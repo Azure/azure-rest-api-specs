@@ -66,7 +66,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "in_progress",
             conclusion: null,
           },
@@ -102,7 +102,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -138,7 +138,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "success",
-        description: "spec-gen-sdk checks succeeded",
+        description: "SDK Validation CI checks succeeded",
       }),
     );
   });
@@ -150,7 +150,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -158,7 +158,7 @@ describe("spec-gen-sdk-status", () => {
           },
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "failure",
             details_url:
@@ -220,7 +220,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -243,7 +243,7 @@ describe("spec-gen-sdk-status", () => {
     // Verify summary was written
     expect(writeToActionsSummaryMock).toHaveBeenCalled();
     expect(writeToActionsSummaryMock.mock.calls[0][0]).toContain(
-      "spec-gen-sdk Checks Result",
+      "SDK Validation CI Checks Result",
     );
   });
 
@@ -254,7 +254,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -287,7 +287,7 @@ describe("spec-gen-sdk-status", () => {
         check_runs: [
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "success",
             details_url:
@@ -295,7 +295,7 @@ describe("spec-gen-sdk-status", () => {
           },
           {
             app: { name: "Azure Pipelines" },
-            name: "spec-gen-sdk",
+            name: "SDK Validation",
             status: "completed",
             conclusion: "failure",
             details_url:
@@ -345,7 +345,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "success",
-        description: "spec-gen-sdk checks succeeded",
+        description: "SDK Validation CI checks succeeded",
       }),
     );
   });

@@ -198,7 +198,7 @@ stages:
         parameters:
           ArtifactName: $(PipelineArtifactsName)
           ArtifactPath: $(StagedArtifactsFolder)
-          CustomCondition: and(succeeded(), ne(variables['StagedArtifactsFolder'], ''))
+          CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
         - task: PowerShell@2
@@ -270,7 +270,7 @@ stages:
               -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
               -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
           displayName: 'Detect API Change and Create API Review'
-          condition: and(succeeded(), ne(variables['SpecGenSdkArtifactPath'], ''), ne(variables['SpecGenSdkArtifactName'], ''))
+          condition: and(succeeded(), eq(variables['HasAPIViewArtifact'], 'true'))
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
