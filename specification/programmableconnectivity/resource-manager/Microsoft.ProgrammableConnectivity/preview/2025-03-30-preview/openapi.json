@@ -2121,10 +2121,24 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "pricingInformation": {
+          "type": "array",
+          "description": "Information about the pricing of the plan.",
+          "items": {
+            "$ref": "#/definitions/PricingInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "pricingTier",
+            "cost",
+            "consumptionUnit"
+          ]
         }
       },
       "required": [
-        "planTermsAndConditionsLinks"
+        "planTermsAndConditionsLinks",
+        "pricingInformation"
       ]
     },
     "OperatorApiConnection": {
@@ -2490,6 +2504,32 @@
         "familyName",
         "givenName",
         "emailAddress"
+      ]
+    },
+    "PricingInformation": {
+      "type": "object",
+      "description": "Model defining how the plan is priced.",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "The pricing tier of the plan.",
+          "readOnly": true
+        },
+        "cost": {
+          "type": "string",
+          "description": "The cost of the plan.",
+          "readOnly": true
+        },
+        "consumptionUnit": {
+          "type": "string",
+          "description": "The unit of consumption that the pricing tier applies to.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "pricingTier",
+        "cost",
+        "consumptionUnit"
       ]
     },
     "ProcessingOperation": {

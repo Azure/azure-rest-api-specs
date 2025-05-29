@@ -66,6 +66,14 @@ model MarketplaceProperties {
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
   planTermsAndConditionsLinks: string[];
+
+  /**
+   * Information about the pricing of the plan.
+   */
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["pricingTier", "cost", "consumptionUnit"])
+  pricingInformation: PricingInformation[];
 }
 
 /**
@@ -112,6 +120,30 @@ model OperatorApiPlanProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * Model defining how the plan is priced.
+ */
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+model PricingInformation {
+  /**
+   * The pricing tier of the plan.
+   */
+  @visibility(Lifecycle.Read)
+  pricingTier: string;
+
+  /**
+   * The cost of the plan.
+   */
+  @visibility(Lifecycle.Read)
+  cost: string;
+
+  /**
+   * The unit of consumption that the pricing tier applies to.
+   */
+  @visibility(Lifecycle.Read)
+  consumptionUnit: string;
 }
 
 @armResourceOperations
