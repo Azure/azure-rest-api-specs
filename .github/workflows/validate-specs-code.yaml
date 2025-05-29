@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Verify Swagger Specs"
+name: "[TEST-IGNORE] Swagger Semantic Validation"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Verify Swagger Specs"
+    name: "[TEST-IGNORE] Swagger Semantic Validation"
     runs-on: ubuntu-24.04
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Validate Swagger Specifications
+      - name: Swagger Semantic Validation
         run: |
           npm exec --no -- oav-runner $GITHUB_WORKSPACE specs
 

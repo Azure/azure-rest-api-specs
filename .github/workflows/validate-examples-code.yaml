@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Verify Swagger Examples"
+name: "[TEST-IGNORE] Swagger Model Validation"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   oav:
-    name: "[TEST-IGNORE] Verify Swagger Examples"
+    name: "[TEST-IGNORE] Swagger Model Validation"
     runs-on: ubuntu-24.04
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Validate Swagger Examples
+      - name: Swagger Model Validation
         run: |
           npm exec --no -- oav-runner $GITHUB_WORKSPACE examples
 

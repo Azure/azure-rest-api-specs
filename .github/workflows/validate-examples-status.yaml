@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Verify Swagger Examples - Set Status"
+name: "[TEST-IGNORE] Swagger Model Validation - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Verify Swagger Examples"]
+    workflows: ["\\[TEST-IGNORE\\] Swagger Model Validation"]
     types: [completed]
 
 permissions:
@@ -30,6 +30,6 @@ jobs:
     name: Set Example Validation Status
     uses: ./.github/workflows/_reusable-set-check-status.yml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Verify Swagger Examples"
-      required_check_name: "[TEST-IGNORE] Verify Swagger Examples"
+      monitored_workflow_name: "[TEST-IGNORE] Swagger Model Validation"
+      required_check_name: "[TEST-IGNORE] Swagger Model Validation"
       overriding_label: "Approved-ModelValidation"
