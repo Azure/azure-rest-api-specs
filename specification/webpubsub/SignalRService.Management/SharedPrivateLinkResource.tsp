@@ -27,7 +27,7 @@ model SharedPrivateLinkResource
 
 @armResourceOperations
 interface SharedPrivateLinkResourceOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -82,7 +82,7 @@ interface SharedPrivateLinkResources {
 }
 @armResourceOperations
 interface WebPubSubSharedPrivateLinkResourceOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,

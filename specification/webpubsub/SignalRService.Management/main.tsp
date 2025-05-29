@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.1
- * Date: 2025-05-29T03:22:40.369Z
+ * Date: 2025-05-29T07:57:57.762Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -21,7 +21,6 @@ import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./SharedPrivateLinkResource.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -43,11 +42,11 @@ namespace Microsoft.SignalRService;
  */
 enum Versions {
   /**
-   * The 2024-10-01-preview API version.
+   * The 2025-01-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_10_01_preview: "2024-10-01-preview",
+  v2025_01_01_preview: "2025-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

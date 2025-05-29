@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebPubSubManagementClient",
-    "version": "2024-10-01-preview",
+    "version": "2025-01-01-preview",
     "description": "REST API for Azure WebPubSub Service",
     "x-typespec-generated": [
       {
@@ -1898,6 +1898,12 @@
           "items": {
             "$ref": "#/definitions/ClientTrafficControlRule"
           }
+        },
+        "maxClientConnectionLifetimeInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 604800
         }
       }
     },

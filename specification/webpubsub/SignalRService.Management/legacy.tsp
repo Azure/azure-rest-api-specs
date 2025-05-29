@@ -316,4 +316,11 @@ namespace Azure.ResourceManager.Legacy {
       body: Request,
     ): Response | ErrorType;
   }
+  /**
+   * @dev Get the provider namespace key-value pair
+   * @template Resource Optional.  The resource to get the provider namespace for.
+   */
+  model CustomProvider<Resource extends {} = TenantActionScope> {
+    ...ProviderNamespace<Resource>;
+  }
 }

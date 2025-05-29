@@ -11,25 +11,20 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.SignalRService;
 
 /**
- * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+ * Optional tier of this particular SKU. 'Standard' or 'Free'.
+ *
+ * `Basic` is deprecated, use `Standard` instead.
  */
-union Origin {
+union WebPubSubSkuTier {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  user: "user",
+  Free: "Free",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  system: "system",
+  Basic: "Basic",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `user,system`: "user,system",
-}
-
-/**
- * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
- */
-union ActionType {
-  string,
+  Standard: "Standard",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Internal: "Internal",
+  Premium: "Premium",
 }
 
 /**
@@ -153,23 +148,6 @@ union ClientTrafficControlRuleDiscriminator {
 }
 
 /**
- * Optional tier of this particular SKU. 'Standard' or 'Free'.
- *
- * `Basic` is deprecated, use `Standard` instead.
- */
-union WebPubSubSkuTier {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Free: "Free",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Premium: "Premium",
-}
-
-/**
  * The kind of the service
  */
 union ServiceKind {
@@ -245,32 +223,173 @@ union ScaleType {
 }
 
 /**
- * Localized display information for this particular operation.
+ * REST API operation supported by resource provider.
+ */
+model Operation {
+  /**
+   * Name of the operation with format: {provider}/{resource}/{operation}
+   */
+  name?: string;
+
+  /**
+   * If the operation is a data action. (for data plane rbac)
+   */
+  isDataAction?: boolean;
+
+  /**
+   * The object that describes a operation.
+   */
+  display?: OperationDisplay;
+
+  /**
+   * Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.
+   */
+  origin?: string;
+
+  /**
+   * Extra Operation properties.
+   */
+  properties?: OperationProperties;
+}
+
+/**
+ * The object that describes a operation.
  */
 model OperationDisplay {
   /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   * Friendly name of the resource provider
    */
-  @visibility(Lifecycle.Read)
   provider?: string;
 
   /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+   * Resource type on which the operation is performed.
    */
-  @visibility(Lifecycle.Read)
   resource?: string;
 
   /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+   * The localized friendly name for the operation.
    */
-  @visibility(Lifecycle.Read)
   operation?: string;
 
   /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
+   * The localized friendly description for the operation
    */
-  @visibility(Lifecycle.Read)
   description?: string;
+}
+
+/**
+ * Extra Operation properties.
+ */
+model OperationProperties {
+  /**
+   * An object that describes a specification.
+   */
+  serviceSpecification?: ServiceSpecification;
+}
+
+/**
+ * An object that describes a specification.
+ */
+model ServiceSpecification {
+  /**
+   * Specifications of the Metrics for Azure Monitoring.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name", "unit"])
+  metricSpecifications?: MetricSpecification[];
+
+  /**
+   * Specifications of the Logs for Azure Monitoring.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  logSpecifications?: LogSpecification[];
+}
+
+/**
+ * Specifications of the Metrics for Azure Monitoring.
+ */
+model MetricSpecification {
+  /**
+   * Name of the metric.
+   */
+  name?: string;
+
+  /**
+   * Localized friendly display name of the metric.
+   */
+  displayName?: string;
+
+  /**
+   * Localized friendly description of the metric.
+   */
+  displayDescription?: string;
+
+  /**
+   * The unit that makes sense for the metric.
+   */
+  unit?: string;
+
+  /**
+   * Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.
+   */
+  aggregationType?: string;
+
+  /**
+   * Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.
+   * Ex. a metric that returns the number of times a particular error code was emitted. The error code may not appear
+   * often, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.
+   */
+  fillGapWithZero?: string;
+
+  /**
+   * The name of the metric category that the metric belongs to. A metric can only belong to a single category.
+   */
+  category?: string;
+
+  /**
+   * The dimensions of the metrics.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  dimensions?: Dimension[];
+}
+
+/**
+ * Specifications of the Dimension of metrics.
+ */
+model Dimension {
+  /**
+   * The public facing name of the dimension.
+   */
+  name?: string;
+
+  /**
+   * Localized friendly display name of the dimension.
+   */
+  displayName?: string;
+
+  /**
+   * Name of the dimension as it appears in MDM.
+   */
+  internalName?: string;
+
+  /**
+   * A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.
+   */
+  toBeExportedForShoebox?: boolean;
+}
+
+/**
+ * Specifications of the Logs for Azure Monitoring.
+ */
+model LogSpecification {
+  /**
+   * Name of the log.
+   */
+  name?: string;
+
+  /**
+   * Localized friendly display name of the log.
+   */
+  displayName?: string;
 }
 
 /**
@@ -362,6 +481,49 @@ model SignalRServiceUsageName {
  * Object that includes an array of resources and a possible link for next set.
  */
 model WebPubSubResourceList is Azure.Core.Page<WebPubSubResource>;
+
+/**
+ * The billing information of the resource.
+ */
+model ResourceSku {
+  /**
+   * The name of the SKU. Required.
+   *
+   * Allowed values: Standard_S1, Free_F1, Premium_P1, Premium_P2
+   */
+  name: string;
+
+  /**
+   * Optional tier of this particular SKU. 'Standard' or 'Free'.
+   *
+   * `Basic` is deprecated, use `Standard` instead.
+   */
+  tier?: WebPubSubSkuTier;
+
+  /**
+   * Not used. Retained for future use.
+   */
+  @visibility(Lifecycle.Read)
+  size?: string;
+
+  /**
+   * Not used. Retained for future use.
+   */
+  @visibility(Lifecycle.Read)
+  family?: string;
+
+  /**
+   * Optional, integer. The unit count of the resource.
+   * 1 for Free_F1/Standard_S1/Premium_P1, 100 for Premium_P2 by default.
+   *
+   * If present, following values are allowed:
+   *     Free_F1: 1;
+   *     Standard_S1: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;
+   *     Premium_P1:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;
+   *     Premium_P2:  100,200,300,400,500,600,700,800,900,1000;
+   */
+  capacity?: int32;
+}
 
 /**
  * A class that describes the properties of the resource
@@ -749,6 +911,13 @@ model ApplicationFirewallSettings {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   clientTrafficControlRules?: ClientTrafficControlRule[];
+
+  /**
+   * Config to control the client connection lifetime in seconds, can be set to 0 to disable the config
+   */
+  @minValue(0)
+  @maxValue(604800)
+  maxClientConnectionLifetimeInSeconds?: int64;
 }
 
 /**
@@ -779,49 +948,6 @@ model WebPubSubSocketIOSettings {
    * "Serverless": your application doesn't have a backend server
    */
   serviceMode?: string;
-}
-
-/**
- * The billing information of the resource.
- */
-model ResourceSku {
-  /**
-   * The name of the SKU. Required.
-   *
-   * Allowed values: Standard_S1, Free_F1, Premium_P1, Premium_P2
-   */
-  name: string;
-
-  /**
-   * Optional tier of this particular SKU. 'Standard' or 'Free'.
-   *
-   * `Basic` is deprecated, use `Standard` instead.
-   */
-  tier?: WebPubSubSkuTier;
-
-  /**
-   * Not used. Retained for future use.
-   */
-  @visibility(Lifecycle.Read)
-  size?: string;
-
-  /**
-   * Not used. Retained for future use.
-   */
-  @visibility(Lifecycle.Read)
-  family?: string;
-
-  /**
-   * Optional, integer. The unit count of the resource.
-   * 1 for Free_F1/Standard_S1/Premium_P1, 100 for Premium_P2 by default.
-   *
-   * If present, following values are allowed:
-   * Free_F1: 1;
-   * Standard_S1: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;
-   * Premium_P1:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;
-   * Premium_P2:  100,200,300,400,500,600,700,800,900,1000;
-   */
-  capacity?: int32;
 }
 
 /**
@@ -994,9 +1120,9 @@ model EventHandler {
   /**
    * Gets or sets the matching pattern for event names.
    * There are 3 kinds of patterns supported:
-   * 1. "*", it matches any event name
-   * 2. Combine multiple events with ",", for example "event1,event2", it matches event "event1" and "event2"
-   * 3. A single event name, for example, "event1", it matches "event1"
+   *     1. "*", it matches any event name
+   *     2. Combine multiple events with ",", for example "event1,event2", it matches event "event1" and "event2"
+   *     3. A single event name, for example, "event1", it matches "event1"
    */
   userEventPattern?: string;
 
@@ -1120,6 +1246,8 @@ model PrivateLinkResource
   /**
    * Private link resource properties
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -1196,9 +1324,7 @@ model RegenerateKeyParameters {
   keyType?: KeyType;
 }
 
-/**
- * Paged collection of Replica items
- */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ReplicaList is Azure.Core.Page<Replica>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1311,16 +1437,6 @@ model SkuCapacity {
 }
 
 /**
- * Azure operation completed successfully.
- */
-model AzureResourceManagerArmResponseWebPubSubKeys {
-  /**
-   * The body type of the operation request or response.
-   */
-  body: WebPubSubKeys;
-}
-
-/**
  * An Event Hub endpoint.
  * The managed identity of Web PubSub service must be enabled, and the identity should have the "Azure Event Hubs Data sender" role to access Event Hub.
  */
@@ -1351,9 +1467,9 @@ model EventNameFilter extends EventListenerFilter {
   /**
    * Gets or sets a matching pattern for event names.
    * There are 3 kinds of patterns supported:
-   * 1. "*", it matches any event name
-   * 2. Combine multiple events with ",", for example "event1,event2", it matches events "event1" and "event2"
-   * 3. A single event name, for example, "event1", it matches "event1"
+   *     1. "*", it matches any event name
+   *     2. Combine multiple events with ",", for example "event1,event2", it matches events "event1" and "event2"
+   *     3. A single event name, for example, "event1", it matches "event1"
    */
   userEventPattern?: string;
 
