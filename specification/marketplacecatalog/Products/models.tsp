@@ -572,6 +572,7 @@ model MarketStartPrice {
 }
 
 @doc("Summary description of the product")
+@resource("product")
 model ProductDetails {
   @doc("Product display name")
   displayName?: string;
@@ -601,7 +602,9 @@ model ProductDetails {
   publishingStage?: PublishingStage;
 
   @doc("Unique product identifier")
-  uniqueProductId?: string;
+  @key
+  @visibility(Lifecycle.Read)
+  uniqueProductId: string;
 
   @doc("The delivery method or deployment model")
   productType: ProductType;
@@ -1098,4 +1101,39 @@ model ApiKeyParameter {
   @header
   @doc("ApiKey to access the API")
   apiKey?: string;
+}
+
+@doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
+model IncludeStopSoldPlansParameter {
+  @query
+  @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
+  includeStopSoldPlans?: boolean = false;
+}
+
+@doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
+model ExcludeSkuDetailsParameter {
+  @query
+  @doc("By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.")
+  excludeSkuDetails?: boolean = false;
+}
+
+@doc("Include future availabilities parameter")
+model IncludeFutureAvailabilitiesParameter {
+  @query
+  @doc("Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.")
+  includeFutureAvailabilities?: boolean = false;
+}
+
+@doc("SKU ID filter parameter")
+model SkuIdParameter {
+  @query
+  @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.")
+  skuId?: string = "en";
+}
+
+@doc("Pricing audience header parameter")
+model PricingAudienceHeaderParameter {
+  @header("x-ms-pricing-audience")
+  @doc("DirectCommercial or PartnerCommercial, DirectCommercial is the default")
+  pricingAudience?: string;
 }
