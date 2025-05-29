@@ -4,6 +4,7 @@ import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import { Readme } from "../src/readme.js";
+import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -16,7 +17,18 @@ describe("readme", () => {
     await expect(readme.getTags()).rejects.toThrowError(
       /no such file or directory/i,
     );
+
+    expect(readme.specModel).toBeUndefined();
   });
+
+  it("resolves path against SpecModel", async () => {
+    const readme = new Readme("readme.md", {
+      specModel: new SpecModel("/specs/foo"),
+    });
+    expect(readme.path).toBe(resolve("/specs/foo/readme.md"));
+  });
+
+  // TODO: Test that path is resolved against backpointer
 
   it("can be created with string content", async () => {
     const folder = "/fake";

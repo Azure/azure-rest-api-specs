@@ -84,11 +84,9 @@ model DrillProperties {
   @visibility(Lifecycle.Read)
   lastSyncTime: utcDateTime;
 
-  /*
   @doc("Managed RG v2 properties.")
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
-*/
 
   @doc("The discriminator for the Drill object hierarchy.")
   @visibility(Lifecycle.Create)
@@ -214,7 +212,7 @@ model RoPlanProperties {
   @visibility(Lifecycle.Read)
   roPlanId: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/recoveryPlans";
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans";
     }
   ]>;
 
@@ -330,7 +328,7 @@ model DrillActionResponse {
   @visibility(Lifecycle.Read)
   jobId: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/jobs";
+      type: "Microsoft.AzureResilienceManagement/drills/drillRuns";
     }
   ]>;
 }
@@ -414,4 +412,21 @@ model DrillPatchProperties {
 
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
+}
+
+@doc("Configuration of the managed on behalf of resource.")
+model ManagedOnBehalfOfConfiguration {
+  @visibility(Lifecycle.Read)
+  @doc("Associated MoboBrokerResources.")
+  moboBrokerResources: MoboBrokerResource[];
+}
+
+@doc("MoboBroker resource.")
+model MoboBrokerResource {
+  /**
+   * The fully qualified resource ID of the MoboBroker resource.
+   * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
+   */
+  @visibility(Lifecycle.Read)
+  id: string;
 }
