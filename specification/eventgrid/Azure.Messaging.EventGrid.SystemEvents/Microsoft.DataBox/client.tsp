@@ -25,9 +25,6 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Access.public);
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DataBoxStageName,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DataBoxCopyCompletedEventData,
   "csharp"
 );

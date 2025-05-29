@@ -63,12 +63,6 @@ using Azure.ClientGenerator.Core;
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceHttpRequest,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceAuthorization,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
   "csharp"
 );

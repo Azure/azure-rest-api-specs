@@ -53,9 +53,6 @@ using Azure.ClientGenerator.Core;
 );
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceType,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData,
   "csharp"
 );
@@ -72,8 +69,5 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.HealthcareDicomImageUpdatedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceType,
   "csharp"
 );

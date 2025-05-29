@@ -31,13 +31,7 @@ using Azure.ClientGenerator.Core;
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceGeometry,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceEnteredEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceEventProperties,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MapsGeofenceExitedEventData,

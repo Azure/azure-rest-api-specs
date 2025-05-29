@@ -28,7 +28,4 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
-  "csharp"
-);
 //Enums

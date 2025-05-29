@@ -74,12 +74,6 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedDetails,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsOperationalDetails,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsHealthResourcesAnnotatedEventData,
   "csharp"
 );
@@ -90,8 +84,5 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedDetails,
   "csharp"
 );

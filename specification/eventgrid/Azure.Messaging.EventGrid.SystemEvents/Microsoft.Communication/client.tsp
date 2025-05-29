@@ -593,12 +593,6 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallGroupProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallRoomProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData,
   "csharp"
 );
@@ -608,82 +602,16 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterQueueDetails,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageContext,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageButtonContent,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.recordingContentType,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.recordingChannelType,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.recordingFormatType,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsUserEngagement,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsInteractiveReplyKind,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageChannelKind,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallEndReasonProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallEndedByProperties,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatAzureBotCommandReceivedInThreadEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatEventBaseProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatEventInThreadBaseProperties,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData,
@@ -696,12 +624,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventBaseProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageEventInThreadBaseProperties,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
@@ -731,15 +653,6 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventBaseProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadEventInThreadBaseProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadParticipantProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData,
   "csharp"
 );
@@ -755,55 +668,19 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatus,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportStatusDetails,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsIncomingCallCustomContext,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageChannelEventError,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatus,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRecordingChunkInfoProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRecordingStorageInfoProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterChannelConfiguration,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterCommunicationError,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData,
@@ -845,9 +722,6 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData,
   "csharp"
 );
@@ -875,42 +749,12 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelectorState,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryAttemptProperties,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsEventBaseProperties,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModel,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.CommunicationIdentifierModelKind,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.CommunicationUserIdentifierModel,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsAppIdentifierModel,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.MicrosoftTeamsUserIdentifierModel,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.PhoneNumberIdentifierModel,
   "csharp"
 );

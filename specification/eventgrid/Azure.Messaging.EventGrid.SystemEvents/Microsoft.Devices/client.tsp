@@ -77,33 +77,6 @@ using Azure.ClientGenerator.Core;
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTwinInfo,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceConnectionStateEventInfo,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceConnectionStateEventProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceLifeCycleEventProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTelemetryEventProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTwinInfoProperties,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DeviceTwinInfoX509Thumbprint,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.IotHubDeviceConnectedEventData,
   "csharp"
 );

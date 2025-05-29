@@ -95,21 +95,3 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventTarget,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventTarget,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventRequest,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventActor,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventSource,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventConnectedRegistry,
-  "csharp"
-);

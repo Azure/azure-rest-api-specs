@@ -109,9 +109,6 @@ using Azure.ClientGenerator.Core;
 );
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobAccessTier,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
   "csharp"
 );
@@ -139,25 +136,16 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,

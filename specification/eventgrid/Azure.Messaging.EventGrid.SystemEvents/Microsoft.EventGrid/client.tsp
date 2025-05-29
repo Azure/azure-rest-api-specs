@@ -68,9 +68,6 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
-  "csharp"
-);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
   "csharp"
 );
@@ -87,11 +84,5 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
-  "csharp"
-);
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
   "csharp"
 );
