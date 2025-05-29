@@ -72,7 +72,10 @@ model MarketplaceProperties {
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["pricingTier", "cost", "consumptionUnit"])
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["pricingTier", "cost", "consumptionUnit"]
+  )
   pricingInformation: PricingInformation[];
 }
 
