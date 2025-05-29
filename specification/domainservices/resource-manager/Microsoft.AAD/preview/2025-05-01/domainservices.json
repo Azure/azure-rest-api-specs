@@ -53,17 +53,11 @@
           "200": {
             "description": "Domain service unsuspended successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Domain service unsuspended successfully."
-                }
-              }
+              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
             }
           },
-          "400": {
-            "description": "Domain service could not be unsuspended (not in a suspended state or not eligible).",
+          "default": {
+            "description": "Error response describing why the operation failed, including cases where the domain service could not be unsuspended (not in a suspended state or not eligible).",
             "schema": {
               "type": "object",
               "properties": {
@@ -72,12 +66,6 @@
                   "example": "Domain service could not be unsuspended (not in a suspended state or not eligible)."
                 }
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1140,6 +1128,16 @@
       },
       "description": "An error response from the Domain Services."
     },
+    "UnsuspendDomainServiceResponse": {
+      "description": "Response for successful unsuspend of a domain service.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Domain service unsuspended successfully."
+        }
+      }
+    },
     "OperationEntityListResult": {
       "description": "The list of domain service operation response.",
       "type": "object",
@@ -1231,6 +1229,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the domain service.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "x-ms-parameter-location": "method"
     }
   }
