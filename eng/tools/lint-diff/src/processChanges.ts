@@ -2,20 +2,18 @@ import { join, relative, resolve, sep } from "path";
 import { readFile } from "fs/promises";
 import { pathExists } from "./util.js";
 import { specification, readme, swagger } from "@azure-tools/specs-shared/changed-files";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model"
-import deepEqual from "deep-eql"
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
+import { ReadmeAffectedTags } from "./lintdiff-types.js";
+import deepEqual from "deep-eql";
 
-import {
-  getTagsAndInputFiles,
-  deduplicateTags,
-} from "./markdown-utils.js";
+import { deduplicateTags } from "./markdown-utils.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 
 export async function getRunList(
   beforePath: string,
   afterPath: string,
   changedFilesPath: string,
-): Promise<[Map<string, string[]>, Map<string, string[]>, Set<string>]> {
+): Promise<[Map<string, ReadmeAffectedTags>, Map<string, ReadmeAffectedTags>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
   // always uses forward slashes as path separators
 
@@ -38,24 +36,36 @@ export async function getRunList(
 
   // In the future, the loop involving [beforePath, afterPath] can be eliminated
   // as well as beforeState
-  const [beforeState, ] = await buildState(changedSpecFiles, beforePath);
+  const [beforeState] = await buildState(changedSpecFiles, beforePath);
   const [afterState, afterSwaggers] = await buildState(changedSpecFiles, afterPath);
   const affectedSwaggerCandidates = new Set<string>(afterSwaggers);
   const [beforeTagMap, afterTagMap] = reconcileChangedFilesAndTags(beforeState, afterState);
 
-
-  const affectedSwaggers = await getChangedSwaggers(beforePath, afterPath, affectedSwaggerCandidates);
+  const affectedSwaggers = await getChangedSwaggers(
+    beforePath,
+    afterPath,
+    affectedSwaggerCandidates,
+  );
 
   console.log("Before readme and tags:");
-  console.table([...beforeTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table(
+    [...beforeTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.changedTags] })),
+    ["readme", "tags"],
+  );
   console.log("\n");
 
   console.log("After readme and tags:");
-  console.table([...afterTagMap].map(([readme, tags]) => ({ readme, tags })), ['readme', 'tags']);
+  console.table(
+    [...afterTagMap].map(([readme, tags]) => ({ readme, tags: [...tags.changedTags] })),
+    ["readme", "tags"],
+  );
   console.log("\n");
 
-  console.log("Affected swaggers:"); 
-  console.table([...affectedSwaggers].map((swagger) => ({ swagger })), ['swagger']);
+  console.log("Affected swaggers:");
+  console.table(
+    [...affectedSwaggers].map((swagger) => ({ swagger })),
+    ["swagger"],
+  );
   console.log("\n");
 
   return [beforeTagMap, afterTagMap, affectedSwaggers];
@@ -64,7 +74,7 @@ export async function getRunList(
 export async function buildState(
   changedSpecFiles: string[],
   rootPath: string,
-): Promise<[Map<string, string[]>, string[]]> {
+): Promise<[Map<string, ReadmeAffectedTags>, string[]]> {
   // Filter changed files to include only those that exist in the rootPath
   const existingChangedFiles = [];
   for (const file of changedSpecFiles) {
@@ -84,47 +94,67 @@ export async function buildState(
     specModels.set(serviceDir, specModel);
   }
 
-  const readmeTags = new Map<string, Set<string>>();
+  // Build a map of readme.md files and tags affected by the changed files
+  const readmeTags = new Map<string, ReadmeAffectedTags>();
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
-    const readmeTagMapForChangedFile = 
-      await specModels.get(getService(changedSwagger))!.getAffectedReadmeTags(resolve(rootPath, changedSwagger));
-    
-    for (const [readmeEntry, tags] of readmeTagMapForChangedFile) { 
-      if (!readmeTags.has(readmeEntry.path)) { 
-        readmeTags.set(readmeEntry.path, new Set<string>());
+    const specModel = specModels.get(getService(changedSwagger))!;
+    const affectedReadmes = await specModel.getAffectedReadmeTags(
+      resolve(rootPath, changedSwagger),
+    );
+
+    for (const [readmePath, tags] of affectedReadmes) {
+      const affectedTags = readmeTags.get(readmePath) ?? {
+        readme: (await specModel.getReadmes()).get(readmePath)!,
+        changedTags: new Set(),
+      };
+      for (const [tagName,] of tags) {
+        affectedTags.changedTags.add(tagName);
       }
-      for (const tag of tags) { 
-        readmeTags.get(readmeEntry.path)?.add(tag.name);
-      }
+      readmeTags.set(readmePath, affectedTags);
     }
   }
 
-  const changedFileAndTagsMap = new Map<string, string[]>();
+  // Deduplicate tags in readme files
+  const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
-    const dedupedTags = deduplicateTags(
-      await getTagsAndInputFiles(
-        [...tags],
-        await readFile(readmeFile, { encoding: "utf-8" }),
-      ),
-    );
+    const tagMap = await tags.readme.getTags();
+    const tagsAndInputFiles = [...tags.changedTags].map(changedTag => {
+      return { 
+        tagName: changedTag,
+        inputFiles: [...tagMap.get(changedTag)!.inputFiles.keys()],
+      }
+    });
 
-    changedFileAndTagsMap.set(relative(rootPath, readmeFile), dedupedTags);
+    const dedupedTags = deduplicateTags(tagsAndInputFiles);
+    changedFileAndTagsMap.set(relative(rootPath, readmeFile), {
+      readme: tags.readme,
+      changedTags: new Set<string>(dedupedTags),
+    });
   }
 
   // For readme files that have changed but there are no affected swaggers,
   // add them to the map with no tags
   for (const changedReadme of existingChangedFiles.filter(readme)) {
+    const service = specModels.get(getService(changedReadme))!;
+    const readmes = await service.getReadmes();
+    const readmeObject = readmes.get(resolve(rootPath, changedReadme))!;
+
     if (!changedFileAndTagsMap.has(changedReadme)) {
-      changedFileAndTagsMap.set(changedReadme, []);
+      changedFileAndTagsMap.set(changedReadme, {
+        readme: readmeObject,
+        changedTags: new Set<string>(),
+      });
     }
   }
 
   const affectedSwaggers = new Set<string>();
   for (const changedSwagger of existingChangedFiles.filter(swagger)) {
     const service = getService(changedSwagger);
-    const swaggerSet = await specModels.get(service)!.getAffectedSwaggers(resolve(rootPath, changedSwagger));
-    for (const swaggerEntry of swaggerSet) {
-      affectedSwaggers.add(relative(rootPath, swaggerEntry.path));
+    const swaggerSet = await specModels
+      .get(service)!
+      .getAffectedSwaggers(resolve(rootPath, changedSwagger));
+    for (const swaggerPath of swaggerSet.keys()) {
+      affectedSwaggers.add(relative(rootPath, swaggerPath));
     }
   }
 
@@ -140,18 +170,18 @@ export async function buildState(
  * @returns maps of readme files and tags to scan
  */
 export function reconcileChangedFilesAndTags(
-  before: Map<string, string[]>,
-  after: Map<string, string[]>,
-): Map<string, string[]>[] {
-  const beforeFinal = new Map<string, string[]>();
-  const afterFinal = new Map<string, string[]>();
+  before: Map<string, ReadmeAffectedTags>,
+  after: Map<string, ReadmeAffectedTags>,
+): Map<string, ReadmeAffectedTags>[] {
+  const beforeFinal = new Map<string, ReadmeAffectedTags>();
+  const afterFinal = new Map<string, ReadmeAffectedTags>();
 
   // Clone the maps so that changes to maps do not affect original object
   for (const [readme, tags] of before.entries()) {
-    beforeFinal.set(readme, [...tags]);
+    beforeFinal.set(readme, tags);
   }
   for (const [readme, tags] of after.entries()) {
-    afterFinal.set(readme, [...tags]);
+    afterFinal.set(readme, tags);
   }
 
   // If a tag is deleted in after and exists in before, do NOT scan the tag
@@ -162,11 +192,11 @@ export function reconcileChangedFilesAndTags(
       continue;
     }
 
-    const afterTags = new Set(afterFinal.get(readme)!);
-    beforeFinal.set(
-      readme,
-      tags.filter((tag) => afterTags.has(tag)),
-    );
+    const afterTags = new Set([...afterFinal.get(readme)!.changedTags]);
+    beforeFinal.set(readme, {
+      readme: tags.readme,
+      changedTags: new Set([...tags.changedTags].filter((t) => afterTags.has(t))),
+    });
   }
 
   return [beforeFinal, afterFinal];
@@ -225,20 +255,20 @@ export function getService(filePath: string): string {
 
 /**
  * Return true if the path contains "/examples/"
- * @param path 
- * @returns 
+ * @param path
+ * @returns
  */
 const excludeExamples = (path: string) => path.includes("/examples/");
 
 /**
  * Given a list of swagger files relatve to before and after root paths,
- * return a set of swagger files that have changed. Changes can be directly in 
- * the swagger file or in part of a referenced file that is included. Not all 
+ * return a set of swagger files that have changed. Changes can be directly in
+ * the swagger file or in part of a referenced file that is included. Not all
  * changes to a file in a $ref will affect a given swagger file.
- * @param beforeRoot 
- * @param afterRoot 
- * @param affectedSwaggerCandidates 
- * @returns 
+ * @param beforeRoot
+ * @param afterRoot
+ * @param affectedSwaggerCandidates
+ * @returns
  */
 export async function getChangedSwaggers(
   beforeRoot: string,
@@ -257,14 +287,12 @@ export async function getChangedSwaggers(
     const afterSwagger = join(afterRoot, swagger);
 
     // Using dereference which supports excluding $ref paths (in this case, examples)
-    const derefBefore = await $RefParser.dereference(
-      beforeSwagger, 
-      { dereference: { excludedPathMatcher: excludeExamples}},
-    );
-    const derefAfter = await $RefParser.dereference(
-      afterSwagger, 
-      { dereference: { excludedPathMatcher: excludeExamples}},
-    );
+    const derefBefore = await $RefParser.dereference(beforeSwagger, {
+      dereference: { excludedPathMatcher: excludeExamples },
+    });
+    const derefAfter = await $RefParser.dereference(afterSwagger, {
+      dereference: { excludedPathMatcher: excludeExamples },
+    });
 
     // Compare the dereferenced objects
     if (!deepEqual(derefBefore, derefAfter)) {
