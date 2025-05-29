@@ -19,61 +19,96 @@
               "nodes": [
                 {
                   "type": "Source",
-                  "name": "source",
+                  "name": "temperature",
                   "sourceSettings": {
-                    "endpointRef": "my-endpoint",
+                    "endpointRef": "default",
                     "dataSources": [
-                      "source1"
+                      "telemetry/temperature"
                     ]
                   }
                 },
                 {
                   "type": "Graph",
-                  "name": "graph",
+                  "name": "my-graph",
                   "graphSettings": {
                     "registryEndpointRef": "my-registry-endpoint",
-                    "artifact": "my-wasm-module:1.4.3"
+                    "artifact": "my-wasm-module:1.4.3",
+                    "configuration": [
+                      {
+                        "key": "key1",
+                        "value": "value1"
+                      },
+                      {
+                        "key": "key2",
+                        "value": "value2"
+                      }
+                    ]
                   }
                 },
                 {
                   "type": "Destination",
-                  "name": "destination",
+                  "name": "alert",
                   "destinationSettings": {
-                    "endpointRef": "my-endpoint",
-                    "dataDestination": "destination1"
+                    "endpointRef": "default",
+                    "dataDestination": "telemetry/temperature/alert"
+                  }
+                },
+                {
+                  "type": "Destination",
+                  "name": "fabric",
+                  "destinationSettings": {
+                    "endpointRef": "fabric",
+                    "dataDestination": "my-table",
+                    "outputSchemaSettings": {
+                      "schemaRef": "aio-sr://namespace/alert-parquet:1",
+                      "serializationFormat": "Parquet"
+                    }
                   }
                 }
               ],
               "nodeConnections": [
                 {
                   "from": {
-                    "name": "wsqbccd",
+                    "name": "temperature",
                     "schema": {
-                      "serializationFormat": "Delta",
-                      "schemaRef": "gkyqreiunkvdgggy"
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/temperature:1"
                     }
                   },
                   "to": {
-                    "name": "dqvkpqshglptwrjfeblfzbofmkfktzbjhidsvqctmbzocbtgtkbgrayg"
+                    "name": "my-graph"
+                  }
+                },
+                {
+                  "from": {
+                    "name": "my-graph.alert-output",
+                    "schema": {
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/alert:1"
+                    }
+                  },
+                  "to": {
+                    "name": "fabric"
+                  }
+                },
+                {
+                  "from": {
+                    "name": "my-graph.normal-output",
+                    "schema": {
+                      "serializationFormat": "Avro",
+                      "schemaRef": "aio-sr://namespace/alert:1"
+                    }
+                  },
+                  "to": {
+                    "name": "fabric"
                   }
                 }
-              ],
-              "provisioningState": "Succeeded"
+              ]
             },
+            "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/resource-123/dataflowProfiles/resource-123/dataflowGraphs/resource-123",
             "extendedLocation": {
-              "name": "qmbrfwcpwwhggszhrdjv",
+              "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
               "type": "CustomLocation"
-            },
-            "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflowGraphs/resource-name123",
-            "name": "iwhrd",
-            "type": "advacc",
-            "systemData": {
-              "createdBy": "ssvaslsmudloholronopqyxjcu",
-              "createdByType": "User",
-              "createdAt": "2024-08-09T18:13:29.389Z",
-              "lastModifiedBy": "gnicpuszwd",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2024-08-09T18:13:29.389Z"
             }
           }
         ],
