@@ -7,24 +7,28 @@ using TypeSpec.Rest;
 namespace Products;
 
 @doc("Eligibility for Azure consumption commitment benefit")
-enum AzureBenefit {
+union AzureBenefit {
   @doc("The product is eligible for Azure consumption commitment benefit")
-  Eligible,
+  Eligible: "Eligible",
 
   @doc("The product is not eligible for Azure consumption commitment benefit")
-  NotEligible,
+  NotEligible: "NotEligible",
+
+  string,
 }
 
 @doc("Badge type")
-enum Badge {
+union Badge {
   @doc("Preferred Solution badge")
-  PreferredSolution,
+  PreferredSolution: "PreferredSolution",
 
   @doc("Power BI Certified badge")
-  PowerBICertified,
+  PowerBICertified: "PowerBICertified",
 
   @doc("Additional Purchase Requirement badge")
-  AdditionalPurchaseRequirement,
+  AdditionalPurchaseRequirement: "AdditionalPurchaseRequirement",
+
+  string,
 }
 
 @doc("Publisher type")
@@ -39,186 +43,204 @@ union PublisherType {
 }
 
 @doc("Product publishing stage")
-enum PublishingStage {
+union PublishingStage {
   @doc("Product is available to restricted audience")
-  Preview,
+  Preview: "Preview",
 
   @doc("Product is publicly available in the Marketplace")
-  Public,
+  Public: "Public",
+
+  string,
 }
 
 @doc("Rating Bucket")
-enum RatingBucket {
+union RatingBucket {
   @doc("Above one star rating")
-  AboveOne,
+  AboveOne: "AboveOne",
 
   @doc("Above two stars rating")
-  AboveTwo,
+  AboveTwo: "AboveTwo",
 
   @doc("Above three stars rating")
-  AboveThree,
+  AboveThree: "AboveThree",
 
   @doc("Above four stars rating")
-  AboveFour,
+  AboveFour: "AboveFour",
+
+  string,
 }
 
 @doc("Legal terms type")
-enum LegalTermsType {
+union LegalTermsType {
   @doc("No specific legal terms")
-  None,
+  None: "None",
 
   @doc("Microsoft Enterprise Agreement")
-  EA,
+  EA: "EA",
+
+  string,
 }
 
 @doc("VM Architecture Type")
-enum VmArchitectureType {
+union VmArchitectureType {
   @doc("The VM image architecture of the plan is X64 Generation1")
-  X64Gen1,
+  X64Gen1: "X64Gen1",
 
   @doc("The VM image architecture of the plan is X64 Generation2")
-  X64Gen2,
+  X64Gen2: "X64Gen2",
 
   @doc("The VM image architecture of the plan is Arm64")
-  Arm64,
+  Arm64: "Arm64",
+
+  string,
 }
 
 @doc("Value showing whether the plan is available for purchase through CSP channel")
-enum CspState {
+union CspState {
   @doc("Plan configured CSP program opt-in for any partner in the CSP Program")
-  OptIn,
+  OptIn: "OptIn",
 
   @doc("Plan configured CSP program opt-out")
-  OptOut,
+  OptOut: "OptOut",
 
   @doc("Plan configured CSP program opt-in for specific partners in the CSP program ISV selects")
-  SelectiveOptIn,
+  SelectiveOptIn: "SelectiveOptIn",
+
+  string,
 }
 
 @doc("The pricing types for which this plan is designated")
-enum PricingType {
+union PricingType {
   @doc("Product has at least one plan that is free of charge")
-  Free,
+  Free: "Free",
 
   @doc("Product has at least one plan that is free trial")
-  FreeTrial,
+  FreeTrial: "FreeTrial",
 
   @doc("Product has at least one plan that is bring your own license")
-  Byol,
+  Byol: "Byol",
 
   @doc("Product has at least one plan that is Pay as you go")
-  Payg,
+  Payg: "Payg",
 
   @doc("Product has at least one plan that is Reserved Instance billing model")
-  Ri,
+  Ri: "Ri",
+
+  string,
 }
 
 @doc("VM security type")
-enum VmSecurityType {
+union VmSecurityType {
   @doc("Default value")
-  None,
+  None: "None",
 
   @doc("Trusted Launch security")
-  Trusted,
+  Trusted: "Trusted",
 
   @doc("Confidential security")
-  Confidential,
+  Confidential: "Confidential",
+
+  string,
 }
 
 @doc("Delivery method or deployment model")
-enum ProductType {
+union ProductType {
   @doc("Default value")
-  None,
+  None: "None",
 
   @doc("Dev Service")
-  DevService,
+  DevService: "DevService",
 
   @doc("Managed Application plan type")
-  ManagedApplication,
+  ManagedApplication: "ManagedApplication",
 
   @doc("Virtual Machine")
-  VirtualMachine,
+  VirtualMachine: "VirtualMachine",
 
   @doc("Azure Application")
-  AzureApplication,
+  AzureApplication: "AzureApplication",
 
   @doc("Container")
-  Container,
+  Container: "Container",
 
   @doc("Software as a Service")
-  SaaS,
+  SaaS: "SaaS",
 
   @doc("Solution Template")
-  SolutionTemplate,
+  SolutionTemplate: "SolutionTemplate",
 
   @doc("IoT Edge Module")
-  IotEdgeModules,
+  IotEdgeModules: "IotEdgeModules",
 
   @doc("Managed Service")
-  ManagedServices,
+  ManagedServices: "ManagedServices",
 
   @doc("Container App")
-  ContainerApps,
+  ContainerApps: "ContainerApps",
 
   @doc("Visual Studio Extension")
-  VisualStudioExtension,
+  VisualStudioExtension: "VisualStudioExtension",
 
   @doc("Dynamics Operations")
-  DynamicsOps,
+  DynamicsOps: "DynamicsOps",
 
   @doc("Dynamics CE")
-  DynamicsCE,
+  DynamicsCE: "DynamicsCE",
 
   @doc("Dynamics Business Central")
-  DynamicsBC,
+  DynamicsBC: "DynamicsBC",
 
   @doc("Power BI")
-  PowerBI,
+  PowerBI: "PowerBI",
 
   @doc("Consulting Services")
-  ConsultingServices,
+  ConsultingServices: "ConsultingServices",
 
   @doc("Co-sell Only")
-  CosellOnly,
+  CosellOnly: "CosellOnly",
 
   @doc("Core Virtual Machine")
-  CoreVirtualMachine,
+  CoreVirtualMachine: "CoreVirtualMachine",
 
   @doc("Power BI Visuals")
-  PowerBIVisuals,
+  PowerBIVisuals: "PowerBIVisuals",
 
   @doc("Office 365")
-  Office365,
+  Office365: "Office365",
 
   @doc("Azure Active Directory Applications")
-  AADApps,
+  AADApps: "AADApps",
 
   @doc("Azure Services")
-  AzureServices,
+  AzureServices: "AzureServices",
 
   @doc("App Service")
-  AppService,
+  AppService: "AppService",
 
   @doc("Log Analytics")
-  LogAnalytics,
+  LogAnalytics: "LogAnalytics",
 
   @doc("Microsoft Product")
-  MicrosoftProduct,
+  MicrosoftProduct: "MicrosoftProduct",
+
+  string,
 }
 
 @doc("The type of the artifact")
-enum ArtifactType {
+union ArtifactType {
   @doc("Contains link to the main ARM template")
-  Template,
+  Template: "Template",
 
   @doc("Contains link to the nested ARM template")
-  Fragment,
+  Fragment: "Fragment",
 
   @doc("Custom artifact type")
-  Custom,
+  Custom: "Custom",
 
   @doc("Metadata artifact type")
-  Metadata,
+  Metadata: "Metadata",
+
+  string,
 }
 
 @doc("Supported pricing audiences")
@@ -430,6 +452,7 @@ model ProductSummary {
   publishingStage?: PublishingStage;
 
   @key
+  @visibility(Lifecycle.Read)
   @doc("Unique product identifier")
   uniqueProductId: string;
 
