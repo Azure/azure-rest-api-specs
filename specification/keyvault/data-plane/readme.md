@@ -58,7 +58,6 @@ input-file:
   - Microsoft.KeyVault/preview/7.6-preview.2/keys.json
   - Microsoft.KeyVault/preview/7.6-preview.2/rbac.json
   - Microsoft.KeyVault/preview/7.6-preview.2/secrets.json
-  - Microsoft.KeyVault/preview/7.6-preview.2/securitydomain.json
   - Microsoft.KeyVault/preview/7.6-preview.2/settings.json
   - Microsoft.KeyVault/preview/7.6-preview.2/storage.json
 ```
@@ -377,7 +376,7 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
