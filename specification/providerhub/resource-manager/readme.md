@@ -116,7 +116,7 @@ directive:
     from: providerhub.json
     where:
       - $.definitions.OperationsPutContent
-    reason: The GET operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default" returns a list of operations.
+    reason: The GET operation for path "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/operations/default" returns a list of operations. There isn't a point GET for this operation.
 
   - suppress: RequiredPropertiesMissingInResourceModel
     from: providerhub.json
