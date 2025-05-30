@@ -1,0 +1,21 @@
+{
+  "name": "api-doc-preview",
+  "type": "module",
+  "private": true,
+  "main": "api-doc-preview.js",
+  "scripts": {
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "prettier": "prettier \"**/*.js\" --check",
+    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
+    "prettier:write": "prettier \"**/*.js\" --write"
+  },
+  "dependencies": {
+    "@azure-tools/specs-shared": "file:../../../.github/shared"
+  },
+  "devDependencies": {
+    "prettier": "~3.5.3",
+    "vitest": "^3.0.2",
+    "@vitest/coverage-v8": "^3.0.2"
+  }
+}
