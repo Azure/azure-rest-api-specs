@@ -1,7 +1,7 @@
-# containerstorage
+# WidgetManagement
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for Contoso.
+> This is the AutoRest configuration file for WidgetManagement.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g
 
 ### Basic Information
 
-These are the global settings for the containerstorage.
+These are the global settings.
 
 ```yaml
 openapi-type: arm
