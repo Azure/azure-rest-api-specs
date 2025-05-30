@@ -30,7 +30,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 /**
- * // FIXME: (missing-service-description) Add service description
+ * // (missing-service-description) Add service description
  */
 @armProviderNamespace
 @service(#{ title: "ConfluentManagementClient" })
