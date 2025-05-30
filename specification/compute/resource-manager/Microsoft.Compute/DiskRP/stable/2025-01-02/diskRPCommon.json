@@ -385,6 +385,10 @@
             "name": "ProvisionedBandwidthCopyOption",
             "modelAsString": true
           }
+        },
+        "securityMetadataUri": {
+          "type": "string",
+          "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM."
         }
       },
       "required": [
@@ -609,6 +613,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A SAS uri for accessing a VM guest state."
+        },
+        "securityMetadataAccessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a VM metadata."
         }
       },
       "description": "A disk access SAS uri."
