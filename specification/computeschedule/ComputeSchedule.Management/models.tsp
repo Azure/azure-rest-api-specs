@@ -425,110 +425,6 @@ model ExecuteStartRequest {
   correlationid: string;
 }
 
-@example(
-  #{
-    resourceConfigParameters: #{
-      baseProfile: #{
-        properties: #{
-          hardwareProfile: #{},
-          provisioningState: 0,
-          storageProfile: #{ osDisk: #{ osType: 0 } },
-          vmExtensions: #[
-            #{
-              properties: #{
-                autoUpgradeMinorVersion: true,
-                protectedSettings: "SomeDecryptedSecretValue",
-                provisioningState: 0,
-                enableAutomaticUpgrade: true,
-                publisher: "Microsoft.Azure.Monitor",
-                type: "AzureMonitorLinuxAgent",
-                typeHandlerVersion: "1.0",
-              },
-            },
-            #{ name: "myExtensionName" }
-          ],
-        },
-        resourcegroupName: "RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B",
-        computeApiVersion: "2024-07-01",
-      },
-      resourceOverrides: #[
-        #{
-          name: "myVMPool_523",
-          location: "LocalDev",
-          properties: #{
-            hardwareProfile: #{ vmSize: "Standard_F1s" },
-            provisioningState: 0,
-            osProfile: #{
-              computerName: "myFleet000000",
-              adminUsername: "adminUser",
-              windowsConfiguration: #{
-                additionalContent: #[
-                  #{ passName: "someValue", content: "" },
-                  #{
-                    passName: "someOtherValue",
-                    content: "SomeDecryptedSecretValue",
-                  }
-                ],
-              },
-              adminPassword: "SomeDecryptedSecretValue",
-            },
-            priority: 0,
-          },
-          zones: #["1"],
-        },
-        #{
-          name: "myVMPool_524",
-          location: "LocalDev",
-          properties: #{
-            hardwareProfile: #{ vmSize: "Standard_F1s" },
-            provisioningState: 0,
-            osProfile: #{
-              computerName: "myFleet000000",
-              adminUsername: "adminUser",
-              windowsConfiguration: #{
-                additionalContent: #[
-                  #{ passName: "someValue", content: "" },
-                  #{
-                    passName: "someOtherValue",
-                    content: "SomeDecryptedSecretValue",
-                  }
-                ],
-              },
-              adminPassword: "SomeDecryptedSecretValue",
-            },
-            priority: 0,
-          },
-          zones: #["2"],
-        }
-      ],
-      resourceCount: 2,
-      resourcePrefix: "tl-VM",
-    },
-    executionParameters: #{
-      retryPolicy: #{ retryCount: 2, retryWindowInMinutes: 10 },
-    },
-    correlationid: "6ffe188f-6d3e-4efc-995d-7446686f8b91",
-  },
-  #{
-    title: "Create VM request all parameters",
-    description: "Create VM request optional parameters example",
-  }
-)
-@example(
-  #{
-    resourceConfigParameters: #{
-      baseProfile: #{},
-      resourceOverrides: #[],
-      resourceCount: 4,
-      resourcePrefix: "tl-VM",
-    },
-    executionParameters: #{},
-  },
-  #{
-    title: "Create VM request parameters",
-    description: "Create VM request with required parameters example",
-  }
-)
 @doc("The ExecuteCreateRequest request for create operations")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteCreateRequest {
@@ -542,34 +438,6 @@ model ExecuteCreateRequest {
   correlationid?: string;
 }
 
-@example(
-  #{
-    description: "Create VM operation created",
-    type: "VirtualMachines",
-    location: "useast",
-    results: #[
-      #{
-        resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
-        errorCode: "",
-        errorDetails: "",
-        operation: #{
-          operationId: "5cc987d0-4a3a-4b01-b31a-c99219ece5e2",
-          resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
-          opType: "Create",
-          subscriptionId: "1d04e8f1-ee04-4056-b0b2-718f5bb45b04",
-          deadline: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
-          deadlineType: "InitiateAt",
-          state: "PendingScheduling",
-          timeZone: "UTC",
-          resourceOperationError: #{ errorCode: "", errorDetails: "" },
-          completedAt: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
-          retryPolicy: #{ retryCount: 3, retryWindowInMinutes: 10 },
-        },
-      }
-    ],
-  },
-  #{ title: "Create VM response", description: "Create VM response" }
-)
 @doc("The response from a create request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model CreateResourceOperationResponse {
@@ -588,34 +456,6 @@ model CreateResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-@example(
-  #{
-    description: "Delete VM operation created",
-    type: "VirtualMachines",
-    location: "useast",
-    results: #[
-      #{
-        resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
-        errorCode: "",
-        errorDetails: "",
-        operation: #{
-          operationId: "5cc987d0-4a3a-4b01-b31a-c99219ece5e2",
-          resourceId: "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/RG5ABF491C-3164-42A6-8CB5-BF3CB53B018B/providers/Microsoft.Compute/virtualMachines/TL13",
-          opType: "Create",
-          subscriptionId: "1d04e8f1-ee04-4056-b0b2-718f5bb45b04",
-          deadline: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
-          deadlineType: "InitiateAt",
-          state: "PendingScheduling",
-          timeZone: "UTC",
-          resourceOperationError: #{ errorCode: "", errorDetails: "" },
-          completedAt: offsetDateTime.fromISO("2025-04-15T19:47:03.591Z"),
-          retryPolicy: #{ retryCount: 3, retryWindowInMinutes: 10 },
-        },
-      }
-    ],
-  },
-  #{ title: "Create VM response", description: "Create VM response" }
-)
 @doc("The response from a delete request")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model DeleteResourceOperationResponse {
@@ -634,43 +474,6 @@ model DeleteResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-@example(
-  #{
-    resources: #{
-      ids: #[
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/033328a9-c714-406c-9d90-b98ef0fd29e7",
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/215a631c-46dd-4256-b679-36441782372c",
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/352c5b18-62c4-479c-a3a6-afabf8c6d39a"
-      ],
-    },
-    executionParameters: #{},
-  },
-  #{
-    title: "Delete request with optional parameters example",
-    description: "delete VM example",
-  }
-)
-@example(
-  #{
-    resources: #{
-      ids: #[
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/033328a9-c714-406c-9d90-b98ef0fd29e7",
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/215a631c-46dd-4256-b679-36441782372c",
-        "/subscriptions/793c9eeb-fcaa-4bc9-844b-6db27ecc759a/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/352c5b18-62c4-479c-a3a6-afabf8c6d39a"
-      ],
-    },
-    executionParameters: #{
-      retryPolicy: #{ retryCount: 2, retryWindowInMinutes: 10 },
-    },
-    forceDeletion: true,
-    correlationid: "6ffe188f-6d3e-4efc-995d-7446686f8b91",
-    computeApiVersion: "2024-11-01",
-  },
-  #{
-    title: "Delete request required parameters",
-    description: "delete VM example with required parameters",
-  }
-)
 @doc("The ExecuteDeleteRequest for delete VM operation")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteDeleteRequest {
@@ -685,9 +488,6 @@ model ExecuteDeleteRequest {
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
-
-  @doc("Microsoft.Compute API version to target when calling delete endpoint.")
-  computeApiVersion?: string;
 }
 
 // ----------- GetOperationStatus ---------
