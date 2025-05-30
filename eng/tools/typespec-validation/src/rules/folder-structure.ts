@@ -122,6 +122,9 @@ export class FolderStructureRule implements Rule {
         success = false;
       }
 
+      // TODO: Decide if v2 should validate folder names and structure to ensure specs align, or allow a more loose structure to ease
+      // migration from v1 to v2.
+
       const specType = folder.includes("data-plane") ? "data-plane" : "resource-manager";
       if (specType === "data-plane") {
         if (folderStruct.length !== 4) {
