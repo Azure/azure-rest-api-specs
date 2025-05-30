@@ -189,7 +189,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties: Record<unknown>;
+  properties: Record<Record<unknown>>;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -867,7 +867,7 @@ alias AcsChatThreadBaseEventData = {
 
   /** The thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties: Record<unknown>;
+  properties: Record<Record<unknown>>;
 
   /** The thread metadata */
   metadata?: Record<string>;
@@ -896,7 +896,7 @@ alias AcsChatThreadPropertiesBaseEventData = {
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
-  properties: Record<unknown>;
+  properties: Record<Record<unknown>>;
 
   /** The thread metadata */
   metadata: Record<string>;
