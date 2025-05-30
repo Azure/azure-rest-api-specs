@@ -8202,6 +8202,47 @@
         "pythonFile"
       ]
     },
+    "DatabricksJobActivity": {
+      "description": "Databricks Job activity.",
+      "x-ms-discriminator-value": "DatabricksJob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Databricks Job activity properties.",
+          "$ref": "#/definitions/DatabricksJobActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DatabricksJobActivityTypeProperties": {
+      "description": "Databricks Job activity properties.",
+      "properties": {
+        "jobId": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The Id of the Databricks Job to be executed. Type: string (or Expression with resultType string)."
+        },
+        "jobParameters": {
+          "description": "Job parameters to be used for each run of this job. If the job takes a parameter that is not specified, the default value from the job will be used.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      },
+      "required": [
+        "jobId"
+      ]
+    },
     "SetVariableActivity": {
       "x-ms-discriminator-value": "SetVariable",
       "description": "Set value for a Variable.",
@@ -9420,8 +9461,9 @@
           "description": "Type of expressions supported by the system. Type: string."
         },
         "value": {
-          "description": "Value for Constant/Field Type: string.",
-          "type": "string"
+          "description": "Value for Constant/Field Type: object.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
         },
         "operators": {
           "description": "Expression operator value Type: list of strings.",

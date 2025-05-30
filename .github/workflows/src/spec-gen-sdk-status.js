@@ -60,7 +60,7 @@ export async function setSpecGenSdkStatusImpl({
   github,
   core,
 }) {
-  const statusName = "spec-gen-sdk status";
+  const statusName = "SDK Validation Status";
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,
     repo,
@@ -71,7 +71,7 @@ export async function setSpecGenSdkStatusImpl({
   const specGenSdkChecks = checks.filter(
     (check) =>
       check.app?.name === "Azure Pipelines" &&
-      check.name.includes("spec-gen-sdk"),
+      check.name.includes("SDK Validation"),
   );
 
   core.info(
@@ -97,7 +97,7 @@ export async function setSpecGenSdkStatusImpl({
   if (!allCompleted) {
     // At least one check is still running or none found yet, set status to pending
     core.info(
-      "Some spec-gen-sdk checks are not completed. Setting status to pending.",
+      "Some SDK Validation checks are not completed. Setting status to pending.",
     );
 
     await github.rest.repos.createCommitStatus({
@@ -106,7 +106,7 @@ export async function setSpecGenSdkStatusImpl({
       sha: head_sha,
       state: CommitStatusState.PENDING,
       context: statusName,
-      description: "Waiting for all spec-gen-sdk checks to complete",
+      description: "Waiting for all SDK Validation checks to complete",
       target_url,
     });
   } else {
@@ -117,7 +117,7 @@ export async function setSpecGenSdkStatusImpl({
     });
 
     core.info(
-      `All spec-gen-sdk checks completed. Setting status to ${result.state}.`,
+      `All SDK Validation checks completed. Setting status to ${result.state}.`,
     );
 
     await github.rest.repos.createCommitStatus({
@@ -142,10 +142,10 @@ async function processResult({ checkRuns, core }) {
   /** @type {import("./github.js").CommitStatusState} */
   let state = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
-  let description = "spec-gen-sdk checks succeeded";
+  let description = "SDK Validation CI checks succeeded";
 
   // Create a summary of the results
-  let summaryContent = "## spec-gen-sdk Checks Result\n\n";
+  let summaryContent = "## SDK Validation CI Checks Result\n\n";
   summaryContent += "| Language | Status | Required Check |\n";
   summaryContent += "|----------|--------|---------------|\n";
 
@@ -200,21 +200,21 @@ async function processResult({ checkRuns, core }) {
   if (state === CommitStatusState.FAILURE) {
     specGenSdkFailedRequiredLanguages =
       specGenSdkFailedRequiredLanguages.replace(/,\s*$/, "");
-    description = `spec-gen-sdk failed for ${specGenSdkFailedRequiredLanguages} languages`;
+    description = `SDK Validation failed for ${specGenSdkFailedRequiredLanguages} languages`;
   }
 
   // Add overall result
   summaryContent += "\n### Overall Result\n\n";
   summaryContent +=
     state === CommitStatusState.SUCCESS
-      ? "✅ All required spec-gen-sdk checks passed successfully!"
-      : `❌ spec-gen-sdk checks failed for: ${specGenSdkFailedRequiredLanguages}`;
+      ? "✅ All required SDK Validation CI checks passed successfully!"
+      : `❌ SDK Validation CI checks failed for: ${specGenSdkFailedRequiredLanguages}`;
 
   // Add next steps
   if (state === CommitStatusState.FAILURE) {
     summaryContent +=
       "\n### Next Steps\n\n" +
-      `Please fix any issues in the the spec-gen-sdk checks for languages: ${specGenSdkFailedRequiredLanguages}.`;
+      `Please fix any issues in the the SDK Validation CI checks for languages: ${specGenSdkFailedRequiredLanguages}.`;
   }
 
   // Write to the summary page
