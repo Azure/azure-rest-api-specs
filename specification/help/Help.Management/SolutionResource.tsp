@@ -112,10 +112,10 @@ interface SolutionResources {
 @@minLength(SolutionResource.name, 1);
 @@doc(SolutionResource.name, "Solution resource Name.");
 @@doc(SolutionResource.properties, "Solution result");
-@@doc(SolutionResources.create::parameters.body,
+@@doc(SolutionResources.create::parameters.resource,
   "The required request body for this solution resource creation."
 );
-@@doc(SolutionResources.update::parameters.body,
+@@doc(SolutionResources.update::parameters.properties,
   "The required request body for updating a solution resource."
 );
 @@doc(SolutionResources.warmUp::parameters.body,

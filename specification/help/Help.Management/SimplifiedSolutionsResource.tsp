@@ -81,6 +81,6 @@ interface SimplifiedSolutionsResources {
 @@minLength(SimplifiedSolutionsResource.name, 1);
 @@doc(SimplifiedSolutionsResource.name, "Simplified Solutions Resource Name.");
 @@doc(SimplifiedSolutionsResource.properties, "Simplified Solutions result");
-@@doc(SimplifiedSolutionsResources.create::parameters.body,
+@@doc(SimplifiedSolutionsResources.create::parameters.resource,
   "The required request body for simplified Solutions resource creation."
 );

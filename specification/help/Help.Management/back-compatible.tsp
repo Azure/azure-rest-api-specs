@@ -12,20 +12,22 @@ using Microsoft.Help;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionNlpMetadataResource.properties);
 
-@@clientName(DiagnosticResources.create::parameters.body,
+@@clientName(DiagnosticResources.create::parameters.resource,
   "diagnosticResourceRequest"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DiagnosticResource.properties);
 
-@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
-@@clientName(SolutionResources.update::parameters.body,
+@@clientName(SolutionResources.create::parameters.resource,
+  "solutionRequestBody"
+);
+@@clientName(SolutionResources.update::parameters.properties,
   "solutionPatchRequestBody"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionResource.properties);
 
-@@clientName(SimplifiedSolutionsResources.create::parameters.body,
+@@clientName(SimplifiedSolutionsResources.create::parameters.resource,
   "simplifiedSolutionsRequestBody"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -37,20 +39,22 @@ using Microsoft.Help;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SolutionResourceSelfHelp.properties);
 
-@@clientName(DiagnosticResources.create::parameters.body,
+@@clientName(DiagnosticResources.create::parameters.resource,
   "diagnosticResourceRequest"
 );
 
-@@clientName(SimplifiedSolutionsResources.create::parameters.body,
+@@clientName(SimplifiedSolutionsResources.create::parameters.resource,
   "simplifiedSolutionsRequestBody"
 );
 
-@@clientName(SolutionResources.create::parameters.body, "solutionRequestBody");
+@@clientName(SolutionResources.create::parameters.resource,
+  "solutionRequestBody"
+);
 
-@@clientName(SolutionResources.update::parameters.body,
+@@clientName(SolutionResources.update::parameters.properties,
   "solutionPatchRequestBody"
 );
-@@clientName(TroubleshooterResources.create::parameters.body,
+@@clientName(TroubleshooterResources.create::parameters.resource,
   "createTroubleshooterRequestBody"
 );
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions::parameters.body,

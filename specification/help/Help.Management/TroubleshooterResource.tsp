@@ -118,7 +118,7 @@ interface TroubleshooterResources {
 @@minLength(TroubleshooterResource.name, 1);
 @@doc(TroubleshooterResource.name, "Troubleshooter resource Name.");
 @@doc(TroubleshooterResource.properties, "Troubleshooter Instance properties.");
-@@doc(TroubleshooterResources.create::parameters.body,
+@@doc(TroubleshooterResources.create::parameters.resource,
   "The required request body for this Troubleshooter resource creation."
 );
 @@doc(TroubleshooterResources.continue::parameters.body,
