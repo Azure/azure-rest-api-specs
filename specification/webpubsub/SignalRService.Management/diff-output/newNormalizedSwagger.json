@@ -2352,7 +2352,7 @@
         "type"
       ]
     },
-    "NetworkACL": {
+    "NetworkAcl": {
       "type": "object",
       "properties": {
         "allow": {
@@ -2377,7 +2377,7 @@
         }
       }
     },
-    "PrivateEndpointACL": {
+    "PrivateEndpointAcl": {
       "type": "object",
       "properties": {
         "name": {
@@ -2389,7 +2389,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkACL"
+          "$ref": "#/definitions/NetworkAcl"
         }
       ]
     },
@@ -2885,7 +2885,7 @@
           "type": "string",
           "readOnly": true
         },
-        "sku": {
+        "resourceSku": {
           "$ref": "#/definitions/ResourceSku",
           "readOnly": true
         },
@@ -2949,8 +2949,8 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "resourceType",
-            "/sku/name",
-            "/sku/tier"
+            "/resourceSku/name",
+            "/resourceSku/tier"
           ]
         },
         "nextLink": {
@@ -3221,7 +3221,7 @@
         }
       }
     },
-    "WebPubSubNetworkACLs": {
+    "WebPubSubNetworkAcls": {
       "type": "object",
       "properties": {
         "defaultAction": {
@@ -3236,12 +3236,12 @@
           }
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkACL"
+          "$ref": "#/definitions/NetworkAcl"
         },
         "privateEndpoints": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointACL"
+            "$ref": "#/definitions/PrivateEndpointAcl"
           },
           "x-ms-identifiers": [
             "name"
@@ -3277,7 +3277,7 @@
           },
           "readOnly": true
         },
-        "externalIP": {
+        "externalIp": {
           "type": "string",
           "readOnly": true
         },
@@ -3326,8 +3326,8 @@
         "resourceLogConfiguration": {
           "$ref": "#/definitions/ResourceLogConfiguration"
         },
-        "networkACLs": {
-          "$ref": "#/definitions/WebPubSubNetworkACLs"
+        "networkAcls": {
+          "$ref": "#/definitions/WebPubSubNetworkAcls"
         },
         "applicationFirewall": {
           "$ref": "#/definitions/ApplicationFirewallSettings"
@@ -3352,8 +3352,8 @@
           "type": "string",
           "default": "false"
         },
-        "socketIO": {
-          "$ref": "#/definitions/WebPubSubSocketIOSettings"
+        "socketIo": {
+          "$ref": "#/definitions/WebPubSubSocketIoSettings"
         }
       }
     },
@@ -3413,7 +3413,7 @@
         "value"
       ]
     },
-    "WebPubSubSocketIOSettings": {
+    "WebPubSubSocketIoSettings": {
       "type": "object",
       "properties": {
         "serviceMode": {

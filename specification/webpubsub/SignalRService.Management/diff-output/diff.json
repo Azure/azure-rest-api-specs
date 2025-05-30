@@ -656,6 +656,23 @@
         }
       }
     },
+    "NetworkACL__deleted": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        },
+        "deny": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        }
+      }
+    },
     "Operation__deleted": {
       "type": "object",
       "properties": {
@@ -723,6 +740,22 @@
         }
       }
     },
+    "PrivateEndpointACL__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkACL"
+        }
+      ]
+    },
     "ServiceSpecification__deleted": {
       "type": "object",
       "properties": {
@@ -747,6 +780,49 @@
         }
       }
     },
+    "WebPubSubNetworkACLs__deleted": {
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "ACLAction",
+            "modelAsString": true
+          }
+        },
+        "publicNetwork": {
+          "$ref": "#/definitions/NetworkACL"
+        },
+        "privateEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointACL"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ipRules": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "WebPubSubSocketIOSettings__deleted": {
+      "type": "object",
+      "properties": {
+        "serviceMode": {
+          "type": "string"
+        }
+      }
+    },
     "Azure.ResourceManager.ArmResponse<WebPubSubKeys>__added": {
       "type": "object",
       "properties": {
@@ -758,8 +834,83 @@
         "body"
       ]
     },
+    "NetworkAcl__added": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        },
+        "deny": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebPubSubRequestType"
+          }
+        }
+      }
+    },
+    "PrivateEndpointAcl__added": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkAcl"
+        }
+      ]
+    },
     "TypeSpec.Http.NoContentResponse__added": {
       "type": "object"
+    },
+    "WebPubSubNetworkAcls__added": {
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "ACLAction",
+            "modelAsString": true
+          }
+        },
+        "publicNetwork": {
+          "$ref": "#/definitions/NetworkAcl"
+        },
+        "privateEndpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointAcl"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "WebPubSubSocketIoSettings__added": {
+      "type": "object",
+      "properties": {
+        "serviceMode": {
+          "type": "string"
+        }
+      }
     },
     "ApplicationFirewallSettings": {
       "properties": {
@@ -806,6 +957,45 @@
         "value"
       ]
     },
+    "Sku": {
+      "properties": {
+        "sku__deleted": {
+          "$ref": "#/definitions/ResourceSku",
+          "readOnly": true
+        },
+        "resourceSku__added": {
+          "$ref": "#/definitions/ResourceSku",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuList": {
+      "properties": {
+        "value": {
+          "x-ms-identifiers": [
+            [
+              " "
+            ],
+            [
+              "-",
+              "/sku/name"
+            ],
+            [
+              "-",
+              "/sku/tier"
+            ],
+            [
+              "+",
+              "/resourceSku/name"
+            ],
+            [
+              "+",
+              "/resourceSku/tier"
+            ]
+          ]
+        }
+      }
+    },
     "WebPubSubHub": {
       "properties": {
         "properties": {
@@ -834,10 +1024,27 @@
         }
       }
     },
-    "WebPubSubNetworkACLs": {
+    "WebPubSubProperties": {
       "properties": {
-        "ipRules": {
-          "maxItems__deleted": 30
+        "externalIP__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "networkACLs__deleted": {
+          "$ref": "#/definitions/WebPubSubNetworkACLs"
+        },
+        "socketIO__deleted": {
+          "$ref": "#/definitions/WebPubSubSocketIOSettings"
+        },
+        "externalIp__added": {
+          "type": "string",
+          "readOnly": true
+        },
+        "networkAcls__added": {
+          "$ref": "#/definitions/WebPubSubNetworkAcls"
+        },
+        "socketIo__added": {
+          "$ref": "#/definitions/WebPubSubSocketIoSettings"
         }
       }
     },

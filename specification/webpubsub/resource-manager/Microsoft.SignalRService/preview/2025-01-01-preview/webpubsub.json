@@ -3402,7 +3402,7 @@
         "name"
       ]
     },
-    "NetworkACL": {
+    "NetworkAcl": {
       "type": "object",
       "description": "Network ACL",
       "properties": {
@@ -3434,7 +3434,7 @@
         }
       }
     },
-    "PrivateEndpointACL": {
+    "PrivateEndpointAcl": {
       "type": "object",
       "description": "ACL for a private endpoint",
       "properties": {
@@ -3448,7 +3448,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkACL"
+          "$ref": "#/definitions/NetworkAcl"
         }
       ]
     },
@@ -3658,35 +3658,43 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown provisioning state"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource successfully provisioned"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource provisioning failed"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource provisioning was canceled"
           },
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Resource provisioning is running"
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "Resource is being created"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Resource is being updated"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Resource is being deleted"
           },
           {
             "name": "Moving",
@@ -4104,7 +4112,7 @@
           "description": "The resource type that this object applies to",
           "readOnly": true
         },
-        "sku": {
+        "resourceSku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The billing information of the resource.",
           "readOnly": true
@@ -4168,8 +4176,8 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "resourceType",
-            "/sku/name",
-            "/sku/tier"
+            "/resourceSku/name",
+            "/resourceSku/tier"
           ]
         },
         "nextLink": {
@@ -4492,7 +4500,7 @@
         }
       }
     },
-    "WebPubSubNetworkACLs": {
+    "WebPubSubNetworkAcls": {
       "type": "object",
       "description": "Network ACLs for the resource",
       "properties": {
@@ -4501,14 +4509,14 @@
           "description": "Azure Networking ACL Action."
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkACL",
+          "$ref": "#/definitions/NetworkAcl",
           "description": "Network ACL"
         },
         "privateEndpoints": {
           "type": "array",
           "description": "ACLs for requests from private endpoints",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointACL"
+            "$ref": "#/definitions/PrivateEndpointAcl"
           },
           "x-ms-identifiers": [
             "name"
@@ -4533,7 +4541,7 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
-        "externalIP": {
+        "externalIp": {
           "type": "string",
           "description": "The publicly accessible IP of the resource.",
           "readOnly": true
@@ -4595,8 +4603,8 @@
           "$ref": "#/definitions/ResourceLogConfiguration",
           "description": "Resource log configuration of a Microsoft.SignalRService resource."
         },
-        "networkACLs": {
-          "$ref": "#/definitions/WebPubSubNetworkACLs",
+        "networkAcls": {
+          "$ref": "#/definitions/WebPubSubNetworkAcls",
           "description": "Network ACLs for the resource"
         },
         "applicationFirewall": {
@@ -4628,8 +4636,8 @@
           "description": "Stop or start the resource.  Default to \"False\".\nWhen it's true, the data plane of the resource is shutdown.\nWhen it's false, the data plane of the resource is started.",
           "default": "false"
         },
-        "socketIO": {
-          "$ref": "#/definitions/WebPubSubSocketIOSettings",
+        "socketIo": {
+          "$ref": "#/definitions/WebPubSubSocketIoSettings",
           "description": "SocketIO settings for the resource"
         }
       }
@@ -4734,24 +4742,28 @@
         "values": [
           {
             "name": "Free",
-            "value": "Free"
+            "value": "Free",
+            "description": "Free tier for WebPubSub service"
           },
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "Basic tier for WebPubSub service (deprecated, use Standard instead)"
           },
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "Standard tier for WebPubSub service"
           },
           {
             "name": "Premium",
-            "value": "Premium"
+            "value": "Premium",
+            "description": "Premium tier for WebPubSub service"
           }
         ]
       }
     },
-    "WebPubSubSocketIOSettings": {
+    "WebPubSubSocketIoSettings": {
       "type": "object",
       "description": "SocketIO settings for the resource",
       "properties": {

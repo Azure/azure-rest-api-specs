@@ -3,11 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-
 namespace Microsoft.SignalRService;
 
 /**
@@ -17,13 +12,17 @@ namespace Microsoft.SignalRService;
  */
 union WebPubSubSkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Free tier for WebPubSub service */
   Free: "Free",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Basic tier for WebPubSub service (deprecated, use Standard instead) */
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Standard tier for WebPubSub service */
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Premium tier for WebPubSub service */
   Premium: "Premium",
 }
 
@@ -32,21 +31,29 @@ union WebPubSubSkuTier {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Unknown provisioning state */
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource successfully provisioned */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource provisioning failed */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource provisioning was canceled */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource provisioning is running */
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource is being created */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource is being updated */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Resource is being deleted */
   Deleting: "Deleting",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Moving: "Moving",
@@ -430,11 +437,13 @@ model NameAvailability {
 /**
  * Object that includes an array of the resource usages and a possible link for next set.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalR is a proper noun"
 model SignalRServiceUsageList is Azure.Core.Page<SignalRServiceUsage>;
 
 /**
  * Object that describes a specific usage of the resources.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalR is a proper noun"
 model SignalRServiceUsage {
   /**
    * Fully qualified ARM resource id
@@ -465,6 +474,7 @@ model SignalRServiceUsage {
 /**
  * Localizable String object containing the name and a localized value.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalR is a proper noun"
 model SignalRServiceUsageName {
   /**
    * The identifier of the usage.
@@ -539,7 +549,7 @@ model WebPubSubProperties {
    * The publicly accessible IP of the resource.
    */
   @visibility(Lifecycle.Read)
-  externalIP?: string;
+  externalIp?: string;
 
   /**
    * FQDN of the service instance.
@@ -603,7 +613,7 @@ model WebPubSubProperties {
   /**
    * Network ACLs for the resource
    */
-  networkACLs?: WebPubSubNetworkACLs;
+  networkAcls?: WebPubSubNetworkAcls;
 
   /**
    * Application firewall settings for the resource
@@ -648,7 +658,7 @@ model WebPubSubProperties {
   /**
    * SocketIO settings for the resource
    */
-  socketIO?: WebPubSubSocketIOSettings;
+  socketIo?: WebPubSubSocketIoSettings;
 }
 
 /**
@@ -829,7 +839,7 @@ model ResourceLogCategory {
 /**
  * Network ACLs for the resource
  */
-model WebPubSubNetworkACLs {
+model WebPubSubNetworkAcls {
   /**
    * Azure Networking ACL Action.
    */
@@ -838,13 +848,13 @@ model WebPubSubNetworkACLs {
   /**
    * Network ACL
    */
-  publicNetwork?: NetworkACL;
+  publicNetwork?: NetworkAcl;
 
   /**
    * ACLs for requests from private endpoints
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  privateEndpoints?: PrivateEndpointACL[];
+  privateEndpoints?: PrivateEndpointAcl[];
 
   /**
    * IP rules for filtering public traffic
@@ -856,7 +866,7 @@ model WebPubSubNetworkACLs {
 /**
  * Network ACL
  */
-model NetworkACL {
+model NetworkAcl {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
@@ -874,7 +884,7 @@ model NetworkACL {
  * ACL for a private endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointACL extends NetworkACL {
+model PrivateEndpointAcl extends NetworkAcl {
   /**
    * Name of the private endpoint connection
    */
@@ -941,7 +951,7 @@ model ClientTrafficControlRule {
 /**
  * SocketIO settings for the resource
  */
-model WebPubSubSocketIOSettings {
+model WebPubSubSocketIoSettings {
   /**
    * The service mode of Web PubSub for Socket.IO. Values allowed:
    * "Default": have your own backend Socket.IO server
@@ -1365,7 +1375,7 @@ model SkuList {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension(
     "x-ms-identifiers",
-    #["resourceType", "/sku/name", "/sku/tier"]
+    #["resourceType", "/resourceSku/name", "/resourceSku/tier"]
   )
   value?: Sku[];
 
@@ -1391,7 +1401,7 @@ model Sku {
    * The billing information of the resource.
    */
   @visibility(Lifecycle.Read)
-  sku?: ResourceSku;
+  resourceSku?: ResourceSku;
 
   /**
    * Describes scaling information of a sku.

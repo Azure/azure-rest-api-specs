@@ -130,6 +130,7 @@ interface WebPubSubResources {
    * Operation to restart a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API design"
   @operationId("WebPubSub_Restart")
   restart is ArmResourceActionAsync<WebPubSubResource, void, NoContentResponse>;
 
