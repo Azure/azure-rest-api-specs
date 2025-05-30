@@ -58,7 +58,15 @@ export class Swagger {
    * @returns {Promise<Map<string, Swagger>>}
    */
   async getRefs() {
-    return new Set([...await this.#getRefs()].filter(s => !example(s.path)));
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map(
+      Array.from(allRefs.entries())
+        .filter(([path, swagger]) => !example(path))
+    );
+
+    return filtered;
   }
 
   async #getRefs() {
@@ -104,10 +112,18 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Set<Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>}
    */
   async getExamples() {
-    return new Set([...await this.#getRefs()].filter(s => example(s.path)));
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map(
+      Array.from(allRefs.entries())
+        .filter(([path, swagger]) => example(path))
+    );
+
+    return filtered;
   }
 
   /**
