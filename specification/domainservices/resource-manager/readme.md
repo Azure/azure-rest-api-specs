@@ -110,14 +110,13 @@ input-file:
 
 ---
 
-# Suppressions
+## Suppression
 
+``` yaml
 directive:
-
-- suppress: PathResourceProviderNamePascalCase
-  from: Microsoft.AAD/preview/2025-05-01/domainservices.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend"]
-  reason: Microsoft.AAD is the correct provider name for legacy reasons.
+  - suppress: PathResourceProviderNamePascalCase
+    reason: Microsoft.AAD is the correct provider name for legacy reasons.
+```
 
 # Code Generation
 
