@@ -1,21 +1,22 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import * as log from "../../src/log.js";
-import * as utils from "../../src/utils.js";
-import * as specHelpers from "../../src/spec-helpers.js";
+import * as log from "../src/log.js";
+import * as utils from "../src/utils.js";
+import * as specHelpers from "../src/spec-helpers.js";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import path from "node:path";
 import {
   getBreakingChangeInfo,
+  getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
   generateArtifact,
   setPipelineVariables,
-} from "../../src/command-helpers.js";
-import { LogLevel } from "../../src/log.js";
-import { APIViewRequestData } from "../../src/types.js";
+} from "../src/command-helpers.js";
+import { LogLevel } from "../src/log.js";
+import { APIViewRequestData } from "../src/types.js";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -39,10 +40,7 @@ describe("commands.ts", () => {
         "Configurations: 'specification/contosowidgetmanager/resource-manager/readme.md', and CommitSHA: 'commitsha', in SpecRepo: 'https://github.com/Azure/azure-rest-api-specs'",
       );
 
-      expect(log.setVsoVariable).toHaveBeenCalledWith(
-        "StagedArtifactsFolder",
-        "path-to-artifact",
-      );
+      expect(log.setVsoVariable).toHaveBeenCalledWith("StagedArtifactsFolder", "path-to-artifact");
       expect(log.setVsoVariable).toHaveBeenCalledWith(
         "PrBranch",
         "sdkauto/sdk-security/keyvault/azcertificates",
@@ -61,15 +59,10 @@ describe("commands.ts", () => {
         // mock implementation intentionally left blank
       });
 
-      setPipelineVariables(
-        "path-to-artifact"
-      );
+      setPipelineVariables("path-to-artifact");
 
       expect(log.setVsoVariable).toHaveBeenCalledOnce();
-      expect(log.setVsoVariable).toHaveBeenCalledWith(
-        "StagedArtifactsFolder",
-        "path-to-artifact",
-      );
+      expect(log.setVsoVariable).toHaveBeenCalledWith("StagedArtifactsFolder", "path-to-artifact");
     });
   });
 
@@ -180,14 +173,18 @@ describe("commands.ts", () => {
         { tspconfigPath: "typespec1", readmePath: undefined },
         { tspconfigPath: "typespec2", readmePath: undefined },
         { tspconfigPath: undefined, readmePath: "readme1" },
-        { tspconfigPath: undefined, readmePath: "readme2" }
+        { tspconfigPath: undefined, readmePath: "readme2" },
       ]);
 
       const result = getSpecPaths("all-specs", "/spec/path");
-      
+
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], false);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        ["typespec1", "typespec2"],
+        ["readme1", "readme2"],
+        false,
+      );
       expect(result).toHaveLength(4);
     });
 
@@ -195,13 +192,17 @@ describe("commands.ts", () => {
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue(["readme1", "readme2"]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: undefined, readmePath: "readme1" },
-        { tspconfigPath: undefined, readmePath: "readme2" }
+        { tspconfigPath: undefined, readmePath: "readme2" },
       ]);
 
       const result = getSpecPaths("all-openapis", "/spec/path");
-      
+
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([], ["readme1", "readme2"], false);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        [],
+        ["readme1", "readme2"],
+        false,
+      );
       expect(result).toHaveLength(2);
     });
 
@@ -212,70 +213,108 @@ describe("commands.ts", () => {
         { tspconfigPath: "typespec1", readmePath: undefined },
         { tspconfigPath: "typespec2", readmePath: undefined },
         { tspconfigPath: undefined, readmePath: "readme1" },
-        { tspconfigPath: undefined, readmePath: "readme2" }
+        { tspconfigPath: undefined, readmePath: "readme2" },
       ]);
 
       const result = getSpecPaths("all-typespecs", "/spec/path");
-      
+
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(["typespec1", "typespec2"], ["readme1", "readme2"], true);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        ["typespec1", "typespec2"],
+        ["readme1", "readme2"],
+        true,
+      );
       expect(result).toHaveLength(4);
     });
 
     test("should return sample TypeSpec paths for 'sample-typespecs' batch type", () => {
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
-        { tspconfigPath: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml", readmePath: undefined },
-        { tspconfigPath: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml", readmePath: undefined }
+        {
+          tspconfigPath: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+          readmePath: undefined,
+        },
+        {
+          tspconfigPath: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+          readmePath: undefined,
+        },
       ]);
 
       const result = getSpecPaths("sample-typespecs", "/spec/path");
-      
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith([
-        "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
-        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"
-      ], [], false);
+
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        [
+          "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+          "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        ],
+        [],
+        false,
+      );
       expect(result).toHaveLength(2);
     });
-    
+
     test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
       const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
       const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
-      
-      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...managementTypespecs, "typespec3", "typespec4"]);
-      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...resourceManagerReadmes, "readme-dp1", "readme-dp2"]);
+
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([
+        ...managementTypespecs,
+        "typespec3",
+        "typespec4",
+      ]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([
+        ...resourceManagerReadmes,
+        "readme-dp1",
+        "readme-dp2",
+      ]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
         { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
       ]);
 
       const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
-      
+
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(managementTypespecs, resourceManagerReadmes, true);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        managementTypespecs,
+        resourceManagerReadmes,
+        true,
+      );
       expect(result).toHaveLength(2);
     });
-    
+
     test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
       const dataPlaneTypespecs = ["typespec3", "typespec4"];
       const dataPlaneReadmes = ["data-plane/readme-dp1", "data-plane/readme-dp2"];
-      
-      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([...dataPlaneTypespecs, "typespec1.Management", "typespec2.Management"]);
-      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([...dataPlaneReadmes, "readme-rm1", "readme-rm2"]);
+
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([
+        ...dataPlaneTypespecs,
+        "typespec1.Management",
+        "typespec2.Management",
+      ]);
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue([
+        ...dataPlaneReadmes,
+        "readme-rm1",
+        "readme-rm2",
+      ]);
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec3", readmePath: undefined },
         { tspconfigPath: "typespec4", readmePath: undefined },
         { tspconfigPath: undefined, readmePath: "data-plane/readme-dp1" },
-        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp2" }
+        { tspconfigPath: undefined, readmePath: "data-plane/readme-dp2" },
       ]);
 
       const result = getSpecPaths("all-dataplane-typespecs", "/spec/path");
-      
+
       expect(utils.getAllTypeSpecPaths).toHaveBeenCalledWith("/spec/path");
       expect(utils.findReadmeFiles).toHaveBeenCalledWith(path.join("/spec/path", "specification"));
-      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(dataPlaneTypespecs, dataPlaneReadmes, true);
+      expect(specHelpers.groupSpecConfigPaths).toHaveBeenCalledWith(
+        dataPlaneTypespecs,
+        dataPlaneReadmes,
+        true,
+      );
       expect(result).toHaveLength(4);
     });
   });
@@ -373,9 +412,12 @@ describe("commands.ts", () => {
         // mock implementation intentionally left blank
       });
 
+      // No need to mock getRequiredSettingValue for this test
+      // We'll just verify the output structure instead
+
       const mockCommandInput = {
         workingFolder: "/working/folder",
-        sdkLanguage: "javascript",
+        sdkLanguage: "azure-sdk-for-js",
         runMode: "",
         localSpecRepoPath: "",
         localSdkRepoPath: "",
@@ -388,7 +430,7 @@ describe("commands.ts", () => {
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
-      const mockApiViewRequestData: APIViewRequestData [] = [];
+      const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
@@ -396,7 +438,7 @@ describe("commands.ts", () => {
         mockhasBreakingChange,
         mockhasManagementPlaneSpecs,
         mockStagedArtifactsFolder,
-        mockApiViewRequestData
+        mockApiViewRequestData,
       );
 
       const breakingChangeLabelArtifactPath = path.normalize(
@@ -407,15 +449,17 @@ describe("commands.ts", () => {
       expect(fs.mkdirSync).toHaveBeenCalledWith(breakingChangeLabelArtifactPath, {
         recursive: true,
       });
+      // Since we're not mocking getRequiredSettingValue properly in this test,
+      // we'll just verify the output contains the expected isSpecGenSdkCheckRequired value
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.join(breakingChangeLabelArtifactPath, "spec-gen-sdk-artifact.json"),
         JSON.stringify(
           {
-            language: "javascript",
+            language: "azure-sdk-for-js",
             result: "succeeded",
             labelAction: false,
             isSpecGenSdkCheckRequired: false,
-            apiViewRequestData: []
+            apiViewRequestData: [],
           },
           undefined,
           2,
@@ -466,7 +510,7 @@ describe("commands.ts", () => {
       const mockhasBreakingChange = false;
       const mockhasManagementPlaneSpecs = false;
       const mockStagedArtifactsFolder = "";
-      const mockApiViewRequestData: APIViewRequestData [] = [];
+      const mockApiViewRequestData: APIViewRequestData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
@@ -479,6 +523,28 @@ describe("commands.ts", () => {
 
       expect(result).toBe(1);
       expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
+    });
+  });
+
+  describe("getRequiredSettingValue", () => {
+    test("should return managementPlane setting when hasManagementPlaneSpecs is true", () => {
+      const result = getRequiredSettingValue(true, "azure-sdk-for-go");
+      // Based on the constants in types.ts, Go SDK requires check for management plane
+      expect(result).toBe(true);
+
+      const result2 = getRequiredSettingValue(true, "azure-sdk-for-js");
+      // Based on the constants in types.ts, JS SDK does not require check for management plane
+      expect(result2).toBe(false);
+    });
+
+    test("should return dataPlane setting when hasManagementPlaneSpecs is false", () => {
+      const result = getRequiredSettingValue(false, "azure-sdk-for-go");
+      // Based on the constants in types.ts, Go SDK requires check for data plane
+      expect(result).toBe(true);
+
+      const result2 = getRequiredSettingValue(false, "azure-sdk-for-js");
+      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      expect(result2).toBe(false);
     });
   });
 });

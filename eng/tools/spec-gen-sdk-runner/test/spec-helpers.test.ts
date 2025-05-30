@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { detectChangedSpecConfigFiles, groupSpecConfigPaths } from "../../src/spec-helpers.js";
-import { SpecGenSdkCmdInput } from "../../src/types.js";
+import { detectChangedSpecConfigFiles, groupSpecConfigPaths } from "../src/spec-helpers.js";
+import { SpecGenSdkCmdInput } from "../src/types.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import {
@@ -8,10 +8,10 @@ import {
   type SpecConfigs,
   normalizePath,
   getChangedFiles,
-} from "../../src/utils.js";
+} from "../src/utils.js";
 
-vi.mock("../../src/utils.js", async () => {
-  const actual = await vi.importActual<typeof import("../../src/utils.js")>("../../src/utils.js");
+vi.mock("../src/utils.js", async () => {
+  const actual = await vi.importActual<typeof import("../src/utils.js")>("../src/utils.js");
 
   return {
     ...actual,
@@ -43,7 +43,7 @@ function normalizeSpecConfigsArray(configsArray: SpecConfigs[]): SpecConfigs[] {
 
 describe("detectChangedSpecConfigFiles", () => {
   const currentFilePath = fileURLToPath(import.meta.url);
-  const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
+  const repoRoot = path.resolve(path.dirname(currentFilePath), "fixtures/");
 
   const mockCommandInput: SpecGenSdkCmdInput = {
     localSpecRepoPath: repoRoot,
