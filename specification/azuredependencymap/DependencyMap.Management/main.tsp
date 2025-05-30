@@ -108,9 +108,13 @@ interface Maps {
   >;
   @doc("Export dependencies")
   @action("exportDependencies")
-  exportDependencies is ArmResourceActionNoResponseContentAsync<
+  exportDependencies is ArmResourceActionAsync<
     MapsResource,
-    ExportDependenciesRequest
+    ExportDependenciesRequest,
+    ExportDependenciesOperationResult,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -240,6 +244,27 @@ union SourceType {
   OffAzure: "OffAzure",
 
   string,
+}
+
+@doc("Model representing the result of the export dependencies asynchronous operation.")
+model ExportDependenciesOperationResult {
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("Properties for export dependencies. These should only be set if the status is Succeeded.")
+  properties?: ExportDependenciesResultProperties;
+}
+
+@doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
+model ExportDependenciesResultProperties {
+  @doc("The SAS URI of the blob containing the exported dependencies data.")
+  blobSasUri?: string;
+
+  @doc("A status message returned by the service with additional context about the export dependencies operation.")
+  statusMessage?: string;
 }
 
 @armResourceOperations
