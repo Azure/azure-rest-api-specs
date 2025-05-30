@@ -127,11 +127,11 @@ export function constructJsonPath(currentPath: string, key: string): string {
   const needsBrackets = key.includes('.') || key.includes(' ') || key.includes('-');
   
   if (currentPath === '') {
-    return needsBrackets ? `['${key.replace(/'/g, "\\'")}']` : key;
+    return needsBrackets ? `['${key.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}']` : key;
   }
   
   return needsBrackets 
-    ? `${currentPath}['${key.replace(/'/g, "\\'")}']` 
+    ? `${currentPath}['${key.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}']`
     : `${currentPath}.${key}`;
 }
 
@@ -222,7 +222,7 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
         JSON.stringify(value).substring(0, 100) + (JSON.stringify(value).length > 100 ? "..." : "") : 
         String(value);
       
-      report += `| \`${path}\` | ${changeType} | \`${formattedValue.replace(/\|/g, "\\|")}\` |\n`;
+      report += `| \`${path}\` | ${changeType} | \`${formattedValue.replace(/\\/g, "\\\\").replace(/\|/g, "\\|")}\` |\n`;
     });
     
     report += "\n";
@@ -335,7 +335,7 @@ export function formatModifiedValuesReport(modifiedValues: ModifiedValueInfo[]):
         JSON.stringify(value).substring(0, 100) + (JSON.stringify(value).length > 100 ? "..." : "") : 
         String(value);
       
-      return `\`${valueStr.replace(/\|/g, "\\|").replace(/`/g, "\\`")}\``;
+      return `\`${valueStr.replace(/\\/g, "\\\\").replace(/\|/g, "\\|").replace(/`/g, "\\`")}\``;
     };
     
     report += `| \`${path}\` | ${formatValue(oldValue)} | ${formatValue(newValue)} |\n`;
