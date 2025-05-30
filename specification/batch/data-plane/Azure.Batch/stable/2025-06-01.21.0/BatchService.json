@@ -14422,7 +14422,9 @@
           "type": "array",
           "description": "The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.",
           "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       }
@@ -15466,8 +15468,29 @@
       "description": "Specifies how Tasks should be distributed across Compute Nodes.",
       "properties": {
         "jobDefaultOrder": {
-          "$ref": "#/definitions/BatchJobDefaultOrder",
-          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none."
+          "type": "string",
+          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none.",
+          "default": "none",
+          "enum": [
+            "none",
+            "creationTime"
+          ],
+          "x-ms-enum": {
+            "name": "BatchJobDefaultOrder",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "none",
+                "description": "Tasks should be scheduled uniformly from all equal-priority jobs for the pool."
+              },
+              {
+                "name": "CreationTime",
+                "value": "creationTime",
+                "description": "If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first."
+              }
+            ]
+          }
         },
         "nodeFillType": {
           "$ref": "#/definitions/BatchNodeFillType",
@@ -15483,8 +15506,29 @@
       "description": "Specifies how Tasks should be distributed across Compute Nodes.",
       "properties": {
         "jobDefaultOrder": {
-          "$ref": "#/definitions/BatchJobDefaultOrder",
-          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none."
+          "type": "string",
+          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none.",
+          "default": "none",
+          "enum": [
+            "none",
+            "creationTime"
+          ],
+          "x-ms-enum": {
+            "name": "BatchJobDefaultOrder",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "none",
+                "description": "Tasks should be scheduled uniformly from all equal-priority jobs for the pool."
+              },
+              {
+                "name": "CreationTime",
+                "value": "creationTime",
+                "description": "If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first."
+              }
+            ]
+          }
         },
         "nodeFillType": {
           "$ref": "#/definitions/BatchNodeFillType",
@@ -16081,7 +16125,7 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account."
+          "description": "The ARM resource id of the disk encryption set. The resource must be in the same subscription as the Batch account."
         }
       }
     },
@@ -16318,8 +16362,8 @@
       "type": "string",
       "description": "HostEndpointSettingsModeTypes enums",
       "enum": [
-        "automatic",
-        "manual"
+        "Audit",
+        "Enforce"
       ],
       "x-ms-enum": {
         "name": "HostEndpointSettingsModeTypes",
@@ -16327,12 +16371,12 @@
         "values": [
           {
             "name": "Audit",
-            "value": "automatic",
+            "value": "Audit",
             "description": "In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints."
           },
           {
             "name": "Enforce",
-            "value": "manual",
+            "value": "Enforce",
             "description": "Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'."
           }
         ]
@@ -16340,7 +16384,7 @@
     },
     "IPFamily": {
       "type": "string",
-      "description": "The IP families used to specify IP versions available to the pool. enums",
+      "description": "The IP families used to specify IP versions available to the pool.",
       "enum": [
         "IPv4",
         "IPv6"
