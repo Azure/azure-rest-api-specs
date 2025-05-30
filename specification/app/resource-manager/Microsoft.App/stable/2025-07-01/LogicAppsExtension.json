@@ -665,14 +665,14 @@
         },
         "files": {
           "$ref": "#/definitions/WorkflowFiles",
-          "description": "Files of the app."
+          "description": "Files to upload in the SMB (workflows, artifacts, maps, schemas etc) in the form of { \"<filename>\" : \"<filecontent>\"}."
         },
         "filesToDelete": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Files of the app to delete."
+          "description": "Array of strings representing the file names to delete from the smb."
         }
       },
       "description": "The workflow filter."
