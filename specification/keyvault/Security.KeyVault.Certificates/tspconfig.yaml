@@ -26,16 +26,15 @@ options:
     "output-path": "."
   "@azure-tools/typespec-java":
     flavor: azure
-    "package-dir": "azure-security-keyvault-certificates"
-    "namespace": "com.azure.security.keyvault.certificates"
-    "models-subpackage": "implementation.models"
-    "custom-types": "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,CertificateOperationError,SubjectAlternativeNames"
-    "custom-types-subpackage": "models"
-    "customization-class": "swagger/src/main/java/CertificatesCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
+    package-dir: "azure-security-keyvault-certificates"
+    namespace: "com.azure.security.keyvault.certificates"
+    models-subpackage: "implementation.models"
+    custom-types: "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,SubjectAlternativeNames"
+    custom-types-subpackage: "models"
+    customization-class: "swagger/src/main/java/CertificatesCustomizations.java"
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":

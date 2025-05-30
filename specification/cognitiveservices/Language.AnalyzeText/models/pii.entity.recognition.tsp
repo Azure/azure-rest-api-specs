@@ -45,7 +45,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 
   /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
   @added(Versions.v2025_05_15_preview)
-  entitySynonyms?: EntitySynonyms;
+  entitySynonyms?: EntitySynonyms[];
 }
 
 /** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
