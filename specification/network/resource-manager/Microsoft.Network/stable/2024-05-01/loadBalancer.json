@@ -1475,7 +1475,7 @@
             "required": true,
             "type": "string",
             "description": "The name of the resource group.",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "name": "loadBalancerName",
@@ -1483,7 +1483,7 @@
             "required": true,
             "type": "string",
             "description": "The name of the load balancer.",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "name": "loadBalancingRuleName",
@@ -1491,7 +1491,7 @@
             "required": true,
             "type": "string",
             "description": "The name of the load balancing rule.",
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2840,8 +2840,8 @@
           "description": "The IP address belonging to the backend address."
         },
         "networkInterfaceIPConfigurationId": {
-          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-          "description": "The id of the network interface ip configuration belonging to the backend address"
+          "type": "string",
+          "description": "Resource ID of the Network Interface IP Configuration."
         },
         "state": {
           "type": "string",

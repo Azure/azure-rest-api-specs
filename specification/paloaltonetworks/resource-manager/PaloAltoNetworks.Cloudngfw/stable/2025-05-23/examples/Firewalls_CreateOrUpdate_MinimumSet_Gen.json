@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "api-version": "2025-05-23",
+    "firewallName": "firewall1",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "dnsSettings": {},
+        "marketplaceDetails": {
+          "offerId": "liftr-pan-ame-test",
+          "publisherId": "isvtestuklegacy"
+        },
+        "networkProfile": {
+          "enableEgressNat": "ENABLED",
+          "networkType": "VNET",
+          "publicIps": [
+            {
+              "address": "20.22.92.11",
+              "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+            }
+          ]
+        },
+        "planData": {
+          "billingCycle": "MONTHLY",
+          "planId": "liftrpantestplan"
+        }
+      }
+    },
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourcegroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1",
+        "location": "eastus",
+        "properties": {
+          "dnsSettings": {},
+          "marketplaceDetails": {
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          },
+          "networkProfile": {
+            "enableEgressNat": "ENABLED",
+            "networkType": "VNET",
+            "publicIps": [
+              {
+                "address": "20.22.92.11",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+              }
+            ]
+          },
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourcegroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1",
+        "location": "eastus",
+        "properties": {
+          "dnsSettings": {},
+          "marketplaceDetails": {
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "publisherId": "aaaa"
+          },
+          "networkProfile": {
+            "enableEgressNat": "ENABLED",
+            "networkType": "VNET",
+            "publicIps": [
+              {
+                "address": "20.22.92.11",
+                "resourceId": "/subscriptions/01c7d41f-afaf-464e-8a8b-5c6f9f98cee8/resourceGroups/mj-liftr-integration/providers/Microsoft.Network/publicIPAddresses/mj-liftr-integration-PublicIp1"
+              }
+            ]
+          },
+          "planData": {
+            "billingCycle": "WEEKLY",
+            "planId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

@@ -120,11 +120,20 @@ export function getAllTypeSpecPaths(specRepoPath: string): string[] {
   }
 }
 
-/*
- * Run the PowerShell script
+/**
+ * Runs a PowerShell script with the given arguments.
+ * Automatically detects the correct executable path for the current platform (Windows/Linux/macOS).
+ * Logs errors and warnings as appropriate.
  */
 export function runPowerShellScript(args: string[]): string | undefined {
-  const result = spawnSync("/usr/bin/pwsh", args, { encoding: "utf8" });
+  const pwshPath = getPwshExecutablePath();
+  if (!pwshPath) {
+    logMessage("No valid PowerShell executable found on this system.", LogLevel.Error);
+    return undefined;
+  }
+
+  const result = spawnSync(pwshPath, args, { encoding: "utf8" });
+
   if (result.error) {
     logMessage(`Error executing PowerShell script:${result.error}`, LogLevel.Error);
     return undefined;
@@ -133,6 +142,34 @@ export function runPowerShellScript(args: string[]): string | undefined {
     logMessage(`PowerShell script error output:${result.stderr}`, LogLevel.Error);
   }
   return result.stdout?.trim();
+}
+
+/**
+ * Determines the appropriate PowerShell executable path for the current OS.
+ * Prefers 'pwsh' (PowerShell Core) over 'powershell' (Windows PowerShell).
+ * Returns undefined if no executable is found.
+ */
+function getPwshExecutablePath(): string | undefined {
+  const isWindows = process.platform === "win32";
+  const candidates = isWindows ? ["pwsh.exe", "powershell.exe"] : ["pwsh"]; // Linux/macOS generally only support pwsh
+  for (const cmd of candidates) {
+    if (isCommandAvailable(cmd)) {
+      return cmd;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Checks if a command is available in PATH by trying to spawn it with '--version'.
+ */
+function isCommandAvailable(command: string): boolean {
+  try {
+    const result = spawnSync(command, ["--version"], { encoding: "utf8" });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
 }
 
 // Function to call Get-ChangedFiles from PowerShell script
@@ -290,7 +327,7 @@ export function searchRelatedTypeSpecProjectBySharedLibrary(
         continue;
       }
 
-      const peerPath = path.join(parentDir, peerDir.name);
+      const peerPath = normalizePath(path.join(parentDir, peerDir.name));
       try {
         const peerFiles = fs.readdirSync(path.resolve(options.specRepoFolder, peerPath));
         if (peerFiles.some((file) => options.searchFileRegex.test(file.toLowerCase()))) {
@@ -401,6 +438,11 @@ export type ChangedSpecs = {
   specs: string[];
 };
 
+export type SpecConfigs = {
+  readmePath?: string;
+  tspconfigPath?: string;
+};
+
 /**
  * Creates combined specs from readme and typespec paths
  * @param readmePath - Path to the readme file
@@ -443,4 +485,15 @@ export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
     map.set(key, value);
   }
   return map;
+}
+
+/**
+ * Normalizes a Windows-style path by converting backslashes (`\`) to slashes (`/`)
+ * Only performs conversion on Windows systems. No effect on Linux/macOS.
+ */
+export function normalizePath(p: string): string {
+  if (process.platform === "win32") {
+    return p.replaceAll("\\", "/");
+  }
+  return p;
 }
