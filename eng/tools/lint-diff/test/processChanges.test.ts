@@ -11,6 +11,7 @@ import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
 
 import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { resolve } from "node:path";
 
 describe("getAffectedServices", () => {
   test.skipIf(isWindows())("returns single service with multiple files", async () => {
@@ -222,17 +223,22 @@ describe("buildState", () => {
       "test/fixtures/buildState/",
     );
 
-    expect(actual).toMatchInlineSnapshot(`
-      [
-        Map {
-          "specification/edit-in-place/readme.md" => {
-            "changedTags": Set {},
-            "readme": Readme {},
+    expect(actual).toMatchObject([
+      new Map([
+        [
+          "specification/edit-in-place/readme.md",
+          {
+            changedTags: new Set<string>(),
+            readme: expect.any(Readme),
           },
-        },
-        [],
-      ]
-    `);
+        ],
+      ]),
+      [],
+    ]);
+
+    expect(actual[0].get("specification/edit-in-place/readme.md")!.readme.path).toEqual(
+      resolve("test/fixtures/buildState/", "specification/edit-in-place/readme.md"),
+    );
   });
 
   test("does not throw if a file is missing", async () => {
