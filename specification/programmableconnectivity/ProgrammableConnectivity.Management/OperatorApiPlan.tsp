@@ -66,8 +66,6 @@ model MarketplaceProperties {
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["version", "url", "label"])
-  @visibility(Lifecycle.Read)
-  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   termsAndConditions: TermsAndConditions[];
 
   /**
