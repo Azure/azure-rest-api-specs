@@ -60,7 +60,7 @@ model MarketplaceProperties {
   termId?: string;
 
   /**
-   * Links to the Terms and Conditions of the Plan that must be accepted to create an
+   * Terms and Conditions of the Plan that must be accepted to create an
    * associated Operator Api Connection
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
@@ -68,7 +68,7 @@ model MarketplaceProperties {
   @OpenAPI.extension("x-ms-identifiers", #["version", "url", "label"])
   @visibility(Lifecycle.Read)
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
-  planTermsAndConditionsLinks: TermsAndConditions[];
+  termsAndConditions: TermsAndConditions[];
 
   /**
    * Information about the pricing of the plan.
