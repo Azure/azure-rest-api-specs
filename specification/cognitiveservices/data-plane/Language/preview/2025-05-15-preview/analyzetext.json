@@ -7302,8 +7302,12 @@
           "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
         },
         "entitySynonyms": {
-          "$ref": "#/definitions/EntitySynonyms",
-          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection."
+          "type": "array",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+          "items": {
+            "$ref": "#/definitions/EntitySynonyms"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
