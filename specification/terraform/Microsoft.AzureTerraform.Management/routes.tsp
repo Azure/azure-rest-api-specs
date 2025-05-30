@@ -18,10 +18,7 @@ interface Terraform {
   @useFinalStateVia("azure-async-operation")
   exportTerraform is ArmProviderActionAsync<
     BaseExportModel,
-    ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders
-    > | TerraformOperationStatus,
+    ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>,
     Scope = SubscriptionActionScope,
     LroHeaders = LroHeaders
   >;
