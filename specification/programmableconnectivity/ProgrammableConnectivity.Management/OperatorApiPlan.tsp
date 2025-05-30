@@ -65,7 +65,14 @@ model MarketplaceProperties {
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
-  planTermsAndConditionsLinks: string[];
+  
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["version", "url", "label"]
+  )
+  @visibility(Lifecycle.Read)
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  planTermsAndConditionsLinks: TermsAndConditions[];
 
   /**
    * Information about the pricing of the plan.

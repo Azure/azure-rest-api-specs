@@ -2118,9 +2118,14 @@
           "type": "array",
           "description": "Links to the Terms and Conditions of the Plan that must be accepted to create an\nassociated Operator Api Connection",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TermsAndConditions"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label"
+          ]
         },
         "pricingInformation": {
           "type": "array",
@@ -2243,9 +2248,14 @@
           "type": "array",
           "description": "Links to the Terms and Conditions of the Operator API Plan that were accepted on creation.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TermsAndConditions"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label"
+          ]
         },
         "purposes": {
           "type": "array",
@@ -3373,6 +3383,30 @@
           "description": "Explanation of the current state of the OperatorApiConnection resource."
         }
       }
+    },
+    "TermsAndConditions": {
+      "type": "object",
+      "description": "Terms and conditions information.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The terms and conditions version."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The terms and conditions URL."
+        },
+        "label": {
+          "type": "string",
+          "description": "The terms and conditions label."
+        }
+      },
+      "required": [
+        "version",
+        "url",
+        "label"
+      ]
     }
   },
   "parameters": {}

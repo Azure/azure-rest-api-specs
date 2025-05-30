@@ -124,9 +124,13 @@ model OperatorApiConnectionProperties {
   /**
    * Links to the Terms and Conditions of the Operator API Plan that were accepted on creation.
    */
-  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["version", "url", "label"]
+  )
   @visibility(Lifecycle.Read)
-  planTermsAndConditionsLinks?: string[];
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  planTermsAndConditionsLinks?: TermsAndConditions[];
 
   /**
    * The purpose for which the Application will use the API. Max Items 1 currently as Operators do not support multiple.
