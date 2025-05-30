@@ -15,6 +15,22 @@
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzureTerraform/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-06-01-preview",
         "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzureTerraform/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-06-01-preview"
       }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzureTerraform/operationStatuses/00000000-0000-0000-0000-000000000000*0000000000000000000000000000000000000000000000000000000000000000",
+        "startTime": "2025-05-30T03:55:32.4347873Z",
+        "endTime": "2025-05-30T03:55:37.1210179Z",
+        "status": "Succeeded",
+        "name": "00000000-0000-0000-0000-000000000000*0000000000000000000000000000000000000000000000000000000000000000",
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/",
+        "properties": {
+          "configuration": "terraform {\n  required_providers {\n    azurerm = {\n      source  = \"azurerm\"\n      version = \"4.24.0\"\n    }\n  }\n}\nprovider \"azurerm\" {\n  features {}\n}\nresource \"azurerm_resource_group\" \"res-0\" {\n  location   = \"australiaeast\"\n  managed_by = \"\"\n  name       = \"rg1\"\n  tags       = {}\n}\n",
+          "errors": null,
+          "import": "import {\n  id = \"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1\"\n  to = azurerm_resource_group.res-0\n}\n",
+          "skippedResources": null
+        }
+      }
     }
   }
 }
