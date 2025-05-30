@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 
@@ -770,6 +772,10 @@ model BatchApplicationListResult {
   @doc("The URL to get the next set of results.")
   @nextLink
   `odata.nextLink`?: string;
+
+  @doc("new property")
+  @added(Versions.v2025_06_01)
+  thisIsOurNewPropertyNameForGeneratingSdk: string;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
