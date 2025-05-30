@@ -189,7 +189,17 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
+  "channelType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingContentType,
+  "contentType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
+  "formatType",
   "csharp"
 );
 
