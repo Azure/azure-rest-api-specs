@@ -31,11 +31,11 @@ using TypeSpec.Versioning;
 /**
  * REST API for Azure WebPubSub Service
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalRService is the official Microsoft service name"
 @armProviderNamespace
 @service(#{ title: "WebPubSubManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalRService is the official Microsoft service name"
 namespace Microsoft.SignalRService;
 
 /**

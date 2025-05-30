@@ -55,6 +55,7 @@ union ProvisioningState {
 
   /** Resource is being deleted */
   Deleting: "Deleting",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Moving: "Moving",
 }
