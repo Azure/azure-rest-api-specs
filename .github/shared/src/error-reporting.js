@@ -1,6 +1,5 @@
 // @ts-check
 import * as fs from "fs";
-import { consoleLogger } from "./logger.js";
 
 /**
  * Set the summary of the github step summary for a job. This feature is intended for formatted markdown,
@@ -12,7 +11,7 @@ import { consoleLogger } from "./logger.js";
  */
 export function setSummary(content) {
     if (!process.env.GITHUB_STEP_SUMMARY) {
-        consoleLogger.info("GITHUB_STEP_SUMMARY is not set. Skipping summary update.");
+        console.log("GITHUB_STEP_SUMMARY is not set. Skipping summary update.");
         return;
     }
     const summaryFile = process.env.GITHUB_STEP_SUMMARY;
@@ -30,5 +29,5 @@ export function setSummary(content) {
  */
 export function annotateFileError(repoPath, message, line, col) {
     const errorLine = `::error file=${repoPath},line=${line},col=${col}::${message}`;
-    consoleLogger.info(errorLine);
+    console.log(errorLine);
 }

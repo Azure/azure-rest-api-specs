@@ -7,7 +7,6 @@ import {
   outputSuccessSummary,
   ReportableOavError,
 } from "./formatting.js";
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
 
 import { parseArgs, ParseArgsConfig } from "node:util";
 
@@ -37,7 +36,7 @@ export async function main() {
     process.exit(1);
   }
 
-  consoleLogger.info(
+  console.log(
     `Running oav-runner against ${runType} within ${targetDirectory}.`,
   );
 

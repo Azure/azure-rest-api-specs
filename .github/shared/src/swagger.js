@@ -63,7 +63,7 @@ export class Swagger {
     // filter out any paths that are examples
     const filtered = new Map(
       Array.from(allRefs.entries())
-        .filter(([path, swagger]) => !example(path))
+        .filter(([path, _]) => !example(path))
     );
 
     return filtered;
@@ -120,7 +120,7 @@ export class Swagger {
     // filter out any paths that are examples
     const filtered = new Map(
       Array.from(allRefs.entries())
-        .filter(([path, swagger]) => example(path))
+        .filter(([path, _]) => example(path))
     );
 
     return filtered;

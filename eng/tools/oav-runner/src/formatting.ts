@@ -2,7 +2,6 @@ import {
   annotateFileError,
   setSummary,
 } from "@azure-tools/specs-shared/error-reporting";
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
 
 export interface ReportableOavError {
   message: string;
@@ -46,7 +45,7 @@ export function outputSuccessSummary(
   if (process.env.GITHUB_STEP_SUMMARY) {
     setSummary(summaryResult);
   } else {
-    consoleLogger.info(summaryResult);
+    console.log(summaryResult);
   }
 }
 
@@ -106,6 +105,6 @@ export function outputErrorSummary(
   if (process.env.GITHUB_STEP_SUMMARY) {
     setSummary(summaryResult);
   } else {
-    consoleLogger.info(summaryResult);
+    console.log(summaryResult);
   }
 }

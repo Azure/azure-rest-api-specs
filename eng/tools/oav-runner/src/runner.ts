@@ -4,7 +4,6 @@ import * as oav from "oav";
 import * as path from "path";
 import * as fs from "fs";
 
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 
 import {
@@ -44,7 +43,7 @@ export async function checkExamples(
       }
     } catch (e) {
       if (e instanceof Error) {
-        consoleLogger.error(
+        console.log(
           `Error validating examples for ${swaggerFile}: ${e.message}`,
         );
         errors.push({
@@ -52,7 +51,7 @@ export async function checkExamples(
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        consoleLogger.error(
+        console.log(
           `Error validating examples for ${swaggerFile}: ${e}`,
         );
         errors.push({
@@ -99,13 +98,13 @@ export async function checkSpecs(
       }
     } catch (e) {
       if (e instanceof Error) {
-        consoleLogger.error(`Error validating ${swaggerFile}: ${e.message}`);
+        console.log(`Error validating ${swaggerFile}: ${e.message}`);
         errors.push({
           message: e.message,
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        consoleLogger.error(`Error validating ${swaggerFile}: ${e}`);
+        console.log(`Error validating ${swaggerFile}: ${e}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${e}`,
           file: swaggerFile,
@@ -168,7 +167,7 @@ export async function processFilesToSpecificationList(
             path.join(rootDirectory, swaggerFile),
           );
           const exampleSwaggers = await swaggerModel.getExamples();
-          const examples = [...exampleSwaggers].map((e) => e.path);
+          const examples = [...exampleSwaggers].map((e) => e[1].path);
           cachedSwaggerSpecs.set(swaggerFile, examples);
         }
         const referencedExamples = cachedSwaggerSpecs.get(swaggerFile);
