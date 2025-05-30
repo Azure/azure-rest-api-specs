@@ -82,6 +82,7 @@ function createParameterTestCases(
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [
     {
@@ -90,6 +91,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: validValue }),
       success: true,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with invalid value ${invalidValue}`,
@@ -97,6 +99,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: invalidValue }),
       success: false,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with undefined value`,
@@ -104,6 +107,7 @@ function createParameterTestCases(
       tspconfigContent: "",
       success: false,
       subRules,
+      additionalOptions,
     },
   ];
   return cases;
@@ -117,21 +121,19 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
-  isModularLibrary: boolean = false,
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [];
 
   const language = emitterName.split("-").pop();
-  const validPairs = [{ key: key, value: validValue }];
-  const invalidPairs = [{ key: key, value: invalidValue }];
-  if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
-    validPairs.push({ key: "is-modular-library", value: isModularLibrary });
-    invalidPairs.push({ key: "is-modular-library", value: isModularLibrary });
-  }
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, ...validPairs),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      { key: key, value: validValue },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: true,
     subRules,
   });
@@ -139,7 +141,14 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, ...invalidPairs),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      {
+        key: key,
+        value: invalidValue,
+      },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -147,26 +156,26 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: isModularLibrary
-      ? createEmitterOptionExample(emitterName, {
-          key: "is-modular-library",
-          value: isModularLibrary,
-        })
-      : createEmitterOptionExample(emitterName),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
   if (!allowUndefined && key.includes(".")) {
-    const incompleteKey = key.split(".").slice(0, -1).join(".");
-    const incompletePairs = [{ key: incompleteKey, value: validValue }];
-    if (isModularLibrary && emitterName === "@azure-tools/typespec-ts") {
-      incompletePairs.push({ key: "is-modular-library", value: isModularLibrary });
-    }
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, ...incompletePairs),
+      tspconfigContent: createEmitterOptionExample(
+        emitterName,
+        {
+          key: key.split(".").slice(0, -1).join("."),
+          value: validValue,
+        },
+        ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+      ),
       success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
@@ -181,6 +190,7 @@ interface Case {
   tspconfigContent: string;
   success: boolean;
   ignoredKeyPaths?: string[];
+  additionalOptions?: Record<string, string | boolean>;
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -246,7 +256,7 @@ const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
   "azure/aaa-bbb",
   [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
   false,
-  true,
+  { "is-modular-library": true }, // Additional option added
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
