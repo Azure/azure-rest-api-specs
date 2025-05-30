@@ -2,8 +2,8 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
-import "../../common/common.tsp";
-import "../../common/Job.tsp";
+import "../common/common.tsp";
+import "../common/Job.tsp";
 
 using Azure.Core;
 using TypeSpec.Http;

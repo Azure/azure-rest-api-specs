@@ -158,7 +158,7 @@ model VirtualInstanceProperties {
    */
   @minValue(0)
   @maxValue(9)
-  systemPriority: int32;
+  systemPriority?: int32;
 
   /**
    * The current stage in the lifecycle of the workload system.
@@ -214,20 +214,14 @@ model WorkloadInfo {
   workloadType: string;
 
   /**
-   * The ID of the corresponding workload definition.
+   * The name of the corresponding workload definition.
    */
-  workloadDefinitionId: string;
+  workloadDefinitionName: string;
 
   /**
    * The version selected for the corresponding workload definition.
    */
   workloadDefinitionVersion?: string;
-
-  /**
-   * Defines the workload component provisioning state.
-   */
-  @visibility(Lifecycle.Read)
-  workloadDefinitionExactVersion?: string;
 }
 
 /**

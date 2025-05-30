@@ -26,7 +26,7 @@
                       {
                         "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
                         "originType": "TemplateDefinition",
-                        "enabled": "true",
+                        "status": "Enabled",
                         "inputParameters": [
                           {
                             "name": "instanceType",
@@ -39,19 +39,16 @@
                           {
                             "name": "resiliencyStatus",
                             "condition": "Equals",
-                            "parameters": {
-                              "name": "instanceType",
-                              "dataType": "String",
-                              "unit": "",
-                              "value": "Standard_D4s_v3"
-                            }
+                            "dataType": "String",
+                            "unit": "",
+                            "value": "Standard_D4s_v3"
                           }
                         ]
                       },
                       {
                         "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
                         "originType": "TemplateDefinition",
-                        "enabled": "false",
+                        "status": "Disabled",
                         "inputParameters": [
                           {
                             "name": "idleTimeout",
@@ -64,12 +61,9 @@
                           {
                             "name": "idleTimeout",
                             "condition": "Equals",
-                            "parameters": {
-                              "name": "idleTimeout",
-                              "dataType": "Integer",
-                              "unit": "Minutes",
-                              "value": "30"
-                            }
+                            "dataType": "Integer",
+                            "unit": "Minutes",
+                            "value": "30"
                           }
                         ]
                       }
@@ -86,7 +80,7 @@
                       {
                         "checkId": "Compute-Instance-AZ-Resiliency-SAP-Prod",
                         "originType": "Manual",
-                        "enabled": "false",
+                        "status": "Disabled",
                         "inputParameters": [
                           {
                             "name": "instanceType",
@@ -99,19 +93,16 @@
                           {
                             "name": "instanceType",
                             "condition": "Equals",
-                            "parameters": {
-                              "dataType": "String",
-                              "name": "resiliencyStatus",
-                              "value": "Compliant",
-                              "unit": ""
-                            }
+                            "dataType": "String",
+                            "value": "Compliant",
+                            "unit": ""
                           }
                         ]
                       },
                       {
                         "checkId": "Azure-Network-LB-Idle-Timeout-30min_SAP",
                         "originType": "TemplateDefinition",
-                        "enabled": "true",
+                        "status": "Enabled",
                         "inputParameters": [
                           {
                             "name": "idleTimeout",
@@ -124,12 +115,9 @@
                           {
                             "name": "idleTimeout",
                             "condition": "Equals",
-                            "parameters": {
-                              "name": "idleTimeout",
-                              "dataType": "Integer",
-                              "unit": "Minutes",
-                              "value": "30"
-                            }
+                            "dataType": "Integer",
+                            "unit": "Minutes",
+                            "value": "30"
                           }
                         ]
                       }
@@ -141,7 +129,7 @@
             "commonChecks": [
               {
                 "checkId": "Azure-Compute-Instance-AvailableMemory-SizeCheck",
-                "enabled": "true",
+                "status": "Enabled",
                 "inputParameters": [
                   {
                     "name": "instanceMemoryLimit",
@@ -154,12 +142,9 @@
                   {
                     "name": "instanceMemoryLimit",
                     "condition": "GreaterThanOrEqual",
-                    "parameters": {
-                      "name": "instanceMemoryLimit",
-                      "dataType": "Integer",
-                      "unit": "GB",
-                      "value": "96"
-                    }
+                    "dataType": "Integer",
+                    "unit": "GB",
+                    "value": "96"
                   }
                 ]
               }

@@ -1090,7 +1090,6 @@
       "required": [
         "workloadInfo",
         "environmentType",
-        "systemPriority",
         "systemLifecycleStage"
       ]
     },
@@ -1210,23 +1209,18 @@
           "type": "string",
           "description": "The type of the workload."
         },
-        "workloadDefinitionId": {
+        "workloadDefinitionName": {
           "type": "string",
-          "description": "The ID of the corresponding workload definition."
+          "description": "The name of the corresponding workload definition."
         },
         "workloadDefinitionVersion": {
           "type": "string",
           "description": "The version selected for the corresponding workload definition."
-        },
-        "workloadDefinitionExactVersion": {
-          "type": "string",
-          "description": "Defines the workload component provisioning state.",
-          "readOnly": true
         }
       },
       "required": [
         "workloadType",
-        "workloadDefinitionId"
+        "workloadDefinitionName"
       ]
     },
     "WorkloadResourceId": {

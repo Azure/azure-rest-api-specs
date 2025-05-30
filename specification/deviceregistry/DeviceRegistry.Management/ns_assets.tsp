@@ -6,21 +6,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/topic.tsp";
-import "./common/assetPropertiesUpdate.tsp";
+import "./common/ns_assetProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2024_10_01_preview)
 @parentResource(Namespace)
-@doc("Namespace Assets Azure resource.")
-model NamespaceAsset is TrackedResource<AssetProperties> {
-  @doc("Asset name parameter.")
+@doc("Asset definition.")
+model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
+  @doc("The name of the asset.")
   @key("assetName")
   @segment("assets")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
@@ -36,6 +35,18 @@ model NamespaceAsset is TrackedResource<AssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
+alias NamespaceAssetPropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    NamespaceAssetProperties,
+    "defaultTopic"
+  >>>;
+
+  @added(Versions.v2024_10_01_preview)
+  @removed(Versions.v2025_07_01_preview)
+  @doc("Object that describes the default topic information for the asset.")
+  defaultTopic?: OptionalProperties<OmitDefaults<Topic>>;
+};
+
 @added(Versions.v2024_10_01_preview)
 @armResourceOperations
 interface NamespaceAssets {
@@ -45,10 +56,11 @@ interface NamespaceAssets {
     NamespaceAsset,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceAsset,
-      AssetPropertiesUpdate
+      NamespaceAssetPropertiesUpdate
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAsset>;
   listByResourceGroup is ArmResourceListByParent<NamespaceAsset>;
+  @removed(Versions.v2025_07_01_preview)
   listBySubscription is ArmListBySubscription<NamespaceAsset>;
 }
