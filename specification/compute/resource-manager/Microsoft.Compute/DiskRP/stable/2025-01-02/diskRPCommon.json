@@ -389,7 +389,7 @@
         "instantAccessDurationMinutes": {
           "type": "integer",
           "format": "int64",
-          "description": "If the resource is a snapshot from a Ultra disk, this determines the time in minutes for the snapshot to be retained for faster restore."
+          "description": "“For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore."
         }
       },
       "required": [
@@ -643,7 +643,7 @@
     "AvailabilityPolicy": {
       "properties": {
         "actionOnDiskDelay": {
-         "type": "string",
+          "type": "string",
           "description": "Determines on how to handle disks with slow IO.",
           "enum": [
             "None",
@@ -664,7 +664,7 @@
             ]
           }
         },
-        "description": "Determines how platform treats disk failures"
+        "description": "In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM"
       }
     }
   },
