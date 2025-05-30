@@ -198,6 +198,18 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
+    case "all-mgmtplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("resource-manager"),
+      );
+      break;
+    }
+    case "all-dataplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("data-plane"),
+      );
+      break;
+    }
     case "sample-typespecs": {
       tspconfigs = [
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
@@ -311,6 +323,7 @@ export function generateArtifact(
     setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+    setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
     vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
