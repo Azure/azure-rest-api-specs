@@ -189,6 +189,9 @@ using Azure.AI.Agents;
   "csharp,java"
 );
 
+@@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
+@@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
+
 // --------------------------------------------------------------------------------
 // Internal C# overrides for operations & models
 // --------------------------------------------------------------------------------
