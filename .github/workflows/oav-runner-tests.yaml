@@ -11,7 +11,7 @@ on:
       - tsconfig.json
       - .github/shared
       - .github/workflows/_reusable-eng-tools-test.yaml
-      - .github/workflows/lintdiff-test.yaml
+      - .github/workflows/oav-runner-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
       - eng/tools/oav-runner/**
@@ -19,11 +19,6 @@ on:
 
 permissions:
   contents: read
-
-defaults:
-  run:
-    shell: bash
-    working-directory: eng/tools/oav-runner
 
 jobs:
   oavrunnertests:

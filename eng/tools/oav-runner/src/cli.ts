@@ -44,9 +44,7 @@ export async function main() {
     [exitCode, scannedSwaggerFiles, errorList] =
       await checkSpecs(targetDirectory);
     reportName = "Swagger Specifications Validation";
-  }
-
-  if (runType === "examples") {
+  } else if (runType === "examples") {
     [exitCode, scannedSwaggerFiles, errorList] =
       await checkExamples(targetDirectory);
     reportName = "Swagger Examples Validation";

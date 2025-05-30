@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Verify Swagger Specs - Set Status"
+name: "[TEST-IGNORE] Swagger ModelValidation - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -27,9 +27,9 @@ permissions:
 
 jobs:
   spec-validation-status:
-    name: Set Specification Validation Status
+    name: Set SemanticValidation Status
     uses: ./.github/workflows/_reusable-set-check-status.yml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger Semantic Validation"
-      required_check_name: "[TEST-IGNORE] Swagger Semantic Validation"
+      monitored_workflow_name: "[TEST-IGNORE] Swagger SemanticValidation"
+      required_check_name: "[TEST-IGNORE] Swagger SemanticValidation"
       overriding_label: "Approved-SemanticValidation"
