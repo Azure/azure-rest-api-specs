@@ -283,6 +283,9 @@ export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
  * @param breakingChangeLabel - The breaking change label.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param stagedArtifactsFolder - The staged artifacts folder.
+ * @param apiViewRequestData - The API view request data.
+ * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
  * @returns the run status code.
  */
 export function generateArtifact(
@@ -293,6 +296,7 @@ export function generateArtifact(
   hasManagementPlaneSpecs: boolean,
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
+  sdkGenerationExecuted: boolean = true,
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -305,10 +309,14 @@ export function generateArtifact(
     if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
       fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
-    const isSpecGenSdkCheckRequired = getRequiredSettingValue(
-      hasManagementPlaneSpecs,
-      commandInput.sdkLanguage as SdkName,
-    );
+    let isSpecGenSdkCheckRequired = false;
+    if (sdkGenerationExecuted) {
+      isSpecGenSdkCheckRequired = getRequiredSettingValue(
+        hasManagementPlaneSpecs,
+        commandInput.sdkLanguage as SdkName,
+      );
+    }
+
     // Write artifact
     const artifactInfo: SpecGenSdkArtifactInfo = {
       language: commandInput.sdkLanguage,

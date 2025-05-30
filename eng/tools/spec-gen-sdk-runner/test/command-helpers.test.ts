@@ -480,6 +480,7 @@ describe("commands.ts", () => {
       );
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabelAction", "remove");
       expect(log.setVsoVariable).toHaveBeenCalledWith("BreakingChangeLabel", "breaking-change");
+      expect(log.setVsoVariable).toHaveBeenCalledWith("HasAPIViewArtifact", "false");
     });
 
     test("should handle errors during artifact generation", () => {
@@ -523,6 +524,78 @@ describe("commands.ts", () => {
 
       expect(result).toBe(1);
       expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
+    });
+
+    test("should set isSpecGenSdkCheckRequired to false when sdkGenerationExecuted is false", () => {
+      vi.spyOn(fs, "existsSync").mockReturnValue(false);
+      vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
+      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      // Mock getRequiredSettingValue to verify it's not called when sdkGenerationExecuted is false
+      const getRequiredSettingValueSpy = vi.spyOn(
+        { getRequiredSettingValue },
+        "getRequiredSettingValue",
+      );
+
+      const mockCommandInput = {
+        workingFolder: "/working/folder",
+        sdkLanguage: "azure-sdk-for-go",
+        runMode: "",
+        localSpecRepoPath: "",
+        localSdkRepoPath: "",
+        sdkRepoName: "",
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      };
+      const mockResult = "succeeded";
+      const mockBreakingchangeLabel = "breaking-change";
+      const mockhasBreakingChange = false;
+      // Using true for hasManagementPlaneSpecs, which would normally make isSpecGenSdkCheckRequired=true
+      // for Go SDK (as tested in the getRequiredSettingValue tests)
+      const mockhasManagementPlaneSpecs = true;
+      const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
+      const mockApiViewRequestData: APIViewRequestData[] = [];
+
+      // Explicitly passing false for sdkGenerationExecuted
+      const result = generateArtifact(
+        mockCommandInput,
+        mockResult,
+        mockBreakingchangeLabel,
+        mockhasBreakingChange,
+        mockhasManagementPlaneSpecs,
+        mockStagedArtifactsFolder,
+        mockApiViewRequestData,
+        false, // sdkGenerationExecuted = false
+      );
+
+      const breakingChangeLabelArtifactPath = path.normalize(
+        "/working/folder/out/spec-gen-sdk-artifact",
+      );
+
+      expect(result).toBe(0);
+      // Verify getRequiredSettingValue was not called
+      expect(getRequiredSettingValueSpy).not.toHaveBeenCalled();
+
+      // Verify isSpecGenSdkCheckRequired is false in the written file
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        path.join(breakingChangeLabelArtifactPath, "spec-gen-sdk-artifact.json"),
+        JSON.stringify(
+          {
+            language: "azure-sdk-for-go",
+            result: "succeeded",
+            labelAction: false,
+            isSpecGenSdkCheckRequired: false, // This should be false when sdkGenerationExecuted is false
+            apiViewRequestData: [],
+          },
+          undefined,
+          2,
+        ),
+      );
     });
   });
 

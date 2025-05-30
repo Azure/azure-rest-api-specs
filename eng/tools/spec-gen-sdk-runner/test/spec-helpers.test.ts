@@ -66,6 +66,25 @@ describe("detectChangedSpecConfigFiles", () => {
     expect(result).toEqual([]);
   });
 
+  test("case with changed files but none under specification folder", () => {
+    vi.mocked(getChangedFiles).mockReturnValue([
+      "eng/tools/script1.js",
+      "documentation/README.md",
+      "profile/2020-09-01-hybrid.json",
+    ]);
+    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    expect(result).toEqual([]);
+  });
+
+  test("case with changed files only under scenarios folder", () => {
+    vi.mocked(getChangedFiles).mockReturnValue([
+      "specification/storage/scenarios/test1.json",
+      "specification/compute/scenarios/test2.json",
+    ]);
+    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    expect(result).toEqual([]);
+  });
+
   test("case with readme files", () => {
     vi.mocked(getChangedFiles).mockReturnValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
