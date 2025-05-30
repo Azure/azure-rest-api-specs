@@ -279,7 +279,6 @@ model ConfluentAgreementProperties {
   /**
    * Date and time in UTC of when the terms were accepted. This is empty if Accepted is false.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retrieveDatetime?: utcDateTime;
 
   /**
@@ -388,7 +387,6 @@ model OrganizationResourceProperties {
    * The creation time of the resource.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdTime?: utcDateTime;
 
   /**
