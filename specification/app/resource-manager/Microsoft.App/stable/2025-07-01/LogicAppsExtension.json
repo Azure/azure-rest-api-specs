@@ -519,10 +519,20 @@
       "type": "object",
       "description": "A logic app extension resource",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/LogicAppProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The logic app resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type - Microsoft.App/logicApps."
         }
       },
       "allOf": [
@@ -597,7 +607,11 @@
     },
     "WorkflowFiles": {
       "description": "Gets or sets the files.",
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "description": "File content as string."
+      }
     },
     "WorkflowHealth": {
       "description": "Represents the workflow health.",
