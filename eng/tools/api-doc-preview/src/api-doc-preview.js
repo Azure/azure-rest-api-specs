@@ -3,14 +3,13 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, readFileList } from "@azure-tools/specs-shared/changed-files";
+import { swagger, readFileList, pathExists } from "@azure-tools/specs-shared/changed-files";
 import { filterAsync } from "@azure-tools/specs-shared/array";
 
 import {
   mappingJSONTemplate,
   repoJSONTemplate,
   indexMd,
-  pathExists,
   getSwaggersToProcess,
 } from "./util.js";
 
@@ -30,7 +29,7 @@ function usage() {
  * Main entry point for the CLI tool. Parses arguments, processes changed files, and writes doc preview artifacts.
  * @returns {Promise<void>}
  */
-async function main() {
+export async function main() {
   const {
     values: {
       "changed-files-path": changedFilesPath,
@@ -129,5 +128,3 @@ async function main() {
   swaggersToProcess.forEach((swagger) => console.log(`  - ${swagger}`));
   console.log(`Artifacts written to: ${outputDir}`);
 }
-
-main();
