@@ -38,19 +38,10 @@ export class Swagger {
    * @returns {Promise<Set<Swagger>>}
    */
   async getRefs() {
-    await this.populateRefPaths();
-
-    if (this.#refs){
-      return new Set(
-        [...this.#refs].filter(s => !example(s.path))
-      );
-    }
-    else {
-      return new Set();
-    }
+    return new Set([...await this.#getRefs()].filter(s => !example(s.path)));
   }
 
-  async populateRefPaths() {
+  async #getRefs() {
     if (!this.#refs) {
       const schema = await $RefParser.resolve(this.#path, {
         resolve: { http: false },
@@ -71,22 +62,15 @@ export class Swagger {
         ),
       );
     }
+
+    return this.#refs;
   }
 
   /**
    * @returns {Promise<Set<Swagger>>}
    */
   async getExamples() {
-    await this.populateRefPaths();
-
-    if (this.#refs){
-      return new Set(
-        [...this.#refs].filter(s => example(s.path))
-      );
-    }
-    else {
-      return new Set();
-    }
+    return new Set([...await this.#getRefs()].filter(s => example(s.path)));
   }
 
   /**
