@@ -25,28 +25,18 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-
 ``` yaml
 openapi-type: arm
-tag: package-2025-04-01-preview
+tag: package-2025-07-01-preview
 ```
 
-### Tag: package-2025-04-01-preview
+### Tag: package-2025-07-01-preview
 
-These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-07-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-04-01-preview'
+```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - preview/2025-04-01-preview/fleets.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    from: fleets.json
-    where: $.definitions.FleetMemberProperties.properties.labels
-    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
-  - code: AvoidAdditionalProperties
-    from: fleets.json
-    where: $.definitions.FleetMemberUpdateProperties.properties.labels
-    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - preview/2025-07-01-preview/fleets.json
 ```
 
 ### Tag: package-2025-03-01
@@ -161,6 +151,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

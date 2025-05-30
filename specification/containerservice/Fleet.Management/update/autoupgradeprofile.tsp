@@ -77,7 +77,7 @@ model AutoUpgradeProfileProperties {
       If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.
       If upgrade channel is Rapid, Stable or NodeImage, this field must be empty.
     """)
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.v2025_07_01_preview)
   targetKubernetesVersion?: string;
 
   @doc("""
@@ -87,7 +87,7 @@ model AutoUpgradeProfileProperties {
       By default, this is set to False.
       For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support
     """)
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.v2025_07_01_preview)
   longTermSupport?: boolean;
 }
 
@@ -112,7 +112,7 @@ union UpgradeChannel {
       For information on the behavior of update run for Kubernetes version upgrade, 
       see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal
     """)
-  @added(Versions.v2025_04_01_preview)
+  @added(Versions.v2025_07_01_preview)
   TargetKubernetesVersion: "TargetKubernetesVersion",
 }
 
