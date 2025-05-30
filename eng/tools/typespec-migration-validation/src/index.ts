@@ -1,6 +1,6 @@
 import { sortOpenAPIDocument } from "@azure-tools/typespec-autorest";
 import fs from "fs";
-import { diff, diffString } from "json-diff";
+import { diff } from "json-diff";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { configuration } from "./configuration.js";
@@ -177,29 +177,35 @@ export async function main() {
 
     fs.writeFileSync(`${outputFolder}/oldNormalizedSwagger.json`, JSON.stringify(sortedOldFile, null, 2));
     fs.writeFileSync(`${outputFolder}/newNormalizedSwagger.json`, JSON.stringify(sortedNewFile, null, 2));
-    const diffForFile = diff(sortedOldFile, sortedNewFile);
-    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
+  }
 
-    // // TO-DELETE: Read the diff file from disk
-    // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
+  let report: string = "";
+  const diffForFile = diff(sortedOldFile, sortedNewFile);
+  //fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
 
-    const changedPaths = findChangedPaths(diffForFile);
-    if (changedPaths.length > 0) {
-      logWarning(`Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`);
-      const changedPathsReport = formatChangedPathsReport(changedPaths);
-      console.log(changedPathsReport);
-    }
+  // // TO-DELETE: Read the diff file from disk
+  // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
 
-    const differences = findDifferences(diffForFile);
-    const report = formatDifferenceReport(differences);
-    console.log(report);
+  const changedPaths = findChangedPaths(diffForFile);
+  if (changedPaths.length > 0) {
+    logWarning(`Found ${changedPaths.length} changed paths in the diff. If it is just case change and you confirm it is expected, run tsmv with --ignorePathCase option to ignore case changes.`);
+    const changedPathsReport = formatChangedPathsReport(changedPaths);
+    console.log(changedPathsReport);
+    report += changedPathsReport;
+  }
 
-    const modifiedValues = findModifiedValues(diffForFile);
-    const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
-    console.log(modifiedValuesReport);
+  const differences = findDifferences(diffForFile);
+  const differencesReport = formatDifferenceReport(differences);
+  console.log(differencesReport);
+  report += differencesReport;
+
+  const modifiedValues = findModifiedValues(diffForFile);
+  const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
+  console.log(modifiedValuesReport);
+  report += modifiedValuesReport;
     
-    // Write the report to a README file in the output folder
-    fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report + modifiedValuesReport);
+  if (outputFolder) {
+    fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
     logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
 
     const suggestedFixes = suggestFix(diffForFile);
@@ -221,10 +227,8 @@ export async function main() {
 ${JSON.stringify(jsonOutput, null, 2)}
 ---- End of Json Output ----`);
     }
-    // fs.writeFileSync(`${outputFolder}/diff.md`, `\`\`\`diff\n${diffForFile}\n\`\`\`\n`);
   }
   else {
-    const differences = diffString(sortedOldFile, sortedNewFile);
-    console.log(differences);
+    console.log(report);
   }
 }
