@@ -65,11 +65,7 @@ model MarketplaceProperties {
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
-  
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["version", "url", "label"]
-  )
+  @OpenAPI.extension("x-ms-identifiers", #["version", "url", "label"])
   @visibility(Lifecycle.Read)
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   planTermsAndConditionsLinks: TermsAndConditions[];
@@ -192,4 +188,25 @@ interface OperatorApiPlans {
       skip?: int32;
     }
   >;
+}
+
+/**
+ * Terms and conditions information.
+ */
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+model TermsAndConditions {
+  /**
+   * The terms and conditions version.
+   */
+  version: string;
+
+  /**
+   * The terms and conditions URL.
+   */
+  url: url;
+
+  /**
+   * The terms and conditions label.
+   */
+  label: string;
 }

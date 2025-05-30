@@ -54,23 +54,3 @@ union ProvisioningState {
 
   string,
 }
-
-/**
- * Terms and conditions information.
- */
-@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
-model TermsAndConditions {
-  /**
-   * The terms and conditions version.
-   */
-  version: string;
-  /**
-   * The terms and conditions URL.
-   */
-  url: url;
-
-  /**
-   * The terms and conditions label.
-   */
-  label: string;
-}

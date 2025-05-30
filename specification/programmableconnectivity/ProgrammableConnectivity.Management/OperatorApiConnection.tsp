@@ -112,25 +112,12 @@ model OperatorApiConnectionProperties {
   status?: Status;
 
   /**
-   * Whether the caller has accepted the Terms and Conditions of the associated Operator API Plan.
-   * After creation, the planTermsAndConditionsLink property is set to the Terms and Conditions that
-   * have been accepted.
-   *
-   * Must be set to True, as the Terms and Conditions must be accepted.
+   * A list of terms and conditions that the user has agreed to when creating this OperatorApiConnection resource.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["version", "url", "label", "agreed"])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
-  planTermsAndConditionsAccepted: boolean;
-
-  /**
-   * Links to the Terms and Conditions of the Operator API Plan that were accepted on creation.
-   */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["version", "url", "label"]
-  )
-  @visibility(Lifecycle.Read)
-  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
-  planTermsAndConditionsLinks?: TermsAndConditions[];
+  agreedTermsAndConditions: AgreedTermsAndConditions[];
 
   /**
    * The purpose for which the Application will use the API. Max Items 1 currently as Operators do not support multiple.
@@ -614,4 +601,30 @@ interface OperatorApiConnections {
    * List OperatorApiConnection resources by subscription ID.
    */
   listBySubscription is ArmListBySubscription<OperatorApiConnection>;
+}
+
+/**
+ * Terms and conditions information.
+ */
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+model AgreedTermsAndConditions {
+  /**
+   * The terms and conditions version.
+   */
+  version: string;
+
+  /**
+   * The terms and conditions URL.
+   */
+  url: url;
+
+  /**
+   * The terms and conditions label.
+   */
+  label: string;
+
+  /**
+   * Whether the terms and conditions have been signed.
+   */
+  agreed: boolean;
 }

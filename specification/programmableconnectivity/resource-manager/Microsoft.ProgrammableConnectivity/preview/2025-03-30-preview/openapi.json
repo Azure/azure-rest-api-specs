@@ -857,6 +857,35 @@
     }
   },
   "definitions": {
+    "AgreedTermsAndConditions": {
+      "type": "object",
+      "description": "Terms and conditions information.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The terms and conditions version."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The terms and conditions URL."
+        },
+        "label": {
+          "type": "string",
+          "description": "The terms and conditions label."
+        },
+        "agreed": {
+          "type": "boolean",
+          "description": "Whether the terms and conditions have been signed."
+        }
+      },
+      "required": [
+        "version",
+        "url",
+        "label",
+        "agreed"
+      ]
+    },
     "ApplicationOwnerProperties": {
       "type": "object",
       "description": "Details about the Application Owner (i.e. organization) that would use the Operator's Network APIs.",
@@ -2240,21 +2269,22 @@
           "description": "The status of the OperatorApiConnection resource.",
           "readOnly": true
         },
-        "planTermsAndConditionsAccepted": {
-          "type": "boolean",
-          "description": "Whether the caller has accepted the Terms and Conditions of the associated Operator API Plan.\nAfter creation, the planTermsAndConditionsLink property is set to the Terms and Conditions that\nhave been accepted.\n\nMust be set to True, as the Terms and Conditions must be accepted."
-        },
-        "planTermsAndConditionsLinks": {
+        "agreedTermsAndConditions": {
           "type": "array",
-          "description": "Links to the Terms and Conditions of the Operator API Plan that were accepted on creation.",
+          "description": "A list of terms and conditions that the user has agreed to when creating this OperatorApiConnection resource.",
           "items": {
-            "$ref": "#/definitions/TermsAndConditions"
+            "$ref": "#/definitions/AgreedTermsAndConditions"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "version",
             "url",
-            "label"
+            "label",
+            "agreed"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
           ]
         },
         "purposes": {
@@ -2283,7 +2313,7 @@
       "required": [
         "operatorApiPlanId",
         "gatewayId",
-        "planTermsAndConditionsAccepted",
+        "agreedTermsAndConditions",
         "purposes",
         "purposeReason",
         "dataProcessingList"
@@ -2328,9 +2358,23 @@
             ]
           }
         },
-        "planTermsAndConditionsAccepted": {
-          "type": "boolean",
-          "description": "Whether the caller has accepted the Terms and Conditions of the associated Operator API Plan.\nAfter creation, the planTermsAndConditionsLink property is set to the Terms and Conditions that\nhave been accepted.\n\nMust be set to True, as the Terms and Conditions must be accepted."
+        "agreedTermsAndConditions": {
+          "type": "array",
+          "description": "A list of terms and conditions that the user has agreed to when creating this OperatorApiConnection resource.",
+          "items": {
+            "$ref": "#/definitions/AgreedTermsAndConditions"
+          },
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label",
+            "agreed"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "purposes": {
           "type": "array",
