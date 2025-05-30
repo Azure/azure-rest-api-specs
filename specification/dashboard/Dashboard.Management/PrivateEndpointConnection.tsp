@@ -95,4 +95,4 @@ interface PrivateEndpointConnections {
   "The private endpoint connection name of Azure Managed Grafana."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.approve::parameters.body, "");
+@@doc(PrivateEndpointConnections.approve::parameters.resource, "");

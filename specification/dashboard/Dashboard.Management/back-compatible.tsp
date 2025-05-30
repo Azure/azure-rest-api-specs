@@ -38,5 +38,6 @@ using Microsoft.Dashboard;
 @@clientName(ManagedDashboards.update::parameters.properties,
   "requestBodyParameters"
 );
+@@clientName(PrivateEndpointConnections.approve::parameters.resource, "body");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ManagedDashboard.properties);
