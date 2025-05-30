@@ -60,12 +60,10 @@ export function outputErrorSummary(
   builtLines.push(`## Error Summary - ${reportName}`);
 
   // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
-  if (reportName === "Swagger Specifications Validation") {
-    reportName = "Swagger SemanticValidation";
+  if (reportName === "Swagger SemanticValidation") {
     checkName = "validate-spec";
   }
-  if (reportName === "Swagger Examples Validation") {
-    reportName = "Swagger ModelValidation";
+  else if (reportName === "Swagger ModelValidation") {
     checkName = "validate-example";
   }
 

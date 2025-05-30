@@ -13,18 +13,24 @@ import { parseArgs, ParseArgsConfig } from "node:util";
 
 export async function main() {
   const config: ParseArgsConfig = {
-    options: {},
+    options: {
+      targetDirectory: {
+        type: "string",
+        short: "d",
+        multiple: false,
+        default: process.cwd(),
+      },
+    },
     allowPositionals: true,
   };
 
-  const { positionals } = parseArgs(config);
+  const { values: opts, positionals } = parseArgs(config);
+  // this option has a default value of process.cwd(), so we can assume it is always defined
+  // just need to resolve that here to make ts aware of it
+  const targetDirectory = opts.targetDirectory as string;
 
-  const [targetDirectory, runType] = positionals;
-
-  if (!targetDirectory) {
-    console.error("Error: <targetDirectory> is required.");
-    process.exit(1);
-  }
+  // first positional is runType
+  const [runType] = positionals;
 
   if (runType !== "specs" && runType !== "examples") {
     console.error("Error: <runType> must be either 'specs' or 'examples'.");
@@ -43,11 +49,11 @@ export async function main() {
   if (runType === "specs") {
     [exitCode, scannedSwaggerFiles, errorList] =
       await checkSpecs(targetDirectory);
-    reportName = "Swagger Specifications Validation";
+    reportName = "Swagger SemanticValidation";
   } else if (runType === "examples") {
     [exitCode, scannedSwaggerFiles, errorList] =
       await checkExamples(targetDirectory);
-    reportName = "Swagger Examples Validation";
+    reportName = "Swagger ModelValidation";
   }
 
   if (errorList.length > 0) {
