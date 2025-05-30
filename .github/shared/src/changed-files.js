@@ -2,6 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { readFile, access } from "fs/promises";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -223,4 +224,33 @@ export function scenario(file) {
   return (
     typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
   );
+}
+
+/**
+ * Given the path to a file return an array of strings where each entry in the
+ * array is a line in the file
+ *
+ * @param changedFilesPath Path to the file containing the list of changed files with one on each line
+ * @returns
+ */
+export async function readFileList(changedFilesPath) {
+  const data = await readFile(changedFilesPath, { encoding: "utf-8" });
+  return data
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+}
+
+/**
+ * Check if a path exists
+ * @param path Path to check for existence
+ * @returns true if the path exists, false otherwise
+ */
+export async function pathExists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
 }

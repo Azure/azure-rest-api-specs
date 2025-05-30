@@ -148,17 +148,3 @@ export function getSwaggersToProcess(swaggerFiles) {
 
   return { selectedVersion, swaggersToProcess };
 }
-
-/**
- * Check if a path exists
- * @param path Path to check for existence
- * @returns true if the path exists, false otherwise
- */
-export async function pathExists(path) {
-  try {
-    await access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
