@@ -125,7 +125,7 @@ These settings apply only when `--tag=package-2025-07-25` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-07-25'
 input-file:
-  - preview/2025-07-25/redhatopenshift.json
+  - stable/2025-07-25/redhatopenshift.json
 ```
 ---
 
