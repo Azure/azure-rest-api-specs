@@ -4493,13 +4493,13 @@
             ]
           }
         },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
-          "description": "Maintenance Mode configuration."
-        },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettings",
           "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
+          "description": "Maintenance Mode configuration."
         }
       }
     },
@@ -4557,13 +4557,13 @@
           "$ref": "#/definitions/FirewallSKU",
           "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
         },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModelUpdate",
-          "description": "Maintenance Mode configuration."
-        },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettingsPatchProperties",
           "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
+          "description": "Maintenance Mode configuration."
         }
       }
     },
@@ -5438,48 +5438,6 @@
       "required": [
         "mode"
       ]
-    },
-    "MaintenanceModeConfigurationModelUpdate": {
-      "type": "object",
-      "description": "Maintenance Mode",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "Current mode of Maintenance Mode Configuration",
-          "default": "Off",
-          "enum": [
-            "On",
-            "CanNotDelete",
-            "Off",
-            "General",
-            "Advanced"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "principals": {
-          "type": "array",
-          "description": "The user, group or service principal object affected by Maintenance Mode",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/Principal"
-          }
-        },
-        "justification": {
-          "type": "string",
-          "description": "Justification for entering or exiting Maintenance Mode",
-          "default": "Off",
-          "enum": [
-            "Networking",
-            "Governance",
-            "Off"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      }
     },
     "MaintenanceModeConfigurationPatchModel": {
       "type": "object",

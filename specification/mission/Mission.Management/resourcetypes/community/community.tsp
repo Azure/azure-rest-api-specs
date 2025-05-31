@@ -159,10 +159,6 @@ model CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
   firewallSku?: FirewallSKU = FirewallSKU.Standard;
-
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 }
 
 @doc("Community Resource Properties")
@@ -170,6 +166,10 @@ model CommunityModel is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
+
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 }
 
 @doc("Community Resource Properties without default values")
@@ -178,6 +178,9 @@ model CommunityPatchProperties
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettingsPatchProperties;
+
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 }
 
 @doc("Community Patch Resource")
