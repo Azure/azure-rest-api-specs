@@ -13,12 +13,7 @@ interface AutonomousDatabases
       AutonomousDatabaseBaseProperties
     > {
   //OCI switchover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/SwitchoverAutonomousDatabase
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform switchover action on Autonomous Database")
-  @Autorest.example(
-    "./examples/autonomousDatabase_switchover.json",
-    "Perform switchover action on Autonomous Database"
-  )
   switchover is ArmResourceActionAsync<
     AutonomousDatabase,
     PeerDbDetails,
@@ -26,12 +21,7 @@ interface AutonomousDatabases
   >;
 
   //OCI failover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/FailOverAutonomousDatabase
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Perform failover action on Autonomous Database")
-  @Autorest.example(
-    "./examples/autonomousDatabase_failover.json",
-    "Perform failover action on Autonomous Database"
-  )
   failover is ArmResourceActionAsync<
     AutonomousDatabase,
     PeerDbDetails,
@@ -39,12 +29,7 @@ interface AutonomousDatabases
   >;
 
   //OCI generate wallet API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/GenerateAutonomousDatabaseWallet
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Generate wallet action on Autonomous Database")
-  @Autorest.example(
-    "./examples/autonomousDatabase_generateWallet.json",
-    "Generate wallet action on Autonomous Database"
-  )
   generateWallet is ArmResourceActionSync<
     AutonomousDatabase,
     GenerateAutonomousDatabaseWalletDetails,
@@ -52,12 +37,7 @@ interface AutonomousDatabases
   >;
 
   //OCI RestoreAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/RestoreAutonomousDatabase
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("Restores an Autonomous Database based on the provided request parameters.")
-  @Autorest.example(
-    "./examples/autonomousDatabase_restore.json",
-    "Perform restore action on Autonomous Database"
-  )
   restore is ArmResourceActionAsync<
     AutonomousDatabase,
     RestoreAutonomousDatabaseDetails,
@@ -65,12 +45,7 @@ interface AutonomousDatabases
   >;
 
   //OCI ShrinkAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/ShrinkAutonomousDatabase
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @doc("This operation shrinks the current allocated storage down to the current actual used data storage.")
-  @Autorest.example(
-    "./examples/autonomousDatabase_shrink.json",
-    "Perform shrink action on Autonomous Database"
-  )
   shrink is ArmResourceActionAsync<
     AutonomousDatabase,
     void,
@@ -78,13 +53,8 @@ interface AutonomousDatabases
   >;
 
   //OCI ChangeDisasterRecoveryConfiguration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/ChangeDisasterRecoveryConfiguration
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @added(Versions.v20241001_preview)
   @doc("Perform ChangeDisasterRecoveryConfiguration action on Autonomous Database")
-  @Autorest.example(
-    "./examples/autonomousDatabase_changeDisasterRecoveryConfiguration.json",
-    "Perform ChangeDisasterRecoveryConfiguration action on Autonomous Database"
-  )
   changeDisasterRecoveryConfiguration is ArmResourceActionAsync<
     AutonomousDatabase,
     DisasterRecoveryConfigurationDetails,
@@ -92,52 +62,11 @@ interface AutonomousDatabases
   >;
 
   //OCI Lifecycle Action - Configuration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/{Start/Stop/Restart}AutonomousDatabase
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
   @added(Versions.v20250601_preview)
   @doc("Perform Lifecycle Management Action on Autonomous Database")
-  @Autorest.example(
-    "./examples/autonomousDatabase_lifecycleActionStart.json",
-    "Perform lifecycle actions Start/Stop/Restart on Autonomous Database"
-  )
   action is ArmResourceActionAsync<
     AutonomousDatabase,
     AutonomousDatabaseLifecycleAction,
     AutonomousDatabase
   >;
 }
-
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.listBySubscription,
-  "./examples/autonomousDatabase_listBySubscription.json",
-  "List Autonomous Database by subscription"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.listByResourceGroup,
-  "./examples/autonomousDatabase_listByResourceGroup.json",
-  "List Autonomous Database by resource group"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.createOrUpdate,
-  "./examples/autonomousDatabase_create.json",
-  "Create Autonomous Database"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.createOrUpdate,
-  "./examples/autonomousDatabaseClone_create.json",
-  "Create clone Autonomous Database"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.get,
-  "./examples/autonomousDatabase_get.json",
-  "Get Autonomous Database"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.update,
-  "./examples/autonomousDatabase_patch.json",
-  "Patch Autonomous Database"
-);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.delete,
-  "./examples/autonomousDatabase_delete.json",
-  "Delete Autonomous Database"
-);
