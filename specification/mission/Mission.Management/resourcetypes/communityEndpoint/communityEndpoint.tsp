@@ -89,10 +89,14 @@ model CommunityEndpointProperties {
   approvalRequired?: boolean;
 }
 
+@doc("Community Endpoint patchable Properties")
+model CommunityEndpointPatchProperties
+  is UpdateableProperties<OmitDefaults<CommunityEndpointProperties>>;
+
 @doc("Community Endpoint Patch Resource")
 model CommunityEndpointPatchModel {
   @doc("Community Endpoint Patch properties")
-  properties?: Update<CommunityEndpointProperties>;
+  properties?: CommunityEndpointPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

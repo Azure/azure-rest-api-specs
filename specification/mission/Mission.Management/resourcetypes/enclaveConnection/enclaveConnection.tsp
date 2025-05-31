@@ -66,10 +66,14 @@ model EnclaveConnectionProperties {
   resourceCollection?: string[];
 }
 
+@doc("Enclave Connection patchable Properties")
+model EnclaveConnectionPatchProperties
+  is UpdateableProperties<OmitDefaults<EnclaveConnectionProperties>>;
+
 @doc("Enclave Connection Patch Resource")
 model EnclaveConnectionPatchModel {
   @doc("Enclave Connection Patch properties")
-  properties?: Update<EnclaveConnectionProperties>;
+  properties?: EnclaveConnectionPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

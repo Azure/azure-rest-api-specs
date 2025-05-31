@@ -29,12 +29,8 @@ import "./resourcetypes/shared/provisioningstate.tsp";
 import "./resourcetypes/shared/resourceid.tsp";
 import "./resourcetypes/shared/roleassignmentitem.tsp";
 
-using Azure.ClientGenerator.Core;
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 

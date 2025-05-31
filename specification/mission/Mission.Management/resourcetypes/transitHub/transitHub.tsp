@@ -75,10 +75,14 @@ model TransitHubProperties {
   resourceCollection?: string[];
 }
 
+@doc("Transit Hub patchable Properties")
+model TransitHubPatchProperties
+  is UpdateableProperties<OmitDefaults<TransitHubProperties>>;
+
 @doc("TH Patch Resource")
 model TransitHubPatchModel {
   @doc("The TransitHub resource.")
-  properties?: Update<TransitHubProperties>;
+  properties?: TransitHubPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

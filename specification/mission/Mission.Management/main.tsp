@@ -9,8 +9,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./version.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 

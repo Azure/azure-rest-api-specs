@@ -117,13 +117,8 @@ model ApprovalSettings {
   connectionUpdateMode?: "Automatic" | "Manual" | string = "Automatic";
 }
 
-@added(Microsoft.Mission.Versions.v2024_12_01_preview)
-@doc("ApprovalSettings Properties")
-@withoutDefaultValues
-model ApprovalSettingsPatchModel is ApprovalSettings;
-
 @doc("Community Resource Properties")
-model CommunityBaseModel {
+model CommunityModel {
   @doc("Address Space.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   addressSpace?: string;
@@ -162,10 +157,7 @@ model CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
   firewallSku?: FirewallSKU = FirewallSKU.Standard;
-}
 
-@doc("Community Resource Properties")
-model CommunityModel is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;
@@ -177,20 +169,13 @@ model CommunityModel is CommunityBaseModel {
 
 @doc("Community Resource Properties without default values")
 @withoutDefaultValues
-model CommunityPatchProperties is CommunityBaseModel {
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Approval requirements for various actions on the community's resources.")
-  approvalSettings?: ApprovalSettingsPatchModel;
-
-  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
-}
+model CommunityPatchProperties
+  is UpdateableProperties<OmitDefaults<CommunityModel>>;
 
 @doc("Community Patch Resource")
 model CommunityPatchModel {
   @doc("Community Patch properties")
-  properties?: Update<CommunityPatchProperties>;
+  properties?: CommunityPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...ManagedServiceIdentityProperty;

@@ -77,10 +77,6 @@ model EnclaveVirtualNetworkModel {
   connectToAzureServices?: boolean = false;
 }
 
-@doc("Enclave Virtual Network Properties")
-@withoutDefaultValues
-model EnclaveVirtualNetworkPatchModel is EnclaveVirtualNetworkModel;
-
 @doc("Virtual Enclave Default Settings")
 model EnclaveDefaultSettingsModel {
   @doc("Key Vault Resource Id.")
@@ -99,10 +95,6 @@ model EnclaveDefaultSettingsModel {
   diagnosticDestination?: DiagnosticDestination = DiagnosticDestination.EnclaveOnly;
 }
 
-@doc("Virtual Enclave Default Settings Patch Model")
-@withoutDefaultValues
-model EnclaveDefaultSettingsPatchModel is EnclaveDefaultSettingsModel;
-
 @doc("Enclave Address Spaces")
 model EnclaveAddressSpacesModel {
   @doc("Enclave Address Space")
@@ -113,10 +105,13 @@ model EnclaveAddressSpacesModel {
 }
 
 @doc("Virtual Enclave Resource properties")
-model VirtualEnclaveBaseModel {
+model VirtualEnclaveModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("Virtual Network.")
+  enclaveVirtualNetwork: EnclaveVirtualNetworkModel;
 
   @doc("Enclave Address Spaces")
   @visibility(Lifecycle.Read)
@@ -126,6 +121,9 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   communityResourceId: CommunityResourceId;
 
+  @doc("Enclave default settings.")
+  enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
+
   @doc("List of resource ids created by Virtual Enclave.")
   @visibility(Lifecycle.Read)
   resourceCollection?: armResourceIdentifier[];
@@ -133,6 +131,9 @@ model VirtualEnclaveBaseModel {
   @doc("Managed resource group configuration.")
   @visibility(Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed On Behalf Of Configuration.")
@@ -155,32 +156,13 @@ model VirtualEnclaveBaseModel {
   governedServiceList?: GovernedServiceItem[];
 }
 
-model VirtualEnclaveModel is VirtualEnclaveBaseModel {
-  @doc("Enclave Virtual Network.")
-  enclaveVirtualNetwork: EnclaveVirtualNetworkModel;
-
-  @doc("Enclave Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
-
-  @doc("Enclave Default Settings")
-  enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
-}
-
-model VirtualEnclavePatchProperties is VirtualEnclaveBaseModel {
-  @doc("Enclave Virtual Network Patch Model.")
-  enclaveVirtualNetwork: EnclaveVirtualNetworkPatchModel;
-
-  @doc("Enclave Maintenance Mode configuration Patch Model.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
-
-  @doc("Enclave Default Settings Patch Model")
-  enclaveDefaultSettings?: EnclaveDefaultSettingsPatchModel;
-}
+model VirtualEnclavePatchProperties
+  is UpdateableProperties<OmitDefaults<VirtualEnclaveModel>>;
 
 @doc("Virtual Enclave Patch Model")
 model VirtualEnclavePatchModel {
   @doc("Virtual Enclave Patch properties")
-  properties?: Update<VirtualEnclavePatchProperties>;
+  properties?: VirtualEnclavePatchProperties;
 
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;

@@ -56,10 +56,6 @@ model RequestMetadata {
   approvalStatus?: ApprovalStatus = ApprovalStatus.Pending;
 }
 
-@doc("Request Metadata for approvals patch request.")
-@withoutDefaultValues
-model RequestMetadataPatchModel is RequestMetadata;
-
 @renamedFrom(Microsoft.Mission.Versions.v2024_12_01_preview, "Approvers")
 @doc("Approver Metadata for approvals request.")
 model Approver {
@@ -74,7 +70,7 @@ model Approver {
 }
 
 @doc("Approval Base model.")
-model ApprovalBaseModel {
+model ApprovalModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -101,22 +97,16 @@ model ApprovalBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval request state change time, time at which approval request state changed from pending to approved or rejected.")
   stateChangedAt?: utcDateTime;
-}
 
-@doc("Approvals model.")
-model ApprovalModel is ApprovalBaseModel {
   @doc("Request metadata for the approval request.")
   requestMetadata: RequestMetadata;
 }
-
 @doc("Approvals patch properties.")
-model ApprovalPatchProperties is ApprovalBaseModel {
-  @doc("Request metadata for the approval request without default values.")
-  requestMetadata: RequestMetadataPatchModel;
-}
+model ApprovalPatchProperties
+  is UpdateableProperties<OmitDefaults<ApprovalModel>>;
 
 @doc("Approvals patch model.")
 model ApprovalPatchModel {
   @doc("Approval Patch properties")
-  properties?: Update<ApprovalPatchProperties>;
+  properties?: ApprovalPatchProperties;
 }

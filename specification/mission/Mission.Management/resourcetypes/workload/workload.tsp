@@ -28,11 +28,15 @@ model WorkloadProperties {
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 }
 
+@doc("Workload patchable Properties")
+model WorkloadPatchProperties
+  is UpdateableProperties<OmitDefaults<WorkloadProperties>>;
+
 @doc("Workload Patch Resource")
 @withoutDefaultValues
 model WorkloadPatchModel {
   @doc("Workload Patch properties")
-  properties?: Update<WorkloadProperties>;
+  properties?: WorkloadPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

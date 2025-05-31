@@ -9,12 +9,9 @@ import "@azure-tools/typespec-client-generator-core";
 
 import "./model.tsp";
 
-using Azure.ClientGenerator.Core;
 using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 

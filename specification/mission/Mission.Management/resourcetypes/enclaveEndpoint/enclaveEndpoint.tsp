@@ -60,11 +60,15 @@ model EnclaveEndpointProperties {
   approvalRequired?: boolean;
 }
 
+@doc("Enclave Endpoint patchable Properties")
+model EnclaveEndpointPatchProperties
+  is UpdateableProperties<OmitDefaults<EnclaveEndpointProperties>>;
+
 @doc("Enclave Endpoint Patch Resource")
 @withoutDefaultValues
 model EnclaveEndpointPatchModel {
   @doc("Enclave Endpoint Patch properties")
-  properties?: Update<EnclaveEndpointProperties>;
+  properties?: EnclaveEndpointPatchProperties;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
