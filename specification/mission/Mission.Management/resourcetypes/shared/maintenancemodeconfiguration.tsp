@@ -16,6 +16,5 @@ model MaintenanceModeConfigurationModel {
 }
 
 @doc("Maintenance Mode Patch Model")
-@withoutDefaultValues
 model MaintenanceModeConfigurationPatchModel
-  is MaintenanceModeConfigurationModel;
+  is UpdateableProperties<OmitDefaults<MaintenanceModeConfigurationModel>>;

@@ -78,6 +78,10 @@ model EnclaveVirtualNetworkModel {
 }
 
 @doc("Virtual Enclave Default Settings")
+model EnclaveDefaultSettingsPatchModel
+  is UpdateableProperties<OmitDefaults<EnclaveDefaultSettingsModel>>;
+
+@doc("Virtual Enclave Default Settings")
 model EnclaveDefaultSettingsModel {
   @doc("Key Vault Resource Id.")
   @visibility(Lifecycle.Read)
@@ -105,7 +109,7 @@ model EnclaveAddressSpacesModel {
 }
 
 @doc("Virtual Enclave Resource properties")
-model VirtualEnclaveModel {
+model VirtualEnclaveBaseModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -121,9 +125,6 @@ model VirtualEnclaveModel {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   communityResourceId: CommunityResourceId;
 
-  @doc("Enclave default settings.")
-  enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
-
   @doc("List of resource ids created by Virtual Enclave.")
   @visibility(Lifecycle.Read)
   resourceCollection?: armResourceIdentifier[];
@@ -131,9 +132,6 @@ model VirtualEnclaveModel {
   @doc("Managed resource group configuration.")
   @visibility(Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-
-  @doc("Maintenance Mode configuration.")
-  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed On Behalf Of Configuration.")
@@ -156,8 +154,24 @@ model VirtualEnclaveModel {
   governedServiceList?: GovernedServiceItem[];
 }
 
+@doc("Virtual Enclave Resource properties")
+model VirtualEnclaveModel is VirtualEnclaveBaseModel {
+  @doc("Enclave default settings.")
+  enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
+
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationModel;
+}
+
+@doc("Virtual Enclave Patchable Properties")
 model VirtualEnclavePatchProperties
-  is UpdateableProperties<OmitDefaults<VirtualEnclaveModel>>;
+  is UpdateableProperties<OmitDefaults<VirtualEnclaveBaseModel>> {
+  @doc("Enclave default settings.")
+  enclaveDefaultSettings?: EnclaveDefaultSettingsPatchModel;
+
+  @doc("Maintenance Mode configuration.")
+  maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
+}
 
 @doc("Virtual Enclave Patch Model")
 model VirtualEnclavePatchModel {

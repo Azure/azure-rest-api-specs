@@ -3335,7 +3335,7 @@
           "description": "Parameter for optimizing query results"
         },
         "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadataUpdate",
+          "$ref": "#/definitions/RequestMetadataPatchModel",
           "description": "Request metadata for the approval request."
         }
       }
@@ -3376,6 +3376,36 @@
       "required": [
         "value"
       ]
+    },
+    "ApprovalStatus": {
+      "type": "string",
+      "description": "Approval Status Enum",
+      "enum": [
+        "Approved",
+        "Rejected",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "ApprovalStatus Type Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "ApprovalStatus Type Rejected"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "ApprovalStatus Type Pending"
+          }
+        ]
+      }
     },
     "Azure.Core.azureLocation": {
       "type": "string",
@@ -3820,6 +3850,36 @@
         ]
       }
     },
+    "DiagnosticDestination": {
+      "type": "string",
+      "description": "Specifies the destination of where to store diagnostic logs.",
+      "enum": [
+        "CommunityOnly",
+        "EnclaveOnly",
+        "Both"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticDestination",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CommunityOnly",
+            "value": "CommunityOnly",
+            "description": "DiagnosticDestination Type CommunityOnly"
+          },
+          {
+            "name": "EnclaveOnly",
+            "value": "EnclaveOnly",
+            "description": "DiagnosticDestination Type EnclaveOnly"
+          },
+          {
+            "name": "Both",
+            "value": "Both",
+            "description": "DiagnosticDestination Type Both"
+          }
+        ]
+      }
+    },
     "EnclaveAddressSpacesModel": {
       "type": "object",
       "description": "Enclave Address Spaces",
@@ -4084,6 +4144,16 @@
               }
             ]
           }
+        }
+      }
+    },
+    "EnclaveDefaultSettingsPatchModel": {
+      "type": "object",
+      "description": "Virtual Enclave Default Settings",
+      "properties": {
+        "diagnosticDestination": {
+          "$ref": "#/definitions/DiagnosticDestination",
+          "description": "Diagnostic Destination."
         }
       }
     },
@@ -4526,14 +4596,13 @@
         "mode"
       ]
     },
-    "MaintenanceModeConfigurationModelUpdate": {
+    "MaintenanceModeConfigurationPatchModel": {
       "type": "object",
-      "description": "Maintenance Mode",
+      "description": "Maintenance Mode Patch Model",
       "properties": {
         "mode": {
           "type": "string",
           "description": "Current mode of Maintenance Mode Configuration",
-          "default": "Off",
           "enum": [
             "On",
             "CanNotDelete",
@@ -4548,7 +4617,6 @@
         "principals": {
           "type": "array",
           "description": "The user, group or service principal object affected by Maintenance Mode",
-          "default": [],
           "items": {
             "$ref": "#/definitions/Principal"
           }
@@ -4556,7 +4624,6 @@
         "justification": {
           "type": "string",
           "description": "Justification for entering or exiting Maintenance Mode",
-          "default": "Off",
           "enum": [
             "Networking",
             "Governance",
@@ -4753,44 +4820,17 @@
         "resourceAction"
       ]
     },
-    "RequestMetadataUpdate": {
+    "RequestMetadataPatchModel": {
       "type": "object",
-      "description": "Request Metadata for approvals request.",
+      "description": "Request Metadata patch properties.",
       "properties": {
         "resourceAction": {
           "type": "string",
           "description": "Resource Action of the item being approved or declined."
         },
         "approvalStatus": {
-          "type": "string",
-          "description": "Status of the approval. Uses ApprovalStatus enum.",
-          "default": "Pending",
-          "enum": [
-            "Approved",
-            "Rejected",
-            "Pending"
-          ],
-          "x-ms-enum": {
-            "name": "ApprovalStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Approved",
-                "value": "Approved",
-                "description": "ApprovalStatus Type Approved"
-              },
-              {
-                "name": "Rejected",
-                "value": "Rejected",
-                "description": "ApprovalStatus Type Rejected"
-              },
-              {
-                "name": "Pending",
-                "value": "Pending",
-                "description": "ApprovalStatus Type Pending"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Status of the approval. Uses ApprovalStatus enum."
         }
       }
     },
@@ -5192,10 +5232,6 @@
             "create"
           ]
         },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
         "resourceCollection": {
           "type": "array",
           "description": "List of resource ids created by Virtual Enclave.",
@@ -5211,14 +5247,18 @@
           "description": "Managed resource group configuration.",
           "readOnly": true
         },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
-          "description": "Maintenance Mode configuration."
-        },
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False).",
           "default": false
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
+          "description": "Maintenance Mode configuration."
         }
       },
       "required": [
@@ -5249,23 +5289,23 @@
     },
     "VirtualEnclavePatchProperties": {
       "type": "object",
-      "description": "The template for adding updateable properties.",
+      "description": "Virtual Enclave Patchable Properties",
       "properties": {
         "enclaveVirtualNetwork": {
           "$ref": "#/definitions/EnclaveVirtualNetworkModel",
           "description": "Virtual Network."
         },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModelUpdate",
-          "description": "Maintenance Mode configuration."
-        },
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
+          "description": "Maintenance Mode configuration."
         }
       }
     },

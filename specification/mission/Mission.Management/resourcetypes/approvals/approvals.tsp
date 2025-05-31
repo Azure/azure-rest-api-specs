@@ -70,7 +70,7 @@ model Approver {
 }
 
 @doc("Approval Base model.")
-model ApprovalModel {
+model ApprovalBaseModel {
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -97,13 +97,23 @@ model ApprovalModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval request state change time, time at which approval request state changed from pending to approved or rejected.")
   stateChangedAt?: utcDateTime;
+}
 
+model ApprovalModel is ApprovalBaseModel {
   @doc("Request metadata for the approval request.")
   requestMetadata: RequestMetadata;
 }
+
+@doc("Request Metadata patch properties.")
+model RequestMetadataPatchModel
+  is UpdateableProperties<OmitDefaults<RequestMetadata>>;
+
 @doc("Approvals patch properties.")
 model ApprovalPatchProperties
-  is UpdateableProperties<OmitDefaults<ApprovalModel>>;
+  is UpdateableProperties<OmitDefaults<ApprovalBaseModel>> {
+  @doc("Request metadata for the approval request.")
+  requestMetadata: RequestMetadataPatchModel;
+}
 
 @doc("Approvals patch model.")
 model ApprovalPatchModel {

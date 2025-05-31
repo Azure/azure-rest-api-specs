@@ -3881,7 +3881,7 @@
           "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         },
         "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadataUpdate",
+          "$ref": "#/definitions/RequestMetadataPatchModel",
           "description": "Request metadata for the approval request."
         }
       }
@@ -4073,19 +4073,65 @@
             "read",
             "create"
           ]
-        },
-        "connectionUpdateMode": {
-          "type": "string",
-          "description": "Behavior of enclave connection update workflow after endpoint update is approved (Automatic or Manual).",
-          "default": "Automatic",
-          "enum": [
-            "Automatic",
-            "Manual"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
         }
+      }
+    },
+    "ApprovalSettingsPatchProperties": {
+      "type": "object",
+      "description": "ApprovalSettings Properties",
+      "properties": {
+        "mandatoryApprovers": {
+          "type": "array",
+          "description": "List of mandatory approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/MandatoryApprover"
+          },
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        }
+      }
+    },
+    "ApprovalStatus": {
+      "type": "string",
+      "description": "Approval Status Enum",
+      "enum": [
+        "Approved",
+        "Rejected",
+        "Pending",
+        "Deleted",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "ApprovalStatus Type Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "ApprovalStatus Type Rejected"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "ApprovalStatus Type Pending"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "ApprovalStatus Type Deleted"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "ApprovalStatus Type Expired"
+          }
+        ]
       }
     },
     "Approver": {
@@ -4447,13 +4493,13 @@
             ]
           }
         },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationModel",
           "description": "Maintenance Mode configuration."
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/ApprovalSettings",
+          "description": "Approval requirements for various actions on the community's resources."
         }
       }
     },
@@ -4511,13 +4557,13 @@
           "$ref": "#/definitions/FirewallSKU",
           "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
         },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettings",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationModelUpdate",
           "description": "Maintenance Mode configuration."
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/ApprovalSettingsPatchProperties",
+          "description": "Approval requirements for various actions on the community's resources."
         }
       }
     },
@@ -4621,6 +4667,36 @@
             "name": "PrivateNetwork",
             "value": "PrivateNetwork",
             "description": "DestinationType Type PrivateNetwork"
+          }
+        ]
+      }
+    },
+    "DiagnosticDestination": {
+      "type": "string",
+      "description": "Specifies the destination of where to store diagnostic logs.",
+      "enum": [
+        "CommunityOnly",
+        "EnclaveOnly",
+        "Both"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticDestination",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CommunityOnly",
+            "value": "CommunityOnly",
+            "description": "DiagnosticDestination Type CommunityOnly"
+          },
+          {
+            "name": "EnclaveOnly",
+            "value": "EnclaveOnly",
+            "description": "DiagnosticDestination Type EnclaveOnly"
+          },
+          {
+            "name": "Both",
+            "value": "Both",
+            "description": "DiagnosticDestination Type Both"
           }
         ]
       }
@@ -4889,6 +4965,16 @@
               }
             ]
           }
+        }
+      }
+    },
+    "EnclaveDefaultSettingsPatchModel": {
+      "type": "object",
+      "description": "Virtual Enclave Default Settings",
+      "properties": {
+        "diagnosticDestination": {
+          "$ref": "#/definitions/DiagnosticDestination",
+          "description": "Diagnostic Destination."
         }
       }
     },
@@ -5395,6 +5481,45 @@
         }
       }
     },
+    "MaintenanceModeConfigurationPatchModel": {
+      "type": "object",
+      "description": "Maintenance Mode Patch Model",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Current mode of Maintenance Mode Configuration",
+          "enum": [
+            "On",
+            "CanNotDelete",
+            "Off",
+            "General",
+            "Advanced"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "principals": {
+          "type": "array",
+          "description": "The user, group or service principal object affected by Maintenance Mode",
+          "items": {
+            "$ref": "#/definitions/Principal"
+          }
+        },
+        "justification": {
+          "type": "string",
+          "description": "Justification for entering or exiting Maintenance Mode",
+          "enum": [
+            "Networking",
+            "Governance",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
       "description": "ManagedResourceGroup related properties",
@@ -5613,9 +5738,9 @@
         "resourceAction"
       ]
     },
-    "RequestMetadataUpdate": {
+    "RequestMetadataPatchModel": {
       "type": "object",
-      "description": "Request Metadata for approvals request.",
+      "description": "Request Metadata patch properties.",
       "properties": {
         "resourceAction": {
           "type": "string",
@@ -5630,47 +5755,8 @@
           "description": "Payload to be sent upon any action on approval request"
         },
         "approvalStatus": {
-          "type": "string",
-          "description": "Status of the approval. Uses ApprovalStatus enum.",
-          "default": "Pending",
-          "enum": [
-            "Approved",
-            "Rejected",
-            "Pending",
-            "Deleted",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "ApprovalStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Approved",
-                "value": "Approved",
-                "description": "ApprovalStatus Type Approved"
-              },
-              {
-                "name": "Rejected",
-                "value": "Rejected",
-                "description": "ApprovalStatus Type Rejected"
-              },
-              {
-                "name": "Pending",
-                "value": "Pending",
-                "description": "ApprovalStatus Type Pending"
-              },
-              {
-                "name": "Deleted",
-                "value": "Deleted",
-                "description": "ApprovalStatus Type Deleted"
-              },
-              {
-                "name": "Expired",
-                "value": "Expired",
-                "description": "ApprovalStatus Type Expired"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ApprovalStatus",
+          "description": "Status of the approval. Uses ApprovalStatus enum."
         }
       }
     },
@@ -6092,10 +6178,6 @@
             "create"
           ]
         },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
         "resourceCollection": {
           "type": "array",
           "description": "List of resource ids created by Virtual Enclave.",
@@ -6110,10 +6192,6 @@
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
           "description": "Managed resource group configuration.",
           "readOnly": true
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
-          "description": "Maintenance Mode configuration."
         },
         "managedOnBehalfOfConfiguration": {
           "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
@@ -6145,6 +6223,14 @@
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
           }
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
+          "description": "Maintenance Mode configuration."
         }
       },
       "required": [
@@ -6175,19 +6261,11 @@
     },
     "VirtualEnclavePatchProperties": {
       "type": "object",
-      "description": "The template for adding updateable properties.",
+      "description": "Virtual Enclave Patchable Properties",
       "properties": {
         "enclaveVirtualNetwork": {
           "$ref": "#/definitions/EnclaveVirtualNetworkModel",
           "description": "Virtual Network."
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModelUpdate",
-          "description": "Maintenance Mode configuration."
         },
         "bastionEnabled": {
           "type": "boolean",
@@ -6213,6 +6291,14 @@
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
           }
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
+          "description": "Maintenance Mode configuration."
         }
       }
     },
