@@ -179,6 +179,7 @@ model CommunityPatchProperties
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettingsPatchProperties;
 
+  @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 }
