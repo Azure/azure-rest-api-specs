@@ -1405,6 +1405,11 @@ model VirtualMachineInstanceProperties {
   @doc("Name of the host node that the VM is on.")
   @visibility(Lifecycle.Read)
   hostNodeName?: string;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Name of the host node that the VM is on.")
+  @visibility(Lifecycle.Read)
+  hostNodeIpAddress?: string;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
