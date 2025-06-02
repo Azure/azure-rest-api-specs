@@ -1040,6 +1040,13 @@
           "$ref": "#/definitions/DeploymentStacksParametersLink",
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
+        "extensionConfigs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfig"
+          },
+          "description": "The configurations to use for deployment extensions. The keys of this object are deployment extension aliases as defined in the deployment template."
+        },
         "actionOnUnmanage": {
           "$ref": "#/definitions/ActionOnUnmanage",
           "description": "Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted."
@@ -1143,6 +1150,14 @@
           "type": "string",
           "readOnly": true,
           "description": "The duration of the last successful Deployment stack update."
+        },
+        "deploymentExtensions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DeploymentStackDeploymentExtension"
+          },
+          "description": "The deployment extensions used to deploy Deployment stack managed resources."
         }
       }
     },
@@ -1166,12 +1181,28 @@
     },
     "ResourceReference": {
       "type": "object",
-      "description": "The resourceId model.",
+      "description": "An ARM or extensible resource reference managed by the Deployment stack..",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The resourceId of a resource managed by the deployment stack."
+          "description": "The fully qualified ARM resource ID. Only present for resources directly deployed with ARM."
+        },
+        "extension": {
+          "$ref": "#/definitions/DeploymentStackDeploymentExtension",
+          "description": "The deployment extension used to deploy this resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        },
+        "identifiers": {
+          "type": "object",
+          "description": "The extensible resource identifiers. The schema of this object is determined by the deployment extension."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version used to deploy this resource."
         }
       }
     },
@@ -1568,6 +1599,49 @@
             "$ref": "#/definitions/ResourceReference"
           },
           "description": "The array of resources that were validated."
+        }
+      }
+    },
+    "DeploymentExtensionConfig": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/DeploymentExtensionConfigItem"
+      },
+      "description": "An extension configuration. Keys of the object are defined by an extension's configuration schema."
+    },
+    "DeploymentExtensionConfigItem": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value of the extension config property."
+        },
+        "keyVaultReference": {
+          "$ref": "#/definitions/KeyVaultParameterReference",
+          "description": "The Azure Key Vault reference used to retrieve the secret value of the extension config property."
+        }
+      }
+    },
+    "DeploymentStackDeploymentExtension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The extension name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The extension version."
+        },
+        "configId": {
+          "type": "string",
+          "description": "The extension configuration ID. It uniquely identifies a deployment target within an extension and disambiguates the same resource deployed with different configurations."
+        },
+        "config": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExtensionConfigItem"
+          },
+          "description": "The deployment extension configuration. The keys of this object are determined by the extension's configuration schema."
         }
       }
     }
