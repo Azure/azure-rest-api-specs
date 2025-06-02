@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "./ContainerServiceEventResourcesExample.tsp";
 import "./common.tsp";
 using TypeSpec.Versioning;
 
@@ -11,6 +12,10 @@ namespace Microsoft.EventGrid.SystemEvents;
 /**
 Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event.
 */
+/** Schema of the Data property of an event grid event for a Microsoft.ResourceNotifications.ContainerServiceEventResources.ScheduledEventEmitted preview event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(
+  MicrosoftResourceNotificationsContainerServiceEventResourcesScheduledEventEmittedExample
+)
 model ResourceNotificationsContainerServiceEventResourcesScheduledEventData
   extends ResourceNotificationsResourceUpdatedEventData {}

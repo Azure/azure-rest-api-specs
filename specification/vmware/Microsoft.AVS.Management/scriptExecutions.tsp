@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptExecutions {
@@ -103,6 +102,7 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
+  @identifiers(#[])
   parameters?: ScriptExecutionParameter[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
@@ -110,6 +110,7 @@ model ScriptExecutionProperties {
     Parameters that will be hidden/not visible to ARM, such as passwords and
     credentials
     """)
+  @identifiers(#[])
   hiddenParameters?: ScriptExecutionParameter[];
 
   @doc("""
