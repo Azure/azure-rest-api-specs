@@ -60,13 +60,11 @@ model AcsCallEndedEventData extends AcsCallingEventProperties {
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantAddedEventData
-  extends AcsCallParticipantEventProperties {}
+model AcsCallParticipantAddedEventData extends AcsCallParticipantEventData {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantRemovedEventData
-  extends AcsCallParticipantEventProperties {}
+model AcsCallParticipantRemovedEventData extends AcsCallParticipantEventData {}
 
 // @example(MicrosoftCommunicationChatMessageReceivedExample)
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -1065,7 +1063,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
+model AcsCallParticipantEventData extends AcsCallingEventProperties {
   /** The user of the call participant */
   user?: AcsCallParticipantProperties;
 
@@ -1086,7 +1084,7 @@ model AcsCallParticipantProperties {
   communicationIdentifier?: CommunicationIdentifierModel;
 
   /** The role of the participant */
-  role?: AcsCallParticipantRoleKind;
+  role?: AcsCallParticipantKind;
 }
 
 /** Schema of common properties of all calling events */
@@ -1616,8 +1614,8 @@ union AcsCallEndedByKind {
   string,
 }
 
-/** Call participant role kind. */
-union AcsCallParticipantRoleKind {
+/** Call participant kind. */
+union AcsCallParticipantKind {
   /** Attendee */
   "Attendee",
 
