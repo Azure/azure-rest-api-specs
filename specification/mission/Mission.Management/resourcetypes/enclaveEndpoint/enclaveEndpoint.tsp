@@ -65,7 +65,6 @@ model EnclaveEndpointPatchProperties
   is UpdateableProperties<OmitDefaults<EnclaveEndpointProperties>>;
 
 @doc("Enclave Endpoint Patch Resource")
-@withoutDefaultValues
 model EnclaveEndpointPatchModel {
   @doc("Enclave Endpoint Patch properties")
   properties?: EnclaveEndpointPatchProperties;

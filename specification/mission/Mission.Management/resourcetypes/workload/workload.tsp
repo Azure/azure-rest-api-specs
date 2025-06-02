@@ -33,7 +33,6 @@ model WorkloadPatchProperties
   is UpdateableProperties<OmitDefaults<WorkloadProperties>>;
 
 @doc("Workload Patch Resource")
-@withoutDefaultValues
 model WorkloadPatchModel {
   @doc("Workload Patch properties")
   properties?: WorkloadPatchProperties;
