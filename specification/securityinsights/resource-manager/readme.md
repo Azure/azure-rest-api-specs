@@ -58,9 +58,31 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json
+    where:
+      - $.definitions["RestApiPollerDataConnectorProperties"].properties["addOnAttributes"].additionalProperties
+      - $.definitions["RestApiPollerRequestConfig"].properties["headers"].additionalProperties
+      - $.definitions["RestApiPollerRequestConfig"].properties["queryParameters"].additionalProperties
+      - $.definitions["RestApiPollerRequestPagingNextPageUrlConfig"].properties["nextPageUrlQueryParameters"].additionalProperties
+      - $.definitions["GenericBlobSbsAuthModel"].properties["credentialsConfig"].additionalProperties
+      - $.definitions["GenericBlobSbsAuthModel"].properties["storageAccountCredentialsConfig"].additionalProperties
+      - $.definitions["JwtAuthModel"].properties["userName"].additionalProperties
+      - $.definitions["JwtAuthModel"].properties["password"].additionalProperties
+      - $.definitions["JwtAuthModel"].properties["queryParameters"].additionalProperties
+      - $.definitions["JwtAuthModel"].properties["headers"].additionalProperties
+      - $.definitions["OAuthModel"].properties["tokenEndpointHeaders"].additionalProperties
+      - $.definitions["OAuthModel"].properties["tokenEndpointQueryParameters"].additionalProperties
+      - $.definitions["OAuthModel"].properties["authorizationEndpointHeaders"].additionalProperties
+      - $.definitions["OAuthModel"].properties["authorizationEndpointQueryParameters"].additionalProperties
+      - $.definitions["SessionAuthModel"].properties["userName"].additionalProperties
+      - $.definitions["SessionAuthModel"].properties["password"].additionalProperties
+      - $.definitions["SessionAuthModel"].properties["queryParameters"].additionalProperties
+      - $.definitions["SessionAuthModel"].properties["headers"].additionalProperties
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
     from: AlertRules.json
+    where:
+      - $.definitions["ScheduledAlertRuleCommonProperties"].properties["customDetails"].additionalProperties
+      - $.definitions["ScheduledAlertRuleTemplateProperties"].properties["customDetails"].additionalProperties
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
 ```
 
