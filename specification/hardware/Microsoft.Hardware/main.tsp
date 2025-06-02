@@ -191,16 +191,28 @@ model ShipTo {
 
 @armResourceOperations
 interface Orders {
+  @Autorest.example("./examples/Orders_Get.json", "OrderById")
   get is ArmResourceRead<Order>;
 
+  @Autorest.example("./examples/Orders_Create.json", "CreateOrder")
   create is ArmResourceCreateOrUpdateAsync<Order>;
 
+  @Autorest.example("./examples/Orders_Update.json", "UpdateOrder")
   update is ArmResourcePatchSync<Order, OrderProperties>;
 
+  @Autorest.example("./examples/Orders_Delete.json", "DeleteOrder")
   delete is ArmResourceDeleteSync<Order>;
 
+  @Autorest.example(
+    "./examples/Orders_ListByResourceGroup.json",
+    "GetByResourceGroup"
+  )
   listByResourceGroup is ArmResourceListByParent<Order>;
 
+  @Autorest.example(
+    "./examples/Orders_ListBySubscription.json",
+    "GetBySubscription"
+  )
   listBySubscription is ArmListBySubscription<Order>;
 }
 
@@ -336,6 +348,7 @@ interface OrderPreviewInterface {
   @armResourceCollectionAction
   @armProviderNameValue
   @doc("Enables preview of hardware order for passed order lines by populating fees, taxes, shipping estimates.")
+  @Autorest.example("./examples/Orders_Preview.json", "OrderPreview")
   @TypeSpec.Rest.action("orderPreview")
   @post
   orderPreview(
