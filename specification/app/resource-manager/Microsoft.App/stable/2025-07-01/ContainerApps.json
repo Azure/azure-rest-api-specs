@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-02-preview",
+    "version": "2025-07-01",
     "title": "ContainerApps API Client"
   },
   "host": "management.azure.com",
@@ -211,12 +211,6 @@
           },
           "Create or Update App Kind": {
             "$ref": "./examples/ContainerApps_Kind_CreateOrUpdate.json"
-          },
-          "Create or Update App On A Connected Environment": {
-            "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
-          },
-          "Create or Update SourceToCloud App": {
-            "$ref": "./examples/ContainerApps_SourceToCloudApp_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -628,11 +622,10 @@
           ]
         },
         "activeRevisionsMode": {
-          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Single: Only one revision can be active at a time. Traffic weights cannot be used. This is the default.</item><item>Multiple: Multiple revisions can be active, including optional traffic weights and labels.</item><item>Labels: Only revisions with labels are active. Traffic weights can be applied to labels.</item></list>",
+          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>",
           "enum": [
             "Multiple",
-            "Single",
-            "Labels"
+            "Single"
           ],
           "type": "string",
           "default": "Single",
@@ -640,10 +633,6 @@
             "name": "ActiveRevisionsMode",
             "modelAsString": true
           }
-        },
-        "targetLabel": {
-          "description": "Required in labels revisions mode. Label to apply to newly created revision.",
-          "type": "string"
         },
         "ingress": {
           "$ref": "#/definitions/Ingress",
@@ -671,13 +660,6 @@
           "format": "int32",
           "description": "Optional. Max inactive revisions a Container App can have.",
           "type": "integer"
-        },
-        "revisionTransitionThreshold": {
-          "format": "int32",
-          "description": "Optional. The percent of the total number of replicas that must be brought up before revision transition occurs. Defaults to 100 when none is given. Value must be greater than 0 and less than or equal to 100.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 100
         },
         "service": {
           "$ref": "#/definitions/Service",
@@ -709,7 +691,7 @@
         },
         "identity": {
           "description": "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code.",
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "managedBy": {
           "type": "string",
@@ -794,11 +776,6 @@
                 ]
               }
             },
-            "deploymentErrors": {
-              "description": "Any errors that occurred during deployment",
-              "type": "string",
-              "readOnly": true
-            },
             "managedEnvironmentId": {
               "description": "Deprecated. Resource ID of the Container App's environment.",
               "type": "string",
@@ -818,25 +795,6 @@
             "workloadProfileName": {
               "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
               "description": "Workload profile name to pin for container app execution."
-            },
-            "patchingConfiguration": {
-              "description": "Container App auto patch configuration.",
-              "type": "object",
-              "properties": {
-                "patchingMode": {
-                  "description": "Patching mode for the container app. Null or default in this field will be interpreted as Automatic by RP. Automatic mode will automatically apply available patches. Manual mode will require the user to manually apply patches. Disabled mode will stop patch detection and auto patching.",
-                  "type": "string",
-                  "enum": [
-                    "Automatic",
-                    "Manual",
-                    "Disabled"
-                  ],
-                  "x-ms-enum": {
-                    "name": "patchingMode",
-                    "modelAsString": true
-                  }
-                }
-              }
             },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",
@@ -963,43 +921,6 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
-        },
-        "appHealth": {
-          "description": "Dapr application health check configuration",
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "description": "Boolean indicating if the health probe is enabled",
-              "type": "boolean"
-            },
-            "path": {
-              "description": "Path for the health probe",
-              "type": "string"
-            },
-            "probeIntervalSeconds": {
-              "description": "Interval for the health probe in seconds",
-              "format": "int32",
-              "type": "integer",
-              "minimum": 1
-            },
-            "probeTimeoutMilliseconds": {
-              "description": "Timeout for the health probe in milliseconds",
-              "format": "int32",
-              "type": "integer",
-              "minimum": 1
-            },
-            "threshold": {
-              "description": "Threshold for the health probe",
-              "format": "int32",
-              "type": "integer",
-              "minimum": 1
-            }
-          }
-        },
-        "maxConcurrency": {
-          "description": "Maximum number of concurrent requests, events handled by the Dapr sidecar",
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -1014,74 +935,7 @@
             "enableMetrics": {
               "description": "Enable jmx core metrics for the java app",
               "type": "boolean"
-            },
-            "javaAgent": {
-              "description": "Diagnostic capabilities achieved by java agent",
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "description": "Enable java agent injection for the java app.",
-                  "type": "boolean"
-                },
-                "logging": {
-                  "description": "Capabilities on the java logging scenario.",
-                  "type": "object",
-                  "properties": {
-                    "loggerSettings": {
-                      "description": "Settings of the logger for the java app.",
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/LoggerSetting"
-                      },
-                      "x-ms-identifiers": [
-                        "logger",
-                        "level"
-                      ]
-                    }
-                  }
-                }
-              }
             }
-          }
-        },
-        "dotnet": {
-          "description": ".NET app configuration",
-          "type": "object",
-          "properties": {
-            "autoConfigureDataProtection": {
-              "description": "Auto configure the ASP.NET Core Data Protection feature",
-              "type": "boolean"
-            }
-          }
-        }
-      }
-    },
-    "LoggerSetting": {
-      "description": "Logger settings for java workloads.",
-      "type": "object",
-      "required": [
-        "logger",
-        "level"
-      ],
-      "properties": {
-        "logger": {
-          "description": "Logger name.",
-          "type": "string"
-        },
-        "level": {
-          "description": "The specified logger's log level.",
-          "enum": [
-            "off",
-            "error",
-            "info",
-            "debug",
-            "trace",
-            "warn"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "level",
-            "modelAsString": true
           }
         }
       }
@@ -1139,7 +993,7 @@
           "description": "custom domain bindings for Container Apps' hostnames.",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/CustomDomain"
+            "$ref": "#/definitions/CustomDomain"
           },
           "x-ms-identifiers": [
             "name"
@@ -1204,18 +1058,6 @@
           "x-ms-identifiers": [
             "targetPort"
           ]
-        },
-        "targetPortHttpScheme": {
-          "description": "Whether an http app listens on http or https",
-          "enum": [
-            "http",
-            "https"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IngressTargetPortHttpScheme",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1307,6 +1149,35 @@
         },
         "label": {
           "description": "Associates a traffic label with a revision",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomain": {
+      "description": "Custom Domain of a Container App",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Hostname.",
+          "type": "string"
+        },
+        "bindingType": {
+          "description": "Custom Domain binding type.",
+          "enum": [
+            "Disabled",
+            "SniEnabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "bindingType",
+            "modelAsString": true
+          }
+        },
+        "certificateId": {
+          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
         }
       }
