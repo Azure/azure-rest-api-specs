@@ -4,11 +4,11 @@
 
 Configuration for generating Face SDK.
 
-The current release is `v1.2`.
+The current release is `v1.3-preview.1`.
 
 ``` yaml
 
-tag: v1.2
+tag: v1.3-preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -68,6 +68,17 @@ These settings apply only when `--tag=v1.2` is specified on the command line.
 ``` yaml $(tag) == 'v1.2'
 input-file:
   - stable/v1.2/Face.json
+suppressions:
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
+```
+
+### Release v1.3-preview.1
+These settings apply only when `--tag=v1.3-preview.1` is specified on the command line.
+``` yaml $(tag) == 'v1.3-preview.1'
+input-file:
+  - preview/v1.3-preview.1/Face.json
 suppressions:
   - code: AvoidAnonymousParameter
     from: Face.json
