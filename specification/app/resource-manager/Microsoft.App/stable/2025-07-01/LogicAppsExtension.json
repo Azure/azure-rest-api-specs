@@ -103,7 +103,6 @@
             "name": "resource",
             "in": "body",
             "description": "Logic app resource properties.",
-            "required": true,
             "schema": {
               "$ref": "#/definitions/LogicApp"
             }
@@ -606,12 +605,8 @@
       }
     },
     "WorkflowFiles": {
-      "description": "Gets or sets the files.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "string",
-        "description": "File content as string."
-      }
+      "description": "Represents an object representing files in the form of { \"<filename>\" : \"<filecontent>\"}.",
+      "$ref": "#/definitions/Object"
     },
     "WorkflowHealth": {
       "description": "Represents the workflow health.",
@@ -661,7 +656,7 @@
       "properties": {
         "appSettings": {
           "$ref": "#/definitions/Object",
-          "description": "Application settings of the workflow."
+          "description": "Application settings of the workflow in the form of { \"<settingName>\" : \"<settingValue>\"}."
         },
         "files": {
           "$ref": "#/definitions/WorkflowFiles",
@@ -679,6 +674,7 @@
     },
     "Object": {
       "type": "object",
+      "description": "JSON object.",
       "properties": {}
     },
     "ErrorEntity": {
