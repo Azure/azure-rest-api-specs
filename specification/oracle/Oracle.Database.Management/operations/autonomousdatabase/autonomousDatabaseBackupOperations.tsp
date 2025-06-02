@@ -13,7 +13,6 @@ interface AutonomousDatabaseBackups
       AutonomousDatabaseBackup,
       AutonomousDatabaseBackupProperties
     > {
-
   update is ArmResourcePatchAsync<
     AutonomousDatabaseBackup,
     AutonomousDatabaseBackupProperties
