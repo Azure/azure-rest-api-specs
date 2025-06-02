@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, administrators, log files, configurations, migrations, advanced threat protection settings with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, administrators, log files, configurations, migrations, advanced threat protection settings with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -39,7 +39,7 @@
         "tags": [
           "AdvancedThreatProtectionSettings"
         ],
-        "description": "Get a list of server's Threat Protection state.",
+        "description": "Lists state of advanced threat protection settings for a flexible server.",
         "operationId": "ServerThreatProtectionSettings_ListByServer",
         "parameters": [
           {
@@ -70,7 +70,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a server's Advanced Threat Protection settings": {
+          "List state of advanced threat protection settings for a flexible server.": {
             "$ref": "./examples/ServerThreatProtectionSettingsListByServer.json"
           }
         },
@@ -84,7 +84,7 @@
         "tags": [
           "AdvancedThreatProtectionSettings"
         ],
-        "description": "Get a server's Advanced Threat Protection settings.",
+        "description": "Gets state of advanced threat protection settings for a flexible server.",
         "operationId": "ServerThreatProtectionSettings_Get",
         "parameters": [
           {
@@ -118,7 +118,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a server's Threat Protection settings": {
+          "Get state of advanced threat protection settings for a flexible server.": {
             "$ref": "./examples/ServerThreatProtectionSettingsGet.json"
           }
         }
@@ -197,14 +197,14 @@
   },
   "definitions": {
     "ServerThreatProtectionProperties": {
-      "description": "Properties of server Threat Protection state.",
+      "description": "Properties of advanced threat protection state for a flexible server.",
       "required": [
         "state"
       ],
       "type": "object",
       "properties": {
         "state": {
-          "description": "Specifies the state of the Threat Protection, whether it is enabled or disabled or a state has not been applied yet on the specific server.",
+          "description": "Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the flexible server.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -217,14 +217,14 @@
         },
         "creationTime": {
           "format": "date-time",
-          "description": "Specifies the UTC creation time of the policy.",
+          "description": "Specifies the creation time (UTC) of the policy.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "ServerThreatProtectionSettingsModel": {
-      "description": "Server's Advanced Threat Protection settings.",
+      "description": "Advanced threat protection settings of the flexible server.",
       "type": "object",
       "allOf": [
         {
@@ -234,13 +234,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerThreatProtectionProperties",
-          "description": "Advanced Threat Protection properties.",
+          "description": "Advanced threat protection properties.",
           "x-ms-client-flatten": true
         }
       }
     },
     "ServerThreatProtectionListResult": {
-      "description": "A list of the server's Advanced Threat Protection settings.",
+      "description": "List of advanced threat protection settings for a flexible server.",
       "type": "object",
       "properties": {
         "value": {
@@ -252,7 +252,7 @@
           "readOnly": true
         },
         "nextLink": {
-          "description": "Link to retrieve next page of results.",
+          "description": "Link used to get the next page of results.",
           "type": "string",
           "readOnly": true
         }
@@ -263,7 +263,7 @@
     "ThreatProtectionNameParameter": {
       "name": "threatProtectionName",
       "in": "path",
-      "description": "The name of the Threat Protection state.",
+      "description": "Name of the advanced threat protection settings.",
       "required": true,
       "type": "string",
       "enum": [

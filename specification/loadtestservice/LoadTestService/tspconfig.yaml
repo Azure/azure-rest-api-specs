@@ -17,6 +17,9 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Developer.LoadTesting
+    model-namespace: false
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
@@ -35,7 +38,6 @@ options:
     title: Azure Load Testing
     description: Azure Load Testing Client
     generate-metadata: false
-    generate-test: false
     package-details:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
@@ -51,7 +53,7 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "azure-developer-loadtesting"
     namespace: com.azure.developer.loadtesting
-    enable-sync-stack: false
+    enable-sync-stack: true
     partial-update: true
     generate-tests: false
     generate-samples: false
