@@ -116,24 +116,34 @@ model DocumentClassifierAnalyzeRequestParams {
 union AnalyzeFromStreamContentType {
   /** Binary data stream */
   "application/octet-stream",
+
   /** PDF document */
   "application/pdf",
+
   /** JPEG image */
   "image/jpeg",
+
   /** PNG image */
   "image/png",
+
   /** TIFF image */
   "image/tiff",
+
   /** BMP image */
   "image/bmp",
+
   /** HEIF image */
   "image/heif",
+
   /** HTML document */
   "text/html",
+
   /** Word document */
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+
   /** Excel document */
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+
   /** PowerPoint document */
   "application/vnd.openxmlformats-officedocument.presentationml.presentation",
 }

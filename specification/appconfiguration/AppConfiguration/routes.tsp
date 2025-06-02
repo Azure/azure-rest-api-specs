@@ -137,7 +137,6 @@ op getKeyValue is Foundations.ResourceOperation<
   Error
 >;
 
-
 /**
  * The content type used when creating or updating a key-value.
  */
