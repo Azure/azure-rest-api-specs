@@ -61,10 +61,7 @@ export class Swagger {
     const allRefs = await this.#getRefs();
 
     // filter out any paths that are examples
-    const filtered = new Map(
-      Array.from(allRefs.entries())
-        .filter(([path, _]) => !example(path))
-    );
+    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
 
     return filtered;
   }
@@ -118,10 +115,7 @@ export class Swagger {
     const allRefs = await this.#getRefs();
 
     // filter out any paths that are examples
-    const filtered = new Map(
-      Array.from(allRefs.entries())
-        .filter(([path, _]) => example(path))
-    );
+    const filtered = new Map([...allRefs].filter(([path]) => example(path)));
 
     return filtered;
   }
