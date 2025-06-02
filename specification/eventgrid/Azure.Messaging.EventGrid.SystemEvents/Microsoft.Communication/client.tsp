@@ -573,9 +573,7 @@ using Azure.ClientGenerator.Core;
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
-  Usage.output
-);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
   Access.public
 );
