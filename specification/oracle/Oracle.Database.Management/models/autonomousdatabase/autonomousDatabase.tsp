@@ -847,10 +847,16 @@ model AutonomousDatabaseBaseProperties {
   @visibility(Lifecycle.Read)
   lifecycleState?: AutonomousDatabaseLifecycleState;
 
+  @removed(Versions.v20250601_preview)
+  @doc("The list of scheduled operations.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  scheduledOperations?: ScheduledOperationsType;
+
+  @added(Versions.v20250601_preview)
   @doc("The list of scheduled operations.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  scheduledOperations?: ScheduledOperationsType[];
+  scheduledOperationsList?: ScheduledOperationsType[];
 
   @doc("The private endpoint Ip address for the resource.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
