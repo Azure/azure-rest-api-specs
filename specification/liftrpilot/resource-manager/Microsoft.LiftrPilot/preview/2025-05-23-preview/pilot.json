@@ -95,6 +95,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -119,8 +127,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ActivateSaasParameterRequest"
-            },
-            "x-ms-parameter-location": "method"
+            }
           }
         ],
         "responses": {
@@ -135,6 +142,14 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SaasOperations_ActivateSaaS_MaximumSet_Gen": {
+            "$ref": "./examples/SaasOperations_ActivateSaaS_MaximumSet_Gen.json"
+          },
+          "SaasOperations_ActivateSaaS_MinimumSet_Gen": {
+            "$ref": "./examples/SaasOperations_ActivateSaaS_MinimumSet_Gen.json"
           }
         }
       }
@@ -170,6 +185,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organizations_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -204,6 +224,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestTrackedResources_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -238,6 +263,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -275,6 +305,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Organizations_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -318,6 +353,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -391,7 +431,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Organizations_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "Organizations_Update",
@@ -441,6 +486,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Organizations_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -499,7 +549,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Organizations_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Organizations_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/organizations/{organizationName}/pilotProxyResources": {
@@ -546,6 +601,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PilotProxyResources_ListByOrganization_MaximumSet_Gen": {
+            "$ref": "./examples/PilotProxyResources_ListByOrganization_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -599,6 +659,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PilotProxyResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PilotProxyResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -682,7 +747,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PilotProxyResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PilotProxyResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "PilotProxyResources_Delete",
@@ -749,7 +819,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PilotProxyResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PilotProxyResources_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/organizations/{organizationName}/pilotPureProxyResources": {
@@ -796,6 +871,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PilotPureProxyResources_ListByOrganization_MaximumSet_Gen": {
+            "$ref": "./examples/PilotPureProxyResources_ListByOrganization_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -849,6 +929,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "PilotPureProxyResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PilotPureProxyResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -932,7 +1017,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PilotPureProxyResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PilotPureProxyResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "PilotPureProxyResources_Delete",
@@ -999,7 +1089,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PilotPureProxyResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PilotPureProxyResources_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources": {
@@ -1036,6 +1131,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestTrackedResources_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1079,6 +1179,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestTrackedResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1152,7 +1257,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestTrackedResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "TestTrackedResources_Update",
@@ -1221,7 +1331,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestTrackedResources_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_Update_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "TestTrackedResources_Delete",
@@ -1278,7 +1393,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestTrackedResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources/{testTrackedResourceName}/restore": {
@@ -1330,6 +1450,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestTrackedResources_Restore_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_Restore_MaximumSet_Gen.json"
           }
         }
       }
@@ -1396,7 +1521,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestTrackedResources_StopBackup_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedResources_StopBackup_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources/{testTrackedResourceName}/testProxyResources": {
@@ -1443,6 +1573,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestProxyResources_ListByTestTracked_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_ListByTestTracked_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1496,6 +1631,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestProxyResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1579,7 +1719,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestProxyResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "TestProxyResources_Delete",
@@ -1646,7 +1791,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestProxyResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources/{testTrackedResourceName}/testProxyResources/{testProxyResourceName}/export": {
@@ -1721,7 +1871,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestProxyResources_Export_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_Export_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources/{testTrackedResourceName}/testProxyResources/{testProxyResourceName}/restart": {
@@ -1784,6 +1939,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TestProxyResources_Restart_MaximumSet_Gen": {
+            "$ref": "./examples/TestProxyResources_Restart_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1841,6 +2001,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestChildPureProxyResources_ListByTestTracked_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_ListByTestTracked_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1904,6 +2069,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestChildPureProxyResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1997,7 +2167,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestChildPureProxyResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "TestChildPureProxyResources_Delete",
@@ -2074,7 +2249,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestChildPureProxyResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedResources/{testTrackedResourceName}/testProxyResources/{testProxyResourceName}/testChildPureProxyResources/{testChildPureProxyResourceName}/register": {
@@ -2146,6 +2326,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestChildPureProxyResources_Register_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_Register_MaximumSet_Gen.json"
           }
         }
       }
@@ -2232,7 +2417,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TestChildPureProxyResources_Unregister_MaximumSet_Gen": {
+            "$ref": "./examples/TestChildPureProxyResources_Unregister_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LiftrPilot/testTrackedSyncResources": {
@@ -2269,6 +2459,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -2312,6 +2507,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -2370,6 +2570,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
         }
       },
       "patch": {
@@ -2421,6 +2626,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_Update_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2462,6 +2672,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TestTrackedSyncResources_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TestTrackedSyncResources_Delete_MaximumSet_Gen.json"
           }
         }
       }
