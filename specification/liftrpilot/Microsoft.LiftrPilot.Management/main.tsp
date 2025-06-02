@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@typespec/openapi3";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
@@ -9,7 +8,6 @@ import "@azure-tools/typespec-liftr-base";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using LiftrBase;
 
@@ -545,7 +543,6 @@ interface SaasOperations {
 
     @bodyRoot
     @doc("The details for ActivateSaaSParameter request.")
-    @extension("x-ms-parameter-location", "method")
     request: ActivateSaasParameterRequest,
   ): ArmResponse<ActivateSaasResponse> | ErrorResponse;
 }
