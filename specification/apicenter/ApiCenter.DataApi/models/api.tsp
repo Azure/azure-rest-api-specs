@@ -51,6 +51,7 @@ model Api {
   contacts?: Contact[];
 
   @doc("The custom metadata defined for API entities.")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing swagger."
   customProperties?: {};
 
   @doc("Last updated date and time.")
