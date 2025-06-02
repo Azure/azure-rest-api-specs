@@ -122,8 +122,7 @@ export class Readme {
       /** @type {Map<string, Tag>} */
       const tags = new Map();
       for (const block of yamlBlocks) {
-        const tagName =
-          block.lang?.match(TagMatchRegex)?.[1] || "default";
+        const tagName = block.lang?.match(TagMatchRegex)?.[1] || "default";
 
         if (tagName === "default" || tagName === "all-api-versions") {
           // Skip yaml blocks where this is no tag or tag is all-api-versions
