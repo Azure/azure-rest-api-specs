@@ -27,7 +27,7 @@ model ApiDeployment {
   server: ApiDeploymentServer;
 
   @doc("The custom metadata defined for API deployment entities.")
-  customProperties?: {};
+  customProperties?: Record<string>;
 
   @doc("Indicates if this is currently recommended deployment.")
   recommended?: boolean;

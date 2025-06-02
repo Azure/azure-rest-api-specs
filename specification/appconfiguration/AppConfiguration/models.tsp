@@ -339,6 +339,7 @@ alias SyncTokenHeader = {
 alias ContentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Avoiding creating a bunch of types for each content type."
   contentType?: T | "application/problem+json";
 };
 

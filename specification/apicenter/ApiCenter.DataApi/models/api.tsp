@@ -51,7 +51,7 @@ model Api {
   contacts?: Contact[];
 
   @doc("The custom metadata defined for API entities.")
-  customProperties?: {};
+  customProperties?: Record<string>;
 
   @doc("Last updated date and time.")
   @visibility(Lifecycle.Read)

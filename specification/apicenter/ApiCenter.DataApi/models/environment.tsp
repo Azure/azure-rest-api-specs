@@ -37,7 +37,7 @@ model Environment {
   onboarding?: EnvironmentOnboardingModel;
 
   @doc("The custom metadata defined for environment entities.")
-  customProperties?: {};
+  customProperties?: Record<string>;
 }
 
 @doc("Environment Server")
