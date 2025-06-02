@@ -165,6 +165,7 @@ async function processResult({ checkRuns, core }) {
       artifactFileName,
       core,
       fallbackToFailedArtifact: true,
+      token: process.env.ADO_TOKEN,
     });
     // Parse the JSON data
     if (!result.artifactData) {
