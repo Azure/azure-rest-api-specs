@@ -180,6 +180,11 @@ export async function processFilesToSpecificationList(
       }
     }
 
+    console.log(`Processing file: ${file}`);
+    console.log(`Is swagger: ${swagger(file)}`);
+    console.log(`What I'm checking for ${absoluteFilePath}`);
+    console.log(`Exists? ${fs.existsSync(absoluteFilePath)}`);
+
     // finally handle our base case where the file we're examining is itself a swagger file
     if (swagger(file) && fs.existsSync(absoluteFilePath)) {
       resultFiles.push(file);
