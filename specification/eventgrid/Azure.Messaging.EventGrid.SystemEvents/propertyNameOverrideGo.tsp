@@ -435,14 +435,9 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 
-@@clientName(recordingChannelType, "ACSRecordingChannelKind", "go");
+@@clientName(recordingChannelType, "ACSRecordingChannelType", "go");
 @@clientName(recordingContentType, "ACSRecordingContentType", "go");
 @@clientName(recordingFormatType, "ACSRecordingFormatType", "go");
-
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
-  "go"
-);
 
 @@clientName(AcsRecordingStorageInfoProperties,
   "ACSRecordingStorageInfoProperties",
