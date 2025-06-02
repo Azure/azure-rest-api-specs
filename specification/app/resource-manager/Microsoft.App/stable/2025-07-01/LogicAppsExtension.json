@@ -606,11 +606,12 @@
       }
     },
     "WorkflowFiles": {
-      "description": "Gets or sets the files.",
+      "description": "Property to add/update files. This is sent as an object with file names as keys and file contents as values (could be json, string/xml etc)",
       "type": "object",
-      "additionalProperties": {
-        "type": "string",
-        "description": "File content as string."
+      "example" : {
+        "Stateful1/abc.json": {},
+        "Maps/def.xml": "<root>...</root>",
+        "Artifacts/ghi.txt": "plain text"
       }
     },
     "WorkflowHealth": {
