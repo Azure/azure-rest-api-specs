@@ -1317,6 +1317,9 @@ union CommunicationIdentifierModelKind {
   /** Microsoft Teams User */
   "microsoftTeamsUser",
 
+    /** Microsoft Teams App */
+  "microsoftTeamsApp",
+
   string,
 }
 
