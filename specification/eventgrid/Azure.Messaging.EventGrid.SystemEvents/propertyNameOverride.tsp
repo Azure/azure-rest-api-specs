@@ -93,6 +93,9 @@ using Azure.ClientGenerator.Core;
 @@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
   "summaryReportBlobUri"
 );
+@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
+  "summaryReportBlobUri"
+);
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind"
 );
