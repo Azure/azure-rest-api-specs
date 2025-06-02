@@ -23,6 +23,9 @@ model EmployeeProperties {
   /** City of employee */
   city?: string;
 
+  /** Country of employee */
+  country?: string;
+
   /** Profile of employee */
   @encode("base64url")
   profile?: bytes;
