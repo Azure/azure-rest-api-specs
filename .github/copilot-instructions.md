@@ -179,7 +179,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
       - Comments and action items for the user.
 
 4. **Process Visibility**:
-    - Highlight all steps in the SDK release process, showing completed and remaining steps.
+    - Highlight all steps in the SDK generation process, showing completed and remaining steps.
     - Do not skip any main steps. Ensure all steps are completed before moving to the next.
 
 5. **Git Operations**:
@@ -209,5 +209,6 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
-## Steps to generate and release SDK from TypeSpec API specification
-Follow /typespec-to-sdk prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+## Steps to generate SDK from TypeSpec API specification
+Follow `/typespec-to-sdk` prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
