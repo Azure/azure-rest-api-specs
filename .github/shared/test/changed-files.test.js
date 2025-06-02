@@ -19,14 +19,14 @@ import {
   specification,
   swagger,
 } from "../src/changed-files.js";
-import { consoleLogger } from "../src/logger.js";
+import { debugLogger } from "../src/logger.js";
 
 describe("changedFiles", () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
 
-  it.each([{}, { logger: consoleLogger }])(
+  it.each([{}, { logger: debugLogger }])(
     `getChangedFiles(%o)`,
     async (options) => {
       const files = [
