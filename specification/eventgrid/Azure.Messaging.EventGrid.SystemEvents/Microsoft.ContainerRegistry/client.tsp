@@ -75,3 +75,23 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryImagePushedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryImageDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartPushedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryChartDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ContainerRegistryArtifactEventData,
+  "csharp"
+);

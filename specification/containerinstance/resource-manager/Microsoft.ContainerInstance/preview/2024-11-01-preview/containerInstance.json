@@ -949,7 +949,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NGroup"
+              "$ref": "#/definitions/NGroupPatch"
             },
             "description": "The NGroup object."
           },
@@ -3669,21 +3669,6 @@
         "identity": {
           "$ref": "#/definitions/NGroupIdentity",
           "description": "The identity of the NGroup, if configured."
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The NGroups zones. NOTE: Availability zones can only be set when you create the scale set"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -3691,6 +3676,38 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "description": "Describes the NGroups resource."
+    },
+    "NGroupPatch": {
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NGroupProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/NGroupIdentity",
+          "description": "The identity of the NGroup, if configured."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The zones for the NGroup."
+        }
+      },
       "description": "Describes the NGroups resource."
     },
     "NGroupIdentity": {
