@@ -438,6 +438,26 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(recordingChannelType, "ACSRecordingChannelKind", "go");
 @@clientName(recordingContentType, "ACSRecordingContentType", "go");
 @@clientName(recordingFormatType, "ACSRecordingFormatType", "go");
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultCertificateExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultCertificateExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretExpiredEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretExpiredEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP, "EXP", "go");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "NBF", "go");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "EXP", "go");
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
   "recordingChannelKind",
