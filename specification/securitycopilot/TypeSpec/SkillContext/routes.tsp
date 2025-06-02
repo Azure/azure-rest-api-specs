@@ -67,6 +67,14 @@ op logProgress(
 ): NoContentResponse;
 
 @post
+@route("/skillContext/logProgressTitle")
+@doc("Log a progress title for a skill invocation")
+op logProgressTitle(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query title: string,
+): NoContentResponse;
+
+@post
 @route("/skillContext/setOutputAsync")
 @doc("Sets the skill output")
 op setSkillOutput(
@@ -171,7 +179,7 @@ op createMemory(
 @doc("Update memory")
 op updateMemory(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body updateMemoryRequest : UpdateMemoryRequest,
+@body updateMemoryRequestWithId : updateMemoryRequestWithId,
 ): MemoryDtoResponse;
 
 @get
@@ -183,6 +191,13 @@ op getMemory(
 @query subScopeId? : string,
 @query scope? : MemoryScope,
 ): MemoryDtoResponse;
+
+@get
+@route("/skillContext/queryMemoriesAsync")
+op queryMemories(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body request : string,
+): MemoryDtoResponsePage;
 
 @post
 @route("/medeinaOpenAI/createChatCompletion")

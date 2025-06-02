@@ -413,6 +413,14 @@ namespace SkillContext
 		@doc("Log message")
 		message: string;
 	}
+
+	@doc("")
+	model EvaluationStepLogStructuredContent {
+		@doc("Title of the log step")
+		title: string;
+		@doc("")
+		summaryContent: string;
+	}
 	
 	@doc("Auth Details")
 	model AuthDetails {
@@ -538,6 +546,12 @@ namespace SkillContext
 
 		@doc("ActivationMode")
 		activationMode?: MemoryActivationRequirementsMode;
+	}
+
+	@doc("")
+	model UpdateMemoryRequestWithId extends UpdateMemoryRequest {
+		@doc("MemoryId")
+		memoryId: string;
 	}
 
 	@doc("UpdateMemoryRequest")
@@ -740,6 +754,15 @@ namespace SkillContext
 		summarizationOptions: MemorySummarizationOptionsDto;
 		embeddingOptions: MemoryEmbeddingOptionsDto;
 		type: MemoryType;
+	}
+
+	@doc("MemoryDtoResponsePage")
+	model MemoryDtoResponsePage {
+		@doc("List of MemoryDtoResponse")
+		items: Array<MemoryDtoResponse>;
+
+		@doc("Continuation token for pagination")
+		continuationToken?: string;
 	}
 
 	model MemoryMetadataDto {
