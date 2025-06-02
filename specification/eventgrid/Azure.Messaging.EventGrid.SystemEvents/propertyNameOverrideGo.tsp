@@ -609,10 +609,7 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSCallParticipantAddedEventData",
   "go"
 );
-@@clientName(AcsCallParticipantEventProperties,
-  "ACSCallParticipantEventProperties",
-  "go"
-);
+@@clientName(AcsCallParticipantEventData, "ACSCallParticipantEventData", "go");
 @@clientName(AcsCallParticipantProperties,
   "ACSCallParticipantProperties",
   "go"
@@ -632,6 +629,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSChatTypingIndicatorReceivedInThreadEventData",
   "go"
 );
-@@clientName(AcsCallParticipantRoleKind, "ACSCallParticipantRoleKind", "go");
+@@clientName(AcsCallParticipantKind, "ACSCallParticipantRoleKind", "go");
 
 // [END] ACS renames (and acronym casing)
