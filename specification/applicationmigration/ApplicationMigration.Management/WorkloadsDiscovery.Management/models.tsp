@@ -80,11 +80,14 @@ model ProxySiteRefreshBody {
  * Represents the presence of Oids in Tables under a DB.
  */
 union HasTablesWithOids {
+  @doc("Oids presence in the database is unknown.")
+  Unknown: "Unknown",
+
   @doc("The Database has tables with Oids.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have tables with Oids.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -93,11 +96,14 @@ union HasTablesWithOids {
  * Represents the presence of custom data types in a DB.
  */
 union HasCustomDataTypes {
+  @doc("Custom data types presence in the database is unknown.")
+  Unknown: "Unknown",
+
   @doc("The Database has custom data types.")
-  True: "true",
+  True: "True",
 
   @doc("The Database does not have custom data types.")
-  False: "false",
+  False: "False",
 
   string,
 }
@@ -106,11 +112,14 @@ union HasCustomDataTypes {
  * Represents an Enum with boolean values.
  */
 union BoolValue {
+  @doc("Represents an unknown value.")
+  Unknown: "Unknown",
+
   @doc("Represents a true boolean value.")
-  True: "true",
+  True: "True",
 
   @doc("Represents a false boolean value.")
-  False: "false",
+  False: "False",
 
   string,
 }

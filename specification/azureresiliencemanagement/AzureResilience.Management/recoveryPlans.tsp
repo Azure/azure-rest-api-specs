@@ -4,10 +4,10 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./common/common.tsp";
-import "./common/Job.tsp";
-import "./common/JobResource.tsp";
-import "./common/ChildJob.tsp";
+import "./models/common/common.tsp";
+import "./models/common/Job.tsp";
+import "./models/common/JobResource.tsp";
+import "./models/common/ChildJob.tsp";
 import "./models/recoveryPlan/recoveryPlan.tsp";
 import "./models/recoveryPlan/recoveryGroup.tsp";
 import "./models/recoveryPlan/recoveryResource.tsp";

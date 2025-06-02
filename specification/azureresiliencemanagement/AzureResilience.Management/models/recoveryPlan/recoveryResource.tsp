@@ -15,20 +15,6 @@ using OpenAPI;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@doc("A state specific to the resource that helps identify its role in replication.")
-union ResourceReplicationRole {
-  @doc("The role of the resource is unknown.")
-  Unknown: "Unknown",
-
-  @doc("A state indicating that the resource is primary and actively replicating data to other replicas.")
-  Primary: "Primary",
-
-  @doc("A state indicating that the resource is a replica, receiving data from the primary.")
-  Replica: "Replica",
-
-  string,
-}
-
 // Define the main model
 @doc("Definition of recovery orchestration resource property associated with recovery orchestration plan.")
 model RecoveryResourceProperties {
@@ -44,18 +30,6 @@ model RecoveryResourceProperties {
   @visibility(Lifecycle.Read)
   resourceLocation?: string;
 
-  @doc("List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
-  @visibility(Lifecycle.Read)
-  recoveryLocations?: string[];
-
-  @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
-  @visibility(Lifecycle.Read)
-  protectionStatus: ResourceProtectionStatus;
-
-  @doc("Specifies the role of the resource in the replication process.")
-  @visibility(Lifecycle.Read)
-  replicationRole?: ResourceReplicationRole;
-
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   inclusionState?: ResourceInclusionState;
 
@@ -67,8 +41,20 @@ model RecoveryResourceProperties {
   @visibility(Lifecycle.Read)
   attentionReasons?: string[];
 
-  @doc("Resource protection solution settings associated with the recovery orchestration resource.")
-  protectionSolutionSetting?: ResourceBaseProtectionSolutionSetting;
+  @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
+  @visibility(Lifecycle.Read)
+  protectionStatus: ResourceProtectionStatus;
+
+  @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  resourceProtectionSolutions: ResourceProtectionSolutionSettings[];
+
+  @doc("A setting that indicates the protection solution selected.")
+  selectedProtectionSolutionType: ResourceProtectionSolutionType;
+
+  @doc("Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.")
+  selectedProtectionSolutionSetting?: ResourceBaseProtectionSolutionSetting;
 
   @doc("The recovery orchestration group id associated with the recovery resources.")
   @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")

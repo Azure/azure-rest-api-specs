@@ -44,4 +44,15 @@ interface ProductResources {
       billingAccountName: string;
     }
   >;
+  listByParent is ArmResourceListByParent<
+    ProductResource,
+    {
+      ...ApiVersionParameter;
+
+      /** The name of the billing account */
+      @pattern("^[a-zA-Z0-9_:-]+$")
+      @path("billingAccountName")
+      billingAccountName: string;
+    }
+  >;
 }
