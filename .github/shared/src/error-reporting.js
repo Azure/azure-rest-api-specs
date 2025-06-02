@@ -10,13 +10,13 @@ import * as fs from "fs";
  * @returns {void}
  */
 export function setSummary(content) {
-    if (!process.env.GITHUB_STEP_SUMMARY) {
-        console.log("GITHUB_STEP_SUMMARY is not set. Skipping summary update.");
-        return;
-    }
-    const summaryFile = process.env.GITHUB_STEP_SUMMARY;
+  if (!process.env.GITHUB_STEP_SUMMARY) {
+    console.log("GITHUB_STEP_SUMMARY is not set. Skipping summary update.");
+    return;
+  }
+  const summaryFile = process.env.GITHUB_STEP_SUMMARY;
 
-    fs.writeFileSync(summaryFile, content);
+  fs.writeFileSync(summaryFile, content);
 }
 
 /**
@@ -28,6 +28,6 @@ export function setSummary(content) {
  * @returns {void}
  */
 export function annotateFileError(repoPath, message, line, col) {
-    const errorLine = `::error file=${repoPath},line=${line},col=${col}::${message}`;
-    console.log(errorLine);
+  const errorLine = `::error file=${repoPath},line=${line},col=${col}::${message}`;
+  console.log(errorLine);
 }
