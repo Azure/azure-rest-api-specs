@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(LiftrBase.Storage.FileSystemResourceProperties,
-  "QumuloFileSystemResourceData",
+  "QumuloFileSystemResourceProperties",
   "csharp"
 );
 @@clientName(LiftrBase.UserDetails, "QumuloUserDetails", "csharp");
