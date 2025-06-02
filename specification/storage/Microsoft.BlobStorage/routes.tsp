@@ -579,8 +579,6 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        ...DateResponseHeader;
-
         /** The list of blobs in the container */
         @body
         enumerationResults: ListBlobsFlatSegmentResponse;
@@ -626,7 +624,6 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        ...DateResponseHeader;
         ...SkuNameResponseHeader;
         ...AccountKindResponseHeader;
         ...IsHierarchicalNamespaceEnabled;
@@ -1348,8 +1345,6 @@ namespace Storage.Blob {
           ...IfTagsParameter;
         },
         {
-          ...DateResponseHeader;
-
           /** The blob tags. */
           @body
           tags: BlobTags;
@@ -1375,10 +1370,7 @@ namespace Storage.Blob {
           @body
           tags: BlobTags;
         },
-        {
-          @statusCode statusCode: 204;
-          ...DateResponseHeader;
-        }
+        {}
       >;
 
       #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
