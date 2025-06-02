@@ -1,0 +1,151 @@
+{
+  "operationId": "UpdateRuns_ListByFleet",
+  "title": "Lists the UpdateRun resources by fleet.",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/updateRuns/run1",
+            "name": "run1",
+            "type": "Microsoft.ContainerService/fleets/updateRuns",
+            "systemData": {
+              "createdBy": "@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2023-03-01T01:10:08.395Z",
+              "lastModifiedBy": "@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-01T01:10:08.395Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "strategy": {
+                "stages": [
+                  {
+                    "name": "stage1",
+                    "groups": [
+                      {
+                        "name": "group-a",
+                        "beforeGates": [
+                          {
+                            "displayName": "gate before group-a",
+                            "type": "Approval"
+                          }
+                        ],
+                        "afterGates": [
+                          {
+                            "displayName": "gate after group-a",
+                            "type": "Approval"
+                          }
+                        ]
+                      }
+                    ],
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before stage1",
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after stage1",
+                        "type": "Approval"
+                      }
+                    ],
+                    "afterStageWaitInSeconds": 3600
+                  }
+                ]
+              },
+              "managedClusterUpdate": {
+                "upgrade": {
+                  "type": "Full",
+                  "kubernetesVersion": "1.26.1"
+                },
+                "nodeImageSelection": {
+                  "type": "Latest"
+                }
+              },
+              "status": {
+                "status": {
+                  "state": "Pending"
+                },
+                "stages": [
+                  {
+                    "status": {
+                      "state": "Pending"
+                    },
+                    "name": "stage1",
+                    "groups": [
+                      {
+                        "status": {
+                          "state": "NotStarted"
+                        },
+                        "name": "group-a",
+                        "members": [
+                          {
+                            "status": {
+                              "state": "NotStarted"
+                            },
+                            "name": "member-one",
+                            "clusterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myClusters/providers/Microsoft.ContainerService/managedClusters/myCluster"
+                          }
+                        ],
+                        "beforeGates": [
+                          {
+                            "displayName": "gate before group-a",
+                            "status": {
+                              "state": "NotStarted"
+                            }
+                          }
+                        ],
+                        "afterGates": [
+                          {
+                            "displayName": "gate after group-a",
+                            "status": {
+                              "state": "NotStarted"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "beforeGates": [
+                      {
+                        "displayName": "gate before stage1",
+                        "gateId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/gates/12345678-910a-bcde-f000-000000000000",
+                        "status": {
+                          "state": "Pending"
+                        }
+                      }
+                    ],
+                    "afterGates": [
+                      {
+                        "displayName": "gate after stage1",
+                        "status": {
+                          "state": "NotStarted"
+                        }
+                      }
+                    ],
+                    "afterStageWaitStatus": {
+                      "status": {
+                        "state": "NotStarted"
+                      },
+                      "waitDurationInSeconds": 3600
+                    }
+                  }
+                ]
+              }
+            },
+            "eTag": "\"EtagValue\""
+          }
+        ],
+        "nextLink": "http://nextlink.contoso.com"
+      }
+    }
+  }
+}
