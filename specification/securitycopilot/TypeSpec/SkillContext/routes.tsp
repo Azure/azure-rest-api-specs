@@ -179,7 +179,7 @@ op createMemory(
 @doc("Update memory")
 op updateMemory(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body updateMemoryRequestWithId : updateMemoryRequestWithId,
+@body updateMemoryRequestWithId : UpdateMemoryRequestWithId,
 ): MemoryDtoResponse;
 
 @get
