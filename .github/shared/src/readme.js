@@ -15,7 +15,7 @@ import { Tag } from "./tag.js";
 /**
  * Regex to match tag names in readme.md yaml code blocks
  */
-export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?["']([^']*)["']/;
+export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?["']([^'"]*?)["']/;
 
 export class Readme {
   /**
