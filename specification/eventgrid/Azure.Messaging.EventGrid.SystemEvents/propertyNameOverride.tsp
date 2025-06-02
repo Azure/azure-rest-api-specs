@@ -176,7 +176,7 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "autorest"
 );
-@@clientName(AcsCallEndedByProperties.type, "kind", "autorest");
+@@clientName(AcsCallEndedByProperties.type, "kind");
 
 // Renames applying to all languages
 @@clientName(recordingChannelType, "AcsRecordingChannelType");
