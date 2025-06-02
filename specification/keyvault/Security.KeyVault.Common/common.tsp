@@ -14,29 +14,34 @@ alias KeyVaultOperation<
 /**
  * The key vault server error.
  */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
-union Error {
+model Error {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The key vault server error.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "innererror")
+  innerError?: NullableError;
+}
+
+/**
+ * A named union to make Error nullable while preserving the original name.
+ */
+union NullableError {
   null,
-  {
-    /**
-     * The error code.
-     */
-    @visibility(Lifecycle.Read)
-    code?: string,
-
-    /**
-     * The error message.
-     */
-    @visibility(Lifecycle.Read)
-    message?: string,
-
-    /**
-     * The key vault server error.
-     */
-    @visibility(Lifecycle.Read)
-    @encodedName("application/json", "innererror")
-    innerError?: Error,
-  },
+  Error,
 }
 
 /**
@@ -49,5 +54,5 @@ model KeyVaultError {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   @visibility(Lifecycle.Read)
-  error?: Error;
+  error?: NullableError;
 }

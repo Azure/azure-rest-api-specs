@@ -80,7 +80,7 @@ op updateSecret is KeyVaultOperation<
      */
     @path("secret-version")
     @clientName("version", "go")
-    secretVersion: string;
+    secretVersion?: string;
 
     /**
      * The parameters for update secret operation.
@@ -114,7 +114,7 @@ op getSecret is KeyVaultOperation<
      */
     @path("secret-version")
     @clientName("version", "go")
-    secretVersion: string;
+    secretVersion?: string;
   },
   SecretBundle
 >;
