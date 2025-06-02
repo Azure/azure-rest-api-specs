@@ -496,7 +496,7 @@
           "200": {
             "description": "Logic App call response.",
             "schema": {
-              "$ref": "#/definitions/LogicAppInvokeResponse"
+              "$ref": "#/definitions/Object"
             }
           },
           "default": {
@@ -607,11 +607,8 @@
     },
     "WorkflowFiles": {
       "description": "Property to add/update files. This is sent as an object with file names as keys and file contents as values (could be json, string/xml etc)",
-      "type": "object",
-      "example": {
-        "Stateful1/abc.json": {},
-        "Maps/def.xml": "<root>...</root>",
-        "Artifacts/ghi.txt": "plain text"
+      "schema" : {
+        "$ref": "#/definitions/Object"
       }
     },
     "WorkflowHealth": {
@@ -661,7 +658,7 @@
       "type": "object",
       "properties": {
         "appSettings": {
-          "type": "object",
+          "$ref": "#/definitions/Object",
           "description": "Application settings of the workflow in the form of { \"<settingName>\" : \"<settingValue>\"}."
         },
         "files": {
@@ -678,9 +675,10 @@
       },
       "description": "The workflow filter."
     },
-    "LogicAppInvokeResponse": {
+    "Object": {
       "type": "object",
-      "description": "Response for Logic App runtime invoke operation."
+      "description": "JSON object.",
+      "properties": {}
     },
     "ErrorEntity": {
       "description": "Body of the error response returned from the API.",
