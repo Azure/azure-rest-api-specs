@@ -3,7 +3,7 @@
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
-import { Readme } from "../src/readme.js";
+import { Readme, TagMatchRegex } from "../src/readme.js";
 import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
@@ -73,5 +73,17 @@ describe("readme", () => {
 
     // Ensures code doesn't try to read file `/fake/readme.md` which would throw
     expect(tags.size).toBe(0);
+  });
+});
+
+describe("TagMatchRegex", () => {
+  it.each([
+    ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false],
+    ["``` yaml $(tag)=='package-2017-03' && $(go)", true],
+    ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true],
+    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true], // Typical case
+    ['``` yaml $(tag) == "package-2025-06-05"', true],
+  ])("matches tags properly: %s", (example, expected) => {
+    expect(TagMatchRegex.test(example)).toEqual(expected);
   });
 });
