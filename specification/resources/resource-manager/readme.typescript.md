@@ -23,6 +23,7 @@ batch:
 ```
 
 ```yaml $(typescript) && $(package-databoundaries) && !$(profile-content)
+title: DataboundariesManegementClient
 typescript:
   package-name: "@azure/arm-databoundaries"
   output-folder: "$(typescript-sdks-folder)/sdk/databoundaries/arm-databoundaries"

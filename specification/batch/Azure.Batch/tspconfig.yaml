@@ -18,6 +18,20 @@ options:
     head-as-boolean: false
     namespace: Azure.Compute.Batch
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Compute.Batch
+    model-namespace: false
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{project-root}"
+    fix-const-stuttering: true
+    generate-fakes: false
+    inject-spans: true
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azbatch"
+    module-version: "0.1.0"
+    package-dir: "azbatch"
+    service-dir: "sdk/batch"
+    single-client: true
+    slice-elements-byval: true
   "@azure-tools/typespec-java":
     namespace: "com.azure.compute.batch"
     package-dir: "azure-compute-batch"
@@ -25,15 +39,17 @@ options:
     skip-special-headers:
       - "ocp-date"
     flavor: azure
+    generate-tests: false
+    generate-samples: false
   "@azure-tools/typespec-python":
     package-dir: "azure-batch"
-    package-name: "{package-dir}"
+    namespace: "azure.batch"
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-ts":
     package-dir: "batch-rest"
-    packageDetails:
+    package-details:
       name: "@azure-rest/batch"
       description: "Batch Service Rest Level Client"
       version: "1.0.0-beta.1"

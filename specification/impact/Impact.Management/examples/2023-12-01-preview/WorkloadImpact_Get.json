@@ -1,0 +1,35 @@
+{
+  "operationId": "WorkloadImpacts_Get",
+  "title": "Get WorkloadImpact Resource by name example",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-12-01-preview",
+    "workloadImpactName": "impact-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "properties": {
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservername",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "high cup utilization",
+          "impactCategory": "Performance",
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          },
+          "clientIncidentDetails": {
+            "clientIncidentId": "AA123",
+            "clientIncidentSource": "Jira"
+          },
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z"
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -70,7 +71,7 @@ union ProvisioningState {
 
 @doc("Details of the Compute Fleet.")
 model FleetProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -80,7 +81,7 @@ model FleetProperties {
   @doc("Configuration Options for Regular instances in Compute Fleet.")
   regularPriorityProfile?: RegularPriorityProfile;
 
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   @doc("List of VM sizes supported for Compute Fleet")
   vmSizesProfile: Array<VmSizeProfile>;
 
@@ -96,11 +97,11 @@ model FleetProperties {
   computeProfile: ComputeProfile;
 
   @doc("Specifies the time at which the Compute Fleet is created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
 
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 
@@ -414,7 +415,10 @@ model VMAttributes {
   @doc("The range of memory in GiB per vCPU specified from min to max. Optional parameter. Either Min or Max is required if specified.")
   memoryInGiBPerVCpu?: VMAttributeMinMaxDouble;
 
-  @doc("Specifies whether the VMSize supporting local storage should be used to build Fleet or not.")
+  @doc("""
+    Specifies whether the VMSize supporting local storage should be used to build Fleet or not.
+    Included - Default if not specified as most Azure VMs support local storage.
+    """)
   localStorageSupport?: VMAttributeSupport;
 
   @doc("""
@@ -423,7 +427,6 @@ model VMAttributes {
     """)
   localStorageInGiB?: VMAttributeMinMaxDouble;
 
-  @extension("x-ms-identifiers", [])
   @doc("""
     The local storage disk types specified as a list. LocalStorageSupport should be set to "Included" or "Required" to use this VMAttribute. 
     If localStorageSupport is "Excluded", this VMAttribute can not be used.
@@ -456,7 +459,6 @@ model VMAttributes {
     """)
   acceleratorSupport?: VMAttributeSupport;
 
-  @extension("x-ms-identifiers", [])
   @doc("""
     The accelerator manufacturers specified as a list. 
     acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
@@ -464,7 +466,6 @@ model VMAttributes {
     """)
   acceleratorManufacturers?: Array<AcceleratorManufacturer>;
 
-  @extension("x-ms-identifiers", [])
   @doc("""
     The accelerator types specified as a list. acceleratorSupport should be set to "Included" or "Required" to use this VMAttribute. 
     If acceleratorSupport is "Excluded", this VMAttribute can not be used.
@@ -478,22 +479,18 @@ model VMAttributes {
     """)
   acceleratorCount?: VMAttributeMinMaxInteger;
 
-  @extension("x-ms-identifiers", [])
   @doc("The VM category specified as a list. Optional parameter.")
   vmCategories?: Array<VMCategory>;
 
-  @extension("x-ms-identifiers", [])
   @doc("The VM architecture types specified as a list. Optional parameter.")
   architectureTypes?: Array<ArchitectureType>;
 
-  @extension("x-ms-identifiers", [])
   @doc("The VM CPU manufacturers specified as a list. Optional parameter.")
   cpuManufacturers?: Array<CpuManufacturer>;
 
   @doc("Specifies whether the VMSize supporting burstable capability should be used to build Fleet or not.")
   burstableSupport?: VMAttributeSupport;
 
-  @extension("x-ms-identifiers", [])
   @doc("Specifies which VMSizes should be excluded while building Fleet. Optional parameter.")
   excludedVMSizes?: Array<string>;
 }
@@ -504,7 +501,7 @@ model LocationProfile {
   @doc("""
     The ARM location name of the additional region. If LocationProfile is specified, then location is required.
     """)
-  location: string;
+  location: azureLocation;
 
   @doc("""
     An override for computeProfile.baseVirtualMachineProfile specific to this region. 
@@ -516,7 +513,7 @@ model LocationProfile {
 @added(Versions.v2024_11_01)
 @doc("Represents the configuration for additional locations where Fleet resources may be deployed.")
 model AdditionalLocationsProfile {
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   @doc("The list of location profiles.")
   locationProfiles: Array<LocationProfile>;
 }
@@ -530,7 +527,7 @@ interface Fleets {
     Fleet,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;

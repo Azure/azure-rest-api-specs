@@ -5,9 +5,19 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.KubernetesRuntime;
 
+@@clientNamespace(Microsoft.KubernetesRuntime,
+  "com.azure.resourcemanager.containerorchestratorruntime",
+  "java"
+);
+
 @@clientName(Microsoft.KubernetesRuntime,
   "ContainerOrchestratorRuntimeMgmt",
   "python"
+);
+
+@@clientName(Microsoft.KubernetesRuntime,
+  "ContainerOrchestratorRuntimeMgmtClient",
+  "java"
 );
 
 @@clientName(AccessMode, "StorageClassAccessMode", "csharp");

@@ -26,7 +26,7 @@ These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-08-01-preview
+tag: package-2025-01-01-preview
 ```
 
 ### Suppression
@@ -188,6 +188,24 @@ input-file:
 - Microsoft.SignalRService/preview/2024-08-01-preview/webpubsub.json
 ```
 
+### Tag: package-2024-10-01-preview
+
+These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2024-10-01-preview/webpubsub.json
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+- Microsoft.SignalRService/preview/2025-01-01-preview/webpubsub.json
+```
+
 ---
 
 # Code Generation
@@ -200,7 +218,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
@@ -224,21 +242,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  # last generated with AutoRest.0.17.3
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.WebPubSub
-  output-folder: $(csharp-sdks-folder)/webpubsub/Microsoft.Azure.Management.WebPubSub/src/Generated
-  clear-output-folder: true
-```
 
 
 

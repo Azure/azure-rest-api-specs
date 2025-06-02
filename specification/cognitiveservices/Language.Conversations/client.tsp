@@ -91,6 +91,11 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
+@@clientName(ConversationalAIInputParameters,
+  "AIConversationLanguageUnderstandingActionContent",
+  "csharp"
+);
+
 @@clientName(ConversationSummarizationTaskParameters,
   "ConversationSummarizationActionContent",
   "csharp"
@@ -141,7 +146,6 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(ConversationalTask.analysisInput, "ConversationInput", "csharp");
 @@clientName(ConversationalTask.parameters, "ActionContent", "csharp");
-@@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
 
 @@clientName(AnalyzeConversationTaskResult,
   "AnalyzeConversationActionResult",
@@ -178,7 +182,6 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(AnalyzeConversationPiiTask, "PiiOperationAction", "csharp");
 @@clientName(AnalyzeConversationPiiTask.parameters, "ActionContent", "csharp");
-@@clientName(ConversationPiiTaskParameters, "PiiActionContent", "csharp");
 
 @@clientName(AnalyzeCustomConversationSummarizationTask,
   "CustomSummarizationOperationAction",
@@ -188,10 +191,6 @@ namespace Language.ConversationsClientCustomizations;
   "ActionContent",
   "csharp"
 );
-@@clientName(CustomConversationSummarizationTaskParameters,
-  "CustomConversationSummarizationActionContent",
-  "csharp"
-);
 
 @@clientName(AnalyzeConversationSummarizationTask,
   "SummarizationOperationAction",
@@ -199,10 +198,6 @@ namespace Language.ConversationsClientCustomizations;
 );
 @@clientName(AnalyzeConversationSummarizationTask.parameters,
   "ActionContent",
-  "csharp"
-);
-@@clientName(ConversationSummarizationTaskParameters,
-  "ConversationSummarizationActionContent",
   "csharp"
 );
 

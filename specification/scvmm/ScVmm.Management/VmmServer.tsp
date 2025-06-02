@@ -43,9 +43,7 @@ interface VmmServers {
   @summary("Implements VmmServers PATCH method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   update is ArmTagsPatchAsync<VmmServer>;
   /** Removes the SCVmm fabric from Azure. */
@@ -53,9 +51,7 @@ interface VmmServers {
   @summary("Implements VmmServers DELETE method.")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   delete is ArmResourceDeleteWithoutOkAsync<
     VmmServer,

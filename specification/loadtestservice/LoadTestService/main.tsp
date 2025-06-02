@@ -10,9 +10,7 @@ using Azure.Core;
 
 @versioned(APIVersions)
 @useAuth(Oauth2)
-@service({
-  title: "Azure Load Testing",
-})
+@service(#{ title: "Azure Load Testing" })
 @server(
   "https://{endpoint}",
   "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
@@ -46,6 +44,10 @@ enum APIVersions {
   @doc("The 2024-07-01-preview version of the Azure Load Testing API.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_01_preview: "2024-07-01-preview",
+
+  @doc("The 2024-12-01-preview version of the Azure Load Testing API.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_12_01_preview: "2024-12-01-preview",
 }
 
 @doc("OAuth 2.0 Flow with Microsoft Entra ID.")

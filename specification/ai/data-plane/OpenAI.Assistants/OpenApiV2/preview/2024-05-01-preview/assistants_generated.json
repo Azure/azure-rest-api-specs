@@ -111,7 +111,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -519,6 +519,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -532,8 +535,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
@@ -729,7 +731,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -971,7 +973,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1255,7 +1257,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1503,7 +1505,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1908,7 +1910,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -2068,7 +2070,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -2297,14 +2299,9 @@
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/ToolResources",
           "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ToolResources"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
@@ -2385,14 +2382,9 @@
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/CreateToolResourcesOptions",
           "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CreateToolResourcesOptions"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
@@ -2483,14 +2475,9 @@
           "x-ms-client-name": "createdAt"
         },
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/ToolResources",
           "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ToolResources"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -2523,14 +2510,9 @@
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/CreateToolResourcesOptions",
           "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CreateToolResourcesOptions"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -2607,14 +2589,9 @@
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/UpdateToolResourcesOptions",
           "description": "Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/UpdateToolResourcesOptions"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "stream": {
@@ -2651,14 +2628,9 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "type": "object",
+          "$ref": "#/definitions/TruncationObject",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -2780,14 +2752,9 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "type": "object",
+          "$ref": "#/definitions/TruncationObject",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -3703,14 +3670,9 @@
           "x-ms-client-name": "stepDetails"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepError",
           "description": "If applicable, information about the last error encountered by this run step.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "created_at": {
@@ -3748,14 +3710,9 @@
           "x-ms-client-name": "failedAt"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepCompletionUsage",
           "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -3983,7 +3940,7 @@
       "properties": {
         "file_search": {
           "type": "object",
-          "description": "Reserved for future use.",
+          "description": "The results of the file search.",
           "additionalProperties": {
             "type": "string"
           },
@@ -4285,14 +4242,9 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "type": "object",
+          "$ref": "#/definitions/MessageIncompleteDetails",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MessageIncompleteDetails"
-            }
-          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -4436,25 +4388,15 @@
           "description": "The status of the assistant thread run."
         },
         "required_action": {
-          "type": "object",
+          "$ref": "#/definitions/RequiredAction",
           "description": "The details of the action required for the assistant thread run to continue.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RequiredAction"
-            }
-          ],
           "x-ms-client-name": "requiredAction"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunError",
           "description": "The last error, if any, encountered by this assistant thread run.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "model": {
@@ -4522,14 +4464,9 @@
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunCompletionUsage",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "temperature": {
           "type": "number",
@@ -4559,14 +4496,9 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "type": "object",
+          "$ref": "#/definitions/TruncationObject",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/TruncationObject"
-            }
-          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -4775,14 +4707,9 @@
       "description": "The details used to update an existing assistant thread",
       "properties": {
         "tool_resources": {
-          "type": "object",
+          "$ref": "#/definitions/UpdateToolResourcesOptions",
           "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/UpdateToolResourcesOptions"
-            }
-          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -5032,14 +4959,9 @@
           "description": "The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use."
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/VectorStoreFileError",
           "description": "The last error associated with this vector store file. Will be `null` if there are no errors.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/VectorStoreFileError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         }
       },
@@ -5367,14 +5289,9 @@
           "x-nullable": true
         },
         "expires_after": {
-          "type": "object",
+          "$ref": "#/definitions/VectorStoreExpirationPolicy",
           "description": "Details on when this vector store expires",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/VectorStoreExpirationPolicy"
-            }
-          ],
           "x-ms-client-name": "expiresAfter"
         },
         "metadata": {

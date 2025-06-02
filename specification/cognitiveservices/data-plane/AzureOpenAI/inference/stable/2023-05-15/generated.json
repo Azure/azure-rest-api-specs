@@ -248,7 +248,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -322,8 +322,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "ChatCompletionsOptions": {
@@ -341,7 +340,7 @@
         "max_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of tokens to generate.",
+          "description": "The maximum number of tokens allowed for the generated answer. By default, the number of tokens the model can return will be (4096 - prompt tokens).\n\nThis value is now deprecated in favor of `max_completion_tokens`, and is not compatible with o1 series models.",
           "x-ms-client-name": "maxTokens"
         },
         "temperature": {
@@ -556,14 +555,9 @@
           "description": "The ordered index associated with this completions choice."
         },
         "logprobs": {
-          "type": "object",
+          "$ref": "#/definitions/CompletionsLogProbabilityModel",
           "description": "The log probabilities model for tokens associated with this completions choice.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/CompletionsLogProbabilityModel"
-            }
-          ]
+          "x-nullable": true
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -608,8 +602,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {

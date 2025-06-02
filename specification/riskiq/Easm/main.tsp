@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
   ]>
 )
 @versioned(Easm.Versions)
-@service({
-  title: "Defender EASM",
-})
+@service(#{ title: "Defender EASM" })
 @server(
   "{endpoint}",
   "",
@@ -47,4 +45,8 @@ enum Versions {
   @doc("Version 2024-03-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_03_01_preview: "2024-03-01-preview",
+
+  @doc("Version 2024-10-01-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_10_01_preview: "2024-10-01-preview",
 }

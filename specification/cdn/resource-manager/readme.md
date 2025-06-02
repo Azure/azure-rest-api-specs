@@ -29,7 +29,41 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2024-09
+tag: package-2025-04
+```
+
+### Tag: package-2025-04
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04'
+input-file:
+  - Microsoft.Cdn/stable/2025-04-15/afdx.json
+  - Microsoft.Cdn/stable/2025-04-15/cdn.json
+  - Microsoft.Cdn/stable/2025-04-15/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-preview-2025-01
+
+These settings apply only when `--tag=package-preview-2025-01` is specified on the command line.
+This version only contains managed identity origin authentication preview version.
+
+```yaml $(tag) == 'package-preview-2025-01'
+input-file:
+  - Microsoft.Cdn/preview/2025-01-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2025-01-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2025-01-01-preview/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
 ```
 
 ### Tag: package-2024-09
@@ -259,7 +293,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

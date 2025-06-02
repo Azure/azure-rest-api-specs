@@ -17,6 +17,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered Asset Endpoint Profile definition.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAssetEndpointProfile
   is TrackedResource<DiscoveredAssetEndpointProfileProperties> {
   @doc("Discovered Asset Endpoint Profile name parameter.")
@@ -31,12 +32,13 @@ model DiscoveredAssetEndpointProfile
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Defines the Discovered Asset Endpoint Profile properties.")
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 model DiscoveredAssetEndpointProfileProperties {
   @doc("The local valid URI specifying the network address/DNS name of a southbound device. The scheme part of the targetAddress URI specifies the type of the device. The additionalConfiguration field holds further connector type specific configuration.")
   targetAddress: url;
@@ -45,7 +47,6 @@ model DiscoveredAssetEndpointProfileProperties {
   additionalConfiguration?: string;
 
   @doc("List of supported authentication methods supported by the target server.")
-  @extension("x-ms-identifiers", [])
   supportedAuthenticationMethods?: AuthenticationMethod[];
 
   @doc("Defines the configuration for the connector type that is being used with the endpoint profile.")
@@ -58,19 +59,13 @@ model DiscoveredAssetEndpointProfileProperties {
   version: int64;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-// The updateable properties of the Discovered Asset Endpoint Profile.
-// This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
-// since otherwise it extends the ARM TrackedResource type.
-alias DiscoveredAssetEndpointProfilePropertiesUpdate = {
-  ...OptionalProperties<UpdateableProperties<DiscoveredAssetEndpointProfileProperties>>;
-};
-
 @armResourceOperations
 @added(Versions.v2024_09_01_preview)
+@removed(Versions.v2024_11_01)
 interface DiscoveredAssetEndpointProfiles {
   get is ArmResourceRead<DiscoveredAssetEndpointProfile>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<DiscoveredAssetEndpointProfile>;
@@ -81,7 +76,7 @@ interface DiscoveredAssetEndpointProfiles {
     DiscoveredAssetEndpointProfile,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       DiscoveredAssetEndpointProfile,
-      DiscoveredAssetEndpointProfilePropertiesUpdate
+      DiscoveredAssetEndpointProfileProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiscoveredAssetEndpointProfile>;
