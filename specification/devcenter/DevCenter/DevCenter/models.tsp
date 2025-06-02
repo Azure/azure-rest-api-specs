@@ -6,7 +6,7 @@ import "../shared/models.tsp";
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 @doc("A pending approval.")
 @resource("approvals")
