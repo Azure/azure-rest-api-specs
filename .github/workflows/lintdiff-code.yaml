@@ -33,12 +33,6 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
-      - name: Get diff with base branch
-        run: |
-          git diff --name-only origin/${{ github.event.pull_request.base.ref }}
-        shell: bash
-        working-directory: after
-
       - name: Get changed files
         uses: actions/github-script@v7
         with:
