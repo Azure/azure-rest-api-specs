@@ -137,6 +137,31 @@ op getKeyValue is Foundations.ResourceOperation<
   Error
 >;
 
+
+/**
+ * The content type used when creating or updating a key-value.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+union PutKeyValueContentType {
+  /** The content type for a single key-value pair. */
+  "application/vnd.microsoft.appconfig.kv+json",
+
+  /** The content type for a set of key-values. */
+  "application/vnd.microsoft.appconfig.kvset+json",
+
+  /** The content type for a JSON object. */
+  "application/json",
+
+  /** The content type for a JSON object with a specific schema. */
+  "text/json",
+
+  /** The content type for a broad JSON operation. */
+  "application/*+json",
+
+  /** The content type for a JSON patch operation with a specific schema. */
+  "application/json-patch+json",
+}
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Creates a key-value.")
@@ -145,16 +170,9 @@ op getKeyValue is Foundations.ResourceOperation<
 @put
 op putKeyValue is AppConfigOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType:
-      | "application/vnd.microsoft.appconfig.kv+json"
-      | "application/vnd.microsoft.appconfig.kvset+json"
-      | "application/json"
-      | "text/json"
-      | "application/*+json"
-      | "application/json-patch+json";
+    contentType: PutKeyValueContentType;
 
     ...KeyPathParam<"The key of the key-value to create.">;
     ...LabelQueryParam<"The label of the key-value to create.">;
@@ -268,6 +286,16 @@ op getSnapshot is StandardOps.ResourceRead<
       RequestIdResponseHeader>
 >;
 
+/** The content types for createSnapshot. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+union CreateSnapshotContentType {
+  /** The content type for a key-value snapshot. */
+  "application/vnd.microsoft.appconfig.snapshot+json",
+
+  /** The content type for a JSON object. */
+  "application/json",
+}
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Creates a key-value snapshot.")
 @doc("Creates a key-value snapshot.")
@@ -277,10 +305,9 @@ op getSnapshot is StandardOps.ResourceRead<
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+    contentType: CreateSnapshotContentType;
 
     ...NamePathParam<"The name of the key-value snapshot to create.">;
     ...SyncTokenHeader;
@@ -298,6 +325,16 @@ op createSnapshot is Foundations.LongRunningOperation<
   Error
 >;
 
+/** The content types for updateSnapshot. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+union UpdateSnapshotContentType {
+  /** The content type for a JSON merge patch operation. */
+  "application/merge-patch+json",
+
+  /** The content type for a JSON object. */
+  "application/json",
+}
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
@@ -305,10 +342,9 @@ op createSnapshot is Foundations.LongRunningOperation<
 @patch(#{ implicitOptionality: true })
 op updateSnapshot is AppConfigOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType: "application/merge-patch+json" | "application/json";
+    contentType: UpdateSnapshotContentType;
 
     ...NamePathParam<"The name of the key-value snapshot to update.">;
     ...SyncTokenHeader;
