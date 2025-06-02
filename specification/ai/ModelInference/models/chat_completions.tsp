@@ -428,14 +428,20 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
   content: string;
 }
 
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+@doc("The contents of the user message, with available input types varying by selected model.")
+union ChatRequestUserMessageContent {
+  string,
+  ChatMessageContentItem[],
+}
+
 @doc("A request chat message representing user input to the assistant.")
 model ChatRequestUserMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'user' for user messages.")
   role: ChatRole.user;
 
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
   @doc("The contents of the user message, with available input types varying by selected model.")
-  content: string | ChatMessageContentItem[];
+  content: ChatRequestUserMessageContent;
 }
 
 @doc("A request chat message representing response or action from the assistant.")
