@@ -202,5 +202,3 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
-
-
