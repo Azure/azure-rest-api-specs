@@ -115,6 +115,7 @@ model Processor {
   batch?: BatchProcessor;
 
   @doc("Transform language processor configurations.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   transformLanguage?: TransformLanguageProcessor;
 }
 
@@ -126,12 +127,15 @@ union ProcessorType {
   Batch: "Batch",
 
   @doc("Transform language processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   TransformLanguage: "TransformLanguage",
 
   @doc("Microsoft Syslog processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   MicrosoftSyslog: "MicrosoftSyslog",
 
   @doc("Microsoft CEF/Common Security Log processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   MicrosoftCommonSecurityLog: "MicrosoftCommonSecurityLog",
 }
 
