@@ -126,18 +126,10 @@ async function getFiles(
   });
 
 
-  let filteredItems = items
+  return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
     .map((d) => path.join(target, d.name))
-    .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"));
-
-  console.log(
-    `Found ${filteredItems.length} files in ${directory} that match the criteria before checking for specification directory`)
-
-  console.log(
-    `Filtering out files that are not in the specification directory: ${filteredItems.join(", ")}`,
-  );
-  return filteredItems
+    .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"))
     .filter((d) => d.includes("specification" + path.sep));
 }
 
@@ -184,9 +176,6 @@ export async function processFilesToSpecificationList(
       const swaggerDir = path.dirname(path.dirname(file));
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
-      console.log(
-        `Found ${visibleSwaggerFiles.length} swagger files in ${swaggerDir}`
-      );
 
       for (const swaggerFile of visibleSwaggerFiles) {
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
