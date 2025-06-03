@@ -8,3 +8,8 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.EdgeSolutionVersionPublishedEventData,
   Access.public
 );
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EdgeSolutionVersionPublishedEventData,
+  "csharp"
+);

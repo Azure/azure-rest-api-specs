@@ -7,7 +7,7 @@ import {
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -30,6 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsMlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -70,12 +71,18 @@ export function createEmitterOptionExample(
   return content;
 }
 
+// TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+function shouldBeTrueOnFailSubRuleValidation(emitterName: string) {
+  return emitterName === "@azure-tools/typespec-csharp" ? true : false;
+}
+
 function createParameterTestCases(
   folder: string,
   key: string,
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [
     {
@@ -84,6 +91,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: validValue }),
       success: true,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with invalid value ${invalidValue}`,
@@ -91,6 +99,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: invalidValue }),
       success: false,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with undefined value`,
@@ -98,6 +107,7 @@ function createParameterTestCases(
       tspconfigContent: "",
       success: false,
       subRules,
+      additionalOptions,
     },
   ];
   return cases;
@@ -111,6 +121,7 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [];
 
@@ -118,7 +129,11 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      { key: key, value: validValue },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: true,
     subRules,
   });
@@ -126,19 +141,26 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, {
-      key: key,
-      value: invalidValue,
-    }),
-    success: false,
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      {
+        key: key,
+        value: invalidValue,
+      },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
+    success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName),
-    success: allowUndefined ? true : false,
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
+    success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
 
@@ -146,11 +168,15 @@ function createEmitterOptionTestCases(
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, {
-        key: key.split(".").slice(0, -1).join("."),
-        value: validValue,
-      }),
-      success: false,
+      tspconfigContent: createEmitterOptionExample(
+        emitterName,
+        {
+          key: key.split(".").slice(0, -1).join("."),
+          value: validValue,
+        },
+        ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+      ),
+      success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
   }
@@ -164,6 +190,7 @@ interface Case {
   tspconfigContent: string;
   success: boolean;
   ignoredKeyPaths?: string[];
+  additionalOptions?: Record<string, string | boolean>;
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -218,7 +245,18 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
-  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+  [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+);
+
+const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-details.name",
+  "@azure/aaa-bbb",
+  "azure/aaa-bbb",
+  [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
+  false,
+  { "is-modular-library": true }, // Additional option added
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -460,7 +498,7 @@ const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
       { key: "namespace", value: "namespace" },
       { key: "package-dir", value: "Azure.AAA" },
     ),
-    success: false,
+    success: shouldBeTrueOnFailSubRuleValidation("@azure-tools/typespec-csharp"),
     subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
   },
 ];
@@ -483,10 +521,22 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
 );
 
+const suppressEntireRuleTestCase: Case = {
+  description: "Suppress entire rule",
+  folder: managementTspconfigFolder,
+  subRules: [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+  tspconfigContent: `
+parameters:
+service-dir-x: ""
+`,
+  success: true,
+  ignoredKeyPaths: [],
+};
+
 const suppressSubRuleTestCases: Case[] = [
   {
     description: "Suppress parameter",
-    folder: "",
+    folder: managementTspconfigFolder,
     subRules: [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
     tspconfigContent: `
 parameters:
@@ -532,6 +582,7 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
+    ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -562,9 +613,34 @@ describe("tspconfig", function () {
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
     ...csharpAzNamespaceWithPackageDirTestCases,
-    // suppression
-    ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
+    readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        reason: "Test reason",
+        rules: ["NOT-SdkTspConfigValidation"],
+        subRules: c.ignoredKeyPaths,
+      },
+    ]);
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
+      return file === join(c.folder, "tspconfig.yaml");
+    });
+
+    const rule = new SdkTspConfigValidationRule(c.subRules);
+    const result = await rule.execute(c.folder);
+    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
+    const returnSuccess = true;
+    strictEqual(result.success, returnSuccess);
+    if (c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
+    if (!c.success)
+      strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+  });
+
+  it.each([...suppressSubRuleTestCases])(`$description`, async (c: Case) => {
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
       {
@@ -582,10 +658,32 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, c.success);
+    const returnSuccess = c.folder.includes(".Management") ? c.success : true;
+    strictEqual(result.success, returnSuccess);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation failed."), true);
+  });
+
+  it.each([suppressEntireRuleTestCase])(`$description`, async (c: Case) => {
+    readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        reason: "Test reason",
+        rules: ["SdkTspConfigValidation"],
+      },
+    ]);
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
+      return file === join(c.folder, "tspconfig.yaml");
+    });
+
+    const rule = new SdkTspConfigValidationRule(c.subRules);
+    const result = await rule.execute(c.folder);
+    strictEqual(result.success, true);
+    strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
   });
 });
