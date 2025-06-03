@@ -134,7 +134,7 @@ using Microsoft.EventGrid.SystemEvents;
   "javascript"
 );
 @@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
-@@clientName(AcsCallParticipantEventProperties,
+@@clientName(AcsCallParticipantEventData,
   "AcsCallParticipantEvent",
   "javascript"
 );
