@@ -84,7 +84,7 @@ alias VirtualMachineScaleSetPath = {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMSOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       VirtualMachineScaleSetPath,
       KeysOf<{
         ...ResourceNameParameter<

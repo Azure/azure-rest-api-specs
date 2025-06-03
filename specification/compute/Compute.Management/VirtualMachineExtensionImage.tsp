@@ -33,7 +33,7 @@ alias ImageTypePath = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       ImageTypePath & KeysOf<VirtualMachineExtensionImage>,
       {
         #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -43,7 +43,7 @@ interface VirtualMachineExtensionImageOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageTypeOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       ImageTypePath,
       KeysOf<VirtualMachineExtensionImage>
     > {}
