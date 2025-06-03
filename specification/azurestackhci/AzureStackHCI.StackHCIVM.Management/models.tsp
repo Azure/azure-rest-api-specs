@@ -1294,12 +1294,11 @@ model VirtualHardDiskStatus {
   uploadStatus?: VirtualHardDiskUploadStatus;
 
   @added(Versions.v2025_07_01_preview)
-  @doc("ARM IDs of the resources that are consuming the VHD.")
+  @doc("ARM IDs of the VMs that are consuming the VHD.")
   managedBy?: string[];
 
   @added(Versions.v2025_07_01_preview)
   @doc("Unique Guid identifying the resource.")
-  @visibility(Lifecycle.Read)
   uniqueId?: string;
 }
 
