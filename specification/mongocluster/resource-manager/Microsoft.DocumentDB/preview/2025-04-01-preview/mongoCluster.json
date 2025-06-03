@@ -1588,7 +1588,7 @@
           {
             "name": "MicrosoftEntraID",
             "value": "MicrosoftEntraID",
-            "description": "Microsot Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'."
+            "description": "Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'."
           }
         ]
       }
@@ -1729,7 +1729,7 @@
     },
     "EntraIdentityProvider": {
       "type": "object",
-      "description": "Defines a Microsot Entra ID Mongo user.",
+      "description": "Defines a Microsoft Entra ID Mongo user.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EntraIdentityProviderProperties",
@@ -1763,8 +1763,8 @@
       "type": "string",
       "description": "Microsoft Entra ID principal types available for a Mongo user.",
       "enum": [
-        "User",
-        "ServicePrincipal"
+        "user",
+        "servicePrincipal"
       ],
       "x-ms-enum": {
         "name": "EntraPrincipalType",
@@ -1772,12 +1772,12 @@
         "values": [
           {
             "name": "User",
-            "value": "User",
+            "value": "user",
             "description": "Entra user type."
           },
           {
-            "name": "ServiePrincipal",
-            "value": "ServicePrincipal",
+            "name": "ServicePrincipal",
+            "value": "servicePrincipal",
             "description": "Entra service principal type."
           }
         ]

@@ -94,10 +94,8 @@ interface WorkloadNetworks {
   getSegment is WorkloadNetworkSegments.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @clientName("createSegments", "java")
-  createSegment is WorkloadNetworkSegments.create;
-  @clientName("updateSegments", "java")
-  updateSegment is WorkloadNetworkSegments.update;
+  createSegments is WorkloadNetworkSegments.create;
+  updateSegments is WorkloadNetworkSegments.update;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   deleteSegment is WorkloadNetworkSegments.deleteSegment;
 
@@ -205,15 +203,15 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
-  "java"
+  "java,go"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
-  "java"
+  "java,go"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
-  "java"
+  "java,go"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
@@ -310,5 +308,5 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
   Record<unknown>,
-  "java"
+  "java,go"
 );
