@@ -29,6 +29,6 @@ namespace Azure.Batch;
 
 @doc("The Azure Batch service version.")
 enum Versions {
-  @doc("API Version 2025-06-01.21.0")
-  v2025_06_01: "2025-06-01.21.0",
+  @doc("API Version 2025-06-01")
+  v2025_06_01: "2025-06-01",
 }
