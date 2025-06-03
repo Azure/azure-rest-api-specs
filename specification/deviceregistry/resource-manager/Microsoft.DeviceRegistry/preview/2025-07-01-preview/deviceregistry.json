@@ -55,6 +55,9 @@
       "name": "BillingContainers"
     },
     {
+      "name": "Namespaces"
+    },
+    {
       "name": "SchemaRegistries"
     },
     {
@@ -303,6 +306,45 @@
           "Get_OperationStatus": {
             "$ref": "./examples/Get_OperationStatus.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListBySubscription",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Namespaces_BySubscription": {
+            "$ref": "./examples/List_Namespace_BySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -963,6 +1005,390 @@
         "x-ms-examples": {
           "Delete_Asset": {
             "$ref": "./examples/Delete_Asset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces": {
+      "get": {
+        "operationId": "Namespaces_ListByResourceGroup",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "List Namespace resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_Namespaces_ByResourceGroup": {
+            "$ref": "./examples/List_Namespace_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}": {
+      "get": {
+        "operationId": "Namespaces_Get",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_Namespace": {
+            "$ref": "./examples/Get_Namespace.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Namespaces_CreateOrReplace",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Create a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Namespace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "201": {
+            "description": "Resource 'Namespace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplace_Namespace_With_Endpoints": {
+            "$ref": "./examples/CreateOrReplace_Namespace_With_Endpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Namespaces_Update",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Update a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Namespace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_Namespace_Endpoints": {
+            "$ref": "./examples/Update_Namespace_Endpoints.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Namespaces_Delete",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Delete a Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_Namespace": {
+            "$ref": "./examples/Delete_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/migrate": {
+      "post": {
+        "operationId": "Namespaces_Migrate",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Migrate the resources into Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceMigrateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Namespace Migrate": {
+            "$ref": "./examples/Migrate_Assets_Namespace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2596,6 +3022,57 @@
         "name"
       ]
     },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error object with properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code for classification of errors (ex: '400', '404', '500', etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist”).",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of error details that describe the status of each error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "description": "Defines the error details properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Multi-part error code for classification and root causing of errors (ex: 400.200.100.432).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (ex: “Authentication method not supported”).",
+          "readOnly": true
+        },
+        "info": {
+          "type": "string",
+          "description": "Human-readable helpful detailed text context for debugging (ex: “The following mechanisms are supported...”).",
+          "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Unique identifier for the transaction to aid in debugging.",
+          "readOnly": true
+        }
+      }
+    },
     "Event": {
       "type": "object",
       "description": "Defines the event properties.",
@@ -2724,6 +3201,197 @@
         "schemaRegistryNamespace",
         "schemaName",
         "schemaVersion"
+      ]
+    },
+    "Messaging": {
+      "type": "object",
+      "description": "The namespace messaging endpoints model.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of messaging endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MessagingEndpoint"
+          }
+        }
+      }
+    },
+    "MessagingEndpoint": {
+      "type": "object",
+      "description": "Namespace messaging endpoint model used by a device to connect to a service.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The messaging endpoint Azure resource Id."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "MigrateResult": {
+      "type": "object",
+      "description": "Result of Migrate operation of asset resource into Namespace resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the asset resource."
+        },
+        "result": {
+          "$ref": "#/definitions/MigrateResultType",
+          "description": "The result of the migrate operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error if the migrate operation is not successful."
+        }
+      }
+    },
+    "MigrateResultType": {
+      "type": "string",
+      "description": "Result Type of Migrate Operation.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "MigrateResultType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource Migrate operation is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource Migrate operation is not successful."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Namespace": {
+      "type": "object",
+      "description": "Namespace definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceListResult": {
+      "type": "object",
+      "description": "The response of a Namespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Namespace items on this page",
+          "items": {
+            "$ref": "#/definitions/Namespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceMigrateRequest": {
+      "type": "object",
+      "description": "Request body for the migrate resources operation in to Namespace resource.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope of the migrate resources operation."
+        },
+        "resourceIds": {
+          "type": "array",
+          "description": "List of asset resources to be migrated.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NamespaceMigrateResponse": {
+      "type": "object",
+      "description": "Response for the migrate asset resources operation into Namespace resource.",
+      "properties": {
+        "migrateResults": {
+          "type": "array",
+          "description": "List of migrate results containing result of each asset migrate operation.",
+          "items": {
+            "$ref": "#/definitions/MigrateResult"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      }
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "description": "The namespace properties model.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "messaging": {
+          "$ref": "#/definitions/Messaging",
+          "description": "Assigned and unassigned messaging endpoints."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceUpdate": {
+      "type": "object",
+      "description": "Namespace definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
       ]
     },
     "ProvisioningState": {
@@ -3070,6 +3738,24 @@
       "required": [
         "schemaContent"
       ]
+    },
+    "Scope": {
+      "type": "string",
+      "description": "Scope of the migrate resources operation.",
+      "enum": [
+        "Resources"
+      ],
+      "x-ms-enum": {
+        "name": "Scope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Resources",
+            "value": "Resources",
+            "description": "Scoping the migration to resourceIds provided"
+          }
+        ]
+      }
     },
     "Topic": {
       "type": "object",

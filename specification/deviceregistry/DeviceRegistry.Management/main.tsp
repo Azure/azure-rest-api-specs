@@ -7,7 +7,7 @@ import "./assetEndpointProfiles.tsp";
 import "./billings.tsp";
 import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
-// import "./namespaces.tsp";
+import "./namespaces.tsp";
 import "./schemaRegistries.tsp";
 
 using TypeSpec.Http;
