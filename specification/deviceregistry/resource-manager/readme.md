@@ -40,6 +40,13 @@ These settings apply only when `--tag=package-preview-2025-07` is specified on t
 ```yaml $(tag) == 'package-preview-2025-07'
 input-file:
   - Microsoft.DeviceRegistry/preview/2025-07-01-preview/deviceregistry.json
+suppressions:
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
 ### Tag: package-2024-11
