@@ -96,13 +96,9 @@
               "Accident",
               "Congestion",
               "DisabledVehicle",
-              "MassTransit",
               "Miscellaneous",
-              "OtherNews",
-              "PlannedEvent",
               "RoadHazard",
               "Construction",
-              "Alert",
               "Weather"
             ],
             "x-ms-enum": {
@@ -122,20 +118,8 @@
                   "description": "DisabledVehicle"
                 },
                 {
-                  "value": "MassTransit",
-                  "description": "MassTransit"
-                },
-                {
                   "value": "Miscellaneous",
                   "description": "Miscellaneous"
-                },
-                {
-                  "value": "OtherNews",
-                  "description": "OtherNews"
-                },
-                {
-                  "value": "PlannedEvent",
-                  "description": "PlannedEvent"
                 },
                 {
                   "value": "RoadHazard",
@@ -144,10 +128,6 @@
                 {
                   "value": "Construction",
                   "description": "Construction"
-                },
-                {
-                  "value": "Alert",
-                  "description": "Alert"
                 },
                 {
                   "value": "Weather",
@@ -159,7 +139,7 @@
           {
             "name": "bbox",
             "in": "query",
-            "description": "A rectangular area for the area of interest on the Earth. The sides of the rectangles are defined by longitude and latitude values. It must conform to the GeoJSON format [minLon, minLat, maxLon, maxLat]. For more information, see  [RFC 7946, Section 5](https://www.rfc-editor.org/rfc/rfc7946#section-5). \n\n The height or width of the bounding box should be at least 12m and not exceed 500,000m. A maximum limit of 30 degrees for either width or height is enforced. (maxLon - minLon should <= 30 and maxLat - minLat should <= 30). \n\nExample: bbox=-105,37,-94,45",
+            "description": "A rectangular area for the area of interest on the Earth. The sides of the rectangles are defined by longitude and latitude values. It must conform to the GeoJSON format [minLon, minLat, maxLon, maxLat]. For more information, see  [RFC 7946, Section 5](https://www.rfc-editor.org/rfc/rfc7946#section-5). \n\n The height or width of the bounding box should be at least 12m. The maximum area of a bounding box is 10,000 km ^2. \n\nExample: bbox=-105,37,-94,45",
             "required": true,
             "type": "array",
             "items": {
@@ -214,13 +194,9 @@
         "Accident",
         "Congestion",
         "DisabledVehicle",
-        "MassTransit",
         "Miscellaneous",
-        "OtherNews",
-        "PlannedEvent",
         "RoadHazard",
         "Construction",
-        "Alert",
         "Weather"
       ],
       "x-ms-enum": {
@@ -240,20 +216,8 @@
             "description": "DisabledVehicle"
           },
           {
-            "value": "MassTransit",
-            "description": "MassTransit"
-          },
-          {
             "value": "Miscellaneous",
             "description": "Miscellaneous"
-          },
-          {
-            "value": "OtherNews",
-            "description": "OtherNews"
-          },
-          {
-            "value": "PlannedEvent",
-            "description": "PlannedEvent"
           },
           {
             "value": "RoadHazard",
@@ -262,10 +226,6 @@
           {
             "value": "Construction",
             "description": "Construction"
-          },
-          {
-            "value": "Alert",
-            "description": "Alert"
           },
           {
             "value": "Weather",
@@ -333,7 +293,7 @@
           "type": "boolean"
         },
         "severity": {
-          "description": "Specifies the level of importance of the incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
+          "description": "Specifies the level of importance of the incident.\n\n - 0: Unknown \n\n - 1: Minor \n\n - 2: Moderate \n\n - 3: Major \n\n- 4: Undefined (used for road closures and other indefinite delays)",
           "type": "integer",
           "format": "int32"
         },
