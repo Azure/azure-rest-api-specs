@@ -50,6 +50,8 @@ suppressions:
       - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
     reason: attributes is a customer-defined property of any shape and custom keys for other properties
   - code: OperationIdNounVerb
     from:
