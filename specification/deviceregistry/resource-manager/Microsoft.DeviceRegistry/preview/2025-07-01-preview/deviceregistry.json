@@ -3376,23 +3376,35 @@
     },
     "NamespaceUpdate": {
       "type": "object",
-      "description": "Namespace definition.",
+      "description": "The type used for update operations of the Namespace.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+      }
+    },
+    "NamespaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Namespace.",
+      "properties": {
+        "messaging": {
+          "$ref": "#/definitions/Messaging",
+          "description": "Assigned and unassigned messaging endpoints."
         }
-      ]
+      }
     },
     "ProvisioningState": {
       "type": "string",

@@ -122,7 +122,16 @@ union Scope {
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Namespace>;
-  update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  update is ArmCustomPatchAsync<
+    Namespace,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Namespace,
+      NamespaceProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
