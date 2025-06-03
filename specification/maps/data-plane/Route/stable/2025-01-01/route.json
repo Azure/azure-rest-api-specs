@@ -768,7 +768,7 @@
           }
         },
         "optimizeWaypointOrder": {
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.\n\n`Note`: Only supported for truck travelMode.",
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the route cost specified with the optimize parameter. The origin and destination are excluded from the optimized waypoint and their position is considered fixed. Acceptable values are true or false.",
           "type": "boolean",
           "default": false
         },
@@ -809,7 +809,7 @@
           }
         },
         "maxRouteCount": {
-          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nFor driving routes, this parameter supports routes with up to two waypoints in addition to the origin and destination and avoid parameter must not be set.\n\nDefault: \"maxRouteCount\":1\n\nMinimum: \"maxRouteCount\":1\n\nMaximum: \"maxRouteCount\":3",
+          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nDefault: \"maxRouteCount\":1\n\nMinimum: \"maxRouteCount\":1\n\nMaximum: \"maxRouteCount\":3",
           "type": "integer",
           "format": "int64",
           "minimum": 1,
@@ -876,7 +876,7 @@
           "default": false
         },
         "includeSpeedLimit": {
-          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour. \n\n`Note`: Only supported for driving travelMode.",
+          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour.",
           "type": "boolean",
           "default": false
         },
@@ -1438,7 +1438,7 @@
           "$ref": "#/definitions/Instruction"
         },
         "address": {
-          "description": "The administrative district and country region for the waypoints and maneuver points on the truck route. Note: Only supported for truck travelMode.",
+          "description": "The administrative district and country region for the waypoints and maneuver points on the route.",
           "type": "object",
           "properties": {
             "countryRegion": {
@@ -1597,7 +1597,7 @@
           },
           {
             "value": "viaWaypoint",
-            "description": "A viaWaypoint is a specific waypoint that must be passed through or visited along a route or trip. `Note`: Only supported for driving travelMode."
+            "description": "A viaWaypoint is a specific waypoint that must be passed through or visited along a route or trip."
           }
         ]
       }
@@ -2203,7 +2203,7 @@
       }
     },
     "DrivingSideEnum": {
-      "description": "Indicates left-hand vs. right-hand side driving at the point of the maneuver. `Note`: Only supported for truck travelMode.",
+      "description": "Indicates left-hand vs. right-hand side driving at the point of the maneuver.",
       "type": "string",
       "enum": [
         "Left",
@@ -2498,7 +2498,7 @@
             },
             {
               "value": "tunnels",
-              "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids the use of tunnels in the route."
             },
             {
               "value": "borderCrossings",
@@ -2506,11 +2506,11 @@
             },
             {
               "value": "lowEmissionZones",
-              "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids low-emission zones in the route."
             },
             {
               "value": "unpavedRoads",
-              "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
+              "description": "Avoids unpaved roads in the route."
             }
           ]
         }
