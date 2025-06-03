@@ -6,6 +6,10 @@ import { LabelAction } from "./label.js";
 import { fetchWithRetry } from "./retries.js";
 
 /**
+ * @typedef {import("../../shared/src/sdk-types.js").SdkName} SdkName
+ */
+
+/**
  * @typedef {Object} ArtifactResource
  * @property {string} [downloadUrl]
  */
@@ -17,7 +21,7 @@ import { fetchWithRetry } from "./retries.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
+ * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndAction({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
@@ -46,7 +50,7 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api)} params.github
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
- * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
+ * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndActionImpl({
   ado_build_id,
@@ -61,6 +65,7 @@ export async function getLabelAndActionImpl({
 
   let issue_number = NaN;
   let labelAction;
+  /** @type {String | undefined} */
   let labelName = "";
   const artifactName = "spec-gen-sdk-artifact";
   const artifactFileName = artifactName + ".json";
@@ -121,6 +126,7 @@ export async function getLabelAndActionImpl({
     // Parse the JSON data
     const breakingChangeResult = JSON.parse(artifactData);
     const labelActionText = breakingChangeResult.labelAction;
+    /** @type {SdkName} */
     const breakingChangeLanguage = breakingChangeResult.language;
     if (breakingChangeLanguage) {
       labelName = sdkLabels[`${breakingChangeLanguage}`].breakingChange;
