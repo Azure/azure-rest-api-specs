@@ -17,6 +17,30 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo,
+  "token",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.tokenInfo,
+  "token",
+  "autorest"
+);
 @@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "autorest"
@@ -152,3 +176,29 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "autorest"
 );
+@@clientName(AcsCallEndedByProperties.type, "kind", "autorest");
+
+// Renames applying to all languages
+@@clientName(recordingChannelType, "AcsRecordingChannelType");
+@@clientName(recordingContentType, "AcsRecordingContentType");
+@@clientName(recordingFormatType, "AcsRecordingFormatType");
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "Nbf");
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");

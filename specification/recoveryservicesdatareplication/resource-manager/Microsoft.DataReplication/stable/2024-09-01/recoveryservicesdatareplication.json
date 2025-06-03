@@ -3407,6 +3407,26 @@
     }
   },
   "definitions": {
+    "AffectedObjectDetails": {
+      "type": "object",
+      "description": "Details of the affected object.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the affected object details."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the affected object details.",
+          "enum": [
+            "object"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
     "AzStackHCIClusterProperties": {
       "type": "object",
       "description": "AzStackHCI cluster properties.",
@@ -5189,22 +5209,8 @@
           "description": "Discriminator property for JobModelCustomProperties."
         },
         "affectedObjectDetails": {
-          "type": "object",
+          "$ref": "#/definitions/AffectedObjectDetails",
           "description": "Gets or sets any custom properties of the affected object.",
-          "properties": {
-            "description": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "object"
-              ],
-              "x-ms-enum": {
-                "modelAsString": false
-              }
-            }
-          },
           "readOnly": true
         }
       },
