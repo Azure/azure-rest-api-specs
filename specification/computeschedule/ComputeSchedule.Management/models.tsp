@@ -137,13 +137,15 @@ model Resources {
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-  @doc("baseProfile, Resource properties that common across all resources ")
-  baseProfile?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
+  baseProfile?: Record<unknown>;
 
-  @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
-  resourceOverrides?: Array<string>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
+  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
+  resourceOverrides?: Record<unknown>[];
 
-  @doc("Number of resources to be created")
+  @doc("Number of VMs to be created")
   resourceCount: int32;
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
@@ -369,41 +371,6 @@ model SubmitHibernateRequest {
   correlationid: string;
 }
 
-@doc("The SubmitCreateRequest request for create operations")
-@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-model SubmitCreateRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("resource creation payload")
-  resourceConfigParameters: ResourceProvisionPayload;
-
-  @doc("The execution parameters for the request")
-  executionParameters?: ExecutionParameters;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
-}
-
-@doc("The SubmitDeleteRequest request for delete operations")
-@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-model SubmitDeleteRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
-
-  @doc("CorrelationId item")
-  correlationid?: string;
-
-  @doc("Forced delete resource item")
-  forceDeletion?: boolean;
-}
-
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -507,7 +474,7 @@ model DeleteResourceOperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-@doc("The ExecuteDeleteRequest request for delete operations")
+@doc("The ExecuteDeleteRequest for delete VM operation")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteDeleteRequest {
   @doc("The execution parameters for the request")

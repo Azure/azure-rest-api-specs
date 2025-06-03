@@ -177,3 +177,28 @@ using Azure.ClientGenerator.Core;
   "autorest"
 );
 @@clientName(AcsCallEndedByProperties.type, "kind", "autorest");
+
+// Renames applying to all languages
+@@clientName(recordingChannelType, "AcsRecordingChannelType");
+@@clientName(recordingContentType, "AcsRecordingContentType");
+@@clientName(recordingFormatType, "AcsRecordingFormatType");
+@@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "Nbf");
+@@clientName(KeyVaultAccessPolicyChangedEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultCertificateNewVersionCreatedEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultKeyNewVersionCreatedEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretExpiredEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretExpiredEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretNearExpiryEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
+@@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
