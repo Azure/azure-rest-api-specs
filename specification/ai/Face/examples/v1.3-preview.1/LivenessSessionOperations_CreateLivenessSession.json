@@ -7,7 +7,10 @@
       "livenessOperationMode": "Passive",
       "deviceCorrelationIdSetInClient": false,
       "deviceCorrelationId": "your_device_correlation_id",
-      "authTokenTimeToLiveInSeconds": 60
+      "userCorrelationIdSetInClient": false,
+      "userCorrelationId": "your_user_correlation_id",
+      "authTokenTimeToLiveInSeconds": 60,
+      "numberOfClientAttemptsAllowed": 1
     }
   },
   "responses": {
@@ -17,6 +20,7 @@
         "authToken": "eyJhbGciOiJFUzI1NiIsIm",
         "status": "NotStarted",
         "modelVersion": "2024-11-15",
+        "isAbuseMonitoringEnabled": true,
         "results": {
           "attempts": []
         }
