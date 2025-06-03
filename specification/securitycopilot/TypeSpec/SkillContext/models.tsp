@@ -407,11 +407,14 @@ namespace SkillContext
 
 	@doc("The progress message to log during a skill invocation")
 	model LogProgressRequest {
+		@doc("")
+		evaluationStepLogStructuredContent?: EvaluationStepLogStructuredContent;
+
 		@doc("Log level")
 		level?: ProgressLogLevel;
 
 		@doc("Log message")
-		message: string;
+		message?: string;
 	}
 
 	@doc("")
