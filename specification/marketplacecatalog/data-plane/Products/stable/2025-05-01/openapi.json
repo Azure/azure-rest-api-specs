@@ -181,6 +181,77 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/skus": {
+      "get": {
+        "operationId": "SkusOperations_List",
+        "description": "Retrieves a list of SKUs available in the marketplace catalog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/ServiceParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceFamilyParameter"
+          },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationsParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSkuSummary"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -679,6 +750,28 @@
           "description": "The ProductSummary items on this page",
           "items": {
             "$ref": "#/definitions/ProductSummary"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSkuSummary": {
+      "type": "object",
+      "description": "Paged collection of SkuSummary items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SkuSummary items on this page",
+          "items": {
+            "$ref": "#/definitions/SkuSummary"
           },
           "x-ms-identifiers": []
         },
@@ -1749,15 +1842,15 @@
         },
         "ram": {
           "type": "string",
-          "description": "The Ram"
+          "description": "The RAM"
         },
-        "vCpu": {
+        "vcpu": {
           "type": "string",
           "description": "The number of virtual CPUs"
         },
         "armSkuName": {
           "type": "string",
-          "description": "The Arm sku name"
+          "description": "The ARM SKU name"
         },
         "accessTier": {
           "type": "string",
@@ -1771,7 +1864,8 @@
       "properties": {
         "productId": {
           "type": "string",
-          "description": "The unique id of the product"
+          "description": "The unique id of the product",
+          "readOnly": true
         },
         "productDisplayName": {
           "type": "string",
@@ -1919,7 +2013,10 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "productId"
+      ]
     },
     "StopSellInfo": {
       "type": "object",
@@ -2105,10 +2202,10 @@
   },
   "parameters": {
     "ApiKeyParameter": {
-      "name": "api-key",
+      "name": "X-API-Key",
       "in": "header",
-      "description": "ApiKey to access the API",
-      "required": false,
+      "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiKey"
@@ -2254,13 +2351,28 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "pricingAudience"
     },
+    "ServiceFamilyParameter": {
+      "name": "serviceFamily",
+      "in": "query",
+      "description": "The service family of the product, such as 'Compute'",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServiceParameter": {
+      "name": "service",
+      "in": "query",
+      "description": "The service name of the product, such as 'Virtual Machines'",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "SkuIdParameter": {
       "name": "skuId",
       "in": "query",
       "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
       "required": false,
       "type": "string",
-      "default": "en",
       "x-ms-parameter-location": "method"
     },
     "StorefrontParameter": {

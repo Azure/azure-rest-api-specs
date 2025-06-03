@@ -50,3 +50,25 @@ interface ProductOperations {
   @doc("Retrieves a single product by ID from the marketplace catalog.")
   get is ProductsGetOperation.ResourceRead<ProductDetails>;
 }
+
+// Skus listing traits
+alias SkusListingTraits = SupportsClientRequestId &
+  SupportsRepeatableRequests &
+  NoConditionalRequests &
+  QueryParametersTrait<ServiceParameter &
+    ServiceFamilyParameter &
+    LanguageParameter &
+    LocationsParameter &
+    MarketParameter &
+    SelectQueryParameter &
+    FilterParameter &
+    OrderByQueryParameter> &
+  RequestHeadersTrait<ApiKeyParameter>;
+
+// Operation definitions for Skus
+alias SkusListingOperation = ResourceOperations<SkusListingTraits>;
+
+interface SkusOperations {
+  @doc("Retrieves a list of SKUs available in the marketplace catalog.")
+  list is SkusListingOperation.ResourceList<SkuSummary>;
+}

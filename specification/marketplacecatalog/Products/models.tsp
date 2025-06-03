@@ -269,9 +269,12 @@ union StopSellReason {
 }
 
 @doc("Summary description of the SKU")
+@resource("skus")
 model SkuSummary {
+  @key
+  @visibility(Lifecycle.Read)
   @doc("The unique id of the product")
-  productId?: string;
+  productId: string;
 
   @doc("Product display name")
   productDisplayName?: string;
@@ -387,13 +390,13 @@ model SkuProperties {
   @doc("The number of cores")
   numberOfCores?: string;
 
-  @doc("The Ram")
+  @doc("The RAM")
   ram?: string;
 
   @doc("The number of virtual CPUs")
-  vCpu?: string;
+  vcpu?: string;
 
-  @doc("The Arm sku name")
+  @doc("The ARM SKU name")
   armSkuName?: string;
 
   @doc("The access tier, such as 'Standard'")
@@ -1136,4 +1139,18 @@ model PricingAudienceHeaderParameter {
   @header("x-ms-pricing-audience")
   @doc("DirectCommercial or PartnerCommercial, DirectCommercial is the default")
   pricingAudience?: string;
+}
+
+@doc("Service parameter")
+model ServiceParameter {
+  @query
+  @doc("The service name of the product, such as 'Virtual Machines'")
+  service: string;
+}
+
+@doc("Service family parameter")
+model ServiceFamilyParameter {
+  @query
+  @doc("The service family of the product, such as 'Compute'")
+  serviceFamily: string;
 }
