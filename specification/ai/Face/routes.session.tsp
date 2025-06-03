@@ -19,7 +19,6 @@ alias LivenessSessionWithVerifyDescription = """
   Permissions includes...
   >
   *
-    * Ability to call /detectLivenessWithVerify/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
   
   > [!NOTE]
@@ -36,7 +35,6 @@ alias CreateLivenessSessionDescription = """
   Permissions includes...
   >
   *
-    * Ability to call /detectLiveness/singleModal for up to 3 retries.
     * A token lifetime of 10 minutes.
   
   > [!NOTE]
