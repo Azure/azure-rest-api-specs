@@ -246,65 +246,67 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 // flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
+@@flattenProperty(Azure.ResourceManager.TrackedResource.properties,
+  "java,python"
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
-  "java"
+  "java,python"
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
-  "java"
+  "java,python"
 );
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Location.properties, "java");
+@@flattenProperty(Location.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Cluster.properties, "java");
+@@flattenProperty(Cluster.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Datastore.properties, "java");
+@@flattenProperty(Datastore.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(HcxEnterpriseSite.properties, "java");
+@@flattenProperty(HcxEnterpriseSite.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ExpressRouteAuthorization.properties, "java");
+@@flattenProperty(ExpressRouteAuthorization.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(GlobalReachConnection.properties, "java");
+@@flattenProperty(GlobalReachConnection.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetwork.properties, "java");
+@@flattenProperty(WorkloadNetwork.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkSegment.properties, "java");
+@@flattenProperty(WorkloadNetworkSegment.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkGateway.properties, "java");
+@@flattenProperty(WorkloadNetworkGateway.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkPortMirroring.properties, "java");
+@@flattenProperty(WorkloadNetworkPortMirroring.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVMGroup.properties, "java");
+@@flattenProperty(WorkloadNetworkVMGroup.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVirtualMachine.properties, "java");
+@@flattenProperty(WorkloadNetworkVirtualMachine.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsService.properties, "java");
+@@flattenProperty(WorkloadNetworkDnsService.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsZone.properties, "java");
+@@flattenProperty(WorkloadNetworkDnsZone.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkPublicIP.properties, "java");
+@@flattenProperty(WorkloadNetworkPublicIP.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CloudLink.properties, "java");
+@@flattenProperty(CloudLink.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(VirtualMachine.properties, "java");
+@@flattenProperty(VirtualMachine.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptPackage.properties, "java");
+@@flattenProperty(ScriptPackage.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptCmdlet.properties, "java");
+@@flattenProperty(ScriptCmdlet.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ScriptExecution.properties, "java");
+@@flattenProperty(ScriptExecution.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(IscsiPath.properties, "java");
+@@flattenProperty(IscsiPath.properties, "java,python");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PrivateCloudUpdate.properties, "java");
+@@flattenProperty(PrivateCloudUpdate.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(ClusterUpdate.properties, "java");
+@@flattenProperty(ClusterUpdate.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PlacementPolicyUpdate.properties, "java");
+@@flattenProperty(PlacementPolicyUpdate.properties, "java,python");
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
   Record<unknown>,
