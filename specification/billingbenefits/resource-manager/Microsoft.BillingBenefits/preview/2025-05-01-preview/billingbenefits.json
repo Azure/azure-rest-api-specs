@@ -1120,7 +1120,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Macc_Create": {
@@ -1149,21 +1149,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource has been updated.",
+            "description": "The resource has been created.",
             "schema": {
               "$ref": "#/definitions/Macc"
             }
           },
           "201": {
-            "description": "The resource has been created.",
+            "description": "The request is being processed.",
             "schema": {
               "$ref": "#/definitions/Macc"
             },
             "headers": {
-              "Location": {
-                "description": "Location URI to poll for result.",
-                "type": "string"
-              },
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
@@ -1316,7 +1312,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -1352,7 +1348,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "The resource is already deleted."
           },
           "default": {
             "description": "Error",
@@ -1365,7 +1361,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs": {
       "get": {
-        "description": "List MACCs under a resource group from primary service admin.",
+        "description": "List MACCs under a resource group for primary service admin.",
         "operationId": "Maccs_ListByResourceGroup",
         "tags": [
           "Macc"
@@ -1391,7 +1387,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request is completed.",
+            "description": "List of MACCs under the given resource group for primary service admin.",
             "schema": {
               "$ref": "#/definitions/MaccList"
             }
@@ -1430,7 +1426,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request is completed.",
+            "description": "List MACCs at subscription level from primary service tenant.",
             "schema": {
               "$ref": "#/definitions/MaccList"
             }
@@ -1453,7 +1449,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Macc_Cancel": {
@@ -1510,7 +1506,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/contributors/{contributorName}": {
       "get": {
-        "description": "Get a contributor from primary service admin",
+        "description": "Get a contributor for primary service admin",
         "operationId": "Contributors_GetFromPrimary",
         "tags": [
           "Macc"
@@ -1555,7 +1551,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/contributors": {
       "get": {
-        "description": "List contributors under from primary service admin",
+        "description": "List contributors under a MACC for primary service admin",
         "operationId": "Contributors_ListFromPrimary",
         "tags": [
           "Macc"
@@ -1584,7 +1580,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request is completed.",
+            "description": "List contributors under a MACC for primary service admin.",
             "schema": {
               "$ref": "#/definitions/ContributorList"
             }
@@ -1607,7 +1603,7 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Maccs_ChargeShortfall": {
@@ -1635,10 +1631,6 @@
           "202": {
             "description": "The request is accepted.",
             "headers": {
-              "Location": {
-                "description": "Location URI to poll for result.",
-                "type": "string"
-              },
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
@@ -2650,18 +2642,22 @@
       ],
       "properties": {
         "grain": {
-          "type": "string",
-          "description": "Commitment grain.",
-          "enum": [
-            "Hourly",
-            "FullTerm",
-            "Unknown"
-          ],
-          "x-ms-enum": {
-            "name": "CommitmentGrain",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/CommitmentGrain",
+          "description": "The grain of the commitment."
         }
+      }
+    },
+    "CommitmentGrain": {
+      "type": "string",
+      "description": "Grain.",
+      "enum": [
+        "Hourly",
+        "FullTerm",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CommitmentGrain",
+        "modelAsString": true
       }
     },
     "Utilization": {
@@ -4186,10 +4182,11 @@
     },
     "Macc": {
       "type": "object",
+      "x-ms-azure-resource": true,
       "description": "Microsoft Azure Consumption Commitment.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -4203,6 +4200,12 @@
     "MaccModelProperties": {
       "type": "object",
       "description": "MACC properties",
+      "required": [
+        "entityType",
+        "productCode",
+        "startAt",
+        "endAt"
+      ],
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/MaccProvisioningState"
@@ -4210,8 +4213,14 @@
         "provisioningSubState": {
           "$ref": "#/definitions/MaccProvisioningSubState"
         },
+        "status": {
+          "$ref": "#/definitions/MaccStatus"
+        },
         "entityType": {
           "$ref": "#/definitions/MaccEntityType"
+        },
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
         },
         "productCode": {
           "$ref": "#/definitions/ProductCode"
@@ -4228,10 +4237,12 @@
           "$ref": "#/definitions/Commitment"
         },
         "startAt": {
-          "$ref": "#/definitions/StartAt"
+          "$ref": "#/definitions/StartAt",
+          "description": "Must be start of month. Timestamp must be in the ISO date format YYYY-MM-DDT00:00:00Z."
         },
         "endAt": {
-          "$ref": "#/definitions/EndAt"
+          "$ref": "#/definitions/EndAt",
+          "description": "Must be end of month. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z."
         },
         "allowContributors": {
           "$ref": "#/definitions/AllowContributors"
@@ -4239,8 +4250,18 @@
         "systemId": {
           "$ref": "#/definitions/MaccSystemId"
         },
+        "automaticShortfall": {
+          "$ref": "#/definitions/AutomaticShortfall"
+        },
         "shortfall": {
           "$ref": "#/definitions/Shortfall"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaccMilestone"
+          },
+          "description": "List of milestones associated with this MACC."
         },
         "resourceUri": {
           "$ref": "#/definitions/ResourceUri"
@@ -4269,7 +4290,7 @@
     },
     "MaccProvisioningState": {
       "type": "string",
-      "description": "Provisioning states of MACC.",
+      "description": "Provisioning states of MACC. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of MACC resource, refer to MaccStatus.",
       "readOnly": true,
       "enum": [
         "Unknown",
@@ -4286,16 +4307,57 @@
     },
     "MaccProvisioningSubState": {
       "type": "string",
-      "description": "Provisioning sub state of MACC.",
+      "description": "Provisioning sub state of MACC. This property is deprecated. For current status of MACC resource, refer to MaccStatus.",
       "readOnly": true,
       "enum": [
         "Unknown",
         "None",
-        "Expired",
-        "ShortfallCharged"
+        "ShortfallCharged",
+        "Stopped",
+        "Completed"
       ],
       "x-ms-enum": {
         "name": "MaccProvisioningSubState",
+        "modelAsString": true
+      }
+    },
+    "MaccStatus": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Represents the current status of the MACC.",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Pending",
+        "Failed",
+        "Canceled",
+        "Completed",
+        "Stopped",
+        "ShortfallPending",
+        "ShortfallCharged",
+        "ShortfallWaived"
+      ],
+      "x-ms-enum": {
+        "name": "MaccStatus",
+        "modelAsString": true
+      }
+    },
+    "MaccMilestoneStatus": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Represents the current status of the Milestone.",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Pending",
+        "Failed",
+        "Completed",
+        "TopupPending",
+        "TopupCharged",
+        "TopupWaived"
+      ],
+      "x-ms-enum": {
+        "name": "MaccMilestoneStatus",
         "modelAsString": true
       }
     },
@@ -4330,6 +4392,10 @@
         }
       }
     },
+    "AutomaticShortfall": {
+      "type": "boolean",
+      "description": "Setting this to true enables automatic shortfall charging when commitment is not met."
+    },
     "MaccPatchRequest": {
       "type": "object",
       "description": "Macc patch request",
@@ -4360,8 +4426,93 @@
         },
         "allowContributors": {
           "$ref": "#/definitions/AllowContributors"
+        },
+        "automaticShortfall": {
+          "$ref": "#/definitions/AutomaticShortfall"
+        },
+        "displayName": {
+          "$ref": "#/definitions/DisplayName"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaccMilestone"
+          },
+          "description": "List of milestones to update or add."
         }
       }
+    },
+    "MaccMilestone": {
+      "type": "object",
+      "description": "MACC milestone represents interim targets within the period of MACC.",
+      "properties": {
+        "milestoneId": {
+          "type": "string",
+          "description": "Unique identifier for the milestone."
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Commitment associated with this milestone."
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt",
+          "description": "End date time for the milestone. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z."
+        },
+        "automaticTopup": {
+          "$ref": "#/definitions/AutomaticTopup"
+        },
+        "status": {
+          "$ref": "#/definitions/MaccMilestoneStatus"
+        },
+        "systemId": {
+          "type": "string",
+          "description": "The globally unique identifier of this milestone which will not change for its lifetime."
+        },
+        "topup": {
+          "$ref": "#/definitions/Topup",
+          "description": "Details of the topup associated with this milestone."
+        }
+      }
+    },
+    "AutomaticTopup": {
+      "type": "boolean",
+      "description": "Setting this to true enables automatic topup invoicing when milestone commitment is not met."
+    },
+    "Topup": {
+      "type": "object",
+      "description": "Details of a topup associated with a milestone",
+      "properties": {
+        "systemId": {
+          "type": "string",
+          "description": "The globally unique identifier of this topup."
+        },
+        "productCode": {
+          "$ref": "#/definitions/ProductCode"
+        },
+        "charge": {
+          "$ref": "#/definitions/Commitment",
+          "description": "Charge details for the topup."
+        },
+        "startAt": {
+          "$ref": "#/definitions/StartAt",
+          "description": "Start date time for the topup period."
+        },
+        "endAt": {
+          "$ref": "#/definitions/EndAt",
+          "description": "End date time for the topup period."
+        },
+        "resourceUri": {
+          "$ref": "#/definitions/ResourceUri",
+          "description": "Fully-qualified identifier of the resource associated with this topup."
+        },
+        "balanceVersion": {
+          "$ref": "#/definitions/BalanceVersion"
+        }
+      }
+    },
+    "BalanceVersion": {
+      "type": "string",
+      "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the topup was created ."
     },
     "ChargeShortfallRequest": {
       "type": "object",
