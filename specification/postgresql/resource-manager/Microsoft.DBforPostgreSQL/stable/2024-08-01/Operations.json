@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PostgreSQLServerManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2024-08-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Microsoft Entra OAuth2 Flow",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -41,11 +41,11 @@
         ],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "OperationList": {
+          "List all available REST API operations.": {
             "$ref": "./examples/OperationList.json"
           }
         },
-        "description": "Lists all of the available REST API operations.",
+        "description": "Lists all available REST API operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -75,22 +75,22 @@
         "provider": {
           "type": "string",
           "readOnly": true,
-          "description": "Operation resource provider name."
+          "description": "Name of the resource provider."
         },
         "resource": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource on which the operation is performed."
+          "description": "Type of resource on which the operation is performed."
         },
         "operation": {
           "type": "string",
           "readOnly": true,
-          "description": "Localized friendly name for the operation."
+          "description": "Name of the operation."
         },
         "description": {
           "type": "string",
           "readOnly": true,
-          "description": "Operation description."
+          "description": "Description of the operation."
         }
       },
       "description": "Display metadata associated with the operation."
@@ -101,21 +101,21 @@
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the operation being performed on this particular object."
+          "description": "Name of the operation being performed on this particular object."
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "readOnly": true,
-          "description": "The localized display information for this particular operation or action."
+          "description": "Localized display information for this particular operation or action."
         },
         "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
+          "description": "Indicates if the operation is a data action.",
           "type": "boolean"
         },
         "origin": {
           "type": "string",
           "readOnly": true,
-          "description": "The intended executor of the operation.",
+          "description": "Intended executor of the operation.",
           "enum": [
             "NotSpecified",
             "user",
@@ -139,7 +139,7 @@
       "description": "REST API operation definition."
     },
     "OperationListResult": {
-      "description": "A list of resource provider operations.",
+      "description": "List of resource provider operations.",
       "type": "object",
       "properties": {
         "value": {
@@ -154,7 +154,7 @@
           ]
         },
         "nextLink": {
-          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "description": "Link used to get the next page of results.",
           "type": "string"
         }
       }
