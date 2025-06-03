@@ -137,7 +137,6 @@ op getKeyValue is Foundations.ResourceOperation<
   Error
 >;
 
-
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Creates a key-value.")

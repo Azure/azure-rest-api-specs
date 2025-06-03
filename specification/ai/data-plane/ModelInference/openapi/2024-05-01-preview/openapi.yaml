@@ -878,19 +878,15 @@ components:
             - user
           description: The chat role associated with this message, which is always 'user' for user messages.
         content:
-          allOf:
-            - $ref: '#/components/schemas/ChatRequestUserMessageContent'
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/ChatMessageContentItem'
           description: The contents of the user message, with available input types varying by selected model.
       allOf:
         - $ref: '#/components/schemas/ChatRequestMessage'
       description: A request chat message representing user input to the assistant.
-    ChatRequestUserMessageContent:
-      anyOf:
-        - type: string
-        - type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageContentItem'
-      description: The contents of the user message, with available input types varying by selected model.
     ChatResponseMessage:
       type: object
       required:
