@@ -40,27 +40,30 @@ model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
   extendedLocation?: ExtendedLocation;
 }
 
-// alias NamespaceDevicePropertiesUpdate = {
-//   ...OptionalProperties<UpdateableProperties<OmitProperties<
-//     NamespaceDeviceProperties,
-//     "enabled"
-//   >>>;
+alias NamespaceDevicePropertiesUpdate = {
+  ...OptionalProperties<UpdateableProperties<OmitProperties<
+    NamespaceDeviceProperties,
+    "enabled"
+  >>>;
 
-//   @added(Versions.v2025_07_01_preview)
-//   @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
-//   enabled?: boolean;
-// };
+  @added(Versions.v2025_07_01_preview)
+  @doc("Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.")
+  enabled?: boolean;
+};
 
 @added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface NamespaceDevices {
   get is ArmResourceRead<NamespaceDevice>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDevice>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
   update is ArmCustomPatchAsync<
     NamespaceDevice,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceDevice,
-      NamespaceDeviceProperties
+      NamespaceDevicePropertiesUpdate
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;

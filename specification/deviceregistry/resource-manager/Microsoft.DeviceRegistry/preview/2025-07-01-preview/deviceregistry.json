@@ -5869,11 +5869,6 @@
       "type": "object",
       "description": "The updatable properties of the NamespaceDevice.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
-          "default": true
-        },
         "deviceGroupId": {
           "type": "string",
           "description": "The Microsoft Entra ID group the device is a member of."
@@ -5890,6 +5885,10 @@
           "type": "object",
           "description": "A set of key-value pairs that contain custom attributes set by the customer.",
           "additionalProperties": {}
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID."
         }
       }
     },
