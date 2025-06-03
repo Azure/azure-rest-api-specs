@@ -1,7 +1,7 @@
 // @ts-check
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { consoleLogger, ConsoleLogger } from "../src/logger";
+import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger";
 
 describe("logger", () => {
   let debugSpy, errorSpy, logSpy;
@@ -19,7 +19,8 @@ describe("logger", () => {
   });
 
   it.each([
-    ["consoleLogger", consoleLogger, false],
+    ["defaultLogger", defaultLogger, false],
+    ["debugLogger", debugLogger, true],
     ["new ConsoleLogger(isDebug: false)", new ConsoleLogger(false), false],
     ["new ConsoleLogger(isDebug: true)", new ConsoleLogger(true), true],
   ])("%s", (_name, logger, isDebug) => {
