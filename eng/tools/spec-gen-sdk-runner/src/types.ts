@@ -46,7 +46,7 @@ export interface SpecGenSdkArtifactInfo {
   result: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired: boolean;
-  apiViewRequestData: APIViewRequestData [];
+  apiViewRequestData: APIViewRequestData[];
 }
 
 /**
@@ -60,12 +60,42 @@ export type SdkName =
   | "azure-sdk-for-python";
 
 /**
+ * Represents the plane types for SDK generation settings
+ */
+export interface PlaneTypeSettings {
+  /**
+   * Whether spec-gen-sdk check is required for data plane
+   */
+  dataPlane: boolean;
+
+  /**
+   * Whether spec-gen-sdk check is required for management plane
+   */
+  managementPlane: boolean;
+}
+
+/**
  * Required check settings for all languages.
  */
-export const SpecGenSdkRequiredSettings: Record<SdkName, boolean> = {
-  "azure-sdk-for-go": true,
-  "azure-sdk-for-java": true,
-  "azure-sdk-for-js": false,
-  "azure-sdk-for-net": false,
-  "azure-sdk-for-python": true,
+export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
+  "azure-sdk-for-go": {
+    dataPlane: true,
+    managementPlane: true,
+  },
+  "azure-sdk-for-java": {
+    dataPlane: false,
+    managementPlane: true,
+  },
+  "azure-sdk-for-js": {
+    dataPlane: false,
+    managementPlane: false,
+  },
+  "azure-sdk-for-net": {
+    dataPlane: false,
+    managementPlane: false,
+  },
+  "azure-sdk-for-python": {
+    dataPlane: true,
+    managementPlane: true,
+  },
 };
