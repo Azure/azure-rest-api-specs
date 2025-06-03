@@ -10,5 +10,7 @@ namespace Microsoft.Monitor;
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model TransformLanguageProcessor {
   @doc("Query to execute on data passing through the processor")
+  @minLength(1)
+  @maxLength(10000)
   query: string;
 }
