@@ -7,8 +7,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.deployments.deployments
-  output-folder: $(azure-libraries-for-java-folder)/sdk/deployments/deployments
+  namespace: com.microsoft.azure.management.resources.deployments
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/deployments
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
 ```

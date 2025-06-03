@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-deployments-deploymentstacks"
-  output-folder: "$(typescript-sdks-folder)/sdk/deployments/arm-deployments-deploymentstacks"
+  package-name: "@azure/arm-resourcesdeploymentstacks"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resourcesdeploymentstacks"
   override-client-name: DeploymentStacksClient
   generate-metadata: true
 ```

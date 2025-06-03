@@ -6,13 +6,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-deployments-templatespecs
-namespace: azure.mgmt.deployments.templatespecs
+package-name: azure-mgmt-resources-templatespecs
+namespace: azure.mgmt.resources.templatespecs
 package-version: 1.0.0
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/deployments/azure-mgmt-deployments-templatespecs/azure/mgmt/deployments/templatespecs
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resources-templatespecs/azure/mgmt/resources/templatespecs
 ```

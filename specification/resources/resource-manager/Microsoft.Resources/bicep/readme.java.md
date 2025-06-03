@@ -7,8 +7,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.deployments.bicep
-  output-folder: $(azure-libraries-for-java-folder)/sdk/deployments/bicep
+  namespace: com.microsoft.azure.management.resources.bicep
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/bicep
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
 ```

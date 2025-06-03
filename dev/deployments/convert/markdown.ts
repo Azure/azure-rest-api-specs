@@ -249,8 +249,8 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Azure.ResourceManager.Deployments.${componentName}
-  output-folder: $(csharp-sdks-folder)/deployments/Azure.ResourceManager.Deployments.${componentName}/GeneratedProtocol
+  namespace: Azure.ResourceManager.Resources.${componentName}
+  output-folder: $(csharp-sdks-folder)/resources/Azure.ResourceManager.Resources.${componentName}/GeneratedProtocol
 \`\`\`
 `;
 }
@@ -264,7 +264,7 @@ These settings apply only when \`--go\` is specified on the command line.
 
 \`\`\` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/deployments/arm${componentName.toLowerCase()}
+module-name: sdk/resourcemanager/resources/arm${componentName.toLowerCase()}
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
@@ -283,8 +283,8 @@ Please also specify \`--azure-libraries-for-java-folder=<path to the root direct
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.deployments.${componentName.toLowerCase()}
-  output-folder: $(azure-libraries-for-java-folder)/sdk/deployments/${componentName.toLowerCase()}
+  namespace: com.microsoft.azure.management.resources.${componentName.toLowerCase()}
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/${componentName.toLowerCase()}
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
 \`\`\`
@@ -301,15 +301,15 @@ Please also specify \`--python-sdks-folder=<path to the root directory of your a
 \`\`\` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-deployments-${componentName.toLowerCase()}
-namespace: azure.mgmt.deployments.${componentName.toLowerCase()}
+package-name: azure-mgmt-resources-${componentName.toLowerCase()}
+namespace: azure.mgmt.resources.${componentName.toLowerCase()}
 package-version: 1.0.0
 clear-output-folder: true
 \`\`\`
 
 \`\`\` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/deployments/azure-mgmt-deployments-${componentName.toLowerCase()}/azure/mgmt/deployments/${componentName.toLowerCase()}
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resources-${componentName.toLowerCase()}/azure/mgmt/resources/${componentName.toLowerCase()}
 \`\`\`
 `;
 }
@@ -324,8 +324,8 @@ Please also specify \`--typescript-sdks-folder=<path to root folder of your azur
 \`\`\`yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-deployments-${componentName.toLowerCase()}"
-  output-folder: "$(typescript-sdks-folder)/sdk/deployments/arm-deployments-${componentName.toLowerCase()}"
+  package-name: "@azure/arm-resources${componentName.toLowerCase()}"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources${componentName.toLowerCase()}"
   override-client-name: ${clientName}
   generate-metadata: true
 \`\`\`
