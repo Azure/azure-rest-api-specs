@@ -2,7 +2,7 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { setSummary, annotateFileError } from '../src/error-reporting.js';
-import fs from 'fs';
+import fs from 'fs/promises';
 
 describe('ErrorReporting', () => {
   let logSpy;
@@ -28,7 +28,7 @@ describe('ErrorReporting', () => {
   it('should write to the summary file when GITHUB_STEP_SUMMARY is set', async () => {
     process.env.GITHUB_STEP_SUMMARY = `${__dirname}/tmp-summary.md`;
 
-    try { fs.unlinkSync(process.env.GITHUB_STEP_SUMMARY); } catch {}
+    await fs.rm(process.env.GITHUB_STEP_SUMMARY, {force: true});
 
     setSummary('# Title');
 
@@ -36,10 +36,11 @@ describe('ErrorReporting', () => {
       'GITHUB_STEP_SUMMARY is not set. Skipping summary update.'
     );
 
-    const content = fs.readFileSync(process.env.GITHUB_STEP_SUMMARY, 'utf-8');
+    const content = await fs.readFile(process.env.GITHUB_STEP_SUMMARY, 'utf-8');
 
     // cleanup after the test so nothing is left behi
-    try { fs.unlinkSync(process.env.GITHUB_STEP_SUMMARY); } catch {}
+    await fs.rm(process.env.GITHUB_STEP_SUMMARY, {force: true});
+
     expect(content).toBe('# Title');
   });
 
