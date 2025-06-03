@@ -984,7 +984,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1062,7 +1062,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1140,7 +1140,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1463,7 +1463,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1550,7 +1550,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1637,7 +1637,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1724,7 +1724,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1811,7 +1811,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CFlow%3E"
+          "final-state-schema": "#/definitions/ArmFlowResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -1888,7 +1888,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
+          "final-state-schema": "#/definitions/ArmConnectionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2377,7 +2377,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
+          "final-state-schema": "#/definitions/ArmConnectionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2454,7 +2454,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CPipeline%3E"
+          "final-state-schema": "#/definitions/ArmPipelineResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2647,7 +2647,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CConnection%3E"
+          "final-state-schema": "#/definitions/ArmConnectionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2766,11 +2766,7 @@
         ]
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
-    "Azure.ResourceManager.ArmResponse<Connection>": {
+    "ArmConnectionResponse": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
@@ -2783,7 +2779,7 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<Flow>": {
+    "ArmFlowResponse": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
@@ -2796,7 +2792,7 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<Pipeline>": {
+    "ArmPipelineResponse": {
       "type": "object",
       "description": "Azure operation completed successfully.",
       "properties": {
@@ -2808,6 +2804,10 @@
       "required": [
         "body"
       ]
+    },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
     },
     "Connection": {
       "type": "object",
