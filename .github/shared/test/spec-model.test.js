@@ -322,18 +322,6 @@ describe("SpecModel", () => {
   });
 });
 
-describe("getReadme regex", () => {
-  it.each([
-    ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false],
-    ["``` yaml $(tag)=='package-2017-03' && $(go)", true],
-    ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true],
-    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true], // Typical case
-  ])("ignores tags that don't match the regex: %s", (example, expected) => {
-    const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
-    expect(regex.test(example)).toEqual(expected);
-  });
-});
-
 // TODO: Update tests for new object-oriented API
 
 // Stress test the parser against all specs in the specification/ folder. This
