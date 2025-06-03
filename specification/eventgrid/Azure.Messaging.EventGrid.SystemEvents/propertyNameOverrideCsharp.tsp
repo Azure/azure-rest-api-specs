@@ -246,5 +246,4 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
-@@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
