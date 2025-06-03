@@ -1722,8 +1722,23 @@
           "SellerViewContributors": {
             "$ref": "./examples/MaccSellerViewContributors.json"
           },
+          "SellerViewContributorsWithMilestones": {
+            "$ref": "./examples/MaccSellerViewContributorsWithMilestones.json"
+          },
+          "SellerViewContributorsWithMilestonesAndTopup": {
+            "$ref": "./examples/MaccSellerViewContributorsWithMilestonesAndTopup.json"
+          },
+          "SellerViewContributorsWithMilestonesAndShortfall": {
+            "$ref": "./examples/MaccSellerViewContributorsWithMilestonesAndShortfall.json"
+          },
+          "SellerViewContributorsWithMilestonesAndTopupAndShortfall": {
+            "$ref": "./examples/MaccSellerViewContributorsWithMilestonesAndTopupAndShortfall.json"
+          },
           "SellerViewNoContributors": {
             "$ref": "./examples/MaccSellerViewNoContributors.json"
+          },
+          "SellerViewWithMilestonesNoContributors": {
+            "$ref": "./examples/MaccSellerViewWithMilestonesNoContributors.json"
           }
         },
         "parameters": [
@@ -4750,7 +4765,11 @@
         },
         "contributors": {
           "type": "boolean",
-          "description": "contributors is the only supported value"
+          "description": "Setting it to true will return the list of contributors associated with the MACC."
+        },
+        "milestones": {
+          "type": "boolean",
+          "description": "Setting it to true will return the list of milestones associated with the MACC."
         },
         "primaryUri": {
           "$ref": "#/definitions/ResourceUri",
