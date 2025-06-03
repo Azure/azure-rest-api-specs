@@ -871,15 +871,6 @@ model PlanSummary {
   hasRI?: boolean;
 }
 
-@doc("Response page composed of a list of Product objects(that includes subset of product attributes) together with a next page link.\nUsually product attributes returned in the list are used to build product tiles for Marketplace Gallery.\nNote:note The max number of items returned per page is 100. In specific cases for performance optimization, please contact Microsoft Marketplace team MKPL_Platform_API_DL@microsoft.com")
-model CatalogApiResponse {
-  @doc("The list of returned items")
-  items?: ProductSummary[];
-
-  @doc("Link to the next page where request returns more than a single page of results")
-  nextPageLink?: string;
-}
-
 @doc("Response page composed of a list of SKU Summaries together with a next page link")
 model SkuApiResponse {
   @doc("The list of returned items")

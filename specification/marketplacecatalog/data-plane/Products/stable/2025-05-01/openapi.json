@@ -270,7 +270,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "The type of the artifact",
+      "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
       "enum": [
         "Template",
         "Fragment",
@@ -306,7 +306,7 @@
     },
     "Attribute": {
       "type": "object",
-      "description": "Represents a SKU attribute",
+      "description": "Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.",
       "properties": {
         "key": {
           "type": "string",
@@ -432,7 +432,7 @@
     },
     "AzureBenefit": {
       "type": "string",
-      "description": "Eligibility for Azure consumption commitment benefit",
+      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
       "enum": [
         "Eligible",
         "NotEligible"
@@ -527,27 +527,9 @@
         }
       }
     },
-    "CatalogApiResponse": {
-      "type": "object",
-      "description": "Response page composed of a list of Product objects together with a next page link.",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The list of returned items",
-          "items": {
-            "$ref": "#/definitions/ProductSummary"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextPageLink": {
-          "type": "string",
-          "description": "Link to the next page where request returns more than a single page of results"
-        }
-      }
-    },
     "CspState": {
       "type": "string",
-      "description": "Value showing whether the plan is available for purchase through CSP channel",
+      "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects.\nFor more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
       "enum": [
         "OptIn",
         "OptOut",
@@ -575,6 +557,41 @@
         ]
       }
     },
+    "Image": {
+      "type": "object",
+      "description": "Includes link to the product image",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Image id"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Image uri"
+        },
+        "type": {
+          "type": "string",
+          "description": "Image type"
+        }
+      }
+    },
+    "ImageGroup": {
+      "type": "object",
+      "description": "List of image objects",
+      "properties": {
+        "context": {
+          "type": "string",
+          "description": "context"
+        },
+        "items": {
+          "type": "array",
+          "description": "List of images",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
     "IncludedQuantityProperty": {
       "type": "object",
       "description": "Included quantity properties",
@@ -591,7 +608,7 @@
     },
     "LegalTermsType": {
       "type": "string",
-      "description": "Legal terms type",
+      "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
       "enum": [
         "None",
         "EA"
@@ -787,7 +804,7 @@
     },
     "PlanMetadata": {
       "type": "object",
-      "description": "Plan/SKU metadata",
+      "description": "Additional metadata",
       "properties": {
         "generation": {
           "type": "string",
@@ -809,7 +826,7 @@
     },
     "PlanSkuRelation": {
       "type": "object",
-      "description": "Related SKU relation",
+      "description": "Pointing to a related SKU object",
       "properties": {
         "sku": {
           "$ref": "#/definitions/RelatedSku",
@@ -918,6 +935,24 @@
       "required": [
         "planType"
       ]
+    },
+    "PreviewImage": {
+      "type": "object",
+      "description": "Video preview image",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "uri"
+        },
+        "imagePurpose": {
+          "type": "string",
+          "description": "imagePurpose"
+        }
+      }
     },
     "Price": {
       "type": "object",
@@ -1107,6 +1142,43 @@
           "type": "string",
           "description": "Product summary"
         },
+        "videos": {
+          "type": "array",
+          "description": "List of product videos",
+          "items": {
+            "$ref": "#/definitions/ProductVideo"
+          },
+          "x-ms-identifiers": []
+        },
+        "images": {
+          "type": "array",
+          "description": "List of Images",
+          "items": {
+            "$ref": "#/definitions/ImageGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "linkedAddIns": {
+          "type": "array",
+          "description": "List of linked Add Ins provided for the item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "List of Links provided for the item",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "additionalProductProperties": {
+          "type": "object",
+          "description": "Dictionary of additional properties provided for the item",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "linkedAddInsTypes": {
           "type": "object",
           "description": "Linked add-in types",
@@ -1290,6 +1362,22 @@
         "isCoreVm": {
           "type": "boolean",
           "description": "Indicates if VM was originally CoreVirtualMachine"
+        },
+        "stopSellInfo": {
+          "$ref": "#/definitions/StopSellInfo",
+          "description": "A StopSellInfo object providing stop sell related data"
+        },
+        "marketingMaterial": {
+          "$ref": "#/definitions/MarketingMaterial",
+          "description": "Includes links to the learning and marketing materials as configured by the publisher"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "List of artifacts",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1506,7 +1594,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "Delivery method or deployment model",
+      "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)\n- `MicrosoftProduct` - 1st party Azure product",
       "enum": [
         "None",
         "DevService",
@@ -1672,6 +1760,28 @@
         ]
       }
     },
+    "ProductVideo": {
+      "type": "object",
+      "description": "Product Video",
+      "properties": {
+        "caption": {
+          "type": "string",
+          "description": "Caption"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Video uri"
+        },
+        "videoPurpose": {
+          "type": "string",
+          "description": "Video purpose"
+        },
+        "previewImage": {
+          "$ref": "#/definitions/PreviewImage",
+          "description": "Preview image"
+        }
+      }
+    },
     "ProrationPolicy": {
       "type": "object",
       "description": "Proration policy",
@@ -1684,7 +1794,7 @@
     },
     "PublisherType": {
       "type": "string",
-      "description": "Publisher type",
+      "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
       "enum": [
         "Microsoft",
         "ThirdParty"
@@ -1708,7 +1818,7 @@
     },
     "PublishingStage": {
       "type": "string",
-      "description": "Product publishing stage",
+      "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
       "enum": [
         "Preview",
         "Public"
@@ -1786,7 +1896,7 @@
     },
     "RelatedSku": {
       "type": "object",
-      "description": "Related SKU",
+      "description": "The sku",
       "properties": {
         "name": {
           "type": "string",
@@ -2141,7 +2251,7 @@
     },
     "VmArchitectureType": {
       "type": "string",
-      "description": "VM Architecture Type",
+      "description": "VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
       "enum": [
         "X64Gen1",
         "X64Gen2",
@@ -2171,7 +2281,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "VM security type",
+      "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
       "enum": [
         "None",
         "Trusted",
