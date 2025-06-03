@@ -5,12 +5,9 @@ import * as path from "path";
 import * as fs from "fs";
 
 import { Swagger } from "@azure-tools/specs-shared/swagger";
-
+import { includesFolder } from "@azure-tools/specs-shared/path";
 import {
-  example,
   getChangedFiles,
-  specification,
-  swagger,
 } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
@@ -128,11 +125,38 @@ async function getFiles(
     withFileTypes: true,
   });
 
-  return items
+
+  let filteredItems = items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
     .map((d) => path.join(target, d.name))
-    .map((d) => d.replace(/^.*?(specification\/.*)$/, "$1"))
-    .filter((d) => specification(d));
+    .map((d) => d.replace(/^.*?(specification[\/\\].*)$/, "$1"));
+
+  console.log(
+    `Found ${filteredItems.length} files in ${directory} that match the criteria before checking for specification directory`)
+
+  console.log(
+    `Filtering out files that are not in the specification directory: ${filteredItems.join(", ")}`,
+  );
+  return filteredItems
+    .filter((d) => d.includes("specification" + path.sep));
+}
+
+function example(file: string): boolean {
+  return (
+    typeof file === "string" &&
+    file.toLowerCase().endsWith(".json") &&
+    includesFolder(file, "examples")
+  );
+}
+
+function swagger(file: string): boolean {
+  return (
+    typeof file === "string" &&
+    file.toLowerCase().endsWith(".json") &&
+    (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
+    includesFolder(file, "specification") &&
+    !includesFolder(file, "examples")
+  )
 }
 
 export async function processFilesToSpecificationList(
@@ -160,6 +184,9 @@ export async function processFilesToSpecificationList(
       const swaggerDir = path.dirname(path.dirname(file));
 
       const visibleSwaggerFiles = await getFiles(rootDirectory, swaggerDir);
+      console.log(
+        `Found ${visibleSwaggerFiles.length} swagger files in ${swaggerDir}`
+      );
 
       for (const swaggerFile of visibleSwaggerFiles) {
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
@@ -175,7 +202,11 @@ export async function processFilesToSpecificationList(
         // the resolved files are absolute paths, so to compare them to the file we're looking at, we need
         // to use the absolute path version of the example file.
         if (referencedExamples?.indexOf(absoluteFilePath) !== -1) {
-          additionalSwaggerFiles.push(swaggerFile);
+          // unfortunately, we get lists of files in posix format from get-changed-files. because of this, when are are grabbing a
+          // resolved swagger file, we need to ensure we are using the posix version of the path as well. If we do not do this,
+          // if we change an example and a spec, we will end up resolving the changed spec twice, one with the posix path (from changed-files)
+          // and one with the windows path (resolved from the swagger model which we pulled refs from to determine which example belonged to which swagger)
+          additionalSwaggerFiles.push(swaggerFile.replace(/\\/g, "/"));
         }
       }
     }
