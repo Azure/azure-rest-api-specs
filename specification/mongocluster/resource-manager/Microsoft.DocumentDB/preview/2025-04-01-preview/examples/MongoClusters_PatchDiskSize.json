@@ -1,0 +1,79 @@
+{
+  "operationId": "MongoClusters_Update",
+  "title": "Updates the disk size on a Mongo Cluster resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2025-04-01-preview",
+    "properties": {
+      "properties": {
+        "storage": {
+          "sizeGb": 256
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "5.0",
+          "storage": {
+            "sizeGb": 256,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 4
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
+          "previewFeatures": [],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "replicationState": "Active",
+            "role": "Primary"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          }
+        },
+        "location": "westus2"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterOperationResults/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterAzureAsyncOperation/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}
