@@ -261,7 +261,7 @@ model ExportDependenciesOperationResult {
 @doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
 model ExportDependenciesResultProperties {
   @doc("The SAS URI of the blob containing the exported dependencies data.")
-  blobSasUri?: string;
+  exportedDataSasUri?: string;
 
   @doc("A status message returned by the service with additional context about the export dependencies operation.")
   statusMessage?: string;
