@@ -1879,6 +1879,24 @@
           "type": "string",
           "description": "Path which should be used as a prefix for all HTTP requests. Null means no path will be prefixed. Default value is null."
         },
+        "dedicatedBackendConnection": {
+          "type": "boolean",
+          "description": "Whether Dedicated backend connection Support is enabled or not. Default value is false."
+        },
+        "validateCertChainAndExpiry": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to validate cert chain and Expiry of the Backend Cert for Https protocol. Default value is true."
+        },
+        "validateSNI": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to validate SNI Name of the Backend Cert for Https protocol. Default value is true."
+        },
+        "sniName": {
+          "type": "string",
+          "description": "Custom Server name indication to be sent to the backend servers for Https protocol. Default value is null"
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
