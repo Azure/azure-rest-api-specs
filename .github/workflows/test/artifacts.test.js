@@ -703,7 +703,7 @@ describe("fetchFailedArtifact function", () => {
     expect(response).toBe(mockFetchResponse);
   });
 
-  it("should throw an error when no matching artifacts are found", async () => {
+  it("should return 404 when no matching artifacts are found", async () => {
     // Mock response with no matching artifacts
     const mockListResponse = {
       ok: true,
@@ -725,8 +725,11 @@ describe("fetchFailedArtifact function", () => {
 
     global.fetch.mockResolvedValue(mockListResponse);
 
-    // Call the function and expect it to throw
-    await expect(fetchFailedArtifact(defaultParams)).rejects.toThrow(
+    // Call the function and expect it to return a 404 response
+    const response = await fetchFailedArtifact(defaultParams);
+    expect(response.ok).toBe(false);
+    expect(response.status).toBe(404);
+    expect(response.statusText).toBe(
       `No artifacts found with name containing ${defaultParams.artifactName}`,
     );
   });
