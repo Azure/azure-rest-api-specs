@@ -41,6 +41,12 @@ These settings apply only when `--tag=package-preview-2025-07` is specified on t
 input-file:
   - Microsoft.DeviceRegistry/preview/2025-07-01-preview/deviceregistry.json
 suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
   - code: OperationIdNounVerb
     from:
       - deviceregistry.json
