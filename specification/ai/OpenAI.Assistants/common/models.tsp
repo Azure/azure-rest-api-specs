@@ -161,24 +161,6 @@ model AssistantsApiResponseFormatJsonObject
   type: ApiResponseFormat.jsonObject;
 }
 
-/** An object describing expected output of the model to match a JSON schema. */
-model AssistantsApiResponseFormatJsonSchemaJsonSchema {
-  /** A description of what the response format is for, used by the model to determine how to respond in the format. */
-  description?: string;
-
-  /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
-  name: string;
-
-  /** The schema for the response format, described as a JSON Schema object. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-  schema: unknown;
-
-  /**
-   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
-   */
-  strict?: boolean;
-}
-
 /**
  * An object describing expected output of the model to match a JSON schema.
  */
@@ -189,8 +171,24 @@ model AssistantsApiResponseFormatJsonSchema
   type: ApiResponseFormat.jsonSchema;
 
   /** The JSON schema that the model must output. */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @encodedName("application/json", "json_schema")
-  jsonSchema: AssistantsApiResponseFormatJsonSchemaJsonSchema;
+  jsonSchema: {
+    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+    description?: string;
+
+    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+    name: string;
+
+    /** The schema for the response format, described as a JSON Schema object. */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+    schema: unknown;
+
+    /**
+     * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
+     */
+    strict?: boolean;
+  };
 }
 
 /** Possible API response formats. */

@@ -111,48 +111,24 @@ model DocumentClassifierAnalyzeRequestParams {
   pages?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
-@doc("Input content type for analyze from stream request parameters.")
-union AnalyzeFromStreamContentType {
-  /** Binary data stream */
-  "application/octet-stream",
-
-  /** PDF document */
-  "application/pdf",
-
-  /** JPEG image */
-  "image/jpeg",
-
-  /** PNG image */
-  "image/png",
-
-  /** TIFF image */
-  "image/tiff",
-
-  /** BMP image */
-  "image/bmp",
-
-  /** HEIF image */
-  "image/heif",
-
-  /** HTML document */
-  "text/html",
-
-  /** Word document */
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-
-  /** Excel document */
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-
-  /** PowerPoint document */
-  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-}
-
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing clients"
   @doc("Input content type.")
   @header
-  contentType: AnalyzeFromStreamContentType;
+  contentType:
+    | "application/octet-stream"
+    | "application/pdf"
+    | "image/jpeg"
+    | "image/png"
+    | "image/tiff"
+    | "image/bmp"
+    | "image/heif"
+    | "text/html"
+    | "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    | "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    | "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
   @doc("Input content.")
   @bodyRoot

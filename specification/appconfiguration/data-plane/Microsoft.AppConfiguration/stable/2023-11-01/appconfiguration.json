@@ -2666,30 +2666,6 @@
         ]
       }
     },
-    "CreateSnapshotContentType": {
-      "type": "string",
-      "description": "The content types for createSnapshot.",
-      "enum": [
-        "application/vnd.microsoft.appconfig.snapshot+json",
-        "application/json"
-      ],
-      "x-ms-enum": {
-        "name": "CreateSnapshotContentType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "application/vnd.microsoft.appconfig.snapshot+json",
-            "value": "application/vnd.microsoft.appconfig.snapshot+json",
-            "description": "The content type for a key-value snapshot."
-          },
-          {
-            "name": "application/json",
-            "value": "application/json",
-            "description": "The content type for a JSON object."
-          }
-        ]
-      }
-    },
     "Error": {
       "type": "object",
       "description": "Azure App Configuration error object.",
@@ -2971,54 +2947,6 @@
         "status"
       ]
     },
-    "PutKeyValueContentType": {
-      "type": "string",
-      "description": "The content type used when creating or updating a key-value.",
-      "enum": [
-        "application/vnd.microsoft.appconfig.kv+json",
-        "application/vnd.microsoft.appconfig.kvset+json",
-        "application/json",
-        "text/json",
-        "application/*+json",
-        "application/json-patch+json"
-      ],
-      "x-ms-enum": {
-        "name": "PutKeyValueContentType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "application/vnd.microsoft.appconfig.kv+json",
-            "value": "application/vnd.microsoft.appconfig.kv+json",
-            "description": "The content type for a single key-value pair."
-          },
-          {
-            "name": "application/vnd.microsoft.appconfig.kvset+json",
-            "value": "application/vnd.microsoft.appconfig.kvset+json",
-            "description": "The content type for a set of key-values."
-          },
-          {
-            "name": "application/json",
-            "value": "application/json",
-            "description": "The content type for a JSON object."
-          },
-          {
-            "name": "text/json",
-            "value": "text/json",
-            "description": "The content type for a JSON object with a specific schema."
-          },
-          {
-            "name": "application/*+json",
-            "value": "application/*+json",
-            "description": "The content type for a broad JSON operation."
-          },
-          {
-            "name": "application/json-patch+json",
-            "value": "application/json-patch+json",
-            "description": "The content type for a JSON patch operation with a specific schema."
-          }
-        ]
-      }
-    },
     "Snapshot": {
       "type": "object",
       "description": "A snapshot is a named, immutable subset of an App Configuration store's key-values.",
@@ -3239,30 +3167,6 @@
           "$ref": "#/definitions/SnapshotStatus",
           "description": "The desired status of the snapshot."
         }
-      }
-    },
-    "UpdateSnapshotContentType": {
-      "type": "string",
-      "description": "The content types for updateSnapshot.",
-      "enum": [
-        "application/merge-patch+json",
-        "application/json"
-      ],
-      "x-ms-enum": {
-        "name": "UpdateSnapshotContentType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "application/merge-patch+json",
-            "value": "application/merge-patch+json",
-            "description": "The content type for a JSON merge patch operation."
-          },
-          {
-            "name": "application/json",
-            "value": "application/json",
-            "description": "The content type for a JSON object."
-          }
-        ]
       }
     }
   },
