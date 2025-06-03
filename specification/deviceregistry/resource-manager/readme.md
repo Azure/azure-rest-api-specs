@@ -52,6 +52,10 @@ suppressions:
       - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
       - $.definitions.NamespaceDeviceProperties.properties.attributes
       - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
     reason: attributes is a customer-defined property of any shape and custom keys for other properties
   - code: OperationIdNounVerb
     from:
