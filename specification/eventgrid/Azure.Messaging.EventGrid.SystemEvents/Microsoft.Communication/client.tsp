@@ -577,6 +577,24 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyModel,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyModel,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyReason,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyReason,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyKind,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatThreadRetentionPolicyKind,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Usage.output
 );
