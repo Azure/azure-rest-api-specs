@@ -26,10 +26,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData, Usage.output);
@@ -573,10 +573,8 @@ using Azure.ClientGenerator.Core;
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
@@ -584,4 +582,177 @@ using Azure.ClientGenerator.Core;
 );
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Access.public
+);
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatAzureBotCommandReceivedInThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageDeletedInThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageEditedInThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedInThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatParticipantAddedToThreadWithUserEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatParticipantRemovedFromThreadWithUserEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadCreatedWithUserEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadPropertiesUpdatedPerUserEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatThreadWithUserDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsChatTypingIndicatorReceivedInThreadEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRecordingFileStatusUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobCancelledEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassificationFailedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobClassifiedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobClosedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobExceptionTriggeredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobQueuedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobSchedulingFailedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobUnassignedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobWaitingForActivationEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterJobWorkerSelectorsExpiredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerDeregisteredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferAcceptedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferDeclinedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferExpiredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferIssuedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerOfferRevokedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerRegisteredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsSmsDeliveryReportReceivedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
+  "csharp"
 );

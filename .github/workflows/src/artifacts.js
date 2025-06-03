@@ -32,6 +32,7 @@ import { fetchWithRetry } from "./retries.js";
  * @param {typeof import("@actions/core")} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
  * @param {boolean} [params.fallbackToFailedArtifact]
+ * @param {string} [params.token]
  * @returns {Promise<{artifactData: string}>}
  */
 export async function getAzurePipelineArtifact({
@@ -42,19 +43,22 @@ export async function getAzurePipelineArtifact({
   core,
   retryOptions = {},
   fallbackToFailedArtifact = false,
+  token = undefined,
 }) {
   let apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
+  const headers = {
+    "Content-Type": "application/json",
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
   let artifactData = "";
   // Use Node.js fetch with retry to call the API
   let response = await fetchWithRetry(
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );
@@ -71,6 +75,7 @@ export async function getAzurePipelineArtifact({
         artifactName,
         core,
         retryOptions,
+        headers,
       });
     }
   }
@@ -98,8 +103,11 @@ export async function getAzurePipelineArtifact({
     // Step 2: Fetch Artifact Content (as a Buffer) with retry
     const artifactResponse = await fetchWithRetry(
       downloadUrl,
-      {},
-      { logger: core.info },
+      {
+        method: "GET",
+        headers,
+      },
+      retryOptions,
     );
     if (!artifactResponse.ok) {
       throw new Error(
@@ -143,6 +151,7 @@ export function getAdoBuildInfoFromUrl(buildUrl) {
  * @param {string} params.artifactName
  * @param {typeof import("@actions/core")} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
+ * @param {Object} [params.headers]
  * @returns {Promise<Response>}
  */
 export async function fetchFailedArtifact({
@@ -151,6 +160,7 @@ export async function fetchFailedArtifact({
   artifactName,
   core,
   retryOptions = {},
+  headers,
 }) {
   // fallback to fetch the failed artifact
   let apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?api-version=7.0`;
@@ -159,9 +169,7 @@ export async function fetchFailedArtifact({
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );
@@ -189,9 +197,7 @@ export async function fetchFailedArtifact({
     apiUrl,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
     },
     retryOptions,
   );
