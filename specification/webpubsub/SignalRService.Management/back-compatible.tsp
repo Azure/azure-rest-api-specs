@@ -45,3 +45,6 @@ using Microsoft.SignalRService;
 @@clientName(Replicas.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Replica.properties);
+@@clientName(WebPubSubOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);

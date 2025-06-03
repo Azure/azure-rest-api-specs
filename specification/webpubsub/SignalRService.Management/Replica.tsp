@@ -15,7 +15,9 @@ namespace Microsoft.SignalRService;
  * A class represent a replica resource.
  */
 @parentResource(WebPubSubResource)
-model Replica is Azure.ResourceManager.TrackedResource<ReplicaProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model Replica extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Replica,
     KeyName = "replicaName",
@@ -28,6 +30,11 @@ model Replica is Azure.ResourceManager.TrackedResource<ReplicaProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: ReplicaProperties;
 }
 
 @armResourceOperations

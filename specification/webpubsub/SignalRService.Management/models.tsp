@@ -551,7 +551,7 @@ model WebPubSubProperties {
    * The publicly accessible IP of the resource.
    */
   @visibility(Lifecycle.Read)
-  externalIp?: string;
+  externalIP?: string;
 
   /**
    * FQDN of the service instance.
@@ -615,7 +615,7 @@ model WebPubSubProperties {
   /**
    * Network ACLs for the resource
    */
-  networkAcls?: WebPubSubNetworkAcls;
+  networkACLs?: WebPubSubNetworkACLs;
 
   /**
    * Application firewall settings for the resource
@@ -660,7 +660,7 @@ model WebPubSubProperties {
   /**
    * SocketIO settings for the resource
    */
-  socketIo?: WebPubSubSocketIoSettings;
+  socketIO?: WebPubSubSocketIOSettings;
 }
 
 /**
@@ -841,7 +841,7 @@ model ResourceLogCategory {
 /**
  * Network ACLs for the resource
  */
-model WebPubSubNetworkAcls {
+model WebPubSubNetworkACLs {
   /**
    * Azure Networking ACL Action.
    */
@@ -850,17 +850,18 @@ model WebPubSubNetworkAcls {
   /**
    * Network ACL
    */
-  publicNetwork?: NetworkAcl;
+  publicNetwork?: NetworkACL;
 
   /**
    * ACLs for requests from private endpoints
    */
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  privateEndpoints?: PrivateEndpointAcl[];
+  privateEndpoints?: PrivateEndpointACL[];
 
   /**
    * IP rules for filtering public traffic
    */
+  @maxItems(30)
   @OpenAPI.extension("x-ms-identifiers", #[])
   ipRules?: IPRule[];
 }
@@ -868,7 +869,7 @@ model WebPubSubNetworkAcls {
 /**
  * Network ACL
  */
-model NetworkAcl {
+model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
@@ -886,7 +887,7 @@ model NetworkAcl {
  * ACL for a private endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointAcl extends NetworkAcl {
+model PrivateEndpointACL extends NetworkACL {
   /**
    * Name of the private endpoint connection
    */
@@ -915,12 +916,14 @@ model ApplicationFirewallSettings {
   /**
    * Rules to control the client connection count
    */
+  @maxItems(10)
   @OpenAPI.extension("x-ms-identifiers", #[])
   clientConnectionCountRules?: ClientConnectionCountRule[];
 
   /**
    * Rules to control the client traffic
    */
+  @maxItems(10)
   @OpenAPI.extension("x-ms-identifiers", #[])
   clientTrafficControlRules?: ClientTrafficControlRule[];
 
@@ -953,7 +956,7 @@ model ClientTrafficControlRule {
 /**
  * SocketIO settings for the resource
  */
-model WebPubSubSocketIoSettings {
+model WebPubSubSocketIOSettings {
   /**
    * The service mode of Web PubSub for Socket.IO. Values allowed:
    * "Default": have your own backend Socket.IO server
@@ -1377,7 +1380,7 @@ model SkuList {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension(
     "x-ms-identifiers",
-    #["resourceType", "/resourceSku/name", "/resourceSku/tier"]
+    #["resourceType", "/sku/name", "/sku/tier"]
   )
   value?: Sku[];
 
@@ -1403,7 +1406,7 @@ model Sku {
    * The billing information of the resource.
    */
   @visibility(Lifecycle.Read)
-  resourceSku?: ResourceSku;
+  sku?: ResourceSku;
 
   /**
    * Describes scaling information of a sku.

@@ -42,7 +42,10 @@ interface CustomDomains {
   @operationId("WebPubSubCustomDomains_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
-    Response = ArmResourceCreatedResponse<CustomDomain>
+    Response = ArmResourceCreatedResponse<
+      CustomDomain,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>
+    >
   >;
 
   /**

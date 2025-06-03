@@ -13,8 +13,9 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
-model WebPubSubResource
-  is Azure.ResourceManager.TrackedResource<WebPubSubProperties> {
+@Azure.ResourceManager.Private.armResourceInternal(WebPubSubProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model WebPubSubResource extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
     KeyName = "resourceName",
@@ -27,6 +28,11 @@ model WebPubSubResource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
+
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties?: WebPubSubProperties;
 
   /**
    * The kind of the service
@@ -59,7 +65,10 @@ interface WebPubSubResources {
   @operationId("WebPubSub_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebPubSubResource,
-    Response = ArmResourceUpdatedResponse<WebPubSubResource> | ArmResourceCreatedResponse<WebPubSubResource> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<WebPubSubResource> | ArmResourceCreatedResponse<
+      WebPubSubResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -109,11 +118,7 @@ interface WebPubSubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WebPubSub_ListKeys")
-  listKeys is ArmResourceActionSync<
-    WebPubSubResource,
-    void,
-    ArmResponse<WebPubSubKeys>
-  >;
+  listKeys is ArmResourceActionSync<WebPubSubResource, void, WebPubSubKeys>;
 
   /**
    * Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
@@ -123,7 +128,7 @@ interface WebPubSubResources {
   regenerateKey is ArmResourceActionAsync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    ArmResponse<WebPubSubKeys>
+    WebPubSubKeys | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubKeys>>
   >;
 
   /**
