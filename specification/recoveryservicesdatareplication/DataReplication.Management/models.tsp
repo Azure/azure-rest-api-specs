@@ -46,11 +46,6 @@ union ProvisioningState {
    * Resource creation/update succeeded.
    */
   Succeeded: "Succeeded",
-
-  /**
-   * Resource is being updated.
-   */
-  Updating: "Updating",
 }
 
 /**
