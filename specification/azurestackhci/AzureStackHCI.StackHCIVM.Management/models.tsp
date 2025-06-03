@@ -1267,6 +1267,10 @@ model VirtualHardDiskProperties {
   @doc("The observed state of virtual hard disks")
   @visibility(Lifecycle.Read)
   status?: VirtualHardDiskStatus;
+
+  @added(Versions.v2025_07_01_preview)
+  @doc("The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.")
+  maxShares?: int64;
 }
 
 #suppress "deprecated" "Legacy flattening"
@@ -1288,6 +1292,15 @@ model VirtualHardDiskStatus {
   @added(Versions.v2024_05_01_preview)
   @doc("The upload status of the virtual hard disk")
   uploadStatus?: VirtualHardDiskUploadStatus;
+
+  @added(Versions.v2025_07_01_preview)
+  @doc("ARM IDs of the resources that are consuming the VHD.")
+  managedBy?: string[];
+
+  @added(Versions.v2025_07_01_preview)
+  @doc("Unique Guid identifying the resource.")
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
 }
 
 @doc("VHD Status provisioning status")
