@@ -295,6 +295,7 @@ model OperationProperties {
   serviceSpecification?: ServiceSpecification;
 }
 
+model OperationList is Azure.Core.Page<Operation>;
 /**
  * An object that describes a specification.
  */

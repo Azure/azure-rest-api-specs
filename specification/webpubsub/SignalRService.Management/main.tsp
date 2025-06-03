@@ -50,4 +50,24 @@ enum Versions {
   v2025_01_01_preview: "2025-01-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+/**
+ * This is the interface that implements the standard Azure Resource Manager operation that returns
+ * all supported RP operations. You should have exactly one declaration for each
+ * Azure Resource Manager service. It implements
+ *   GET "/providers/Microsoft.ContosoProviderHub/operations"
+ */
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationList> | ErrorResponse;
+}
