@@ -1,0 +1,71 @@
+{
+  "title": "Update_NamespaceDiscoveredDevice",
+  "operationId": "NamespaceDiscoveredDevices_Update",
+  "description": "Patch a Namespace Discovered Device",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "discoveredDeviceName": "my-discovereddevice-1",
+    "properties": {
+      "properties": {
+        "endpoints": {
+          "outbound": {
+            "assigned": {
+              "newEventGridEndpoint": {
+                "endpointType": "Microsoft.EventGrid",
+                "address": "https://myneweventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/discoveredDevice/my-discovereddevice-1",
+        "name": "my-discovereddevice-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/discoveredDevice",
+        "location": "West Europe",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+        },
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "endpoints": {
+            "outbound": {
+              "assigned": {
+                "newEventGridEndpoint": {
+                  "endpointType": "Microsoft.EventGrid",
+                  "address": "https://myneweventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+                }
+              }
+            }
+          },
+          "discoveryId": "discoveryId1",
+          "version": 1,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

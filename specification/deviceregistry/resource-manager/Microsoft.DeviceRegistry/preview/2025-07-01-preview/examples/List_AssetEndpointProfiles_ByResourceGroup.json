@@ -1,0 +1,115 @@
+{
+  "title": "List_AssetEndpointProfiles_ByResourceGroup",
+  "operationId": "AssetEndpointProfiles_ListByResourceGroup",
+  "description": "List Asset Endpoint Profiles in a Resource Group",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile",
+            "name": "my-assetendpointprofile",
+            "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
+            "location": "West Europe",
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+            },
+            "tags": {
+              "site": "building-1"
+            },
+            "systemData": {
+              "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "createdByType": "Application",
+              "createdAt": "2022-11-16T00:36:43.2516899Z",
+              "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+            },
+            "properties": {
+              "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+              "targetAddress": "https://www.example.com/myTargetAddress",
+              "endpointProfileType": "myEndpointProfileType",
+              "authentication": {
+                "method": "Anonymous"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile1",
+            "name": "my-assetendpointprofile1",
+            "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
+            "location": "West Europe",
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+            },
+            "tags": {
+              "site": "building-2"
+            },
+            "systemData": {
+              "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "createdByType": "Application",
+              "createdAt": "2022-11-16T00:36:43.2516899Z",
+              "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+            },
+            "properties": {
+              "uuid": "7824a74f-21e1-4458-ae06-604d3a241d2c",
+              "targetAddress": "https://www.example.com/myTargetAddress1",
+              "endpointProfileType": "myEndpointProfileType",
+              "authentication": {
+                "method": "Certificate",
+                "x509Credentials": {
+                  "certificateSecretName": "certificatRef"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assetEndpointProfiles/my-assetendpointprofile2",
+            "name": "my-assetendpointprofile2",
+            "type": "Microsoft.DeviceRegistry/assetEndpointProfiles",
+            "location": "West Europe",
+            "extendedLocation": {
+              "type": "CustomLocation",
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+            },
+            "tags": {
+              "site": "building-2"
+            },
+            "systemData": {
+              "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "createdByType": "Application",
+              "createdAt": "2022-11-16T00:36:43.2516899Z",
+              "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+            },
+            "properties": {
+              "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
+              "targetAddress": "https://www.example.com/myTargetAddress2",
+              "endpointProfileType": "myEndpointProfileType",
+              "authentication": {
+                "method": "UsernamePassword",
+                "usernamePasswordCredentials": {
+                  "usernameSecretName": "usernameRef",
+                  "passwordSecretName": "passwordRef"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
