@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-11-01-preview",
+    "version": "2025-02-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -122,7 +122,7 @@
             "$ref": "./examples/ElasticPoolGetWithPreferredEnclaveType.json"
           },
           "Get an elastic pool with Availability Zone": {
-            "$ref": "./examples/GetElasticPoolWithAvailabilityZone.json"
+            "$ref": "./examples/GetElasticPoolWithPinnedAvailabilityZone.json"
           },
           "Get an elastic pool with serverless properties": {
             "$ref": "./examples/GetElasticPoolWithServerlessProperties.json"
@@ -212,7 +212,7 @@
             "$ref": "./examples/ElasticPoolCreateWithVBSPreferredEnclaveType.json"
           },
           "Create or Update an elastic pool with Availability Zone": {
-            "$ref": "./examples/CreateElasticPoolWithAvailabilityZone.json"
+            "$ref": "./examples/CreateElasticPoolWithPinnedAvailabilityZone.json"
           },
           "Create or Update an elastic pool with serverless properties": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateServerlessProperties.json"
@@ -558,7 +558,7 @@
             "modelAsString": true
           }
         },
-        "availabilityZone": {
+        "pinnedAvailabilityZone": {
           "description": "Specifies the availability zone the pool's primary replica is pinned to.",
           "enum": [
             "NoPreference",
@@ -655,7 +655,7 @@
             "modelAsString": true
           }
         },
-        "availabilityZone": {
+        "pinnedAvailabilityZone": {
           "description": "Specifies the availability zone the pool's primary replica is pinned to.",
           "enum": [
             "NoPreference",
