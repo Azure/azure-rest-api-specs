@@ -373,7 +373,10 @@ using Microsoft.DataReplication;
   "java"
 );
 @@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
-@@clientName(PrivateEndpointConnectionProxies, "PrivateEndpointConnProxies", "java");
+@@clientName(PrivateEndpointConnectionProxies,
+  "PrivateEndpointConnProxies",
+  "java"
+);
 @@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
 
 // seems we are not able to rename XXListResult models and anonymous models
