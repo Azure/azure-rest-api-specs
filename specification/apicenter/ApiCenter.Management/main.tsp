@@ -136,6 +136,7 @@ enum Versions {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "It is pascal case"
 @get
+@list
 @autoRoute
 @listsResource(TResource)
 @segmentOf(TResource)

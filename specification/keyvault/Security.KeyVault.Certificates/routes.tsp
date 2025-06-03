@@ -20,6 +20,7 @@ namespace KeyVault;
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
+@list
 op getCertificates is KeyVaultOperation<
   {
     /**
@@ -102,6 +103,7 @@ op deleteCertificateContacts is KeyVaultOperation<{}, Contacts>;
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
+@list
 op getCertificateIssuers is KeyVaultOperation<
   {
     /**
@@ -268,6 +270,7 @@ op importCertificate is KeyVaultOperation<
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
+@list
 op getCertificateVersions is KeyVaultOperation<
   {
     /**
@@ -530,6 +533,7 @@ op restoreCertificate is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
+@list
 op getDeletedCertificates is KeyVaultOperation<
   {
     /**

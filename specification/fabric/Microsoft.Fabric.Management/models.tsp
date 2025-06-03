@@ -107,12 +107,11 @@ union ResourceState {
 }
 
 @doc("An object that represents enumerating SKUs for new resources.")
-@pagedResult
 model RpSkuEnumerationForNewResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The collection of available SKUs for new resources")
   @identifiers(#[])
-  @items
+  @pageItems
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -138,11 +137,10 @@ model RpSkuProperties {
 }
 
 @doc("An object that represents enumerating SKUs for existing resources")
-@pagedResult
 model RpSkuEnumerationForExistingResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The SKU details")
-  @items
+  @pageItems
   @identifiers(#[])
   value: Array<RpSkuDetailsForExistingResource>;
 

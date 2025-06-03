@@ -60,6 +60,7 @@ interface SitesByServiceGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
+  @list
   @added(Versions.v2025_03_01_preview)
   listByServiceGroup(
     ...ApiVersionParameter,

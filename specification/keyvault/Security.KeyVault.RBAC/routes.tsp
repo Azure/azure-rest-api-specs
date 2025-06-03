@@ -84,6 +84,7 @@ interface RoleDefinitions {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleDefinitions")
   @get
+  @list
   list is KeyVaultOperation<
     {
       /**
@@ -177,6 +178,7 @@ interface RoleAssignments {
    */
   @route("/{+scope}/providers/Microsoft.Authorization/roleAssignments")
   @get
+  @list
   listForScope is KeyVaultOperation<
     {
       /**

@@ -62,6 +62,7 @@ interface Indexes {
   @doc("List the versions of an Index given the name.")
   @route("/indexes/{name}/versions")
   @get
+  @list
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
@@ -128,6 +129,7 @@ interface Indexes {
   @doc("List the latest version of each index. Latest is defined by most recent created by date.")
   @route("/indexes")
   @get
+  @list
   listLatest is Azure.Core.Foundations.Operation<
     {
       ...StandardListQueryParameters;
@@ -185,6 +187,7 @@ interface Prompts {
   @doc("List the versions of a Prompt given the name.")
   @route("/prompts/{name}/versions")
   @get
+  @list
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
@@ -244,6 +247,7 @@ interface Prompts {
   @doc("List the latest version of each prompt. Latest is defined by most recent created by date.")
   @route("/prompts")
   @get
+  @list
   listLatest is Azure.Core.Foundations.Operation<
     {
       ...StandardListQueryParameters;

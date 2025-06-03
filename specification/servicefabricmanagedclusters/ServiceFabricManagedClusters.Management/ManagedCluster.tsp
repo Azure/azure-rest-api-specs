@@ -103,6 +103,7 @@ interface ManagedClusters {
    * Gets the list of recent fault simulations for the cluster.
    */
   @tag("FaultSimulation")
+  @list
   listFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
     void,

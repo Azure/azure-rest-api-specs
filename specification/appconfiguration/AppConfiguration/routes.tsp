@@ -88,6 +88,7 @@ alias KeyValuesRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of key-values.")
 @doc("Gets a list of key-values.")
+@list
 op getKeyValues is Foundations.ResourceList<
   KeyValue,
   KeyValuesRequestParams,
@@ -221,6 +222,7 @@ op checkKeyValue is AppConfigOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a list of key-value snapshots.")
 @doc("Gets a list of key-value snapshots.")
+@list
 op getSnapshots is Foundations.ResourceList<
   Snapshot,
   {
@@ -353,6 +355,7 @@ alias LabelsRequestParams = {
 @summary("Gets a list of labels.")
 @doc("Gets a list of labels.")
 @route("/labels")
+@list
 op getLabels is AppConfigOperation<
   LabelsRequestParams,
   LabelListResult &
@@ -432,6 +435,7 @@ alias RevisionsRequestParams = {
 @doc("Gets a list of key-value revisions.")
 @route("/revisions")
 @get
+@list
 op getRevisions is AppConfigOperation<
   RevisionsRequestParams,
   KeyValueListResult &

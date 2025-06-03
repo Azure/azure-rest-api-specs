@@ -50,10 +50,9 @@ model VirtualMachineScaleSet {
 }
 
 @doc("The response of a VirtualMachineScaleSet list operation.")
-@pagedResult
 model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
-  @items
+  @pageItems
   value: Array<VirtualMachineScaleSet>;
 
   @doc("The link to the next page of items")
