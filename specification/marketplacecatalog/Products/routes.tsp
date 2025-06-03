@@ -10,7 +10,6 @@ using TypeSpec.Http;
 namespace Products;
 
 // Product listing traits
-
 alias ProductsListingTraits = SupportsClientRequestId &
   SupportsRepeatableRequests &
   NoConditionalRequests &
@@ -22,7 +21,8 @@ alias ProductsListingTraits = SupportsClientRequestId &
     SelectQueryParameter &
     FilterParameter &
     ExpandQueryParameter &
-    OrderByQueryParameter>;
+    OrderByQueryParameter> &
+  RequestHeadersTrait<ApiKeyParameter>;
 
 // Product get traits
 alias ProductsGetTraits = SupportsClientRequestId &
@@ -36,10 +36,10 @@ alias ProductsGetTraits = SupportsClientRequestId &
     HideKeysParameter &
     ExcludeSkuDetailsParameter &
     IncludeFutureAvailabilitiesParameter &
-    SkuIdParameter &
-    PricingAudienceHeaderParameter &
-    ApiKeyParameter>;
+    SkuIdParameter> &
+  RequestHeadersTrait<ApiKeyParameter & PricingAudienceHeaderParameter>;
 
+// Operation definitions
 alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
 alias ProductsGetOperation = ResourceOperations<ProductsGetTraits>;
 

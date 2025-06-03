@@ -22,6 +22,87 @@
   ],
   "tags": [],
   "paths": {
+    "/product/{uniqueProductId}": {
+      "get": {
+        "operationId": "ProductOperations_Get",
+        "description": "Retrieves a single product by ID from the marketplace catalog.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "uniqueProductId",
+            "in": "path",
+            "description": "Unique product identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/MarketParameter"
+          },
+          {
+            "$ref": "#/parameters/StorefrontParameter"
+          },
+          {
+            "$ref": "#/parameters/LanguageParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationsParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeStopSoldPlansParameter"
+          },
+          {
+            "$ref": "#/parameters/HideKeysParameter"
+          },
+          {
+            "$ref": "#/parameters/ExcludeSkuDetailsParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeFutureAvailabilitiesParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyParameter"
+          },
+          {
+            "$ref": "#/parameters/PricingAudienceHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProductDetails"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/products": {
       "get": {
         "operationId": "ProductOperations_List",
@@ -59,6 +140,9 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -100,10 +184,6 @@
     }
   },
   "definitions": {
-    "ApiKeyParameter": {
-      "type": "object",
-      "description": "ApiKey"
-    },
     "Artifact": {
       "type": "object",
       "description": "Plan level resources and configuration files",
@@ -893,7 +973,8 @@
         },
         "uniqueProductId": {
           "type": "string",
-          "description": "Unique product identifier"
+          "description": "Unique product identifier",
+          "readOnly": true
         },
         "productType": {
           "$ref": "#/definitions/ProductType",
@@ -1119,6 +1200,7 @@
         }
       },
       "required": [
+        "uniqueProductId",
         "productType",
         "productId",
         "isPrivate",
@@ -2022,6 +2104,15 @@
     }
   },
   "parameters": {
+    "ApiKeyParameter": {
+      "name": "api-key",
+      "in": "header",
+      "description": "ApiKey to access the API",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiKey"
+    },
     "Azure.Core.ClientRequestIdHeader": {
       "name": "x-ms-client-request-id",
       "in": "header",
@@ -2086,6 +2177,15 @@
       "collectionFormat": "multi",
       "x-ms-parameter-location": "method"
     },
+    "ExcludeSkuDetailsParameter": {
+      "name": "excludeSkuDetails",
+      "in": "query",
+      "description": "By default SKU details are included (excludeSkuDetails = FALSE ), to exclude SKU details in the response, set excludeSkuDetails to TRUE.",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
     "HideKeysParameter": {
       "name": "hideKeys",
       "in": "query",
@@ -2096,6 +2196,24 @@
         "type": "string"
       },
       "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "IncludeFutureAvailabilitiesParameter": {
+      "name": "includeFutureAvailabilities",
+      "in": "query",
+      "description": "Indicates whether to include the product's plans/SKU availabilities with future dates in the response. By default, includeFutureAvailabilities is set to FALSE.",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "IncludeStopSoldPlansParameter": {
+      "name": "includeStopSoldPlans",
+      "in": "query",
+      "description": "Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.",
+      "required": false,
+      "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "LanguageParameter": {
@@ -2125,6 +2243,24 @@
       "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PricingAudienceHeaderParameter": {
+      "name": "x-ms-pricing-audience",
+      "in": "header",
+      "description": "DirectCommercial or PartnerCommercial, DirectCommercial is the default",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "pricingAudience"
+    },
+    "SkuIdParameter": {
+      "name": "skuId",
+      "in": "query",
+      "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
+      "required": false,
+      "type": "string",
+      "default": "en",
       "x-ms-parameter-location": "method"
     },
     "StorefrontParameter": {

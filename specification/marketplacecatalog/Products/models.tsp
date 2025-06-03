@@ -1098,9 +1098,9 @@ model HideKeysParameter {
 
 @doc("ApiKey")
 model ApiKeyParameter {
-  @header
-  @doc("ApiKey to access the API")
-  apiKey?: string;
+  @header("X-API-Key")
+  @doc("Use Api key provided by Marketplace Catalog Team as a parameter provided in the header")
+  apiKey: string;
 }
 
 @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
@@ -1128,7 +1128,7 @@ model IncludeFutureAvailabilitiesParameter {
 model SkuIdParameter {
   @query
   @doc("Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.")
-  skuId?: string = "en";
+  skuId?: string;
 }
 
 @doc("Pricing audience header parameter")
