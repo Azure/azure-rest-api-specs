@@ -25,7 +25,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -53,7 +53,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -238,9 +238,6 @@
               "$ref": "#/definitions/WebPubSubResource"
             }
           },
-          "202": {
-            "description": "ignore"
-          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -252,6 +249,9 @@
           "WebPubSub_CreateOrUpdate": {
             "$ref": "./examples/WebPubSub_CreateOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -314,9 +314,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -638,7 +635,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -662,9 +659,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -841,9 +835,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -1045,9 +1036,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -1333,10 +1321,7 @@
             }
           },
           "202": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            }
+            "description": "ignore"
           },
           "default": {
             "description": "ignore",
@@ -1823,9 +1808,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore"
           },
@@ -1889,12 +1871,14 @@
       "properties": {
         "clientConnectionCountRules": {
           "type": "array",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientConnectionCountRule"
           }
         },
         "clientTrafficControlRules": {
           "type": "array",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientTrafficControlRule"
           }
@@ -1906,17 +1890,6 @@
           "maximum": 604800
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<WebPubSubKeys>": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/WebPubSubKeys"
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "ClientConnectionCountRule": {
       "type": "object",
@@ -2119,6 +2092,23 @@
         "domainName"
       ]
     },
+    "Dimension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean"
+        }
+      }
+    },
     "EventHandler": {
       "type": "object",
       "properties": {
@@ -2284,6 +2274,17 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
     "ManagedIdentity": {
       "type": "object",
       "properties": {
@@ -2323,6 +2324,41 @@
         }
       }
     },
+    "MetricSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "NameAvailability": {
       "type": "object",
       "properties": {
@@ -2352,7 +2388,7 @@
         "type"
       ]
     },
-    "NetworkAcl": {
+    "NetworkACL": {
       "type": "object",
       "properties": {
         "allow": {
@@ -2369,6 +2405,72 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationProperties": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
     "PrivateEndpoint": {
       "type": "object",
       "properties": {
@@ -2377,7 +2479,7 @@
         }
       }
     },
-    "PrivateEndpointAcl": {
+    "PrivateEndpointACL": {
       "type": "object",
       "properties": {
         "name": {
@@ -2389,7 +2491,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkAcl"
+          "$ref": "#/definitions/NetworkACL"
         }
       ]
     },
@@ -2570,12 +2672,12 @@
     "Replica": {
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
         "properties": {
           "$ref": "#/definitions/ReplicaProperties",
           "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku"
         }
       },
       "allOf": [
@@ -2705,6 +2807,30 @@
       "required": [
         "name"
       ]
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "ShareablePrivateLinkResourceProperties": {
       "type": "object",
@@ -2885,7 +3011,7 @@
           "type": "string",
           "readOnly": true
         },
-        "resourceSku": {
+        "sku": {
           "$ref": "#/definitions/ResourceSku",
           "readOnly": true
         },
@@ -2949,8 +3075,8 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "resourceType",
-            "/resourceSku/name",
-            "/resourceSku/tier"
+            "/sku/name",
+            "/sku/tier"
           ]
         },
         "nextLink": {
@@ -3134,8 +3260,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/WebPubSubHubProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/WebPubSubHubProperties"
         }
       },
       "required": [
@@ -3221,7 +3346,7 @@
         }
       }
     },
-    "WebPubSubNetworkAcls": {
+    "WebPubSubNetworkACLs": {
       "type": "object",
       "properties": {
         "defaultAction": {
@@ -3236,12 +3361,12 @@
           }
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkAcl"
+          "$ref": "#/definitions/NetworkACL"
         },
         "privateEndpoints": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointAcl"
+            "$ref": "#/definitions/PrivateEndpointACL"
           },
           "x-ms-identifiers": [
             "name"
@@ -3249,6 +3374,7 @@
         },
         "ipRules": {
           "type": "array",
+          "maxItems": 30,
           "items": {
             "$ref": "#/definitions/IPRule"
           }
@@ -3277,7 +3403,7 @@
           },
           "readOnly": true
         },
-        "externalIp": {
+        "externalIP": {
           "type": "string",
           "readOnly": true
         },
@@ -3326,8 +3452,8 @@
         "resourceLogConfiguration": {
           "$ref": "#/definitions/ResourceLogConfiguration"
         },
-        "networkAcls": {
-          "$ref": "#/definitions/WebPubSubNetworkAcls"
+        "networkACLs": {
+          "$ref": "#/definitions/WebPubSubNetworkACLs"
         },
         "applicationFirewall": {
           "$ref": "#/definitions/ApplicationFirewallSettings"
@@ -3352,20 +3478,20 @@
           "type": "string",
           "default": "false"
         },
-        "socketIo": {
-          "$ref": "#/definitions/WebPubSubSocketIoSettings"
+        "socketIO": {
+          "$ref": "#/definitions/WebPubSubSocketIOSettings"
         }
       }
     },
     "WebPubSubResource": {
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
         "properties": {
           "$ref": "#/definitions/WebPubSubProperties",
           "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku"
         },
         "kind": {
           "type": "string",
@@ -3386,6 +3512,9 @@
           "$ref": "#/definitions/ManagedIdentity"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -3413,7 +3542,7 @@
         "value"
       ]
     },
-    "WebPubSubSocketIoSettings": {
+    "WebPubSubSocketIOSettings": {
       "type": "object",
       "properties": {
         "serviceMode": {

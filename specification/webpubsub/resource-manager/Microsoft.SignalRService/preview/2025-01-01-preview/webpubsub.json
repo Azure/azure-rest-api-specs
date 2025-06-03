@@ -84,7 +84,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -119,7 +119,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -366,19 +366,9 @@
               "$ref": "#/definitions/WebPubSubResource"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -400,7 +390,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -506,9 +496,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -947,10 +934,9 @@
               "$ref": "#/definitions/CustomDomain"
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -967,7 +953,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -1006,9 +992,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1270,9 +1253,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1562,9 +1542,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1979,10 +1956,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/Replica"
-            },
+            "description": "Resource update request accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2700,9 +2674,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -2818,6 +2789,7 @@
         "clientConnectionCountRules": {
           "type": "array",
           "description": "Rules to control the client connection count",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientConnectionCountRule"
           },
@@ -2826,6 +2798,7 @@
         "clientTrafficControlRules": {
           "type": "array",
           "description": "Rules to control the client traffic",
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/ClientTrafficControlRule"
           },
@@ -2839,19 +2812,6 @@
           "maximum": 604800
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<WebPubSubKeys>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/WebPubSubKeys",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "ClientConnectionCountRule": {
       "type": "object",
@@ -3072,6 +3032,28 @@
         "domainName",
         "customCertificate"
       ]
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The public facing name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Name of the dimension as it appears in MDM."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario."
+        }
+      }
     },
     "EventHandler": {
       "type": "object",
@@ -3302,6 +3284,20 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Specifications of the Logs for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the log."
+        }
+      }
+    },
     "ManagedIdentity": {
       "type": "object",
       "description": "A class represent managed identities used for request and response",
@@ -3366,6 +3362,50 @@
         ]
       }
     },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Localized friendly description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that makes sense for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count."
+        },
+        "fillGapWithZero": {
+          "type": "string",
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published.\nEx. a metric that returns the number of times a particular error code was emitted. The error code may not appear\noften, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted."
+        },
+        "category": {
+          "type": "string",
+          "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of the metrics.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "NameAvailability": {
       "type": "object",
       "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
@@ -3402,7 +3442,7 @@
         "name"
       ]
     },
-    "NetworkAcl": {
+    "NetworkACL": {
       "type": "object",
       "description": "Network ACL",
       "properties": {
@@ -3424,6 +3464,86 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "REST API operation supported by resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation with format: {provider}/{resource}/{operation}"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "If the operation is a data action. (for data plane rbac)"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that describes a operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Extra Operation properties."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that describes a operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Friendly name of the resource provider"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The localized friendly name for the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized friendly description for the operation"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Extra Operation properties.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "An object that describes a specification."
+        }
+      }
+    },
     "PrivateEndpoint": {
       "type": "object",
       "description": "Private endpoint",
@@ -3434,7 +3554,7 @@
         }
       }
     },
-    "PrivateEndpointAcl": {
+    "PrivateEndpointACL": {
       "type": "object",
       "description": "ACL for a private endpoint",
       "properties": {
@@ -3448,7 +3568,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkAcl"
+          "$ref": "#/definitions/NetworkACL"
         }
       ]
     },
@@ -3717,13 +3837,13 @@
       "type": "object",
       "description": "A class represent a replica resource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ReplicaProperties",
-          "x-ms-client-flatten": true
-        },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The billing information of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicaProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3892,6 +4012,33 @@
             "value": "SocketIO"
           }
         ]
+      }
+    },
+    "ServiceSpecification": {
+      "type": "object",
+      "description": "An object that describes a specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Specifications of the Logs for Azure Monitoring.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
       }
     },
     "ShareablePrivateLinkResourceProperties": {
@@ -4112,7 +4259,7 @@
           "description": "The resource type that this object applies to",
           "readOnly": true
         },
-        "resourceSku": {
+        "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The billing information of the resource.",
           "readOnly": true
@@ -4176,8 +4323,8 @@
           "readOnly": true,
           "x-ms-identifiers": [
             "resourceType",
-            "/resourceSku/name",
-            "/resourceSku/tier"
+            "/sku/name",
+            "/sku/tier"
           ]
         },
         "nextLink": {
@@ -4401,8 +4548,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/WebPubSubHubProperties",
-          "description": "Properties of a hub.",
-          "x-ms-client-flatten": true
+          "description": "Properties of a hub."
         }
       },
       "required": [
@@ -4500,7 +4646,7 @@
         }
       }
     },
-    "WebPubSubNetworkAcls": {
+    "WebPubSubNetworkACLs": {
       "type": "object",
       "description": "Network ACLs for the resource",
       "properties": {
@@ -4509,14 +4655,14 @@
           "description": "Azure Networking ACL Action."
         },
         "publicNetwork": {
-          "$ref": "#/definitions/NetworkAcl",
+          "$ref": "#/definitions/NetworkACL",
           "description": "Network ACL"
         },
         "privateEndpoints": {
           "type": "array",
           "description": "ACLs for requests from private endpoints",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointAcl"
+            "$ref": "#/definitions/PrivateEndpointACL"
           },
           "x-ms-identifiers": [
             "name"
@@ -4525,6 +4671,7 @@
         "ipRules": {
           "type": "array",
           "description": "IP rules for filtering public traffic",
+          "maxItems": 30,
           "items": {
             "$ref": "#/definitions/IPRule"
           },
@@ -4541,7 +4688,7 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
-        "externalIp": {
+        "externalIP": {
           "type": "string",
           "description": "The publicly accessible IP of the resource.",
           "readOnly": true
@@ -4603,8 +4750,8 @@
           "$ref": "#/definitions/ResourceLogConfiguration",
           "description": "Resource log configuration of a Microsoft.SignalRService resource."
         },
-        "networkAcls": {
-          "$ref": "#/definitions/WebPubSubNetworkAcls",
+        "networkACLs": {
+          "$ref": "#/definitions/WebPubSubNetworkACLs",
           "description": "Network ACLs for the resource"
         },
         "applicationFirewall": {
@@ -4636,8 +4783,8 @@
           "description": "Stop or start the resource.  Default to \"False\".\nWhen it's true, the data plane of the resource is shutdown.\nWhen it's false, the data plane of the resource is started.",
           "default": "false"
         },
-        "socketIo": {
-          "$ref": "#/definitions/WebPubSubSocketIoSettings",
+        "socketIO": {
+          "$ref": "#/definitions/WebPubSubSocketIOSettings",
           "description": "SocketIO settings for the resource"
         }
       }
@@ -4678,14 +4825,14 @@
       "type": "object",
       "description": "A class represent a resource.",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The billing information of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/WebPubSubProperties",
           "description": "A class that describes the properties of the resource",
           "x-ms-client-flatten": true
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The billing information of the resource."
         },
         "kind": {
           "$ref": "#/definitions/ServiceKind",
@@ -4700,6 +4847,9 @@
           "description": "A class represent managed identities used for request and response"
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -4763,7 +4913,7 @@
         ]
       }
     },
-    "WebPubSubSocketIoSettings": {
+    "WebPubSubSocketIOSettings": {
       "type": "object",
       "description": "SocketIO settings for the resource",
       "properties": {
