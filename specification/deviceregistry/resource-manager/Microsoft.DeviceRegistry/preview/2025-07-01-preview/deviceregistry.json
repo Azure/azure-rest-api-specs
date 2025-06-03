@@ -61,6 +61,9 @@
       "name": "NamespaceAssets"
     },
     {
+      "name": "NamespaceDevices"
+    },
+    {
       "name": "NamespaceDiscoveredAssets"
     },
     {
@@ -1669,6 +1672,372 @@
         "x-ms-examples": {
           "Delete_NamespaceAsset": {
             "$ref": "./examples/Delete_NamespaceAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices": {
+      "get": {
+        "operationId": "NamespaceDevices_ListByResourceGroup",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "List NamespaceDevice resources by Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_NamespaceDevices_ByResourceGroup": {
+            "$ref": "./examples/List_NamespaceDevices_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices/{deviceName}": {
+      "get": {
+        "operationId": "NamespaceDevices_Get",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Get a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NamespaceDevice with Endpoint Error Status": {
+            "$ref": "./examples/Get_NamespaceDeviceWithEndpointErrorStatus.json"
+          },
+          "Get_NamespaceDevice": {
+            "$ref": "./examples/Get_NamespaceDevice.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NamespaceDevices_CreateOrReplace",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Create a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NamespaceDevice' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "201": {
+            "description": "Resource 'NamespaceDevice' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create edge enabled device with UsernamesPassword inbound authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_UsernamePass.json"
+          },
+          "Create edge enabled device with anonymous host authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_Anonymous.json"
+          },
+          "Create edge enabled device with x509 inbound authentication.": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice_Edge_x509.json"
+          },
+          "CreateOrReplace_NamespaceDevices": {
+            "$ref": "./examples/CreateOrReplace_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NamespaceDevices_Update",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Update a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceDeviceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceDevice"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_NamespaceDevices": {
+            "$ref": "./examples/Update_NamespaceDevice.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NamespaceDevices_Delete",
+        "tags": [
+          "NamespaceDevices"
+        ],
+        "description": "Delete a NamespaceDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the device.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_NamespaceDevice": {
+            "$ref": "./examples/Delete_NamespaceDevice.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3850,6 +4219,53 @@
       ],
       "x-ms-discriminator-value": "Storage"
     },
+    "DeviceIdentity": {
+      "type": "object",
+      "description": "The backing Microsoft Entra ID for the device used for authentication to other services.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal id for the device resource.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id for the Microsoft Entra ID tenant.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceMessagingEndpoint": {
+      "type": "object",
+      "description": "Device messaging endpoint model.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for the messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        }
+      },
+      "required": [
+        "address"
+      ]
+    },
+    "DeviceMessagingEndpointUpdate": {
+      "type": "object",
+      "description": "Device messaging endpoint model.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection used for the messaging endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address to connect to."
+        }
+      }
+    },
     "DeviceRef": {
       "type": "object",
       "description": "Defines which device and endpoint to use for this asset",
@@ -3879,6 +4295,47 @@
         "endpointName": {
           "type": "string",
           "description": "The name of endpoint to use"
+        }
+      }
+    },
+    "DeviceStatus": {
+      "type": "object",
+      "description": "Defines the device status properties.",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/StatusConfig",
+          "description": "Defines the device status config properties.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "$ref": "#/definitions/DeviceStatusEndpoints",
+          "description": "Defines the device status for inbound/outbound endpoints.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceStatusEndpoint": {
+      "type": "object",
+      "description": "Defines the device status properties.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Defines the error related to this endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceStatusEndpoints": {
+      "type": "object",
+      "description": "Defines the device status for inbound/outbound endpoints.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "KeyValue pair representing status of inbound endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceStatusEndpoint"
+          },
+          "readOnly": true
         }
       }
     },
@@ -4113,6 +4570,163 @@
         ]
       }
     },
+    "HostAuthentication": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the host.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentials",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509Credentials",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      },
+      "required": [
+        "method"
+      ]
+    },
+    "HostAuthenticationUpdate": {
+      "type": "object",
+      "description": "Definition of the client authentication mechanism to the host.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Defines the method to authenticate the user of the client at the server.",
+          "default": "Certificate",
+          "enum": [
+            "Anonymous",
+            "Certificate",
+            "UsernamePassword"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "The user authentication method is anonymous."
+              },
+              {
+                "name": "Certificate",
+                "value": "Certificate",
+                "description": "The user authentication method is an x509 certificate."
+              },
+              {
+                "name": "UsernamePassword",
+                "value": "UsernamePassword",
+                "description": "The user authentication method is a username and password."
+              }
+            ]
+          }
+        },
+        "usernamePasswordCredentials": {
+          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
+          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/X509CredentialsUpdate",
+          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        }
+      }
+    },
+    "InboundEndpoints": {
+      "type": "object",
+      "description": "An endpoint to connect to the device.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version associated with device endpoint."
+        },
+        "authentication": {
+          "$ref": "#/definitions/HostAuthentication",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "trustSettings": {
+          "$ref": "#/definitions/TrustSettings",
+          "description": "Defines server trust settings for the endpoint."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+        }
+      },
+      "required": [
+        "endpointType",
+        "address"
+      ]
+    },
+    "InboundEndpointsUpdate": {
+      "type": "object",
+      "description": "An endpoint to connect to the device.",
+      "properties": {
+        "endpointType": {
+          "type": "string",
+          "description": "Type of connection endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version associated with device endpoint."
+        },
+        "authentication": {
+          "$ref": "#/definitions/HostAuthenticationUpdate",
+          "description": "Defines the client authentication mechanism to the server."
+        },
+        "trustSettings": {
+          "$ref": "#/definitions/TrustSettings",
+          "description": "Defines server trust settings for the endpoint."
+        },
+        "additionalConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+        }
+      }
+    },
     "ManagementAction": {
       "type": "object",
       "description": "Defines the action properties.",
@@ -4277,6 +4891,40 @@
       "required": [
         "address"
       ]
+    },
+    "MessagingEndpoints": {
+      "type": "object",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "Set of endpoints to connect to the device.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InboundEndpoints"
+          }
+        },
+        "outbound": {
+          "$ref": "#/definitions/OutboundEndpoints",
+          "description": "Set of endpoints a device can connect to."
+        }
+      }
+    },
+    "MessagingEndpointsUpdate": {
+      "type": "object",
+      "description": "Connection endpoint URL a device can use to connect to a service.",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "Set of endpoints to connect to the device.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InboundEndpointsUpdate"
+          }
+        },
+        "outbound": {
+          "$ref": "#/definitions/OutboundEndpointsUpdate",
+          "description": "Set of endpoints a device can connect to."
+        }
+      }
     },
     "MigrateResult": {
       "type": "object",
@@ -5037,6 +5685,213 @@
         "name",
         "dataSource"
       ]
+    },
+    "NamespaceDevice": {
+      "type": "object",
+      "description": "Device definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceDeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Tag.",
+          "readOnly": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceDeviceListResult": {
+      "type": "object",
+      "description": "The response of a NamespaceDevice list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamespaceDevice items on this page",
+          "items": {
+            "$ref": "#/definitions/NamespaceDevice"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceDeviceProperties": {
+      "type": "object",
+      "description": "Defines the device properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "A unique identifier for the device.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
+          "default": true
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceTemplateId": {
+          "type": "string",
+          "description": "Device Template Id used to create a device.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceGroupId": {
+          "type": "string",
+          "description": "The Microsoft Entra ID group the device is a member of."
+        },
+        "discoveredDeviceRef": {
+          "type": "string",
+          "description": "Reference to a device. Populated only if the device had been created from discovery flow. Discovered device name must be provided.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity",
+          "description": "Identity for the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endpoints": {
+          "$ref": "#/definitions/MessagingEndpoints",
+          "description": "Property bag containing the device's unassigned and assigned endpoints."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "status": {
+          "$ref": "#/definitions/DeviceStatus",
+          "description": "Device status updates.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp (in UTC) that is updated each time the resource is modified.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NamespaceDeviceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the NamespaceDevice.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceDeviceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceDeviceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NamespaceDevice.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
+          "default": true
+        },
+        "deviceGroupId": {
+          "type": "string",
+          "description": "The Microsoft Entra ID group the device is a member of."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
+        },
+        "endpoints": {
+          "$ref": "#/definitions/MessagingEndpointsUpdate",
+          "description": "Property bag containing the device's unassigned and assigned endpoints."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        }
+      }
     },
     "NamespaceDiscoveredAsset": {
       "type": "object",
@@ -5909,6 +6764,49 @@
         }
       }
     },
+    "OutboundEndpoints": {
+      "type": "object",
+      "description": "Property bag contains the device's outbound endpoints",
+      "properties": {
+        "assigned": {
+          "type": "object",
+          "description": "Endpoints the device can connect to.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpoint"
+          }
+        },
+        "unassigned": {
+          "type": "object",
+          "description": "Set of most recently removed endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpoint"
+          }
+        }
+      },
+      "required": [
+        "assigned"
+      ]
+    },
+    "OutboundEndpointsUpdate": {
+      "type": "object",
+      "description": "Property bag contains the device's outbound endpoints",
+      "properties": {
+        "assigned": {
+          "type": "object",
+          "description": "Endpoints the device can connect to.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
+          }
+        },
+        "unassigned": {
+          "type": "object",
+          "description": "Set of most recently removed endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
+          }
+        }
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning status of the resource.",
@@ -6479,6 +7377,16 @@
               }
             ]
           }
+        }
+      }
+    },
+    "TrustSettings": {
+      "type": "object",
+      "description": "Defines server trust settings for an endpoint.",
+      "properties": {
+        "trustList": {
+          "type": "string",
+          "description": "Defines a secret reference for certificates to trust."
         }
       }
     },
