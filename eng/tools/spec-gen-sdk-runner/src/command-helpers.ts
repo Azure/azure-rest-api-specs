@@ -321,6 +321,7 @@ export function generateArtifact(
     const artifactInfo: SpecGenSdkArtifactInfo = {
       language: commandInput.sdkLanguage,
       result,
+      prNumber: commandInput.prNumber,
       labelAction: hasBreakingChange,
       isSpecGenSdkCheckRequired,
       apiViewRequestData: apiViewRequestData,
