@@ -587,6 +587,35 @@ namespace SkillContext
 		state?: MemoryState;
 	}
 
+	@doc("QueryMemoriesRequest")
+	model QueryMemoriesRequest {
+		@doc("")
+		subScopeId?: string;
+		@doc("")
+		scope?: MemoryScope;
+		@doc("")
+		subScope?: MemorySubScope;
+		@doc("")
+		categoryFilter?: string;
+		@doc("")
+		createdByFilter?: string;
+		@doc("")
+		continuationToken?: string;
+		@doc("")
+		createdAtStartTime?: offsetDateTime;
+		@doc("")
+		createdAtEndTime?: offsetDateTime;
+		@doc("")
+		typeFilter?: MemoryType;
+		@doc("")
+		nameFilter?: string;
+		@doc("")
+		matchingTagsFilter?: Record<string>;
+		@doc("Indicates whether to include only Active memories in the response")
+		includeOnlyActive: boolean;
+		limit: int32;
+	}
+
 	@doc("MemoryState")
 	enum MemoryState {
 		@doc("Unknown")

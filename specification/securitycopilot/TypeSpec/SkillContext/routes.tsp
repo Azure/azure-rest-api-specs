@@ -196,7 +196,7 @@ op getMemory(
 @route("/skillContext/queryMemoriesAsync")
 op queryMemories(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body request : string,
+@body request : QueryMemoriesRequest,
 ): MemoryDtoResponsePage;
 
 @post
