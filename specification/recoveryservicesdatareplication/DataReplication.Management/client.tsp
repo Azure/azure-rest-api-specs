@@ -379,10 +379,6 @@ using Microsoft.DataReplication;
 );
 @@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
 
-// seems we are not able to rename XXListResult models and anonymous models
-// @@clientName(PrivateEndpointConnectionProxy, "PrivEndptConnProxy", "java");
-// @@clientName(PrivateEndpointConnection, "PrivEndptConn", "java");
-
 @@clientName(Microsoft.DataReplication,
   "RecoveryServicesDataReplicationMgmtClient",
   "python"
