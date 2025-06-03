@@ -1126,6 +1126,9 @@
           "Macc_Create": {
             "$ref": "./examples/MaccCreate.json"
           },
+          "MaccWithMilestones_Create": {
+            "$ref": "./examples/MaccWithMilestonesCreate.json"
+          },
           "Contributor_Create": {
             "$ref": "./examples/ContributorCreate.json"
           }
@@ -4525,6 +4528,10 @@
     "MaccMilestone": {
       "type": "object",
       "description": "MACC milestone represents interim targets within the period of MACC.",
+      "required": [
+        "commitment",
+        "endAt"
+      ],
       "properties": {
         "milestoneId": {
           "type": "string",
