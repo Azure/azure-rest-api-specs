@@ -78,12 +78,23 @@ describe("readme", () => {
 
 describe("TagMatchRegex", () => {
   it.each([
-    ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false],
-    ["``` yaml $(tag)=='package-2017-03' && $(go)", true],
-    ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true],
-    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true], // Typical case
-    ['``` yaml $(tag) == "package-2025-06-05"', true],
-  ])("matches tags properly: %s", (example, expected) => {
-    expect(TagMatchRegex.test(example)).toEqual(expected);
-  });
+    ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false, undefined],
+    ["``` yaml $(tag)=='package-2017-03' && $(go)", true, "package-2017-03"],
+    ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true, "release_4_0"],
+    [
+      "``` yaml $(tag) == 'package-2021-12-01-preview'",
+      true,
+      "package-2021-12-01-preview",
+    ],
+    ['``` yaml $(tag) == "package-2025-06-05"', true, "package-2025-06-05"],
+    ["``` yaml $(tag) == 'package-2025-06-05\"", false, undefined],
+    ["``` yaml $(tag) == \"package-2025-06-05'", false, undefined],
+  ])(
+    "matches tags and extracts tag names properly: %s",
+    (example, expectedMatch, expectedTag) => {
+      const match = example.match(TagMatchRegex);
+      expect(TagMatchRegex.test(example)).toEqual(expectedMatch);
+      expect(match?.[2]).toEqual(expectedTag);
+    },
+  );
 });
