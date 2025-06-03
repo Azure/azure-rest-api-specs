@@ -46,6 +46,8 @@ suppressions:
       - deviceregistry.json
     where:
       - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceAssetProperties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
     reason: attributes is a customer-defined property of any shape and custom keys for other properties
   - code: OperationIdNounVerb
     from:

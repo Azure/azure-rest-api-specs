@@ -35,18 +35,6 @@ model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-// alias NamespaceAssetPropertiesUpdate = {
-//   ...OptionalProperties<UpdateableProperties<OmitProperties<
-//     NamespaceAssetProperties,
-//     "defaultTopic"
-//   >>>;
-
-//   @added(Versions.v2025_07_01_preview)
-//   @removed(Versions.v2025_07_01_preview)
-//   @doc("Object that describes the default topic information for the asset.")
-//   defaultTopic?: OptionalProperties<OmitDefaults<Topic>>;
-// };
-
 @added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface NamespaceAssets {
