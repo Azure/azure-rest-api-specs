@@ -544,7 +544,7 @@ model ProductSummary {
   attributes?: Attribute[];
 }
 
-@doc("Represents a SKU attribute")
+@doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.")
 model Attribute {
   @doc("The attribute key")
   key?: string;
@@ -775,7 +775,7 @@ model ProductDetails {
   artifacts?: Artifact[];
 }
 
-@doc("Related SKU")
+@doc("The sku")
 model RelatedSku {
   @doc("The name")
   name?: string;
@@ -787,7 +787,7 @@ model RelatedSku {
   identity?: string;
 }
 
-@doc("Related SKU relation")
+@doc("Pointing to a related SKU object")
 model PlanSkuRelation {
   @doc("The Sku")
   sku?: RelatedSku;
@@ -796,7 +796,7 @@ model PlanSkuRelation {
   relationType?: string;
 }
 
-@doc("Plan/SKU metadata")
+@doc("Additional metadata")
 model PlanMetadata {
   @doc("The VM image generation (applicable to Virtual Machine products only)")
   generation?: string;
@@ -871,7 +871,7 @@ model PlanSummary {
   hasRI?: boolean;
 }
 
-@doc("Response page composed of a list of Product objects together with a next page link.")
+@doc("Response page composed of a list of Product objects(that includes subset of product attributes) together with a next page link.\nUsually product attributes returned in the list are used to build product tiles for Marketplace Gallery.\nNote:note The max number of items returned per page is 100. In specific cases for performance optimization, please contact Microsoft Marketplace team MKPL_Platform_API_DL@microsoft.com")
 model CatalogApiResponse {
   @doc("The list of returned items")
   items?: ProductSummary[];
