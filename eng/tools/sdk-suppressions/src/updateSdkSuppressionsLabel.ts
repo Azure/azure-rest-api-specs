@@ -52,8 +52,10 @@ export async function getSdkSuppressionsSdkNames(
       // if the head suppression file is present but anything is wrong like schema error with it return
       const validateSdkSuppressionsFileResult =
         validateSdkSuppressionsFile(headSuppressionContent).result;
+      // If the head suppression file is not valid or empty, we get _sdkNameList with [].
       if (!validateSdkSuppressionsFileResult) {
-        return [];
+        console.log(`Get sdk name after compare for ${suppressionFile} was empty because the head suppression file is not valid or empty.`);
+        continue;
       }
       // if base suppression file does not exist, set it to an empty object but has correct schema
       if (!baseSuppressionContent) {
@@ -67,10 +69,13 @@ export async function getSdkSuppressionsSdkNames(
           `${JSON.stringify(headSuppressionContent)} to get different SDK.`,
       );
 
-      sdkNameList = getSdkNamesWithChangedSuppressions(
+      let _sdkNameList = getSdkNamesWithChangedSuppressions(
         headSuppressionContent as SdkSuppressionsYml,
         baseSuppressionContent as SdkSuppressionsYml,
       );
+
+      console.log(`Get sdk name after compare for ${suppressionFile} was ${_sdkNameList.join(",")}`);
+      sdkNameList = [..._sdkNameList, ...sdkNameList];
     }
   }
 
