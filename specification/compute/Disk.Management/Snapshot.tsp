@@ -107,7 +107,7 @@ interface Snapshots {
   /**
    * Revokes access to a snapshot.
    */
-  @action("endgetaccess")
+  @action("endGetAccess")
   revokeAccess is ComputeResourceActionAsync<Snapshot, void, OkResponse>;
 }
 
