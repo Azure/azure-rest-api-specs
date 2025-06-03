@@ -6,7 +6,11 @@
     "api-version": "2025-05-01-preview",
     "body": {
       "properties": {
-        "allowContributors": false
+        "commitment": {
+          "grain": "FullTerm",
+          "amount": 40000,
+          "currencyCode": "USD"
+        }
       }
     }
   },
@@ -26,13 +30,14 @@
             "currencyCode": "USD"
           },
           "startAt": "2023-07-01T00:00:00Z",
-          "endAt": "2024-07-10T00:00:00Z",
+          "endAt": "2024-07-01T00:00:00Z",
           "systemId": "13810867107109237",
-          "allowContributors": false,
+          "allowContributors": true,
           "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "provisioningState": "Succeeded",
           "provisioningSubState": "None",
-          "status": "Active"
+          "status": "Active",
+          "automaticShortfall": true
         },
         "location": "global",
         "tags": {

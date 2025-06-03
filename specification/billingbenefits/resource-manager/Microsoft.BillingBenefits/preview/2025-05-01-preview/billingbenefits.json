@@ -1264,16 +1264,25 @@
         },
         "x-ms-examples": {
           "MaccCommitment_Update": {
-            "$ref": "./examples/MaccCommitmentUpdate.json"
+            "$ref": "./examples/MaccNoMilestonesCommitmentUpdate.json"
+          },
+          "MaccAndMilestoneCommitment_Update": {
+            "$ref": "./examples/MaccAndMilestoneCommitmentUpdate.json"
           },
           "MaccEndDate_Update": {
-            "$ref": "./examples/MaccEndDateUpdate.json"
+            "$ref": "./examples/MaccNoMilestonesEndDateUpdate.json"
           },
           "MaccEndContributorRule_Update": {
             "$ref": "./examples/MaccContributorRuleUpdate.json"
           },
           "MaccTags_Update": {
             "$ref": "./examples/MaccTagsUpdate.json"
+          },
+          "MilestonesCreate_OnExistingMacc": {
+            "$ref": "./examples/MilestonesCreateOnExistingMacc.json"
+          },
+          "MaccDisplayName_Update": {
+            "$ref": "./examples/MaccDisplayNameUpdate.json"
           }
         },
         "parameters": [
@@ -4528,10 +4537,6 @@
     "MaccMilestone": {
       "type": "object",
       "description": "MACC milestone represents interim targets within the period of MACC.",
-      "required": [
-        "commitment",
-        "endAt"
-      ],
       "properties": {
         "milestoneId": {
           "type": "string",
