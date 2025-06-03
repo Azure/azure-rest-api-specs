@@ -1194,6 +1194,18 @@
           },
           "Contributor_Get": {
             "$ref": "./examples/ContributorGet.json"
+          },
+          "MaccWithMilestones_Get": {
+            "$ref": "./examples/MaccWithMilestonesGet.json"
+          },
+          "MaccWithMilestonesAndTopup_Get": {
+            "$ref": "./examples/MaccWithMilestonesAndTopupGet.json"
+          },
+          "MaccWithMilestonesAndShortfall_Get": {
+            "$ref": "./examples/MaccWithMilestonesAndShortfallGet.json"
+          },
+          "MaccWithMilestonesAndShortfallAndTopup_Get": {
+            "$ref": "./examples/MaccWithMilestonesAndTopupAndShortfallGet.json"
           }
         },
         "parameters": [
@@ -4253,6 +4265,9 @@
         "automaticShortfall": {
           "$ref": "#/definitions/AutomaticShortfall"
         },
+        "automaticShortfallSuppressReasonCode": {
+          "$ref": "#/definitions/AutomaticShortfallSuppressReasonCode"
+        },
         "shortfall": {
           "$ref": "#/definitions/Shortfall"
         },
@@ -4389,12 +4404,20 @@
         },
         "endAt": {
           "$ref": "#/definitions/EndAt"
+        },
+        "resourceUri": {
+          "$ref": "#/definitions/ResourceUri",
+          "description": "Fully-qualified identifier of the credit resource associated with the shortfall."
         }
       }
     },
     "AutomaticShortfall": {
       "type": "boolean",
       "description": "Setting this to true enables automatic shortfall charging when commitment is not met."
+    },
+    "AutomaticShortfallSuppressReasonCode": {
+      "type": "string",
+      "description": "Optional field to record suppression reason for automatic shortfall."
     },
     "MaccPatchRequest": {
       "type": "object",
@@ -4464,15 +4487,15 @@
         "status": {
           "$ref": "#/definitions/MaccMilestoneStatus"
         },
-        "systemId": {
-          "type": "string",
-          "description": "The globally unique identifier of this milestone which will not change for its lifetime."
-        },
         "topup": {
           "$ref": "#/definitions/Topup",
           "description": "Details of the topup associated with this milestone."
         }
       }
+    },
+    "TopupSystemId": {
+      "type": "string",
+      "description": "This is the globally unique identifier of the Topup which will not change for the lifetime of the topup credit."
     },
     "AutomaticTopup": {
       "type": "boolean",
@@ -4483,8 +4506,7 @@
       "description": "Details of a topup associated with a milestone",
       "properties": {
         "systemId": {
-          "type": "string",
-          "description": "The globally unique identifier of this topup."
+          "$ref": "#/definitions/TopupSystemId"
         },
         "productCode": {
           "$ref": "#/definitions/ProductCode"
@@ -4503,7 +4525,7 @@
         },
         "resourceUri": {
           "$ref": "#/definitions/ResourceUri",
-          "description": "Fully-qualified identifier of the resource associated with this topup."
+          "description": "Fully-qualified identifier of the credit resource associated with the topup."
         },
         "balanceVersion": {
           "$ref": "#/definitions/BalanceVersion"
@@ -4511,7 +4533,7 @@
       }
     },
     "BalanceVersion": {
-      "type": "string",
+      "type": "number",
       "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the topup was created ."
     },
     "ChargeShortfallRequest": {
