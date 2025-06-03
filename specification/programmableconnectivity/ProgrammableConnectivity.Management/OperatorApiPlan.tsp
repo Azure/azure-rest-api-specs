@@ -60,12 +60,24 @@ model MarketplaceProperties {
   termId?: string;
 
   /**
-   * Links to the Terms and Conditions of the Plan that must be accepted to create an
+   * Terms and Conditions of the Plan that must be accepted to create an
    * associated Operator Api Connection
    */
   @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
   @visibility(Lifecycle.Read)
-  planTermsAndConditionsLinks: string[];
+  @OpenAPI.extension("x-ms-identifiers", #["version", "url", "label"])
+  termsAndConditions: TermsAndConditions[];
+
+  /**
+   * Information about the pricing of the plan.
+   */
+  @TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["pricingTier", "cost", "consumptionUnit"]
+  )
+  pricingInformation: PricingInformation[];
 }
 
 /**
@@ -114,6 +126,30 @@ model OperatorApiPlanProperties {
   provisioningState?: ProvisioningState;
 }
 
+/**
+ * Model defining how the plan is priced.
+ */
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+model PricingInformation {
+  /**
+   * The pricing tier of the plan.
+   */
+  @visibility(Lifecycle.Read)
+  pricingTier: string;
+
+  /**
+   * The cost of the plan.
+   */
+  @visibility(Lifecycle.Read)
+  cost: string;
+
+  /**
+   * The unit of consumption that the pricing tier applies to.
+   */
+  @visibility(Lifecycle.Read)
+  consumptionUnit: string;
+}
+
 @armResourceOperations
 interface OperatorApiPlans {
   /**
@@ -150,4 +186,25 @@ interface OperatorApiPlans {
       skip?: int32;
     }
   >;
+}
+
+/**
+ * Terms and conditions information.
+ */
+@TypeSpec.Versioning.added(Versions.v2025_03_30_preview)
+model TermsAndConditions {
+  /**
+   * The terms and conditions version.
+   */
+  version: string;
+
+  /**
+   * The terms and conditions URL.
+   */
+  url: url;
+
+  /**
+   * The terms and conditions label.
+   */
+  label: string;
 }
