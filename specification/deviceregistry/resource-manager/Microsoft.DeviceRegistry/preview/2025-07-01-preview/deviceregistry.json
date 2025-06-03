@@ -58,6 +58,9 @@
       "name": "Namespaces"
     },
     {
+      "name": "NamespaceAssets"
+    },
+    {
       "name": "SchemaRegistries"
     },
     {
@@ -1309,6 +1312,360 @@
         "x-ms-examples": {
           "Delete_Namespace": {
             "$ref": "./examples/Delete_Namespace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/assets": {
+      "get": {
+        "operationId": "NamespaceAssets_ListByResourceGroup",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "List NamespaceAsset resources by Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_NamespaceAssets_ByResourceGroup": {
+            "$ref": "./examples/List_NamespaceAssets_ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/assets/{assetName}": {
+      "get": {
+        "operationId": "NamespaceAssets_Get",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "Get a NamespaceAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "The name of the asset.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAsset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_NamespaceAsset": {
+            "$ref": "./examples/Get_NamespaceAsset.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NamespaceAssets_CreateOrReplace",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "Create a NamespaceAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "The name of the asset.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceAsset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NamespaceAsset' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAsset"
+            }
+          },
+          "201": {
+            "description": "Resource 'NamespaceAsset' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAsset"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrReplace_NamespaceAsset": {
+            "$ref": "./examples/CreateOrReplace_NamespaceAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NamespaceAssets_Update",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "Update a NamespaceAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "The name of the asset.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NamespaceAssetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAsset"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_NamespaceAssets": {
+            "$ref": "./examples/Update_NamespaceAsset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NamespaceAssets_Delete",
+        "tags": [
+          "NamespaceAssets"
+        ],
+        "description": "Delete a NamespaceAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "description": "The name of the asset.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_NamespaceAsset": {
+            "$ref": "./examples/Delete_NamespaceAsset.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2917,6 +3274,19 @@
         }
       }
     },
+    "BrokerStateStoreDestinationConfiguration": {
+      "type": "object",
+      "description": "The configuration for a MQTT broker state store destination.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The MQTT broker state store destination key."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
     "DataPoint": {
       "type": "object",
       "description": "Defines the data point properties.",
@@ -3020,6 +3390,125 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "DatasetBrokerStateStoreDestination": {
+      "type": "object",
+      "description": "The type for a MQTT broker state store destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/BrokerStateStoreDestinationConfiguration",
+          "description": "The MQTT broker state store destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "BrokerStateStore"
+    },
+    "DatasetDestination": {
+      "type": "object",
+      "description": "The type of the destination.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/DatasetDestinationTarget",
+          "description": "Target destination."
+        }
+      },
+      "discriminator": "target",
+      "required": [
+        "target"
+      ]
+    },
+    "DatasetDestinationTarget": {
+      "type": "string",
+      "description": "The set of supported dataset destinations for an asset.",
+      "enum": [
+        "Mqtt",
+        "BrokerStateStore",
+        "Storage"
+      ],
+      "x-ms-enum": {
+        "name": "DatasetDestinationTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "MQTT target."
+          },
+          {
+            "name": "BrokerStateStore",
+            "value": "BrokerStateStore",
+            "description": "Broker State Store target."
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage target."
+          }
+        ]
+      }
+    },
+    "DatasetMqttDestination": {
+      "type": "object",
+      "description": "The type for a MQTT destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/MqttDestinationConfiguration",
+          "description": "The MQTT destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Mqtt"
+    },
+    "DatasetStorageDestination": {
+      "type": "object",
+      "description": "The type for a storage destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/StorageDestinationConfiguration",
+          "description": "The storage destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Storage"
+    },
+    "DeviceRef": {
+      "type": "object",
+      "description": "Defines which device and endpoint to use for this asset",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "Name of the device resource"
+        },
+        "endpointName": {
+          "type": "string",
+          "description": "The name of endpoint to use"
+        }
+      },
+      "required": [
+        "deviceName",
+        "endpointName"
       ]
     },
     "Error": {
@@ -3135,6 +3624,82 @@
         "eventNotifier"
       ]
     },
+    "EventDestination": {
+      "type": "object",
+      "description": "The type of the destination.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/EventDestinationTarget",
+          "description": "Target destination."
+        }
+      },
+      "discriminator": "target",
+      "required": [
+        "target"
+      ]
+    },
+    "EventDestinationTarget": {
+      "type": "string",
+      "description": "The set of supported event destinations for an asset.",
+      "enum": [
+        "Mqtt",
+        "Storage"
+      ],
+      "x-ms-enum": {
+        "name": "EventDestinationTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "MQTT target."
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage target."
+          }
+        ]
+      }
+    },
+    "EventMqttDestination": {
+      "type": "object",
+      "description": "The type for a MQTT destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/MqttDestinationConfiguration",
+          "description": "The MQTT destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Mqtt"
+    },
+    "EventStorageDestination": {
+      "type": "object",
+      "description": "The type for a storage destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/StorageDestinationConfiguration",
+          "description": "The storage destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Storage"
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -3176,6 +3741,111 @@
           }
         ]
       }
+    },
+    "ManagementAction": {
+      "type": "object",
+      "description": "Defines the action properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the action."
+        },
+        "actionConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the action."
+        },
+        "targetUri": {
+          "type": "string",
+          "description": "The target URI on which a client can invoke the specific action."
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "topic": {
+          "type": "string",
+          "description": "The MQTT topic path on which a client will receive the request for the action."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "The type of the action.",
+          "default": "Call",
+          "enum": [
+            "Call",
+            "Read",
+            "Write"
+          ],
+          "x-ms-enum": {
+            "name": "ManagementActionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Call",
+                "value": "Call",
+                "description": "Call action type."
+              },
+              {
+                "name": "Read",
+                "value": "Read",
+                "description": "Read action type."
+              },
+              {
+                "name": "Write",
+                "value": "Write",
+                "description": "Write action type."
+              }
+            ]
+          }
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Response timeout for the action."
+        }
+      },
+      "required": [
+        "name",
+        "targetUri"
+      ]
+    },
+    "ManagementGroup": {
+      "type": "object",
+      "description": "Defines the management group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the management group."
+        },
+        "managementGroupConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the management group."
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "defaultTopic": {
+          "type": "string",
+          "description": "Default MQTT topic path on which a client will receive the request for all actions that are part of the management group."
+        },
+        "defaultTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default response timeout for all actions that are part of the management group.",
+          "default": 100
+        },
+        "actions": {
+          "type": "array",
+          "description": "Array of actions that are part of the management group. Each action can have an individual configuration.",
+          "items": {
+            "$ref": "#/definitions/ManagementAction"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "MessageSchemaReference": {
       "type": "object",
@@ -3280,6 +3950,74 @@
       },
       "readOnly": true
     },
+    "MqttDestinationConfiguration": {
+      "type": "object",
+      "description": "The configuration for a MQTT destination.",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "The MQTT topic."
+        },
+        "retain": {
+          "type": "string",
+          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
+          "default": "Never",
+          "enum": [
+            "Keep",
+            "Never"
+          ],
+          "x-ms-enum": {
+            "name": "TopicRetainType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Keep",
+                "value": "Keep",
+                "description": "Retain the messages."
+              },
+              {
+                "name": "Never",
+                "value": "Never",
+                "description": "Never retain messages."
+              }
+            ]
+          }
+        },
+        "qos": {
+          "type": "string",
+          "description": "The MQTT QoS setting. Defaults to QoS 1.",
+          "default": "Qos1",
+          "enum": [
+            "Qos0",
+            "Qos1"
+          ],
+          "x-ms-enum": {
+            "name": "MqttDestinationQos",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Qos0",
+                "value": "Qos0",
+                "description": "QoS 0."
+              },
+              {
+                "name": "Qos1",
+                "value": "Qos1",
+                "description": "QoS 1."
+              }
+            ]
+          }
+        },
+        "ttl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The MQTT TTL setting."
+        }
+      },
+      "required": [
+        "topic"
+      ]
+    },
     "Namespace": {
       "type": "object",
       "description": "Namespace definition.",
@@ -3298,6 +4036,699 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "NamespaceAsset": {
+      "type": "object",
+      "description": "Asset definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceAssetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NamespaceAssetListResult": {
+      "type": "object",
+      "description": "The response of a NamespaceAsset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamespaceAsset items on this page",
+          "items": {
+            "$ref": "#/definitions/NamespaceAsset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceAssetProperties": {
+      "type": "object",
+      "description": "Defines the asset properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled/disabled status of the asset."
+        },
+        "externalAssetId": {
+          "type": "string",
+          "description": "Asset ID provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
+        "deviceRef": {
+          "$ref": "#/definitions/DeviceRef",
+          "description": "Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "assetTypeRefs": {
+          "type": "array",
+          "description": "URIs or type definition IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "An integer that is incremented each time the resource is modified.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp (in UTC) that is updated each time the resource is modified.",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Asset hardware revision number."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Asset software revision number."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Asset documentation reference."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "discoveredAssetRefs": {
+          "type": "array",
+          "description": "Reference to a list of discovered assets. Populated only if the asset has been created from discovery flow. Discovered asset names must be provided.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "defaultStreamsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all streams. Each stream can have its own configuration that overrides the default settings here."
+        },
+        "defaultManagementGroupsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all management groups. Each management group can have its own configuration that overrides the default settings here."
+        },
+        "defaultDatasetsDestinations": {
+          "type": "array",
+          "description": "Default destinations for a dataset.",
+          "items": {
+            "$ref": "#/definitions/DatasetDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultEventsDestinations": {
+          "type": "array",
+          "description": "Default destinations for an event.",
+          "items": {
+            "$ref": "#/definitions/EventDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultStreamsDestinations": {
+          "type": "array",
+          "description": "Default destinations for a stream.",
+          "items": {
+            "$ref": "#/definitions/StreamDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/NamespaceDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "streams": {
+          "type": "array",
+          "description": "Array of streams that are part of the asset. Each stream can have a per-stream configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceStream"
+          },
+          "x-ms-identifiers": []
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Array of management groups that are part of the asset. Each management group can have a per-group configuration.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/NamespaceAssetStatus",
+          "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceRef"
+      ]
+    },
+    "NamespaceAssetStatus": {
+      "type": "object",
+      "description": "Defines the asset status properties.",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/StatusConfig",
+          "description": "Defines the asset status config properties.",
+          "readOnly": true
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of dataset statuses that describe the status of each dataset.",
+          "items": {
+            "$ref": "#/definitions/NamespaceAssetStatusDataset"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of event statuses that describe the status of each event.",
+          "items": {
+            "$ref": "#/definitions/NamespaceAssetStatusEvent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "streams": {
+          "type": "array",
+          "description": "Array of stream statuses that describe the status of each stream.",
+          "items": {
+            "$ref": "#/definitions/NamespaceAssetStatusStream"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Array of management group statuses that describe the status of each management group.",
+          "items": {
+            "$ref": "#/definitions/NamespaceAssetStatusManagementGroup"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NamespaceAssetStatusDataset": {
+      "type": "object",
+      "description": "Defines the asset status dataset properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dataset. Must be unique within the status.datasets array. This name is used to correlate between the spec and status dataset information.",
+          "readOnly": true
+        },
+        "messageSchemaReference": {
+          "$ref": "#/definitions/NamespaceMessageSchemaReference",
+          "description": "The message schema reference object.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceAssetStatusEvent": {
+      "type": "object",
+      "description": "Defines the asset status event properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event. Must be unique within the status.events array. This name is used to correlate between the spec and status event information.",
+          "readOnly": true
+        },
+        "messageSchemaReference": {
+          "$ref": "#/definitions/NamespaceMessageSchemaReference",
+          "description": "The message schema reference object.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceAssetStatusManagementAction": {
+      "type": "object",
+      "description": "Defines the asset status action properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the action. Must be unique within the status.actions array. This name is used to correlate between the spec and status event information.",
+          "readOnly": true
+        },
+        "requestMessageSchemaReference": {
+          "$ref": "#/definitions/NamespaceMessageSchemaReference",
+          "description": "The request message schema reference object for the action.",
+          "readOnly": true
+        },
+        "responseMessageSchemaReference": {
+          "$ref": "#/definitions/NamespaceMessageSchemaReference",
+          "description": "The response message schema reference object for the action.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceAssetStatusManagementGroup": {
+      "type": "object",
+      "description": "Defines the asset status management group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. Must be unique within the status.managementGroups array. This name is used to correlate between the spec and status event information.",
+          "readOnly": true
+        },
+        "actions": {
+          "type": "array",
+          "description": "Array of action statuses that describe the status of each action.",
+          "items": {
+            "$ref": "#/definitions/NamespaceAssetStatusManagementAction"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceAssetStatusStream": {
+      "type": "object",
+      "description": "Defines the asset status stream properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the stream. Must be unique within the status.streams array. This name is used to correlate between the spec and status event information.",
+          "readOnly": true
+        },
+        "messageSchemaReference": {
+          "$ref": "#/definitions/NamespaceMessageSchemaReference",
+          "description": "The message schema reference object.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceAssetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the NamespaceAsset.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceAssetUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceAssetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NamespaceAsset.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled/disabled status of the asset."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the asset."
+        },
+        "assetTypeRefs": {
+          "type": "array",
+          "description": "URIs or type definition IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Asset manufacturer."
+        },
+        "manufacturerUri": {
+          "type": "string",
+          "description": "Asset manufacturer URI."
+        },
+        "model": {
+          "type": "string",
+          "description": "Asset model."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Asset product code."
+        },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Asset hardware revision number."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "Asset software revision number."
+        },
+        "documentationUri": {
+          "type": "string",
+          "description": "Asset documentation reference."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Asset serial number."
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "defaultDatasetsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all datasets. Each dataset can have its own configuration that overrides the default settings here."
+        },
+        "defaultEventsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
+        },
+        "defaultStreamsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all streams. Each stream can have its own configuration that overrides the default settings here."
+        },
+        "defaultManagementGroupsConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific default configuration for all management groups. Each management group can have its own configuration that overrides the default settings here."
+        },
+        "defaultDatasetsDestinations": {
+          "type": "array",
+          "description": "Default destinations for a dataset.",
+          "items": {
+            "$ref": "#/definitions/DatasetDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultEventsDestinations": {
+          "type": "array",
+          "description": "Default destinations for an event.",
+          "items": {
+            "$ref": "#/definitions/EventDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultStreamsDestinations": {
+          "type": "array",
+          "description": "Default destinations for a stream.",
+          "items": {
+            "$ref": "#/definitions/StreamDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
+          "items": {
+            "$ref": "#/definitions/NamespaceDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of events that are part of the asset. Each event can have per-event configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "streams": {
+          "type": "array",
+          "description": "Array of streams that are part of the asset. Each stream can have a per-stream configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceStream"
+          },
+          "x-ms-identifiers": []
+        },
+        "managementGroups": {
+          "type": "array",
+          "description": "Array of management groups that are part of the asset. Each management group can have a per-group configuration.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NamespaceDataset": {
+      "type": "object",
+      "description": "Defines the dataset properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dataset."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "Name of the data source within a dataset."
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "datasetConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific JSON string that describes configuration for the specific dataset."
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Destinations for a dataset.",
+          "items": {
+            "$ref": "#/definitions/DatasetDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataPoints": {
+          "type": "array",
+          "description": "Array of data points that are part of the dataset. Each data point can have per-data point configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceDatasetDataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NamespaceDatasetDataPoint": {
+      "type": "object",
+      "description": "Defines the dataset data point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        }
+      },
+      "required": [
+        "name",
+        "dataSource"
+      ]
+    },
+    "NamespaceEvent": {
+      "type": "object",
+      "description": "Defines the event properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the event."
+        },
+        "eventNotifier": {
+          "type": "string",
+          "description": "The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset."
+        },
+        "eventConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Destinations for an event.",
+          "items": {
+            "$ref": "#/definitions/EventDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "dataPoints": {
+          "type": "array",
+          "description": "Array of data points that are part of the event. Each data point can have a per-data point configuration.",
+          "items": {
+            "$ref": "#/definitions/NamespaceEventDataPoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "eventNotifier"
+      ]
+    },
+    "NamespaceEventDataPoint": {
+      "type": "object",
+      "description": "Defines the event data point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        }
+      },
+      "required": [
+        "name",
+        "dataSource"
       ]
     },
     "NamespaceListResult": {
@@ -3319,6 +4750,32 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "NamespaceMessageSchemaReference": {
+      "type": "object",
+      "description": "Defines the message schema reference properties.",
+      "properties": {
+        "schemaRegistryNamespace": {
+          "type": "string",
+          "description": "The message schema registry namespace.",
+          "readOnly": true
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The message schema name.",
+          "readOnly": true
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "The message schema version.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "schemaRegistryNamespace",
+        "schemaName",
+        "schemaVersion"
       ]
     },
     "NamespaceMigrateRequest": {
@@ -3373,6 +4830,35 @@
           "readOnly": true
         }
       }
+    },
+    "NamespaceStream": {
+      "type": "object",
+      "description": "Defines the stream properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the stream definition."
+        },
+        "streamConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the specific stream."
+        },
+        "typeRef": {
+          "type": "string",
+          "description": "URI or type definition ID."
+        },
+        "destinations": {
+          "type": "array",
+          "description": "Destinations for a stream.",
+          "items": {
+            "$ref": "#/definitions/StreamDestination"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "NamespaceUpdate": {
       "type": "object",
@@ -3768,6 +5254,143 @@
           }
         ]
       }
+    },
+    "StatusConfig": {
+      "type": "object",
+      "description": "Defines the status config properties.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A read-only incremental counter indicating the number of times the configuration has been modified from the perspective of the current actual (edge) state of the CRD. Edge would be the only writer of this value and would sync back up to the cloud. In steady state, this should equal version.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A read-only timestamp indicating the last time the configuration has been modified from the perspective of the current actual (edge) state of the CRD. Edge would be the only writer of this value and would sync back up to the cloud.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/StatusError",
+          "description": "Object to transfer and persist errors that originate from the edge.",
+          "readOnly": true
+        }
+      }
+    },
+    "StatusError": {
+      "type": "object",
+      "description": "Defines the status config error properties.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code for classification of errors (ex: '400', '404', '500', etc.).",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable helpful error message to provide additional context for error (e.g.,: “Capability ID 'foo' does not exist”).",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Array of error details that describe the status of each error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "StorageDestinationConfiguration": {
+      "type": "object",
+      "description": "The configuration for a storage destination.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The storage destination path."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "StreamDestination": {
+      "type": "object",
+      "description": "The type of the destination.",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/StreamDestinationTarget",
+          "description": "Target destination."
+        }
+      },
+      "discriminator": "target",
+      "required": [
+        "target"
+      ]
+    },
+    "StreamDestinationTarget": {
+      "type": "string",
+      "description": "The set of supported stream destinations for an asset.",
+      "enum": [
+        "Mqtt",
+        "Storage"
+      ],
+      "x-ms-enum": {
+        "name": "StreamDestinationTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "MQTT target."
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage target."
+          }
+        ]
+      }
+    },
+    "StreamMqttDestination": {
+      "type": "object",
+      "description": "The type for a MQTT destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/MqttDestinationConfiguration",
+          "description": "The MQTT destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Mqtt"
+    },
+    "StreamStorageDestination": {
+      "type": "object",
+      "description": "The type for a storage destination.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/StorageDestinationConfiguration",
+          "description": "The storage destination configuration."
+        }
+      },
+      "required": [
+        "configuration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Storage"
     },
     "Topic": {
       "type": "object",
