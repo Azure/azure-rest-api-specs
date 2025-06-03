@@ -67,12 +67,6 @@ suppressions:
     reason: An existing resource type is called 'schemas'
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
-  - code: ArmResourcePropertiesBag
-    from:
-      - deviceregistry.json
-    where:
-      - $.definitions.NamespaceDeviceProperties.properties.identity
-    reason: identity property has been approved as part of the Devices schema design
 ```
 
 ### Tag: package-2024-11
