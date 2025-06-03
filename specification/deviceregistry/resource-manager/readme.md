@@ -25,12 +25,21 @@ These are the global settings for the Azure Device Registry.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11
+tag: package-preview-2025-07
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2025-07
+
+These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2025-07-01-preview/deviceregistry.json
 ```
 
 ### Tag: package-2024-11
