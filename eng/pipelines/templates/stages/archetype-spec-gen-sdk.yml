@@ -267,7 +267,7 @@ stages:
               -apiviewArtifactName "$(PipelineArtifactsName)" `
               -buildId "$(Build.BuildId)" `
               -commitish "$(System.PullRequest.SourceCommitId)" `
-              -repoName "$(SdkRepoOwner)/$(SpecRepoName)" `
+              -repoName "$(SpecRepoOwner)/$(SpecRepoName)" `
               -pullRequestNumber "$(System.PullRequest.PullRequestNumber)" 
           displayName: 'Detect API Change and Create API Review'
           condition: and(succeeded(), eq(variables['HasAPIViewArtifact'], 'true'))
