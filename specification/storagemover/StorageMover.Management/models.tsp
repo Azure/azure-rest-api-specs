@@ -327,12 +327,14 @@ model AgentProperties {
   /**
    * Local IP address reported by the Agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   localIPAddress?: string;
 
   /**
    * Available memory reported by the Agent, in MB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   memoryInMB?: int64;
 
@@ -713,6 +715,7 @@ model JobRunResourceId {
   /**
    * Fully qualified resource id of the Job Run.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
   @visibility(Lifecycle.Read)
   jobRunResourceId?: string;
 }
