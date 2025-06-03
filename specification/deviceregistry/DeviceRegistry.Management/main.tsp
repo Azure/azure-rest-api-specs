@@ -9,6 +9,7 @@ import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
 import "./namespaces.tsp";
 import "./ns_assets.tsp";
+import "./ns_discoveredAssets.tsp";
 import "./schemaRegistries.tsp";
 
 using TypeSpec.Http;
