@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RoutingConfiguration",
-    "version": "2024-05-01"
+    "version": "2024-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -722,6 +722,16 @@
             "modelAsString": true
           },
           "description": "Determines whether BGP route propagation is enabled. Defaults to true."
+        },
+        "peeringRoutePropagationRules": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "peeringRoutePropagationRule"
+          ],
+          "items": {
+            "$ref": "#/definitions/PeeringRoutePropagationRule"
+          },
+          "description": "Rule to define peering route propagation behavior."
         }
       },
       "required": [
@@ -739,6 +749,27 @@
       },
       "required": [
         "networkGroupId"
+      ],
+      "description": "Network manager routing group item."
+    },
+    "PeeringRoutePropagationRule": {
+      "type": "object",
+      "properties": {
+        "propagationOption": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "DisableAllPeeringPrefixes"
+          ],
+          "x-ms-enum": {
+            "name": "PropagationOption",
+            "modelAsString": true
+          },
+          "description": "Determines the peering route propogation rule behavior. Defaults to 'Default'."
+        }
+      },
+      "required": [
+        "propagationOption"
       ],
       "description": "Network manager routing group item."
     },
