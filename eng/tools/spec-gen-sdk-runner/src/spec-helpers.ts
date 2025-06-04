@@ -31,6 +31,10 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
     .filter((p) => p.startsWith("specification/"))
     .filter((p) => !p.includes("/scenarios/"));
 
+  if (fileList.length === 0) {
+    logMessage("No relevant files changed under 'specification' folder in the PR");
+    return [];
+  }
   logMessage(`Related readme.md and typespec project list:`);
   const changedSpecs: ChangedSpecs[] = [];
 

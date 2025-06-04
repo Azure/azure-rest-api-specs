@@ -17,12 +17,11 @@ import {
  */
 export default async function setSpecGenSdkStatus({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
-  const ado_build_id = inputs.ado_build_id;
-  const ado_project_url = inputs.ado_project_url;
   const head_sha = inputs.head_sha;
-  if (!ado_build_id || !ado_project_url || !head_sha) {
+  const details_url = inputs.details_url;
+  if (!details_url || !head_sha) {
     throw new Error(
-      `Required inputs are not valid: ado_build_id:${ado_build_id}, ado_project_url:${ado_project_url}, head_sha:${head_sha}`,
+      `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
     );
   }
   const owner = inputs.owner;

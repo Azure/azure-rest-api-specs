@@ -90,10 +90,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let hasManagementPlaneSpecs = false;
   let overallRunHasBreakingChange = false;
   let currentRunHasBreakingChange = false;
+  let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+
+  if (changedSpecs.length === 0) {
+    sdkGenerationExecuted = false;
+    overallExecutionResult = "succeeded";
+  }
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -179,6 +185,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       hasManagementPlaneSpecs,
       stagedArtifactsFolder,
       apiViewRequestData,
+      sdkGenerationExecuted,
     ) || statusCode;
   return statusCode;
 }
