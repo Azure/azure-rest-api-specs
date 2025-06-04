@@ -44,6 +44,7 @@ export type VsoLogs = Map<
 export interface SpecGenSdkArtifactInfo {
   language: string;
   result: string;
+  prNumber?: string;
   labelAction?: boolean;
   isSpecGenSdkCheckRequired: boolean;
   apiViewRequestData: APIViewRequestData[];
