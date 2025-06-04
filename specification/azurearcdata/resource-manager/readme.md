@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-06-01
+tag: package-preview-2025-06
 ```
 
 ``` yaml
@@ -45,11 +45,11 @@ directive:
 ```
 
 
-### Tag: package-preview-2025-06-01
+### Tag: package-preview-2025-06
 
-These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-06-01'
+```yaml $(tag) == 'package-preview-2025-06'
 input-file:
   - Microsoft.AzureArcData/preview/2025-06-01-preview/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/preview/2025-06-01-preview/azurearcdata.json
