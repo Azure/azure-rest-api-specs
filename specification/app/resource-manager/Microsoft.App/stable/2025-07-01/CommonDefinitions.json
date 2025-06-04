@@ -818,6 +818,27 @@
               "items": {
                 "type": "string"
               }
+            },
+            "provisioningState": {
+              "description": "Provisioning state of the Dapr Component.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DaprComponentProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -995,7 +1016,8 @@
                 "Failed",
                 "Canceled",
                 "DeleteFailed",
-                "Pending"
+                "Pending",
+                "Deleting"
               ],
               "type": "string",
               "readOnly": true,
@@ -1003,6 +1025,11 @@
                 "name": "CertificateProvisioningState",
                 "modelAsString": true
               }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
             },
             "certificateKeyVaultProperties": {
               "description": "Properties for a certificate stored in a Key Vault.",
@@ -1129,7 +1156,8 @@
                 "Failed",
                 "Canceled",
                 "DeleteFailed",
-                "Pending"
+                "Pending",
+                "Deleting"
               ],
               "type": "string",
               "readOnly": true,
@@ -1279,6 +1307,24 @@
             "name": "IdentitySettingsLifeCycle",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ResourceTags": {
+      "type": "object",
+      "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         }
       }
     }

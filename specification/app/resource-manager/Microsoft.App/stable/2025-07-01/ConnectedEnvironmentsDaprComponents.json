@@ -123,6 +123,10 @@
         "summary": "Creates or updates a Dapr Component.",
         "description": "Creates or updates a Dapr Component in a connected environment.",
         "operationId": "ConnectedEnvironmentsDaprComponents_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -164,14 +168,19 @@
               "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DaprComponent"
+            }
+          },
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": false,
         "x-ms-examples": {
           "Create or update dapr component": {
             "$ref": "./examples/ConnectedEnvironmentsDaprComponents_CreateOrUpdate.json"
@@ -185,6 +194,10 @@
         "summary": "Delete a Dapr Component.",
         "description": "Delete a Dapr Component from a connected environment.",
         "operationId": "ConnectedEnvironmentsDaprComponents_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -211,8 +224,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete operation completed"
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Environment does not exist"
@@ -220,7 +238,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -228,8 +246,7 @@
           "Delete dapr component": {
             "$ref": "./examples/ConnectedEnvironmentsDaprComponents_Delete.json"
           }
-        },
-        "x-ms-long-running-operation": false
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/daprComponents/{componentName}/listSecrets": {
