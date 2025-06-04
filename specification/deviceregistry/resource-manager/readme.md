@@ -59,6 +59,7 @@ suppressions:
       - $.definitions.OutboundEndpointsUpdate.properties.assigned
       - $.definitions.OutboundEndpoints.properties.unassigned
       - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.DiscoveredDeviceProperties.properties.attributes
       - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
       - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
       - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
