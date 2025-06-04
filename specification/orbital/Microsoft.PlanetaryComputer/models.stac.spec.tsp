@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.common.geojson.tsp";
 import "./models.common.cql.tsp";
-import { clientName } from "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
