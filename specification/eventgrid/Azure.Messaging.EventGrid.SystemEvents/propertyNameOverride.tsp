@@ -56,6 +56,12 @@ using Azure.ClientGenerator.Core;
   "autorest"
 );
 
+@@clientName(recordingChannelType, "AcsRecordingChannelType");
+
+@@clientName(recordingContentType, "AcsRecordingContentType");
+
+@@clientName(recordingFormatType, "AcsRecordingFormatType");
+
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl,
   "fileurl",
   "autorest"
@@ -176,3 +182,4 @@ using Azure.ClientGenerator.Core;
   "listItemId",
   "autorest"
 );
+@@clientName(AcsCallEndedByProperties.type, "kind", "autorest");
