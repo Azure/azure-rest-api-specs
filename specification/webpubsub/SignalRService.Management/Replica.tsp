@@ -63,10 +63,10 @@ interface Replicas {
   update is ArmCustomPatchAsync<
     Replica,
     PatchModel = Replica,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Replica>> & {
+    Response = Replica | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Replica>> & {
       @bodyRoot
       _: Replica;
-    }
+    })
   >;
 
   /**

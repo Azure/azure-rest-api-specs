@@ -1321,7 +1321,10 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
           },
           "default": {
             "description": "ignore",
@@ -1334,6 +1337,9 @@
           "WebPubSubReplicas_Update": {
             "$ref": "./examples/WebPubSubReplicas_Update.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
@@ -2451,7 +2457,10 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Operation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
