@@ -2668,6 +2668,27 @@
           },
           "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
         },
+        "locationInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Describes the location for the product where storage account resource can be created."
+              },
+              "zones": {
+                "readOnly": true,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Describes the available zones for the product where storage account resource can be created."
+              }
+            }
+          }
+        },
         "capabilities": {
           "readOnly": true,
           "type": "array",
@@ -3375,6 +3396,24 @@
         }
       }
     },
+    "Placement": {
+      "type": "object",
+      "description": "The complex type of the zonal placement details.",
+      "properties": {
+        "zonePlacementPolicy": {
+          "type": "string",
+          "description": "The availability zone pinning policy for the storage account.",
+          "enum": [
+            "Any",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ZonePlacementPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
@@ -3403,6 +3442,17 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. Gets or sets the pinned logical availability zone for the storage account."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Optional. Gets or sets the zonal placement details for the storage account."
         },
         "tags": {
           "type": "object",
@@ -4380,7 +4430,18 @@
             "name": "Kind",
             "modelAsString": true
           }
-        }
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional. Gets or sets the pinned logical availability zone for the storage account."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Optional. Gets or sets the zonal placement details for the storage account."
+        },
       },
       "description": "The parameters that can be provided when updating the storage account properties."
     },
