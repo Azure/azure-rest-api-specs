@@ -1,22 +1,22 @@
 import { describe, test, expect, vi, beforeEach, type Mock } from "vitest";
-import * as utils from "../../src/utils.js";
+import * as utils from "../src/utils.js";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
-} from "../../src/commands.js";
-import * as commandHelpers from "../../src/command-helpers.js";
-import * as log from "../../src/log.js";
-import * as changeFiles from "../../src/change-files.js";
+} from "../src/commands.js";
+import * as commandHelpers from "../src/command-helpers.js";
+import * as log from "../src/log.js";
+import * as changeFiles from "../src/spec-helpers.js";
 import fs from "node:fs";
 import path from "node:path";
-import { LogLevel } from "../../src/log.js";
+import { LogLevel } from "../src/log.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
-    const [filePath, ...rest] = args
-    return [String(filePath).replaceAll('\\', '/'), ...rest]
-  })
+    const [filePath, ...rest] = args;
+    return [String(filePath).replaceAll("\\", "/"), ...rest];
+  });
 }
 
 describe("generateSdkForSingleSpec", () => {
@@ -30,7 +30,7 @@ describe("generateSdkForSingleSpec", () => {
       readmePath: "path/to/readme.md",
       localSpecRepoPath: "/spec/path",
       workingFolder: "/working/folder",
-      runMode: "batch",
+      runMode: "release",
       localSdkRepoPath: "/sdk/path",
       sdkRepoName: "azure-sdk-for-js",
       sdkLanguage: "javascript",
@@ -40,6 +40,7 @@ describe("generateSdkForSingleSpec", () => {
 
     const mockExecutionReport = {
       executionResult: "succeeded",
+      stagedArtifactsFolder: "path/to/artifacts",
       packages: [
         {
           packageName: "test-package",
@@ -82,6 +83,8 @@ describe("generateSdkForSingleSpec", () => {
     );
     expect(log.logMessage).toHaveBeenCalledWith("Runner command executed successfully");
     expect(commandHelpers.setPipelineVariables).toHaveBeenCalledWith(
+      "path/to/artifacts",
+      false,
       "test-package",
       "npm install test-package",
     );
@@ -190,12 +193,13 @@ describe("generateSdkForSpecPr", () => {
         specs: [
           "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
         ],
-        typespecProject: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
         readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
       },
     ];
     const mockExecutionReport = {
       executionResult: "succeeded",
+      packages: [],
       vsoLogPath: "path/to/log",
     };
 
@@ -215,10 +219,12 @@ describe("generateSdkForSpecPr", () => {
     });
 
     const statusCode = await generateSdkForSpecPr();
-
+    const serviceFolderPath = commandHelpers.getServiceFolderPath(
+      mockChangedSpecs[0].typespecProject,
+    );
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
-      `Generating SDK from ${mockChangedSpecs[0].typespecProject} ${mockChangedSpecs[0].readmeMd}`,
+      `Generating SDK from ${serviceFolderPath}`,
       LogLevel.Group,
     );
     expect(log.logMessage).toHaveBeenCalledWith(`Runner command executed successfully`);
@@ -228,7 +234,60 @@ describe("generateSdkForSpecPr", () => {
     expect(log.logMessage).toHaveBeenCalledWith("ending group logging", LogLevel.EndGroup);
     expect(commandHelpers.logIssuesToPipeline).toHaveBeenCalledWith(
       mockExecutionReport.vsoLogPath,
-      `${mockChangedSpecs[0].typespecProject} ${mockChangedSpecs[0].readmeMd}`,
+      serviceFolderPath,
+    );
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded", // overallExecutionResult
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      true, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted
+    );
+  });
+
+  test("should handle the case when there are no changed specs", async () => {
+    // Set up mocks
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: "javascript",
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+
+    // Return empty array for changedSpecs
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue([]);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+
+    // Spy on generateArtifact to verify parameters
+    const generateArtifactSpy = vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const statusCode = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    // Verify runSpecGenSdkCommand is not called when there are no changed specs
+    expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
+    // Verify correct parameters are passed to generateArtifact
+    expect(generateArtifactSpy).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded", // overallExecutionResult should be set to "succeeded"
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      false, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      false, // sdkGenerationExecuted should be set to false
     );
   });
 
@@ -258,6 +317,16 @@ describe("generateSdkForSpecPr", () => {
     expect(log.logMessage).toHaveBeenCalledWith(
       "Runner: no spec config file found in the changed files",
       LogLevel.Warn,
+    );
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "", // overallExecutionResult is empty because no spec was actually processed
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      false, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config
     );
   });
 
@@ -399,16 +468,34 @@ describe("generateSdkForBatchSpecs", () => {
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
-    
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
   test("should generate SDKs for all specs successfully", async () => {
     const mockBatchType = "all-specs";
-    const mockSpecPaths = ["typespec1", "typespec2", "readme1", "readme2"];
+    const mockSpecPaths = [
+      {
+        tspconfigPath: "typespec1",
+        readmePath: "readme1",
+      },
+      {
+        tspconfigPath: "typespec2",
+        readmePath: "readme2",
+      },
+      {
+        tspconfigPath: "typespec3",
+        readmePath: "readme3",
+      },
+      {
+        tspconfigPath: "typespec4",
+        readmePath: "readme4",
+      },
+    ];
     const mockExecutionReport = {
       executionResult: "succeeded",
+      stagedArtifactsFolder: "path/to/artifacts",
       packages: [],
     };
     const mockInput = {
@@ -442,6 +529,7 @@ describe("generateSdkForBatchSpecs", () => {
     expect(result).toBe(0);
     expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
     expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
+    expect(commandHelpers.setPipelineVariables).toHaveBeenCalledWith("path/to/artifacts");
     const markdownFilePath = path.normalize(
       path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
     );
@@ -450,13 +538,22 @@ describe("generateSdkForBatchSpecs", () => {
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
   });
 
   test("should handle errors during SDK generation", async () => {
     const mockBatchType = "all-specs";
-    const mockSpecPaths = ["typespec1", "typespec2"];
+    const mockSpecPaths = [
+      {
+        tspconfigPath: "typespec1",
+        readmePath: "readme1",
+      },
+      {
+        tspconfigPath: "typespec2",
+        readmePath: "readme2",
+      },
+    ];
     const mockExecutionReport = {
       executionResult: "failed",
       packages: [],
@@ -486,7 +583,9 @@ describe("generateSdkForBatchSpecs", () => {
     const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
-
+    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
     const result = await generateSdkForBatchSpecs(mockBatchType);
 
     expect(result).toBe(1);
@@ -495,18 +594,26 @@ describe("generateSdkForBatchSpecs", () => {
     const markdownFilePath = path.normalize(
       path.join(mockInput.workingFolder, "out/logs/generation-summary.md"),
     );
-    expect(logSpy).toHaveBeenNthCalledWith(1, `Generating SDK from ${mockSpecPaths[0]}`, "group");
+    expect(logSpy).toHaveBeenNthCalledWith(
+      1,
+      `Generating SDK from ${mockSpecPaths[0].tspconfigPath}`,
+      "group",
+    );
     expect(logSpy).toHaveBeenNthCalledWith(
       3,
       "Runner: error executing command:Error: Command failed",
       LogLevel.Error,
     );
     expect(logSpy).toHaveBeenNthCalledWith(5, "ending group logging", "endgroup");
-    expect(logSpy).toHaveBeenNthCalledWith(6, `Generating SDK from ${mockSpecPaths[1]}`, "group");
+    expect(logSpy).toHaveBeenNthCalledWith(
+      6,
+      `Generating SDK from ${mockSpecPaths[1].tspconfigPath}`,
+      "group",
+    );
     expect(logSpy).toHaveBeenCalledWith(`Runner: markdown file written to ${markdownFilePath}`);
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
 
-    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock)
+    const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();
     logSpy.mockRestore();
   });
