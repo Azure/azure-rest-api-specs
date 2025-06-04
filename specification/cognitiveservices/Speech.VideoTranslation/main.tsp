@@ -444,7 +444,10 @@ interface EventHubConfigurationOperations {
   @doc("Create or replace EventHub configuration.")
   @route("/configurations/event-hub")
   @put
-  createOrReplaceEventHubConfiguration is RpcOperation<EventHubConfiguration, EventHubConfiguration>;
+  createOrReplaceEventHubConfiguration is RpcOperation<
+    EventHubConfiguration,
+    EventHubConfiguration
+  >;
 
   @doc("Get EventHub configuration.")
   @route("/configurations/event-hub")
