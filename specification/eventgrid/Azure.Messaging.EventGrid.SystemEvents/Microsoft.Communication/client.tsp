@@ -606,6 +606,9 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
   "csharp"
 );
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
+  "csharp"
+);
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
   "csharp"
 );
