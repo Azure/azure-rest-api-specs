@@ -242,11 +242,11 @@ model IterationInput {
   exportSubtitleInVideo?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required, if not specified, it will not use TTS custom lexicon.")
+  @doc("Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   ttsCustomLexiconFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required, if not specified, it will not use TTS custom lexicon.")
+  @doc("Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   ttsCustomLexiconFileIdInAudioContentCreation?: Guid;
 
   @added(ApiVersions.v2025_05_20)

@@ -4,7 +4,7 @@
 
 Configuration for generating VideoTranslation SDK.
 
-The current release for the VideoTranslation is `release_2025_05_20`.
+The current release for the VideoTranslation.
 
 ``` yaml
 tag: release_2025_05_20
