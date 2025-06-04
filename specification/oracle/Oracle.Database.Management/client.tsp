@@ -6,6 +6,7 @@ using Azure.Core;
 using Oracle.Database;
 
 @@clientName(Oracle.Database, "OracleDatabaseMgmt", "python");
+@@clientName(Oracle.Database, "OracleDatabaseManagementClient", "javascript");
 
 // CSharp
 @@clientName(DataCollectionOptions, "DiagnosticCollectionConfig", "csharp");
