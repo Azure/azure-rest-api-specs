@@ -33,13 +33,7 @@ interface OperationResults {
     operationId: string,
   ):
     | OkResponse
-    | (AcceptedResponse & {
-        /**
-         * The URL to get the status of a completed long-running operation.
-         */
-        @header("Location")
-        location?: string;
-      })
+    | (AcceptedResponse & LocationHeader)
     | ArmNoContentResponse<"No Content. For Delete operation results.">
     | ErrorResponse;
 }

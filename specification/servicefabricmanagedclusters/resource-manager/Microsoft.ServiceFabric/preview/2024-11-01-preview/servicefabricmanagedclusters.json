@@ -296,9 +296,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Location": {
+              "location": {
                 "type": "string",
-                "description": "The URL to get the status of a completed long-running operation."
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -8151,14 +8151,10 @@
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
         "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
+          "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
         },
         "forceUpdateTag": {
           "type": "string",
