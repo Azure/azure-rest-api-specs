@@ -126,7 +126,7 @@ union EventHubVideoTranslationEventKind {
 union EnableEmotionalPlatformVoice {
   string,
 
-  /** Let API to decide whether enable emotional voice for the target locale. */
+  /** Let API to decide whether to enable emotional voice for the target locale. */
   Auto: "Auto",
 
   /** Force to enable emotional voice if there is voice supported emotion for the target locale. */
@@ -190,7 +190,7 @@ model TranslationInput {
   @doc("Number of speakers in the video, if not provided, it will be auto-detected from the video file.")
   speakerCount?: int32;
 
-  @doc("Indicate whether enable lip sync, if not provided, the default value is false to disable the lip sync.")
+  @doc("Indicate whether to enable lip sync, if not provided, the default value is false to disable the lip sync.")
   @added(ApiVersions.v2025_05_20)
   enableLipSync?: boolean;
 
@@ -217,7 +217,7 @@ model IterationResult {
   targetLocaleSubtitleWebvttFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Target locale Advanced SubStation Alpha format subtitle file URL, only response when specify exportTargetLocaleAdvancedSubtitleFile to true in iteration creation API.")
+  @doc("This property provides the URL of the target locale Advanced SubStation Alpha (ASS) subtitle file. It is populated only when exportTargetLocaleAdvancedSubtitleFile is set to true during iteration creation; otherwise, this property will not be included in the response.")
   targetLocaleAdvancedSubtitleFileUrl?: url;
 
   @doc("Metadata json webvtt file URL.")
@@ -254,7 +254,7 @@ model IterationInput {
   enableVideoSpeedAdjustment?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Indicate whether allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle.")
+  @doc("Indicate whether to allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle.")
   enableOcrCorrectionFromSubtitle?: boolean;
 
   @added(ApiVersions.v2025_05_20)
@@ -274,14 +274,14 @@ model IterationInput {
   subtitleFontSize?: int32;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale, if not specified, it will let API to decide whether enable emotional or not at server side.")
+  @doc("This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side.")
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 }
 
 @added(ApiVersions.v2025_05_20)
 @doc("EventHub configuration.")
-model EventHubConfig {
-  @doc("Indicate whether enable sending event to EventHub.")
+model EventHubConfiguration {
+  @doc("Indicate whether to enable sending event to EventHub.")
   isEnabled: boolean;
 
   @doc("EventHub namespace host name, for example: [YourNamespace].servicebus.windows.net")
@@ -440,21 +440,21 @@ interface OperationOperations {
 }
 
 @added(ApiVersions.v2025_05_20)
-interface EventHubConfigOperations {
+interface EventHubConfigurationOperations {
   @doc("Create or replace EventHub configuration.")
   @route("/configurations/event-hub")
   @put
-  createOrReplaceEventHubConfig is RpcOperation<EventHubConfig, EventHubConfig>;
+  createOrReplaceEventHubConfiguration is RpcOperation<EventHubConfiguration, EventHubConfiguration>;
 
   @doc("Get EventHub configuration.")
   @route("/configurations/event-hub")
   @get
-  getEventHubConfig is RpcOperation<{}, EventHubConfig>;
+  getEventHubConfiguration is RpcOperation<{}, EventHubConfiguration>;
 
   @doc("Delete EventHub configuration.")
   @delete
   @route("/configurations/event-hub")
-  deleteEventHubConfig is RpcOperation<{}, NoContentResponse>;
+  deleteEventHubConfiguration is RpcOperation<{}, NoContentResponse>;
 
   @doc("Send ping to EventHub to verify configuration.")
   @route("/configurations/event-hub:ping")

@@ -74,7 +74,7 @@
   "paths": {
     "/configurations/event-hub": {
       "get": {
-        "operationId": "EventHubConfigOperations_GetEventHubConfig",
+        "operationId": "EventHubConfigurationOperations_GetEventHubConfiguration",
         "tags": [
           "VideoTranslation"
         ],
@@ -88,7 +88,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EventHubConfig"
+              "$ref": "#/definitions/EventHubConfiguration"
             }
           },
           "default": {
@@ -103,15 +103,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get EventHub config": {
-            "$ref": "./examples/EventHubConfigOperations_GetEventHubConfig.json"
-          }
         }
       },
       "put": {
-        "operationId": "EventHubConfigOperations_CreateOrReplaceEventHubConfig",
+        "operationId": "EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration",
         "tags": [
           "VideoTranslation"
         ],
@@ -125,7 +120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EventHubConfig"
+              "$ref": "#/definitions/EventHubConfiguration"
             }
           }
         ],
@@ -133,7 +128,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EventHubConfig"
+              "$ref": "#/definitions/EventHubConfiguration"
             }
           },
           "default": {
@@ -148,15 +143,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or replace EventHub configuration": {
-            "$ref": "./examples/EventHubConfigOperations_CreateOrReplaceEventHubConfig.json"
-          }
         }
       },
       "delete": {
-        "operationId": "EventHubConfigOperations_DeleteEventHubConfig",
+        "operationId": "EventHubConfigurationOperations_DeleteEventHubConfiguration",
         "tags": [
           "VideoTranslation"
         ],
@@ -182,17 +172,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete EventHub config": {
-            "$ref": "./examples/EventHubConfigOperations_DeleteEventHubConfig.json"
-          }
         }
       }
     },
     "/configurations/event-hub:ping": {
       "post": {
-        "operationId": "EventHubConfigOperations_PingEventHub",
+        "operationId": "EventHubConfigurationOperations_PingEventHub",
         "tags": [
           "VideoTranslation"
         ],
@@ -217,11 +202,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Send EventHub ping event": {
-            "$ref": "./examples/EventHubConfigOperations_PingEventHub.json"
           }
         }
       }
@@ -793,7 +773,7 @@
           {
             "name": "Auto",
             "value": "Auto",
-            "description": "Let API to decide whether enable emotional voice for the target locale."
+            "description": "Let API to decide whether to enable emotional voice for the target locale."
           },
           {
             "name": "Enable",
@@ -808,13 +788,13 @@
         ]
       }
     },
-    "EventHubConfig": {
+    "EventHubConfiguration": {
       "type": "object",
       "description": "EventHub configuration.",
       "properties": {
         "isEnabled": {
           "type": "boolean",
-          "description": "Indicate whether enable sending event to EventHub."
+          "description": "Indicate whether to enable sending event to EventHub."
         },
         "eventHubNamespaceHostName": {
           "type": "string",
@@ -965,7 +945,7 @@
         },
         "enableOcrCorrectionFromSubtitle": {
           "type": "boolean",
-          "description": "Indicate whether allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle."
+          "description": "Indicate whether to allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle."
         },
         "exportTargetLocaleAdvancedSubtitleFile": {
           "type": "boolean",
@@ -986,7 +966,7 @@
         },
         "enableEmotionalPlatformVoice": {
           "$ref": "#/definitions/EnableEmotionalPlatformVoice",
-          "description": "This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale, if not specified, it will let API to decide whether enable emotional or not at server side."
+          "description": "This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side."
         }
       }
     },
@@ -1017,7 +997,7 @@
         "targetLocaleAdvancedSubtitleFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Target locale Advanced SubStation Alpha format subtitle file URL, only response when specify exportTargetLocaleAdvancedSubtitleFile to true in iteration creation API."
+          "description": "This property provides the URL of the target locale Advanced SubStation Alpha (ASS) subtitle file. It is populated only when exportTargetLocaleAdvancedSubtitleFile is set to true during iteration creation; otherwise, this property will not be included in the response."
         },
         "metadataJsonWebvttFileUrl": {
           "type": "string",
@@ -1214,7 +1194,7 @@
         },
         "enableLipSync": {
           "type": "boolean",
-          "description": "Indicate whether enable lip sync, if not provided, the default value is false to disable the lip sync."
+          "description": "Indicate whether to enable lip sync, if not provided, the default value is false to disable the lip sync."
         },
         "subtitleMaxCharCountPerSegment": {
           "type": "integer",
