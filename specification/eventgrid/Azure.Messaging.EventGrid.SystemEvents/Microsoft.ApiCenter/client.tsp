@@ -20,4 +20,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
   Access.public
 );
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+  "csharp"
+);
 //Enums

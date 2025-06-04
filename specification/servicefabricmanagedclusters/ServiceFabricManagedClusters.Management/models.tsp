@@ -377,7 +377,7 @@ model FaultSimulationDetails {
   /**
    * List of node type simulations associated with the cluster fault simulation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["nodeTypeName"])
+  @Azure.ResourceManager.identifiers(#["nodeTypeName"])
   nodeTypeFaultSimulation?: NodeTypeFaultSimulation[];
 
   /**
@@ -409,6 +409,16 @@ model NodeTypeFaultSimulation {
    * Current or latest asynchronous operation status on the node type
    */
   operationStatus?: SfmcOperationStatus;
+}
+
+/**
+ * Fault Simulation Request for Start action.
+ */
+model FaultSimulationContentWrapper {
+  /**
+   * Parameters for Fault Simulation start action.
+   */
+  parameters: FaultSimulationContent;
 }
 
 /**

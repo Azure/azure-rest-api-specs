@@ -113,7 +113,7 @@ model CompanyDetails {
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   marketplaceDetails: MarketplaceDetails;
 
   @doc("Details of the user.")

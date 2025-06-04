@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 // @armResourceOperations
@@ -24,6 +23,7 @@ interface WorkloadNetworkDhcpConfigurations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}")
   @doc("Get a {name}", WorkloadNetworkDhcp)
   @get
+  @armResourceRead(WorkloadNetworkDhcp)
   get(
     ...Foundations.BaseParameters<WorkloadNetworkDhcp>,
     ...DhcpIdParameter,
