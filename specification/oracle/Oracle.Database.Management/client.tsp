@@ -570,11 +570,8 @@ using Oracle.Database;
   "listByAutonomousDatabase",
   "go"
 );
-@@clientName(DbNodes.listByParent, "listByCloudVMCluster", "java");
-@@clientName(DbServers.listByParent,
-  "listByCloudExadataInfrastructure",
-  "go"
-);
+@@clientName(DbNodes.listByParent, "listByCloudVMCluster", "go");
+@@clientName(DbServers.listByParent, "listByCloudExadataInfrastructure", "go");
 @@clientName(VirtualNetworkAddresses.listByParent,
   "listByCloudVMCluster",
   "go"
