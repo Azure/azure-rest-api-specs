@@ -59,6 +59,10 @@ suppressions:
       - $.definitions.OutboundEndpointsUpdate.properties.assigned
       - $.definitions.OutboundEndpoints.properties.unassigned
       - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
+      - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
+      - $.definitions.DiscoveredOutboundEndpointsUpdate.properties.assigned
       - $.definitions.DeviceStatusEndpoints.properties.inbound
     reason: attributes is a customer-defined property of any shape and custom keys for other properties
   - code: OperationIdNounVerb
