@@ -13,7 +13,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the discovered device properties.")
 @added(Versions.v2025_07_01_preview)
-model DiscoveredDeviceProperties {
+model NamespaceDiscoveredDeviceProperties {
   @doc("A device ID that represents the device in a system external to Azure. Unique within scope of an Azure tenant.")
   externalDeviceId?: string;
 

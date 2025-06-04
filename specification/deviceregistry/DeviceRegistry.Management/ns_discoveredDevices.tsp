@@ -17,7 +17,8 @@ namespace Microsoft.DeviceRegistry;
 @doc("Discovered device definition.")
 @parentResource(Namespace)
 @added(Versions.v2025_07_01_preview)
-model NamespaceDiscoveredDevice is TrackedResource<DiscoveredDeviceProperties> {
+model NamespaceDiscoveredDevice
+  is TrackedResource<NamespaceDiscoveredDeviceProperties> {
   @doc("The name of the discovered device.")
   @key("discoveredDeviceName")
   @segment("discoveredDevices")
@@ -46,7 +47,7 @@ interface NamespaceDiscoveredDevices {
     NamespaceDiscoveredDevice,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       NamespaceDiscoveredDevice,
-      DiscoveredDeviceProperties
+      NamespaceDiscoveredDeviceProperties
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredDevice>;
