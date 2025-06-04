@@ -31,6 +31,124 @@ openapi-type: arm
 tag: package-2024-07-01
 ```
 
+### Tag: package-2024-09-preview
+These settings apply only when `--tag=package-2024-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-09-preview'
+input-file:
+  - Microsoft.Network/preview/2024-09-01-preview/networkManagerRoutingConfiguration.json
+  - Microsoft.Network/preview/2024-09-01-preview/network.json
+  - Microsoft.Network/stable/2024-07-01/applicationGateway.json
+  - Microsoft.Network/stable/2024-07-01/applicationGatewayWafDynamicManifests.json
+  - Microsoft.Network/stable/2024-07-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2024-07-01/availableDelegations.json
+  - Microsoft.Network/stable/2024-07-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2024-07-01/azureFirewall.json
+  - Microsoft.Network/stable/2024-07-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2024-07-01/azureWebCategory.json
+  - Microsoft.Network/stable/2024-07-01/bastionHost.json
+  - Microsoft.Network/stable/2024-07-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2024-07-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2024-07-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2024-07-01/cloudServiceSwap.json
+  - Microsoft.Network/stable/2024-07-01/customIpPrefix.json
+  - Microsoft.Network/stable/2024-07-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2024-07-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2024-07-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/endpointService.json
+  - Microsoft.Network/stable/2024-07-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2024-07-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2024-07-01/expressRoutePort.json
+  - Microsoft.Network/stable/2024-07-01/expressRouteProviderPort.json
+  - Microsoft.Network/stable/2024-07-01/firewallPolicy.json
+  - Microsoft.Network/stable/2024-07-01/ipAddressManager.json
+  - Microsoft.Network/stable/2024-07-01/ipAllocation.json
+  - Microsoft.Network/stable/2024-07-01/ipGroups.json
+  - Microsoft.Network/stable/2024-07-01/loadBalancer.json
+  - Microsoft.Network/stable/2024-07-01/natGateway.json
+  - Microsoft.Network/stable/2024-07-01/networkInterface.json
+  - Microsoft.Network/stable/2024-07-01/networkManager.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerActiveConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerConnection.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerScopeConnection.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/stable/2024-07-01/networkProfile.json
+  - Microsoft.Network/stable/2024-07-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2024-07-01/networkSecurityPerimeter.json
+  - Microsoft.Network/stable/2024-07-01/networkVerifier.json
+  - Microsoft.Network/stable/2024-07-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2024-07-01/networkWatcher.json
+  - Microsoft.Network/stable/2024-07-01/operation.json
+  - Microsoft.Network/stable/2024-07-01/privateEndpoint.json
+  - Microsoft.Network/stable/2024-07-01/privateLinkService.json
+  - Microsoft.Network/stable/2024-07-01/publicIpAddress.json
+  - Microsoft.Network/stable/2024-07-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2024-07-01/routeFilter.json
+  - Microsoft.Network/stable/2024-07-01/routeTable.json
+  - Microsoft.Network/stable/2024-07-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2024-07-01/serviceCommunity.json
+  - Microsoft.Network/stable/2024-07-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2024-07-01/serviceTags.json
+  - Microsoft.Network/stable/2024-07-01/usage.json
+  - Microsoft.Network/stable/2024-07-01/virtualNetwork.json
+  - Microsoft.Network/stable/2024-07-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2024-07-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2024-07-01/virtualRouter.json
+  - Microsoft.Network/stable/2024-07-01/virtualWan.json
+  - Microsoft.Network/stable/2024-07-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2024-07-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2024-07-01/webapplicationfirewall.json
+suppressions:
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: TrackedResourcePatchOperation
+    reason: False alarm.
+    where:
+      - $.definitions.NspProfile
+      - $.definitions.NspAccessRule
+      - $.definitions.NspAssociation
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+      
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
+```
+```
+
 ### Tag: package-2024-07-01
 
 These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
