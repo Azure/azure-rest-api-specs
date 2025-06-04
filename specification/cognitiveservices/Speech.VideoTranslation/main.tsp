@@ -161,9 +161,15 @@ scalar localeName extends string;
 @maxLength(64)
 scalar resourceId extends string;
 
+@doc("The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow.")
+@pattern("^#?(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$")
+@minLength(6)
+@maxLength(9)
+scalar rgbaColor extends string;
+
 @doc("Translation input.")
 model TranslationInput {
-  @doc("The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.")
+  @doc("The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts , if not specified, the source locale will be auto-detected from the video file, the auto detect is only supported after version 2025-05-20.")
   @madeOptional(ApiVersions.v2025_05_20)
   sourceLocale?: localeName;
 
@@ -173,25 +179,25 @@ model TranslationInput {
   @doc("Translation voice kind.")
   voiceKind: VoiceKind;
 
-  @doc("Translation video file url.")
+  @doc("Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify audioFileUrl instead.")
   @madeOptional(ApiVersions.v2025_05_20)
   videoFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translation audio file url.")
+  @doc("Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify videoFileUrl instead.")
   audioFileUrl?: url;
 
-  @doc("Number of speakers in the video.")
+  @doc("Number of speakers in the video, if not provided, it will be auto-detected from the video file.")
   speakerCount?: int32;
 
-  @doc("Indicate whether enable lip sync.")
+  @doc("Indicate whether enable lip sync, if not provided, the default value is false to disable the lip sync.")
   @added(ApiVersions.v2025_05_20)
   enableLipSync?: boolean;
 
-  @doc("Subtitle max display character count per segment.")
+  @doc("Subtitle max display character count per segment, if not provided, it will use the language dependent default value.")
   subtitleMaxCharCountPerSegment?: int32;
 
-  @doc("Export subtitle in video.")
+  @doc("Export subtitle in video, if not specified, the default value is false, it will not burn subtitle to the translated video file.")
   exportSubtitleInVideo?: boolean;
 }
 
@@ -211,7 +217,7 @@ model IterationResult {
   targetLocaleSubtitleWebvttFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Target locale Advanced SubStation Alpha format subtitle file URL, only response when specify export this file explicitly in iteration creation API.")
+  @doc("Target locale Advanced SubStation Alpha format subtitle file URL, only response when specify exportTargetLocaleAdvancedSubtitleFile to true in iteration creation API.")
   targetLocaleAdvancedSubtitleFileUrl?: url;
 
   @doc("Metadata json webvtt file URL.")
@@ -226,49 +232,49 @@ model IterationInput {
   @doc("Webvtt file for content editing, this parameter is required from the second iteration creation request of the translation.")
   webvttFile?: WebvttFile;
 
-  @doc("Number of speakers in the video.")
+  @doc("Number of speakers in the video, if not specified, it will inherit the value defined in the input of translation creation.")
   speakerCount?: int32;
 
-  @doc("Subtitle max display character count per segment.")
+  @doc("Subtitle max display character count per segment, if not specified, it will inherit the value defined in the input of translation creation.")
   subtitleMaxCharCountPerSegment?: int32;
 
-  @doc("Export subtitle in video.")
+  @doc("Export subtitle in video, if not specified, it will inherit the value defined in the input of translation creation.")
   exportSubtitleInVideo?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required.")
+  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with URL, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required, if not specified, it will not use TTS custom lexicon.")
   ttsCustomLexiconFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required.")
+  @doc("Translate with TTS custom lexicon for TTS synthesis, provide the custom lexicon file with file ID in Audio Content Creation, ttsCustomLexiconFileUrl and ttsCustomLexiconFileIdInAudioContentCreation are conflict, only one of them are required, if not specified, it will not use TTS custom lexicon.")
   ttsCustomLexiconFileIdInAudioContentCreation?: Guid;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience.")
+  @doc("This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience, if not specified, video speed will not be adjusted.")
   enableVideoSpeedAdjustment?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Indicate whether allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable.")
+  @doc("Indicate whether allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle.")
   enableOcrCorrectionFromSubtitle?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions.")
+  @doc("This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions, if not specified, iteration response will not include advanced subtitle.")
   exportTargetLocaleAdvancedSubtitleFile?: boolean;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal.")
-  subtitlePrimaryColor?: string;
+  @doc("This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default white color.")
+  subtitlePrimaryColor?: rgbaColor;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies the outline color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal.")
-  subtitleOutlineColor?: string;
+  @doc("This parameter specifies the outline color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default black color.")
+  subtitleOutlineColor?: rgbaColor;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies the font size of subtitles in the video translation output.")
+  @doc("This parameter specifies the font size of subtitles in the video translation output, if not specified, it will use the language dependent default value.")
   subtitleFontSize?: int32;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale.")
+  @doc("This parameter specifies whether or not enable the emotion for platform voice, by default let server to decide whether enable emotion for better quality for the target locale, if not specified, it will let API to decide whether enable emotional or not at server side.")
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
 }
 
@@ -284,7 +290,7 @@ model EventHubConfig {
   @doc("EventHub name")
   eventHubName: string;
 
-  @doc("Managed identity client ID for user-assigned managed identity; API will use system-assigned managed identity if not specified.")
+  @doc("Managed identity client ID for user-assigned managed identity, if not specified, API will use system-assigned managed identity.")
   managedIdentityClientId?: Guid;
 
   @doc("Enabled event kinds for notification.")
@@ -445,7 +451,7 @@ interface EventHubConfigOperations {
   @get
   getEventHubConfig is RpcOperation<{}, EventHubConfig>;
 
-  @doc("Get EventHub configuration.")
+  @doc("Delete EventHub configuration.")
   @delete
   @route("/configurations/event-hub")
   deleteEventHubConfig is RpcOperation<{}, NoContentResponse>;
