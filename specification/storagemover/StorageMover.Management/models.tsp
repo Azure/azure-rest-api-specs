@@ -92,7 +92,7 @@ union AgentStatus {
  * The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.
  */
 union Minute {
-  integer,
+  int32,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `0`: 0,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
