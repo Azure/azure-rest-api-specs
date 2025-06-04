@@ -463,31 +463,13 @@
         "authenticationSettings"
       ]
     },
-    "CopilotConnectorKind": {
-      "type": "string",
-      "description": "Kind of Copilot Connector.",
-      "enum": [
-        "MCP"
-      ],
-      "x-ms-enum": {
-        "name": "CopilotConnectorKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "MCP",
-            "value": "MCP",
-            "description": "MCP server connector"
-          }
-        ]
-      }
-    },
     "CopilotConnectorProperties": {
       "type": "object",
       "description": "The Copilot Connector resource",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/CopilotConnectorKind",
-          "description": "Kind of Copilot Connector."
+        "connectorType": {
+          "$ref": "#/definitions/CopilotConnectorType",
+          "description": "Type of Copilot Connector."
         },
         "description": {
           "type": "string",
@@ -499,7 +481,11 @@
         },
         "connectionInfo": {
           "$ref": "#/definitions/ConnectionInfo",
-          "description": "Used to store connection information for CopilotConnector"
+          "description": "Used to store connection information for CopilotConnector",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -508,7 +494,7 @@
         }
       },
       "required": [
-        "kind",
+        "connectorType",
         "description",
         "enabled",
         "connectionInfo"
@@ -549,6 +535,24 @@
       "required": [
         "value"
       ]
+    },
+    "CopilotConnectorType": {
+      "type": "string",
+      "description": "Type of Copilot Connector.",
+      "enum": [
+        "MCP"
+      ],
+      "x-ms-enum": {
+        "name": "CopilotConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MCP",
+            "value": "MCP",
+            "description": "MCP server connector"
+          }
+        ]
+      }
     },
     "PatchableCopilotConnectorProperties": {
       "type": "object",

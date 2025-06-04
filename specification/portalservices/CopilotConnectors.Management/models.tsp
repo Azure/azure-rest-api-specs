@@ -10,8 +10,8 @@ namespace Microsoft.PortalServices;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("Kind of Copilot Connector.")
-union CopilotConnectorKind {
+@doc("Type of Copilot Connector.")
+union CopilotConnectorType {
   string,
 
   @doc("MCP server connector")
@@ -20,8 +20,8 @@ union CopilotConnectorKind {
 
 @doc("The Copilot Connector resource")
 model CopilotConnectorProperties {
-  @doc("Kind of Copilot Connector.")
-  kind: CopilotConnectorKind;
+  @doc("Type of Copilot Connector.")
+  connectorType: CopilotConnectorType;
 
   @doc("String describing this Copilot Connector")
   description: string;
@@ -30,6 +30,7 @@ model CopilotConnectorProperties {
   enabled: boolean;
 
   @doc("Used to store connection information for CopilotConnector")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   connectionInfo: ConnectionInfo;
 
   @doc("The status of the last provisioning operation performed on the resource.")
