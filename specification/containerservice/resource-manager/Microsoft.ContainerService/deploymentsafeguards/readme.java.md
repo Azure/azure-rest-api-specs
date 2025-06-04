@@ -18,16 +18,16 @@ description: "Azure Kubernetes Deployment Safeguards Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2025-04-01-preview
+  - tag: package-2025-04-02-preview
   - tag: package-2025-04-01
 ```
 
-### Tag: package-2025-04-preview and java
+### Tag: package-2025-04-02-preview and java
 
-These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-02-preview` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2025-04-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2025-04-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_04_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_02_preview
