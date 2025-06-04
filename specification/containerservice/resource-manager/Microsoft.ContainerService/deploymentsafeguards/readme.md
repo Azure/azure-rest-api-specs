@@ -1,8 +1,8 @@
-# ContainerServiceFleet
+# ContainerServiceDeploymentSafeguards
 
 > see https://aka.ms/autorest
 
-## This is the AutoRest configuration file for ContainerServiceFleet.
+## This is the AutoRest configuration file for ContainerServiceDeploymentSafeguards.
 
 The service is hosted under the Microsoft.ContainerService resource provider but exposes a separate set of resources, apis, and SDKs.
 
