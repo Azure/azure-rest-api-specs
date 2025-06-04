@@ -60,7 +60,14 @@ interface Replicas {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @operationId("WebPubSubReplicas_Update")
-  update is ArmCustomPatchAsync<Replica, PatchModel = Replica>;
+  update is ArmCustomPatchAsync<
+    Replica,
+    PatchModel = Replica,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Replica>> & {
+      @bodyRoot
+      _: Replica;
+    }
+  >;
 
   /**
    * Operation to delete a replica.

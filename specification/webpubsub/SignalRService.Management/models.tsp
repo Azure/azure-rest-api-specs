@@ -1602,3 +1602,4 @@ model TrafficThrottleByUserIdRule extends ClientTrafficControlRule {
 
   type: "TrafficThrottleByUserIdRule";
 }
+@@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);

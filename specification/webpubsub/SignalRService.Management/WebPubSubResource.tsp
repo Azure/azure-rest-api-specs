@@ -128,7 +128,10 @@ interface WebPubSubResources {
   regenerateKey is ArmResourceActionAsync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    WebPubSubKeys | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubKeys>>
+    WebPubSubKeys | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubKeys>> & {
+      @bodyRoot
+      _: WebPubSubKeys;
+    })
   >;
 
   /**
