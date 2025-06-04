@@ -4,19 +4,19 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2024-07-01",
+    "api-version": "2025-06-01",
     "parameters": {
       "properties": {
         "vmSize": "Standard_d4s_v3",
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
-              "publisher": "Canonical",
-              "offer": "UbuntuServer",
-              "sku": "18_04-lts-gen2",
+              "publisher": "canonical",
+              "offer": "ubuntu-24_04-lts",
+              "sku": "server",
               "version": "latest"
             },
-            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+            "nodeAgentSkuId": "batch.node.ubuntu 24.04"
           }
         },
         "resourceTags": {
@@ -43,12 +43,12 @@
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8DB554F8E08BCF4\"",
         "properties": {
-          "lastModified": "2023-06-14T07:03:58.3231917Z",
-          "creationTime": "2023-06-14T07:03:58.3231917Z",
+          "lastModified": "2024-08-28T07:03:58.3231917Z",
+          "creationTime": "2024-08-28T07:03:58.3231917Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
+          "provisioningStateTransitionTime": "2024-08-28T07:03:58.3231917Z",
           "allocationState": "Resizing",
-          "allocationStateTransitionTime": "2023-06-14T07:03:58.3231917Z",
+          "allocationStateTransitionTime": "2024-08-28T07:03:58.3231917Z",
           "vmSize": "STANDARD_D4S_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
@@ -58,12 +58,12 @@
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "Canonical",
-                "offer": "UbuntuServer",
-                "sku": "18_04-lts-gen2",
+                "publisher": "canonical",
+                "offer": "ubuntu-24_04-lts",
+                "sku": "server",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+              "nodeAgentSkuId": "batch.node.ubuntu 24.04"
             }
           },
           "scaleSettings": {
@@ -77,7 +77,7 @@
             "targetDedicatedNodes": 1,
             "nodeDeallocationOption": "Requeue",
             "resizeTimeout": "PT15M",
-            "startTime": "2023-09-27T07:33:13.0625789Z"
+            "startTime": "2024-08-28T07:03:58.3231917Z"
           },
           "currentDedicatedNodes": 0,
           "currentLowPriorityNodes": 0,

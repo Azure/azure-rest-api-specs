@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2024-07-01"
+    "api-version": "2025-06-01"
   },
   "responses": {
     "200": {
@@ -17,13 +17,13 @@
         "type": "Microsoft.Batch/batchAccounts/pools",
         "etag": "W/\"0x8D4EDFEBFADF4AB\"",
         "properties": {
-          "lastModified": "2017-08-28T10:22:55.9407275Z",
-          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "lastModified": "2024-08-28T10:22:55.9407275Z",
+          "creationTime": "2024-08-28T10:22:55.9407275Z",
           "provisioningState": "Succeeded",
-          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "provisioningStateTransitionTime": "2024-08-28T10:22:55.9407275Z",
           "allocationState": "Resizing",
-          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
-          "vmSize": "STANDARD_D4",
+          "allocationStateTransitionTime": "2024-08-28T10:22:55.9407275Z",
+          "vmSize": "STANDARD_D4S_V3",
           "interNodeCommunication": "Disabled",
           "taskSlotsPerNode": 1,
           "taskSchedulingPolicy": {
@@ -32,12 +32,12 @@
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "Canonical",
-                "offer": "UbuntuServer",
-                "sku": "18.04-LTS",
+                "publisher": "canonical",
+                "offer": "ubuntu-24_04-lts",
+                "sku": "server",
                 "version": "latest"
               },
-              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+              "nodeAgentSkuId": "batch.node.ubuntu 24.04"
             }
           },
           "scaleSettings": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "BatchManagementClient",
     "description": "The Batch Management Client.",
-    "version": "2024-07-01"
+    "version": "2025-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -4409,7 +4409,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool."
+          "title": "The fully qualified ID of the certificate to install on the pool. This must be inside the same Batch account as the pool."
         },
         "storeLocation": {
           "type": "string",
@@ -4482,7 +4482,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "title": "The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists."
+          "title": "The ID of the application package to install. This must be inside the same Batch account as the pool. This can either be a reference to a specific version or the default version if one exists."
         },
         "version": {
           "type": "string",
@@ -4490,7 +4490,7 @@
           "description": "If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409."
         }
       },
-      "title": "Link to an application package inside the batch account",
+      "title": "Link to an application package inside the Batch account",
       "required": [
         "id"
       ]
@@ -4754,6 +4754,11 @@
           },
           "title": "The list of disk targets Batch Service will encrypt on the compute node",
           "description": "On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
+        },
+        "customerManagedKey": {
+          "title": "The Customer Managed Key reference to encrypt the OS Disk.",
+          "$ref": "#/definitions/DiskCustomerManagedKey",
+          "description": "Customer Managed Key will encrypt OS Disk by EncryptionAtRest, and by default we will encrypt the data disk as well. It can be used only when the pool is configured with an identity and OsDisk is set as one of the targets of DiskEncryption."
         }
       },
       "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Virtual Machine Image or Azure Compute Gallery Image."
@@ -4833,13 +4838,13 @@
       }
     },
     "NodePlacementConfiguration": {
-      "title": "Node placement configuration for batch pools.",
+      "title": "Node placement configuration for Batch pools.",
       "description": "Allocation configuration used by Batch Service to provision the nodes.",
       "type": "object",
       "properties": {
         "policy": {
           "$ref": "#/definitions/NodePlacementPolicyType",
-          "title": "Node placement Policy type on Batch Pools.",
+          "title": "Node placement Policy type on Batch pools.",
           "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
         }
       }
@@ -4971,6 +4976,10 @@
           "title": "The storage account type to be used for the data disk.",
           "description": "If omitted, the default is \"Standard_LRS\". Values are:\n\n Standard_LRS - The data disk should use standard locally redundant storage.\n Premium_LRS - The data disk should use premium locally redundant storage.",
           "$ref": "#/definitions/StorageAccountType"
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDisk",
+          "title": "The managed disk parameters."
         }
       },
       "required": [
@@ -4982,6 +4991,29 @@
     "TaskSchedulingPolicy": {
       "type": "object",
       "properties": {
+        "jobDefaultOrder": {
+          "type": "string",
+          "title": "The order for scheduling tasks from different jobs with the same priority.",
+          "description": "If not specified, the default is none.",
+          "enum": [
+            "None",
+            "CreationTime"
+          ],
+          "x-ms-enum": {
+            "name": "JobDefaultOrder",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Tasks should be scheduled uniformly from all equal-priority jobs for the pool."
+              },
+              {
+                "value": "CreationTime",
+                "description": "If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first."
+              }
+            ]
+          }
+        },
         "nodeFillType": {
           "type": "string",
           "default": "Spread",
@@ -5557,6 +5589,44 @@
         ]
       }
     },
+    "IPFamily": {
+      "type": "string",
+      "title": "The IP families used to specify IP versions available to the pool.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IPFamily",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPv4",
+            "description": "IPv4 is available to the pool."
+          },
+          {
+            "value": "IPv6",
+            "description": "IPv6 is available to the pool."
+          }
+        ]
+      }
+    },
+    "IpTag": {
+      "type": "object",
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "title": "The IP Tag type.",
+          "description": "Example: FirstPartyUsage."
+        },
+        "displayName": {
+          "type": "string",
+          "title": "The value of the IP tag associated with the public IP.",
+          "description": "Example: SQL."
+        }
+      },
+      "description": "IP Tags that will applied to new Public IPs that Batch creates. The IP tags are used to identify the purpose of the public IPs created by Batch. For example, the IP tag type can be FirstPartyUsage and the display name can be SQL."
+    },
     "PublicIPAddressConfiguration": {
       "type": "object",
       "properties": {
@@ -5572,6 +5642,22 @@
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
           "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+        },
+        "ipFamilies": {
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPFamily"
+          },
+          "title": "The IP families used to specify IP versions available to the pool.",
+          "description": "IP families are used to determine single-stack or dual-stack pools. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpTag"
+          },
+          "title": "IP Tags that will applied to new Public IPs that Batch creates."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -6392,6 +6478,10 @@
         "securityProfile": {
           "$ref": "#/definitions/VMDiskSecurityProfile",
           "title": "Specifies the security profile for the managed disk."
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk. It can be set only in UserSubscription mode."
         }
       }
     },
@@ -6428,6 +6518,10 @@
           "$ref": "#/definitions/UefiSettings",
           "title": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine.",
           "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
+        },
+        "proxyAgentSettings": {
+          "$ref": "#/definitions/ProxyAgentSettings",
+          "description": "Specifies ProxyAgent settings while creating the virtual machine."
         }
       },
       "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
@@ -6445,6 +6539,44 @@
         }
       },
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
+    },
+    "DiskCustomerManagedKey": {
+      "type": "object",
+      "properties": {
+        "keyUrl": {
+          "type": "string",
+          "description": "Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Set this flag to true to enable auto-updating of the Disk Encryption to the latest key version. Default is false."
+        },
+        "identityReference": {
+          "$ref": "#/definitions/PoolIdentityReference",
+          "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the KeyVault."
+        }
+      },
+      "description": "The Customer Managed Key reference to encrypt the Disk."
+    },
+    "PoolIdentityReference": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource id of the user assigned identity. This reference must be included in the pool identities."
+        }
+      },
+      "description": "The reference of one of the pool identities to encrypt Disk. This identity will be used to access the key vault."
+    },
+    "DiskEncryptionSetParameters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id of the disk encryption set. The resource should be in the same subscription as the Batch account."
+        }
+      },
+      "description": "The ARM resource id of the disk encryption set."
     },
     "UpgradePolicy": {
       "type": "object",
@@ -6561,8 +6693,9 @@
       "properties": {
         "securityEncryptionType": {
           "type": "string",
-          "title": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
+          "title": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
           "enum": [
+            "DiskWithVMGuestState",
             "NonPersistedTPM",
             "VMGuestStateOnly"
           ],
@@ -6571,16 +6704,80 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "NonPersistedTPM"
+                "name": "DiskWithVMGuestState",
+                "value": "DiskWithVMGuestState",
+                "description": "EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob. It is not supported in data disks."
               },
               {
-                "value": "VMGuestStateOnly"
+                "name": "VMGuestStateOnly",
+                "value": "VMGuestStateOnly",
+                "description": "EncryptionType of the managed disk is set to VMGuestStateOnly for encryption of just the VMGuestState blob."
+              },
+              {
+                "name": "NonPersistedTPM",
+                "value": "NonPersistedTPM",
+                "description": "EncryptionType of the managed disk is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob."
               }
             ]
           }
+        },
+        "diskEncryptionSet": {
+          "$ref": "#/definitions/DiskEncryptionSetParameters",
+          "description": "Specifies the customer managed disk encryption set resource id for the managed disk that is used for Customer Managed Key encrypted ConfidentialVM OS Disk and VMGuest blob. It can be set only in UserSubscription mode."
         }
       },
       "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs."
+    },
+    "HostEndpointSettings": {
+      "type": "object",
+      "title": "Specifies particular host endpoint settings.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "title": "Audit / Enforce",
+          "enum": [
+            "Audit",
+            "Enforce"
+          ],
+          "x-ms-enum": {
+            "name": "HostEndpointSettingsModeTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Audit",
+                "description": "In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints."
+              },
+              {
+                "value": "Enforce",
+                "description": "Enforce mode is the recommended mode of operation and system will enforce the access control policy. This property cannot be used together with 'inVMAccessControlProfileReferenceId'."
+              }
+            ]
+          },
+          "description": "Specifies the access control policy execution mode."
+        },
+        "inVMAccessControlProfileReferenceId": {
+          "type": "string",
+          "title": "Specifies the reference to the InVMAccessControlProfileVersion resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}."
+        }
+      }
+    },
+    "ProxyAgentSettings": {
+      "type": "object",
+      "title": "Specifies ProxyAgent settings while creating the virtual machine.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Specifies whether Metadata Security Protocol feature should be enabled on the virtual machine or virtual machine scale set. Default is False."
+        },
+        "imds": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "title": "Settings for the IMDS endpoint."
+        },
+        "wireServer": {
+          "$ref": "#/definitions/HostEndpointSettings",
+          "title": "Settings for the WireServer endpoint."
+        }
+      }
     }
   },
   "parameters": {

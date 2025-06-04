@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-07-01"
+    "api-version": "2025-06-01"
   },
   "responses": {
     "200": {
@@ -1097,16 +1097,6 @@
             "isDataAction": false
           },
           {
-            "name": "Microsoft.Batch/locations/cloudServiceSkus/read",
-            "display": {
-              "provider": "Microsoft Batch",
-              "resource": "Batch Supported Skus",
-              "operation": "List Supported Batch Cloud Service VM",
-              "description": "Lists available Batch supported Cloud Service VM sizes at the given location"
-            },
-            "isDataAction": false
-          },
-          {
             "name": "Microsoft.Batch/batchAccounts/privateLinkResources/read",
             "display": {
               "provider": "Microsoft Batch",
@@ -1133,6 +1123,16 @@
               "resource": "PrivateEndpointConnections",
               "operation": "Get or List Private endpoint connection",
               "description": "Gets Private endpoint connection or Lists Private endpoint connections on a Batch account"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnections/delete",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies",
+              "operation": "Delete Private endpoint connection",
+              "description": "Delete a Private endpoint connection on a Batch account"
             },
             "isDataAction": false
           },
@@ -1202,6 +1202,16 @@
             "origin": "system"
           },
           {
+            "name": "Microsoft.Batch/batchAccounts/detectors/read",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "Detectors",
+              "operation": "Get or List Detectors",
+              "description": "Gets AppLens Detector or Lists AppLens Detectors on a Batch account"
+            },
+            "isDataAction": false
+          },
+          {
             "name": "Microsoft.Batch/batchAccounts/outboundNetworkDependenciesEndpoints/read",
             "display": {
               "provider": "Microsoft Batch",
@@ -1211,6 +1221,105 @@
             },
             "isDataAction": false,
             "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/deployments/preflight/action",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "Preflight",
+              "operation": "Check Preflight",
+              "description": "Runs Preflight validation for resources included in the request"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterAssociationProxies/read",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterAssociationProxies",
+              "operation": "Get or List NSP Association Proxies",
+              "description": "Gets or lists the NSP association proxies on a Batch account"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterAssociationProxies/write",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterAssociationProxies",
+              "operation": "Create or Update NSP Association Proxy",
+              "description": "Creates or updates the NSP association proxy on a Batch account"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterAssociationProxies/delete",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterAssociationProxies",
+              "operation": "Delete NSP Association Proxy",
+              "description": "Deletes the NSP association proxy on a Batch account"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurations/read",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterConfigurations",
+              "operation": "Get or List NSP Configurations",
+              "description": "Gets or lists the NSP association configurations on a Batch account"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurations/reconcile/action",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterConfigurations",
+              "operation": "Reconcile NSP Configuration",
+              "description": "Reconciles the NSP association on a Batch account to sync up with the latest configuration from the NSP control plane"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurationOperationResults/read",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterConfigurations",
+              "operation": "Get NSP Configuration Operation Results",
+              "description": "Gets the results of a long running NSP configuration operation on a Batch account"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/locations/notifyNetworkSecurityPerimeterUpdatesAvailable/action",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "NetworkSecurityPerimeterConfigurations",
+              "operation": "Notify NSP Updates Available",
+              "description": "Notifies the NSP updates available at the given location"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/joinPerimeter/action",
+            "display": {
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts",
+              "operation": "Join Network Security Perimeter",
+              "description": "Determines if the user is allowed to associate a Batch account with a Network Security Perimeter"
+            },
+            "isDataAction": false,
+            "origin": "system"
           }
         ]
       }
