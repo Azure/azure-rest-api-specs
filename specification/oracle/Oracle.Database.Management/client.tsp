@@ -544,3 +544,35 @@ using Oracle.Database;
   "csharp"
 );
 @@clientName(AutonomousDatabaseBaseProperties.ocid, "DatabaseOcid", "csharp");
+
+// Java
+@@clientName(AutonomousDatabaseBackups.listByParent,
+  "listByAutonomousDatabase",
+  "java"
+);
+@@clientName(DbNodes.listByParent, "listByCloudVmCluster", "java");
+@@clientName(DbServers.listByParent,
+  "listByCloudExadataInfrastructure",
+  "java"
+);
+@@clientName(VirtualNetworkAddresses.listByParent,
+  "listByCloudVmCluster",
+  "java"
+);
+
+@@clientName(AutonomousDatabaseBaseProperties.nextLongTermBackupTimeStamp,
+  "nextLongTermBackupTimestamp",
+  "java"
+);
+
+// Go
+@@clientName(AutonomousDatabaseBackups.listByParent,
+  "listByAutonomousDatabase",
+  "go"
+);
+@@clientName(DbNodes.listByParent, "listByCloudVMCluster", "go");
+@@clientName(DbServers.listByParent, "listByCloudExadataInfrastructure", "go");
+@@clientName(VirtualNetworkAddresses.listByParent,
+  "listByCloudVMCluster",
+  "go"
+);
