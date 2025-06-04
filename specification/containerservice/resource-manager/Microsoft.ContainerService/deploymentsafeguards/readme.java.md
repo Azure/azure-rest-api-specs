@@ -18,16 +18,16 @@ description: "Azure Kubernetes Deployment Safeguards Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2025-04-preview
-  - tag: package-2025-04
+  - tag: package-2025-04-01-preview
+  - tag: package-2025-04-01
 ```
 
 ### Tag: package-2025-04-preview and java
 
-These settings apply only when `--tag=package-2025-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2025-04-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2025-04-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_04_02_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_02_preview
@@ -37,10 +37,10 @@ generate-interface: true
 
 ### Tag: package-2025-04 and java
 
-These settings apply only when `--tag=package-2025-04` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2025-04' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2025-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_04_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_01
