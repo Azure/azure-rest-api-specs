@@ -1777,43 +1777,7 @@
       "maxItems": 3,
       "items": {
         "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
-      },
-      "allOf": [
-        {
-          "contains":{ 
-            "type": "object", 
-            "properties": { 
-              "type": { 
-                "type": "array", 
-                "items": { 
-                  "type": "string" 
-                },
-                "contains": { 
-                  "const": "PrivateNic" 
-                } 
-              }
-            },
-            "required": [ "type" ]
-          } 
-        }, 
-        { 
-          "contains": { 
-            "type": "object",
-            "properties": { 
-              "type": { 
-                "type": "array", 
-                "items": {
-                  "type": "string"
-                }, 
-              "contains": {
-                "const": "PublicNic"
-              }
-            }
-          },
-          "required": [ "type" ]
-          }
-        }
-      ]
+      }
     },
     "NvaInterfaceConfigurationsProperties": {
       "type": "object",
@@ -1824,7 +1788,7 @@
           "description": "A subnet resource id where the NIC will be deployed"
         },
         "type": {
-          "type": "array", 
+          "type": "array",
           "items": {
             "type": "string",
             "enum": [
@@ -1832,7 +1796,29 @@
               "PublicNic",
               "AdditionalPrivateNic",
               "AdditionalPublicNic"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "NvaNicType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "PrivateNic",
+                  "description": "The private NIC type"
+                },
+                {
+                  "value": "PublicNic",
+                  "description": "The public NIC type"
+                },
+                {
+                  "value": "AdditionalPrivateNic",
+                  "description": "An additional private NIC type"
+                },
+                {
+                  "value": "AdditionalPublicNic",
+                  "description": "An additional public NIC type"
+                }
+              ]
+            }
           },
           "description": "Specifies the NIC types for the NVA interface configuration. Allowed values: PrivateNic, PublicNic, AdditionalPrivateNic, AdditionalPublicNic. Only the combination of PrivateNic and PublicNic is currently supported."
         },
