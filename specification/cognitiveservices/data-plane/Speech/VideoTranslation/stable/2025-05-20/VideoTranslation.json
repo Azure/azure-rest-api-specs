@@ -1200,12 +1200,12 @@
         "videoFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify audioFileUrl instead."
+          "description": "Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
         "audioFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify videoFileUrl instead."
+          "description": "Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
         "speakerCount": {
           "type": "integer",

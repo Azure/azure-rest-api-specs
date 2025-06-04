@@ -179,12 +179,12 @@ model TranslationInput {
   @doc("Translation voice kind.")
   voiceKind: VoiceKind;
 
-  @doc("Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify audioFileUrl instead.")
+  @doc("Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   @madeOptional(ApiVersions.v2025_05_20)
   videoFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration, if not specified, please specify videoFileUrl instead.")
+  @doc("Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   audioFileUrl?: url;
 
   @doc("Number of speakers in the video, if not provided, it will be auto-detected from the video file.")
