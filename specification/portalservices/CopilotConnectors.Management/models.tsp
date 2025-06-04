@@ -31,7 +31,7 @@ model CopilotConnectorProperties {
 
   @doc("Used to store connection information for CopilotConnector")
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  connectionInfo: ConnectionInfo;
+  connectionInfo?: ConnectionInfo;
 
   @doc("The status of the last provisioning operation performed on the resource.")
   @visibility(Lifecycle.Read)
