@@ -1,16 +1,16 @@
 import { describe, test, expect, vi, beforeEach, type Mock } from "vitest";
-import * as utils from "../../src/utils.js";
+import * as utils from "../src/utils.js";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
-} from "../../src/commands.js";
-import * as commandHelpers from "../../src/command-helpers.js";
-import * as log from "../../src/log.js";
-import * as changeFiles from "../../src/spec-helpers.js";
+} from "../src/commands.js";
+import * as commandHelpers from "../src/command-helpers.js";
+import * as log from "../src/log.js";
+import * as changeFiles from "../src/spec-helpers.js";
 import fs from "node:fs";
 import path from "node:path";
-import { LogLevel } from "../../src/log.js";
+import { LogLevel } from "../src/log.js";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
@@ -193,7 +193,7 @@ describe("generateSdkForSpecPr", () => {
         specs: [
           "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
         ],
-        typespecProject: "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
         readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
       },
     ];
@@ -219,7 +219,9 @@ describe("generateSdkForSpecPr", () => {
     });
 
     const statusCode = await generateSdkForSpecPr();
-    const serviceFolderPath = commandHelpers.getServiceFolderPath(mockChangedSpecs[0].typespecProject);
+    const serviceFolderPath = commandHelpers.getServiceFolderPath(
+      mockChangedSpecs[0].typespecProject,
+    );
     expect(statusCode).toBe(0);
     expect(log.logMessage).toHaveBeenCalledWith(
       `Generating SDK from ${serviceFolderPath}`,
@@ -233,6 +235,59 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.logIssuesToPipeline).toHaveBeenCalledWith(
       mockExecutionReport.vsoLogPath,
       serviceFolderPath,
+    );
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded", // overallExecutionResult
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      true, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted
+    );
+  });
+
+  test("should handle the case when there are no changed specs", async () => {
+    // Set up mocks
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-js",
+      sdkLanguage: "javascript",
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+
+    // Return empty array for changedSpecs
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue([]);
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+
+    // Spy on generateArtifact to verify parameters
+    const generateArtifactSpy = vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const statusCode = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    // Verify runSpecGenSdkCommand is not called when there are no changed specs
+    expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
+    // Verify correct parameters are passed to generateArtifact
+    expect(generateArtifactSpy).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded", // overallExecutionResult should be set to "succeeded"
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      false, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      false, // sdkGenerationExecuted should be set to false
     );
   });
 
@@ -262,6 +317,16 @@ describe("generateSdkForSpecPr", () => {
     expect(log.logMessage).toHaveBeenCalledWith(
       "Runner: no spec config file found in the changed files",
       LogLevel.Warn,
+    );
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "", // overallExecutionResult is empty because no spec was actually processed
+      "", // breakingChangeLabel
+      false, // overallRunHasBreakingChange
+      false, // hasManagementPlaneSpecs
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted is true because there were some changed specs but they had no valid config
     );
   });
 
