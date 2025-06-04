@@ -131,3 +131,11 @@ using Microsoft.ComputeSchedule;
   "$DO_NOT_NORMALIZE$V2024-10-01",
   "javascript"
 );
+@@clientName(DeleteResourceOperationResponse,
+  "DeleteResourceOperationResult",
+  "csharp"
+);
+@@clientName(CreateResourceOperationResponse,
+  "CreateResourceOperationResult",
+  "csharp"
+);

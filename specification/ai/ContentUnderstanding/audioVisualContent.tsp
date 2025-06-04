@@ -28,14 +28,27 @@ model AudioVisualContent extends MediaContent {
   @doc("Height of each video frame in pixels, if applicable.")
   height?: int32;
 
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of camera shot changes in the video, represented by its timestamp in milliseconds.  Only if returnDetails is true.")
+  cameraShotTimesMs?: int64[];
+
   @doc("List of key frames in the video, represented by its timestamp in milliseconds.  Only if returnDetails is true.")
   keyFrameTimesMs?: int64[];
 
   @doc("List of transcript phrases.  Only if returnDetails is true.")
   transcriptPhrases?: TranscriptPhrase[];
 
+  @removed(Versions.v2025_05_01_preview)
   @doc("List of faces in the video.  Only if enableFace and returnDetails are true.")
   faces?: ImageFace[];
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of detected persons in the video.  Only if enableFace and returnDetails are true.")
+  persons?: DetectedPerson[];
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of audio visual segments.  Only if enableSegmentation and returnDetails are true.")
+  segments?: AudioVisualSegment[];
 }
 
 @doc("Transcript phrase.")
@@ -80,4 +93,36 @@ model TranscriptWord {
 
   @doc("Span of the word in the markdown content.")
   span?: ContentSpan;
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Audio visual segment, such as a scene, chapter, etc.")
+model AudioVisualSegment {
+  @doc("Segment ID.")
+  segmentId: string;
+
+  @doc("Start time of the segment in milliseconds.")
+  startTimeMs: int64;
+
+  @doc("End time of the segment in milliseconds.")
+  endTimeMs: int64;
+
+  @doc("Short description of the segment.")
+  description: string;
+
+  @doc("Span of the segment in the markdown content.")
+  span?: ContentSpan;
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Detected person.")
+model DetectedPerson {
+  @doc("Person identifier in the optional person directory if found.  Otherwise, each unknown person is assigned a unique `Person-{Number}`.")
+  personId?: string;
+
+  @doc("Confidence of the person identification, if a person directory is provided.")
+  confidence?: float32;
+
+  @doc("Encoded source that identifies the position of the person in the input content.")
+  source?: SourceExpression;
 }
