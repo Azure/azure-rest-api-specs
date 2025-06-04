@@ -74,7 +74,7 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2024-03
+tag: package-deploymentstacks-2025-06
 ```
 
 ``` yaml $(package-changes)
@@ -798,6 +798,15 @@ These settings apply only when `--tag=package-deploymentstacks-2024-03` is speci
 ``` yaml $(tag) == 'package-deploymentstacks-2024-03'
 input-file:
 - Microsoft.Resources/stable/2024-03-01/deploymentStacks.json
+```
+
+### Tag: package-deploymentstacks-2025-06
+
+These settings apply only when `--tag=package-deploymentstacks-2025-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentstacks-2025-06'
+input-file:
+- Microsoft.Resources/stable/2025-06-01/deploymentStacks.json
 ```
 
 ### Tag: package-policy-2016-12
