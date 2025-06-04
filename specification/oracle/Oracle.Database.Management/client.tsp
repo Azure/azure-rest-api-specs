@@ -564,3 +564,18 @@ using Oracle.Database;
   "nextLongTermBackupTimestamp",
   "java"
 );
+
+// Go
+@@clientName(AutonomousDatabaseBackups.listByParent,
+  "listByAutonomousDatabase",
+  "go"
+);
+@@clientName(DbNodes.listByParent, "listByCloudVMCluster", "java");
+@@clientName(DbServers.listByParent,
+  "listByCloudExadataInfrastructure",
+  "go"
+);
+@@clientName(VirtualNetworkAddresses.listByParent,
+  "listByCloudVMCluster",
+  "go"
+);
