@@ -42,7 +42,10 @@ interface WebPubSubHubs {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSubHubs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<WebPubSubHub>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    WebPubSubHub,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List hub settings.

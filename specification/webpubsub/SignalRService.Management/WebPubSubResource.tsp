@@ -63,7 +63,13 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<WebPubSubResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    WebPubSubResource,
+    Response = ArmResourceUpdatedResponse<WebPubSubResource> | ArmResourceCreatedResponse<
+      WebPubSubResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
+    > | ArmAcceptedLroResponse
+  >;
 
   /**
    * Operation to update an exiting resource.
@@ -82,7 +88,10 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<WebPubSubResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    WebPubSubResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Handles requests to list all resources in a resource group.
@@ -115,12 +124,11 @@ interface WebPubSubResources {
    * Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_RegenerateKey")
   regenerateKey is ArmResourceActionAsync<
     WebPubSubResource,
     RegenerateKeyParameters,
-    WebPubSubKeys
+    WebPubSubKeys | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubKeys>>
   >;
 
   /**
