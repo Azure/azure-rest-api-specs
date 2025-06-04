@@ -11,7 +11,9 @@ export function checkReadOnly(jsonObj: any): string[] {
 
       if (getPropertyName(path)) {
         const [definitionName, propertyName] = getPropertyName(path)!;
-        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@visibility(Lifecycle.Read)\` onto its property "${propertyName}". If the property cannot access directly, add \`@@visibility(${definitionName}.${propertyName}, Lifecycle.Read);\` right after the model.`);
+        suggestedFixes.push(
+          `Find a model called "${definitionName}". Add \`@visibility(Lifecycle.Read)\` onto its property "${propertyName}". If the property cannot access directly, add \`@@visibility(${definitionName}.${propertyName}, Lifecycle.Read);\` RIGHT AFTER the end bracket of the model.`,
+        );
       }
     }
   }
