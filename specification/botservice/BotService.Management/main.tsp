@@ -49,9 +49,9 @@ enum Versions {
 }
 
 interface Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @tag("Operations")
   @autoRoute
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
