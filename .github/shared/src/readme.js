@@ -5,7 +5,6 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { Swagger } from "./swagger.js";
 import { Tag } from "./tag.js";
 
 /**
@@ -14,26 +13,44 @@ import { Tag } from "./tag.js";
  */
 
 export class Readme {
+  /**
+   * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
+   *
+   * Reset to `undefined` after `#data` is loaded to save memory.
+   *
+   * @type {string | undefined}
+   */
+  #content;
+
+  /** @type {{globalConfig: Object, tags: Map<string, Tag>} | undefined} */
+  #data;
+
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
-  /** @type {{globalConfig: Object, tags: Set<Tag>} | undefined} */
-  #data;
-
-  /** @type {string} absolute path */
+  /**
+   * absolute path
+   * @type {string}
+   * */
   #path;
 
-  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
+  /**
+   * SpecModel that contains this Readme
+   * @type {SpecModel | undefined}
+   */
   #specModel;
 
   /**
-   * @param {string} path
+   * @param {string} path Used for content, unless options.content is specified
    * @param {Object} [options]
+   * @param {string} [options.content] If specified, is used instead of reading path from disk
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    this.#path = resolve(options?.specModel?.folder ?? "", path);
+
+    this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
   }
@@ -67,11 +84,15 @@ export class Readme {
 
   async #getData() {
     if (!this.#data) {
-      const content = await readFile(this.#path, {
-        encoding: "utf8",
-      });
+      // Only read file if #content is exactly undefined, to allow setting #content to empty string
+      // to simulate an empty file
+      if (this.#content === undefined) {
+        this.#content = await readFile(this.#path, {
+          encoding: "utf8",
+        });
+      }
 
-      const tokens = marked.lexer(content);
+      const tokens = marked.lexer(this.#content);
 
       /** @type import("marked").Tokens.Code[] */
       const yamlBlocks = tokens
@@ -93,8 +114,8 @@ export class Readme {
         {},
       );
 
-      /** @type {Set<Tag>} */
-      const tags = new Set();
+      /** @type {Map<string, Tag>} */
+      const tags = new Map();
       for (const block of yamlBlocks) {
         const tagName =
           block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
@@ -124,7 +145,7 @@ export class Readme {
         // swaggers means that the previous definition did not have an input-file
         // key. It's possible that the previous defintion had an `input-file: []`
         // or something like it.
-        const existingTag = [...tags].find((t) => t.name == tagName);
+        const existingTag = tags.get(tagName);
         if ((existingTag?.inputFiles?.size ?? 0) > 0) {
           // The tag already exists and has a swagger file. This is an error as
           // there should only be one definition of input-files per tag.
@@ -133,33 +154,27 @@ export class Readme {
           throw new Error(message);
         }
 
-        /** @type {Set<Swagger>} */
-        const inputFiles = new Set();
-
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
           ? obj["input-file"]
           : [obj["input-file"]];
-        for (const swaggerPath of inputFilePaths) {
-          const swaggerPathNormalized =
-            Readme.#normalizeSwaggerPath(swaggerPath);
-          const swaggerPathResolved = resolve(
-            dirname(this.#path),
-            swaggerPathNormalized,
-          );
-          const swagger = new Swagger(swaggerPathResolved, {
-            logger: this.#logger,
-            specModel: this.#specModel,
-          });
-          inputFiles.add(swagger);
-        }
 
-        const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
+        const swaggerPathsResolved = inputFilePaths
+          .map((p) => Readme.#normalizeSwaggerPath(p))
+          .map((p) => resolve(dirname(this.#path), p));
 
-        tags.add(tag);
+        const tag = new Tag(tagName, swaggerPathsResolved, {
+          logger: this.#logger,
+          readme: this,
+        });
+
+        tags.set(tag.name, tag);
       }
 
       this.#data = { globalConfig, tags };
+
+      // Clear #content to save memory, since it's no longer needed after #data is loaded
+      this.#content = undefined;
     }
 
     return this.#data;
@@ -172,6 +187,9 @@ export class Readme {
     return (await this.#getData()).globalConfig;
   }
 
+  /**
+   * @returns {Promise<Map<string, Tag>>}
+   */
   async getTags() {
     return (await this.#getData()).tags;
   }
@@ -184,12 +202,21 @@ export class Readme {
   }
 
   /**
+   * @returns {SpecModel | undefined} SpecModel that contains this Readme
+   */
+  get specModel() {
+    return this.#specModel;
+  }
+
+  /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     const tags = await mapAsync(
-      [...(await this.getTags())].sort((a, b) => a.name.localeCompare(b.name)),
+      [...(await this.getTags()).values()].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      ),
       async (t) => await t.toJSONAsync(options),
     );
 
@@ -209,37 +236,4 @@ export class Readme {
   toString() {
     return `Readme(${this.#path}, {logger: ${this.#logger}})`;
   }
-}
-
-/**
- * @param {string} markdown
- * @param {Object} [options]
- * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<Set<string>>} All input files for all tags
- */
-export async function getInputFiles(markdown, options = {}) {
-  const { logger } = options;
-
-  const tokens = marked.lexer(markdown);
-
-  const yamlBlocks = tokens
-    .filter((token) => token.type === "code")
-    .map((token) => /** @type import("marked").Tokens.Code */ (token))
-    // Include default block and tagged blocks (```yaml $(tag) == 'package-2021-11-01')
-    .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
-
-  const inputFiles = yamlBlocks.flatMap((block) => {
-    const tag =
-      block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
-
-    const obj = /** @type {any} */ (yaml.load(block.text));
-    const blockFiles = /** @type string[] */ (obj["input-file"] || []);
-
-    /* v8 ignore next */
-    logger?.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);
-
-    return blockFiles;
-  });
-
-  return new Set(inputFiles);
 }
