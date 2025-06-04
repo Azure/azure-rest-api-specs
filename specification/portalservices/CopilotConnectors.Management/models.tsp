@@ -50,14 +50,12 @@ model ConnectionInfo {
 @doc("Authentication settings")
 model AuthenticationSettings {
   @doc("Used to store api key authentication settings for CopilotConnector endpoint")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   apiKey: ApiKeyAuthenticationSettings;
 }
 
 @doc("Authentication settings")
 model ApiKeyAuthenticationSettings {
   @doc("Used to store api key for CopilotConnector endpoint")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
   value: string;
 }
 

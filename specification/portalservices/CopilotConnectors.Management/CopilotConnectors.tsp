@@ -25,13 +25,23 @@ model CopilotConnectorResource is TrackedResource<CopilotConnectorProperties> {
 
 @armResourceOperations
 interface CopilotConnectors {
+  @returnTypeVisibility(Lifecycle.Read)
   get is ArmResourceRead<CopilotConnectorResource>;
+
+  @returnTypeVisibility(Lifecycle.Read)
   createOrUpdate is ArmResourceCreateOrReplaceSync<CopilotConnectorResource>;
+
+  @returnTypeVisibility(Lifecycle.Read)
   update is ArmCustomPatchSync<
     CopilotConnectorResource,
     PatchableCopilotConnectorProperties
   >;
+
   delete is ArmResourceDeleteSync<CopilotConnectorResource>;
+
+  @returnTypeVisibility(Lifecycle.Read)
   listByResourceGroup is ArmResourceListByParent<CopilotConnectorResource>;
+
+  @returnTypeVisibility(Lifecycle.Read)
   listBySubscription is ArmListBySubscription<CopilotConnectorResource>;
 }
