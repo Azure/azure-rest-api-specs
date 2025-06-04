@@ -27,7 +27,7 @@ These are the global settings for the pilot service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-05-21-preview
+tag: package-2025-05-23-preview
 ```
 
 ### Tag: package-2024-10-03-preview
@@ -76,6 +76,19 @@ These settings apply only when `--tag=package-2025-05-21-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-21-preview'
 input-file:
   - Microsoft.LiftrPilot/preview/2025-05-21-preview/pilot.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: User Assigned Managed Identity Type inline definition is automtaically added to json.
+```
+
+### Tag: default
+
+These settings apply when no tag is specified on the command line.
+
+```yaml $(tag) == 'default' || $(tag) == 'package-2025-05-23-preview'
+input-file:
+  - Microsoft.LiftrPilot/preview/2025-05-23-preview/pilot.json
 suppressions:
   - code: AvoidAnonymousTypes
     where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
