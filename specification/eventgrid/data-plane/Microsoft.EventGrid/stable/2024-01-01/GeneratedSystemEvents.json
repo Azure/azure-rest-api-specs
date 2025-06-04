@@ -129,11 +129,11 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallParticipantEventProperties"
+          "$ref": "#/definitions/AcsCallParticipantEventData"
         }
       ]
     },
-    "AcsCallParticipantEventProperties": {
+    "AcsCallParticipantEventData": {
       "type": "object",
       "description": "Schema of common properties of all participant events",
       "properties": {
@@ -160,32 +160,9 @@
         }
       ]
     },
-    "AcsCallParticipantProperties": {
-      "type": "object",
-      "description": "Schema of common properties of all participant event user",
-      "properties": {
-        "communicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the participant user"
-        },
-        "role": {
-          "$ref": "#/definitions/AcsCallParticipantRoleKind",
-          "description": "The role of the participant"
-        }
-      }
-    },
-    "AcsCallParticipantRemovedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AcsCallParticipantEventProperties"
-        }
-      ]
-    },
-    "AcsCallParticipantRoleKind": {
+    "AcsCallParticipantKind": {
       "type": "string",
-      "description": "Call participant role kind.",
+      "description": "Call participant kind.",
       "enum": [
         "Attendee",
         "Presenter",
@@ -194,7 +171,7 @@
         "Collaborator"
       ],
       "x-ms-enum": {
-        "name": "AcsCallParticipantRoleKind",
+        "name": "AcsCallParticipantKind",
         "modelAsString": true,
         "values": [
           {
@@ -224,6 +201,29 @@
           }
         ]
       }
+    },
+    "AcsCallParticipantProperties": {
+      "type": "object",
+      "description": "Schema of common properties of all participant event user",
+      "properties": {
+        "communicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the participant user"
+        },
+        "role": {
+          "$ref": "#/definitions/AcsCallParticipantKind",
+          "description": "The role of the participant"
+        }
+      }
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ]
     },
     "AcsCallRoomProperties": {
       "type": "object",
@@ -3979,7 +3979,8 @@
         "unknown",
         "communicationUser",
         "phoneNumber",
-        "microsoftTeamsUser"
+        "microsoftTeamsUser",
+        "microsoftTeamsApp"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -4004,6 +4005,11 @@
             "name": "microsoftTeamsUser",
             "value": "microsoftTeamsUser",
             "description": "Microsoft Teams User"
+          },
+          {
+            "name": "microsoftTeamsApp",
+            "value": "microsoftTeamsApp",
+            "description": "Microsoft Teams App"
           }
         ]
       }
@@ -6316,12 +6322,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6361,12 +6369,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6406,12 +6416,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6451,12 +6463,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6496,12 +6510,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6541,12 +6557,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6586,12 +6604,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6631,12 +6651,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6676,12 +6698,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6721,12 +6745,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -8964,7 +8990,8 @@
         "summaryReportBlobUrl": {
           "type": "string",
           "format": "uri",
-          "description": "The summary report blob url for a storage task"
+          "description": "The summary report blob url for a storage task",
+          "x-ms-client-name": "summaryReportBlobUri"
         }
       },
       "required": [
