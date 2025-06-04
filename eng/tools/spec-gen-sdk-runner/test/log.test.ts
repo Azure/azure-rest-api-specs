@@ -6,7 +6,7 @@ import {
   vsoAddAttachment,
   vsoLogIssue,
   setVsoVariable,
-} from "../../src/log.js";
+} from "../src/log.js";
 
 const logSpy = vi.spyOn(console, "log").mockImplementation(() => {
   // mock implementation intentionally left blank
