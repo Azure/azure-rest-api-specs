@@ -686,6 +686,7 @@ model ItemProperties {
   /**
    * Datetime the asset represents in RFC 3339 format.
    */
+  @Azure.ClientGenerator.Core.clientName("datetime_s", "python")
   datetime: string;
 
   /**
