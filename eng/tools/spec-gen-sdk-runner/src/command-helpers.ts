@@ -198,6 +198,18 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
+    case "all-mgmtplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("resource-manager"),
+      );
+      break;
+    }
+    case "all-dataplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("data-plane"),
+      );
+      break;
+    }
     case "sample-typespecs": {
       tspconfigs = [
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
@@ -271,6 +283,9 @@ export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
  * @param breakingChangeLabel - The breaking change label.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param stagedArtifactsFolder - The staged artifacts folder.
+ * @param apiViewRequestData - The API view request data.
+ * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
  * @returns the run status code.
  */
 export function generateArtifact(
@@ -281,6 +296,7 @@ export function generateArtifact(
   hasManagementPlaneSpecs: boolean,
   stagedArtifactsFolder: string,
   apiViewRequestData: APIViewRequestData[],
+  sdkGenerationExecuted: boolean = true,
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -293,13 +309,21 @@ export function generateArtifact(
     if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
       fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
+    let isSpecGenSdkCheckRequired = false;
+    if (sdkGenerationExecuted) {
+      isSpecGenSdkCheckRequired = getRequiredSettingValue(
+        hasManagementPlaneSpecs,
+        commandInput.sdkLanguage as SdkName,
+      );
+    }
+
     // Write artifact
     const artifactInfo: SpecGenSdkArtifactInfo = {
       language: commandInput.sdkLanguage,
       result,
+      prNumber: commandInput.prNumber,
       labelAction: hasBreakingChange,
-      isSpecGenSdkCheckRequired:
-        hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+      isSpecGenSdkCheckRequired,
       apiViewRequestData: apiViewRequestData,
     };
     fs.writeFileSync(
@@ -311,6 +335,7 @@ export function generateArtifact(
     setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
     setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
     setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+    setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
     vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
@@ -334,4 +359,21 @@ export function getServiceFolderPath(specConfigPath: string): string {
     return `${segments[0]}/${segments[1]}`;
   }
   return specConfigPath;
+}
+
+/**
+ * Get the required setting value for the SDK check based on the spec PR types.
+ * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param sdkName - The SDK name.
+ * @returns boolean indicating whether the SDK check is required.
+ */
+export function getRequiredSettingValue(
+  hasManagementPlaneSpecs: boolean,
+  sdkName: SdkName,
+): boolean {
+  if (hasManagementPlaneSpecs) {
+    return SpecGenSdkRequiredSettings[sdkName].managementPlane;
+  } else {
+    return SpecGenSdkRequiredSettings[sdkName].dataPlane;
+  }
 }
