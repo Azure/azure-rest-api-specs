@@ -4068,6 +4068,14 @@
       "type": "object",
       "description": "The application resource properties.",
       "properties": {
+        "managedIdentities": {
+          "type": "array",
+          "description": "List of user assigned identities for the application, each mapped to a friendly name.",
+          "items": {
+            "$ref": "#/definitions/ApplicationUserAssignedIdentity"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response",
@@ -4087,14 +4095,6 @@
         "upgradePolicy": {
           "$ref": "#/definitions/ApplicationUpgradePolicy",
           "description": "Describes the policy for a monitored application upgrade."
-        },
-        "managedIdentities": {
-          "type": "array",
-          "description": "List of user assigned identities for the application, each mapped to a friendly name.",
-          "items": {
-            "$ref": "#/definitions/ApplicationUserAssignedIdentity"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -4550,13 +4550,13 @@
       "properties": {
         "healthCheckWaitDuration": {
           "type": "string",
-          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckStableDuration": {
           "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
@@ -7099,28 +7099,28 @@
         },
         "healthCheckWaitDuration": {
           "type": "string",
-          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckStableDuration": {
           "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeTimeout": {
           "type": "string",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeDomainTimeout": {
           "type": "string",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         }
       },
       "required": [
@@ -7951,23 +7951,23 @@
         },
         "replicaRestartWaitDuration": {
           "type": "string",
-          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "quorumLossWaitDuration": {
           "type": "string",
-          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "standByReplicaKeepDuration": {
           "type": "string",
-          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "servicePlacementTimeLimit": {
           "type": "string",
-          "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "format": "duration-constant",
+          "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
         }
       },
       "allOf": [

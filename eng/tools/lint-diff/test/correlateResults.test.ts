@@ -7,6 +7,7 @@ import {
   BeforeAfter,
 } from "../src/lintdiff-types.js";
 import {
+  correlateRuns,
   getViolations,
   getLintDiffViolations,
   arrayIsEqual,
@@ -15,6 +16,155 @@ import {
 } from "../src/correlateResults.js";
 import { relativizePath } from "../src/util.js";
 import { isWindows } from "./test-util.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
+import { resolve } from "path";
+
+const __dirname = new URL('.', import.meta.url).pathname;
+
+describe.skipIf(isWindows())("correlateRuns", () => {
+  test("correlates before and after runs with matching readme and tag", async() => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "tag1",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(
+          resolve(afterPath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "tag1",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag1")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+
+  test("correlates before and after runs with matching readme and a default tag", async() => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "default-tag",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(
+          resolve(afterPath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "tag1",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag1")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+
+  test("correlates before and after runs with matching readme but no tag", async() => {
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(
+          resolve(afterPath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, [], afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: null,
+      after: afterChecks[0],
+    });
+  });
+  
+  test("uses no baseline if there are no matching before checks", async() => { 
+    const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
+    const beforePath = resolve(fixtureRoot, "before");
+    const afterPath = resolve(fixtureRoot, "after");
+
+    const beforeChecks: AutorestRunResult[] = [
+      {
+        rootPath: beforePath,
+        readme: new Readme(
+          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const afterChecks: AutorestRunResult[] = [
+      {
+        rootPath: afterPath,
+        readme: new Readme(
+          resolve(afterPath, "specification/service1/resource-manager/readme.md")
+        ),
+        tag: "tag2",
+        stdout: "stdout",
+        stderr: "stderr",
+        error: null,
+      },
+    ];
+
+    const result = await correlateRuns(beforePath, beforeChecks, afterChecks);
+    expect(result.size).toEqual(1);
+    expect(result.get("specification/service1/resource-manager/readme.md#tag2")).toMatchObject({
+      before: beforeChecks[0],
+      after: afterChecks[0],
+    });
+  });
+});
 
 describe("getViolations", () => {
   test("returns a result", () => {
@@ -32,14 +182,14 @@ describe("getViolations", () => {
         {
           before: {
             rootPath: "before",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: existingErrorInBefore,
             stderr: "",
           },
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: `${newError}\n${correlatedErrorInAfter}`,
             stderr: "",
@@ -73,14 +223,14 @@ describe("getViolations", () => {
         {
           before: {
             rootPath: "before",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: beforeViolation,
             stderr: "",
           },
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: afterViolation,
             stderr: "",
@@ -114,7 +264,7 @@ describe("getViolations", () => {
           before: null,
           after: {
             rootPath: "after",
-            readme: "specification/service1/resource-manager/readme.md",
+            readme: new Readme("specification/service1/resource-manager/readme.md"),
             tag: "tag1",
             stdout: afterViolation,
             stderr: "",
@@ -159,7 +309,7 @@ describe("getLintDiffViolations", async () => {
   function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
     return {
       rootPath: "string",
-      readme: "string",
+      readme: new Readme("string"),
       tag: "string",
       error: null,
       stdout: stdout,
