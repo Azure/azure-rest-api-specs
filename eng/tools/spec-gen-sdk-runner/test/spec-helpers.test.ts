@@ -191,8 +191,8 @@ describe("detectChangedSpecConfigFiles", () => {
 
   test("case with V2 folder structure - resource-manager", () => {
     vi.mocked(getChangedFiles).mockReturnValue([
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       "specification/service1/resource-manager/readme.md",
     ]);
 
@@ -204,13 +204,13 @@ describe("detectChangedSpecConfigFiles", () => {
     // In V2 structure, the TypeSpec project should be correctly associated with the readme
     expect(normalizedResult).toEqual({
       specs: [
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       ],
       readmeMd:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/readme.md",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
   });
 
@@ -239,8 +239,8 @@ describe("detectChangedSpecConfigFiles", () => {
 
   test("case with V2 folder structure - nested subfolders", () => {
     vi.mocked(getChangedFiles).mockReturnValue([
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/examples/2025-05-05/create.json",
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/stable/2025-05-05/servicecontrol.json",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/examples/2021-11-01/create.json",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/stable/2021-11-01/servicecontrol.json",
       "specification/service1/resource-manager/Microsoft.Service1/readme.md",
       "specification/service1/resource-manager/readme.md",
     ]);
@@ -253,21 +253,21 @@ describe("detectChangedSpecConfigFiles", () => {
     // The deepest TypeSpec project should be used, and both readme files should be cleaned up
     expect(normalizedResult).toEqual({
       specs: [
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/examples/2025-05-05/create.json",
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/stable/2025-05-05/servicecontrol.json",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/examples/2021-11-01/create.json",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/stable/2021-11-01/servicecontrol.json",
       ],
       readmeMd:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/readme.md",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
   });
 
   test("case with V2 folder structure mixed with old structure", () => {
     vi.mocked(getChangedFiles).mockReturnValue([
       // V2 folder structure
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       "specification/service1/resource-manager/readme.md",
       // Old folder structure
       "specification/contosowidgetmanager/Contoso.WidgetManager/client.tsp",
@@ -283,13 +283,13 @@ describe("detectChangedSpecConfigFiles", () => {
     const normalizedV2Result = normalizeResultItem(result[0]);
     expect(normalizedV2Result).toEqual({
       specs: [
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       ],
       readmeMd:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/readme.md",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
 
     // Second result should be for the old structure
@@ -308,8 +308,8 @@ describe("detectChangedSpecConfigFiles", () => {
   test("case with multiple V2 folder structures", () => {
     vi.mocked(getChangedFiles).mockReturnValue([
       // First service
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       "specification/service1/resource-manager/readme.md",
       // Second service
       "specification/service2/data-plane/widget2/tspconfig.yaml",
@@ -327,13 +327,13 @@ describe("detectChangedSpecConfigFiles", () => {
 
     expect(normalizeResultItem(service1Result!)).toEqual({
       specs: [
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       ],
       readmeMd:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/readme.md",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
 
     expect(normalizeResultItem(service2Result!)).toEqual({
@@ -349,8 +349,8 @@ describe("detectChangedSpecConfigFiles", () => {
   test("case with V2 folder structure - cross-platform path separators", () => {
     // Mock getChangedFiles to return paths with both forward and backslashes
     vi.mocked(getChangedFiles).mockReturnValue([
-      String.raw`specification\service1\resource-manager\Microsoft.Service1\servicecontrol\tspconfig.yaml`,
-      "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+      String.raw`specification\service1\resource-manager\Microsoft.Service1\WidgetManagement\tspconfig.yaml`,
+      "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       String.raw`specification\service1\resource-manager\readme.md`,
     ]);
 
@@ -362,13 +362,13 @@ describe("detectChangedSpecConfigFiles", () => {
     // The function should handle mixed path separators correctly
     expect(normalizedResult).toEqual({
       specs: [
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/main.tsp",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       ],
       readmeMd:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/readme.md",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
-        "specification/service1/resource-manager/Microsoft.Service1/servicecontrol/tspconfig.yaml",
+        "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
     });
   });
 });
