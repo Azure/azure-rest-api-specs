@@ -5472,19 +5472,30 @@
     },
     "AutonomousDatabaseBackupUpdate": {
       "type": "object",
-      "description": "AutonomousDatabaseBackup resource definition",
+      "description": "The type used for update operations of the AutonomousDatabaseBackup.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
+          "$ref": "#/definitions/AutonomousDatabaseBackupUpdateProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      }
+    },
+    "AutonomousDatabaseBackupUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AutonomousDatabaseBackup.",
+      "properties": {
+        "retentionPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period, in days",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
-      ]
+      }
     },
     "AutonomousDatabaseBaseProperties": {
       "type": "object",
