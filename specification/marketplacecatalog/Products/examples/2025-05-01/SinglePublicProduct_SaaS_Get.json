@@ -1,134 +1,276 @@
 {
   "parameters": {
-    "id": "uniqueProductId",
+    "id": "securescan-enterprise",
     "language": "en",
-    "api-version": "2023-05-01-preview",
-    "market": "US"
+    "api-version": "2025-05-01",
+    "market": "US",
+    "storefront": "azure",
+    "locations": ["eastus"],
+    "includeStopSoldPlans": false,
+    "hideKeys": [],
+    "excludeSkuDetails": false,
+    "includeFutureAvailabilities": false,
+    "skuId": null,
+    "X-API-Key": "your-api-key-here",
+    "x-ms-pricing-audience": "DirectCommercial"
   },
   "responses": {
     "200": {
       "body": {
-        "language": "en",
-        "hasStandardContractAmendments": false,
-        "offerId": "offerId",
-        "standardContractAmendmentsRevisionId": "00000000-0000-0000-0000-000000000000",
-        "isPrivate": false,
-        "isStopSell": false,
-        "legalTermsUri": "legalTermsUri",
-        "cspLegalTermsUri": "cspLegalTermsUri",
-        "legalTermsType": "None",
-        "privacyPolicyUri": "privacyPolicyUri",
-        "supportUri": "supportUri",
-        "links": [
+        "displayName": "CloudGuard Security Scanner",
+        "popularity": 4.8,
+        "categoryIds": [
+          "SecurityAndIdentity"
+        ],
+        "industryIds": [
+          "Technology"
+        ],
+        "publisherId": "cloudguard-security",
+        "azureBenefit": "Eligible",
+        "badges": [
+          "PreferredSolution",
+          "PowerBICertified",
+          "AdditionalPurchaseRequirement"
+        ],
+        "publisherType": "ThirdParty",
+        "publishingStage": "Public",
+        "uniqueProductId": "securescan-enterprise",
+        "productType": "SaaS",
+        "productSubType": "SecurityAnalytics",
+        "productFamily": "Security",
+        "operatingSystems": [
+          "Linux"
+        ],
+        "pricingTypes": [
+          "Payg"
+        ],
+        "publisherDisplayName": "CloudGuard Security, Inc.",
+        "longSummary": "CloudGuard Security Scanner is an enterprise-grade cloud security solution that continuously monitors your cloud infrastructure for vulnerabilities, misconfigurations, and compliance violations. With real-time scanning, automated remediation suggestions, and comprehensive reporting, it helps organizations maintain a strong security posture across their cloud environments.",
+        "summary": "Enterprise cloud security scanner with continuous monitoring, compliance checking, and automated remediation guidance",
+        "videos": [
           {
-            "id": "linkId",
-            "displayName": "linkDisplayName",
-            "uri": "linkUri"
+            "caption": "CloudGuard Security Scanner Overview",
+            "uri": "https://www.youtube.com/watch?v=cloudguard-demo",
+            "videoPurpose": "trailer",
+            "previewImage": {
+              "caption": "Product Overview",
+              "uri": "https://www.cloudguard.com/media/preview-image.png",
+              "imagePurpose": "preview"
+            }
           }
         ],
-        "linkedAddIns": [
-          "assetId:someId"
-        ],
-        "mediumIconUri": "mediumIconUri",
-        "largeIconUri": "largeIconUri",
-        "wideIconUri": "wideIconUri",
         "images": [
           {
-            "context": "imageContext",
+            "context": "screenshots",
             "items": [
               {
-                "id": "small",
-                "uri": "imageUrl",
-                "type": "icon"
+                "id": "dashboard",
+                "uri": "https://www.cloudguard.com/screenshots/dashboard.png",
+                "type": "screenshot"
               }
             ]
           }
         ],
-        "videos": [
+        "links": [
           {
-            "caption": "caption",
-            "uri": "https://videouri",
-            "videoPurpose": "trailer",
-            "previewImage": {
-              "caption": "previewImageCaption",
-              "uri": "https://previewImageUri",
-              "imagePurpose": "trailer"
-            }
+            "id": "documentation",
+            "displayName": "Documentation",
+            "uri": "https://docs.cloudguard.com"
           }
         ],
+        "linkedAddIns": [
+          "cloudguard-cli:latest"
+        ],
+        "linkedAddInsTypes": {
+          "cli": "Command Line Interface"
+        },
+        "additionalProductProperties": {
+          "complianceStandards": "PCI-DSS,HIPAA,SOC2,ISO27001",
+          "deploymentMode": "Automated",
+          "customField": "value"
+        },
+        "smallIconUri": "https://www.cloudguard.com/icons/small.png",
+        "description": "CloudGuard Security Scanner provides comprehensive cloud security monitoring and compliance management for enterprises. Key features include:\n\n- Continuous Security Monitoring: Real-time scanning of cloud resources for security vulnerabilities\n- Compliance Management: Pre-built compliance templates for major standards (PCI DSS, HIPAA, SOC 2)\n- Automated Remediation: Smart suggestions for fixing security issues with one-click implementation\n- Custom Policies: Create and enforce organization-specific security policies\n- Integration Support: Works with major DevOps tools and CI/CD pipelines\n- Advanced Reporting: Detailed security insights and compliance reports\n\nOur solution helps organizations maintain security best practices while accelerating their cloud journey.",
+        "ratingBuckets": [
+          "AboveFour"
+        ],
+        "ratingAverage": 4.8,
+        "ratingCount": 245,
         "plans": [
           {
-            "id": "0001",
-            "availabilities": [
-              {
-                "id": "availabilityId",
-                "actions": [
-                  "Browse"
-                ],
-                "meter": null,
-                "pricingAudience": "DirectCommercial",
-                "terms": null,
-                "hasFreeTrials": false,
-                "displayRank": 0
-              }
+            "planId": "pro",
+            "uniquePlanId": "securescan-enterprise-pro",
+            "displayName": "Professional",
+            "vmArchitectureType": null,
+            "cspState": "OptIn",
+            "metadata": {
+              "generation": "2023",
+              "altStackReference": "basic-tier",
+              "relatedSkus": [
+                {
+                  "sku": {
+                    "name": "basic",
+                    "generation": "2023",
+                    "identity": "cloudguard-scanner-basic"
+                  },
+                  "relationType": "upgrade-from"
+                }
+              ]
+            },
+            "stackType": "Gen2",
+            "altArchitectureReference": null,
+            "categoryIds": [
+              "SecurityAndIdentity",
+              "NetworkSecurity",
+              "CloudProtection"
             ],
-            "uiDefinitionUri": "uiDefUri",
-            "isHidden": false,
-            "isStopSell": false,
-            "isQuantifiable": false,
+            "hasProtectedArtifacts": false,
+            "pricingTypes": [
+              "Payg"
+            ],
+            "vmSecuritytypes": [
+              "Standard",
+              "Trusted",
+              "Confidential"
+            ],
+            "summary": "Advanced security features for growing organizations",
+            "description": "Professional-grade security scanning with advanced features and priority support",
+            "skuId": "pro-001",
+            "planType": "SaaS",
+            "displayRank": "2",
+            "isPrivate": false,
+            "hasRI": true,
             "purchaseDurationDiscounts": [
               {
-                "duration": "duration",
-                "discountPercentage": 0
+                "duration": "P1Y",
+                "discountPercentage": 20.0
               }
             ],
-            "planId": "plan1Id",
-            "uniquePlanId": "uniquePlan1Id",
-            "displayName": "planDisplayName",
-            "metadata": {
-              "generation": null,
-              "altStackReference": null
-            },
-            "categoryIds": [],
-            "pricingTypes": [],
-            "description": "planDescription",
-            "skuId": "0001",
-            "planType": "SaaS",
-            "isPrivate": false
+            "availabilities": [
+              {
+                "id": "pro-payg",
+                "actions": [
+                  "Purchase",
+                  "Trial"
+                ],
+                "pricingAudience": "DirectCommercial",
+                "terms": [
+                  {
+                    "termId": "monthly",
+                    "termUnit": "P1M",
+                    "termDescription": "Monthly subscription",
+                    "prorationPolicy": {
+                      "minimumProratedUnits": "1"
+                    },
+                    "price": {
+                      "currencyCode": "USD",
+                      "isPIRequired": true,
+                      "listPrice": 99.99,
+                      "msrp": 119.99
+                    },
+                    "renewTermId": "monthly",
+                    "renewTermUnits": "P1M",
+                    "billingPlan": {
+                      "billingPeriod": "P1M",
+                      "title": "Monthly Billing",
+                      "description": "Billed monthly with usage charges",
+                      "price": {
+                        "currencyCode": "USD",
+                        "isPIRequired": true,
+                        "listPrice": 99.99,
+                        "msrp": 119.99
+                      }
+                    },
+                    "isAutorenewable": true,
+                    "termDescriptionParameters": [
+                      {
+                        "parameter": "scanCount",
+                        "value": "1000"
+                      },
+                      {
+                        "parameter": "retention",
+                        "value": "30 days"
+                      }
+                    ],
+                    "renewToTermBillingPlan": "pro-monthly-renewed"
+                  }
+                ],
+                "hasFreeTrials": true,
+                "consumptionUnitType": "scan",
+                "displayRank": 1
+              }
+            ]
           }
         ],
+        "supportedProducts": [
+          "azure-devops"
+        ],
+        "applicableProducts": [
+          "azure-kubernetes-service"
+        ],
+        "lastModifiedDateTime": "2025-05-01T10:00:00.0000000+00:00",
+        "locations": [
+          "eastus"
+        ],
+        "serviceFamily": "Security",
+        "service": "SecurityServices",
+        "productId": "cloudguard-scanner-2025",
+        "hasMarketplaceFootprint": true,
+        "attributes": [
+          {
+            "key": "ComplianceFrameworks",
+            "value": "PCI-DSS,HIPAA,SOC2,ISO27001"
+          }
+        ],
+        "language": "en",
+        "hasStandardContractAmendments": true,
+        "offerId": "cloudguard-security-scanner",
+        "standardContractAmendmentsRevisionId": "2025-05-01-rev1",
+        "universalAmendmentUrl": "https://www.cloudguard.com/legal/universal-amendment",
+        "isPrivate": false,
+        "isStopSell": false,
+        "legalTermsUri": "https://www.cloudguard.com/legal/terms",
+        "cspLegalTermsUri": "https://www.cloudguard.com/legal/csp-terms",
+        "legalTermsType": "EA",
+        "privacyPolicyUri": "https://www.cloudguard.com/legal/privacy",
+        "supportUri": "https://support.cloudguard.com",
+        "uiDefinitionUri": "https://www.cloudguard.com/setup/ui-definition",
+        "pricingDetailsUri": "https://www.cloudguard.com/pricing",
+        "mediumIconUri": "https://www.cloudguard.com/icons/medium.png",
+        "largeIconUri": "https://www.cloudguard.com/icons/large.png",
+        "wideIconUri": "https://www.cloudguard.com/icons/wide.png",
         "isReseller": false,
         "productOwnershipSellingMotion": "3PPAgency",
         "disableSendEmailOnPurchase": false,
-        "displayName": "ProductDisplayName",
-        "popularity": 1.0,
-        "categoryIds": [
-          "Productivity"
+        "isCoreVm": false,
+        "stopSellInfo": null,
+        "marketingMaterial": {
+          "path": "https://www.cloudguard.com/resources",
+          "learnUri": "https://learn.cloudguard.com"
+        },
+        "screenshotUris": [
+          "https://www.cloudguard.com/screenshots/dashboard.png",
+          "https://www.cloudguard.com/screenshots/reports.png"
         ],
-        "industryIds": [
-          "Education"
+        "billingComponent": {
+          "billingTag": "enterprise-scanner",
+          "customMeterIds": {
+            "scanOperations": [1001, 1002]
+          }
+        },
+        "artifacts": [
+          {
+            "artifactType": "Template"
+          }
         ],
-        "publisherId": "publisherId",
-        "azureBenefit": "NotEligible",
-        "publisherType": "Microsoft",
-        "publishingStage": "Public",
-        "uniqueProductId": "uniqueProductId",
-        "productType": "SaaS",
-        "productSubType": "Azure",
-        "productFamily": "Azure",
-        "pricingTypes": [],
-        "publisherDisplayName": "publisherDisplayName",
-        "longSummary": "longSummary",
-        "linkedAddInsTypes": {},
-        "smallIconUri": "smallIconUri",
-        "description": "description",
-        "ratingAverage": 0.0,
-        "ratingCount": 0,
-        "service": "SaaS",
-        "serviceFamily": "SaaS",
-        "productId": "product_id",
-        "hasMarketplaceFootprint": true,
-        "lastModifiedDateTime": "2022-09-10T17:09:22.5659785+00:00"
+        "startingPrice": {
+          "market": "US",
+          "termUnits": "P1M",
+          "meterUnits": "scan",
+          "minTermPrice": 99.99,
+          "minMeterPrice": 0.10,
+          "currency": "USD"
+        }
       }
     }
   }
