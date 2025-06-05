@@ -21,7 +21,6 @@ multiapi: true
 batch:
   - tag: package-2025-04
   - tag: package-preview-2025-04
-  - tag: package-2025-03
   - tag: package-2020-11
   - tag: package-2020-03-01-only
   - tag: package-2019-09-preview-only
