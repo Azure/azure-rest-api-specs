@@ -1027,15 +1027,6 @@ model PlanSummary {
   hasRi?: boolean;
 }
 
-@doc("Response page composed of a list of SKU Summaries together with a next page link")
-model SkuApiResponse {
-  @doc("The list of returned items")
-  items?: SkuSummary[];
-
-  @doc("Link to the next page where request returns more than a single page of results")
-  nextPageLink?: string;
-}
-
 @doc("Plan level resources and configuration files")
 model Artifact {
   @doc("Artifact name")
