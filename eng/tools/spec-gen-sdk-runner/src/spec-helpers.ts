@@ -149,8 +149,6 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
   if (fileList.length === 0) {
     logMessage("No relevant files changed under 'specification' folder in the PR");
     return [];
-  } else {
-    // Continue with processing the files
   }
   logMessage(`Related readme.md and typespec project list:`);
   const changedSpecs: ChangedSpecs[] = [];
