@@ -273,7 +273,7 @@ interface StoragePools {
   @post
   getHealthStatus(
     ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<HealthResponse> | ErrorResponse;
+  ): ArmResponse<HealthResult> | ErrorResponse;
 
   @doc("Returns current information about an on-going connection to an AVS instance")
   @armResourceAction(StoragePool)
@@ -428,7 +428,7 @@ model RangeLimits {
 }
 
 @doc("Health information for a storage pool")
-model HealthResponse {
+model HealthResult {
   @doc("Health metrics")
   health: HealthDetails;
 
@@ -545,7 +545,7 @@ model StoragePoolEnableAvsConnectionPost {
 }
 
 @doc("Explicit service initialization data")
-model ServiceInitializationData {
+model ServiceInitializationInfo {
   @doc("Service account username")
   serviceAccountUsername?: string;
 
@@ -566,7 +566,7 @@ model StoragePoolFinalizeAvsConnectionPost {
   serviceInitializationDataEnc?: string;
 
   @doc("Explicit AVS connection information")
-  serviceInitializationData?: ServiceInitializationData;
+  serviceInitializationData?: ServiceInitializationInfo;
 }
 
 @doc("AVS storage container resource type, representing a VMware storage container in a storage pool, which can be associated to and mounted as a datastore")
