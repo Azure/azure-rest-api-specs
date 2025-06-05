@@ -131,7 +131,7 @@ export function swagger(file) {
  * Given the path to a file return an array of strings where each entry in the
  * array is a line in the file
  *
- * @param changedFilesPath Path to the file containing the list of changed files with one on each line
+ * @param {string} changedFilesPath Path to the file containing the list of changed files with one on each line
  * @returns
  */
 export async function readFileList(changedFilesPath) {
@@ -144,7 +144,7 @@ export async function readFileList(changedFilesPath) {
 
 /**
  * Check if a path exists
- * @param path Path to check for existence
+ * @param {string} path Path to check for existence
  * @returns true if the path exists, false otherwise
  */
 export async function pathExists(path) {

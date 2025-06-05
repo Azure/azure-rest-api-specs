@@ -1,0 +1,45 @@
+trigger: none
+pr:
+  paths: 
+    include:
+      - specification/**
+
+jobs:
+  - job: SwaggerApiDocPreview
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
+    
+    steps: 
+      # TODO: Use sparse checkout instead
+      - checkout: self
+
+      - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+        parameters:
+          Paths: 
+            - repo.json
+            - mapping.json
+            - index.md
+          Repositories:
+            - Name: MicrosoftDocs/AzureRestPreview
+              Commitish: refs/heads/doc-preview-migration-test
+              WorkingDirectory: AzureRestPreview
+
+      - template: /eng/pipelines/templates/steps/npm-install.yml
+
+      # TODO: Use variables for triggering repository instead of hardcoding
+      - script: |
+          npm exec --no api-doc-preview --output AzureRestPreview
+        displayName: 'Generate Swagger API documentation preview'
+        workingDirectory: .github/shared
+
+      - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
+        parameters:
+          WorkingDirectory: AzureRestPreview
+          TargetRepoOwner: MicrosoftDocs
+          TargetRepoName: AzureRestPreview
+          # TODO: Determine this value at runtime
+          BaseRepoBranch: doc-preview-migration-test-01
+      
+      - script: echo "launch pipeline, await pipeline, download artifact from pipeline..."
+
+      - script: echo "interpret results..."

@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { parseSwaggerFilePath, getSwaggersToProcess } from "../src/util.js";
+import { parseSwaggerFilePath, getSwaggersToProcess } from "../src/api-doc-preview-util.js";
 
 describe("parseSwaggerFilePath", () => {
   test("returns null for invalid path", () => {

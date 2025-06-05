@@ -1,64 +1,50 @@
+#!/usr/bin/env node
 import { join, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, readFileList, pathExists } from "@azure-tools/specs-shared/changed-files";
-import { filterAsync } from "@azure-tools/specs-shared/array";
+import { swagger, readFileList, pathExists } from "../src/changed-files.js";
+import { filterAsync } from "../src/array.js";
 
 import {
   mappingJSONTemplate,
   repoJSONTemplate,
   indexMd,
   getSwaggersToProcess,
-} from "./util.js";
+} from "../src/doc-preview.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-/**
- * Displays usage information for the CLI tool
- */
 function usage() {
   console.log(
     "Usage: api-doc-preview --changed-files-path <path> --output <output-dir> [--spec-root <spec-root>] [--build-id <build-id>] [--spec-repo-owner <owner>] [--spec-repo-name <name>] [--spec-repo-pr-number <pr-number>]",
   );
-  console.log("TODO");
 }
 
-/**
- * Main entry point for the CLI tool. Parses arguments, processes changed files, and writes doc preview artifacts.
- * @returns {Promise<void>}
- */
 export async function main() {
   const {
     values: {
-      "changed-files-path": changedFilesPath,
       output: outputDir,
       "build-id": buildId,
-      "spec-repo-owner": specRepoOwner,
       "spec-repo-name": specRepoName,
       "spec-repo-pr-number": specRepoPrNumber,
       "spec-repo-root": specRepoRoot,
     },
   } = parseArgs({
     options: {
-      "changed-files-path": { type: "string" },
       output: { type: "string" },
       "build-id": {
         type: "string",
-        default: process.env.UNIFIED_PIPELINE_BUILD_ID || "",
-      },
-      "spec-repo-owner": {
-        type: "string",
-        default: process.env.SPEC_REPO_OWNER || "",
+        default: process.env.BUILD_BUILDID || "",
       },
       "spec-repo-name": {
         type: "string",
-        default: process.env.SPEC_REPO_NAME || "",
+        default: process.env.BUILD_REPOSITORY_NAME || "",
       },
       "spec-repo-pr-number": {
         type: "string",
-        default: process.env.SPEC_REPO_PULL_REQUEST_NUMBER || "",
+        default: process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER || "",
       },
       "spec-repo-root": {
         type: "string",
@@ -70,10 +56,6 @@ export async function main() {
 
   // TODO: Better validation
   let validArgs = true;
-  if (!changedFilesPath) {
-    console.log("Missing required parameter --changed-files-path");
-    validArgs = false;
-  }
 
   if (!outputDir) {
     console.log("Missing required parameter --output");
@@ -88,7 +70,12 @@ export async function main() {
 
   // Get selected version and swaggers to process
 
-  const changedFiles = await readFileList(changedFilesPath);
+  const changedFiles = await getChangedFiles({ cwd: specRepoRoot });
+  console.log(
+    `Found ${changedFiles.length} changed files in ${specRepoRoot}`,
+  );
+  console.log("Changed files:");
+  changedFiles.forEach((file) => console.log(`  - ${file}`));
   // TODO: `swagger` filter doesn't perfectly overlap with existing process. Determine if additional changes are needed to `swagger` check.
   const swaggerPaths = changedFiles.filter(swagger);
   const existingSwaggerFiles = await filterAsync(
@@ -107,8 +94,7 @@ export async function main() {
     getSwaggersToProcess(existingSwaggerFiles);
 
   const key = {
-    owner: specRepoOwner,
-    repo: specRepoName,
+    repoName: specRepoName,
     prNumber: specRepoPrNumber,
   };
 

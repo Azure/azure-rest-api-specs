@@ -1,5 +1,3 @@
-import { access } from "fs/promises";
-
 const DOCS_NAMESPACE = "_swagger_specs";
 const SPEC_FILE_REGEX =
   "(specification/)+(.*)/(resourcemanager|resource-manager|dataplane|data-plane|control-plane)/(.*)/(preview|stable|privatepreview)/(.*?)/(example)?(.*)";
@@ -51,11 +49,11 @@ export function parseSwaggerFilePath(specPath) {
  * @param {{owner: string, repo: string, prNumber: string}} prKey
  * @returns {object}
  */
-export function repoJSONTemplate({ owner, repo, prNumber }) {
+export function repoJSONTemplate({ repoName, prNumber }) {
   return {
     repo: [
       {
-        url: `https://github.com/${owner}/${repo}`,
+        url: `https://github.com/${repoName}`,
         prNumber: prNumber,
         name: DOCS_NAMESPACE,
       },
@@ -100,10 +98,10 @@ export function mappingJSONTemplate(files) {
  * @returns {string}
  */
 // TODO: Use aka.ms link for Teams channel
-export function indexMd(buildId, { owner, repo, prNumber }) {
+export function indexMd(buildId, { repoName, prNumber }) {
   return `# Documentation Preview for swagger pipeline build #${buildId}
 
-Welcome to documentation preview for ${owner}/${repo}/pull/${prNumber} 
+Welcome to documentation preview for ${repoName}/pull/${prNumber} 
 created via the swagger pipeline.
 
 Your documentation may be viewed in the menu on the left hand side.
