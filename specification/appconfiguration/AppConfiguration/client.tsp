@@ -17,6 +17,20 @@ namespace SdkCustomizations;
 // .NET specific customizations
 @@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
 @@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
-@@access(getKeyValue, Access.internal, "csharp");
-@@access(getKeyValues, Access.internal, "csharp");
+@@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
+@@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
+@@clientName(putKeyValue, "SetConfigurationSetting", "csharp");
+@@clientName(deleteKeyValue, "DeleteConfigurationSetting", "csharp");
+@@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
+@@clientName(putLock, "CreateReadOnlyLock", "csharp");
+@@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
+// @@access(putKeyValue, Access.internal, "csharp");
+// @@access(deleteKeyValue, Access.internal, "csharp");
+// @@access(getSnapshot, Access.internal, "csharp");
+// @@access(createSnapshot, Access.internal, "csharp");
+// @@access(updateSnapshot, Access.internal, "csharp");
+// @@access(getKeyValue, Access.internal, "csharp");
+// @@access(getKeyValues, Access.internal, "csharp");
+// @@access(deleteLock, Access.internal, "csharp");
+// @@access(putLock, Access.internal, "csharp");
 
