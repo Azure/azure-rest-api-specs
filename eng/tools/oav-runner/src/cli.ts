@@ -11,6 +11,7 @@ import {
 import { resolve } from "path";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { exit } from "node:process";
+import fs from "node:fs/promises";
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -40,7 +41,6 @@ export async function main() {
   if (opts.fileList !== undefined) {
     const fileListPath = resolve(opts.fileList as string);
     try {
-      const fs = await import('node:fs/promises');
       const fileContent = await fs.readFile(fileListPath, { encoding: 'utf-8' });
       fileList = fileContent.split('\n')
         .map(line => line.trim())

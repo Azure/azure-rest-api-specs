@@ -12,9 +12,7 @@ import {
 import { ReportableOavError } from "./formatting.js";
 
 export async function preCheckFiltering(rootDirectory: string, fileList?: string[]): Promise<string[]> {
-  const changedFiles = fileList?.length
-    ? fileList
-    : await getChangedFiles({ cwd: rootDirectory });
+  const changedFiles = fileList ?? await getChangedFiles({ cwd: rootDirectory });
 
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
