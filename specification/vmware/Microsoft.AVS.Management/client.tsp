@@ -211,7 +211,7 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
