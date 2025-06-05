@@ -163,7 +163,7 @@ interface QuestionAnsweringProjects {
   @sharedRoute
   @route("/authoring/query-knowledgebases/projects/{projectName}/:import")
   @pollingOperation(QuestionAnsweringProjects.getImportStatus)
-  importFromFile is Foundations.LongRunningOperation<
+  importFromFiles is Foundations.LongRunningOperation<
     {
       @doc("This request has a multi-part body.")
       @TypeSpec.Http.header("Content-Type")
