@@ -139,6 +139,9 @@ model AkriConnectorTemplateHelmConfigurationSettings {
   /** The release name of the Helm chart. */
   releaseName: string;
 
+  /** The name of the repository */
+  repositoryName: string;
+
   /** The version of the Helm chart. */
   version: string;
 
@@ -199,9 +202,6 @@ model AkriConnectorTemplateHelmContainerRegistry
 model AkriConnectorTemplateHelmContainerRegistrySettings {
   /** The registry to use for the Helm chart. */
   registry: string;
-
-  /** The repository to use for the Helm chart. */
-  repository: string;
 
   /** Optional reference to a secret in the same namespace to use for pulling the Helm chart. */
   authSecretRef?: AkriConnectorTemplateHelmAuthSecretRef;

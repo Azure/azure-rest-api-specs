@@ -4318,6 +4318,10 @@
           "type": "string",
           "description": "The release name of the Helm chart."
         },
+        "repositoryName": {
+          "type": "string",
+          "description": "The name of the repository"
+        },
         "version": {
           "type": "string",
           "description": "The version of the Helm chart."
@@ -4336,6 +4340,7 @@
       },
       "required": [
         "releaseName",
+        "repositoryName",
         "version"
       ]
     },
@@ -4366,18 +4371,13 @@
           "type": "string",
           "description": "The registry to use for the Helm chart."
         },
-        "repository": {
-          "type": "string",
-          "description": "The repository to use for the Helm chart."
-        },
         "authSecretRef": {
           "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
           "description": "Optional reference to a secret in the same namespace to use for pulling the Helm chart."
         }
       },
       "required": [
-        "registry",
-        "repository"
+        "registry"
       ]
     },
     "AkriConnectorTemplateHelmDeleteConfiguration": {
