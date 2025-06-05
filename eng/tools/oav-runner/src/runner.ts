@@ -76,13 +76,13 @@ export async function checkSpecs(
     ? fileList
     : await getChangedFiles({ cwd: rootDirectory });
 
-  console.log('oav-runner is checking the following changed files:');
-  changedFiles.forEach(file => console.log(`- ${file}`));
-
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
     changedFiles,
   );
+
+  console.log('oav-runner is checking the following specification rooted files:');
+  swaggerFiles.forEach(file => console.log(`- ${file}`));
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -167,6 +167,10 @@ export async function processFilesToSpecificationList(
   // files from get-changed-files are relative to the root of the repo,
   // though that context is passed into this from cli arguments.
   for (const file of files) {
+    if (!file.startsWith("specification/")) {
+      continue;
+    }
+
     const absoluteFilePath = path.join(rootDirectory, file);
 
     // if the file is an example, we need to find the swagger file that references it
@@ -187,9 +191,18 @@ export async function processFilesToSpecificationList(
           const swaggerModel = new Swagger(
             path.join(rootDirectory, swaggerFile),
           );
-          const exampleSwaggers = await swaggerModel.getExamples();
-          const examples = [...exampleSwaggers].map((e) => e[1].path);
-          cachedSwaggerSpecs.set(swaggerFile, examples);
+          try {
+            const exampleSwaggers = await swaggerModel.getExamples();
+            const examples = [...exampleSwaggers].map((e) => e[1].path);
+            cachedSwaggerSpecs.set(swaggerFile, examples);
+          }
+          catch (e) {
+            console.log(
+              `Error getting examples for ${swaggerFile}: ${e instanceof Error ? e.message : String(e)}`,
+            );
+            // if we can't get the examples, we just skip this file
+            continue;
+          }
         }
         const referencedExamples = cachedSwaggerSpecs.get(swaggerFile);
 
