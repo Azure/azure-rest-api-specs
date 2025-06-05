@@ -17,3 +17,6 @@ namespace SdkCustomizations;
 // .NET specific customizations
 @@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
 @@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
+@@access(getKeyValue, Access.internal, "csharp");
+@@access(getKeyValues, Access.internal, "csharp");
+
