@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-05-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-15-preview'
 input-file:
-  - Microsoft.PortalServices/copilotConnectors/preview/2025-05-15-preview/copilotconnectors.json
+  - Microsoft.PortalServices/copilotConnectors/preview/2025-05-15-preview/copilotConnectors.json
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-09-01-preview/azurecoreexperiencesassistant.json
   - Microsoft.PortalServices/copilotSettings/preview/2024-09-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-09-01-preview/dashboards.json
