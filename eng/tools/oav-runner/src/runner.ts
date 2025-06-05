@@ -190,7 +190,7 @@ export async function processFilesToSpecificationList(
           );
           try {
             const exampleSwaggers = await swaggerModel.getExamples();
-            const examples = exampleSwaggers.keys()
+            const examples = [...exampleSwaggers.keys()]
             cachedSwaggerSpecs.set(swaggerFile, examples);
           }
           catch (e) {
