@@ -1,0 +1,37 @@
+{
+  "title": "SolutionTemplateVersions_BulkPublishSolution_MaximumSet",
+  "operationId": "SolutionTemplateVersions_BulkPublishSolution",
+  "parameters": {
+    "api-version": "2025-06-01",
+    "subscriptionId": "FFA229AF-C1A3-4CB6-9E5D-62C25CFBE4D0",
+    "resourceGroupName": "rgconfigurationmanager",
+    "solutionTemplateName": "test123",
+    "solutionTemplateVersionName": "1.0.0",
+    "body": {
+      "targets": [
+        {
+          "targetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Edge/Targets/target1",
+          "solutionInstanceName": "abc123"
+        }
+      ],
+      "solutionInstanceName": "abc123",
+      "solutionDependencies": [
+        {
+          "solutionVersionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Edge/Targets/target1/solutions/test/1.0.0.1",
+          "solutionTemplateId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Edge/SolutionTemplates/test",
+          "solutionTemplateVersion": "1.0.0.1",
+          "targetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Edge/Targets/target1",
+          "dependencies": [],
+          "solutionInstanceName": "abc123"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
