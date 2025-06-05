@@ -20,7 +20,8 @@ Follow these steps in order to create or manage a release plan for an API specif
 - If no release plan exists, proceed to Step 3
 
 ## Step 3: Gather Release Plan Information
-Collect the following required information from the user. If any details are missing, prompt the user accordingly:
+Collect the following required information from the user. Do not use non GUID valid for product and service tree Id.
+If any details are missing, prompt the user accordingly:
 
 - **API Lifecycle Stage**: Must be one of:
     - Private Preview
