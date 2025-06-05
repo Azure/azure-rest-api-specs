@@ -95,6 +95,9 @@ model DataflowGraphSourceSettings {
 
   /** List of data sources. */
   dataSources: string[];
+
+  /** Reference to the resource in Azure Device Registry where the data in the endpoint originates from. */
+  assetRef?: string;
 }
 
 /** DataflowGraph graph node properties. */
