@@ -13,12 +13,13 @@ import { ReportableOavError } from "./formatting.js";
 
 export async function checkExamples(
   rootDirectory: string,
+  fileList?: string[]
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
-  const changedFiles = await getChangedFiles({
-    cwd: rootDirectory,
-  });
+  const changedFiles = fileList?.length
+    ? fileList
+    : await getChangedFiles({ cwd: rootDirectory });
 
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
@@ -67,12 +68,16 @@ export async function checkExamples(
 
 export async function checkSpecs(
   rootDirectory: string,
+  fileList?: string[]
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
-  const changedFiles = await getChangedFiles({
-    cwd: rootDirectory,
-  });
+  const changedFiles = fileList?.length
+    ? fileList
+    : await getChangedFiles({ cwd: rootDirectory });
+
+  console.log('oav-runner is checking the following changed files:');
+  changedFiles.forEach(file => console.log(`- ${file}`));
 
   const swaggerFiles = await processFilesToSpecificationList(
     rootDirectory,
