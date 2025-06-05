@@ -11,12 +11,7 @@ import {
 } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
-export async function checkExamples(
-  rootDirectory: string,
-  fileList?: string[]
-): Promise<[number, string[], ReportableOavError[]]> {
-  let errors: ReportableOavError[] = [];
-
+export async function preCheckFiltering(rootDirectory: string, fileList?: string[]): Promise<string[]> {
   const changedFiles = fileList?.length
     ? fileList
     : await getChangedFiles({ cwd: rootDirectory });
@@ -25,6 +20,20 @@ export async function checkExamples(
     rootDirectory,
     changedFiles,
   );
+
+  console.log('oav-runner is checking the following specification rooted files:');
+  swaggerFiles.forEach(file => console.log(`- ${file}`));
+
+  return swaggerFiles;
+}
+
+export async function checkExamples(
+  rootDirectory: string,
+  fileList?: string[]
+): Promise<[number, string[], ReportableOavError[]]> {
+  let errors: ReportableOavError[] = [];
+
+  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -72,17 +81,7 @@ export async function checkSpecs(
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
-  const changedFiles = fileList?.length
-    ? fileList
-    : await getChangedFiles({ cwd: rootDirectory });
-
-  const swaggerFiles = await processFilesToSpecificationList(
-    rootDirectory,
-    changedFiles,
-  );
-
-  console.log('oav-runner is checking the following specification rooted files:');
-  swaggerFiles.forEach(file => console.log(`- ${file}`));
+  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
   for (const swaggerFile of swaggerFiles) {
     try {
