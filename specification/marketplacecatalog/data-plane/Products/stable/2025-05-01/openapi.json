@@ -259,6 +259,14 @@
       "type": "object",
       "description": "Plan level resources and configuration files",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Artifact name"
+        },
+        "uri": {
+          "type": "string",
+          "description": "Artifact uri"
+        },
         "artifactType": {
           "$ref": "#/definitions/ArtifactType",
           "description": "The type of the artifact"
@@ -802,6 +810,262 @@
         "value"
       ]
     },
+    "PlanDetails": {
+      "type": "object",
+      "description": "Returns a subset of Plan attributes",
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "Plan id"
+        },
+        "uniquePlanId": {
+          "type": "string",
+          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the plan / sku"
+        },
+        "vmArchitectureType": {
+          "$ref": "#/definitions/VmArchitectureType",
+          "description": "VM Architecture Type. Applicable to Virtual Machine products only"
+        },
+        "cspState": {
+          "$ref": "#/definitions/CspState",
+          "description": "Value showing whether the plan is available for purchase through CSP channel"
+        },
+        "metadata": {
+          "$ref": "#/definitions/PlanMetadata",
+          "description": "Expanded plan/SKU metadata."
+        },
+        "altStackReference": {
+          "type": "string",
+          "description": "Alternative stack reference"
+        },
+        "stackType": {
+          "type": "string",
+          "description": "Stack type : Classic, Gen1, Gen2"
+        },
+        "altArchitectureReference": {
+          "type": "string",
+          "description": "The alternative architecture reference"
+        },
+        "categoryIds": {
+          "type": "array",
+          "description": "Plan CategoryIds",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasProtectedArtifacts": {
+          "type": "boolean",
+          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
+        },
+        "pricingTypes": {
+          "type": "array",
+          "description": "The list of the pricing types for which this plan is designated",
+          "items": {
+            "$ref": "#/definitions/PricingType"
+          }
+        },
+        "vmSecuritytypes": {
+          "type": "array",
+          "description": "VM security type",
+          "items": {
+            "$ref": "#/definitions/VmSecurityType"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "The plan summary text"
+        },
+        "description": {
+          "type": "string",
+          "description": "Plan / sku description"
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The SKU id"
+        },
+        "planType": {
+          "$ref": "#/definitions/ProductType",
+          "description": "Managed Application or Solution template plan type"
+        },
+        "displayRank": {
+          "type": "string",
+          "description": "The order the plan is displayed in the 'Plans' table"
+        },
+        "isPrivate": {
+          "type": "boolean",
+          "description": "Indication that the plan is accessible to restricted audience only"
+        },
+        "id": {
+          "type": "string",
+          "description": "The id"
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availabilities for this plan",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "uiDefinitionUri": {
+          "type": "string",
+          "description": "What blade to open when someone wants to create a marketplace item"
+        },
+        "artifacts": {
+          "type": "array",
+          "description": "Files related to the marketplace item",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          },
+          "x-ms-identifiers": []
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the marketplace item"
+        },
+        "isHidden": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is hidden"
+        },
+        "isStopSell": {
+          "type": "boolean",
+          "description": "A value indicating whether plan has been stopped from selling"
+        },
+        "stopSellInfo": {
+          "$ref": "#/definitions/StopSellInfo",
+          "description": "A StopSellInfo object providing stop sell related data"
+        },
+        "minQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Min quantity"
+        },
+        "maxQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max quantity"
+        },
+        "isQuantifiable": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is quantifiable"
+        },
+        "billingComponents": {
+          "type": "array",
+          "description": "Billing components",
+          "items": {
+            "$ref": "#/definitions/BillingComponent"
+          },
+          "x-ms-identifiers": []
+        },
+        "purchaseDurationDiscounts": {
+          "type": "array",
+          "description": "List of purchase duration discounts",
+          "items": {
+            "$ref": "#/definitions/PurchaseDurationDiscount"
+          },
+          "x-ms-identifiers": []
+        },
+        "isHiddenPrivateOffer": {
+          "type": "boolean",
+          "description": "A value indicating whether the plan is used as hidden private offer requiring a quote"
+        },
+        "certifications": {
+          "type": "array",
+          "description": "List of certifications",
+          "items": {
+            "$ref": "#/definitions/LinkProperties"
+          }
+        },
+        "customerInstruction": {
+          "type": "string",
+          "description": "Plan's customer instruction for purchasing"
+        },
+        "planLabels": {
+          "type": "array",
+          "description": "Plan labels",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasRI": {
+          "type": "boolean",
+          "description": "Indication whether the SKU supports reservations"
+        },
+        "skuType": {
+          "type": "string",
+          "description": "SKU type"
+        },
+        "skuTitle": {
+          "type": "string",
+          "description": "Sku title localized"
+        },
+        "location": {
+          "type": "string",
+          "description": "SKU location"
+        },
+        "armRegionName": {
+          "type": "string",
+          "description": "The Arm region name"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Applicable cloud, such as 'Global'"
+        },
+        "locationType": {
+          "type": "string",
+          "description": "The location type, such as 'Region'"
+        },
+        "region": {
+          "type": "string",
+          "description": "The region"
+        },
+        "skuGroupId": {
+          "type": "string",
+          "description": "The sku group id"
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone, such as 'Zone 1'"
+        },
+        "feature": {
+          "type": "string",
+          "description": "The feature, such as 'Spot'"
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "The service type"
+        },
+        "skuAttributes": {
+          "type": "array",
+          "description": "Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "x-ms-identifiers": []
+        },
+        "skuProperties": {
+          "$ref": "#/definitions/SkuProperties",
+          "description": "The sku properties"
+        },
+        "offeringProperties": {
+          "type": "array",
+          "description": "SKU price related properties.",
+          "items": {
+            "$ref": "#/definitions/OfferingProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "planType",
+        "isHidden",
+        "isStopSell",
+        "isQuantifiable"
+      ]
+    },
     "PlanMetadata": {
       "type": "object",
       "description": "Additional metadata",
@@ -840,7 +1104,6 @@
     },
     "PlanSummary": {
       "type": "object",
-      "description": "Returns a subset of Plan attributes",
       "properties": {
         "planId": {
           "type": "string",

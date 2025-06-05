@@ -809,6 +809,161 @@ model PlanMetadata {
 }
 
 @doc("Returns a subset of Plan attributes")
+model PlanDetails {
+  @doc("Plan id")
+  planId?: string;
+
+  @doc("Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between")
+  uniquePlanId?: string;
+
+  @doc("Display name of the plan / sku")
+  displayName?: string;
+
+  @doc("VM Architecture Type. Applicable to Virtual Machine products only")
+  vmArchitectureType?: VmArchitectureType;
+
+  @doc("Value showing whether the plan is available for purchase through CSP channel")
+  cspState?: CspState;
+
+  @doc("Expanded plan/SKU metadata.")
+  metadata?: PlanMetadata;
+
+  @doc("Alternative stack reference")
+  altStackReference?: string;
+
+  @doc("Stack type : Classic, Gen1, Gen2")
+  stackType?: string;
+
+  @doc("The alternative architecture reference")
+  altArchitectureReference?: string;
+
+  @doc("Plan CategoryIds")
+  categoryIds?: string[];
+
+  @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
+  hasProtectedArtifacts?: boolean;
+
+  @doc("The list of the pricing types for which this plan is designated")
+  pricingTypes?: PricingType[];
+
+  @doc("VM security type")
+  vmSecuritytypes?: VmSecurityType[];
+
+  @doc("The plan summary text")
+  summary?: string;
+
+  @doc("Plan / sku description")
+  description?: string;
+
+  @doc("The SKU id")
+  skuId?: string;
+
+  @doc("Managed Application or Solution template plan type")
+  planType: ProductType;
+
+  @doc("The order the plan is displayed in the 'Plans' table")
+  displayRank?: string;
+
+  @doc("Indication that the plan is accessible to restricted audience only")
+  isPrivate?: boolean;
+
+  @doc("The id")
+  id?: string;
+
+  @doc("List of availabilities for this plan")
+  availabilities?: Availability[];
+
+  @doc("What blade to open when someone wants to create a marketplace item")
+  uiDefinitionUri?: string;
+
+  @doc("Files related to the marketplace item")
+  artifacts?: Artifact[];
+
+  @doc("Version of the marketplace item")
+  version?: string;
+
+  @doc("A value indicating whether the plan is hidden")
+  isHidden: boolean;
+
+  @doc("A value indicating whether plan has been stopped from selling")
+  isStopSell: boolean;
+
+  @doc("A StopSellInfo object providing stop sell related data")
+  stopSellInfo?: StopSellInfo;
+
+  @doc("Min quantity")
+  minQuantity?: int32;
+
+  @doc("Max quantity")
+  maxQuantity?: int32;
+
+  @doc("A value indicating whether the plan is quantifiable")
+  isQuantifiable: boolean;
+
+  @doc("Billing components")
+  billingComponents?: BillingComponent[];
+
+  @doc("List of purchase duration discounts")
+  purchaseDurationDiscounts?: PurchaseDurationDiscount[];
+
+  @doc("A value indicating whether the plan is used as hidden private offer requiring a quote")
+  isHiddenPrivateOffer?: boolean;
+
+  @doc("List of certifications")
+  certifications?: LinkProperties[];
+
+  @doc("Plan's customer instruction for purchasing")
+  customerInstruction?: string;
+
+  @doc("Plan labels")
+  planLabels?: string[];
+
+  @doc("Indication whether the SKU supports reservations")
+  hasRI?: boolean;
+
+  @doc("SKU type")
+  skuType?: string;
+
+  @doc("Sku title localized")
+  skuTitle?: string;
+
+  @doc("SKU location")
+  location?: string;
+
+  @doc("The Arm region name")
+  armRegionName?: string;
+
+  @doc("Applicable cloud, such as 'Global'")
+  cloud?: string;
+
+  @doc("The location type, such as 'Region'")
+  locationType?: string;
+
+  @doc("The region")
+  region?: string;
+
+  @doc("The sku group id")
+  skuGroupId?: string;
+
+  @doc("The zone, such as 'Zone 1'")
+  zone?: string;
+
+  @doc("The feature, such as 'Spot'")
+  feature?: string;
+
+  @doc("The service type")
+  serviceType?: string;
+
+  @doc("Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)")
+  skuAttributes?: Attribute[];
+
+  @doc("The sku properties")
+  skuProperties?: SkuProperties;
+
+  @doc("SKU price related properties.")
+  offeringProperties?: OfferingProperties[];
+}
+
 model PlanSummary {
   @doc("Plan id")
   planId?: string;
@@ -882,6 +1037,12 @@ model SkuApiResponse {
 
 @doc("Plan level resources and configuration files")
 model Artifact {
+  @doc("Artifact name")
+  name?: string;
+
+  @doc("Artifact uri")
+  uri?: string;
+
   @doc("The type of the artifact")
   artifactType: ArtifactType;
 }
