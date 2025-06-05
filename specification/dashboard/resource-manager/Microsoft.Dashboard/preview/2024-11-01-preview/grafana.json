@@ -2783,17 +2783,6 @@
         }
       }
     },
-    "PrivateEndpoint": {
-      "type": "object",
-      "description": "The Private Endpoint resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ARM identifier for Private Endpoint",
-          "readOnly": true
-        }
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "The Private Endpoint Connection resource.",
@@ -2836,11 +2825,11 @@
       "description": "Properties of the PrivateEndpointConnectProperties.",
       "properties": {
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint",
           "description": "The resource of private end point."
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between service consumer and provider."
         },
         "groupIds": {
@@ -2851,7 +2840,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource.",
           "readOnly": true
         }
@@ -2859,65 +2848,6 @@
       "required": [
         "privateLinkServiceConnectionState"
       ]
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          }
-        ]
-      }
-    },
-    "PrivateEndpointServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          }
-        ]
-      }
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -2984,24 +2914,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "A collection of information about the state of the connection between service consumer and provider.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
     },
