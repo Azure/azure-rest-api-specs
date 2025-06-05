@@ -28,7 +28,53 @@ These are the global settings for the Nginx API.
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-01-preview
+tag: package-2025-03-01-preview
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - NGINX.NGINXPLUS/preview/2025-03-01-preview/openapi.json
+
+suppressions:
+  - code: GetCollectionResponseSchema
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies"]
+    reason: This is by design to avoid high bandwidth consumption as agreed with the partner
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    reason: This is by design as agreed with the partner
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    reason: This is by design as agreed with the partner
+  - code: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    reason: This is by design as agreed with the partner
+  - code: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    reason: This is by design as agreed with the partner
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze"]
+    reason: This is by design as agreed with the partner
+  - code: PostResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies"]
+    reason: This is by design as agreed with the partner
+  - code: RequiredDefaultResponse
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies"]
+    reason: This is by design as agreed with the partner
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    reason: User Assigned Managed Identity Type inline definition is automatically added to json.
 ```
 
 ### Tag: package-2024-11-01-preview
