@@ -37,7 +37,7 @@ alias VirtualMachinePath = {
 
 @armResourceOperations
 interface VirtualMachineRunCommandOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       VirtualMachinePath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -127,7 +127,7 @@ alias VirtualMachineScaleSetVMPath = {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMRunCommandOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       VirtualMachineScaleSetVMPath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -171,6 +171,7 @@ interface VirtualMachineScaleSetVMRunCommands {
    * The operation to update the VMSS VM run command.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@typespec/http/patch-implicit-optional" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMRunCommands_Update")
   update is VirtualMachineScaleSetVMRunCommandOps.CustomPatchAsync<
     VirtualMachineRunCommand,

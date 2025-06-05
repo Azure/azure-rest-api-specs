@@ -38,7 +38,7 @@ interface SharedGalleries {
   /**
    * List shared galleries by subscription id or tenant id.
    */
-  list is Azure.ResourceManager.Legacy.LegacyOperations.ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeLegacyOperations.ArmResourceListByParent<
     SharedGallery,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {

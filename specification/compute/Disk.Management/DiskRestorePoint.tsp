@@ -43,7 +43,7 @@ alias VMRestorePointPath = {
 
 @armResourceOperations
 interface DiskRestorePointsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       VMRestorePointPath,
       KeysOf<{
         ...ResourceNameParameter<

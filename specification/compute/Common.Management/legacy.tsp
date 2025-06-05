@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Legacy {
     ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
   }
 
-  interface LegacyOperations<
+  interface ComputeLegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
     ErrorType extends {} = Microsoft.Compute.CloudError
@@ -368,13 +368,6 @@ namespace Azure.ResourceManager.Legacy {
       Response,
       Error
     >;
-  }
-  /**
-   * @dev Get the provider namespace key-value pair
-   * @template Resource Optional.  The resource to get the provider namespace for.
-   */
-  model Provider<Resource extends {} = TenantActionScope> {
-    ...ProviderNamespace<Resource>;
   }
 
   alias BasePath = {
