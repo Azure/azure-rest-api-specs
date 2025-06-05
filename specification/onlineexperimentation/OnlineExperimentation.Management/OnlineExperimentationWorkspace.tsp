@@ -31,34 +31,6 @@ model OnlineExperimentationWorkspace
 }
 
 /**
- * Updatable properties of the online experimentation workspace resource.
- */
-model OnlineExperimentationWorkspacePatchProperties {
-  /**
-   * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.
-   */
-  logAnalyticsWorkspaceResourceId?: LogAnalyticsWorkspaceArmResourceId;
-
-  /**
-   * The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.
-   */
-  logsExporterStorageAccountResourceId?: StorageAccountArmResourceId;
-
-  /**
-   * The encryption configuration for the online experimentation workspace resource.
-   */
-  encryption?: ResourceEncryptionConfiguration;
-
-  /**
-   * Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.
-   * - Enabled: The resource can be accessed from the public internet.
-   * - Disabled: The resource can only be accessed from a private endpoint.
-   */
-  @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
-  publicNetworkAccess?: PublicNetworkAccessType;
-}
-
-/**
  * Partial update of an online experimentation workspace resource.
  */
 model OnlineExperimentationWorkspacePatch {
@@ -73,7 +45,31 @@ model OnlineExperimentationWorkspacePatch {
   /**
    * Updatable properties of the online experimentation workspace resource.
    */
-  properties?: OnlineExperimentationWorkspacePatchProperties;
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
+  properties?: {
+    /**
+     * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.
+     */
+    logAnalyticsWorkspaceResourceId?: LogAnalyticsWorkspaceArmResourceId;
+
+    /**
+     * The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.
+     */
+    logsExporterStorageAccountResourceId?: StorageAccountArmResourceId;
+
+    /**
+     * The encryption configuration for the online experimentation workspace resource.
+     */
+    encryption?: ResourceEncryptionConfiguration;
+
+    /**
+     * Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.
+     * - Enabled: The resource can be accessed from the public internet.
+     * - Disabled: The resource can only be accessed from a private endpoint.
+     */
+    @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
+    publicNetworkAccess?: PublicNetworkAccessType;
+  };
 }
 
 @armResourceOperations
