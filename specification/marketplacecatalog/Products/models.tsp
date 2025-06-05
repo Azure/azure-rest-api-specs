@@ -394,7 +394,7 @@ model SkuProperties {
   ram?: string;
 
   @doc("The number of virtual CPUs")
-  vcpu?: string;
+  vCpu?: string;
 
   @doc("The ARM SKU name")
   armSkuName?: string;

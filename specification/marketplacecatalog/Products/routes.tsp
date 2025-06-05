@@ -4,8 +4,6 @@ import "./models.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
-using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace Products;
 
