@@ -15,8 +15,10 @@ alias KeyVaultOperation<
  * The key vault server error.
  */
 #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
+#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
 union Error {
   null,
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
   {
     /**
      * The error code.
