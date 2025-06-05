@@ -1,0 +1,106 @@
+{
+  "operationId": "WorkloadImpacts_Create",
+  "title": "Reporting a connectivity impact",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-12-01-preview",
+    "workloadImpactName": "impact-001",
+    "resource": {
+      "properties": {
+        "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservercontext",
+        "startDateTime": "2022-06-15T05:59:46.6517821Z",
+        "endDateTime": null,
+        "impactDescription": "conection failure",
+        "impactCategory": "Resource.Connectivity",
+        "connectivity": {
+          "protocol": "TCP",
+          "port": 1443,
+          "source": {
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+          },
+          "target": {
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm2"
+          }
+        },
+        "workload": {
+          "context": "webapp/scenario1",
+          "toolset": "Other"
+        },
+        "clientIncidentDetails": {
+          "clientIncidentId": "AA123",
+          "clientIncidentSource": "Jira"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "properties": {
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservercontext",
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "conection failure",
+          "impactCategory": "Resource.Connectivity",
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 1443,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "target": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm2"
+            }
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          },
+          "clientIncidentDetails": {
+            "clientIncidentId": "AA123",
+            "clientIncidentSource": "Jira"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact-001",
+        "name": "impact-001",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "properties": {
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservercontext",
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2022-06-15T06:01:46.6517821Z",
+          "startDateTime": "2022-06-15T05:59:46.6517821Z",
+          "endDateTime": null,
+          "impactDescription": "conection failure",
+          "impactCategory": "Resource.Connectivity",
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 1443,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "target": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceSub/providers/Microsoft.compute/virtualmachines/vm2"
+            }
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          },
+          "clientIncidentDetails": {
+            "clientIncidentId": "AA123",
+            "clientIncidentSource": "Jira"
+          }
+        }
+      }
+    }
+  }
+}

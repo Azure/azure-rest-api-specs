@@ -144,7 +144,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -161,19 +161,6 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.GuestConfiguration
-  output-folder: $(csharp-sdks-folder)/guestconfiguration/Microsoft.Azure.Management.GuestConfiguration/src/Generated
-  clear-output-folder: true
-```
 
 
 

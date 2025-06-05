@@ -357,6 +357,30 @@ union AttestHealthStatusEnum {
   string,
 }
 
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of hardware platform from attestation token.")
+union AttestHWPlatformEnum {
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
+  SEVSNP: "SEVSNP",
+
+  @doc("AttestHWPlatform is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Defines type of managed disk security encryption type from attestation token.")
+union AttestDiskSecurityEncryptionTypeEnum {
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
+  NonPersistedTPM: "NonPersistedTPM",
+
+  @doc("Disk security encryption type is unknown")
+  Unknown: "Unknown",
+
+  string,
+}
+
 @doc("Defines the different types of operations for guest agent.")
 union ProvisioningAction {
   @doc("Install guest agent")
@@ -378,6 +402,15 @@ union OperatingSystemTypes {
 
   @doc("Linux operating system")
   Linux: "Linux",
+
+  string,
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("Encryption type of the managed disk enum.")
+union SecurityEncryptionType {
+  @doc("Non-persisted TPM encryption type")
+  NonPersistedTPM: "NonPersistedTPM",
 
   string,
 }
@@ -430,6 +463,18 @@ model LogicalNetworkArmReference {
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l2Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/l3Networks";
+    },
+    {
+      type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
   ]>;
 }
@@ -457,7 +502,7 @@ model StorageContainerArmReference {
 @doc("The ARM ID for a Gallery Image.")
 model ImageArmReference {
   @doc("The ARM ID for an image resource used by the virtual machine instance.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/galleryImages";
@@ -501,6 +546,10 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
+  @added(Versions.v2024_08_01_preview)
+  @doc("The credentials used to login to the image repository that has access to the specified image")
+  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
+
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -508,11 +557,11 @@ model GalleryImageProperties {
   version?: GalleryImageVersion;
 
   @doc("Provisioning state of the gallery image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of gallery images")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: GalleryImageStatus;
 
   @added(Versions.v2024_05_01_preview)
@@ -522,6 +571,17 @@ model GalleryImageProperties {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
     }
   ]>;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The credentials used to login to the image repository that has access to the specified image")
+model VmImageRepositoryCredentials {
+  @doc("Username for accessing image repository")
+  username: string;
+
+  @doc("Password for accessing image repository")
+  @secret
+  password: string;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -563,7 +623,7 @@ model GalleryImageVersionStorageProfile {
 model GalleryDiskImage {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("This property indicates the size of the VHD to be created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sizeInMB?: int64;
 }
 
@@ -630,18 +690,18 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @doc("Subnet - list of subnets under the logical network")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("name of the network switch to be used for VMs")
   vmSwitchName?: string;
 
   @doc("The observed state of logical networks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: LogicalNetworkStatus;
 }
 
@@ -675,7 +735,7 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
@@ -685,7 +745,7 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -695,15 +755,15 @@ model SubnetProperties {
 @doc("Route table resource.")
 model RouteTable {
   @doc("A unique read-only string that changes whenever the resource is updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   @doc("Resource name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Resource type.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   #suppress "deprecated" "LEGACY flattening"
@@ -715,13 +775,13 @@ model RouteTable {
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   routes?: Route[];
 }
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattend property"
+  #suppress "deprecated" "Legacy flattened property"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
@@ -765,28 +825,56 @@ model IPPool {
 @doc("IP Pool info")
 model IPPoolInfo {
   @doc("Number of IP addresses allocated from the IP Pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   used?: string;
 
   @doc("Number of IP addresses available in the IP Pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   available?: string;
 }
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to logical networks that are currently using this NSG")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnets?: LogicalNetworkArmReference[];
 
   @doc("The provisioning state of the network security group resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Network Security Group")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_02_01_preview)
+  status?: NetworkSecurityGroupStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("The observed state of network security group")
+model NetworkSecurityGroupStatus {
+  @doc("NetworkSecurityGroup provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("network security group provisioning status")
+  provisioningStatus?: NetworkSecurityGroupStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("network security group provisioning status")
+model NetworkSecurityGroupStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the network security group")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the network security group [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("Security rule resource.")
@@ -819,14 +907,14 @@ model SecurityRuleProperties {
   direction: SecurityRuleDirection;
 
   @doc("Provisioning state of the SR")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -835,12 +923,16 @@ model NetworkInterfaceProperties {
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is a existing local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the network interface.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of network interfaces")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: NetworkInterfaceStatus;
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
@@ -851,7 +943,7 @@ model NetworkInterfaceProperties {
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   name?: string;
 
@@ -864,12 +956,12 @@ model IPConfiguration {
 @doc("InterfaceIPConfigurationPropertiesFormat properties of IP configuration.")
 model IPConfigurationProperties {
   @doc("Gateway for network interface")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gateway?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("prefixLength for network interface")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   prefixLength?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -963,11 +1055,11 @@ model MarketplaceGalleryImageProperties {
   version?: GalleryImageVersion;
 
   @doc("Provisioning state of the marketplace gallery image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of marketplace gallery images")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: MarketplaceGalleryImageStatus;
 }
 
@@ -1017,6 +1109,20 @@ model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: NetworkInterfacesUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model NetworkInterfacesUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("DNS Settings for the interface")
+  dnsSettings?: InterfaceDNSSettings;
 }
 
 @doc("Tags object for patch operations.")
@@ -1032,11 +1138,11 @@ model StorageContainerProperties {
   path: string;
 
   @doc("Provisioning state of the storage container.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of storage containers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: StorageContainerStatus;
 }
 
@@ -1106,8 +1212,12 @@ model VirtualHardDiskProperties {
   @doc("The format of the actual VHD file [vhd, vhdx]")
   diskFileFormat?: DiskFileFormat;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the virtual hard disk.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
@@ -1118,7 +1228,7 @@ model VirtualHardDiskProperties {
   ]>;
 
   @doc("The observed state of virtual hard disks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: VirtualHardDiskStatus;
 }
 
@@ -1157,6 +1267,16 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
+  progressPercentage?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1168,6 +1288,20 @@ model VirtualHardDiskUploadStatus {
 
   @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
   status?: Status;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("The progress of the operation in percentage")
+  @minValue(0)
+  @maxValue(100)
+  progressPercentage?: int64;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("VirtualHardDisk upload error code")
+  errorCode?: string;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Descriptive upload error message")
+  errorMessage?: string;
 }
 
 @doc("The virtual hard disk resource patch definition.")
@@ -1175,6 +1309,18 @@ model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2025_02_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: VirtualHardDisksUpdateProperties;
+}
+
+@added(Versions.v2025_02_01_preview)
+@doc("Defines the resource properties for the update.")
+model VirtualHardDisksUpdateProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
+  @doc("Size of the disk in GB")
+  diskSizeGB?: int64;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -1204,6 +1350,10 @@ model VirtualMachineInstanceProperties {
   @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
   hardwareProfile?: VirtualMachineInstancePropertiesHardwareProfile;
 
+  @added(Versions.v2025_04_01_preview)
+  @doc("PlacementProfile - Specifies the placement related settings for the virtual machine.")
+  placementProfile?: VirtualMachineInstancePropertiesPlacementProfile;
+
   @doc("NetworkProfile - describes the network configuration the virtual machine instance")
   networkProfile?: VirtualMachineInstancePropertiesNetworkProfile;
 
@@ -1219,27 +1369,42 @@ model VirtualMachineInstanceProperties {
   @doc("HTTP Proxy configuration for the VM.")
   httpProxyConfig?: HttpProxyConfiguration;
 
+  @added(Versions.v2025_02_01_preview)
+  @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
+
   @doc("Provisioning state of the virtual machine instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 
   @doc("The virtual machine instance view.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   instanceView?: VirtualMachineInstanceView;
 
   @doc("The observed state of virtual machine instances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: VirtualMachineInstanceStatus;
 
   @doc("Guest agent install status.")
   guestAgentInstallStatus?: GuestAgentInstallStatus;
 
   @doc("Unique identifier for the vm resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmId?: string;
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
+  @added(Versions.v2025_04_01_preview)
+  @doc("Unique identifier for the Hyper-V VM resource.")
+  @visibility(Lifecycle.Read)
+  hyperVVmId?: string;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("Name of the host node that the VM is on.")
+  @visibility(Lifecycle.Read)
+  hostNodeName?: string;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
@@ -1260,8 +1425,18 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
+}
+
+@added(Versions.v2025_04_01_preview)
+@doc("PlacementProfile - Specifies the placement related settings for the virtual machine.")
+model VirtualMachineInstancePropertiesPlacementProfile {
+  @doc("The zone in which the VM should be placed in.")
+  zone?: string;
+
+  @doc("Specifies whether VM can only failover strictly within the zone it was placed in")
+  strictPlacementPolicy?: boolean;
 }
 
 @doc("Dynamic memory config")
@@ -1296,14 +1471,14 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
 @doc("OsProfile - describes the configuration of the operating system and sets login data")
 model VirtualMachineInstancePropertiesOsProfile {
   @doc("AdminPassword - admin password")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @secret
   adminPassword?: string;
 
@@ -1340,7 +1515,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @extension("x-ms-identifiers", ["path"])
+  @identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1349,7 +1524,7 @@ model SshPublicKey {
   @doc("Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys")
   path?: string;
 
-  @doc("SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://docs.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
+  @doc("SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure]https://learn.microsoft.com/azure/virtual-machines/linux/create-ssh-keys-detailed).")
   keyData?: string;
 }
 
@@ -1398,7 +1573,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
   dataDisks?: VirtualHardDiskArmReference[];
 
   @doc("Which Image to use for the virtual machine instance")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   imageReference?: ImageArmReference;
 
   @doc("VHD to attach as OS disk")
@@ -1417,6 +1592,25 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk parameters.")
+  managedDisk?: VirtualMachineInstanceManagedDiskParameters;
+}
+
+@added(Versions.v2024_08_01_preview)
+@doc("The parameters of a managed disk.")
+model VirtualMachineInstanceManagedDiskParameters {
+  @doc("Specifies the security profile for the managed disk.")
+  securityProfile?: VMDiskSecurityProfile;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
+@added(Versions.v2024_08_01_preview)
+@doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
+model VMDiskSecurityProfile {
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
+  securityEncryptionType?: SecurityEncryptionType;
 }
 
 @doc("HTTP Proxy configuration for the VM.")
@@ -1448,7 +1642,7 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1498,35 +1692,35 @@ model VirtualMachineInstanceStatusProvisioningStatus {
 @doc("Defines the status of a guest agent installation.")
 model GuestAgentInstallStatus {
   @doc("Specifies the VM's unique SMBIOS ID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmUuid?: string;
 
   @doc("The installation status of the hybrid machine agent installation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: StatusTypes;
 
   @doc("The time of the last status change.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStatusChange?: utcDateTime;
 
   @doc("The hybrid machine agent full version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   agentVersion?: string;
 
   @doc("Details about the error state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
 @doc("Identity for the resource.")
 model Identity {
   @doc("The principal ID of resource identity. The value must be an UUID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   @doc("The tenant ID of resource. The value must be an UUID.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   @doc("The identity type.")
@@ -1572,7 +1766,7 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
@@ -1585,7 +1779,7 @@ model StorageProfileUpdate {
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -1632,47 +1826,57 @@ model HybridIdentityMetadataProperties {
   publicKey?: string;
 
   @doc("Identity for the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   identity?: Identity;
 
   @doc("Provisioning state of the virtual machine instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Defines the attestation status properties")
 model AttestationStatusProperties {
   @doc("The status of whether secure boot is enabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attestSecureBootEnabled?: AttestSecureBootPropertyEnum = AttestSecureBootPropertyEnum.Unknown;
 
   @doc("The status of whether attestation certificate is validated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attestationCertValidated?: AttestCertPropertyEnum = AttestCertPropertyEnum.Unknown;
 
   @doc("The status of whether the list of boot integrity properties is validated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bootIntegrityValidated?: AttestBootIntegrityPropertyEnum = AttestBootIntegrityPropertyEnum.Unknown;
 
   @doc("kernel version string for Linux VM.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   linuxKernelVersion?: string;
 
   @doc("The health status of attestation validation and parsing")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthStatus?: AttestHealthStatusEnum = AttestHealthStatusEnum.Unknown;
 
   @doc("The time stamp of the last time attestation token is validated by relying party service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timestamp?: string;
 
   @doc("The error message of attestation validation and parsing")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
+
+  @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2024_08_01_preview)
+  attestHardwarePlatform?: AttestHWPlatformEnum;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
+  @visibility(Lifecycle.Read)
+  attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
 }
 
 @doc("Defines the resource properties.")
@@ -1684,11 +1888,11 @@ model GuestAgentProperties {
   provisioningAction?: ProvisioningAction;
 
   @doc("The guest agent status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
 }
 
@@ -1698,7 +1902,7 @@ model GuestCredential {
   username?: string;
 
   @doc("The password to connect with the guest.")
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password?: string;
 }

@@ -1,0 +1,45 @@
+parameters:
+  - name: SdkRepoCommit
+    type: string
+    default: 'main'
+    displayName: 'SDK repository commit'
+  - name: ConfigType
+    type: string
+    values:
+      - 'TypeSpec'
+      - 'OpenAPI'
+    default: 'TypeSpec'
+    displayName: 'API specification type'
+  - name: ConfigPath
+    type: string
+    default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
+    displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
+  - name: ApiVersion
+    type: string
+    default: ''
+    displayName: 'API version'
+  - name: SdkReleaseType
+    type: string
+    values:
+      - 'beta'
+      - 'stable'
+    default: 'beta'
+    displayName: 'SDK release type'
+  - name: SkipPullRequestCreation
+    type: boolean
+    default: false
+    displayName: 'Skip SDK pull request creation'
+    
+trigger: none
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+  parameters:
+    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+    SdkRepoUrl: $(SdkRepoUrl)
+    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    ConfigType: ${{ parameters.ConfigType }}
+    ConfigPath: ${{ parameters.ConfigPath }}
+    ApiVersion: ${{ parameters.ApiVersion }}
+    SdkReleaseType: ${{ parameters.SdkReleaseType }}
+    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}

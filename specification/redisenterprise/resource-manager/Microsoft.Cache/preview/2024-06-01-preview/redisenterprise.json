@@ -2033,19 +2033,32 @@
       "type": "object",
       "description": "Parameters for reconfiguring active geo-replication, of an existing database that was previously unlinked from a replication group.",
       "required": [
-        "groupNickname",
-        "linkedDatabases"
+        "geoReplication"
       ],
       "properties": {
-        "groupNickname": {
-          "type": "string",
-          "description": "The name of the group of linked database resources. This should match the existing replication group name."
-        },
-        "linkedDatabases": {
-          "type": "array",
-          "description": "The resource IDs of the databases that are expected to be linked and included in the replication group. This parameter is used to validate that the linking is to the expected (unlinked) part of the replication group, if it is splintered.",
-          "items": {
-            "$ref": "#/definitions/LinkedDatabase"
+        "geoReplication": {
+          "type": "object",
+          "description": "Properties to configure geo replication for this database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "properties": {
+            "groupNickname": {
+              "type": "string",
+              "description": "The name of the group of linked database resources. This should match the existing replication group name.",
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "linkedDatabases": {
+              "type": "array",
+              "description": "The resource IDs of the databases that are expected to be linked and included in the replication group. This parameter is used to validate that the linking is to the expected (unlinked) part of the replication group, if it is splintered.",
+              "items": {
+                "$ref": "#/definitions/LinkedDatabase"
+              }
+            }
           }
         }
       }

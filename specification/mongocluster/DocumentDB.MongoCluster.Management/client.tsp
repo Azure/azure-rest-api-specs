@@ -8,7 +8,7 @@ using Microsoft.DocumentDB;
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
 @@clientName(Microsoft.DocumentDB,
   "MongoClusterManagementClient",
-  "javascript"
+  "javascript,java"
 );
 @@access(Operations.list, Access.internal, "csharp");
 @@clientName(CheckNameAvailabilityResponse,
@@ -58,7 +58,10 @@ using Microsoft.DocumentDB;
   "MongoClusterNameUnavailableReason",
   "csharp"
 );
-@@clientName(PublicNetworkAccess, "MongoClusterPublicNetworkAccess", "csharp");
+@@clientName(Microsoft.DocumentDB.PublicNetworkAccess,
+  "MongoClusterPublicNetworkAccess",
+  "csharp"
+);
 @@clientName(FirewallRule, "MongoClusterFirewallRule", "csharp");
 @@clientName(FirewallRuleProperties,
   "MongoClusterFirewallRuleProperties",

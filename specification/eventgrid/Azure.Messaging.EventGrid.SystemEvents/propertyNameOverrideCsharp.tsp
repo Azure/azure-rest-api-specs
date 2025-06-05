@@ -2,11 +2,11 @@ import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
 import "./Microsoft.Devices/IotHub.tsp";
-import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
+import "./Microsoft.ResourceNotifications/HealthResources.tsp";
+import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
@@ -189,7 +189,17 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
+  "channelType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingContentType,
+  "contentType",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
+  "formatType",
   "csharp"
 );
 
@@ -236,5 +246,4 @@ using Microsoft.EventGrid.SystemEvents;
 );
 
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
-@@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");

@@ -17,7 +17,7 @@ model SAPVirtualInstance is TrackedResource<SAPVirtualInstanceProperties> {
     SegmentName = "sapVirtualInstances",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9]{2}$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...SAPVirtualInstanceIdentityProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SAP is used for representing the company product."
@@ -36,7 +36,7 @@ interface SAPVirtualInstances {
   /**
    * Updates a Virtual Instance for SAP solutions resource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SAPVirtualInstance,
     UpdateSAPVirtualInstanceRequest
@@ -60,32 +60,26 @@ interface SAPVirtualInstances {
   /**
    * Starts the SAP application, that is the Central Services instance and Application server instances.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionAsync<
     SAPVirtualInstance,
-    {
-      @doc("The Virtual Instance for SAP solutions resource start request body.")
-      @body
-      body?: StartRequest;
-    },
+    StartRequest,
     Foundations.OperationStatusResult
   >;
 
   /**
    * Stops the SAP Application, that is the Application server instances and Central Services instance.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionAsync<
     SAPVirtualInstance,
-    {
-      @doc("The Virtual Instance for SAP solutions resource stop request body.")
-      @body
-      body?: StopRequest;
-    },
+    StopRequest,
     Foundations.OperationStatusResult
   >;
 
   /**
    * Gets the sizing recommendations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSizingRecommendations")
   getSizingRecommendations is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPSizingRecommendationRequest,
@@ -95,6 +89,8 @@ interface SAPVirtualInstances {
   /**
    * Get a list of SAP supported SKUs for ASCS, Application and Database tier.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeSapSupportedSku")
   getSapSupportedSku is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPSupportedSkusRequest,
@@ -104,6 +100,8 @@ interface SAPVirtualInstances {
   /**
    * Get the SAP Disk Configuration Layout prod/non-prod SAP System.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeDiskConfigurations")
   getDiskConfigurations is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPDiskConfigurationsRequest,
@@ -113,6 +111,8 @@ interface SAPVirtualInstances {
   /**
    * Get the recommended SAP Availability Zone Pair Details for your region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Added Operation ID as it determines the PowerShell verb used."
+  @operationId("SapVirtualInstances_InvokeAvailabilityZoneDetails")
   getAvailabilityZoneDetails is VirtualResourceActionSync<
     SAPVirtualInstanceMetadata,
     SAPAvailabilityZoneDetailsRequest,

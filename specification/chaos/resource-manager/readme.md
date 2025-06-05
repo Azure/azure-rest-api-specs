@@ -24,13 +24,78 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the chaos.
 
-``` yaml
+```yaml
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-preview-2024-03
+tag: package-2025-01
 ```
 
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Chaos/stable/2025-01-01/openapi.json
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.Chaos/preview/2024-11-01-preview/openapi.json
+suppressions:
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].get
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{parentProviderNamespace}/{parentResourceType}/{parentResourceName}/providers/Microsoft.Chaos/targets/{targetName}"].put
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: TrackedResourcePatchOperation
+    from: openapi.json
+    where: $.definitions.Target
+    reason: Not actually a tracked resource, but location property is required to avoid breaking changes
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.Target.properties.properties
+    reason: Existing GA-exposed resource which relies on additionalProperties currently. Our RP will release a V2 in the future.
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    reason: already used in GA api version, fixing it will cause breaking change
+```
 
 ### Tag: package-preview-2024-03
 
@@ -84,11 +149,12 @@ directive:
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
+
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-01'
+```yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Chaos/stable/2024-01-01/capabilities.json
   - Microsoft.Chaos/stable/2024-01-01/capabilityTypes.json
@@ -140,7 +206,7 @@ directive:
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11'
+```yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.Chaos/stable/2023-11-01/capabilities.json
   - Microsoft.Chaos/stable/2023-11-01/capabilityTypes.json
@@ -192,7 +258,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-10'
+```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Chaos/preview/2023-10-27-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-10-27-preview/capabilityTypes.json
@@ -245,7 +311,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-09'
+```yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Chaos/preview/2023-09-01-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-09-01-preview/capabilityTypes.json
@@ -297,7 +363,7 @@ directive:
 
 These settings apply only when `--tag=package-2023-04-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-04-15-preview'
+```yaml $(tag) == 'package-2023-04-15-preview'
 input-file:
   - Microsoft.Chaos/preview/2023-04-15-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-04-15-preview/capabilityTypes.json
@@ -311,7 +377,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-04-01-preview'
+```yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilityTypes.json
@@ -325,7 +391,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-10-01-preview'
+```yaml $(tag) == 'package-2022-10-01-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -345,7 +411,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-07-01-preview'
+```yaml $(tag) == 'package-2022-07-01-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -365,7 +431,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-09-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-09-15-preview'
+```yaml $(tag) == 'package-2021-09-15-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -390,12 +456,11 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -413,17 +478,13 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.target
@@ -436,7 +497,7 @@ directive:
     where: $.definitions.target
     from: targets.json
     reason: |-
-      we defined the toplevelresourcelistbysubscription here:
+      we defined the the top level resource list here:
 
       https://github.com/mariohdez/azure-rest-api-specs/blob/5a870f3163ae6e9cc5ed33d40cfff61764050213/specification/chaos/resource-manager/Microsoft.Chaos/preview/2021-09-15-preview/targets.json#L37
   - suppress: EnumInsteadOfBoolean

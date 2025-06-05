@@ -26,7 +26,7 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 
   ...ManagedServiceIdentityProperty;
@@ -44,73 +44,50 @@ model InstanceProperties {
   description?: string;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The Azure IoT Operations version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  schemaRegistryNamespace: string;
+  schemaRegistryRef: SchemaRegistryRef;
 
-  @doc("The configuration for components of the AIO Instance.")
-  components?: Components = #{};
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("The features of the AIO Instance.")
+  @added(Versions.`2025-04-01`)
+  features?: Record<InstanceFeature>;
 }
 
-@doc("The configuration for components of the AIO Instance.")
-model Components {
-  @doc("The properties of the ADR instance.")
-  adr?: AdrProperties = #{ state: OperationalMode.Enabled };
+@doc("The features of the AIO Instance.")
+@added(Versions.`2025-04-01`)
+model InstanceFeature {
+  @doc("The state of the feature.")
+  mode?: InstanceFeatureMode;
 
-  @doc("The properties of the AKRI instance.")
-  akri?: AkriInstanceProperties = #{ state: OperationalMode.Enabled };
-
-  @doc("The properties of the connectors instance.")
-  connectors?: ConnectorInstanceProperties = #{
-    state: OperationalMode.Enabled,
-  };
-
-  @doc("The properties of the dataflows instance.")
-  dataflows?: DataflowInstanceProperties = #{ state: OperationalMode.Enabled };
-
-  @doc("The properties of the device provisioning instance.")
-  schemaRegistry?: SchemaRegistryInstanceProperties = #{
-    state: OperationalMode.Enabled,
-  };
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("The settings of the feature.")
+  settings?: Record<OperationalMode>;
 }
 
-@doc("The properties of an ADR instance.")
-model AdrProperties {
-  @doc("This determines if the ADR service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-@doc("The properties of an AKRI instance.")
-model AkriInstanceProperties {
-  @doc("This determines if the AKRI service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
+@doc("The enum defining mode of a feature.")
+@added(Versions.`2025-04-01`)
+union InstanceFeatureMode {
+  string,
+
+  @doc("Opt in to enable a stable feature")
+  "Stable",
+
+  @doc("Opt in to enable a preview feature")
+  "Preview",
+
+  @doc("Opt out of a feature")
+  "Disabled",
 }
 
-@doc("The properties of a  Connector instance.")
-model ConnectorInstanceProperties {
-  @doc("This determines if the Connector service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-
-@doc("The properties of an Dataflow instance.")
-model DataflowInstanceProperties {
-  @doc("This determines if the Dataflow service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
-}
-
-@doc("The properties of a Schema Registry instance.")
-model SchemaRegistryInstanceProperties {
-  @doc("This determines if the Schema Registry service is enabled.")
-  @visibility("create", "read")
-  state: OperationalMode;
+@doc("The reference to the Schema Registry for this AIO Instance.")
+model SchemaRegistryRef {
+  @doc("The resource ID of the Schema Registry.")
+  resourceId: SchemaRegistryID;
 }

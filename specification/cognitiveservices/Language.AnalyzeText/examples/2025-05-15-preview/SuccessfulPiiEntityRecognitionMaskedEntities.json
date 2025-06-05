@@ -1,0 +1,82 @@
+{
+  "operationId": "AnalyzeText",
+  "title": "SuccessfulPiiEntityRecognitionMaskedEntitiesRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "PiiEntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "redactionPolicy": {
+          "policyKind": "entityMask"
+        }
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "language": "en",
+            "text": "My name is John Doe My phone number is 424 878 9192"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "PiiEntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "id": "1",
+              "redactedText": "My name is [PERSON_1] My phone number is [PHONENUMBER_1]",
+              "entities": [
+                {
+                  "category": "Person",
+                  "type": "Person",
+                  "tags": [
+                    {
+                      "name": "Person",
+                      "confidenceScore": 0.65
+                    }
+                  ],
+                  "length": 8,
+                  "offset": 11,
+                  "mask": "[Person_1]",
+                  "maskOffset": 11,
+                  "maskLength": 9,
+                  "text": "John Doe",
+                  "confidenceScore": 0.65
+                },
+                {
+                  "category": "PhoneNumber",
+                  "type": "PhoneNumber",
+                  "tags": [
+                    {
+                      "name": "PhoneNumber",
+                      "confidenceScore": 0.8
+                    }
+                  ],
+                  "length": 12,
+                  "offset": 36,
+                  "mask": "[PHONENUMBER_1]",
+                  "maskOffset": 41,
+                  "maskLength": 13,
+                  "text": "424 878 9192",
+                  "confidenceScore": 0.8
+                }
+              ],
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2021-01-15"
+        }
+      }
+    }
+  }
+}

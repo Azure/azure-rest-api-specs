@@ -30,6 +30,12 @@ union OnYourDataVectorizationSourceType {
     Currently only supported by Elasticsearch®.
     """)
   modelId: "model_id",
+
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("""
+    Represents the integrated vectorizer defined within the search resource.
+    """)
+  integrated: "integrated",
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -91,6 +97,16 @@ model OnYourDataModelIdVectorizationSource
   @doc("The embedding model ID build inside the search service. Currently only supported by Elasticsearch®.")
   @encodedName("application/json", "model_id")
   modelId: string;
+}
+
+@added(ServiceApiVersions.v2024_08_01_Preview)
+@doc("""
+  Represents the integrated vectorizer defined within the search resource.
+  """)
+model OnYourDataIntegratedVectorizationSource
+  extends OnYourDataVectorizationSource {
+  /** The type discriminator. ALways 'integrated'. */
+  type: OnYourDataVectorizationSourceType.integrated;
 }
 
 /** The authentication types supported with Azure OpenAI On Your Data vector search. */

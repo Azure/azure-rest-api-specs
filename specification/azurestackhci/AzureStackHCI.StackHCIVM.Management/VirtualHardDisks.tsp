@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -21,7 +22,7 @@ model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @path
   @key("virtualHardDiskName")
   @segment("virtualHardDisks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The extendedLocation of the resource.")
@@ -42,7 +43,16 @@ interface VirtualHardDisks {
   >;
 
   @doc("The operation to update a virtual hard disk.")
-  update is ArmTagsPatchAsync<VirtualHardDisk>;
+  @removed(Versions.v2025_02_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_02_01_preview, "update")
+  updateOld is ArmTagsPatchAsync<VirtualHardDisk>;
+
+  @doc("The operation to update a virtual hard disk.")
+  @patch(#{ implicitOptionality: false })
+  @added(Versions.v2025_02_01_preview)
+  @sharedRoute
+  update is ArmCustomPatchAsync<VirtualHardDisk, VirtualHardDisksUpdateRequest>;
 
   @doc("The operation to delete a virtual hard disk.")
   delete is ArmResourceDeleteWithoutOkAsync<VirtualHardDisk>;
@@ -52,4 +62,12 @@ interface VirtualHardDisks {
 
   @doc("Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.")
   listAll is ArmListBySubscription<VirtualHardDisk>;
+
+  @added(Versions.v2024_08_01_preview)
+  @doc("The operation to upload a virtual hard disk.")
+  upload is ArmResourceActionAsync<
+    VirtualHardDisk,
+    VirtualHardDiskUploadRequest,
+    VirtualHardDiskUploadResponse
+  >;
 }
