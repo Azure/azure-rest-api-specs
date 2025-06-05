@@ -1,9 +1,9 @@
 import semver from "semver";
 import { describe, expect, it } from "vitest";
 import { execFile, execNpm, execNpmExec, isExecError } from "../src/exec.js";
-import { ConsoleLogger } from "../src/logger.js";
+import { debugLogger } from "../src/logger.js";
 
-const options = { logger: new ConsoleLogger(/*debug*/ true) };
+const options = { logger: debugLogger };
 
 describe("execFile", () => {
   const file = "node";
