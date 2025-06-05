@@ -960,42 +960,46 @@
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "properties": {
-          "type": "object",
-          "description": "Updatable properties of the online experimentation workspace resource.",
-          "properties": {
-            "logAnalyticsWorkspaceResourceId": {
-              "type": "string",
-              "format": "arm-id",
-              "description": "The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.",
-              "x-ms-arm-id-details": {
-                "allowedResources": [
-                  {
-                    "type": "Microsoft.OperationalInsights/workspaces"
-                  }
-                ]
+          "$ref": "#/definitions/OnlineExperimentationWorkspacePatchProperties",
+          "description": "Updatable properties of the online experimentation workspace resource."
+        }
+      }
+    },
+    "OnlineExperimentationWorkspacePatchProperties": {
+      "type": "object",
+      "description": "Updatable properties of the online experimentation workspace resource.",
+      "properties": {
+        "logAnalyticsWorkspaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
               }
-            },
-            "logsExporterStorageAccountResourceId": {
-              "type": "string",
-              "format": "arm-id",
-              "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.",
-              "x-ms-arm-id-details": {
-                "allowedResources": [
-                  {
-                    "type": "Microsoft.Storage/storageAccounts"
-                  }
-                ]
-              }
-            },
-            "encryption": {
-              "$ref": "#/definitions/ResourceEncryptionConfiguration",
-              "description": "The encryption configuration for the online experimentation workspace resource."
-            },
-            "publicNetworkAccess": {
-              "$ref": "#/definitions/PublicNetworkAccessType",
-              "description": "Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.\n- Enabled: The resource can be accessed from the public internet.\n- Disabled: The resource can only be accessed from a private endpoint."
-            }
+            ]
           }
+        },
+        "logsExporterStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. online experimentation workspace uses it generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experimentation workspace resource."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccessType",
+          "description": "Public Network Access Control for the online experimentation resource. Defaults to Enabled if set to null.\n- Enabled: The resource can be accessed from the public internet.\n- Disabled: The resource can only be accessed from a private endpoint."
         }
       }
     },

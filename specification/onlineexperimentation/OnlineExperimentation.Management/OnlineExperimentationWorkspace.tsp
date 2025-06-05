@@ -31,21 +31,9 @@ model OnlineExperimentationWorkspace
 }
 
 /**
- * Partial update of an online experimentation workspace resource.
- */
-model OnlineExperimentationWorkspacePatch {
-  ...ManagedServiceIdentityProperty;
-  ...Azure.ResourceManager.Foundations.TagsUpdateModel<OnlineExperimentationWorkspace>;
-
-  /**
-   * The SKU (Stock Keeping Unit) assigned to this resource.
-   */
-  sku?: OnlineExperimentationWorkspaceSku;
-
-  /**
    * Updatable properties of the online experimentation workspace resource.
    */
-  properties?: {
+model OnlineExperimentationWorkspacePatchProperties {
     /**
      * The resource identifier of the Log Analytics workspace which online experimentation workspace uses for generating experiment analysis results.
      */
@@ -68,7 +56,24 @@ model OnlineExperimentationWorkspacePatch {
      */
     @added(Microsoft.OnlineExperimentation.Versions.v2025_08_01_preview)
     publicNetworkAccess?: PublicNetworkAccessType;
-  };
+  }
+
+/**
+ * Partial update of an online experimentation workspace resource.
+ */
+model OnlineExperimentationWorkspacePatch {
+  ...ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<OnlineExperimentationWorkspace>;
+
+  /**
+   * The SKU (Stock Keeping Unit) assigned to this resource.
+   */
+  sku?: OnlineExperimentationWorkspaceSku;
+
+  /**
+   * Updatable properties of the online experimentation workspace resource.
+   */
+  properties?: OnlineExperimentationWorkspacePatchProperties;
 }
 
 @armResourceOperations

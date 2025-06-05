@@ -1401,6 +1401,7 @@ model JobModelCustomProperties {
    * Gets or sets any custom properties of the affected object.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
   @visibility(Lifecycle.Read)
   affectedObjectDetails?: {
     description?: string;
