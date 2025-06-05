@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.PortalServices;
 
+@armResourceOperations
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Type of Copilot Connector.")
