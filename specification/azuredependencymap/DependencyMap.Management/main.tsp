@@ -24,6 +24,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
+
+  /** 2025-05-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -103,9 +108,13 @@ interface Maps {
   >;
   @doc("Export dependencies")
   @action("exportDependencies")
-  exportDependencies is ArmResourceActionNoResponseContentAsync<
+  exportDependencies is ArmResourceActionAsync<
     MapsResource,
-    ExportDependenciesRequest
+    ExportDependenciesRequest,
+    ExportDependenciesOperationResult,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -183,10 +192,14 @@ model GetConnectionsForProcessOnFocusedMachineRequest {
 @doc("ExportDependencies request model")
 model ExportDependenciesRequest {
   @doc("Machine arm id")
-  focusedMachineId: string;
+  focusedMachineId?: string;
 
   @doc("Filters for ExportDependencies")
   filters?: DependencyMapVisualizationFilter;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of Appliance Names")
+  applianceNameList?: string[];
 }
 
 @doc("A Discovery Source resource")
@@ -231,6 +244,27 @@ union SourceType {
   OffAzure: "OffAzure",
 
   string,
+}
+
+@doc("Model representing the result of the export dependencies asynchronous operation.")
+model ExportDependenciesOperationResult {
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("Properties for export dependencies. These should only be set if the status is Succeeded.")
+  properties?: ExportDependenciesResultProperties;
+}
+
+@doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
+model ExportDependenciesResultProperties {
+  @doc("The SAS URI of the blob containing the exported dependencies data.")
+  exportedDataSasUri?: string;
+
+  @doc("A status message returned by the service with additional context about the export dependencies operation.")
+  statusMessage?: string;
 }
 
 @armResourceOperations
