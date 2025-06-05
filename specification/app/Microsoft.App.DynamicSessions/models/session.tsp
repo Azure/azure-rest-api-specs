@@ -2,9 +2,11 @@ import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
+@added(Versions.v2025_02_02_preview)
 @doc("The session resource.")
 model Session {
   @doc("The identifier of the session.")
@@ -23,6 +25,7 @@ model Session {
   etag: eTag;
 }
 
+@added(Versions.v2025_02_02_preview)
 @doc("The sessions list response.")
 model SessionsListResponse {
   @doc("The list of sessions.")

@@ -2,9 +2,11 @@ import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
+@added(Versions.v2025_02_02_preview)
 @doc("SessionPool Metadata.")
 model SessionPoolMetadataResponse {
   @doc("List of runtimes.")
@@ -23,6 +25,7 @@ model SessionPoolMetadataResponse {
   jupyterKernel: JupyterKernel;
 }
 
+@added(Versions.v2025_02_02_preview)
 @doc("Runtime information.")
 model Runtime {
   @doc("Name of the runtime.")
@@ -32,6 +35,7 @@ model Runtime {
   version: string;
 }
 
+@added(Versions.v2025_02_02_preview)
 @doc("Package information.")
 model Package {
   @doc("Name of the package.")
@@ -41,6 +45,7 @@ model Package {
   version: string;
 }
 
+@added(Versions.v2025_02_02_preview)
 @doc("Jupyter kernel information.")
 model JupyterKernel {
   @doc("Name of the kernel.")

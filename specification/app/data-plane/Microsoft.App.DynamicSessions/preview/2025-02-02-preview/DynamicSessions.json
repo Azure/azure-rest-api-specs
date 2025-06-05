@@ -246,6 +246,7 @@
           {
             "name": "file",
             "in": "formData",
+            "description": "The file to upload.",
             "required": true,
             "type": "file"
           }
@@ -432,17 +433,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "offset",
+            "name": "skip",
             "in": "query",
             "description": "The offset for pagination purpose.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The page size - by default there is no paging.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -635,7 +628,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -688,6 +681,10 @@
           }
         ]
       }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
     "CodeExecutionIdentifier": {
       "type": "object",
@@ -770,6 +767,7 @@
         },
         "projectUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Project URL of the kernel."
         },
         "description": {
@@ -866,7 +864,7 @@
           "description": "The date and time when the session will expire."
         },
         "etag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the session, representing the underlying container ID."
         }
       },
@@ -1088,6 +1086,11 @@
             "$ref": "#/definitions/Session"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of sessions."
         }
       },
       "required": [

@@ -105,6 +105,7 @@ interface SessionResourceFiles {
 // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
 // So we need to use custom operations instead of standard operations.
 @route("/session")
+@added(Versions.v2025_02_02_preview)
 interface SessionManagement {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("Get the session.")
@@ -124,6 +125,7 @@ interface SessionManagement {
 // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
 // So we need to use custom operations instead of standard operations.
 @route("/listSessions")
+@added(Versions.v2025_02_02_preview)
 interface ListSessions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("List the sessions.")
@@ -141,6 +143,7 @@ interface ListSessions {
 // Azure standard operations require resource identifier (here session id) to be passed in the request path.
 // But for sessions, session identifier needs to be passed as a query parameter for conformity with other operations.
 // So we need to use custom operations instead of standard operations.
+@added(Versions.v2025_02_02_preview)
 interface SessionPoolMetadata {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No suitable standard operation found."
   @doc("Get the metadata information.")
