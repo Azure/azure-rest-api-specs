@@ -18,7 +18,7 @@ using KeyVault;
 @@clientName(CertificateAttributes.recoveryLevel, "adminContacts", "java");
 @@clientName(Contact, "CertificateContact", "java");
 @@clientName(Contact.EmailAddress, "email", "java");
-@@clientName(Error, "CertificateOperationError", "java");
+@@clientName(KeyVault.Error, "CertificateOperationError", "java");
 @@clientName(JsonWebKeyCurveName, "CertificateKeyCurveName", "java");
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
