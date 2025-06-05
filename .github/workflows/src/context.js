@@ -10,7 +10,7 @@ import { getIssueNumber } from "./issues.js";
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }>}
+ * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }>}
  */
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
@@ -24,7 +24,7 @@ export async function extractInputs(github, context, core) {
   // with debug enabled to replay the previous context.
   core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
 
-  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }} */
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
 
   // Add support for more event types as needed
@@ -240,16 +240,6 @@ export async function extractInputs(github, context, core) {
     };
   } else if (context.eventName === "check_run") {
     let checkRun = context.payload.check_run;
-
-    // Extract the ADO build ID and project URL from the check run details URL
-    const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
-    const match = checkRun.details_url.match(buildUrlRegex);
-    if (!match) {
-      throw new Error(
-        `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
-      );
-    }
-
     const payload =
       /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
         context.payload
@@ -259,8 +249,7 @@ export async function extractInputs(github, context, core) {
       owner: repositoryInfo.owner,
       repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
-      ado_build_id: match[2],
-      ado_project_url: match[1],
+      details_url: checkRun.details_url,
       issue_number: NaN,
       run_id: NaN,
     };
