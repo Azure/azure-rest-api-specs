@@ -27,7 +27,7 @@ op invokeSkill(
 @doc("Get skill descriptor")
 op getSkillDescriptor(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
-@body skillName: string,
+@query skillName: string,
 ): SkillDescriptor;
 
 @get
