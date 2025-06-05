@@ -227,7 +227,7 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
   "java"
 );
 @@clientName(WorkloadNetworkPublicIPProperties,
-  "WorkloadNetworkPublicIPProperties",
+  "WorkloadNetworkPublicIpProperties",
   "java"
 );
 @@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock,
