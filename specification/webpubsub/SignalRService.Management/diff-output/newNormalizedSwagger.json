@@ -238,6 +238,15 @@
               "$ref": "#/definitions/WebPubSubResource"
             }
           },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "ignore"
+              }
+            }
+          },
           "default": {
             "description": "ignore",
             "schema": {
@@ -249,11 +258,7 @@
           "WebPubSub_CreateOrUpdate": {
             "$ref": "./examples/WebPubSub_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "WebPubSub_Update",
@@ -314,6 +319,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "ignore"
+          },
           "202": {
             "description": "ignore"
           },
@@ -633,11 +641,7 @@
           "WebPubSubCustomDomains_CreateOrUpdate": {
             "$ref": "./examples/WebPubSubCustomDomains_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "WebPubSubCustomDomains_Delete",
@@ -659,6 +663,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "ignore"
+          },
           "202": {
             "description": "ignore"
           },
@@ -1582,6 +1589,61 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
+        "parameters": [
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/skus": {
@@ -1792,45 +1854,6 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
-        "parameters": [
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "sharedPrivateLinkResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebPubSubSharedPrivateLinkResources_Delete": {
-            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Delete.json"
-          }
         },
         "x-ms-long-running-operation": true
       }
@@ -3521,9 +3544,6 @@
           "$ref": "#/definitions/ManagedIdentity"
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"

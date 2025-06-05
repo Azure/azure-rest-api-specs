@@ -355,25 +355,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'WebPubSubResource' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
             }
           },
           "201": {
-            "description": "Resource 'WebPubSubResource' create operation succeeded",
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/WebPubSubResource"
-            },
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "format": "int32"
+              },
+              "location": {
+                "type": "string",
+                "description": "ignore"
               }
             }
           },
@@ -388,11 +390,7 @@
           "WebPubSub_CreateOrUpdate": {
             "$ref": "./examples/WebPubSub_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "WebPubSub_Update",
@@ -473,7 +471,7 @@
         "tags": [
           "WebPubSubResources"
         ],
-        "description": "Operation to delete a resource.",
+        "description": "Delete a WebPubSubResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -496,6 +494,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -932,12 +933,6 @@
             "description": "Resource 'CustomDomain' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/CustomDomain"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
             }
           },
           "default": {
@@ -951,18 +946,14 @@
           "WebPubSubCustomDomains_CreateOrUpdate": {
             "$ref": "./examples/WebPubSubCustomDomains_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "WebPubSubCustomDomains_Delete",
         "tags": [
           "CustomDomains"
         ],
-        "description": "Delete a custom domain.",
+        "description": "Delete a CustomDomain",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -992,6 +983,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -2326,6 +2320,91 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
+        "tags": [
+          "WebPubSubSharedPrivateLinkResources"
+        ],
+        "description": "Delete a SharedPrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "replicaName",
+            "in": "path",
+            "description": "The name of the replica.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "sharedPrivateLinkResourceName",
+            "in": "path",
+            "description": "The name of the shared private link resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubSharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/skus": {
@@ -2635,74 +2714,6 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
-        "tags": [
-          "WebPubSubSharedPrivateLinkResources"
-        ],
-        "description": "Delete the specified shared private link resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the WebPubSubResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "sharedPrivateLinkResourceName",
-            "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WebPubSubSharedPrivateLinkResources_Delete": {
-            "$ref": "./examples/WebPubSubSharedPrivateLinkResources_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4847,9 +4858,6 @@
           "description": "A class represent managed identities used for request and response"
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"

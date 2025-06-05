@@ -31,7 +31,7 @@ model WebPubSubResource extends Foundations.TrackedResource {
 
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: WebPubSubProperties;
 
   /**
@@ -63,7 +63,21 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<WebPubSubResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    WebPubSubResource,
+    Response = ArmResponse<WebPubSubResource> | {
+      @statusCode statusCode: 201;
+      @body body: WebPubSubResource;
+    } | {
+      @statusCode statusCode: 202;
+
+      @doc("ignore")
+      @header
+      location?: string;
+
+      @header("Retry-After") retryAfter?: int32;
+    }
+  >;
 
   /**
    * Operation to update an exiting resource.
@@ -82,7 +96,20 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<WebPubSubResource>;
+  @delete
+  @autoRoute
+  @doc("Delete a {name}", WebPubSubResource)
+  @armResourceDelete(WebPubSubResource)
+  delete(
+    ...ResourceInstanceParameters<
+      WebPubSubResource,
+      Azure.ResourceManager.Foundations.BaseParameters<WebPubSubResource>
+    >,
+  ):
+    | ArmDeletedResponse
+    | ArmDeleteAcceptedLroResponse
+    | ArmDeletedNoContentResponse
+    | ErrorResponse;
 
   /**
    * Handles requests to list all resources in a resource group.
