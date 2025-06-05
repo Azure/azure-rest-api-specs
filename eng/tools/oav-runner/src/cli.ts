@@ -73,11 +73,11 @@ export async function main() {
 
   if (runType === "specs") {
     [exitCode, scannedSwaggerFiles, errorList] =
-      await checkSpecs(targetDirectory);
+      await checkSpecs(targetDirectory, fileList);
     reportName = "Swagger SemanticValidation";
   } else if (runType === "examples") {
     [exitCode, scannedSwaggerFiles, errorList] =
-      await checkExamples(targetDirectory);
+      await checkExamples(targetDirectory, fileList);
     reportName = "Swagger ModelValidation";
   }
 
