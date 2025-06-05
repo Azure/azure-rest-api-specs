@@ -14,11 +14,13 @@ options:
     package-dir: "products"
     namespace: "azure.products"
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Products"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "products-rest"
     package-details:
@@ -28,6 +30,7 @@ options:
   "@azure-tools/typespec-java":
     package-dir: "products"
     namespace: com.products
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

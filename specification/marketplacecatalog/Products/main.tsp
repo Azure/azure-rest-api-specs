@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Products" })
 @server("https://catalogapi.azure.com")
 @versioned(Products.Versions)
+@useAuth(AzureKey)
 namespace Products;
 
 enum Versions {

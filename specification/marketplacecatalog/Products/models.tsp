@@ -364,7 +364,7 @@ model SkuSummary {
   cspState?: CspState;
 
   @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
+  hasRi?: boolean;
 
   @doc("The SKU attributes")
   skuAttributes?: Attribute[];
@@ -535,7 +535,7 @@ model ProductSummary {
   productId?: string;
 
   @doc("Indication whether the product has plans with reservations")
-  hasRIPlans?: boolean;
+  hasRiPlans?: boolean;
 
   @doc("Indication if product has a representation in the marketplace")
   hasMarketplaceFootprint?: boolean;
@@ -919,7 +919,7 @@ model PlanDetails {
   planLabels?: string[];
 
   @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
+  hasRi?: boolean;
 
   @doc("SKU type")
   skuType?: string;
@@ -964,6 +964,7 @@ model PlanDetails {
   offeringProperties?: OfferingProperties[];
 }
 
+@doc("Returns a subset of Plan attributes")
 model PlanSummary {
   @doc("Plan id")
   planId?: string;
@@ -1023,7 +1024,7 @@ model PlanSummary {
   isPrivate?: boolean;
 
   @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
+  hasRi?: boolean;
 }
 
 @doc("Response page composed of a list of SKU Summaries together with a next page link")
@@ -1230,7 +1231,7 @@ model Price {
   currencyCode?: string;
 
   @doc("A value indicating whether a payment instrument is required")
-  isPIRequired: boolean;
+  isPiRequired: boolean;
 
   @doc("Retail price for the item")
   listPrice: float32;
@@ -1378,3 +1379,7 @@ model ServiceFamilyParameter {
   @doc("The service family of the product, such as 'Compute'")
   serviceFamily: string;
 }
+
+// API key def
+@doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header")
+model AzureKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;

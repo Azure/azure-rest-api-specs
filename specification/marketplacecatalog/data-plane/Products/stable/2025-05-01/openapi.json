@@ -20,6 +20,19 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "AzureKey": []
+    }
+  ],
+  "securityDefinitions": {
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "name": "X-API-Key",
+      "in": "header"
+    }
+  },
   "tags": [],
   "paths": {
     "/product/{uniqueProductId}": {
@@ -474,6 +487,41 @@
           }
         ]
       }
+    },
+    "AzureKey": {
+      "type": "object",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "X-API-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
     },
     "Badge": {
       "type": "string",
@@ -1003,7 +1051,7 @@
             "type": "string"
           }
         },
-        "hasRI": {
+        "hasRi": {
           "type": "boolean",
           "description": "Indication whether the SKU supports reservations"
         },
@@ -1117,6 +1165,7 @@
     },
     "PlanSummary": {
       "type": "object",
+      "description": "Returns a subset of Plan attributes",
       "properties": {
         "planId": {
           "type": "string",
@@ -1203,7 +1252,7 @@
           "type": "boolean",
           "description": "Indication that the plan is accessible to restricted audience only"
         },
-        "hasRI": {
+        "hasRi": {
           "type": "boolean",
           "description": "Indication whether the SKU supports reservations"
         }
@@ -1238,7 +1287,7 @@
           "type": "string",
           "description": "Currency code i.e. 'USD'"
         },
-        "isPIRequired": {
+        "isPiRequired": {
           "type": "boolean",
           "description": "A value indicating whether a payment instrument is required"
         },
@@ -1254,7 +1303,7 @@
         }
       },
       "required": [
-        "isPIRequired",
+        "isPiRequired",
         "listPrice",
         "msrp"
       ]
@@ -1846,7 +1895,7 @@
           "type": "string",
           "description": "The unique id of the product"
         },
-        "hasRIPlans": {
+        "hasRiPlans": {
           "type": "boolean",
           "description": "Indication whether the product has plans with reservations"
         },
@@ -2375,7 +2424,7 @@
           "$ref": "#/definitions/CspState",
           "description": "CSP state"
         },
-        "hasRI": {
+        "hasRi": {
           "type": "boolean",
           "description": "Indication whether the SKU supports reservations"
         },
