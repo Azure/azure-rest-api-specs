@@ -106,7 +106,19 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-05-04-preview
+
+These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-04-preview'
+input-file:
+  - Microsoft.Security/preview/2025-05-04-preview/operations.json
+  - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
+  - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+  ```
+
 ### Tag: package-2025-03
+
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-03'
@@ -578,7 +590,9 @@ input-file:
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
-- Microsoft.Security/preview/2024-10-01-preview/operations.json
+- Microsoft.Security/preview/2025-05-04-preview/operations.json
+- Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
+- Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -593,8 +607,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2021-06-01/assessmentMetadata.json
-- Microsoft.Security/stable/2021-06-01/assessments.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
