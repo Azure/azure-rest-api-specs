@@ -48,7 +48,7 @@ export async function main() {
       console.log(`Loaded ${fileList.length} files from ${opts.fileList}`);
     } catch (error) {
       console.error(`Error reading file list from ${opts.fileList}: ${error instanceof Error ? error.message : String(error)}`);
-      console.error('User provided file list thatis invalid or not found.');
+      console.error('User provided file list that is not found.');
       console.error("Please ensure the file exists and is readable, or do not provide the option 'fileList'")
       exit(1);
     }
