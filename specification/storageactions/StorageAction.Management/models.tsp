@@ -578,6 +578,7 @@ model StorageTaskNameParameter {
   @segment("storageTaskNames")
   @key
   @doc("The Storage Task name.")
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "For backward compatibility"
   storageTaskName: string;
 }
 

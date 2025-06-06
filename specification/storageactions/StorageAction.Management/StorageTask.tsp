@@ -13,8 +13,11 @@ namespace Microsoft.StorageActions;
 /**
  * Represents Storage Task.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(StorageTaskProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model StorageTask extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = StorageTask,
@@ -30,8 +33,11 @@ model StorageTask extends Foundations.TrackedResource {
   identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   @doc("The resource-specific properties for this resource.")
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   properties?: StorageTaskProperties;
 }
 

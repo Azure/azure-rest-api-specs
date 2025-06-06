@@ -31,6 +31,7 @@ interface StorageTasksOperationGroup {
     Parameters = {
       @path
       @segment("locations")
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       location: string;
     }
   >;
