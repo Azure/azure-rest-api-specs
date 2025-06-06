@@ -52,28 +52,26 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
-  - tag: package-resources-2025-04-sdk-only
-  - tag: package-resources-2025-03-sdk-only
-  - tag: package-resources-2024-11-sdk-only
-  - tag: package-resources-2024-07-sdk-only
-  - tag: package-resources-2024-03-sdk-only
-  - tag: package-resources-2023-07-sdk-only
-  - tag: package-resources-2022-09-sdk-only
-  - tag: package-resources-2021-04-sdk-only
-  - tag: package-resources-2021-01-sdk-only
-  - tag: package-resources-2020-10-sdk-only
-  - tag: package-resources-2020-06-sdk-only
-  - tag: package-resources-2019-10-sdk-only
-  - tag: package-resources-2019-08-sdk-only
-  - tag: package-resources-2019-07-sdk-only
-  - tag: package-resources-2019-0510-sdk-only
-  - tag: package-resources-2019-05-sdk-only
-  - tag: package-resources-2019-03-sdk-only
-  - tag: package-resources-2018-05-sdk-only
-  - tag: package-resources-2018-02-sdk-only
-  - tag: package-resources-2017-05-sdk-only
-  - tag: package-resources-2016-09-sdk-only
-  - tag: package-resources-2016-02-sdk-only
+  - tag: package-resources-2025-04-python-only
+  - tag: package-resources-2025-03-python-only
+  - tag: package-resources-2024-11-python-only
+  - tag: package-resources-2024-07-python-only
+  - tag: package-resources-2022-09-python-only
+  - tag: package-resources-2021-04-python-only
+  - tag: package-resources-2021-01-python-only
+  - tag: package-resources-2020-10-python-only
+  - tag: package-resources-2020-06-python-only
+  - tag: package-resources-2019-10-python-only
+  - tag: package-resources-2019-08-python-only
+  - tag: package-resources-2019-07-python-only
+  - tag: package-resources-2019-0510-python-only
+  - tag: package-resources-2019-05-python-only
+  - tag: package-resources-2019-03-python-only
+  - tag: package-resources-2018-05-python-only
+  - tag: package-resources-2018-02-python-only
+  - tag: package-resources-2017-05-python-only
+  - tag: package-resources-2016-09-python-only
+  - tag: package-resources-2016-02-python-only
   - multiapiscript-resources: true
   - tag: package-subscriptions-2022-12
   - tag: package-subscriptions-2021-01
@@ -432,171 +430,268 @@ namespace: azure.mgmt.resource.policy.v2015_10_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
 ```
 
-### Tag: package-resources-2025-04-sdk-only and python
+### Tag: package-resources-2025-04-python-only and python
 
-These settings apply only when `--tag=package-resources-2025-04-sdk-only --python` is specified on the command line. Please also
+These settings apply only when `--tag=package-resources-2025-04-python-only --python` is specified on the command line. Please also
 specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2025-04-sdk-only'
-title: ResourceManagementClient
+``` yaml $(tag) == 'package-resources-2025-04-python-only'
 default-api-version: "2025-04-01"
 namespace: azure.mgmt.resource.resources.v2025_04_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_04_01
 ```
 
-### Tag: package-resources-2025-03-sdk-only and python
+### Tag: package-resources-2025-03-python-only and python
 
-These settings apply only when `--tag=package-resources-2025-03-sdk-only --python` is specified on the command line. Please also
+These settings apply only when `--tag=package-resources-2025-03-python-only --python` is specified on the command line. Please also
 specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2025-03-sdk-only'
-title: ResourceManagementClient
+``` yaml $(tag) == 'package-resources-2025-03-python-only'
 default-api-version: "2025-03-01"
 namespace: azure.mgmt.resource.resources.v2025_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_03_01
 ```
 
-### Tag: package-resources-2024-11-sdk-only and python
+### Tag: package-resources-2024-11-python-only and python
 
-These settings apply only when `--tag=package-resources-2024-11-sdk-only --python` is specified on the command line.
+These settings apply only when `--tag=package-resources-2024-11-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2024-11-sdk-only'
-title: ResourceManagementClient
+``` yaml $(tag) == 'package-resources-2024-11-python-only'
 default-api-version: "2024-11-01"
 namespace: azure.mgmt.resource.resources.v2024_11_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_11_01
 ```
 
-### Tag: package-resources-2024-07-sdk-only and python
+### Tag: package-resources-2024-07-python-only and python
 
-These settings apply only when `--tag=package-resources-2024-07-sdk-only --python` is specified on the command line.
+These settings apply only when `--tag=package-resources-2024-07-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2024-07-sdk-only'
-title: ResourceManagementClient
+``` yaml $(tag) == 'package-resources-2024-07-python-only'
 default-api-version: "2024-07-01"
 namespace: azure.mgmt.resource.resources.v2024_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_07_01
 ```
 
-### Tag: package-resources-2024-03-sdk-only and python
+### Tag: package-resources-2022-09-python-only and python
 
-These settings apply only when `--tag=package-resources-2024-03-sdk-only --python` is specified on the command line.
+These settings apply only when `--tag=package-resources-2022-09-python-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2024-03-sdk-only'
-title: ResourceManagementClient
-default-api-version: "2024-03-01"
-namespace: azure.mgmt.resource.resources.v2024_03_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_03_01
+``` yaml $(tag) == 'package-resources-2022-09-python-only'
+default-api-version: "2022-09-01"
+namespace: azure.mgmt.resource.resources.v2022_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
 ```
 
-### Tag: package-resources-2023-07-sdk-only and python
+### Tag: package-resources-2021-04-python-only and python
 
-These settings apply only when `--tag=package-resources-2023-07-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2021-04-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2023-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2023-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2023-07-01/deployments.json
+``` yaml $(tag) == 'package-resources-2021-04-python-only'
+namespace: azure.mgmt.resource.resources.v2021_04_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_04_01
 ```
 
-### Tag: package-resources-2022-09-sdk-only and python
+### Tag: package-resources-2021-01-python-only and python
 
-These settings apply only when `--tag=package-resources-2022-09-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2021-01-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2022-09-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2022-09-01/resources.json
-  - Microsoft.Resources/deployments/stable/2022-09-01/deployments.json
+``` yaml $(tag) == 'package-resources-2021-01-python-only'
+namespace: azure.mgmt.resource.resources.v2021_01_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_01_01
 ```
 
-### Tag: package-resources-2021-04-sdk-only
+### Tag: package-resources-2020-10-python-only and python
 
-These settings apply only when `--tag=package-resources-2021-04-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2020-10-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2021-04-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2021-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-04-01/deployments.json
+``` yaml $(tag) == 'package-resources-2020-10-python-only'
+namespace: azure.mgmt.resource.resources.v2020_10_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_10_01
 ```
 
-### Tag: package-resources-2021-01-sdk-only
+### Tag: package-resources-2020-06-python-only and python
 
-These settings apply only when `--tag=package-resources-2021-01-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2020-06-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2021-01-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2021-01-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-01-01/deployments.json
+``` yaml $(tag) == 'package-resources-2020-06-python-only'
+namespace: azure.mgmt.resource.resources.v2020_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_06_01
 ```
 
-### Tag: package-resources-2020-10-sdk-only
+### Tag: package-resources-2019-10-python-only and python
 
-These settings apply only when `--tag=package-resources-2020-10-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-10-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2020-10-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-10-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-10-python-only'
+namespace: azure.mgmt.resource.resources.v2019_10_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_10_01
 ```
 
-### Tag: package-resources-2020-08-sdk-only
+### Tag: package-resources-2019-08-python-only and python
 
-These settings apply only when `--tag=package-resources-2020-08-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-08-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2020-08-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-08-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-08-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-08-python-only'
+namespace: azure.mgmt.resource.resources.v2019_08_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_08_01
 ```
 
-### Tag: package-resources-2020-06-sdk-only
+### Tag: package-resources-2019-07-python-only and python
 
-These settings apply only when `--tag=package-resources-2020-06-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-07-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2020-06-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-06-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-06-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-07-python-only'
+namespace: azure.mgmt.resource.resources.v2019_07_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_07_01
 ```
 
-### Tag: package-resources-2019-10-sdk-only
+### Tag: package-resources-2019-0510-python-only and python
 
-These settings apply only when `--tag=package-resources-2019-10-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-0510-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2019-10-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-10-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-0510-python-only'
+namespace: azure.mgmt.resource.resources.v2019_05_10
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_10
 ```
 
-### Tag: package-resources-2019-08-sdk-only
+### Tag: package-resources-2019-05-python-only and python
 
-These settings apply only when `--tag=package-resources-2019-08-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-05-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2019-08-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-08-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-08-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-05-python-only'
+namespace: azure.mgmt.resource.resources.v2019_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_01
 ```
 
-### Tag: package-resources-2019-07-sdk-only
+### Tag: package-resources-2019-03-python-only and python
 
-These settings apply only when `--tag=package-resources-2019-07-sdk-only` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-03-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2019-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-07-01/deployments.json
+``` yaml $(tag) == 'package-resources-2019-03-python-only'
+namespace: azure.mgmt.resource.resources.v2019_03_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_03_01
 ```
 
+### Tag: package-resources-2018-05-python-only and python
 
+These settings apply only when `--tag=package-resources-2018-05-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
+``` yaml $(tag) == 'package-resources-2018-05-python-only'
+namespace: azure.mgmt.resource.resources.v2018_05_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_05_01
+```
 
+### Tag: package-resources-2018-02-python-only and python
 
+These settings apply only when `--tag=package-resources-2018-02-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
+``` yaml $(tag) == 'package-resources-2018-02-python-only'
+namespace: azure.mgmt.resource.resources.v2018_02_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_02_01
+```
 
+### Tag: package-resources-2017-05-python-only and python
 
+These settings apply only when `--tag=package-resources-2017-05-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
+``` yaml $(tag) == 'package-resources-2017-05-python-only'
+namespace: azure.mgmt.resource.resources.v2017_05_10
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2017_05_10
+```
+
+### Tag: package-resources-2016-09-python-only and python
+
+These settings apply only when `--tag=package-resources-2016-09-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-09-python-only'
+namespace: azure.mgmt.resource.resources.v2016_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_09_01
+```
+
+### Tag: package-resources-2016-02-python-only and python
+
+These settings apply only when `--tag=package-resources-2016-02-python-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2016-02-python-only'
+namespace: azure.mgmt.resource.resources.v2016_02_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
+```
+
+### Tag: package-subscriptions-2022-12 and python
+
+These settings apply only when `--tag=package-subscriptions-2022-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2022-12'
+default-api-version: "2022-12-01"
+namespace: azure.mgmt.resource.subscriptions.v2022_12_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2022_12_01
+```
+
+### Tag: package-subscriptions-2021-01 and python
+
+These settings apply only when `--tag=package-subscriptions-2021-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2021-01'
+namespace: azure.mgmt.resource.subscriptions.v2021_01_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2021_01_01
+```
+
+### Tag: package-subscriptions-2019-11 and python
+
+These settings apply only when `--tag=package-subscriptions-2019-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-11'
+namespace: azure.mgmt.resource.subscriptions.v2019_11_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2019_11_01
+```
+
+### Tag: package-subscriptions-2019-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2019-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06'
+namespace: azure.mgmt.resource.subscriptions.v2019_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2019_06_01
+```
+
+### Tag: package-subscriptions-2018-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2018-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2018-06'
+namespace: azure.mgmt.resource.subscriptions.v2018_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2018_06_01
+```
+
+### Tag: package-subscriptions-2016-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2016-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2016-06'
+namespace: azure.mgmt.resource.subscriptions.v2016_06_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
+```
