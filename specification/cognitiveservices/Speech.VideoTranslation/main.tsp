@@ -179,12 +179,12 @@ model TranslationInput {
   @doc("Translation voice kind.")
   voiceKind: VoiceKind;
 
-  @doc("Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
+  @doc("Translation video file Azure blob url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   @madeOptional(ApiVersions.v2025_05_20)
   videoFileUrl?: url;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
+  @doc("Translation audio file Azure blob url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid.")
   audioFileUrl?: url;
 
   @doc("Number of speakers in the video, if not provided, it will be auto-detected from the video file.")
@@ -270,7 +270,7 @@ model IterationInput {
   subtitleOutlineColor?: rgbaColor;
 
   @added(ApiVersions.v2025_05_20)
-  @doc("This parameter specifies the font size of subtitles in the video translation output, if not specified, it will use the language dependent default value.")
+  @doc("This parameter specifies the font size of subtitles in the video translation output between 5 and 30, if not specified, it will use the language dependent default value.")
   subtitleFontSize?: int32;
 
   @added(ApiVersions.v2025_05_20)
@@ -287,7 +287,7 @@ model EventHubConfiguration {
   @doc("EventHub namespace host name, for example: [YourNamespace].servicebus.windows.net")
   eventHubNamespaceHostName: string;
 
-  @doc("EventHub name")
+  @doc("EventHub name.")
   eventHubName: string;
 
   @doc("Managed identity client ID for user-assigned managed identity, if not specified, API will use system-assigned managed identity.")

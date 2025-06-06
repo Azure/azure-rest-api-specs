@@ -822,7 +822,7 @@
         },
         "eventHubName": {
           "type": "string",
-          "description": "EventHub name"
+          "description": "EventHub name."
         },
         "managedIdentityClientId": {
           "$ref": "#/definitions/Guid",
@@ -982,7 +982,7 @@
         "subtitleFontSize": {
           "type": "integer",
           "format": "int32",
-          "description": "This parameter specifies the font size of subtitles in the video translation output, if not specified, it will use the language dependent default value."
+          "description": "This parameter specifies the font size of subtitles in the video translation output between 5 and 30, if not specified, it will use the language dependent default value."
         },
         "enableEmotionalPlatformVoice": {
           "$ref": "#/definitions/EnableEmotionalPlatformVoice",
@@ -1200,12 +1200,12 @@
         "videoFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Translation video file url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+          "description": "Translation video file Azure blob url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
         "audioFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Translation audio file url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+          "description": "Translation audio file Azure blob url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
         "speakerCount": {
           "type": "integer",
