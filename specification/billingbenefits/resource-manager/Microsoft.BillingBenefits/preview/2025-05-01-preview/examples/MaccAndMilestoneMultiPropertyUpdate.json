@@ -8,25 +8,30 @@
       "properties": {
         "commitment": {
           "grain": "FullTerm",
-          "amount": 40000,
+          "amount": 50000,
           "currencyCode": "USD"
         },
+        "endAt": "2029-10-31T23:59:59Z",
+        "allowContributors": false,
+        "displayName": "macc 20230614 updated with milestones",
         "milestones": [
           {
             "milestoneId": "{unique_guid_1}",
             "commitment": {
-              "amount": 20000,
+              "amount": 25000,
               "currencyCode": "USD",
               "grain": "FullTerm"
-            }
+            },
+            "endAt": "2027-06-30T23:59:59Z"
           },
           {
             "milestoneId": "{unique_guid_2}",
             "commitment": {
               "grain": "FullTerm",
-              "amount": 25000,
+              "amount": 35000,
               "currencyCode": "USD"
-            }
+            },
+            "endAt": "2028-06-30T23:59:59Z"
           }
         ]
       }
@@ -40,17 +45,17 @@
         "type": "Microsoft.BillingBenefits/maccs",
         "properties": {
           "entityType": "primary",
-          "displayName": "macc 20230614",
+          "displayName": "macc 20230614 updated with milestones",
           "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
           "commitment": {
             "grain": "FullTerm",
-            "amount": 40000,
+            "amount": 50000,
             "currencyCode": "USD"
           },
           "startAt": "2025-05-01T00:00:00Z",
-          "endAt": "2028-05-01T23:59:59Z",
+          "endAt": "2029-10-31T23:59:59Z",
           "systemId": "13810867107109237",
-          "allowContributors": true,
+          "allowContributors": false,
           "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "provisioningState": "Succeeded",
           "provisioningSubState": "None",
@@ -60,11 +65,11 @@
             {
               "milestoneId": "{unique_guid_1}",
               "commitment": {
-                "amount": 20000,
+                "amount": 25000,
                 "currencyCode": "USD",
                 "grain": "FullTerm"
               },
-              "endAt": "2026-05-31T23:59:59Z",
+              "endAt": "2027-06-30T23:59:59Z",
               "automaticTopup": true,
               "status": "Active"
             },
@@ -72,11 +77,11 @@
               "milestoneId": "{unique_guid_2}",
               "commitment": {
                 "grain": "FullTerm",
-                "amount": 25000,
+                "amount": 35000,
                 "currencyCode": "USD"
               },
-              "endAt": "2027-05-31T23:59:59Z",
-              "automaticTopup": false,
+              "endAt": "2028-06-30T23:59:59Z",
+              "automaticTopup": true,
               "status": "Active"
             }
           ]
