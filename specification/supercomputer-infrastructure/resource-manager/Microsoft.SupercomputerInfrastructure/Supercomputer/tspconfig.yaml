@@ -2,11 +2,11 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    use-read-only-status-schema: true
-    emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager" # TODO: might need changing
-    output-file: "{version-status}/{version}/clustermanagement.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/supercomputermanagement.json"
+    use-read-only-status-schema: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
