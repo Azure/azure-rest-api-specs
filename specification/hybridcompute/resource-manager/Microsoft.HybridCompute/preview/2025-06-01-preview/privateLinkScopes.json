@@ -1312,6 +1312,45 @@
         ]
       }
     },
+    "ServiceExtensionAccessMode":{
+      "type": "string",
+      "description": "Property that determines whether or not private link validation is enforced for extensions",
+      "enum": [
+        "enforced",
+        "learning"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enforced",
+            "description": "Indicates that private link validation is enforced for a given extension."
+          },
+          {
+            "value": "learning",
+            "description": "Indicates that private link validation is not enforced for a given extension."
+          }
+        ]
+      }
+    },
+    "ServiceExtensionName":{
+      "type": "string",
+      "description": "Private Link Scope Service Extension name",
+      "enum": [
+        "SQL"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SQL",
+            "description": "SQL extension name"
+          }
+        ]
+      }
+    },
     "AccessMode": {
       "type": "string",
       "description": "Property that impacts a resource's logging behavior and its connectivity with other resources and public networks.",
@@ -1615,6 +1654,14 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnectionDataModel"
           }
+        },
+        "serviceExtensions":{
+          "readOnly": false,
+          "description": "List of privatel link enabled extensions",
+          "type": "array",
+          "items":{
+            "$ref": "#/definitions/ServiceExtensionDataModel"
+          }
         }
       }
     },
@@ -1727,6 +1774,18 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The Private Endpoint Connection properties."
         }
+      }
+    },
+    "ServiceExtensionDataModel":{
+      "type": "object",
+      "description":"The Data Model to toggle enforcement of private link validation for an extensions",
+      "properties":{
+        "name":{
+          "$ref":"#/definitions/ServiceExtensionName"
+        },
+        "accessMode":{
+          "$ref": "#/definitions/ServiceExtensionAccessMode"
+        } 
       }
     },
     "PrivateEndpointConnectionProperties": {
