@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-/** Microsoft.Contoso Resource Provider management API. */
+/** Microsoft.Widget Resource Provider management API. */
 @armProviderNamespace
 @service(#{ title: "Widget" })
 @versioned(Microsoft.Widget.Versions)
