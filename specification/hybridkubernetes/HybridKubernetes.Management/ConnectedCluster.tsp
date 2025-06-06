@@ -42,7 +42,6 @@ model ConnectedCluster extends Foundations.TrackedResource {
    * Properties of the connected cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: ConnectedClusterProperties;
 }

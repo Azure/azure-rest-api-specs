@@ -513,7 +513,6 @@ model ConnectedClusterPatch {
    * Describes the connected cluster resource properties that can be updated during PATCH operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConnectedClusterPatchProperties;
 }
 
