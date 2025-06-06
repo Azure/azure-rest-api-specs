@@ -1,15 +1,15 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc4",
-    "resourceGroupName": "testrg",
     "api-version": "2024-08-01",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "virtualEndpointName": "pgVirtualEndpoint1",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "virtualEndpointName": "examplebasename",
     "parameters": {
       "properties": {
         "endpointType": "ReadWrite",
         "members": [
-          "testReplica1"
+          "exampleprimaryserver"
         ]
       }
     }
@@ -20,22 +20,22 @@
         "properties": {
           "endpointType": "ReadWrite",
           "members": [
-            "testReplica1"
+            "exampleprimaryserver"
           ],
           "virtualEndpoints": [
-            "pgVirtualEndpoint1.reader.postgres.database.azure.com",
-            "pgVirtualEndpoint1.writer.postgres.database.azure.com"
+            "examplebasename.reader.postgres.database.azure.com",
+            "examplebasename.writer.postgres.database.azure.com"
           ]
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4/virtualEndpoints/pgVirtualEndpoint1",
-        "name": "pgVirtualEndpoint1",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/virtualEndpoints/examplebasename",
+        "name": "examplebasename",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/virtualEndpoints"
       }
     },
     "202": {
       "content": {
         "operation": "ReplicaGroupUpdateManagementOperation",
-        "startTime": "2023-08-07T16:55:22.403Z"
+        "startTime": "2024-08-01T19:30:22.123456Z"
       },
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-08-01",

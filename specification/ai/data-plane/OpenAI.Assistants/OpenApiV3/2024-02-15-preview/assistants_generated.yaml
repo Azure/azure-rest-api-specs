@@ -970,13 +970,12 @@ components:
     AssistantStreamEvent:
       anyOf:
         - type: string
-        - anyOf:
-            - $ref: '#/components/schemas/ThreadStreamEvent'
-            - $ref: '#/components/schemas/RunStreamEvent'
-            - $ref: '#/components/schemas/RunStepStreamEvent'
-            - $ref: '#/components/schemas/MessageStreamEvent'
-            - $ref: '#/components/schemas/ErrorEvent'
-            - $ref: '#/components/schemas/DoneEvent'
+        - $ref: '#/components/schemas/ThreadStreamEvent'
+        - $ref: '#/components/schemas/RunStreamEvent'
+        - $ref: '#/components/schemas/RunStepStreamEvent'
+        - $ref: '#/components/schemas/MessageStreamEvent'
+        - $ref: '#/components/schemas/ErrorEvent'
+        - $ref: '#/components/schemas/DoneEvent'
       description: |-
         Each event in a server-sent events stream has an `event` and `data` property:
 
