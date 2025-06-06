@@ -14,8 +14,8 @@ using Azure.ResourceManager;
 /** Microsoft.Contoso Resource Provider management API. */
 @armProviderNamespace
 @service(#{ title: "Widget" })
-@versioned(Widget.Versions)
-namespace Widget;
+@versioned(Microsoft.Widget.Versions)
+namespace Microsoft.Widget;
 
 /** The available API versions. */
 enum Versions {
