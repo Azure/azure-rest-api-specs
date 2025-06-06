@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)
     @post

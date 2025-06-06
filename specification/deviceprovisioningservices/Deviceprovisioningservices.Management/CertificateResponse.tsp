@@ -45,7 +45,7 @@ interface CertificateResponses {
       /**
        * ETag of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -64,7 +64,7 @@ interface CertificateResponses {
       /**
        * ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -83,64 +83,63 @@ interface CertificateResponses {
       /**
        * ETag of the certificate
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`: string;
 
       /**
        * This is optional, and it is the Common Name of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.name")
       `certificate.name`?: string;
 
       /**
        * Raw data within the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.rawBytes")
       `certificate.rawBytes`?: bytes;
 
       /**
        * Indicates if certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.isVerified")
       `certificate.isVerified`?: boolean;
 
       /**
        * A description that mentions the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.purpose")
       `certificate.purpose`?: CertificatePurpose;
 
       /**
        * Time the certificate is created.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.created")
       `certificate.created`?: utcDateTime;
 
       /**
        * Time the certificate is last updated.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.lastUpdated")
       `certificate.lastUpdated`?: utcDateTime;
 
       /**
        * Indicates if the certificate contains a private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.hasPrivateKey")
       `certificate.hasPrivateKey`?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.nonce")
       `certificate.nonce`?: string;
     },
@@ -171,63 +170,63 @@ interface CertificateResponses {
       /**
        * ETag of the certificate. This is required to update an existing certificate, and ignored while creating a brand new certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`: string;
 
       /**
        * Common Name for the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.name")
       `certificate.name`?: string;
 
       /**
        * Raw data of certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.rawBytes")
       `certificate.rawBytes`?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.isVerified")
       `certificate.isVerified`?: boolean;
 
       /**
        * Description mentioning the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.purpose")
       `certificate.purpose`?: CertificatePurpose;
 
       /**
        * Certificate creation time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.created")
       `certificate.created`?: utcDateTime;
 
       /**
        * Certificate last updated time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.lastUpdated")
       `certificate.lastUpdated`?: utcDateTime;
 
       /**
        * Indicates if the certificate contains private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.hasPrivateKey")
       `certificate.hasPrivateKey`?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.nonce")
       `certificate.nonce`?: string;
     },
@@ -248,63 +247,63 @@ interface CertificateResponses {
       /**
        * ETag of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`: string;
 
       /**
        * Common Name for the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.name")
       `certificate.name`?: string;
 
       /**
        * Raw data of certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.rawBytes")
       `certificate.rawBytes`?: bytes;
 
       /**
        * Indicates if the certificate has been verified by owner of the private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.isVerified")
       `certificate.isVerified`?: boolean;
 
       /**
        * Describe the purpose of the certificate.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.purpose")
       `certificate.purpose`?: CertificatePurpose;
 
       /**
        * Certificate creation time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.created")
       `certificate.created`?: utcDateTime;
 
       /**
        * Certificate last updated time.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.lastUpdated")
       `certificate.lastUpdated`?: utcDateTime;
 
       /**
        * Indicates if the certificate contains private key.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.hasPrivateKey")
       `certificate.hasPrivateKey`?: boolean;
 
       /**
        * Random number generated to indicate Proof of Possession.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @query("certificate.nonce")
       `certificate.nonce`?: string;
     },

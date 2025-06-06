@@ -14,10 +14,10 @@ namespace Microsoft.Devices;
 /**
  * Represents a list of private endpoint connections.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model PrivateEndpointConnectionsList is PrivateEndpointConnection[];
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @pagedResult
 model OperationListResult {
   /**
