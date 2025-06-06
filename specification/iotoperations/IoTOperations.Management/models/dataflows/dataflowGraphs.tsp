@@ -154,26 +154,29 @@ model DataflowGraphDestinationNodeSettings {
   dataDestination: string;
 
   /** Output schema settings. */
-  outputSchemaSettings?: DataflowGraphSchemaSettings;
+  outputSchemaSettings?: DataflowGraphDestinationSchemaSettings;
 }
 
-/** DataflowGraph output schema settings. */
+/** DataflowGraph destination node output schema settings. */
 @added(Versions.`2025-07-01-preview`)
-model DataflowGraphSchemaSettings {
-  /** Output serialization format. */
-  serializationFormat?: DataflowGraphSerializationFormat;
+model DataflowGraphDestinationSchemaSettings {
+  /** The format of the output data. */
+  serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
 
   /** Reference to the schema that describes the output of the transformation. */
-  schemaRef: string;
+  schemaRef?: string;
 }
 
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
-union DataflowGraphSerializationFormat {
-  TransformationSerializationFormat,
+union DataflowGraphDestinationSchemaSerializationFormat {
+  string,
+  
+  /** Parquet serialization format. */
+  Parquet,
 
-  /** Avro serialization format. */
-  Avro,
+  /** Delta serialization format. */
+  Delta,
 }
 
 /** DataflowGraph DataflowGraphNode Connection. */
@@ -189,11 +192,30 @@ model DataflowGraphNodeConnection {
 /** DataflowGraph DataflowGraphNode Connection Input. */
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphConnectionInput {
-  /** Name of the source node. */
+  /** Name of the input node. */
   name: string;
 
-  /** Schema settings for the source node. */
-  schema?: DataflowGraphSchemaSettings;
+  /** Schema settings for the input node. */
+  schema?: DataflowGraphConnectionSchemaSettings;
+}
+
+/** DataflowGraph connection node output schema settings. */
+@added(Versions.`2025-07-01-preview`)
+model DataflowGraphConnectionSchemaSettings {
+  /** Output serialization format. */
+  serializationFormat?: DataflowGraphConnectionSchemaSerializationFormat;
+
+  /** Reference to the schema that describes the output of the transformation. */
+  schemaRef?: string;
+}
+
+/** Serialization format for dataflow graph connection. */
+@added(Versions.`2025-07-01-preview`)
+union DataflowGraphConnectionSchemaSerializationFormat {
+  TransformationSerializationFormat,
+
+  /** Avro serialization format. */
+  Avro,
 }
 
 /** DataflowGraph DataflowGraphNode Connection Output. */
