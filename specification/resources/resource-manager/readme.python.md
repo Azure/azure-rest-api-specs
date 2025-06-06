@@ -436,6 +436,7 @@ These settings apply only when `--tag=package-resources-2025-04-sdk-only --pytho
 specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2025-04-sdk-only'
+title: ResourceManagementClient
 default-api-version: "2025-04-01"
 namespace: azure.mgmt.resource.resources.v2025_04_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_04_01
@@ -447,6 +448,7 @@ These settings apply only when `--tag=package-resources-2025-03-sdk-only --pytho
 specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2025-03-sdk-only'
+title: ResourceManagementClient
 default-api-version: "2025-03-01"
 namespace: azure.mgmt.resource.resources.v2025_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_03_01
@@ -458,6 +460,7 @@ These settings apply only when `--tag=package-resources-2024-11-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2024-11-sdk-only'
+title: ResourceManagementClient
 default-api-version: "2024-11-01"
 namespace: azure.mgmt.resource.resources.v2024_11_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_11_01
@@ -469,6 +472,7 @@ These settings apply only when `--tag=package-resources-2024-07-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2024-07-sdk-only'
+title: ResourceManagementClient
 default-api-version: "2024-07-01"
 namespace: azure.mgmt.resource.resources.v2024_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_07_01
@@ -480,6 +484,7 @@ These settings apply only when `--tag=package-resources-2022-09-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2022-09-sdk-only'
+title: ResourceManagementClient
 default-api-version: "2022-09-01"
 namespace: azure.mgmt.resource.resources.v2022_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
@@ -491,6 +496,7 @@ These settings apply only when `--tag=package-resources-2021-04-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2021-04-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2021_04_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_04_01
 ```
@@ -501,6 +507,7 @@ These settings apply only when `--tag=package-resources-2021-01-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2021-01-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2021_01_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_01_01
 ```
@@ -511,6 +518,7 @@ These settings apply only when `--tag=package-resources-2020-10-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2020-10-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2020_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_10_01
 ```
@@ -521,6 +529,7 @@ These settings apply only when `--tag=package-resources-2020-06-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2020-06-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2020_06_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_06_01
 ```
@@ -531,6 +540,7 @@ These settings apply only when `--tag=package-resources-2019-10-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-10-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_10_01
 ```
@@ -541,6 +551,7 @@ These settings apply only when `--tag=package-resources-2019-08-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-08-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_08_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_08_01
 ```
@@ -551,6 +562,7 @@ These settings apply only when `--tag=package-resources-2019-07-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-07-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_07_01
 ```
@@ -561,6 +573,7 @@ These settings apply only when `--tag=package-resources-2019-0510-sdk-only --pyt
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-0510-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_05_10
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_10
 ```
@@ -571,6 +584,7 @@ These settings apply only when `--tag=package-resources-2019-05-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-05-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_01
 ```
@@ -581,6 +595,7 @@ These settings apply only when `--tag=package-resources-2019-03-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2019-03-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2019_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_03_01
 ```
@@ -591,6 +606,7 @@ These settings apply only when `--tag=package-resources-2018-05-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2018-05-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2018_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_05_01
 ```
@@ -601,6 +617,7 @@ These settings apply only when `--tag=package-resources-2018-02-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2018-02-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2018_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_02_01
 ```
@@ -611,6 +628,7 @@ These settings apply only when `--tag=package-resources-2017-05-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2017-05-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2017_05_10
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2017_05_10
 ```
@@ -621,6 +639,7 @@ These settings apply only when `--tag=package-resources-2016-09-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2016-09-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2016_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_09_01
 ```
@@ -631,6 +650,7 @@ These settings apply only when `--tag=package-resources-2016-02-sdk-only --pytho
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-resources-2016-02-sdk-only'
+title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources.v2016_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
 ```
