@@ -38,7 +38,6 @@ model VolumeGroup extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: VolumeGroupProperties;
 }

@@ -509,7 +509,6 @@ model ElasticSanUpdate {
    * Properties of ElasticSan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ElasticSanUpdateProperties;
 
   /**
@@ -773,7 +772,6 @@ model VolumeGroupUpdate {
    * Properties of VolumeGroup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VolumeGroupUpdateProperties;
 }
 
@@ -917,7 +915,6 @@ model VolumeUpdate {
    * Properties of Volume.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VolumeUpdateProperties;
 }
 
