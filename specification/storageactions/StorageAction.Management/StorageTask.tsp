@@ -30,7 +30,6 @@ model StorageTask extends Foundations.TrackedResource {
   identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties?: StorageTaskProperties;
 }
