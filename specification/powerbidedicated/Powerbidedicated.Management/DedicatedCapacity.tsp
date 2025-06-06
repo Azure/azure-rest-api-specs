@@ -14,8 +14,8 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(DedicatedCapacityProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DedicatedCapacity
@@ -33,7 +33,7 @@ model DedicatedCapacity
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: CapacitySku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)

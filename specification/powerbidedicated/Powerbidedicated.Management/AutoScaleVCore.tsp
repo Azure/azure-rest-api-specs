@@ -13,9 +13,9 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of an auto scale v-core resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
@@ -32,14 +32,14 @@ model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku: AutoScaleVCoreSku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties: AutoScaleVCoreProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface AutoScaleVCores {
   /**

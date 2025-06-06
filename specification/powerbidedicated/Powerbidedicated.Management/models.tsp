@@ -529,7 +529,7 @@ model CheckCapacityNameAvailabilityResult {
 /**
  * Represents the SKU name and Azure pricing tier for auto scale v-core resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AutoScaleVCoreSku {
   /**
    * Name of the SKU level.
@@ -550,7 +550,7 @@ model AutoScaleVCoreSku {
 /**
  * Properties of an auto scale v-core resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model AutoScaleVCoreProperties extends AutoScaleVCoreMutableProperties {
   /**
@@ -568,7 +568,7 @@ model AutoScaleVCoreProperties extends AutoScaleVCoreMutableProperties {
 /**
  * An object that represents a set of mutable auto scale v-core resource properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AutoScaleVCoreMutableProperties {
   /**
    * The maximum capacity of an auto scale v-core resource.
@@ -579,7 +579,7 @@ model AutoScaleVCoreMutableProperties {
 /**
  * Update request specification
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AutoScaleVCoreUpdateParameters {
   /**
    * The SKU of the auto scale v-core resource.
@@ -603,7 +603,7 @@ model AutoScaleVCoreUpdateParameters {
 /**
  * An array of auto scale v-core resources.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @pagedResult
 model AutoScaleVCoreListResult {
   /**
@@ -612,7 +612,7 @@ model AutoScaleVCoreListResult {
   @items
   value: AutoScaleVCore[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @nextLink
   nextLink?: string;
 }
