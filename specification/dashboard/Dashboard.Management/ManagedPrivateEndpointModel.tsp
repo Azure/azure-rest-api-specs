@@ -52,7 +52,7 @@ interface ManagedPrivateEndpointModels {
   /**
    * Update a managed private endpoint for an existing grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })

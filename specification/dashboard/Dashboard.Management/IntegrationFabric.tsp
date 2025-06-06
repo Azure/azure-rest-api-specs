@@ -31,7 +31,7 @@ interface IntegrationFabrics {
 
   create is ArmResourceCreateOrReplaceAsync<IntegrationFabric>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     IntegrationFabric,

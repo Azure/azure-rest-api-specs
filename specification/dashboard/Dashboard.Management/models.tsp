@@ -167,7 +167,7 @@ model ManagedGrafanaProperties {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -201,13 +201,13 @@ model ManagedGrafanaProperties {
   /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   deterministicOutboundIP?: DeterministicOutboundIP = DeterministicOutboundIP.Disabled;
 
   /**
    * List of outbound IPs if deterministicOutboundIP is enabled.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   outboundIPs?: string[];
 
@@ -272,7 +272,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState;
 }
@@ -413,7 +413,7 @@ model Smtp {
    * The StartTLSPolicy setting of the SMTP configuration
    * https://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   startTLSPolicy?: StartTLSPolicy;
 
   /**
@@ -552,7 +552,7 @@ model ManagedGrafanaPropertiesUpdateParameters {
   /**
    * Whether a Grafana instance uses deterministic outbound IPs.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   deterministicOutboundIP?: DeterministicOutboundIP = DeterministicOutboundIP.Disabled;
 
   /**
@@ -786,7 +786,7 @@ model ManagedPrivateEndpointModelProperties {
   /**
    * The private IP of private endpoint after approval. This property is empty before connection is approved.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   privateLinkServicePrivateIP?: string;
 }

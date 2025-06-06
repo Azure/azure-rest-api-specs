@@ -13,8 +13,8 @@ namespace Microsoft.Dashboard;
 /**
  * The grafana resource type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(ManagedGrafanaProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
@@ -31,8 +31,8 @@ model ManagedGrafana extends Azure.ResourceManager.Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
@@ -60,7 +60,7 @@ interface ManagedGrafanas {
   /**
    * Update a workspace for Grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
@@ -129,7 +129,7 @@ interface ManagedGrafanas {
   /**
    * Refresh and sync managed private endpoints of a grafana resource to latest state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("refreshManagedPrivateEndpoints")
   @operationId("ManagedPrivateEndpoints_Refresh")
