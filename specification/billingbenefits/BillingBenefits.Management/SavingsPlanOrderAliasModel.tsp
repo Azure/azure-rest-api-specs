@@ -13,9 +13,11 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order alias
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@Azure.ResourceManager.Private.armResourceInternal(SavingsPlanOrderAliasProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  SavingsPlanOrderAliasProperties
+)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
 model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
@@ -39,13 +41,13 @@ model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
   kind?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SavingsPlanOrderAliasProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface SavingsPlanOrderAliasModels {
   /**

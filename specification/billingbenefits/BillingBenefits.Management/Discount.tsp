@@ -24,12 +24,14 @@ model Discount is Azure.ResourceManager.TrackedResource<DiscountProperties> {
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[-\\w\\._,\\(\\)]+$")
   kind?: string;
@@ -37,22 +39,26 @@ model Discount is Azure.ResourceManager.TrackedResource<DiscountProperties> {
   /**
    * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Managed service identity (system assigned and/or user assigned identities)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: ManagedServiceIdentity;
 
   /**
    * The resource model definition representing SKU
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 
   /**
    * Plan for the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 }
 
@@ -74,7 +80,7 @@ interface Discounts {
    * Update discounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @operationId("Discount_Update")
   update is ArmCustomPatchAsync<
@@ -113,7 +119,7 @@ interface Discounts {
   /**
    * Cancel discount. Stops applying the benefit.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   cancel is ArmResourceActionAsync<
     Discount,
     void,

@@ -1102,7 +1102,8 @@ model SavingsPlanPurchaseValidateRequest {
  * Reservation order alias
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ReservationOrderAliasRequest extends Azure.ResourceManager.CommonTypes.Resource {
+model ReservationOrderAliasRequest
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Reservation order SKU
    */
@@ -1314,8 +1315,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts",
-      scopes: ["tenant"]
+      type: "Microsoft.Billing/billingAccounts";
+      scopes: ["tenant"];
     }
   ]>;
 
@@ -1325,7 +1326,7 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts",
+      type: "Microsoft.Billing/billingAccounts";
       scopes: ["tenant"];
     }
   ]>;
@@ -1336,8 +1337,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts/customers",
-      scopes: ["tenant"]
+      type: "Microsoft.Billing/billingAccounts/customers";
+      scopes: ["tenant"];
     }
   ]>;
 
@@ -1358,8 +1359,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   benefitResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.BillingBenefits/discounts",
-      scopes: ["resourceGroup"]
+      type: "Microsoft.BillingBenefits/discounts";
+      scopes: ["resourceGroup"];
     }
   ]>;
 
@@ -1376,7 +1377,7 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -1384,7 +1385,7 @@ model ManagedServiceIdentity {
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -1464,6 +1465,7 @@ model Plan {
 /**
  * Discounts patch request
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model DiscountPatchRequest {
   /**
    * Discounts patch request properties
@@ -1612,7 +1614,7 @@ model DiscountTypeProperties {
   /**
    * Array of conditions for the discount. Validation: Optional. Maximum length is 1000.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   conditions?: ConditionsItem[];
 }
 
@@ -1711,8 +1713,8 @@ model DiscountTypeProductSku extends DiscountTypeProperties {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
 @discriminator("discountType")
 model DiscountTypeCustomPrice extends DiscountTypeProperties {
   /**
@@ -1753,7 +1755,7 @@ model CustomPriceProperties {
   /**
    * The set of BigCat claims. Validation: Required. Must contain AgreementType, NationalCloud, and PricingAudience claims. Additionally requires AccessPass claim when creating custom price with action == consume on the pricing instructions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   catalogClaims: CatalogClaimsItem[];
 
   /**
@@ -1774,7 +1776,7 @@ model CustomPriceProperties {
   /**
    * The set of market set prices of the priceable node. Validation: Required. Must contain at least one element.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   marketSetPrices: MarketSetPricesItems[];
 }
 
@@ -1809,7 +1811,7 @@ model MarketSetPricesItems {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "For backward compatibility"
 model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeCustomPrice {
   /**
    * Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.

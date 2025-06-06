@@ -13,9 +13,11 @@ namespace Microsoft.BillingBenefits;
 /**
  * Reservation order alias
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-@Azure.ResourceManager.Private.armResourceInternal(ReservationOrderAliasResponseProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(
+  ReservationOrderAliasResponseProperties
+)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
 model ReservationOrderAliasResponse extends Foundations.ProxyResource {
@@ -39,13 +41,13 @@ model ReservationOrderAliasResponse extends Foundations.ProxyResource {
   location?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationOrderAliasResponseProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface ReservationOrderAliasResponses {
   /**
