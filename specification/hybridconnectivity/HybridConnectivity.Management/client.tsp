@@ -102,6 +102,7 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 @@clientName(HostType.AWS, "Aws", "csharp");
+@@clientName(HostType.AWS, "Gcp", "csharp");
 @@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
 @@alternateType(InventoryProperties.azureResourceId,
   armResourceIdentifier,
@@ -149,5 +150,9 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(GenerateAwsTemplateResponse,
   "GenerateAwsTemplateResult",
+  "csharp"
+);
+@@clientName(GenerateGcpTemplateResponse,
+  "GenerateGcpTemplateResult",
   "csharp"
 );
