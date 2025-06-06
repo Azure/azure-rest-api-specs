@@ -557,11 +557,71 @@
           "MaccValidateCreate": {
             "$ref": "./examples/MaccValidateCreate.json"
           },
+          "MaccValidateContributor": {
+            "$ref": "./examples/MaccValidateContributor.json"
+          },
+          "MaccValidateCreateMultiEntity": {
+            "$ref": "./examples/MaccValidateCreateMultiEntity.json"
+          },
+          "MaccValidateCreateBackfilledMacc": {
+            "$ref": "./examples/MaccValidateCreateBackfilledMacc.json"
+          },
+          "MaccValidateCreateNewMaccWithMilestone": {
+            "$ref": "./examples/MaccValidateCreateNewMaccWithMilestone.json"
+          },
+          "MaccValidateCreateMilestonesOnExistingMacc": {
+            "$ref": "./examples/MaccValidateCreateMilestonesOnExistingMacc.json"
+          },
           "MaccValidateUpdate": {
             "$ref": "./examples/MaccValidateUpdate.json"
           },
+          "MaccValidateUpdateCommitment": {
+            "$ref": "./examples/MaccValidateUpdateCommitment.json"
+          },
+          "MaccValidateUpdateEndAt": {
+            "$ref": "./examples/MaccValidateUpdateEndAt.json"
+          },
+          "MaccValidateUpdateContributorRule": {
+            "$ref": "./examples/MaccValidateUpdateContributorRule.json"
+          },
+          "MaccValidateUpdateCommitmentEndAtContributorRule": {
+            "$ref": "./examples/MaccValidateUpdateCommitmentEndAtContributorRule.json"
+          },
+          "MaccValidateUpdateMilestoneCommitment": {
+            "$ref": "./examples/MaccValidateUpdateMilestoneCommitment.json"
+          },
+          "MaccValidateUpdateMilestoneEndDate": {
+            "$ref": "./examples/MaccValidateUpdateMilestoneEndDate.json"
+          },
+          "MaccValidateUpdateMaccAndMilestoneCommitment": {
+            "$ref": "./examples/MaccValidateUpdateMaccAndMilestoneCommitment.json"
+          },
+          "MaccValidateUpdateMaccAndMilestoneEndDate": {
+            "$ref": "./examples/MaccValidateUpdateMaccAndMilestoneEndDate.json"
+          },
+          "MaccValidateUpdateSuppressShortfall": {
+            "$ref": "./examples/MaccValidateUpdateSuppressShortfall.json"
+          },
+          "MaccValidateUpdateUnsuppressShortfall": {
+            "$ref": "./examples/MaccValidateUpdateUnsuppressShortfall.json"
+          },
+          "MaccValidateUpdateMilestoneSuppressTopup": {
+            "$ref": "./examples/MaccValidateUpdateMilestoneSuppressTopup.json"
+          },
+          "MaccValidateUpdateMilestoneUnsuppressTopup": {
+            "$ref": "./examples/MaccValidateUpdateMilestoneUnsuppressTopup.json"
+          },
+          "MaccValidateUpdateRemoveMilestones": {
+            "$ref": "./examples/MaccValidateUpdateRemoveMilestones.json"
+          },
           "MaccValidateCancel": {
             "$ref": "./examples/MaccValidateCancel.json"
+          },
+          "MaccValidateCancelWithMilestones": {
+            "$ref": "./examples/MaccValidateCancelWithMilestones.json"
+          },
+          "MaccValidateWriteOffWithMilestones": {
+            "$ref": "./examples/MaccValidateWriteOffWithMilestones.json"
           }
         },
         "parameters": [
@@ -4590,7 +4650,7 @@
       "type": "object",
       "description": "Optional field to record suppression reason for automatic shortfall.",
       "properties": {
-        "code": {                
+        "code": {
           "type": "string",
           "description": "Code for the suppression reason."
         },
@@ -4692,7 +4752,7 @@
       "type": "object",
       "description": "Optional field to record suppression reason for automatic topup.",
       "properties": {
-        "code": {                
+        "code": {
           "type": "string",
           "description": "Code for the suppression reason."
         },

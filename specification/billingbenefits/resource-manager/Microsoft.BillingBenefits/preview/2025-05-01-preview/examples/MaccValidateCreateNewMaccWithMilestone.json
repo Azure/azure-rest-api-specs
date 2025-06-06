@@ -7,38 +7,38 @@
         {
           "properties": {
             "entityType": "primary",
+            "systemId": null,
             "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "resourceUri": "R1",
-            "systemId": "13810867107109237",
+            "resourceUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "startAt": "2023-07-01T00:00:00Z",
+            "endAt": "2026-07-31T23:59:59Z",
+            "allowContributors": true,
             "commitment": {
               "grain": "FullTerm",
-              "amount": 20000,
-              "currencyCode": "USD"
+              "currencyCode": "USD",
+              "amount": 20000
             },
-            "endAt": "2030-07-31T23:59:59Z",
-            "allowContributors": true,
-            "displayName": "Test MACC Benefit",
             "milestones": [
               {
-                "milestoneId": "{unique_guid_1}",
                 "commitment": {
                   "grain": "FullTerm",
                   "currencyCode": "USD",
-                  "amount": 10000
+                  "amount": 5000
                 },
                 "endAt": "2024-07-31T23:59:59Z"
               },
               {
-                "milestoneId": "{unique_guid_2}",
                 "commitment": {
                   "grain": "FullTerm",
                   "currencyCode": "USD",
                   "amount": 15000
                 },
-                "endAt": "2027-07-31T23:59:59Z"
+                "endAt": "2025-07-31T23:59:59Z"
               }
             ]
-          }
+          },
+          "location": "global"
         }
       ]
     }
@@ -48,7 +48,7 @@
       "body": {
         "benefits": [
           {
-            "resourceUri": "R1",
+            "resourceUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
             "valid": true
           }
         ]
