@@ -90,27 +90,28 @@ model TestRun {
   id: string;
 
   @doc("The test-run display name.")
+  @maxLength(200)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   displayName: string;
 
   @doc("The test-run creator's id.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   creatorId: string;
 
   @doc("The test-run creator's name.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   creatorName: string;
 
   @doc("The test-run config.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  config: RunConfig;
+  config?: RunConfig;
 
   @doc("The test-run CI Config.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  ciConfig: CiConfig;
+  ciConfig?: CiConfig;
 
   @doc("The test-run summary.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   summary: RunSummary;
 }
 
@@ -122,7 +123,21 @@ model RunConfig {
 
   @doc("The SDK Language used for run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  sdkLanguage: string;
+  sdkLanguage: SDKLanguage;
+}
+
+@doc("The SDK Language used for run.")
+union SDKLanguage {
+  string,
+
+  @doc("JAVASCRIPT SDK")
+  JAVASCRIPT: "JAVASCRIPT",
+
+  @doc("TYPESCRIPT SDK")
+  TYPESCRIPT: "TYPESCRIPT",
+
+  @doc("CSHARP SDK")
+  CSHARP: "CSHARP",
 }
 
 @doc("The run framework.")
@@ -166,28 +181,28 @@ model CiConfig {
 @doc("The run summary.")
 model RunSummary {
   @doc("The run status.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  status: string;
+  @visibility(Lifecycle.Read)
+  status: RunStatus;
 
   @doc("The run billable time.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  billableTime: int32;
+  billableTime?: int64;
 
   @doc("The number of browser sessions corresponding to the run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  numBrowserSessions: int32;
+  numBrowserSessions?: int64;
 
   @doc("The list of jobs corresponding to the run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  jobs: Array<string>;
+  jobs?: Array<string>;
 
   @doc("The list of projects corresponding to the run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  projects: Array<string>;
+  projects?: Array<string>;
 
   @doc("The list of tags corresponding to the run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags: Array<string>;
+  tags?: Array<string>;
 
   @doc("The run start time as utcDateTime.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -195,13 +210,27 @@ model RunSummary {
 
   @doc("The run end time as utcDateTime.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  endTime: utcDateTime;
+  endTime?: utcDateTime;
 
   @doc("The run duration.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  duration: int32;
+  duration?: int64;
 
   @doc("The list of error messages corresponding to the run.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  errorMessages: Array<string>;
+  errorMessages?: Array<string>;
+}
+
+@doc("The run status.")
+union RunStatus {
+  string,
+
+  @doc("The run status is RUNNING")
+  RUNNING: "RUNNING",
+
+  @doc("The run status is CLIENT_COMPLETE")
+  CLIENT_COMPLETE: "CLIENT_COMPLETE",
+
+  @doc("The run status is SERVER_COMPLETE")
+  SERVER_COMPLETE: "SERVER_COMPLETE",
 }

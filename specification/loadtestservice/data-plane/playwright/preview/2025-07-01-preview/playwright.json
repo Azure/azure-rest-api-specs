@@ -877,7 +877,7 @@
           ]
         },
         "sdkLanguage": {
-          "type": "string",
+          "$ref": "#/definitions/SDKLanguage",
           "description": "The SDK Language used for run.",
           "x-ms-mutability": [
             "read",
@@ -905,7 +905,7 @@
           ]
         },
         "sdkLanguage": {
-          "type": "string",
+          "$ref": "#/definitions/SDKLanguage",
           "description": "The SDK Language used for run.",
           "x-ms-mutability": [
             "read",
@@ -986,22 +986,48 @@
         }
       }
     },
+    "RunStatus": {
+      "type": "string",
+      "description": "The run status.",
+      "enum": [
+        "RUNNING",
+        "CLIENT_COMPLETE",
+        "SERVER_COMPLETE"
+      ],
+      "x-ms-enum": {
+        "name": "RunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RUNNING",
+            "value": "RUNNING",
+            "description": "The run status is RUNNING"
+          },
+          {
+            "name": "CLIENT_COMPLETE",
+            "value": "CLIENT_COMPLETE",
+            "description": "The run status is CLIENT_COMPLETE"
+          },
+          {
+            "name": "SERVER_COMPLETE",
+            "value": "SERVER_COMPLETE",
+            "description": "The run status is SERVER_COMPLETE"
+          }
+        ]
+      }
+    },
     "RunSummary": {
       "type": "object",
       "description": "The run summary.",
       "properties": {
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/RunStatus",
           "description": "The run status.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "billableTime": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The run billable time.",
           "x-ms-mutability": [
             "read",
@@ -1011,7 +1037,7 @@
         },
         "numBrowserSessions": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The number of browser sessions corresponding to the run.",
           "x-ms-mutability": [
             "read",
@@ -1077,7 +1103,7 @@
         },
         "duration": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The run duration.",
           "x-ms-mutability": [
             "read",
@@ -1100,128 +1126,37 @@
       },
       "required": [
         "status",
-        "billableTime",
-        "numBrowserSessions",
-        "jobs",
-        "projects",
-        "tags",
-        "startTime",
-        "endTime",
-        "duration",
-        "errorMessages"
+        "startTime"
       ]
     },
-    "RunSummaryCreateOrUpdate": {
-      "type": "object",
-      "description": "The run summary.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The run status.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "billableTime": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The run billable time.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "numBrowserSessions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of browser sessions corresponding to the run.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "jobs": {
-          "type": "array",
-          "description": "The list of jobs corresponding to the run.",
-          "items": {
-            "type": "string"
+    "SDKLanguage": {
+      "type": "string",
+      "description": "The SDK Language used for run.",
+      "enum": [
+        "JAVASCRIPT",
+        "TYPESCRIPT",
+        "CSHARP"
+      ],
+      "x-ms-enum": {
+        "name": "SDKLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JAVASCRIPT",
+            "value": "JAVASCRIPT",
+            "description": "JAVASCRIPT SDK"
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "projects": {
-          "type": "array",
-          "description": "The list of projects corresponding to the run.",
-          "items": {
-            "type": "string"
+          {
+            "name": "TYPESCRIPT",
+            "value": "TYPESCRIPT",
+            "description": "TYPESCRIPT SDK"
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "The list of tags corresponding to the run.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The run start time as utcDateTime.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The run end time as utcDateTime.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "duration": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The run duration.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "errorMessages": {
-          "type": "array",
-          "description": "The list of error messages corresponding to the run.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
+          {
+            "name": "CSHARP",
+            "value": "CSHARP",
+            "description": "CSHARP SDK"
+          }
+        ]
       }
     },
     "TestRun": {
@@ -1239,6 +1174,7 @@
         "displayName": {
           "type": "string",
           "description": "The test-run display name.",
+          "maxLength": 200,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1248,20 +1184,12 @@
         "creatorId": {
           "type": "string",
           "description": "The test-run creator's id.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "creatorName": {
           "type": "string",
           "description": "The test-run creator's name.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "config": {
           "$ref": "#/definitions/RunConfig",
@@ -1284,11 +1212,7 @@
         "summary": {
           "$ref": "#/definitions/RunSummary",
           "description": "The test-run summary.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -1296,8 +1220,6 @@
         "displayName",
         "creatorId",
         "creatorName",
-        "config",
-        "ciConfig",
         "summary"
       ]
     },
@@ -1308,24 +1230,7 @@
         "displayName": {
           "type": "string",
           "description": "The test-run display name.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "creatorId": {
-          "type": "string",
-          "description": "The test-run creator's id.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "creatorName": {
-          "type": "string",
-          "description": "The test-run creator's name.",
+          "maxLength": 200,
           "x-ms-mutability": [
             "read",
             "update",
@@ -1344,15 +1249,6 @@
         "ciConfig": {
           "$ref": "#/definitions/CiConfigCreateOrUpdate",
           "description": "The test-run CI Config.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "summary": {
-          "$ref": "#/definitions/RunSummaryCreateOrUpdate",
-          "description": "The test-run summary.",
           "x-ms-mutability": [
             "read",
             "update",
