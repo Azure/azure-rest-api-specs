@@ -10,9 +10,9 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://azure.com/.default"]>)
-@service(#{ title: "Widget" })
-@versioned(Widget.Versions)
-namespace Widget;
+@service(#{ title: "WidgetAnalytics" })
+@versioned(WidgetAnalytics.Versions)
+namespace WidgetAnalytics;
 
 @doc("Versions info.")
 enum Versions {

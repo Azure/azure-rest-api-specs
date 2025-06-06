@@ -1,7 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using Widget;
+using WidgetAnalytics;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Widgets, "AzureWidgets", "csharp");
+@@clientName(WidgetAnalytics, "AzureWidgetAnalytics", "csharp");

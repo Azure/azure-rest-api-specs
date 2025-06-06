@@ -1,7 +1,7 @@
-# WidgetManagement
+# Widget
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for WidgetManagement.
+> This is the AutoRest configuration file for Widget.
 
 ## Configuration
 
