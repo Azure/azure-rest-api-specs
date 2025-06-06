@@ -2352,6 +2352,7 @@ model ResourceIdentity {
   /**
    * User Assigned Identities
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentity | null>;
 }
 

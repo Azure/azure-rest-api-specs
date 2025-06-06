@@ -73,6 +73,7 @@ interface OrderItemResources {
       /**
        * Defines the If-Match condition. The patch will be performed only if the ETag of the order on the server matches this value.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`?: string;
     }
@@ -159,6 +160,7 @@ interface OrderItemResources {
    * Cancel order item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @operationId("OrderItems_Cancel")
   cancel is ArmResourceActionSync<
     OrderItemResource,

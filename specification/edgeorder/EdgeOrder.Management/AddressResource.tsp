@@ -58,6 +58,7 @@ interface AddressResources {
       /**
        * Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       `If-Match`?: string;
     }
