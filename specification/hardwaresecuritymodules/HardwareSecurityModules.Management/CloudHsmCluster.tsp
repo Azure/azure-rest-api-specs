@@ -13,7 +13,7 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 model CloudHsmCluster
   is Azure.ResourceManager.TrackedResource<CloudHsmClusterProperties> {
   ...ResourceNameParameter<
@@ -93,7 +93,7 @@ interface CloudHsmClusters {
   /**
    * Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   validateBackupProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
@@ -106,7 +106,7 @@ interface CloudHsmClusters {
   /**
    * Create a backup of the Cloud HSM Cluster in the specified subscription
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   backup is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
@@ -119,7 +119,7 @@ interface CloudHsmClusters {
   /**
    * Queued validating pre restore operation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   validateRestoreProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
@@ -132,7 +132,7 @@ interface CloudHsmClusters {
   /**
    * Restores all key materials of a specified Cloud HSM Cluster
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   restore is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
@@ -158,8 +158,8 @@ interface CloudHsmClusters {
    * Gets the backup operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("CloudHsmClusterBackupStatus_Get")
   @get
   cloudHsmClusterBackupStatusGet(
@@ -168,7 +168,7 @@ interface CloudHsmClusters {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
     >,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @path
     @segment("cloudHsmClusters")
     @minLength(3)
@@ -187,8 +187,8 @@ interface CloudHsmClusters {
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @get
   @operationId("CloudHsmClusterRestoreStatus_Get")
   cloudHsmClusterRestoreStatusGet(

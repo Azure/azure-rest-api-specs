@@ -13,8 +13,8 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(DedicatedHsmProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DedicatedHsm extends Foundations.TrackedResource {
@@ -35,7 +35,7 @@ model DedicatedHsm extends Foundations.TrackedResource {
   /**
    * Properties of the dedicated HSM
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: DedicatedHsmProperties;

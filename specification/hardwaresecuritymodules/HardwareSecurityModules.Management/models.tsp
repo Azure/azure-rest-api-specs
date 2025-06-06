@@ -469,7 +469,7 @@ model CloudHsmClusterSku {
 /**
  * Patchable properties of the Cloud HSM Cluster
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model CloudHsmClusterPatchParameters {
   /**
    * The Cloud HSM Cluster's tags
@@ -521,7 +521,7 @@ model PrivateLinkResourceProperties {
  * Backup properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model BackupRequestProperties extends BackupRestoreRequestBaseProperties {}
 
 /**
@@ -596,7 +596,7 @@ model BackupRestoreBaseResultProperties {
   /**
    * The end time of the backup/restore operation in UTC
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   endTime?: utcDateTime | null;
 
@@ -749,7 +749,7 @@ model Error {
 /**
  * Patchable properties of the dedicated HSM
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model DedicatedHsmPatchParameters {
   /**
    * Resource tags
