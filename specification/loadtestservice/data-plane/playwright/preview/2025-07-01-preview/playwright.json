@@ -345,9 +345,8 @@
             "name": "os",
             "in": "query",
             "description": "The os provided by client for remote script runs.",
-            "required": false,
+            "required": true,
             "type": "string",
-            "default": "Linux",
             "enum": [
               "Linux",
               "Windows"
@@ -368,6 +367,16 @@
                 }
               ]
             }
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "The runId provided by client in GUID format.",
+            "required": false,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"

@@ -41,7 +41,14 @@ alias GetBrowsersParams = {
 
   @query
   @doc("The os provided by client for remote script runs.")
-  os?: OS = OS.Linux;
+  os: OS;
+
+  @query
+  @maxLength(36)
+  @minLength(3)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
+  @doc("The runId provided by client in GUID format.")
+  runId?: string;
 };
 
 alias GetBrowsersResponse = {
