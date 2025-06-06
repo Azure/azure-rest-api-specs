@@ -81,9 +81,9 @@ model ChatCompletionsFunctionToolDefinition
   @doc("The object name, which is always 'function'.")
   type: "function";
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @doc("The function definition details for the function tool.")
   @typeChangedFrom(ServiceApiVersions.v2024_08_01_Preview, FunctionDefinition)
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   function: {
     /** A description of what the function does, used by the model to choose when and how to call the function. */
     description?: string;

@@ -334,8 +334,8 @@ model ServiceInfo {
   @doc("Arbitrary service-defined metadata about this service. May be used by constitution or application code, but will not affect any core framework decisions.")
   serviceData?: unknown;
 
-  @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
   configuration: {
     maximumNodeCertificateValidityDays: safeuint;
     recentCoseProposalsWindowSize: safeuint;

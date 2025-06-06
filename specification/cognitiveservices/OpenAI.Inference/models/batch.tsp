@@ -180,8 +180,8 @@ model Batch {
   cancelledAt?: utcDateTime;
 
   /** The request counts for different statuses within the batch. */
-  @encodedName("application/json", "request_counts")
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  @encodedName("application/json", "request_counts")
   requestCounts?: {
     /** Total number of requests in the batch. */
     total?: int32;

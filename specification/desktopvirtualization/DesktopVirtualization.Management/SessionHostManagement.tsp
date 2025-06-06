@@ -33,8 +33,8 @@ interface InitiateSessionHostUpdate {
   /**
    * Initiates a hostpool update or schedule an update for the future.
    */
-  @action("initiateSessionHostUpdate")
   #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  @action("initiateSessionHostUpdate")
   post is ArmResourceActionSync<
     SessionHostManagement,
     Request = {
