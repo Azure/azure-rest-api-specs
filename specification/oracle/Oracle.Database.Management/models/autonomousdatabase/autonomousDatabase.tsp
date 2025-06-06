@@ -562,7 +562,7 @@ model ConnectionStringType {
   profiles?: ProfileType[];
 }
 
-@doc("The details of scheduled operation.")
+@doc("The list of scheduled operations.")
 model ScheduledOperationsType {
   @doc("Day of week")
   dayOfWeek: DayOfWeek;
