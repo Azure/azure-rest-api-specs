@@ -119,8 +119,8 @@ union ConfigurationCheckConfigurationDeviation {
    * Used when the deviation status cannot be determined due to the configuration checks not being
    * evaluated.
    */
-  @doc("The deviation status is evalution failed as the configuration checks couldn't be evaluated.")
-  EvalutionFailed: "EvalutionFailed",
+  @doc("The deviation status is evaluation failed as the configuration checks couldn't be evaluated.")
+  EvaluationFailed: "EvaluationFailed",
 
   @doc("Allows for custom or additional deviation states.")
   string,
