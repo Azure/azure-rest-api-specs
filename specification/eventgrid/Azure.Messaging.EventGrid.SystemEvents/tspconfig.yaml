@@ -23,7 +23,10 @@ options:
     flavor: azure
     generate-test: true
     generate-sample: true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Messaging.EventGrid.SystemEvents
+    model-namespace: false
+    api-version: "2018-01-01"
   "@azure-tools/typespec-csharp":
     package-dir: Azure.Messaging.EventGrid.SystemEvents
     model-namespace: false
@@ -51,6 +54,7 @@ options:
     models-subpackage: systemevents
     package-dir: azure-messaging-eventgrid-systemevents
     customization-class: customization/src/main/java/EventGridSystemEventsCustomization.java
+    use-eclipse-language-server: false
     custom-types-subpackage: implementation.models
     custom-types: AcsRouterCommunicationError,AcsMessageChannelEventError
     flavor: azure
