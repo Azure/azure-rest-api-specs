@@ -161,7 +161,7 @@ model DataflowGraphDestinationNodeSettings {
 @added(Versions.`2025-07-01-preview`)
 model DataflowGraphDestinationSchemaSettings {
   /** The format of the output data. */
-  serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
+  serializationFormat?: DataflowGraphDestinationSchemaSerializationFormat;
 
   /** Reference to the schema that describes the output of the transformation. */
   schemaRef?: string;
