@@ -647,7 +647,6 @@ model RoleAssignmentEntity {
    * Role assignment entity properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RoleAssignmentEntityProperties;
 }
 
@@ -886,7 +885,6 @@ model PurchaseRequest {
 
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PurchaseRequestProperties;
 }
 
@@ -1102,7 +1100,8 @@ model SavingsPlanPurchaseValidateRequest {
  * Reservation order alias
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ReservationOrderAliasRequest extends Azure.ResourceManager.CommonTypes.Resource {
+model ReservationOrderAliasRequest
+  extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Reservation order SKU
    */
@@ -1117,7 +1116,6 @@ model ReservationOrderAliasRequest extends Azure.ResourceManager.CommonTypes.Res
    * Reservation order alias request properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationOrderAliasRequestProperties;
 }
 
@@ -1314,8 +1312,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts",
-      scopes: ["tenant"]
+      type: "Microsoft.Billing/billingAccounts";
+      scopes: ["tenant"];
     }
   ]>;
 
@@ -1325,7 +1323,7 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts",
+      type: "Microsoft.Billing/billingAccounts";
       scopes: ["tenant"];
     }
   ]>;
@@ -1336,8 +1334,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Billing/billingAccounts/customers",
-      scopes: ["tenant"]
+      type: "Microsoft.Billing/billingAccounts/customers";
+      scopes: ["tenant"];
     }
   ]>;
 
@@ -1358,8 +1356,8 @@ model DiscountProperties {
   @visibility(Lifecycle.Read)
   benefitResourceId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.BillingBenefits/discounts",
-      scopes: ["resourceGroup"]
+      type: "Microsoft.BillingBenefits/discounts";
+      scopes: ["resourceGroup"];
     }
   ]>;
 
@@ -1469,7 +1467,6 @@ model DiscountPatchRequest {
    * Discounts patch request properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiscountPatchRequestProperties;
 
   /**
@@ -1826,6 +1823,5 @@ model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
    * Discount properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiscountProperties;
 }
