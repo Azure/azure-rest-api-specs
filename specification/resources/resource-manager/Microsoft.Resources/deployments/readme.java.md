@@ -9,5 +9,4 @@ java:
   service-title: Deployments
   client-flattened-annotation-target: disabled
   uuid-as-string: true
-  output-model-immutable: true
 ```
