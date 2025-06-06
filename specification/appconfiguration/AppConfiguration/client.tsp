@@ -29,8 +29,8 @@ namespace SdkCustomizations;
 // @@access(getSnapshot, Access.internal, "csharp");
 // @@access(createSnapshot, Access.internal, "csharp");
 // @@access(updateSnapshot, Access.internal, "csharp");
-// @@access(getKeyValue, Access.internal, "csharp");
-// @@access(getKeyValues, Access.internal, "csharp");
+@@access(getKeyValue, Access.internal, "csharp");
+@@access(getKeyValues, Access.internal, "csharp");
 // @@access(deleteLock, Access.internal, "csharp");
 // @@access(putLock, Access.internal, "csharp");
 
