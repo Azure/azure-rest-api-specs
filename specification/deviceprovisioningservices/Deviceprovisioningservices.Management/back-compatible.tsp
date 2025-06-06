@@ -17,7 +17,7 @@ using Microsoft.Devices;
   "ProvisioningServiceTags"
 );
 
-@@clientName(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.body,
+@@clientName(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
 );
 

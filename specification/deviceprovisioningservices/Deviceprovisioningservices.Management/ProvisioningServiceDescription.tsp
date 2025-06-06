@@ -46,7 +46,6 @@ model ProvisioningServiceDescription
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: IotDpsPropertiesDescription;
 

@@ -92,7 +92,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("IotDpsResource_DeletePrivateEndpointConnection")
-  deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteAsync<
+  deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Parameters = {
       /**
@@ -125,6 +125,6 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnection.properties,
   "The properties of a private endpoint connection"
 );
-@@doc(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.body,
+@@doc(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
   "The private endpoint connection with updated properties"
 );
