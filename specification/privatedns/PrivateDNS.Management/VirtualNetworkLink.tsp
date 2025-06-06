@@ -37,7 +37,6 @@ model VirtualNetworkLink extends Foundations.TrackedResource {
    * Properties of the virtual network link to the Private DNS zone.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VirtualNetworkLinkProperties;
 }
 

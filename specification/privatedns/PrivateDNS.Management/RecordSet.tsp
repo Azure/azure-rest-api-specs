@@ -38,7 +38,6 @@ model RecordSet extends Foundations.ProxyResource {
    * The properties of the record set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecordSetProperties;
 }
 

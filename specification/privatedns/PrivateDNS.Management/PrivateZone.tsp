@@ -35,7 +35,6 @@ model PrivateZone extends Foundations.TrackedResource {
    * Properties of the Private DNS zone.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateZoneProperties;
 }
 
