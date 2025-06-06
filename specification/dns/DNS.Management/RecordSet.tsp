@@ -119,12 +119,14 @@ interface RecordSets {
       /**
        * The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
@@ -142,6 +144,7 @@ interface RecordSets {
       /**
        * The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -157,6 +160,7 @@ interface RecordSets {
       /**
        * The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     }

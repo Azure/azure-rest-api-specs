@@ -170,6 +170,7 @@ model RecordSetProperties {
   /**
    * The TTL (time-to-live) of the records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   TTL?: int64;
 
   /**
@@ -198,53 +199,62 @@ model RecordSetProperties {
   /**
    * The list of A records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   ARecords?: ARecord[];
 
   /**
    * The list of AAAA records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   AAAARecords?: AaaaRecord[];
 
   /**
    * The list of MX records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   MXRecords?: MxRecord[];
 
   /**
    * The list of NS records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   NSRecords?: NsRecord[];
 
   /**
    * The list of PTR records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   PTRRecords?: PtrRecord[];
 
   /**
    * The list of SRV records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   SRVRecords?: SrvRecord[];
 
   /**
    * The list of TXT records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   TXTRecords?: TxtRecord[];
 
   /**
    * The CNAME record in the  record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   CNAMERecord?: CnameRecord;
 
   /**
    * The SOA record in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   SOARecord?: SoaRecord;
 
   /**
@@ -256,18 +266,21 @@ model RecordSetProperties {
   /**
    * The list of DS records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   DSRecords?: DsRecord[];
 
   /**
    * The list of TLSA records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   TLSARecords?: TlsaRecord[];
 
   /**
    * The list of NAPTR records in the record set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   NAPTRRecords?: NaptrRecord[];
 }
@@ -285,6 +298,7 @@ model SubResource {
 /**
  * An A record.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ARecord {
   /**
    * The IPv4 address of this A record.
@@ -420,6 +434,7 @@ model SoaRecord {
   /**
    * The minimum value for this SOA record. By convention this is used to determine the negative caching duration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   minimumTTL?: int64;
 }
 
@@ -704,5 +719,6 @@ model RecordSetUpdateParameters {
   /**
    * Specifies information about the record set being updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   RecordSet?: RecordSet;
 }
