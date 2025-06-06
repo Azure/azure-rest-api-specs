@@ -31,6 +31,10 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
     .filter((p) => p.startsWith("specification/"))
     .filter((p) => !p.includes("/scenarios/"));
 
+  if (fileList.length === 0) {
+    logMessage("No relevant files changed under 'specification' folder in the PR");
+    return [];
+  }
   logMessage(`Related readme.md and typespec project list:`);
   const changedSpecs: ChangedSpecs[] = [];
 
@@ -199,17 +203,6 @@ export function groupSpecConfigPaths(
   const emptyArray: string[] = [];
   const safeTspConfigs = tspconfigs ?? emptyArray;
   const safeReadmes = readmes ?? emptyArray;
-
-  if (skipUnmatchedReadme) {
-    // Explicitly remove the specific readme file from the array
-    // as we don't want to include it for typespec related batch runs
-    const indexToRemove = safeReadmes.indexOf(
-      "specification/awsconnector/resource-manager/readme.md",
-    );
-    if (indexToRemove !== -1) {
-      safeReadmes.splice(indexToRemove, 1);
-    }
-  }
 
   // Quick return for simple cases
   if (safeTspConfigs.length === 0 && safeReadmes.length === 0) {

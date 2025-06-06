@@ -27,7 +27,57 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-04
+tag: package-2025-04-01
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2025-04-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2025-04-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2025-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2025-04-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2025-04-01/workspaceRP.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+  - code: ResourceNameRestriction
+    reason: Experience is the same as previous GA version, adding restriction will be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart"]
+  - code: AvoidAdditionalProperties
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.CustomKeys.properties.keys
+  - code: LroLocationHeader
+    reason: Existing API behavior
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].delete.responses.202
+  - code: PatchBodyParametersSchema
+    reason: Existing API behavior, the whole property is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: XmsPageableForListCalls
+    reason: Existing API behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources"].get
+  - code: GuidUsage
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
 
 ### Tag: package-preview-2025-04

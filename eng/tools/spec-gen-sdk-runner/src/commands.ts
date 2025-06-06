@@ -90,10 +90,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let hasManagementPlaneSpecs = false;
   let overallRunHasBreakingChange = false;
   let currentRunHasBreakingChange = false;
+  let sdkGenerationExecuted = true;
   let overallExecutionResult = "";
   let currentExecutionResult = "";
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+
+  if (changedSpecs.length === 0) {
+    sdkGenerationExecuted = false;
+    overallExecutionResult = "succeeded";
+  }
 
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
@@ -179,6 +185,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       hasManagementPlaneSpecs,
       stagedArtifactsFolder,
       apiViewRequestData,
+      sdkGenerationExecuted,
     ) || statusCode;
   return statusCode;
 }
@@ -191,6 +198,14 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
+  if (
+    batchType === "all-typespecs" ||
+    batchType === "all-mgmtplane-typespecs" ||
+    batchType === "all-dataplane-typespecs"
+  ) {
+    specGenSdkCommand.push("--skip-sdk-gen-from-openapi", "true");
+  }
+
   // Get the spec paths based on the batch run type
   const specConfigsArray: SpecConfigs[] = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
