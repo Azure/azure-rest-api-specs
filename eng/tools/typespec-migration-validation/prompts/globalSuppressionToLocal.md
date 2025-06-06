@@ -1,6 +1,6 @@
-# ARM Swagger to TypeSpec Migration Guide
+# Remove global suppressions
 
-As a GitHub Copilot assistant, follow this guide when helping users migrate Swagger specifications to TypeSpec.
+As a GitHub Copilot assistant, follow this guide to remove all the global suppressions and specify them locally.
 
 ## Understanding User Input
 
