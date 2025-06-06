@@ -223,7 +223,9 @@ export function findParentWithFile(
       return undefined;
     }
     currentPath = path.dirname(currentPath);
-    if (stopAtFolder && currentPath === stopAtFolder) {
+    // Check if we've reached the root of the path (stopAtFolder) or
+    // if we've reached '.' which prevents infinite loops with path.dirname('.')
+    if ((stopAtFolder && currentPath === stopAtFolder) || currentPath === ".") {
       return undefined;
     }
   }
