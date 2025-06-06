@@ -51,4 +51,10 @@ interface Evaluations {
     },
     ResourceCreatedResponse<AgentEvaluation>
   >;
+
+  @doc("Cancel an evaluation run")
+  cancel is EvaluationsOperations.ResourceUpdate<Evaluation>;
+
+  @doc("Delete an evaluation run")
+  delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }
