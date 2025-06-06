@@ -198,16 +198,6 @@ input-file:
   - Microsoft.Resources/stable/2023-07-01/resources.json
 ```
 
-### Tag: package-resources-2023-07-sdk-only
-
-These settings apply only when `--tag=package-resources-2023-07-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2023-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2023-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2023-07-01/deployments.json
-```
-
 ### Tag: package-resources-2024-03
 
 These settings apply only when `--tag=package-resources-2024-03` is specified on the command line.
@@ -215,16 +205,6 @@ These settings apply only when `--tag=package-resources-2024-03` is specified on
 ``` yaml $(tag) == 'package-resources-2024-03'
 input-file:
   - Microsoft.Resources/stable/2024-03-01/resources.json
-```
-
-### Tag: package-resources-2024-03-sdk-only
-
-These settings apply only when `--tag=package-resources-2024-03-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2024-03-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2024-03-01/resources.json
-  - Microsoft.Resources/deployments/stable/2024-03-01/deployments.json
 ```
 
 ### Tag: package-resources-2024-07
@@ -236,16 +216,6 @@ input-file:
   - Microsoft.Resources/stable/2024-07-01/resources.json
 ```
 
-### Tag: package-resources-2024-07-sdk-only
-
-These settings apply only when `--tag=package-resources-2024-07-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2024-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2024-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2024-07-01/deployments.json
-```
-
 ### Tag: package-resources-2024-11
 
 These settings apply only when `--tag=package-resources-2024-11` is specified on the command line.
@@ -253,16 +223,6 @@ These settings apply only when `--tag=package-resources-2024-11` is specified on
 ``` yaml $(tag) == 'package-resources-2024-11'
 input-file:
   - Microsoft.Resources/stable/2024-11-01/resources.json
-```
-
-### Tag: package-resources-2024-11-sdk-only
-
-These settings apply only when `--tag=package-resources-2024-11-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2024-11-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2024-11-01/resources.json
-  - Microsoft.Resources/deployments/stable/2024-11-01/deployments.json
 ```
 
 ### Tag: package-resources-2025-03
@@ -274,16 +234,6 @@ input-file:
   - Microsoft.Resources/stable/2025-03-01/resources.json
 ```
 
-### Tag: package-resources-2025-03-sdk-only
-
-These settings apply only when `--tag=package-resources-2025-03-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2025-03-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2025-03-01/resources.json
-  - Microsoft.Resources/deployments/stable/2025-03-01/deployments.json
-```
-
 ### Tag: package-resources-2025-04
 
 These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
@@ -291,16 +241,6 @@ These settings apply only when `--tag=package-resources-2025-04` is specified on
 ``` yaml $(tag) == 'package-resources-2025-04'
 input-file:
   - Microsoft.Resources/stable/2025-04-01/resources.json
-```
-
-### Tag: package-resources-2025-04-sdk-only
-
-These settings apply only when `--tag=package-resources-2025-04-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2025-04-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2025-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2025-04-01/deployments.json
 ```
 
 ### Tag: package-2022-12
@@ -493,16 +433,6 @@ These settings apply only when `--tag=package-resources-2022-09` is specified on
 ``` yaml $(tag) == 'package-resources-2022-09'
 input-file:
 - Microsoft.Resources/stable/2022-09-01/resources.json
-```
-
-### Tag: package-resources-2022-09-sdk-only
-
-These settings apply only when `--tag=package-resources-2022-09-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2022-09-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2022-09-01/resources.json
-  - Microsoft.Resources/deployments/stable/2022-09-01/deployments.json
 ```
 
 ### Tag: package-policy-2020-09
@@ -811,16 +741,6 @@ input-file:
 - Microsoft.Resources/stable/2021-04-01/resources.json
 ```
 
-### Tag: package-resources-2021-04-sdk-only
-
-These settings apply only when `--tag=package-resources-2021-04-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2021-04-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2021-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-04-01/deployments.json
-```
-
 ### Tag: package-resources-2021-01
 
 These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
@@ -828,16 +748,6 @@ These settings apply only when `--tag=package-resources-2021-01` is specified on
 ``` yaml $(tag) == 'package-resources-2021-01'
 input-file:
 - Microsoft.Resources/stable/2021-01-01/resources.json
-```
-
-### Tag: package-resources-2021-01-sdk-only
-
-These settings apply only when `--tag=package-resources-2021-01-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2021-01-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2021-01-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-01-01/deployments.json
 ```
 
 ### Tag: package-resources-2020-10
@@ -849,16 +759,6 @@ input-file:
   - Microsoft.Resources/stable/2020-10-01/resources.json
 ```
 
-### Tag: package-resources-2020-10-sdk-only
-
-These settings apply only when `--tag=package-resources-2020-10-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2020-10-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-10-01/deployments.json
-```
-
 ### Tag: package-resources-2020-08
 
 These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
@@ -866,16 +766,6 @@ These settings apply only when `--tag=package-resources-2020-08` is specified on
 ``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
   - Microsoft.Resources/stable/2020-08-01/resources.json
-```
-
-### Tag: package-resources-2020-08-sdk-only
-
-These settings apply only when `--tag=package-resources-2020-08-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2020-08-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-08-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-08-01/deployments.json
 ```
 
 ### Tag: package-resources-2020-06
@@ -887,16 +777,6 @@ input-file:
 - Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
-### Tag: package-resources-2020-06-sdk-only
-
-These settings apply only when `--tag=package-resources-2020-06-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2020-06-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2020-06-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-06-01/deployments.json
-```
-
 ### Tag: package-resources-2019-10
 
 These settings apply only when `--tag=package-resources-2019-10` is specified on the command line.
@@ -904,16 +784,6 @@ These settings apply only when `--tag=package-resources-2019-10` is specified on
 ``` yaml $(tag) == 'package-resources-2019-10'
 input-file:
 - Microsoft.Resources/stable/2019-10-01/resources.json
-```
-
-### Tag: package-resources-2019-10-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-10-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-10-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-10-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-08
@@ -925,16 +795,6 @@ input-file:
 - Microsoft.Resources/stable/2019-08-01/resources.json
 ```
 
-### Tag: package-resources-2019-08-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-08-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-08-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-08-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-08-01/deployments.json
-```
-
 ### Tag: package-resources-2019-07
 
 These settings apply only when `--tag=package-resources-2019-07` is specified on the command line.
@@ -942,16 +802,6 @@ These settings apply only when `--tag=package-resources-2019-07` is specified on
 ``` yaml $(tag) == 'package-resources-2019-07'
 input-file:
 - Microsoft.Resources/stable/2019-07-01/resources.json
-```
-
-### Tag: package-resources-2019-07-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-07-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-07-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-0510
@@ -963,16 +813,6 @@ input-file:
 - Microsoft.Resources/stable/2019-05-10/resources.json
 ```
 
-### Tag: package-resources-2019-0510-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-0510-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-0510-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-05-10/resources.json
-  - Microsoft.Resources/deployments/stable/2019-05-10/deployments.json
-```
-
 ### Tag: package-resources-2019-05
 
 These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
@@ -980,16 +820,6 @@ These settings apply only when `--tag=package-resources-2019-05` is specified on
 ``` yaml $(tag) == 'package-resources-2019-05'
 input-file:
 - Microsoft.Resources/stable/2019-05-01/resources.json
-```
-
-### Tag: package-resources-2019-05-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-05-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-05-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-05-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-05-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -1001,16 +831,6 @@ input-file:
 - Microsoft.Resources/stable/2019-03-01/resources.json
 ```
 
-### Tag: package-resources-2019-03-sdk-only
-
-These settings apply only when `--tag=package-resources-2019-03-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2019-03-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2019-03-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-03-01/deployments.json
-```
-
 ### Tag: package-resources-2018-05
 
 These settings apply only when `--tag=package-resources-2018-05` is specified on the command line.
@@ -1018,16 +838,6 @@ These settings apply only when `--tag=package-resources-2018-05` is specified on
 ``` yaml $(tag) == 'package-resources-2018-05'
 input-file:
 - Microsoft.Resources/stable/2018-05-01/resources.json
-```
-
-### Tag: package-resources-2018-05-sdk-only
-
-These settings apply only when `--tag=package-resources-2018-05-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2018-05-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2018-05-01/resources.json
-  - Microsoft.Resources/deployments/stable/2018-05-01/deployments.json
 ```
 
 ### Tag: package-resources-2018-02
@@ -1039,16 +849,6 @@ input-file:
 - Microsoft.Resources/stable/2018-02-01/resources.json
 ```
 
-### Tag: package-resources-2018-02-sdk-only
-
-These settings apply only when `--tag=package-resources-2018-02-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2018-02-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2018-02-01/resources.json
-  - Microsoft.Resources/deployments/stable/2018-02-01/deployments.json
-```
-
 ### Tag: package-resources-2017-05
 
 These settings apply only when `--tag=package-resources-2017-05` is specified on the command line.
@@ -1056,16 +856,6 @@ These settings apply only when `--tag=package-resources-2017-05` is specified on
 ``` yaml $(tag) == 'package-resources-2017-05'
 input-file:
 - Microsoft.Resources/stable/2017-05-10/resources.json
-```
-
-### Tag: package-resources-2017-05-sdk-only
-
-These settings apply only when `--tag=package-resources-2017-05-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2017-05-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2017-05-10/resources.json
-  - Microsoft.Resources/deployments/stable/2017-05-10/deployments.json
 ```
 
 ### Tag: package-resources-2016-09
@@ -1077,16 +867,6 @@ input-file:
 - Microsoft.Resources/stable/2016-09-01/resources.json
 ```
 
-### Tag: package-resources-2016-09-sdk-only
-
-These settings apply only when `--tag=package-resources-2016-09-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2016-09-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2016-09-01/resources.json
-  - Microsoft.Resources/deployments/stable/2016-09-01/deployments.json
-```
-
 ### Tag: package-resources-2016-07
 
 These settings apply only when `--tag=package-resources-2016-07` is specified on the command line.
@@ -1094,16 +874,6 @@ These settings apply only when `--tag=package-resources-2016-07` is specified on
 ``` yaml $(tag) == 'package-resources-2016-07'
 input-file:
 - Microsoft.Resources/stable/2016-07-01/resources.json
-```
-
-### Tag: package-resources-2016-07-sdk-only
-
-These settings apply only when `--tag=package-resources-2016-07-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2016-07-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2016-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2016-07-01/deployments.json
 ```
 
 ### Tag: package-resources-2016-02
@@ -1115,16 +885,6 @@ input-file:
 - Microsoft.Resources/stable/2016-02-01/resources.json
 ```
 
-### Tag: package-resources-2016-02-sdk-only
-
-These settings apply only when `--tag=package-resources-2016-02-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2016-02-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2016-02-01/resources.json
-  - Microsoft.Resources/deployments/stable/2016-02-01/deployments.json
-```
-
 ### Tag: package-resources-2015-11
 
 These settings apply only when `--tag=package-resources-2015-11` is specified on the command line.
@@ -1132,16 +892,6 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 ``` yaml $(tag) == 'package-resources-2015-11'
 input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
-```
-
-### Tag: package-resources-2015-11-sdk-only
-
-These settings apply only when `--tag=package-resources-2015-11-sdk-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-resources-2015-11-sdk-only'
-input-file:
-  - Microsoft.Resources/stable/2015-11-01/resources.json
-  - Microsoft.Resources/deployments/stable/2015-11-01/deployments.json
 ```
 
 ### Tag: package-subscriptions-2020-01
