@@ -20,6 +20,7 @@ interface CheckNameAvailabilityOperationGroup {
    * This API is used to check the uniqueness of a resource name used for a diagnostic, troubleshooter or solutions
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @operationId("CheckNameAvailability_CheckAvailability")
   @route("/{+scope}/providers/Microsoft.Help/checkNameAvailability")
   @post
@@ -34,6 +35,7 @@ interface CheckNameAvailabilityOperationGroup {
     /**
      * The required parameters for availability check.
      */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
     @bodyRoot
     CheckNameAvailabilityRequest?: CommonTypes.CheckNameAvailabilityRequest,
   ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
@@ -68,6 +70,7 @@ interface DiscoverySolutionOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface DiscoverySolutionNLPOperationGroup {
   /**
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary.

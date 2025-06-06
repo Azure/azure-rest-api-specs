@@ -603,6 +603,7 @@ model Solutions {
   /**
    * List of metadata.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   solutions?: SolutionMetadataProperties[];
 }

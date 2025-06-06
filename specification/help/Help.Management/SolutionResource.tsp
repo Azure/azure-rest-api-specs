@@ -25,7 +25,7 @@ model SolutionResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface SolutionResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -34,7 +34,7 @@ interface SolutionResourcesOps
         /**
          * The fully qualified Azure Resource manager identifier of the resource.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path(#{ allowReserved: true })
         scope: string,
 
@@ -44,7 +44,7 @@ interface SolutionResourcesOps
         /**
          * Solution resource Name.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path
         @segment("solutions")
         @minLength(1)
@@ -54,6 +54,7 @@ interface SolutionResourcesOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface SolutionResources {
   /**
@@ -81,6 +82,7 @@ interface SolutionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @operationId("Solution_Update")
   update is SolutionResourcesOps.CustomPatchAsync<

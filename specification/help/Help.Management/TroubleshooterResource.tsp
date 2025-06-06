@@ -25,7 +25,7 @@ model TroubleshooterResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface TroubleshooterResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -34,7 +34,7 @@ interface TroubleshooterResourcesOps
         /**
          * The fully qualified Azure Resource manager identifier of the resource.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path(#{ allowReserved: true })
         scope: string,
 
@@ -44,7 +44,7 @@ interface TroubleshooterResourcesOps
         /**
          * Troubleshooter resource Name.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path
         @segment("troubleshooters")
         @minLength(1)
@@ -54,6 +54,7 @@ interface TroubleshooterResourcesOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface TroubleshooterResources {
   /**

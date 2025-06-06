@@ -25,7 +25,7 @@ model DiagnosticResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DiagnosticResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -34,7 +34,7 @@ interface DiagnosticResourcesOps
         /**
          * The fully qualified Azure Resource manager identifier of the resource.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path(#{ allowReserved: true })
         scope: string,
 
@@ -44,7 +44,7 @@ interface DiagnosticResourcesOps
         /**
          * Unique resource name for insight resources
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path
         @segment("diagnostics")
         @minLength(1)
@@ -54,6 +54,7 @@ interface DiagnosticResourcesOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface DiagnosticResources {
   /**
