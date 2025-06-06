@@ -417,6 +417,156 @@
           }
         }
       }
+    },
+    "/playwrightworkspaces/{workspaceId}/test-runs": {
+      "get": {
+        "operationId": "TestRuns_List",
+        "description": "Lists test-runs for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_List": {
+            "$ref": "./examples/TestRuns_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/playwrightworkspaces/{workspaceId}/test-runs/{runId}": {
+      "patch": {
+        "operationId": "TestRuns_CreateOrUpdate",
+        "description": "Creates/Updates a test-run for the workspace with given test-run id. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The test-run id in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestRun"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestRuns_CreateOrUpdate": {
+            "$ref": "./examples/TestRuns_CreateOrUpdate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -562,6 +712,115 @@
         }
       }
     },
+    "CiConfig": {
+      "type": "object",
+      "description": "The run CI config.",
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "The CI provider name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "branch": {
+          "type": "string",
+          "description": "The CI branch.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "author": {
+          "type": "string",
+          "description": "The CI author.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The CI commit id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "revisionUrl": {
+          "type": "string",
+          "description": "The CI revision URL.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "providerName",
+        "branch",
+        "author",
+        "commitId",
+        "revisionUrl"
+      ]
+    },
+    "CiConfigCreateOrUpdate": {
+      "type": "object",
+      "description": "The run CI config.",
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "The CI provider name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "branch": {
+          "type": "string",
+          "description": "The CI branch.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "author": {
+          "type": "string",
+          "description": "The CI author.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "commitId": {
+          "type": "string",
+          "description": "The CI commit id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "revisionUrl": {
+          "type": "string",
+          "description": "The CI revision URL.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "PagedAccessToken": {
       "type": "object",
       "description": "Paged collection of AccessToken items",
@@ -582,6 +841,525 @@
       "required": [
         "value"
       ]
+    },
+    "PagedTestRun": {
+      "type": "object",
+      "description": "Paged collection of TestRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestRun items on this page",
+          "items": {
+            "$ref": "#/definitions/TestRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RunConfig": {
+      "type": "object",
+      "description": "The run config.",
+      "properties": {
+        "framework": {
+          "$ref": "#/definitions/RunFramework",
+          "description": "The framework used for run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sdkLanguage": {
+          "type": "string",
+          "description": "The SDK Language used for run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "framework",
+        "sdkLanguage"
+      ]
+    },
+    "RunConfigCreateOrUpdate": {
+      "type": "object",
+      "description": "The run config.",
+      "properties": {
+        "framework": {
+          "$ref": "#/definitions/RunFrameworkCreateOrUpdate",
+          "description": "The framework used for run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sdkLanguage": {
+          "type": "string",
+          "description": "The SDK Language used for run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "RunFramework": {
+      "type": "object",
+      "description": "The run framework.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The framework name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The framework version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "runnerName": {
+          "type": "string",
+          "description": "The framework runner name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "runnerName"
+      ]
+    },
+    "RunFrameworkCreateOrUpdate": {
+      "type": "object",
+      "description": "The run framework.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The framework name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The framework version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "runnerName": {
+          "type": "string",
+          "description": "The framework runner name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "RunSummary": {
+      "type": "object",
+      "description": "The run summary.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The run status.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "billableTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The run billable time.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numBrowserSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of browser sessions corresponding to the run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "jobs": {
+          "type": "array",
+          "description": "The list of jobs corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "projects": {
+          "type": "array",
+          "description": "The list of projects corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "The list of tags corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run start time as utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run end time as utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The run duration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "The list of error messages corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "billableTime",
+        "numBrowserSessions",
+        "jobs",
+        "projects",
+        "tags",
+        "startTime",
+        "endTime",
+        "duration",
+        "errorMessages"
+      ]
+    },
+    "RunSummaryCreateOrUpdate": {
+      "type": "object",
+      "description": "The run summary.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The run status.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "billableTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The run billable time.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "numBrowserSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of browser sessions corresponding to the run.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "jobs": {
+          "type": "array",
+          "description": "The list of jobs corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "projects": {
+          "type": "array",
+          "description": "The list of projects corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "The list of tags corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run start time as utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The run end time as utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "duration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The run duration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "errorMessages": {
+          "type": "array",
+          "description": "The list of error messages corresponding to the run.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestRun": {
+      "type": "object",
+      "description": "Model of a test-run used for tracking purpose.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The test-run id in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The test-run display name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "The test-run creator's id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "The test-run creator's name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "config": {
+          "$ref": "#/definitions/RunConfig",
+          "description": "The test-run config.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfig",
+          "description": "The test-run CI Config.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "summary": {
+          "$ref": "#/definitions/RunSummary",
+          "description": "The test-run summary.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "creatorId",
+        "creatorName",
+        "config",
+        "ciConfig",
+        "summary"
+      ]
+    },
+    "TestRunCreateOrUpdate": {
+      "type": "object",
+      "description": "Model of a test-run used for tracking purpose.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The test-run display name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "The test-run creator's id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "The test-run creator's name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "config": {
+          "$ref": "#/definitions/RunConfigCreateOrUpdate",
+          "description": "The test-run config.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "ciConfig": {
+          "$ref": "#/definitions/CiConfigCreateOrUpdate",
+          "description": "The test-run CI Config.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "summary": {
+          "$ref": "#/definitions/RunSummaryCreateOrUpdate",
+          "description": "The test-run summary.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
     }
   },
   "parameters": {
