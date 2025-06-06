@@ -1573,6 +1573,73 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/writeoff": {
+      "post": {
+        "description": "Write-off MACC.",
+        "operationId": "Maccs_WriteOff",
+        "tags": [
+          "Macc"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Macc_WriteOff": {
+            "$ref": "./examples/MaccWriteOff.json"
+          },
+          "MaccWithMilestones_WriteOff": {
+            "$ref": "./examples/MaccWithMilestonesWriteOff.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MaccNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Clients should wait for the Retry-After interval before polling again"
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Macc"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/maccs/{maccName}/contributors/{contributorName}": {
       "get": {
         "description": "Get a contributor for primary service admin",
