@@ -33,7 +33,6 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
   kind?: string;
 
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EnvironmentProperties;
 }
 
