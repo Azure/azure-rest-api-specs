@@ -335,6 +335,7 @@ model ServiceInfo {
   serviceData?: unknown;
 
   @doc("Lists governance-controlled configuration parameters of this service, which will be used by core framework code.")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   configuration: {
     maximumNodeCertificateValidityDays: safeuint;
     recentCoseProposalsWindowSize: safeuint;

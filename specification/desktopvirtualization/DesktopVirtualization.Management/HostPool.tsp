@@ -34,6 +34,7 @@ interface AppAttachPackageInfo {
    * Gets information from a package given the path to the package.
    */
   @action("importAppAttachPackageInfo")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   `import` is ArmResourceActionSync<
     HostPool,
     Request = {
@@ -51,6 +52,7 @@ interface MSIXImages {
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
   @action("expandMsixImage")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   expand is ArmResourceActionSync<
     HostPool,
     Request = {

@@ -28,6 +28,7 @@ model CompletionsUsage {
   @doc("Details of the prompt tokens.")
   @added(ServiceApiVersions.v2024_10_01_Preview)
   @encodedName("application/json", "prompt_tokens_details")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   promptTokensDetails?: {
     /** Audio input tokens present in the prompt. */
     @added(ServiceApiVersions.v2025_01_01_Preview)
@@ -42,6 +43,7 @@ model CompletionsUsage {
   /** Breakdown of tokens used in a completion. */
   @added(ServiceApiVersions.v2024_09_01_Preview)
   @encodedName("application/json", "completion_tokens_details")
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   completionTokensDetails?: {
     /**
      * When using Predicted Outputs, the number of tokens in the
