@@ -95,7 +95,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
     assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
+    assert(result.errorOutput.includes("does not match regex"));
   });
 
   it("should fail if second level folder is resource-manager", async function () {
@@ -108,7 +108,7 @@ describe("folder-structure", function () {
       "/gitroot/specification/foo/resource-manager",
     );
     assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
+    assert(result.errorOutput.includes("does not match regex"));
   });
 
   it("should fail if Shared does not follow Management ", async function () {

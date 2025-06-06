@@ -122,38 +122,35 @@ export class FolderStructureRule implements Rule {
         success = false;
       }
 
-      // TODO: Decide if v2 should validate folder names and structure to ensure specs align, or allow a more loose structure to ease
-      // migration from v1 to v2.
-
       const specType = folder.includes("data-plane") ? "data-plane" : "resource-manager";
       if (specType === "data-plane") {
         if (folderStruct.length !== 4) {
           errorOutput +=
-            "Invalid folder structure: TypeSpec for data-plane specs must be in a folder exactly one level under 'data-plane', like 'specification/foo/data-plane/Foo'.";
+            "Invalid folder structure: TypeSpec for data-plane specs must be in a folder exactly one level under 'data-plane', like 'specification/foo/data-plane/FooAnalytics'.";
           success = false;
         }
       } else if (specType === "resource-manager") {
         if (folderStruct.length !== 5) {
           errorOutput +=
-            "Invalid folder structure: TypeSpec for resource-manager specs must be in a folder exactly two levels under 'resource-manager', like 'specification/foo/resource-management/Microsoft.Foo/FooManagement'.";
+            "Invalid folder structure: TypeSpec for resource-manager specs must be in a folder exactly two levels under 'resource-manager', like 'specification/foo/resource-management/Microsoft.Foo/Foo'.";
           success = false;
         }
 
+        const rpNamespaceRegex = /^[A-Za-z0-9\.]+$/;
         const rpNamespaceFolder = folderStruct[folderStruct.length - 2];
 
-        // Verify service folder is capitalized after each '.'
-        if (/(^|\. *)([a-z])/g.test(rpNamespaceFolder)) {
+        if (!rpNamespaceRegex.test(rpNamespaceFolder)) {
           success = false;
-          errorOutput += `Invalid RP namespace folder '${rpNamespaceFolder}'. RP namespace folders must be capitalized after each '.'`;
+          errorOutput += `RPNamespace folder '${rpNamespaceFolder}' does not match regex ${rpNamespaceRegex}`;
         }
       }
 
+      const serviceRegex = /^[A-Za-z0-9]+$/;
       const serviceFolder = folderStruct[folderStruct.length - 1];
 
-      // Verify service folder is capitalized after each '.'
-      if (/(^|\. *)([a-z])/g.test(serviceFolder)) {
+      if (!serviceRegex.test(serviceFolder)) {
         success = false;
-        errorOutput += `Invalid service folder '${serviceFolder}'. Service folders must be capitalized after each '.'`;
+        errorOutput += `Service folder '${serviceFolder}' does not match regex ${serviceRegex}`;
       }
     }
 
