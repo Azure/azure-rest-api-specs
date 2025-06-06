@@ -442,7 +442,7 @@ namespace: azure.mgmt.resource.resources.v2025_04_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_04_01
 input-file:
   - Microsoft.Resources/stable/2025-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2025-04-01/resources.json
+  - Microsoft.Resources/deployments/stable/2025-04-01/deployments.json
 ```
 
 ### Tag: package-resources-2025-03-python-only and python
@@ -457,7 +457,7 @@ namespace: azure.mgmt.resource.resources.v2025_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_03_01
 input-file:
   - Microsoft.Resources/stable/2025-03-01/resources.json
-  - Microsoft.Resources/deployments/stable/2025-03-01/resources.json
+  - Microsoft.Resources/deployments/stable/2025-03-01/deployments.json
 ```
 
 ### Tag: package-resources-2024-11-python-only and python
@@ -472,7 +472,7 @@ namespace: azure.mgmt.resource.resources.v2024_11_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_11_01
 input-file:
   - Microsoft.Resources/stable/2024-11-01/resources.json
-  - Microsoft.Resources/deployments/stable/2024-11-01/resources.json
+  - Microsoft.Resources/deployments/stable/2024-11-01/deployments.json
 ```
 
 ### Tag: package-resources-2024-07-python-only and python
@@ -487,7 +487,7 @@ namespace: azure.mgmt.resource.resources.v2024_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_07_01
 input-file:
   - Microsoft.Resources/stable/2024-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2024-07-01/resources.json
+  - Microsoft.Resources/deployments/stable/2024-07-01/deployments.json
 ```
 
 ### Tag: package-resources-2022-09-python-only and python
@@ -502,7 +502,7 @@ namespace: azure.mgmt.resource.resources.v2022_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
 input-file:
   - Microsoft.Resources/stable/2022-09-01/resources.json
-  - Microsoft.Resources/deployments/stable/2022-09-01/resources.json
+  - Microsoft.Resources/deployments/stable/2022-09-01/deployments.json
 ```
 
 ### Tag: package-resources-2021-04-python-only and python
@@ -516,7 +516,7 @@ namespace: azure.mgmt.resource.resources.v2021_04_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_04_01
 input-file:
   - Microsoft.Resources/stable/2021-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-04-01/resources.json
+  - Microsoft.Resources/deployments/stable/2021-04-01/deployments.json
 ```
 
 ### Tag: package-resources-2021-01-python-only and python
@@ -530,7 +530,7 @@ namespace: azure.mgmt.resource.resources.v2021_01_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2021_01_01
 input-file:
   - Microsoft.Resources/stable/2021-01-01/resources.json
-  - Microsoft.Resources/deployments/stable/2021-01-01/resources.json
+  - Microsoft.Resources/deployments/stable/2021-01-01/deployments.json
 ```
 
 ### Tag: package-resources-2020-10-python-only and python
@@ -544,7 +544,7 @@ namespace: azure.mgmt.resource.resources.v2020_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_10_01
 input-file:
   - Microsoft.Resources/stable/2020-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-10-01/resources.json
+  - Microsoft.Resources/deployments/stable/2020-10-01/deployments.json
 ```
 
 ### Tag: package-resources-2020-06-python-only and python
@@ -558,7 +558,7 @@ namespace: azure.mgmt.resource.resources.v2020_06_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_06_01
 input-file:
   - Microsoft.Resources/stable/2020-06-01/resources.json
-  - Microsoft.Resources/deployments/stable/2020-06-01/resources.json
+  - Microsoft.Resources/deployments/stable/2020-06-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-10-python-only and python
@@ -572,7 +572,7 @@ namespace: azure.mgmt.resource.resources.v2019_10_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_10_01
 input-file:
   - Microsoft.Resources/stable/2019-10-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-10-01/resources.json
+  - Microsoft.Resources/deployments/stable/2019-10-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-08-python-only and python
@@ -586,7 +586,7 @@ namespace: azure.mgmt.resource.resources.v2019_08_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_08_01
 input-file:
   - Microsoft.Resources/stable/2019-08-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-08-01/resources.json
+  - Microsoft.Resources/deployments/stable/2019-08-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-07-python-only and python
@@ -600,7 +600,7 @@ namespace: azure.mgmt.resource.resources.v2019_07_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_07_01
 input-file:
   - Microsoft.Resources/stable/2019-07-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-07-01/resources.json
+  - Microsoft.Resources/deployments/stable/2019-07-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-0510-python-only and python
@@ -614,7 +614,7 @@ namespace: azure.mgmt.resource.resources.v2019_05_10
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_10
 input-file:
   - Microsoft.Resources/stable/2019-05-10/resources.json
-  - Microsoft.Resources/deployments/stable/2019-05-10/resources.json
+  - Microsoft.Resources/deployments/stable/2019-05-10/deployments.json
 ```
 
 ### Tag: package-resources-2019-05-python-only and python
@@ -628,7 +628,7 @@ namespace: azure.mgmt.resource.resources.v2019_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_05_01
 input-file:
   - Microsoft.Resources/stable/2019-05-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-05-01/resources.json
+  - Microsoft.Resources/deployments/stable/2019-05-01/deployments.json
 ```
 
 ### Tag: package-resources-2019-03-python-only and python
@@ -642,7 +642,7 @@ namespace: azure.mgmt.resource.resources.v2019_03_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_03_01
 input-file:
   - Microsoft.Resources/stable/2019-03-01/resources.json
-  - Microsoft.Resources/deployments/stable/2019-03-01/resources.json
+  - Microsoft.Resources/deployments/stable/2019-03-01/deployments.json
 ```
 
 ### Tag: package-resources-2018-05-python-only and python
@@ -656,7 +656,7 @@ namespace: azure.mgmt.resource.resources.v2018_05_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_05_01
 input-file:
   - Microsoft.Resources/stable/2018-05-01/resources.json
-  - Microsoft.Resources/deployments/stable/2018-05-01/resources.json
+  - Microsoft.Resources/deployments/stable/2018-05-01/deployments.json
 ```
 
 ### Tag: package-resources-2018-02-python-only and python
@@ -670,7 +670,7 @@ namespace: azure.mgmt.resource.resources.v2018_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2018_02_01
 input-file:
   - Microsoft.Resources/stable/2018-02-01/resources.json
-  - Microsoft.Resources/deployments/stable/2018-02-01/resources.json
+  - Microsoft.Resources/deployments/stable/2018-02-01/deployments.json
 ```
 
 ### Tag: package-resources-2017-05-python-only and python
@@ -684,7 +684,7 @@ namespace: azure.mgmt.resource.resources.v2017_05_10
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2017_05_10
 input-file:
   - Microsoft.Resources/stable/2017-05-10/resources.json
-  - Microsoft.Resources/deployments/stable/2017-05-10/resources.json
+  - Microsoft.Resources/deployments/stable/2017-05-10/deployments.json
 ```
 
 ### Tag: package-resources-2016-09-python-only and python
@@ -698,7 +698,7 @@ namespace: azure.mgmt.resource.resources.v2016_09_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_09_01
 input-file:
   - Microsoft.Resources/stable/2016-09-01/resources.json
-  - Microsoft.Resources/deployments/stable/2016-09-01/resources.json
+  - Microsoft.Resources/deployments/stable/2016-09-01/deployments.json
 ```
 
 ### Tag: package-resources-2016-02-python-only and python
@@ -712,7 +712,7 @@ namespace: azure.mgmt.resource.resources.v2016_02_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
 input-file:
   - Microsoft.Resources/stable/2016-02-01/resources.json
-  - Microsoft.Resources/deployments/stable/2016-02-01/resources.json
+  - Microsoft.Resources/deployments/stable/2016-02-01/deployments.json
 ```
 
 ### Tag: package-subscriptions-2022-12 and python
