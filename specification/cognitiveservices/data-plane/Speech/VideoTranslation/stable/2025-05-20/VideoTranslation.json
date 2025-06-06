@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Video Translation",
-    "version": "2024-05-20-preview",
+    "version": "2025-05-20",
     "description": "Video translation API to translate video from source locale to target locale.",
     "contact": {
       "name": "Azure AI - Speech Services",
@@ -72,6 +72,160 @@
     }
   ],
   "paths": {
+    "/configurations/event-hub": {
+      "get": {
+        "operationId": "EventHubConfigurationOperations_GetEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Get EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_GetEventHubConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Create or replace EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace EventHub configuration": {
+            "$ref": "./examples/EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EventHubConfigurationOperations_DeleteEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Delete EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_DeleteEventHubConfiguration.json"
+          }
+        }
+      }
+    },
+    "/configurations/event-hub:ping": {
+      "post": {
+        "operationId": "EventHubConfigurationOperations_PingEventHub",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Send ping to EventHub to verify configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Send EventHub ping event": {
+            "$ref": "./examples/EventHubConfigurationOperations_PingEventHub.json"
+          }
+        }
+      }
+    },
     "/operations/{operationId}": {
       "get": {
         "operationId": "OperationOperations_GetOperation",
@@ -624,6 +778,106 @@
         }
       }
     },
+    "EnableEmotionalPlatformVoice": {
+      "type": "string",
+      "description": "Enable emotional platform voice kind.",
+      "enum": [
+        "Auto",
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "EnableEmotionalPlatformVoice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Let API to decide whether to enable emotional voice for the target locale."
+          },
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Force to enable emotional voice if there is voice supported emotion for the target locale."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable platform voice emotion for the target locale."
+          }
+        ]
+      }
+    },
+    "EventHubConfiguration": {
+      "type": "object",
+      "description": "EventHub configuration.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to enable sending event to EventHub."
+        },
+        "eventHubNamespaceHostName": {
+          "type": "string",
+          "description": "EventHub namespace host name, for example: [YourNamespace].servicebus.windows.net"
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "EventHub name."
+        },
+        "managedIdentityClientId": {
+          "$ref": "#/definitions/Guid",
+          "description": "Managed identity client ID for user-assigned managed identity, if not specified, API will use system-assigned managed identity."
+        },
+        "enabledEvents": {
+          "type": "array",
+          "description": "Enabled event kinds for notification.",
+          "items": {
+            "$ref": "#/definitions/EventHubVideoTranslationEventKind"
+          }
+        }
+      },
+      "required": [
+        "isEnabled",
+        "eventHubNamespaceHostName",
+        "eventHubName",
+        "enabledEvents"
+      ]
+    },
+    "EventHubVideoTranslationEventKind": {
+      "type": "string",
+      "description": "EventHub event kind.",
+      "enum": [
+        "Ping",
+        "TranslationCompletion",
+        "IterationCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "EventHubVideoTranslationEventKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ping",
+            "value": "Ping",
+            "description": "Send event to EventHub when ping API is requested."
+          },
+          {
+            "name": "TranslationCompletion",
+            "value": "TranslationCompletion",
+            "description": "Send event to EventHub when translation completed or failed."
+          },
+          {
+            "name": "IterationCompletion",
+            "value": "IterationCompletion",
+            "description": "Send event to EventHub when iteration completed or failed."
+          }
+        ]
+      }
+    },
+    "Guid": {
+      "type": "string",
+      "description": "Guid, for example: 8e2da02e-f9b3-4a1c-941f-8da60f16c2e5",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
     "Iteration": {
       "type": "object",
       "description": "Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.",
@@ -695,6 +949,44 @@
         "exportSubtitleInVideo": {
           "type": "boolean",
           "description": "Export subtitle in video, if not specified, it will inherit the value defined in the input of translation creation."
+        },
+        "ttsCustomLexiconFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "ttsCustomLexiconFileIdInAudioContentCreation": {
+          "$ref": "#/definitions/Guid",
+          "description": "Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "enableVideoSpeedAdjustment": {
+          "type": "boolean",
+          "description": "This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience, if not specified, video speed will not be adjusted."
+        },
+        "enableOcrCorrectionFromSubtitle": {
+          "type": "boolean",
+          "description": "Indicate whether to allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle."
+        },
+        "exportTargetLocaleAdvancedSubtitleFile": {
+          "type": "boolean",
+          "description": "This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions, if not specified, iteration response will not include advanced subtitle."
+        },
+        "subtitlePrimaryColor": {
+          "$ref": "#/definitions/rgbaColor",
+          "description": "This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default white color."
+        },
+        "subtitleOutlineColor": {
+          "$ref": "#/definitions/rgbaColor",
+          "description": "This parameter specifies the outline color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default black color."
+        },
+        "subtitleFontSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This parameter specifies the font size of subtitles in the video translation output between 5 and 30, if not specified, it will use the language dependent default value."
+        },
+        "enableEmotionalPlatformVoice": {
+          "$ref": "#/definitions/EnableEmotionalPlatformVoice",
+          "description": "This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side."
         }
       }
     },
@@ -707,6 +999,11 @@
           "format": "uri",
           "description": "Translated video file URL."
         },
+        "translatedAudioFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translated audio file URL."
+        },
         "sourceLocaleSubtitleWebvttFileUrl": {
           "type": "string",
           "format": "uri",
@@ -716,6 +1013,11 @@
           "type": "string",
           "format": "uri",
           "description": "Target locale subtitle file URL."
+        },
+        "targetLocaleAdvancedSubtitleFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "This property provides the URL of the target locale Advanced SubStation Alpha (ASS) subtitle file. It is populated only when exportTargetLocaleAdvancedSubtitleFile is set to true during iteration creation; otherwise, this property will not be included in the response."
         },
         "metadataJsonWebvttFileUrl": {
           "type": "string",
@@ -900,10 +1202,19 @@
           "format": "uri",
           "description": "Translation video file Azure blob url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
+        "audioFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translation audio file Azure blob url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
         "speakerCount": {
           "type": "integer",
           "format": "int32",
           "description": "Number of speakers in the video, if not provided, it will be auto-detected from the video file."
+        },
+        "enableLipSync": {
+          "type": "boolean",
+          "description": "Indicate whether to enable lip sync, if not provided, the default value is false to disable the lip sync."
         },
         "subtitleMaxCharCountPerSegment": {
           "type": "integer",
@@ -916,10 +1227,8 @@
         }
       },
       "required": [
-        "sourceLocale",
         "targetLocale",
-        "voiceKind",
-        "videoFileUrl"
+        "voiceKind"
       ]
     },
     "VoiceKind": {
@@ -1008,6 +1317,13 @@
       "minLength": 3,
       "maxLength": 64,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+    },
+    "rgbaColor": {
+      "type": "string",
+      "description": "The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow.",
+      "minLength": 6,
+      "maxLength": 9,
+      "pattern": "^#?(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$"
     }
   },
   "parameters": {
