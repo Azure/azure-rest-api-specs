@@ -8188,11 +8188,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the source node."
+          "description": "Name of the input node."
         },
         "schema": {
-          "$ref": "#/definitions/DataflowGraphSchemaSettings",
-          "description": "Schema settings for the source node."
+          "$ref": "#/definitions/DataflowGraphConnectionSchemaSettings",
+          "description": "Schema settings for the input node."
         }
       },
       "required": [
@@ -8212,6 +8212,56 @@
         "name"
       ]
     },
+    "DataflowGraphConnectionSchemaSerializationFormat": {
+      "type": "string",
+      "description": "Serialization format for dataflow graph connection.",
+      "enum": [
+        "Delta",
+        "Json",
+        "Parquet",
+        "Avro"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowGraphConnectionSchemaSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta Format"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet Format"
+          },
+          {
+            "name": "Avro",
+            "value": "Avro",
+            "description": "Avro serialization format."
+          }
+        ]
+      }
+    },
+    "DataflowGraphConnectionSchemaSettings": {
+      "type": "object",
+      "description": "DataflowGraph connection node output schema settings.",
+      "properties": {
+        "serializationFormat": {
+          "$ref": "#/definitions/DataflowGraphConnectionSchemaSerializationFormat",
+          "description": "Output serialization format."
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Reference to the schema that describes the output of the transformation."
+        }
+      }
+    },
     "DataflowGraphDestinationNodeSettings": {
       "type": "object",
       "description": "DataflowGraph destination node settings.",
@@ -8225,13 +8275,54 @@
           "description": "Data destination at the endpoint."
         },
         "outputSchemaSettings": {
-          "$ref": "#/definitions/DataflowGraphSchemaSettings",
+          "$ref": "#/definitions/DataflowGraphDestinationSchemaSettings",
           "description": "Output schema settings."
         }
       },
       "required": [
         "endpointRef",
         "dataDestination"
+      ]
+    },
+    "DataflowGraphDestinationSchemaSerializationFormat": {
+      "type": "string",
+      "description": "Serialization format for dataflow graph.",
+      "enum": [
+        "Parquet",
+        "Delta"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowGraphDestinationSchemaSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet serialization format."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta serialization format."
+          }
+        ]
+      }
+    },
+    "DataflowGraphDestinationSchemaSettings": {
+      "type": "object",
+      "description": "DataflowGraph destination node output schema settings.",
+      "properties": {
+        "serializationFormat": {
+          "$ref": "#/definitions/DataflowGraphDestinationSchemaSerializationFormat",
+          "description": "The format of the output data."
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Reference to the schema that describes the output of the transformation."
+        }
+      },
+      "required": [
+        "serializationFormat"
       ]
     },
     "DataflowGraphGraphNode": {
@@ -8471,59 +8562,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataflowGraphSchemaSettings": {
-      "type": "object",
-      "description": "DataflowGraph output schema settings.",
-      "properties": {
-        "serializationFormat": {
-          "$ref": "#/definitions/DataflowGraphSerializationFormat",
-          "description": "Output serialization format."
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "Reference to the schema that describes the output of the transformation."
-        }
-      },
-      "required": [
-        "schemaRef"
-      ]
-    },
-    "DataflowGraphSerializationFormat": {
-      "type": "string",
-      "description": "Serialization format for dataflow graph.",
-      "enum": [
-        "Delta",
-        "Json",
-        "Parquet",
-        "Avro"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowGraphSerializationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Delta",
-            "value": "Delta",
-            "description": "Delta Format"
-          },
-          {
-            "name": "Json",
-            "value": "Json",
-            "description": "JSON Format"
-          },
-          {
-            "name": "Parquet",
-            "value": "Parquet",
-            "description": "Parquet Format"
-          },
-          {
-            "name": "Avro",
-            "value": "Avro",
-            "description": "Avro serialization format."
-          }
-        ]
-      }
     },
     "DataflowGraphSourceNode": {
       "type": "object",
