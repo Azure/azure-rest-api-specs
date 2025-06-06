@@ -30,7 +30,6 @@ model SqlVirtualMachine extends Foundations.TrackedResource {
   identity?: ResourceIdentity;
 
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: SqlVirtualMachineProperties;
 }
