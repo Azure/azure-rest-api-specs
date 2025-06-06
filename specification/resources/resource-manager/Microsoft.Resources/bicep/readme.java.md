@@ -4,11 +4,10 @@ These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(java)
+title: BicepManagementClient
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.resources.bicep
-  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/bicep
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
+  service-name: Bicep
+  client-flattened-annotation-target: disabled
+  uuid-as-string: true
+  output-model-immutable: true
 ```
