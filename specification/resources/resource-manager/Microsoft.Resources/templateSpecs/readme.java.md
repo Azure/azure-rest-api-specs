@@ -5,10 +5,9 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.resources.templatespecs
-  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/templatespecs
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
+  title: TemplateSpecsManagementClient
+  service-title: Template Specs
+  client-flattened-annotation-target: disabled
+  uuid-as-string: true
+  output-model-immutable: true
 ```
