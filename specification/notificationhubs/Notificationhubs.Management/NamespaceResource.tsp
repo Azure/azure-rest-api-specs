@@ -30,7 +30,6 @@ model NamespaceResource extends Foundations.TrackedResource {
   sku: Sku;
 
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: NamespaceProperties;
 }
