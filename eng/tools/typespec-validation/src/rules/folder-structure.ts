@@ -129,7 +129,7 @@ export class FolderStructureRule implements Rule {
       if (specType === "data-plane") {
         if (folderStruct.length !== 4) {
           errorOutput +=
-            "Invalid folder structure: TypeSpec for data-plane specs must be in a folder exactly one level under 'data-plane', like 'specification/foo/data-plane/Foo'.";
+            "Invalid folder structure: TypeSpec for data-plane specs must be in a folder exactly one level under 'data-plane', like 'specification/foo/data-plane/FooAnalytics'.";
           success = false;
         }
       } else if (specType === "resource-manager") {
