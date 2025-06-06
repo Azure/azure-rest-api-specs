@@ -27,10 +27,42 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-04-01
+tag: package-2025-06-01
 ```
 
 ---
+
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-06-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-06-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
 
 ### Tag: package-preview-2025-04-01
 
