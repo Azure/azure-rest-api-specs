@@ -647,7 +647,6 @@ model RoleAssignmentEntity {
    * Role assignment entity properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RoleAssignmentEntityProperties;
 }
 
@@ -886,7 +885,6 @@ model PurchaseRequest {
 
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PurchaseRequestProperties;
 }
 
@@ -1118,7 +1116,6 @@ model ReservationOrderAliasRequest
    * Reservation order alias request properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ReservationOrderAliasRequestProperties;
 }
 
@@ -1471,7 +1468,6 @@ model DiscountPatchRequest {
    * Discounts patch request properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiscountPatchRequestProperties;
 
   /**
@@ -1828,6 +1824,5 @@ model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
    * Discount properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiscountProperties;
 }
