@@ -321,7 +321,6 @@ model DedicatedCapacityUpdateParameters {
    * Properties of the provision operation request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DedicatedCapacityMutableProperties;
 }
 
@@ -596,7 +595,6 @@ model AutoScaleVCoreUpdateParameters {
    * Properties of the update operation request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AutoScaleVCoreMutableProperties;
 }
 
