@@ -187,7 +187,7 @@ model ConnectedClusterProperties {
   /**
    * Provisioning state of the connected cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -269,13 +269,13 @@ model ConnectedClusterProperties {
   /**
    * Details of the gateway used by the Arc router for connectivity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   gateway?: Gateway | null;
 
   /**
    * Configuration settings for customizing the behavior of the connected cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   arcAgentryConfigurations?: ArcAgentryConfigurations[] | null;
 
   /**
@@ -293,16 +293,19 @@ model AadProfile {
   /**
    * Whether to enable Azure RBAC for Kubernetes authorization.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   enableAzureRBAC?: boolean;
 
   /**
    * The list of AAD group object IDs that will have admin role of the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   adminGroupObjectIDs?: string[];
 
   /**
    * The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   tenantID?: string;
 }
 
@@ -323,13 +326,13 @@ model ArcAgentProfile {
   /**
    * List of system extensions that are installed on the cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   systemComponents?: SystemComponent[];
 
   /**
    * List of arc agentry and system components errors on the cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   agentErrors?: AgentError[];
 
   /**
@@ -463,14 +466,14 @@ model ArcAgentryConfigurations {
   /**
    * The configuration settings for the feature that do not contain any sensitive or secret information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   settings?: Record<string> | null;
 
   /**
    * The configuration settings for the feature that contain any sensitive or secret information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   protectedSettings?: Record<string> | null;
 }
@@ -501,7 +504,7 @@ model Resource {
 /**
  * Object containing updates for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model ConnectedClusterPatch {
   /**
    * Resource tags.

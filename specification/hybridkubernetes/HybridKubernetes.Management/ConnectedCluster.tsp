@@ -13,8 +13,8 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @subscriptionResource

@@ -45,8 +45,8 @@ enum Versions {
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
