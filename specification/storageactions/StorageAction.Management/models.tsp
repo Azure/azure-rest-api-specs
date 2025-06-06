@@ -117,7 +117,6 @@ model StorageTaskPreviewAction {
    * Properties of the storage task preview.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: StorageTaskPreviewActionProperties;
 }
 
@@ -389,7 +388,6 @@ model StorageTaskUpdateParameters {
    * Properties of the storage task.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageTaskUpdateProperties;
 }
 
