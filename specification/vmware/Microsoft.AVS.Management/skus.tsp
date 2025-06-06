@@ -13,6 +13,7 @@ interface Skus {
   @doc("A list of SKUs.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AVS/skus")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

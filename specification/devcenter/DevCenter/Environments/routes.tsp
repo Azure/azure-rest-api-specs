@@ -17,6 +17,7 @@ interface Environments {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
+  @list
   listEnvironments is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -31,6 +32,7 @@ interface Environments {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
+  @list
   listEnvironmentsByUser is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -217,6 +219,7 @@ interface Environments {
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
+  @list
   listEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
@@ -231,6 +234,7 @@ interface Environments {
   @doc("Lists all environment definitions available within a catalog.")
   @route("/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions")
   @get
+  @list
   listEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
       ...ProjectNameParameter;
