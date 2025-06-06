@@ -296,6 +296,7 @@ model SkuLocationInfo {
 /**
  * The capability information in the specified SKU.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SKUCapability {
   /**
    * The name of capability.
@@ -368,6 +369,7 @@ model ElasticSanProperties {
   /**
    * Total Provisioned MBps Elastic San appliance.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   totalMBps?: int64;
 

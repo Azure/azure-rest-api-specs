@@ -14,8 +14,8 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for Volume Group request.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(VolumeGroupProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(ElasticSan)
@@ -36,8 +36,8 @@ model VolumeGroup extends Foundations.ProxyResource {
   /**
    * Properties of VolumeGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: VolumeGroupProperties;
 }
@@ -82,6 +82,7 @@ interface VolumeGroups {
       /**
        * Optional, returns only soft deleted volume groups if set to true. If set to false or if not specified, returns only active volume groups.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
     },
