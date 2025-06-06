@@ -16,8 +16,8 @@ interface GuestConfigurationAssignmentsOperationGroup {
   /**
    * List all guest configuration assignments for a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GuestConfigurationAssignments_RGList")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")

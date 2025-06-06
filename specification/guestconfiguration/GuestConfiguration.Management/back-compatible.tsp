@@ -16,6 +16,6 @@ using Microsoft.GuestConfiguration;
   "parameters"
 );
 @@clientName(VmssvmInfo, "VMSSVMInfo");
-#suppress "deprecated" ""
+#suppress "deprecated" "For backward compatibility - @flattenProperty decorator is not recommended to use."
 @@flattenProperty(Operation.properties);
 @@clientName(AssignmentReport, "CommonAssignmentReport", "go");

@@ -16,7 +16,7 @@ namespace Microsoft.GuestConfiguration;
  */
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   error?: {
     /**
      * Error code.
@@ -124,7 +124,7 @@ model GuestConfigurationAssignmentProperties {
   /**
    * VM resource Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   targetResourceId?: string | null;
 
@@ -142,21 +142,21 @@ model GuestConfigurationAssignmentProperties {
   /**
    * Date and time when last compliance status was checked.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   lastComplianceStatusChecked?: utcDateTime | null;
 
   /**
    * Id of the latest report for the guest configuration assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   latestReportId?: string | null;
 
   /**
    * parameter hash for the guest configuration assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   parameterHash?: string | null;
 
@@ -173,28 +173,28 @@ model GuestConfigurationAssignmentProperties {
   /**
    * Combined hash of the configuration package and parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   assignmentHash?: string | null;
 
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState | null;
 
   /**
    * Type of the resource - VMSS / VM
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   resourceType?: string | null;
 
   /**
    * The list of VM Compliance data for VMSS
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #["vmId"])
   vmssVMList?: VmssvmInfo[];
 }
@@ -241,14 +241,14 @@ model GuestConfigurationNavigation {
   /**
    * Specifies the origin of the configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   assignmentSource?: string | null;
 
   /**
    * Specifies the content type of the configuration. Possible values could be Builtin or Custom.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   contentType?: string | null;
 
@@ -457,7 +457,7 @@ model AssignmentReportResource {
   /**
    * Properties of a guest configuration assignment resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
   @visibility(Lifecycle.Read)
   properties?: {};
 }
@@ -504,14 +504,14 @@ model VmssvmInfo {
   /**
    * Id of the latest report for the guest configuration assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   latestReportId?: string | null;
 
   /**
    * Date and time when last compliance status was checked.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
   lastComplianceChecked?: utcDateTime | null;
 }
@@ -567,7 +567,7 @@ model GuestConfigurationAssignmentList {
   @items
   value?: GuestConfigurationAssignment[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @nextLink
   nextLink?: string;
 }
@@ -647,7 +647,7 @@ model GuestConfigurationAssignmentReportProperties {
   /**
    * Details of the assignment report.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   details?: AssignmentReportDetails | null;
 
   /**
@@ -710,7 +710,7 @@ model OperationList {
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @nextLink
   nextLink?: string;
 }

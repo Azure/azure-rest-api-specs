@@ -25,11 +25,11 @@ model GuestConfigurationAssignment
   /**
    * Region where the VM is located.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GuestConfigurationAssignmentOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -49,7 +49,7 @@ interface GuestConfigurationAssignmentOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GuestConfigurationAssignmentOpsList
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -64,7 +64,7 @@ interface GuestConfigurationAssignmentOpsList
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface GuestConfigurationAssignments {
   /**
    * Get information about a guest configuration assignment
@@ -100,7 +100,7 @@ interface GuestConfigurationAssignments {
   /**
    * List all guest configuration assignments for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   SubscriptionList is GuestConfigurationAssignmentOpsList.List<
     GuestConfigurationAssignment,
@@ -140,8 +140,8 @@ interface GuestConfigurationAssignments {
     }
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationHCRPAssignmentOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -161,8 +161,8 @@ interface GuestConfigurationHCRPAssignmentOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
@@ -206,7 +206,7 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
@@ -221,7 +221,7 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("GuestConfigurationHCRPAssignmentReports_Get")
@@ -239,8 +239,8 @@ interface GuestConfigurationHCRPAssignments {
     }
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationAssignmentsVMSSOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -260,8 +260,8 @@ interface GuestConfigurationAssignmentsVMSSOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
@@ -304,7 +304,7 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
@@ -319,7 +319,7 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get a report for the VMSS guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("GuestConfigurationAssignmentReportsVMSS_Get")
@@ -338,8 +338,8 @@ interface GuestConfigurationAssignmentsVMSS {
     }
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" "" s
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -359,8 +359,8 @@ interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
       >>
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get information about a guest configuration assignment
@@ -392,7 +392,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("reports")
@@ -407,7 +407,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @operationId("GuestConfigurationConnectedVMwarevSphereAssignmentsReports_Get")

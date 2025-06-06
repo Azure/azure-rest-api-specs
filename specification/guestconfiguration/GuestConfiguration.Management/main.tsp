@@ -50,8 +50,8 @@ enum Versions {
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @tag("Operations")
   @autoRoute
   @armUpdateProviderNamespace
