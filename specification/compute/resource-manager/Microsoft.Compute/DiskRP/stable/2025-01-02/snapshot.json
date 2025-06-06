@@ -610,6 +610,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "snapshotAccessState": {
+          "$ref": "./diskRPCommon.json#/definitions/snapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         }
       },
       "required": [
@@ -666,42 +670,8 @@
           "description": "List of supported capabilities for the image from which the OS disk was created."
         },
         "snapshotAccessState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The state of snapshot which determines the access availability of the snapshot.",
-          "enum": [
-            "Unknown",
-            "Pending",
-            "Available",
-            "InstantAccess",
-            "AvailableWithInstantAccess"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotAccessState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Unknown",
-                "description": "Default value."
-              },
-              {
-                "value": "Pending",
-                "description": "The snapshot cannot be used for restore, copy or download to offline."
-              },
-              {
-                "value": "Available",
-                "description": "The snapshot can be used for restore, copy to different region, and download to offline."
-              },
-              {
-                "value": "InstantAccess",
-                "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
-              },
-              {
-                "value": "AvailableWithInstantAccess",
-                "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
-              }
-            ]
-          }
+          "$ref": "./diskRPCommon.json#/definitions/snapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         }
       },
       "description": "Snapshot resource update properties."
