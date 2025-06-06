@@ -593,7 +593,6 @@ model SolutionMetadataResource
    * Solution metadata Resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Solutions;
 }
 
@@ -1006,7 +1005,6 @@ model SolutionPatchRequestBody {
    * Solution result
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SolutionResourceProperties;
 }
 
@@ -1448,7 +1446,6 @@ model SolutionNlpMetadataResource
    * Solution metadata Resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NlpSolutions;
 }
 
