@@ -135,7 +135,7 @@ export class FolderStructureRule implements Rule {
       } else if (specType === "resource-manager") {
         if (folderStruct.length !== 5) {
           errorOutput +=
-            "Invalid folder structure: TypeSpec for resource-manager specs must be in a folder exactly two levels under 'resource-manager', like 'specification/foo/resource-management/Microsoft.Foo/FooManagement'.";
+            "Invalid folder structure: TypeSpec for resource-manager specs must be in a folder exactly two levels under 'resource-manager', like 'specification/foo/resource-management/Microsoft.Foo/Foo'.";
           success = false;
         }
 
