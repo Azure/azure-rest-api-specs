@@ -647,7 +647,6 @@ model DnsResourceReferenceRequest {
    * The properties of the Resource Reference Request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DnsResourceReferenceRequestProperties;
 }
 
@@ -669,7 +668,6 @@ model DnsResourceReferenceResult {
    * The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DnsResourceReferenceResultProperties;
 }
 

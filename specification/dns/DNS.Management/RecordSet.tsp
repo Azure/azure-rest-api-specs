@@ -36,7 +36,6 @@ model RecordSet extends Foundations.ProxyResource {
   etag?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: RecordSetProperties;
 }
