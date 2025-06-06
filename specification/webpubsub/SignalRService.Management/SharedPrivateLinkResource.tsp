@@ -120,21 +120,14 @@ interface WebPubSubSharedPrivateLinkResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSubSharedPrivateLinkResources_Delete")
-  @delete
-  @autoRoute
-  @doc("Delete a {name}", SharedPrivateLinkResource)
-  @armResourceDelete(SharedPrivateLinkResource)
-  delete(
-    ...ResourceInstanceParameters<
-      SharedPrivateLinkResource,
-      Azure.ResourceManager.Foundations.BaseParameters<SharedPrivateLinkResource>
-    >,
-  ):
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse
-    | ArmDeletedNoContentResponse
-    | ErrorResponse;
-
+  delete is WebPubSubSharedPrivateLinkResourceOps.DeleteSync<
+    SharedPrivateLinkResource,
+    Response =
+      | OkResponse
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+  >;
   /**
    * List shared private link resources
    */

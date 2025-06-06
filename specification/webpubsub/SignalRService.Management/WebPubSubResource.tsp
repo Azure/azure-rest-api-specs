@@ -65,17 +65,11 @@ interface WebPubSubResources {
   @operationId("WebPubSub_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebPubSubResource,
-    Response = ArmResponse<WebPubSubResource> | {
-      @statusCode statusCode: 201;
-      @body body: WebPubSubResource;
-    } | {
+    Response = ArmResponse<WebPubSubResource> | ArmResourceCreatedResponse<
+      WebPubSubResource,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = WebPubSubResource>
+    > | {
       @statusCode statusCode: 202;
-
-      @doc("ignore")
-      @header
-      location?: string;
-
-      @header("Retry-After") retryAfter?: int32;
     }
   >;
 

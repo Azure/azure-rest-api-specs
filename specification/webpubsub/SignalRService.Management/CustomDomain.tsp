@@ -40,9 +40,13 @@ interface CustomDomains {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSubCustomDomains_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
-    Response = ArmResourceCreatedSyncResponse<CustomDomain> | ErrorResponse
+    Response = ArmResourceCreatedResponse<
+      CustomDomain,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>
+    > | ErrorResponse
   >;
 
   /**
