@@ -13,8 +13,8 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(ZoneProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model Zone extends Foundations.TrackedResource {
@@ -34,7 +34,7 @@ model Zone extends Foundations.TrackedResource {
   /*
    * The properties of the zone.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   properties?: ZoneProperties;
 }
 

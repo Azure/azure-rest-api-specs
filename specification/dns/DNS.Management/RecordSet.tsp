@@ -16,8 +16,8 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type).
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(Zone)
@@ -39,7 +39,7 @@ model RecordSet extends Foundations.ProxyResource {
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: RecordSetProperties;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSetOperationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -64,7 +64,7 @@ interface RecordSetOperationOps
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSetOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -95,7 +95,7 @@ interface RecordSetOps
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSets {
   /**
    * Gets a record set.
