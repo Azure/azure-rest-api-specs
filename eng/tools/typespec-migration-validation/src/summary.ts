@@ -226,7 +226,7 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
       
       report += `| \`${path}\` | ${changeType} | \`${formattedValue.replace(/\\/g, "\\\\").replace(/\|/g, "\\|")}\` |\n`;
       jsonOutput.apiChanges.push({
-        category: "key-changed",
+        category: "added-or-deleted",
         key: key,
         path: path,
         type: changeType,

@@ -18,8 +18,8 @@ export interface ValueChange {
   newValue: string;
 }
 
-export interface KeyChange {
-  category: "key-changed";
+export interface AddDeleteChange {
+  category: "added-or-deleted";
   path: string;
   key: string;
   type: "added" | "deleted";
@@ -32,7 +32,7 @@ export interface PathChange {
   type: "added" | "deleted";
 }
 
-export type Change = ValueChange | KeyChange | PathChange;
+export type Change = ValueChange | AddDeleteChange | PathChange;
 export interface JsonOutput {
   version: "1.0.0";
   suggestions: string[];
