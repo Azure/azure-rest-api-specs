@@ -5,9 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.Blob;
@@ -17,7 +15,12 @@ scalar base64Bytes extends bytes;
 
 /** The error response. */
 @error
+@mediaTypeHint("application/xml")
 model StorageError {
+  /** The error code. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+  Code?: string;
+
   /** The error message. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
   Message?: string;
