@@ -5250,6 +5250,10 @@
           "$ref": "#/definitions/ManagedClusterMetricsProfile",
           "description": "Optional cluster metrics configuration."
         },
+        "nodeProvisioningProfile": {
+          "$ref": "#/definitions/ManagedClusterNodeProvisioningProfile",
+          "description": "Node provisioning settings that apply to the whole cluster."
+        },
         "bootstrapProfile": {
           "$ref": "#/definitions/ManagedClusterBootstrapProfile",
           "description": "Profile of the cluster bootstrap configuration."
@@ -7898,6 +7902,57 @@
           "type": "boolean",
           "title": "Whether to enable cost analysis",
           "description": "The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
+        }
+      }
+    },
+    "ManagedClusterNodeProvisioningProfile": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "NodeProvisioningMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Nodes are provisioned manually by the user"
+              },
+              {
+                "value": "Auto",
+                "description": "Nodes are provisioned automatically by AKS using Karpenter (See aka.ms/aks/nap for more details). Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
+              }
+            ]
+          },
+          "title": "The node provisioning mode. If not specified, the default is Manual."
+        },
+        "defaultNodePools": {
+          "enum": [
+            "None",
+            "Auto"
+          ],
+          "title": "The set of default Karpenter NodePools (CRDs) configured for node provisioning.",
+          "description": "This field has no effect unless mode is 'Auto'. Warning: Changing this from Auto to None on an existing cluster will cause the default Karpenter NodePools to be deleted, which will drain and delete the nodes associated with those pools. It is strongly recommended to not do this unless there are idle nodes ready to take the pods evicted by that action. If not specified, the default is Auto. For more information see aka.ms/aks/nap#node-pools.",
+          "default": "Auto",
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "NodeProvisioningDefaultNodePools",
+            "values": [
+              {
+                "description": "No Karpenter NodePools are provisioned automatically. Automatic scaling will not happen unless the user creates one or more NodePool CRD instances.",
+                "value": "None"
+              },
+              {
+                "description": "A standard set of Karpenter NodePools are provisioned",
+                "value": "Auto"
+              }
+            ]
+          }
         }
       }
     },
