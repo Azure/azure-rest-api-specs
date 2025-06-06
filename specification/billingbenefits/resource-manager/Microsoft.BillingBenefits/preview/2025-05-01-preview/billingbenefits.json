@@ -1295,6 +1295,18 @@
           },
           "MilestonesRemove_FromMacc": {
             "$ref": "./examples/MilestonesRemoveFromMacc.json"
+          },
+          "MaccSuppressAutomaticShortfall": {
+            "$ref": "./examples/MaccSuppressAutomaticShortfall.json"
+          },
+          "MaccUnsuppressAutomaticShortfall": {
+            "$ref": "./examples/MaccUnsuppressAutomaticShortfall.json"
+          },
+          "MaccMilestoneSuppressAutomaticTopup": {
+            "$ref": "./examples/MaccMilestoneSuppressAutomaticTopup.json"
+          },
+          "MaccMilestoneUnsuppressAutomaticTopup": {
+            "$ref": "./examples/MaccMilestoneUnsuppressAutomaticTopup.json"
           }
         },
         "parameters": [
@@ -4346,8 +4358,8 @@
         "automaticShortfall": {
           "$ref": "#/definitions/AutomaticShortfall"
         },
-        "automaticShortfallSuppressReasonCode": {
-          "$ref": "#/definitions/AutomaticShortfallSuppressReasonCode"
+        "automaticShortfallSuppressReason": {
+          "$ref": "#/definitions/AutomaticShortfallSuppressReason"
         },
         "shortfall": {
           "$ref": "#/definitions/Shortfall"
@@ -4448,6 +4460,7 @@
         "Pending",
         "Failed",
         "Completed",
+        "Canceled",
         "TopupPending",
         "TopupCharged",
         "TopupWaived"
@@ -4489,6 +4502,13 @@
         "resourceUri": {
           "$ref": "#/definitions/ResourceUri",
           "description": "Fully-qualified identifier of the credit resource associated with the shortfall."
+        },
+        "balanceVersion": {
+          "$ref": "#/definitions/BalanceVersion"
+        },
+        "systemId": {
+          "$ref": "#/definitions/SystemId",
+          "description": "This is the globally unique identifier of the shortfall which will not change for its lifetime."
         }
       }
     },
@@ -4496,9 +4516,19 @@
       "type": "boolean",
       "description": "Setting this to true enables automatic shortfall charging when commitment is not met."
     },
-    "AutomaticShortfallSuppressReasonCode": {
-      "type": "string",
-      "description": "Optional field to record suppression reason for automatic shortfall."
+    "AutomaticShortfallSuppressReason": {
+      "type": "object",
+      "description": "Optional field to record suppression reason for automatic shortfall.",
+      "properties": {
+        "code": {                
+          "type": "string",
+          "description": "Code for the suppression reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message for suppression reason."
+        }
+      }
     },
     "MaccPatchRequest": {
       "type": "object",
@@ -4534,6 +4564,9 @@
         "automaticShortfall": {
           "$ref": "#/definitions/AutomaticShortfall"
         },
+        "automaticShortfallSuppressReason": {
+          "$ref": "#/definitions/AutomaticShortfallSuppressReason"
+        },
         "displayName": {
           "$ref": "#/definitions/DisplayName"
         },
@@ -4565,6 +4598,9 @@
         "automaticTopup": {
           "$ref": "#/definitions/AutomaticTopup"
         },
+        "automaticTopupSuppressReason": {
+          "$ref": "#/definitions/AutomaticTopupSuppressReason"
+        },
         "status": {
           "$ref": "#/definitions/MaccMilestoneStatus"
         },
@@ -4574,20 +4610,35 @@
         }
       }
     },
-    "TopupSystemId": {
+    "SystemId": {
       "type": "string",
-      "description": "This is the globally unique identifier of the Topup which will not change for the lifetime of the topup credit."
+      "description": "This is the globally unique identifier of the resource which will not change for its lifetime."
     },
     "AutomaticTopup": {
       "type": "boolean",
       "description": "Setting this to true enables automatic topup invoicing when milestone commitment is not met."
+    },
+    "AutomaticTopupSuppressReason": {
+      "type": "object",
+      "description": "Optional field to record suppression reason for automatic topup.",
+      "properties": {
+        "code": {                
+          "type": "string",
+          "description": "Code for the suppression reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human readable message for the suppression reason."
+        }
+      }
     },
     "Topup": {
       "type": "object",
       "description": "Details of a topup associated with a milestone",
       "properties": {
         "systemId": {
-          "$ref": "#/definitions/TopupSystemId"
+          "$ref": "#/definitions/SystemId",
+          "description": "This is the globally unique identifier of the Topup which will not change for the lifetime of the topup credit."
         },
         "productCode": {
           "$ref": "#/definitions/ProductCode"
@@ -4615,7 +4666,7 @@
     },
     "BalanceVersion": {
       "type": "number",
-      "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the topup was created ."
+      "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created."
     },
     "ChargeShortfallRequest": {
       "type": "object",

@@ -3,10 +3,11 @@
     "subscriptionId": "10000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resource_group_name_01",
     "maccName": "macc_20230614",
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-05-01-preview",    
     "body": {
       "properties": {
-        "allowContributors": false
+        "automaticShortfall": true,
+        "automaticShortfallSuppressReason": null
       }
     }
   },
@@ -22,18 +23,19 @@
           "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
           "commitment": {
             "grain": "FullTerm",
-            "amount": 40000,
+            "amount": 20000,
             "currencyCode": "USD"
           },
           "startAt": "2023-07-01T00:00:00Z",
-          "endAt": "2024-07-10T00:00:00Z",
+          "endAt": "2024-07-01T00:00:00Z",
           "systemId": "13810867107109237",
-          "allowContributors": false,
+          "allowContributors": true,
           "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-          "provisioningState": "Succeeded",          
-          "provisioningSubState": "None",
-          "status": "Active",
-          "automaticShortfall": true
+          "provisioningState": "Succeeded",
+          "provisioningSubState": "None",          
+          "status": "ShortfallPending",
+          "automaticShortfall": true,
+          "automaticShortfallSuppressReason": null
         },
         "location": "global",
         "tags": {
