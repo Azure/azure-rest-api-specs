@@ -1052,7 +1052,6 @@ model Configuration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConfigurationProperties;
 }
 
@@ -1234,7 +1233,6 @@ model ChildConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ChildConfigurationProperties;
 }
 
@@ -1620,7 +1618,6 @@ model ProductFamily {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductFamilyProperties;
 }
 
@@ -1652,7 +1649,6 @@ model ProductLine {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductLineProperties;
 }
 
@@ -1678,7 +1674,6 @@ model Product {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductProperties;
 }
 
@@ -2413,7 +2408,6 @@ model ProductFamiliesMetadataDetails {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductFamilyProperties;
 }
 
@@ -2425,7 +2419,6 @@ model AddressUpdateParameter {
    * Properties of an address to be updated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AddressUpdateProperties;
 
   /**
@@ -2458,7 +2451,6 @@ model OrderItemUpdateParameter {
    * Order item update properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OrderItemUpdateProperties;
 
   /**
