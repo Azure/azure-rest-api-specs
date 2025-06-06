@@ -37,7 +37,6 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
    * Properties of the configuration assignment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: ConfigurationAssignmentProperties;
 }

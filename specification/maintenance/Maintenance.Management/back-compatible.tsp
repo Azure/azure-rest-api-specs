@@ -44,3 +44,5 @@ using Microsoft.Maintenance;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ConfigurationAssignment.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Microsoft.Maintenance.Update.properties);

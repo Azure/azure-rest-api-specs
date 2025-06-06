@@ -245,7 +245,6 @@ model MaintenanceConfigurationProperties {
    * Definition of a MaintenanceWindow
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   maintenanceWindow?: MaintenanceWindow;
 
   /**
@@ -586,7 +585,6 @@ model Update {
    * Properties of the apply update
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UpdateProperties;
 }
 
