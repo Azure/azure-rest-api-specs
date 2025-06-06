@@ -28,7 +28,6 @@ model DatadogMonitorResource
   sku?: ResourceSku;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: MonitorProperties;
 
@@ -219,5 +218,5 @@ interface DatadogMonitorResources {
 @@doc(DatadogMonitorResource.properties,
   "Properties specific to the monitor resource."
 );
-@@doc(DatadogMonitorResources.create::parameters.body, "");
-@@doc(DatadogMonitorResources.update::parameters.body, "");
+@@doc(DatadogMonitorResources.create::parameters.resource, "");
+@@doc(DatadogMonitorResources.update::parameters.properties, "");

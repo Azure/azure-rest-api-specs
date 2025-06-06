@@ -84,4 +84,4 @@ interface TagRules {
 @@doc(MonitoringTagRules.properties,
   "Definition of the properties for a TagRules resource."
 );
-@@doc(TagRules.createOrUpdate::parameters.body, "");
+@@doc(TagRules.createOrUpdate::parameters.resource, "");

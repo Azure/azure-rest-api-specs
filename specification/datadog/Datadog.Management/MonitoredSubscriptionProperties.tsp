@@ -108,5 +108,5 @@ interface MonitoredSubscriptions {
 @@doc(MonitoredSubscriptionProperties.properties,
   "The request to update subscriptions needed to be monitored by the Datadog monitor resource."
 );
-@@doc(MonitoredSubscriptions.createorUpdate::parameters.body, "");
-@@doc(MonitoredSubscriptions.update::parameters.body, "");
+@@doc(MonitoredSubscriptions.createorUpdate::parameters.resource, "");
+@@doc(MonitoredSubscriptions.update::parameters.properties, "");

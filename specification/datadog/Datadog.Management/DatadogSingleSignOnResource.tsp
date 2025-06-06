@@ -84,4 +84,4 @@ interface DatadogSingleSignOnResources {
 
 @@doc(DatadogSingleSignOnResource.name, "Configuration name");
 @@doc(DatadogSingleSignOnResource.properties, "");
-@@doc(DatadogSingleSignOnResources.createOrUpdate::parameters.body, "");
+@@doc(DatadogSingleSignOnResources.createOrUpdate::parameters.resource, "");
