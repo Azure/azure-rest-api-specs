@@ -6,7 +6,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   title: BicepManagementClient
-  service-title: Bicep
+  service-name: Bicep
   client-flattened-annotation-target: disabled
   uuid-as-string: true
   output-model-immutable: true

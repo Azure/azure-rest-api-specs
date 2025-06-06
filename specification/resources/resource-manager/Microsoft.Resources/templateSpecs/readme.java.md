@@ -6,7 +6,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   title: TemplateSpecsManagementClient
-  service-title: Template Specs
+  service-name: Template Specs
   client-flattened-annotation-target: disabled
   uuid-as-string: true
   output-model-immutable: true
