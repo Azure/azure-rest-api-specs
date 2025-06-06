@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "api-version": "2025-02-01-preview",
+    "sku": "Standard_ND_A100_v4",
+    "capacity": 5,
+    "durationhours": 24,
+    "start-date-range": "2025-04-01 -T00:00:00Z",
+    "end-date-range": "2025-05-01 -T00:00:00Z",
+    "zone": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "CapacityBlocks": [
+          {
+            "location": "eastus",
+            "zone": 1,
+            "sku": {
+              "name": "Standard_ND_A100_v4",
+              "capacity": 5
+            },
+            "schedule": {
+              "startTime": "2025-04-01-T00:00:00Z",
+              "endTime": "2025-04-02-T00:00:00Z"
+            }
+          },
+          {
+            "location": "eastus",
+            "zone": 1,
+            "sku": {
+              "name": "Standard_ND_A100_v4",
+              "capacity": 5
+            },
+            "schedule": {
+              "startTime": "2025-04-03-T00:00:00Z",
+              "endTime": "2025-04-04-T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
