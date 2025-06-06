@@ -1572,7 +1572,6 @@ model PrivateLinkResource extends PrivateLinkResourceBase {
    * Resource properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateLinkResourceProperties;
 }
 
