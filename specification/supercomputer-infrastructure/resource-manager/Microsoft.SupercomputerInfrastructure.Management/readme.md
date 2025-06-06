@@ -18,10 +18,7 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - preview/2025-07-01-preview/widget.json
-suppressions:
-  - code: PathContainsResourceType
-  - code: PathResourceProviderMatchNamespace
+  - preview/2025-07-01-preview/supercomputermanagement.json
 ```
 
 ---
