@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-resourcesdeploymentstacks"
-  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resourcesdeploymentstacks"
+  output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
   override-client-name: DeploymentStacksClient
   generate-metadata: true
 ```
