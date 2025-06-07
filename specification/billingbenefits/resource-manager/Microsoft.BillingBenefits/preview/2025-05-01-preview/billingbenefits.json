@@ -557,8 +557,8 @@
           "MaccValidateCreate": {
             "$ref": "./examples/MaccValidateCreate.json"
           },
-          "MaccValidateContributor": {
-            "$ref": "./examples/MaccValidateContributor.json"
+          "MaccValidateCreateContributor": {
+            "$ref": "./examples/MaccValidateCreateContributor.json"
           },
           "MaccValidateCreateMultiEntity": {
             "$ref": "./examples/MaccValidateCreateMultiEntity.json"
@@ -583,6 +583,9 @@
           },
           "MaccValidateUpdateContributorRule": {
             "$ref": "./examples/MaccValidateUpdateContributorRule.json"
+          },
+          "MaccValidateUpdateDisplayName": {
+            "$ref": "./examples/MaccValidateUpdateDisplayName.json"
           },
           "MaccValidateUpdateCommitmentEndAtContributorRule": {
             "$ref": "./examples/MaccValidateUpdateCommitmentEndAtContributorRule.json"
@@ -613,6 +616,9 @@
           },
           "MaccValidateUpdateRemoveMilestones": {
             "$ref": "./examples/MaccValidateUpdateRemoveMilestones.json"
+          },
+          "MaccValidateUpdateContributor": {
+            "$ref": "./examples/MaccValidateUpdateContributor.json"
           },
           "MaccValidateCancel": {
             "$ref": "./examples/MaccValidateCancel.json"
@@ -1851,6 +1857,10 @@
           "202": {
             "description": "The request is accepted.",
             "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
@@ -4452,17 +4462,17 @@
           "$ref": "#/definitions/MaccStatus"
         },
         "entityType": {
-          "$ref": "#/definitions/MaccEntityType"
+          "$ref": "#/definitions/MaccEntityType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "displayName": {
           "$ref": "#/definitions/DisplayName"
         },
         "productCode": {
           "$ref": "#/definitions/ProductCode"
-        },
-        "primaryUri": {
-          "$ref": "#/definitions/ResourceUri",
-          "description": "Fully-qualified identifier of the primary MACC."
         },
         "billingAccountId": {
           "$ref": "#/definitions/BillingAccountResourceId",
@@ -4478,9 +4488,6 @@
         "endAt": {
           "$ref": "#/definitions/EndAt",
           "description": "Must be end of month. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z."
-        },
-        "allowContributors": {
-          "$ref": "#/definitions/AllowContributors"
         },
         "systemId": {
           "$ref": "#/definitions/MaccSystemId"
@@ -4504,6 +4511,13 @@
         "resourceUri": {
           "$ref": "#/definitions/ResourceUri"
         },
+        "allowContributors": {
+          "$ref": "#/definitions/AllowContributors"
+        },
+        "primaryUri": {
+          "$ref": "#/definitions/ResourceUri",
+          "description": "Fully-qualified identifier of the primary MACC."
+        },
         "primaryBillingAccountId": {
           "$ref": "#/definitions/BillingAccountResourceId",
           "description": "Fully-qualified identifier of the billing account of the primary MACC."
@@ -4520,7 +4534,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "MACC contributor properties",
+          "description": "MACC properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MaccModelProperties"
         }
@@ -4602,7 +4616,19 @@
     },
     "MaccEntityType": {
       "type": "string",
-      "description": "Represents type of the object being operated on. Possible values are primary or contributor."
+      "description": "Represents type of the object being operated on. Possible values are primary or contributor.",
+      "enum": [
+        "primary",
+        "contributor"
+      ],
+      "x-enum-description": [
+        "Primary MACC, which is the main commitment contract for the customer.",
+        "Contributor MACC, which is a secondary MACC that contributes to the primary MACC."
+      ],
+      "x-ms-enum": {
+        "name": "MaccEntityType",
+        "modelAsString": true
+      }
     },
     "AllowContributors": {
       "type": "boolean",
