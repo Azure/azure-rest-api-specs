@@ -33,7 +33,7 @@ interface OperationResults {
     operationId: string,
   ):
     | OkResponse
-    | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader>
+    | (AcceptedResponse & LocationHeader)
     | ArmNoContentResponse<"No Content. For Delete operation results.">
     | ErrorResponse;
 }
