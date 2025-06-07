@@ -1,0 +1,35 @@
+name: "[TEST-IGNORE] Swagger SemanticValidation - Set Status"
+
+on:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
+  pull_request_target:
+    types:
+      # Run workflow on default types, to update status as quickly as possible.
+      - opened
+      - synchronize
+      - reopened
+      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows: ["\\[TEST-IGNORE\\] Swagger SemanticValidation"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+  pull-requests: read
+  statuses: write
+
+jobs:
+  spec-validation-status:
+    name: Set SemanticValidation Status
+    uses: ./.github/workflows/_reusable-set-check-status.yml
+    with:
+      monitored_workflow_name: "[TEST-IGNORE] Swagger SemanticValidation"
+      required_check_name: "[TEST-IGNORE] Swagger SemanticValidation"
+      overriding_label: "Approved-SemanticValidation"
