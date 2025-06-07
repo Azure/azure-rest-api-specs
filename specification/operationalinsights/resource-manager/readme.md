@@ -67,6 +67,7 @@ input-file:
   - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacePurge.json
   - Microsoft.OperationalInsights/stable/2025-02-01/Workspaces.json
   - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacesFailover.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Workspaces_NetworkSecurityPerimeter_API.json
 ```
 
 ### Tag: package-2023-09
