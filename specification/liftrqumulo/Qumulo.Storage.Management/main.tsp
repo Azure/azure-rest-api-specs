@@ -41,14 +41,14 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface FileSystems {
   /**
-   * Get a FileSystemResource
+   * Retrieve details of a specific file system resource in Qumulo storage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Get")
   get is ArmResourceRead<FileSystemResource>;
 
   /**
-   * Create a FileSystemResource
+   * Create a new file system resource in Qumulo storage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_CreateOrUpdate")
@@ -59,7 +59,7 @@ interface FileSystems {
   >;
 
   /**
-   * Update a FileSystemResource
+   * Update an existing file system resource from Qumulo storage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
@@ -67,7 +67,7 @@ interface FileSystems {
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 
   /**
-   * Delete a FileSystemResource
+   * Delete an existing file system resource from Qumulo storage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @operationId("FileSystems_Delete")
