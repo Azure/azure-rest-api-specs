@@ -1,10 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -29,13 +30,18 @@ model DataflowResource is ProxyResource<DataflowProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("Dataflow Resource properties")
 model DataflowProperties {
   @doc("Mode for Dataflow. Optional; defaults to Enabled.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
+
+  @doc("Disk persistence mode.")
+  @added(Versions.`2025-07-01-preview`)
+  requestDiskPersistence?: OperationalMode;
 
   @doc("List of operations including source and destination references as well as transformation.")
   @identifiers(#[])
@@ -70,13 +76,13 @@ union OperationType {
   string,
 
   @doc("Dataflow Source Operation")
-  Source: "Source",
+  Source: Source,
 
   @doc("Dataflow Destination Operation")
-  Destination: "Destination",
+  Destination: Destination,
 
   @doc("Dataflow BuiltIn Transformation Operation")
-  BuiltInTransformation: "BuiltInTransformation",
+  BuiltInTransformation: BuiltInTransformation,
 }
 
 @doc("Dataflow BuiltIn Transformation properties")
