@@ -56,6 +56,9 @@
         "x-ms-examples": {
           "SkuList": {
             "$ref": "./examples/SKUList.json"
+          },
+          "SKUListWithLocationInfo": {
+            "$ref": "./examples/SKUListWithLocationInfo.json"
           }
         },
         "parameters": [
@@ -4171,6 +4174,15 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
+        },
+        "zones": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional. Gets or sets the pinned logical availability zone for the storage account."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Optional. Gets or sets the zonal placement details for the storage account."
         },
         "properties": {
           "x-ms-client-flatten": true,
