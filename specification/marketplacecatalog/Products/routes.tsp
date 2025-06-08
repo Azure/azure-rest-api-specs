@@ -8,7 +8,8 @@ using Azure.Core.Traits;
 namespace Products;
 
 // Product listing traits
-alias ProductsListingTraits = SupportsRepeatableRequests &
+alias ProductsListingTraits = NoClientRequestId &
+  SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<StorefrontParameter &
     LanguageParameter &
@@ -20,7 +21,8 @@ alias ProductsListingTraits = SupportsRepeatableRequests &
     ExpandQueryParameter &
     OrderByQueryParameter>;
 // Product get traits
-alias ProductsGetTraits = SupportsRepeatableRequests &
+alias ProductsGetTraits = NoClientRequestId &
+  SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<MarketParameter &
     StorefrontParameter &
@@ -46,7 +48,8 @@ interface ProductOperations {
 }
 
 // Skus listing traits
-alias SkusListingTraits = SupportsRepeatableRequests &
+alias SkusListingTraits = NoClientRequestId &
+  SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<ServiceParameter &
     ServiceFamilyParameter &

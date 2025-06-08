@@ -364,7 +364,7 @@ model SkuSummary {
   cspState?: CspState;
 
   @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
+  hasRi?: boolean;
 
   @doc("The SKU attributes")
   skuAttributes?: Attribute[];
@@ -535,7 +535,7 @@ model ProductSummary {
   productId?: string;
 
   @doc("Indication whether the product has plans with reservations")
-  hasRIPlans?: boolean;
+  hasRiPlans?: boolean;
 
   @doc("Indication if product has a representation in the marketplace")
   hasMarketplaceFootprint?: boolean;
@@ -858,7 +858,7 @@ model PlanSummary {
   isPrivate?: boolean;
 
   @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
+  hasRi?: boolean;
 }
 
 @doc("Plan level resources and configuration files")
@@ -1056,7 +1056,7 @@ model Price {
   currencyCode?: string;
 
   @doc("A value indicating whether a payment instrument is required")
-  isPIRequired: boolean;
+  isPiRequired: boolean;
 
   @doc("Retail price for the item")
   listPrice: float32;
