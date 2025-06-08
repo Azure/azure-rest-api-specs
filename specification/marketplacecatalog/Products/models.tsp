@@ -1376,4 +1376,4 @@ model ServiceFamilyParameter {
 
 // API key def
 @doc("Use key provided by Marketplace Catalog Team as a parameter provided in the header")
-model DiscoveryAPIKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
+model DiscoveryApiKey is ApiKeyAuth<ApiKeyLocation.header, "X-API-Key">;
