@@ -8,8 +8,7 @@ using Azure.Core.Traits;
 namespace Products;
 
 // Product listing traits
-alias ProductsListingTraits = SupportsClientRequestId &
-  SupportsRepeatableRequests &
+alias ProductsListingTraits = SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<StorefrontParameter &
     LanguageParameter &
@@ -19,12 +18,9 @@ alias ProductsListingTraits = SupportsClientRequestId &
     SelectQueryParameter &
     FilterParameter &
     ExpandQueryParameter &
-    OrderByQueryParameter> &
-  RequestHeadersTrait<ApiKeyParameter>;
-
+    OrderByQueryParameter>;
 // Product get traits
-alias ProductsGetTraits = SupportsClientRequestId &
-  SupportsRepeatableRequests &
+alias ProductsGetTraits = SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<MarketParameter &
     StorefrontParameter &
@@ -35,7 +31,7 @@ alias ProductsGetTraits = SupportsClientRequestId &
     ExcludeSkuDetailsParameter &
     IncludeFutureAvailabilitiesParameter &
     SkuIdParameter> &
-  RequestHeadersTrait<ApiKeyParameter & PricingAudienceHeaderParameter>;
+  RequestHeadersTrait<PricingAudienceHeaderParameter>;
 
 // Operation definitions
 alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
@@ -50,8 +46,7 @@ interface ProductOperations {
 }
 
 // Skus listing traits
-alias SkusListingTraits = SupportsClientRequestId &
-  SupportsRepeatableRequests &
+alias SkusListingTraits = SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<ServiceParameter &
     ServiceFamilyParameter &
@@ -60,8 +55,7 @@ alias SkusListingTraits = SupportsClientRequestId &
     MarketParameter &
     SelectQueryParameter &
     FilterParameter &
-    OrderByQueryParameter> &
-  RequestHeadersTrait<ApiKeyParameter>;
+    OrderByQueryParameter>;
 
 // Operation definitions for Skus
 alias SkusListingOperation = ResourceOperations<SkusListingTraits>;

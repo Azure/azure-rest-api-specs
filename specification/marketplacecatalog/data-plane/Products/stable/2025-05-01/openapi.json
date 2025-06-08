@@ -51,9 +51,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
             "$ref": "#/parameters/MarketParameter"
           },
           {
@@ -81,9 +78,6 @@
             "$ref": "#/parameters/SkuIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiKeyParameter"
-          },
-          {
             "$ref": "#/parameters/PricingAudienceHeaderParameter"
           }
         ],
@@ -92,13 +86,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProductDetails"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -133,9 +120,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
             "$ref": "#/parameters/StorefrontParameter"
           },
           {
@@ -161,9 +145,6 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -171,13 +152,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedProductSummary"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -212,9 +186,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
             "$ref": "#/parameters/ServiceParameter"
           },
           {
@@ -237,9 +208,6 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -247,13 +215,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedSkuSummary"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -304,7 +265,7 @@
     },
     "ArtifactType": {
       "type": "string",
-      "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template",
+      "description": "The type of the artifact",
       "enum": [
         "Template",
         "Fragment",
@@ -466,7 +427,7 @@
     },
     "AzureBenefit": {
       "type": "string",
-      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit",
+      "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit)",
       "enum": [
         "Eligible",
         "NotEligible"
@@ -563,7 +524,7 @@
     },
     "CspState": {
       "type": "string",
-      "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects.\nFor more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers",
+      "description": "Value showing whether the plan is available for purchase through CSP channel",
       "enum": [
         "OptIn",
         "OptOut",
@@ -677,7 +638,7 @@
     },
     "LegalTermsType": {
       "type": "string",
-      "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
+      "description": "Supported legal terms type",
       "enum": [
         "None",
         "EA"
@@ -1922,7 +1883,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)\n- `MicrosoftProduct` - 1st party Azure product",
+      "description": "The delivery method or deployment model",
       "enum": [
         "None",
         "DevService",
@@ -2122,7 +2083,7 @@
     },
     "PublisherType": {
       "type": "string",
-      "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
+      "description": "A value indicating whether this is a Microsoft or third party product",
       "enum": [
         "Microsoft",
         "ThirdParty"
@@ -2146,7 +2107,7 @@
     },
     "PublishingStage": {
       "type": "string",
-      "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace",
+      "description": "Product publishing stage",
       "enum": [
         "Preview",
         "Public"
@@ -2561,7 +2522,7 @@
     },
     "VmArchitectureType": {
       "type": "string",
-      "description": "VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+      "description": "VM Architecture Type. Applicable to Virtual Machine products only",
       "enum": [
         "X64Gen1",
         "X64Gen2",
@@ -2591,7 +2552,7 @@
     },
     "VmSecurityType": {
       "type": "string",
-      "description": "VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment",
+      "description": "VM security type. Applicable to Virtual Machine products only",
       "enum": [
         "None",
         "Trusted",
@@ -2621,25 +2582,6 @@
     }
   },
   "parameters": {
-    "ApiKeyParameter": {
-      "name": "X-API-Key",
-      "in": "header",
-      "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiKey"
-    },
-    "Azure.Core.ClientRequestIdHeader": {
-      "name": "x-ms-client-request-id",
-      "in": "header",
-      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-      "required": false,
-      "type": "string",
-      "format": "uuid",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "clientRequestId"
-    },
     "Azure.Core.ExpandQueryParameter": {
       "name": "expand",
       "in": "query",
@@ -2736,7 +2678,7 @@
     "LanguageParameter": {
       "name": "language",
       "in": "query",
-      "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
+      "description": "Language to search, ISO 639-1 two-letter code. Default is \"en\"",
       "required": false,
       "type": "string",
       "default": "en",
@@ -2757,7 +2699,7 @@
     "MarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
+      "description": "Product market value (the response will include only products that can be sold in the specified market). Example: 'US'",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2798,7 +2740,7 @@
     "StorefrontParameter": {
       "name": "storefront",
       "in": "query",
-      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
+      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The default value is 'azure'",
       "required": false,
       "type": "string",
       "default": "azure",

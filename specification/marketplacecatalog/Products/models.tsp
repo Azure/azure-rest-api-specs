@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 
 namespace Products;
 
-@doc("Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - The product is eligible for Azure consumption commitment benefit\n- `NotEligible` - The product is not eligible for Azure consumption commitment benefit")
+@doc("Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit)")
 union AzureBenefit {
   @doc("The product is eligible for Azure consumption commitment benefit")
   Eligible: "Eligible",
@@ -31,7 +31,7 @@ union Badge {
   string,
 }
 
-@doc("A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor")
+@doc("A value indicating whether this is a Microsoft or third party product")
 union PublisherType {
   @doc("Product is published by Microsoft (1st party product)")
   Microsoft: "Microsoft",
@@ -42,7 +42,7 @@ union PublisherType {
   string,
 }
 
-@doc("Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Public` - Product is publicly available in the Marketplace")
+@doc("Product publishing stage")
 union PublishingStage {
   @doc("Product is available to restricted audience")
   Preview: "Preview",
@@ -70,7 +70,7 @@ union RatingBucket {
   string,
 }
 
-@doc("Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None")
+@doc("Supported legal terms type")
 union LegalTermsType {
   @doc("No specific legal terms")
   None: "None",
@@ -81,7 +81,7 @@ union LegalTermsType {
   string,
 }
 
-@doc("VM Architecture Type. Applicable to Virtual Machine products only.\nPossible values:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2")
+@doc("VM Architecture Type. Applicable to Virtual Machine products only")
 union VmArchitectureType {
   @doc("The VM image architecture of the plan is X64 Generation1")
   X64Gen1: "X64Gen1",
@@ -95,7 +95,7 @@ union VmArchitectureType {
   string,
 }
 
-@doc("Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects.\nFor more information see, https://docs.microsoft.com/en-us/azure/marketplace/cloud-solution-providers")
+@doc("Value showing whether the plan is available for purchase through CSP channel")
 union CspState {
   @doc("Plan configured CSP program opt-in for any partner in the CSP Program")
   OptIn: "OptIn",
@@ -129,7 +129,7 @@ union PricingType {
   string,
 }
 
-@doc("VM security type. Applicable to Virtual Machine products only. Possible values:\n- Standard - Basic level of security for the virtual machine\n- Trusted - protects against persistent and advanced attacks on Gen2 virtual machines with configurable features like security boot and virtual Trusted Platform Module(vTPM)\n- Confidential - on top of Trusted Launch, Confidential virtual machines offer higher confidentiality and integrity guaranteed with hardware-based trusted execution environment")
+@doc("VM security type. Applicable to Virtual Machine products only")
 union VmSecurityType {
   @doc("Default value")
   None: "None",
@@ -143,7 +143,7 @@ union VmSecurityType {
   string,
 }
 
-@doc("The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` - Products published as Solution Templates (ST) or Azure Managed Apps (AMA) plans that deploy Azure resources to the customer tenant \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)\n- `MicrosoftProduct` - 1st party Azure product")
+@doc("The delivery method or deployment model")
 union ProductType {
   @doc("Default value")
   None: "None",
@@ -226,7 +226,7 @@ union ProductType {
   string,
 }
 
-@doc("The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template")
+@doc("The type of the artifact")
 union ArtifactType {
   @doc("Contains link to the main ARM template")
   Template: "Template",
@@ -1316,13 +1316,6 @@ model HideKeysParameter {
   @query
   @doc("This key is utilized to retrieve preview products and is generated within the Partner Center during the offer publishing process.")
   hideKeys?: string[];
-}
-
-@doc("ApiKey")
-model ApiKeyParameter {
-  @header("X-API-Key")
-  @doc("Use Api key provided by Marketplace Catalog Team as a parameter provided in the header")
-  apiKey: string;
 }
 
 @doc("Indicates whether to include in the response the product's plans/SKUs that are no longer available for purchase. By default, includeStopSoldPlans is set to FALSE.")
