@@ -598,6 +598,9 @@ model ProductDetails {
   @doc("The product badges")
   badges?: Badge[];
 
+  @doc("Indication whether the product has plans with reservations")
+  hasRIPlans?: boolean;
+
   @doc("Publisher type")
   publisherType?: PublisherType;
 
