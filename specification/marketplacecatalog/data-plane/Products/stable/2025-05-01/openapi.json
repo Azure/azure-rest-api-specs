@@ -22,11 +22,11 @@
   ],
   "security": [
     {
-      "AzureKey": []
+      "DiscoveryAPIKey": []
     }
   ],
   "securityDefinitions": {
-    "AzureKey": {
+    "DiscoveryAPIKey": {
       "type": "apiKey",
       "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
       "name": "X-API-Key",
@@ -488,41 +488,6 @@
         ]
       }
     },
-    "AzureKey": {
-      "type": "object",
-      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "API key authentication",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "in": {
-          "type": "string",
-          "description": "location of the API key",
-          "enum": [
-            "header"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "name of the API key",
-          "enum": [
-            "X-API-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
-    },
     "Badge": {
       "type": "string",
       "description": "Badge type",
@@ -625,6 +590,41 @@
           }
         ]
       }
+    },
+    "DiscoveryAPIKey": {
+      "type": "object",
+      "description": "Use key provided by Marketplace Catalog Team as a parameter provided in the header",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "X-API-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
     },
     "Image": {
       "type": "object",
