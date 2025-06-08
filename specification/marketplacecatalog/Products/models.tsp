@@ -673,7 +673,7 @@ model ProductDetails {
   startingPrice?: MarketStartPrice;
 
   @doc("Full set of plan/SKU attributes")
-  plans?: PlanSummary[];
+  plans?: PlanDetails[];
 
   @doc("Maps to the list of compatible products")
   supportedProducts?: string[];
