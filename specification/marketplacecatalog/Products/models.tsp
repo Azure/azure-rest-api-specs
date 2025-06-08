@@ -1225,7 +1225,7 @@ model Price {
   currencyCode?: string;
 
   @doc("A value indicating whether a payment instrument is required")
-  isPiRequired: boolean;
+  isPIRequired: boolean;
 
   @doc("Retail price for the item")
   listPrice: float32;
