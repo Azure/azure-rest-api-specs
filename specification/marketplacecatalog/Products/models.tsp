@@ -576,66 +576,7 @@ model MarketStartPrice {
 
 @doc("Summary description of the product")
 @resource("product")
-model ProductDetails {
-  @doc("Product display name")
-  displayName?: string;
-
-  @doc("Popularity of the product")
-  popularity?: float64;
-
-  @doc("Array of product categories")
-  categoryIds?: string[];
-
-  @doc("List of industry IDs the item belongs to")
-  industryIds?: string[];
-
-  @doc("Publisher id")
-  publisherId?: string;
-
-  @doc("Eligibility for Azure consumption commitment benefit")
-  azureBenefit?: AzureBenefit;
-
-  @doc("The product badges")
-  badges?: Badge[];
-
-  @doc("Indication whether the product has plans with reservations")
-  hasRIPlans?: boolean;
-
-  @doc("Publisher type")
-  publisherType?: PublisherType;
-
-  @doc("Product publishing stage")
-  publishingStage?: PublishingStage;
-
-  @doc("Unique product identifier")
-  @key
-  @visibility(Lifecycle.Read)
-  uniqueProductId: string;
-
-  @doc("The delivery method or deployment model")
-  productType: ProductType;
-
-  @doc("Product sub type")
-  productSubType?: string;
-
-  @doc("Product Family")
-  productFamily?: string;
-
-  @doc("Operating system info for this product")
-  operatingSystems?: string[];
-
-  @doc("The pricing types for this offer")
-  pricingTypes?: PricingType[];
-
-  @doc("Publisher display name")
-  publisherDisplayName?: string;
-
-  @doc("Product long summary")
-  longSummary?: string;
-
-  @doc("Product summary")
-  summary?: string;
-
+model ProductDetails extends ProductSummary {
   @doc("List of product videos")
   videos?: ProductVideo[];
 
@@ -650,57 +591,6 @@ model ProductDetails {
 
   @doc("Dictionary of additional properties provided for the item")
   additionalProductProperties?: Record<string>;
-
-  @doc("Linked add-in types")
-  linkedAddInsTypes?: Record<string>;
-
-  @doc("URI to the small product icon")
-  smallIconUri?: string;
-
-  @doc("The product description text")
-  description?: string;
-
-  @doc("Rating buckets")
-  ratingBuckets?: RatingBucket[];
-
-  @doc("Average rating for the offer")
-  ratingAverage?: float64;
-
-  @doc("Total number of ratings for the offer")
-  ratingCount?: int32;
-
-  @doc("Retail price of the product's cheapest plan")
-  startingPrice?: MarketStartPrice;
-
-  @doc("Full set of plan/SKU attributes")
-  plans?: PlanDetails[];
-
-  @doc("Maps to the list of compatible products")
-  supportedProducts?: string[];
-
-  @doc("Product categories the offer belongs to")
-  applicableProducts?: string[];
-
-  @doc("Latest update date of the product")
-  lastModifiedDateTime?: string;
-
-  @doc("List of locations which are available on the SKUs")
-  locations?: string[];
-
-  @doc("The service family of the product, such as 'Compute'")
-  serviceFamily?: string;
-
-  @doc("The service name of the product, such as 'Virtual Machines'")
-  service?: string;
-
-  @doc("The unique id of the product")
-  productId: string;
-
-  @doc("Indication if product has a representation in the marketplace")
-  hasMarketplaceFootprint?: boolean;
-
-  @doc("Set of products attributes")
-  attributes?: Attribute[];
 
   @doc("The product language")
   language?: string;
@@ -726,14 +616,8 @@ model ProductDetails {
   @doc("Legal terms URI")
   legalTermsUri?: string;
 
-  @doc("CSP legal terms URI")
-  cspLegalTermsUri?: string;
-
   @doc("Legal terms type")
   legalTermsType?: LegalTermsType;
-
-  @doc("Uri to the privacy policy of the product")
-  privacyPolicyUri?: string;
 
   @doc("Support uri of the product")
   supportUri?: string;
@@ -776,6 +660,13 @@ model ProductDetails {
 
   @doc("List of artifacts")
   artifacts?: Artifact[];
+
+  // Override properties that differ from base class
+  @doc("Full set of plan/SKU attributes")
+  plans?: PlanDetails[];
+
+  @doc("The unique id of the product")
+  productId: string;
 }
 
 @doc("The sku")
@@ -812,64 +703,7 @@ model PlanMetadata {
 }
 
 @doc("Returns a subset of Plan attributes")
-model PlanDetails {
-  @doc("Plan id")
-  planId?: string;
-
-  @doc("Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between")
-  uniquePlanId?: string;
-
-  @doc("Display name of the plan / sku")
-  displayName?: string;
-
-  @doc("VM Architecture Type. Applicable to Virtual Machine products only")
-  vmArchitectureType?: VmArchitectureType;
-
-  @doc("Value showing whether the plan is available for purchase through CSP channel")
-  cspState?: CspState;
-
-  @doc("Expanded plan/SKU metadata.")
-  metadata?: PlanMetadata;
-
-  @doc("Alternative stack reference")
-  altStackReference?: string;
-
-  @doc("Stack type : Classic, Gen1, Gen2")
-  stackType?: string;
-
-  @doc("The alternative architecture reference")
-  altArchitectureReference?: string;
-
-  @doc("Plan CategoryIds")
-  categoryIds?: string[];
-
-  @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
-  hasProtectedArtifacts?: boolean;
-
-  @doc("The list of the pricing types for which this plan is designated")
-  pricingTypes?: PricingType[];
-
-  @doc("VM security type")
-  vmSecuritytypes?: VmSecurityType[];
-
-  @doc("The plan summary text")
-  summary?: string;
-
-  @doc("Plan / sku description")
-  description?: string;
-
-  @doc("The SKU id")
-  skuId?: string;
-
-  @doc("Managed Application or Solution template plan type")
-  planType: ProductType;
-
-  @doc("The order the plan is displayed in the 'Plans' table")
-  displayRank?: string;
-
-  @doc("Indication that the plan is accessible to restricted audience only")
-  isPrivate?: boolean;
-
+model PlanDetails extends PlanSummary {
   @doc("The id")
   id?: string;
 
@@ -920,9 +754,6 @@ model PlanDetails {
 
   @doc("Plan labels")
   planLabels?: string[];
-
-  @doc("Indication whether the SKU supports reservations")
-  hasRI?: boolean;
 
   @doc("SKU type")
   skuType?: string;

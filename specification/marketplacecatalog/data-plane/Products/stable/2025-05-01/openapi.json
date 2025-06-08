@@ -836,91 +836,6 @@
       "type": "object",
       "description": "Returns a subset of Plan attributes",
       "properties": {
-        "planId": {
-          "type": "string",
-          "description": "Plan id"
-        },
-        "uniquePlanId": {
-          "type": "string",
-          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the plan / sku"
-        },
-        "vmArchitectureType": {
-          "$ref": "#/definitions/VmArchitectureType",
-          "description": "VM Architecture Type. Applicable to Virtual Machine products only"
-        },
-        "cspState": {
-          "$ref": "#/definitions/CspState",
-          "description": "Value showing whether the plan is available for purchase through CSP channel"
-        },
-        "metadata": {
-          "$ref": "#/definitions/PlanMetadata",
-          "description": "Expanded plan/SKU metadata."
-        },
-        "altStackReference": {
-          "type": "string",
-          "description": "Alternative stack reference"
-        },
-        "stackType": {
-          "type": "string",
-          "description": "Stack type : Classic, Gen1, Gen2"
-        },
-        "altArchitectureReference": {
-          "type": "string",
-          "description": "The alternative architecture reference"
-        },
-        "categoryIds": {
-          "type": "array",
-          "description": "Plan CategoryIds",
-          "items": {
-            "type": "string"
-          }
-        },
-        "hasProtectedArtifacts": {
-          "type": "boolean",
-          "description": "Set to true if plan has artifacts that are to be hidden for non authenticated users"
-        },
-        "pricingTypes": {
-          "type": "array",
-          "description": "The list of the pricing types for which this plan is designated",
-          "items": {
-            "$ref": "#/definitions/PricingType"
-          }
-        },
-        "vmSecuritytypes": {
-          "type": "array",
-          "description": "VM security type",
-          "items": {
-            "$ref": "#/definitions/VmSecurityType"
-          }
-        },
-        "summary": {
-          "type": "string",
-          "description": "The plan summary text"
-        },
-        "description": {
-          "type": "string",
-          "description": "Plan / sku description"
-        },
-        "skuId": {
-          "type": "string",
-          "description": "The SKU id"
-        },
-        "planType": {
-          "$ref": "#/definitions/ProductType",
-          "description": "Managed Application or Solution template plan type"
-        },
-        "displayRank": {
-          "type": "string",
-          "description": "The order the plan is displayed in the 'Plans' table"
-        },
-        "isPrivate": {
-          "type": "boolean",
-          "description": "Indication that the plan is accessible to restricted audience only"
-        },
         "id": {
           "type": "string",
           "description": "The id"
@@ -1012,10 +927,6 @@
             "type": "string"
           }
         },
-        "hasRI": {
-          "type": "boolean",
-          "description": "Indication whether the SKU supports reservations"
-        },
         "skuType": {
           "type": "string",
           "description": "SKU type"
@@ -1082,10 +993,14 @@
         }
       },
       "required": [
-        "planType",
         "isHidden",
         "isStopSell",
         "isQuantifiable"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PlanSummary"
+        }
       ]
     },
     "PlanMetadata": {
@@ -1339,99 +1254,6 @@
       "type": "object",
       "description": "Summary description of the product",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Product display name"
-        },
-        "popularity": {
-          "type": "number",
-          "format": "double",
-          "description": "Popularity of the product"
-        },
-        "categoryIds": {
-          "type": "array",
-          "description": "Array of product categories",
-          "items": {
-            "type": "string"
-          }
-        },
-        "industryIds": {
-          "type": "array",
-          "description": "List of industry IDs the item belongs to",
-          "items": {
-            "type": "string"
-          }
-        },
-        "publisherId": {
-          "type": "string",
-          "description": "Publisher id"
-        },
-        "azureBenefit": {
-          "$ref": "#/definitions/AzureBenefit",
-          "description": "Eligibility for Azure consumption commitment benefit"
-        },
-        "badges": {
-          "type": "array",
-          "description": "The product badges",
-          "items": {
-            "$ref": "#/definitions/Badge"
-          }
-        },
-        "hasRIPlans": {
-          "type": "boolean",
-          "description": "Indication whether the product has plans with reservations"
-        },
-        "publisherType": {
-          "$ref": "#/definitions/PublisherType",
-          "description": "Publisher type"
-        },
-        "publishingStage": {
-          "$ref": "#/definitions/PublishingStage",
-          "description": "Product publishing stage"
-        },
-        "uniqueProductId": {
-          "type": "string",
-          "description": "Unique product identifier",
-          "readOnly": true
-        },
-        "productType": {
-          "$ref": "#/definitions/ProductType",
-          "description": "The delivery method or deployment model"
-        },
-        "productSubType": {
-          "type": "string",
-          "description": "Product sub type"
-        },
-        "productFamily": {
-          "type": "string",
-          "description": "Product Family"
-        },
-        "operatingSystems": {
-          "type": "array",
-          "description": "Operating system info for this product",
-          "items": {
-            "type": "string"
-          }
-        },
-        "pricingTypes": {
-          "type": "array",
-          "description": "The pricing types for this offer",
-          "items": {
-            "$ref": "#/definitions/PricingType"
-          }
-        },
-        "publisherDisplayName": {
-          "type": "string",
-          "description": "Publisher display name"
-        },
-        "longSummary": {
-          "type": "string",
-          "description": "Product long summary"
-        },
-        "summary": {
-          "type": "string",
-          "description": "Product summary"
-        },
         "videos": {
           "type": "array",
           "description": "List of product videos",
@@ -1469,98 +1291,6 @@
             "type": "string"
           }
         },
-        "linkedAddInsTypes": {
-          "type": "object",
-          "description": "Linked add-in types",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "smallIconUri": {
-          "type": "string",
-          "description": "URI to the small product icon"
-        },
-        "description": {
-          "type": "string",
-          "description": "The product description text"
-        },
-        "ratingBuckets": {
-          "type": "array",
-          "description": "Rating buckets",
-          "items": {
-            "$ref": "#/definitions/RatingBucket"
-          }
-        },
-        "ratingAverage": {
-          "type": "number",
-          "format": "double",
-          "description": "Average rating for the offer"
-        },
-        "ratingCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of ratings for the offer"
-        },
-        "startingPrice": {
-          "$ref": "#/definitions/MarketStartPrice",
-          "description": "Retail price of the product's cheapest plan"
-        },
-        "plans": {
-          "type": "array",
-          "description": "Full set of plan/SKU attributes",
-          "items": {
-            "$ref": "#/definitions/PlanDetails"
-          }
-        },
-        "supportedProducts": {
-          "type": "array",
-          "description": "Maps to the list of compatible products",
-          "items": {
-            "type": "string"
-          }
-        },
-        "applicableProducts": {
-          "type": "array",
-          "description": "Product categories the offer belongs to",
-          "items": {
-            "type": "string"
-          }
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "description": "Latest update date of the product"
-        },
-        "locations": {
-          "type": "array",
-          "description": "List of locations which are available on the SKUs",
-          "items": {
-            "type": "string"
-          }
-        },
-        "serviceFamily": {
-          "type": "string",
-          "description": "The service family of the product, such as 'Compute'"
-        },
-        "service": {
-          "type": "string",
-          "description": "The service name of the product, such as 'Virtual Machines'"
-        },
-        "productId": {
-          "type": "string",
-          "description": "The unique id of the product"
-        },
-        "hasMarketplaceFootprint": {
-          "type": "boolean",
-          "description": "Indication if product has a representation in the marketplace"
-        },
-        "attributes": {
-          "type": "array",
-          "description": "Set of products attributes",
-          "items": {
-            "$ref": "#/definitions/Attribute"
-          },
-          "x-ms-identifiers": []
-        },
         "language": {
           "type": "string",
           "description": "The product language"
@@ -1593,17 +1323,9 @@
           "type": "string",
           "description": "Legal terms URI"
         },
-        "cspLegalTermsUri": {
-          "type": "string",
-          "description": "CSP legal terms URI"
-        },
         "legalTermsType": {
           "$ref": "#/definitions/LegalTermsType",
           "description": "Legal terms type"
-        },
-        "privacyPolicyUri": {
-          "type": "string",
-          "description": "Uri to the privacy policy of the product"
         },
         "supportUri": {
           "type": "string",
@@ -1667,14 +1389,28 @@
             "$ref": "#/definitions/Artifact"
           },
           "x-ms-identifiers": []
+        },
+        "plans": {
+          "type": "array",
+          "description": "Full set of plan/SKU attributes",
+          "items": {
+            "$ref": "#/definitions/PlanDetails"
+          }
+        },
+        "productId": {
+          "type": "string",
+          "description": "The unique id of the product"
         }
       },
       "required": [
-        "uniqueProductId",
-        "productType",
-        "productId",
         "isPrivate",
-        "isStopSell"
+        "isStopSell",
+        "productId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProductSummary"
+        }
       ]
     },
     "ProductSummary": {
@@ -2678,7 +2414,7 @@
     "LanguageParameter": {
       "name": "language",
       "in": "query",
-      "description": "Language to search, ISO 639-1 two-letter code. Default is \"en\"",
+      "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default is \"en\"",
       "required": false,
       "type": "string",
       "default": "en",
@@ -2699,7 +2435,7 @@
     "MarketParameter": {
       "name": "market",
       "in": "query",
-      "description": "Product market value (the response will include only products that can be sold in the specified market). Example: 'US'",
+      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2740,7 +2476,7 @@
     "StorefrontParameter": {
       "name": "storefront",
       "in": "query",
-      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The default value is 'azure'",
+      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
       "required": false,
       "type": "string",
       "default": "azure",
