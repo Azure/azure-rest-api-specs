@@ -1,5 +1,9 @@
 # Supercomputer
 
+> see https://aka.ms/autorest
+
+---
+
 ## Configuration
 
 ### Basic Information
