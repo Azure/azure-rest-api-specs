@@ -129,6 +129,9 @@
               "generation": "Gen2",
               "altStackReference": "standard-gen1"
             },
+            "altStackReference": "standard-gen1",
+            "stackType": "Gen2",
+            "altArchitectureReference": "standard-gen1-x64",
             "categoryIds": [
               "compute",
               "enterprise"
@@ -149,7 +152,81 @@
             "planType": "VirtualMachine",
             "displayRank": "1",
             "isPrivate": false,
+            "id": "vm-plan-std-gen2",
+            "version": "1.0.0",
+            "isHidden": false,
+            "isStopSell": false,
+            "minQuantity": 1,
+            "maxQuantity": 100,
+            "isQuantifiable": true,
+            "isHiddenPrivateOffer": false,
+            "certifications": [
+              {
+                "id": "azure-certified",
+                "displayName": "Azure Certified VM",
+                "uri": "https://example.com/certifications/azure-vm"
+              }
+            ],
+            "customerInstruction": "Select appropriate VM size based on your workload requirements",
+            "planLabels": [
+              "standard",
+              "gen2",
+              "enterprise"
+            ],
             "hasRI": true,
+            "skuType": "Standard",
+            "skuTitle": "Enterprise Linux Standard Gen2",
+            "location": "eastus",
+            "armRegionName": "eastus",
+            "cloud": "Public",
+            "locationType": "Region",
+            "region": "East US",
+            "skuGroupId": "enterprise-linux-group",
+            "zone": "Zone 1",
+            "feature": "Standard",
+            "serviceType": "VirtualMachine",
+            "skuAttributes": [
+              {
+                "key": "vmSize",
+                "value": "Standard_D2s_v3"
+              },
+              {
+                "key": "cores",
+                "value": "2"
+              },
+              {
+                "key": "ram",
+                "value": "8GB"
+              },
+              {
+                "key": "diskType",
+                "value": "Premium_LRS"
+              },
+              {
+                "key": "networkAccelerated",
+                "value": "true"
+              }
+            ],
+            "skuProperties": {
+              "category": "Compute",
+              "dataDiskType": "Premium_LRS",
+              "diskType": "Premium_LRS",
+              "numberOfCores": "2",
+              "ram": "8GB",
+              "vCpu": "2",
+              "armSkuName": "Standard_D2s_v3",
+              "accessTier": "Standard"
+            },
+            "offeringProperties": [
+              {
+                "productCode": "ENTLINUX-STD-GEN2",
+                "termId": "hourly",
+                "meterType": "compute",
+                "billingMeterId": "vm-compute-meter",
+                "offeringId": "enterprise-linux-std-offering",
+                "type": "Consumption"
+              }
+            ],
             "billingComponents": [
               {
                 "billingTag": "compute",
@@ -170,15 +247,21 @@
                 ],
                 "meter": {
                   "meterId": "std-gen2-compute",
+                  "partNumber": "ENTLINUX-STD-GEN2",
+                  "consumptionResourceId": "enterprise-linux-vm",
                   "price": {
                     "currencyCode": "USD",
                     "isPIRequired": true,
                     "listPrice": 0.12,
                     "msrp": 0.15
-                  }
+                  },
+                  "type": "compute",
+                  "includedQuantityProperties": []
                 },
                 "pricingAudience": "DirectCommercial",
-                "hasFreeTrials": true
+                "hasFreeTrials": true,
+                "consumptionUnitType": "Hour",
+                "displayRank": 1
               }
             ]
           }

@@ -121,6 +121,7 @@
                 }
               ]
             },
+            "altStackReference": "basic-tier",
             "stackType": "Gen2",
             "altArchitectureReference": null,
             "categoryIds": [
@@ -143,7 +144,58 @@
             "planType": "SaaS",
             "displayRank": "2",
             "isPrivate": false,
+            "id": "pro-plan-001",
+            "version": "2.1.0",
+            "isHidden": false,
+            "isStopSell": false,
+            "minQuantity": 1,
+            "maxQuantity": 1000,
+            "isQuantifiable": true,
+            "isHiddenPrivateOffer": false,
+            "certifications": [
+              {
+                "id": "iso27001",
+                "displayName": "ISO 27001 Certified",
+                "uri": "https://www.cloudguard.com/certifications/iso27001"
+              }
+            ],
+            "customerInstruction": "Contact support for enterprise deployment assistance",
+            "planLabels": [
+              "recommended",
+              "enterprise"
+            ],
             "hasRI": true,
+            "skuType": "Standard",
+            "skuTitle": "CloudGuard Pro Scanner",
+            "location": "Global",
+            "armRegionName": "global",
+            "cloud": "Public",
+            "locationType": "Global",
+            "region": "Global",
+            "skuGroupId": "cloudguard-scanner-group",
+            "zone": "Zone 1",
+            "feature": "SecurityScanning",
+            "serviceType": "SaaS",
+            "skuAttributes": [
+              {
+                "key": "MaxScansPerMonth",
+                "value": "10000"
+              },
+              {
+                "key": "SupportLevel",
+                "value": "Premium"
+              }
+            ],
+            "skuProperties": {
+              "category": "Security",
+              "dataDiskType": null,
+              "diskType": null,
+              "numberOfCores": null,
+              "ram": null,
+              "vCpu": null,
+              "armSkuName": "cloudguard-pro",
+              "accessTier": "Standard"
+            },
             "billingComponents": [
               {
                 "billingTag": "enterprise-scanner",
@@ -168,6 +220,24 @@
                   "Purchase",
                   "Trial"
                 ],
+                "meter": {
+                  "meterId": "scan-meter-001",
+                  "partNumber": "CGSCAN-PRO-001",
+                  "consumptionResourceId": "cloudguard-scanner-pro",
+                  "price": {
+                    "currencyCode": "USD",
+                    "isPIRequired": true,
+                    "listPrice": 0.10,
+                    "msrp": 0.12
+                  },
+                  "type": "usage",
+                  "includedQuantityProperties": [
+                    {
+                      "termId": "monthly",
+                      "quantity": "100"
+                    }
+                  ]
+                },
                 "pricingAudience": "DirectCommercial",
                 "terms": [
                   {
