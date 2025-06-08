@@ -84,7 +84,6 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
-  let breakingChangeLabel = "";
   let executionReport;
   let changedSpecPathText = "";
   let hasManagementPlaneSpecs = false;
@@ -164,7 +163,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       if (overallExecutionResult !== "failed") {
         overallExecutionResult = currentExecutionResult;
       }
-      [currentRunHasBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
+      currentRunHasBreakingChange = getBreakingChangeInfo(executionReport);
       overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
       logMessage(`Runner command execution result:${currentExecutionResult}`);
     } catch (error) {
@@ -180,7 +179,6 @@ export async function generateSdkForSpecPr(): Promise<number> {
     generateArtifact(
       commandInput,
       overallExecutionResult,
-      breakingChangeLabel,
       overallRunHasBreakingChange,
       hasManagementPlaneSpecs,
       stagedArtifactsFolder,
