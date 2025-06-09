@@ -277,6 +277,21 @@
           },
           "Create SaaS NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
+          },
+          "Create NVA in VNet with PrivateNic & PublicNic": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetBasicPut.json"
+          },
+          "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPrivateNic": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPrivatePut.json"
+          },
+          "Create NVA in VNet with PrivateNic, PublicNic & AdditionalPublicNic": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetAdditionalPublicPut.json"
+          },
+          "Create NVA in VNet with PrivateNic & PublicNic, including NetworkProfile": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetNetworkProfilePut.json"
+          },
+          "Create NVA in VNet with PrivateNic & PublicNic, including Internet-Ingress": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetIngressPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1146,7 +1161,7 @@
         "additionalNics": {
           "type": "array",
           "readOnly": false,
-          "description": "Details required for Additional Network Interface.",
+          "description": "Details required for Additional Network Interface. This property is not compatible with the NVA deployed in VNets",
           "items": {
             "$ref": "#/definitions/VirtualApplianceAdditionalNicProperties"
           },
@@ -1196,7 +1211,7 @@
           "description": "The deployment type. PartnerManaged for the SaaS NVA"
         },
         "delegation": {
-          "description": "The delegation for the Virtual Appliance",
+          "description": "The delegation for the Virtual Appliance. Only appliable for SaaS NVA.",
           "$ref": "#/definitions/DelegationProperties"
         },
         "partnerManagedResource": {
@@ -1240,11 +1255,13 @@
         "nicType": {
           "type": "string",
           "readOnly": true,
-          "description": "NIC type - PublicNic, PrivateNic, or AdditionalNic.",
+          "description": "NIC type - PublicNic, PrivateNic, AdditionalNic; AdditionalPrivateNic and AdditionalPublicNic are only supported for NVAs deployed in VNets.",
           "enum": [
             "PublicNic",
             "PrivateNic",
-            "AdditionalNic"
+            "AdditionalNic",
+            "AdditionalPrivateNic",
+            "AdditionalPublicNic"
           ],
           "x-ms-enum": {
             "name": "NicTypeInResponse",
@@ -1318,7 +1335,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the IP configuration."
+          "description": "For hub NVAs, primary IP configs must be named 'privatenicipconfig' and 'publicnicipconfig', with non-primary configs using these prefixes; no naming restrictions apply for NVAs in VNets.",
+          "maxLength": 80
         },
         "properties": {
           "$ref": "#/definitions/VirtualApplianceIPConfigurationProperties"
@@ -1728,7 +1746,7 @@
           "description": "The partner managed SLB resource id"
         }
       },
-      "description": "Properties of the partner managed resource."
+      "description": "Properties of the partner managed resource. Only appliable for SaaS NVA."
     },
     "NetworkVirtualApplianceInstanceIds": {
       "type": "object",
@@ -1789,8 +1807,9 @@
       "properties": {
         "subnet": {
           "readOnly": false,
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "A subnet resource id where the NIC will be deployed"
+          "$ref": "#/definitions/NvaInVnetSubnetReferenceProperties",
+          "description": "A subnet resource id where the NIC will be deployed",
+          "x-ms-identifiers": []
         },
         "type": {
           "type": "array",
@@ -1834,6 +1853,26 @@
         }
       },
       "description": "Specifies input parameters required NVA in VNet interface configuration."
-    }
+    },
+    "NvaInVnetSubnetReferenceProperties": {
+      "type": "object",
+      "title": "Subnet references where the NVA NICS will be deployed",
+      "description": "The resource URI of the subnets where the NVA NICS will be deployed",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Resource Uri of Subnet",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
   }
 }
