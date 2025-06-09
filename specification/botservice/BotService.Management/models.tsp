@@ -271,6 +271,7 @@ model BotProperties {
   /**
    * The bot's endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   endpoint: string | null;
 
   /**
@@ -316,6 +317,7 @@ model BotProperties {
   /**
    * Microsoft App Managed Identity Resource Id for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   msaAppMSIResourceId?: string;
 
   /**
@@ -407,6 +409,7 @@ model BotProperties {
   /**
    * The channel schema transformation version for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   schemaTransformationVersion?: string | null = null;
 
   /**
@@ -534,6 +537,7 @@ model PrivateLinkResourceBase {
  */
 model NetworkSecurityPerimeterConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ProvisioningState = ProvisioningState.Succeeded;
 
   /**
@@ -826,6 +830,7 @@ model Error {
   /**
    * The error body.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   error?: ErrorBody;
 }
 
@@ -858,11 +863,14 @@ model Channel {
   /**
    * The channel name
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   channelName: string;
 
   /**
    * Entity Tag of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   etag?: string | null;
 
@@ -876,6 +884,7 @@ model Channel {
   /**
    * Specifies the location of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   location?: string = "global";
 }
 
@@ -927,6 +936,7 @@ model ChannelSettings {
   /**
    * The list of sites
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   sites?: Site[];
 
   /**
@@ -1022,6 +1032,7 @@ model Site {
   /**
    * Whether this site is enabled for block user upload.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   isBlockUserUploadEnabled?: boolean | null = null;
 
   /**
@@ -1181,6 +1192,7 @@ model OperationEntity {
   /**
    * Additional properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   properties?: unknown;
 }
 
@@ -1221,6 +1233,7 @@ model ServiceProviderResponseList {
   /**
    * Gets the list of bot service providers and their properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   value?: ServiceProvider[];
 }
@@ -1344,6 +1357,7 @@ model ServiceProviderParameterMetadataConstraints {
 /**
  * The request body for a request to Bot Service Management to list QnA Maker endpoint keys.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model QnAMakerEndpointKeysRequestBody {
   /**
    * the host name of the QnA Maker endpoint
@@ -1359,6 +1373,7 @@ model QnAMakerEndpointKeysRequestBody {
 /**
  * Schema for EndpointKeys generate/refresh operations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model QnAMakerEndpointKeysResponse {
   /**
    * Primary Access Key.
@@ -1388,11 +1403,13 @@ model ConnectionSettingProperties {
   /**
    * Id of the Connection Setting.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   id?: string;
 
   /**
    * Name of the Connection Setting.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   name?: string;
 
   /**
@@ -1430,6 +1447,7 @@ model ConnectionSettingProperties {
   /**
    * Service Provider Parameters associated with the Connection Setting
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   parameters?: ConnectionSettingParameter[];
 
   /**
@@ -1451,6 +1469,7 @@ model ConnectionSettingParameter {
   /**
    * Value associated with the Connection Setting Parameter.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   value?: string | null;
 }
 
@@ -1467,41 +1486,49 @@ model HostSettingsResponse {
   /**
    * For in-conversation bot user authentication
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   OAuthUrl?: string;
 
   /**
    * For verifying incoming tokens from the channels
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ToBotFromChannelOpenIdMetadataUrl?: string;
 
   /**
    * For verifying incoming tokens from the channels
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ToBotFromChannelTokenIssuer?: string;
 
   /**
    * For verifying incoming tokens from bot emulator
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ToBotFromEmulatorOpenIdMetadataUrl?: string;
 
   /**
    * For getting access token to channels from bot host
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ToChannelFromBotLoginUrl?: string;
 
   /**
    * For getting access token to channels from bot host
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ToChannelFromBotOAuthScope?: string;
 
   /**
    * Per cloud OAuth setting on whether authority is validated
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ValidateAuthority?: boolean;
 
   /**
    * Same as toBotFromChannelOpenIdMetadataUrl, used by SDK < v4.12
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   BotOpenIdMetadata?: string;
 }
 
@@ -1818,6 +1845,7 @@ model MsTeamsChannelProperties {
   /**
    * Whether this channel accepted terms
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   acceptedTerms?: boolean | null = null;
 }
 
@@ -1959,6 +1987,7 @@ model WebChatChannelProperties {
   /**
    * The list of Web Chat sites
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   sites?: WebChatSite[];
 }
 
@@ -1966,6 +1995,7 @@ model WebChatChannelProperties {
  * A site for the Webchat channel
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model WebChatSite extends Site {}
 
 /**
@@ -1990,6 +2020,7 @@ model DirectLineChannelProperties {
   /**
    * The list of Direct Line sites
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   sites?: DirectLineSite[];
 
   /**
@@ -2005,6 +2036,7 @@ model DirectLineChannelProperties {
   /**
    * Direct Line embed code of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   DirectLineEmbedCode?: string;
 }
 
@@ -2012,6 +2044,7 @@ model DirectLineChannelProperties {
  * A site for the Direct Line channel
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model DirectLineSite extends Site {}
 
 /**
@@ -2077,6 +2110,7 @@ model SmsChannelProperties {
   /**
    * The Sms account SID. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   accountSID: string;
 
   /**
@@ -2157,11 +2191,13 @@ model SlackChannelProperties {
   /**
    * Whether to register the settings before OAuth validation is performed. Recommended to True.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   registerBeforeOAuthFlow?: boolean;
 
   /**
    * Whether this channel is validated for the bot
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   IsValidated?: boolean;
 
@@ -2199,6 +2235,7 @@ model LineChannelProperties {
   /**
    * The list of line channel registrations
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   lineRegistrations: LineRegistration[];
 
   /**
@@ -2264,11 +2301,13 @@ model DirectLineSpeechChannelProperties {
   /**
    * The cognitive service region with this channel registration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceRegion?: string | null;
 
   /**
    * The cognitive service subscription key to use with this channel registration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @secret
   cognitiveServiceSubscriptionKey?: string | null;
 
@@ -2335,21 +2374,26 @@ model TelephonyChannelProperties {
   /**
    * The extensionKey1
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceSubscriptionKey?: string | null;
 
   /**
    * The extensionKey2
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceRegion?: string | null;
 
   /**
    * The default locale of the channel
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   defaultLocale?: string | null;
 
   /**
    * The premium SKU applied to the channel
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   premiumSKU?: string | null;
 
   /**
@@ -2375,41 +2419,49 @@ model TelephonyPhoneNumbers {
   /**
    * The endpoint of ACS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   acsEndpoint?: string | null;
 
   /**
    * The secret of ACS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   acsSecret?: string | null;
 
   /**
    * The resource id of ACS.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   acsResourceId?: string | null;
 
   /**
    * The subscription key of cognitive service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceSubscriptionKey?: string | null;
 
   /**
    * The service region of cognitive service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceRegion?: string | null;
 
   /**
    * The resource id of cognitive service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceResourceId?: string | null;
 
   /**
    * The default locale of the phone number.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   defaultLocale?: string | null;
 
   /**
    * Optional Property that will determine the offering type of the phone.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   offerType?: string | null;
 }
 
@@ -2425,26 +2477,31 @@ model TelephonyChannelResourceApiConfiguration {
   /**
    * The provider name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   providerName?: string | null;
 
   /**
    * The cognitive service subscription key.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceSubscriptionKey?: string | null;
 
   /**
    * The cognitive service region.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceRegion?: string | null;
 
   /**
    * The cognitive service resourceId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   cognitiveServiceResourceId?: string | null;
 
   /**
    * The default locale.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   defaultLocale?: string | null;
 }
 

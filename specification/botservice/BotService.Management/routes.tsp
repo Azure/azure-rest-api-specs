@@ -47,6 +47,7 @@ interface BotConnectionOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface QnAMakerEndpointKeysOperationGroup {
   /**
    * Lists the QnA Maker endpoint keys
@@ -88,6 +89,7 @@ interface OperationResultsOperationGroup {
    * Get the operation result for a long running operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @operationId("OperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.BotService/operationresults/{operationResultId}")
   @get

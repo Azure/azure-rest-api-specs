@@ -49,7 +49,8 @@ enum Versions {
 }
 
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @tag("Operations")
   @autoRoute
   @Azure.ResourceManager.Private.armUpdateProviderNamespace

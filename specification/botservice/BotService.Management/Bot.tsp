@@ -24,21 +24,25 @@ model Bot is Azure.ResourceManager.TrackedResource<BotProperties> {
   /**
    * Gets or sets the SKU of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 
   /**
    * Required. Gets or sets the Kind of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: Kind;
 
   /**
    * Entity Tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
 
   /**
    * Entity zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
