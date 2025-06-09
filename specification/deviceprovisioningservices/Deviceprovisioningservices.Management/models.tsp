@@ -332,7 +332,7 @@ model IotDpsPropertiesDescription {
   /**
    * The IP filter rules.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   ipFilterRules?: IpFilterRule[];
 
   /**
@@ -377,7 +377,7 @@ model IotDpsPropertiesDescription {
   /**
    * List of authorization keys for a provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   authorizationPolicies?: SharedAccessSignatureAuthorizationRuleAccessRightsDescription[];
 
   /**
@@ -562,7 +562,7 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -570,7 +570,7 @@ model ManagedServiceIdentity {
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -635,7 +635,7 @@ model Resource {
 /**
  * A container holding only the Tags for a resource, allowing the user to update the tags on a Provisioning Service instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model TagsResource {
   /**
    * Resource tags

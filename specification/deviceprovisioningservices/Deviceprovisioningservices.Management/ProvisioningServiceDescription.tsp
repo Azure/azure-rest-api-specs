@@ -13,8 +13,8 @@ namespace Microsoft.Devices;
 /**
  * The description of the provisioning service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ProvisioningServiceDescription
@@ -44,7 +44,7 @@ model ProvisioningServiceDescription
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   subscriptionid?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: IotDpsPropertiesDescription;
@@ -58,7 +58,7 @@ model ProvisioningServiceDescription
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ProvisioningServiceDescriptionOperationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -84,7 +84,7 @@ interface ProvisioningServiceDescriptionOperationOps
       ErrorDetails
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface ProvisioningServiceDescriptionOperations {
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
