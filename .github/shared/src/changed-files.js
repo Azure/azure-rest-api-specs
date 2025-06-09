@@ -2,7 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { readFile, access } from "fs/promises";
+import { access } from "fs/promises";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -125,21 +125,6 @@ export function swagger(file) {
     (dataPlane(file) || resourceManager(file)) &&
     !example(file)
   );
-}
-
-/**
- * Given the path to a file return an array of strings where each entry in the
- * array is a line in the file
- *
- * @param {string} changedFilesPath Path to the file containing the list of changed files with one on each line
- * @returns
- */
-export async function readFileList(changedFilesPath) {
-  const data = await readFile(changedFilesPath, { encoding: "utf-8" });
-  return data
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
 }
 
 /**

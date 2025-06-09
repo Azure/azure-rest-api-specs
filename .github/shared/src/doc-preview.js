@@ -46,7 +46,7 @@ export function parseSwaggerFilePath(specPath) {
 }
 
 /**
- * @param {{owner: string, repo: string, prNumber: string}} prKey
+ * @param {{repoName: string, prNumber: string}} prKey
  * @returns {object}
  */
 export function repoJSONTemplate({ repoName, prNumber }) {
@@ -94,7 +94,7 @@ export function mappingJSONTemplate(files) {
 
 /**
  * @param {string} buildId
- * @param {{owner: string, repo: string, prNumber: string}} key
+ * @param {{repoName: string, prNumber: string}} key
  * @returns {string}
  */
 // TODO: Use aka.ms link for Teams channel
@@ -116,9 +116,12 @@ us in the [Docs Support Teams Channel](https://teams.microsoft.com/l/channel/19%
  * @param {string[]} swaggerFiles
  **/
 export function getSwaggersToProcess(swaggerFiles) {
+  // swaggerFileObjs never has any `null` elements, otherwise, returns the
+  // output type of `parseSwaggerFilePath`.
+  /** @type {Exclude<ReturnType<typeof parseSwaggerFilePath>, null>[]} */
   const swaggerFileObjs = swaggerFiles
     .map(parseSwaggerFilePath)
-    .filter(Boolean);
+    .filter((obj) => obj !== null);
 
   const versions = swaggerFileObjs.map((obj) => obj.apiVersion).filter(Boolean);
   const uniqueVersions = [...new Set(versions)];
