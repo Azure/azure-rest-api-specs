@@ -319,6 +319,7 @@ model NotificationHubProperties {
   /**
    * Gets or sets the NotificationHub name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   name?: string;
 
@@ -1037,12 +1038,15 @@ model NamespaceProperties {
    * Name of the Notification Hubs namespace. This is immutable property, set automatically
    * by the service when the namespace is created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Defines values for OperationProvisioningState.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   provisioningState?: OperationProvisioningState;
 
   /**
@@ -1200,6 +1204,8 @@ model PrivateEndpointConnectionProperties {
   /**
    * State of Private Endpoint Connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 
   /**
@@ -1535,6 +1541,7 @@ model PrivateLinkServiceConnection {
 
 model OperationListResult is Azure.Core.Page<Operation>;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OperationDisplay {
   /** 
   The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
