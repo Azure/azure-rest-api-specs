@@ -486,7 +486,7 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -494,7 +494,7 @@ model ManagedServiceIdentity {
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
