@@ -49,6 +49,8 @@ input-file:
 - preview/2024-12-01-preview/LogFiles.json
 - preview/2024-12-01-preview/ServiceOperations.json
 - preview/2024-12-01-preview/Maintenances.json
+- preview/2024-12-01-preview/PrivateEndpointConnections.json
+- preview/2024-12-01-preview/PrivateLinkResources.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
