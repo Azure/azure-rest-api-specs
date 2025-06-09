@@ -120,14 +120,26 @@ union EgressPolicy {
   string,
 }
 
+@doc("The possible values representing different network policy rules.")
+union PolicyRule {
+  @doc("Allow all network traffic.")
+  AllowAll: "AllowAll",
+
+  @doc("Deny all network traffic.")
+  DenyAll: "DenyAll",
+
+  @doc("Allow traffic within the same namespace.")
+  AllowSameNamespace: "AllowSameNamespace",
+}
+
 @doc("The profile of the fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
 model FleetManagedNamespaceProfile {
   @doc("Action if Kubernetes managed namespace with the same name already exists.")
-  adoptionPolicy?: AdoptionPolicy;
+  adoptionPolicy?: PolicyRule;
 
   @doc("Delete options of a fleet managed namespace.")
-  deletePolicy?: DeletePolicy;
+  deletePolicy?: PolicyRule;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the fleet managed namespace.")
