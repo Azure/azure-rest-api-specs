@@ -26,17 +26,17 @@ options:
     "output-path": "./azure/keyvault/administration/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
-    "package-dir": "azure-security-keyvault-administration"
-    "namespace": "com.azure.security.keyvault.administration"
-    "models-subpackage": "implementation.models"
-    "custom-types": "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
-    "custom-types-subpackage": "models"
-    "customization-class": "swagger/src/main/java/AdministrationCustomizations.java"
-    "partial-update": true
-    "generate-tests": false
-    "generate-samples": false
-    "include-api-view-properties": false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+    package-dir: "azure-security-keyvault-administration"
+    namespace: "com.azure.security.keyvault.administration"
+    models-subpackage: "implementation.models"
+    custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
+    custom-types-subpackage: "models"
+    customization-class: "customizations/src/main/java/AdministrationCustomizations.java"
+    generate-tests: false
+    generate-samples: false
+    include-api-view-properties: false
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Security.KeyVault.Administration
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Security.KeyVault.Administration"
     namespace: "Azure.Security.KeyVault.Administration"
