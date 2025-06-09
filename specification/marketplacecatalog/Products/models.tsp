@@ -574,6 +574,7 @@ model MarketStartPrice {
   currency?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
 @resource("product")
 model ProductDetails extends ProductSummary {
@@ -702,6 +703,7 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
 model PlanDetails extends PlanSummary {
   @doc("The id")
