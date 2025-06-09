@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 interface Environments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since Environment has a different path"
