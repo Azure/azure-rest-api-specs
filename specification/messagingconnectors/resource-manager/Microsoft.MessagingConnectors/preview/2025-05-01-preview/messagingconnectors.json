@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.MessagingConnectors management service",
-    "version": "2025-03-01-preview",
+    "version": "2025-05-01-preview",
     "description": "Microsoft.MessagingConnectors Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -745,6 +745,27 @@
     }
   },
   "definitions": {
+    "AccessKeyAuthentication": {
+      "type": "object",
+      "description": "AccessKey Model.",
+      "properties": {
+        "accessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "AccessKey secret.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "accessKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Authentication"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
     "Authentication": {
       "type": "object",
       "description": "Base properties for auth.",
@@ -765,7 +786,9 @@
       "enum": [
         "OAuth",
         "ConnectionString",
-        "UsernamePassword"
+        "UsernamePassword",
+        "AccessKey",
+        "SasToken"
       ],
       "x-ms-enum": {
         "name": "AuthenticationMode",
@@ -785,6 +808,16 @@
             "name": "UsernamePassword",
             "value": "UsernamePassword",
             "description": "UsernamePassword model."
+          },
+          {
+            "name": "AccessKey",
+            "value": "AccessKey",
+            "description": "AccessKey model."
+          },
+          {
+            "name": "SasToken",
+            "value": "SasToken",
+            "description": "SasToken model."
           }
         ]
       }
@@ -834,6 +867,61 @@
         }
       ],
       "x-ms-discriminator-value": "Avro"
+    },
+    "AzureBlobSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for AzureBlobSourceConnector",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the storage account where the blob files are located"
+        },
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "Authentication for AzureBlob"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name"
+        },
+        "pathPattern": {
+          "type": "string",
+          "description": "The path pattern to locate the files, default to * to poll all"
+        },
+        "compression": {
+          "$ref": "#/definitions/Compression",
+          "description": "Compression type"
+        },
+        "discoveryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the datetime to start processing files, files whose creation time earlier than this will be ignored"
+        },
+        "pathDateFormat": {
+          "type": "string",
+          "description": "Date format of {date} variable in path pattern"
+        },
+        "pathTimeFormat": {
+          "type": "string",
+          "description": "Time format of {time} variable in path pattern, support only hours currently"
+        },
+        "outOfOrderHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "For how many hours late that we still consider a file to be on time"
+        }
+      },
+      "required": [
+        "accountName",
+        "authentication",
+        "containerName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureBlobSource"
     },
     "AzureDataExplorerSourceConnectorProperties": {
       "type": "object",
@@ -1076,6 +1164,30 @@
             "name": "EventSchemaSet",
             "value": "EventSchemaSet",
             "description": "EventSchemaSetCloudEventsConfig"
+          }
+        ]
+      }
+    },
+    "Compression": {
+      "type": "string",
+      "description": "Type of File Compression Mode",
+      "enum": [
+        "None",
+        "Gzip"
+      ],
+      "x-ms-enum": {
+        "name": "Compression",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Not Compressed"
+          },
+          {
+            "name": "Gzip",
+            "value": "Gzip",
+            "description": "Gzip Compression"
           }
         ]
       }
@@ -1421,7 +1533,9 @@
         "SolacePubsubSource",
         "ManagedAzureMapsWeatherSource",
         "EventHubSource",
-        "DataverseSource"
+        "DataverseSource",
+        "AzureBlobSource",
+        "SampleDataSource"
       ],
       "x-ms-enum": {
         "name": "ConnectorType",
@@ -1501,6 +1615,16 @@
             "name": "DataverseSource",
             "value": "DataverseSource",
             "description": "Dataverse source connector."
+          },
+          {
+            "name": "AzureBlobSource",
+            "value": "AzureBlobSource",
+            "description": "Dataverse source connector."
+          },
+          {
+            "name": "SampleDataSource",
+            "value": "SampleDataSource",
+            "description": "SampleData source connector."
           }
         ]
       }
@@ -1709,6 +1833,10 @@
         "cloudEventsConfig": {
           "$ref": "#/definitions/CloudEventsConfig",
           "description": "Cloud events config"
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "networkProperties config."
         }
       },
       "required": [
@@ -1723,6 +1851,10 @@
         "dataPreviewProperties": {
           "$ref": "#/definitions/DataPreviewProperties",
           "description": "DataPreview properties"
+        },
+        "skipValidation": {
+          "type": "boolean",
+          "description": "Skip validation or not"
         }
       },
       "required": [
@@ -1815,6 +1947,48 @@
       "required": [
         "connectorType"
       ]
+    },
+    "DataType": {
+      "type": "string",
+      "description": "Sample Data Type",
+      "enum": [
+        "Bicycles",
+        "YellowTaxi",
+        "StockMarket",
+        "Buses",
+        "SP500Stocks"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bicycles",
+            "value": "Bicycles",
+            "description": "Bicycles data type"
+          },
+          {
+            "name": "YellowTaxi",
+            "value": "YellowTaxi",
+            "description": "Yellow Taxi  data type"
+          },
+          {
+            "name": "StockMarket",
+            "value": "StockMarket",
+            "description": "Stock Market  data type"
+          },
+          {
+            "name": "Buses",
+            "value": "Buses",
+            "description": "Buses data type"
+          },
+          {
+            "name": "SP500Stocks",
+            "value": "SP500Stocks",
+            "description": "SP500Stocks data type"
+          }
+        ]
+      }
     },
     "DataverseSourceConnectorProperties": {
       "type": "object",
@@ -2841,6 +3015,46 @@
           }
         ]
       }
+    },
+    "SampleDataSourceConnectorProperties": {
+      "type": "object",
+      "description": "Configuration for SampleDataSourceConnector",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DataType",
+          "description": "Sample Data Type"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SampleDataSource"
+    },
+    "SasTokenAuthentication": {
+      "type": "object",
+      "description": "SasToken Model.",
+      "properties": {
+        "sasToken": {
+          "type": "string",
+          "format": "password",
+          "description": "SasToken secret.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "sasToken"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Authentication"
+        }
+      ],
+      "x-ms-discriminator-value": "SasToken"
     },
     "SaslMechanismForConfluent": {
       "type": "string",

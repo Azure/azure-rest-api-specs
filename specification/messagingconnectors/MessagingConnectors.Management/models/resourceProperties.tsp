@@ -176,6 +176,14 @@ union ConnectorType {
   @doc("Dataverse source connector.")
   DataverseSource: "DataverseSource",
 
+  @added(Versions.v2025_05_01_preview)
+  @doc("Dataverse source connector.")
+  AzureBlobSource: "AzureBlobSource",
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("SampleData source connector.")
+  SampleDataSource: "SampleDataSource",
+
   string,
 }
 

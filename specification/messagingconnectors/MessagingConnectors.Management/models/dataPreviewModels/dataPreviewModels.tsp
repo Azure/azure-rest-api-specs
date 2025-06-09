@@ -44,6 +44,10 @@ model DataRangeLimit extends DataRangeBaseConfig {
 model DataPreviewRequest {
   @doc("DataPreview properties")
   dataPreviewProperties: DataPreviewProperties;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Skip validation or not")
+  skipValidation?: boolean;
 }
 
 @doc("Properties of one DataPreview")
@@ -63,6 +67,10 @@ model DataPreviewProperties {
 
   @doc("Cloud events config")
   cloudEventsConfig?: CloudEventsConfig;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("networkProperties config.")
+  networkProperties?: NetworkProperties;
 }
 
 @doc("Header item")
