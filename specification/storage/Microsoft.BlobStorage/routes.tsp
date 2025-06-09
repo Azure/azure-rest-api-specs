@@ -1388,7 +1388,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?PageBlob")
+        @route("{blobName}")
         op create is StorageOperationNoBody<
           {
             ...MetadataHeaders;
@@ -1728,7 +1728,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?AppendBlob")
+        @route("{blobName}")
         op create is StorageOperationNoBody<
           {
             ...MetadataHeaders;
@@ -1901,7 +1901,7 @@ namespace Storage.Blob {
         #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
         @put
         @sharedRoute
-        @route("{blobName}?BlockBlob")
+        @route("{blobName}")
         op upload is StorageOperation<
           {
             ...MetadataHeaders;
