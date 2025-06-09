@@ -13,10 +13,10 @@ namespace Microsoft.SqlVirtualMachine;
  * A SQL virtual machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-@Azure.ResourceManager.Private.armResourceInternal(SqlVirtualMachineProperties)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(SqlVirtualMachineProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model SqlVirtualMachine extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = SqlVirtualMachine,
@@ -32,10 +32,10 @@ model SqlVirtualMachine extends Foundations.TrackedResource {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: ResourceIdentity;
 
-  @doc("The resource-specific properties for this resource.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: SqlVirtualMachineProperties;
 }
 
@@ -104,8 +104,8 @@ interface SqlVirtualMachines {
    * Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SqlVirtualMachines_FetchDCAssessment")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @operationId("SqlVirtualMachines_FetchDCAssessment")
   fetchDCAssessment is ArmResourceActionAsyncBase<
     SqlVirtualMachine,
     DiskConfigAssessmentRequest,
