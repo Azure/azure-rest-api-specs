@@ -64,7 +64,9 @@ export async function main() {
   let validArgs = true;
 
   if (!outputDir) {
-    console.log(`Missing required parameter --output. Value given: ${outputDir || '<empty>'}`);
+    console.log(
+      `Missing required parameter --output. Value given: ${outputDir || "<empty>"}`,
+    );
     validArgs = false;
   }
 
