@@ -98,16 +98,6 @@ input-file:
   - Microsoft.HybridCompute/preview/2025-06-01-preview/privateLinkScopes.json
 ```
 
-### Tag: package-preview-2025-06-01
-
-These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-06-01'
-input-file:
-  - Microsoft.HybridCompute/preview/2025-06-01/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2025-06-01/privateLinkScopes.json
-```
-
 ### Tag: package-preview-2025-02-19
 
 These settings apply only when `--tag=package-preview-2025-02-19` is specified on the command line.
