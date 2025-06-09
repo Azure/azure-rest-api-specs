@@ -52,9 +52,21 @@ interface Evaluations {
     ResourceCreatedResponse<AgentEvaluation>
   >;
 
-  @doc("Cancel an evaluation run")
-  cancel is EvaluationsOperations.ResourceUpdate<Evaluation>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Cancel an evaluation run by name")
+  @route("runs:cancel/{name}")
+  @patch
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  cancel is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the evaluation run to update.")
+      @path
+      name: string;
+    },
+    Evaluation
+  >;
 
-  @doc("Delete an evaluation run")
+  @doc("Delete an evaluation run by name")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }
