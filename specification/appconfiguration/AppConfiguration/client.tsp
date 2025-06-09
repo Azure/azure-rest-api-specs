@@ -33,4 +33,5 @@ namespace SdkCustomizations;
 @@access(getKeyValues, Access.internal, "csharp");
 // @@access(deleteLock, Access.internal, "csharp");
 // @@access(putLock, Access.internal, "csharp");
+@@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 
