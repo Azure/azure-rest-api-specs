@@ -62,7 +62,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FhirServiceHostName",
-  "autorest"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId"
