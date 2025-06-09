@@ -4,4 +4,4 @@ import "@azure-tools/typespec-client-generator-core";
 using WidgetAnalytics;
 using Azure.ClientGenerator.Core;
 
-@@clientName(WidgetAnalytics, "AzureWidgetAnalytics", "csharp");
+@@clientName(Widgets, "AzureWidgets", "csharp");
