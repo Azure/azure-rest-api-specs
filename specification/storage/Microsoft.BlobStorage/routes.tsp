@@ -1431,7 +1431,6 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1765,7 +1764,6 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
