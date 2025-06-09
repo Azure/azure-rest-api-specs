@@ -36,7 +36,6 @@ model Vault extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: VaultProperties;
 
