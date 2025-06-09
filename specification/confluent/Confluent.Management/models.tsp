@@ -605,6 +605,7 @@ model ConfluentListMetadata {
   /**
    * Total size of the list
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   total_size?: int32;
 }
 
@@ -635,11 +636,13 @@ model UserRecord {
   /**
    * Name of the user
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   full_name?: string;
 
   /**
    * Auth type of the user
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   auth_type?: string;
 }
 
@@ -655,21 +658,25 @@ model MetadataEntity {
   /**
    * Resource name of the record
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   resource_name?: string;
 
   /**
    * Created Date Time
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   created_at?: string;
 
   /**
    * Updated Date time
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   updated_at?: string;
 
   /**
    * Deleted Date time
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   deleted_at?: string;
 }
 
@@ -715,6 +722,7 @@ model ServiceAccountRecord {
   /**
    * Name of the service account
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   display_name?: string;
 
   /**
@@ -770,6 +778,7 @@ model InvitationRecord {
   /**
    * Auth type of the user
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   auth_type?: string;
 
   /**
@@ -780,11 +789,13 @@ model InvitationRecord {
   /**
    * Accepted date time of the invitation
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   accepted_at?: string;
 
   /**
    * Expiration date time of the invitation
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   expires_at?: string;
 }
 
@@ -825,6 +836,7 @@ model AccessInvitedUserDetails {
   /**
    * Auth type of the user
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   auth_type?: string;
 }
 
@@ -870,6 +882,7 @@ model EnvironmentRecord {
   /**
    * Display name of the user
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   display_name?: string;
 }
 
@@ -915,6 +928,7 @@ model ClusterRecord {
   /**
    * Display name of the cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   display_name?: string;
 
   /**
@@ -935,6 +949,7 @@ model ClusterSpecEntity {
   /**
    * The name of the cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   display_name?: string;
 
   /**
@@ -960,16 +975,19 @@ model ClusterSpecEntity {
   /**
    * The bootstrap endpoint used by Kafka clients to connect to the cluster
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   kafka_bootstrap_endpoint?: string;
 
   /**
    * The cluster HTTP request URL.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   http_endpoint?: string;
 
   /**
    * The Kafka API cluster endpoint
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   api_endpoint?: string;
 
   /**
@@ -1025,6 +1043,7 @@ model ClusterEnvironmentEntity {
   /**
    * CRN reference to the referred resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   resource_name?: string;
 }
 
@@ -1050,6 +1069,7 @@ model ClusterNetworkEntity {
   /**
    * CRN reference to the referred resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   resource_name?: string;
 }
 
@@ -1070,6 +1090,7 @@ model ClusterByokEntity {
   /**
    * CRN reference to the referred resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   resource_name?: string;
 }
 
@@ -1135,11 +1156,13 @@ model RoleBindingRecord {
   /**
    * The name of the role to bind to the principal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   role_name?: string;
 
   /**
    * A CRN that specifies the scope and resource patterns necessary for the role to bind
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   crn_pattern?: string;
 }
 
@@ -1155,11 +1178,13 @@ model AccessCreateRoleBindingRequestModel {
   /**
    * The name of the role to bind to the principal
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   role_name?: string;
 
   /**
    * A CRN that specifies the scope and resource patterns necessary for the role to bind
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   crn_pattern?: string;
 }
 
@@ -1217,6 +1242,7 @@ model StreamGovernanceConfig {
 /**
  * Metadata of the data record
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SCMetadataEntity {
   /**
    * Self lookup url
@@ -1273,6 +1299,7 @@ model ClusterProperties {
 /**
  * Spec of the cluster record
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SCClusterSpecEntity {
   /**
    * The name of the cluster
@@ -1343,6 +1370,7 @@ model SCClusterSpecEntity {
 /**
  * The environment or the network to which cluster belongs
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SCClusterNetworkEnvironmentEntity {
   /**
    * ID of the referred resource
@@ -1368,6 +1396,7 @@ model SCClusterNetworkEnvironmentEntity {
 /**
  * The network associated with this object
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SCClusterByokEntity {
   /**
    * ID of the referred resource
@@ -1572,6 +1601,7 @@ model RegionSpecEntity {
 /**
  * Create API Key model
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model CreateAPIKeyModel {
   /**
    * Name of the API Key
@@ -1587,6 +1617,7 @@ model CreateAPIKeyModel {
 /**
  * Details API key
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model APIKeyRecord {
   /**
    * Type of api key
@@ -1609,6 +1640,7 @@ model APIKeyRecord {
 /**
  * API Key Properties
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model APIKeyProperties {
   /**
    * Metadata of the record
@@ -1624,6 +1656,7 @@ model APIKeyProperties {
 /**
  * Spec of the API Key record
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model APIKeySpecEntity {
   /**
    * The description of the API Key
@@ -1656,6 +1689,7 @@ model APIKeySpecEntity {
 /**
  * API Key Resource details which can be kafka cluster or schema registry cluster
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model APIKeyResourceEntity {
   /**
    * Id of the resource
@@ -1686,6 +1720,7 @@ model APIKeyResourceEntity {
 /**
  * API Key Owner details which can be a user or service account
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model APIKeyOwnerEntity {
   /**
    * API Key owner id
@@ -1885,6 +1920,7 @@ model TopicsInputConfig {
 /**
  * Metadata of the list
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SCConfluentListMetadata {
   /**
    * First page of the list
@@ -1968,6 +2004,7 @@ model AzureBlobStorageSourceConnectorServiceInfo
 /**
  * The authentication info when auth_type is AzureCosmosDBSinkConnector
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureCosmosDBSinkConnectorServiceInfo
   extends ConnectorServiceTypeInfoBase {
   /**
@@ -2004,6 +2041,7 @@ model AzureCosmosDBSinkConnectorServiceInfo
 /**
  * The authentication info when auth_type is AzureCosmosDBSourceConnector
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureCosmosDBSourceConnectorServiceInfo
   extends ConnectorServiceTypeInfoBase {
   /**
@@ -2197,6 +2235,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
 /**
  * The partner connector type is KafkaAzureCosmosDBSink
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Auth Type
@@ -2262,6 +2301,7 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
 /**
  * The partner connector type is KafkaAzureCosmosDBSource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Auth Type

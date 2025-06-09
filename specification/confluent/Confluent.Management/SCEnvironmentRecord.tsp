@@ -14,7 +14,10 @@ namespace Microsoft.Confluent;
 /**
  * Details about environment name, metadata and environment id of an environment
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(OrganizationResource)
@@ -32,12 +35,15 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EnvironmentProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SCEnvironmentRecordsOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -64,6 +70,7 @@ interface SCEnvironmentRecordsOps
       ResourceProviderDefaultErrorResponse
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SCEnvironmentRecords {
   /**
@@ -145,6 +152,8 @@ interface SCEnvironmentRecords {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SCEnvironmentRecordClusterOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -172,6 +181,7 @@ interface SCEnvironmentRecordClusterOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SCEnvironmentRecordCluster {
   /**
    * Get schema registry cluster by Id

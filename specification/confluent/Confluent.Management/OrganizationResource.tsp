@@ -26,6 +26,8 @@ model OrganizationResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OrganizationResourceAPIKeyOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -47,12 +49,14 @@ interface OrganizationResourceAPIKeyOps
       ResourceProviderDefaultErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface OrganizationResourceAPIKeyActions {
   /**
    * Get API key details of a kafka or schema registry cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @get
   @operationId("Organization_GetClusterAPIKey")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
@@ -66,6 +70,7 @@ interface OrganizationResourceAPIKeyActions {
    * Deletes API key of a kafka or schema registry cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
@@ -76,6 +81,7 @@ interface OrganizationResourceAPIKeyActions {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OrganizationResourceRoleBindingIdOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -97,6 +103,7 @@ interface OrganizationResourceRoleBindingIdOps
       ResourceProviderDefaultErrorResponse
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OrganizationResourceRoleBindingIdOperationGroup
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -114,6 +121,7 @@ interface OrganizationResourceRoleBindingIdOperationGroup
       ResourceProviderDefaultErrorResponse
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OrganizationResourceRoleBindingIdActions {
   /**
    * Organization role bindings

@@ -11,6 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Confluent;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface MarketplaceAgreementsOperationGroup {
   /**
    * List Confluent marketplace agreements in the subscription.
@@ -52,6 +53,7 @@ interface ValidationsOperationGroup {
    * Organization Validate proxy resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @summary("Organization Validate proxy resource")
   @operationId("Validations_ValidateOrganization")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidate")
@@ -78,6 +80,7 @@ interface ValidationsOperationGroup {
    * Organization Validate proxy resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @summary("Organization Validate proxy resource")
   @operationId("Validations_ValidateOrganizationV2")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidateV2")

@@ -14,7 +14,10 @@ namespace Microsoft.Confluent;
 /**
  * Details of cluster record
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(SCEnvironmentRecord)
@@ -32,12 +35,15 @@ model SCClusterRecord extends Foundations.ProxyResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ClusterProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SCClusterRecordsOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -71,6 +77,7 @@ interface SCClusterRecordsOps
       ResourceProviderDefaultErrorResponse
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SCClusterRecords {
   /**
@@ -131,6 +138,7 @@ interface SCClusterRecords {
    * Creates API key for a schema registry Cluster ID or Kafka Cluster ID under a environment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @operationId("Organization_CreateAPIKey")
   createAPIKey is ArmResourceActionSync<
     SCClusterRecord,
