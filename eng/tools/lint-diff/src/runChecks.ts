@@ -6,7 +6,6 @@ import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
 import { ReadmeAffectedTags } from "./lintdiff-types.js";
 import { getOpenapiType } from "./markdown-utils.js";
-import { readFile } from "fs/promises";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -23,13 +22,6 @@ export async function runChecks(
 
   for (const [readme, tags] of runList.entries()) {
     const changedFilePath = join(path, readme);
-
-    // TEST: Ignore readme.md if no "input-file"s
-    // Needed for extra resource-manager/readme.md required for RPaaS
-    const readmeContent = await readFile(changedFilePath, { encoding: "utf-8" });
-    if (!readmeContent.includes("input-file")) {
-      continue;
-    }
 
     let openApiType = await getOpenapiType(tags.readme);
 
