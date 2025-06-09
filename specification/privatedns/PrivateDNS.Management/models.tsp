@@ -296,6 +296,7 @@ model RecordSetProperties {
 /**
  * An A record.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ARecord {
   /**
    * The IPv4 address of this A record.

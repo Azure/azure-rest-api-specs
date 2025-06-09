@@ -14,8 +14,8 @@ namespace Microsoft.Network;
 /**
  * Describes a link to virtual network for a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(PrivateZone)
 @Azure.ResourceManager.Private.armResourceInternal(VirtualNetworkLinkProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
@@ -36,7 +36,7 @@ model VirtualNetworkLink extends Foundations.TrackedResource {
   /**
    * Properties of the virtual network link to the Private DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   properties?: VirtualNetworkLinkProperties;
 }
 
@@ -57,12 +57,14 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new virtual network link to the Private DNS zone to be created, but to prevent updating an existing link. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
@@ -84,6 +86,7 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always overwrite the current virtual network link. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -100,6 +103,7 @@ interface VirtualNetworkLinks {
       /**
        * The ETag of the virtual network link to the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },

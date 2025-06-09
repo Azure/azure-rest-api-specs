@@ -15,8 +15,8 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type) in a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(PrivateZone)
 @Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
@@ -37,11 +37,11 @@ model RecordSet extends Foundations.ProxyResource {
   /**
    * The properties of the record set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   properties?: RecordSetProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSetOperationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -66,7 +66,7 @@ interface RecordSetOperationOps
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSetOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -97,7 +97,7 @@ interface RecordSetOps
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface RecordSets {
   /**
    * Gets a record set.
@@ -115,12 +115,14 @@ interface RecordSets {
       /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-None-Match")
       IfNoneMatch?: string;
     }
@@ -138,6 +140,7 @@ interface RecordSets {
       /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -154,6 +157,7 @@ interface RecordSets {
       /**
        * The ETag of the record set. Omit this value to always delete the current record set. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     }

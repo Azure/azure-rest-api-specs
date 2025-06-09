@@ -5,17 +5,17 @@ using Microsoft.Network;
 
 @@clientName(PrivateZones.createOrUpdate::parameters.resource, "parameters");
 @@clientName(PrivateZones.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "For backward compatibility"
 @@flattenProperty(PrivateZone.properties);
 
 @@clientName(VirtualNetworkLinks.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(VirtualNetworkLinks.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "For backward compatibility"
 @@flattenProperty(VirtualNetworkLink.properties);
 
 @@clientName(RecordSets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RecordSets.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "For backward compatibility"
 @@flattenProperty(RecordSet.properties);

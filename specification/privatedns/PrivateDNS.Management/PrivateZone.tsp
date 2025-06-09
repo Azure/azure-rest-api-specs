@@ -13,8 +13,8 @@ namespace Microsoft.Network;
 /**
  * Describes a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(PrivateZoneProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model PrivateZone extends Foundations.TrackedResource {
@@ -34,7 +34,7 @@ model PrivateZone extends Foundations.TrackedResource {
   /**
    * Properties of the Private DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   properties?: PrivateZoneProperties;
 }
 
@@ -55,12 +55,14 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new Private DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
@@ -82,6 +84,7 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -98,6 +101,7 @@ interface PrivateZones {
       /**
        * The ETag of the Private DNS zone. Omit this value to always delete the current zone. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -138,7 +142,7 @@ interface PrivateZones {
   /**
    * Lists all record sets in a Private DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @get
   @action("ALL")
   @operationId("RecordSets_List")
