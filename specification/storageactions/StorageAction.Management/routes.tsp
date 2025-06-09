@@ -32,7 +32,7 @@ interface StorageTasksOperationGroup {
       @path
       @segment("locations")
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      location: string;
+      location: Azure.Core.azureLocation;
     }
   >;
 }

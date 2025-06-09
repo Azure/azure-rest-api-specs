@@ -4,10 +4,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageTaskPreviewAction.properties);
+@@flattenProperty(StorageTaskPreviewAction.properties, "!csharp");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageTaskUpdateParameters.properties);
+@@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp");
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
@@ -15,13 +15,5 @@ using Microsoft.StorageActions;
   "parameters"
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
-@@clientName(StorageTaskOperation, "StorageTaskOperationInfo", "csharp");
-@@clientName(OnSuccess, "OnSuccessAction", "csharp");
-@@clientName(OnFailure, "OnFailureAction", "csharp");
-@@clientName(StorageTaskPreviewActionProperties,
-  "StorageTaskPreviewActionProperties",
-  "csharp"
-);
-@@clientName(StorageTaskProperties, "StorageTaskProperties", "csharp");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(StorageTask.properties);
+@@flattenProperty(StorageTask.properties, "!csharp");
