@@ -788,7 +788,7 @@ model BatchApplication {
 @error
 model BatchError {
   @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
-  code: string;
+  code?: string;
 
   @doc("A message describing the error, intended to be suitable for display in a user interface.")
   message?: BatchErrorMessage;
@@ -1398,13 +1398,13 @@ model BatchJobScheduleConfiguration {
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
 model SecurityProfile {
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes.")
-  encryptionAtHost: boolean;
+  encryptionAtHost?: boolean;
 
   @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
-  securityType: SecurityTypes;
+  securityType?: SecurityTypes;
 
   @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
-  uefiSettings: BatchUefiSettings;
+  uefiSettings?: BatchUefiSettings;
 }
 
 @doc("""
@@ -1474,7 +1474,7 @@ model BatchJobNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
   @clientName("skipWithdrawFromVnet")
-  skipWithdrawFromVNet: boolean;
+  skipWithdrawFromVNet?: boolean;
 }
 
 @doc("The execution constraints for a Job.")
@@ -2226,7 +2226,7 @@ model BatchPublicIpAddressConfiguration {
   provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
-  ipAddressIds?: ipV4Address[];
+  ipAddressIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @doc("""

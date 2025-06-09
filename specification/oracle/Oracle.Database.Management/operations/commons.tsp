@@ -63,9 +63,10 @@ interface ListActions {
   @post
   ArmResourceGetActionAsync<
     TResource extends Foundations.Resource,
-    TResponse,
+    TResponse extends {} | void,
     TBaseParameters = BaseParameters<TResource>
   >(
     ...ResourceInstanceParameters<TResource, TBaseParameters>,
-  ): ArmResponse<TResponse> | ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<TResponse> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
+    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
 }
