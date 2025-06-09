@@ -243,7 +243,6 @@ model ConfluentAgreementResource {
    * Represents the properties of the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConfluentAgreementProperties;
 }
 
@@ -1438,7 +1437,6 @@ model SchemaRegistryClusterRecord {
    * Schema Registry Cluster Properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SchemaRegistryClusterProperties;
 }
 
@@ -1556,7 +1554,6 @@ model RegionRecord {
    * Region Properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegionProperties;
 }
 
@@ -1633,7 +1630,6 @@ model APIKeyRecord {
    * API Key Properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: APIKeyProperties;
 }
 
