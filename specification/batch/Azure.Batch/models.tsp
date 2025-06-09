@@ -490,7 +490,7 @@ union BatchJobDefaultOrder {
   None: "none",
 
   @doc("If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first.")
-  CreationTime: "creationTime",
+  CreationTime: "creationtime",
 }
 
 @doc("BatchPoolIdentityType enums")
