@@ -277,7 +277,7 @@ model CertificateProperties {
   /**
    * The certificate's expiration date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" ""
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("date-time-rfc1123")
   expiry?: string;
@@ -301,7 +301,7 @@ model CertificateProperties {
   /**
    * The certificate's creation date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" ""
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("date-time-rfc1123")
   created?: string;
@@ -309,7 +309,7 @@ model CertificateProperties {
   /**
    * The certificate's last update date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" ""
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("date-time-rfc1123")
   updated?: string;
