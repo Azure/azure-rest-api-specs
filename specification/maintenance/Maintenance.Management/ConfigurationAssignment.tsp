@@ -13,8 +13,8 @@ namespace Microsoft.Maintenance;
 /**
  * Configuration Assignment
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationAssignmentProperties
 )
@@ -36,7 +36,7 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
   /**
    * Properties of the configuration assignment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: ConfigurationAssignmentProperties;
 }

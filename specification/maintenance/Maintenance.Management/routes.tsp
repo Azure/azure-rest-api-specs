@@ -19,7 +19,7 @@ interface ScheduledEventOperationGroup {
    * Post Scheduled Event Acknowledgement
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @summary("Post Scheduled Event Acknowledgement")
   @operationId("ScheduledEvent_Acknowledge")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
@@ -50,7 +50,7 @@ interface ScheduledEventOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
 interface ApplyUpdatesOperationGroup {
   /**
    * Apply maintenance updates to resource with parent
@@ -135,7 +135,7 @@ interface ApplyUpdateForResourceGroupOperationGroup {
    * Get Configuration records within a subscription and resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @summary("Get Configuration records within a subscription and resource group")
   @operationId("ApplyUpdateForResourceGroup_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates")
@@ -148,7 +148,7 @@ interface ApplyUpdateForResourceGroupOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
 interface ConfigurationAssignmentForResourceGroupOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
@@ -184,7 +184,7 @@ interface ConfigurationAssignmentForResourceGroupOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
 interface UpdatesOperationGroup {
   /**
    * Get updates to resources.
