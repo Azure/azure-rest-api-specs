@@ -425,6 +425,7 @@ model ResourceCertificateDetails {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   authType: string;
 
   /**
@@ -478,9 +479,11 @@ model ReplicationUsageList {
   /**
    * The list of replication usages for the given vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @items
   value?: ReplicationUsage[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @nextLink
   nextLink?: string;
 }
@@ -634,6 +637,7 @@ model Error {
   /**
    * The error details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   details?: Error[];
 
@@ -700,6 +704,7 @@ model CapabilitiesProperties {
 /**
  * DNSZone information
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model DNSZone {
   /**
    * Subresource type for vault AzureBackup, AzureBackup_secondary or AzureSiteRecovery
@@ -740,6 +745,7 @@ model CapabilitiesResponseProperties {
 /**
  * DNSZone information for Microsoft.RecoveryServices
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DNSZoneResponse extends DNSZone {
   /**
@@ -1523,6 +1529,7 @@ model VaultUsageList {
   @items
   value?: VaultUsage[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @nextLink
   nextLink?: string;
 }
@@ -1640,6 +1647,7 @@ model ResourceCertificateAndAcsDetails extends ResourceCertificateDetails {
   /**
    * Global ACS namespace RP realm.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   globalAcsRPRealm: string;
 
   /**

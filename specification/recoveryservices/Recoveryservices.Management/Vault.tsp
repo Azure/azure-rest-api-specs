@@ -13,6 +13,9 @@ namespace Microsoft.RecoveryServices;
 /**
  * Resource information, as returned by the resource provider.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(VaultProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model Vault extends Foundations.TrackedResource {
@@ -29,6 +32,9 @@ model Vault extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: IdentityData;
 
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
@@ -64,6 +70,7 @@ interface VaultOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VaultCreateOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -79,6 +86,7 @@ interface VaultCreateOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VaultOperationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -103,6 +111,7 @@ interface VaultOperationOps
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VaultStatusOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -118,12 +127,14 @@ interface VaultStatusOps
         @path
         vaultName: string,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
         @path
         @segment("operationStatus")
         operationId: string,
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface VaultDeleteOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -147,6 +158,7 @@ interface VaultDeleteOps
         identityName: string,
       }
     > {}
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface Vaults {
   /**
    * Get the Vault details.
@@ -161,6 +173,7 @@ interface Vaults {
     Vault,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -178,6 +191,7 @@ interface Vaults {
     PatchModel = PatchVault,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -205,6 +219,7 @@ interface Vaults {
    * Uploads a certificate for a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @put
   @operationId("VaultCertificates_Create")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
@@ -288,6 +303,7 @@ interface GetOperationResult {
    * Gets the operation result for a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("GetOperationResult")
   getOperationResult is GetOperationResultOps.Read<
     Vault,
