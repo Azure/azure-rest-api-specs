@@ -16,7 +16,7 @@ import { simpleGit } from "simple-git";
 export async function getRootFolder(inputPath: string): Promise<string> {
   try {
     const gitRoot = await simpleGit(inputPath).revparse("--show-toplevel");
-    return gitRoot.trim();
+    return resolve(gitRoot.trim());
   }
   catch (error) {
     console.error(
