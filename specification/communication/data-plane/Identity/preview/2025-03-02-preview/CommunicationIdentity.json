@@ -179,7 +179,7 @@
         "tags": [
           "TeamsUser"
         ],
-        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time. Pass the token as a bearer token in the authorization header.",
         "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
@@ -282,7 +282,7 @@
         "tags": [
           "TeamsExtension"
         ],
-        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "summary": "Exchanges a Teams Extension token for an ACS user access token.",
         "operationId": "TeamsExtensionToken_Exchange",
         "consumes": [
           "application/json"
@@ -319,7 +319,7 @@
           }
         },
         "x-ms-examples": {
-          "Exchange a Teams Phone token": {
+          "Exchange a Teams Extension token": {
             "$ref": "./examples/ExchangeTeamsExtensionToken.json"
           }
         }
@@ -330,8 +330,8 @@
         "tags": [
           "TeamsExtension"
         ],
-        "summary": "Get Teams Phone access assignment by object id.",
-        "operationId": "TeamsExtensionAssignment_Get",
+        "summary": "Get Teams Extension access assignment by object id.",
+        "operationId": "TeamsExtensionAssignments_Get",
         "produces": [
           "application/json"
         ],
@@ -378,8 +378,8 @@
         "tags": [
           "TeamsExtension"
         ],
-        "summary": "Creates or replaces a Teams Phone access assignment.",
-        "operationId": "TeamsExtensionAssignment_Upsert",
+        "summary": "Creates or replaces a Teams Extension access assignment.",
+        "operationId": "TeamsExtensionAssignments_Upsert",
         "consumes": [
           "application/json"
         ],
@@ -444,8 +444,8 @@
         "tags": [
           "TeamsExtension"
         ],
-        "summary": "Removes a Teams Phone access assignment.",
-        "operationId": "TeamsExtensionAssignment_Delete",
+        "summary": "Removes a Teams Extension access assignment.",
+        "operationId": "TeamsExtensionAssignments_Delete",
         "produces": [
           "application/json"
         ],
@@ -491,7 +491,7 @@
         "tags": [
           "EntraId"
         ],
-        "summary": "Exchanges an Entra ID token for an ACS user access token.",
+        "summary": "Exchanges an Entra ID token for an ACS user access token. Pass the token as a bearer token in the authorization header.",
         "operationId": "EntraIdToken_Exchange",
         "consumes": [
           "application/json"
@@ -528,7 +528,7 @@
           }
         },
         "x-ms-examples": {
-          "Exchange a Teams Phone token": {
+          "Exchange a Teams Extension token": {
             "$ref": "./examples/ExchangeEntraIdToken.json"
           }
         }
@@ -629,7 +629,7 @@
           "EntraId"
         ],
         "summary": "Get Entra access assignment by object id.",
-        "operationId": "EntraIdAssignment_Get",
+        "operationId": "EntraIdAssignments_Get",
         "produces": [
           "application/json"
         ],
@@ -670,7 +670,7 @@
           "EntraId"
         ],
         "summary": "Creates or replaces an Entra access assignment.",
-        "operationId": "EntraIdAssignment_Upsert",
+        "operationId": "EntraIdAssignments_Upsert",
         "consumes": [
           "application/json"
         ],
@@ -729,7 +729,7 @@
           "EntraId"
         ],
         "summary": "Removes an Entra access assignment.",
-        "operationId": "EntraIdAssignment_Delete",
+        "operationId": "EntraIdAssignments_Delete",
         "produces": [
           "application/json"
         ],
@@ -907,7 +907,7 @@
       }
     },
     "TeamsUserExchangeTokenRequest": {
-      "description": "A request to create or update a Teams Phone assignment.",
+      "description": "A request to create or update a Teams Extension assignment.",
       "required": [
         "appId",
         "token",
