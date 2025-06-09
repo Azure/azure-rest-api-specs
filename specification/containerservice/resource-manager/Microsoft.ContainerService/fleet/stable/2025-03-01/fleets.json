@@ -735,14 +735,6 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
             "name": "fleetName",
             "in": "path",
             "description": "The name of the Fleet resource.",
@@ -761,6 +753,14 @@
             "minLength": 1,
             "maxLength": 50,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
