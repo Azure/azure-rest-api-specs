@@ -660,7 +660,7 @@ model ResourceIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -673,7 +673,7 @@ model ResourceIdentity {
   /**
    * The Azure Active Directory tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -1055,12 +1055,14 @@ model AdditionalFeaturesServerConfigurations {
   /**
    * Enable or disable R services (SQL 2016 onwards).
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   isRServicesEnabled?: boolean;
 }
 
 /**
  * Set the server/instance-level settings for SQL Server.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SQLInstanceSettings {
   /**
    * SQL Server Collation.
@@ -1080,11 +1082,13 @@ model SQLInstanceSettings {
   /**
    * SQL Server minimum memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   minServerMemoryMB?: int32;
 
   /**
    * SQL Server maximum memory.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   maxServerMemoryMB?: int32;
 
   /**
@@ -1101,6 +1105,7 @@ model SQLInstanceSettings {
 /**
  * Enable AAD authentication for SQL VM.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AADAuthenticationSettings {
   /**
    * The client Id of the Managed Identity to query Microsoft Graph API. An empty string must be used for the system assigned Managed Identity
@@ -1153,6 +1158,7 @@ model StorageConfigurationSettings {
 /**
  * Set disk storage settings for SQL Server.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SQLStorageSettings {
   /**
    * Logical Unit Numbers for the disks.
@@ -1173,6 +1179,7 @@ model SQLStorageSettings {
 /**
  * Set tempDb storage settings for SQL Server.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SQLTempDbSettings {
   /**
    * SQL Server tempdb data file size
@@ -1367,6 +1374,7 @@ model DiskConfigAssessmentRequest {
 /**
  * An update to a SQL virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model SqlVirtualMachineUpdate {
   /**
    * Resource tags.
@@ -1463,9 +1471,9 @@ model Operation {
   /** 
     Additional descriptions for the operation.
      */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-client-flatten", false)
   properties?: Record<{}>;
