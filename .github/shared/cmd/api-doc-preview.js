@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, readFileList, pathExists } from "../src/changed-files.js";
+import { swagger, getChangedFiles, pathExists } from "../src/changed-files.js";
 import { filterAsync } from "../src/array.js";
 
 import {
@@ -17,9 +17,15 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function usage() {
-  console.log(
-    "Usage: api-doc-preview --changed-files-path <path> --output <output-dir> [--spec-root <spec-root>] [--build-id <build-id>] [--spec-repo-owner <owner>] [--spec-repo-name <name>] [--spec-repo-pr-number <pr-number>]",
-  );
+  console.log(`Usage:
+npx api-doc-preview --output <output-dir>
+
+parameters:
+  --output <output-dir>       Directory to write documentation artifacts to.
+  --build-id <build-id>       Build ID, used in the documentation index. Defaults to BUILD_BUILDID environment variable.
+  --spec-repo-name <name>     Name of the repository containing the swagger files of the form <org>/<repo-name>. Defaults to BUILD_REPOSITORY_NAME environment variable.
+  --spec-repo-pr-number <pr-number>  PR number of the repository containing the swagger files. Defaults to SYSTEM_PULLREQUEST_PULLREQUESTNUMBER environment variable.
+  --spec-repo-root <path>     Root path of the repository containing the swagger files. Defaults to the root of the repository containing this script.`);
 }
 
 export async function main() {
@@ -58,7 +64,7 @@ export async function main() {
   let validArgs = true;
 
   if (!outputDir) {
-    console.log("Missing required parameter --output");
+    console.log(`Missing required parameter --output. Value given: ${outputDir || '<empty>'}`);
     validArgs = false;
   }
 
@@ -71,9 +77,7 @@ export async function main() {
   // Get selected version and swaggers to process
 
   const changedFiles = await getChangedFiles({ cwd: specRepoRoot });
-  console.log(
-    `Found ${changedFiles.length} changed files in ${specRepoRoot}`,
-  );
+  console.log(`Found ${changedFiles.length} changed files in ${specRepoRoot}`);
   console.log("Changed files:");
   changedFiles.forEach((file) => console.log(`  - ${file}`));
   // TODO: `swagger` filter doesn't perfectly overlap with existing process. Determine if additional changes are needed to `swagger` check.
@@ -114,3 +118,5 @@ export async function main() {
   swaggersToProcess.forEach((swagger) => console.log(`  - ${swagger}`));
   console.log(`Artifacts written to: ${outputDir}`);
 }
+
+await main();
