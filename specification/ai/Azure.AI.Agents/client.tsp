@@ -2,6 +2,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
 using Azure.AI.Agents;
 
 // --------------------------------------------------------------------------------
@@ -28,7 +30,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Files.listFiles, "list", "python");
 @@access(Azure.AI.Agents.Files.uploadFile,
   Access.internal,
-  "python, java, javascript"
+  "python, javascript"
 );
 @@clientName(Azure.AI.Agents.Files.getFile, "get", "python");
 @@access(Azure.AI.Agents.Files.getFileContent, Access.internal, "python");
@@ -479,3 +481,109 @@ using Azure.AI.Agents;
 @@clientName(ThreadRun.assistantId, "agentId", "python");
 @@clientName(CreateRunOptions.assistantId, "agentId", "python");
 @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
+
+@client({ name: "PersistentAgentsClient", service: Azure.AI.Agents}, "java")
+@useDependency(Azure.AI.Agents.Versions.v2025_05_01)
+namespace Agents.Persistent {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  interface PersistentAgentsAdministration {
+    getAgent is Azure.AI.Agents.getAgent;
+    createAgent is Azure.AI.Agents.createAgent;
+    updateAgent is Azure.AI.Agents.updateAgent;
+    @access(Access.internal)
+    deleteAgentInternal is Azure.AI.Agents.deleteAgent;
+    listAgents is Azure.AI.Agents.listAgents;
+    createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/files")
+  interface Files {
+    listFiles is Azure.AI.Agents.Files.listFiles;
+    #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
+    uploadFile is Azure.AI.Agents.Files.uploadFile;
+    getFile is Azure.AI.Agents.Files.getFile;
+    getFileContent is Azure.AI.Agents.Files.getFileContent;
+    @access(Access.internal)
+    deleteFileInternal is Azure.AI.Agents.Files.deleteFile;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/threads/{threadId}/messages")
+  interface Messages {
+    createMessage is Azure.AI.Agents.Messages.createMessage;
+    listMessages is Azure.AI.Agents.Messages.listMessages;
+    getMessage is Azure.AI.Agents.Messages.getMessage;
+    updateMessage is Azure.AI.Agents.Messages.updateMessage;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/threads/{threadId}/runs")
+  interface Runs {
+    createRun is Azure.AI.Agents.Runs.createRun;
+    listRuns is Azure.AI.Agents.Runs.listRuns;
+    getRun is Azure.AI.Agents.Runs.getRun;
+    updateRun is Azure.AI.Agents.Runs.updateRun;
+    submitToolOutputsToRun is Azure.AI.Agents.Runs.submitToolOutputsToRun;
+    cancelRun is Azure.AI.Agents.Runs.cancelRun;
+    
+    listRunSteps is Azure.AI.Agents.RunSteps.listRunSteps;  
+    @route("/{runId}/steps/{stepId}")
+    getRunStep is Azure.AI.Agents.RunSteps.getRunStep;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @operationGroup("java")
+  @route("/threads")
+  interface Threads {
+    createThread is Azure.AI.Agents.Threads.createThread;
+    listThreads is Azure.AI.Agents.Threads.listThreads;
+    getThread is Azure.AI.Agents.Threads.getThread;
+    updateThread is Azure.AI.Agents.Threads.updateThread;
+    @access(Access.internal)
+    deleteThreadInternal is Azure.AI.Agents.Threads.deleteThread;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @operationGroup("java")
+  interface VectorStores {
+    @route("/vector_stores")
+    createVectorStore is Azure.AI.Agents.VectorStores.createVectorStore;
+    @route("/vector_stores/{vectorStoreId}")
+    getVectorStore is Azure.AI.Agents.VectorStores.getVectorStore;
+    @route("/vector_stores/{vectorStoreId}")
+    modifyVectorStore is Azure.AI.Agents.VectorStores.modifyVectorStore;
+    @route("/vector_stores")
+    listVectorStores is Azure.AI.Agents.VectorStores.listVectorStores;
+    @route("/vector_stores/{vectorStoreId}")
+    @access(Access.internal)
+    deleteVectorStoreInternal is Azure.AI.Agents.VectorStores.deleteVectorStore;
+
+    @route("/vector_stores/{vectorStoreId}/files")
+    createVectorStoreFile is Azure.AI.Agents.VectorStoreFiles.createVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files/{fileId}")
+    getVectorStoreFile is Azure.AI.Agents.VectorStoreFiles.getVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files/{fileId}")
+    @access(Access.internal)
+    deleteVectorStoreFileInternal is Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files")
+    listVectorStoreFiles is Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles;
+
+    @route("/vector_stores/{vectorStoreId}/file_batches")
+    createVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}")
+    getVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel")
+    cancelVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
+    listVectorStoreFileBatchFiles is Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles;
+  }
+}
