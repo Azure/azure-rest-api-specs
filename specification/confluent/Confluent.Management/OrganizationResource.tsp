@@ -26,8 +26,8 @@ model OrganizationResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceAPIKeyOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -49,14 +49,14 @@ interface OrganizationResourceAPIKeyOps
       ResourceProviderDefaultErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceAPIKeyActions {
   /**
    * Get API key details of a kafka or schema registry cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("Organization_GetClusterAPIKey")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
@@ -69,8 +69,8 @@ interface OrganizationResourceAPIKeyActions {
   /**
    * Deletes API key of a kafka or schema registry cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
@@ -81,7 +81,7 @@ interface OrganizationResourceAPIKeyActions {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -103,7 +103,7 @@ interface OrganizationResourceRoleBindingIdOps
       ResourceProviderDefaultErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdOperationGroup
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -121,12 +121,12 @@ interface OrganizationResourceRoleBindingIdOperationGroup
       ResourceProviderDefaultErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdActions {
   /**
    * Organization role bindings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Access_DeleteRoleBinding")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}")
@@ -142,7 +142,7 @@ interface OrganizationResources {
   /**
    * Get the properties of a specific Organization resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_Get")
   get is ArmResourceRead<
     OrganizationResource,
@@ -152,7 +152,7 @@ interface OrganizationResources {
   /**
    * Create Organization resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_Create")
   create is OrganizationResourceRoleBindingIdOperationGroup.CreateOrUpdateAsync<
     OrganizationResource,
@@ -162,7 +162,7 @@ interface OrganizationResources {
   /**
    * Update Organization resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Organization_Update")
   update is OrganizationResourceRoleBindingIdOperationGroup.CustomPatchSync<
@@ -174,8 +174,8 @@ interface OrganizationResources {
   /**
    * Delete Organization resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     OrganizationResource,
@@ -186,7 +186,7 @@ interface OrganizationResources {
   /**
    * List all Organizations under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     OrganizationResource,
@@ -196,7 +196,7 @@ interface OrganizationResources {
   /**
    * List all organizations under the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     OrganizationResource,
@@ -206,7 +206,7 @@ interface OrganizationResources {
   /**
    * cloud provider regions available for creating Schema Registry clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Organization_ListRegions")
   listRegions is ArmResourceActionSync<
     OrganizationResource,
@@ -218,7 +218,7 @@ interface OrganizationResources {
   /**
    * Organization users details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListUsers")
   @action("access/default/listUsers")
   listUsers is ArmResourceActionSync<
@@ -231,7 +231,7 @@ interface OrganizationResources {
   /**
    * Organization service accounts details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListServiceAccounts")
   @action("access/default/listServiceAccounts")
   listServiceAccounts is ArmResourceActionSync<
@@ -244,7 +244,7 @@ interface OrganizationResources {
   /**
    * Organization accounts invitation details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListInvitations")
   @action("access/default/listInvitations")
   listInvitations is ArmResourceActionSync<
@@ -257,7 +257,7 @@ interface OrganizationResources {
   /**
    * Invite user to the organization
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("access/default/createInvitation")
   @operationId("Access_InviteUser")
   inviteUser is ArmResourceActionSync<
@@ -270,7 +270,7 @@ interface OrganizationResources {
   /**
    * Environment list of an organization
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListEnvironments")
   @action("access/default/listEnvironments")
   listEnvironments is ArmResourceActionSync<
@@ -283,7 +283,7 @@ interface OrganizationResources {
   /**
    * Cluster details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListClusters")
   @action("access/default/listClusters")
   listClusters is ArmResourceActionSync<
@@ -296,7 +296,7 @@ interface OrganizationResources {
   /**
    * Organization role bindings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListRoleBindings")
   @action("access/default/listRoleBindings")
   listRoleBindings is ArmResourceActionSync<
@@ -309,7 +309,7 @@ interface OrganizationResources {
   /**
    * Organization role bindings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("access/default/createRoleBinding")
   @operationId("Access_CreateRoleBinding")
   createRoleBinding is ArmResourceActionSync<
@@ -322,7 +322,7 @@ interface OrganizationResources {
   /**
    * Organization role bindings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Access_ListRoleBindingNameList")
   @action("access/default/listRoleBindingNameList")
   listRoleBindingNameList is ArmResourceActionSync<

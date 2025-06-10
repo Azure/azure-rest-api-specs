@@ -25,7 +25,7 @@ model ConnectorResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConnectorResourcesOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -71,7 +71,7 @@ interface ConnectorResources {
   /**
    * Get confluent connector by Name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_Get")
   get is ArmResourceRead<
     ConnectorResource,
@@ -81,7 +81,7 @@ interface ConnectorResources {
   /**
    * Create confluent connector by Name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_CreateOrUpdate")
   createOrUpdate is ConnectorResourcesOps.CreateOrUpdateSync<
     ConnectorResource,
@@ -91,7 +91,7 @@ interface ConnectorResources {
   /**
    * Delete confluent connector by name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectorResource,
@@ -101,7 +101,7 @@ interface ConnectorResources {
   /**
    * Lists all the connectors in a cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_List")
   list is ArmResourceListByParent<
     ConnectorResource,
