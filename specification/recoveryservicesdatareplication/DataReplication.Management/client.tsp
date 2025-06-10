@@ -4,9 +4,9 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DataReplication;
 
-// csharp
-@@scope(OperationResults.get, "!csharp");
-@@scope(LocationBasedOperationResults.get, "!csharp");
+// csharp, java don't expose LRO polling status API
+@@scope(OperationResults.get, "!csharp, !java");
+@@scope(LocationBasedOperationResults.get, "!csharp, !java");
 
 @@clientName(FabricAgentModelProperties.lastHeartbeat,
   "LastHeartbeatOn",
@@ -331,7 +331,56 @@ using Microsoft.DataReplication;
   "csharp"
 );
 
+// java, avoid model name causing file path too long
+@@clientName(VMwareToAzStackHCIPlannedFailoverModelCustomProperties,
+  "VMwareToAzStackHciPlannedFailoverCustomProps",
+  "java"
+);
+@@clientName(VMwareToAzStackHCIReplicationExtensionModelCustomProperties,
+  "VMwareToAzStackHciRepExtnCustomProps",
+  "java"
+);
+@@clientName(HyperVToAzStackHCIRecoveryPointModelCustomProperties,
+  "HyperVToAzStackHciRecoveryPointCustomProps",
+  "java"
+);
+@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
+  "HyperVToAzStackHciPlannedFailoverCustomProps",
+  "java"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties,
+  "VMwareToAzStackHciProtectedItemCustomProps",
+  "java"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+  "VMwareToAzStackHciProtectedItemCustomPropsUpdate",
+  "java"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties,
+  "HyperVToAzStackHciProtectedItemCustomProps",
+  "java"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+  "HyperVToAzStackHciProtectedItemCustomPropsUpdate",
+  "java"
+);
+@@clientName(HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
+  "HyperVToAzStackHciReplicationExtCustomProps",
+  "java"
+);
+@@clientName(VMwareToAzStackHCIRecoveryPointModelCustomProperties,
+  "VMwareToAzStackHCIRecoveryPointCustomProps",
+  "java"
+);
+@@clientName(ReplicationExtensionModel, "ReplicationExtension", "java");
+@@clientName(PrivateEndpointConnectionProxies,
+  "PrivateEndpointConnProxies",
+  "java"
+);
+@@clientName(JobModelCustomProperties, "JobCustomProperties", "java");
+
 @@clientName(Microsoft.DataReplication,
   "RecoveryServicesDataReplicationMgmtClient",
   "python"
 );
+@@clientName(Microsoft.DataReplication, "DataReplicationMgmtClient", "java");
