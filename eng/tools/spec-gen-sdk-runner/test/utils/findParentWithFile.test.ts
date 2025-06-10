@@ -27,6 +27,11 @@ describe("findParentWithFile", () => {
     expect(result).toBe("specification/contosowidgetmanager/Contoso.WidgetManager");
   });
 
+  test("handles single segment path", () => {
+    const result = findParentWithFile(".", typespecProjectRegex, repoRoot);
+    expect(result).toBeUndefined();
+  });
+
   test("stops at specified boundary", () => {
     const result = findParentWithFile(
       "specification/contosowidgetmanager/Contoso.WidgetManager",

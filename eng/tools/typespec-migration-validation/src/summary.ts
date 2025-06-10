@@ -1,3 +1,5 @@
+import { jsonOutput } from "./index.js";
+
 /**
  * Interface representing a value and the set of JSON paths where it appears
  */
@@ -190,8 +192,8 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
   let report = "## Swagger Changes\n\n";
   
   // Group by keys
-  const keyGroups: Map<string, Map<string, [string, any]>> = new Map();
-  
+  const keyGroups: Map<string, Map<string, ["added" | "deleted", any]>> = new Map();
+
   keyPathsMap.forEach((valueChangeInfo, key) => {
     const baseKey = key.replace(/__added$|__deleted$/, '');
     const changeType = key.endsWith("__added") ? "added" : "deleted";
@@ -223,6 +225,13 @@ export function formatDifferenceReport(keyPathsMap: Map<string, ValueChangeInfo>
         String(value);
       
       report += `| \`${path}\` | ${changeType} | \`${formattedValue.replace(/\\/g, "\\\\").replace(/\|/g, "\\|")}\` |\n`;
+      jsonOutput.apiChanges.push({
+        category: "added-or-deleted",
+        key: key,
+        path: path,
+        type: changeType,
+        value: formattedValue
+      });
     });
     
     report += "\n";
@@ -243,6 +252,11 @@ export function formatChangedPathsReport(changedPaths: PathChangeInfo[]): string
   report += "## Changed Paths\n\n";
   changedPaths.forEach(({ path, changeType }) => {
     report += `Path: ${path}\nChange Type: ${changeType}\n\n`;
+    jsonOutput.apiChanges.push({
+      category: "path-changed",
+      path: path,
+      type: changeType,
+    })
   });  
   return report;
 }
@@ -339,6 +353,12 @@ export function formatModifiedValuesReport(modifiedValues: ModifiedValueInfo[]):
     };
     
     report += `| \`${path}\` | ${formatValue(oldValue)} | ${formatValue(newValue)} |\n`;
+    jsonOutput.apiChanges.push({
+      category: "value-changed",
+      path: path,
+      oldValue: formatValue(oldValue),
+      newValue: formatValue(newValue)
+    });
   });
   
   report += "\n";
