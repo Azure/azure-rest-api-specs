@@ -248,6 +248,12 @@ union SourceType {
 
 @doc("Model representing the result of the export dependencies asynchronous operation.")
 model ExportDependenciesOperationResult {
+  @doc("The status URL of export dependencies operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
   @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
   status: string;
 
