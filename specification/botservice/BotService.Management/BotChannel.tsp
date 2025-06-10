@@ -26,25 +26,25 @@ model BotChannel is Azure.ResourceManager.TrackedResource<Channel> {
   /**
    * Gets or sets the SKU of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Required. Gets or sets the Kind of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: Kind;
 
   /**
    * Entity Tag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Entity zones
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
@@ -54,21 +54,21 @@ interface BotChannels {
   /**
    * Returns a BotService Channel registration specified by the parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Channels_Get")
   get is ArmResourceRead<BotChannel, Error = Error>;
 
   /**
    * Creates a Channel registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Channels_Create")
   create is ArmResourceCreateOrReplaceSync<BotChannel, Error = Error>;
 
   /**
    * Updates a Channel registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Channels_Update")
   update is ArmCustomPatchSync<
@@ -81,14 +81,14 @@ interface BotChannels {
   /**
    * Deletes a Channel registration from a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Channels_Delete")
   delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
 
   /**
    * Returns all the Channel registrations of a particular BotService resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Channels_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     BotChannel,
@@ -99,7 +99,7 @@ interface BotChannels {
   /**
    * Lists a Channel registration for a Bot Service including secrets
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listChannelWithKeys")
   @operationId("Channels_ListWithKeys")
   listWithKeys is ArmResourceActionSync<
@@ -112,7 +112,7 @@ interface BotChannels {
   /**
    * Regenerates secret keys and returns them for the DirectLine Channel of a particular BotService resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("regeneratekeys")
   @operationId("DirectLine_RegenerateKeys")
   regenerateKeys is ArmResourceActionSync<
