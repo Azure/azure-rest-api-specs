@@ -16,7 +16,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.StorageActions;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface StorageTasksOperationGroup {
   /**
    * Runs the input conditions against input object metadata properties and designates matched objects in response.
@@ -29,9 +29,9 @@ interface StorageTasksOperationGroup {
     Response = StorageTaskPreviewAction,
     Scope = SubscriptionActionScope,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @segment("locations")
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       location: Azure.Core.azureLocation;
     }
   >;
