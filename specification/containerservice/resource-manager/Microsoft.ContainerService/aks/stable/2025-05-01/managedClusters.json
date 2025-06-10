@@ -5258,6 +5258,10 @@
           "$ref": "#/definitions/ManagedClusterBootstrapProfile",
           "description": "Profile of the cluster bootstrap configuration."
         },
+        "aiToolchainOperatorProfile": {
+          "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
+          "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
         "status": {
           "$ref": "#/definitions/ManagedClusterStatus",
           "description": "Contains read-only information about the Managed Cluster."
@@ -7953,6 +7957,17 @@
               }
             ]
           }
+        }
+      }
+    },
+    "ManagedClusterAIToolchainOperatorProfile": {
+      "type": "object",
+      "description": "When enabling the operator, a set of AKS managed CRDs and controllers will be installed in the cluster. The operator automates the deployment of OSS models for inference and/or training purposes. It provides a set of preset models and enables distributed inference against them.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Whether to enable AI toolchain operator to the cluster",
+          "description": "Indicates if AI toolchain operator  enabled or not."
         }
       }
     },
