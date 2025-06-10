@@ -11130,20 +11130,19 @@
               },
               {
                 "value": "Auto",
-                "description": "Nodes are provisioned automatically by AKS using Karpenter. Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
+                "description": "Nodes are provisioned automatically by AKS using Karpenter (See aka.ms/aks/nap for more details). Fixed size Node Pools can still be created, but autoscaling Node Pools cannot be. (See aka.ms/aks/nap for more details)."
               }
             ]
           },
-          "title": "The node provisioning mode. If not specified, the default is Manual.",
-          "description": "Once the mode it set to Auto, it cannot be changed back to Manual."
+          "title": "The node provisioning mode. If not specified, the default is Manual."
         },
         "defaultNodePools": {
           "enum": [
             "None",
             "Auto"
           ],
-          "title": "The set of default Karpenter NodePools configured for node provisioning.",
-          "description": "This field has no effect unless mode is 'Auto'. Warning: Changing this from Auto to None on an existing cluster will cause the default Karpenter NodePools to be deleted, which will in turn drain and delete the nodes associated with those pools. It is strongly recommended to not do this unless there are idle nodes ready to take the pods evicted by that action. If not specified, the default is Auto. For more information see aka.ms/something",
+          "title": "The set of default Karpenter NodePools (CRDs) configured for node provisioning.",
+          "description": "This field has no effect unless mode is 'Auto'. Warning: Changing this from Auto to None on an existing cluster will cause the default Karpenter NodePools to be deleted, which will drain and delete the nodes associated with those pools. It is strongly recommended to not do this unless there are idle nodes ready to take the pods evicted by that action. If not specified, the default is Auto. For more information see aka.ms/aks/nap#node-pools.",
           "default": "Auto",
           "type": "string",
           "x-ms-enum": {
@@ -11151,7 +11150,7 @@
             "name": "NodeProvisioningDefaultNodePools",
             "values": [
               {
-                "description": "No Karpenter NodePools are provisioned automatically. Automatic scaling will not happen unless the user creates one or more NodePool instances.",
+                "description": "No Karpenter NodePools are provisioned automatically. Automatic scaling will not happen unless the user creates one or more NodePool CRD instances.",
                 "value": "None"
               },
               {
