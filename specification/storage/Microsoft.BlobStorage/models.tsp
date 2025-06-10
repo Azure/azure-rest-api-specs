@@ -2189,3 +2189,14 @@ alias FileRequestIntentParameter = {
   fileRequestIntent?: FileShareTokenIntent;
 };
 
+alias CopySourceErrorCodeResponseHeader = {
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  copySourceErrorCode?: string;
+};
+
+alias CopySourceStatusCodeResponseHeader = {
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  copySourceStatusCode?: int32;
+};

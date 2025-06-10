@@ -1212,6 +1212,8 @@ namespace Storage.Blob {
           ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
+          ...CopySourceErrorCodeResponseHeader;
+          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1257,6 +1259,8 @@ namespace Storage.Blob {
           ...ContentMd5ResponseHeader;
           ...ContentCrc64ResponseHeader;
           ...EncryptionScopeResponseHeader;
+          ...CopySourceErrorCodeResponseHeader;
+          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1579,6 +1583,8 @@ namespace Storage.Blob {
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -1869,6 +1875,8 @@ namespace Storage.Blob {
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2009,6 +2017,8 @@ namespace Storage.Blob {
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2085,6 +2095,8 @@ namespace Storage.Blob {
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
