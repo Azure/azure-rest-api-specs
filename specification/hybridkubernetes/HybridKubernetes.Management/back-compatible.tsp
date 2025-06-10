@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Kubernetes;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConnectedClusterPatch.properties);
 
 @@clientName(ConnectedClusters.createOrReplace::parameters.resource,
@@ -15,7 +15,7 @@ using Microsoft.Kubernetes;
 @@clientName(ConnectedClusters.listClusterUserCredential::parameters.body,
   "Properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConnectedCluster.properties);
 
 @@scope(Operations.list, "!csharp");
