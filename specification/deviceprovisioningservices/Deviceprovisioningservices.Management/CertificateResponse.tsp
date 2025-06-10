@@ -37,7 +37,7 @@ interface CertificateResponses {
   /**
    * Get the certificate from the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DpsCertificate_Get")
   get is ArmResourceRead<
     CertificateResponse,
@@ -55,7 +55,7 @@ interface CertificateResponses {
   /**
    * Add new certificate or update an existing certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DpsCertificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -75,7 +75,7 @@ interface CertificateResponses {
   /**
    * Deletes the specified certificate associated with the Provisioning Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DpsCertificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateResponse,
@@ -149,7 +149,7 @@ interface CertificateResponses {
   /**
    * Get all the certificates tied to the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DpsCertificate_List")
   list is ArmResourceListByParent<
     CertificateResponse,
@@ -160,7 +160,7 @@ interface CertificateResponses {
   /**
    * Generate verification code for Proof of Possession.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DpsCertificate_GenerateVerificationCode")
   generateVerificationCode is ArmResourceActionSync<
     CertificateResponse,
@@ -236,7 +236,7 @@ interface CertificateResponses {
   /**
    * Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("verify")
   @operationId("DpsCertificate_VerifyCertificate")
   verifyCertificate is ArmResourceActionSync<

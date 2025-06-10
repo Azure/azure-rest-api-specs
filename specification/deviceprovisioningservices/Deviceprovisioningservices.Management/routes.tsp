@@ -18,7 +18,7 @@ interface IotDpsResourceOperationGroup {
   /**
    * Check if a provisioning service name is available. This will validate if the name is syntactically valid and if the name is usable
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check if a provisioning service name is available.")
   @operationId("IotDpsResource_CheckProvisioningServiceNameAvailability")
   @autoRoute
