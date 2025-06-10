@@ -13,8 +13,8 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @subscriptionResource
@@ -29,19 +29,19 @@ model ConnectedCluster extends Foundations.TrackedResource {
   /**
    * The identity of the connected cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity: ConnectedClusterIdentity;
 
   /**
    * The kind of connected cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: ConnectedClusterKind;
 
   /**
    * Properties of the connected cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: ConnectedClusterProperties;
 }
@@ -84,7 +84,7 @@ interface ConnectedClusters {
    * Delete a connected cluster, removing the tracked resource in Azure Resource Manager (ARM).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectedCluster_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
