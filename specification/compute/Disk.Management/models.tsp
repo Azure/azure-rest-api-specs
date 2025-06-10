@@ -706,7 +706,7 @@ model SupportedCapabilities {
 
   /**
    * CPU architecture supported by an OS disk.
-   */W
+   */
   architecture?: Architecture;
 
   /**
