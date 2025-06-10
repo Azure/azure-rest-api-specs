@@ -53,8 +53,8 @@ options:
     debug: true
     azure: true
     module-version: 0.1.0
-    prefix: 'Az'
-    subject-prefix: 'DependencyMap'
+    prefix: "Az"
+    subject-prefix: "DependencyMap"
     service-name: DependencyMap
     module-name: "{prefix}.{service-name}"
     output-folder: "{output-dir}"
@@ -69,7 +69,7 @@ options:
           parameter-name: SubscriptionId
         set:
           default:
-            script: '(Get-AzContext).Subscription.Id'
+            script: "(Get-AzContext).Subscription.Id"
       - where:
           variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
         remove: true
@@ -79,7 +79,7 @@ options:
         remove: true
       - where:
           variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
-        remove: true        
+        remove: true
       - where:
           verb: Set
         remove: true
@@ -92,9 +92,9 @@ options:
           verb: Export
         remove: true
       - no-inline:
-        - DiscoverySourceResourceProperties
+          - DiscoverySourceResourceProperties
       - model-cmdlet:
-        - model-name: OffAzureDiscoverySourceResourceProperties
+          - model-name: OffAzureDiscoverySourceResourceProperties
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
