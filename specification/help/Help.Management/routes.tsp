@@ -14,13 +14,13 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Help;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CheckNameAvailabilityOperationGroup {
   /**
    * This API is used to check the uniqueness of a resource name used for a diagnostic, troubleshooter or solutions
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CheckNameAvailability_CheckAvailability")
   @route("/{+scope}/providers/Microsoft.Help/checkNameAvailability")
   @post
@@ -35,13 +35,13 @@ interface CheckNameAvailabilityOperationGroup {
     /**
      * The required parameters for availability check.
      */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     CheckNameAvailabilityRequest?: CommonTypes.CheckNameAvailabilityRequest,
   ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DiscoverySolutionOperationGroup {
   /**
    * Lists the relevant Azure Diagnostics, Solutions and Troubleshooters using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. <br/><br/> Required Input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.
@@ -69,8 +69,8 @@ interface DiscoverySolutionOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DiscoverySolutionNLPOperationGroup {
   /**
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary.

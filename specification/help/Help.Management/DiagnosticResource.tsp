@@ -13,7 +13,7 @@ namespace Microsoft.Help;
 /**
  * Diagnostic resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DiagnosticResource
   is Azure.ResourceManager.ExtensionResource<DiagnosticResourceProperties> {
@@ -25,7 +25,7 @@ model DiagnosticResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DiagnosticResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -34,7 +34,7 @@ interface DiagnosticResourcesOps
         /**
          * The fully qualified Azure Resource manager identifier of the resource.
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path(#{ allowReserved: true })
         scope: string,
 
@@ -44,7 +44,7 @@ interface DiagnosticResourcesOps
         /**
          * Unique resource name for insight resources
          */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("diagnostics")
         @minLength(1)
@@ -54,7 +54,7 @@ interface DiagnosticResourcesOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DiagnosticResources {
   /**
