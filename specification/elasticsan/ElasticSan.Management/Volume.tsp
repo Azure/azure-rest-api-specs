@@ -49,21 +49,21 @@ interface Volumes {
   /**
    * Delete an Volume.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Volume,
     Parameters = {
       /**
        * Optional, used to delete snapshots under volume. Allowed value are only true or false. Default value is false.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-delete-snapshots`?: `x-ms-delete-snapshots`;
 
       /**
        * Optional, used to delete volume if active sessions present. Allowed value are only true or false. Default value is false.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-force-delete`?: `x-ms-force-delete`;
 
@@ -85,7 +85,7 @@ interface Volumes {
       /**
        * Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
     },
