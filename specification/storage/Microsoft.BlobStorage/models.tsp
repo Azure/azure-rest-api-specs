@@ -18,12 +18,19 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model StorageError {
   /** The error code. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Code?: string;
+  @Xml.name("Code") code?: string;
 
   /** The error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Message?: string;
+  @Xml.name("Message") message?: string;
+
+  /** Copy source status code */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
+
+  /** Copy source error code */
+  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
+
+  /** Copy source error message */
+  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
 /// Models
