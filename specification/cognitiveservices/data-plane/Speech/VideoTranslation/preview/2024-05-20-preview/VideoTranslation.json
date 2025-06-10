@@ -685,16 +685,16 @@
         "speakerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of speakers in the video."
+          "description": "Number of speakers in the video, if not specified, it will inherit the value defined in the input of translation creation."
         },
         "subtitleMaxCharCountPerSegment": {
           "type": "integer",
           "format": "int32",
-          "description": "Subtitle max display character count per segment."
+          "description": "Subtitle max display character count per segment, if not specified, it will inherit the value defined in the input of translation creation."
         },
         "exportSubtitleInVideo": {
           "type": "boolean",
-          "description": "Export subtitle in video."
+          "description": "Export subtitle in video, if not specified, it will inherit the value defined in the input of translation creation."
         }
       }
     },
@@ -885,7 +885,7 @@
       "properties": {
         "sourceLocale": {
           "$ref": "#/definitions/localeName",
-          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
+          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts , if not specified, the source locale will be auto-detected from the video file, the auto detect is only supported after version 2025-05-20."
         },
         "targetLocale": {
           "$ref": "#/definitions/localeName",
@@ -898,21 +898,21 @@
         "videoFileUrl": {
           "type": "string",
           "format": "uri",
-          "description": "Translation video file url."
+          "description": "Translation video file Azure blob url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
         },
         "speakerCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of speakers in the video."
+          "description": "Number of speakers in the video, if not provided, it will be auto-detected from the video file."
         },
         "subtitleMaxCharCountPerSegment": {
           "type": "integer",
           "format": "int32",
-          "description": "Subtitle max display character count per segment."
+          "description": "Subtitle max display character count per segment, if not provided, it will use the language dependent default value."
         },
         "exportSubtitleInVideo": {
           "type": "boolean",
-          "description": "Export subtitle in video."
+          "description": "Export subtitle in video, if not specified, the default value is false, it will not burn subtitle to the translated video file."
         }
       },
       "required": [
