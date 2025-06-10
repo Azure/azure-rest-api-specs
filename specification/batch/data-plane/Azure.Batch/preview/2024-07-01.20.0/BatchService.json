@@ -10355,10 +10355,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "code"
-      ]
+      }
     },
     "BatchErrorDetail": {
       "type": "object",
@@ -10987,8 +10984,7 @@
         }
       },
       "required": [
-        "subnetId",
-        "skipWithdrawFromVNet"
+        "subnetId"
       ]
     },
     "BatchJobNetworkConfigurationUpdate": {
@@ -14366,7 +14362,9 @@
           "type": "array",
           "description": "The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.",
           "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       }
@@ -15620,6 +15618,16 @@
         "resourceId"
       ]
     },
+    "BatchVmDiskSecurityProfile": {
+      "type": "object",
+      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionTypes",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
+        }
+      }
+    },
     "BatchVmImageReference": {
       "type": "object",
       "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
@@ -16389,7 +16397,7 @@
           "description": "The storage account type for managed disk."
         },
         "securityProfile": {
-          "$ref": "#/definitions/VmDiskSecurityProfile",
+          "$ref": "#/definitions/BatchVmDiskSecurityProfile",
           "description": "Specifies the security profile settings for the managed disk."
         }
       }
@@ -16911,29 +16919,6 @@
           "$ref": "#/definitions/BatchUefiSettings",
           "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
         }
-      },
-      "required": [
-        "encryptionAtHost",
-        "securityType",
-        "uefiSettings"
-      ]
-    },
-    "SecurityProfileUpdate": {
-      "type": "object",
-      "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
-      "properties": {
-        "encryptionAtHost": {
-          "type": "boolean",
-          "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes."
-        },
-        "securityType": {
-          "$ref": "#/definitions/SecurityTypes",
-          "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
-        },
-        "uefiSettings": {
-          "$ref": "#/definitions/BatchUefiSettings",
-          "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
-        }
       }
     },
     "SecurityTypes": {
@@ -17413,7 +17398,7 @@
           "x-ms-client-name": "OsDisk"
         },
         "securityProfile": {
-          "$ref": "#/definitions/SecurityProfileUpdate",
+          "$ref": "#/definitions/SecurityProfile",
           "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
         },
         "serviceArtifactReference": {
@@ -17433,16 +17418,6 @@
         "scaleSetVmResourceId": {
           "type": "string",
           "description": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
-        }
-      }
-    },
-    "VmDiskSecurityProfile": {
-      "type": "object",
-      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
-      "properties": {
-        "securityEncryptionType": {
-          "$ref": "#/definitions/SecurityEncryptionTypes",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
         }
       }
     },

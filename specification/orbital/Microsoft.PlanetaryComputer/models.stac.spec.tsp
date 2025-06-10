@@ -867,6 +867,7 @@ model Link {
    * Specifies the HTTP method that the resource expects.
    * Default: GET.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
   method?: "GET" | "POST" | string = "GET";
 
   /**

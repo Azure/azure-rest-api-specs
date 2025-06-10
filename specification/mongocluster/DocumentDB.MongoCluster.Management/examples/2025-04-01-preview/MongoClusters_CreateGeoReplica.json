@@ -1,0 +1,122 @@
+{
+  "operationId": "MongoClusters_CreateOrUpdate",
+  "title": "Creates a replica Mongo Cluster resource from a source resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myReplicaMongoCluster",
+    "api-version": "2025-04-01-preview",
+    "resource": {
+      "location": "centralus",
+      "properties": {
+        "createMode": "GeoReplica",
+        "replicaParameters": {
+          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+          "sourceLocation": "eastus"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster",
+        "name": "myReplicaMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "5.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 3
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
+          "previewFeatures": [
+            "GeoReplicas"
+          ],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "GeoAsyncReplica",
+            "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+            "replicationState": "Provisioning"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          }
+        },
+        "location": "centralus"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myReplicaMongoCluster",
+        "name": "myReplicaMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "5.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
+          "previewFeatures": [
+            "GeoReplicas"
+          ],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "GeoAsyncReplica",
+            "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
+            "replicationState": "Provisioning"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          }
+        },
+        "location": "centralus"
+      }
+    }
+  }
+}
