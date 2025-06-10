@@ -34,7 +34,7 @@ interface OrderItemResources {
   /**
    * Get an order item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Get")
   get is ArmResourceRead<
     OrderItemResource,
@@ -51,7 +51,7 @@ interface OrderItemResources {
    * Create an order item. Existing order item cannot be updated with this api and should instead be updated with the Update order item
    * API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Create")
   create is ArmResourceCreateOrReplaceAsync<
@@ -63,7 +63,7 @@ interface OrderItemResources {
   /**
    * Update the properties of an existing order item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("OrderItems_Update")
   update is ArmCustomPatchAsync<
@@ -82,14 +82,14 @@ interface OrderItemResources {
   /**
    * Delete an order item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<OrderItemResource>;
 
   /**
    * List order items at resource group level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     OrderItemResource,
@@ -124,7 +124,7 @@ interface OrderItemResources {
   /**
    * List order items at subscription level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     OrderItemResource,
@@ -159,7 +159,7 @@ interface OrderItemResources {
   /**
    * Cancel order item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Cancel")
   cancel is ArmResourceActionSync<
@@ -171,7 +171,7 @@ interface OrderItemResources {
   /**
    * Return order item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Return")
   @action("return")
   returnOrderItem is ArmResourceActionAsync<

@@ -18,7 +18,7 @@ interface ProductsAndConfigurationsOperationGroup {
   /**
    * List configurations for the given product family, product line and product for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ProductsAndConfigurations_ListConfigurations")
   @autoRoute
   listConfigurations is ArmProviderActionSync<
@@ -36,7 +36,7 @@ interface ProductsAndConfigurationsOperationGroup {
   /**
    * List product families for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ProductsAndConfigurations_ListProductFamilies")
   @autoRoute
   listProductFamilies is ArmProviderActionSync<
@@ -60,7 +60,7 @@ interface ProductsAndConfigurationsOperationGroup {
   /**
    * List product families metadata for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ProductsAndConfigurations_ListProductFamiliesMetadata")
   @autoRoute
   @action("productFamiliesMetadata")
@@ -82,7 +82,7 @@ interface OrdersOperationGroup {
   /**
    * List orders at subscription level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Orders_ListBySubscription")
   @autoRoute
   @get
@@ -107,7 +107,7 @@ interface OrdersOperationGroup {
   /**
    * List orders at resource group level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Orders_ListByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders")

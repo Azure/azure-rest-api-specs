@@ -28,7 +28,7 @@ interface AddressResources {
   /**
    * Get information about the specified address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_Get")
   get is ArmResourceRead<AddressResource>;
 
@@ -36,7 +36,7 @@ interface AddressResources {
    * Create a new address with the specified parameters. Existing address cannot be updated with this API and should
    * instead be updated with the Update address API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_Create")
   create is ArmResourceCreateOrReplaceAsync<
@@ -48,7 +48,7 @@ interface AddressResources {
   /**
    * Update the properties of an existing address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Addresses_Update")
   update is ArmCustomPatchAsync<
@@ -67,14 +67,14 @@ interface AddressResources {
   /**
    * Delete an address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<AddressResource>;
 
   /**
    * List all the addresses available under the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AddressResource,
@@ -103,7 +103,7 @@ interface AddressResources {
   /**
    * List all the addresses available under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     AddressResource,
