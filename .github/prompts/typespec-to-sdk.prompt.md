@@ -2,7 +2,17 @@
 mode: 'agent'
 description: 'Generate SDKs from TypeSpec'
 ---
-Your goal is to guide user through the process of generating SDKs from TypeSpec projects.
+Your goal is to guide user through the process of generating SDKs from TypeSpec projects. Show all the high level steps to the user to ensure they understand the flow. Use the provided tools to perform actions and gather information as needed.
+## TypeSpec to SDK Generation Process
+1. **Pre-Flight Check**: Ensure user is not on main branch and prompt to create a new branch if necessary.
+2. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
+3. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
+4. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
+5. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main".
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
+7. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created.
+8. **Verify API Readiness**: Ensure the API specification pull request is ready for SDK generation.
+9. **Generate SDKs via Pipeline**: Create a release plan and generate SDKs, monitoring the pipeline status and displaying generated SDK PR links.
 
 ## Pre-Flight Check
 - Verify ${workspaceFolder} is not on main branch
@@ -58,7 +68,7 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
 **Goal**: Determine how to generate SDKs
 **Actions**:
 1. Present options: "How would you like to generate SDKs?"
-    - Option A: "Generate SDK locally"
+    - Option A: "Generate SDK locally". This is currently supported only for Python.
     - Option B: "Use SDK generation pipeline"
 2. Based on selection:
     - If Option A: Run `/create-sdk-locally` and then proceed to Step 6

@@ -4,7 +4,7 @@ description: 'Verify SDK namespace approval for Management plane'
 tools: ['GetReleasePlan', 'GetReleasePlanForPullRequest', 'LinkNameSpaceApprovalIssue']
 ---
 This task is required only for management plan API spec and only if a release plan exists for the API spec pull request.
-## Step 1: Check is release plan exists and it is for management plane SDK
+## Step 1: Check if release plan exists and it is for management plane SDK
 **Goal**: Determine if a release plan exists for the API spec pull request or work item Id or release plan Id in current context.
 **Actions**:
 1. Get release plan and check if it is for management plane SDK

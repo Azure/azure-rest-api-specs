@@ -31,7 +31,7 @@ If any details are missing, prompt the user accordingly:
 - **Product Service Tree ID**: GUID format identifier for the product in Service Tree
 - **Expected Release Timeline**: Format as "Month YYYY" (e.g., "March 2024")
 - **API Version**: The version of the API being released
-- **SDK Release Type**: 
+- **SDK Release Type**: Value must be beta or stable.
     - "beta" for preview API versions
     - "stable" for GA API versions
 
