@@ -304,7 +304,11 @@ namespace Storage.Blob {
         ...MetadataHeaders;
         ...IfModifiedSinceParameter;
       },
-      {}
+      {
+        ...EtagResponseHeader;
+        ...LastModifiedResponseHeader;
+        ...DateResponseHeader;
+      }
     >;
 
     /** gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly. */
