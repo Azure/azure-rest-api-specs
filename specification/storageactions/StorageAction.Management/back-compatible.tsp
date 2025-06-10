@@ -3,10 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageTaskPreviewAction.properties, "!csharp");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp");
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
@@ -15,5 +15,5 @@ using Microsoft.StorageActions;
   "parameters"
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageTask.properties, "!csharp");

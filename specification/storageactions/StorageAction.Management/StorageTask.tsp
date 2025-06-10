@@ -92,7 +92,7 @@ interface StorageTasks {
   /**
    * Fetch the storage tasks run report summary for each assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
   @operationId("StorageTasksReport_List")
@@ -118,7 +118,7 @@ interface StorageTasks {
   /**
    * Lists Resource IDs of the Storage Task Assignments associated with this Storage Task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("storageTaskAssignments")
   @operationId("StorageTaskAssignment_List")
