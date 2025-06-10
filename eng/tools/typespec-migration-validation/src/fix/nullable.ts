@@ -1,4 +1,5 @@
 import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
 export function  checkNullable(jsonObj: any): Suggestion[] {
@@ -14,7 +15,7 @@ export function  checkNullable(jsonObj: any): Suggestion[] {
         const [definitionName, propertyName] = getPropertyName(path)!;
         suggestedFixes.push({
           suggestion: `Find a model called "${definitionName}". Change its property "${propertyName}" by adding \` | null\` to its property type.`,
-          path: `${path}['${change.key}']`
+          path: constructJsonPath(path, change.key)
         });
       }
     }

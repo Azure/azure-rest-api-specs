@@ -1,4 +1,5 @@
 import { jsonOutput, Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkDefault } from "./default.js";
 import { checkPropertyAttributeAdded, checkPropertyAttributeChanged, checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 import { checkMinMax } from "./minMax.js";
@@ -21,7 +22,7 @@ export function suggestFix(jsonObj: any): string[] {
 \`\`\`typespec
 ${s}
 \`\`\``,
-        path: `${path}['${statement.key}]`
+        path: constructJsonPath(path, statement.key)
       });
     }
   }
@@ -40,7 +41,7 @@ ${s}
 \`\`\`typespec
 ${s}
 \`\`\``,
-        path: `${path}['${statement.key}]`
+        path: constructJsonPath(path, statement.key)
       });
     }
   }
@@ -75,7 +76,7 @@ export function suggestPrompt(jsonObj: any): string[] {
       const [definitionName, propertyName] = getPropertyName(path)!;
       suggestedFixes.push({
         suggestion: `Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement.`,
-        path: `${path}['${change.key}']`
+        path: constructJsonPath(path, change.key)
       });
     }
   }

@@ -1,4 +1,5 @@
 import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
 const knownPropertyDecoratorMapping: { [key: string]: string } = {
@@ -20,7 +21,7 @@ export function checkMinMax(jsonObj: any): Suggestion[] {
           const [definitionName, propertyName] = getPropertyName(path)!;
           suggestedFixes.push({
             suggestion: `Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value});\` right after the model.`,
-            path: `${path}['${change.key}']` 
+            path: constructJsonPath(path, change.key)
           });
         }
       }
