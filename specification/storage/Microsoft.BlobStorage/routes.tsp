@@ -1040,7 +1040,15 @@ namespace Storage.Blob {
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
         },
-        {}
+        {
+          ...EtagResponseHeader;
+          ...LastModifiedResponseHeader;
+          ...VersionIdResponseHeader;
+          ...DateResponseHeader;
+          ...IsServerEncryptedResponseHeader;
+          ...EncryptionKeySha256ResponseHeader;
+          ...EncryptionScopeResponseHeader;
+        }
       >;
 
       /** The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite. */
