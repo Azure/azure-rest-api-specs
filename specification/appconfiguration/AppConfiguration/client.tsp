@@ -35,4 +35,5 @@ namespace SdkCustomizations;
 // @@access(deleteLock, Access.internal, "csharp");
 // @@access(putLock, Access.internal, "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
+@@alternateType(RevisionsRequestParams.select, string[], "csharp");
 
