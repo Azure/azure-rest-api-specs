@@ -37,6 +37,9 @@ namespace Storage.Blob {
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
     contentType: ResponseMediaType;
+
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
   }) | TError;
 
   /** Azure Storage Blob basic operation template */
@@ -221,6 +224,9 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 201;
+        ...EtagResponseHeader;
+        ...LastModifiedResponseHeader;
+        ...DateResponseHeader;
       }
     >;
 
@@ -239,6 +245,7 @@ namespace Storage.Blob {
         ...MetadataHeaders;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeader;
         ...LeaseDurationHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
@@ -279,6 +286,7 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 202;
+        ...DateResponseHeader;
       }
     >;
 
@@ -661,17 +669,22 @@ namespace Storage.Blob {
         @header("x-ms-range-get-content-crc64")
         rangeGetContentCrc64?: boolean,
 
+        /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
+        @header("x-ms-structured-body")
+        structuredBodyType?: string,
+
         ...EncryptionKeyParameter,
         ...EncryptionKeySha256Parameter,
         ...EncryptionAlgorithmParameter,
         ...IfTagsParameter,
         ...ConditionalRequestHeaders,
-        ...StructuredBodyParameter,
       ): (BodyParameter & {
         /** The media type of the body of the response. */
         @header("Content-Type")
         contentType: "application/octet-stream";
 
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -698,6 +711,8 @@ namespace Storage.Blob {
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
+        ...AcceptRangesResponseHeader;
+        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...IsServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
@@ -709,6 +724,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 206;
@@ -717,6 +734,8 @@ namespace Storage.Blob {
         @header("Content-Type")
         contentType: "application/octet-stream";
 
+        ...RequestIdResponseHeader;
+        ...ClientRequestIdHeader;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -745,6 +764,7 @@ namespace Storage.Blob {
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
         ...AcceptRangesResponseHeader;
+        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...IsServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
@@ -756,6 +776,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
       }) | StorageError;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
@@ -810,6 +832,8 @@ namespace Storage.Blob {
           ...ContentLanguageResponseHeader;
           ...CacheControlResponseHeader;
           ...BlobSequenceNumberResponseHeader;
+          ...DateResponseHeader;
+          ...AcceptRangesResponseHeader;
           ...BlobCommittedBlockCountResponseHeader;
           ...IsServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
@@ -871,6 +895,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 202;
+          ...DateResponseHeader;
         }
       >;
 
@@ -1932,6 +1957,8 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
             ...ContentCrc64Parameter;
+            ...StructuredBodyParameter;
+            ...StructuredContentLengthParameter;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
@@ -1943,9 +1970,11 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
+            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
@@ -2031,14 +2060,18 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
+            ...StructuredBodyParameter;
+            ...StructuredContentLengthParameter;
           },
           {
             @statusCode statusCode: 201;
+            ...DateResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
@@ -2128,6 +2161,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...VersionIdResponseHeader;
+            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -2161,6 +2195,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
+            ...DateResponseHeader;
           }
         >;
 
