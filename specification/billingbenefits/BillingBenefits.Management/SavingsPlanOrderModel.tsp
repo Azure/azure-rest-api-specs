@@ -13,8 +13,8 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(
   SavingsPlanOrderModelProperties
 )
@@ -31,11 +31,11 @@ model SavingsPlanOrderModel extends Foundations.ProxyResource {
   /**
    * Savings plan SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: ResourceSku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   properties?: SavingsPlanOrderModelProperties;
 }

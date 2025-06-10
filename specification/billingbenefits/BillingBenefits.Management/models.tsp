@@ -39,24 +39,24 @@ model SavingsPlanModelListResult {
 /**
  * Provisioning state
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PendingBilling: "PendingBilling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ConfirmedBilling: "ConfirmedBilling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Created: "Created",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cancelled: "Cancelled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Expired: "Expired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -65,11 +65,11 @@ union ProvisioningState {
  */
 union Term {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P1Y: "P1Y",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P3Y: "P3Y",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P5Y: "P5Y",
 }
 
@@ -78,7 +78,7 @@ union Term {
  */
 union BillingPlan {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P1M: "P1M",
 }
 
@@ -87,11 +87,11 @@ union BillingPlan {
  */
 union AppliedScopeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Single: "Single",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Shared: "Shared",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagementGroup: "ManagementGroup",
 }
 
@@ -100,11 +100,11 @@ union AppliedScopeType {
  */
 union CommitmentGrain {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hourly: "Hourly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FullTerm: "FullTerm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
 }
 
@@ -113,13 +113,13 @@ union CommitmentGrain {
  */
 union PaymentStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Scheduled: "Scheduled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cancelled: "Cancelled",
 }
 
@@ -128,57 +128,57 @@ union PaymentStatus {
  */
 union ReservedResourceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VirtualMachines: "VirtualMachines",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlDatabases: "SqlDatabases",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SuseLinux: "SuseLinux",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDb: "CosmosDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RedHat: "RedHat",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlDataWarehouse: "SqlDataWarehouse",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VMwareCloudSimple: "VMwareCloudSimple",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RedHatOsa: "RedHatOsa",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Databricks: "Databricks",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AppService: "AppService",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedDisk: "ManagedDisk",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BlockBlob: "BlockBlob",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RedisCache: "RedisCache",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureDataExplorer: "AzureDataExplorer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MySql: "MySql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MariaDb: "MariaDb",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PostgreSql: "PostgreSql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DedicatedHost: "DedicatedHost",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SapHana: "SapHana",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlAzureHybridBenefit: "SqlAzureHybridBenefit",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AVS: "AVS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataFactory: "DataFactory",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NetAppStorage: "NetAppStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureFiles: "AzureFiles",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlEdge: "SqlEdge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VirtualMachineSoftware: "VirtualMachineSoftware",
 }
 
@@ -187,9 +187,9 @@ union ReservedResourceType {
  */
 union InstanceFlexibility {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   On: "On",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Off: "Off",
 }
 
@@ -198,9 +198,9 @@ union InstanceFlexibility {
  */
 union DiscountEntityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Affiliate: "Affiliate",
 }
 
@@ -209,15 +209,15 @@ union DiscountEntityType {
  */
 union DiscountProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -226,15 +226,15 @@ union DiscountProvisioningState {
  */
 union DiscountStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Expired: "Expired",
 }
 
@@ -243,11 +243,11 @@ union DiscountStatus {
  */
 union DiscountAppliedScopeType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BillingAccount: "BillingAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BillingProfile: "BillingProfile",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Customer: "Customer",
 }
 
@@ -256,13 +256,13 @@ union DiscountAppliedScopeType {
  */
 union ManagedServiceIdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
@@ -271,11 +271,11 @@ union ManagedServiceIdentityType {
  */
 union PricingCurrencyDuration {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P1M: "P1M",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P1Y: "P1Y",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   P3Y: "P3Y",
 }
 
@@ -284,15 +284,15 @@ union PricingCurrencyDuration {
  */
 union DiscountType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ProductFamily: "ProductFamily",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Product: "Product",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sku: "Sku",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CustomPrice: "CustomPrice",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CustomPriceMultiCurrency: "CustomPriceMultiCurrency",
 }
 
@@ -301,11 +301,11 @@ union DiscountType {
  */
 union ApplyDiscountOn {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Purchase: "Purchase",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Consume: "Consume",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Renew: "Renew",
 }
 
@@ -314,9 +314,9 @@ union ApplyDiscountOn {
  */
 union DiscountCombinationRule {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BestOf: "BestOf",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Stackable: "Stackable",
 }
 
@@ -325,9 +325,9 @@ union DiscountCombinationRule {
  */
 union PricingPolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Protected: "Protected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Locked: "Locked",
 }
 
@@ -336,11 +336,11 @@ union PricingPolicy {
  */
 union DiscountRuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FixedPriceLock: "FixedPriceLock",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FixedListPrice: "FixedListPrice",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PriceCeiling: "PriceCeiling",
 }
 
@@ -349,11 +349,11 @@ union DiscountRuleType {
  */
 union DiscountProvisioningSubState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Expired: "Expired",
 }
 
@@ -447,7 +447,7 @@ model AppliedScopeProperties {
 /**
  * Commitment towards the benefit.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Commitment extends Price {
   /**
    * Commitment grain.
@@ -455,14 +455,14 @@ model Commitment extends Price {
   grain?: CommitmentGrain;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Price {
   /**
    * The ISO 4217 3-letter currency code for the currency used by this purchase record.
    */
   currencyCode?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amount?: float64;
 }
 
@@ -545,10 +545,10 @@ model SavingsPlanOrderModelProperties {
    */
   planInformation?: BillingPlanInformation;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   savingsPlans?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 }
@@ -572,7 +572,7 @@ model BillingPlanInformation {
    */
   nextPaymentDueDate?: plainDate;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   transactions?: PaymentDetail[];
 }
@@ -606,7 +606,7 @@ model PaymentDetail {
    */
   status?: PaymentStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 
@@ -616,7 +616,7 @@ model PaymentDetail {
   billingAccount?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtendedStatusInfo {
   /**
    * Status code providing additional information.
@@ -646,7 +646,7 @@ model RoleAssignmentEntity {
   /**
    * Role assignment entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RoleAssignmentEntityProperties;
 }
 
@@ -670,10 +670,10 @@ model RoleAssignmentEntityProperties {
   scope?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanOrderModelList is Azure.Core.Page<SavingsPlanOrderModel>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanModelList is Azure.Core.Page<SavingsPlanModel>;
 
 /**
@@ -790,7 +790,7 @@ model SavingsPlanModelProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   benefitStartTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   extendedStatusInfo?: ExtendedStatusInfo;
 
@@ -815,7 +815,7 @@ model SavingsPlanModelProperties {
    */
   renewDestination?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewProperties?: RenewProperties;
 }
 
@@ -865,30 +865,30 @@ model UtilizationAggregates {
   valueUnit?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RenewProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purchaseProperties?: PurchaseRequest;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceSku {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PurchaseRequest {
   /**
    * The SKU to be applied for this resource
    */
   sku?: ResourceSku;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PurchaseRequestProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PurchaseRequestProperties {
   /**
    * Friendly name of the savings plan
@@ -1047,20 +1047,20 @@ model SavingsPlanUpdateRequestProperties {
    */
   renew?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   renewProperties?: RenewProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanUpdateValidateRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   benefits?: SavingsPlanUpdateRequestProperties[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanValidateResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   benefits?: SavingsPlanValidResponseProperty[];
 
@@ -1090,16 +1090,16 @@ model SavingsPlanValidResponseProperty {
   reason?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SavingsPlanPurchaseValidateRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   benefits?: SavingsPlanOrderAliasModel[];
 }
 
 /**
  * Reservation order alias
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReservationOrderAliasRequest
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -1115,7 +1115,7 @@ model ReservationOrderAliasRequest
   /**
    * Reservation order alias request properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ReservationOrderAliasRequestProperties;
 }
 
@@ -1374,7 +1374,7 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -1382,7 +1382,7 @@ model ManagedServiceIdentity {
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -1395,7 +1395,7 @@ model ManagedServiceIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1462,18 +1462,18 @@ model Plan {
 /**
  * Discounts patch request
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiscountPatchRequest {
   /**
    * Discounts patch request properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DiscountPatchRequestProperties;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -1492,8 +1492,8 @@ model DiscountPatchRequestProperties {
  */
 model DiscountList is Azure.Core.Page<Discount>;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PricingCurrencyTotal extends Price {
   /**
    * Represents either billing plan or savings plan term in ISO 8601 format.
@@ -1520,11 +1520,11 @@ model OperationResultError {
  * billing information
  */
 model BillingInformation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   billingCurrencyTotalPaidAmount?: Price;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   billingCurrencyProratedAmount?: Price;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   billingCurrencyRemainingCommitmentAmount?: Price;
 }
 
@@ -1610,7 +1610,7 @@ model DiscountTypeProperties {
   /**
    * Array of conditions for the discount. Validation: Optional. Maximum length is 1000.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   conditions?: ConditionsItem[];
 }
 
@@ -1634,7 +1634,7 @@ model PriceGuaranteeProperties {
  * Condition for a discount.
  */
 model ConditionsItem {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   conditionName?: string;
 
   /**
@@ -1642,7 +1642,7 @@ model ConditionsItem {
    */
   value?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
 }
 
@@ -1709,8 +1709,8 @@ model DiscountTypeProductSku extends DiscountTypeProperties {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows a single entry in marketSetPrices.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("discountType")
 model DiscountTypeCustomPrice extends DiscountTypeProperties {
   /**
@@ -1751,7 +1751,7 @@ model CustomPriceProperties {
   /**
    * The set of BigCat claims. Validation: Required. Must contain AgreementType, NationalCloud, and PricingAudience claims. Additionally requires AccessPass claim when creating custom price with action == consume on the pricing instructions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   catalogClaims: CatalogClaimsItem[];
 
   /**
@@ -1772,7 +1772,7 @@ model CustomPriceProperties {
   /**
    * The set of market set prices of the priceable node. Validation: Required. Must contain at least one element.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   marketSetPrices: MarketSetPricesItems[];
 }
 
@@ -1780,9 +1780,9 @@ model CustomPriceProperties {
  * Catalog claim for a discount.
  */
 model CatalogClaimsItem {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   catalogClaimsItemType?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string;
 }
 
@@ -1790,7 +1790,7 @@ model CatalogClaimsItem {
  * Items in the MarketSetPrices array.
  */
 model MarketSetPricesItems {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   markets: string[];
 
   /**
@@ -1807,7 +1807,7 @@ model MarketSetPricesItems {
 /**
  * Discount type properties including product family name, product id, sku, and custom price properties. Allows multiple entries in marketSetPrices.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeCustomPrice {
   /**
    * Defines the type of discount. Supported values are ProductFamily, Product, Sku, CustomPrice, and CustomPriceMultiCurrency.
@@ -1818,11 +1818,11 @@ model DiscountTypeCustomPriceMultiCurrency extends DiscountTypeCustomPrice {
 /**
  * Applied discount
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Discount properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DiscountProperties;
 }

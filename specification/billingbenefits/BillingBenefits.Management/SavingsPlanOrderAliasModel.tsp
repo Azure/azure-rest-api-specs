@@ -13,8 +13,8 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order alias
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(
   SavingsPlanOrderAliasProperties
 )
@@ -31,22 +31,22 @@ model SavingsPlanOrderAliasModel extends Foundations.ProxyResource {
   /**
    * Savings plan SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: ResourceSku;
 
   /**
    * Resource provider kind
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   properties?: SavingsPlanOrderAliasProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SavingsPlanOrderAliasModels {
   /**
