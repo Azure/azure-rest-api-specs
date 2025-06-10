@@ -68,7 +68,7 @@ Your goal is to guide user through the process of generating SDKs from TypeSpec 
 **Goal**: Determine how to generate SDKs
 **Actions**:
 1. Present options: "How would you like to generate SDKs?"
-    - Option A: "Generate SDK locally". This is currently supported only for Python.
+    - Option A: "Generate SDK locally". This is currently supported only for Python. Do not recommend this for other languages.
     - Option B: "Use SDK generation pipeline"
 2. Based on selection:
     - If Option A: Run `/create-sdk-locally` and then proceed to Step 6
