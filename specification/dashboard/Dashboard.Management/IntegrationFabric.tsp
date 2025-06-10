@@ -31,7 +31,7 @@ interface IntegrationFabrics {
 
   create is ArmResourceCreateOrReplaceAsync<IntegrationFabric>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     IntegrationFabric,
@@ -40,7 +40,7 @@ interface IntegrationFabrics {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     IntegrationFabric,
     LroHeaders = ArmAsyncOperationHeader &
