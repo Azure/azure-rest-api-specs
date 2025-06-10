@@ -8,42 +8,9 @@ import { processDocument } from "./document.js";
 import { suggestFix, suggestPrompt } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
 import { addIgnorePath, processIgnoreList } from "./ignore.js";
+import { jsonOutput } from "./jsonOutput.js";
 import { logHeader, logWarning } from "./log.js";
 import { findChangedPaths, findDifferences, findModifiedValues, formatChangedPathsReport, formatDifferenceReport, formatModifiedValuesReport } from "./summary.js";
-
-export interface ValueChange {
-  category: "value-changed";
-  path: string;
-  oldValue: string;
-  newValue: string;
-}
-
-export interface AddDeleteChange {
-  category: "added-or-deleted";
-  path: string;
-  key: string;
-  type: "added" | "deleted";
-  value: string;
-}
-
-export interface PathChange {
-  category: "path-changed";
-  path: string;
-  type: "added" | "deleted";
-}
-
-export type Change = ValueChange | AddDeleteChange | PathChange;
-export interface JsonOutput {
-  version: "1.0.0";
-  suggestions: string[];
-  apiChanges: Change[];
-}
-
-export const jsonOutput: JsonOutput = {
-  version: "1.0.0",
-  suggestions: [],
-  apiChanges: []
-};
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
