@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
 /**
  * The DNS Management Client.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "DnsManagementClient" })
 @versioned(Versions)
