@@ -2145,7 +2145,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "DefaultSoftwareInventoryEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -10012,7 +10012,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "DefaultSoftwareInventoryEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -11980,7 +11980,7 @@
               "default"
             ],
             "x-ms-enum": {
-              "name": "Default",
+              "name": "DefaultSoftwareInventoryEnum",
               "modelAsString": true,
               "values": [
                 {
@@ -13395,7 +13395,7 @@
         "default"
       ],
       "x-ms-enum": {
-        "name": "Default",
+        "name": "SoftwareInventoryDefaultEnum",
         "modelAsString": true,
         "values": [
           {
@@ -13413,7 +13413,7 @@
         "default"
       ],
       "x-ms-enum": {
-        "name": "DefaultValues",
+        "name": "DefaultValuesEnum",
         "modelAsString": true,
         "values": [
           {
@@ -13987,6 +13987,30 @@
         }
       }
     },
+    "DiscoverySource": {
+      "type": "string",
+      "description": "Servers Discovery source.",
+      "enum": [
+        "Arc",
+        "Appliance"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoverySource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Arc",
+            "value": "Arc",
+            "description": "Arc Discovery source."
+          },
+          {
+            "name": "Appliance",
+            "value": "Appliance",
+            "description": "Appliance Discovery Source."
+          }
+        ]
+      }
+    },
     "ErrorDetails": {
       "type": "object",
       "description": "Error contract returned when some exception occurs in Rest API.",
@@ -14475,6 +14499,26 @@
           "description": "Gets or sets the IP Address."
         }
       }
+    },
+    "GenericArcDiscovery": {
+      "type": "object",
+      "description": "Contains data related to Azure Generic Arc Discovery.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AzureArcStatus",
+          "description": "AzureArc status indicates whether arc discovery has successfully completed or not.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Resource Id.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "resourceId"
+      ]
     },
     "GuestOsDetails": {
       "type": "object",
@@ -17847,7 +17891,7 @@
         },
         "maxSizeInBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets Bytes allocated for the disk."
         },
         "name": {
@@ -18172,14 +18216,8 @@
           "readOnly": true
         },
         "discoverySource": {
-          "type": "string",
-          "description": "Gets or sets the discovery source of the server.",
-          "enum": [
-            "Arc"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets the discovery state of the server.",
           "readOnly": true
         },
         "hypervisor": {
@@ -19027,6 +19065,16 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "provisioning state enum",
           "readOnly": true
+        },
+        "arcDiscovery": {
+          "$ref": "#/definitions/GenericArcDiscovery",
+          "description": "Gets the data related to Azure arc discovery.",
+          "readOnly": true
+        },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets the discovery source.",
+          "readOnly": true
         }
       }
     },
@@ -19437,19 +19485,13 @@
           "description": "The status of the last operation."
         },
         "arcDiscovery": {
-          "$ref": "#/definitions/ArcDiscovery",
+          "$ref": "#/definitions/GenericArcDiscovery",
           "description": "Gets the data related to Azure arc discovery.",
           "readOnly": true
         },
         "discoverySource": {
-          "type": "string",
-          "description": "Gets or sets the discovery state of the server.",
-          "enum": [
-            "Arc"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets the discovery source.",
           "readOnly": true
         }
       }
@@ -20083,19 +20125,13 @@
           "description": "The status of the last operation."
         },
         "arcDiscovery": {
-          "$ref": "#/definitions/ArcDiscovery",
+          "$ref": "#/definitions/GenericArcDiscovery",
           "description": "Gets the data related to Azure arc discovery.",
           "readOnly": true
         },
         "discoverySource": {
-          "type": "string",
-          "description": "Gets or sets the discovery state of the server.",
-          "enum": [
-            "Arc"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets the discovery source.",
           "readOnly": true
         }
       }
