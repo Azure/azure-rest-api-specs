@@ -5289,6 +5289,12 @@
           },
           "description": "The annotations of managed namespace."
         },
+        "portalFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients.",
+          "description": "The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
+        },
         "defaultResourceQuota": {
           "description": "The default resource quota enforced upon the namespace. Customers can have other Kubernetes resource quota objects under the namespace. All the resource quotas will be enforced.",
           "$ref": "#/definitions/ResourceQuota"
