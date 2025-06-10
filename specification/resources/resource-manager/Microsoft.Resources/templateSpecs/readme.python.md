@@ -4,15 +4,16 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(python)
+title: TemplateSpecsClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-resources-templatespecs
-namespace: azure.mgmt.resources.templatespecs
+package-name: azure-mgmt-resource-templatespecs
+namespace: azure.mgmt.resource.templatespecs
 package-version: 1.0.0
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resources-templatespecs/azure/mgmt/resources/templatespecs
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-templatespecs/azure/mgmt/resource/templatespecs
 ```
