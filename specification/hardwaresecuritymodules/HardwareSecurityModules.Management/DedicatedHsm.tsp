@@ -13,8 +13,8 @@ namespace Microsoft.HardwareSecurityModules;
 /**
  * Resource information with extended details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(DedicatedHsmProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DedicatedHsm extends Foundations.TrackedResource {
@@ -27,7 +27,7 @@ model DedicatedHsm extends Foundations.TrackedResource {
   /**
    * SKU details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -35,7 +35,7 @@ model DedicatedHsm extends Foundations.TrackedResource {
   /**
    * Properties of the dedicated HSM
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: DedicatedHsmProperties;
 }

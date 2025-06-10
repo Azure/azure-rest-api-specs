@@ -26,7 +26,7 @@ model PrivateEndpointConnection
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -43,7 +43,7 @@ interface PrivateEndpointConnections {
    * Creates or updates the private endpoint connection for the Cloud Hsm Cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CloudHsmClusterPrivateEndpointConnections_Create")
   create is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
