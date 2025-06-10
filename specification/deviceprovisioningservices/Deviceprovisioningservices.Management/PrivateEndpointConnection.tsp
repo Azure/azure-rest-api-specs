@@ -27,7 +27,7 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateEndpointConnectionsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -88,9 +88,9 @@ interface PrivateEndpointConnections {
   /**
    * Delete private endpoint connection with the specified name
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("IotDpsResource_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,

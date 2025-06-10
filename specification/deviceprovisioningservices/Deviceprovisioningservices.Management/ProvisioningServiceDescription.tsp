@@ -13,8 +13,8 @@ namespace Microsoft.Devices;
 /**
  * The description of the provisioning service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(IotDpsPropertiesDescription)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ProvisioningServiceDescription
@@ -29,22 +29,22 @@ model ProvisioningServiceDescription
   /**
    * The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The resource group of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourcegroup?: string;
 
   /**
    * The subscription id of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionid?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: IotDpsPropertiesDescription;
@@ -52,13 +52,13 @@ model ProvisioningServiceDescription
   /**
    * Sku info for a provisioning Service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: IotDpsSkuInfo;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProvisioningServiceDescriptionOperationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -84,7 +84,7 @@ interface ProvisioningServiceDescriptionOperationOps
       ErrorDetails
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProvisioningServiceDescriptionOperations {
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
@@ -145,7 +145,7 @@ interface ProvisioningServiceDescriptions {
    * Deletes the Provisioning Service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("IotDpsResource_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ProvisioningServiceDescription,

@@ -24,7 +24,7 @@ model GroupIdInformation
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GroupIdInformationsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {

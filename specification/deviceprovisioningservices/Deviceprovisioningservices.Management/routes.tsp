@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Devices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface IotDpsResourceOperationGroup {
   /**
    * Check if a provisioning service name is available. This will validate if the name is syntactically valid and if the name is usable
