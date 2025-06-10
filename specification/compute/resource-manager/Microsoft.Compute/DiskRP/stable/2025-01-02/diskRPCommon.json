@@ -313,11 +313,11 @@
               },
               {
                 "value": "ImportSecure",
-                "description": "Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId"
+                "description": "Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blobs for VM guest state specified by securityDataUri and VM metadata specified by securityMetadataUri in storage account specified by storageAccountId. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM."
               },
               {
                 "value": "UploadPreparedSecure",
-                "description": "Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state"
+                "description": "Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in disk, VM guest state and VM metadata. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM."
               },
               {
                 "value": "CopyFromSanSnapshot",
@@ -390,6 +390,10 @@
           "type": "integer",
           "format": "int64",
           "description": "“For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore."
+        },
+        "securityMetadataUri": {
+          "type": "string",
+          "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM."
         }
       },
       "required": [
@@ -496,6 +500,18 @@
           ],
           "x-ms-enum": {
             "name": "Architecture",
+            "modelAsString": true
+          }
+        },
+        "supportedSecurityOption": {
+          "type": "string",
+          "description": "Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM",
+          "enum": [
+            "TrustedLaunchSupported",
+            "TrustedLaunchAndConfidentialVMSupported"
+          ],
+          "x-ms-enum": {
+            "name": "SupportedSecurityOption",
             "modelAsString": true
           }
         }
@@ -614,6 +630,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A SAS uri for accessing a VM guest state."
+        },
+        "securityMetadataAccessSAS": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A SAS uri for accessing a VM metadata."
         }
       },
       "description": "A disk access SAS uri."
