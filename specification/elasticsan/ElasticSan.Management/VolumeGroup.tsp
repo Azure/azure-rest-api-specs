@@ -92,7 +92,7 @@ interface VolumeGroups {
   /**
    * Validate whether a disk snapshot backup can be taken for list of volumes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Volumes_PreBackup")
   preBackup is ArmResourceActionAsync<
     VolumeGroup,
@@ -103,7 +103,7 @@ interface VolumeGroups {
   /**
    * Validate whether a list of backed up disk snapshots can be restored into ElasticSan volumes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Volumes_PreRestore")
   preRestore is ArmResourceActionAsync<
     VolumeGroup,

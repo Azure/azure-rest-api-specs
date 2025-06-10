@@ -30,14 +30,14 @@ interface Snapshots {
   /**
    * Get a Volume Snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VolumeSnapshots_Get")
   get is ArmResourceRead<Snapshot>;
 
   /**
    * Create a Volume Snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VolumeSnapshots_Create")
   create is ArmResourceCreateOrReplaceAsync<
     Snapshot,
@@ -47,7 +47,7 @@ interface Snapshots {
   /**
    * Delete a Volume Snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VolumeSnapshots_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -58,7 +58,7 @@ interface Snapshots {
   /**
    * List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using filter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VolumeSnapshots_ListByVolumeGroup")
   listByVolumeGroup is ArmResourceListByParent<
     Snapshot,
