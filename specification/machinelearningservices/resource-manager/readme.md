@@ -78,6 +78,12 @@ suppressions:
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+    - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
 ```
 
 ### Tag: package-2025-04-01
