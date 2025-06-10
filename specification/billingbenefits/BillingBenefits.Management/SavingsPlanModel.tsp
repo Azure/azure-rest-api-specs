@@ -44,7 +44,7 @@ interface SavingsPlanModels {
   /**
    * Get savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SavingsPlan_Get")
   get is ArmResourceRead<
     SavingsPlanModel,
@@ -60,7 +60,7 @@ interface SavingsPlanModels {
   /**
    * Update savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("SavingsPlan_Update")
   update is ArmCustomPatchAsync<
@@ -72,7 +72,7 @@ interface SavingsPlanModels {
   /**
    * List savings plans in an order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SavingsPlan_List")
   list is ArmResourceListByParent<
     SavingsPlanModel,
@@ -82,7 +82,7 @@ interface SavingsPlanModels {
   /**
    * Validate savings plan patch.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("validate")
   @operationId("SavingsPlan_ValidateUpdate")
   validateUpdate is ArmResourceActionSync<

@@ -45,7 +45,7 @@ interface SavingsPlanOrderModels {
   /**
    * Get a savings plan order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SavingsPlanOrder_Get")
   get is ArmResourceRead<
     SavingsPlanOrderModel,
@@ -62,7 +62,7 @@ interface SavingsPlanOrderModels {
   /**
    * List all Savings plan orders.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SavingsPlanOrder_List")
   list is ArmResourceListByParent<
     SavingsPlanOrderModel,
@@ -73,7 +73,7 @@ interface SavingsPlanOrderModels {
   /**
    * Elevate as owner on savings plan order based on billing permissions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SavingsPlanOrder_Elevate")
   elevate is ArmResourceActionSync<
     SavingsPlanOrderModel,
