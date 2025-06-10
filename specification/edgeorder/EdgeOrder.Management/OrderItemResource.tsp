@@ -25,7 +25,7 @@ model OrderItemResource
   /**
    * Msi identity of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ResourceIdentity;
 }
 
@@ -52,7 +52,7 @@ interface OrderItemResources {
    * API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Create")
   create is ArmResourceCreateOrReplaceAsync<
     OrderItemResource,
@@ -73,7 +73,7 @@ interface OrderItemResources {
       /**
        * Defines the If-Match condition. The patch will be performed only if the ETag of the order on the server matches this value.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       `If-Match`?: string;
     }
@@ -160,7 +160,7 @@ interface OrderItemResources {
    * Cancel order item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OrderItems_Cancel")
   cancel is ArmResourceActionSync<
     OrderItemResource,

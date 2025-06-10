@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EdgeOrder;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProductsAndConfigurationsOperationGroup {
   /**
    * List configurations for the given product family, product line and product for the given subscription.
@@ -77,7 +77,7 @@ interface ProductsAndConfigurationsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrdersOperationGroup {
   /**
    * List orders at subscription level.
@@ -108,7 +108,7 @@ interface OrdersOperationGroup {
    * List orders at resource group level.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Orders_ListByResourceGroup")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/orders")
   @get

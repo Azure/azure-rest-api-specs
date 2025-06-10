@@ -37,7 +37,7 @@ interface AddressResources {
    * instead be updated with the Update address API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Addresses_Create")
   create is ArmResourceCreateOrReplaceAsync<
     AddressResource,
@@ -58,7 +58,7 @@ interface AddressResources {
       /**
        * Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       `If-Match`?: string;
     }
