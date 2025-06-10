@@ -36,7 +36,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement"
 );
-@@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "fileurl");
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName"
 );
@@ -89,12 +88,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime, "queuedOn");
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn"
-);
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri"
-);
-@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri"
 );
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind"

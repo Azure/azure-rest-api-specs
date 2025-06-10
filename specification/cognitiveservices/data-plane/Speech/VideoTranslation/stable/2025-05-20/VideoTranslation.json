@@ -1,0 +1,1381 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Video Translation",
+    "version": "2025-05-20",
+    "description": "Video translation API to translate video from source locale to target locale.",
+    "contact": {
+      "name": "Azure AI - Speech Services",
+      "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
+    },
+    "license": {
+      "name": "Copyright (c) Microsoft. All rights reserved."
+    },
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/videotranslation",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "KeyAuth": []
+    },
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AADToken": {
+      "type": "oauth2",
+      "description": "These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    },
+    "KeyAuth": {
+      "type": "apiKey",
+      "description": "Provide your Speech resource key here.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "VideoTranslation"
+    }
+  ],
+  "paths": {
+    "/configurations/event-hub": {
+      "get": {
+        "operationId": "EventHubConfigurationOperations_GetEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Get EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_GetEventHubConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Create or replace EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EventHubConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace EventHub configuration": {
+            "$ref": "./examples/EventHubConfigurationOperations_CreateOrReplaceEventHubConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EventHubConfigurationOperations_DeleteEventHubConfiguration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Delete EventHub configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete EventHub config": {
+            "$ref": "./examples/EventHubConfigurationOperations_DeleteEventHubConfiguration.json"
+          }
+        }
+      }
+    },
+    "/configurations/event-hub:ping": {
+      "post": {
+        "operationId": "EventHubConfigurationOperations_PingEventHub",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Send ping to EventHub to verify configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Send EventHub ping event": {
+            "$ref": "./examples/EventHubConfigurationOperations_PingEventHub.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "operationId": "OperationOperations_GetOperation",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Fetch a operation by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/OperationOperations_GetOperation.json"
+          }
+        }
+      }
+    },
+    "/translations": {
+      "get": {
+        "operationId": "TranslationOperations_ListTranslation",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "List translation resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTranslation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List translations": {
+            "$ref": "./examples/TranslationOperations_ListTranslation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/translations/{translationId}": {
+      "get": {
+        "operationId": "TranslationOperations_GetTranslation",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Fetch a translation by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Translation": {
+            "$ref": "./examples/TranslationOperations_GetTranslation.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TranslationOperations_CreateTranslation",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates a translation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Translation": {
+            "$ref": "./examples/TranslationOperations_CreateTranslation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "TranslationOperations_DeleteTranslation",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Delete a translation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Translation": {
+            "$ref": "./examples/TranslationOperations_DeleteTranslation.json"
+          }
+        }
+      }
+    },
+    "/translations/{translationId}/iterations": {
+      "get": {
+        "operationId": "IterationOperations_ListIteration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "List Iteration resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedIteration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Iteration": {
+            "$ref": "./examples/IterationOperations_ListIteration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/translations/{translationId}/iterations/{iterationId}": {
+      "get": {
+        "operationId": "IterationOperations_GetIteration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Fetch a iteration by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "Iteration ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Iteration": {
+            "$ref": "./examples/IterationOperations_GetIteration.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IterationOperations_CreateIteration",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates an iteration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "translationId",
+            "in": "path",
+            "description": "Translation resource ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "iterationId",
+            "in": "path",
+            "description": "Iteration ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Iteration": {
+            "$ref": "./examples/IterationOperations_CreateIteration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "EnableEmotionalPlatformVoice": {
+      "type": "string",
+      "description": "Enable emotional platform voice kind.",
+      "enum": [
+        "Auto",
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "EnableEmotionalPlatformVoice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "Let API to decide whether to enable emotional voice for the target locale."
+          },
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Force to enable emotional voice if there is voice supported emotion for the target locale."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable platform voice emotion for the target locale."
+          }
+        ]
+      }
+    },
+    "EventHubConfiguration": {
+      "type": "object",
+      "description": "EventHub configuration.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicate whether to enable sending event to EventHub."
+        },
+        "eventHubNamespaceHostName": {
+          "type": "string",
+          "description": "EventHub namespace host name, for example: [YourNamespace].servicebus.windows.net"
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "EventHub name."
+        },
+        "managedIdentityClientId": {
+          "$ref": "#/definitions/Guid",
+          "description": "Managed identity client ID for user-assigned managed identity, if not specified, API will use system-assigned managed identity."
+        },
+        "enabledEvents": {
+          "type": "array",
+          "description": "Enabled event kinds for notification.",
+          "items": {
+            "$ref": "#/definitions/EventHubVideoTranslationEventKind"
+          }
+        }
+      },
+      "required": [
+        "isEnabled",
+        "eventHubNamespaceHostName",
+        "eventHubName",
+        "enabledEvents"
+      ]
+    },
+    "EventHubVideoTranslationEventKind": {
+      "type": "string",
+      "description": "EventHub event kind.",
+      "enum": [
+        "Ping",
+        "TranslationCompletion",
+        "IterationCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "EventHubVideoTranslationEventKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ping",
+            "value": "Ping",
+            "description": "Send event to EventHub when ping API is requested."
+          },
+          {
+            "name": "TranslationCompletion",
+            "value": "TranslationCompletion",
+            "description": "Send event to EventHub when translation completed or failed."
+          },
+          {
+            "name": "IterationCompletion",
+            "value": "IterationCompletion",
+            "description": "Send event to EventHub when iteration completed or failed."
+          }
+        ]
+      }
+    },
+    "Guid": {
+      "type": "string",
+      "description": "Guid, for example: 8e2da02e-f9b3-4a1c-941f-8da60f16c2e5",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "Iteration": {
+      "type": "object",
+      "description": "Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/resourceId",
+          "description": "Iteration ID",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/IterationInput",
+          "description": "Iteration input."
+        },
+        "description": {
+          "type": "string",
+          "description": "Iteration description"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Iteration status",
+          "readOnly": true
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "Iteration failure reason",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/IterationResult",
+          "description": "Iteration result.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "input"
+      ]
+    },
+    "IterationInput": {
+      "type": "object",
+      "description": "Iteration input.",
+      "properties": {
+        "webvttFile": {
+          "$ref": "#/definitions/WebvttFile",
+          "description": "Webvtt file for content editing, this parameter is required from the second iteration creation request of the translation."
+        },
+        "speakerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of speakers in the video, if not specified, it will inherit the value defined in the input of translation creation."
+        },
+        "subtitleMaxCharCountPerSegment": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Subtitle max display character count per segment, if not specified, it will inherit the value defined in the input of translation creation."
+        },
+        "exportSubtitleInVideo": {
+          "type": "boolean",
+          "description": "Export subtitle in video, if not specified, it will inherit the value defined in the input of translation creation."
+        },
+        "ttsCustomLexiconFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "ttsCustomLexiconFileIdInAudioContentCreation": {
+          "$ref": "#/definitions/Guid",
+          "description": "Translate with TTS custom lexicon for speech synthesis. Provide the custom lexicon file using either ttsCustomLexiconFileUrl or ttsCustomLexiconFileIdInAudioContentCreation. These parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "enableVideoSpeedAdjustment": {
+          "type": "boolean",
+          "description": "This parameter allows for the adjustment of video playback speed to ensure better alignment with translated audio. When enabled, the API can slow down or speed up the video to match the timing of the translated audio, providing a more synchronized and seamless viewing experience, if not specified, video speed will not be adjusted."
+        },
+        "enableOcrCorrectionFromSubtitle": {
+          "type": "boolean",
+          "description": "Indicate whether to allow the API to correct the speech recognition (SR) results using the subtitles from the original video file. By leveraging the existing subtitles, the API can enhance the accuracy of the transcribed text, ensuring that the final output is more precise and reliable, if not specified, translation will not do correction from OCR subtitle."
+        },
+        "exportTargetLocaleAdvancedSubtitleFile": {
+          "type": "boolean",
+          "description": "This parameter, when enabled, allows the API to export subtitles in the Advanced SubStation Alpha format. The subtitle file can specify font styles and colors, which helps in addressing character display issues in certain target locales such as Arabic (Ar), Japanese (Ja), Korean (Ko), and Chinese (Ch). By using this parameter, you can ensure that the subtitles are visually appealing and correctly rendered across different languages and regions, if not specified, iteration response will not include advanced subtitle."
+        },
+        "subtitlePrimaryColor": {
+          "$ref": "#/definitions/rgbaColor",
+          "description": "This parameter specifies the primary color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default white color."
+        },
+        "subtitleOutlineColor": {
+          "$ref": "#/definitions/rgbaColor",
+          "description": "This parameter specifies the outline color of the subtitles in the video translation output. The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow. This parameter allows for customization of subtitle appearance to enhance readability and visual appeal, if not specified, it will use default black color."
+        },
+        "subtitleFontSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This parameter specifies the font size of subtitles in the video translation output between 5 and 30, if not specified, it will use the language dependent default value."
+        },
+        "enableEmotionalPlatformVoice": {
+          "$ref": "#/definitions/EnableEmotionalPlatformVoice",
+          "description": "This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side."
+        }
+      }
+    },
+    "IterationResult": {
+      "type": "object",
+      "description": "Iteration result.",
+      "properties": {
+        "translatedVideoFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translated video file URL."
+        },
+        "translatedAudioFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translated audio file URL."
+        },
+        "sourceLocaleSubtitleWebvttFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source locale subtitle file URL."
+        },
+        "targetLocaleSubtitleWebvttFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Target locale subtitle file URL."
+        },
+        "targetLocaleAdvancedSubtitleFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "This property provides the URL of the target locale Advanced SubStation Alpha (ASS) subtitle file. It is populated only when exportTargetLocaleAdvancedSubtitleFile is set to true during iteration creation; otherwise, this property will not be included in the response."
+        },
+        "metadataJsonWebvttFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Metadata json webvtt file URL."
+        },
+        "reportFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Report file URL."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Operation.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/resourceId",
+          "description": "Operation ID",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Operation status"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PagedIteration": {
+      "type": "object",
+      "description": "Paged collection of Iteration items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Iteration items on this page",
+          "items": {
+            "$ref": "#/definitions/Iteration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTranslation": {
+      "type": "object",
+      "description": "Paged collection of Translation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Translation items on this page",
+          "items": {
+            "$ref": "#/definitions/Translation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "Task status.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Not started status"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running status"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Run succeeded status"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Run failed status"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Cancelled status"
+          }
+        ]
+      }
+    },
+    "Translation": {
+      "type": "object",
+      "description": "Create translation resource for hosting iterations of translating one video file from source locale to target locale.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/resourceId",
+          "description": "Translation resource ID.",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/TranslationInput",
+          "description": "Translation input."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Translation display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Translation description."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "latestIteration": {
+          "$ref": "#/definitions/Iteration",
+          "description": "Latest iteration of the translation.",
+          "readOnly": true
+        },
+        "latestSucceededIteration": {
+          "$ref": "#/definitions/Iteration",
+          "description": "Latest completed iteration of the translation.",
+          "readOnly": true
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "Translation failure reason",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "input"
+      ]
+    },
+    "TranslationInput": {
+      "type": "object",
+      "description": "Translation input.",
+      "properties": {
+        "sourceLocale": {
+          "$ref": "#/definitions/localeName",
+          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts , if not specified, the source locale will be auto-detected from the video file, the auto detect is only supported after version 2025-05-20."
+        },
+        "targetLocale": {
+          "$ref": "#/definitions/localeName",
+          "description": "The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts."
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VoiceKind",
+          "description": "Translation voice kind."
+        },
+        "videoFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translation video file Azure blob url, .mp4 file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "audioFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translation audio file Azure blob url, .mp3 or .wav file format, maxmum 5GB file size and 4 hours video duration. Provide the input media file using either videoFileUrl or audioFileUrl, these parameters are mutually exclusive—only one of them is required. If both are provided, the request will be considered invalid."
+        },
+        "speakerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of speakers in the video, if not provided, it will be auto-detected from the video file."
+        },
+        "enableLipSync": {
+          "type": "boolean",
+          "description": "Indicate whether to enable lip sync, if not provided, the default value is false to disable the lip sync."
+        },
+        "subtitleMaxCharCountPerSegment": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Subtitle max display character count per segment, if not provided, it will use the language dependent default value."
+        },
+        "exportSubtitleInVideo": {
+          "type": "boolean",
+          "description": "Export subtitle in video, if not specified, the default value is false, it will not burn subtitle to the translated video file."
+        }
+      },
+      "required": [
+        "targetLocale",
+        "voiceKind"
+      ]
+    },
+    "VoiceKind": {
+      "type": "string",
+      "description": "TTS voice kind.",
+      "enum": [
+        "PlatformVoice",
+        "PersonalVoice"
+      ],
+      "x-ms-enum": {
+        "name": "VoiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlatformVoice",
+            "value": "PlatformVoice",
+            "description": "TTS platform voice"
+          },
+          {
+            "name": "PersonalVoice",
+            "value": "PersonalVoice",
+            "description": "TTS personal voice"
+          }
+        ]
+      }
+    },
+    "WebvttFile": {
+      "type": "object",
+      "description": "Translation webvtt file.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Translation webvtt file url."
+        },
+        "kind": {
+          "$ref": "#/definitions/WebvttFileKind",
+          "description": "Translation webvtt file kind."
+        }
+      },
+      "required": [
+        "url",
+        "kind"
+      ]
+    },
+    "WebvttFileKind": {
+      "type": "string",
+      "description": "Webvtt file kind.",
+      "enum": [
+        "SourceLocaleSubtitle",
+        "TargetLocaleSubtitle",
+        "MetadataJson"
+      ],
+      "x-ms-enum": {
+        "name": "WebvttFileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SourceLocaleSubtitle",
+            "value": "SourceLocaleSubtitle",
+            "description": "Source locale plain text subtitle webvtt file"
+          },
+          {
+            "name": "TargetLocaleSubtitle",
+            "value": "TargetLocaleSubtitle",
+            "description": "Target locale plain text subtitle webvtt file"
+          },
+          {
+            "name": "MetadataJson",
+            "value": "MetadataJson",
+            "description": "Target locale metadata JSON webvtt file"
+          }
+        ]
+      }
+    },
+    "localeName": {
+      "type": "string",
+      "description": "Locale name, for example: en-US",
+      "minLength": 5,
+      "maxLength": 16,
+      "pattern": "^[A-Za-z]{2,4}([_-][A-Za-z]{4})?([_-]([A-Za-z]{2}|[0-9]{3}))?$"
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "Resource ID",
+      "minLength": 3,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+    },
+    "rgbaColor": {
+      "type": "string",
+      "description": "The value should be provided in the format <rr><gg><bb>, #<rr><gg><bb>, <rr><gg><bb><aa> or #<rr><gg><bb><aa>, where <rr> represents the red component of the color, <gg> represents the green component, <bb> represents the blue component, <aa> represents the alpha component. For example, EBA205 or #EBA205  would set the subtitle color to a specific shade of yellow.",
+      "minLength": 6,
+      "maxLength": 9,
+      "pattern": "^#?(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdHeader": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "Operation ID.",
+      "required": true,
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
+    }
+  }
+}
