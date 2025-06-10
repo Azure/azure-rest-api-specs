@@ -75,7 +75,7 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(getKeys, "ListKeyProperties", "go");
 @@clientName(getKeyVersions, "ListKeyPropertiesVersions", "go");
 
-// renaming Keytem to KeyProperties.
+// renaming KeyItem to KeyProperties.
 // renaming existing KeyProperties to something else
 // to avoid a naming conflict as it's not part of the public surface area
 @@clientName(KeyProperties, "ShouldNotGenerate", "go");
