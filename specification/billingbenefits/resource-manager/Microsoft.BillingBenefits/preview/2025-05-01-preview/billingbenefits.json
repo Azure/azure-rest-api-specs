@@ -545,7 +545,7 @@
     "/providers/Microsoft.BillingBenefits/validate": {
       "post": {
         "description": "Validate any benefit.",
-        "operationId": "ValidatePurchase",
+        "operationId": "Benefit_Validate",
         "tags": [
           "Savings plan",
           "Macc"
@@ -4514,6 +4514,9 @@
         "allowContributors": {
           "$ref": "#/definitions/AllowContributors"
         },
+        "hasMilestones": {
+          "$ref": "#/definitions/HasMilestones"
+        },
         "primaryUri": {
           "$ref": "#/definitions/ResourceUri",
           "description": "Fully-qualified identifier of the primary MACC."
@@ -4635,6 +4638,11 @@
       "default": false,
       "description": "Setting this to true means multi-entity."
     },
+    "HasMilestones": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set to true by default if there are milestones in the MACC. Setting this to false indicates removal of milestones from MACC."
+    },
     "MaccSystemId": {
       "type": "string",
       "description": "This is the globally unique identifier of the MACC which will not change for the lifetime of the MACC."
@@ -4725,6 +4733,9 @@
         },
         "displayName": {
           "$ref": "#/definitions/DisplayName"
+        },
+        "hasMilestones": {
+          "$ref": "#/definitions/HasMilestones"
         },
         "milestones": {
           "type": "array",
