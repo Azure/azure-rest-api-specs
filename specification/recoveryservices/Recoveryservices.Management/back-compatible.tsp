@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
@@ -16,7 +16,7 @@ using Microsoft.RecoveryServices;
 @@clientName(VaultExtendedInfoResources.update::parameters.properties,
   "resourceResourceExtendedInfoDetails"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VaultExtendedInfoResource.properties);
 @@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
   "input"
