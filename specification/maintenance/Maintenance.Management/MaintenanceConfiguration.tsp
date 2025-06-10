@@ -46,14 +46,14 @@ interface MaintenanceConfigurations {
   /**
    * Get Public Maintenance Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicMaintenanceConfigurations_Get")
   get is MaintenanceConfigurationOps.Read<MaintenanceConfiguration>;
 
   /**
    * Get Public Maintenance Configuration records
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("publicMaintenanceConfigurations")
   @operationId("PublicMaintenanceConfigurations_List")
   list is MaintenanceConfigurationOps.List<
@@ -84,21 +84,21 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MaintenanceConfigurations_Get")
   get is MaintenanceConfigurationOperationGroupOps.Read<MaintenanceConfiguration>;
 
   /**
    * Create or Update configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MaintenanceConfigurations_CreateOrUpdate")
   createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<MaintenanceConfiguration>;
 
   /**
    * Patch configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("MaintenanceConfigurations_Update")
   update is MaintenanceConfigurationOperationGroupOps.CustomPatchSync<
@@ -109,7 +109,7 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Delete Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MaintenanceConfigurations_Delete")
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
@@ -119,7 +119,7 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MaintenanceConfigurationsForResourceGroup_List")
   @segment("maintenanceConfigurations")
   list is MaintenanceConfigurationOperationGroupOps.List<
@@ -130,7 +130,7 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration records within a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MaintenanceConfigurations_List")
   @segment("maintenanceConfigurations")
   maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ResourceListByParent<

@@ -75,11 +75,11 @@ union Visibility {
  */
 union RebootOptions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IfRequired: "IfRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Never: "Never",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Always: "Always",
 }
 
@@ -160,7 +160,7 @@ union ImpactType {
 /**
  * Filter VMs by Any or All specified tags.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TagOperators {
   All,
   Any,
@@ -223,7 +223,7 @@ model ListMaintenanceConfigurationsResult {
 /**
  * Properties for maintenance configuration
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MaintenanceConfigurationProperties {
   /**
    * Gets or sets namespace of the resource
@@ -233,7 +233,7 @@ model MaintenanceConfigurationProperties {
   /**
    * Gets or sets extensionProperties of the maintenanceConfiguration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionProperties?: Record<string>;
 
   /**
@@ -244,7 +244,7 @@ model MaintenanceConfigurationProperties {
   /**
    * Definition of a MaintenanceWindow
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maintenanceWindow?: MaintenanceWindow;
 
   /**
@@ -385,7 +385,7 @@ model Resource {
 /**
  * Properties for apply update
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplyUpdateProperties {
   /**
    * The status
@@ -407,7 +407,7 @@ model ApplyUpdateProperties {
 /**
  * Properties for configuration assignment
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConfigurationAssignmentProperties {
   /**
    * The maintenance configuration Id
@@ -462,7 +462,7 @@ model TagSettingsProperties {
   /**
    * Dictionary of tags with its list of values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string[]>;
 
   /**
@@ -584,7 +584,7 @@ model Update {
   /**
    * Properties of the apply update
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: UpdateProperties;
 }
 

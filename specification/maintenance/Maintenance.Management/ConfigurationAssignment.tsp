@@ -13,8 +13,8 @@ namespace Microsoft.Maintenance;
 /**
  * Configuration Assignment
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(
   ConfigurationAssignmentProperties
 )
@@ -30,13 +30,13 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
   /**
    * Location of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
    * Properties of the configuration assignment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: ConfigurationAssignmentProperties;
 }
@@ -152,21 +152,21 @@ interface ConfigurationAssignmentOperationGroup {
   /**
    * Get configuration assignment for resource..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationAssignments_Get")
   get is ConfigurationAssignmentOperationGroupOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationAssignments_CreateOrUpdate")
   createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Unregister configuration for resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationAssignments_Delete")
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
@@ -222,7 +222,7 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * [UNSUPPORTED] Get configuration assignment within a subscription. This API is not implemented yet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationAssignmentsWithinSubscription_List")
   list is ConfigurationAssignmentsForSubscriptionOps.List<
     ConfigurationAssignment,
