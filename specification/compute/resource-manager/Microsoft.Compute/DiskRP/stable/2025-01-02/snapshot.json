@@ -96,6 +96,9 @@
           },
           "Create a snapshot from an existing snapshot in the same or a different subscription in a different region with quicker copy speed.": {
             "$ref": "./examples/snapshotExamples/Snapshot_Create_EnhancedProvisionedBandwidthCopySpeed.json"
+          },
+          "Create a snapshot which can be instantly accessable.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_InstantAccessSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -607,6 +610,10 @@
         },
         "dataAccessAuthMode": {
           "$ref": "./diskRPCommon.json#/definitions/DataAccessAuthMode"
+        },
+        "snapshotAccessState": {
+          "$ref": "./diskRPCommon.json#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         }
       },
       "required": [
@@ -661,6 +668,10 @@
         "supportedCapabilities": {
           "$ref": "./diskRPCommon.json#/definitions/SupportedCapabilities",
           "description": "List of supported capabilities for the image from which the OS disk was created."
+        },
+        "snapshotAccessState": {
+          "$ref": "./diskRPCommon.json#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot."
         }
       },
       "description": "Snapshot resource update properties."

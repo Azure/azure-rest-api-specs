@@ -156,6 +156,9 @@
           },
           "Create a managed disk from elastic san volume snapshot.": {
             "$ref": "./examples/diskExamples/Disk_Create_FromAnElasticSanVolumeSnapshot.json"
+          },
+          "Create a managed disk with availability policy.": {
+            "$ref": "./examples/diskExamples/Disk_CreateOrUpdate_AvailabilityPolicy.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -781,6 +784,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started."
+        },
+        "availabilityPolicy": {
+          "$ref": "./diskRPCommon.json#/definitions/AvailabilityPolicy",
+          "description": "Determines how platform treats disk failures"
         }
       },
       "required": [
@@ -881,6 +888,10 @@
         "optimizedForFrequentAttach": {
           "type": "boolean",
           "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
+        },
+        "availabilityPolicy": {
+          "$ref": "./diskRPCommon.json#/definitions/AvailabilityPolicy",
+          "description": "Determines how platform treats disk failures"
         }
       },
       "description": "Disk resource update properties."

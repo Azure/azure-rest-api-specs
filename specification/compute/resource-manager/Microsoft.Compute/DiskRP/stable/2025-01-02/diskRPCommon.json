@@ -386,6 +386,11 @@
             "modelAsString": true
           }
         },
+        "instantAccessDurationMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "“For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore."
+        },
         "securityMetadataUri": {
           "type": "string",
           "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM."
@@ -652,6 +657,72 @@
           {
             "value": "None",
             "description": "No additional authentication would be performed when accessing export/upload URL."
+          }
+        ]
+      }
+    },
+    "AvailabilityPolicy": {
+      "type": "object",
+      "properties": {
+        "actionOnDiskDelay": {
+          "type": "string",
+          "description": "Determines on how to handle disks with slow I/O.",
+          "enum": [
+            "None",
+            "AutomaticReattach"
+          ],
+          "x-ms-enum": {
+            "name": "AvailabilityPolicyDiskDelay",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Defaults to behavior without av policy specified, which is VM restart upon slow disk io.."
+              },
+              {
+                "value": "AutomaticReattach",
+                "description": "Upon a disk io failure or slow response, try detaching then reattaching the disk."
+              }
+            ]
+          }
+        }
+      },
+      "description": "In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM"
+    },
+    "SnapshotAccessState": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
           }
         ]
       }
