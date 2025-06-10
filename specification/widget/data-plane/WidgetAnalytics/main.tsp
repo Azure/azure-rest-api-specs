@@ -23,6 +23,10 @@ enum Versions {
   @doc("The 2022-12-01 version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_12_01: "2022-12-01",
+
+  @doc("The 2023-12-01 version.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_12_01: "2023-12-01",
 }
 
 @doc("A widget.")
