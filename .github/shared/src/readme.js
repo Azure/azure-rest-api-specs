@@ -12,6 +12,11 @@ import { Tag } from "./tag.js";
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
+/**
+ * Regex to match tag names in readme.md yaml code blocks
+ */
+export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
+
 export class Readme {
   /**
    * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
@@ -117,8 +122,7 @@ export class Readme {
       /** @type {Map<string, Tag>} */
       const tags = new Map();
       for (const block of yamlBlocks) {
-        const tagName =
-          block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
+        const tagName = block.lang?.match(TagMatchRegex)?.[2] || "default";
 
         if (tagName === "default" || tagName === "all-api-versions") {
           // Skip yaml blocks where this is no tag or tag is all-api-versions

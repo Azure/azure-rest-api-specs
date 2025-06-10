@@ -86,7 +86,6 @@
       },
       "required": [
         "communicationIdentifier",
-        "type",
         "name"
       ]
     },
@@ -3127,10 +3126,7 @@
           "description": "Timestamp when the gateway token has expired.",
           "x-ms-client-name": "expiresOn"
         }
-      },
-      "required": [
-        "expiredAtUtc"
-      ]
+      }
     },
     "ApiManagementGatewayApiAddedEventData": {
       "type": "object",
@@ -3310,10 +3306,7 @@
           "description": "Timestamp when the gateway token will expire.",
           "x-ms-client-name": "expiresOn"
         }
-      },
-      "required": [
-        "expiredAtUtc"
-      ]
+      }
     },
     "ApiManagementProductCreatedEventData": {
       "type": "object",
@@ -3912,7 +3905,8 @@
         "unknown",
         "communicationUser",
         "phoneNumber",
-        "microsoftTeamsUser"
+        "microsoftTeamsUser",
+        "microsoftTeamsApp"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -3937,6 +3931,11 @@
             "name": "microsoftTeamsUser",
             "value": "microsoftTeamsUser",
             "description": "Microsoft Teams User"
+          },
+          {
+            "name": "microsoftTeamsApp",
+            "value": "microsoftTeamsApp",
+            "description": "Microsoft Teams App"
           }
         ]
       }
@@ -4912,8 +4911,7 @@
       "properties": {
         "fileUrl": {
           "type": "string",
-          "description": "The path to the capture file.",
-          "x-ms-client-name": "fileurl"
+          "description": "The path to the capture file."
         },
         "fileType": {
           "type": "string",
@@ -8768,8 +8766,7 @@
         "summaryReportBlobUrl": {
           "type": "string",
           "format": "uri",
-          "description": "The summary report blob url for a storage task",
-          "x-ms-client-name": "summaryReportBlobUri"
+          "description": "The summary report blob url for a storage task"
         }
       },
       "required": [
