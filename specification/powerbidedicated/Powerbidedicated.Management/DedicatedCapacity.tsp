@@ -14,8 +14,8 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of a Dedicated Capacity resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(DedicatedCapacityProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model DedicatedCapacity
@@ -30,10 +30,10 @@ model DedicatedCapacity
   /**
    * The SKU of the PowerBI Dedicated capacity resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: CapacitySku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties: DedicatedCapacityProperties;
@@ -59,7 +59,7 @@ interface Capacities {
   /**
    * Updates the current state of the specified Dedicated capacity.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DedicatedCapacity,
@@ -74,7 +74,7 @@ interface Capacities {
   /**
    * Deletes the specified Dedicated capacity.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedCapacity,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

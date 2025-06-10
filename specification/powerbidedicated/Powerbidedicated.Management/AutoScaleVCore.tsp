@@ -13,9 +13,9 @@ namespace Microsoft.PowerBIDedicated;
 /**
  * Represents an instance of an auto scale v-core resource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(AutoScaleVCoreProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
@@ -29,16 +29,16 @@ model AutoScaleVCore extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * The SKU of the auto scale v-core resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: AutoScaleVCoreSku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties: AutoScaleVCoreProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AutoScaleVCores {
   /**
@@ -49,7 +49,7 @@ interface AutoScaleVCores {
   /**
    * Provisions the specified auto scale v-core based on the configuration specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<
     AutoScaleVCore,
     Response = ArmResourceUpdatedResponse<AutoScaleVCore>,
