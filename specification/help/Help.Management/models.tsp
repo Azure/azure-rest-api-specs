@@ -15,7 +15,7 @@ namespace Microsoft.Help;
  */
 @doc("The default resourceUri parameter type.")
 model ScopeParameter {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The fully qualified Azure Resource manager identifier of the resource.")
   @Azure.ResourceManager.Private.resourceParameterBaseFor(
     [Azure.ResourceManager.CommonTypes.ResourceHome.Extension]
@@ -31,7 +31,7 @@ model ScopeParameter {
 model ScopeParameters<Resource extends {}> {
   ...ApiVersionParameter;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path(#{ allowReserved: true })
   @doc("The fully qualified Azure Resource manager identifier of the resource.")
   @Azure.ResourceManager.Private.resourceParameterBaseFor(
