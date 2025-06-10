@@ -46,35 +46,12 @@ npx tsp compile .
 3. For warnings that appear during the compilation process, you need to categorize the warnings according to the warning types from the previously removed global suppressions and add inline suppressions in the corresponding TypeSpec files. The format for inline suppressions is as follows:
 
 ```typespec
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility with existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @operationId("WebPubSubCustomDomains_Get")
 get is ArmResourceRead<CustomDomain>;
 ```
 
-Note that inline suppressions need to be placed above the relevant code, especially above all decorators. You cannot intermix #suppress with decorators, as this will cause TypeSpec validation to fail. You also need to provide clear justification statements. The justification statement "For backward compatibility with existing API" in the example is a good justification. However, I hope you can provide more detailed and appropriate justification statements based on specific situations, rather than always using "For backward compatibility".
-
-Here are some commonly used justification templates that you can adjust based on actual situations or choose more appropriate justifications based on the specific warning context:
-
-#### Common Justification Templates
-
-1. **Backward Compatibility**
-   - `"For backward compatibility with existing API"`
-   - `"Can not change existing operationId for backward compatibility"`
-   - `"Can not change existing response codes for backward compatibility"`
-
-2. **Planned Fixes**
-   - `"MUST CHANGE ON NEXT UPDATE"`
-   - `"Will be fixed in next API version"`
-   - `"MUST REMOVE AT NEXT API VERSION UPDATE"`
-
-3. **Design Decisions**
-   - `"Existing service design, non-conforming operation"`
-   - `"This is an existing service pattern"`
-   - `"Required for this specific use case"`
-
-4. **Technical Limitations**
-   - `"This requires a breaking change in runtime API"`
-   - `"Breaking change required for proper fix"`
+Note that inline suppressions need to be placed above the relevant code, especially above all decorators. You cannot intermix #suppress with decorators, as this will cause TypeSpec validation to fail. You also need to provide clear justification statements. The justification statement "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details" in the example is a good justification. However, I hope you can provide more detailed and appropriate justification statements based on specific situations.
 
 4. After adding all inline suppressions, you need to check that all inline suppressions have clear justification statements. Note the two common error formats:
 
