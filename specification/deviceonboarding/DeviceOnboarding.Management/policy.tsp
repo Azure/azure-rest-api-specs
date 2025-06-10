@@ -250,6 +250,7 @@ model FdoPublicKey {
   @doc("x5Chain representation of the public key.")
   @visibility(Lifecycle.Read)
   default?: bytes[];
+
   // status: boolean; // To be added later.
 
   @added(Versions.v2025_05_01_preview)
