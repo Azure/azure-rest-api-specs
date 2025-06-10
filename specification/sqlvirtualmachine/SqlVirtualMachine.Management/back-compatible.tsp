@@ -6,7 +6,7 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(AvailabilityGroupListeners.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AvailabilityGroupListener.properties);
 
 @@clientName(SqlVirtualMachineGroups.createOrUpdate::parameters.resource,
@@ -15,7 +15,7 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(SqlVirtualMachineGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SqlVirtualMachineGroup.properties);
 
 @@clientName(SqlVirtualMachines.createOrUpdate::parameters.resource,
@@ -27,5 +27,5 @@ using Microsoft.SqlVirtualMachine;
 );
 @@clientName(SqlVirtualMachines.troubleshoot::parameters.body, "parameters");
 @@clientName(Operation, "Info", "csharp");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SqlVirtualMachine.properties);
