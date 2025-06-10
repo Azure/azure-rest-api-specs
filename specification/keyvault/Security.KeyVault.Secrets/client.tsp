@@ -34,7 +34,10 @@ op listSecretProperties is KeyVaultOperation<{}, SecretListResult>;
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
-op listDeletedSecretProperties is KeyVaultOperation<{}, DeletedSecretListResult>;
+op listDeletedSecretProperties is KeyVaultOperation<
+  {},
+  DeletedSecretListResult
+>;
 
 /**
  * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
@@ -46,7 +49,7 @@ op listDeletedSecretProperties is KeyVaultOperation<{}, DeletedSecretListResult>
 @get
 op listSecretPropertiesVersions is KeyVaultOperation<
   {
-     /**
+    /**
      * The name of the secret.
      */
     @path("secret-name")

@@ -70,7 +70,7 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @get
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
-     /**
+    /**
      * The name of the certificate.
      */
     @path("certificate-name")
