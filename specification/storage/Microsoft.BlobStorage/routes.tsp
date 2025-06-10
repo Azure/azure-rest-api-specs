@@ -1244,6 +1244,7 @@ namespace Storage.Blob {
           ...CopySourceAuthorizationParameter;
           ...EncryptionScopeParameter;
           ...CopySourceTagsParameter;
+          ...FileRequestIntentParameter;
         },
         {
           @statusCode statusCode: 202;
@@ -1565,6 +1566,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -1853,6 +1855,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -1994,6 +1997,7 @@ namespace Storage.Blob {
             /** The type of the blob. */
             @header("x-ms-blob-type")
             blobType: BlobType.BlockBlob;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2071,6 +2075,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;

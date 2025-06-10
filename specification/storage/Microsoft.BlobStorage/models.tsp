@@ -2173,3 +2173,19 @@ alias StructuredBodyParameter = {
   @header("x-ms-structured-body")
   structuredBodyType?: string;
 };
+
+/** The file share token intent types. */
+union FileShareTokenIntent {
+  /** The file share token intent is backup. */
+  Backup: "backup",
+
+  /** Extensible */
+  string,
+}
+
+alias FileRequestIntentParameter = {
+  /** Valid value is backup */
+  @header("x-ms-file-request-intent")
+  fileRequestIntent?: FileShareTokenIntent;
+};
+
