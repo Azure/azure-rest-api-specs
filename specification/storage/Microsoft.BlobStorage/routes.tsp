@@ -1395,7 +1395,6 @@ namespace Storage.Blob {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
             ...TimeoutParameter;
-            ...ContentLengthParameter;
 
             /** Optional. Indicates the tier to be set on the page blob. */
             @header("x-ms-access-tier")
@@ -1420,6 +1419,10 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyExpiryParameter;
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
+
+            /** the initial size of the page blob */
+            @header("Content-Length")
+            contentLength: 0;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
@@ -1736,7 +1739,6 @@ namespace Storage.Blob {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
             ...TimeoutParameter;
-            ...ContentLengthParameter;
             ...BlobContentTypeParameter;
             ...BlobContentEncodingParameter;
             ...BlobContentLanguageParameter;
@@ -1754,6 +1756,10 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyExpiryParameter;
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
+
+            /** the initial size of the append blob */
+            @header("Content-Length")
+            contentLength: 0;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
