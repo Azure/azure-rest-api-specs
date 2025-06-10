@@ -138,7 +138,7 @@ interface Zones {
   /**
    * Lists all record sets in a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("recordsets")
   @operationId("RecordSets_ListByDnsZone")
@@ -165,7 +165,7 @@ interface Zones {
   /**
    * Lists all record sets in a DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("all")
   @operationId("RecordSets_ListAllByDnsZone")

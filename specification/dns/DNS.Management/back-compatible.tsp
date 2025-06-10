@@ -18,25 +18,25 @@ using Microsoft.Network;
 @@clientName(RecordSetProperties.caaRecords, "CaaRecords");
 @@clientName(SoaRecord.minimumTTL, "minimumTtl");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DnsResourceReferenceRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DnsResourceReferenceResult.properties);
 
 @@clientName(RecordSetUpdateParameters.RecordSet, "recordSet");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DnssecConfig.properties);
 
 @@clientName(RecordSets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RecordSets.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RecordSet.properties);
 
 @@clientName(Zones.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Zones.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Zone.properties);
 @@visibility(DnssecConfig.properties, Lifecycle.Read);
 @@clientName(DnsResourceReferenceOperationGroup.getByTargetResources::parameters.body,
