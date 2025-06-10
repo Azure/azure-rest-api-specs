@@ -1,2 +1,13 @@
-This readme.md file is lacking a string. The lack of that string should exclude
-it from consideration.
+# Widget
+
+> see https://aka.ms/autorest
+> This is the AutoRest configuration file for Widget.
+
+## Configuration
+
+Required if any services under this folder are RPaaS.
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+```
