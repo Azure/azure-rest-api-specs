@@ -27,7 +27,7 @@ model NotificationHubResource
   /**
    * The Sku description for a namespace
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -36,21 +36,21 @@ interface NotificationHubResources {
   /**
    * Gets the notification hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NotificationHubs_Get")
   get is ArmResourceRead<NotificationHubResource>;
 
   /**
    * Creates/Update a NotificationHub in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NotificationHubs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationHubResource>;
 
   /**
    * Patch a NotificationHub in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("NotificationHubs_Update")
   update is ArmCustomPatchSync<
@@ -61,14 +61,14 @@ interface NotificationHubResources {
   /**
    * Deletes a notification hub associated with a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NotificationHubs_Delete")
   delete is ArmResourceDeleteSync<NotificationHubResource>;
 
   /**
    * Lists the notification hubs associated with a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NotificationHubs_List")
   list is ArmResourceListByParent<
     NotificationHubResource,
@@ -91,7 +91,7 @@ interface NotificationHubResources {
   /**
    * Test send a push notification.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("debugsend")
   @operationId("NotificationHubs_DebugSend")
   debugSend is ArmResourceActionSync<
@@ -103,7 +103,7 @@ interface NotificationHubResources {
   /**
    * Lists the PNS Credentials associated with a notification hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("pnsCredentials")
   @operationId("NotificationHubs_GetPnsCredentials")
   getPnsCredentials is ArmResourceActionSync<

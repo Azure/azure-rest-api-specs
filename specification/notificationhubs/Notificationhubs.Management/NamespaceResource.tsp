@@ -13,9 +13,9 @@ namespace Microsoft.NotificationHubs;
 /**
  * Notification Hubs Namespace Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(NamespaceProperties)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NamespaceResource extends Foundations.TrackedResource {
@@ -29,11 +29,11 @@ model NamespaceResource extends Foundations.TrackedResource {
   /**
    * The Sku description for a namespace
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The resource-specific properties for this resource.")
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: NamespaceProperties;
@@ -44,21 +44,21 @@ interface NamespaceResources {
   /**
    * Returns the given namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Get")
   get is ArmResourceRead<NamespaceResource>;
 
   /**
    * Creates / Updates a Notification Hub namespace. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NamespaceResource>;
 
   /**
    * Patches the existing namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Namespaces_Update")
   update is ArmCustomPatchSync<
@@ -69,14 +69,14 @@ interface NamespaceResources {
   /**
    * Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_Delete")
   delete is ArmResourceDeleteSync<NamespaceResource>;
 
   /**
    * Lists the available namespaces within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_List")
   list is ArmResourceListByParent<
     NamespaceResource,
@@ -99,7 +99,7 @@ interface NamespaceResources {
   /**
    * Lists all the available namespaces within the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Namespaces_ListAll")
   listAll is ArmListBySubscription<
     NamespaceResource,
@@ -122,7 +122,7 @@ interface NamespaceResources {
   /**
    * Checks the availability of the given notificationHub in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NotificationHubs_CheckNotificationHubAvailability")
   checkNotificationHubAvailability is ArmResourceActionSync<
     NamespaceResource,
@@ -133,7 +133,7 @@ interface NamespaceResources {
   /**
    * Lists the PNS credentials associated with a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("pnsCredentials")
   @operationId("Namespaces_GetPnsCredentials")
   getPnsCredentials is ArmResourceActionSync<
