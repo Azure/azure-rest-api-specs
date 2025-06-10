@@ -34,6 +34,12 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01: "2024-10-01",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v2_preview)
+  v2025_05_01: "2025-05-01",
 }
 
 @doc("Partner's specific Properties")
@@ -42,6 +48,11 @@ model PartnerProperties {
   @maxLength(200)
   @doc("Description of the Organization's purpose")
   description: string;
+
+  @doc("The URL of the partner's website")
+  @pattern("^(https?|ftp)://[a-zA-Z0-9\\-._~:/?#@!$&'()*+,;=]+$")
+  @maxLength(200)
+  websiteUrl?: string;
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
