@@ -1,0 +1,26 @@
+name: After APIView
+
+on:
+  workflow_dispatch:
+  check_run:
+    types: [completed]
+    
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  post-apiview:
+    name: After APIView
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: 'eng/common'
+    
+      - name: Test GitHub Search API
+        run: |
+          . "eng/common/scripts/Helpers/ApiView-Helpers.ps1"
+          Set-ApiViewCommentForRelatedIssues -HeadCommitish "f76ade73b5d491863ac5fc2228980091361e8b4a" -AuthToken ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
