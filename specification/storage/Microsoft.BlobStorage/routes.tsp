@@ -956,7 +956,12 @@ namespace Storage.Blob {
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
         },
-        {}
+        {
+          ...EtagResponseHeader;
+          ...LastModifiedResponseHeader;
+          ...BlobSequenceNumberResponseHeader;
+          ...DateResponseHeader;
+        }
       >;
 
       /** Set the immutability policy of a blob */
