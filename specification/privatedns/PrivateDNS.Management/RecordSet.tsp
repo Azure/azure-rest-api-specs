@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./PrivateZone.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -43,11 +42,12 @@ model RecordSet extends Foundations.ProxyResource {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecordSetOperationOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * The name of the DNS zone (without a terminating dot).
@@ -68,11 +68,12 @@ interface RecordSetOperationOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecordSetOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * The name of the DNS zone (without a terminating dot).
@@ -91,7 +92,7 @@ interface RecordSetOps
         /**
          * The name of the record set, relative to the name of the zone.
          */
-        @path
+        @path(#{ allowReserved: true })
         relativeRecordSetName: string,
       },
       CloudError
@@ -102,13 +103,11 @@ interface RecordSets {
   /**
    * Gets a record set.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   get is RecordSetOps.Read<RecordSet>;
 
   /**
    * Creates or updates a record set within a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   createOrUpdate is RecordSetOps.CreateOrUpdateSync<
     RecordSet,
     Parameters = {
@@ -131,7 +130,6 @@ interface RecordSets {
   /**
    * Updates a record set within a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   @patch(#{ implicitOptionality: false })
   update is RecordSetOps.CustomPatchAsync<
     RecordSet,
@@ -150,7 +148,6 @@ interface RecordSets {
   /**
    * Deletes a record set from a Private DNS zone. This operation cannot be undone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   delete is RecordSetOps.DeleteSync<
     RecordSet,
     Parameters = {
@@ -166,7 +163,6 @@ interface RecordSets {
   /**
    * Lists the record sets of a specified type in a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}")
   listByType is RecordSetOperationOps.Read<
     RecordSet,
     Parameters = {
