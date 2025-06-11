@@ -78,6 +78,10 @@ suppressions:
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
 ```
 
 ### Tag: package-2025-04-01
