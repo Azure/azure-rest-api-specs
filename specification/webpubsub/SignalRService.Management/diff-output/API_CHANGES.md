@@ -61,12 +61,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}'].put.consumes__deleted` | deleted | `["application/json","text/json"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}'].put.consumes__deleted` | deleted | `["application/json","text/json"]` |
 
-### Changes for `schema`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/regenerateKey'].post.responses.202.schema__deleted` | deleted | `{"$ref":"#/definitions/WebPubSubKeys"}` |
-
 ### Changes for `x-ms-long-running-operation-options`
 
 | Path | Change Type | Value |

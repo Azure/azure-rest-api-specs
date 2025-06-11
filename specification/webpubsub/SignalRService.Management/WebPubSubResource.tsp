@@ -138,11 +138,22 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_RegenerateKey")
-  regenerateKey is ArmResourceActionAsync<
-    WebPubSubResource,
-    RegenerateKeyParameters,
-    Response = WebPubSubKeys
-  >;
+  @post
+  @action("regenerateKey")
+  @armResourceAction(WebPubSubResource)
+  regenerateKey(
+    ...ResourceInstanceParameters<
+      WebPubSubResource,
+      Azure.ResourceManager.Foundations.BaseParameters<WebPubSubResource>
+    >,
+    @bodyRoot body: RegenerateKeyParameters,
+  ): {
+    @statusCode statusCode: 200;
+    @body body: WebPubSubKeys;
+  } | (ArmAcceptedLroResponse & {
+    @bodyRoot
+    _: WebPubSubKeys;
+  }) | ErrorResponse;
 
   /**
    * Operation to restart a resource.
