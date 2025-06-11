@@ -4642,8 +4642,7 @@
         },
         "vmSize": {
           "type": "string",
-          "title": "The size of the agent pool VMs.",
-          "description": "VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
+          "description": "The size of the agent pool VMs. VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
         },
         "osDiskSizeGB": {
           "$ref": "#/definitions/ContainerServiceOSDisk"
@@ -4659,8 +4658,7 @@
         },
         "messageOfTheDay": {
           "type": "string",
-          "title": "Message of the day for Linux nodes, base64-encoded.",
-          "description": "A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It must not be specified for Windows nodes. It must be a static string (i.e., will be printed raw and not be executed as a script)."
+          "description": "Message of the day for Linux nodes, base64-encoded. A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It must not be specified for Windows nodes. It must be a static string (i.e., will be printed raw and not be executed as a script)."
         },
         "vnetSubnetID": {
           "type": "string",
@@ -4672,8 +4670,7 @@
               }
             ]
           },
-          "title": "The ID of the subnet which agent pool nodes and optionally pods will join on startup.",
-          "description": "If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+          "description": "The ID of the subnet which agent pool nodes and optionally pods will join on startup. If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
         "podSubnetID": {
           "type": "string",
@@ -4685,8 +4682,7 @@
               }
             ]
           },
-          "title": "The ID of the subnet which pods will join when launched.",
-          "description": "If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+          "description": "The ID of the subnet which pods will join when launched. If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
         "podIPAllocationMode": {
           "$ref": "#/definitions/PodIPAllocationMode"
@@ -4718,8 +4714,7 @@
         },
         "scaleDownMode": {
           "$ref": "#/definitions/ScaleDownMode",
-          "title": "The scale down mode to use when scaling the Agent Pool.",
-          "description": "This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete."
+          "description": "The scale down mode to use when scaling the Agent Pool. This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete."
         },
         "type": {
           "$ref": "#/definitions/AgentPoolType"
@@ -4729,14 +4724,12 @@
         },
         "orchestratorVersion": {
           "type": "string",
-          "title": "The version of Kubernetes specified by the user.",
-          "description": "Both patch version <major.minor.patch> and <major.minor> are supported. When <major.minor> is specified, the latest supported patch version is chosen automatically. Updating the agent pool with the same <major.minor> once it has been created will not trigger an upgrade, even if a newer patch version is available. As a best practice, you should upgrade all node pools in an AKS cluster to the same Kubernetes version. The node pool version must have the same major version as the control plane. The node pool minor version must be within two minor versions of the control plane version. The node pool version cannot be greater than the control plane version. For more information see [upgrading a node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool)."
+          "description": "The version of Kubernetes specified by the user. Both patch version <major.minor.patch> and <major.minor> are supported. When <major.minor> is specified, the latest supported patch version is chosen automatically. Updating the agent pool with the same <major.minor> once it has been created will not trigger an upgrade, even if a newer patch version is available. As a best practice, you should upgrade all node pools in an AKS cluster to the same Kubernetes version. The node pool version must have the same major version as the control plane. The node pool minor version must be within two minor versions of the control plane version. The node pool version cannot be greater than the control plane version. For more information see [upgrading a node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool)."
         },
         "currentOrchestratorVersion": {
           "readOnly": true,
           "type": "string",
-          "title": "The version of Kubernetes running on the Agent Pool.",
-          "description": "If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
+          "description": "The version of Kubernetes running on the Agent Pool. If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
         },
         "nodeImageVersion": {
           "readOnly": true,
@@ -4753,8 +4746,7 @@
           "description": "The current deployment or provisioning state."
         },
         "powerState": {
-          "title": "Whether the Agent Pool is running or stopped.",
-          "description": "When an Agent Pool is first created it is initially Running. The Agent Pool can be stopped by setting this field to Stopped. A stopped Agent Pool stops all of its VMs and does not accrue billing charges. An Agent Pool can only be stopped if it is Running and provisioning state is Succeeded",
+          "description": "Whether the Agent Pool is running or stopped. When an Agent Pool is first created it is initially Running. The Agent Pool can be stopped by setting this field to Stopped. A stopped Agent Pool stops all of its VMs and does not accrue billing charges. An Agent Pool can only be stopped if it is Running and provisioning state is Succeeded",
           "$ref": "#/definitions/PowerState"
         },
         "availabilityZones": {
@@ -4766,13 +4758,11 @@
         },
         "enableNodePublicIP": {
           "type": "boolean",
-          "title": "Whether each node is allocated its own public IP.",
-          "description": "Some scenarios may require nodes in a node pool to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. For more information see [assigning a public IP per node](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#assign-a-public-ip-per-node-for-your-node-pools). The default is false."
+          "description": "Whether each node is allocated its own public IP. Some scenarios may require nodes in a node pool to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. For more information see [assigning a public IP per node](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#assign-a-public-ip-per-node-for-your-node-pools). The default is false."
         },
         "enableCustomCATrust": {
           "type": "boolean",
-          "title": "Whether to enable Custom CA Trust feature.",
-          "description": "When set to true, AKS adds a label to the node indicating that the feature is enabled and deploys a daemonset along with host services to sync custom certificate authorities from user-provided list of base64 encoded certificates into node trust stores. Defaults to false."
+          "description": "Whether to enable Custom CA Trust feature. When set to true, AKS adds a label to the node indicating that the feature is enabled and deploys a daemonset along with host services to sync custom certificate authorities from user-provided list of base64 encoded certificates into node trust stores. Defaults to false."
         },
         "nodePublicIPPrefixID": {
           "type": "string",
@@ -4784,8 +4774,7 @@
               }
             ]
           },
-          "title": "The public IP prefix ID which VM nodes should use IPs from.",
-          "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
+          "description": "The public IP prefix ID which VM nodes should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
         },
         "scaleSetPriority": {
           "$ref": "#/definitions/ScaleSetPriority",
@@ -4793,13 +4782,11 @@
         },
         "scaleSetEvictionPolicy": {
           "$ref": "#/definitions/ScaleSetEvictionPolicy",
-          "title": "The Virtual Machine Scale Set eviction policy to use.",
-          "description": "This cannot be specified unless the scaleSetPriority is 'Spot'. If not specified, the default is 'Delete'."
+          "description": "The Virtual Machine Scale Set eviction policy to use. This cannot be specified unless the scaleSetPriority is 'Spot'. If not specified, the default is 'Delete'."
         },
         "spotMaxPrice": {
           "$ref": "#/definitions/SpotMaxPrice",
-          "title": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand.",
-          "description": "Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)"
+          "description": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)"
         },
         "tags": {
           "type": "object",
@@ -4827,8 +4814,7 @@
           "items": {
             "type": "string"
           },
-          "title": "Taints added on the nodes during creation that will not be reconciled by AKS.",
-          "description": "These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`"
+          "description": "Taints added on the nodes during creation that will not be reconciled by AKS. These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`"
         },
         "proximityPlacementGroupID": {
           "$ref": "#/definitions/ProximityPlacementGroupID",
@@ -4844,8 +4830,7 @@
         },
         "enableEncryptionAtHost": {
           "type": "boolean",
-          "title": "Whether to enable host based OS and data drive encryption.",
-          "description": "This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption"
+          "description": "Whether to enable host based OS and data drive encryption. This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption"
         },
         "enableUltraSSD": {
           "type": "boolean",
@@ -4853,8 +4838,7 @@
         },
         "enableFIPS": {
           "type": "boolean",
-          "title": "Whether to use a FIPS-enabled OS.",
-          "description": "See [Add a FIPS-enabled node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview) for more details."
+          "description": "Whether to use a FIPS-enabled OS. See [Add a FIPS-enabled node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview) for more details."
         },
         "gpuInstanceProfile": {
           "$ref": "#/definitions/GPUInstanceProfile",
@@ -4878,8 +4862,7 @@
               }
             ]
           },
-          "title": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set.",
-          "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
+          "description": "The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts)."
         },
         "windowsProfile": {
           "$ref": "#/definitions/AgentPoolWindowsProfile",
@@ -5029,8 +5012,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "title": "Unique name of the agent pool profile in the context of the subscription and resource group.",
-          "description": "Windows agent pool names must be 6 characters or less.",
+          "description": "Unique name of the agent pool profile in the context of the subscription and resource group. Windows agent pool names must be 6 characters or less.",
           "pattern": "^[a-z][a-z0-9]{0,11}$"
         }
       },
@@ -5101,8 +5083,7 @@
           }
         ]
       },
-      "title": "The mode of an agent pool.",
-      "description": "A cluster must have at least one 'System' Agent Pool at all times. For additional information on agent pool restrictions and best practices, see: https://docs.microsoft.com/azure/aks/use-system-pools"
+      "description": "The mode of an agent pool. A cluster must have at least one 'System' Agent Pool at all times. For additional information on agent pool restrictions and best practices, see: https://docs.microsoft.com/azure/aks/use-system-pools"
     },
     "AgentPoolListResult": {
       "type": "object",
@@ -5127,34 +5108,29 @@
       "properties": {
         "maxSurge": {
           "type": "string",
-          "title": "The maximum number or percentage of nodes that are surged during upgrade.",
-          "description": "This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
+          "description": "The maximum number or percentage of nodes that are surged during upgrade. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
         },
         "maxUnavailable": {
           "type": "string",
-          "title": "The maximum number or percentage of nodes that can be simultaneously unavailable during upgrade.",
-          "description": "This can either be set to an integer (e.g. '1') or a percentage (e.g. '5%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 0. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
+          "description": "The maximum number or percentage of nodes that can be simultaneously unavailable during upgrade. This can either be set to an integer (e.g. '1') or a percentage (e.g. '5%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 0. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
         },
         "maxBlockedNodes": {
           "type": "string",
-          "title": "The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon.",
-          "description": "This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
+          "description": "The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
         },
         "drainTimeoutInMinutes": {
           "type": "integer",
           "format": "int32",
           "maximum": 1440,
           "minimum": 1,
-          "title": "The drain timeout for a node",
-          "description": "The amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes."
+          "description": "The drain timeout for a node. The amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes."
         },
         "nodeSoakDurationInMinutes": {
           "type": "integer",
           "format": "int32",
           "maximum": 30,
           "minimum": 0,
-          "title": "The soak duration for a node",
-          "description": "The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes."
+          "description": "The soak duration for a node. The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes."
         },
         "undrainableNodeBehavior": {
           "type": "string",
@@ -5292,8 +5268,7 @@
         "portalFqdn": {
           "readOnly": true,
           "type": "string",
-          "title": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients.",
-          "description": "The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
+          "description": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
         },
         "defaultResourceQuota": {
           "description": "The default resource quota enforced upon the namespace. Customers can have other Kubernetes resource quota objects under the namespace. All the resource quotas will be enforced.",
@@ -5556,8 +5531,7 @@
               }
             ]
           },
-          "title": "The ID of the subnet which node and optionally pods will join on startup.",
-          "description": "If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+          "description": "The ID of the subnet which node and optionally pods will join on startup. If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
         "podSubnetID": {
           "type": "string",
@@ -5569,13 +5543,11 @@
               }
             ]
           },
-          "title": "The ID of the subnet which pods will join when launched.",
-          "description": "If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
+          "description": "The ID of the subnet which pods will join when launched. If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
         "enableNodePublicIP": {
           "type": "boolean",
-          "title": "Whether the machine is allocated its own public IP.",
-          "description": "Some scenarios may require the machine to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. The default is false."
+          "description": "Whether the machine is allocated its own public IP. Some scenarios may require the machine to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. The default is false."
         },
         "nodePublicIPPrefixID": {
           "type": "string",
@@ -5587,8 +5559,7 @@
               }
             ]
           },
-          "title": "The public IP prefix ID which VM node should use IPs from.",
-          "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
+          "description": "The public IP prefix ID which VM node should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
         },
         "nodePublicIPTags": {
           "$ref": "#/definitions/NodePublicIPTags",
@@ -5636,8 +5607,7 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "title": "The size of the VM.",
-          "description": "VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
+          "description": "The size of the VM. VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
         },
         "gpuInstanceProfile": {
           "$ref": "#/definitions/GPUInstanceProfile",
@@ -5679,8 +5649,7 @@
             },
             "messageOfTheDay": {
               "type": "string",
-              "title": "Message of the day for Linux nodes, base64-encoded.",
-              "description": "A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It must not be specified for Windows nodes. It must be a static string (i.e., will be printed raw and not be executed as a script)."
+              "description": "Message of the day for Linux nodes, base64-encoded. A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It must not be specified for Windows nodes. It must be a static string (i.e., will be printed raw and not be executed as a script)."
             }
           }
         },
@@ -5703,14 +5672,12 @@
         },
         "orchestratorVersion": {
           "type": "string",
-          "title": "The version of Kubernetes specified by the user.",
-          "description": "Both patch version <major.minor.patch> and <major.minor> are supported. When <major.minor> is specified, the latest supported patch version is chosen automatically."
+          "description": "The version of Kubernetes specified by the user. Both patch version <major.minor.patch> and <major.minor> are supported. When <major.minor> is specified, the latest supported patch version is chosen automatically."
         },
         "currentOrchestratorVersion": {
           "readOnly": true,
           "type": "string",
-          "title": "The version of Kubernetes running on the machine.",
-          "description": "If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
+          "description": "The version of Kubernetes running on the machine. If orchestratorVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
         },
         "kubeletDiskType": {
           "$ref": "#/definitions/KubeletDiskType"
@@ -5724,8 +5691,7 @@
           "items": {
             "type": "string"
           },
-          "title": "Taints added on the node during creation that will not be reconciled by AKS.",
-          "description": "These taints will not be reconciled by AKS and can be removed with a kubectl call. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`"
+          "description": "Taints added on the node during creation that will not be reconciled by AKS. These taints will not be reconciled by AKS and can be removed with a kubectl call. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`"
         },
         "nodeTaints": {
           "type": "array",
@@ -5759,9 +5725,8 @@
       "properties": {
         "provisioningError": {
           "$ref": "#/definitions/CloudErrorBody",
-          "title": "The error details information of the machine.",
           "readOnly": true,
-          "description": "Preserves the detailed info of failure. If there was no error, this field is omitted."
+          "description": "The error details information of the machine. Preserves the detailed info of failure. If there was no error, this field is omitted."
         },
         "creationTimestamp": {
           "type": "string",
@@ -5770,13 +5735,12 @@
           "description": "Specifies the time at which the machine was created."
         },
         "driftAction": {
-          "description": "Indicates whether a machine has deviated from its expected state due to changes in managed cluster properties, requiring corrective action.",
+          "description": "The drift action of the machine. Indicates whether a machine has deviated from its expected state due to changes in managed cluster properties, requiring corrective action.",
           "readOnly": true,
           "enum": [
             "Synced",
             "Recreate"
           ],
-          "title": "The drift action of the machine.",
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
@@ -5794,19 +5758,17 @@
           }
         },
         "driftReason": {
-          "title": "Reason for machine drift",
           "type": "string",
           "readOnly": true,
-          "description": "Provides detailed information on why the machine has drifted. This field is omitted if the machine is up to date."
+          "description": "Reason for machine drift. Provides detailed information on why the machine has drifted. This field is omitted if the machine is up to date."
         },
         "vmState": {
-          "description": "Indicates the current state of the underlying virtual machine.",
+          "description": "Virtual machine state. Indicates the current state of the underlying virtual machine.",
           "readOnly": true,
           "enum": [
             "Running",
             "Deleted"
           ],
-          "title": "Virtual machine state.",
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
@@ -5883,8 +5845,7 @@
         },
         "enableCSIProxy": {
           "type": "boolean",
-          "title": "Whether to enable CSI proxy.",
-          "description": "For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy)."
+          "description": "Whether to enable CSI proxy. For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy)."
         },
         "gmsaProfile": {
           "$ref": "#/definitions/WindowsGmsaProfile",
@@ -5901,8 +5862,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "title": "Whether to enable Windows gMSA.",
-          "description": "Specifies whether to enable Windows gMSA in the managed cluster."
+          "description": "Whether to enable Windows gMSA. Specifies whether to enable Windows gMSA in the managed cluster."
         },
         "dnsServer": {
           "type": "string",
@@ -5979,8 +5939,7 @@
         },
         "networkMode": {
           "$ref": "#/definitions/NetworkMode",
-          "title": "The network mode Azure CNI is configured with.",
-          "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
+          "description": "The network mode Azure CNI is configured with. This cannot be specified if networkPlugin is anything other than 'azure'."
         },
         "networkDataplane": {
           "$ref": "#/definitions/NetworkDataplane",
@@ -6040,13 +5999,11 @@
             ]
           },
           "default": "loadBalancer",
-          "title": "The outbound (egress) routing method.",
-          "description": "This can only be set at cluster creation time and cannot be changed later. For more information see [egress outbound type](https://docs.microsoft.com/azure/aks/egress-outboundtype)."
+          "description": "The outbound (egress) routing method. This can only be set at cluster creation time and cannot be changed later. For more information see [egress outbound type](https://docs.microsoft.com/azure/aks/egress-outboundtype)."
         },
         "loadBalancerSku": {
           "$ref": "#/definitions/LoadBalancerSku",
-          "title": "The load balancer sku for the managed cluster.",
-          "description": "The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
+          "description": "The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
         },
         "loadBalancerProfile": {
           "$ref": "#/definitions/ManagedClusterLoadBalancerProfile",
@@ -6065,16 +6022,14 @@
           "items": {
             "type": "string"
           },
-          "title": "The CIDR notation IP ranges from which to assign pod IPs.",
-          "description": "One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking."
+          "description": "The CIDR notation IP ranges from which to assign pod IPs. One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking."
         },
         "serviceCidrs": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "title": "The CIDR notation IP ranges from which to assign service cluster IPs.",
-          "description": "One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking. They must not overlap with any Subnet IP ranges."
+          "description": "The CIDR notation IP ranges from which to assign service cluster IPs. One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking. They must not overlap with any Subnet IP ranges."
         },
         "ipFamilies": {
           "type": "array",
@@ -6090,8 +6045,7 @@
               "modelAsString": true
             }
           },
-          "title": "The IP families used to specify IP versions available to the cluster.",
-          "description": "IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
+          "description": "The IP families used to specify IP versions available to the cluster. IP families are used to determine single-stack or dual-stack clusters. For single-stack, the expected value is IPv4. For dual-stack, the expected values are IPv4 and IPv6."
         },
         "podLinkLocalAccess": {
           "$ref": "#/definitions/PodLinkLocalAccess",
@@ -6215,8 +6169,7 @@
           "x-ms-client-flatten": true
         }
       },
-      "title": "Planned maintenance configuration, used to configure when updates can be deployed to a Managed Cluster.",
-      "description": "See [planned maintenance](https://docs.microsoft.com/azure/aks/planned-maintenance) for more information about planned maintenance."
+      "description": "Planned maintenance configuration, used to configure when updates can be deployed to a Managed Cluster. See [planned maintenance](https://docs.microsoft.com/azure/aks/planned-maintenance) for more information about planned maintenance."
     },
     "MaintenanceConfigurationProperties": {
       "type": "object",
@@ -6226,9 +6179,8 @@
           "items": {
             "$ref": "#/definitions/TimeInWeek"
           },
-          "title": "Time slots during the week when planned maintenance is allowed to proceed.",
           "x-ms-identifiers": [],
-          "description": "If two array entries specify the same day of the week, the applied configuration is the union of times in both entries."
+          "description": "Time slots during the week when planned maintenance is allowed to proceed. If two array entries specify the same day of the week, the applied configuration is the union of times in both entries."
         },
         "notAllowedTime": {
           "type": "array",
@@ -6416,8 +6368,7 @@
               }
             ]
           },
-          "title": "The week index.",
-          "description": "Specifies on which instance of the allowed days specified in daysOfWeek the maintenance occurs."
+          "description": "The week index. Specifies on which instance of the allowed days specified in daysOfWeek the maintenance occurs."
         },
         "dayOfWeek": {
           "$ref": "#/definitions/WeekDay",
@@ -6445,8 +6396,7 @@
           "description": "The end date of the date span."
         }
       },
-      "title": "A date range.",
-      "description": "For example, between '2022-12-23' and '2023-01-05'.",
+      "description": "A date range. For example, between '2022-12-23' and '2023-01-05'.",
       "required": [
         "start",
         "end"
@@ -6464,8 +6414,7 @@
           "items": {
             "$ref": "#/definitions/HourInDay"
           },
-          "title": "A list of hours in the day used to identify a time range.",
-          "description": "Each integer hour represents a time range beginning at 0m after the hour ending at the next hour (non-inclusive). 0 corresponds to 00:00 UTC, 23 corresponds to 23:00 UTC. Specifying [0, 1] means the 00:00 - 02:00 UTC time range."
+          "description": "A list of hours in the day used to identify a time range. Each integer hour represents a time range beginning at 0m after the hour ending at the next hour (non-inclusive). 0 corresponds to 00:00 UTC, 23 corresponds to 23:00 UTC. Specifying [0, 1] means the 00:00 - 02:00 UTC time range."
         }
       },
       "description": "Time in a week."
@@ -6508,8 +6457,7 @@
           "description": "The end of a time span"
         }
       },
-      "title": "A time range.",
-      "description": "For example, between 2021-05-25T13:00:00Z and 2021-05-25T14:00:00Z."
+      "description": "A time range. For example, between 2021-05-25T13:00:00Z and 2021-05-25T14:00:00Z."
     },
     "RunCommandRequest": {
       "type": "object",
@@ -6760,8 +6708,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "title": "Enable Static Egress Gateway addon",
-          "description": "Indicates if Static Egress Gateway addon is enabled or not."
+          "description": "Enable Static Egress Gateway addon. Indicates if Static Egress Gateway addon is enabled or not."
         }
       },
       "description": "The Static Egress Gateway addon configuration for the cluster."
@@ -6887,8 +6834,7 @@
         },
         "kubernetesVersion": {
           "type": "string",
-          "title": "The version of Kubernetes the Managed Cluster is requested to run.",
-          "description": "When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
+          "description": "The version of Kubernetes the Managed Cluster is requested to run. When you upgrade a supported AKS cluster, Kubernetes minor versions cannot be skipped. All upgrades must be performed sequentially by major version number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for more details."
         },
         "currentKubernetesVersion": {
           "readOnly": true,
@@ -6897,13 +6843,11 @@
         },
         "dnsPrefix": {
           "type": "string",
-          "title": "The DNS prefix of the Managed Cluster.",
-          "description": "This cannot be updated once the Managed Cluster has been created."
+          "description": "The DNS prefix of the Managed Cluster. This cannot be updated once the Managed Cluster has been created."
         },
         "fqdnSubdomain": {
           "type": "string",
-          "title": "The FQDN subdomain of the private cluster with custom private dns zone.",
-          "description": "This cannot be updated once the Managed Cluster has been created."
+          "description": "The FQDN subdomain of the private cluster with custom private dns zone. This cannot be updated once the Managed Cluster has been created."
         },
         "fqdn": {
           "readOnly": true,
@@ -6918,8 +6862,7 @@
         "azurePortalFQDN": {
           "readOnly": true,
           "type": "string",
-          "title": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients.",
-          "description": "The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
+          "description": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
         },
         "agentPoolProfiles": {
           "type": "array",
@@ -6950,8 +6893,7 @@
         },
         "podIdentityProfile": {
           "$ref": "#/definitions/ManagedClusterPodIdentityProfile",
-          "title": "The pod identity profile of the Managed Cluster.",
-          "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on AAD pod identity integration."
+          "description": "The pod identity profile of the Managed Cluster. See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on AAD pod identity integration."
         },
         "oidcIssuerProfile": {
           "$ref": "#/definitions/ManagedClusterOIDCIssuerProfile",
@@ -6975,8 +6917,7 @@
         },
         "enableNamespaceResources": {
           "type": "boolean",
-          "title": "Enable namespace as Azure resource.",
-          "description": "The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource."
+          "description": "Enable namespace as Azure resource. The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource."
         },
         "networkProfile": {
           "$ref": "#/definitions/ContainerServiceNetworkProfile",
@@ -6999,104 +6940,84 @@
           "properties": {
             "balance-similar-node-groups": {
               "type": "string",
-              "title": "Detects similar node pools and balances the number of nodes between them.",
-              "description": "Valid values are 'true' and 'false'"
+              "description": "Detects similar node pools and balances the number of nodes between them. Valid values are 'true' and 'false'"
             },
             "daemonset-eviction-for-empty-nodes": {
               "type": "boolean",
-              "title": "DaemonSet pods will be gracefully terminated from empty nodes",
-              "description": "If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+              "description": "DaemonSet pods will be gracefully terminated from empty nodes. If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
             },
             "daemonset-eviction-for-occupied-nodes": {
               "type": "boolean",
-              "title": "DaemonSet pods will be gracefully terminated from non-empty nodes",
-              "description": "If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+              "description": "DaemonSet pods will be gracefully terminated from non-empty nodes. If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
             },
             "ignore-daemonsets-utilization": {
               "type": "boolean",
-              "title": "Should CA ignore DaemonSet pods when calculating resource utilization for scaling down",
-              "description": "If set to true, the resources used by daemonset will be taken into account when making scaling down decisions."
+              "description": "Should CA ignore DaemonSet pods when calculating resource utilization for scaling down. If set to true, the resources used by daemonset will be taken into account when making scaling down decisions."
             },
             "expander": {
               "type": "string",
-              "title": "Type of node group expander to be used in scale up. Set to be deprecated, please use 'expanders' flag in the future.",
-              "description": "Available values are: 'least-waste', 'most-pods', 'priority', 'random'.",
+              "description": "Type of node group expander to be used in scale up. Set to be deprecated, please use 'expanders' flag in the future. Available values are: 'least-waste', 'most-pods', 'priority', 'random'.",
               "$ref": "#/definitions/expander"
             },
             "max-empty-bulk-delete": {
               "type": "string",
-              "title": "The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer.",
-              "description": "The default is 10."
+              "description": "The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer. The default is 10."
             },
             "max-graceful-termination-sec": {
               "type": "string",
-              "title": "The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node.",
-              "description": "The default is 600."
+              "description": "The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node. The default is 600."
             },
             "max-node-provision-time": {
               "type": "string",
-              "title": "The maximum time the autoscaler waits for a node to be provisioned.",
-              "description": "The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "The maximum time the autoscaler waits for a node to be provisioned. The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "max-total-unready-percentage": {
               "type": "string",
-              "title": "The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations.",
-              "description": "The default is 45. The maximum is 100 and the minimum is 0."
+              "description": "The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations. The default is 45. The maximum is 100 and the minimum is 0."
             },
             "new-pod-scale-up-delay": {
               "type": "string",
-              "title": "Ignore unscheduled pods before they're a certain age.",
-              "description": "For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc)."
+              "description": "Ignore unscheduled pods before they're a certain age. For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc)."
             },
             "ok-total-unready-count": {
               "type": "string",
-              "title": "The number of allowed unready nodes, irrespective of max-total-unready-percentage.",
-              "description": "This must be an integer. The default is 3."
+              "description": "The number of allowed unready nodes, irrespective of max-total-unready-percentage. This must be an integer. The default is 3."
             },
             "scan-interval": {
               "type": "string",
-              "title": "How often cluster is reevaluated for scale up or down.",
-              "description": "The default is '10'. Values must be an integer number of seconds."
+              "description": "How often cluster is reevaluated for scale up or down. The default is '10'. Values must be an integer number of seconds."
             },
             "scale-down-delay-after-add": {
               "type": "string",
-              "title": "How long after scale up that scale down evaluation resumes",
-              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "How long after scale up that scale down evaluation resumes. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "scale-down-delay-after-delete": {
               "type": "string",
-              "title": "How long after node deletion that scale down evaluation resumes.",
-              "description": "The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "How long after node deletion that scale down evaluation resumes. The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "scale-down-delay-after-failure": {
               "type": "string",
-              "title": "How long after scale down failure that scale down evaluation resumes.",
-              "description": "The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "How long after scale down failure that scale down evaluation resumes. The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "scale-down-unneeded-time": {
               "type": "string",
-              "title": "How long a node should be unneeded before it is eligible for scale down.",
-              "description": "The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "How long a node should be unneeded before it is eligible for scale down. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "scale-down-unready-time": {
               "type": "string",
-              "title": "How long an unready node should be unneeded before it is eligible for scale down",
-              "description": "The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
+              "description": "How long an unready node should be unneeded before it is eligible for scale down. The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported."
             },
             "scale-down-utilization-threshold": {
               "type": "string",
-              "title": "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down.",
-              "description": "The default is '0.5'."
+              "description": "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down. The default is '0.5'."
             },
             "skip-nodes-with-local-storage": {
               "type": "string",
-              "title": "If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath.",
-              "description": "The default is true."
+              "description": "If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath. The default is true."
             },
             "skip-nodes-with-system-pods": {
               "type": "string",
-              "title": "If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods)",
-              "description": "The default is true."
+              "description": "If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods). The default is true."
             }
           },
           "description": "Parameters to be applied to the cluster-autoscaler when enabled"
@@ -7115,8 +7036,7 @@
               }
             ]
           },
-          "title": "The Resource ID of the disk encryption set to use for enabling encryption at rest.",
-          "description": "This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'"
+          "description": "The Resource ID of the disk encryption set to use for enabling encryption at rest. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'"
         },
         "identityProfile": {
           "type": "object",
@@ -7134,8 +7054,7 @@
         },
         "disableLocalAccounts": {
           "type": "boolean",
-          "title": "If local accounts should be disabled on the Managed Cluster.",
-          "description": "If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. For more details see [disable local accounts](https://docs.microsoft.com/azure/aks/managed-aad#disable-local-accounts-preview)."
+          "description": "If local accounts should be disabled on the Managed Cluster. If set to true, getting static credentials will be disabled for this cluster. This must only be used on Managed Clusters that are AAD enabled. For more details see [disable local accounts](https://docs.microsoft.com/azure/aks/managed-aad#disable-local-accounts-preview)."
         },
         "httpProxyConfig": {
           "$ref": "#/definitions/ManagedClusterHTTPProxyConfig",
@@ -7178,8 +7097,7 @@
               }
             ]
           },
-          "title": "PublicNetworkAccess of the managedCluster",
-          "description": "Allow or deny public network access for AKS"
+          "description": "PublicNetworkAccess of the managedCluster. Allow or deny public network access for AKS"
         },
         "workloadAutoScalerProfile": {
           "$ref": "#/definitions/ManagedClusterWorkloadAutoScalerProfile"
@@ -7280,8 +7198,7 @@
           }
         ]
       },
-      "title": "The expander to use when scaling up",
-      "description": "If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
+      "description": "The expander to use when scaling up. If not specified, the default is 'random'. See [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders) for more information."
     },
     "ManagedClusterAPIServerAccessProfile": {
       "type": "object",
@@ -7291,18 +7208,15 @@
           "items": {
             "type": "string"
           },
-          "title": "The IP ranges authorized to access the Kubernetes API server.",
-          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with clusters that use Public IP Per Node, or clusters that are using a Basic Load Balancer. For more information see [API server authorized IP ranges](https://docs.microsoft.com/azure/aks/api-server-authorized-ip-ranges)."
+          "description": "The IP ranges authorized to access the Kubernetes API server. IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with clusters that use Public IP Per Node, or clusters that are using a Basic Load Balancer. For more information see [API server authorized IP ranges](https://docs.microsoft.com/azure/aks/api-server-authorized-ip-ranges)."
         },
         "enablePrivateCluster": {
           "type": "boolean",
-          "title": "Whether to create the cluster as a private cluster or not.",
-          "description": "For more details, see [Creating a private AKS cluster](https://docs.microsoft.com/azure/aks/private-clusters)."
+          "description": "Whether to create the cluster as a private cluster or not. For more details, see [Creating a private AKS cluster](https://docs.microsoft.com/azure/aks/private-clusters)."
         },
         "privateDNSZone": {
           "type": "string",
-          "title": "The private DNS zone mode for the cluster.",
-          "description": "The default is System. For more details see [configure private DNS zone](https://docs.microsoft.com/azure/aks/private-clusters#configure-private-dns-zone). Allowed values are 'system' and 'none'."
+          "description": "The private DNS zone mode for the cluster. The default is System. For more details see [configure private DNS zone](https://docs.microsoft.com/azure/aks/private-clusters#configure-private-dns-zone). Allowed values are 'system' and 'none'."
         },
         "enablePrivateClusterPublicFQDN": {
           "type": "boolean",
@@ -7326,8 +7240,7 @@
               }
             ]
           },
-          "title": "The subnet to be used when apiserver vnet integration is enabled.",
-          "description": "It is required when: 1. creating a new cluster with BYO Vnet; 2. updating an existing cluster to enable apiserver vnet integration."
+          "description": "The subnet to be used when apiserver vnet integration is enabled. It is required when: 1. creating a new cluster with BYO Vnet; 2. updating an existing cluster to enable apiserver vnet integration."
         }
       },
       "description": "Access profile for managed cluster API server."
@@ -7347,8 +7260,7 @@
         },
         "type": {
           "type": "string",
-          "title": "The type of identity used for the managed cluster.",
-          "description": "For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).",
+          "description": "The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).",
           "enum": [
             "SystemAssigned",
             "UserAssigned",
@@ -7395,8 +7307,7 @@
               }
             }
           },
-          "title": "The user identity associated with the managed cluster. This identity will be used in control plane. Only one user assigned identity is allowed.",
-          "description": "The keys must be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+          "description": "The user identity associated with the managed cluster. This identity will be used in control plane. Only one user assigned identity is allowed. The keys must be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the managed cluster."
@@ -7566,8 +7477,7 @@
               }
             ]
           },
-          "title": "The upgrade channel for auto upgrade. The default is 'none'.",
-          "description": "For more information see [setting the AKS cluster auto-upgrade channel](https://docs.microsoft.com/azure/aks/upgrade-cluster#set-auto-upgrade-channel)."
+          "description": "The upgrade channel for auto upgrade. The default is 'none'. For more information see [setting the AKS cluster auto-upgrade channel](https://docs.microsoft.com/azure/aks/upgrade-cluster#set-auto-upgrade-channel)."
         },
         "nodeOSUpgradeChannel": {
           "type": "string",
@@ -7599,8 +7509,7 @@
               }
             ]
           },
-          "title": "Manner in which the OS on your nodes is updated",
-          "description": "The default is Unmanaged, but may change to either NodeImage or SecurityPatch at GA."
+          "description": "Manner in which the OS on your nodes is updated. The default is Unmanaged, but may change to either NodeImage or SecurityPatch at GA."
         }
       },
       "description": "Auto upgrade profile for a managed cluster."
@@ -7665,8 +7574,7 @@
           "description": "The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription."
         }
       },
-      "title": "AADProfile specifies attributes for Azure Active Directory integration.",
-      "description": "For more details see [managed AAD on AKS](https://docs.microsoft.com/azure/aks/managed-aad)."
+      "description": "AADProfile specifies attributes for Azure Active Directory integration. For more details see [managed AAD on AKS](https://docs.microsoft.com/azure/aks/managed-aad)."
     },
     "ManagedClusterAddonProfile": {
       "type": "object",
@@ -7811,8 +7719,7 @@
         "namespace",
         "podLabels"
       ],
-      "title": "A pod identity exception, which allows pods with certain labels to access the Azure Instance Metadata Service (IMDS) endpoint without being intercepted by the node-managed identity (NMI) server.",
-      "description": "See [disable AAD Pod Identity for a specific Pod/Application](https://azure.github.io/aad-pod-identity/docs/configure/application_exception/) for more details."
+      "description": "A pod identity exception, which allows pods with certain labels to access the Azure Instance Metadata Service (IMDS) endpoint without being intercepted by the node-managed identity (NMI) server. See [disable AAD Pod Identity for a specific Pod/Application](https://azure.github.io/aad-pod-identity/docs/configure/application_exception/) for more details."
     },
     "ManagedClusterPodIdentityProfile": {
       "type": "object",
@@ -7823,8 +7730,7 @@
         },
         "allowNetworkPluginKubenet": {
           "type": "boolean",
-          "title": "Whether pod identity is allowed to run on clusters with Kubenet networking.",
-          "description": "Running in Kubenet is disabled by default due to the security related nature of AAD Pod Identity and the risks of IP spoofing. See [using Kubenet network plugin with AAD Pod Identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity#using-kubenet-network-plugin-with-azure-active-directory-pod-managed-identities) for more information."
+          "description": "Whether pod identity is allowed to run on clusters with Kubenet networking. Running in Kubenet is disabled by default due to the security related nature of AAD Pod Identity and the risks of IP spoofing. See [using Kubenet network plugin with AAD Pod Identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity#using-kubenet-network-plugin-with-azure-active-directory-pod-managed-identities) for more information."
         },
         "userAssignedIdentities": {
           "description": "The pod identities to use in the cluster.",
@@ -7843,8 +7749,7 @@
           "x-ms-identifiers": []
         }
       },
-      "title": "The pod identity profile of the Managed Cluster.",
-      "description": "See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on pod identity integration."
+      "description": "The pod identity profile of the Managed Cluster. See [use AAD pod identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity) for more details on pod identity integration."
     },
     "ManagedClusterOIDCIssuerProfile": {
       "type": "object",
@@ -8047,8 +7952,7 @@
           }
         ]
       },
-      "title": "Pod IP Allocation Mode",
-      "description": "The IP allocation mode for pods in the agent pool. Must be used with podSubnetId. The default is 'DynamicIndividual'."
+      "description": "Pod IP Allocation Mode. The IP allocation mode for pods in the agent pool. Must be used with podSubnetId. The default is 'DynamicIndividual'."
     },
     "OSType": {
       "type": "string",
@@ -8174,14 +8078,12 @@
           }
         ]
       },
-      "title": "The Virtual Machine Scale Set eviction policy.",
-      "description": "The eviction policy specifies what to do with the VM when it is evicted. The default is Delete. For more information about eviction see [spot VMs](https://docs.microsoft.com/azure/virtual-machines/spot-vms)"
+      "description": "The Virtual Machine Scale Set eviction policy. The eviction policy specifies what to do with the VM when it is evicted. The default is Delete. For more information about eviction see [spot VMs](https://docs.microsoft.com/azure/virtual-machines/spot-vms)"
     },
     "SpotMaxPrice": {
       "type": "number",
       "default": -1,
-      "title": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand.",
-      "description": "Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)"
+      "description": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)"
     },
     "ScaleDownMode": {
       "type": "string",
@@ -8481,9 +8383,8 @@
       "properties": {
         "provisioningError": {
           "$ref": "#/definitions/CloudErrorBody",
-          "title": "The error details information of the managed cluster.",
           "readOnly": true,
-          "description": "Preserves the detailed info of failure. If there was no error, this field is omitted."
+          "description": "The error details information of the managed cluster. Preserves the detailed info of failure. If there was no error, this field is omitted."
         }
       },
       "description": "Contains read-only information about the Managed Cluster."
@@ -8493,9 +8394,8 @@
       "properties": {
         "provisioningError": {
           "$ref": "#/definitions/CloudErrorBody",
-          "title": "The error detail information of the agent pool.",
           "readOnly": true,
-          "description": "Preserves the detailed info of failure. If there was no error, this field is omitted."
+          "description": "The error detail information of the agent pool. Preserves the detailed info of failure. If there was no error, this field is omitted."
         }
       },
       "description": "Contains read-only information about the Agent Pool."
@@ -8554,8 +8454,7 @@
         },
         "tier": {
           "type": "string",
-          "title": "The tier of a managed cluster SKU.",
-          "description": "If not specified, the default is 'Free'. See [AKS Pricing Tier](https://learn.microsoft.com/azure/aks/free-standard-pricing-tiers) for more details.",
+          "description": "The tier of a managed cluster SKU. If not specified, the default is 'Free'. See [AKS Pricing Tier](https://learn.microsoft.com/azure/aks/free-standard-pricing-tiers) for more details.",
           "enum": [
             "Premium",
             "Standard",
@@ -8764,8 +8663,7 @@
           }
         ]
       },
-      "title": "The OS disk type to be used for machines in the agent pool.",
-      "description": "The default is 'Ephemeral' if the VM supports it and has a cache disk larger than the requested OSDiskSizeGB. Otherwise, defaults to 'Managed'. May not be changed after creation. For more information see [Ephemeral OS](https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os)."
+      "description": "The OS disk type to be used for machines in the agent pool. The default is 'Ephemeral' if the VM supports it and has a cache disk larger than the requested OSDiskSizeGB. Otherwise, defaults to 'Managed'. May not be changed after creation. For more information see [Ephemeral OS](https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os)."
     },
     "KubeletDiskType": {
       "type": "string",
@@ -8817,41 +8715,34 @@
       "description": "Determines the type of workload a node can run."
     },
     "KubeletConfig": {
-      "title": "Kubelet configurations of agent nodes.",
-      "description": "See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.",
+      "description": "Kubelet configurations of agent nodes. See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.",
       "type": "object",
       "properties": {
         "cpuManagerPolicy": {
           "type": "string",
-          "title": "The CPU Manager policy to use.",
-          "description": "The default is 'none'. See [Kubernetes CPU management policies](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#cpu-management-policies) for more information. Allowed values are 'none' and 'static'."
+          "description": "The CPU Manager policy to use. The default is 'none'. See [Kubernetes CPU management policies](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#cpu-management-policies) for more information. Allowed values are 'none' and 'static'."
         },
         "cpuCfsQuota": {
           "type": "boolean",
-          "title": "If CPU CFS quota enforcement is enabled for containers that specify CPU limits.",
-          "description": "The default is true."
+          "description": "If CPU CFS quota enforcement is enabled for containers that specify CPU limits. The default is true."
         },
         "cpuCfsQuotaPeriod": {
           "type": "string",
-          "title": "The CPU CFS quota period value.",
-          "description": "The default is '100ms.' Valid values are a sequence of decimal numbers with an optional fraction and a unit suffix. For example: '300ms', '2h45m'. Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'."
+          "description": "The CPU CFS quota period value. The default is '100ms.' Valid values are a sequence of decimal numbers with an optional fraction and a unit suffix. For example: '300ms', '2h45m'. Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'."
         },
         "imageGcHighThreshold": {
           "type": "integer",
           "format": "int32",
-          "title": "The percent of disk usage after which image garbage collection is always run.",
-          "description": "To disable image garbage collection, set to 100. The default is 85%"
+          "description": "The percent of disk usage after which image garbage collection is always run. To disable image garbage collection, set to 100. The default is 85%"
         },
         "imageGcLowThreshold": {
           "type": "integer",
           "format": "int32",
-          "title": "The percent of disk usage before which image garbage collection is never run.",
-          "description": "This cannot be set higher than imageGcHighThreshold. The default is 80%"
+          "description": "The percent of disk usage before which image garbage collection is never run. This cannot be set higher than imageGcHighThreshold. The default is 80%"
         },
         "topologyManagerPolicy": {
           "type": "string",
-          "title": "The Topology Manager policy to use.",
-          "description": "For more information see [Kubernetes Topology Manager](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager). The default is 'none'. Allowed values are 'none', 'best-effort', 'restricted', and 'single-numa-node'."
+          "description": "The Topology Manager policy to use. For more information see [Kubernetes Topology Manager](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager). The default is 'none'. Allowed values are 'none', 'best-effort', 'restricted', and 'single-numa-node'."
         },
         "allowedUnsafeSysctls": {
           "type": "array",
@@ -8905,8 +8796,7 @@
       }
     },
     "LinuxOSConfig": {
-      "title": "OS configurations of Linux agent nodes.",
-      "description": "See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.",
+      "description": "OS configurations of Linux agent nodes. See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.",
       "type": "object",
       "properties": {
         "sysctls": {
@@ -8915,13 +8805,11 @@
         },
         "transparentHugePageEnabled": {
           "type": "string",
-          "title": "Whether transparent hugepages are enabled.",
-          "description": "Valid values are 'always', 'madvise', and 'never'. The default is 'always'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge)."
+          "description": "Whether transparent hugepages are enabled. Valid values are 'always', 'madvise', and 'never'. The default is 'always'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge)."
         },
         "transparentHugePageDefrag": {
           "type": "string",
-          "title": "Whether the kernel should make aggressive use of memory compaction to make more hugepages available.",
-          "description": "Valid values are 'always', 'defer', 'defer+madvise', 'madvise' and 'never'. The default is 'madvise'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge)."
+          "description": "Whether the kernel should make aggressive use of memory compaction to make more hugepages available. Valid values are 'always', 'defer', 'defer+madvise', 'madvise' and 'never'. The default is 'madvise'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge)."
         },
         "swapFileSizeMB": {
           "type": "integer",
@@ -8936,8 +8824,7 @@
       "properties": {
         "disableOutboundNat": {
           "type": "boolean",
-          "title": "Whether to disable OutboundNAT in windows nodes",
-          "description": "The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
+          "description": "Whether to disable OutboundNAT in windows nodes. The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
         }
       }
     },
@@ -9642,8 +9529,7 @@
             "name": "KeyVaultNetworkAccessTypes",
             "modelAsString": true
           },
-          "title": "Network access of the key vault",
-          "description": "Network access of key vault. The possible values are `Public` and `Private`. `Public` means the key vault allows public access from all networks. `Private` means the key vault disables public access and enables private link. The default value is `Public`."
+          "description": "Network access of the key vault. Network access of key vault. The possible values are `Public` and `Private`. `Public` means the key vault allows public access from all networks. `Private` means the key vault disables public access and enables private link. The default value is `Public`."
         },
         "keyVaultResourceId": {
           "type": "string",
@@ -9799,8 +9685,7 @@
       },
       "minItems": 0,
       "maxItems": 10,
-      "title": "The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided.",
-      "description": "Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. For node pools of VMSS type, updating the value of this field will result in nodes being reimaged."
+      "description": "The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided. Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. For node pools of VMSS type, updating the value of this field will result in nodes being reimaged."
     },
     "ManagedClusterStorageProfileDiskCSIDriver": {
       "type": "object",
@@ -10131,8 +10016,7 @@
           }
         ]
       },
-      "title": "The network mode Azure CNI is configured with.",
-      "description": "This cannot be specified if networkPlugin is anything other than 'azure'."
+      "description": "The network mode Azure CNI is configured with. This cannot be specified if networkPlugin is anything other than 'azure'."
     },
     "NetworkDataplane": {
       "type": "string",
@@ -10215,8 +10099,7 @@
               }
             ]
           },
-          "title": "Enable advanced network policies",
-          "description": "This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is FQDN if security.enabled is set to true."
+          "description": "Enable advanced network policies. This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is FQDN if security.enabled is set to true."
         },
         "transitEncryption": {
           "type": "object",
@@ -10242,8 +10125,7 @@
                   }
                 ]
               },
-              "title": "Configures pod-to-pod encryption",
-              "description": "This can be enabled only on Cilium-based clusters. If not specified, the default value is None."
+              "description": "Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None."
             }
           }
         }
@@ -10269,8 +10151,7 @@
           }
         ]
       },
-      "title": "The load balancer sku for the managed cluster.",
-      "description": "The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
+      "description": "The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs."
     },
     "SnapshotType": {
       "type": "string",
@@ -10305,8 +10186,7 @@
           }
         ]
       },
-      "title": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines.",
-      "description": "This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}'. Customers use it to create an agentpool and to update an existing agentpool with a CapacityReservationGroupID. If customers explicitly specify this CapacityReservationGroupID as an empty string, AKS will disassociate the existing CRG from the nodepool. For more information see [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)"
+      "description": "The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines. This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}'. Customers use it to create an agentpool and to update an existing agentpool with a CapacityReservationGroupID. If customers explicitly specify this CapacityReservationGroupID as an empty string, AKS will disassociate the existing CRG from the nodepool. For more information see [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)"
     },
     "TrustedAccessRoleRule": {
       "type": "object",
@@ -11085,7 +10965,7 @@
       "properties": {
         "costAnalysis": {
           "$ref": "#/definitions/ManagedClusterCostAnalysis",
-          "title": "The configuration for detailed per-Kubernetes resource cost analysis."
+          "description": "The configuration for detailed per-Kubernetes resource cost analysis."
         }
       }
     },
@@ -11095,8 +10975,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "title": "Whether to enable cost analysis",
-          "description": "The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
+          "description": "Whether to enable cost analysis. The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
         }
       }
     },
@@ -11106,8 +10985,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "title": "Whether to enable AI toolchain operator to the cluster",
-          "description": "Indicates if AI toolchain operator  enabled or not."
+          "description": "Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not."
         }
       }
     },
@@ -11134,15 +11012,14 @@
               }
             ]
           },
-          "title": "The node provisioning mode. If not specified, the default is Manual."
+          "description": "The node provisioning mode. If not specified, the default is Manual."
         },
         "defaultNodePools": {
           "enum": [
             "None",
             "Auto"
           ],
-          "title": "The set of default Karpenter NodePools (CRDs) configured for node provisioning.",
-          "description": "This field has no effect unless mode is 'Auto'. Warning: Changing this from Auto to None on an existing cluster will cause the default Karpenter NodePools to be deleted, which will drain and delete the nodes associated with those pools. It is strongly recommended to not do this unless there are idle nodes ready to take the pods evicted by that action. If not specified, the default is Auto. For more information see aka.ms/aks/nap#node-pools.",
+          "description": "The set of default Karpenter NodePools (CRDs) configured for node provisioning. This field has no effect unless mode is 'Auto'. Warning: Changing this from Auto to None on an existing cluster will cause the default Karpenter NodePools to be deleted, which will drain and delete the nodes associated with those pools. It is strongly recommended to not do this unless there are idle nodes ready to take the pods evicted by that action. If not specified, the default is Auto. For more information see aka.ms/aks/nap#node-pools.",
           "default": "Auto",
           "type": "string",
           "x-ms-enum": {
@@ -11186,8 +11063,7 @@
             ]
           },
           "default": "Direct",
-          "title": "The artifact source.",
-          "description": "The source where the artifacts are downloaded from."
+          "description": "The artifact source. The source where the artifacts are downloaded from."
         },
         "containerRegistryId": {
           "type": "string",
