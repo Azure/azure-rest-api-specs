@@ -60,21 +60,21 @@
             }
           ],
           "sCITTConfiguration": {
-              "configuration": {
-                "policy": {
-                  "policyScript": "export function apply(phdr) { if (!phdr.issuer) {return 'Issuer not found'} else if (phdr.issuer !== 'did:x509:0:sha256:HnwZ4lezuxq/GVcl/Sk7YWW170qAD0DZBLXilXet0jg=::eku:1.3.6.1.4.1.311.10.3.13') { return 'Invalid issuer'; } return true; }"
-                },
-                "authentication": {
-                  "allowUnauthenticated": false,
-                  "jwt": {
-                    "requiredClaims": {
-                      "aud": "scitt",
-                      "iss": "https://authserver.com/",
-                      "http://unique.claim/department_id": "654987"
-                    }
+            "configuration": {
+              "policy": {
+                "policyScript": "export function apply(phdr) { if (!phdr.issuer) {return 'Issuer not found'} else if (phdr.issuer !== 'did:x509:0:sha256:HnwZ4lezuxq/GVcl/Sk7YWW170qAD0DZBLXilXet0jg=::eku:1.3.6.1.4.1.311.10.3.13') { return 'Invalid issuer'; } return true; }"
+              },
+              "authentication": {
+                "allowUnauthenticated": false,
+                "jwt": {
+                  "requiredClaims": {
+                    "aud": "scitt",
+                    "iss": "https://authserver.com/",
+                    "http://unique.claim/department_id": "654987"
                   }
                 }
               }
+            }
           }
         },
         "name": "DummyLedgerName",
