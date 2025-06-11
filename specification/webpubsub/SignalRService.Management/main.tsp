@@ -62,6 +62,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a standard ARM operations list endpoint, not a resource operation"
   list(
     ...ApiVersionParameter,
 

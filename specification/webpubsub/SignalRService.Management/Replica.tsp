@@ -15,8 +15,11 @@ namespace Microsoft.SignalRService;
  * A class represent a replica resource.
  */
 @parentResource(WebPubSubResource)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourceInternal is required for ARM resource definition in TypeSpec"
 @Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "includeInapplicableMetadataInPayload is required to maintain compatibility with existing API"
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replica extends TrackedResource to follow ARM standard resource pattern for backward compatibility"
 model Replica extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Replica,
@@ -32,8 +35,12 @@ model Replica extends Foundations.TrackedResource {
   sku?: ResourceSku;
 
   @doc("The resource-specific properties for this resource.")
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "conditionalClientFlatten is required for ARM resource client generation"
   @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourcePropertiesOptionality is required for ARM resource definition"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties field documentation is provided by the ReplicaProperties model"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties field is required in resource envelope for backward compatibility with existing client SDKs"
   properties?: ReplicaProperties;
 }
 
@@ -58,6 +65,7 @@ interface Replicas {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Long running operation follows ARM standards with Azure-AsyncOperation header"
   @patch(#{ implicitOptionality: false })
   @operationId("WebPubSubReplicas_Update")
   update is ArmCustomPatchAsync<

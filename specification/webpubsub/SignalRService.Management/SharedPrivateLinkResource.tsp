@@ -119,6 +119,7 @@ interface WebPubSubSharedPrivateLinkResources {
    * Delete the specified shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId is required to maintain consistency with existing API contract"
   @operationId("WebPubSubSharedPrivateLinkResources_Delete")
   delete is WebPubSubSharedPrivateLinkResourceOps.DeleteSync<
     SharedPrivateLinkResource,

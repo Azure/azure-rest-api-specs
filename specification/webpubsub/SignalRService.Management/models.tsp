@@ -551,6 +551,7 @@ model WebPubSubProperties {
    * The publicly accessible IP of the resource.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "externalIP follows the existing API naming convention for IP addresses"
   externalIP?: string;
 
   /**
@@ -615,6 +616,7 @@ model WebPubSubProperties {
   /**
    * Network ACLs for the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "networkACLs follows the existing API naming convention for ACLs (Access Control Lists)"
   networkACLs?: WebPubSubNetworkACLs;
 
   /**
@@ -660,6 +662,7 @@ model WebPubSubProperties {
   /**
    * SocketIO settings for the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "socketIO follows the official Socket.IO naming convention"
   socketIO?: WebPubSubSocketIOSettings;
 }
 
@@ -841,6 +844,7 @@ model ResourceLogCategory {
 /**
  * Network ACLs for the resource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WebPubSubNetworkACLs follows the existing API naming convention with ACLs suffix"
 model WebPubSubNetworkACLs {
   /**
    * Azure Networking ACL Action.
@@ -869,6 +873,7 @@ model WebPubSubNetworkACLs {
 /**
  * Network ACL
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NetworkACL follows the existing API naming convention for ACL (Access Control List)"
 model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
@@ -886,7 +891,8 @@ model NetworkACL {
 /**
  * ACL for a private endpoint
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "PrivateEndpointACL extends NetworkACL to maintain backward compatibility with existing client SDKs"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "PrivateEndpointACL follows the existing API naming convention for ACL (Access Control List)"
 model PrivateEndpointACL extends NetworkACL {
   /**
    * Name of the private endpoint connection
@@ -956,6 +962,7 @@ model ClientTrafficControlRule {
 /**
  * SocketIO settings for the resource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WebPubSubSocketIOSettings follows the official Socket.IO naming convention"
 model WebPubSubSocketIOSettings {
   /**
    * The service mode of Web PubSub for Socket.IO. Values allowed:
@@ -1406,6 +1413,7 @@ model Sku {
    * The billing information of the resource.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "The sku property name is standard ARM pattern and required for backward compatibility"
   sku?: ResourceSku;
 
   /**

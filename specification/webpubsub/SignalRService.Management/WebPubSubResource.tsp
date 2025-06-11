@@ -13,8 +13,11 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourceInternal is required for ARM resource definition in TypeSpec"
 @Azure.ResourceManager.Private.armResourceInternal(WebPubSubProperties)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "includeInapplicableMetadataInPayload is required to maintain compatibility with existing API"
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "WebPubSubResource extends TrackedResource to follow ARM standard resource pattern for backward compatibility"
 model WebPubSubResource extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
@@ -26,12 +29,15 @@ model WebPubSubResource extends Foundations.TrackedResource {
   /**
    * The billing information of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU field is required in resource envelope for backward compatibility with existing ARM specifications"
   sku?: ResourceSku;
 
   @doc("The resource-specific properties for this resource.")
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "conditionalClientFlatten is required for ARM resource client generation"
   @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourcePropertiesOptionality is required for ARM resource definition"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties field is required in resource envelope for backward compatibility with existing client SDKs"
   properties?: WebPubSubProperties;
 
   /**
@@ -62,6 +68,7 @@ interface WebPubSubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Long running operation follows ARM standards with Azure-AsyncOperation header"
   @operationId("WebPubSub_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebPubSubResource,
@@ -137,6 +144,7 @@ interface WebPubSubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "RegenerateKey operation returns keys in response body for backward compatibility"
   @operationId("WebPubSub_RegenerateKey")
   @post
   @action("regenerateKey")
