@@ -54,9 +54,6 @@
             "$ref": "#/parameters/MarketParameter"
           },
           {
-            "$ref": "#/parameters/StorefrontParameter"
-          },
-          {
             "$ref": "#/parameters/LanguageParameter"
           },
           {
@@ -120,9 +117,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/StorefrontParameter"
-          },
-          {
             "$ref": "#/parameters/LanguageParameter"
           },
           {
@@ -135,16 +129,16 @@
             "$ref": "#/parameters/HideKeysParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "$ref": "#/parameters/OdataSelectParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterParameter"
+            "$ref": "#/parameters/OdataFilterParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ExpandQueryParameter"
+            "$ref": "#/parameters/OdataExpandParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "$ref": "#/parameters/OdataOrderByParameter"
           }
         ],
         "responses": {
@@ -201,13 +195,13 @@
             "$ref": "#/parameters/MarketParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+            "$ref": "#/parameters/OdataSelectParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterParameter"
+            "$ref": "#/parameters/OdataFilterParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+            "$ref": "#/parameters/OdataOrderByParameter"
           }
         ],
         "responses": {
@@ -2318,26 +2312,6 @@
     }
   },
   "parameters": {
-    "Azure.Core.ExpandQueryParameter": {
-      "name": "expand",
-      "in": "query",
-      "description": "Expand the indicated resources into the response.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.FilterParameter": {
-      "name": "filter",
-      "in": "query",
-      "description": "The maximum number of result items per page.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -2347,30 +2321,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "Azure.Core.OrderByQueryParameter": {
-      "name": "orderby",
-      "in": "query",
-      "description": "Expressions that specify the order of returned results.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.SelectQueryParameter": {
-      "name": "select",
-      "in": "query",
-      "description": "Select the specified fields to be included in the response.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
     },
     "ExcludeSkuDetailsParameter": {
       "name": "excludeSkuDetails",
@@ -2440,6 +2390,38 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "OdataExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Expands related entities inline. Example: '$expand=startingPrice'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OdataFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filters the results, based on a Boolean condition. Example: '$filter=productType eq \"VirtualMachine\"'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OdataOrderByParameter": {
+      "name": "$orderBy",
+      "in": "query",
+      "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OdataSelectParameter": {
+      "name": "$select",
+      "in": "query",
+      "description": "Selects which properties to include in the results. Example: '$select=displayName'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "PricingAudienceHeaderParameter": {
       "name": "x-ms-pricing-audience",
       "in": "header",
@@ -2471,15 +2453,6 @@
       "description": "Apply SKU ID filtering to the results and only return products that include SKUs matching the selected SKU ID.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "StorefrontParameter": {
-      "name": "storefront",
-      "in": "query",
-      "description": "Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'",
-      "required": false,
-      "type": "string",
-      "default": "azure",
       "x-ms-parameter-location": "method"
     }
   }

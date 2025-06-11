@@ -11,21 +11,19 @@ namespace Products;
 alias ProductsListingTraits = NoClientRequestId &
   SupportsRepeatableRequests &
   NoConditionalRequests &
-  QueryParametersTrait<StorefrontParameter &
-    LanguageParameter &
+  QueryParametersTrait<LanguageParameter &
     LocationsParameter &
     MarketParameter &
     HideKeysParameter &
-    SelectQueryParameter &
-    FilterParameter &
-    ExpandQueryParameter &
-    OrderByQueryParameter>;
+    OdataSelectParameter &
+    OdataFilterParameter &
+    OdataExpandParameter &
+    OdataOrderByParameter>;
 // Product get traits
 alias ProductsGetTraits = NoClientRequestId &
   SupportsRepeatableRequests &
   NoConditionalRequests &
   QueryParametersTrait<MarketParameter &
-    StorefrontParameter &
     LanguageParameter &
     LocationsParameter &
     IncludeStopSoldPlansParameter &
@@ -56,9 +54,9 @@ alias SkusListingTraits = NoClientRequestId &
     LanguageParameter &
     LocationsParameter &
     MarketParameter &
-    SelectQueryParameter &
-    FilterParameter &
-    OrderByQueryParameter>;
+    OdataSelectParameter &
+    OdataFilterParameter &
+    OdataOrderByParameter>;
 
 // Operation definitions for Skus
 alias SkusListingOperation = ResourceOperations<SkusListingTraits>;

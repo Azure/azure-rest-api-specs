@@ -1123,13 +1123,6 @@ model MarketParameter {
   market: string;
 }
 
-@doc("Parameters for return storefront products")
-model StorefrontParameter {
-  @query
-  @doc("Return products available in Azure Portal Marketplace, AppSource or Azure Marketplace portal. The possible values are: \n- `azure` - Azure Portal Marketplace\n- `amp` - Azure Marketplace portal\n- `appsource` - AppSource portal\nThe default value is 'azure'")
-  storefront?: string = "azure";
-}
-
 @doc("Parameters for language selection")
 model LanguageParameter {
   @query
@@ -1198,6 +1191,35 @@ model ServiceFamilyParameter {
   @query
   @doc("The service family of the product, such as 'Compute'")
   serviceFamily: string;
+}
+
+// OData parameters
+@doc("OData Filter parameter")
+model OdataFilterParameter {
+  @query
+  @doc("Filters the results, based on a Boolean condition. Example: '$filter=productType eq \"VirtualMachine\"'. Fields that can be filtered by are:\n- `displayName`\n- `productId`\n- `popularity`\n- `categoryIds`\n- `industryIds`\n- `publisherId`\n- `uniqueProductId`\n- `productType`\n- `operatingSystems`\n- `pricingTypes`\n- `publisherDisplayName`\n- `longSummary`\n- `summary`\n- `linkedAddinsTypes`\n- `description`\n- `supportedProducts`\n- `applicableProducts`\n- `lastModifiedDateTime`\n- `plan.planId`\n- `plan.displayName`\n- `plan.cspState`\n- `plan.altStackReference`\n- `plan.stackType`\n- `plan.categoryIds`\n- `plan.hasProtectedArtifacts`\n- `plan.pricingTypes`\n- `plan.summary`\n- `plan.description`\n- `plan.skuId`\n- `plan.displayRank`\n- `plan.isPrivate`")
+  $filter?: string;
+}
+
+@doc("OData Select parameter")
+model OdataSelectParameter {
+  @query
+  @doc("Selects which properties to include in the results. Example: '$select=displayName'")
+  $select?: string;
+}
+
+@doc("OData Expand parameter")
+model OdataExpandParameter {
+  @query
+  @doc("Expands related entities inline. Example: '$expand=startingPrice'")
+  $expand?: string;
+}
+
+@doc("OData Expand parameter")
+model OdataOrderByParameter {
+  @query
+  @doc("Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`'")
+  $orderBy?: string;
 }
 
 // API key def
