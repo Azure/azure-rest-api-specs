@@ -203,15 +203,15 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
