@@ -30,7 +30,6 @@ interface Datasets
   @Rest.action("startPendingUpload")
   startPendingUploadVersion is VersionedResourceActionWithBody<
     DatasetVersion,
-    DatasetInputParameters,
     PendingUploadRequest,
     PendingUploadResponse
   >;

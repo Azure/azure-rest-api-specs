@@ -19,11 +19,15 @@ model InputParameters<
   TEntityType extends Reflection.Model,
   TBodyName extends valueof string = "body"
 > {
-  @doc("The name of the {name} to operate on", TEntityType)
+  @doc("The name of the {name} to operate on.", TEntityType)
   @Http.bodyRoot
   @clientName(TBodyName)
   body: TEntityType;
 
+  @doc("Content type for patch")
+  @Http.header("Content-Type")
+  contentType: "application/merge-patch+json";
+  
   @doc(
     "The specific version id of the {name} to operate on.",
     TEntityType
@@ -122,11 +126,20 @@ interface VersionedOperations<
 @Rest.action
 op VersionedResourceActionWithBody<
   TEntityType extends Reflection.Model,
-  TInputParameters extends Reflection.Model,
+  TParams,
   TResponse
 > is Azure.Core.Foundations.ResourceOperation<
   TEntityType,
-  TInputParameters,
+  {
+    @doc("Parameters for the action")
+    @Http.bodyRoot
+    body: TParams;
+
+    @doc("The specific version id of the {name} to operate on.", TEntityType)
+    @Rest.segment("versions")
+    @Http.path
+    version: string;
+  },
   TResponse
 >;
 
