@@ -13281,7 +13281,8 @@
         }
       },
       "required": [
-        "scopeType"
+        "scopeType",
+        "subscriptionOrResourceGroupIds"
       ]
     },
     "ArcScopePropertiesUpdate": {
@@ -14515,6 +14516,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource Id.",
           "readOnly": true
         }
@@ -16623,37 +16625,37 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown value."
+            "description": "The job result is unknown or not yet determined."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed value."
+            "description": "The SQL inventory import job completed successfully without any issues."
           },
           {
             "name": "CompletedWithWarnings",
             "value": "CompletedWithWarnings",
-            "description": "CompletedWithWarnings value."
+            "description": "The SQL inventory import job completed but encountered non-critical warnings."
           },
           {
             "name": "CompletedWithErrors",
             "value": "CompletedWithErrors",
-            "description": "CompletedWithErrors value."
+            "description": "The SQL inventory import job completed but encountered errors with some items."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed value."
+            "description": "The SQL inventory import job failed to complete due to critical errors."
           },
           {
             "name": "WaitingForBlobUpload",
             "value": "WaitingForBlobUpload",
-            "description": "WaitingForBlobUpload value."
+            "description": "The job is waiting for the SQL inventory data blob to be uploaded."
           },
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "InProgress value."
+            "description": "The SQL inventory import job is currently running and processing data."
           }
         ]
       }
@@ -16672,23 +16674,23 @@
           {
             "name": "AzureMigrateCSV",
             "value": "AzureMigrateCSV",
-            "description": "AzureMigrateCSV value."
+            "description": "Azure Migrate CSV format for importing machine inventory data."
           },
           {
             "name": "RVToolsXlsx",
             "value": "RVToolsXlsx",
-            "description": "RVToolsXlsx value."
+            "description": "RVTools Excel format for importing VMware virtual machine inventory data."
           }
         ]
       }
     },
     "JobErrorSummary": {
       "type": "object",
-      "description": "Job Error Summary",
+      "description": "Summary of errors and warnings encountered during a job execution",
       "properties": {
         "errors": {
           "type": "array",
-          "description": "errors list",
+          "description": "List of error messages encountered during job execution",
           "items": {
             "type": "string"
           }
@@ -16696,12 +16698,12 @@
         "errorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "error count"
+          "description": "Total number of errors encountered during job execution"
         },
         "warningCount": {
           "type": "integer",
           "format": "int32",
-          "description": "warning Count"
+          "description": "Total number of warnings generated during job execution"
         }
       }
     },
