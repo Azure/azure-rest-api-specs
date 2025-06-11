@@ -3445,7 +3445,7 @@
             "$ref": "#/parameters/FilePropertySemantics"
           },
           {
-            "$ref": "#/parameters/ContentLength"
+            "$ref": "#/parameters/ContentLengthOptional"
           },
           {
             "$ref": "#/parameters/OptionalBody"
@@ -7676,6 +7676,16 @@
       "in": "header",
       "description": "Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero.",
       "required": true,
+      "type": "integer",
+      "format": "int64",
+      "x-ms-parameter-location": "method"
+    },
+    "ContentLengthOptional": {
+      "name": "Content-Length",
+      "x-ms-client-name": "contentLength",
+      "in": "header",
+      "description": "Specifies the number of bytes being transmitted in the request body. When the x-ms-write header is set to clear, the value of this header must be set to zero.",
+      "required": false,
       "type": "integer",
       "format": "int64",
       "x-ms-parameter-location": "method"
