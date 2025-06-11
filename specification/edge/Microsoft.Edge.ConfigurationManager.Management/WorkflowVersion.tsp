@@ -92,8 +92,8 @@ model StageSpec {
   tasks: TaskSpec[];
 
   @added(Versions.v2025_06_01_preview)
-  @doc("Task options for the stage")
-  taskOptions?: TaskOption;
+  @doc("Task option for the stage")
+  taskOption?: TaskOption;
 }
 
 @doc("Workflow Version Properties")
