@@ -55,20 +55,14 @@ interface CustomDomains {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSubCustomDomains_Delete")
-  @delete
-  @autoRoute
-  @doc("Delete a {name}", CustomDomain)
-  @armResourceDelete(CustomDomain)
-  delete(
-    ...ResourceInstanceParameters<
-      CustomDomain,
-      Azure.ResourceManager.Foundations.BaseParameters<CustomDomain>
-    >,
-  ):
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse
-    | ArmDeletedNoContentResponse
-    | ErrorResponse;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CustomDomain,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+      | ErrorResponse
+  >;
 
   /**
    * List all custom domains.

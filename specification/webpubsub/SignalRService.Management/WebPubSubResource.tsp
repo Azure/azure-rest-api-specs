@@ -97,20 +97,14 @@ interface WebPubSubResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("WebPubSub_Delete")
-  @delete
-  @autoRoute
-  @doc("Delete a {name}", WebPubSubResource)
-  @armResourceDelete(WebPubSubResource)
-  delete(
-    ...ResourceInstanceParameters<
-      WebPubSubResource,
-      Azure.ResourceManager.Foundations.BaseParameters<WebPubSubResource>
-    >,
-  ):
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse
-    | ArmDeletedNoContentResponse
-    | ErrorResponse;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    WebPubSubResource,
+    Response =
+      | OkResponse
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Handles requests to list all resources in a resource group.
