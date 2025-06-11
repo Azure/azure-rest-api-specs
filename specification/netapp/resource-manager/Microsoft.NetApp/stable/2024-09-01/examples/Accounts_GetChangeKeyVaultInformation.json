@@ -6,6 +6,21 @@
     "api-version": "2024-09-01"
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "keyVaultUri": "https://my-key-vault.managedhsm.azure.net",
+          "keyName": "rsakey",
+          "keyVaultResourceId": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "keyVaultPrivateEndpoints": [
+            {
+              "virtualNetworkId": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1",
+              "privateEndpointId": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privip1"
+            }
+          ]
+        }
+      }
+    },
     "202": {
       "headers": {
         "Location": "https://management.azure.com/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2024-09-01&operationResultResponseType=Location"

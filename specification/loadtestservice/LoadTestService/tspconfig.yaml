@@ -17,6 +17,9 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Developer.LoadTesting
+    model-namespace: false
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/loadtestservice.json"
@@ -25,19 +28,17 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-loadtesting"
-    package-name: "{package-dir}"
+    namespace: "azure.developer.loadtesting"
     generate-test: true
     generate-sample: true
-    # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "load-testing-rest"
     title: Azure Load Testing
     description: Azure Load Testing Client
-    generateMetadata: false
-    generateTest: false
-    packageDetails:
+    generate-metadata: false
+    package-details:
       name: "@azure-rest/load-testing"
       description: "This package contains Microsoft Azure LoadTestingClient client library."
       version: 1.0.1
@@ -46,12 +47,15 @@ options:
     package-dir: "Azure.Developer.LoadTesting"
     clear-output-folder: true
     namespace: "{package-dir}"
+    generate-sample-project: false
+    model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-developer-loadtesting"
     namespace: com.azure.developer.loadtesting
-    enable-sync-stack: false
+    enable-sync-stack: true
     partial-update: true
     generate-tests: false
+    generate-samples: false
     service-name: Load Testing
     flavor: azure

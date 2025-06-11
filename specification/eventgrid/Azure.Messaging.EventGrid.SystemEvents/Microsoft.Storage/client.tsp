@@ -107,3 +107,47 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedStatus,
   Access.public
 );
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageAsyncOperationInitiatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobInventoryPolicyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobRenamedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageBlobTierChangedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryDeletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageDirectoryRenamedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.StorageTaskQueuedEventData,
+  "csharp"
+);

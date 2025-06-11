@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/informatica"
+    default: "sdk/informaticadatamanagement"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,30 +13,26 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-informaticadatamanagement"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.informaticadatamanagement"
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-java":
-  #   package-dir: "azure-resourcemanager-informaticadatamanagement"
-  #   flavor: "azure"
-  #   namespace: "com.azure.resourcemanager.informaticadatamanagement"
-  #   service-name: "Informatica DataManagement"
-  #   examples-directory: "examples"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-informaticadatamanagement"
+    namespace: "com.azure.resourcemanager.informaticadatamanagement"
+    flavor: "azure"
+    service-name: "Informatica DataManagement"
   "@azure-tools/typespec-csharp":
+    package-dir: Azure.ResourceManager.InformaticaDataManagement
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    service-dir: "sdk/informatica"
+    experimental-extensible-enums: true
     package-dir: "arm-informaticadatamanagement"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-informaticadatamanagement"
 linter:
   extends:

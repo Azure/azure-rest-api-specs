@@ -1,0 +1,75 @@
+name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  lintdiff:
+    name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout eng
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            eng/
+            .github/
+
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Get changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
+            const { writeFileSync } = await import('fs');
+            const { join } = await import('path');
+
+            // TODO: Logger
+            const changedFiles = await getChangedFiles({ cwd: 'after'});
+            console.log('Changed files:', changedFiles);
+            
+            const filePath = join(process.cwd(), 'changed-files.txt');
+            writeFileSync(filePath, changedFiles.join('\n'), 'utf8');
+            console.log(`Changed files written to ${filePath}`);
+
+      - name: Prepend test notice to summary
+        if: always()
+        run: |
+          temp_file=$(mktemp)
+          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger LintDiff'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are are in required check 'Swagger LintDiff'.\n" > $GITHUB_STEP_SUMMARY
+
+      # TODO: Could be github.sha for merge commit
+      - name: Run LintDiff
+        run: |
+          npm exec --no -- lint-diff \
+            --before before \
+            --after after \
+            --changed-files-path changed-files.txt \
+            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --compare-sha ${{ github.event.pull_request.head.sha }} \
+            --out-file $GITHUB_STEP_SUMMARY
+
+          echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
+          echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
+          echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
+        env:
+          # Some LintDiff runs are memory intensive and require more than the
+          # default.
+          NODE_OPTIONS: '--max-old-space-size=8192'
