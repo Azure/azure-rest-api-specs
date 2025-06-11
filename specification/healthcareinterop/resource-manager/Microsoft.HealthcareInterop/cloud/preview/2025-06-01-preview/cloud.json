@@ -1,0 +1,5414 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft HealthcareInterop Cloud service",
+    "version": "2025-06-01-preview",
+    "description": "Microsoft HealthcareInterop Cloud resources management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OperationStatus"
+    },
+    {
+      "name": "Hubs"
+    },
+    {
+      "name": "StorageAccountConnectors"
+    },
+    {
+      "name": "OneLakeConnectors"
+    },
+    {
+      "name": "Hl7Connectors"
+    },
+    {
+      "name": "DicomConnectors"
+    },
+    {
+      "name": "DicomDirectChannels"
+    },
+    {
+      "name": "FhirQueryEventBatchChannels"
+    },
+    {
+      "name": "FhirQueryFlatFileBatchChannels"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.HealthcareInterop/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/dicomConnectors": {
+      "get": {
+        "operationId": "DicomConnectors_ListBySubscription",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "List DicomConnector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/DicomConnectors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/dicomDirectChannels": {
+      "get": {
+        "operationId": "DicomDirectChannels_ListBySubscription",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "List DicomDirectChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels": {
+      "get": {
+        "operationId": "FhirQueryEventBatchChannels_ListBySubscription",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "List FhirQueryEventBatchChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels": {
+      "get": {
+        "operationId": "FhirQueryFlatFileBatchChannels_ListBySubscription",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "List FhirQueryFlatFileBatchChannel resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/hl7Connectors": {
+      "get": {
+        "operationId": "Hl7Connectors_ListBySubscription",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "List Hl7Connector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hl7ConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/hubs": {
+      "get": {
+        "operationId": "Hubs_ListBySubscription",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "List Hub resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/Hubs_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationStatus_Get_MaximumSet": {
+            "$ref": "./examples/OperationStatus_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/oneLakeConnectors": {
+      "get": {
+        "operationId": "OneLakeConnectors_ListBySubscription",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "List OneLakeConnector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareInterop/storageAccountConnectors": {
+      "get": {
+        "operationId": "StorageAccountConnectors_ListBySubscription",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "List StorageAccountConnector resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomConnectors": {
+      "get": {
+        "operationId": "DicomConnectors_ListByResourceGroup",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "List DicomConnector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/DicomConnectors_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomConnectors/{dicomConnectorName}": {
+      "get": {
+        "operationId": "DicomConnectors_Get",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "Get a DicomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomConnectorName",
+            "in": "path",
+            "description": "The name of the Dicom connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_Get_MaximumSet": {
+            "$ref": "./examples/DicomConnectors_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DicomConnectors_CreateOrUpdate",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "Create a DicomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomConnectorName",
+            "in": "path",
+            "description": "The name of the Dicom connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DicomConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DicomConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'DicomConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DicomConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DicomConnectors_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DicomConnectors_Update",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "Update a DicomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomConnectorName",
+            "in": "path",
+            "description": "The name of the Dicom connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomConnector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_Update_MaximumSet": {
+            "$ref": "./examples/DicomConnectors_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DicomConnectors_Delete",
+        "tags": [
+          "DicomConnectors"
+        ],
+        "description": "Delete a DicomConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomConnectorName",
+            "in": "path",
+            "description": "The name of the Dicom connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomConnectors_Delete": {
+            "$ref": "./examples/DicomConnectors_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels": {
+      "get": {
+        "operationId": "DicomDirectChannels_ListByResourceGroup",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "List DicomDirectChannel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/dicomDirectChannels/{dicomDirectChannelName}": {
+      "get": {
+        "operationId": "DicomDirectChannels_Get",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "Get a DicomDirectChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomDirectChannelName",
+            "in": "path",
+            "description": "The name of the DicomDirectChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_Get_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DicomDirectChannels_CreateOrUpdate",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "Create a DicomDirectChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomDirectChannelName",
+            "in": "path",
+            "description": "The name of the DicomDirectChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DicomDirectChannel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannel"
+            }
+          },
+          "201": {
+            "description": "Resource 'DicomDirectChannel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DicomDirectChannels_Update",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "Update a DicomDirectChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomDirectChannelName",
+            "in": "path",
+            "description": "The name of the DicomDirectChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DicomDirectChannel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_Update_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DicomDirectChannels_Delete",
+        "tags": [
+          "DicomDirectChannels"
+        ],
+        "description": "Delete a DicomDirectChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dicomDirectChannelName",
+            "in": "path",
+            "description": "The name of the DicomDirectChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DicomDirectChannels_Delete_MaximumSet": {
+            "$ref": "./examples/DicomDirectChannels_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels": {
+      "get": {
+        "operationId": "FhirQueryEventBatchChannels_ListByResourceGroup",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "List FhirQueryEventBatchChannel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryEventBatchChannels/{fhirQueryEventBatchChannelName}": {
+      "get": {
+        "operationId": "FhirQueryEventBatchChannels_Get",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "Get a FhirQueryEventBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryEventBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryEventBatchChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_Get_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FhirQueryEventBatchChannels_CreateOrUpdate",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "Create a FhirQueryEventBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryEventBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryEventBatchChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FhirQueryEventBatchChannel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannel"
+            }
+          },
+          "201": {
+            "description": "Resource 'FhirQueryEventBatchChannel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FhirQueryEventBatchChannels_Update",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "Update a FhirQueryEventBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryEventBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryEventBatchChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryEventBatchChannel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_Update_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FhirQueryEventBatchChannels_Delete",
+        "tags": [
+          "FhirQueryEventBatchChannels"
+        ],
+        "description": "Delete a FhirQueryEventBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryEventBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryEventBatchChannel resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryEventBatchChannels_Delete_MaximumSet": {
+            "$ref": "./examples/FhirQueryEventBatchChannels_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels": {
+      "get": {
+        "operationId": "FhirQueryFlatFileBatchChannels_ListByResourceGroup",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "List FhirQueryFlatFileBatchChannel resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/fhirQueryFlatFileBatchChannels/{fhirQueryFlatFileBatchChannelName}": {
+      "get": {
+        "operationId": "FhirQueryFlatFileBatchChannels_Get",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "Get a FhirQueryFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_Get_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FhirQueryFlatFileBatchChannels_CreateOrUpdate",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "Create a FhirQueryFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FhirQueryFlatFileBatchChannel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+            }
+          },
+          "201": {
+            "description": "Resource 'FhirQueryFlatFileBatchChannel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FhirQueryFlatFileBatchChannels_Update",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "Update a FhirQueryFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannelUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_Update_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FhirQueryFlatFileBatchChannels_Delete",
+        "tags": [
+          "FhirQueryFlatFileBatchChannels"
+        ],
+        "description": "Delete a FhirQueryFlatFileBatchChannel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fhirQueryFlatFileBatchChannelName",
+            "in": "path",
+            "description": "The name of the FhirQueryFlatFileBatchChannel resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FhirQueryFlatFileBatchChannels_Delete_MaximumSet": {
+            "$ref": "./examples/FhirQueryFlatFileBatchChannels_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/hl7Connectors": {
+      "get": {
+        "operationId": "Hl7Connectors_ListByResourceGroup",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "List Hl7Connector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hl7ConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/hl7Connectors/{hl7ConnectorName}": {
+      "get": {
+        "operationId": "Hl7Connectors_Get",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "Get a Hl7Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hl7ConnectorName",
+            "in": "path",
+            "description": "The name of the Hl7 connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hl7Connector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_Get_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Hl7Connectors_CreateOrUpdate",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "Create a Hl7Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hl7ConnectorName",
+            "in": "path",
+            "description": "The name of the Hl7 connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Hl7Connector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Hl7Connector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Hl7Connector"
+            }
+          },
+          "201": {
+            "description": "Resource 'Hl7Connector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Hl7Connector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Hl7Connectors_Update",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "Update a Hl7Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hl7ConnectorName",
+            "in": "path",
+            "description": "The name of the Hl7 connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Hl7ConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hl7Connector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_Update_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Hl7Connectors_Delete",
+        "tags": [
+          "Hl7Connectors"
+        ],
+        "description": "Delete a Hl7Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hl7ConnectorName",
+            "in": "path",
+            "description": "The name of the Hl7 connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hl7Connectors_Delete_MaximumSet": {
+            "$ref": "./examples/Hl7Connectors_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/hubs": {
+      "get": {
+        "operationId": "Hubs_ListByResourceGroup",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "List Hub resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HubListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/Hubs_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/hubs/{hubName}": {
+      "get": {
+        "operationId": "Hubs_Get",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "Get a Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The name of the hub resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_Get_MaximumSet": {
+            "$ref": "./examples/Hubs_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Hubs_CreateOrUpdate",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "Create a Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The name of the hub resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Hub' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            }
+          },
+          "201": {
+            "description": "Resource 'Hub' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Hubs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Hubs_Update",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "Update a Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The name of the hub resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_Update_MaximumSet": {
+            "$ref": "./examples/Hubs_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Hubs_Delete",
+        "tags": [
+          "Hubs"
+        ],
+        "description": "Delete a Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hubName",
+            "in": "path",
+            "description": "The name of the hub resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Hubs_Delete_MaximumSet": {
+            "$ref": "./examples/Hubs_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/oneLakeConnectors": {
+      "get": {
+        "operationId": "OneLakeConnectors_ListByResourceGroup",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "List OneLakeConnector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/oneLakeConnectors/{oneLakeConnectorName}": {
+      "get": {
+        "operationId": "OneLakeConnectors_Get",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "Get a OneLakeConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "oneLakeConnectorName",
+            "in": "path",
+            "description": "The name of the OneLake connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_Get_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OneLakeConnectors_CreateOrUpdate",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "Create a OneLakeConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "oneLakeConnectorName",
+            "in": "path",
+            "description": "The name of the OneLake connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OneLakeConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'OneLakeConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OneLakeConnectors_Update",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "Update a OneLakeConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "oneLakeConnectorName",
+            "in": "path",
+            "description": "The name of the OneLake connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneLakeConnector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_Update_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OneLakeConnectors_Delete",
+        "tags": [
+          "OneLakeConnectors"
+        ],
+        "description": "Delete a OneLakeConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "oneLakeConnectorName",
+            "in": "path",
+            "description": "The name of the OneLake connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OneLakeConnectors_Delete_MaximumSet": {
+            "$ref": "./examples/OneLakeConnectors_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/storageAccountConnectors": {
+      "get": {
+        "operationId": "StorageAccountConnectors_ListByResourceGroup",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "List StorageAccountConnector resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthcareInterop/storageAccountConnectors/{storageAccountConnectorName}": {
+      "get": {
+        "operationId": "StorageAccountConnectors_Get",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "Get a StorageAccountConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageAccountConnectorName",
+            "in": "path",
+            "description": "The name of the storage account connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_Get_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageAccountConnectors_CreateOrUpdate",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "Create a StorageAccountConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageAccountConnectorName",
+            "in": "path",
+            "description": "The name of the storage account connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageAccountConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'StorageAccountConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StorageAccountConnectors_Update",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "Update a StorageAccountConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageAccountConnectorName",
+            "in": "path",
+            "description": "The name of the storage account connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccountConnector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_Update_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "StorageAccountConnectors_Delete",
+        "tags": [
+          "StorageAccountConnectors"
+        ],
+        "description": "Delete a StorageAccountConnector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageAccountConnectorName",
+            "in": "path",
+            "description": "The name of the storage account connector resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageAccountConnectors_Delete_MaximumSet": {
+            "$ref": "./examples/StorageAccountConnectors_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdhocTriggerConfiguration": {
+      "type": "object",
+      "description": "The adhoc based trigger configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchTriggerProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AdhocTrigger"
+    },
+    "AdhocTriggerConfigurationUpdate": {
+      "type": "object",
+      "description": "The adhoc based trigger configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchTriggerPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AdhocTrigger"
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BatchTriggerProperties": {
+      "type": "object",
+      "description": "Trigger configuration for batch based channels",
+      "properties": {
+        "triggerType": {
+          "$ref": "#/definitions/BatchTriggerType",
+          "description": "The type of trigger."
+        },
+        "startDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional input to specify the start date time of the trigger in UTC timezone. By default, the trigger will start once the resource is successfully provisioned."
+        },
+        "state": {
+          "$ref": "#/definitions/TriggerState",
+          "description": "The state of the trigger."
+        }
+      },
+      "discriminator": "triggerType",
+      "required": [
+        "triggerType",
+        "state"
+      ]
+    },
+    "BatchTriggerPropertiesUpdate": {
+      "type": "object",
+      "description": "Trigger configuration for batch based channels",
+      "properties": {
+        "triggerType": {
+          "$ref": "#/definitions/BatchTriggerType",
+          "description": "The type of trigger."
+        },
+        "startDateTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional input to specify the start date time of the trigger in UTC timezone. By default, the trigger will start once the resource is successfully provisioned."
+        },
+        "state": {
+          "$ref": "#/definitions/TriggerState",
+          "description": "The state of the trigger."
+        }
+      },
+      "discriminator": "triggerType",
+      "required": [
+        "triggerType"
+      ]
+    },
+    "BatchTriggerType": {
+      "type": "string",
+      "description": "The batch trigger types.",
+      "enum": [
+        "AdhocTrigger",
+        "RecurringScheduleTrigger"
+      ],
+      "x-ms-enum": {
+        "name": "BatchTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AdhocTrigger",
+            "value": "AdhocTrigger",
+            "description": "The adhoc trigger type."
+          },
+          {
+            "name": "RecurringScheduleTrigger",
+            "value": "RecurringScheduleTrigger",
+            "description": "The recurring schedule trigger type."
+          }
+        ]
+      }
+    },
+    "Credential": {
+      "type": "object",
+      "description": "The credential properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CredentialType",
+          "description": "The type of the credential."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "CredentialType": {
+      "type": "string",
+      "description": "The credential types.",
+      "enum": [
+        "KeyVaultKey"
+      ],
+      "x-ms-enum": {
+        "name": "CredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeyVaultKey",
+            "value": "KeyVaultKey",
+            "description": "Private key stored in KeyVault as key object."
+          }
+        ]
+      }
+    },
+    "CredentialUpdate": {
+      "type": "object",
+      "description": "The credential properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CredentialType",
+          "description": "The type of the credential."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "CustomLocation": {
+      "type": "object",
+      "description": "The custom location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom location resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the custom location resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ExtendedLocation/customLocations"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id"
+      ]
+    },
+    "DicomConnector": {
+      "type": "object",
+      "description": "The healthcare interop DICOM connector resource that reads healthcare images from on-prem systems which is processed by the healthcare interop channel resource(s) associated with this connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DicomConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DicomConnectorListResult": {
+      "type": "object",
+      "description": "The response of a DicomConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DicomConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/DicomConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DicomConnectorProperties": {
+      "type": "object",
+      "description": "The properties to configure the DICOM connector resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this dicomConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "connectedClusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the remote connector environment connected cluster where the connector will be deployed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          }
+        },
+        "receiver": {
+          "type": "object",
+          "description": "The receiver configuration to be used for the DICOM connector.",
+          "properties": {
+            "dicomListenerConfiguration": {
+              "$ref": "#/definitions/DicomListenerConfiguration",
+              "description": "The listener configuration to be used for DICOM connector."
+            },
+            "requirements": {
+              "$ref": "#/definitions/Requirements",
+              "description": "The resource requirements for the application (CPU, Memory, and Storage)."
+            }
+          },
+          "required": [
+            "dicomListenerConfiguration"
+          ]
+        },
+        "managedDicomEdgeConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the dicomEdgeConnector resource managed by this resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/dicomEdgeConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "connectedClusterId"
+      ]
+    },
+    "DicomConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the DICOM connector resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this dicomConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "connectedClusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the remote connector environment connected cluster where the connector will be deployed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          }
+        },
+        "receiver": {
+          "type": "object",
+          "description": "The receiver configuration to be used for the DICOM connector.",
+          "properties": {
+            "dicomListenerConfiguration": {
+              "$ref": "#/definitions/DicomListenerConfigurationUpdate",
+              "description": "The listener configuration to be used for DICOM connector."
+            },
+            "requirements": {
+              "$ref": "#/definitions/Requirements",
+              "description": "The resource requirements for the application (CPU, Memory, and Storage)."
+            }
+          }
+        }
+      }
+    },
+    "DicomConnectorUpdate": {
+      "type": "object",
+      "description": "The healthcare interop DICOM connector resource that reads healthcare images from on-prem systems which is processed by the healthcare interop channel resource(s) associated with this connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DicomConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "DicomDirectChannel": {
+      "type": "object",
+      "description": "The healthcare interop resource that transfers DICOM files.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DicomDirectChannelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DicomDirectChannelDestinationConnectorType": {
+      "type": "string",
+      "description": "Types of destination connectors supported for the channel resources.",
+      "enum": [
+        "StorageAccountConnector"
+      ],
+      "x-ms-enum": {
+        "name": "DicomDirectChannelDestinationConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccountConnector",
+            "value": "StorageAccountConnector",
+            "description": "Storage Account destination connector."
+          }
+        ]
+      }
+    },
+    "DicomDirectChannelDestinationProperties": {
+      "type": "object",
+      "description": "The destination configuration for the channel resources.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DicomDirectChannelDestinationConnectorType",
+          "description": "The type of destination connector."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DicomDirectChannelDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "The destination configuration for the channel resources.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/DicomDirectChannelDestinationConnectorType",
+          "description": "The type of destination connector."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "DicomDirectChannelListResult": {
+      "type": "object",
+      "description": "The response of a DicomDirectChannel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DicomDirectChannel items on this page",
+          "items": {
+            "$ref": "#/definitions/DicomDirectChannel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DicomDirectChannelProperties": {
+      "type": "object",
+      "description": "The properties to configure the DicomDirectChannel resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this dicomDirectChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/DicomDirectChannelSourceProperties",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/DicomDirectChannelDestinationProperties",
+          "description": "The settings to configure the destination of the data to be persisted."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "sourceConfiguration",
+        "destinationConfiguration"
+      ]
+    },
+    "DicomDirectChannelPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the DicomDirectChannel resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this dicomDirectChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/DicomDirectChannelSourcePropertiesUpdate",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/DicomDirectChannelDestinationPropertiesUpdate",
+          "description": "The settings to configure the destination of the data to be persisted."
+        }
+      }
+    },
+    "DicomDirectChannelSourceProperties": {
+      "type": "object",
+      "description": "The source configuration for the DicomDirectChannel resource.",
+      "properties": {
+        "dicomConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing dicomConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/dicomConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "dicomConnectorResourceId"
+      ]
+    },
+    "DicomDirectChannelSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The source configuration for the DicomDirectChannel resource.",
+      "properties": {
+        "dicomConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing dicomConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/dicomConnectors"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DicomDirectChannelUpdate": {
+      "type": "object",
+      "description": "The healthcare interop resource that transfers DICOM files.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DicomDirectChannelPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "DicomDirectStorageAccountConnectorDestinationProperties": {
+      "type": "object",
+      "description": "StorageAccountConnector destination properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "storageAccountConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DicomDirectChannelDestinationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "DicomDirectStorageAccountConnectorDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "StorageAccountConnector destination properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DicomDirectChannelDestinationPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "DicomListenerConfiguration": {
+      "type": "object",
+      "description": "The Listener Configuration to be used for dicom connector configuration.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number that will be exposed to receive DICOM images.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "port"
+      ]
+    },
+    "DicomListenerConfigurationUpdate": {
+      "type": "object",
+      "description": "The Listener Configuration to be used for dicom connector configuration.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number that will be exposed to receive DICOM images.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "EmrSystemType": {
+      "type": "string",
+      "description": "The EMR system types.",
+      "enum": [
+        "Epic"
+      ],
+      "x-ms-enum": {
+        "name": "EmrSystemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Epic",
+            "value": "Epic",
+            "description": "The Epic EMR system."
+          }
+        ]
+      }
+    },
+    "EpicFhirServerAuthenticationProperties": {
+      "type": "object",
+      "description": "The Epic FHIR Server authentication configuration.",
+      "properties": {
+        "authorizationEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The OAuth2 authorization URL."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID to use to fetch the token."
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/Credential",
+          "description": "The client secret credential to use to fetch the token."
+        }
+      },
+      "required": [
+        "authorizationEndpoint",
+        "clientId",
+        "clientSecret"
+      ]
+    },
+    "EpicFhirServerAuthenticationPropertiesUpdate": {
+      "type": "object",
+      "description": "The Epic FHIR Server authentication configuration.",
+      "properties": {
+        "authorizationEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The OAuth2 authorization URL."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID to use to fetch the token."
+        },
+        "clientSecret": {
+          "$ref": "#/definitions/CredentialUpdate",
+          "description": "The client secret credential to use to fetch the token."
+        }
+      }
+    },
+    "EpicFhirServerProperties": {
+      "type": "object",
+      "description": "The Epic EMR system properties.",
+      "properties": {
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/EpicFhirServerAuthenticationProperties",
+          "description": "The Epic FHIR Server authentication configuration."
+        }
+      },
+      "required": [
+        "authenticationConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirServerProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Epic"
+    },
+    "EpicFhirServerPropertiesUpdate": {
+      "type": "object",
+      "description": "The Epic EMR system properties.",
+      "properties": {
+        "authenticationConfiguration": {
+          "$ref": "#/definitions/EpicFhirServerAuthenticationPropertiesUpdate",
+          "description": "The Epic FHIR Server authentication configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirServerPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Epic"
+    },
+    "ErrorAckStrategy": {
+      "type": "string",
+      "description": "The strategy for how HL7 message error acknowledgments are sent back to the caller.",
+      "enum": [
+        "SendNackOnError",
+        "NeverSendNack"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorAckStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SendNackOnError",
+            "value": "SendNackOnError",
+            "description": "The error acknowledgment strategy is to send a negative acknowledgment (NACK) message"
+          },
+          {
+            "name": "NeverSendNack",
+            "value": "NeverSendNack",
+            "description": "The error acknowledgment strategy is to never send a negative acknowledgment (NACK) message"
+          }
+        ]
+      }
+    },
+    "ExtensionManagedIdentity": {
+      "type": "object",
+      "description": "The managed identity used for extensions.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the managed identity.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The managed identity type.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "principalId",
+        "type"
+      ]
+    },
+    "FhirQueryBatchChannelDestinationConnectorType": {
+      "type": "string",
+      "description": "Types of destination connectors supported for the FHIR query batch based channel resources.",
+      "enum": [
+        "StorageAccountConnector",
+        "OneLakeConnector"
+      ],
+      "x-ms-enum": {
+        "name": "FhirQueryBatchChannelDestinationConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccountConnector",
+            "value": "StorageAccountConnector",
+            "description": "Storage Account destination connector."
+          },
+          {
+            "name": "OneLakeConnector",
+            "value": "OneLakeConnector",
+            "description": "One Lake destination connector."
+          }
+        ]
+      }
+    },
+    "FhirQueryBatchChannelDestinationProperties": {
+      "type": "object",
+      "description": "The destination configuration for the FHIR query batch based channel resources.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationConnectorType",
+          "description": "The type of destination connector."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryBatchChannelDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "The destination configuration for the FHIR query batch based channel resources.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationConnectorType",
+          "description": "The type of destination connector."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryBatchOneLakeConnectorDestinationProperties": {
+      "type": "object",
+      "description": "OneLakeConnector destination properties.",
+      "properties": {
+        "oneLakeConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing oneLakeConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/oneLakeConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "oneLakeConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "OneLakeConnector"
+    },
+    "FhirQueryBatchOneLakeConnectorDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "OneLakeConnector destination properties.",
+      "properties": {
+        "oneLakeConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing oneLakeConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/oneLakeConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "OneLakeConnector"
+    },
+    "FhirQueryBatchStorageAccountConnectorDestinationProperties": {
+      "type": "object",
+      "description": "StorageAccountConnector destination properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "storageAccountConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "FhirQueryBatchStorageAccountConnectorDestinationPropertiesUpdate": {
+      "type": "object",
+      "description": "StorageAccountConnector destination properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as destination.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "FhirQueryEventBatchChannel": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from input healthcare events/messages and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FhirQueryEventBatchChannelJobProperties": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerProperties",
+          "description": "The trigger configuration"
+        }
+      },
+      "required": [
+        "trigger"
+      ]
+    },
+    "FhirQueryEventBatchChannelJobPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerPropertiesUpdate",
+          "description": "The trigger configuration"
+        }
+      }
+    },
+    "FhirQueryEventBatchChannelListResult": {
+      "type": "object",
+      "description": "The response of a FhirQueryEventBatchChannel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FhirQueryEventBatchChannel items on this page",
+          "items": {
+            "$ref": "#/definitions/FhirQueryEventBatchChannel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FhirQueryEventBatchChannelProperties": {
+      "type": "object",
+      "description": "The properties to configure the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this fhirQueryEventBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourceProperties",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelTransformationProperties",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationProperties",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelJobProperties",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "sourceConfiguration",
+        "transformationConfiguration",
+        "destinationConfiguration",
+        "jobConfiguration"
+      ]
+    },
+    "FhirQueryEventBatchChannelPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this fhirQueryEventBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourcePropertiesUpdate",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelTransformationPropertiesUpdate",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationPropertiesUpdate",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelJobPropertiesUpdate",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      }
+    },
+    "FhirQueryEventBatchChannelSourceConnectorType": {
+      "type": "string",
+      "description": "Types of source connectors supported for the FhirQueryEventBatchChannel resource.",
+      "enum": [
+        "Hl7Connector"
+      ],
+      "x-ms-enum": {
+        "name": "FhirQueryEventBatchChannelSourceConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hl7Connector",
+            "value": "Hl7Connector",
+            "description": "Hl7 connector."
+          }
+        ]
+      }
+    },
+    "FhirQueryEventBatchChannelSourceProperties": {
+      "type": "object",
+      "description": "The source configuration for the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryEventBatchChannelSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The source configuration for the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryEventBatchChannelTransformationProperties": {
+      "type": "object",
+      "description": "The transformation configuration for the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryProperties",
+          "description": "The Fhir Query configuration."
+        }
+      },
+      "required": [
+        "fhirQueryConfiguration"
+      ]
+    },
+    "FhirQueryEventBatchChannelTransformationPropertiesUpdate": {
+      "type": "object",
+      "description": "The transformation configuration for the FhirQueryEventBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryPropertiesUpdate",
+          "description": "The Fhir Query configuration."
+        }
+      }
+    },
+    "FhirQueryEventBatchChannelUpdate": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from input healthcare events/messages and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "FhirQueryFlatFileBatchChannel": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelJobProperties": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerProperties",
+          "description": "The trigger configuration"
+        }
+      },
+      "required": [
+        "trigger"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelJobPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties for Job",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/BatchTriggerPropertiesUpdate",
+          "description": "The trigger configuration"
+        }
+      }
+    },
+    "FhirQueryFlatFileBatchChannelListResult": {
+      "type": "object",
+      "description": "The response of a FhirQueryFlatFileBatchChannel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FhirQueryFlatFileBatchChannel items on this page",
+          "items": {
+            "$ref": "#/definitions/FhirQueryFlatFileBatchChannel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelProperties": {
+      "type": "object",
+      "description": "The properties to configure the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this fhirQueryFlatFileBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourceProperties",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelTransformationProperties",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationProperties",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelJobProperties",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "sourceConfiguration",
+        "transformationConfiguration",
+        "destinationConfiguration",
+        "jobConfiguration"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this fhirQueryFlatFileBatchChannel resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "sourceConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourcePropertiesUpdate",
+          "description": "The settings to configure the source of the data to be ingested."
+        },
+        "transformationConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelTransformationPropertiesUpdate",
+          "description": "The settings to configure the transformations to process the data."
+        },
+        "destinationConfiguration": {
+          "$ref": "#/definitions/FhirQueryBatchChannelDestinationPropertiesUpdate",
+          "description": "The settings to configure the destination of the data to be persisted."
+        },
+        "jobConfiguration": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelJobPropertiesUpdate",
+          "description": "The settings to configure the job executions to process the data."
+        }
+      }
+    },
+    "FhirQueryFlatFileBatchChannelSourceConnectorType": {
+      "type": "string",
+      "description": "Types of source connectors supported for the FhirQueryFlatFileBatchChannel resource.",
+      "enum": [
+        "StorageAccountConnector"
+      ],
+      "x-ms-enum": {
+        "name": "FhirQueryFlatFileBatchChannelSourceConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccountConnector",
+            "value": "StorageAccountConnector",
+            "description": "Storage Account connector."
+          }
+        ]
+      }
+    },
+    "FhirQueryFlatFileBatchChannelSourceProperties": {
+      "type": "object",
+      "description": "The source configuration for the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "The source configuration for the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourceConnectorType",
+          "description": "The type of source connector to be used for this channel."
+        }
+      },
+      "discriminator": "connectorType",
+      "required": [
+        "connectorType"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelTransformationProperties": {
+      "type": "object",
+      "description": "The transformation configuration for the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryProperties",
+          "description": "The FHIR Query configuration."
+        }
+      },
+      "required": [
+        "fhirQueryConfiguration"
+      ]
+    },
+    "FhirQueryFlatFileBatchChannelTransformationPropertiesUpdate": {
+      "type": "object",
+      "description": "The transformation configuration for the FhirQueryFlatFileBatchChannel resource.",
+      "properties": {
+        "fhirQueryConfiguration": {
+          "$ref": "#/definitions/FhirQueryPropertiesUpdate",
+          "description": "The FHIR Query configuration."
+        }
+      }
+    },
+    "FhirQueryFlatFileBatchChannelUpdate": {
+      "type": "object",
+      "description": "The healthcare interop resource that extracts IDs from file that contains a list of delimited IDs and queries the configured EMR FHIR endpoint to retrieve the representative resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "FhirQueryProperties": {
+      "type": "object",
+      "description": "The FHIR Query configuration that is to be used when fetching the associated FHIR resources from the EMR FHIR endpoint.",
+      "properties": {
+        "fhirServerConfiguration": {
+          "$ref": "#/definitions/FhirServerProperties",
+          "description": "The FHIR Server configuration."
+        }
+      },
+      "required": [
+        "fhirServerConfiguration"
+      ]
+    },
+    "FhirQueryPropertiesUpdate": {
+      "type": "object",
+      "description": "The FHIR Query configuration that is to be used when fetching the associated FHIR resources from the EMR FHIR endpoint.",
+      "properties": {
+        "fhirServerConfiguration": {
+          "$ref": "#/definitions/FhirServerPropertiesUpdate",
+          "description": "The FHIR Server configuration."
+        }
+      }
+    },
+    "FhirServerProperties": {
+      "type": "object",
+      "description": "The FHIR Server configuration.",
+      "properties": {
+        "emrSystem": {
+          "$ref": "#/definitions/EmrSystemType",
+          "description": "The type of EMR system."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The FHIR Server URL."
+        }
+      },
+      "discriminator": "emrSystem",
+      "required": [
+        "emrSystem",
+        "serviceEndpoint"
+      ]
+    },
+    "FhirServerPropertiesUpdate": {
+      "type": "object",
+      "description": "The FHIR Server configuration.",
+      "properties": {
+        "emrSystem": {
+          "$ref": "#/definitions/EmrSystemType",
+          "description": "The type of EMR system."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The FHIR Server URL."
+        }
+      },
+      "discriminator": "emrSystem",
+      "required": [
+        "emrSystem"
+      ]
+    },
+    "Hl7Configuration": {
+      "type": "object",
+      "description": "Settings used to customize how HL7 messages are read.",
+      "properties": {
+        "carriageReturn": {
+          "type": "string",
+          "description": "Optional string representing the carriage return character used in the HL7/MLLP implementation.",
+          "maxLength": 4
+        },
+        "carriageReturnOptional": {
+          "type": "boolean",
+          "description": "Optional boolean indicating if the carriage return is optional in the HL7/MLLP implementation."
+        },
+        "endBlockDelimiter": {
+          "type": "string",
+          "description": "Optional string representing the end block delimiter used in the HL7/MLLP implementation.",
+          "maxLength": 4
+        },
+        "errorAckStrategy": {
+          "$ref": "#/definitions/ErrorAckStrategy",
+          "description": "Optional enum representing how HL7 message error acknowledgments are sent back to the caller"
+        },
+        "noStartByteRequired": {
+          "type": "boolean",
+          "description": "Optional boolean indicating if no start byte is required in the HL7/MLLP implementation."
+        },
+        "startBlockDelimiter": {
+          "type": "string",
+          "description": "Optional string representing the start block delimiter used in the HL7/MLLP implementation.",
+          "maxLength": 4
+        }
+      }
+    },
+    "Hl7Connector": {
+      "type": "object",
+      "description": "The healthcare interop Hl7 connector resource that reads healthcare events/messages from on-prem systems which is processed by the healthcare interop channel resource(s) associated with this connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Hl7ConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Hl7ConnectorListResult": {
+      "type": "object",
+      "description": "The response of a Hl7Connector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Hl7Connector items on this page",
+          "items": {
+            "$ref": "#/definitions/Hl7Connector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Hl7ConnectorProperties": {
+      "type": "object",
+      "description": "The properties to configure the Hl7 connector resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this hl7Connector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "connectedClusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the remote connector environment connected cluster where the connector will be deployed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          }
+        },
+        "receiver": {
+          "type": "object",
+          "description": "The receiver configuration to be used for the Hl7 connector.",
+          "properties": {
+            "hl7Configuration": {
+              "$ref": "#/definitions/Hl7Configuration",
+              "description": "The receiver endpoint configuration to be used for Hl7 connector."
+            },
+            "messageListenerConfiguration": {
+              "$ref": "#/definitions/MessageListenerConfiguration",
+              "description": "The listener configuration to be used for Hl7 connector."
+            },
+            "requirements": {
+              "$ref": "#/definitions/Requirements",
+              "description": "The resource requirements for the application (CPU, Memory, and Storage)."
+            }
+          },
+          "required": [
+            "messageListenerConfiguration"
+          ]
+        },
+        "managedHl7EdgeConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the hl7EdgeConnector resource managed by this resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hl7EdgeConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "connectedClusterId"
+      ]
+    },
+    "Hl7ConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the Hl7 connector resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this hl7Connector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "connectedClusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the remote connector environment connected cluster where the connector will be deployed.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          }
+        },
+        "receiver": {
+          "type": "object",
+          "description": "The receiver configuration to be used for the Hl7 connector.",
+          "properties": {
+            "hl7Configuration": {
+              "$ref": "#/definitions/Hl7Configuration",
+              "description": "The receiver endpoint configuration to be used for Hl7 connector."
+            },
+            "messageListenerConfiguration": {
+              "$ref": "#/definitions/MessageListenerConfigurationUpdate",
+              "description": "The listener configuration to be used for Hl7 connector."
+            },
+            "requirements": {
+              "$ref": "#/definitions/Requirements",
+              "description": "The resource requirements for the application (CPU, Memory, and Storage)."
+            }
+          }
+        }
+      }
+    },
+    "Hl7ConnectorSourceProperties": {
+      "type": "object",
+      "description": "Hl7Connector source properties.",
+      "properties": {
+        "hl7ConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hl7Connector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hl7Connectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "hl7ConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Hl7Connector"
+    },
+    "Hl7ConnectorSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "Hl7Connector source properties.",
+      "properties": {
+        "hl7ConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hl7Connector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hl7Connectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryEventBatchChannelSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Hl7Connector"
+    },
+    "Hl7ConnectorUpdate": {
+      "type": "object",
+      "description": "The healthcare interop Hl7 connector resource that reads healthcare events/messages from on-prem systems which is processed by the healthcare interop channel resource(s) associated with this connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Hl7ConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Hub": {
+      "type": "object",
+      "description": "The healthcare interop hub resource to centrally manage configuration across a collection of associated healthcare interop resources such as connectors and channels.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HubListResult": {
+      "type": "object",
+      "description": "The response of a Hub list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Hub items on this page",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HubProperties": {
+      "type": "object",
+      "description": "The properties to configure the healthcare interop hub.",
+      "properties": {
+        "managedInfraConfiguration": {
+          "$ref": "#/definitions/ManagedInfraConfiguration",
+          "description": "The configuration for the managed infra resources associated with this hub resource.",
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "The managed-on-behalf-of configuration for the resource provider to be able to manage resources on behalf of the resource owner.",
+          "readOnly": true
+        },
+        "remoteConnectorEnvironments": {
+          "type": "array",
+          "description": "Environments hosted on remote locations where Connectors can be deployed.",
+          "items": {
+            "$ref": "#/definitions/RemoteConnectorEnvironment"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "HubPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the healthcare interop hub.",
+      "properties": {
+        "remoteConnectorEnvironments": {
+          "type": "array",
+          "description": "Environments hosted on remote locations where Connectors can be deployed.",
+          "items": {
+            "$ref": "#/definitions/RemoteConnectorEnvironment"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HubUpdate": {
+      "type": "object",
+      "description": "The healthcare interop hub resource to centrally manage configuration across a collection of associated healthcare interop resources such as connectors and channels.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "KeyVaultConfiguration": {
+      "type": "object",
+      "description": "Key Vault configuration.",
+      "properties": {
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the key vault.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the key vault.",
+          "pattern": ".+\\.vault\\.azure\\.net\\/",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "keyVaultResourceId",
+        "keyVaultUri"
+      ]
+    },
+    "KeyVaultKeyCredential": {
+      "type": "object",
+      "description": "KeyVault key credential properties",
+      "properties": {
+        "keyVaultKeyIdentifier": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the key vault key identifier."
+        }
+      },
+      "required": [
+        "keyVaultKeyIdentifier"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Credential"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyVaultKey"
+    },
+    "KeyVaultKeyCredentialUpdate": {
+      "type": "object",
+      "description": "KeyVault key credential properties",
+      "properties": {
+        "keyVaultKeyIdentifier": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the key vault key identifier."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CredentialUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyVaultKey"
+    },
+    "ManagedInfraConfiguration": {
+      "type": "object",
+      "description": "The configuration for the managed infra resources.",
+      "properties": {
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the managed resource group.",
+          "readOnly": true
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountConfiguration",
+          "description": "The configuration of the managed-on-behalf-of storage account.",
+          "readOnly": true
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultConfiguration",
+          "description": "The configuration of the managed-on-behalf-of key vault.",
+          "readOnly": true
+        }
+      }
+    },
+    "MessageListenerConfiguration": {
+      "type": "object",
+      "description": "Settings used to customize the newtwork listener configuration.",
+      "properties": {
+        "inactivityTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional duration in seconds to wait before an inactive connection is closed. Not used if useTransientConnection is true.",
+          "minimum": 10
+        },
+        "messageBufferSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional size of the message buffer used when reading HL7 messages from an MLLP connection.",
+          "minimum": 512
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number that will be exposed to receive HL7 messages.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "useTransientConnection": {
+          "type": "boolean",
+          "description": "Optional setting that will close the connection between each HL7 message received."
+        }
+      },
+      "required": [
+        "port"
+      ]
+    },
+    "MessageListenerConfigurationUpdate": {
+      "type": "object",
+      "description": "Settings used to customize the newtwork listener configuration.",
+      "properties": {
+        "inactivityTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional duration in seconds to wait before an inactive connection is closed. Not used if useTransientConnection is true.",
+          "minimum": 10
+        },
+        "messageBufferSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional size of the message buffer used when reading HL7 messages from an MLLP connection.",
+          "minimum": 512
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number that will be exposed to receive HL7 messages.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "useTransientConnection": {
+          "type": "boolean",
+          "description": "Optional setting that will close the connection between each HL7 message received."
+        }
+      }
+    },
+    "OneLakeConnector": {
+      "type": "object",
+      "description": "The healthcare interop OneLake connector resource to capture the configuration pertaining to an existing OneLake instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OneLakeConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OneLakeConnectorListResult": {
+      "type": "object",
+      "description": "The response of a OneLakeConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OneLakeConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/OneLakeConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OneLakeConnectorProperties": {
+      "type": "object",
+      "description": "The properties to configure the OneLakeConnector resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this oneLakeConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "host": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional string to specify the host of the Microsoft Fabric instance in the form of https://<host>.fabric.microsoft.com. By default, the host https://onelake.dfs.fabric.microsoft.com/ will be used.",
+          "pattern": ".+\\.fabric\\.microsoft\\.com"
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "GUID of the lakehouse to connect to."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "GUID of the workspace to connect to."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Optional string to specify the folder path to use when reading/writing the files from/to a lakehouse. If not specified, the root of the lakehouse file directory will be used."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "lakehouseId",
+        "workspaceId"
+      ]
+    },
+    "OneLakeConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the OneLakeConnector resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this oneLakeConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "host": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional string to specify the host of the Microsoft Fabric instance in the form of https://<host>.fabric.microsoft.com. By default, the host https://onelake.dfs.fabric.microsoft.com/ will be used.",
+          "pattern": ".+\\.fabric\\.microsoft\\.com"
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "GUID of the lakehouse to connect to."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "GUID of the workspace to connect to."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Optional string to specify the folder path to use when reading/writing the files from/to a lakehouse. If not specified, the root of the lakehouse file directory will be used."
+        }
+      }
+    },
+    "OneLakeConnectorUpdate": {
+      "type": "object",
+      "description": "The healthcare interop OneLake connector resource to capture the configuration pertaining to an existing OneLake instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OneLakeConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ProvisioningLROState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Provisioning",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningLROState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RecurringScheduleTriggerConfiguration": {
+      "type": "object",
+      "description": "The recurring schedule based trigger configuration.",
+      "properties": {
+        "activeHours": {
+          "type": "array",
+          "description": "Optional input to specify the recurrence configuration for the schedule indicating the hours the schedule should run on. By default, the schedule will run at all hours.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "activeDays": {
+          "type": "array",
+          "description": "Optional input to specify the recurrence configuration for the schedule indicating the days the schedule should run on. By default, the schedule will run on all days.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchTriggerProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RecurringScheduleTrigger"
+    },
+    "RecurringScheduleTriggerConfigurationUpdate": {
+      "type": "object",
+      "description": "The recurring schedule based trigger configuration.",
+      "properties": {
+        "activeHours": {
+          "type": "array",
+          "description": "Optional input to specify the recurrence configuration for the schedule indicating the hours the schedule should run on. By default, the schedule will run at all hours.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "activeDays": {
+          "type": "array",
+          "description": "Optional input to specify the recurrence configuration for the schedule indicating the days the schedule should run on. By default, the schedule will run on all days.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchTriggerPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "RecurringScheduleTrigger"
+    },
+    "RemoteConnectorEnvironment": {
+      "type": "object",
+      "description": "An Environment hosted on a remote location where Connectors can be deployed.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the remote connector environment connected cluster.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "connectedClusterId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the remote connector environment connected cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters"
+              }
+            ]
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the connected cluster is provisioned.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "healthcareExtensionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the healthcare extension.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Kubernetes/connectedClusters/Microsoft.KubernetesConfiguration/extensions"
+              }
+            ]
+          }
+        },
+        "customLocation": {
+          "$ref": "#/definitions/CustomLocation",
+          "description": "The custom location associated with the healthcare extension.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "storageExtensionManagedIdentity": {
+          "$ref": "#/definitions/ExtensionManagedIdentity",
+          "description": "The managed identity used by the storage extension.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "connectedClusterId",
+        "location",
+        "healthcareExtensionId",
+        "customLocation",
+        "storageExtensionManagedIdentity"
+      ]
+    },
+    "Requirements": {
+      "type": "object",
+      "description": "The resource requirements for the application (CPU, Memory, and Storage).",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "The required CPU for the edge connector. The string is Kubernetes Quantity Format (e.g. 100m)."
+        },
+        "memory": {
+          "type": "string",
+          "description": "The required Memory for the edge connector. The string is Kubernetes Quantity Format (e.g. 512Mi)."
+        },
+        "storage": {
+          "type": "string",
+          "description": "The required Storage for the edge connector. The string is Kubernetes Quantity Format (e.g. 10Gi)."
+        }
+      }
+    },
+    "StorageAccountConfiguration": {
+      "type": "object",
+      "description": "Storage account configuration.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the storage account.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "storageAccountBlobEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The storage account blob service endpoint.",
+          "pattern": ".+\\.core\\.windows\\.net\\/",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "storageAccountResourceId",
+        "storageAccountBlobEndpoint"
+      ]
+    },
+    "StorageAccountConnector": {
+      "type": "object",
+      "description": "The healthcare interop storage account connector resource to capture the configuration pertaining to an existing Storage Account instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageAccountConnectorListResult": {
+      "type": "object",
+      "description": "The response of a StorageAccountConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageAccountConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageAccountConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageAccountConnectorProperties": {
+      "type": "object",
+      "description": "The properties to configure the StorageAccountConnector resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningLROState",
+          "description": "The status of the last provisioning operation.",
+          "readOnly": true
+        },
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this storageAccountConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "storageAccountContainerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the Azure storage account container to connect to.",
+          "pattern": ".+\\.core\\.windows\\.net\\/.+"
+        },
+        "blobPrefix": {
+          "type": "string",
+          "description": "Optional string to specify the blob prefix/path to use when reading/writing blobs from/to an Azure Storage container. If not specified, the root of the container will be used."
+        }
+      },
+      "required": [
+        "hubResourceId",
+        "storageAccountContainerUrl"
+      ]
+    },
+    "StorageAccountConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties to configure the StorageAccountConnector resource.",
+      "properties": {
+        "hubResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing hub resource to link/associate this storageAccountConnector resource to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/hubs"
+              }
+            ]
+          }
+        },
+        "storageAccountContainerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the Azure storage account container to connect to.",
+          "pattern": ".+\\.core\\.windows\\.net\\/.+"
+        },
+        "blobPrefix": {
+          "type": "string",
+          "description": "Optional string to specify the blob prefix/path to use when reading/writing blobs from/to an Azure Storage container. If not specified, the root of the container will be used."
+        }
+      }
+    },
+    "StorageAccountConnectorSourceProperties": {
+      "type": "object",
+      "description": "StorageAccountConnector source properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "storageAccountConnectorResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "StorageAccountConnectorSourcePropertiesUpdate": {
+      "type": "object",
+      "description": "StorageAccountConnector source properties.",
+      "properties": {
+        "storageAccountConnectorResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of an existing storageAccountConnector resource linked/associated to the same hub resource, to use as source.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HealthcareInterop/storageAccountConnectors"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FhirQueryFlatFileBatchChannelSourcePropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "StorageAccountConnector"
+    },
+    "StorageAccountConnectorUpdate": {
+      "type": "object",
+      "description": "The healthcare interop storage account connector resource to capture the configuration pertaining to an existing Storage Account instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "TriggerState": {
+      "type": "string",
+      "description": "The trigger state.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The trigger is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The trigger is disabled."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

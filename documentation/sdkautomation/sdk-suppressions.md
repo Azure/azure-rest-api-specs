@@ -11,7 +11,7 @@ Once the suppression is added to the pull request, SDK reviewers will evaluate t
 
 ## How to Suppress the SDK Breaking Changes
 
-To suppress SDK breaking changes, go to the `spec-gen-sdk` CI check result for a specific SDK language, such as "spec-gen-sdk - go - pullrequest". Click on the link of **View more details on Azure Pipelines** to browse to the azure pipeline result page. Then download the artifact of **spec-gen-sdk logs**. There is a html report with the name ended by "-gen-result.html". Open the html report then look for the `Absent SDK breaking changes suppressions` section, as shown in the following code block:
+To suppress SDK breaking changes, go to the `SDK Validation *` CI check result for a specific SDK language, such as "SDK Validation - Go". Click on the link of **View more details on Azure Pipelines** to browse to the azure pipeline result page. Then download the artifact of **spec-gen-sdk logs**. There is a html report with the name ended by "-gen-result.html". Open the html report then look for the `Absent SDK breaking changes suppressions` section, as shown in the following code block:
 
 ```yaml
 Absent SDK breaking changes suppressions

@@ -33,7 +33,7 @@ model DrillRunResource is ProxyResource<DrillRunResourceProperties> {
 @doc("Properties of a Drill Run resource.")
 model DrillRunResourceProperties extends JobResourceProperties {
   @doc("Discriminator for the Job object hierarchy.")
-  jobResourceType: JobResourceType.DrillRunChild;
+  jobResourceType: JobResourceType.DrillRun;
 
   @doc("The provisioning state of the Drill Run Resource.")
   @visibility(Lifecycle.Read)

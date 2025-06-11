@@ -212,7 +212,7 @@ model RoPlanProperties {
   @visibility(Lifecycle.Read)
   roPlanId: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/recoveryPlans";
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans";
     }
   ]>;
 
@@ -328,7 +328,7 @@ model DrillActionResponse {
   @visibility(Lifecycle.Read)
   jobId: armResourceIdentifier<[
     {
-      type: "Microsoft.Resiliency/jobs";
+      type: "Microsoft.AzureResilienceManagement/drills/drillRuns";
     }
   ]>;
 }

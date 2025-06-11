@@ -64,7 +64,7 @@ alias DataAssetId = Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
-alias StorageId = Azure.Core.armResourceIdentifier<[
+alias DiscoveryStorageId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.Discovery/Storages";
   }
@@ -112,8 +112,20 @@ alias WorkspaceId = Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
+alias WorkflowId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.Discovery/workflows";
+  }
+]>;
+
 alias SubnetId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.Network/virtualNetworks/subnets";
+  }
+]>;
+
+alias UserAssignedIdentityId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.ManagedIdentity/userAssignedIdentities";
   }
 ]>;

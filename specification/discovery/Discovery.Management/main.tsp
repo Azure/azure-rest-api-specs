@@ -4,8 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Discovery.Management.Shared/namespace.tsp";
-// import "../Discovery.Bookshelf.Management/all.tsp";
-// import "../Discovery.Catalog.Management/all.tsp";
+import "../Discovery.Bookshelf.Management/all.tsp";
+import "../Discovery.Catalog.Management/all.tsp";
 import "../Discovery.Workspace.Management/all.tsp";
 import "../Discovery.Supercomputer.Management/all.tsp";
 
