@@ -550,8 +550,8 @@ model WebPubSubProperties {
   /**
    * The publicly accessible IP of the resource.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "externalIP follows the existing API naming convention for IP addresses"
+  @visibility(Lifecycle.Read)
   externalIP?: string;
 
   /**
@@ -1412,8 +1412,8 @@ model Sku {
   /**
    * The billing information of the resource.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "The sku property name is standard ARM pattern and required for backward compatibility"
+  @visibility(Lifecycle.Read)
   sku?: ResourceSku;
 
   /**

@@ -14,12 +14,12 @@ namespace Microsoft.SignalRService;
 /**
  * A class represent a replica resource.
  */
-@parentResource(WebPubSubResource)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourceInternal is required for ARM resource definition in TypeSpec"
-@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "includeInapplicableMetadataInPayload is required to maintain compatibility with existing API"
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replica extends TrackedResource to follow ARM standard resource pattern for backward compatibility"
+@parentResource(WebPubSubResource)
+@Azure.ResourceManager.Private.armResourceInternal(ReplicaProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model Replica extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Replica,
@@ -34,13 +34,13 @@ model Replica extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ResourceSku;
 
-  @doc("The resource-specific properties for this resource.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "conditionalClientFlatten is required for ARM resource client generation"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourcePropertiesOptionality is required for ARM resource definition"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Properties field documentation is provided by the ReplicaProperties model"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties field is required in resource envelope for backward compatibility with existing client SDKs"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: ReplicaProperties;
 }
 

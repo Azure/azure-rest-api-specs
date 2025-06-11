@@ -14,10 +14,10 @@ namespace Microsoft.SignalRService;
  * A class represent a resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourceInternal is required for ARM resource definition in TypeSpec"
-@Azure.ResourceManager.Private.armResourceInternal(WebPubSubProperties)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "includeInapplicableMetadataInPayload is required to maintain compatibility with existing API"
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "WebPubSubResource extends TrackedResource to follow ARM standard resource pattern for backward compatibility"
+@Azure.ResourceManager.Private.armResourceInternal(WebPubSubProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model WebPubSubResource extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = WebPubSubResource,
@@ -32,12 +32,12 @@ model WebPubSubResource extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU field is required in resource envelope for backward compatibility with existing ARM specifications"
   sku?: ResourceSku;
 
-  @doc("The resource-specific properties for this resource.")
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "conditionalClientFlatten is required for ARM resource client generation"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "armResourcePropertiesOptionality is required for ARM resource definition"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Properties field is required in resource envelope for backward compatibility with existing client SDKs"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   properties?: WebPubSubProperties;
 
   /**
