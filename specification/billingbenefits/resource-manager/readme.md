@@ -31,6 +31,7 @@ tag: package-preview-2025-05-01-preview
 ```
 
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: ProvisioningStateValidation
@@ -120,7 +121,6 @@ input-file:
   - Microsoft.BillingBenefits/preview/2024-11-01-preview/billingbenefits.json
 ```
 
-
 ---
 
 # Code Generation
@@ -140,6 +140,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
