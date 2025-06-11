@@ -6500,6 +6500,10 @@
               "Operation-Location": {
                 "description": "URL to monitor operation status",
                 "type": "string"
+              },
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
           },
@@ -14510,7 +14514,7 @@
           "readOnly": true
         },
         "resourceId": {
-          "$ref": "#/definitions/ResourceId",
+          "type": "string",
           "description": "Resource Id.",
           "readOnly": true
         }
@@ -16536,9 +16540,19 @@
       "type": "object",
       "description": "Import SQL inventory job REST Resource.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name",
+          "readOnly": true
+        },
         "type": {
           "type": "string",
-          "description": "Handled by resource provider.",
+          "description": "Resource Type",
           "readOnly": true
         },
         "properties": {
