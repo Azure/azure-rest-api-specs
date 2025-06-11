@@ -1422,12 +1422,18 @@ alias LeaseIdResponseHeader = {
   leaseId?: string;
 };
 
-/** The is server encrypted response header. */
-alias IsServerEncryptedResponseHeader = {
+/** The request server encrypted response header. */
+alias RequestServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
-  @clientName("isServerEncrypted")
   @header("x-ms-request-server-encrypted")
-  requestServerEncrypted?: boolean;
+  isServerEncrypted?: boolean;
+};
+
+/** The server encrypted response header. */
+alias ServerEncryptedResponseHeader = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @header("x-ms-server-encrypted")
+  isServerEncrypted?: boolean;
 };
 
 /** The legal hold response header. */
