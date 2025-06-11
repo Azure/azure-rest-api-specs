@@ -10,6 +10,9 @@
   - [How to View the Html Report of `SDK Validation` Checks Result](#how-to-view-the-html-report-of-sdk-validation-checks-result)
   - [How to View the Detailed SDK Generation Errors](#how-to-view-the-detailed-sdk-generation-errors)
   - [Locating an Automatically Generated SDK Pull Request from Your API Specs](#locating-an-automatically-generated-sdk-pull-request-from-your-api-specs)
+  - [Common Error Fix Guidance](#common-error-fix-guidance)
+    - [Import Resolution Errors](#import-resolution-errors)
+      - [Error Pattern: `import-not-found`](#error-pattern-import-not-found)
   - [.NET SDK Generation Error Fix Guidance](#net-sdk-generation-error-fix-guidance)
     - [How to Fix Naming Violations for Management Plane SDK](#how-to-fix-naming-violations-for-management-plane-sdk)
 
@@ -62,6 +65,24 @@ Let's take Python as an example.
 ## Locating an Automatically Generated SDK Pull Request from Your API Specs
 
 For detailed instructions, please refer to [Using the SDK Generation Pipelines](https://aka.ms/azsdk/spec-gen-sdk-pipeline-doc).
+
+## Common Error Fix Guidance
+
+### Import Resolution Errors
+
+#### Error Pattern: `import-not-found`
+
+**Error Message Pattern**: `error import-not-found: Couldn't resolve import '[.*].tsp'`
+
+**Root Cause**: The folder containing the imported TypeSpec files is not specified in the `tspconfig.yaml` file's `additionalDirectories` setting.
+
+**Solution Steps**:
+
+1. Locate the `tspconfig.yaml` file in your TypeSpec project root
+2. Find the `additionalDirectories` array in the configuration
+3. Add the path to the folder containing the imported `.tsp` files
+4. Ensure the path is relative to the `tspconfig.yaml` file location
+**Reference**: [Sample tspconfig.yaml](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L52)
 
 ## .NET SDK Generation Error Fix Guidance
 
