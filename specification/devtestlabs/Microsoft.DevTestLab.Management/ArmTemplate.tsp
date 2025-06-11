@@ -1,0 +1,77 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DevTestLab;
+/**
+ * An Azure Resource Manager template.
+ */
+model ArmTemplate
+  is Azure.ResourceManager.TrackedResource<ArmTemplateProperties, false> {
+  ...ResourceNameParameter<
+    Resource = ArmTemplate,
+    KeyName = "name",
+    SegmentName = "armtemplates",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface ArmTemplates {
+  /**
+   * Get azure resource manager template.
+   */
+  get is ArmResourceRead<
+    ArmTemplate,
+    Parameters = {
+      /**
+       * Specify the $expand query. Example: 'properties($select=displayName)'
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * List azure resource manager templates in a given artifact source.
+   */
+  list is ArmResourceListByParent<
+    ArmTemplate,
+    Parameters = {
+      /**
+       * Specify the $expand query. Example: 'properties($select=displayName)'
+       */
+      @query("$expand")
+      $expand?: string;
+
+      /**
+       * The filter to apply to the operation. Example: '$filter=contains(name,'myName')'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The maximum number of resources to return from the operation. Example: '$top=10'
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The ordering expression for the results, using OData notation. Example: '$orderby=name desc'
+       */
+      @query("$orderby")
+      $orderby?: string;
+    },
+    Response = ArmResponse<ArmTemplateList>
+  >;
+}
+
+@@doc(ArmTemplate.name, "The name of the azure resource manager template.");
+@@doc(ArmTemplate.properties, "The properties of the resource.");

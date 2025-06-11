@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "name": "{bastionHostName}",
+    "api-version": "2025-06-05-preview",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "virtualNetworkName": "{virtualNetworkName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{bastionHostName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks/bastionHosts",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}/bastionhosts/{bastionHostName}",
+        "location": "{location}",
+        "properties": {
+          "ipAddressId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/publicIpAddresses/{ipName}",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "BastionHosts_Get",
+  "title": "BastionHosts_Get"
+}

@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "name": "{vmName}",
+    "api-version": "2025-06-05-preview",
+    "changeSecurityProfileProperties": {
+      "properties": {
+        "securityProfile": {
+          "integrityMonitoring": false,
+          "securityType": "TrustedLaunch",
+          "uefiSettings": {
+            "secureBootEnabled": true,
+            "vTpmEnabled": true
+          }
+        }
+      }
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "responses": {
+      "200": {},
+      "202": {}
+    }
+  },
+  "operationId": "VirtualMachines_ChangeSecurityProfile",
+  "title": "VirtualMachines_ChangeSecurityProfile"
+}
