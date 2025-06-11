@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 namespace Microsoft.ConnectedCache;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -121,6 +123,31 @@ union CycleType {
   Fast: "Fast",
 }
 
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc issue type")
+union MccIssueType {
+  /** mcc issue Type drive not found */
+  DriveNotFound: "DriveNotFound",
+
+  /** mcc issue worker count is less */
+  WorkerCountTooFew: "WorkerCountTooFew",
+
+  /** mcc issue with drive permissions */
+  DrivePermission: "DrivePermission",
+
+  /** mcc issue drive size is too small */
+  DriveTooSmall: "DriveTooSmall",
+
+  /** mcc issue with drive i/o error */
+  DriveInputOutputError: "DriveInputOutputError",
+
+  /** all other issues */
+  Other: "Other",
+
+  string,
+}
+
+@removed(Versions.v2024_11_30_preview)
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
   @doc("The provisioned state of the resource")
@@ -145,6 +172,7 @@ model CacheNodeOldResponse {
 }
 
 @doc("Mcc PATCH operation properties.")
+@Azure.ClientGenerator.Core.clientName("ConnectedCachePatchContent", "csharp")
 model ConnectedCachePatchResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
@@ -253,6 +281,7 @@ model CustomerEntity {
 model AdditionalCustomerProperties {
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2024_11_30_preview)
   peeringDbLastUpdateTime?: utcDateTime;
 
   @doc("Customer resource cache efficiency.")
@@ -313,6 +342,10 @@ model AdditionalCustomerProperties {
 
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
+  @Azure.ClientGenerator.Core.clientName(
+    "peeringDbLastUpdateDateValue",
+    "csharp"
+  )
   peeringDbLastUpdateDate?: utcDateTime;
 
   @doc("Customer resource owner organization name.")
@@ -575,13 +608,13 @@ model CacheNodeEntity {
   @doc("Auto Update Ring Type which is slow or fast etc.")
   autoUpdateRingType?: autoUpdateRingType;
 
-  @doc("Customer requested week of month for mcc install of auto update cycle")
-  @minValue(1)
+  @doc("Customer requested week of month for mcc install of auto update cycle. 0 is default no selection. 1-5 are valid weeks of month, 1 is first week, 2 is second week, etc.")
+  @minValue(0)
   @maxValue(5)
   autoUpdateRequestedWeek?: int32;
 
-  @doc("Customer requested day of week for mcc install of auto update cycle")
-  @minValue(1)
+  @doc("Customer requested day of week for mcc install of auto update cycle. 0 is default no selection. 1-7 are days of week, 1 is Sunday, 2 is Monday, etc.")
+  @minValue(0)
   @maxValue(7)
   autoUpdateRequestedDay?: int32;
 
@@ -594,6 +627,26 @@ model CacheNodeEntity {
 model AdditionalCacheNodeProperties {
   @doc("issues list to return the issues as part of the additional cache node properties")
   cacheNodePropertiesDetailsIssuesList?: string[];
+
+  @added(Versions.v2024_11_30_preview)
+  @visibility(Lifecycle.Read)
+  @doc("current cache node issue list.")
+  issuesList?: string[];
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("Number of cache node issues.")
+  @visibility(Lifecycle.Read)
+  issuesCount?: int32;
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("cache node current tls certificate.")
+  @visibility(Lifecycle.Read)
+  currentTlsCertificate?: MccCacheNodeTlsCertificate;
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("cache node last auto update information.")
+  @visibility(Lifecycle.Read)
+  lastAutoUpdateInfo?: MccCacheNodeAutoUpdateInfo;
 
   @doc("Cache node resource aggregated status details.")
   @visibility(Lifecycle.Read)
@@ -638,6 +691,7 @@ model AdditionalCacheNodeProperties {
   proxyUrlConfiguration?: ProxyUrlConfiguration;
 
   @doc("Cache node resource Mcc proxy Url")
+  @removed(Versions.v2024_11_30_preview)
   proxyUrl?: string;
 
   @doc("Cache node resource requires a proxy")
@@ -647,6 +701,7 @@ model AdditionalCacheNodeProperties {
   osType?: OsType;
 
   @doc("Update Cycle Type")
+  @removed(Versions.v2024_11_30_preview)
   updateCycleType?: CycleType;
 
   @doc("Auto update or fast update version")
@@ -685,6 +740,17 @@ model AdditionalCacheNodeProperties {
   @doc("Auto update last triggered date time of mcc install")
   @visibility(Lifecycle.Read)
   autoUpdateLastTriggeredDateTime?: utcDateTime;
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("Resource creation method of mcc cache node resource, cli or portal")
+  @minValue(0)
+  @maxValue(5)
+  creationMethod?: int32;
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("Cache node tls certificate status.")
+  @visibility(Lifecycle.Read)
+  tlsStatus?: string;
 
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
@@ -776,4 +842,227 @@ model CacheNodeInstallProperties {
   @visibility(Lifecycle.Read)
   @secret
   registrationKey?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @visibility(Lifecycle.Read)
+  @secret
+  @added(Versions.v2024_11_30_preview)
+  @doc("Mcc Tls certificate provisioning key.")
+  tlsCertificateProvisioningKey?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @added(Versions.v2024_11_30_preview)
+  @doc("Cache node resource drive configurations.")
+  driveConfiguration?: CacheNodeDriveConfiguration[];
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("proxyUrl configuration of the cache node")
+  proxyUrlConfiguration?: ProxyUrlConfiguration;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "optional properties"
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource auto update history.")
+model MccCacheNodeAutoUpdateHistory
+  extends Azure.ResourceManager.Foundations.TrackedResource {
+  @doc("Mcc cache node resource auto update history properties.")
+  properties?: MccCacheNodeAutoUpdateHistoryProperties;
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource auto update history properties.")
+model MccCacheNodeAutoUpdateHistoryProperties {
+  @doc("Mcc customer resource Id.")
+  @visibility(Lifecycle.Read)
+  customerId?: string;
+
+  @doc("Mcc cache node resource Id.")
+  @visibility(Lifecycle.Read)
+  cacheNodeId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("Cache node resource auto update history information.")
+  autoUpdateHistory?: MccCacheNodeAutoUpdateInfo[];
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource auto update properties.")
+model MccCacheNodeAutoUpdateInfo {
+  @doc("Auto update image uri before update.")
+  @visibility(Lifecycle.Read)
+  imageUriBeforeUpdate?: string;
+
+  @doc("Auto update image uri targetted to update.")
+  @visibility(Lifecycle.Read)
+  imageUriTargeted?: string;
+
+  @doc("Auto update image uri at Terminal.")
+  @visibility(Lifecycle.Read)
+  imageUriTerminal?: string;
+
+  @doc("Auto update Ring Type.")
+  @visibility(Lifecycle.Read)
+  autoUpdateRingType?: int32;
+
+  @doc("Auto update image uri after update.")
+  @visibility(Lifecycle.Read)
+  movedToTerminalStateDateTime?: utcDateTime;
+
+  @doc("Auto update image uri before update.")
+  @visibility(Lifecycle.Read)
+  ruleRequestedWeek?: int32;
+
+  @doc("Auto update image uri after update.")
+  @visibility(Lifecycle.Read)
+  ruleRequestedDay?: int32;
+
+  @doc("Auto update entity created datetime.")
+  @visibility(Lifecycle.Read)
+  createdDateTimeUtc?: utcDateTime;
+
+  @doc("Auto update entity last updated datetime.")
+  @visibility(Lifecycle.Read)
+  updatedRegistryDateTimeUtc?: utcDateTime;
+
+  @doc("This text describing the purpose of the plan of auto update.")
+  @visibility(Lifecycle.Read)
+  planChangeLogText?: string;
+
+  @doc("Auto update last applied status.")
+  @visibility(Lifecycle.Read)
+  autoUpdateLastAppliedStatus?: int32;
+
+  @doc("Auto update last applied status text.")
+  @visibility(Lifecycle.Read)
+  autoUpdateLastAppliedStatusText?: string;
+
+  @doc("Auto update last applied detailed status text.")
+  @visibility(Lifecycle.Read)
+  autoUpdateLastAppliedStatusDetailedText?: string;
+
+  @doc("Auto update planId.")
+  @visibility(Lifecycle.Read)
+  planId?: int64;
+
+  @doc("Auto update time to go live date time.")
+  @visibility(Lifecycle.Read)
+  timeToGoLiveDateTime?: string;
+
+  @doc("Auto update rule requested minute.")
+  @visibility(Lifecycle.Read)
+  ruleRequestedMinute?: string;
+
+  @doc("Auto update rule requested hour.")
+  @visibility(Lifecycle.Read)
+  ruleRequestedHour?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "optional properties"
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource issue history.")
+model MccCacheNodeIssueHistory
+  extends Azure.ResourceManager.Foundations.TrackedResource {
+  @doc("Mcc cache node resource issue history properties.")
+  properties?: MccCacheNodeIssueHistoryProperties;
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource issue history properties.")
+model MccCacheNodeIssueHistoryProperties {
+  @doc("Mcc customer resource Id.")
+  @visibility(Lifecycle.Read)
+  customerId?: string;
+
+  @doc("Mcc cache node resource Id.")
+  @visibility(Lifecycle.Read)
+  cacheNodeId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("Cache node resource issue details history.")
+  mccIssueHistory?: MccIssue[];
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource issue properties.")
+model MccIssue {
+  @doc("Mcc cache node issue type.")
+  @visibility(Lifecycle.Read)
+  mccIssueType?: string;
+
+  @doc("Mcc cache node issues toastString.")
+  @visibility(Lifecycle.Read)
+  toastString?: string;
+
+  @doc("Mcc cache node issue detail string.")
+  @visibility(Lifecycle.Read)
+  detailString?: string;
+
+  @doc("Mcc cache node issue related help link.")
+  @visibility(Lifecycle.Read)
+  helpLink?: string;
+
+  @doc("Mcc cache node issue start date.")
+  @visibility(Lifecycle.Read)
+  issueStartDate?: utcDateTime;
+
+  @doc("Mcc cache node issue end date.")
+  @visibility(Lifecycle.Read)
+  issueEndDate?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "optional properties"
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource Tls certificate history details.")
+model MccCacheNodeTlsCertificateHistory
+  extends Azure.ResourceManager.Foundations.TrackedResource {
+  @doc("Mcc cache node resource Tls certificate details.")
+  properties?: MccCacheNodeTlsCertificateProperties;
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource auto update properties.")
+model MccCacheNodeTlsCertificateProperties {
+  @doc("Mcc customer resource Id.")
+  @visibility(Lifecycle.Read)
+  customerId?: string;
+
+  @doc("Mcc cache node resource Id.")
+  @visibility(Lifecycle.Read)
+  cacheNodeId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @doc("Cache node resource tls certificate history details.")
+  tlsCertificateHistory?: MccCacheNodeTlsCertificate[];
+}
+
+@added(Versions.v2024_11_30_preview)
+@doc("Mcc cache node resource Tls certificate details.")
+model MccCacheNodeTlsCertificate {
+  @doc("Mcc cache node Tls certificate status.")
+  @visibility(Lifecycle.Read)
+  actionRequired?: string;
+
+  @doc("Mcc cache node Tls certificate file name.")
+  @visibility(Lifecycle.Read)
+  certificateFileName?: string;
+
+  @doc("Mcc cache node Tls certificate thumbprint.")
+  @visibility(Lifecycle.Read)
+  thumbprint?: string;
+
+  @doc("Mcc cache node Tls certificate expiry date.")
+  @visibility(Lifecycle.Read)
+  expiryDate?: utcDateTime;
+
+  @doc("Mcc cache node Tls certificate not before date.")
+  @visibility(Lifecycle.Read)
+  notBeforeDate?: utcDateTime;
+
+  @doc("Mcc cache node Tls certificate subject name.")
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  @doc("Mcc cache node Tls certificate subject alternate name.")
+  @visibility(Lifecycle.Read)
+  subjectAltName?: string;
 }

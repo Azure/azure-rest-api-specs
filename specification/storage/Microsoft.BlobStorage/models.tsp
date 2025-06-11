@@ -18,12 +18,19 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model StorageError {
   /** The error code. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Code?: string;
+  @Xml.name("Code") code?: string;
 
   /** The error message. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
-  Message?: string;
+  @Xml.name("Message") message?: string;
+
+  /** Copy source status code */
+  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
+
+  /** Copy source error code */
+  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
+
+  /** Copy source error message */
+  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
 /// Models
@@ -1422,12 +1429,18 @@ alias LeaseIdResponseHeader = {
   leaseId?: string;
 };
 
-/** The is server encrypted response header. */
-alias IsServerEncryptedResponseHeader = {
+/** The request server encrypted response header. */
+alias RequestServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
-  @clientName("isServerEncrypted")
   @header("x-ms-request-server-encrypted")
-  requestServerEncrypted?: boolean;
+  isServerEncrypted?: boolean;
+};
+
+/** The server encrypted response header. */
+alias ServerEncryptedResponseHeader = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @header("x-ms-server-encrypted")
+  isServerEncrypted?: boolean;
 };
 
 /** The legal hold response header. */
@@ -2172,4 +2185,31 @@ alias StructuredBodyParameter = {
   /** Required if the request body is a structured message. Specifies the message schema version and properties. */
   @header("x-ms-structured-body")
   structuredBodyType?: string;
+};
+
+/** The file share token intent types. */
+union FileShareTokenIntent {
+  /** The file share token intent is backup. */
+  Backup: "backup",
+
+  /** Extensible */
+  string,
+}
+
+alias FileRequestIntentParameter = {
+  /** Valid value is backup */
+  @header("x-ms-file-request-intent")
+  fileRequestIntent?: FileShareTokenIntent;
+};
+
+alias CopySourceErrorCodeResponseHeader = {
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  copySourceErrorCode?: string;
+};
+
+alias CopySourceStatusCodeResponseHeader = {
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  copySourceStatusCode?: int32;
 };
