@@ -1254,6 +1254,8 @@ namespace Storage.Blob {
           ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
+          ...CopySourceErrorCodeResponseHeader;
+          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1286,6 +1288,7 @@ namespace Storage.Blob {
           ...CopySourceAuthorizationParameter;
           ...EncryptionScopeParameter;
           ...CopySourceTagsParameter;
+          ...FileRequestIntentParameter;
         },
         {
           @statusCode statusCode: 202;
@@ -1298,6 +1301,8 @@ namespace Storage.Blob {
           ...ContentMd5ResponseHeader;
           ...ContentCrc64ResponseHeader;
           ...EncryptionScopeResponseHeader;
+          ...CopySourceErrorCodeResponseHeader;
+          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1610,6 +1615,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -1622,6 +1628,8 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -1901,6 +1909,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -1914,6 +1923,8 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2046,6 +2057,7 @@ namespace Storage.Blob {
             /** The type of the blob. */
             @header("x-ms-blob-type")
             blobType: BlobType.BlockBlob;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2057,6 +2069,8 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2127,6 +2141,7 @@ namespace Storage.Blob {
             ...SourceIfMatchParameter;
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
+            ...FileRequestIntentParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2136,6 +2151,8 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
+            ...CopySourceErrorCodeResponseHeader;
+            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
