@@ -4891,6 +4891,10 @@
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents the model training status."
         },
+        "dataGenerationStatus": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
+          "description": "Represents the model data generation status."
+        },
         "evaluationStatus": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents model evaluation status."
@@ -4904,7 +4908,8 @@
       "required": [
         "modelLabel",
         "trainingConfigVersion",
-        "trainingStatus"
+        "trainingStatus",
+        "dataGenerationStatus"
       ]
     },
     "AnalyzeConversationAuthoringTrainingJobState": {
