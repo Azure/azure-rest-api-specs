@@ -26,10 +26,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData, Usage.output);
@@ -573,10 +573,8 @@ using Azure.ClientGenerator.Core;
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRoleKind,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantKind,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
@@ -606,6 +604,9 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
