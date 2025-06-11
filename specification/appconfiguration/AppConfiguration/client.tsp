@@ -15,8 +15,8 @@ namespace SdkCustomizations;
 @@access(SnapshotUpdateParameters, Access.public, "python");
 
 // .NET specific customizations
-@@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
-@@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
+//@@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
+//@@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
 @@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
 @@clientName(putKeyValue, "SetConfigurationSetting", "csharp");
