@@ -1,3 +1,4 @@
+// cspell:ignore naar kubefleet NoSchedule
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -351,7 +352,7 @@ union CoreV1TolerationOperator {
 
 @doc("The available taint effect for the Toleration section")
 union CoreV1TaintEffect {
-  @doc("The Noschedule taint effect.")
+  @doc("The NoSchedule taint effect.")
   NoSchedule: "NoSchedule",
 
   string,
