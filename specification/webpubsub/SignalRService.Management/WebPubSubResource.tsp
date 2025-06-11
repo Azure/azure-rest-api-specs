@@ -147,10 +147,7 @@ interface WebPubSubResources {
       Azure.ResourceManager.Foundations.BaseParameters<WebPubSubResource>
     >,
     @bodyRoot body: RegenerateKeyParameters,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: WebPubSubKeys;
-  } | (ArmAcceptedLroResponse & {
+  ): ArmResponse<WebPubSubKeys> | (ArmAcceptedLroResponse & {
     @bodyRoot
     _: WebPubSubKeys;
   }) | ErrorResponse;
