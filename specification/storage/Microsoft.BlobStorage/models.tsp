@@ -1422,7 +1422,6 @@ alias LeaseIdResponseHeader = {
 /** The request server encrypted response header. */
 alias RequestServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
-  @clientName("isServerEncrypted")
   @header("x-ms-request-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -1430,7 +1429,6 @@ alias RequestServerEncryptedResponseHeader = {
 /** The server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
-  @clientName("isServerEncrypted")
   @header("x-ms-server-encrypted")
   isServerEncrypted?: boolean;
 };
