@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 namespace Azure.AI.Projects;
 
@@ -12,9 +13,30 @@ alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.Suppor
   Azure.Core.Traits.NoConditionalRequests>;
 */
 
+
+@doc("Document me")
+model InputParameters<
+  TEntityType extends Reflection.Model,
+  TBodyName extends valueof string = "body"
+> {
+  @doc("The name of the {name} to operate on", TEntityType)
+  @Http.bodyRoot
+  @clientName(TBodyName)
+  body: TEntityType;
+
+  @doc(
+    "The specific version id of the {name} to operate on.",
+    TEntityType
+  )
+  @Rest.segment("versions")
+  @Http.path
+  version: string;
+}
+
 @Rest.autoRoute
 interface VersionedOperations<
   TEntityType extends Reflection.Model,
+  TInputParameters extends Reflection.Model,
   TListLatestParameters extends Reflection.Model = {},
   TListVersionsParameters extends Reflection.Model = {}
 > {
@@ -92,23 +114,7 @@ interface VersionedOperations<
   @Http.patch
   createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
     TEntityType,
-    {
-      @doc("The definition of the {name} to create or update", TEntityType)
-      @Http.bodyRoot
-      body: TEntityType;
-
-      @doc("Content type for patch")
-      @Http.header("Content-Type")
-      contentType: "application/merge-patch+json";
-
-      @doc(
-        "The specific version id of the {name} to create or replace.",
-        TEntityType
-      )
-      @Rest.segment("versions")
-      @Http.path
-      version: string;
-    },
+    TInputParameters,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
   >;
 }
@@ -116,20 +122,11 @@ interface VersionedOperations<
 @Rest.action
 op VersionedResourceActionWithBody<
   TEntityType extends Reflection.Model,
-  TParams,
+  TInputParameters extends Reflection.Model,
   TResponse
 > is Azure.Core.Foundations.ResourceOperation<
   TEntityType,
-  {
-    @doc("Parameters for the action")
-    @Http.bodyRoot
-    body: TParams;
-
-    @doc("The specific version id of the {name} to operate on.", TEntityType)
-    @Rest.segment("versions")
-    @Http.path
-    version: string;
-  },
+  TInputParameters,
   TResponse
 >;
 

@@ -14,11 +14,15 @@ namespace Azure.AI.Projects;
 
 alias ListDatasetVersionsParameters = {};
 
+@doc("Document me")
+model DatasetInputParameters is InputParameters<DatasetVersion, "DatasetVersion">;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
 interface Datasets
   extends VersionedOperations<
       DatasetVersion,
+      DatasetInputParameters,
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
@@ -26,6 +30,7 @@ interface Datasets
   @Rest.action("startPendingUpload")
   startPendingUploadVersion is VersionedResourceActionWithBody<
     DatasetVersion,
+    DatasetInputParameters,
     PendingUploadRequest,
     PendingUploadResponse
   >;
