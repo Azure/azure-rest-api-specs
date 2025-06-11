@@ -10672,6 +10672,79 @@
         }
       ]
     },
+    "ErrorAction": {
+      "type": "object",
+      "description": "Error Action Properties",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Error action mode",
+          "default": "stopOnAnyFailure",
+          "enum": [
+            "stopOnAnyFailure",
+            "stopOnNFailures",
+            "silentlyContinue"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorActionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "stopOnAnyFailure",
+                "value": "stopOnAnyFailure",
+                "description": "Stop on any failure"
+              },
+              {
+                "name": "stopOnNFailures",
+                "value": "stopOnNFailures",
+                "description": "Stop after N cumulative failures"
+              },
+              {
+                "name": "silentlyContinue",
+                "value": "silentlyContinue",
+                "description": "Continue silently despite errors"
+              }
+            ]
+          }
+        },
+        "maxToleratedFailures": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max tolerated failures",
+          "minimum": 0
+        }
+      }
+    },
+    "ErrorActionMode": {
+      "type": "string",
+      "description": "Error Action Mode",
+      "enum": [
+        "stopOnAnyFailure",
+        "stopOnNFailures",
+        "silentlyContinue"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorActionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopOnAnyFailure",
+            "value": "stopOnAnyFailure",
+            "description": "Stop on any failure"
+          },
+          {
+            "name": "stopOnNFailures",
+            "value": "stopOnNFailures",
+            "description": "Stop after N cumulative failures"
+          },
+          {
+            "name": "silentlyContinue",
+            "value": "silentlyContinue",
+            "description": "Continue silently despite errors"
+          }
+        ]
+      }
+    },
     "EventGridFilter": {
       "type": "object",
       "description": "Event Grid Filter Resource",
@@ -12307,19 +12380,28 @@
           "type": "string",
           "description": "Name of Stage"
         },
-        "targetId": {
-          "type": "string",
-          "description": "Target ARM id"
-        },
         "specification": {
           "type": "object",
           "description": "Stage specification",
           "additionalProperties": {}
+        },
+        "tasks": {
+          "type": "array",
+          "description": "List of tasks in the stage",
+          "items": {
+            "$ref": "#/definitions/TaskSpec"
+          },
+          "x-ms-identifiers": []
+        },
+        "taskOptions": {
+          "$ref": "#/definitions/TaskOption",
+          "description": "Task options for the stage"
         }
       },
       "required": [
         "name",
-        "specification"
+        "specification",
+        "tasks"
       ]
     },
     "StageSpecTemplate": {
@@ -12797,6 +12879,55 @@
         {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
+      ]
+    },
+    "TaskOption": {
+      "type": "object",
+      "description": "Task Option Properties",
+      "properties": {
+        "concurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Parallel worker numbers of the tasks",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 8
+        },
+        "errorAction": {
+          "$ref": "#/definitions/ErrorAction",
+          "description": "Error action for the tasks"
+        }
+      }
+    },
+    "TaskSpec": {
+      "type": "object",
+      "description": "Task Spec",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of Task"
+        },
+        "targetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Target ARM id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/targets"
+              }
+            ]
+          }
+        },
+        "specification": {
+          "type": "object",
+          "description": "Task specification",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "name",
+        "specification"
       ]
     },
     "UninstallSolutionParameter": {
