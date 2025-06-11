@@ -319,7 +319,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "./cdn.json#/definitions/Profile"
+              "$ref": "./share.json#/definitions/Profile"
             }
           },
           "202": {
@@ -330,7 +330,7 @@
               }
             },
             "schema": {
-              "$ref": "./cdn.json#/definitions/Profile"
+              "$ref": "./share.json#/definitions/Profile"
             }
           },
           "default": {
@@ -4015,7 +4015,7 @@
         },
         "changeToWafPolicy": {
           "description": "The new waf resource for the security policy to use.",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         }
       }
     },
@@ -4098,7 +4098,7 @@
       "properties": {
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Certificate version.",
@@ -4150,7 +4150,7 @@
         },
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Secret version, if customer is using a specific version.",
@@ -4296,12 +4296,12 @@
         "azureDnsZone": {
           "description": "Resource reference to the Azure DNS zone",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "preValidatedCustomDomainResourceId": {
           "description": "Resource reference to the Azure resource where custom domain ownership was prevalidated",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         }
       }
     },
@@ -4376,7 +4376,7 @@
         "secret": {
           "description": "Resource reference to the secret. ie. subs/rg/profile/secret",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         }
       }
     },
@@ -4509,7 +4509,7 @@
         "wafPolicy": {
           "type": "object",
           "description": "Resource ID.",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "associations": {
           "description": "Waf associations",
@@ -4801,7 +4801,7 @@
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault secret. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{secretName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Version of the secret to be used",
@@ -4847,7 +4847,7 @@
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "secretVersion": {
           "description": "Version of the secret to be used",
@@ -4900,7 +4900,7 @@
         "secretSource": {
           "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "$ref": "./share.json#/definitions/ResourceReference",
           "readOnly": true
         },
         "subject": {
@@ -5034,7 +5034,7 @@
         "azureOrigin": {
           "description": "Resource reference to the Azure origin resource.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "hostName": {
           "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.",
@@ -5107,7 +5107,7 @@
       "properties": {
         "privateLink": {
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "$ref": "./share.json#/definitions/ResourceReference",
           "description": "The resource id of the resource the shared private link resource is for."
         },
         "privateLinkLocation": {
@@ -5350,7 +5350,7 @@
         "originGroup": {
           "description": "A reference to the origin group.",
           "type": "object",
-          "$ref": "./cdn.json#/definitions/ResourceReference"
+          "$ref": "./share.json#/definitions/ResourceReference"
         },
         "originPath": {
           "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
@@ -5360,7 +5360,7 @@
           "description": "rule sets referenced by this endpoint.",
           "type": "array",
           "items": {
-            "$ref": "./cdn.json#/definitions/ResourceReference"
+            "$ref": "./share.json#/definitions/ResourceReference"
           }
         },
         "supportedProtocols": {
