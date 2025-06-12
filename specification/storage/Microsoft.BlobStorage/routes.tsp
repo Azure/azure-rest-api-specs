@@ -718,7 +718,7 @@ namespace Storage.Blob {
         ...AcceptRangesResponseHeaderPrivate;
         ...DateResponseHeaderPrivate;
         ...BlobCommittedBlockCountResponseHeader;
-        ...ServerEncryptedResponseHeaderPrivate;
+        ...ServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
         ...EncryptionScopeResponseHeader;
         ...BlobContentMd5ResponseHeader;
@@ -770,7 +770,7 @@ namespace Storage.Blob {
         ...AcceptRangesResponseHeaderPrivate;
         ...DateResponseHeaderPrivate;
         ...BlobCommittedBlockCountResponseHeader;
-        ...ServerEncryptedResponseHeaderPrivate;
+        ...ServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
         ...EncryptionScopeResponseHeader;
         ...BlobContentMd5ResponseHeader;
@@ -839,7 +839,7 @@ namespace Storage.Blob {
           ...DateResponseHeaderPrivate;
           ...AcceptRangesResponseHeaderPrivate;
           ...BlobCommittedBlockCountResponseHeader;
-          ...ServerEncryptedResponseHeaderPrivate;
+          ...ServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
           ...EncryptionScopeResponseHeader;
           ...AccessTierOptional;
@@ -1054,7 +1054,7 @@ namespace Storage.Blob {
           ...LastModifiedResponseHeaderPrivate;
           ...VersionIdResponseHeaderPrivate;
           ...DateResponseHeaderPrivate;
-          ...RequestServerEncryptedResponseHeaderPrivate;
+          ...RequestServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeaderPrivate;
           ...EncryptionScopeResponseHeaderPrivate;
         }
@@ -2005,7 +2005,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
             ...DateResponseHeaderPrivate;
-            ...RequestServerEncryptedResponseHeaderPrivate;
+            ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
             ...StructuredBodyTypeResponseHeaderPrivate;
@@ -2105,7 +2105,7 @@ namespace Storage.Blob {
             ...DateResponseHeaderPrivate;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            ...RequestServerEncryptedResponseHeaderPrivate;
+            ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
             ...StructuredBodyTypeResponseHeaderPrivate;
