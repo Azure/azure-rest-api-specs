@@ -121,8 +121,7 @@ interface RecordSets {
   /**
    * Updates a record set within a DNS zone.
    */
-  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch
+  @patch(#{ implicitOptionality: false })
   @armResourceUpdate(RecordSet)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{+relativeRecordSetName}")
   update(
