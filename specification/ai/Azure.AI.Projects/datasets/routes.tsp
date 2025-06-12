@@ -29,7 +29,7 @@ interface Datasets
   startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<
     DatasetVersion,
     {
-      @doc("Parameters for the action")
+      @doc("The pending upload request parameters")
       @Http.bodyRoot
       pendingUploadRequest: PendingUploadRequest;
 
