@@ -38,10 +38,9 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: ResponseMediaType;
 
-    ...DateResponseHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-    
+    ...DateResponseHeader
   }) | TError;
 
   /** Azure Storage Blob basic operation template */
@@ -90,7 +89,7 @@ namespace Storage.Blob {
   op getStatistics is StorageOperation<
     TimeoutParameter,
     {
-      
+      ...DateResponseHeader;
 
       /** Storage service statistics */
       @body
@@ -134,7 +133,7 @@ namespace Storage.Blob {
       @body
       userDelegationKey: UserDelegationKey;
 
-      
+      ...DateResponseHeader;
     }
   >;
 
@@ -146,7 +145,7 @@ namespace Storage.Blob {
   op getAccountInfo is StorageOperation<
     TimeoutParameter,
     {
-      
+      ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
 
@@ -196,7 +195,7 @@ namespace Storage.Blob {
       ...FilterBlobsIncludeParameter;
     },
     {
-      
+      ...DateResponseHeader;
 
       /** The filter blobs enumeration results */
       @body
@@ -228,7 +227,7 @@ namespace Storage.Blob {
         @statusCode statusCode: 201;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -247,7 +246,7 @@ namespace Storage.Blob {
         ...MetadataHeaders;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
         ...LeaseDurationHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
@@ -288,7 +287,7 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 202;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -309,7 +308,7 @@ namespace Storage.Blob {
       {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -330,7 +329,7 @@ namespace Storage.Blob {
         ...BlobPublicAccess;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -358,7 +357,7 @@ namespace Storage.Blob {
       {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -384,7 +383,7 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 201;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -456,7 +455,7 @@ namespace Storage.Blob {
         ...FilterBlobsIncludeParameter;
       },
       {
-        
+        ...DateResponseHeader;
 
         /** The container filter blob enumeration results */
         @body
@@ -484,7 +483,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -505,7 +504,7 @@ namespace Storage.Blob {
       {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -527,7 +526,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -550,7 +549,7 @@ namespace Storage.Blob {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
         ...LeaseIdResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -573,7 +572,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        
+        ...DateResponseHeader;
       }
     >;
 
@@ -593,7 +592,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        
+        ...DateResponseHeader;
 
         /** The list of blobs in the container */
         @body
@@ -621,7 +620,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        
+        ...DateResponseHeader;
 
         /** The list of blobs in the container */
         @body
@@ -640,7 +639,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
       },
       {
-        
+        ...DateResponseHeader;
         ...SkuNameResponseHeader;
         ...AccountKindResponseHeader;
         ...IsHierarchicalNamespaceEnabled;
@@ -718,7 +717,7 @@ namespace Storage.Blob {
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
         ...AcceptRangesResponseHeader;
-        
+        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...ServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
@@ -770,7 +769,7 @@ namespace Storage.Blob {
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
         ...AcceptRangesResponseHeader;
-        
+        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...ServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
@@ -838,7 +837,7 @@ namespace Storage.Blob {
           ...ContentLanguageResponseHeader;
           ...CacheControlResponseHeader;
           ...BlobSequenceNumberResponseHeader;
-          
+          ...DateResponseHeader;
           ...AcceptRangesResponseHeader;
           ...BlobCommittedBlockCountResponseHeader;
           ...ServerEncryptedResponseHeader;
@@ -901,7 +900,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 202;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -937,7 +936,7 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -966,7 +965,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...BlobSequenceNumberResponseHeader;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -988,7 +987,7 @@ namespace Storage.Blob {
           ...VersionIdParameter;
         },
         {
-          
+          ...DateResponseHeader;
           ...ImmutabilityPolicyExpiresOnResponseHeader;
           ...ImmutabilityPolicyModeResponseHeader;
         }
@@ -1026,7 +1025,7 @@ namespace Storage.Blob {
           ...VersionIdParameter;
         },
         {
-          
+          ...DateResponseHeader;
           ...LegalHoldResponseHeader;
         }
       >;
@@ -1055,7 +1054,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...VersionIdResponseHeader;
-          
+          ...DateResponseHeader;
           ...RequestServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
           ...EncryptionScopeResponseHeader;
@@ -1082,7 +1081,7 @@ namespace Storage.Blob {
           @statusCode statusCode: 201;
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1105,7 +1104,7 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -1127,7 +1126,7 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1151,7 +1150,7 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1175,7 +1174,7 @@ namespace Storage.Blob {
           @statusCode statusCode: 202;
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          
+          ...DateResponseHeader;
           ...LeaseTimeResponseHeader;
         }
       >;
@@ -1210,7 +1209,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...VersionIdResponseHeader;
-          
+          ...DateResponseHeader;
           ...RequestServerEncryptedResponseHeader;
         }
       >;
@@ -1253,7 +1252,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...VersionIdResponseHeader;
-          
+          ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
           ...CopySourceErrorCodeResponseHeader;
@@ -1297,7 +1296,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...VersionIdResponseHeader;
-          
+          ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
           ...ContentMd5ResponseHeader;
@@ -1328,7 +1327,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 204;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -1374,7 +1373,7 @@ namespace Storage.Blob {
           ...TimeoutParameter;
         },
         {
-          
+          ...DateResponseHeader;
           ...AccountKindResponseHeader;
           ...SkuNameResponseHeader;
           ...IsHierarchicalNamespaceEnabled;
@@ -1397,7 +1396,7 @@ namespace Storage.Blob {
           ...IfTagsParameter;
         },
         {
-          
+          ...DateResponseHeader;
 
           /** The blob tags. */
           @body
@@ -1426,7 +1425,7 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 204;
-          
+          ...DateResponseHeader;
         }
       >;
 
@@ -1483,7 +1482,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1531,7 +1530,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1572,7 +1571,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -1626,7 +1625,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1657,7 +1656,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -1692,7 +1691,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -1721,7 +1720,7 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -1747,7 +1746,7 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -1770,7 +1769,7 @@ namespace Storage.Blob {
             @statusCode statusCode: 202;
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
-            
+            ...DateResponseHeader;
             ...CopyIdResponseHeader;
             ...CopyStatusResponseHeader;
           }
@@ -1823,7 +1822,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1868,7 +1867,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            
+            ...DateResponseHeader;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -1919,7 +1918,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            
+            ...DateResponseHeader;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -1949,7 +1948,7 @@ namespace Storage.Blob {
           {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
-            
+            ...DateResponseHeader;
             ...IsSealedResponseHeader;
           }
         >;
@@ -2006,7 +2005,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -2067,7 +2066,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -2104,7 +2103,7 @@ namespace Storage.Blob {
           },
           {
             @statusCode statusCode: 201;
-            
+            ...DateResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2147,7 +2146,7 @@ namespace Storage.Blob {
           },
           {
             @statusCode statusCode: 201;
-            
+            ...DateResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2203,7 +2202,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...VersionIdResponseHeader;
-            
+            ...DateResponseHeader;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -2237,7 +2236,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
-            
+            ...DateResponseHeader;
           }
         >;
 
@@ -2290,7 +2289,7 @@ namespace Storage.Blob {
             ...LeaseStateResponseHeader;
             ...LeaseStatusResponseHeader;
             ...AcceptRangesResponseHeader;
-            
+            ...DateResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...ServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
