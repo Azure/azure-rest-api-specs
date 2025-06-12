@@ -1974,9 +1974,14 @@
               "$ref": "#/definitions/Replica"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1993,7 +1998,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },

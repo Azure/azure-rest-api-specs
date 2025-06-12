@@ -71,7 +71,7 @@ interface Replicas {
   update is ArmCustomPatchAsync<
     Replica,
     PatchModel = Replica,
-    Response = Replica | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Replica>> & {
+    Response = Replica | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Replica;
     })
