@@ -56,7 +56,6 @@ suppressions:
     from: FlexibleServers.json
     reason: This check is optional.
   - code: PutResponseCodes
-    from: swagger-document
     reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
   - code: PutInOperationName
     from: AdvancedThreatProtectionSettings.json
@@ -65,28 +64,21 @@ suppressions:
     from: AdvancedThreatProtectionSettings.json
     reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
   - code: PatchBodyParametersSchema
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: DeleteResponseCodes
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: LroLocationHeader
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ProvisioningStateSpecifiedForLROPut
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ProvisioningStateSpecifiedForLROPatch
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ResourceNameRestriction
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: PostResponseCodes
     from: FlexibleServers.json
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: XmsPageableForListCalls
     from: PrivateLinkResources.json
