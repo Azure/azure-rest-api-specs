@@ -304,9 +304,9 @@ namespace Storage.Blob {
         ...IfModifiedSinceParameter;
       },
       {
-        ...EtagResponseHeader;
-        ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
+        ...EtagResponseHeaderPrivate;
+        ...LastModifiedResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -673,6 +673,7 @@ namespace Storage.Blob {
         rangeGetContentCrc64?: boolean,
 
         /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
+        @access(Access.internal)
         @header("x-ms-structured-body")
         structuredBodyType?: string,
 
@@ -714,10 +715,10 @@ namespace Storage.Blob {
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
-        ...AcceptRangesResponseHeader;
-        ...DateResponseHeader;
+        ...AcceptRangesResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
         ...BlobCommittedBlockCountResponseHeader;
-        ...ServerEncryptedResponseHeader;
+        ...ServerEncryptedResponseHeaderPrivate;
         ...EncryptionKeySha256ResponseHeader;
         ...EncryptionScopeResponseHeader;
         ...BlobContentMd5ResponseHeader;
@@ -727,8 +728,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeader;
-        ...StructuredContentLengthResponseHeader;
+        ...StructuredBodyTypeResponseHeaderPrivate;
+        ...StructuredContentLengthResponseHeaderPrivate;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 206;
@@ -766,10 +767,10 @@ namespace Storage.Blob {
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
-        ...AcceptRangesResponseHeader;
-        ...DateResponseHeader;
+        ...AcceptRangesResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
         ...BlobCommittedBlockCountResponseHeader;
-        ...ServerEncryptedResponseHeader;
+        ...ServerEncryptedResponseHeaderPrivate;
         ...EncryptionKeySha256ResponseHeader;
         ...EncryptionScopeResponseHeader;
         ...BlobContentMd5ResponseHeader;
@@ -779,8 +780,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeader;
-        ...StructuredContentLengthResponseHeader;
+        ...StructuredBodyTypeResponseHeaderPrivate;
+        ...StructuredContentLengthResponseHeaderPrivate;
       }) | StorageError;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */

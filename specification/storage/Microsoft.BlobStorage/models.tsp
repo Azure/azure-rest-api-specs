@@ -1221,6 +1221,13 @@ alias AcceptRangesResponseHeader = {
   @header("Accept-Ranges") acceptRanges?: string;
 };
 
+/** The private accept ranges response header. */
+alias AcceptRangesResponseHeaderPrivate = {
+  /** Indicates that the service supports requests for partial blob content. */
+  @access(Access.internal)
+  @header("Accept-Ranges") acceptRanges?: string;
+};
+
 /** The is current version response header. */
 alias IsCurrentVersionResponseHeader = {
   /** The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header. */
@@ -1439,6 +1446,14 @@ alias RequestServerEncryptedResponseHeader = {
 /** The server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @header("x-ms-server-encrypted")
+  isServerEncrypted?: boolean;
+};
+
+/** The server encrypted response header. */
+alias ServerEncryptedResponseHeaderPrivate = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @access(Access.internal)
   @header("x-ms-server-encrypted")
   isServerEncrypted?: boolean;
 };
@@ -2196,6 +2211,13 @@ alias StructuredBodyTypeResponseHeader = {
   structuredBodyType?: string;
 };
 
+alias StructuredBodyTypeResponseHeaderPrivate = {
+  /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
+  @access(Access.internal)
+  @header("x-ms-structured-body")
+  structuredBodyType?: string;
+};
+
 alias StructuredContentLengthParameter = {
   /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
   @header("x-ms-structured-content-length")
@@ -2204,6 +2226,13 @@ alias StructuredContentLengthParameter = {
 
 alias StructuredContentLengthResponseHeader = {
   /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
+  @header("x-ms-structured-content-length")
+  structuredContentLength?: int64;
+};
+
+alias StructuredContentLengthResponseHeaderPrivate = {
+  /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
+  @access(Access.internal)
   @header("x-ms-structured-content-length")
   structuredContentLength?: int64;
 };
