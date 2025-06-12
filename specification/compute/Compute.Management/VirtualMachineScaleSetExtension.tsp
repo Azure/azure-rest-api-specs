@@ -38,9 +38,7 @@ model VirtualMachineScaleSetExtension
   @segment("extensions")
   @key("vmssExtensionName")
   vmssExtensionName: string;
-
 }
-
 
 @armResourceOperations
 interface VirtualMachineScaleSetExtensions {

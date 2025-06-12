@@ -16,9 +16,8 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(VirtualMachineScaleSetVM)
-model VirtualMachineScaleSetVMExtension 
+model VirtualMachineScaleSetVMExtension
   is ProxySubResourceReadOnly<VirtualMachineExtensionProperties> {
-
   /**
    * The location of the extension.
    */
@@ -47,7 +46,6 @@ model VirtualMachineScaleSetVMExtension
   @segment("extensions")
   @key("vmExtensionName")
   vmssExtensionName: string;
-
 }
 
 @armResourceOperations

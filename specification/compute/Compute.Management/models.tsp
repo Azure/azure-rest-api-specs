@@ -3949,7 +3949,7 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
 model VirtualMachineScaleSetExtensionListResult
   is Azure.Core.Page<VirtualMachineScaleSetExtension>;
 
-@@identifiers(VirtualMachineScaleSetExtensionListResult.value,#["name", "id"]);
+@@identifiers(VirtualMachineScaleSetExtensionListResult.value, #["name", "id"]);
 
 @@doc(VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."

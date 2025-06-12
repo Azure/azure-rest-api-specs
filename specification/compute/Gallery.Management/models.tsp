@@ -2513,7 +2513,6 @@ model CommunityGalleryImageVersionList
   is Azure.Core.Page<CommunityGalleryImageVersion>;
 @@identifiers(CommunityGalleryImageVersionList.value, #[]);
 
-
 /**
  * The source image from which the Image Version is going to be created.
  */
