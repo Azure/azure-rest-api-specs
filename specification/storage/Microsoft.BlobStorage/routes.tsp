@@ -40,6 +40,7 @@ namespace Storage.Blob {
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
+    ...DateResponseHeader;
   }) | TError;
 
   /** Azure Storage Blob basic operation template */
