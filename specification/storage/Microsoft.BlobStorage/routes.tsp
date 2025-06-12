@@ -2235,7 +2235,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
           }
         >;
 
