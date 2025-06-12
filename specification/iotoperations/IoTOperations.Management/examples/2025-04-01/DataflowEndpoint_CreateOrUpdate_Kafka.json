@@ -1,0 +1,149 @@
+{
+  "title": "DataflowEndpoint_CreateOrUpdate_Kafka",
+  "operationId": "DataflowEndpoint_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-name123",
+    "dataflowEndpointName": "generic-kafka-endpoint",
+    "resource": {
+      "properties": {
+        "endpointType": "Kafka",
+        "kafkaSettings": {
+          "host": "example.kafka.local:9093",
+          "authentication": {
+            "method": "Sasl",
+            "saslSettings": {
+              "saslType": "Plain",
+              "secretRef": "my-secret"
+            }
+          },
+          "tls": {
+            "mode": "Enabled",
+            "trustedCaCertificateConfigMapRef": "ca-certificates"
+          },
+          "consumerGroupId": "dataflows",
+          "compression": "Gzip",
+          "batching": {
+            "mode": "Enabled",
+            "latencyMs": 5,
+            "maxBytes": 1000000,
+            "maxMessages": 100000
+          },
+          "partitionStrategy": "Default",
+          "kafkaAcks": "All",
+          "copyMqttProperties": "Enabled",
+          "cloudEventAttributes": "Propagate"
+        }
+      },
+      "extendedLocation": {
+        "name": "qmbrfwcpwwhggszhrdjv",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpointType": "Kafka",
+          "kafkaSettings": {
+            "host": "example.kafka.local:9093",
+            "authentication": {
+              "method": "Sasl",
+              "saslSettings": {
+                "saslType": "Plain",
+                "secretRef": "my-secret"
+              }
+            },
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "ca-certificates"
+            },
+            "consumerGroupId": "dataflows",
+            "compression": "Gzip",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 5,
+              "maxBytes": 1000000,
+              "maxMessages": 100000
+            },
+            "partitionStrategy": "Default",
+            "kafkaAcks": "All",
+            "copyMqttProperties": "Enabled",
+            "cloudEventAttributes": "Propagate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "endpointType": "Kafka",
+          "kafkaSettings": {
+            "host": "example.kafka.local:9093",
+            "authentication": {
+              "method": "Sasl",
+              "saslSettings": {
+                "saslType": "Plain",
+                "secretRef": "my-secret"
+              }
+            },
+            "tls": {
+              "mode": "Enabled",
+              "trustedCaCertificateConfigMapRef": "ca-certificates"
+            },
+            "consumerGroupId": "dataflows",
+            "compression": "Gzip",
+            "batching": {
+              "mode": "Enabled",
+              "latencyMs": 5,
+              "maxBytes": 1000000,
+              "maxMessages": 100000
+            },
+            "partitionStrategy": "Default",
+            "kafkaAcks": "All",
+            "copyMqttProperties": "Enabled",
+            "cloudEventAttributes": "Propagate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "qmbrfwcpwwhggszhrdjv",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123",
+        "name": "zyhxscudobzfacetvgyjiav",
+        "type": "iay",
+        "systemData": {
+          "createdBy": "ssvaslsmudloholronopqyxjcu",
+          "createdByType": "User",
+          "createdAt": "2024-08-09T18:13:29.389Z",
+          "lastModifiedBy": "gnicpuszwd",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-09T18:13:29.389Z"
+        }
+      }
+    }
+  }
+}

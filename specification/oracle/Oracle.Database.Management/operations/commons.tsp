@@ -14,16 +14,10 @@ interface OracleSubscriptionLevelResource<
   TProperties extends TypeSpec.Reflection.Model
 >
   extends ResourceListBySubscription<T>,
+    ResourceCreateAsync<T>,
     ResourceRead<T>,
     ResourceUpdateAsync<T, TProperties>,
-    ResourceDeleteWithoutOkAsync<T> {
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    T,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
-}
+    ResourceDeleteWithoutOkAsync<T> {}
 
 @armResourceOperations(T)
 interface OracleTrackedResource<
@@ -50,33 +44,29 @@ interface OracleLocationBasedResource<T extends Foundations.Resource>
 interface OracleChildResource<
   T extends Foundations.Resource,
   TProperties extends TypeSpec.Reflection.Model
-> extends ResourceRead<T>, ResourceDeleteWithoutOkAsync<T> {
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    T,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
-}
+>
+  extends ResourceCreateAsync<T>,
+    ResourceRead<T>,
+    ResourceDeleteWithoutOkAsync<T> {}
 
 @armResourceOperations
 interface ListActions {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Generic Async Get operation")
+  @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   @autoRoute
   @armResourceAction(TResource)
   @post
   ArmResourceGetActionAsync<
     TResource extends Foundations.Resource,
-    TResponse,
+    TResponse extends {} | void,
     TBaseParameters = BaseParameters<TResource>
   >(
     ...ResourceInstanceParameters<TResource, TBaseParameters>,
-  ): ArmResponse<TResponse> | ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmResponse<TResponse> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
+    Azure.Core.Foundations.RetryAfterHeader> | ErrorResponse;
 }

@@ -39,7 +39,7 @@ interface SAPApplicationServerInstances {
   /**
    * Puts the SAP Application Server Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SAPApplicationServerInstance,
     UpdateSAPApplicationInstanceRequest
@@ -58,26 +58,18 @@ interface SAPApplicationServerInstances {
   /**
    * Starts the SAP Application Server Instance.
    */
-  start is ArmResourceActionAsync<
+  start is CustomizedArmResourceActionAsync<
     SAPApplicationServerInstance,
-    {
-      @doc("SAP Application server instance start request body.")
-      @body
-      body?: StartRequest;
-    },
+    StartRequest,
     Foundations.OperationStatusResult
   >;
 
   /**
    * Stops the SAP Application Server Instance.
    */
-  stop is ArmResourceActionAsync<
+  stop is CustomizedArmResourceActionAsync<
     SAPApplicationServerInstance,
-    {
-      @doc("SAP Application server instance stop request body.")
-      @body
-      body?: StopRequest;
-    },
+    StopRequest,
     Foundations.OperationStatusResult
   >;
 }

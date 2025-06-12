@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/contosowidgetmanager"
   "dependencies":
-    "additionalDirectories":
-      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -18,7 +16,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-contoso-widgetmanager"
-    package-name: "{package-dir}"
+    namespace: "azure.contoso.widgetmanager"
     generate-test: true
     generate-sample: true
     flavor: azure
@@ -28,12 +26,27 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Template.Contoso
+    model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "contosowidgetmanager-rest"
-    packageDetails:
-      name: "@azure-rest/contoso-widgetmanager-rest"
+    package-dir: "contoso-widgetmanager-rest"
+    package-details:
+      name: "@azure-rest/contoso-widgetmanager"
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-contoso-widgetmanager"
     namespace: com.azure.contoso.widgetmanager
     flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/contosowidget"
+    package-dir: "azmanager"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
