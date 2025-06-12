@@ -14,7 +14,7 @@ model Branch is ProxyResource<BranchProperties> {
     Resource = Branch,
     KeyName = "branchName",
     SegmentName = "branches",
-    NamePattern = "^\\S.{0,62}\\S$|^\\S$"
+    NamePattern = "^\\S.{0,126}\\S$|^\\S$"
   >;
 }
 
