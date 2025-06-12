@@ -2264,6 +2264,13 @@ alias StructuredContentLengthParameter = {
   structuredContentLength?: int64;
 };
 
+alias StructuredContentLengthParameterPrivate = {
+  /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+  @access(Access.internal)
+  @header("x-ms-structured-content-length")
+  structuredContentLength?: int64;
+};
+
 alias StructuredContentLengthResponseHeader = {
   /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
   @header("x-ms-structured-content-length")
@@ -2279,6 +2286,13 @@ alias StructuredContentLengthResponseHeaderPrivate = {
 
 alias StructuredBodyParameter = {
   /** Required if the request body is a structured message. Specifies the message schema version and properties. */
+  @header("x-ms-structured-body")
+  structuredBodyType?: string;
+};
+
+alias StructuredBodyParameterPrivate = {
+  /** Required if the request body is a structured message. Specifies the message schema version and properties. */
+  @access(Access.internal)
   @header("x-ms-structured-body")
   structuredBodyType?: string;
 };

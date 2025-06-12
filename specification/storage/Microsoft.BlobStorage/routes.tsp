@@ -1991,8 +1991,8 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
             ...ContentCrc64Parameter;
-            ...StructuredBodyParameter;
-            ...StructuredContentLengthParameter;
+            ...StructuredBodyParameterPrivate;
+            ...StructuredContentLengthParameterPrivate;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
@@ -2004,11 +2004,11 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
-            ...RequestServerEncryptedResponseHeader;
+            ...DateResponseHeaderPrivate;
+            ...RequestServerEncryptedResponseHeaderPrivate;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeader;
+            ...StructuredBodyTypeResponseHeaderPrivate;
           },
           "application/octet-stream"
         >;
