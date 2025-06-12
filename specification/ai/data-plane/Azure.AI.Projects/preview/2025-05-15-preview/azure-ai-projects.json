@@ -941,8 +941,8 @@
         }
       }
     },
-    "/evaluations/runs:cancel/{name}": {
-      "patch": {
+    "/evaluations/runs/{name}:cancel": {
+      "post": {
         "operationId": "Evaluations_Cancel",
         "description": "Cancel an evaluation run by name",
         "parameters": [
@@ -952,16 +952,23 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the evaluation run to update.",
+            "description": "Identifier of the evaluation.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {

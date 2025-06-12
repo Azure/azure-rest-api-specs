@@ -54,17 +54,11 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Cancel an evaluation run by name")
-  @route("runs:cancel/{name}")
-  @patch
-  @useAuth(BearerAuth)
-  @added(Versions.v2025_05_15_preview)
-  cancel is Azure.Core.Foundations.Operation<
-    {
-      @doc("Name of the evaluation run to update.")
-      @path
-      name: string;
-    },
-    Evaluation
+  @post
+  cancel is EvaluationsOperations.ResourceAction<
+    Evaluation,
+    {},
+    Http.NoContentResponse
   >;
 
   @doc("Delete an evaluation run by name")
