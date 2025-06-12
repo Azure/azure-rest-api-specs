@@ -15,16 +15,14 @@ alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.Suppor
   Azure.Core.Traits.NoConditionalRequests>;
 */
 
-
-@doc("Document me")
+@doc("Defines the request parameters for the createOrUpdateVersion operations.")
 model InputParameters<
   TEntityType extends Reflection.Model,
   TBodyName extends valueof string = "body"
 > {
   @doc("The {name} to create or update.", TEntityType)
   @Http.bodyRoot
-  //@clientName("body", "python") // "npx tsv ." fails with "error invalid-ref: Unknown decorator @clientName"
-  @clientName(TBodyName)          // "npx tsv ." fails with "error invalid-ref: Unknown decorator @clientName"
+  @clientName(TBodyName)
   body: TEntityType;
 
   @doc("Content type for patch")
