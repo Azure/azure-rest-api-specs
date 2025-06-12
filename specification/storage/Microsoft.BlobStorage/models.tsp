@@ -1443,6 +1443,14 @@ alias RequestServerEncryptedResponseHeader = {
   isServerEncrypted?: boolean;
 };
 
+/** The private request server encrypted response header. */
+alias RequestServerEncryptedResponseHeaderPrivate = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @access(Access.internal)
+  @header("x-ms-request-server-encrypted")
+  isServerEncrypted?: boolean;
+};
+
 /** The server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
@@ -1564,6 +1572,14 @@ alias ContentLengthResponseHeader = {
 /** The version ID response header. */
 alias VersionIdResponseHeader = {
   /** A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob. */
+  @header("x-ms-version-id")
+  versionId: string;
+};
+
+/** The private version ID response header. */
+alias VersionIdResponseHeaderPrivate = {
+  /** A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob. */
+  @access(Access.internal)
   @header("x-ms-version-id")
   versionId: string;
 };
@@ -1773,6 +1789,14 @@ alias EncryptionScopeResponseHeader = {
   encryptionScope?: string;
 };
 
+/** The private encryption scope response header. */
+alias EncryptionScopeResponseHeaderPrivate = {
+  /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
+  @access(Access.internal)
+  @header("x-ms-encryption-scope")
+  encryptionScope?: string;
+};
+
 /** The blob content disposition parameter. */
 alias BlobContentDispositionParameter = {
   /** Optional. Sets the blob's content disposition. If specified, this property is stored with the blob and returned with a read request. */
@@ -1918,6 +1942,14 @@ alias EncryptionKeySha256Parameter = {
 /** The encryption key SHA256 response header. */
 alias EncryptionKeySha256ResponseHeader = {
   /** The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key. */
+  @header("x-ms-encryption-key-sha256")
+  encryptionKeySha256?: string;
+};
+
+/** The private encryption key SHA256 response header. */
+alias EncryptionKeySha256ResponseHeaderPrivate = {
+  /** The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key. */
+  @access(Access.internal)
   @header("x-ms-encryption-key-sha256")
   encryptionKeySha256?: string;
 };

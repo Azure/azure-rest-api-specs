@@ -1050,13 +1050,13 @@ namespace Storage.Blob {
           ...IfTagsParameter;
         },
         {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...RequestServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
+          ...EtagResponseHeaderPrivate;
+          ...LastModifiedResponseHeaderPrivate;
+          ...VersionIdResponseHeaderPrivate;
+          ...DateResponseHeaderPrivate;
+          ...RequestServerEncryptedResponseHeaderPrivate;
+          ...EncryptionKeySha256ResponseHeaderPrivate;
+          ...EncryptionScopeResponseHeaderPrivate;
         }
       >;
 
