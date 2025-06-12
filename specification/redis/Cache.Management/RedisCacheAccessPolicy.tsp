@@ -13,6 +13,7 @@ namespace Microsoft.Cache;
 /**
  * Response to get/put access policy.
  */
+@parentResource(RedisResource)
 model RedisCacheAccessPolicy
   is Azure.ResourceManager.ProxyResource<RedisCacheAccessPolicyProperties> {
   ...ResourceNameParameter<
@@ -28,14 +29,14 @@ interface RedisCacheAccessPolicies {
   /**
    * Gets the detailed information about an access policy of a redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccessPolicy_Get")
   get is ArmResourceRead<RedisCacheAccessPolicy>;
 
   /**
    * Adds an access policy to the redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccessPolicy_CreateUpdate")
   createUpdate is ArmResourceCreateOrReplaceAsync<
     RedisCacheAccessPolicy,
@@ -45,8 +46,8 @@ interface RedisCacheAccessPolicies {
   /**
    * Deletes the access policy from a redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccessPolicy_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RedisCacheAccessPolicy,
@@ -56,7 +57,7 @@ interface RedisCacheAccessPolicies {
   /**
    * Gets the list of access policies associated with this redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AccessPolicy_List")
   list is ArmResourceListByParent<
     RedisCacheAccessPolicy,

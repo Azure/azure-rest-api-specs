@@ -13,35 +13,42 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cache;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RedisOperationGroup {
   /**
    * Checks that the redis cache name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Redis_CheckNameAvailability")
   @autoRoute
-  @action("CheckNameAvailability")
+  @Rest.Private.actionSegment("CheckNameAvailability")
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityParameters,
-    Response = void,
+    Response = OkResponse,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AsyncOperationStatusOperationGroup {
   /**
    * For checking the ongoing status of an operation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AsyncOperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/asyncOperations/{operationId}")
   @get
   get(
     ...ApiVersionParameter,
-    ...LocationResourceParameter,
+
+    /**
+     * The location at which operation was triggered
+     */
+    @path
+    location: string,
 
     /**
      * The ID of asynchronous operation

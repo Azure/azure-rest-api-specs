@@ -28,50 +28,65 @@ model RedisPatchSchedule
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
+
+@armResourceOperations
+interface RedisPatchSchedulesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the redis cache.
+         */
+        @path
+        @segment("redis")
+        name: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = RedisPatchSchedule,
+        KeyName = "default",
+        SegmentName = "patchSchedules",
+        NamePattern = "",
+        Type = DefaultName
+      >>
+    > {}
 
 @armResourceOperations
 interface RedisPatchSchedules {
   /**
    * Gets the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PatchSchedules_Get")
-  get is ArmResourceRead<RedisPatchSchedule>;
+  get is RedisPatchSchedulesOps.Read<RedisPatchSchedule>;
 
   /**
    * Create or replace the patching schedule for Redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PatchSchedules_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<RedisPatchSchedule>;
+  createOrUpdate is RedisPatchSchedulesOps.CreateOrUpdateSync<RedisPatchSchedule>;
 
   /**
    * Deletes the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PatchSchedules_Delete")
-  delete is ArmResourceDeleteSync<RedisPatchSchedule>;
+  delete is RedisPatchSchedulesOps.DeleteSync<RedisPatchSchedule>;
 
   /**
    * Gets all patch schedules in the specified redis cache (there is only one).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PatchSchedules_ListByRedisResource")
-  listByRedisResource is ArmResourceListByParent<
-    RedisPatchSchedule,
-    Parameters = {
-      /**
-       * The name of the Redis cache.
-       */
-      @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-      @path
-      cacheName: string;
-    }
-  >;
+  listByRedisResource is ArmResourceListByParent<RedisPatchSchedule>;
 }
 
 @@doc(RedisPatchSchedule.name,

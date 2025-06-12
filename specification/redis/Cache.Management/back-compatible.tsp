@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Cache;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisCreateParameters.properties);
 
 @@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
@@ -58,50 +58,53 @@ using Microsoft.Cache;
   "aadEnabled"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisLinkedServerCreateParameters.properties);
 
-@@clientName(RedisResources.create::parameters.resource, "parameters");
+@@clientName(RedisResources.create::parameters.properties, "parameters");
 @@clientName(RedisResources.update::parameters.properties, "parameters");
 @@clientName(RedisResources.regenerateKey::parameters.body, "parameters");
 @@clientName(RedisResources.forceReboot::parameters.body, "parameters");
 @@clientName(RedisResources.importData::parameters.body, "parameters");
 @@clientName(RedisResources.exportData::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisResource.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(RedisFirewallRules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisFirewallRule.properties);
 
 @@clientName(RedisPatchSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisPatchSchedule.properties);
 
-@@clientName(LinkedServer.create::parameters.resource, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@clientName(LinkedServer.create::parameters.properties, "parameters");
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisLinkedServerWithProperties.properties);
 
 @@clientName(RedisCacheAccessPolicies.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisCacheAccessPolicy.properties);
 
 @@clientName(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RedisCacheAccessPolicyAssignment.properties);
 @@clientName(ScheduleEntries.scheduleEntries, "ScheduleEntries");
+@@clientName(RedisOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);

@@ -28,6 +28,8 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
 /**
  * REST API for Azure Redis Cache Service.
  */
@@ -49,4 +51,21 @@ enum Versions {
   v2024_11_01: "2024-11-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @operationId("Operations_List")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | ErrorResponse;
+}
