@@ -49,8 +49,14 @@ interface Datasets
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is VersionedResourceActionNoBody<
+  getCredentials is Azure.Core.Foundations.ResourceOperation<
     DatasetVersion,
+    {
+      @doc("The specific version id of the DatasetVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
     AssetCredentialResponse
   >;
 }

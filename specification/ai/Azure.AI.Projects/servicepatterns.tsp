@@ -28,7 +28,7 @@ model InputParameters<
   @doc("Content type for patch")
   @Http.header("Content-Type")
   contentType: "application/merge-patch+json";
-  
+
   @doc(
     "The specific version id of the {name} to create or update.",
     TEntityType
@@ -144,34 +144,3 @@ op VersionedResourceActionWithBody<
   TResponse
 >;
 
-@Rest.action
-op VersionedResourceActionNoBody<
-  TEntityType extends Reflection.Model,
-  TResponse
-> is Azure.Core.Foundations.ResourceOperation<
-  TEntityType,
-  {
-    @doc("The specific version id of the {name} to operate on.", TEntityType)
-    @Rest.segment("versions")
-    @Http.path
-    version: string;
-  },
-  TResponse
->;
-
-/* Reenable this once the service supports "unversioned" operations
-@Rest.action
-op UnversionedResourceAction<
-  TEntityType extends Reflection.Model,
-  TParams,
-  TResponse
-> is Azure.Core.Foundations.ResourceOperation<
-  TEntityType,
-  {
-    @doc("Parameters for the action")
-    @Http.bodyRoot
-    body: TParams;
-  },
-  TResponse
->;
-*/
