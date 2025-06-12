@@ -67,6 +67,29 @@ union ProvisioningState {
   string,
 }
 
+@added(Versions.v2025_06_10_preview)
+@doc("Endpoint Resource")
+@parentResource(TenantLocationResource)
+model Endpoint is ProxyResource<EndpointProperties> {
+  @doc("The name of the Endpoint")
+  @key("endpointName")
+  @segment("endpoints")
+  @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string;
+}
+
+@added(Versions.v2025_06_10_preview)
+@doc("The properties of Endpoint")
+model EndpointProperties {
+  @doc("The provisioning state of the Endpoint")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  @doc("The hostname for the endpoint")
+  hostname?: string;
+}
+
 @added(Versions.v2025_05_23_preview)
 @doc("The properties of Application")
 @parentResource(TenantLocationResource)
