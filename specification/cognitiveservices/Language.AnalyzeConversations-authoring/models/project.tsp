@@ -1205,6 +1205,12 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   trainingStatus: AnalyzeConversationAuthoringSubTrainingJobState;
 
   /**
+   * Represents the model data generation status.
+   */
+  @added(Versions.v2025_05_15_preview)
+  dataGenerationStatus: AnalyzeConversationAuthoringSubTrainingJobState;
+
+  /**
    * Represents model evaluation status.
    */
   evaluationStatus?: AnalyzeConversationAuthoringSubTrainingJobState;

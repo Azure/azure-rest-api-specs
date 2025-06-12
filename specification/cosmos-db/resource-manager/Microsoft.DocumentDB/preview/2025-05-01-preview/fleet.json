@@ -1,0 +1,1323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Fleet feature REST API",
+    "version": "2025-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/fleets": {
+      "get": {
+        "operationId": "Fleet_List",
+        "x-ms-examples": {
+          "CosmosDB Fleet List by subscription": {
+            "$ref": "./examples/fleet/CosmosDBFleetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all the fleets under the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of fleets.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets": {
+      "get": {
+        "tags": [
+          "Fleets"
+        ],
+        "operationId": "Fleet_ListByResourceGroup",
+        "x-ms-examples": {
+          "CosmosDB Fleet List by Resource Group": {
+            "$ref": "./examples/fleet/CosmosDBFleetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all the fleets under the specified subscription and resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of fleets.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}": {
+      "get": {
+        "operationId": "Fleet_Get",
+        "x-ms-examples": {
+          "CosmosDB Fleet Get": {
+            "$ref": "./examples/fleet/CosmosDBFleetGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The fleet properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Fleet_Create",
+        "x-ms-examples": {
+          "CosmosDB Fleet Create": {
+            "$ref": "./examples/fleet/CosmosDBFleetCreate.json"
+          }
+        },
+        "description": "Creates an Azure Cosmos DB fleet under a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetResource"
+            },
+            "description": "The parameters to provide for the current fleet."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously. The fleet properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetResource"
+            }
+          },
+          "201": {
+            "description": "The fleet is being created or updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FleetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Fleet_Update",
+        "x-ms-examples": {
+          "CosmosDB Fleet Update": {
+            "$ref": "./examples/fleet/CosmosDBFleetUpdate.json"
+          }
+        },
+        "description": "Updates the properties of an existing Azure Cosmos DB Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FleetResourceUpdate"
+            },
+            "description": "The parameters to provide for the current fleet."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously. The fleet properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Fleet_Delete",
+        "x-ms-examples": {
+          "CosmosDB Fleet Delete": {
+            "$ref": "./examples/fleet/CosmosDBFleetDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Fleet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Fleet delete operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The specified Fleet does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetAnalytics": {
+      "get": {
+        "operationId": "FleetAnalytics_List",
+        "x-ms-examples": {
+          "CosmosDB FleetAnalytics List": {
+            "$ref": "./examples/fleet/CosmosDBFleetAnalyticsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all the FleetAnalytics under a fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of FleetAnalytics.",
+            "schema": {
+              "$ref": "#/definitions/FleetAnalyticsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetAnalytics/{fleetAnalyticsName}": {
+      "get": {
+        "operationId": "FleetAnalytics_Get",
+        "x-ms-examples": {
+          "CosmosDB FleetAnalytics Get": {
+            "$ref": "./examples/fleet/CosmosDBFleetAnalyticsGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB FleetAnalytics under a fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetAnalyticsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The FleetAnalytics properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetAnalyticsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetAnalytics_Create",
+        "x-ms-examples": {
+          "CosmosDB FleetAnalytics Create": {
+            "$ref": "./examples/fleet/CosmosDBFleetAnalyticsCreate.json"
+          }
+        },
+        "description": "Creates an Azure Cosmos DB FleetAnalytics under a fleet.",
+        "x-ms-long-running-operation": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetAnalyticsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetAnalyticsResource"
+            },
+            "description": "The parameters to provide for the current FleetAnalytics."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously.",
+            "schema": {
+              "$ref": "#/definitions/FleetAnalyticsResource"
+            }
+          },
+          "201": {
+            "description": "The fleetAnalytics is being created or updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FleetAnalyticsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FleetAnalytics_Delete",
+        "x-ms-examples": {
+          "CosmosDB FleetAnalytics Delete": {
+            "$ref": "./examples/fleet/CosmosDBFleetAnalyticsDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB FleetAnalytics.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetAnalyticsNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The FleetAnalytics delete operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The specified FleetAnalytics does not exist in the fleet."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces": {
+      "get": {
+        "operationId": "Fleetspace_List",
+        "x-ms-examples": {
+          "CosmosDB Fleetspace List": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all the fleetspaces under a fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of fleetspaces.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}": {
+      "get": {
+        "operationId": "Fleetspace_Get",
+        "x-ms-examples": {
+          "CosmosDB Fleetspace Get": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB fleetspace under a fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The fleetspace properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Fleetspace_Create",
+        "x-ms-examples": {
+          "CosmosDB Fleetspace Create": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceCreate.json"
+          }
+        },
+        "description": "Creates an Azure Cosmos DB fleetspace under a fleet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetspaceResource"
+            },
+            "description": "The parameters to provide for the current fleetspace."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual fleetspace.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceResource"
+            }
+          },
+          "201": {
+            "description": "The fleetspace is being created or updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Fleetspace_Update",
+        "x-ms-examples": {
+          "CosmosDB Fleetspace Update": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceUpdate.json"
+          }
+        },
+        "description": "Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FleetspaceUpdate"
+            },
+            "description": "The parameters to provide for the current fleetspace."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual fleetspace.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceResource"
+            }
+          },
+          "202": {
+            "description": "The Fleetspace update operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Fleetspace_Delete",
+        "x-ms-examples": {
+          "CosmosDB Fleetspace Delete": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB Fleetspace.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Fleetspace delete operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The specified Fleetspace does not exist in the fleet."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}/fleetspaceAccounts": {
+      "get": {
+        "operationId": "FleetspaceAccount_List",
+        "x-ms-examples": {
+          "CosmosDB FleetspaceAccount List": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceAccountList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all the fleetspaces accounts  under a fleetspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of fleetspaces accounts.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}/fleetspaceAccounts/{fleetspaceAccountName}": {
+      "get": {
+        "operationId": "FleetspaceAccount_Get",
+        "x-ms-examples": {
+          "CosmosDB FleetspaceAccount Get": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceAccountGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB fleetspace account under a fleetspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The fleetspace account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetspaceAccount_Create",
+        "x-ms-examples": {
+          "CosmosDB FleetspaceAccount Create": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceAccountCreate.json"
+          }
+        },
+        "description": "Creates an Azure Cosmos DB fleetspace account under a fleetspace.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetspaceAccountResource"
+            },
+            "description": "The parameters to provide for the current fleetspace account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual fleetspace account.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceAccountResource"
+            }
+          },
+          "201": {
+            "description": "The fleetspace account is being created or updated asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/FleetspaceAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FleetspaceAccount_Delete",
+        "x-ms-examples": {
+          "CosmosDB FleetspaceAccount Delete": {
+            "$ref": "./examples/fleet/CosmosDBFleetspaceAccountDelete.json"
+          }
+        },
+        "description": "Removes an existing Azure Cosmos DB fleetspace account from a fleetspace.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FleetspaceAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Fleetspace Account delete operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The specified Fleetspace account does not exist in the fleet."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "FleetListResult": {
+      "description": "The response of the List operation that contains the fleets and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of fleets and their properties.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetAnalyticsListResult": {
+      "description": "The response of the List operation that contains the FleetAnalytics and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of FleetAnalytics and their properties.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetAnalyticsResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetspaceListResult": {
+      "description": "The response of the List operation that contains the fleetspaces and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of fleetspaces and their properties.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetspaceResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetResource": {
+      "description": "An Azure Cosmos DB FleetResource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FleetResourceUpdate": {
+      "description": "Represents a fleet resource for updates.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FleetResourceProperties"
+        }
+      }
+    },
+    "FleetResourceProperties": {
+      "description": "Properties to update Azure Cosmos DB fleet resource.",
+      "type": "object",
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the Fleet."
+        }
+      }
+    },
+    "FleetAnalyticsResource": {
+      "description": "An Azure Cosmos DB FleetAnalytics.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FleetAnalyticsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetAnalyticsProperties": {
+      "type": "object",
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the FleetAnalytics."
+        },
+        "storageLocationType": {
+          "type": "string",
+          "enum": [
+            "StorageAccount",
+            "FabricLakehouse"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "The type of the fleet analytics resource."
+        },
+        "storageLocationUri": {
+          "type": "string",
+          "description": "The unique identifier of the fleet analytics resource."
+        }
+      }
+    },
+    "FleetspaceResource": {
+      "description": "An Azure Cosmos DB Fleetspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FleetspaceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetspaceUpdate": {
+      "type": "object",
+      "description": "Represents a fleetspace resource for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetspaceProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the fleetspace."
+        }
+      }
+    },
+    "FleetspaceProperties": {
+      "description": "Properties to update Azure Cosmos DB Fleetspace.",
+      "type": "object",
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the Fleetspace."
+        },
+        "fleetspaceApiKind": {
+          "type": "string",
+          "enum": [
+            "NoSQL"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "The kind of API this fleetspace belongs to. Acceptable values: 'NoSQL'"
+        },
+        "throughputPoolConfiguration": {
+          "type": "object",
+          "description": "Configuration for throughput pool in the fleetspace.",
+          "properties": {
+            "minThroughput": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Minimum throughput for the pool."
+            },
+            "maxThroughput": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Maximum throughput for the pool."
+            },
+            "serviceTier": {
+              "type": "string",
+              "enum": [
+                "GeneralPurpose",
+                "BusinessCritical"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
+            },
+            "dataRegions": {
+              "type": "array",
+              "description": "List of data regions assigned to the fleetspace. Eg [westus2]",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          }
+        }
+      }
+    },
+    "FleetspaceAccountListResult": {
+      "description": "The List operation response, that contains the global database accounts and their properties.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FleetspaceAccountResource"
+          },
+          "description": "List of global database accounts in a fleetspace and their properties."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FleetspaceAccountResource": {
+      "description": "An Azure Cosmos DB Fleetspace Account",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FleetspaceAccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FleetspaceAccountProperties": {
+      "description": "An Azure Cosmos DB Global Database Account which is part of a Fleetspace Account.",
+      "type": "object",
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the Fleetspace Account."
+        },
+        "globalDatabaseAccountProperties": {
+          "type": "object",
+          "description": "Configuration for fleetspace Account in the fleetspace.",
+          "properties": {
+            "resourceId": {
+              "description": "The resource identifier of global database account in the Fleetspace Account.",
+              "type": "string"
+            },
+            "armLocation": {
+              "description": "The location of  global database account in the Fleetspace Account.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FleetNameParameter": {
+      "name": "fleetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB fleet name. Needs to be unique under a subscription.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "FleetAnalyticsNameParameter": {
+      "name": "fleetAnalyticsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB fleetAnalytics name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "FleetspaceNameParameter": {
+      "name": "fleetspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB fleetspace name. Needs to be unique under a fleet.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "FleetspaceAccountNameParameter": {
+      "name": "fleetspaceAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB fleetspace account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    }
+  }
+}
