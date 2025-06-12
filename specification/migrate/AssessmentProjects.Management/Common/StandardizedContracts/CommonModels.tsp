@@ -196,6 +196,12 @@ model AssessedDiskDataV3 {
 
   @doc("Gets the number of write operations per second.")
   numberOfWriteOperationsPerSecond?: float32;
+
+  @doc("Stores the other disk recommendations based on storage utilised.")
+  otherDiskRecommendations?: AssessedDiskDataV3[];
+
+  @doc("Stores the Size multiplier of the disk for which it's recommended.")
+  sizeMultiplier?: float32;
 }
 
 @doc("Assessed network adapter data for normalized contract.")

@@ -186,6 +186,14 @@ model Skus<TMigrationSuitability> {
   @doc("The sku details.")
   @visibility(Lifecycle.Read)
   details?: SkuDetails;
+  
+  @doc("Additional properties related to the SKU.")
+  @visibility(Lifecycle.Read)
+  additionalProperties?: SkuAdditionalProperties;
+
+  @doc("Other recommendations for the same SKU.")
+  @visibility(Lifecycle.Read)
+  otherRecommendations?: Skus<TMigrationSuitability>[];
 }
 
 @doc("Source recommendation details.")
@@ -223,4 +231,11 @@ model SkuDetails {
   @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", #[])
   totalSavings?: SavingsDetailsCommon[];
+}
+
+@doc("Represents additional properties for a SKU in an assessed workload scenario.")
+model SkuAdditionalProperties {
+  @doc("The size for which the SKU is evaluated.")
+  @visibility(Lifecycle.Read)
+  utilisedSize: float32;
 }
