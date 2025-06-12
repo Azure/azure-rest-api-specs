@@ -1486,6 +1486,14 @@ alias BlobSequenceNumberResponseHeader = {
   blobSequenceNumber: int64;
 };
 
+/** The private blob sequence number response header. */
+alias BlobSequenceNumberResponseHeaderPrivate = {
+  /** The current sequence number for a page blob. This header is not returned for block blobs or append blobs. */
+  @access(Access.internal)
+  @header("x-ms-blob-sequence-number")
+  blobSequenceNumber: int64;
+};
+
 /** The blob expiration options parameter. */
 alias BlobExpiryOptionsParameter = {
   /** Required. Indicates mode of the expiry time */

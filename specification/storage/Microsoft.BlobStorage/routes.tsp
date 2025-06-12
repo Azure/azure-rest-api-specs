@@ -961,10 +961,10 @@ namespace Storage.Blob {
           ...IfTagsParameter;
         },
         {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
+          ...EtagResponseHeaderPrivate;
+          ...LastModifiedResponseHeaderPrivate;
+          ...BlobSequenceNumberResponseHeaderPrivate;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
