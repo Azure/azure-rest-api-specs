@@ -16,6 +16,7 @@ jobs:
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           SkipCheckoutNone: true
+          TokenToUseForAuth: $(azuresdk-github-pat)
           Paths: 
             - repo.json
             - mapping.json
