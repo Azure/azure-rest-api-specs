@@ -26,7 +26,7 @@ These are the global settings for the DevTestLab API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09
+tag: package-2025-06-preview
 ```
 
 
@@ -57,6 +57,14 @@ input-file:
 - Microsoft.DevTestLab/preview/2015-05-21-preview/DTL.json
 ```
 
+### Tag: package-2025-06-preview
+
+These settings apply only when `--tag=package-2025-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-05-preview'
+input-file:
+- Microsoft.DevTestLab/preview/2025-06-05-preview/DTL.json
+```
 
 ---
 # Code Generation
