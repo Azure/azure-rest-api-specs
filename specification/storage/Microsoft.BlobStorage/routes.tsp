@@ -18,8 +18,8 @@ namespace Storage.Blob {
   /** Azure Storage Blob basic operation template */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   op StorageOperation<
-    TParams extends TypeSpec.Reflection.Model | void,
-    TResponse extends TypeSpec.Reflection.Model | void,
+    TParams extends TypeSpec.Reflection.Model  = {},
+    TResponse extends TypeSpec.Reflection.Model = {},
     RequestMediaType extends string = "application/xml",
     ResponseMediaType extends string = "application/xml",
     TError = StorageError
@@ -45,14 +45,14 @@ namespace Storage.Blob {
   /** Azure Storage Blob basic operation template */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   op StorageOperationNoBody<
-    TParams extends TypeSpec.Reflection.Model | void,
-    TResponse extends TypeSpec.Reflection.Model | void,
+    TParams extends TypeSpec.Reflection.Model = {},
+    TResponse extends TypeSpec.Reflection.Model = {},
     TError = StorageError
   >(
     ...ApiVersionHeader,
     ...TParams,
     ...ClientRequestIdHeader,
-  ): TResponse | TError;
+  ): (TResponse & DateResponseHeader) | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
