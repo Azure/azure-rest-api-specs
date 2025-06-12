@@ -75,6 +75,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Legacy"
   @doc("The list of Azure DevOps organizations the pool should be present in.")
+  @identifiers(#[])
   organizations: Organization[];
 }
 @doc("Defines an Azure DevOps organization.")
@@ -111,6 +112,7 @@ model VmssFabricProfile extends FabricProfile {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Legacy"
   @doc("The VM images of the machines in the pool.")
+  @identifiers(#[])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
