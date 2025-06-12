@@ -23,7 +23,6 @@ interface Datasets
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
-
   @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
   @Rest.action("startPendingUpload")
   startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<

@@ -96,5 +96,3 @@ interface VersionedOperations<
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
   >;
 }
-
-
