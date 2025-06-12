@@ -171,6 +171,9 @@ These settings apply only when `--tag=package-2024-12-09-preview-ledger` is spec
 ```yaml $(tag) == 'package-2024-12-09-preview-ledger'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
 
 ### Tag: package-2024-12-09-preview-identity
@@ -180,4 +183,24 @@ These settings apply only when `--tag=package-2024-12-09-preview-identity` is sp
 ```yaml $(tag) == 'package-2024-12-09-preview-identity'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
 ```
+
+### Tag: package-2025-01-31-preview-codetransparency
+
+These settings apply only when `--tag=package-2025-01-31-preview-codetransparency` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-31-preview-codetransparency'
+input-file:
+  - Microsoft.CodeTransparency/preview/2025-01-31-preview/cts.json
+suppressions:
+  - code: LroExtension
+    from: cts.json
+    reason: Following RFC which does not specify this
+  - code: ErrorResponse
+    from: cts.json
+    reason: No way to express when using CBOR
+```
+

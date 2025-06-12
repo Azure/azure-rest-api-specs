@@ -40,17 +40,36 @@ function Submit-Request($filePath, $packageName)
     $query.Add('language', $LanguageShort)
     $query.Add('project', $DevopsProject)
     $reviewFileFullName = Join-Path -Path $ArtifactPath $packageName $reviewFileName
+    # If CI generates token file then it passes both token file name and original file (filePath) to APIView
+    # If both files are passed then APIView downloads the parent directory as a zip
+    # If code file is not passed(for e.g. .NET or Java) then APIView needs full path to original file to download only that file.
     if (Test-Path $reviewFileFullName)
     {
         $query.Add('codeFile', $reviewFileName)
+        # Pass only relative path in package artifact directory when code file is also present
+        $query.Add('filePath', (Split-Path -Leaf $filePath))
+    }
+    else
+    {
+        $query.Add('filePath', $filePath)
     }
     $uri = [System.UriBuilder]$APIViewUri
     $uri.query = $query.toString()
+
+    $correlationId = [System.Guid]::NewGuid().ToString()
+    $headers = @{
+      "x-correlation-id" = $correlationId
+    }
     LogInfo "Request URI: $($uri.Uri.OriginalString)"
+    LogInfo "Correlation ID: $correlationId"
     try
     {
-        $Response = Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -MaximumRetryCount 3
+        $Response = Invoke-WebRequest -Method 'GET' -Uri $uri.Uri -Headers $headers -MaximumRetryCount 3
         $StatusCode = $Response.StatusCode
+        if ($Response.Headers['Content-Type'] -like 'application/json*') {
+            $responseContent = $Response.Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
+            LogSuccess $responseContent
+        }
     }
     catch
     {

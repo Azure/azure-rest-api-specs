@@ -15,40 +15,27 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
-  - [`SDK azure-powershell`](#sdk-azure-powershell)
-  - [`SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`](#sdk-azure-sdk-for--checks-like-sdk-azure-sdk-for-go)
+  - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
+  - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
-    - [Get help fixing Avocado validation failures](#get-help-fixing-avocado-validation-failures)
-    - [Run avocado locally](#run-avocado-locally)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
-    - [`Record<unknown>` causes `AvoidAdditionalProperties` and `PropertiesTypeObjectNoDefinition`](#recordunknown-causes-avoidadditionalproperties-and-propertiestypeobjectnodefinition)
-    - [`RequestBodyMustExistForPutPatch`](#requestbodymustexistforputpatch)
-    - [`PatchPropertiesCorrespondToPutProperties`](#patchpropertiescorrespondtoputproperties)
-    - [`@singleton` causes `EvenSegmentedPathForPutOperation` and `XmsPageableForListCalls`](#singleton-causes-evensegmentedpathforputoperation-and-xmspageableforlistcalls)
-    - [`AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`](#avoidanonymousparameter-avoidanonymoustypes-integertypemusthaveformat)
-    - [`AvoidAnonymousTypes` inside a 202 response](#avoidanonymoustypes-inside-a-202-response)
-    - [`OAuth2Auth` causes `XmsEnumValidation`](#oauth2auth-causes-xmsenumvalidation)
-    - [`ProvisioningStateMustBeReadOnly`](#provisioningstatemustbereadonly)
-    - [`PatchBodyParameterSchema`](#patchbodyparameterschema)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
-  - [`Spell Check`](#spell-check)
+  - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
-    - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
 - [Suppression Process](#suppression-process)
 - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
 - [Obsolete checks](#obsolete-checks)
-
 
 # Prerequisites
 
@@ -64,44 +51,52 @@ This check is owned by One Engineering System. See [1ES CredScan] for help.
 
 This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 
-## `SDK azure-powershell`
+## `SDK Validation *` checks, like `SDK Validation - Go`
 
 > [!IMPORTANT]
 >
-> - This check is never blocking merging of a spec PR, even if it fails.
-> - The `SDK azure-powershell` check is owned by the `Azure.Core` team,
-    not the Azure SDK team.
-
-The owner of this check is Yeming Liu from the `Azure.Core` team.
-Please reach out to him with any questions.
-
-## `SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`
-
-> [!IMPORTANT]
->
-> - The `SDK azure-sdk-for-*` checks are owned by the Shanghai division of the Azure SDK team,
+> - The `SDK Validation Status` check is a meta check that aggregates the results of all `SDK Validation - {Language}`
+    checks and reports a unified status. Re-run any individual `SDK Validation - {Language}` checks will automatically
+    trigger a re-run of this meta check.
+> - The `SDK Validation *` checks are owned by the Shanghai division of the Azure SDK team,
     not the core Redmond Azure SDK team.
-> - Only `SDK azure-sdk-for-go` check failure will block a specs PR, because this check serves as a canary for the
-    entire `SDK azure-sdk-for-*` group of checks.
+> - For more information, refer to [SDK Validation FAQ](https://aka.ms/azsdk/sdk-automation-faq).
 
 If you have an issue or with any of checks listed in the first column of the table below:
 
 | Check name                        | Owner          | GitHub login                                                  |
 |-----------------------------------|----------------| ------------------------------------------------------------- |
-| `SDK azure-sdk-for-go`            | Chenjie Shi    | [tadelesh](https://github.com/tadelesh)                       |
-| `SDK azure-sdk-for-java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
-| `SDK azure-sdk-for-net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
-| `SDK azure-sdk-for-python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
+| `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
+| `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
+| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
+| `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
 
 1. Attempt to diagnose the issue yourself:
     1. Look at the affected PR's `checks` tab for the failing check.
-    1. Click on the `View Azure DevOps build log for more details.` link from that tab and inspect the devOps logs.
-       For example, for `SDK azure-sdk-for-go` check look into the `SDK azure-sdk-fo-go` job, `SDK Automation` task logs.
-1. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
+    2. Click on the `View more details on Azure Pipelines.` link from that tab and inspect the devOps logs.
+       For example, for `SDK Validation - Go` check look into the `Azure Pipelines/SDK Validation - Go` pipeline run logs.
+2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
+
+## `SDK Breaking Change Review`
+
+> [!IMPORTANT]
+>
+> - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
+     changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
+     in PR review workflow, i.e. REST API breaking change review and ARM review.
+> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+
+If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
+
+| Language        | Reviewer        | GitHub login                                                  |
+|-----------------|-----------------| ------------------------------------------------------------- |
+| `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
+| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
 
@@ -136,29 +131,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-> [!IMPORTANT]
-> `Swagger Avocado` check is not a blocking for merging your PR, even if it fails.
-> It is left to the discretion of the PR reviewer if the Avocado failure actually
-> needs to be addressed or suppressed.
-
-### Get help fixing Avocado validation failures
-
-Refer to [Avocado README](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
-
-### Run avocado locally
-
-``` powershell
-npm install -g @azure/avocado
-
-avocado
-```
-
-When type avocado in command line, avocado will validate in the current directory.
-
-Note: When running in OpenAPI spec PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
-
-- Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
-- Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
+Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 

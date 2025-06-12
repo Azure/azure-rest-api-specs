@@ -58,7 +58,7 @@ op addUploadPart(
   upload_id: string,
 
   @doc("The request body data payload for the operation.")
-  @body
+  @multipartBody
   requestBody: AddUploadPartRequest,
 ): UploadPart;
 

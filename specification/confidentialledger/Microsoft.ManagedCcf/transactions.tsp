@@ -35,7 +35,7 @@ model Transaction {
 @TypeSpec.Rest.resource("transactions")
 model NamedTransaction {
   @doc("Identifier of the requested transaction.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   transactionId: transactionId;
 
@@ -46,7 +46,7 @@ model NamedTransaction {
 @TypeSpec.Rest.resource("transactions")
 model CommittedTransaction {
   @doc("Singleton key for accessing commit.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   id: "commit";
 

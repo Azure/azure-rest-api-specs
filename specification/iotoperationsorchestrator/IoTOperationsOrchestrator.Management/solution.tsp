@@ -25,21 +25,21 @@ model Solution is TrackedResource<SolutionProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("The properties of a Solution resource.")
 model SolutionProperties {
   @doc("A list of components")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   components?: ComponentProperties[];
 
   @doc("Version of the particular resource.")
   version?: string;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

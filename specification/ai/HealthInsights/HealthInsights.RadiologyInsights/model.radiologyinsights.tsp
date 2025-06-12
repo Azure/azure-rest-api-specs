@@ -87,11 +87,11 @@ model QualityMeasureOptions {
 @resource("radiology-insights/jobs")
 model RadiologyInsightsJob {
   @doc("The request data for the operation.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobData?: RadiologyInsightsData;
 
   @doc("The result of the operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: RadiologyInsightsInferenceResult;
 
   ...HealthInsightsJobBase;
@@ -375,7 +375,7 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("The expansion of the category (which is an abbreviation.)")
   categoryDescription: string;
 
-  @doc("The value. If the value is a range, use field valueRange.")
+  @doc("The value. If the value is a range, use field rangeValue.")
   singleValue?: string;
 
   @doc("The range.")

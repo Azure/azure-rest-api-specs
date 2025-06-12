@@ -10,7 +10,7 @@ parameters:
     default: 'swaggerAPIViewArtifacts'
   - name: APIViewAPIUri
     type: string
-    default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
+    default: 'https://apiview.dev/api/PullRequests/CreateAPIRevisionIfAPIHasChanges'
 
 pr:
    branches:
@@ -20,12 +20,13 @@ pr:
 jobs:
 - job:
   pool:
-    name: azsdk-pool-x64
-    demands: ImageOverride -equals ubuntu-22.04
+    name: azsdk-pool
+    demands: ImageOverride -equals ubuntu-24.04
 
   steps:
   - checkout: self
-    fetchDepth: 0
+    # Required to compare head commit with base commit
+    fetchDepth: 2
   
   - pwsh: |
       dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `
@@ -61,6 +62,6 @@ jobs:
         -RepoName $(Build.Repository.Name) `
         -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
         -Language 'Swagger' `
-        -CommitSha $(Build.SourceVersion)
+        -CommitSha $(System.PullRequest.SourceCommitId)
     displayName: Create Swagger APIView
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))

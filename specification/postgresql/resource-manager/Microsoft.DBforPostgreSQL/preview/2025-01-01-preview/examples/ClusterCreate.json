@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D4ds_v5"
+      },
+      "properties": {
+        "administratorLogin": "examplelogin",
+        "administratorLoginPassword": "examplepassword",
+        "version": "16",
+        "createMode": "Create",
+        "cluster": {
+          "clusterSize": 2
+        },
+        "storage": {
+          "tier": "P15",
+          "storageSizeGB": 256,
+          "autoGrow": "Disabled"
+        },
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Disabled"
+        },
+        "highAvailability": {
+          "mode": "Disabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2025-01-01T18:30:22.123456Z"
+        },
+        "properties": {
+          "cluster": {
+            "clusterSize": 2
+          },
+          "replica": {
+            "role": "Primary",
+            "replicationState": "Active"
+          },
+          "storage": {
+            "iops": 1100,
+            "tier": "P15",
+            "storageSizeGB": 256,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "version": "16",
+          "administratorLogin": "examplelogin",
+          "state": "Ready",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2025-01-01T18:35:22.123456Z"
+        },
+        "properties": {
+          "cluster": {
+            "clusterSize": 2
+          },
+          "replica": {
+            "role": "Primary",
+            "replicationState": "Active"
+          },
+          "storage": {
+            "iops": 1100,
+            "tier": "P15",
+            "storageSizeGB": 256,
+            "autoGrow": "Disabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "version": "16",
+          "administratorLogin": "examplelogin",
+          "state": "Ready",
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Primary"
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

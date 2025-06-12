@@ -4,6 +4,7 @@ import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
 
@@ -156,9 +157,11 @@ alias ChatCompletionsCommon = {
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  @visibility(Lifecycle.Read)
   created: utcDateTime;
 
   @doc("The model used for the chat completion.")
+  @visibility(Lifecycle.Read)
   `model`: string;
 };
 
@@ -176,11 +179,13 @@ model ChatCompletions {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
+  @visibility(Lifecycle.Read)
   choices: ChatChoice[];
 
   @doc("""
       Usage information for tokens processed and generated as part of this completions operation.
     """)
+  @visibility(Lifecycle.Read)
   usage: CompletionsUsage;
 }
 
@@ -199,11 +204,13 @@ model StreamingChatCompletionsUpdate {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
+  @visibility(Lifecycle.Read)
   choices: StreamingChatChoiceUpdate[];
 
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
+  @visibility(Lifecycle.Read)
   usage?: CompletionsUsage;
 }
 
@@ -214,36 +221,45 @@ model StreamingChatCompletionsUpdate {
   """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
+  @visibility(Lifecycle.Read)
   completion_tokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
+  @visibility(Lifecycle.Read)
   prompt_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
   total_tokens: int32;
 
   @doc("Breakdown of tokens used in a completion.")
+  @visibility(Lifecycle.Read)
   completion_tokens_details?: CompletionsUsageDetails;
 
   @doc("Breakdown of tokens used in the prompt/chat history.")
+  @visibility(Lifecycle.Read)
   prompt_tokens_details?: PromptUsageDetails;
 }
 
 @doc("A breakdown of tokens used in a completion.")
 model CompletionsUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
   audio_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
   total_tokens: int32;
 }
 
 @doc("A breakdown of tokens used in the prompt/chat history.")
 model PromptUsageDetails {
   @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
   audio_tokens: int32;
 
   @doc("The total number of tokens cached.")
+  @visibility(Lifecycle.Read)
   cached_tokens: int32;
 }
 
@@ -362,6 +378,7 @@ alias ChatChoiceCommon = {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
+  @visibility(Lifecycle.Read)
   finish_reason: CompletionsFinishReason | null;
 };
 
@@ -374,6 +391,7 @@ model ChatChoice {
   ...ChatChoiceCommon;
 
   @doc("The chat message for a given chat completions prompt.")
+  @visibility(Lifecycle.Read)
   message: ChatResponseMessage;
 }
 
@@ -387,6 +405,7 @@ model StreamingChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")
+  @visibility(Lifecycle.Read)
   delta: StreamingChatResponseMessageUpdate;
 }
 
@@ -415,6 +434,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("The contents of the user message, with available input types varying by selected model.")
   content: string | ChatMessageContentItem[];
 }
@@ -466,10 +486,11 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 @doc("A representation of a chat message update as received in a streaming response.")
 model StreamingChatResponseMessageUpdate {
   @doc("The chat role associated with the message. If present, should always be 'assistant'")
+  @visibility(Lifecycle.Read)
   role?: ChatRole;
 
-  //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
+  @visibility(Lifecycle.Read)
   content?: string;
 
   @encodedName("application/json", "tool_calls")
@@ -477,16 +498,19 @@ model StreamingChatResponseMessageUpdate {
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
     completions request to resolve as configured.
     """)
+  @visibility(Lifecycle.Read)
   toolCalls?: StreamingChatResponseToolCallUpdate[];
 }
 
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
+  @visibility(Lifecycle.Read)
   role: ChatRole;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
+  @visibility(Lifecycle.Read)
   content: string | null;
 
   @encodedName("application/json", "tool_calls")
@@ -494,15 +518,18 @@ model ChatResponseMessage {
     The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
     completions request to resolve as configured.
     """)
+  @visibility(Lifecycle.Read)
   toolCalls?: ChatCompletionsToolCall[];
 
   @doc("""
       The audio generated by the model as a response to the messages if the model is configured to generate audio.
     """)
+  @visibility(Lifecycle.Read)
   audio?: ChatCompletionsAudio;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
 alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
@@ -576,9 +603,11 @@ model FunctionDefinition {
   """)
 model StreamingChatResponseToolCallUpdate {
   @doc("The ID of the tool call.")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Updates to the function call requested by the AI model.")
+  @visibility(Lifecycle.Read)
   function: FunctionCall;
 }
 
@@ -599,6 +628,7 @@ model ChatCompletionsToolCall {
 @doc("The name and arguments of a function that should be called, as generated by the model.")
 model FunctionCall {
   @doc("The name of the function to call.")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("""
@@ -607,6 +637,7 @@ model FunctionCall {
     not defined by your function schema. Validate the arguments in your code before calling
     your function.
     """)
+  @visibility(Lifecycle.Read)
   arguments: string;
 }
 
@@ -719,6 +750,7 @@ model ChatCompletionsAudio {
       Unique identifier for the audio response. This value can be used in chat history messages instead of passing 
       the full audio object.
     """)
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("""
@@ -727,17 +759,21 @@ model ChatCompletionsAudio {
     """)
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   @encodedName("application/json", "expires_at")
+  @visibility(Lifecycle.Read)
   expiresAt: utcDateTime;
 
   @doc("Base64 encoded audio data")
+  @visibility(Lifecycle.Read)
   data: string;
 
   @doc("""
     The format of the audio content. If format is not provided, it will match the format used in the
     input audio request.
     """)
+  @visibility(Lifecycle.Read)
   format?: AudioContentFormat;
 
   @doc("The transcript of the audio file.")
+  @visibility(Lifecycle.Read)
   transcript: string;
 }
