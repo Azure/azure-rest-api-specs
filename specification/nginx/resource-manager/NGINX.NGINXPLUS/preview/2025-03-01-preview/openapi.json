@@ -1121,6 +1121,12 @@
               "$ref": "#/definitions/Configuration"
             }
           },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1265,6 +1271,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze": {
+      "post": {
+        "operationId": "Configurations_AnalyzeConfiguration",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Analyzes a configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nginxDeploymentName",
+            "in": "path",
+            "description": "The name of the NginxDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The analysis request body containing configuration details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalysisCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_AnalyzeConfiguration_MaximumSet_Gen": {
+            "$ref": "./examples/Configurations_AnalyzeConfiguration_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies": {
       "post": {
         "operationId": "NginxDeployments_ListDefaultWafPolicies",
@@ -1296,6 +1366,12 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NginxDeploymentDefaultWafPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1587,6 +1663,128 @@
           }
         ]
       }
+    },
+    "AnalysisCreate": {
+      "type": "object",
+      "description": "Analysis request payload for configuration analysis.",
+      "properties": {
+        "config": {
+          "type": "object",
+          "description": "The configuration details to analyze.",
+          "properties": {
+            "rootFile": {
+              "type": "string",
+              "description": "Path to the root configuration file."
+            },
+            "files": {
+              "type": "array",
+              "description": "List of additional configuration files.",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationFile"
+              },
+              "x-ms-identifiers": [
+                "virtualPath"
+              ]
+            },
+            "protectedFiles": {
+              "type": "array",
+              "description": "List of protected file requests for analysis.",
+              "items": {
+                "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+              },
+              "x-ms-identifiers": [
+                "virtualPath"
+              ]
+            },
+            "package": {
+              "$ref": "#/definitions/NginxConfigurationPackage",
+              "description": "Configuration package data for analysis."
+            }
+          },
+          "required": [
+            "rootFile"
+          ]
+        }
+      },
+      "required": [
+        "config"
+      ]
+    },
+    "AnalysisDiagnostic": {
+      "type": "object",
+      "description": "Represents a diagnostic message from analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the diagnostic."
+        },
+        "directive": {
+          "type": "string",
+          "description": "Directive that triggered the diagnostic."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the diagnostic."
+        },
+        "file": {
+          "type": "string",
+          "description": "File in which the diagnostic occurred."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Line number where the issue was found."
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed diagnostic message."
+        },
+        "rule": {
+          "type": "string",
+          "description": "Identifier of the rule violated."
+        }
+      },
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule"
+      ]
+    },
+    "AnalysisResult": {
+      "type": "object",
+      "description": "Result of configuration analysis.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Overall status of the analysis process."
+        },
+        "data": {
+          "type": "object",
+          "description": "Detailed analysis data, including errors and diagnostics.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "description": "List of error diagnostics.",
+              "items": {
+                "$ref": "#/definitions/AnalysisDiagnostic"
+              }
+            },
+            "diagnostics": {
+              "type": "array",
+              "description": "List of analysis diagnostic items.",
+              "items": {
+                "$ref": "#/definitions/DiagnosticItem"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "ApiKey": {
       "type": "object",
@@ -1968,6 +2166,58 @@
           "description": "Root file path."
         }
       }
+    },
+    "DiagnosticItem": {
+      "type": "object",
+      "description": "Detailed diagnostic item including severity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique diagnostic identifier."
+        },
+        "directive": {
+          "type": "string",
+          "description": "Directive text related to the diagnostic."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the issue."
+        },
+        "file": {
+          "type": "string",
+          "description": "File path associated with the diagnostic."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Line number in the file."
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message."
+        },
+        "rule": {
+          "type": "string",
+          "description": "Rule name that was violated."
+        },
+        "level": {
+          "$ref": "#/definitions/SeverityLevel",
+          "description": "Severity level of the diagnostic."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the diagnostic."
+        }
+      },
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule",
+        "level"
+      ]
     },
     "IdentityProperties": {
       "type": "object",
@@ -3202,6 +3452,30 @@
         "min",
         "max"
       ]
+    },
+    "SeverityLevel": {
+      "type": "string",
+      "description": "Severity Level of the analysis",
+      "enum": [
+        "Info",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "SeverityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Severity Level Info."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Severity Level Warning."
+          }
+        ]
+      }
     },
     "UserIdentityProperties": {
       "type": "object",

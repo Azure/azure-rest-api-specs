@@ -37,13 +37,28 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-  - NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json
+  - NGINX.NGINXPLUS/preview/2025-03-01-preview/openapi.json
+
 suppressions:
   - code: GetCollectionResponseSchema
-    from: swagger.json
+    from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies"]
-    reason: This is by design to avoid high bandwidth consumption
-
+    reason: This is by design to avoid high bandwidth consumption as agreed with the partner
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    reason: This is by design. Request contains a customer provided secret that is not returned in the response. 
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    reason: This is by design. We do not return provided file contents in the response. 
+  - code: PutResponseCodes
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    reason: This is a synchronous API, hence we're not returning a 200. 
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    reason: User Assigned Managed Identity Type inline definition is automatically added to json.
 ```
 
 ### Tag: package-2024-11-01-preview
