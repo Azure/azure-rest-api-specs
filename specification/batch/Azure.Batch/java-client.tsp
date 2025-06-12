@@ -7,7 +7,6 @@ import "@typespec/http";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
-@versioned(Azure.Batch.Versions)
 namespace JavaClient;
 
 // Get Application Operation
