@@ -503,7 +503,7 @@ namespace Agents.Persistent {
   @operationGroup("java")
   @route("/files")
   interface Files {
-    listFiles is Azure.AI.Agents.Files.listFiles;
+    listFilesInternal is Azure.AI.Agents.Files.listFiles;
     #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
     uploadFile is Azure.AI.Agents.Files.uploadFile;
     getFile is Azure.AI.Agents.Files.getFile;
@@ -586,4 +586,87 @@ namespace Agents.Persistent {
     @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
     listVectorStoreFileBatchFiles is Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles;
   }
+
+  /** Available market codes for Bing search configuration */
+  // union MarketCode {
+  //   string;
+  //   /** MarketCode `es-AR` for Spanish - Argentina */
+  //   "esAR": "es-AR";
+  //   /** MarketCode `en-AU` for English - Australia */
+  //   "enAU": "en-AU";
+  //   /** MarketCode `de-AT` for German - Austria */
+  //   "deAT": "de-AT";
+  //   /** MarketCode `nl-BE` for Dutch - Belgium */
+  //   "nlBE": "nl-BE";
+  //   /** MarketCode `fr-BE` for French - Belgium */
+  //   "frBE": "fr-BE";
+  //   /** MarketCode `pt-BR` for Portuguese - Brazil */
+  //   "ptBR": "pt-BR";
+  //   /** MarketCode `en-CA` for English - Canada */
+  //   "enCA": "en-CA";
+  //   /** MarketCode `fr-CA` for French - Canada */
+  //   "frCA": "fr-CA";
+  //   /** MarketCode `es-CL` for Spanish - Chile */
+  //   "esCL": "es-CL";
+  //   /** MarketCode `da-DK` for Danish - Denmark */
+  //   "daDK": "da-DK";
+  //   /** MarketCode `fi-FI` for Finnish - Finland */
+  //   "fiFI": "fi-FI";
+  //   /** MarketCode `fr-FR` for French - France */
+  //   "frFR": "fr-FR";
+  //   /** MarketCode `de-DE` for German - Germany */
+  //   "deDE": "de-DE";
+  //   /** MarketCode `zh-HK` for Traditional Chinese - Hong Kong SAR */
+  //   "zhHK": "zh-HK";
+  //   /** MarketCode `en-IN` for English - India */
+  //   "enIN": "en-IN";
+  //   /** MarketCode `en-ID` for English - Indonesia */
+  //   "enID": "en-ID";
+  //   /** MarketCode `it-IT` for Italian - Italy */
+  //   "itIT": "it-IT";
+  //   /** MarketCode `ja-JP` for Japanese - Japan */
+  //   "jaJP": "ja-JP";
+  //   /** MarketCode `ko-KR` for Korean - Korea */
+  //   "koKR": "ko-KR";
+  //   /** MarketCode `en-MY` for English - Malaysia */
+  //   "enMY": "en-MY";
+  //   /** MarketCode `es-MX` for Spanish - Mexico */
+  //   "esMX": "es-MX";
+  //   /** MarketCode `nl-NL` for Dutch - Netherlands */
+  //   "nlNL": "nl-NL";
+  //   /** MarketCode `en-NZ` for English - New Zealand */
+  //   "enNZ": "en-NZ";
+  //   /** MarketCode `no-NO` for Norwegian - Norway */
+  //   "noNO": "no-NO";
+  //   /** MarketCode `zh-CN` for Chinese - People's Republic of China */
+  //   "zhCN": "zh-CN";
+  //   /** MarketCode `pl-PL` for Polish - Poland */
+  //   "plPL": "pl-PL";
+  //   /** MarketCode `en-PH` for English - Republic of the Philippines */
+  //   "enPH": "en-PH";
+  //   /** MarketCode `ru-RU` for Russian - Russia */
+  //   "ruRU": "ru-RU";
+  //   /** MarketCode `en-ZA` for English - South Africa */
+  //   "enZA": "en-ZA";
+  //   /** MarketCode `es-ES` for Spanish - Spain */
+  //   "esES": "es-ES";
+  //   /** MarketCode `sv-SE` for Swedish - Sweden */
+  //   "svSE": "sv-SE";
+  //   /** MarketCode `fr-CH` for French - Switzerland */
+  //   "frCH": "fr-CH";
+  //   /** MarketCode `de-CH` for German - Switzerland */
+  //   "deCH": "de-CH";
+  //   /** MarketCode `zh-TW` for Traditional Chinese - Taiwan */
+  //   "zhTW": "zh-TW";
+  //   /** MarketCode `tr-TR` for Turkish - Türkiye */
+  //   "trTR": "tr-TR";
+  //   /** MarketCode `en-GB` for English - United Kingdom */
+  //   "enGB": "en-GB";
+  //   /** MarketCode `en-US` for English - United States */
+  //   "enUS": "en-US";
+  //   /** MarketCode `es-US` for Spanish - United States */
+  //   "esUS": "es-US";
+  // }
 }
+
+@@clientName(Azure.AI.Agents.BingCustomSearchConfiguration.setLang , "Language", "java");
