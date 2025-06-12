@@ -81,7 +81,6 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: XmsPageableForListCalls
-    from: PrivateLinkResources.json
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: AvoidAdditionalProperties
     from: ServiceOperations.json
