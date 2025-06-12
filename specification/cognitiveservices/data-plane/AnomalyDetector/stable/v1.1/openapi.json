@@ -619,8 +619,7 @@
           "description": "Error message for the current time stamp.",
           "items": {
             "$ref": "#/definitions/Multivariate.ErrorResponse"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -654,8 +653,7 @@
           "description": "Interpretation of this anomalous time stamp.",
           "items": {
             "$ref": "#/definitions/Multivariate.AnomalyInterpretation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -714,8 +712,7 @@
           "description": "Variable status.",
           "items": {
             "$ref": "#/definitions/Multivariate.VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -800,8 +797,7 @@
           "items": {
             "$ref": "#/definitions/Multivariate.ErrorResponse"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/Multivariate.DiagnosticsInfo",
@@ -824,8 +820,7 @@
           "description": "List of models.",
           "items": {
             "$ref": "#/definitions/Multivariate.AnomalyDetectionModel"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "currentCount": {
           "type": "integer",
@@ -966,16 +961,14 @@
           "description": "Error message when detection fails.",
           "items": {
             "$ref": "#/definitions/Multivariate.ErrorResponse"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "variableStates": {
           "type": "array",
           "description": "Variable status.",
           "items": {
             "$ref": "#/definitions/Multivariate.VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "setupInfo": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionOptions",
@@ -1035,8 +1028,7 @@
           "description": "Detection result for each time stamp.",
           "items": {
             "$ref": "#/definitions/Multivariate.AnomalyState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1054,8 +1046,7 @@
           "description": "Contains the inference data, including the name, time stamps (ISO 8601), and\nvalues of variables.",
           "items": {
             "$ref": "#/definitions/Multivariate.VariableValues"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "topContributorCount": {
           "type": "integer",
@@ -1077,16 +1068,14 @@
           "description": "Variable status.",
           "items": {
             "$ref": "#/definitions/Multivariate.VariableState"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "results": {
           "type": "array",
           "description": "Anomaly status and information.",
           "items": {
             "$ref": "#/definitions/Multivariate.AnomalyState"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1333,8 +1322,7 @@
           "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the change point detection result.",
           "items": {
             "$ref": "#/definitions/Univariate.TimeSeriesPoint"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.TimeGranularity",
@@ -1402,8 +1390,7 @@
           "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there's a duplicated time stamp, the API won't work. In such\na case, an error message is returned.",
           "items": {
             "$ref": "#/definitions/Univariate.TimeSeriesPoint"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.TimeGranularity",
