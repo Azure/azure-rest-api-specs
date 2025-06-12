@@ -44,13 +44,16 @@ union DeploymentSafeguardsLevel {
 
 @doc("Specifies the Pod Security Standards level")
 union PodSecurityStandardsLevel {
-    @doc("Privileged level is an unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.")
-    PodSecurityStandardsPrivileged: "Privileged",
-    @doc("Baseline level is a minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.")
-    PodSecurityStandardsBaseline: "Baseline",
-    @doc("Restricted level is a heavily restricted policy, following current Pod hardening best practices.")
-    PodSecurityStandardsRestricted: "Restricted",
-    string,
+  @doc("Privileged level is an unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.")
+  PodSecurityStandardsPrivileged: "Privileged",
+
+  @doc("Baseline level is a minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.")
+  PodSecurityStandardsBaseline: "Baseline",
+
+  @doc("Restricted level is a heavily restricted policy, following current Pod hardening best practices.")
+  PodSecurityStandardsRestricted: "Restricted",
+
+  string,
 }
 
 @doc("DeploymentSafeguards Properties")
