@@ -48,14 +48,8 @@ interface Organizations {
     SolarWindsOrganizationResourceUpdate
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SolarWindsOrganizationResource>;
-  listByResourceGroup is ArmResourceListByParent<
-    SolarWindsOrganizationResource,
-    Response = ArmResponse<SolarWindsOrganizationResourceListResult>
-  >;
-  listBySubscription is ArmListBySubscription<
-    SolarWindsOrganizationResource,
-    Response = ArmResponse<SolarWindsOrganizationResourceListResult>
-  >;
+  listByResourceGroup is ArmResourceListByParent<SolarWindsOrganizationResource>;
+  listBySubscription is ArmListBySubscription<SolarWindsOrganizationResource>;
   @post
   @doc("List the resources currently being monitored by the SolarWinds organization resource.")
   @action("listMonitoredResources")
@@ -73,11 +67,6 @@ interface Organizations {
     ...MetricsStatusRequestParameter,
   ): ArmResponse<MetricsStatusResponse> | ErrorResponse;
 }
-
-model SolarWindsOrganizationResourceListResult
-  is ResourceListResult<SolarWindsOrganizationResource>;
-
-@@identifiers(SolarWindsOrganizationResourceListResult.value, #["id"]);
 
 @doc("A tag rule belonging to SolarWinds account")
 @parentResource(SolarWindsOrganizationResource)
