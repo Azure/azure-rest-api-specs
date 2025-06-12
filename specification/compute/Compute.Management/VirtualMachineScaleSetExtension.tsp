@@ -18,13 +18,6 @@ namespace Microsoft.Compute;
 @parentResource(VirtualMachineScaleSet)
 model VirtualMachineScaleSetExtension
   is ProxySubResourceReadOnly<VirtualMachineScaleSetExtensionProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = VirtualMachineScaleSetExtension,
-    KeyName = "vmssExtensionName",
-    SegmentName = "extensions",
-    NamePattern = ""
-  >;
-
   /**
    * Resource type
    */
@@ -35,9 +28,19 @@ model VirtualMachineScaleSetExtension
   /**
    * Resource name
    */
-  @encodedName("application/json", "name")
-  vmName?: string;
+  name?: string;
+
+  /**
+   * The name of the VM scale set extension.
+   */
+  @path
+  @visibility(Lifecycle.Read)
+  @segment("extensions")
+  @key("vmssExtensionName")
+  vmssExtensionName: string;
+
 }
+
 
 @armResourceOperations
 interface VirtualMachineScaleSetExtensions {
@@ -94,9 +97,6 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
-@@doc(VirtualMachineScaleSetExtension.name,
-  "The name of the VM scale set extension."
-);
 @@doc(VirtualMachineScaleSetExtension.properties,
   "Describes the properties of a Virtual Machine Scale Set Extension."
 );

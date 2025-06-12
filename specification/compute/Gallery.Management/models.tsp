@@ -734,7 +734,7 @@ model GalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -924,7 +924,7 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The target regions where the Image Version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   targetRegions?: TargetRegion[];
 
   /**
@@ -1405,7 +1405,7 @@ model ValidationsProfile {
   /**
    * This specifies the pub, offer, sku and version of the image version metadata
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   platformAttributes?: PlatformAttribute[];
 }
 
@@ -1504,7 +1504,7 @@ model GalleryApplicationProperties {
   /**
    * A list of custom actions that can be performed with all of the Gallery Application Versions within this Gallery Application.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -1530,7 +1530,7 @@ model GalleryApplicationCustomAction {
   /**
    * The parameters that this custom action uses
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: GalleryApplicationCustomActionParameter[];
 }
 
@@ -1637,7 +1637,7 @@ model GalleryApplicationVersionPublishingProfile
   /**
    * A list of custom actions that can be performed with this Gallery Application Version.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
 }
 
@@ -1877,19 +1877,19 @@ model AccessControlRules {
   /**
    * A list of privileges.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privileges?: AccessControlRulesPrivilege[];
 
   /**
    * A list of roles.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   roles?: AccessControlRulesRole[];
 
   /**
    * A list of identities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   identities?: AccessControlRulesIdentity[];
 
   /**
@@ -1987,7 +1987,7 @@ model GalleryResourceProfileVersionPropertiesBase {
   /**
    * The target regions where the Resource Profile version is going to be replicated to. This property is updatable.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   targetLocations?: TargetRegion[];
 
   /**
@@ -2103,6 +2103,7 @@ model PirResource {
  * The List Shared Gallery Images operation response.
  */
 model SharedGalleryImageList is Azure.Core.Page<SharedGalleryImage>;
+@@identifiers(SharedGalleryImageList.value, #[]);
 
 /**
  * Describes the properties of a gallery image definition.
@@ -2148,7 +2149,7 @@ model SharedGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -2183,6 +2184,7 @@ model SharedGalleryImageProperties {
  */
 model SharedGalleryImageVersionList
   is Azure.Core.Page<SharedGalleryImageVersion>;
+@@identifiers(SharedGalleryImageVersionList.value, #[]);
 
 /**
  * Describes the properties of a gallery image version.
@@ -2404,7 +2406,7 @@ model CommunityGalleryImageProperties {
   /**
    * A list of gallery image features.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: GalleryImageFeature[];
 
   /**
@@ -2502,12 +2504,15 @@ model CommunityGalleryImageVersionProperties {
  * The List Community Gallery Images operation response.
  */
 model CommunityGalleryImageList is Azure.Core.Page<CommunityGalleryImage>;
+@@identifiers(CommunityGalleryImageList.value, #[]);
 
 /**
  * The List Community Gallery Image versions operation response.
  */
 model CommunityGalleryImageVersionList
   is Azure.Core.Page<CommunityGalleryImageVersion>;
+@@identifiers(CommunityGalleryImageVersionList.value, #[]);
+
 
 /**
  * The source image from which the Image Version is going to be created.
@@ -2632,4 +2637,4 @@ model ProxyResourceShared<
   "The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries."
 );
 @@doc(SharedGalleryList.value, "A list of shared galleries.");
-@@OpenAPI.extension(SharedGalleryList.value, "x-ms-identifiers", #["name"]);
+@@identifiers(SharedGalleryList.value, #["name"]);

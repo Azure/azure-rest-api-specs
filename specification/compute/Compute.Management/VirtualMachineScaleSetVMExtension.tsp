@@ -16,14 +16,8 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(VirtualMachineScaleSetVM)
-model VirtualMachineScaleSetVMExtension
+model VirtualMachineScaleSetVMExtension 
   is ProxySubResourceReadOnly<VirtualMachineExtensionProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = VirtualMachineScaleSetVMExtension,
-    KeyName = "vmExtensionName",
-    SegmentName = "extensions",
-    NamePattern = ""
-  >;
 
   /**
    * The location of the extension.
@@ -43,8 +37,17 @@ model VirtualMachineScaleSetVMExtension
    * Resource name
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "name")
-  vmName?: string;
+  name?: string;
+
+  /**
+   * The name of the virtual machine extension.
+   */
+  @path
+  @visibility(Lifecycle.Read)
+  @segment("extensions")
+  @key("vmExtensionName")
+  vmssExtensionName: string;
+
 }
 
 @armResourceOperations
@@ -117,9 +120,6 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
-@@doc(VirtualMachineScaleSetVMExtension.name,
-  "The name of the virtual machine extension."
-);
 @@doc(VirtualMachineScaleSetVMExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );

@@ -1450,6 +1450,7 @@ enum IntervalInMins {
  */
 model ListUsagesResult is Azure.Core.Page<Usage>;
 
+@@identifiers(ListUsagesResult.value, #[]);
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
 @@doc(ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
@@ -1504,7 +1505,7 @@ model VirtualMachineSizeListResult {
    * The list of virtual machine sizes.
    */
   @items
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: VirtualMachineSize[];
 
   /**
@@ -2612,7 +2613,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: VirtualMachineScaleSetIPConfiguration[];
 
   /**
@@ -2943,6 +2944,7 @@ model VirtualMachineScaleSetExtensionProfile {
   /**
    * The virtual machine scale set child extension resources.
    */
+  @identifiers(#["name", "id"])
   extensions?: VirtualMachineScaleSetExtension[];
 
   /**
@@ -3329,7 +3331,7 @@ model SkuProfile {
   /**
    * Specifies the VM sizes for the virtual machine scale set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   vmSizes?: SkuProfileVMSize[];
 
   /**
@@ -3691,7 +3693,7 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetUpdateNetworkConfiguration[];
 
   /**
@@ -3754,7 +3756,7 @@ model VirtualMachineScaleSetUpdateNetworkConfigurationProperties {
   /**
    * The virtual machine scale set IP Configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations?: VirtualMachineScaleSetUpdateIPConfiguration[];
 
   /**
@@ -3947,6 +3949,8 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
 model VirtualMachineScaleSetExtensionListResult
   is Azure.Core.Page<VirtualMachineScaleSetExtension>;
 
+@@identifiers(VirtualMachineScaleSetExtensionListResult.value,#["name", "id"]);
+
 @@doc(VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."
 );
@@ -4010,7 +4014,7 @@ model VirtualMachineScaleSetInstanceView {
    * The extensions information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   extensions?: VirtualMachineScaleSetVMExtensionsSummary[];
 
   /**
@@ -4629,7 +4633,7 @@ model VirtualMachineScaleSetVMInstanceView {
   /**
    * The disks information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   disks?: DiskInstanceView[];
 
   /**
@@ -5173,7 +5177,7 @@ model NetworkProfile {
   /**
    * Specifies the networking configurations that will be used to create the virtual machine networking resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
 }
 
@@ -5269,7 +5273,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   /**
    * Specifies the IP configurations of the network interface.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   ipConfigurations: VirtualMachineNetworkInterfaceIPConfiguration[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5453,7 +5457,7 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
   /**
    * The list of network configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
 }
 
@@ -5582,6 +5586,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
   /**
    * The list of VMSS VM extensions
    */
+  @identifiers(#["name", "id"])
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -5959,7 +5964,7 @@ model VirtualMachineInstanceView {
   /**
    * The virtual machine disk information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   disks?: DiskInstanceView[];
 
   /**
@@ -6161,13 +6166,11 @@ model Placement {
   /**
    * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   includeZones?: string[];
 
   /**
    * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   excludeZones?: string[];
 }
 
@@ -6689,7 +6692,7 @@ model VirtualMachineImageProperties {
   disallowed?: DisallowedConfiguration;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   features?: VirtualMachineImageFeature[];
 
   /**
@@ -7131,7 +7134,7 @@ model DedicatedHostGroupInstanceView {
   /**
    * List of instance view of the dedicated hosts under the dedicated host group.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   hosts?: DedicatedHostInstanceViewWithName[];
 }
 
@@ -7948,14 +7951,14 @@ model CapacityReservationGroupInstanceView {
    * List of instance view of the capacity reservations under the capacity reservation group.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capacityReservations?: CapacityReservationInstanceViewWithName[];
 
   /**
    * List of the subscriptions that the capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   sharedSubscriptionIds?: SubResourceReadOnly[];
 }
 
@@ -8295,13 +8298,13 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: RunCommandInputParameter[];
 
   /**
    * The parameters used by the script.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -8494,7 +8497,7 @@ model RunCommandInput {
   /**
    * The run command parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: RunCommandInputParameter[];
 }
 

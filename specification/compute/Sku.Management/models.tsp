@@ -51,6 +51,7 @@ enum ResourceSkuRestrictionsReasonCode {
  * The List Resource Skus operation response.
  */
 model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
+@@identifiers(ResourceSkusResult.value, #[]);
 
 /**
  * Describes an available Compute SKU.
@@ -108,7 +109,7 @@ model ResourceSku {
    * A list of locations and availability zones in those locations where the SKU is available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  @identifiers(#["location"])
   locationInfo?: ResourceSkuLocationInfo[];
 
   /**
@@ -128,7 +129,7 @@ model ResourceSku {
    * A name value pair to describe the capability.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 
   /**
@@ -188,7 +189,7 @@ model ResourceSkuLocationInfo {
    * Details of capabilities available to a SKU in specific zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   zoneDetails?: ResourceSkuZoneDetails[];
 
   /**
@@ -218,7 +219,7 @@ model ResourceSkuZoneDetails {
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ResourceSkuCapabilities[];
 }
 

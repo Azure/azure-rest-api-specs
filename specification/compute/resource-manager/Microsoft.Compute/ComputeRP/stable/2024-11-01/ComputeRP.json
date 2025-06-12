@@ -15700,16 +15700,14 @@
           "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "excludeZones": {
           "type": "array",
           "description": "This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -19786,8 +19784,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Resource name",
-          "x-ms-client-name": "vmName"
+          "description": "Resource name"
         }
       },
       "allOf": [
@@ -19805,7 +19802,11 @@
           "description": "The list of VM scale set extensions.",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -19826,7 +19827,11 @@
           "description": "The virtual machine scale set child extension resources.",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "id"
+          ]
         },
         "extensionsTimeBudget": {
           "type": "string",
@@ -21276,8 +21281,7 @@
         "name": {
           "type": "string",
           "description": "Resource name",
-          "readOnly": true,
-          "x-ms-client-name": "vmName"
+          "readOnly": true
         }
       },
       "allOf": [
@@ -21321,7 +21325,11 @@
           "description": "The list of VMSS VM extensions",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name",
+            "id"
+          ]
         }
       }
     },
