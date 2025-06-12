@@ -2176,3 +2176,18 @@ alias CopySourceStatusCodeResponseHeader = {
   @header("x-ms-copy-source-status-code")
   copySourceStatusCode?: int32;
 };
+
+alias ClientRequestIdHeader = {
+  @access(Access.internal)
+  @header("x-ms-client-request-id")
+  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+  clientRequestId?: uuid;
+};
+
+alias RequestIdResponseHeader = {
+  @access(Access.internal)
+  @visibility(Lifecycle.Read)
+  @header("x-ms-request-id")
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  requestId?: uuid;
+};
