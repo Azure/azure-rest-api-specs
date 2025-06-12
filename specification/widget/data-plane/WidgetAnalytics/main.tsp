@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://azure.com/.default"]>)
-@service(#{ title: "WidgetAnalytics" })
+@service(#{ title: "WidgetAnalytics2" })
 @versioned(WidgetAnalytics.Versions)
 namespace WidgetAnalytics;
 
