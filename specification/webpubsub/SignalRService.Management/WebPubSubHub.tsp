@@ -40,8 +40,8 @@ interface WebPubSubHubs {
   /**
    * Delete a hub setting.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId is required to maintain consistency with existing API contract"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubHubs_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     WebPubSubHub,

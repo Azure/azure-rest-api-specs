@@ -59,21 +59,21 @@ interface SharedPrivateLinkResources {
   /**
    * Get the specified shared private link resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubReplicaSharedPrivateLinkResources_Get")
   get is SharedPrivateLinkResourceOps.Read<SharedPrivateLinkResource>;
 
   /**
    * Create or update a shared private link resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate")
   createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<SharedPrivateLinkResource>;
 
   /**
    * List shared private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubReplicaSharedPrivateLinkResources_List")
   list is SharedPrivateLinkResourceOps.List<
     SharedPrivateLinkResource,
@@ -118,8 +118,8 @@ interface WebPubSubSharedPrivateLinkResources {
   /**
    * Delete the specified shared private link resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId is required to maintain consistency with existing API contract"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubSharedPrivateLinkResources_Delete")
   delete is WebPubSubSharedPrivateLinkResourceOps.DeleteSync<
     SharedPrivateLinkResource,

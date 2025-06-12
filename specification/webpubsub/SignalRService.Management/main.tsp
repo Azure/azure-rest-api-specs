@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
 /**
  * REST API for Azure WebPubSub Service
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SignalRService is the official Microsoft service name"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "WebPubSubManagementClient" })
 @versioned(Versions)
