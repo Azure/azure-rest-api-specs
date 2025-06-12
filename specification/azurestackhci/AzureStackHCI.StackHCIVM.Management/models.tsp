@@ -72,6 +72,7 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_06_01_preview)
 @doc("Type of Logical Network")
 union LogicalNetworkTypeEnum {
   @doc("Logical Network of type Workload")
@@ -715,6 +716,7 @@ model LogicalNetworkProperties {
   @visibility(Lifecycle.Read)
   status?: LogicalNetworkStatus;
 
+  @added(Versions.v2025_06_01_preview)
   @doc("Type of the Logical Network")
   @visibility(Lifecycle.Read)
   networkType?: LogicalNetworkTypeEnum;
