@@ -2,7 +2,9 @@
 
 ## Guidelines for defining a new event in Typespec
 
- **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
+ **_NOTE:_** New events MUST NOT be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main. Once the PR is merged to main, the events are considered GA regardless of whether docs list them as being in preview. This is because customers cannot control which version of events they consume - it is entirely up to the service publishing the events. Any breaking changes to events would need to be implemented as a new event type. Full details can be found in the [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy/), Section 4.
+
+ **_NOTE FOR EVENTGRID SERVICE TEAM:_** In order to merge a PR that adds a new event, @l0lawrence and @JosgLove-msft must be added as reviewers. They will ensure that the event meets the correct TypeSpec requirements. If you are not sure if your event meets the requirements, please reach out to them before submitting a PR.
 
 ## Write in Typespec
 
