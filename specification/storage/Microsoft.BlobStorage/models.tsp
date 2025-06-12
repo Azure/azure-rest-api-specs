@@ -1443,6 +1443,14 @@ alias RequestServerEncryptedResponseHeader = {
   isServerEncrypted?: boolean;
 };
 
+/** The private request server encrypted response header. */
+alias RequestServerEncryptedResponseHeaderPrivate = {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @access(Access.internal)
+  @header("x-ms-request-server-encrypted")
+  isServerEncrypted?: boolean;
+};
+
 /** The server encrypted response header. */
 alias ServerEncryptedResponseHeader = {
   /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */

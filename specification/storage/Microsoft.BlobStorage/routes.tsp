@@ -1054,7 +1054,7 @@ namespace Storage.Blob {
           ...LastModifiedResponseHeaderPrivate;
           ...VersionIdResponseHeaderPrivate;
           ...DateResponseHeaderPrivate;
-          ...RequestServerEncryptedResponseHeader;
+          ...RequestServerEncryptedResponseHeaderPrivate;
           ...EncryptionKeySha256ResponseHeaderPrivate;
           ...EncryptionScopeResponseHeaderPrivate;
         }
