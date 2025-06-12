@@ -4606,22 +4606,6 @@
       ],
       "x-ms-discriminator-value": "Storage"
     },
-    "DeviceIdentity": {
-      "type": "object",
-      "description": "The backing Microsoft Entra ID for the device used for authentication to other services.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "Principal id for the device resource.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant id for the Microsoft Entra ID tenant.",
-          "readOnly": true
-        }
-      }
-    },
     "DeviceMessagingEndpoint": {
       "type": "object",
       "description": "Device messaging endpoint model.",
@@ -6280,18 +6264,6 @@
             "create"
           ]
         },
-        "deviceTemplateId": {
-          "type": "string",
-          "description": "Device Template Id used to create a device.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "deviceGroupId": {
-          "type": "string",
-          "description": "The Microsoft Entra ID group the device is a member of."
-        },
         "discoveredDeviceRef": {
           "type": "string",
           "description": "Reference to a device. Populated only if the device had been created from discovery flow. Discovered device name must be provided.",
@@ -6327,14 +6299,6 @@
         "operatingSystemVersion": {
           "type": "string",
           "description": "Device operating system version."
-        },
-        "identity": {
-          "$ref": "#/definitions/DeviceIdentity",
-          "description": "Identity for the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "endpoints": {
           "$ref": "#/definitions/MessagingEndpoints",
@@ -6391,10 +6355,6 @@
       "type": "object",
       "description": "The updatable properties of the NamespaceDevice.",
       "properties": {
-        "deviceGroupId": {
-          "type": "string",
-          "description": "The Microsoft Entra ID group the device is a member of."
-        },
         "operatingSystemVersion": {
           "type": "string",
           "description": "Device operating system version."

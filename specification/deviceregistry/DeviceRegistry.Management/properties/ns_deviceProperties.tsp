@@ -24,13 +24,6 @@ model NamespaceDeviceProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   externalDeviceId?: string;
 
-  @doc("Device Template Id used to create a device.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  deviceTemplateId?: string;
-
-  @doc("The Microsoft Entra ID group the device is a member of.")
-  deviceGroupId?: string;
-
   @doc("Reference to a device. Populated only if the device had been created from discovery flow. Discovered device name must be provided.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   discoveredDeviceRef?: string;
@@ -49,10 +42,6 @@ model NamespaceDeviceProperties {
 
   @doc("Device operating system version.")
   operatingSystemVersion?: string;
-
-  @doc("Identity for the resource.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  identity?: DeviceIdentity;
 
   @doc("Property bag containing the device's unassigned and assigned endpoints.")
   endpoints?: MessagingEndpoints;
@@ -76,18 +65,6 @@ model NamespaceDeviceProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@doc("The backing Microsoft Entra ID for the device used for authentication to other services.")
-@added(Versions.v2025_07_01_preview)
-model DeviceIdentity {
-  @doc("Principal id for the device resource.")
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  @doc("Tenant id for the Microsoft Entra ID tenant.")
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
 }
 
 @doc("Connection endpoint URL a device can use to connect to a service.")
