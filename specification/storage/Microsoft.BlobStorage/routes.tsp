@@ -1473,7 +1473,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.PageBlob;
+            blobType: "PageBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -1813,7 +1813,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.AppendBlob;
+            blobType: "AppendBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -1996,7 +1996,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.BlockBlob;
+            blobType: "BlockBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -2056,7 +2056,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.BlockBlob;
+            blobType: "BlockBlob";
 
             ...FileRequestIntentParameter;
           },
