@@ -104,9 +104,9 @@ interface Replicas {
    * Operation to restart a replica.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Restart operation returns no content for backward compatibility"
   @operationId("WebPubSubReplicas_Restart")
-  restart is ArmResourceActionAsync<Replica, void, NoContentResponse>;
+  restart is ArmResourceActionAsync<Replica, void, void>;
 }
 
 @@maxLength(Replica.name, 63);

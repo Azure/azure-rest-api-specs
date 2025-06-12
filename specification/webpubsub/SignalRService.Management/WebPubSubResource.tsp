@@ -153,9 +153,9 @@ interface WebPubSubResources {
    * Operation to restart a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Restart operation returns no content for backward compatibility"
   @operationId("WebPubSub_Restart")
-  restart is ArmResourceActionAsync<WebPubSubResource, void, NoContentResponse>;
+  restart is ArmResourceActionAsync<WebPubSubResource, void, void>;
 
   /**
    * List all available skus of the resource.
