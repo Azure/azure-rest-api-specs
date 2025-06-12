@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
+
 namespace Azure.AI.Projects;
 
 alias CoreOps = Azure.Core.StandardResourceOperations;
