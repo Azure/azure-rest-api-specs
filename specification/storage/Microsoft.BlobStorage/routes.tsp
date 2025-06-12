@@ -224,9 +224,9 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 201;
-        ...EtagResponseHeader;
-        ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
+        ...EtagResponseHeaderPrivate;
+        ...LastModifiedResponseHeaderPrivate;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
