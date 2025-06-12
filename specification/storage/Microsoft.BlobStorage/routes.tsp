@@ -836,10 +836,10 @@ namespace Storage.Blob {
           ...ContentLanguageResponseHeader;
           ...CacheControlResponseHeader;
           ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-          ...AcceptRangesResponseHeader;
+          ...DateResponseHeaderPrivate;
+          ...AcceptRangesResponseHeaderPrivate;
           ...BlobCommittedBlockCountResponseHeader;
-          ...ServerEncryptedResponseHeader;
+          ...ServerEncryptedResponseHeaderPrivate;
           ...EncryptionKeySha256ResponseHeader;
           ...EncryptionScopeResponseHeader;
           ...AccessTierOptional;
