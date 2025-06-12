@@ -1153,6 +1153,17 @@
         }
       }
     },
+    "ExportDependenciesAdditionalInfo": {
+      "type": "object",
+      "description": "Additional information about the exported dependencies data.",
+      "properties": {
+        "availableDaysCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of days for which data was available in the exported results."
+        }
+      }
+    },
     "ExportDependenciesOperationResult": {
       "type": "object",
       "description": "Model representing the result of the export dependencies asynchronous operation.",
@@ -1211,10 +1222,42 @@
           "type": "string",
           "description": "The SAS URI of the blob containing the exported dependencies data."
         },
+        "statusCode": {
+          "$ref": "#/definitions/ExportDependenciesStatusCode",
+          "description": "A status code returned by the service with additional context about the export dependencies operation."
+        },
         "statusMessage": {
           "type": "string",
           "description": "A status message returned by the service with additional context about the export dependencies operation."
+        },
+        "additionalInfo": {
+          "$ref": "#/definitions/ExportDependenciesAdditionalInfo",
+          "description": "Additional information about the exported data."
         }
+      }
+    },
+    "ExportDependenciesStatusCode": {
+      "type": "string",
+      "description": "Status codes for export dependencies operation",
+      "enum": [
+        "Completed",
+        "NoDataFound"
+      ],
+      "x-ms-enum": {
+        "name": "ExportDependenciesStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Operation completed successfully with data"
+          },
+          {
+            "name": "NoDataFound",
+            "value": "NoDataFound",
+            "description": "Operation completed but no data was found to export"
+          }
+        ]
       }
     },
     "GetConnectionsForProcessOnFocusedMachineRequest": {

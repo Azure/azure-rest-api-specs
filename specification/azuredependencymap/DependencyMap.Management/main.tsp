@@ -269,8 +269,31 @@ model ExportDependenciesResultProperties {
   @doc("The SAS URI of the blob containing the exported dependencies data.")
   exportedDataSasUri?: string;
 
+  @doc("A status code returned by the service with additional context about the export dependencies operation.")
+  statusCode?: ExportDependenciesStatusCode;
+
   @doc("A status message returned by the service with additional context about the export dependencies operation.")
   statusMessage?: string;
+
+  @doc("Additional information about the exported data.")
+  additionalInfo?: ExportDependenciesAdditionalInfo;
+}
+
+/** Status codes for export dependencies operation */
+union ExportDependenciesStatusCode {
+  string,
+
+  /** Operation completed successfully with data */
+  Completed: "Completed",
+
+  /** Operation completed but no data was found to export */
+  NoDataFound: "NoDataFound",
+}
+
+@doc("Additional information about the exported dependencies data.")
+model ExportDependenciesAdditionalInfo {
+  @doc("Number of days for which data was available in the exported results.")
+  availableDaysCount?: int32;
 }
 
 @armResourceOperations
