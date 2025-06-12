@@ -17,7 +17,7 @@ alias ListIndexVersionParameters = {};
 interface Indexes
   extends VersionedOperations<
       Index,
-      InputParameters<Index, "pendingUploadRequest">,
+      InputParameters<Index, "index">,
       ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}
