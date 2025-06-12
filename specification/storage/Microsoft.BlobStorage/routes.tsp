@@ -2097,18 +2097,18 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...StructuredBodyParameter;
-            ...StructuredContentLengthParameter;
+            ...StructuredBodyParameterPrivate;
+            ...StructuredContentLengthParameterPrivate;
           },
           {
             @statusCode statusCode: 201;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            ...RequestServerEncryptedResponseHeader;
+            ...RequestServerEncryptedResponseHeaderPrivate;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeader;
+            ...StructuredBodyTypeResponseHeaderPrivate;
           },
           "application/octet-stream"
         >;
