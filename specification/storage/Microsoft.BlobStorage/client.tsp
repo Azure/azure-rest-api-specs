@@ -35,6 +35,10 @@ model BlobServiceClientParameters {
   "SetProperties",
   "rust"
 );
+@@access(Storage.Blob.Container.Blob.setHttpHeaders.EtagResponseHeader,
+  Access.internal,
+  "rust"
+);
 
 @@clientInitialization(Storage.Blob.Container,
   {
