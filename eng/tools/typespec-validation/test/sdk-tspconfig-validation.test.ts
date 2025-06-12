@@ -7,7 +7,7 @@ import {
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -30,6 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsMlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -81,6 +82,7 @@ function createParameterTestCases(
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [
     {
@@ -89,6 +91,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: validValue }),
       success: true,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with invalid value ${invalidValue}`,
@@ -96,6 +99,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: invalidValue }),
       success: false,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with undefined value`,
@@ -103,6 +107,7 @@ function createParameterTestCases(
       tspconfigContent: "",
       success: false,
       subRules,
+      additionalOptions,
     },
   ];
   return cases;
@@ -116,6 +121,7 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [];
 
@@ -123,7 +129,11 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      { key: key, value: validValue },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: true,
     subRules,
   });
@@ -131,10 +141,14 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, {
-      key: key,
-      value: invalidValue,
-    }),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      {
+        key: key,
+        value: invalidValue,
+      },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -142,7 +156,10 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -151,10 +168,14 @@ function createEmitterOptionTestCases(
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, {
-        key: key.split(".").slice(0, -1).join("."),
-        value: validValue,
-      }),
+      tspconfigContent: createEmitterOptionExample(
+        emitterName,
+        {
+          key: key.split(".").slice(0, -1).join("."),
+          value: validValue,
+        },
+        ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+      ),
       success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
@@ -169,6 +190,7 @@ interface Case {
   tspconfigContent: string;
   success: boolean;
   ignoredKeyPaths?: string[];
+  additionalOptions?: Record<string, string | boolean>;
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -223,7 +245,18 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
-  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+  [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+);
+
+const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-details.name",
+  "@azure/aaa-bbb",
+  "azure/aaa-bbb",
+  [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
+  false,
+  { "is-modular-library": true }, // Additional option added
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -549,6 +582,7 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
+    ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
