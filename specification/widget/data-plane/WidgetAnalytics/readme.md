@@ -14,7 +14,16 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-12-01
+tag: package-2023-12-01
+```
+
+### Tag: package-2023-12-01
+
+These settings apply only when `--tag=package-2023-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12-01'
+input-file:
+  - stable/2023-12-01/widgetanalytics.json
 ```
 
 ### Tag: package-2022-12-01
