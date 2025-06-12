@@ -19,9 +19,10 @@ model InputParameters<
   TEntityType extends Reflection.Model,
   TBodyName extends valueof string = "body"
 > {
-  @doc("The name of the {name} to operate on.", TEntityType)
+  @doc("The {name} to create or update.", TEntityType)
   @Http.bodyRoot
-  @clientName(TBodyName)
+  //@clientName("body", "python") // "npx tsv ." fails with "error invalid-ref: Unknown decorator @clientName"
+  @clientName(TBodyName)          // "npx tsv ." fails with "error invalid-ref: Unknown decorator @clientName"
   body: TEntityType;
 
   @doc("Content type for patch")
@@ -29,7 +30,7 @@ model InputParameters<
   contentType: "application/merge-patch+json";
   
   @doc(
-    "The specific version id of the {name} to operate on.",
+    "The specific version id of the {name} to create or update.",
     TEntityType
   )
   @Rest.segment("versions")
