@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Batch",
-    "version": "2024-07-01.20.0",
+    "version": "2024-07-01.19.0",
     "description": "Azure Batch provides Cloud-scale job scheduling and compute management.",
     "x-typespec-generated": [
       {
@@ -166,11 +166,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List applications": {
-            "$ref": "./examples/Applications_ListApplications.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -261,11 +256,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get applications": {
-            "$ref": "./examples/Applications_GetApplication.json"
           }
         }
       }
@@ -382,11 +372,6 @@
           }
         },
         "deprecated": true,
-        "x-ms-examples": {
-          "Certificate list": {
-            "$ref": "./examples/Certificates_ListCertificates.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -483,12 +468,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate create": {
-            "$ref": "./examples/Certificates_CreateCertificate.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})": {
@@ -596,12 +576,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate get": {
-            "$ref": "./examples/Certificates_GetCertificate.json"
-          }
-        }
+        "deprecated": true
       },
       "delete": {
         "operationId": "Certificates_DeleteCertificate",
@@ -693,12 +668,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate delete": {
-            "$ref": "./examples/Certificates_DeleteCertificate.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete": {
@@ -796,12 +766,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate cancel delete": {
-            "$ref": "./examples/Certificates_CancelCertificateDeletion.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/jobs": {
@@ -924,11 +889,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Job list": {
-            "$ref": "./examples/Jobs_ListJobs.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -1023,14 +983,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic job": {
-            "$ref": "./examples/Jobs_CreateJob_Basic.json"
-          },
-          "Creates a complex job": {
-            "$ref": "./examples/Jobs_CreateJob_Complex.json"
           }
         }
       }
@@ -1177,11 +1129,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job get": {
-            "$ref": "./examples/Jobs_GetJob.json"
-          }
         }
       },
       "put": {
@@ -1315,11 +1262,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Job patch": {
-            "$ref": "./examples/Jobs_ReplaceJob.json"
           }
         }
       },
@@ -1455,11 +1397,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job update": {
-            "$ref": "./examples/Jobs_UpdateJob.json"
-          }
         }
       },
       "delete": {
@@ -1576,11 +1513,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete Job": {
-            "$ref": "./examples/Jobs_DeleteJob.json"
-          }
         }
       }
     },
@@ -1681,14 +1613,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic collection of tasks": {
-            "$ref": "./examples/Tasks_CreateTaskCollection_Basic.json"
-          },
-          "Creates a complex collection of tasks": {
-            "$ref": "./examples/Tasks_CreateTaskCollection_Complex.json"
           }
         }
       }
@@ -1826,11 +1750,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job disable": {
-            "$ref": "./examples/Jobs_DisableJob.json"
-          }
         }
       }
     },
@@ -1955,11 +1874,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job enable": {
-            "$ref": "./examples/Jobs_EnableJob.json"
-          }
         }
       }
     },
@@ -2079,11 +1993,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Job list preparation and release task status": {
-            "$ref": "./examples/Jobs_ListJobPreparationAndReleaseTaskStatus.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -2174,11 +2083,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Job get task counts": {
-            "$ref": "./examples/Jobs_GetJobTaskCounts.json"
           }
         }
       }
@@ -2310,11 +2214,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Task list": {
-            "$ref": "./examples/Tasks_ListTasks.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -2416,26 +2315,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic task": {
-            "$ref": "./examples/Tasks_CreateTask_Basic.json"
-          },
-          "Creates a task with container settings": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettings.json"
-          },
-          "Creates a task with container settings with data isolation": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettingsWithDataIsolation.json"
-          },
-          "Creates a task with container settings with duplicate source": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettingsWithDataIsolation_DuplicateSources.json"
-          },
-          "Creates a task with exit conditions": {
-            "$ref": "./examples/Tasks_CreateTask_ExitConditions.json"
-          },
-          "Creates a task with extra slot requirement": {
-            "$ref": "./examples/Tasks_CreateTask_RequiredSlots.json"
           }
         }
       }
@@ -2593,11 +2472,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task get": {
-            "$ref": "./examples/Tasks_GetTask.json"
-          }
         }
       },
       "put": {
@@ -2738,11 +2612,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task update": {
-            "$ref": "./examples/Tasks_ReplaceTask.json"
-          }
         }
       },
       "delete": {
@@ -2858,11 +2727,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task delete": {
-            "$ref": "./examples/Tasks_DeleteTask.json"
           }
         }
       }
@@ -2984,11 +2848,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File list from task": {
-            "$ref": "./examples/Tasks_ListTaskFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -3146,11 +3005,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get File From Task": {
-            "$ref": "./examples/Tasks_GetTaskFile.json"
-          }
         }
       },
       "delete": {
@@ -3246,11 +3100,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File delete from task": {
-            "$ref": "./examples/Tasks_DeleteTaskFile.json"
           }
         }
       },
@@ -3389,11 +3238,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "File get properties from task": {
-            "$ref": "./examples/Tasks_GetTaskFileProperties.json"
-          }
         }
       }
     },
@@ -3525,11 +3369,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task reactivate": {
-            "$ref": "./examples/Tasks_ReactivateTask.json"
-          }
         }
       }
     },
@@ -3636,11 +3475,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task list subtasks": {
-            "$ref": "./examples/Tasks_ListSubTasks.json"
           }
         },
         "x-ms-pageable": {
@@ -3775,11 +3609,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task terminate": {
-            "$ref": "./examples/Tasks_TerminateTask.json"
           }
         }
       }
@@ -3924,11 +3753,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job terminate": {
-            "$ref": "./examples/Jobs_TerminateJob.json"
-          }
         }
       }
     },
@@ -4052,11 +3876,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "JobSchedule list": {
-            "$ref": "./examples/JobSchedules_ListJobSchedules.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -4151,14 +3970,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic JobSchedule": {
-            "$ref": "./examples/JobSchedules_CreateJobSchedule_Basic.json"
-          },
-          "Creates a complex JobScheduleAdd": {
-            "$ref": "./examples/JobSchedules_CreateJobSchedule_Complex.json"
           }
         }
       }
@@ -4304,11 +4115,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule get": {
-            "$ref": "./examples/JobSchedules_GetJobSchedule.json"
-          }
         }
       },
       "put": {
@@ -4442,11 +4248,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule patch": {
-            "$ref": "./examples/JobSchedules_ReplaceJobSchedule.json"
           }
         }
       },
@@ -4582,11 +4383,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule update": {
-            "$ref": "./examples/JobSchedules_UpdateJobSchedule.json"
-          }
         }
       },
       "delete": {
@@ -4702,11 +4498,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule delete": {
-            "$ref": "./examples/JobSchedules_DeleteJobSchedule.json"
           }
         }
       },
@@ -4828,11 +4619,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check Job Schedule Exists": {
-            "$ref": "./examples/JobSchedules_JobScheduleExists.json"
           }
         }
       }
@@ -4958,11 +4744,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule disable": {
-            "$ref": "./examples/JobSchedules_DisableJobSchedule.json"
-          }
         }
       }
     },
@@ -5086,11 +4867,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule enable": {
-            "$ref": "./examples/JobSchedules_EnableJobSchedule.json"
           }
         }
       }
@@ -5220,11 +4996,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Job Under Job Schedule": {
-            "$ref": "./examples/Jobs_ListJobsFromSchedule.json"
           }
         },
         "x-ms-pageable": {
@@ -5360,11 +5131,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule terminate": {
-            "$ref": "./examples/JobSchedules_TerminateJobSchedule.json"
-          }
         }
       }
     },
@@ -5463,11 +5229,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NodeCountsPayload": {
-            "$ref": "./examples/Pools_ListPoolNodeCounts.json"
           }
         },
         "x-ms-pageable": {
@@ -5595,11 +5356,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Pool list": {
-            "$ref": "./examples/Pools_ListPools_Basic.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -5694,35 +5450,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a VirtualMachineConfiguration pool": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfiguration.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/Pools_CreatePool_OSDisk.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithServiceArtifactReference.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with containers": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithContainers.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithExtensions.json"
-          },
-          "Creates a pool with SecurityProfile": {
-            "$ref": "./examples/Pools_CreatePool_SecurityProfile.json"
-          },
-          "Creates a pool with accelerated networking": {
-            "$ref": "./examples/Pools_CreatePool_AcceleratedNetworking.json"
-          },
-          "Creates a pool with mount drive specified": {
-            "$ref": "./examples/Pools_CreatePool_MountConfiguration.json"
-          },
-          "Creates a simple pool with resourceTags": {
-            "$ref": "./examples/Pools_CreatePool_ResourceTags.json"
           }
         }
       }
@@ -5868,26 +5595,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Add a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithOSDisk.json"
-          },
-          "Get a VirtualMachineConfiguration pool with SecurityProfile": {
-            "$ref": "./examples/Pools_GetPool_SecurityProfile.json"
-          },
-          "Get a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithServiceArtifactReference.json"
-          },
-          "Get a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithExtensions.json"
-          },
-          "Get a pool with AcceleratedNetworking": {
-            "$ref": "./examples/Pools_GetPool_AcceleratedNetworking.json"
-          },
-          "Pool get": {
-            "$ref": "./examples/Pools_GetPool_Basic.json"
-          }
         }
       },
       "patch": {
@@ -6022,11 +5729,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Patch the Pool": {
-            "$ref": "./examples/Pools_UpdatePool.json"
-          }
         }
       },
       "delete": {
@@ -6135,11 +5837,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool delete": {
-            "$ref": "./examples/Pools_DeletePool.json"
           }
         }
       },
@@ -6261,11 +5958,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Check Pool Exists": {
-            "$ref": "./examples/Pools_PoolExists.json"
-          }
         }
       }
     },
@@ -6355,11 +6047,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Disable pool autoscale": {
-            "$ref": "./examples/Pools_DisablePoolAutoScale.json"
           }
         }
       }
@@ -6497,11 +6184,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool enable autoscale": {
-            "$ref": "./examples/Pools_EnablePoolAutoscale.json"
-          }
         }
       }
     },
@@ -6606,11 +6288,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool evaluate autoscale": {
-            "$ref": "./examples/Pools_EvaluatePoolAutoscale.json"
           }
         }
       }
@@ -6731,11 +6408,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Node list": {
-            "$ref": "./examples/Nodes_ListNodes.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -6844,11 +6516,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node get": {
-            "$ref": "./examples/Nodes_GetNode.json"
           }
         }
       }
@@ -6959,11 +6626,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node Deallocate": {
-            "$ref": "./examples/Node_DeallocateNode.json"
-          }
         }
       }
     },
@@ -7073,11 +6735,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node disable scheduling": {
-            "$ref": "./examples/Nodes_DisableNodeScheduling.json"
-          }
         }
       }
     },
@@ -7174,11 +6831,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node enable scheduling": {
-            "$ref": "./examples/Nodes_EnableNodeScheduling.json"
           }
         }
       }
@@ -7299,11 +6951,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List compute node extensions": {
-            "$ref": "./examples/Nodes_ListNodeExtensions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -7419,11 +7066,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get batch node extension": {
-            "$ref": "./examples/Nodes_GetNodeExtension.json"
           }
         }
       }
@@ -7545,11 +7187,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File list from node": {
-            "$ref": "./examples/Nodes_ListNodeFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -7707,11 +7344,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get File From Compute Node": {
-            "$ref": "./examples/Nodes_GetNodeFile.json"
-          }
         }
       },
       "delete": {
@@ -7807,11 +7439,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File delete from node": {
-            "$ref": "./examples/Nodes_DeleteNodeFile.json"
           }
         }
       },
@@ -7950,11 +7577,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "File get properties from node": {
-            "$ref": "./examples/Nodes_GetNodeFileProperties.json"
-          }
         }
       }
     },
@@ -8063,11 +7685,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node reboot": {
-            "$ref": "./examples/Nodes_RebootNode.json"
           }
         }
       }
@@ -8178,11 +7795,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node reimage": {
-            "$ref": "./examples/Nodes_NodeReimage.json"
-          }
         }
       }
     },
@@ -8278,11 +7890,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node get remote login settings": {
-            "$ref": "./examples/Nodes_GetNodeRemoteLoginSettings.json"
           }
         }
       }
@@ -8380,11 +7987,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node start": {
-            "$ref": "./examples/Node_StartNode.json"
           }
         }
       }
@@ -8494,11 +8096,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Upload BatchService Logs": {
-            "$ref": "./examples/Nodes_UploadNodeLogs.json"
-          }
         }
       }
     },
@@ -8607,11 +8204,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node create user": {
-            "$ref": "./examples/Nodes_CreateNodeUser.json"
           }
         }
       }
@@ -8729,11 +8321,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node update user": {
-            "$ref": "./examples/Nodes_ReplaceNodeUser.json"
-          }
         }
       },
       "delete": {
@@ -8822,11 +8409,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node delete user": {
-            "$ref": "./examples/Nodes_DeleteNodeUser.json"
           }
         }
       }
@@ -8964,11 +8546,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool remove nodes": {
-            "$ref": "./examples/Pools_RemoveNodes.json"
-          }
         }
       }
     },
@@ -9105,11 +8682,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool resize": {
-            "$ref": "./examples/Pools_ResizePool.json"
-          }
         }
       }
     },
@@ -9234,11 +8806,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool stop resize": {
-            "$ref": "./examples/Pools_StopPoolResize.json"
-          }
         }
       }
     },
@@ -9340,11 +8907,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool update": {
-            "$ref": "./examples/Pools_ReplacePoolProperties.json"
           }
         }
       }
@@ -9463,11 +9025,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Pool list usage metrics": {
-            "$ref": "./examples/Pools_ListPoolUsageMetrics.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -9569,11 +9126,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Account list node agent skus": {
-            "$ref": "./examples/Pools_ListSupportedImages.json"
           }
         },
         "x-ms-pageable": {
@@ -14197,18 +13749,6 @@
       "type": "object",
       "description": "Parameters for updating an Azure Batch Pool.",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty."
-        },
-        "vmSize": {
-          "type": "string",
-          "description": "The size of virtual machines in the Pool. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty."
-        },
-        "enableInterNodeCommunication": {
-          "type": "boolean",
-          "description": "Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.<br /><br />This field can be updated only when the pool is empty."
-        },
         "startTask": {
           "$ref": "#/definitions/BatchStartTaskUpdate",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged."
@@ -14237,33 +13777,9 @@
           },
           "x-ms-identifiers": []
         },
-        "virtualMachineConfiguration": {
-          "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
-          "description": "The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty."
-        },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/BatchNodeCommunicationMode",
           "description": "The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged."
-        },
-        "taskSlotsPerNode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty."
-        },
-        "taskSchedulingPolicy": {
-          "$ref": "#/definitions/BatchTaskSchedulingPolicyUpdate",
-          "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.<br /><br />This field can be updated only when the pool is empty."
-        },
-        "networkConfiguration": {
-          "$ref": "#/definitions/NetworkConfigurationUpdate",
-          "description": "The network configuration for the Pool. This field can be updated only when the pool is empty."
-        },
-        "resourceTags": {
-          "type": "object",
-          "description": "The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.<br /><br />This field can be updated only when the pool is empty.",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "userAccounts": {
           "type": "array",
@@ -14272,18 +13788,6 @@
             "$ref": "#/definitions/UserAccount"
           },
           "x-ms-identifiers": []
-        },
-        "mountConfiguration": {
-          "type": "array",
-          "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.<br /><br />This field can be updated only when the pool is empty.",
-          "items": {
-            "$ref": "#/definitions/MountConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
-        "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicyUpdate",
-          "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.<br /><br />This field can be updated only when the pool is empty."
         }
       }
     },
