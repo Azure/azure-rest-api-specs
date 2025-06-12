@@ -9,12 +9,13 @@ jobs:
     variables:
       - template: /eng/pipelines/templates/variables/globals.yml
     
-    steps: 
+    steps:
       # TODO: Use sparse checkout instead
       - checkout: self
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
+          SkipCheckoutNone: true
           Paths: 
             - repo.json
             - mapping.json
