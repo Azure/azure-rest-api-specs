@@ -65,10 +65,10 @@ suppressions:
     from: AdvancedThreatProtectionSettings.json
     reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
   - code: PatchBodyParametersSchema
-    from: swagger-document.json
+    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: DeleteResponseCodes
-    from: swagger-document.json
+    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: LroLocationHeader
     from: swagger-document
@@ -77,7 +77,7 @@ suppressions:
     from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ProvisioningStateSpecifiedForLROPatch
-    from: swagger-document.json
+    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: ResourceNameRestriction
     from: swagger-document
@@ -86,7 +86,7 @@ suppressions:
     from: FlexibleServers.json
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: swagger-document.json
+    from: swagger-document
     reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: XmsPageableForListCalls
     from: PrivateLinkResources.json
