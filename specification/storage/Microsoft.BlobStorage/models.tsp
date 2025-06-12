@@ -18,6 +18,10 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model StorageError {
   /** The error code. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** The error code. */
   @Xml.name("Code") code?: string;
 
   /** The error message. */
@@ -129,7 +133,8 @@ model FilterBlobItem {
 }
 
 /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
-union ListContainersIncludeType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum ListContainersIncludeType {
   /** Include metadata */
   metadata: "metadata",
 
@@ -138,24 +143,21 @@ union ListContainersIncludeType {
 
   /** Include system */
   system: "system",
-
-  string,
 }
 
 /** The filter blobs includes. */
-union FilterBlobsIncludeItem {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum FilterBlobsIncludeItem {
   /** The filter includes no versions. */
   None: "none",
 
   /** The filter includes n versions. */
   Versions: "versions",
-
-  /** Extensible */
-  string,
 }
 
 /** The account kind. */
-union AccountKind {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum AccountKind {
   /** The storage account is a general-purpose account. */
   Storage: "Storage",
 
@@ -170,13 +172,11 @@ union AccountKind {
 
   /** The storage account is a block blob storage account. */
   BlockBlobStorage: "BlockBlobStorage",
-
-  /** Extensible */
-  string,
 }
 
 /** The SKU types */
-union SkuName {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum SkuName {
   /** The standard LRS SKU. */
   StandardLRS: "Standard_LRS",
 
@@ -191,9 +191,6 @@ union SkuName {
 
   /** The premium LRS SKU. */
   PremiumLRS: "Premium_LRS",
-
-  /** Extensible */
-  string,
 }
 
 /** The list container segment response */
@@ -375,7 +372,8 @@ union PublicAccessType {
 }
 
 /** The copy status. */
-union CopyStatus {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum CopyStatus {
   /** The copy operation is pending. */
   Pending: "pending",
 
@@ -387,25 +385,21 @@ union CopyStatus {
 
   /** The copy operation is aborted. */
   Aborted: "aborted",
-
-  /** Extensible */
-  string,
 }
 
 /** The lease duration. */
-union LeaseDuration {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum LeaseDuration {
   /** The lease is of infinite duration. */
   Infinite: "infinite",
 
   /** The lease is of fixed duration. */
   Fixed: "fixed",
-
-  /** Extensible */
-  string,
 }
 
 /** The lease state. */
-union LeaseState {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum LeaseState {
   /** The lease is available. */
   Available: "available",
 
@@ -420,21 +414,16 @@ union LeaseState {
 
   /** The lease is broken. */
   Broken: "broken",
-
-  /** Extensible */
-  string,
 }
 
 /** The lease status. */
-union LeaseStatus {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum LeaseStatus {
   /** The lease is unlocked. */
   Unlocked: "unlocked",
 
   /** The lease is locked. */
   Locked: "locked",
-
-  /** Extensible */
-  string,
 }
 
 /** Represents an access policy. */
@@ -705,7 +694,8 @@ model BlobPropertiesInternal {
 }
 
 /** The immutability policy mode. */
-union BlobImmutabilityPolicyMode {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobImmutabilityPolicyMode {
   /** The immutability policy is mutable. */
   Mutable: "Mutable",
 
@@ -714,13 +704,11 @@ union BlobImmutabilityPolicyMode {
 
   /** The immutability policy is unlocked. */
   Unlocked: "Unlocked",
-
-  /** Extensible */
-  string,
 }
 
 /** The blob type. */
-union BlobType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobType {
   /** The blob is a block blob. */
   BlockBlob: "BlockBlob",
 
@@ -729,9 +717,6 @@ union BlobType {
 
   /** The blob is an append blob. */
   AppendBlob: "AppendBlob",
-
-  /** Extensible */
-  string,
 }
 
 /** If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard. */
@@ -964,12 +949,10 @@ model BlobTags {
 }
 
 /** The query request, note only SQL supported */
-union QueryRequestType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum QueryRequestType {
   /** The SQL request query type. */
   SQL: "SQL",
-
-  /** Extensible */
-  string,
 }
 
 /** Groups the set of query request settings. */
@@ -1066,8 +1049,9 @@ model ArrowField {
 model ParquetConfiguration is Record<unknown>;
 
 /** The query format type. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 @Xml.name("Type")
-union QueryType {
+enum QueryType {
   /** The query format type is delimited. */
   Delimited: "delimited",
 
@@ -1079,9 +1063,6 @@ union QueryType {
 
   /** The query format type is Parquet. */
   Parquet: "parquet",
-
-  /** Extensible */
-  string,
 }
 
 /// Parameters
@@ -1115,7 +1096,8 @@ alias SequenceNumberActionParameter = {
 };
 
 /** The sequence number actions. */
-union SequenceNumberActionType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum SequenceNumberActionType {
   /** Increment the sequence number. */
   Increment: "increment",
 
@@ -1124,9 +1106,6 @@ union SequenceNumberActionType {
 
   /** Update the sequence number. */
   Update: "update",
-
-  /** Extensible */
-  string,
 }
 
 /** The sequence number parameter. */
@@ -1308,7 +1287,8 @@ alias IfSequenceNumberLessThanOrEqualToParameter = {
 };
 
 /** The block list types. */
-union BlockListType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlockListType {
   /** The list of committed blocks. */
   Committed: "committed",
 
@@ -1317,9 +1297,6 @@ union BlockListType {
 
   /** Both lists together. */
   All: "all",
-
-  /** Extensible */
-  string,
 }
 
 /** The source content CRC64 parameter. */
@@ -1586,15 +1563,13 @@ alias CopySourceTagsParameter = {
 };
 
 /** The blob copy source tags types. */
-union BlobCopySourceTags {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobCopySourceTags {
   /** The replace blob source tags option. */
   Replace: "REPLACE",
 
   /** The copy blob source tags option. */
   Copy: "COPY",
-
-  /** Extensible */
-  string,
 }
 
 /** The copy source authorization header parameter */
@@ -1822,24 +1797,20 @@ alias BlobPathParameter = {
 };
 
 /** The type of blob deletions. */
-union BlobDeleteType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobDeleteType {
   /** Permanently delete the blob. */
   Permanent: "Permanent",
-
-  /** Extensible */
-  string,
 }
 
 /** The delete snapshots option type. */
-union DeleteSnapshotsOptionType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum DeleteSnapshotsOptionType {
   /** The delete snapshots include option is only. */
   Only: "only",
 
   /** The delete snapshots include option is include. */
   Include: "include",
-
-  /** Extensible */
-  string,
 }
 
 /** The encryption algorithm parameter. */
@@ -1850,12 +1821,10 @@ alias EncryptionAlgorithmParameter = {
 };
 
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
-union EncryptionAlgorithmType {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum EncryptionAlgorithmType {
   /** The AES256 encryption algorithm. */
   AES256: "AES256",
-
-  /** Extensible */
-  string,
 }
 
 /** The encryption key SHA256 hash parameter. */
@@ -1996,7 +1965,8 @@ alias ListBlobsIncludeParameter = {
 };
 
 /** The list blob includes parameter values. */
-union ListBlobsIncludeItem {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum ListBlobsIncludeItem {
   /** The include copies. */
   Copy: "copy",
 
@@ -2026,9 +1996,6 @@ union ListBlobsIncludeItem {
 
   /** The include deleted with versions. */
   DeletedWithVersions: "deletedwithversions",
-
-  /** Extensible */
-  string,
 }
 
 /** The lease duration parameter. */
@@ -2212,4 +2179,19 @@ alias CopySourceStatusCodeResponseHeader = {
   /** The status code for the copy source. */
   @header("x-ms-copy-source-status-code")
   copySourceStatusCode?: int32;
+};
+
+alias ClientRequestIdHeader = {
+  @access(Access.internal)
+  @header("x-ms-client-request-id")
+  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+  clientRequestId?: uuid;
+};
+
+alias RequestIdResponseHeader = {
+  @access(Access.internal)
+  @visibility(Lifecycle.Read)
+  @header("x-ms-request-id")
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  requestId?: uuid;
 };
