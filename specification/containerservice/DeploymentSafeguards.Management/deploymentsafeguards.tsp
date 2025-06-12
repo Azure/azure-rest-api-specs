@@ -70,6 +70,7 @@ model DeploymentSafeguardsProperties {
   systemExcludedNamespaces: Array<string>;
 
   @doc("The pod security standards level")
+  @added(Versions.v2025_05_02_preview)
   podSecurityStandardsLevel: PodSecurityStandardsLevel;
 }
 
