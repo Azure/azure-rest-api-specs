@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 @doc("Disconnected operations image resource.")
@@ -31,6 +32,17 @@ interface Images {
     }
   >;
 
+  @doc("List by parent")
+  @added(Microsoft.Edge.Versions.v2025_05_01)
+  listAll is ArmResourceListByParent<
+    Image,
+    Azure.ResourceManager.Foundations.DefaultBaseParameters<Image> & {
+      ...FilterQueryParameter;
+      ...TopQueryParameter;
+      ...SkipQueryParameter;
+    }
+  >;
+
   @doc("Get the resource")
   get is ArmResourceRead<Image>;
 
@@ -38,6 +50,6 @@ interface Images {
   listDownloadUri is ArmResourceActionSync<
     Image,
     void,
-    ArmResponse<ImageDownloadResponse> | ErrorResponse
+    ArmResponse<ImageDownloadResult> | ErrorResponse
   >;
 }

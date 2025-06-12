@@ -64,6 +64,7 @@ model ScheduledActionResource {
   notificationSettings?: Array<NotificationProperties>;
 }
 
+@@identifiers(ResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 

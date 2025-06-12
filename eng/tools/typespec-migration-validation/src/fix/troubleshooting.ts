@@ -32,7 +32,7 @@ export function suggestFix(jsonObj: any): string[] {
   if (suggestedFixes.length > 0) {
     suggestedFixes.forEach((fix) => {
       jsonOutput.suggestions.push(
-        `Find file "back-compatible.tsp" or "client.tsp" and add the following statement exactly as it is:":
+        `Find file "back-compatible.tsp" or "client.tsp" and add the following statement exactly as it is::
 \`\`\`typespec
 ${fix}
 \`\`\``,
