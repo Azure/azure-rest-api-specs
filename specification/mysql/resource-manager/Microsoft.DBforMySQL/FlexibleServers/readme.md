@@ -49,15 +49,14 @@ input-file:
 - preview/2024-12-01-preview/LogFiles.json
 - preview/2024-12-01-preview/ServiceOperations.json
 - preview/2024-12-01-preview/Maintenances.json
+- preview/2024-12-01-preview/PrivateEndpointConnections.json
+- preview/2024-12-01-preview/PrivateLinkResources.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
     reason: This check is optional.
   - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
+    from: swagger-document
     reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
   - code: PutInOperationName
     from: AdvancedThreatProtectionSettings.json
@@ -65,8 +64,46 @@ suppressions:
   - code: AllProxyResourcesShouldHaveDelete
     from: AdvancedThreatProtectionSettings.json
     reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
+  - code: PatchBodyParametersSchema
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: DeleteResponseCodes
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: LroLocationHeader
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ProvisioningStateSpecifiedForLROPatch
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ResourceNameRestriction
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: PostResponseCodes
+    from: FlexibleServers.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: swagger-document
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: XmsPageableForListCalls
+    from: PrivateLinkResources.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: AvoidAdditionalProperties
+    from: ServiceOperations.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: OperationsApiResponseSchema
+    from: ServiceOperations.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: ServiceOperations.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: RequiredPropertiesMissingInResourceModel
+    from: ServiceOperations.json
+    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
 ```
-
 
 ## Suppression
 
@@ -76,9 +113,6 @@ directive:
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json
-    reason: Property isDataAction is not included in get operation reponse body
-  - suppress: OperationsApiResponseSchema
-    from: Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
     reason: Property isDataAction is not included in get operation reponse body
 ```
 
