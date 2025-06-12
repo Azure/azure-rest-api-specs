@@ -18,6 +18,10 @@ scalar base64Bytes extends bytes;
 @mediaTypeHint("application/xml")
 model StorageError {
   /** The error code. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /** The error code. */
   @Xml.name("Code") code?: string;
 
   /** The error message. */
