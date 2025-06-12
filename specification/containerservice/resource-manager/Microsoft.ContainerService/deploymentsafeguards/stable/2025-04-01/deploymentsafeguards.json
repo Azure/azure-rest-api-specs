@@ -366,12 +366,47 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "podSecurityStandardsLevel": {
+          "$ref": "#/definitions/PodSecurityStandardsLevel",
+          "description": "The pod security standards level"
         }
       },
       "required": [
         "level",
-        "systemExcludedNamespaces"
+        "systemExcludedNamespaces",
+        "podSecurityStandardsLevel"
       ]
+    },
+    "PodSecurityStandardsLevel": {
+      "type": "string",
+      "description": "Specifies the Pod Security Standards level",
+      "enum": [
+        "Privileged",
+        "Baseline",
+        "Restricted"
+      ],
+      "x-ms-enum": {
+        "name": "PodSecurityStandardsLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PodSecurityStandardsPrivileged",
+            "value": "Privileged",
+            "description": "Privileged level is an unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations."
+          },
+          {
+            "name": "PodSecurityStandardsBaseline",
+            "value": "Baseline",
+            "description": "Baseline level is a minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration."
+          },
+          {
+            "name": "PodSecurityStandardsRestricted",
+            "value": "Restricted",
+            "description": "Restricted level is a heavily restricted policy, following current Pod hardening best practices."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
