@@ -7,18 +7,24 @@ parameters:
     default: 'typeSpecAPIViewArtifacts'
   - name: APIViewAPIUri
     type: string
-    default: 'https://apiview.dev/PullRequest/DetectAPIChanges'
+    default: 'https://apiview.dev/api/PullRequests/CreateAPIRevisionIfAPIHasChanges'
     # Please use 'https://apiviewstagingtest.com/PullRequest/DetectAPIChanges' for testing purposes
 
 jobs:
 - job:
   pool:
-    name: azsdk-pool-x64
-    demands: ImageOverride -equals ubuntu-22.04
+    name: azsdk-pool
+    demands: ImageOverride -equals ubuntu-24.04
+
+  variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
 
   steps:
   - checkout: self
-    fetchDepth: 0
+    # Required to compare head commit with base commit
+    fetchDepth: 2
+
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
 
   - pwsh: |
       . $(Build.SourcesDirectory)/eng/scripts/Create-APIView.ps1
@@ -47,6 +53,6 @@ jobs:
         -RepoName $(Build.Repository.Name) `
         -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
         -Language 'TypeSpec' `
-        -CommitSha $(Build.SourceVersion)
+        -CommitSha $(System.PullRequest.SourceCommitId)
     displayName: Create TypeSpec APIView
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))

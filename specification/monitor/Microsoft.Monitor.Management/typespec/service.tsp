@@ -14,9 +14,7 @@ using OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Mixed version"
 @armProviderNamespace("Microsoft.Monitor")
-@service({
-  title: "Azure Monitor Control Plane API",
-})
+@service(#{ title: "Azure Monitor Control Plane API" })
 @doc("Provides operations for working with Azure Monitor")
 @versioned(Versions)
 namespace Microsoft.Monitor;

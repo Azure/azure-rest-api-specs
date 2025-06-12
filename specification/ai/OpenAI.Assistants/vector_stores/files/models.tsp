@@ -44,16 +44,32 @@ union VectorStoreFileErrorCode {
   string,
 
   /** An internal error occurred. */
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   internalError: "internal_error",
 
   /** The file was not found. */
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   fileNotFound: "file_not_found",
 
   /** The file could not be parsed. */
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   parsingError: "parsing_error",
 
   /** The file has an unhandled mime type. */
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   unhandledMimeType: "unhandled_mime_type",
+
+  /** The server encountered an error. */
+  @added(ServiceApiVersions.v2025_01_01_preview)
+  serverError: "server_error",
+
+  /** The file format is not supported. */
+  @added(ServiceApiVersions.v2025_01_01_preview)
+  unsupportedFile: "unsupported_file",
+
+  /** The file is invalid. */
+  @added(ServiceApiVersions.v2025_01_01_preview)
+  invalidFile: "invalid_file",
 }
 
 /** Details on the error that may have ocurred while processing a file for this vector store */

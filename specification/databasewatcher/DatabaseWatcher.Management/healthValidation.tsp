@@ -36,24 +36,24 @@ model HealthValidation is ProxyResource<HealthValidationProperties> {
 @doc("The generic properties of the health validation resource.")
 @added(Versions.v2024_10_01_preview)
 model HealthValidationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The start time of health validation, in UTC.")
   startTime: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The end time of health validation, in UTC.")
   endTime: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current health validation status.")
   status: validationStatus;
 
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   @doc("The list of issues found by health validation.")
   issues: ValidationIssue[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the health validation resource.")
   provisioningState?: ResourceProvisioningState;
 }
@@ -85,31 +85,31 @@ union validationStatus {
 @doc("The model of a health validation issue.")
 @added(Versions.v2024_10_01_preview)
 model ValidationIssue {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The error code of the issue.")
   errorCode: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The error message of the issue.")
   errorMessage: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The additional details for the issue.")
   additionalDetails?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The recommendation for resolving the issue.")
   recommendationMessage: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The URL related to resolving the issue.")
   recommendationUrl?: url;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The resource ID of the Azure resource related to the issue.")
   relatedResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The type of the Azure resource related to the issue.")
   relatedResourceType?: string;
 }

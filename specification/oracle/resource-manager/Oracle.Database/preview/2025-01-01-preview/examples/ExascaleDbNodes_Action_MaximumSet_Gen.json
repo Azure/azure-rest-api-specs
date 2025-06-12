@@ -1,0 +1,26 @@
+{
+  "title": "ExascaleDbNodes_Action_MaximumSet",
+  "operationId": "ExascaleDbNodes_Action",
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "exadbVmClusterName": "vmClusterName",
+    "exascaleDbNodeName": "dbNodeName",
+    "body": {
+      "action": "Start"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "provisioningState": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

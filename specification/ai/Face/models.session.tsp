@@ -74,7 +74,7 @@ model LivenessSessionData {
 model LivenessSessionItem {
   @doc("The unique ID to reference this session.")
   @key("sessionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("DateTime when this session was created.")
@@ -313,13 +313,12 @@ model LivenessSessionAuditEntry {
 model CreateLivenessWithVerifySessionMultipartContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessWithVerifySessionJsonContent;
+  Parameters: HttpPart<CreateLivenessWithVerifySessionJsonContent>;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  VerifyImage: bytes;
+  VerifyImage: HttpPart<bytes>;
 }
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for update model in new version."
 @removed(Versions.v1_2)
 @renamedFrom(Versions.v1_2, "CreateLivenessWithVerifySessionRequest")
@@ -330,7 +329,7 @@ model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   contentType: "multipart/form-data";
 
   @doc("Request content of liveness with verify session creation.")
-  @body
+  @multipartBody
   body: CreateLivenessWithVerifySessionMultipartContent;
 }
 
@@ -351,7 +350,7 @@ model SessionImageStream {
 model LivenessSessionCommonData {
   @doc("The unique ID to reference this session.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionId: string;
 
   @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
@@ -505,22 +504,46 @@ model CreateLivenessWithVerifySessionRequest {
   contentType: "multipart/form-data";
 
   @doc("Request content of liveness with verify session creation.")
-  @body
+  @multipartBody
   body: CreateLivenessWithVerifySessionContent;
 }
 
 @added(Versions.v1_2)
 @doc("Request of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionContent is CreateLivenessSessionContent {
+model CreateLivenessWithVerifySessionContent {
+  @doc("Type of liveness mode the client should follow.")
+  livenessOperationMode: HttpPart<LivenessOperationMode>;
+
+  @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
+  deviceCorrelationIdSetInClient?: HttpPart<boolean>;
+
+  @doc("Whether or not store the session image.")
+  enableSessionImage?: HttpPart<boolean>;
+
+  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
+  livenessModelVersion?: HttpPart<LivenessModel>;
+
   @doc("Whether or not return the verify image hash.")
-  returnVerifyImageHash?: boolean;
+  returnVerifyImageHash?: HttpPart<boolean>;
 
   @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
-  @minValue(0)
-  @maxValue(1)
-  verifyConfidenceThreshold?: float32;
+  verifyConfidenceThreshold?: HttpPart<confidenceScore>;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  verifyImage: bytes;
+  verifyImage: HttpPart<bytes>;
+
+  @doc("Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.")
+  deviceCorrelationId?: HttpPart<string>;
+
+  @doc("Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.")
+  authTokenTimeToLiveInSeconds?: HttpPart<authTokenLifetimeInSeconds>; // = 600;
 }
+
+@minValue(60)
+@maxValue(86400)
+scalar authTokenLifetimeInSeconds extends int32;
+
+@minValue(0)
+@maxValue(1)
+scalar confidenceScore extends float32;

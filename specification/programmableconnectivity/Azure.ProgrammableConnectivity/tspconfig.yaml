@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/programmableconnectivity"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -18,20 +17,21 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Communication.ProgrammableConnectivity
+    model-namespace: false
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
     package-dir: "azure-programmableconnectivity"
-    package-name: "{package-dir}"
+    namespace: "azure.programmableconnectivity"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    generateMetadata: true
-    generateTest: true
-    azureSdkForJs: true
-    package-dir: "programmableconnectivity"
-    packageDetails:
-      name: "@azure/programmableconnectivity"
+    generate-metadata: true
+    package-dir: "programmableconnectivity-rest"
+    package-details:
+      name: "@azure-rest/programmableconnectivity"
     flavor: azure
 linter:
   extends:

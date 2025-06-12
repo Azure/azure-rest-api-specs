@@ -21,23 +21,61 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
 
 /** Supported parameters for a PII Entities Recognition task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PiiTaskParameters is PreBuiltTaskParameters {
+model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   /** Domain for PII task */
   domain?: PiiDomain = PiiDomain.none;
 
   /** Enumeration of PII categories to be returned in the response. */
-  piiCategories?: Array<PiiCategory>;
+  piiCategories?: PiiCategory[];
 
   /** StringIndexType to be used for analysis. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
   @added(Versions.v2024_11_15_preview)
-  excludePiiCategories?: Array<PiiCategoriesExclude>;
+  excludePiiCategories?: PiiCategoriesExclude[];
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2025_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+  @added(Versions.v2025_05_15_preview)
+  entitySynonyms?: EntitySynonyms[];
+}
+
+/** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: EntityCategory;
+
+  /** The entity synonyms */
+  synonyms: EntitySynonym[];
+}
+
+/** The entity synonyms used to enhance pii entity detection */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+
+  /** The 2 letter ISO 639-1 language the synonym */
+  language?: string;
+}
+
+/** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+@added(Versions.v2025_05_15_preview)
+model ValueExclusionPolicy {
+  /** Option to make the values excluded values case sensitive */
+  caseSensitive: boolean = false;
+
+  /** List of words and terms that should be excluded from detection by the PII detection service */
+  excludedValues: string[];
 }
 
 /** The abstract base class for RedactionPolicy. */
@@ -54,7 +92,7 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
 
-  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
@@ -111,11 +149,8 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    Array<PiiEntitiesDocumentResult>
-  )
-  documents: Array<PiiResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, PiiEntitiesDocumentResult[])
+  documents: PiiResultWithDetectedLanguage[];
 }
 
 /** PII domains. */
@@ -136,7 +171,7 @@ model PiiEntityWithTags is Entity {
   type?: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags?: Array<EntityTag>;
+  tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
   mask?: string;
@@ -155,8 +190,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
-  entities: Array<PiiEntityWithTags>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Entity[])
+  entities: PiiEntityWithTags[];
 }
 
 /** Contains the PII results with detected language. */
@@ -198,7 +233,7 @@ union PiiCategoriesExclude {
   /** AR National Identity Number */
   ARNationalIdentityNumber: "ARNationalIdentityNumber",
 
-  /** AT Identity Card */
+  /** AT Bank Account Number */
   AUBankAccountNumber: "AUBankAccountNumber",
 
   /** AU Driver's License Number */
@@ -704,4 +739,40 @@ union PiiCategoriesExclude {
 
   /** Address */
   Address: "Address",
+
+  /** Date Of Birth */
+  @added(Versions.v2025_05_15_preview)
+  DateOfBirth: "DateOfBirth",
+
+  /** Bank Account Number */
+  @added(Versions.v2025_05_15_preview)
+  BankAccountNumber: "BankAccountNumber",
+
+  /** Passport Number */
+  @added(Versions.v2025_05_15_preview)
+  PassportNumber: "PassportNumber",
+
+  /** Drivers License Number */
+  @added(Versions.v2025_05_15_preview)
+  DriversLicenseNumber: "DriversLicenseNumber",
+
+  /** Neighborhood */
+  @added(Versions.v2025_05_15_preview)
+  Neighborhood: "Neighborhood",
+
+  /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
+  @added(Versions.v2025_05_15_preview)
+  SortCode: "SortCode",
+
+  /** PIN */
+  @added(Versions.v2025_05_15_preview)
+  PIN: "PIN",
+
+  /** VIN */
+  @added(Versions.v2025_05_15_preview)
+  VIN: "VIN",
+
+  /** License Plate */
+  @added(Versions.v2025_05_15_preview)
+  LicensePlate: "LicensePlate",
 }
