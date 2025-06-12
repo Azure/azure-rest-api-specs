@@ -1,0 +1,61 @@
+{
+  "title": "AzureDataExplorerSourceConnector UpdateTags",
+  "operationId": "ConnectorOperations_UpdateTags",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resourceGroupName": "abcd",
+    "api-version": "2025-05-01-preview",
+    "name": "AzureDataExplorerSourceConnector1",
+    "properties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/AzureDataExplorerSourceConnector1",
+        "name": "AzureDataExplorerSourceConnector1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "properties": {
+          "direction": "Source",
+          "converterConfig": {
+            "type": "JsonConverter"
+          },
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "authentication": {
+              "authenticationMode": "ConnectionString"
+            }
+          },
+          "maxTasks": 1,
+          "dataSourceProperties": {
+            "connectorType": "AzureDataExplorerSource",
+            "clusterUrl": "hostName.AzureDataExplorer.com",
+            "database": "databaseName1",
+            "tableNames": "tableName1,tableName2",
+            "authentication": {
+              "authenticationMode": "OAuth"
+            }
+          },
+          "scalingProperties": {
+            "scalingType": "StaticScaling",
+            "parallelism": 1
+          },
+          "connectorState": "Running",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import "./common.tsp";
-import "../../../microsoftinventory/commonmodelslib/common.tsp";
+import "./commonmodelslib/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -94,6 +94,16 @@ model ComputeDeviceProperties {
   @doc("The status of the last operation")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Unique Id of the device")
+  @visibility(Lifecycle.Read)
+  nodeId?: string;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("The cluster where the device is located")
+  @visibility(Lifecycle.Read)
+  clusterName?: string;
 }
 
 @armResourceOperations
