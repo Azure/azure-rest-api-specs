@@ -30,7 +30,8 @@ interface ManagedHsms {
    */
   get is ArmResourceRead<
     ManagedHsm,
-    Response = ArmResponse<ManagedHsm> | NoContentResponse
+    Response = ArmResponse<ManagedHsm> | NoContentResponse,
+    Error = ManagedHsmError
   >;
 
   /**
@@ -44,20 +45,23 @@ interface ManagedHsms {
       @bodyRoot
       _: ManagedHsm;
     }),
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ManagedHsmError
   >;
 
   /**
    * Update a managed HSM Pool in the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedHsm,
     PatchModel = ManagedHsm,
     Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
       @bodyRoot _: ManagedHsm;
-    })
+    }),
+    Error = ManagedHsmError
   >;
 
   /**
@@ -66,7 +70,8 @@ interface ManagedHsms {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedHsm,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ManagedHsmError
   >;
 
   /**
@@ -80,7 +85,8 @@ interface ManagedHsms {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ManagedHsmError
   >;
 
   /**
@@ -94,7 +100,8 @@ interface ManagedHsms {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = ManagedHsmError
   >;
 
   /**

@@ -28,7 +28,14 @@ model PrivateEndpointConnection
   /**
    * Azure location of the key vault resource.
    */
-  Location?: string;
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   *
+   */
+  @visibility(Lifecycle.Read)
+  tags?: string;
 
   /**
    * Modified whenever there is a change in the state of private endpoint connection.

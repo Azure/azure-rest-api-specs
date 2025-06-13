@@ -32,7 +32,8 @@ interface DeletedManagedHsms {
   @operationId("ManagedHsms_GetDeleted")
   getDeleted is ArmResourceRead<
     DeletedManagedHsm,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = ManagedHsmError
   >;
 
   /**
@@ -45,7 +46,8 @@ interface DeletedManagedHsms {
     DeletedManagedHsm,
     void,
     Response = ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = ManagedHsmError
   >;
 }
 

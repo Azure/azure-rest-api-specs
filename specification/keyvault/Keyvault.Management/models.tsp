@@ -167,18 +167,27 @@ union StoragePermissions {
 /**
  * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
  */
-union NetworkRuleBypassOptions {
+union KeyVaultNetworkRuleBypassOption {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AzureServices: "AzureServices",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
 }
-
+/**
+ * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
+ */
+union ManagedHsmNetworkRuleBypassOption {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AzureServices: "AzureServices",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+}
 /**
  * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
  */
-union NetworkRuleAction {
+union KeyVaultNetworkRuleAction {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Allow: "Allow",
@@ -186,6 +195,16 @@ union NetworkRuleAction {
   Deny: "Deny",
 }
 
+/**
+ * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
+ */
+union ManagedHsmNetworkRuleAction {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Allow: "Allow",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deny: "Deny",
+}
 /**
  * Provisioning state of the vault.
  */
@@ -214,9 +233,33 @@ union PrivateEndpointServiceConnectionStatus {
 }
 
 /**
+ * The private endpoint connection status.
+ */
+union ManagedHsmPrivateEndpointServiceConnectionStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disconnected: "Disconnected",
+}
+
+/**
  * A message indicating if changes on the service provider require any updates on the consumer.
  */
-union ActionsRequired {
+union KeyVaultActionsRequiredMessage {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+}
+
+/**
+ * A message indicating if changes on the service provider require any updates on the consumer.
+ */
+union ManagedHsmActionsRequiredMessage {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
@@ -241,7 +284,25 @@ union PrivateEndpointConnectionProvisioningState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disconnected: "Disconnected",
 }
-
+/**
+ * The current provisioning state.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union ManagedHsmPrivateEndpointConnectionProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disconnected: "Disconnected",
+}
 /**
  * The type of identity.
  */
@@ -470,7 +531,25 @@ enum SkuName {
  * The vault's create mode to indicate whether the vault need to be recovered or not.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum CreateMode {
+enum KeyVaultCreateMode {
+  recover,
+  default,
+}
+
+/**
+ * The vault's create mode to indicate whether the vault need to be recovered or not.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum KeyVaultPatchMode {
+  recover,
+  default,
+}
+
+/**
+ * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ManagedHsmCreateMode {
   recover,
   default,
 }
@@ -487,7 +566,7 @@ enum AccessPolicyUpdateKind {
  * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum Reason {
+enum ManagedHsmNameUnavailableReason {
   AccountNameInvalid,
   AlreadyExists,
 }
@@ -495,23 +574,12 @@ enum Reason {
 /**
  * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
  */
-/*
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum ManagedHsmNameUnavailableReason {
-  AccountNameInvalid,
-  AlreadyExists,
-}
-*/
-/**
- * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
- */
-/*
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum KeyVaultNameUnavailableReason {
   AccountNameInvalid,
   AlreadyExists,
 }
-*/
+
 /**
  * SKU of the managed HSM Pool
  */
@@ -573,7 +641,7 @@ model VaultProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["tenantId", "objectId", "permissions"]
+    #["tenantId", "objectId", "permissions"]
   )
   accessPolicies?: AccessPolicyEntry[];
 
@@ -585,7 +653,7 @@ model VaultProperties {
   /**
    * The resource id of HSM Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hsmPoolResourceId?: string;
 
   /**
@@ -621,8 +689,8 @@ model VaultProperties {
   /**
    * The vault's create mode to indicate whether the vault need to be recovered or not.
    */
-  @visibility("create", "update")
-  createMode?: CreateMode;
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  createMode?: KeyVaultCreateMode;
 
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
@@ -642,7 +710,7 @@ model VaultProperties {
   /**
    * List of private endpoint connections associated with the key vault.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnectionItem[];
 
   /**
@@ -727,23 +795,23 @@ model NetworkRuleSet {
   /**
    * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
    */
-  bypass?: NetworkRuleBypassOptions;
+  bypass?: KeyVaultNetworkRuleBypassOption;
 
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
    */
-  defaultAction?: NetworkRuleAction;
+  defaultAction?: KeyVaultNetworkRuleAction;
 
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipRules?: IPRule[];
 
   /**
    * The list of virtual network rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualNetworkRules?: VirtualNetworkRule[];
 }
 
@@ -811,6 +879,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the private endpoint connection.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 }
 
@@ -821,7 +890,7 @@ model PrivateEndpoint {
   /**
    * Full identifier of the private endpoint resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -842,7 +911,7 @@ model PrivateLinkServiceConnectionState {
   /**
    * A message indicating if changes on the service provider require any updates on the consumer.
    */
-  actionsRequired?: ActionsRequired;
+  actionsRequired?: KeyVaultActionsRequiredMessage;
 }
 
 /**
@@ -906,7 +975,7 @@ model VaultPatchProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["tenantId", "objectId", "permissions"]
+    #["tenantId", "objectId", "permissions"]
   )
   accessPolicies?: AccessPolicyEntry[];
 
@@ -943,7 +1012,7 @@ model VaultPatchProperties {
   /**
    * The vault's create mode to indicate whether the vault need to be recovered or not.
    */
-  createMode?: CreateMode;
+  createMode?: KeyVaultPatchMode;
 
   /**
    * Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value.
@@ -968,25 +1037,25 @@ model VaultAccessPolicyParameters {
   /**
    * The resource id of the access policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The resource name of the access policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The resource name of the access policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * The resource type of the access policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
@@ -1004,7 +1073,7 @@ model VaultAccessPolicyProperties {
    */
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["tenantId", "objectId", "permissions"]
+    #["tenantId", "objectId", "permissions"]
   )
   accessPolicies: AccessPolicyEntry[];
 }
@@ -1017,26 +1086,26 @@ model DeletedVaultProperties {
   /**
    * The resource id of the original vault.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vaultId?: string;
 
   /**
    * The location of the original vault.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * The deleted date.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionDate?: utcDateTime;
 
   /**
    * The scheduled purged date.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
@@ -1044,13 +1113,13 @@ model DeletedVaultProperties {
    * Tags of the original vault.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
   /**
    * Purge protection status of the original vault.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   purgeProtectionEnabled?: boolean;
 }
 
@@ -1061,32 +1130,32 @@ model Resource {
   /**
    * Fully qualified identifier of the key vault resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Name of the key vault resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Resource type of the key vault resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure location of the key vault resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * Tags assigned to the key vault resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -1112,19 +1181,19 @@ model CheckNameAvailabilityResult {
   /**
    * A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
   /**
    * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
    */
-  @visibility("read")
-  reason?: Reason;
+  @visibility(Lifecycle.Read)
+  reason?: KeyVaultNameUnavailableReason;
 
   /**
    * An error message explaining the Reason value in more detail.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -1158,13 +1227,13 @@ model PrivateLinkResourceProperties {
   /**
    * Group identifier of private link resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * Required member names of private link resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -1190,7 +1259,7 @@ model ManagedHsmProperties {
   /**
    * The URI of the managed hsm pool for performing operations on keys.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hsmUri?: string;
 
   /**
@@ -1211,19 +1280,19 @@ model ManagedHsmProperties {
   /**
    * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
    */
-  @visibility("create", "update")
-  createMode?: CreateMode;
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  createMode?: ManagedHsmCreateMode;
 
   /**
    * Resource Status Message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusMessage?: string;
 
   /**
    * Provisioning state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -1234,13 +1303,13 @@ model ManagedHsmProperties {
   /**
    * List of all regions associated with the managed hsm pool.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   regions?: MhsmGeoReplicatedRegion[];
 
   /**
    * List of private endpoint connections associated with the managed hsm pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: MhsmPrivateEndpointConnectionItem[];
 
   /**
@@ -1251,14 +1320,14 @@ model ManagedHsmProperties {
   /**
    * The scheduled purge date in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * Managed HSM security domain properties.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   securityDomainProperties?: ManagedHSMSecurityDomainProperties;
 }
 
@@ -1269,17 +1338,17 @@ model MhsmNetworkRuleSet {
   /**
    * Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.
    */
-  bypass?: NetworkRuleBypassOptions;
+  bypass?: ManagedHsmNetworkRuleBypassOption;
 
   /**
    * The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.
    */
-  defaultAction?: NetworkRuleAction;
+  defaultAction?: ManagedHsmNetworkRuleAction;
 
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["value"])
+  @OpenAPI.extension("x-ms-identifiers", #["value"])
   ipRules?: MhsmipRule[];
 
   /**
@@ -1320,7 +1389,7 @@ model MhsmGeoReplicatedRegion {
   /**
    * Provisioning state of the geo replicated region.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GeoReplicationRegionProvisioningState;
 
   /**
@@ -1368,7 +1437,7 @@ model MhsmPrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the private endpoint connection.
    */
-  provisioningState?: PrivateEndpointConnectionProvisioningState;
+  provisioningState?: ManagedHsmPrivateEndpointConnectionProvisioningState;
 }
 
 /**
@@ -1378,7 +1447,7 @@ model MhsmPrivateEndpoint {
   /**
    * Full identifier of the private endpoint resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -1389,7 +1458,7 @@ model MhsmPrivateLinkServiceConnectionState {
   /**
    * Indicates whether the connection has been approved, rejected or removed by the key vault owner.
    */
-  status?: PrivateEndpointServiceConnectionStatus;
+  status?: ManagedHsmPrivateEndpointServiceConnectionStatus;
 
   /**
    * The reason for approval or rejection.
@@ -1399,7 +1468,7 @@ model MhsmPrivateLinkServiceConnectionState {
   /**
    * A message indicating if changes on the service provider require any updates on the consumer.
    */
-  actionsRequired?: ActionsRequired;
+  actionsRequired?: ManagedHsmActionsRequiredMessage;
 }
 
 /**
@@ -1409,13 +1478,13 @@ model ManagedHSMSecurityDomainProperties {
   /**
    * Activation Status
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activationStatus?: ActivationStatus;
 
   /**
    * Activation Status Message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activationStatusMessage?: string;
 }
 
@@ -1426,25 +1495,25 @@ model ManagedHsmResource {
   /**
    * The Azure Resource Manager resource ID for the managed HSM Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the managed HSM Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The resource type of the managed HSM Pool.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * The supported Azure location where the managed HSM Pool should be created.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -1461,7 +1530,7 @@ model ManagedHsmResource {
   /**
    * Metadata pertaining to creation and last modification of the key vault resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   /**
@@ -1492,13 +1561,13 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 
   /**
@@ -1521,7 +1590,7 @@ model ManagedHsmError {
   /**
    * The server error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Error;
 }
 
@@ -1532,19 +1601,19 @@ model Error {
   /**
    * The error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * The inner error, contains a more specific error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "innererror")
   innerError?: Error;
 }
@@ -1557,40 +1626,40 @@ model DeletedManagedHsmProperties {
   /**
    * The resource id of the original managed HSM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mhsmId?: string;
 
   /**
    * The location of the original managed HSM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: string;
 
   /**
    * The deleted date.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deletionDate?: utcDateTime;
 
   /**
    * The scheduled purged date.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * Purge protection status of the original managed HSM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   purgeProtectionEnabled?: boolean;
 
   /**
    * Tags of the original managed HSM.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
 
@@ -1624,13 +1693,13 @@ model MhsmPrivateLinkResourceProperties {
   /**
    * Group identifier of private link resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * Required member names of private link resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -1661,19 +1730,19 @@ model CheckMhsmNameAvailabilityResult {
   /**
    * A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nameAvailable?: boolean;
 
   /**
    * The reason that a managed hsm name could not be used. The reason element is only returned if NameAvailable is false.
    */
-  @visibility("read")
-  reason?: Reason;
+  @visibility(Lifecycle.Read)
+  reason?: ManagedHsmNameUnavailableReason;
 
   /**
    * An error message explaining the Reason value in more detail.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 
@@ -1694,13 +1763,13 @@ model ServiceSpecification {
   /**
    * Log specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -1771,7 +1840,7 @@ model MetricSpecification {
   /**
    * The dimensions of metric
    */
-  @OpenAPI.extension("x-ms-identifiers", ["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   dimensions?: DimensionProperties[];
 
   /**
@@ -1844,13 +1913,13 @@ model SecretProperties {
   /**
    * The URI to retrieve the current version of the secret.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secretUri?: string;
 
   /**
    * The URI to retrieve the specific version of the secret.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   secretUriWithVersion?: string;
 }
 
@@ -1886,14 +1955,14 @@ model Attributes {
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: utcDateTime;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updated?: utcDateTime;
 }
 
@@ -1963,13 +2032,13 @@ model KeyProperties {
   /**
    * The URI to retrieve the current version of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyUri?: string;
 
   /**
    * The URI to retrieve the specific version of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyUriWithVersion?: string;
 
   /**
@@ -2008,19 +2077,19 @@ model KeyAttributes {
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: int64;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updated?: int64;
 
   /**
    * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 
   /**
@@ -2039,7 +2108,7 @@ model RotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   lifetimeActions?: LifetimeAction[];
 }
 
@@ -2048,13 +2117,13 @@ model KeyRotationPolicyAttributes {
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: int64;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updated?: int64;
 
   /**
@@ -2184,13 +2253,13 @@ model ManagedHsmKeyProperties {
   /**
    * The URI to retrieve the current version of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyUri?: string;
 
   /**
    * The URI to retrieve the specific version of the key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyUriWithVersion?: string;
 
   /**
@@ -2229,19 +2298,19 @@ model ManagedHsmKeyAttributes {
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: int64;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updated?: int64;
 
   /**
    * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 
   /**
@@ -2260,7 +2329,7 @@ model ManagedHsmRotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   lifetimeActions?: ManagedHsmLifetimeAction[];
 }
 
@@ -2269,13 +2338,13 @@ model ManagedHsmKeyRotationPolicyAttributes {
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   created?: int64;
 
   /**
    * Last updated time in seconds since 1970-01-01T00:00:00Z.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updated?: int64;
 
   /**
@@ -2367,26 +2436,26 @@ model ProxyResourceWithoutSystemData {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
@@ -2419,3 +2488,10 @@ model ResourceListResult {
   @TypeSpec.nextLink
   nextLink?: ResourceLocation<Resource>;
 }
+
+@@doc(ManagedHsmCreateMode.default,
+  "Create a new managed HSM pool. This is the default option."
+);
+@@doc(ManagedHsmCreateMode.recover,
+  "Recover the managed HSM pool from a soft-deleted resource."
+);

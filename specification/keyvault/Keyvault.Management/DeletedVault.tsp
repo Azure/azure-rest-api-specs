@@ -34,7 +34,8 @@ interface DeletedVaults {
   @operationId("Vaults_GetDeleted")
   getDeleted is ArmResourceRead<
     DeletedVault,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -47,7 +48,8 @@ interface DeletedVaults {
     DeletedVault,
     void,
     OkResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 }
 

@@ -32,12 +32,25 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Vault>;
+  @armResourceCreateOrUpdate(Vault)
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      Vault,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<Vault>
+    >,
+    VaultCreateOrUpdateParameters,
+    Vault | ArmResourceCreatedResponse<
+      Vault,
+      LroHeaders = ArmLroLocationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    ErrorResponse
+  >;
 
   /**
    * Update a key vault in the specified subscription.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Vault,
     PatchModel = VaultPatchParameters,
@@ -74,7 +87,8 @@ interface Vaults {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -91,8 +105,10 @@ interface Vaults {
        * Name of the operation
        */
       @path
+      @segment("accessPolicies")
       operationKind: AccessPolicyUpdateKind;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -114,7 +130,6 @@ interface Vaults {
 @@doc(Vaults.createOrUpdate::parameters.resource,
   "Parameters to create or update the vault"
 );
-@@doc(Vaults.update::parameters.properties, "Parameters to patch the vault");
 @@doc(Vaults.updateAccessPolicy::parameters.body,
   "Access policy to merge into the vault"
 );

@@ -27,7 +27,14 @@ model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
   /**
    * Azure location of the key vault resource.
    */
-  Location?: azureLocation;
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Tags assigned to the key vault resource.
+   */
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
@@ -41,12 +48,20 @@ interface Secrets {
   /**
    * Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Secret>;
-
+  @armResourceCreateOrUpdate(Secret)
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      Secret,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<Secret>
+    >,
+    SecretCreateOrUpdateParameters,
+    Secret | ArmResourceCreatedResponse<Secret>,
+    ErrorResponse
+  >;
   /**
    * Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Secret,
     PatchModel = SecretPatchParameters,

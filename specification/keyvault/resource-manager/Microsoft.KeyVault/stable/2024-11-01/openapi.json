@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "KeyVaultManagementClient",
+    "title": "RedisManagementClient",
     "version": "2024-11-01",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
     "x-typespec-generated": [
@@ -109,7 +109,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "mhsName",
+            "name": "mhsmName",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -128,7 +128,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -170,7 +170,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -203,7 +203,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -239,7 +239,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -288,7 +288,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -342,7 +342,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -392,7 +392,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -449,7 +449,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -497,7 +497,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -544,7 +544,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -594,7 +594,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -646,7 +646,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -716,7 +716,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -790,7 +790,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -852,7 +852,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -1322,13 +1322,13 @@
             "description": "Parameters to create or update the vault",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/VaultCreateOrUpdateParameters"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Vault' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Vault"
             }
@@ -1339,9 +1339,9 @@
               "$ref": "#/definitions/Vault"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1366,7 +1366,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -1396,7 +1396,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters to patch the vault",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VaultPatchParameters"
@@ -1474,7 +1474,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/{operationKind}/{operationKind}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}/{operationKind}": {
       "put": {
         "operationId": "Vaults_UpdateAccessPolicy",
         "tags": [
@@ -1547,7 +1547,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1986,13 +1986,13 @@
             "description": "Parameters to create or update the secret",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Secret"
+              "$ref": "#/definitions/SecretCreateOrUpdateParameters"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Secret' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Secret"
             }
@@ -2001,6 +2001,13 @@
             "description": "Resource 'Secret' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Secret"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2178,23 +2185,6 @@
           "$ref": "#/definitions/KeyRotationPolicyActionType",
           "description": "The type of action."
         }
-      }
-    },
-    "ActionsRequired": {
-      "type": "string",
-      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
-      "enum": [
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ActionsRequired",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
       }
     },
     "ActivationStatus": {
@@ -2384,7 +2374,7 @@
           "readOnly": true
         },
         "reason": {
-          "$ref": "#/definitions/Reason",
+          "$ref": "#/definitions/ManagedHsmNameUnavailableReason",
           "description": "The reason that a managed hsm name could not be used. The reason element is only returned if NameAvailable is false.",
           "readOnly": true
         },
@@ -2405,7 +2395,7 @@
           "readOnly": true
         },
         "reason": {
-          "$ref": "#/definitions/Reason",
+          "$ref": "#/definitions/KeyVaultNameUnavailableReason",
           "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
           "readOnly": true
         },
@@ -2416,16 +2406,28 @@
         }
       }
     },
-    "CreateMode": {
-      "type": "string",
-      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
-      "enum": [
-        "recover",
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "CreateMode",
-        "modelAsString": false
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from Key Vault resource provider",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from Key Vault resource provider"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from Key Vault resource provider",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code. This is a mnemonic that can be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "User friendly error message. The message is typically localized and may vary with service version."
+        }
       }
     },
     "DeletedManagedHsm": {
@@ -2435,6 +2437,7 @@
         "properties": {
           "$ref": "#/definitions/DeletedManagedHsmProperties",
           "description": "Properties of the deleted managed HSM",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -2513,6 +2516,7 @@
         "properties": {
           "$ref": "#/definitions/DeletedVaultProperties",
           "description": "Properties of the vault",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       },
@@ -2614,6 +2618,28 @@
             "value": "Recoverable+ProtectedSubscription"
           }
         ]
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "The server error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/Error",
+          "description": "The inner error, contains a more specific error code.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
       }
     },
     "GeoReplicationRegionProvisioningState": {
@@ -3062,6 +3088,103 @@
         }
       }
     },
+    "KeyVaultActionsRequiredMessage": {
+      "type": "string",
+      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+      "enum": [
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultActionsRequiredMessage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "KeyVaultCreateMode": {
+      "type": "string",
+      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
+      "enum": [
+        "recover",
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultCreateMode",
+        "modelAsString": false
+      }
+    },
+    "KeyVaultNameUnavailableReason": {
+      "type": "string",
+      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
+      "enum": [
+        "AccountNameInvalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultNameUnavailableReason",
+        "modelAsString": false
+      }
+    },
+    "KeyVaultNetworkRuleAction": {
+      "type": "string",
+      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultNetworkRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny"
+          }
+        ]
+      }
+    },
+    "KeyVaultNetworkRuleBypassOption": {
+      "type": "string",
+      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+      "enum": [
+        "AzureServices",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultNetworkRuleBypassOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureServices",
+            "value": "AzureServices"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "KeyVaultPatchMode": {
+      "type": "string",
+      "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
+      "enum": [
+        "recover",
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "KeyVaultPatchMode",
+        "modelAsString": false
+      }
+    },
     "LifetimeAction": {
       "type": "object",
       "properties": {
@@ -3107,6 +3230,58 @@
         }
       ]
     },
+    "ManagedHsmActionsRequiredMessage": {
+      "type": "string",
+      "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+      "enum": [
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmActionsRequiredMessage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "ManagedHsmCreateMode": {
+      "type": "string",
+      "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
+      "enum": [
+        "recover",
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmCreateMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "recover",
+            "value": "recover",
+            "description": "Recover the managed HSM pool from a soft-deleted resource."
+          },
+          {
+            "name": "default",
+            "value": "default",
+            "description": "Create a new managed HSM pool. This is the default option."
+          }
+        ]
+      }
+    },
+    "ManagedHsmError": {
+      "type": "object",
+      "description": "The error exception.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The server error.",
+          "readOnly": true
+        }
+      }
+    },
     "ManagedHsmListResult": {
       "type": "object",
       "description": "The response of a ManagedHsm list operation.",
@@ -3127,6 +3302,137 @@
       "required": [
         "value"
       ]
+    },
+    "ManagedHsmNameUnavailableReason": {
+      "type": "string",
+      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
+      "enum": [
+        "AccountNameInvalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmNameUnavailableReason",
+        "modelAsString": false
+      }
+    },
+    "ManagedHsmNetworkRuleAction": {
+      "type": "string",
+      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmNetworkRuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny"
+          }
+        ]
+      }
+    },
+    "ManagedHsmNetworkRuleBypassOption": {
+      "type": "string",
+      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+      "enum": [
+        "AzureServices",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmNetworkRuleBypassOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureServices",
+            "value": "AzureServices"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "ManagedHsmPrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmPrivateEndpointConnectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ManagedHsmPrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedHsmPrivateEndpointServiceConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected"
+          }
+        ]
+      }
     },
     "ManagedHsmProperties": {
       "type": "object",
@@ -3165,7 +3471,7 @@
           "default": true
         },
         "createMode": {
-          "$ref": "#/definitions/CreateMode",
+          "$ref": "#/definitions/ManagedHsmCreateMode",
           "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
           "x-ms-mutability": [
             "update",
@@ -3430,11 +3736,11 @@
       "description": "A set of rules governing the network accessibility of a managed hsm pool.",
       "properties": {
         "bypass": {
-          "$ref": "#/definitions/NetworkRuleBypassOptions",
+          "$ref": "#/definitions/ManagedHsmNetworkRuleBypassOption",
           "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
         },
         "defaultAction": {
-          "$ref": "#/definitions/NetworkRuleAction",
+          "$ref": "#/definitions/ManagedHsmNetworkRuleAction",
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
         },
         "ipRules": {
@@ -3540,7 +3846,7 @@
           "description": "Approval state of the private link connection."
         },
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "$ref": "#/definitions/ManagedHsmPrivateEndpointConnectionProvisioningState",
           "description": "Provisioning state of the private endpoint connection."
         }
       }
@@ -3605,7 +3911,7 @@
       "description": "An object that represents the approval state of the private link connection.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "$ref": "#/definitions/ManagedHsmPrivateEndpointServiceConnectionStatus",
           "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
         },
         "description": {
@@ -3613,7 +3919,7 @@
           "description": "The reason for approval or rejection."
         },
         "actionsRequired": {
-          "$ref": "#/definitions/ActionsRequired",
+          "$ref": "#/definitions/ManagedHsmActionsRequiredMessage",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
@@ -3627,8 +3933,7 @@
           "description": "The MhsmGeoReplicatedRegion items on this page",
           "items": {
             "$ref": "#/definitions/MhsmGeoReplicatedRegion"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -3659,67 +3964,24 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).",
+          "x-ms-client-name": "AddressRange"
         }
       },
       "required": [
         "value"
       ]
     },
-    "NetworkRuleAction": {
-      "type": "string",
-      "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkRuleAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny"
-          }
-        ]
-      }
-    },
-    "NetworkRuleBypassOptions": {
-      "type": "string",
-      "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
-      "enum": [
-        "AzureServices",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkRuleBypassOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureServices",
-            "value": "AzureServices"
-          },
-          {
-            "name": "None",
-            "value": "None"
-          }
-        ]
-      }
-    },
     "NetworkRuleSet": {
       "type": "object",
       "description": "A set of rules governing the network accessibility of a vault.",
       "properties": {
         "bypass": {
-          "$ref": "#/definitions/NetworkRuleBypassOptions",
+          "$ref": "#/definitions/KeyVaultNetworkRuleBypassOption",
           "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
         },
         "defaultAction": {
-          "$ref": "#/definitions/NetworkRuleAction",
+          "$ref": "#/definitions/KeyVaultNetworkRuleAction",
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
         },
         "ipRules": {
@@ -3796,6 +4058,15 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "string",
+          "readOnly": true
+        },
         "etag": {
           "type": "string",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
@@ -3803,7 +4074,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3861,7 +4132,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
-          "description": "Provisioning state of the private endpoint connection."
+          "description": "Provisioning state of the private endpoint connection.",
+          "readOnly": true
         }
       }
     },
@@ -4008,7 +4280,7 @@
           "description": "The reason for approval or rejection."
         },
         "actionsRequired": {
-          "$ref": "#/definitions/ActionsRequired",
+          "$ref": "#/definitions/KeyVaultActionsRequiredMessage",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       }
@@ -4073,18 +4345,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Reason": {
-      "type": "string",
-      "description": "The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.",
-      "enum": [
-        "AccountNameInvalid",
-        "AlreadyExists"
-      ],
-      "x-ms-enum": {
-        "name": "Reason",
-        "modelAsString": false
-      }
     },
     "Resource": {
       "type": "object",
@@ -4166,6 +4426,19 @@
           "$ref": "#/definitions/SecretProperties",
           "description": "Properties of the secret",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the key vault resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags assigned to the key vault resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4173,7 +4446,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4184,6 +4457,26 @@
         {
           "$ref": "#/definitions/Attributes"
         }
+      ]
+    },
+    "SecretCreateOrUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for creating or updating a secret",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the secret.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SecretProperties",
+          "description": "Properties of the secret"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "SecretListResult": {
@@ -4573,6 +4866,31 @@
         "type"
       ]
     },
+    "VaultCreateOrUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for creating or updating a vault",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the key vault should be created."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags that will be assigned to the key vault.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/VaultProperties",
+          "description": "Properties of the vault"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
     "VaultListResult": {
       "type": "object",
       "description": "The response of a Vault list operation.",
@@ -4661,7 +4979,7 @@
           "description": "softDelete data retention days. It accepts >=7 and <=90."
         },
         "createMode": {
-          "$ref": "#/definitions/CreateMode",
+          "$ref": "#/definitions/KeyVaultPatchMode",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not."
         },
         "enablePurgeProtection": {
@@ -4739,7 +5057,7 @@
           "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC."
         },
         "createMode": {
-          "$ref": "#/definitions/CreateMode",
+          "$ref": "#/definitions/KeyVaultCreateMode",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
           "x-ms-mutability": [
             "update",

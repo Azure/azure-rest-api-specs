@@ -20,6 +20,7 @@ import "./DeletedManagedHsm.tsp";
 import "./MhsmPrivateEndpointConnection.tsp";
 import "./Secret.tsp";
 import "./routes.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -32,9 +33,7 @@ using TypeSpec.Versioning;
  */
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service({
-  title: "KeyVaultManagementClient",
-})
+@service(#{ title: "RedisManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.KeyVault;

@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -26,7 +25,6 @@ using Azure.Core;
 @@clientName(Vaults.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Vaults.update::parameters.properties, "parameters");
 @@clientName(Vaults.updateAccessPolicy::parameters.body, "parameters");
-
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
@@ -43,7 +41,7 @@ using Azure.Core;
 @@clientName(Secrets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Secrets.update::parameters.properties, "parameters");
 @@clientName(ManagedHsmsOperationGroup.checkMhsmNameAvailability::parameters.body,
-  "mhsName"
+  "mhsmName"
 );
 @@clientName(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "vaultName"
@@ -81,10 +79,7 @@ using Azure.Core;
 );
 //@@clientName(ActionsRequired, "ManagedHsmActionsRequiredMessage", "csharp");
 //@@clientName(NetworkRuleAction, "ManagedHsmNetworkRuleAction", "csharp");
-@@clientName(NetworkRuleBypassOptions,
-  "ManagedHsmNetworkRuleBypassOption",
-  "csharp"
-);
+//@@clientName(NetworkRuleBypassOptions, "ManagedHsmNetworkRuleBypassOption","csharp");
 @@clientName(PublicNetworkAccess, "ManagedHsmPublicNetworkAccess", "csharp");
 //@@clientName(CreateMode, "ManagedHsmCreateMode", "csharp");
 @@clientName(ManagedHsmProperties.networkAcls, "NetworkRuleSet", "csharp");
@@ -168,8 +163,33 @@ using Azure.Core;
 );
 @@clientName(VaultProvisioningState, "KeyVaultProvisioningState", "csharp");
 @@alternateType(PrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(PrivateEndpointConnection.location, azureLocation, "csharp");
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 @@alternateType(MhsmPrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(MhsmPrivateEndpointConnectionItem.etag, eTag, "csharp");
+@@alternateType(MhsmPrivateEndpointConnectionItem.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ManagedHsmProperties.hsmUri, url, "csharp");
+@@alternateType(ManagedHsmProperties.tenantId, uuid, "csharp");
+@@alternateType(SecretProperties.secretUri, url, "csharp");
+@@alternateType(DeletedVaultProperties.vaultId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DeletedVaultProperties.location, azureLocation, "csharp");
+@@alternateType(DeletedManagedHsmProperties.mhsmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(DeletedManagedHsmProperties.mhsmId, "managedHsmId", "csharp");
+@@alternateType(DeletedManagedHsmProperties.location, azureLocation, "csharp");
+@@alternateType(VaultAccessPolicyParameters.location, azureLocation, "csharp");
+@@alternateType(PrivateEndpointConnectionItem.etag, eTag, "csharp");
+@@alternateType(Secret.location, azureLocation, "csharp");
+@@visibility(DeletedVault.properties, Lifecycle.Read);
+@@visibility(DeletedManagedHsm.properties, Lifecycle.Read);

@@ -26,7 +26,8 @@ interface VaultsOperationGroup {
   listDeleted is ArmProviderActionSync<
     Response = Azure.ResourceManager.ResourceListResult<DeletedVault>,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
   /**
    * The List operation gets information about the vaults associated with the subscription.
@@ -64,7 +65,8 @@ interface VaultsOperationGroup {
     Request = VaultCheckNameAvailabilityParameters,
     Response = CheckNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
 }
 
@@ -81,7 +83,8 @@ interface ManagedHsmsOperationGroup {
   listDeleted is ArmProviderActionSync<
     Response = Azure.ResourceManager.ResourceListResult<DeletedManagedHsm>,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
   /**
    * Checks that the managed hsm name is valid and is not already in use.
@@ -93,7 +96,8 @@ interface ManagedHsmsOperationGroup {
     Request = CheckMhsmNameAvailabilityParameters,
     Response = CheckMhsmNameAvailabilityResult,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    Error = CloudError
   >;
 }
 

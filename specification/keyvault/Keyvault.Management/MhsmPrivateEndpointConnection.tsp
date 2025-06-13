@@ -68,7 +68,10 @@ interface MhsmPrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MHSMPrivateEndpointConnections_ListByResource")
-  listByResource is ArmResourceListByParent<MhsmPrivateEndpointConnection>;
+  listByResource is ArmResourceListByParent<
+    MhsmPrivateEndpointConnection,
+    Error = ManagedHsmError
+  >;
 }
 
 @@doc(MhsmPrivateEndpointConnection.name,
