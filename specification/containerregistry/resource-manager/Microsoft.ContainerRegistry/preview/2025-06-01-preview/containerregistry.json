@@ -2094,14 +2094,6 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "The pipeline run does not exist in the subscription."
           },
@@ -2116,10 +2108,6 @@
           "PipelineRunDelete": {
             "$ref": "./examples/PipelineRunDelete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -3217,9 +3205,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "headers": {
