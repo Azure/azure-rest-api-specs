@@ -500,6 +500,57 @@ union AccessTier {
   string,
 }
 
+/** The access tiers. */
+union AccessTierOptional {
+  /** The hot P4 tier. */
+  P4: "P4",
+
+  /** The hot P6 tier. */
+  P6: "P6",
+
+  /** The hot P10 tier. */
+  P10: "P10",
+
+  /** The hot P15 tier. */
+  P15: "P15",
+
+  /** The hot P20 tier. */
+  P20: "P20",
+
+  /** The hot P30 tier. */
+  P30: "P30",
+
+  /** The hot P40 tier. */
+  P40: "P40",
+
+  /** The hot P50 tier. */
+  P50: "P50",
+
+  /** The hot P60 tier. */
+  P60: "P60",
+
+  /** The hot P70 tier. */
+  P70: "P70",
+
+  /** The hot P80 tier. */
+  P80: "P80",
+
+  /** The hot access tier. */
+  Hot: "Hot",
+
+  /** The cool access tier. */
+  Cool: "Cool",
+
+  /** The archive access tier. */
+  Archive: "Archive",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** Extensible */
+  string,
+}
+
 /** The archive status. */
 union ArchiveStatus {
   /** The archive status is rehydrating pending to hot. */
@@ -1658,10 +1709,10 @@ alias ContentCrc64Parameter = {
 };
 
 /** The access tier optional parameter. */
-alias AccessTierOptional = {
+alias AccessTierOptionalHeader = {
   /** The tier to be set on the blob. */
   @header("x-ms-access-tier")
-  tier?: AccessTier;
+  tier?: AccessTierOptional;
 };
 
 /** The content MD5 parameter. */

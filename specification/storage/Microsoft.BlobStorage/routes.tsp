@@ -854,7 +854,10 @@ namespace Storage.Blob {
           ...ServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
           ...EncryptionScopeResponseHeader;
-          ...AccessTierOptional;
+        
+          /** The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive. */
+          @header("x-ms-access-tier")
+          accessTier?: string;
 
           /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
           @header("x-ms-access-tier-inferred")
@@ -1242,7 +1245,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptional;
+          ...AccessTierOptionalHeader;
           ...RehydratePriorityHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
@@ -1290,7 +1293,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptional;
+          ...AccessTierOptionalHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
           ...SourceIfMatchParameter;
@@ -1308,6 +1311,10 @@ namespace Storage.Blob {
           ...EncryptionScopeParameter;
           ...CopySourceTagsParameter;
           ...FileRequestIntentParameter;
+
+          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
+          @header("x-ms-requires-sync")
+          requiresSync: true;
         },
         {
           @statusCode statusCode: 202;
@@ -2003,7 +2010,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
+            ...AccessTierOptionalHeader;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
             ...BlobTagsHeaderParameter;
@@ -2059,7 +2066,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
+            ...AccessTierOptionalHeader;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
             ...SourceIfModifiedSinceParameter;
@@ -2199,7 +2206,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
+            ...AccessTierOptionalHeader;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
 
