@@ -18,7 +18,7 @@ using TypeSpec.Versioning;
 )
 @service(#{ title: "AI Model Inference" })
 @server(
-  "https://{resource}.services.ai.azure.com/api/models",
+  "https://{resource}.services.ai.azure.com/models",
   "AI Model Inference",
   {
     @doc("The Azure AI Services resource name, for example 'my-resource'")
@@ -33,16 +33,4 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-01-preview version of the AI.Model service.")
   v2024_05_01_Preview: "2024-05-01-preview",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2025-04-01 version of the AI.Model service.")
-  v2025_04_01: "2025-04-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2025-05-01 version of the AI.Model service.")
-  v2025_05_01: "2025-05-01",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2025-05-15-preview version of the AI.Model service.")
-  v2025_05_15_Preview: "2025-05-15-preview",
 }
