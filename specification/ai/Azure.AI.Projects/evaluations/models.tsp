@@ -177,7 +177,6 @@ model AgentEvaluation {
   result?: Array<AgentEvaluationResult>;
 }
 
-@lroStatus
 @doc("The provisioning state of the last accepted operation.")
 union EvaluationStatus {
   string,
