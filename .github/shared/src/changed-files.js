@@ -2,6 +2,7 @@
 
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { access } from "fs/promises";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -124,4 +125,18 @@ export function swagger(file) {
     (dataPlane(file) || resourceManager(file)) &&
     !example(file)
   );
+}
+
+/**
+ * Check if a path exists
+ * @param {string} path Path to check for existence
+ * @returns true if the path exists, false otherwise
+ */
+export async function pathExists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
 }
