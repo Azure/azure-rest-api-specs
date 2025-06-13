@@ -1415,7 +1415,7 @@ namespace Storage.Blob {
 
           /** Indicates the tier to be set on the blob. */
           @header("x-ms-access-tier")
-          tier: AccessTier;
+          tier: AccessTierOptional;
 
           ...RehydratePriorityHeader;
           ...LeaseIdOptionalParameter;
