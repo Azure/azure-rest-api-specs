@@ -75,9 +75,9 @@ model ScheduledActionResource {
   type?: string;
 
   @doc("""
-  The ARM Id of the resource.
-  "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-  """)
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
   resourceId: ValidScheduledActionResourceId;
 
   @doc("The desired notification settings for the specified resource.")
