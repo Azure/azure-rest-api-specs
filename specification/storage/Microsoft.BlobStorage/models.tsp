@@ -21,6 +21,14 @@ model StorageError {
   @header("x-ms-error-code")
   errorCode?: string;
 
+  /** The error code for the copy source. */
+  @header("x-ms-copy-source-error-code")
+  xMsCopySourceErrorCode?: string;
+
+  /** The status code for the copy source. */
+  @header("x-ms-copy-source-status-code")
+  xMsCopySourceStatusCode?: int32;
+
   /** The error code. */
   @Xml.name("Code") code?: string;
 
@@ -2178,18 +2186,6 @@ alias FileRequestIntentParameter = {
   /** Valid value is backup */
   @header("x-ms-file-request-intent")
   fileRequestIntent?: FileShareTokenIntent;
-};
-
-alias CopySourceErrorCodeResponseHeader = {
-  /** The error code for the copy source. */
-  @header("x-ms-copy-source-error-code")
-  copySourceErrorCode?: string;
-};
-
-alias CopySourceStatusCodeResponseHeader = {
-  /** The status code for the copy source. */
-  @header("x-ms-copy-source-status-code")
-  copySourceStatusCode?: int32;
 };
 
 alias ClientRequestIdHeader = {

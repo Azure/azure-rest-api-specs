@@ -57,7 +57,7 @@ namespace Storage.Blob {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-  })  | TError;
+  }) | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -1275,8 +1275,6 @@ namespace Storage.Blob {
           ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
-          ...CopySourceErrorCodeResponseHeader;
-          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1322,8 +1320,6 @@ namespace Storage.Blob {
           ...ContentMd5ResponseHeader;
           ...ContentCrc64ResponseHeader;
           ...EncryptionScopeResponseHeader;
-          ...CopySourceErrorCodeResponseHeader;
-          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1656,8 +1652,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -1951,8 +1945,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2098,8 +2090,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2180,8 +2170,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
