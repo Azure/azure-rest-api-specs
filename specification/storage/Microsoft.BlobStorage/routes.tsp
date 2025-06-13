@@ -38,6 +38,7 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: ResponseMediaType;
 
+    ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   }) | TError;
@@ -53,6 +54,7 @@ namespace Storage.Blob {
     ...TParams,
     ...ClientRequestIdHeader,
   ): (TResponse & {
+    ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   })  | TError;
@@ -178,6 +180,7 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: "multipart/mixed";
 
+    ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   }) | StorageError;
@@ -438,6 +441,7 @@ namespace Storage.Blob {
       multipartContentType: "multipart/mixed";
 
       ...RequestIdResponseHeader;
+      ...ApiVersionHeader;
     } & MultipartBodyParameter) | StorageError;
 
     /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
@@ -736,6 +740,7 @@ namespace Storage.Blob {
         ...LegalHoldResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+        ...ApiVersionHeader;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 206;
@@ -788,6 +793,7 @@ namespace Storage.Blob {
         ...LegalHoldResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+        ...ApiVersionHeader;
       }) | StorageError;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
