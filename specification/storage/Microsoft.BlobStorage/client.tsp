@@ -98,3 +98,7 @@ model BlobServiceClientParameters {
   uint64,
   "rust"
 );
+
+@@scope(Storage.Blob.Container.submitBatch, "!rust");
+@@scope(Storage.Blob.submitBatch, "!rust");
+
