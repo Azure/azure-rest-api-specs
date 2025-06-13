@@ -28,6 +28,18 @@ alias Hl7EdgeConnectorResourceId = Azure.Core.armResourceIdentifier<[
   }
 ]>;
 
+alias DicomConnectorResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.HealthcareInterop/dicomConnectors";
+  }
+]>;
+
+alias DicomEdgeConnectorResourceId = Azure.Core.armResourceIdentifier<[
+  {
+    type: "Microsoft.HealthcareInterop/dicomEdgeConnectors";
+  }
+]>;
+
 alias StorageAccountConnectorResourceId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.HealthcareInterop/storageAccountConnectors";

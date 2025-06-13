@@ -36,6 +36,7 @@ model HubProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("Environments hosted on remote locations where Connectors can be deployed.")
+  @identifiers(#[])
   remoteConnectorEnvironments?: Array<RemoteConnectorEnvironment>;
 
   @doc("The status of the last provisioning operation.")

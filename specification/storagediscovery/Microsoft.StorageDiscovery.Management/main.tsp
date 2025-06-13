@@ -56,7 +56,7 @@ model StorageDiscoveryWorkspaceProperties {
   discoveryScopeLevels: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
-      scopes: ["tenant", "subscription", "resourceGroup"];
+      scopes: ["Tenant", "Subscription", "ResourceGroup"];
     }
   ]>[];
 
