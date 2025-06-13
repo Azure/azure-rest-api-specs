@@ -5,7 +5,6 @@ import "./java-client.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 @TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_02_01)
 //@versioned(Azure.Batch.Versions)
 namespace Client;
