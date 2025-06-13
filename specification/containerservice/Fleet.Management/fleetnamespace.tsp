@@ -136,48 +136,48 @@ union PolicyRule {
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("The orchestrator profile to manage the lifecycle of the namespace.")
-model OrchestratorProfile {
+@doc("The propagation to be used for provisioning the namespace among the fleet.")
+model PropagationPolicy {
   @doc("The type of the policy to be used.")
-  type: OrchestratorProfileType;
+  type: PropagationType;
 
-  @doc("The policy configuration for the type of the orchestrator.")
-  policy: OrchestratorPolicy;
+  @doc("The propagation profile to be used for the propagation.")
+  propagationProfile: PropagationProfile;
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("The type of the namespace orchestrator.")
-union OrchestratorProfileType {
-  @doc("Using a fleet hub and kubefleet ClusterResourcePlacement.")
-  Hub: "Hub",
+@doc("How the namespace will be provisioned among the fleet members.")
+union PropagationType {
+  @doc("Using ClusterResourcePlacement.")
+  Placement: "Placement",
 
   string,
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("The available orchestrator type.")
-union OrchestratorPolicy {
-  @doc("The Hub Orchestrator.")
-  hubPolicy: HubPolicy,
+@doc("The available Propagation profiles.")
+union PropagationProfile {
+  @doc("Use ClusterResourcePlacement.")
+  PlacementProfile,
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("HubPolicy uses a fleet hub and CRP to propagate the namespace.")
-model HubPolicy {
-  @doc("The default ClusterResourcePlacement (CRP) policy configuration.")
+@doc("The configuration profile for default ClusterResourcePlacement for placement.")
+model PlacementProfile {
+  @doc("The default ClusterResourcePlacement policy configuration.")
   defaultClusterResourcePlacement: ClusterResourcePlacement;
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("The desired state of ClusterResourcePlacement")
+@doc("The desired configuration of ClusterResourcePlacement")
 model ClusterResourcePlacement {
-  @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
-  policy?: ClusterResourcePlacementPolicy;
+  @doc("PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
+  policy?: PlacementPolicy;
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("ClusterResourcePlacementPolicy contains the rules to select target member clusters to place the selected resources. Only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity.")
-model ClusterResourcePlacementPolicy {
+@doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity.")
+model PlacementPolicy {
   @doc("Type of placement.")
   placementType?: PlacementType;
 
@@ -185,11 +185,11 @@ model ClusterResourcePlacementPolicy {
   clusterNames?: string[];
 
   @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll.") // don't forget to update this when we add PickN.
-  affinity?: ClusterResourcePlacementAffinity;
+  affinity?: Affinity;
 
   @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  tolerations?: CrpToleration[];
+  tolerations?: Toleration[];
 }
 
 @added(Versions.v2025_03_02_naar)
@@ -205,56 +205,56 @@ union PlacementType {
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("ClusterResourcePlacementAffinity is a group of cluster affinity scheduling rules.")
-model ClusterResourcePlacementAffinity {
+@doc("Affinity is a group of cluster affinity scheduling rules.")
+model Affinity {
   @doc("ClusterAffinity contains cluster affinity scheduling rules for the selected resources.")
-  clusterAffinity?: ClusterResourcePlacementClusterAffinity;
+  clusterAffinity?: ClusterAffinity;
 }
 
 @added(Versions.v2025_03_02_naar)
 @doc("ClusterAffinity contains cluster affinity scheduling rules for the selected resources.")
-model ClusterResourcePlacementClusterAffinity {
+model ClusterAffinity {
   @doc("If any affinity requirements specified by this field are not met at scheduling time, the resource will not be scheduled onto the cluster.")
-  requiredDuringSchedulingIgnoredDuringExecution?: CrpClusterSelector;
+  requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelector;
 }
 @added(Versions.v2025_03_02_naar)
-@doc("CrpClusterSelector allows specifying cluster selector terms.")
-model CrpClusterSelector {
+@doc("ClusterSelector allows specifying cluster selector terms.")
+model ClusterSelector {
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  clusterSelectorTerms: CrpClusterSelectorTerm[];
+  clusterSelectorTerms: ClusterSelectorTerm[];
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("CrpClusterSelectorTerm allows specifying what clusters in the fleet are in scope. If you specify both label and property selectors in the same term, the results are AND'd.")
-model CrpClusterSelectorTerm {
+@doc("ClusterSelectorTerm allows specifying what clusters in the fleet are in scope. If you specify both label and property selectors in the same term, the results are AND'd.")
+model ClusterSelectorTerm {
   @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected.")
-  labelSelector?: MetaV1ClusterLabelSelector;
+  labelSelector?: ClusterLabelSelector;
 
   @doc("PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected.")
-  propertySelector?: CrpClusterPropertySelector;
+  propertySelector?: ClusterPropertySelector;
 }
 
 @added(Versions.v2025_03_02_naar)
 @doc("A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.")
-model MetaV1ClusterLabelSelector {
+model ClusterLabelSelector {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("matchLabels is a map of {key,value} pairs.")
   matchLabels?: Record<string>;
 
   @doc("matchExpressions is a list of label selector requirements. The requirements are ANDed.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  matchExpressions?: MetaV1LabelSelectorRequirement[];
+  matchExpressions?: LabelSelectorRequirement[];
 }
 
 @added(Versions.v2025_03_02_naar)
 @doc("A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.")
-model MetaV1LabelSelectorRequirement {
+model LabelSelectorRequirement {
   @doc("key is the label key that the selector applies to.")
   key: string;
 
   @doc("operator represents a key's relationship to a set of values.")
-  operator: MetaV1LabelSelectorOperator;
+  operator: LabelSelectorOperator;
 
   @doc("values is an array of string values to be compared using the operator.")
   values?: string[];
@@ -262,7 +262,7 @@ model MetaV1LabelSelectorRequirement {
 
 @added(Versions.v2025_03_02_naar)
 @doc("A label selector operator is the set of operators that can be used in a selector requirement.")
-union MetaV1LabelSelectorOperator {
+union LabelSelectorOperator {
   @doc("In validates whether the key is in the list of values.")
   In: "In",
 
@@ -280,20 +280,20 @@ union MetaV1LabelSelectorOperator {
 
 @added(Versions.v2025_03_02_naar)
 @doc("PropertySelector helps user specify property requirements when picking clusters for resource placement.")
-model CrpClusterPropertySelector {
-  @doc("MatchExpressions is an array of CRPPropertySelectorRequirements. The requirements are AND'd.")
+model ClusterPropertySelector {
+  @doc("MatchExpressions is an array of PropertySelectorRequirements. The requirements are AND'd.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  matchExpressions: CrpClusterPropertySelectorRequirement[];
+  matchExpressions: ClusterPropertySelectorRequirement[];
 }
 
 @added(Versions.v2025_03_02_naar)
 @doc("PropertySelectorRequirement is a specific property requirement when picking clusters for resource placement.")
-model CrpClusterPropertySelectorRequirement {
+model ClusterPropertySelectorRequirement {
   @doc("Name is the name of the property.")
   name: string;
 
   @doc("Operator specifies the relationship between a cluster's observed value of the specified property and the values given in the requirement.")
-  operator: CrpPropertySelectorOperator;
+  operator: PropertySelectorOperator;
 
   @doc("Values are a list of values of the specified property which Fleet will compare against the observed values of individual member clusters in accordance with the given operator.")
   values: string[];
@@ -301,7 +301,7 @@ model CrpClusterPropertySelectorRequirement {
 
 @added(Versions.v2025_03_02_naar)
 @doc("The possible operator values, which describe the relationship between a cluster’s observed value of the given property and the list of values in the matcher.")
-union CrpPropertySelectorOperator {
+union PropertySelectorOperator {
   @doc("Gt (Greater than): a cluster’s observed value of the given property must be greater than the value in the matcher before it can be picked for resource placement.")
   Gt: "Gt",
 
@@ -325,22 +325,22 @@ union CrpPropertySelectorOperator {
 
 @added(Versions.v2025_03_02_naar)
 @doc("Toleration allows ClusterResourcePlacement to tolerate any taint that matches <key,value,effect> using the matching operator <operator>")
-model CrpToleration {
+model Toleration {
   @doc("Key is the taint key that the toleration applies to.")
   key?: string;
 
   @doc("Operator represents a key's relationship to the value. Default is Equal.")
-  operator?: CoreV1TolerationOperator;
+  operator?: TolerationOperator;
 
   @doc("Value is the taint value the toleration matches to.")
   value?: string;
 
   @doc("Effect indicates the taint effect to match. Empty means match all taint effects.")
-  effect?: CoreV1TaintEffect;
+  effect?: TaintEffect;
 }
 
 @doc("The available operator for the Toleration section.")
-union CoreV1TolerationOperator {
+union TolerationOperator {
   @doc("Operator that checks for existence.")
   Exists: "Exists",
 
@@ -351,7 +351,7 @@ union CoreV1TolerationOperator {
 }
 
 @doc("The available taint effect for the Toleration section")
-union CoreV1TaintEffect {
+union TaintEffect {
   @doc("The NoSchedule taint effect.")
   NoSchedule: "NoSchedule",
 
@@ -397,8 +397,8 @@ model FleetManagedNamespaceProperties {
   @doc("Delete options of a fleet managed namespace.")
   deletePolicy?: DeletePolicy;
 
-  @doc("The profile of the orchestrator to create the namespace.")
-  orchestratorProfile: OrchestratorProfile;
+  @doc("The profile of the propagation to create the namespace.")
+  propagationPolicy: PropagationPolicy;
 
   @visibility("read")
   @doc("Status information of the last operation for fleet managed namespace.")
@@ -425,3 +425,4 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 }
+
