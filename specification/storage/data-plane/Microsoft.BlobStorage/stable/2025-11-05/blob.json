@@ -2053,16 +2053,38 @@
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -2774,16 +2796,38 @@
             "x-ms-client-name": "deleteSnapshots"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -2976,16 +3020,38 @@
             "x-ms-client-name": "encryptionAlgorithm"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -3055,111 +3121,7 @@
               },
               "x-ms-access-tier": {
                 "type": "string",
-                "description": "The tier to be set on the blob.",
-                "enum": [
-                  "P4",
-                  "P6",
-                  "P10",
-                  "P15",
-                  "P20",
-                  "P30",
-                  "P40",
-                  "P50",
-                  "P60",
-                  "P70",
-                  "P80",
-                  "Hot",
-                  "Cool",
-                  "Archive",
-                  "Premium",
-                  "Cold"
-                ],
-                "x-ms-enum": {
-                  "name": "AccessTier",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "P4",
-                      "value": "P4",
-                      "description": "The hot P4 tier."
-                    },
-                    {
-                      "name": "P6",
-                      "value": "P6",
-                      "description": "The hot P6 tier."
-                    },
-                    {
-                      "name": "P10",
-                      "value": "P10",
-                      "description": "The hot P10 tier."
-                    },
-                    {
-                      "name": "P15",
-                      "value": "P15",
-                      "description": "The hot P15 tier."
-                    },
-                    {
-                      "name": "P20",
-                      "value": "P20",
-                      "description": "The hot P20 tier."
-                    },
-                    {
-                      "name": "P30",
-                      "value": "P30",
-                      "description": "The hot P30 tier."
-                    },
-                    {
-                      "name": "P40",
-                      "value": "P40",
-                      "description": "The hot P40 tier."
-                    },
-                    {
-                      "name": "P50",
-                      "value": "P50",
-                      "description": "The hot P50 tier."
-                    },
-                    {
-                      "name": "P60",
-                      "value": "P60",
-                      "description": "The hot P60 tier."
-                    },
-                    {
-                      "name": "P70",
-                      "value": "P70",
-                      "description": "The hot P70 tier."
-                    },
-                    {
-                      "name": "P80",
-                      "value": "P80",
-                      "description": "The hot P80 tier."
-                    },
-                    {
-                      "name": "Hot",
-                      "value": "Hot",
-                      "description": "The hot access tier."
-                    },
-                    {
-                      "name": "Cool",
-                      "value": "Cool",
-                      "description": "The cool access tier."
-                    },
-                    {
-                      "name": "Archive",
-                      "value": "Archive",
-                      "description": "The archive access tier."
-                    },
-                    {
-                      "name": "Premium",
-                      "value": "Premium",
-                      "description": "The Premium access tier."
-                    },
-                    {
-                      "name": "Cold",
-                      "value": "Cold",
-                      "description": "The Cold access tier."
-                    }
-                  ]
-                }
+                "description": "The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive."
               },
               "x-ms-access-tier-change-time": {
                 "type": "string",
@@ -4372,27 +4334,8 @@
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
             "required": false,
-            "type": "string",
-            "enum": [
-              "infinite",
-              "fixed"
-            ],
-            "x-ms-enum": {
-              "name": "LeaseDuration",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Infinite",
-                  "value": "infinite",
-                  "description": "The lease is of infinite duration."
-                },
-                {
-                  "name": "Fixed",
-                  "value": "fixed",
-                  "description": "The lease is of fixed duration."
-                }
-              ]
-            },
+            "type": "integer",
+            "format": "int32",
             "x-ms-client-name": "duration"
           },
           {
@@ -5939,16 +5882,38 @@
             "x-ms-client-name": "blobContentDisposition"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -6577,16 +6542,38 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -6727,27 +6714,8 @@
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.",
             "required": false,
-            "type": "string",
-            "enum": [
-              "infinite",
-              "fixed"
-            ],
-            "x-ms-enum": {
-              "name": "LeaseDuration",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Infinite",
-                  "value": "infinite",
-                  "description": "The lease is of infinite duration."
-                },
-                {
-                  "name": "Fixed",
-                  "value": "fixed",
-                  "description": "The lease is of fixed duration."
-                }
-              ]
-            },
+            "type": "integer",
+            "format": "int32",
             "x-ms-client-name": "duration"
           },
           {
@@ -6759,16 +6727,38 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -6915,16 +6905,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -7067,16 +7079,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -7231,16 +7265,38 @@
             "x-ms-client-name": "proposedLeaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -7388,16 +7444,38 @@
             "x-ms-client-name": "breakPeriod"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -7591,16 +7669,38 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -7769,11 +7869,10 @@
               "Hot",
               "Cool",
               "Archive",
-              "Premium",
               "Cold"
             ],
             "x-ms-enum": {
-              "name": "AccessTier",
+              "name": "AccessTierOptional",
               "modelAsString": true,
               "values": [
                 {
@@ -7845,11 +7944,6 @@
                   "name": "Archive",
                   "value": "Archive",
                   "description": "The archive access tier."
-                },
-                {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
                 },
                 {
                   "name": "Cold",
@@ -7931,16 +8025,38 @@
             "x-ms-client-name": "sourceIfTags"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -8221,11 +8337,10 @@
               "Hot",
               "Cool",
               "Archive",
-              "Premium",
               "Cold"
             ],
             "x-ms-enum": {
-              "name": "AccessTier",
+              "name": "AccessTierOptional",
               "modelAsString": true,
               "values": [
                 {
@@ -8299,11 +8414,6 @@
                   "description": "The archive access tier."
                 },
                 {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
-                },
-                {
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
@@ -8347,16 +8457,38 @@
             "x-ms-client-name": "sourceIfNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -8491,6 +8623,17 @@
             "x-ms-client-name": "fileRequestIntent"
           },
           {
+            "name": "x-ms-requires-sync",
+            "in": "header",
+            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
+            "required": true,
+            "type": "boolean",
+            "enum": [
+              true
+            ],
+            "x-ms-client-name": "requiresSync"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -8541,36 +8684,10 @@
                 "type": "string",
                 "description": "State of the copy operation identified by x-ms-copy-id.",
                 "enum": [
-                  "pending",
-                  "success",
-                  "failed",
-                  "aborted"
+                  "success"
                 ],
                 "x-ms-enum": {
-                  "name": "CopyStatus",
-                  "modelAsString": false,
-                  "values": [
-                    {
-                      "name": "Pending",
-                      "value": "pending",
-                      "description": "The copy operation is pending."
-                    },
-                    {
-                      "name": "Success",
-                      "value": "success",
-                      "description": "The copy operation succeeded."
-                    },
-                    {
-                      "name": "Failed",
-                      "value": "failed",
-                      "description": "The copy operation failed."
-                    },
-                    {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation is aborted."
-                    }
-                  ]
+                  "modelAsString": false
                 }
               },
               "x-ms-encryption-scope": {
@@ -9666,16 +9783,38 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -10014,16 +10153,38 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -10314,16 +10475,38 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -10605,16 +10788,38 @@
             "x-ms-client-name": "ifSequenceNumberEqualTo"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -10863,16 +11068,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -11055,16 +11282,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -11263,16 +11512,38 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -11415,16 +11686,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -11594,16 +11887,38 @@
             "minimum": 0
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -11874,16 +12189,38 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -12190,16 +12527,38 @@
             "x-ms-client-name": "appendPosition"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -12423,16 +12782,38 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-blob-condition-appendpos",
@@ -12710,11 +13091,10 @@
               "Hot",
               "Cool",
               "Archive",
-              "Premium",
               "Cold"
             ],
             "x-ms-enum": {
-              "name": "AccessTier",
+              "name": "AccessTierOptional",
               "modelAsString": true,
               "values": [
                 {
@@ -12788,11 +13168,6 @@
                   "description": "The archive access tier."
                 },
                 {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
-                },
-                {
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
@@ -12802,16 +13177,38 @@
             "x-ms-client-name": "tier"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -13209,11 +13606,10 @@
               "Hot",
               "Cool",
               "Archive",
-              "Premium",
               "Cold"
             ],
             "x-ms-enum": {
-              "name": "AccessTier",
+              "name": "AccessTierOptional",
               "modelAsString": true,
               "values": [
                 {
@@ -13287,11 +13683,6 @@
                   "description": "The archive access tier."
                 },
                 {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
-                },
-                {
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
@@ -13301,16 +13692,38 @@
             "x-ms-client-name": "tier"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -14271,11 +14684,10 @@
               "Hot",
               "Cool",
               "Archive",
-              "Premium",
               "Cold"
             ],
             "x-ms-enum": {
-              "name": "AccessTier",
+              "name": "AccessTierOptional",
               "modelAsString": true,
               "values": [
                 {
@@ -14349,11 +14761,6 @@
                   "description": "The archive access tier."
                 },
                 {
-                  "name": "Premium",
-                  "value": "Premium",
-                  "description": "The Premium access tier."
-                },
-                {
                   "name": "Cold",
                   "value": "Cold",
                   "description": "The Cold access tier."
@@ -14363,16 +14770,38 @@
             "x-ms-client-name": "tier"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "name": "If-Modified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifModifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+            "name": "If-Unmodified-Since",
+            "in": "header",
+            "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "name": "If-Match",
+            "in": "header",
+            "description": "A condition that must be met in order for the request to be processed.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "x-ms-if-tags",
@@ -15370,12 +15799,12 @@
       "properties": {
         "start": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc7231",
           "description": "The date-time the policy is active."
         },
         "expiry": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc7231",
           "description": "The date-time the policy expires."
         },
         "permission": {
@@ -15488,6 +15917,108 @@
             "name": "Premium",
             "value": "Premium",
             "description": "The Premium access tier."
+          },
+          {
+            "name": "Cold",
+            "value": "Cold",
+            "description": "The Cold access tier."
+          }
+        ]
+      }
+    },
+    "AccessTierOptional": {
+      "type": "string",
+      "description": "The access tiers.",
+      "enum": [
+        "P4",
+        "P6",
+        "P10",
+        "P15",
+        "P20",
+        "P30",
+        "P40",
+        "P50",
+        "P60",
+        "P70",
+        "P80",
+        "Hot",
+        "Cool",
+        "Archive",
+        "Cold"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTierOptional",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "P4",
+            "value": "P4",
+            "description": "The hot P4 tier."
+          },
+          {
+            "name": "P6",
+            "value": "P6",
+            "description": "The hot P6 tier."
+          },
+          {
+            "name": "P10",
+            "value": "P10",
+            "description": "The hot P10 tier."
+          },
+          {
+            "name": "P15",
+            "value": "P15",
+            "description": "The hot P15 tier."
+          },
+          {
+            "name": "P20",
+            "value": "P20",
+            "description": "The hot P20 tier."
+          },
+          {
+            "name": "P30",
+            "value": "P30",
+            "description": "The hot P30 tier."
+          },
+          {
+            "name": "P40",
+            "value": "P40",
+            "description": "The hot P40 tier."
+          },
+          {
+            "name": "P50",
+            "value": "P50",
+            "description": "The hot P50 tier."
+          },
+          {
+            "name": "P60",
+            "value": "P60",
+            "description": "The hot P60 tier."
+          },
+          {
+            "name": "P70",
+            "value": "P70",
+            "description": "The hot P70 tier."
+          },
+          {
+            "name": "P80",
+            "value": "P80",
+            "description": "The hot P80 tier."
+          },
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "The hot access tier."
+          },
+          {
+            "name": "Cool",
+            "value": "Cool",
+            "description": "The cool access tier."
+          },
+          {
+            "name": "Archive",
+            "value": "Archive",
+            "description": "The archive access tier."
           },
           {
             "name": "Cold",

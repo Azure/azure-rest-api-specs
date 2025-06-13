@@ -437,10 +437,14 @@ enum LeaseStatus {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
-  @Xml.name("Start") start: utcDateTime;
+  @Xml.name("Start")
+  @encode("rfc7231")
+  start: utcDateTime;
 
   /** The date-time the policy expires. */
-  @Xml.name("Expiry") expiry: utcDateTime;
+  @Xml.name("Expiry")
+  @encode("rfc7231")
+  expiry: utcDateTime;
 
   /** The permissions for acl the policy. */
   @Xml.name("Permission") permission: string;
@@ -1423,7 +1427,7 @@ alias ContentCrc64ResponseHeader = {
 alias CopyStatusResponseHeader = {
   /** State of the copy operation identified by x-ms-copy-id. */
   @header("x-ms-copy-status")
-  copyStatus: CopyStatus;
+  copyStatus?: CopyStatus;
 };
 
 /** The copy ID response header. */
@@ -2069,10 +2073,18 @@ enum ListBlobsIncludeItem {
 }
 
 /** The lease duration parameter. */
-alias LeaseDurationHeader = {
+alias LeaseDurationResponseHeader = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
   duration?: LeaseDuration;
+};
+
+
+/** The lease duration parameter. */
+alias LeaseDurationHeaderParameter = {
+  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
+  @header("x-ms-lease-duration")
+  duration?: int32;
 };
 
 /** The container name path parameter */
