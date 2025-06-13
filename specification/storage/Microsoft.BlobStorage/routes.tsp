@@ -159,7 +159,6 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?comp=batch")
-  @scope("!rust")
   op submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
@@ -414,7 +413,6 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @post
     @route("{containerName}?restype=container&comp=batch")
-    @scope("!rust")
     op submitBatch(
       ...ContainerNamePathParameter,
 
@@ -476,6 +474,7 @@ namespace Storage.Blob {
         ...ProposedLeaseIdOptionalParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"acquire">;
       },
       {
         @statusCode statusCode: 201;
@@ -499,6 +498,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"release">;
       },
       {
         ...EtagResponseHeader;
@@ -520,6 +520,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"renew">;
       },
       {
         ...LeaseIdResponseHeader;
@@ -541,6 +542,7 @@ namespace Storage.Blob {
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
         ...LeaseBreakPeriodParameter;
+        ...LeaseActionParameter<"break">;
       },
       {
         @statusCode statusCode: 202;
@@ -566,6 +568,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"change">;
       },
       {
         ...LeaseIdResponseHeader;
@@ -1075,6 +1078,7 @@ namespace Storage.Blob {
           ...ProposedLeaseIdOptionalParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"acquire">;
         },
         {
           @statusCode statusCode: 201;
@@ -1099,6 +1103,7 @@ namespace Storage.Blob {
           ...LeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"release">;
         },
         {
           ...EtagResponseHeader;
@@ -1121,6 +1126,7 @@ namespace Storage.Blob {
           ...LeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"renew">;
         },
         {
           ...EtagResponseHeader;
@@ -1145,6 +1151,7 @@ namespace Storage.Blob {
           ...ProposedLeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"change">;
         },
         {
           ...EtagResponseHeader;
@@ -1168,6 +1175,7 @@ namespace Storage.Blob {
           ...LeaseBreakPeriodParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"break">;
         },
         {
           @statusCode statusCode: 202;

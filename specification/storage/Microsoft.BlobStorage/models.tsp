@@ -2206,3 +2206,13 @@ alias RequestIdResponseHeader = {
   @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   requestId?: uuid;
 };
+
+enum LeaseAction {
+  "break",
+}
+
+alias LeaseActionParameter<TAction extends string> = {
+  /** Describes what lease action to take. */
+  @header("x-ms-lease-action")
+  action: TAction;
+};
