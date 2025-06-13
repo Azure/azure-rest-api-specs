@@ -784,6 +784,10 @@
           "CacheRuleUpdate": {
             "$ref": "./examples/CacheRuleUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1026,17 +1030,6 @@
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ConnectedRegistry"
-            }
-          },
-          "201": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistry"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -1566,14 +1559,6 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "The export pipeline does not exist in the subscription."
           },
@@ -1588,10 +1573,6 @@
           "ExportPipelineDelete": {
             "$ref": "./examples/ExportPipelineDelete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -2304,9 +2285,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "headers": {
@@ -3518,9 +3496,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
           "202": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "headers": {
@@ -3845,14 +3820,6 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
-          "202": {
-            "description": "The request was successful; the operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "The webhook does not exist in the subscription."
           }
@@ -3861,10 +3828,6 @@
           "WebhookDelete": {
             "$ref": "./examples/WebhookDelete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "patch": {
