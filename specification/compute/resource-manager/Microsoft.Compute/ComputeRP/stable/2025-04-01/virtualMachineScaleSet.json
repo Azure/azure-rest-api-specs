@@ -2287,6 +2287,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_ScaleOut",
+        "description": "Scales out one or more virtual machines in a VM scale set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetScaleOutInput"
+            },
+            "description": "The input object for ScaleOut API."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Scale Out VirtualMachineScaleSet": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_ScaleOut.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": {
       "put": {
         "tags": [
@@ -6534,6 +6599,33 @@
         "name": "ZonalPlatformFaultDomainAlignMode",
         "modelAsString": true
       }
+    },
+    "VMScaleSetScaleOutInput": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the number of virtual machines in the scale set."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetScaleOutInputProperties"
+        }
+      },
+      "description": "The input for ScaleOut",
+      "required": [
+        "capacity"
+      ]
+    },
+    "VMScaleSetScaleOutInputProperties": {
+      "type": "object",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "The zone in which the scale out is requested for the virtual machine scale set."
+        }
+      },
+      "description": "The input properties for ScaleOut"
     }
   }
 }
