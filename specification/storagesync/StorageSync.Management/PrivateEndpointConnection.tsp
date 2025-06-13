@@ -54,6 +54,7 @@ interface PrivateEndpointConnections {
   /**
    * Get a PrivateEndpointConnection List.
    */
+  #suppress "deprecated" "For backward compatibility"
   listByStorageSyncService is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>

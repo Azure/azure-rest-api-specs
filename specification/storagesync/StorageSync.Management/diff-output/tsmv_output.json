@@ -1,11 +1,6 @@
 {
   "version": "1.0.0",
-  "suggestions": [
-    {
-      "suggestion": "Find a model called \"ServerEndpointProperties\". Add `@minValue(0)` onto its property \"tierFilesOlderThanDays\". If the property cannot access directly, add `@@minValue(ServerEndpointProperties.tierFilesOlderThanDays, 0);` right after the model.",
-      "path": "definitions.ServerEndpointProperties.properties.tierFilesOlderThanDays.minimum__deleted"
-    }
-  ],
+  "suggestions": [],
   "apiChanges": [
     {
       "category": "added-or-deleted",
@@ -422,6 +417,13 @@
     },
     {
       "category": "added-or-deleted",
+      "key": "x-ms-examples",
+      "path": "paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}'].get['x-ms-examples__deleted']",
+      "type": "deleted",
+      "value": "{\"LocationOperationStatus\":{\"$ref\":\"./examples/LocationOperationStatus_Get.json\"}}"
+    },
+    {
+      "category": "added-or-deleted",
       "key": "x-ms-pageable",
       "path": "paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/storageSyncServices'].get['x-ms-pageable__deleted']",
       "type": "deleted",
@@ -722,13 +724,6 @@
       "value": "string"
     },
     {
-      "category": "added-or-deleted",
-      "key": "minimum",
-      "path": "definitions.ServerEndpointProperties.properties.tierFilesOlderThanDays.minimum__deleted",
-      "type": "deleted",
-      "value": "0"
-    },
-    {
       "category": "value-changed",
       "path": "definitions.StorageSyncServiceProperties.properties.privateEndpointConnections.items.$ref",
       "oldValue": "`../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection`",
@@ -757,6 +752,12 @@
       "path": "paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability'].post.responses.default.schema.$ref",
       "oldValue": "`#/definitions/StorageSyncError`",
       "newValue": "`../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse`"
+    },
+    {
+      "category": "value-changed",
+      "path": "paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}'].get.operationId",
+      "oldValue": "`LocationOperationStatus`",
+      "newValue": "`OperationStatusOperationGroup_LocationOperationStatus`"
     },
     {
       "category": "value-changed",

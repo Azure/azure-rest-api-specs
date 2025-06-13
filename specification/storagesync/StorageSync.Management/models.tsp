@@ -778,6 +778,7 @@ model SyncGroupCreateParameters
    * The parameters used to create the sync group
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }
@@ -1342,6 +1343,7 @@ model ServerEndpointProperties {
   /**
    * Tier files older than days.
    */
+  @minValue(0)
   @maxValue(2147483647)
   tierFilesOlderThanDays?: int32;
 
@@ -2209,6 +2211,7 @@ model RegisteredServerProperties {
   /**
    * Registered Server OS Version
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   serverOSVersion?: string;
 
   /**
@@ -2357,6 +2360,7 @@ model RegisteredServerCreateParametersProperties {
   /**
    * Registered Server OS Version
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   serverOSVersion?: string;
 
   /**
@@ -2607,7 +2611,8 @@ model SubscriptionState {
   /**
    * Subscription state properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }

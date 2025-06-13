@@ -155,7 +155,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}": {
       "get": {
-        "operationId": "LocationOperationStatus",
+        "operationId": "OperationStatusOperationGroup_LocationOperationStatus",
         "description": "Get Operation status",
         "parameters": [
           {
@@ -191,11 +191,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "LocationOperationStatus": {
-            "$ref": "./examples/LocationOperationStatus_Get.json"
           }
         }
       }
@@ -4289,6 +4284,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Tier files older than days.",
+          "minimum": 0,
           "maximum": 2147483647
         },
         "friendlyName": {

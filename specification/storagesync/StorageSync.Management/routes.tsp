@@ -68,27 +68,27 @@ interface OperationStatusOperationGroup {
     @path
     operationId: string,
   ): ArmResponse<OperationStatus> | ErrorResponse;
+  /**
+   * Get Operation status
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
+  @get
+  @operationId("LocationOperationStatus")
+  locationOperationStatus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * The desired region to obtain information from.
+     */
+    @path
+    locationName: string,
+
+    /**
+     * operation Id
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<LocationOperationStatus> | ErrorResponse;
 }
-
-/**
- * Get Operation status
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
-@get
-op locationOperationStatus(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
-  /**
-   * The desired region to obtain information from.
-   */
-  @path
-  locationName: string,
-
-  /**
-   * operation Id
-   */
-  @path
-  operationId: string,
-): ArmResponse<LocationOperationStatus> | ErrorResponse;

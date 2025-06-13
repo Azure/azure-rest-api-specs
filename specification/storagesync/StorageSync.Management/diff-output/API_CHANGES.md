@@ -79,6 +79,12 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}/abort'].post.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 
+### Changes for `x-ms-examples`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}'].get['x-ms-examples__deleted']` | deleted | `{"LocationOperationStatus":{"$ref":"./examples/LocationOperationStatus_Get.json"}}` |
+
 ### Changes for `x-ms-pageable`
 
 | Path | Change Type | Value |
@@ -287,12 +293,6 @@
 | `definitions.ServerEndpointProperties.properties.serverLocalPath.type__added` | added | `string` |
 | `definitions.ServerEndpointProperties.properties.serverResourceId.type__added` | added | `string` |
 
-### Changes for `minimum`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ServerEndpointProperties.properties.tierFilesOlderThanDays.minimum__deleted` | deleted | `0` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
@@ -302,6 +302,7 @@
 | `paths['/providers/Microsoft.StorageSync/operations'].get.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability'].post.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}'].get.operationId` | `LocationOperationStatus` | `OperationStatusOperationGroup_LocationOperationStatus` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}'].get.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/storageSyncServices'].get.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}'].get.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
