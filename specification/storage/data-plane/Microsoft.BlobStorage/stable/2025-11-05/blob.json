@@ -4179,6 +4179,20 @@
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "acquire"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -4284,6 +4298,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "release"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -4397,6 +4425,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "renew"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -4515,6 +4557,20 @@
             "type": "integer",
             "format": "int32",
             "x-ms-client-name": "breakPeriod"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "break"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -4645,6 +4701,20 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "change"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -6265,6 +6335,20 @@
             "x-ms-client-name": "ifTags"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "acquire"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -6382,6 +6466,20 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "release"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -6507,6 +6605,20 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "renew"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -6646,6 +6758,20 @@
             "x-ms-client-name": "ifTags"
           },
           {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "change"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -6774,6 +6900,20 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
+          },
+          {
+            "name": "x-ms-lease-action",
+            "in": "header",
+            "description": "Describes what lease action to take.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "break"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "action"
           },
           {
             "name": "x-ms-client-request-id",
@@ -15547,6 +15687,16 @@
         "start",
         "expiry"
       ]
+    },
+    "LeaseAction": {
+      "type": "string",
+      "enum": [
+        "break"
+      ],
+      "x-ms-enum": {
+        "name": "LeaseAction",
+        "modelAsString": false
+      }
     },
     "LeaseDuration": {
       "type": "string",
