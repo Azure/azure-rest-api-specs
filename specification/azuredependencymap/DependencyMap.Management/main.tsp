@@ -260,6 +260,12 @@ model ExportDependenciesOperationResult {
   @doc("Contains error details if status is Failed/Canceled.")
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+
   @doc("Properties for export dependencies. These should only be set if the status is Succeeded.")
   properties?: ExportDependenciesResultProperties;
 }
@@ -271,9 +277,6 @@ model ExportDependenciesResultProperties {
 
   @doc("A status code returned by the service with additional context about the export dependencies operation.")
   statusCode?: ExportDependenciesStatusCode;
-
-  @doc("A status message returned by the service with additional context about the export dependencies operation.")
-  statusMessage?: string;
 
   @doc("Additional information about the exported data.")
   additionalInfo?: ExportDependenciesAdditionalInfo;

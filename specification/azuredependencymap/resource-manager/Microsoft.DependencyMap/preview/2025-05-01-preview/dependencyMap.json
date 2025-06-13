@@ -1184,6 +1184,16 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "description": "Contains error details if status is Failed/Canceled."
         },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
         "properties": {
           "$ref": "#/definitions/ExportDependenciesResultProperties",
           "description": "Properties for export dependencies. These should only be set if the status is Succeeded."
@@ -1225,10 +1235,6 @@
         "statusCode": {
           "$ref": "#/definitions/ExportDependenciesStatusCode",
           "description": "A status code returned by the service with additional context about the export dependencies operation."
-        },
-        "statusMessage": {
-          "type": "string",
-          "description": "A status message returned by the service with additional context about the export dependencies operation."
         },
         "additionalInfo": {
           "$ref": "#/definitions/ExportDependenciesAdditionalInfo",
