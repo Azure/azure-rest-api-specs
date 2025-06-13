@@ -8627,10 +8627,13 @@
             "in": "header",
             "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
             "required": true,
-            "type": "boolean",
+            "type": "string",
             "enum": [
-              true
+              "true"
             ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
             "x-ms-client-name": "requiresSync"
           },
           {
