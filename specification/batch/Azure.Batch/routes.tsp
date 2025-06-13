@@ -533,6 +533,7 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Creates a Certificate to the specified Account.")
   @doc("Creates a Certificate to the specified Account.")
+  @removed(Azure.Batch.Versions.v2024_07_01)
   @route("/certificates")
   createCertificate is CreateOperation<
     {
@@ -545,6 +546,7 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @doc("Lists all of the Certificates that have been added to the specified Account.")
+  @removed(Azure.Batch.Versions.v2024_07_01)
   @route("/certificates")
   listCertificates is ListOperation<
     {
@@ -565,6 +567,7 @@ interface Certificates {
     You must make sure that the Certificate is not being used by any resources, and
     then you can try again to delete the Certificate.
     """)
+  @removed(Azure.Batch.Versions.v2024_07_01)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   cancelCertificateDeletion is PostOperation<
     {
