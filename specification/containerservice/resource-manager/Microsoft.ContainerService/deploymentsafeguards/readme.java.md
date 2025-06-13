@@ -6,12 +6,12 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards
+namespace: com.microsoft.azure.management.containerservice.safeguards
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservicedeploymentsafeguards
-title: ContainerServiceDeploymentSafeguardsManagementClient
-description: "Azure Kubernetes Deployment Safeguards Client"
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice-safeguards
+title: ContainerServiceSafeguardsManagementClient
+description: "Azure Kubernetes Safeguards Client"
 ```
 
 ### Java multi-api
@@ -29,8 +29,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2025-04-02-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_04_02_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_02_preview
+  namespace: com.microsoft.azure.management.containerservice.safeguards.v2025_04_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/safeguards/mgmt-v2025_04_02_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,8 +42,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2025-04-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_01
+  namespace: com.microsoft.azure.management.containerservice.safeguards.v2025_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/safeguards/mgmt-v2025_04_01
 regenerate-manager: true
 generate-interface: true
 ```

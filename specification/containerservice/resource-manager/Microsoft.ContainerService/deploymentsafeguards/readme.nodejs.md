@@ -6,8 +6,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
-  package-name: azure-arm-containerservicedeploymentsafeguards
-  output-folder: $(node-sdks-folder)/lib/services/containerservicesdeploymentsafeguards
+  package-name: azure-arm-containerservice-safeguards
+  output-folder: $(node-sdks-folder)/lib/services/containerservices/safeguards
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
