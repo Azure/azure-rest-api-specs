@@ -2606,7 +2606,3 @@ model ResourceMoveRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resources?: string[];
 }
-
-@@OpenAPI.extension(Configurations.value, "x-ms-identifiers", #[]);
-@@OpenAPI.extension(ProductFamilies.value, "x-ms-identifiers", #[]);
-@@OpenAPI.extension(ProductFamiliesMetadata.value, "x-ms-identifiers", #[]);
