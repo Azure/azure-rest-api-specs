@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
+    "connectionAnalyzerName": "ca1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ca1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionAnalyzers/ca1",
+        "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "diagnosticOperations": [
+            "ConnectivityCheck"
+          ],
+          "source": {
+            "type": "VM",
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/ct1"
+          },
+          "destination": {
+            "address": "destination",
+            "type": "ExternalAddress"
+          },
+          "protocolSettings": {
+            "protocol": "Tcp"
+          },
+          "diagnosticOperationsSettings": {
+            "connectivityCheckSettings": {
+              "generatePath": true,
+              "preferredIPVersion": "IPv4"
+            }
+          },
+          "expiryInDays": 30,
+          "outputSettings": {
+            "storageAccountSettings": {
+              "storageAccountId": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/sa1",
+              "path": "path"
+            }
+          },
+          "startTime": "2021-10-05T03:30:00Z"
+        },
+        "location": "eastus",
+        "type": "Microsoft.Network/networkWatchers/connectionAnalyzer"
+      }
+    }
+  }
+}
