@@ -57,7 +57,27 @@ scalar ValidScheduledActionResourceId
 @segment("resources")
 @doc("Represents an scheduled action resource metadata.")
 model ScheduledActionResource {
-  @doc("The ARM Id of the resource.")
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  @doc("The name of the resource")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  @doc("""
+    The compute RP resource id of the resource in the scheduled actions scope. 
+    """)
+  @visibility(Lifecycle.Read)
+  id: armResourceIdentifier;
+
+  @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+  @doc("The type of resource")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("""
+  The ARM Id of the resource.
+  "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+  """)
   resourceId: ValidScheduledActionResourceId;
 
   @doc("The desired notification settings for the specified resource.")
@@ -176,6 +196,6 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
   ...ResourceNameParameter<
     ScheduledActionResources,
-    SegmentName = "scheduledActions"
+    SegmentName = "associatedScheduledActions"
   >;
 }

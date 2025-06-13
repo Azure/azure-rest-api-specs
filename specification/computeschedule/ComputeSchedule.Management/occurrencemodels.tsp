@@ -145,5 +145,5 @@ model OccurrenceExtensionProperties {
 @doc("The scheduled action extension")
 model OccurrenceExtensionResource
   is ExtensionResource<OccurrenceExtensionProperties> {
-  ...ResourceNameParameter<OccurrenceProperties, SegmentName = "occurrences">;
+  ...ResourceNameParameter<OccurrenceProperties, SegmentName = "associatedOccurrences">;
 }
