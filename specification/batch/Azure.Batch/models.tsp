@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Foundations;
-using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 
