@@ -1,0 +1,99 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.StorageSync;
+/**
+ * Storage Sync Service object.
+ */
+model StorageSyncService
+  is Azure.ResourceManager.TrackedResource<StorageSyncServiceProperties> {
+  ...ResourceNameParameter<
+    Resource = StorageSyncService,
+    KeyName = "storageSyncServiceName",
+    SegmentName = "storageSyncServices",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@armResourceOperations
+interface StorageSyncServices {
+  /**
+   * Get a given StorageSyncService.
+   */
+  get is ArmResourceRead<StorageSyncService>;
+
+  /**
+   * Create a new StorageSyncService.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    StorageSyncService,
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Patch a given StorageSyncService.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    StorageSyncService,
+    PatchModel = StorageSyncServiceUpdateParameters
+  >;
+
+  /**
+   * Delete a given StorageSyncService.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    StorageSyncService,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Get a StorageSyncService list by Resource group name.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    StorageSyncService,
+    Response = ArmResponse<StorageSyncServiceArray>
+  >;
+
+  /**
+   * Get a StorageSyncService list by subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    StorageSyncService,
+    Response = ArmResponse<StorageSyncServiceArray>
+  >;
+
+  /**
+   * Gets the private link resources that need to be created for a storage sync service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("privateLinkResources")
+  @operationId("PrivateLinkResources_ListByStorageSyncService")
+  listByStorageSyncService is ArmResourceActionSync<
+    StorageSyncService,
+    void,
+    ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
+  >;
+}
+
+@@doc(StorageSyncService.name, "Name of Storage Sync Service resource.");
+@@doc(StorageSyncService.properties, "Storage Sync Service properties.");
+@@doc(StorageSyncServices.create::parameters.resource,
+  "Storage Sync Service resource name."
+);
+@@doc(StorageSyncServices.update::parameters.properties,
+  "Storage Sync Service resource."
+);
