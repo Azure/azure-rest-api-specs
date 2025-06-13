@@ -24,6 +24,7 @@ model InputTextItem {
 
 @doc("Element containing the text for translation.")
 model TranslateBody extends InputTextItem {
+
   @doc("Text to translate.")
   text: string;
 
