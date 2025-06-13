@@ -52,7 +52,10 @@ namespace Storage.Blob {
     ...ApiVersionHeader,
     ...TParams,
     ...ClientRequestIdHeader,
-  ): TResponse | TError;
+  ): (TResponse & {
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
+  })  | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -1253,6 +1256,10 @@ namespace Storage.Blob {
           ...ImmutabilityPolicyExpiryParameter;
           ...ImmutabilityPolicyModeParameter;
           ...LegalHoldOptionalParameter;
+
+          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
+          @header("x-ms-requires-sync")
+          requiresSync: true;
         },
         {
           @statusCode statusCode: 202;
@@ -1331,6 +1338,10 @@ namespace Storage.Blob {
           copyid: string;
 
           ...LeaseIdOptionalParameter;
+
+          /** The copy action to be performed. */
+          @header("x-ms-copy-action")
+          copyActionAbortConstant: "abort";
         },
         {
           @statusCode statusCode: 204;
@@ -1529,6 +1540,7 @@ namespace Storage.Blob {
             ...IfTagsParameter;
             ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
+            ...PageWriteParameter<"update">;
           },
           {
             @statusCode statusCode: 201;
@@ -1570,6 +1582,7 @@ namespace Storage.Blob {
             ...IfSequenceNumberEqualToParameter;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
+            ...PageWriteParameter<"clear">;
           },
           {
             @statusCode statusCode: 201;
@@ -1624,6 +1637,7 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...PageWriteParameter<"update">;
           },
           {
             @statusCode statusCode: 201;

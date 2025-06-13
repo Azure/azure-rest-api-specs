@@ -3093,6 +3093,11 @@
                   ]
                 }
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-copy-completion-time": {
                 "type": "string",
                 "format": "date-time-rfc7231",
@@ -3349,6 +3354,11 @@
                     }
                   ]
                 }
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-server-encrypted": {
                 "type": "boolean",
@@ -4220,9 +4230,19 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -6376,9 +6396,19 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -7496,6 +7526,17 @@
             "x-ms-client-name": "legalHold"
           },
           {
+            "name": "x-ms-requires-sync",
+            "in": "header",
+            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
+            "required": true,
+            "type": "boolean",
+            "enum": [
+              true
+            ],
+            "x-ms-client-name": "requiresSync"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -8122,6 +8163,20 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
+          },
+          {
+            "name": "x-ms-copy-action",
+            "in": "header",
+            "description": "The copy action to be performed.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "abort"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "copyActionAbortConstant"
           },
           {
             "name": "x-ms-client-request-id",
@@ -9162,6 +9217,11 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -9169,6 +9229,11 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -9392,6 +9457,20 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "structuredContentLength"
+          },
+          {
+            "name": "x-ms-page-write",
+            "in": "header",
+            "description": "Required. You may specify one of the following options:\\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "pageWrite"
           },
           {
             "name": "x-ms-client-request-id",
@@ -9650,6 +9729,20 @@
             "x-ms-client-name": "ifTags"
           },
           {
+            "name": "x-ms-page-write",
+            "in": "header",
+            "description": "Required. You may specify one of the following options:\\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "clear"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "pageWrite"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -9687,10 +9780,20 @@
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "format": "byte",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9968,6 +10071,20 @@
             "x-ms-client-name": "fileRequestIntent"
           },
           {
+            "name": "x-ms-page-write",
+            "in": "header",
+            "description": "Required. You may specify one of the following options:\\n  - Update: Writes the bytes specified by the request body into the specified range. The Range and Content-Length headers must match to perform the update.\\n  - Clear: Clears the specified range and releases the space used in storage for that range. To clear a range, set the Content-Length header to zero, and the Range header to a value that indicates the range to clear, up to maximum blob size.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "pageWrite"
+          },
+          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -10005,6 +10122,11 @@
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "format": "byte",
@@ -10026,6 +10148,11 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -12623,6 +12750,11 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
               "x-ms-copy-source-error-code": {
                 "type": "string",
                 "description": "The error code for the copy source."
@@ -12639,6 +12771,11 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -15687,16 +15824,6 @@
         "start",
         "expiry"
       ]
-    },
-    "LeaseAction": {
-      "type": "string",
-      "enum": [
-        "break"
-      ],
-      "x-ms-enum": {
-        "name": "LeaseAction",
-        "modelAsString": false
-      }
     },
     "LeaseDuration": {
       "type": "string",
