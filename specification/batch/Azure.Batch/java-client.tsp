@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
+//@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 namespace JavaClient;
 
 // Get Application Operation
