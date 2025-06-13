@@ -117,6 +117,11 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
   - Microsoft.NetworkCloud/preview/2025-07-01-preview/networkcloud.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
 ```
 ---
 
