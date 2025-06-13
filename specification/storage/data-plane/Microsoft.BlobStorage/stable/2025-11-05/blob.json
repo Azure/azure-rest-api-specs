@@ -5636,19 +5636,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -7332,19 +7326,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -7740,19 +7728,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -8953,19 +8935,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -11885,19 +11861,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -13408,19 +13378,13 @@
             "required": false,
             "type": "string",
             "enum": [
-              "Mutable",
               "Locked",
               "Unlocked"
             ],
             "x-ms-enum": {
-              "name": "BlobImmutabilityPolicyMode",
+              "name": "ImmutabilityPolicyMode",
               "modelAsString": false,
               "values": [
-                {
-                  "name": "Mutable",
-                  "value": "Mutable",
-                  "description": "The immutability policy is mutable."
-                },
                 {
                   "name": "Locked",
                   "value": "Locked",
@@ -15528,6 +15492,30 @@
             "name": "Unavailable",
             "value": "unavailable",
             "description": "The geo replication is unavailable."
+          }
+        ]
+      }
+    },
+    "ImmutabilityPolicyMode": {
+      "type": "string",
+      "description": "The immutability policy mode used in requests.",
+      "enum": [
+        "Locked",
+        "Unlocked"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutabilityPolicyMode",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Locked",
+            "value": "Locked",
+            "description": "The immutability policy is locked."
+          },
+          {
+            "name": "Unlocked",
+            "value": "Unlocked",
+            "description": "The immutability policy is unlocked."
           }
         ]
       }

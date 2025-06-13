@@ -693,6 +693,17 @@ model BlobPropertiesInternal {
   @Xml.name("LegalHold") legalHold?: boolean;
 }
 
+
+/** The immutability policy mode used in requests. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum ImmutabilityPolicyMode {
+  /** The immutability policy is locked. */
+  Locked: "Locked",
+
+  /** The immutability policy is unlocked. */
+  Unlocked: "Unlocked",
+}
+
 /** The immutability policy mode. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobImmutabilityPolicyMode {
@@ -1664,7 +1675,7 @@ alias LegalHoldOptionalParameter = {
 alias ImmutabilityPolicyModeParameter = {
   /** Specifies the immutability policy mode to set on the blob. */
   @header("x-ms-immutability-policy-mode")
-  immutabilityPolicyMode?: BlobImmutabilityPolicyMode;
+  immutabilityPolicyMode?: ImmutabilityPolicyMode;
 };
 
 /** The immutability policy expiration parameter. */
