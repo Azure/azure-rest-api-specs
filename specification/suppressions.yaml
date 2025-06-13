@@ -54,3 +54,1456 @@
     - sphere/resource-manager/Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
     - splitio/resource-manager/SplitIO.Experimentation/preview/2024-03-01-preview/splitio.json
     - translation/data-plane/Azure.AI.DocumentTranslation/preview/2023-11-01-preview/openapi.json
+- tool: TypeSpecValidation
+  reason: Remove specs that miss JS/Java/Python/GO emitters options
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.experimental-extensible-enums
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+    - parameters.service-dir.default
+  paths:
+    - apicenter/ApiCenter.Management/tspconfig.yaml
+    - awsconnector/AccessAnalyzerAnalyzer.Management/tspconfig.yaml
+    - awsconnector/AcmCertificateSummary.Management/tspconfig.yaml
+    - awsconnector/ApiGatewayRestApi.Management/tspconfig.yaml
+    - awsconnector/ApiGatewayStage.Management/tspconfig.yaml
+    - awsconnector/AppSyncGraphqlApi.Management/tspconfig.yaml
+    - awsconnector/AutoScalingAutoScalingGroup.Management/tspconfig.yaml
+    - awsconnector/Awsconnector.Management/tspconfig.yaml
+    - awsconnector/CloudFormationStack.Management/tspconfig.yaml
+    - awsconnector/CloudFormationStackSet.Management/tspconfig.yaml
+    - awsconnector/CloudFrontDistribution.Management/tspconfig.yaml
+    - awsconnector/CloudTrailTrail.Management/tspconfig.yaml
+    - awsconnector/CloudWatchAlarm.Management/tspconfig.yaml
+    - awsconnector/CodeBuildProject.Management/tspconfig.yaml
+    - awsconnector/CodeBuildSourceCredentialsInfo.Management/tspconfig.yaml
+    - awsconnector/ConfigServiceConfigurationRecorder.Management/tspconfig.yaml
+    - awsconnector/ConfigServiceConfigurationRecorderStatus.Management/tspconfig.yaml
+    - awsconnector/ConfigServiceDeliveryChannel.Management/tspconfig.yaml
+    - awsconnector/DatabaseMigrationServiceReplicationInstance.Management/tspconfig.yaml
+    - awsconnector/DaxCluster.Management/tspconfig.yaml
+    - awsconnector/DynamoDBContinuousBackupsDescription.Management/tspconfig.yaml
+    - awsconnector/DynamoDBTable.Management/tspconfig.yaml
+    - awsconnector/Ec2AccountAttribute.Management/tspconfig.yaml
+    - awsconnector/Ec2Address.Management/tspconfig.yaml
+    - awsconnector/Ec2FlowLog.Management/tspconfig.yaml
+    - awsconnector/Ec2Image.Management/tspconfig.yaml
+    - awsconnector/Ec2Instance.Management/tspconfig.yaml
+    - awsconnector/Ec2InstanceStatus.Management/tspconfig.yaml
+    - awsconnector/Ec2Ipam.Management/tspconfig.yaml
+    - awsconnector/Ec2KeyPair.Management/tspconfig.yaml
+    - awsconnector/Ec2NetworkAcl.Management/tspconfig.yaml
+    - awsconnector/Ec2NetworkInterface.Management/tspconfig.yaml
+    - awsconnector/Ec2RouteTable.Management/tspconfig.yaml
+    - awsconnector/Ec2SecurityGroup.Management/tspconfig.yaml
+    - awsconnector/Ec2Snapshot.Management/tspconfig.yaml
+    - awsconnector/Ec2Subnet.Management/tspconfig.yaml
+    - awsconnector/Ec2Volume.Management/tspconfig.yaml
+    - awsconnector/Ec2Vpc.Management/tspconfig.yaml
+    - awsconnector/Ec2VPCEndpoint.Management/tspconfig.yaml
+    - awsconnector/Ec2VPCPeeringConnection.Management/tspconfig.yaml
+    - awsconnector/EcrImageDetail.Management/tspconfig.yaml
+    - awsconnector/EcrRepository.Management/tspconfig.yaml
+    - awsconnector/EcsCluster.Management/tspconfig.yaml
+    - awsconnector/EcsService.Management/tspconfig.yaml
+    - awsconnector/EcsTaskDefinition.Management/tspconfig.yaml
+    - awsconnector/EfsFileSystem.Management/tspconfig.yaml
+    - awsconnector/EfsMountTarget.Management/tspconfig.yaml
+    - awsconnector/EksCluster.Management/tspconfig.yaml
+    - awsconnector/EksNodegroup.Management/tspconfig.yaml
+    - awsconnector/ElasticBeanstalkApplication.Management/tspconfig.yaml
+    - awsconnector/ElasticBeanstalkConfigurationTemplate.Management/tspconfig.yaml
+    - awsconnector/ElasticBeanstalkEnvironment.Management/tspconfig.yaml
+    - awsconnector/ElasticLoadBalancingV2Listener.Management/tspconfig.yaml
+    - awsconnector/ElasticLoadBalancingV2LoadBalancer.Management/tspconfig.yaml
+    - awsconnector/ElasticLoadBalancingV2TargetGroup.Management/tspconfig.yaml
+    - awsconnector/ElasticLoadBalancingv2TargetHealthDescription.Management/tspconfig.yaml
+    - awsconnector/EmrCluster.Management/tspconfig.yaml
+    - awsconnector/GuardDutyDetector.Management/tspconfig.yaml
+    - awsconnector/IamAccessKeyLastUsed.Management/tspconfig.yaml
+    - awsconnector/IamAccessKeyMetadata.Management/tspconfig.yaml
+    - awsconnector/IamGroup.Management/tspconfig.yaml
+    - awsconnector/IamInstanceProfile.Management/tspconfig.yaml
+    - awsconnector/IamMFADevice.Management/tspconfig.yaml
+    - awsconnector/IamPasswordPolicy.Management/tspconfig.yaml
+    - awsconnector/IamPolicyVersion.Management/tspconfig.yaml
+    - awsconnector/IamRole.Management/tspconfig.yaml
+    - awsconnector/IamServerCertificate.Management/tspconfig.yaml
+    - awsconnector/IamVirtualMFADevice.Management/tspconfig.yaml
+    - awsconnector/KmsAlias.Management/tspconfig.yaml
+    - awsconnector/KmsKey.Management/tspconfig.yaml
+    - awsconnector/LambdaFunction.Management/tspconfig.yaml
+    - awsconnector/LambdaFunctionCodeLocation.Management/tspconfig.yaml
+    - awsconnector/LightsailBucket.Management/tspconfig.yaml
+    - awsconnector/LightsailInstance.Management/tspconfig.yaml
+    - awsconnector/LogsLogGroup.Management/tspconfig.yaml
+    - awsconnector/LogsLogStream.Management/tspconfig.yaml
+    - awsconnector/LogsMetricFilter.Management/tspconfig.yaml
+    - awsconnector/LogsSubscriptionFilter.Management/tspconfig.yaml
+    - awsconnector/Macie2JobSummary.Management/tspconfig.yaml
+    - awsconnector/MacieAllowList.Management/tspconfig.yaml
+    - awsconnector/NetworkFirewallFirewall.Management/tspconfig.yaml
+    - awsconnector/NetworkFirewallFirewallPolicy.Management/tspconfig.yaml
+    - awsconnector/NetworkFirewallRuleGroup.Management/tspconfig.yaml
+    - awsconnector/OpenSearchDomainStatus.Management/tspconfig.yaml
+    - awsconnector/OrganizationsAccount.Management/tspconfig.yaml
+    - awsconnector/OrganizationsOrganization.Management/tspconfig.yaml
+    - awsconnector/RdsDBCluster.Management/tspconfig.yaml
+    - awsconnector/RdsDBInstance.Management/tspconfig.yaml
+    - awsconnector/RdsDBSnapshot.Management/tspconfig.yaml
+    - awsconnector/RdsDBSnapshotAttributesResult.Management/tspconfig.yaml
+    - awsconnector/RdsEventSubscription.Management/tspconfig.yaml
+    - awsconnector/RdsExportTask.Management/tspconfig.yaml
+    - awsconnector/RedshiftCluster.Management/tspconfig.yaml
+    - awsconnector/RedshiftClusterParameterGroup.Management/tspconfig.yaml
+    - awsconnector/Route53DomainsDomainSummary.Management/tspconfig.yaml
+    - awsconnector/Route53HostedZone.Management/tspconfig.yaml
+    - awsconnector/Route53ResourceRecordSet.Management/tspconfig.yaml
+    - awsconnector/S3AccessControlPolicy.Management/tspconfig.yaml
+    - awsconnector/S3AccessPoint.Management/tspconfig.yaml
+    - awsconnector/S3Bucket.Management/tspconfig.yaml
+    - awsconnector/S3BucketPolicy.Management/tspconfig.yaml
+    - awsconnector/S3ControlMultiRegionAccessPointPolicyDocument.Management/tspconfig.yaml
+    - awsconnector/SageMakerApp.Management/tspconfig.yaml
+    - awsconnector/SageMakerNotebookInstanceSummary.Management/tspconfig.yaml
+    - awsconnector/SecretsManagerResourcePolicy.Management/tspconfig.yaml
+    - awsconnector/SecretsManagerSecret.Management/tspconfig.yaml
+    - awsconnector/SnsSubscription.Management/tspconfig.yaml
+    - awsconnector/SnsTopic.Management/tspconfig.yaml
+    - awsconnector/SqsQueue.Management/tspconfig.yaml
+    - awsconnector/SsmInstanceInformation.Management/tspconfig.yaml
+    - awsconnector/SsmParameter.Management/tspconfig.yaml
+    - awsconnector/SsmResourceComplianceSummaryItem.Management/tspconfig.yaml
+    - awsconnector/Wafv2LoggingConfiguration.Management/tspconfig.yaml
+    - awsconnector/WafWebACLSummary.Management/tspconfig.yaml
+    - azuredatatransfer/AzureDataTransfer.Management/tspconfig.yaml
+    - azurelargeinstance/AzureLargeInstance.Management/tspconfig.yaml
+    - azurestackhci/AzureStackHCI.StackHCIVM.Management/tspconfig.yaml
+    - azurestackhci/Operations.Management/tspconfig.yaml
+    - communitytraining/Community.Management/tspconfig.yaml
+    - containerstorage/ContainerStorage.Management/tspconfig.yaml
+    - desktopvirtualization/DesktopVirtualization.Management/tspconfig.yaml
+    - github-network/GitHub.Network.Management/tspconfig.yaml
+    - iotoperationsdataprocessor/IoTOperationsDataProcessor.Management/tspconfig.yaml
+    - iotoperationsmq/IoTOperationsMQ.Management/tspconfig.yaml
+    - iotoperationsorchestrator/IoTOperationsOrchestrator.Management/tspconfig.yaml
+    - manufacturingplatform/Manufacturingplatform.Management/tspconfig.yaml
+    - monitor/Microsoft.Monitor.Operations.Management/tspconfig.yaml
+    - monitor/Microsoft.Monitor.PipelineGroups.Management/tspconfig.yaml
+    - portal/Dashboard.Management/tspconfig.yaml
+    - portal/TenantConfiguration.Management/tspconfig.yaml
+    - portalservices/Extension.Management/tspconfig.yaml
+    - purviewpolicy/PurviewPolicy.Management/tspconfig.yaml
+    - quantum/Microsoft.Quantum.Management/tspconfig.yaml
+    - sovereign/Sovereign.Management/tspconfig.yaml
+    - splitio/SplitIO.Experimentation.Management/tspconfig.yaml
+    - workloads/Workloads.Operations.Management/tspconfig.yaml
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [ai/Azure.AI.Agents/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+  paths: [ai/Azure.AI.Projects/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [ai/ContentUnderstanding/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [ai/DocumentIntelligence/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [ai/Face/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [ai/HealthInsights/HealthInsights.OpenAPI/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [ai/ImageAnalysis/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [ai/ModelInference/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [ai/OpenAI.Assistants/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [apicenter/ApiCenter.DataApi/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+  paths: [app/Microsoft.App.DynamicSessions/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [appcomplianceautomation/AppComplianceAutomation.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [appconfiguration/AppConfiguration/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [applicationinsights/ApplicationInsights.LiveMetrics/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [azuredependencymap/DependencyMap.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths: [batch/Azure.Batch/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+  paths: [cognitiveservices/AnomalyDetector/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [cognitiveservices/ContentSafety/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.AnalyzeText/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.AnalyzeText-authoring/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.Conversations/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.QuestionAnswering/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/OpenAI.Inference/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [cognitiveservices/Speech.VideoTranslation/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [communication/Communication.JobRouter/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [communication/Communication.Messages/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+    - parameters.service-dir.default
+  paths: [confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-ts.experimental-extensible-enums
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths: [connectedcache/ConnectedCache.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.package-dir
+  paths: [containerservice/DeploymentSafeguards.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.namespace
+    - options.@azure-tools/typespec-python.package-dir
+  paths: [containerservice/Fleet.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+  paths: [contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [databasefleetmanager/DatabaseFleetManager.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.namespace
+  paths: [dell/Dell.Storage.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [devcenter/DevCenter/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.service-name
+  paths: [edge/Microsoft.Edge.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [eventgrid/Azure.Messaging.EventGrid/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [eventgrid/Azure.Messaging.EventGrid.SystemEvents/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.service-name
+  paths: [fabric/Microsoft.Fabric.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [informatica/Informatica.DataManagement.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.Administration/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.Certificates/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.Keys/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.RBAC/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.Secrets/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [keyvault/Security.KeyVault.Settings/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [kubernetesruntime/KubernetesRuntime.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [liftrastronomer/Astronomer.Astro.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [liftrqumulo/Qumulo.Storage.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+  paths: [loadtestservice/LoadTestService/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [loadtestservice/LoadTestService.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [loadtestservice/Playwright.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+  paths: [machinelearningservices/AzureAI.Assets/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/AKSAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [migrate/AssessmentProjects.Management/AssessmentProjects.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/AvsAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/BusinessCases.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/Collectors.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/HeterogeneousAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/MachineAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-python.namespace
+  paths: [migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [monitor/Microsoft.Monitor.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths: [onlineexperimentation/Azure.Analytics.OnlineExperimentation/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [orbital/Microsoft.PlanetaryComputer/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths: [playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [playwrighttesting/PlaywrightTesting.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+  paths: [programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths: [programmableconnectivity/ProgrammableConnectivity.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [purview/Azure.Analytics.Purview.DataMap/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [quantum/Quantum.Workspace/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [recoveryservicesdatareplication/DataReplication.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+  paths: [relationships/Relationships.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+  paths: [riskiq/Easm/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [schemaregistry/SchemaRegistry/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [scvmm/ScVmm.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-samples
+  paths: [servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [sphere/Sphere.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+  paths: [translation/Azure.AI.DocumentTranslation/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [translation/Azure.AI.TextTranslation/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths: [trustedsigning/TrustedSigning/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [verifiedid/Microsoft.VerifiedId.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-python.flavor
+    - options.@azure-tools/typespec-python.generate-sample
+    - options.@azure-tools/typespec-python.generate-test
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-ts.flavor
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [voiceservices/VoiceServices.Provisioning/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-java.namespace
+  paths: [widget/data-plane/WidgetAnalytics/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.package-dir
+  paths: [widget/resource-manager/Microsoft.Widget/Widget/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml]
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.fix-const-stuttering
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.generate-samples
+    - options.@azure-tools/typespec-go.head-as-boolean
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.flavor
+    - options.@azure-tools/typespec-java.namespace
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-java.service-name
+  paths: [workloads/Workloads.SAPMonitor.Management/tspconfig.yaml]
