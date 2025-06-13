@@ -2,14 +2,14 @@
   "parameters": {
     "api-version": "2025-05-01-preview",
     "body": {
-      "benefitType": "MACC",
       "benefits": [
         {
+          "benefitType": "MACC",
           "properties": {
-            "entityType": "primary",
+            "entityType": "Primary",
             "systemId": null,
-            "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "resourceUri": "R1",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
             "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
             "startAt": "2023-07-01T00:00:00Z",
             "endAt": "2024-07-31T23:59:59Z",
@@ -19,20 +19,19 @@
               "currencyCode": "USD",
               "amount": 10000
             }
-          },
-          "location": "global"
+          }
         },
         {
+          "benefitType": "MACC",
           "properties": {
-            "entityType": "contributor",
+            "entityType": "Contributor",
             "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-            "primaryUri": "R1",
-            "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "resourceUri": "R2",
+            "primaryResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
             "startAt": "2023-07-01T00:00:00Z",
             "systemId": null
-          },
-          "location": "global"
+          }
         }
       ]
     }
@@ -42,11 +41,11 @@
       "body": {
         "benefits": [
           {
-            "resourceUri": "R1",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
             "valid": true
           },
           {
-            "resourceUri": "R2",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
             "valid": false,
             "reason": "Error message",
             "reasonCode": "ErrorCode"

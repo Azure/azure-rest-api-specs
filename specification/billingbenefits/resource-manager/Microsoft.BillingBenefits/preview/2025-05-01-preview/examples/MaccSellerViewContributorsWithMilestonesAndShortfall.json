@@ -3,11 +3,11 @@
     "api-version": "2025-05-01-preview",
     "body": {
       "properties": {
-        "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+        "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
         "$filter": "properties/provisioningState ne 'Canceled'",
         "contributors": true,
         "milestones": true,
-        "primaryUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
+        "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
       }
     }
   },
@@ -19,7 +19,7 @@
             "properties": {
               "provisioningState": "Succeeded",
               "displayName": "Macc 20230614",
-              "entityType": "primary",
+              "entityType": "Primary",
               "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
               "commitment": {
                 "grain": "FullTerm",
@@ -40,14 +40,14 @@
                 },
                 "startAt": "2028-07-01T00:00:00Z",
                 "endAt": "2029-07-31T23:59:59Z",
-                "resourceUri": "subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
+                "resourceId": "/subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
                 "balanceVersion": 5,
                 "systemId": "shortfall76543210"
               },
               "hasMilestones": true,
               "milestones": [
                 {
-                  "milestoneId": "{unique_guid_1}",
+                  "milestoneId": "11111111-1111-1111-1111-111111111111",
                   "commitment": {
                     "amount": 10000,
                     "currencyCode": "USD",
@@ -59,7 +59,7 @@
                   "topup": null
                 },
                 {
-                  "milestoneId": "{unique_guid_2}",
+                  "milestoneId": "22222222-2222-2222-2222-222222222222",
                   "commitment": {
                     "grain": "FullTerm",
                     "amount": 15000,
@@ -71,7 +71,7 @@
                   "topup": null
                 }
               ],
-              "resourceUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
+              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
             },
             "systemData": {
               "createdByType": "User",
@@ -82,11 +82,11 @@
           },
           {
             "properties": {
-              "resourceUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/{leadMaccName}/contributor/{maccContributorName}",
-              "primaryUri": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
-              "primaryBillingAccountId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/{leadMaccName}/contributor/{maccContributorName}",
+              "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
               "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-              "entityType": "contributor",
+              "entityType": "Contributor",
               "displayName": "Macc Contributor 1",
               "commitment": {
                 "grain": "FullTerm",
@@ -106,13 +106,13 @@
                 },
                 "startAt": "2028-07-01T00:00:00Z",
                 "endAt": "2029-07-31T23:59:59Z",
-                "resourceUri": "subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
+                "resourceId": "/subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
                 "balanceVersion": 6,
                 "systemId": "shortfall65432109"
               },
               "milestones": [
                 {
-                  "milestoneId": "{unique_guid_1}",
+                  "milestoneId": "11111111-1111-1111-1111-111111111111",
                   "commitment": {
                     "amount": 10000,
                     "currencyCode": "USD",
@@ -124,7 +124,7 @@
                   "topup": null
                 },
                 {
-                  "milestoneId": "{unique_guid_2}",
+                  "milestoneId": "22222222-2222-2222-2222-222222222222",
                   "commitment": {
                     "grain": "FullTerm",
                     "amount": 15000,
