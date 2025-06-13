@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * Properties of an artifact source.
  */
+@parentResource(Lab)
 model ArtifactSource
   is Azure.ResourceManager.TrackedResource<ArtifactSourceProperties, false> {
   ...ResourceNameParameter<

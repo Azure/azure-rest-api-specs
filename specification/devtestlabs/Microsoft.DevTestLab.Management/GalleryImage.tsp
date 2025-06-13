@@ -13,11 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A gallery image.
  */
+@parentResource(Lab)
 model GalleryImage
   is Azure.ResourceManager.TrackedResource<GalleryImageProperties, false> {
   ...ResourceNameParameter<
     Resource = GalleryImage,
-    KeyName = "name",
     SegmentName = "galleryimages",
     NamePattern = ""
   >;

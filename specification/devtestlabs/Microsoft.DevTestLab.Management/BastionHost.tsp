@@ -7,17 +7,16 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
  * Profile of a Bastion Host
  */
+@parentResource(VirtualNetwork)
 model BastionHost
   is Azure.ResourceManager.TrackedResource<BastionHostProperties, false> {
   ...ResourceNameParameter<
     Resource = BastionHost,
-    KeyName = "name",
     SegmentName = "bastionhosts",
     NamePattern = ""
   >;

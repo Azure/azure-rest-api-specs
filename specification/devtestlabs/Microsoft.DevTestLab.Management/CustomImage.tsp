@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A custom image.
  */
+@parentResource(Lab)
 model CustomImage
   is Azure.ResourceManager.TrackedResource<CustomImageProperties, false> {
   ...ResourceNameParameter<

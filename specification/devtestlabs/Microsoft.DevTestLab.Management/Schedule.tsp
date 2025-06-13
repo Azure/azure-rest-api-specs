@@ -30,7 +30,6 @@ model Schedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
 model VirtualMachineSchedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineSchedule,
-    KeyName = "virtualMachineName",
     SegmentName = "schedules",
     NamePattern = ""
   >;

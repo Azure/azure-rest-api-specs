@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
+@parentResource(Lab)
 model NotificationChannel
   is Azure.ResourceManager.TrackedResource<NotificationChannelProperties> {
   ...ResourceNameParameter<

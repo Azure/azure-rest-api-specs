@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * An environment, which is essentially an ARM template deployment.
  */
+@parentResource(LabUser)
 model DtlEnvironment
   is Azure.ResourceManager.TrackedResource<EnvironmentProperties, false> {
   ...ResourceNameParameter<

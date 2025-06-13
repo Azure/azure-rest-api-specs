@@ -13,11 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
+@parentResource(ArtifactSource)
 model ArmTemplate
   is Azure.ResourceManager.TrackedResource<ArmTemplateProperties, false> {
   ...ResourceNameParameter<
     Resource = ArmTemplate,
-    KeyName = "name",
     SegmentName = "armtemplates",
     NamePattern = ""
   >;

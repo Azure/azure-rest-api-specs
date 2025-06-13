@@ -4,6 +4,8 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
+
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -12,10 +14,10 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
+@parentResource(Lab)
 model LabCost is Azure.ResourceManager.TrackedResource<LabCostProperties> {
   ...ResourceNameParameter<
     Resource = LabCost,
-    KeyName = "name",
     SegmentName = "costs",
     NamePattern = ""
   >;

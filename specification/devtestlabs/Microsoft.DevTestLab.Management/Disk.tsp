@@ -13,10 +13,10 @@ namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
+@parentResource(LabUser)
 model Disk is Azure.ResourceManager.TrackedResource<DiskProperties, false> {
   ...ResourceNameParameter<
     Resource = Disk,
-    KeyName = "name",
     SegmentName = "disks",
     NamePattern = ""
   >;
