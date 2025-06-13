@@ -1,3 +1,4 @@
+import "./Microsoft.ApiManagement/ApiManagement.tsp";
 import "./Microsoft.Communication/AzureCommunicationServices.tsp";
 import "./Microsoft.EventHub/EventHub.tsp";
 import "./Microsoft.HealthcareApis/HealthcareApis.tsp";
@@ -57,10 +58,6 @@ using Microsoft.EventGrid.SystemEvents;
 );
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn",
-  "javascript"
-);
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
   "javascript"
 );
 
@@ -133,7 +130,7 @@ using Microsoft.EventGrid.SystemEvents;
   "javascript"
 );
 @@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
-@@clientName(AcsCallParticipantEventProperties,
+@@clientName(AcsCallParticipantEventData,
   "AcsCallParticipantEvent",
   "javascript"
 );
@@ -142,6 +139,22 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
 @@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
 @@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
+@@clientName(ApiManagementCircuitBreakerProperties,
+  "ApiManagementCircuitBreaker",
+  "javascript"
+);
+@@clientName(ApiManagementGatewayProperties,
+  "ApiManagementGateway",
+  "javascript"
+);
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties,
+  "ApiManagementNearExpiryGatewayToken",
+  "javascript"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties,
+  "ApiManagementExpiredGatewayToken",
+  "javascript"
+);
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"

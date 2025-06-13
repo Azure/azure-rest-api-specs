@@ -50,6 +50,7 @@ model Api {
   @doc("Points of contact for the API.")
   contacts?: Contact[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing swagger."
   @doc("The custom metadata defined for API entities.")
   customProperties?: {};
 
