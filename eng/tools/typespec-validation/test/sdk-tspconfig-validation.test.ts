@@ -631,9 +631,7 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
-    const returnSuccess = true;
-    strictEqual(result.success, returnSuccess);
+    strictEqual(result.success, c.success);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
