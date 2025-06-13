@@ -5,6 +5,7 @@ import "./models.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 

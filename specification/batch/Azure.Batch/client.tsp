@@ -4,6 +4,7 @@ import "./java-client.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 namespace Client;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""

@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 
@@ -3229,7 +3230,7 @@ model BatchPoolReplaceOptions {
 @doc("Parameters for updating an Azure Batch Pool.")
 model BatchPoolUpdateOptions {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   displayName?: string;
 
   @doc("The size of virtual machines in the Pool. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty.")
