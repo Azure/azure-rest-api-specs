@@ -36,7 +36,6 @@ import "./ServiceFabric.tsp";
 import "./LabVirtualMachine.tsp";
 import "./VirtualNetwork.tsp";
 import "./BastionHost.tsp";
-import "./routes.tsp";
 import "./legacy.tsp";
 
 using Azure.ResourceManager;
