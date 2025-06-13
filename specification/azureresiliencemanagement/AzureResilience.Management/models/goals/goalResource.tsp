@@ -33,10 +33,12 @@ model GoalResourceProperties {
   manuallyAttestedForDisasterRecovery: AttestationState;
 
   @doc("Reason for exclusion from high availability goals.")
-  exclusionReasonForHighAvailabilityGoals: ExclusionReason;
+  @visibility(Lifecycle.Read)
+  exclusionReasonForHighAvailabilityGoals?: ExclusionReason;
 
   @doc("Reason for exclusion from disaster recovery goals.")
-  exclusionReasonForDisasterRecoveryGoals: ExclusionReason;
+  @visibility(Lifecycle.Read)
+  exclusionReasonForDisasterRecoveryGoals?: ExclusionReason;
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)

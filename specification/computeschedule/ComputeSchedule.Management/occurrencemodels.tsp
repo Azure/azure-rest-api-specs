@@ -96,6 +96,7 @@ model OccurrenceResource is ScheduledActionResource {
   errorDetails?: Azure.Core.Foundations.Error;
 }
 
+@@identifiers(OccurrenceResourceListResponse.value, #[]);
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 

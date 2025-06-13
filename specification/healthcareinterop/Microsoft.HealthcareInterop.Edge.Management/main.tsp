@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./hl7edgeconnector.tsp";
+import "./dicomedgeconnector.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -24,6 +25,11 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2025-05-01-preview version.")
   v2025_05_01_preview: "2025-05-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("The 2025-06-01-preview version.")
+  v2025_06_01_preview: "2025-06-01-preview",
 }
 
 /** The provisioning state of a resource. */

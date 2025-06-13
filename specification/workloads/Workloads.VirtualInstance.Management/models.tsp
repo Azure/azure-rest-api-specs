@@ -45,6 +45,11 @@ union EnvironmentType {
    * Production system.
    */
   Production: "Production",
+
+  /**
+   * Disaster recovery system.
+   */
+  DisasterRecovery: "DisasterRecovery",
 }
 
 /**
@@ -158,7 +163,7 @@ model VirtualInstanceProperties {
    */
   @minValue(0)
   @maxValue(9)
-  systemPriority: int32;
+  systemPriority?: int32;
 
   /**
    * The current stage in the lifecycle of the workload system.
@@ -214,20 +219,25 @@ model WorkloadInfo {
   workloadType: string;
 
   /**
-   * The ID of the corresponding workload definition.
+   * The name of the corresponding workload definition.
    */
-  workloadDefinitionId: string;
+  workloadDefinitionName: string;
 
   /**
    * The version selected for the corresponding workload definition.
    */
   workloadDefinitionVersion?: string;
+}
 
+/**
+ * Defines the workload information object for update scenarios.
+ */
+@added(Versions.v2025_06_01_preview)
+model UpdateWorkloadInfo {
   /**
-   * Defines the workload component provisioning state.
+   * The version selected for the corresponding workload definition.
    */
-  @visibility(Lifecycle.Read)
-  workloadDefinitionExactVersion?: string;
+  workloadDefinitionVersion?: string;
 }
 
 /**
@@ -275,7 +285,7 @@ model UpdateVirtualInstanceProperties {
    * The workload specific information including the workload type, definition ID and version.
    */
   @added(Versions.v2025_06_01_preview)
-  workloadInfo?: WorkloadInfo;
+  workloadInfo?: UpdateWorkloadInfo;
 
   /**
    * The type of environment in which the workload system is deployed - Production / Non Production.

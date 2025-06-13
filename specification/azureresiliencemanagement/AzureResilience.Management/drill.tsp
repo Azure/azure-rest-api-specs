@@ -17,8 +17,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
-//interface Operations extends Azure.ResourceManager.Operations {}
-
 @armResourceOperations(Drill)
 interface Drills {
   @route(ServiceGroupRoute)
@@ -34,7 +32,10 @@ interface Drills {
       Drill,
       DrillPatchProperties
     >,
-    ServiceGroupParameters
+    ServiceGroupParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @route(ServiceGroupRoute)

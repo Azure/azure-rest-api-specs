@@ -27,7 +27,7 @@ These are the global settings for the hybridconnectivity.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-12-15-preview
+tag: package-2025-12-01-preview
 ```
 
 ### Tag: package-2021-07-08-privatepreview
@@ -105,19 +105,44 @@ input-file:
   - Microsoft.HybridConnectivity/preview/2024-12-15-preview/hybridconnectivity.json
 ```
 
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
+```
+
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - Microsoft.HybridConnectivity/preview/2025-12-01-preview/hybridconnectivity.json
+```
+
 ## Suppression
 
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
     reason: Property solutionSettings for Solution Configurations settings previously defined like this
-    from: publicCloud.json
+    from: hybridconnectivity.json
     where:
       - $.definitions.SolutionConfigurationUpdateProperties.properties.solutionSettings
       - $.definitions.SolutionConfigurationUpdate.properties.properties.properties.solutionSettings
       - $.definitions.SolutionConfiguration.properties.properties.properties.solutionSettings
       - $.definitions.SolutionConfigurationProperties.properties.solutionSettings
       - $.definitions.SolutionTypeSettings.properties.solutionSettings
+      - $.definitions.SolutionSettings
+
+  - suppress: INVALID_TYPE
+    reason: ModelValidation doesn't support empty body objects while GenerateAwsTemplateResponse is a generic object
+    from: hybridconnectivity.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate"]
 ```
 
 ---

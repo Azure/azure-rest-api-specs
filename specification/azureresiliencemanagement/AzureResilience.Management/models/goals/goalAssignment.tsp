@@ -38,6 +38,7 @@ model GoalAssignmentProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
   @doc("Details of any errors encountered during the operation.")
   errorDetails?: CommonTypes.ErrorDetail;
 }

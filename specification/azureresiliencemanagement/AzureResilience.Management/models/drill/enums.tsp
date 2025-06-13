@@ -4,11 +4,11 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
+using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -162,6 +162,9 @@ union DrillResourceState {
 
   @doc("Resource is in Drill but not part of the ROPlan")
   InDrillNotInRO: "InDrillNotInRO",
+
+  @doc("Resource is not in a state where it can be faulted.")
+  ResourceStateIncompatibleWithFault: "ResourceStateIncompatibleWithFault",
 }
 
 /**
@@ -249,26 +252,32 @@ union VMPresent {
 }
 
 /**
- * Enum for Drill stages.
+ * Enum for Drill Run Subtasks.
  */
-@doc("Enum for Drill stages.")
-union DrillRunStages {
+@doc("Enum for Drill Run Subtasks.")
+union DrillRunSubtasks {
   string,
 
-  @doc("Fault stage.")
-  Fault: "Fault",
+  @doc("FaultInjection Subtasks.")
+  FaultInjection: "FaultInjection",
 
-  @doc("Failover stage.")
+  @doc("Failover Subtasks.")
   Failover: "Failover",
 
-  @doc("Reprotect stage.")
+  @doc("TestFailover Subtasks.")
+  TestFailover: "TestFailover",
+
+  @doc("TestFailoverCleanup Subtasks.")
+  TestFailoverCleanup: "TestFailoverCleanup",
+
+  @doc("Reprotect Subtasks.")
   Reprotect: "Reprotect",
 
-  @doc("Failback stage.")
-  Failback: "Failback",
+  @doc("FailoverReverse Subtasks.")
+  FailoverReverse: "FailoverReverse",
 
-  @doc("ReprotectInOriginalLocation stage.")
-  ReprotectInOriginalLocation: "ReprotectInOriginalLocation",
+  @doc("ReprotectReverse Subtasks.")
+  ReprotectReverse: "ReprotectReverse",
 }
 
 /**
@@ -300,4 +309,30 @@ union RoExclusionReason {
 
   @doc("Protection not configured.")
   ProtectionStatus: "ProtectionStatus",
+}
+
+/**
+ * Enum for DrillRun Tasks.
+ */
+@doc("Enum for DrillRun Tasks.")
+union DrillRunTasks {
+  string,
+
+  @doc("Failover task.")
+  Failover: "Failover",
+
+  @doc("TestFailover tasks.")
+  TestFailover: "TestFailover",
+
+  @doc("TestFailoverCleanup tasks.")
+  TestFailoverCleanup: "TestFailoverCleanup",
+
+  @doc("Reprotect task.")
+  Reprotect: "Reprotect",
+
+  @doc("FailoverReverse task.")
+  FailoverReverse: "FailoverReverse",
+
+  @doc("ReprotectReverse task.")
+  ReprotectReverse: "ReprotectReverse",
 }

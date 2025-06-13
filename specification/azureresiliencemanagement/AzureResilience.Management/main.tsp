@@ -9,6 +9,7 @@ import "./recoveryPlans.tsp";
 import "./drill.tsp";
 import "./drillResource.tsp";
 import "./drillRun.tsp";
+import "./partnersolution.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

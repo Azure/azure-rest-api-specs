@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Microsoft.Discovery.Shared;
 
 @armProviderNamespace
 @versioned(Microsoft.Discovery.Versions)
@@ -19,9 +18,6 @@ namespace Microsoft.Discovery;
 @doc("Supercomputer tracked resource")
 model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
-
-  /** Updatable managed service identity */
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Supercomputer properties")
@@ -30,11 +26,6 @@ model SupercomputerProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  // read
-  @doc("The ID of the workspace.")
-  @visibility(Lifecycle.Read)
-  workspaceId?: WorkspaceId;
-
   /**
     System Subnet ID associated with managed NodePool for system resources.
     It should have connectivity to the child NodePool subnets.
@@ -42,7 +33,42 @@ model SupercomputerProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   subnetId: Microsoft.Discovery.Shared.SubnetId;
 
+  /**
+    Dictionary of identity properties for the Supercomputer.
+   */
+  @doc("Dictionary of identity properties.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  identities: SupercomputerIdentities;
+
   ...MoboConfigurationWithMrg;
+}
+
+/**
+    Model representing the dictionary of identity properties.
+   */
+@doc("Dictionary of identity properties for the Supercomputer.")
+model SupercomputerIdentities {
+  /**
+      Cluster identity ID used by the supercomputer.
+      This identity is used by the supercomputer at cluster level to access Azure resources.
+      This identity must have NetworkContributor role on the system subnet.
+    */
+  @doc("Cluster identity ID.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  clusterIdentity: Microsoft.Discovery.Identity;
+
+  /**
+      Kubelet identity ID used by the supercomputer.
+      This identity is used by the supercomputer at node level to access Azure resources.
+      This identity must have ManagedIdentityOperator role on the clusterIdentity.
+    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  kubeletIdentity: Microsoft.Discovery.Identity;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
+  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
 
 @armResourceOperations
