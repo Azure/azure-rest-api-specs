@@ -21,7 +21,7 @@ directive:
         "values": [
           {
               "value": "_10minutely",
-              "name": "Tenminutely"
+              "name": "TenMinutely"
           },
           {
               "value": "hourly",
@@ -43,7 +43,7 @@ directive:
         "values": [
           {
               "value": "_10minutely",
-              "name": "Tenminutely"
+              "name": "TenMinutely"
           },
           {
               "value": "hourly",
