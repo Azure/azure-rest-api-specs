@@ -154,7 +154,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2021-12-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
@@ -172,7 +172,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2022-09-30-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
@@ -194,7 +194,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-06-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-06-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2023-06-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
@@ -219,7 +219,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-06-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-06-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
@@ -244,7 +244,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/stable/2023-06-30/Configurations.json
 - Microsoft.DBforMySQL/Databases/stable/2023-06-30/Databases.json
 - Microsoft.DBforMySQL/Firewall/stable/2023-06-30/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2023-06-30/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2023-06-30/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/stable/2023-06-30/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2023-06-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
@@ -270,10 +270,10 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-10-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-10-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2023-06-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-10-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-10-01-preview/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/common-types/v1/common-types.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
@@ -294,8 +294,8 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-12-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2023-12-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2023-12-01-preview/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2023-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
@@ -330,8 +330,8 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2023-12-30/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2023-12-30/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
@@ -366,8 +366,8 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/stable/2023-12-30/Configurations.json
 - Microsoft.DBforMySQL/Databases/stable/2023-12-30/Databases.json
 - Microsoft.DBforMySQL/Firewall/stable/2023-12-30/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2023-12-30/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2023-12-30/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/stable/2023-12-30/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/stable/2023-12-30/Maintenances.json
@@ -405,8 +405,8 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/stable/2023-12-30/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/stable/2023-12-30/Maintenances.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-02-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-02-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-02-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-02-01-preview/AdvancedThreatProtectionSettings.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -441,8 +441,8 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/stable/2023-12-30/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/stable/2023-12-30/Maintenances.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-06-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-06-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-06-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-06-01-preview/AdvancedThreatProtectionSettings.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -474,8 +474,8 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/stable/2023-12-30/Configurations.json
 - Microsoft.DBforMySQL/Databases/stable/2023-12-30/Databases.json
 - Microsoft.DBforMySQL/Firewall/stable/2023-12-30/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-10-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2024-10-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-10-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2024-10-01-preview/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/stable/2023-12-30/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2024-10-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/stable/2023-12-30/Maintenances.json
@@ -522,7 +522,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/stable/2022-01-01/Configurations.json
 - Microsoft.DBforMySQL/Databases/stable/2022-01-01/Databases.json
 - Microsoft.DBforMySQL/Firewall/stable/2022-01-01/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2022-01-01/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/stable/2022-01-01/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/stable/2022-01-01/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2022-01-01/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/stable/2022-01-01/AzureADAdministrator.json
@@ -538,7 +538,7 @@ input-file:
 - Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
 - Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
 - Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServersAPI/preview/2021-12-01-preview/FlexibleServers.json
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
@@ -559,36 +559,3 @@ directive:
     from: Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
     reason: Property isDataAction is not included in get operation reponse body
 ```
-
----
-
-# Code Generation
-
-## Swagger to SDK
-
-This section describes what SDK should be generated by the automatic system.
-This is not used by Autorest itself.
-
-``` yaml $(swagger-to-sdk)
-swagger-to-sdk:
-  - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
-```
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)
