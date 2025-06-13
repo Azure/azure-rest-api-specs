@@ -56,8 +56,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2025-05-02-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.containerservicedeploymentsafeguards.v2025_05_02_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_05_02_preview
+  namespace: com.microsoft.azure.management.containerservice.safeguards.v2025_05_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/safeguards/mgmt-v2025_05_02_preview
 regenerate-manager: true
 generate-interface: true
 ```
