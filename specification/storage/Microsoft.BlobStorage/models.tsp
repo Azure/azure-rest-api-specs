@@ -1633,7 +1633,7 @@ alias EtagResponseHeader = {
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
   @header("x-ms-copy-source-tag-option")
-  copySourceTags?: string;
+  copySourceTags?: BlobCopySourceTags;
 };
 
 /** The blob copy source tags types. */
