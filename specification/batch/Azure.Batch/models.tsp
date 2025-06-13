@@ -3234,11 +3234,11 @@ model BatchPoolUpdateOptions {
   displayName?: string;
 
   @doc("The size of virtual machines in the Pool. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   vmSize?: string;
 
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   enableInterNodeCommunication?: boolean;
 
   @doc("A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged.")
@@ -3261,37 +3261,37 @@ model BatchPoolUpdateOptions {
   metadata?: BatchMetadataItem[];
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("The desired node communication mode for the pool. If this element is present, it replaces the existing targetNodeCommunicationMode configured on the Pool. If omitted, any existing metadata is left unchanged.")
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   taskSlotsPerNode?: int32;
 
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   taskSchedulingPolicy?: BatchTaskSchedulingPolicy;
 
   @doc("The network configuration for the Pool. This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   networkConfiguration?: NetworkConfiguration;
 
   @doc("The user-specified tags associated with the pool. The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   resourceTags?: Record<string>;
 
   @doc("The list of user Accounts to be created on each Compute Node in the Pool. This field can be updated only when the pool is empty.")
   userAccounts?: UserAccount[];
 
   @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   mountConfiguration?: MountConfiguration[];
 
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.<br /><br />This field can be updated only when the pool is empty.")
-  //@added(Versions.v2024_07_01)
+  @added(Versions.v2024_07_01)
   upgradePolicy?: UpgradePolicy;
 }
 
