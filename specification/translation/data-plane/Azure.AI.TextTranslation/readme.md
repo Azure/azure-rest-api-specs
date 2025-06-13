@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-05-01-preview'
 version: package-2025-05-01-preview
 input-file:
-  - preview/2025-05-01-preview/openapi.json
+  - preview/v2025-05-01-preview/openapi.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
