@@ -4,7 +4,7 @@ param(
     [string]$FileName = 'Azure.Sdk.Tools.Cli',
     [string]$Package = 'azsdk',
     [string]$Version, # Default to latest
-    [string]$InstallDirectory = (Join-Path $HOME ".azure-sdk-mcp" "azsdk"),
+    [string]$InstallDirectory = (Join-Path $env:HOME ".azure-sdk-mcp" "azsdk"),
     [string]$Repository = 'Azure/azure-sdk-tools',
     [string]$RunDirectory = (Resolve-Path (Join-Path $PSScriptRoot .. .. ..)),
     [switch]$Run,
