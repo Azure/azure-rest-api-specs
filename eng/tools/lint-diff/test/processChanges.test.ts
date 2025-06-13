@@ -249,4 +249,13 @@ describe("buildState", () => {
       ),
     ).not.toThrow();
   });
+
+  test.skipIf(isWindows())("does not include readme files that has no input-file:", async () => {
+    const actual = await buildState(
+      ["specification/no-input-file/readme.md"],
+      "test/fixtures/buildState/",
+    );
+
+    expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
+  });
 });
