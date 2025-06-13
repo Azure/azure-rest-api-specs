@@ -55,12 +55,20 @@ interface Evaluations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Cancel an evaluation run by name")
   @post
+  @Azure.Core.pollingOperation(Evaluations.cancel)
   cancel is EvaluationsOperations.ResourceAction<
     Evaluation,
     {},
-    Http.NoContentResponse
+    AcceptedResponse &
+      Evaluation & {
+        @Azure.Core.pollingLocation()
+        @doc("The location for monitoring the evaluation state.")
+        @TypeSpec.Http.header("operation-location")
+        operationLocation: string;
+      }
   >;
 
   @doc("Delete an evaluation run by name")
-  delete is EvaluationsOperations.ResourceDelete<Evaluation>;
+  @Azure.Core.pollingOperation(Evaluations.delete)
+  delete is EvaluationsOperations.LongRunningResourceDelete<Evaluation>;
 }

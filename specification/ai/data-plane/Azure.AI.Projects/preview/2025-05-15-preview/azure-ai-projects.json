@@ -916,9 +916,36 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
             "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -938,7 +965,8 @@
               }
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/evaluations/runs/{name}:cancel": {
@@ -961,9 +989,16 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            },
             "headers": {
+              "operation-location": {
+                "type": "string",
+                "description": "The location for monitoring the evaluation state."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -983,7 +1018,8 @@
               }
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/evaluations/runs:run": {
@@ -1901,6 +1937,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -2425,7 +2503,7 @@
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/EvaluationStatus",
           "description": "Status of the evaluation. It is set by service and is read-only.",
           "readOnly": true
         },
@@ -2456,6 +2534,96 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationStatus": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "NotStarted",
+        "Unapproved",
+        "Pausing",
+        "Paused",
+        "Starting",
+        "Preparing",
+        "Queued",
+        "Running",
+        "Finalizing",
+        "CancelRequested",
+        "Completed",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Evaluation hasn't started yet."
+          },
+          {
+            "name": "Unapproved",
+            "value": "Unapproved",
+            "description": "Evaluation has been unapproved."
+          },
+          {
+            "name": "Pausing",
+            "value": "Pausing",
+            "description": "Evaluation is pausing"
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Evaluation has been paused"
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Evaluation has started."
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "The evaluation run environment is being prepared."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Evaluation is queued."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Evaluation started to run."
+          },
+          {
+            "name": "Finalizing",
+            "value": "Finalizing",
+            "description": "Evaluation is completed."
+          },
+          {
+            "name": "CancelRequested",
+            "value": "CancelRequested",
+            "description": "Cancelation has been requested for the evaluation."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Completed",
+            "description": "Evaluation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Evaluation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Following cancelation request, the evaluation is now successfully canceled."
+          }
+        ]
+      }
     },
     "EvaluatorConfiguration": {
       "type": "object",
