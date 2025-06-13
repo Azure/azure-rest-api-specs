@@ -38,6 +38,7 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: ResponseMediaType;
 
+    ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   }) | TError;
@@ -48,11 +49,11 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     TError = StorageError
-  >(
-    ...ApiVersionHeader,
-    ...TParams,
-    ...ClientRequestIdHeader,
-  ): TResponse | TError;
+  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+    ...ApiVersionHeader;
+    ...RequestIdResponseHeader;
+    ...ClientRequestIdHeader;
+  }) | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -159,7 +160,6 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?comp=batch")
-  @scope("!rust")
   op submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
@@ -176,6 +176,7 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: "multipart/mixed";
 
+    ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
   }) | StorageError;
@@ -413,7 +414,6 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @post
     @route("{containerName}?restype=container&comp=batch")
-    @scope("!rust")
     op submitBatch(
       ...ContainerNamePathParameter,
 
@@ -436,6 +436,7 @@ namespace Storage.Blob {
       multipartContentType: "multipart/mixed";
 
       ...RequestIdResponseHeader;
+      ...ApiVersionHeader;
     } & MultipartBodyParameter) | StorageError;
 
     /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
@@ -467,7 +468,7 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @put
     @route("{containerName}?comp=lease&restype=container&acquire")
-    op acquireLease is StorageOperation<
+    op acquireLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
         ...LeaseDurationHeader;
@@ -475,6 +476,7 @@ namespace Storage.Blob {
         ...ProposedLeaseIdOptionalParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"acquire">;
       },
       {
         @statusCode statusCode: 201;
@@ -498,6 +500,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"release">;
       },
       {
         ...EtagResponseHeader;
@@ -519,6 +522,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"renew">;
       },
       {
         ...LeaseIdResponseHeader;
@@ -540,6 +544,7 @@ namespace Storage.Blob {
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
         ...LeaseBreakPeriodParameter;
+        ...LeaseActionParameter<"break">;
       },
       {
         @statusCode statusCode: 202;
@@ -565,6 +570,7 @@ namespace Storage.Blob {
         ...TimeoutParameter;
         ...IfModifiedSinceParameter;
         ...IfUnmodifiedSinceParameter;
+        ...LeaseActionParameter<"change">;
       },
       {
         ...LeaseIdResponseHeader;
@@ -730,6 +736,7 @@ namespace Storage.Blob {
         ...LegalHoldResponseHeader;
         ...StructuredBodyTypeResponseHeaderPrivate;
         ...StructuredContentLengthResponseHeaderPrivate;
+        ...ApiVersionHeader;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 206;
@@ -782,6 +789,7 @@ namespace Storage.Blob {
         ...LegalHoldResponseHeader;
         ...StructuredBodyTypeResponseHeaderPrivate;
         ...StructuredContentLengthResponseHeaderPrivate;
+        ...ApiVersionHeader;
       }) | StorageError;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
@@ -1066,7 +1074,7 @@ namespace Storage.Blob {
       #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
       @put
       @route("{blobName}?comp=lease&acquire")
-      op acquireLease is StorageOperation<
+      op acquireLease is StorageOperationNoBody<
         {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
@@ -1075,6 +1083,7 @@ namespace Storage.Blob {
           ...ProposedLeaseIdOptionalParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"acquire">;
         },
         {
           @statusCode statusCode: 201;
@@ -1099,6 +1108,7 @@ namespace Storage.Blob {
           ...LeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"release">;
         },
         {
           ...EtagResponseHeader;
@@ -1121,6 +1131,7 @@ namespace Storage.Blob {
           ...LeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"renew">;
         },
         {
           ...EtagResponseHeader;
@@ -1145,6 +1156,7 @@ namespace Storage.Blob {
           ...ProposedLeaseIdRequiredParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"change">;
         },
         {
           ...EtagResponseHeader;
@@ -1168,6 +1180,7 @@ namespace Storage.Blob {
           ...LeaseBreakPeriodParameter;
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
+          ...LeaseActionParameter<"break">;
         },
         {
           @statusCode statusCode: 202;
@@ -1245,6 +1258,10 @@ namespace Storage.Blob {
           ...ImmutabilityPolicyExpiryParameter;
           ...ImmutabilityPolicyModeParameter;
           ...LegalHoldOptionalParameter;
+
+          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
+          @header("x-ms-requires-sync")
+          requiresSync: true;
         },
         {
           @statusCode statusCode: 202;
@@ -1254,8 +1271,6 @@ namespace Storage.Blob {
           ...DateResponseHeader;
           ...CopyIdResponseHeader;
           ...CopyStatusResponseHeader;
-          ...CopySourceErrorCodeResponseHeader;
-          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1301,8 +1316,6 @@ namespace Storage.Blob {
           ...ContentMd5ResponseHeader;
           ...ContentCrc64ResponseHeader;
           ...EncryptionScopeResponseHeader;
-          ...CopySourceErrorCodeResponseHeader;
-          ...CopySourceStatusCodeResponseHeader;
         }
       >;
 
@@ -1323,6 +1336,10 @@ namespace Storage.Blob {
           copyid: string;
 
           ...LeaseIdOptionalParameter;
+
+          /** The copy action to be performed. */
+          @header("x-ms-copy-action")
+          copyActionAbortConstant: "abort";
         },
         {
           @statusCode statusCode: 204;
@@ -1473,7 +1490,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.PageBlob;
+            blobType: "PageBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -1521,6 +1538,7 @@ namespace Storage.Blob {
             ...IfTagsParameter;
             ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
+            ...PageWriteParameter<"update">;
           },
           {
             @statusCode statusCode: 201;
@@ -1562,6 +1580,7 @@ namespace Storage.Blob {
             ...IfSequenceNumberEqualToParameter;
             ...ConditionalRequestHeaders;
             ...IfTagsParameter;
+            ...PageWriteParameter<"clear">;
           },
           {
             @statusCode statusCode: 201;
@@ -1616,6 +1635,7 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...PageWriteParameter<"update">;
           },
           {
             @statusCode statusCode: 201;
@@ -1628,8 +1648,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -1813,7 +1831,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.AppendBlob;
+            blobType: "AppendBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -1923,8 +1941,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -1996,7 +2012,7 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.BlockBlob;
+            blobType: "BlockBlob";
           },
           {
             @statusCode statusCode: 201;
@@ -2056,7 +2072,8 @@ namespace Storage.Blob {
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
-            blobType: BlobType.BlockBlob;
+            blobType: "BlockBlob";
+
             ...FileRequestIntentParameter;
           },
           {
@@ -2069,8 +2086,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
@@ -2151,8 +2166,6 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...CopySourceErrorCodeResponseHeader;
-            ...CopySourceStatusCodeResponseHeader;
           }
         >;
 
