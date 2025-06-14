@@ -36,6 +36,7 @@ jobs:
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 
           $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
+          $matchedFiles = @($matchedFiles | Where-Object { $_ -ne ".github/CODEOWNERS" })
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
