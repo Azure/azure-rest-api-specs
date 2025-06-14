@@ -1373,6 +1373,9 @@
           },
           "MaccMilestoneUnsuppressAutomaticTopup": {
             "$ref": "./examples/MaccMilestoneUnsuppressAutomaticTopup.json"
+          },
+          "Contributor_UpdateEndDate": {
+            "$ref": "./examples/ContributorEndDateUpdate.json"
           }
         },
         "parameters": [
@@ -2071,7 +2074,7 @@
           }
         ]
       },
-      "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
+      "description": "Fully-qualified identifier of the billing account where the benefit is applied. Present only for Enterprise Agreement customers."
     },
     "PrimaryResourceId": {
       "type": "string",
@@ -2453,7 +2456,8 @@
           "$ref": "#/definitions/CustomerResourceId"
         },
         "billingAccountId": {
-          "$ref": "#/definitions/BillingAccountResourceId"
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "readOnly": true
         },
         "term": {
           "$ref": "#/definitions/Term"
@@ -2565,7 +2569,8 @@
           "$ref": "#/definitions/CustomerResourceId"
         },
         "billingAccountId": {
-          "$ref": "#/definitions/BillingAccountResourceId"
+          "$ref": "#/definitions/BillingAccountResourceId",
+          "readOnly": true
         },
         "term": {
           "$ref": "#/definitions/Term"
@@ -3310,7 +3315,8 @@
         },
         "billingAccountResourceId": {
           "$ref": "#/definitions/BillingAccountResourceId",
-          "description": "Billing account resource id where the discount metadata is present."
+          "description": "Billing account resource id where the discount metadata is present.",
+          "readOnly": true
         },
         "billingProfileResourceId": {
           "$ref": "#/definitions/BillingProfileResourceId",
@@ -3878,7 +3884,8 @@
           ]
         },
         "automaticShortfall": {
-          "$ref": "#/definitions/AutomaticShortfall"
+          "$ref": "#/definitions/EnablementMode",
+          "description": "Setting this to 'Enable' enables automatic shortfall charging when commitment is not met."
         },
         "automaticShortfallSuppressReason": {
           "$ref": "#/definitions/AutomaticShortfallSuppressReason"
@@ -3909,9 +3916,6 @@
         },
         "allowContributors": {
           "$ref": "#/definitions/AllowContributors"
-        },
-        "hasMilestones": {
-          "$ref": "#/definitions/HasMilestones"
         },
         "primaryResourceId": {
           "$ref": "#/definitions/ResourceId",
@@ -3956,40 +3960,11 @@
     },
     "MaccProvisioningState": {
       "type": "string",
-      "description": "Provisioning states of MACC. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of MACC resource, refer to MaccStatus.",
-      "readOnly": true,
-      "enum": [
-        "Unknown",
-        "Pending",
-        "Succeeded",
-        "Canceled",
-        "Failed",
-        "ShortfallPending"
-      ],
-      "x-ms-enum": {
-        "name": "MaccProvisioningState",
-        "modelAsString": true
-      }
-    },
-    "MaccProvisioningSubState": {
-      "type": "string",
-      "description": "Provisioning sub state of MACC. This property is deprecated. For current status of MACC resource, refer to MaccStatus.",
-      "readOnly": true,
-      "enum": [
-        "Unknown",
-        "None",
-        "ShortfallCharged",
-        "Stopped",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "MaccProvisioningSubState",
-        "modelAsString": true
-      }
+      "description": "Provisioning state of MACC as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of MACC resource, refer to MaccStatus.",
+      "readOnly": true
     },
     "MaccStatus": {
       "type": "string",
-      "readOnly": true,
       "description": "Represents the current status of the MACC.",
       "enum": [
         "Unknown",
@@ -4022,7 +3997,6 @@
     },
     "MaccMilestoneStatus": {
       "type": "string",
-      "readOnly": true,
       "description": "Represents the current status of the Milestone.",
       "enum": [
         "Unknown",
@@ -4031,9 +4005,22 @@
         "Failed",
         "Completed",
         "Canceled",
+        "Remove",
         "TopupPending",
         "TopupCharged",
         "TopupWaived"
+      ],
+      "x-enum-description": [
+        "Default status when the milestone status is not known",
+        "Milestone is active and being tracked",
+        "Milestone creation or update is in progress",
+        "Milestone creation has failed",
+        "Milestone target has been successfully completed",
+        "Macc with milestones have been canceled by the customer",
+        "Status to remove milestone from the MACC",
+        "Milestone target was not met and topup invoicing is pending",
+        "Additional charges (topup) have been applied for not meeting the milestone target",
+        "Topup charges have been waived for this milestone"
       ],
       "x-ms-enum": {
         "name": "MaccMilestoneStatus",
@@ -4056,15 +4043,26 @@
         "modelAsString": true
       }
     },
+    "EnablementMode": {
+      "type": "string",
+      "description": "Represents the enablement status of a feature or settings.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-enum-description": [
+        "Feature is enabled.",
+        "Feature is disabled."
+      ],
+      "x-ms-enum": {
+        "name": "EnablementMode",
+        "modelAsString": true
+      }
+    },
     "AllowContributors": {
       "type": "boolean",
       "default": false,
       "description": "Setting this to true means multi-entity."
-    },
-    "HasMilestones": {
-      "type": "boolean",
-      "default": false,
-      "description": "Set to true by default if there are milestones in the MACC. Setting this to false indicates removal of milestones from MACC."
     },
     "MaccSystemId": {
       "type": "string",
@@ -4075,7 +4073,11 @@
       "description": "MACC shortfall",
       "properties": {
         "productCode": {
-          "$ref": "#/definitions/ProductCode"
+          "$ref": "#/definitions/ProductCode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "charge": {
           "$ref": "#/definitions/Price"
@@ -4095,13 +4097,13 @@
         },
         "systemId": {
           "$ref": "#/definitions/SystemId",
-          "description": "This is the globally unique identifier of the shortfall which will not change for its lifetime."
+          "description": "This is the globally unique identifier of the shortfall which will not change for its lifetime.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
-    },
-    "AutomaticShortfall": {
-      "type": "boolean",
-      "description": "Setting this to true enables automatic shortfall charging when commitment is not met."
     },
     "AutomaticShortfallSuppressReason": {
       "type": "object",
@@ -4149,7 +4151,7 @@
           "$ref": "#/definitions/AllowContributors"
         },
         "automaticShortfall": {
-          "$ref": "#/definitions/AutomaticShortfall"
+          "$ref": "#/definitions/EnablementMode"
         },
         "automaticShortfallSuppressReason": {
           "$ref": "#/definitions/AutomaticShortfallSuppressReason"
@@ -4157,8 +4159,8 @@
         "displayName": {
           "$ref": "#/definitions/DisplayName"
         },
-        "hasMilestones": {
-          "$ref": "#/definitions/HasMilestones"
+        "status": {
+          "$ref": "#/definitions/MaccMilestoneStatus"
         },
         "milestones": {
           "type": "array",
@@ -4193,8 +4195,11 @@
       "properties": {
         "milestoneId": {
           "type": "string",
-          "format": "uuid",
-          "description": "Globally unique identifier (GUID) for the milestone."
+          "description": "Globally unique identifier for the milestone. Format: {guid}",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "commitment": {
           "$ref": "#/definitions/Commitment",
@@ -4205,7 +4210,8 @@
           "description": "End date time for the milestone. Timestamp must be in the ISO date format YYYY-MM-DDT23:59:59Z."
         },
         "automaticTopup": {
-          "$ref": "#/definitions/AutomaticTopup"
+          "$ref": "#/definitions/EnablementMode",
+          "description": "Setting this to 'Enable' enables automatic topup invoicing when milestone commitment is not met."
         },
         "automaticTopupSuppressReason": {
           "$ref": "#/definitions/AutomaticTopupSuppressReason"
@@ -4222,10 +4228,6 @@
     "SystemId": {
       "type": "string",
       "description": "This is the globally unique identifier of the resource which will not change for its lifetime."
-    },
-    "AutomaticTopup": {
-      "type": "boolean",
-      "description": "Setting this to true enables automatic topup invoicing when milestone commitment is not met."
     },
     "AutomaticTopupSuppressReason": {
       "type": "object",
@@ -4247,10 +4249,18 @@
       "properties": {
         "systemId": {
           "$ref": "#/definitions/SystemId",
-          "description": "This is the globally unique identifier of the Topup which will not change for the lifetime of the topup credit."
+          "description": "This is the globally unique identifier of the Topup which will not change for the lifetime of the topup credit.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "productCode": {
-          "$ref": "#/definitions/ProductCode"
+          "$ref": "#/definitions/ProductCode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "charge": {
           "$ref": "#/definitions/Commitment",
@@ -4393,7 +4403,7 @@
           "$ref": "#/definitions/BenefitValidateModel"
         },
         {
-          "$ref": "#/definitions/SavingsPlanOrderAliasModel"
+          "$ref": "#/definitions/SavingsPlanOrderAliasProperties"
         }
       ],
       "x-ms-discriminator-value": "SavingsPlan"
@@ -4673,7 +4683,7 @@
       "required": true,
       "description": "Request body for updating MACC.",
       "schema": {
-        "$ref": "#/definitions/MaccPatchRequest"
+        "$ref": "#/definitions/Macc"
       }
     },
     "ChargeShortfallRequestParameter": {

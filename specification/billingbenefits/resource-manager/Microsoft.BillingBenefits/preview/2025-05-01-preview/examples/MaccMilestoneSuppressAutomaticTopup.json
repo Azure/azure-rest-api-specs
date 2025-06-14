@@ -5,11 +5,13 @@
     "maccName": "macc_20230614",
     "api-version": "2025-05-01-preview",
     "body": {
+      "location": "global",
       "properties": {
+        "entityType": "Primary",
         "milestones": [
           {
             "milestoneId": "11111111-1111-1111-1111-111111111111",
-            "automaticTopup": false,
+            "automaticTopup": "Disable",
             "automaticTopupSuppressReason": {
               "code": "CustomerRequestedSuppression",
               "message": "Customer explicitly requested to disable automatic topup charging"
@@ -41,8 +43,7 @@
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "provisioningState": "Succeeded",
           "status": "Active",
-          "automaticShortfall": true,
-          "hasMilestones": true,
+          "automaticShortfall": "Enable",
           "milestones": [
             {
               "milestoneId": "11111111-1111-1111-1111-111111111111",
@@ -52,7 +53,7 @@
                 "grain": "FullTerm"
               },
               "endAt": "2024-07-31T23:59:59Z",
-              "automaticTopup": false,
+              "automaticTopup": "Disable",
               "automaticTopupSuppressReason": {
                 "code": "CustomerRequestedSuppression",
                 "message": "Customer explicitly requested to disable automatic topup charging"
@@ -68,7 +69,7 @@
                 "currencyCode": "USD"
               },
               "endAt": "2025-01-31T23:59:59Z",
-              "automaticTopup": true,
+              "automaticTopup": "Enable",
               "status": "Active",
               "topup": null
             }

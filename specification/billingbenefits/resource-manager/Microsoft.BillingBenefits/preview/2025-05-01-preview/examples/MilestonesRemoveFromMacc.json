@@ -5,9 +5,19 @@
     "maccName": "macc_20230614",
     "api-version": "2025-05-01-preview",
     "body": {
+      "location": "global",
       "properties": {
-        "milestones": [],
-        "hasMilestones": false
+        "entityType": "Primary",
+        "milestones": [
+          {
+            "milestoneId": "12000000-0000-0000-0000-000000000000",
+            "status": "Remove"
+          },
+          {
+            "milestoneId": "13000000-0000-0000-0000-000000000001",
+            "status": "Remove"
+          }
+        ]
       }
     }
   },
@@ -33,9 +43,8 @@
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "provisioningState": "Succeeded",
           "status": "Active",
-          "automaticShortfall": true,
-          "milestones": [],
-          "hasMilestones": false
+          "automaticShortfall": "Enable",
+          "milestones": []
         },
         "location": "global",
         "tags": {

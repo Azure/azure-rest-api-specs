@@ -5,7 +5,9 @@
     "maccName": "macc_20230614",
     "api-version": "2025-05-01-preview",
     "body": {
+      "location": "global",
       "properties": {
+        "entityType": "Primary",
         "commitment": {
           "grain": "FullTerm",
           "amount": 50000,
@@ -59,8 +61,7 @@
           "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
           "provisioningState": "Succeeded",
           "status": "Active",
-          "automaticShortfall": true,
-          "hasMilestones": true,
+          "automaticShortfall": "Enable",
           "milestones": [
             {
               "milestoneId": "11111111-1111-1111-1111-111111111111",
@@ -70,7 +71,7 @@
                 "grain": "FullTerm"
               },
               "endAt": "2027-06-30T23:59:59Z",
-              "automaticTopup": true,
+              "automaticTopup": "Enable",
               "status": "Active"
             },
             {
@@ -81,7 +82,7 @@
                 "currencyCode": "USD"
               },
               "endAt": "2028-06-30T23:59:59Z",
-              "automaticTopup": true,
+              "automaticTopup": "Enable",
               "status": "Active"
             }
           ]
