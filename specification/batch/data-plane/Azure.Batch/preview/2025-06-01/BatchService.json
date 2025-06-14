@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Batch",
-    "version": "2024-07-01.20.0",
+    "version": "2025-06-01",
     "description": "Azure Batch provides Cloud-scale job scheduling and compute management.",
     "x-typespec-generated": [
       {
@@ -166,11 +166,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List applications": {
-            "$ref": "./examples/Applications_ListApplications.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -261,11 +256,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get applications": {
-            "$ref": "./examples/Applications_GetApplication.json"
           }
         }
       }
@@ -382,11 +372,6 @@
           }
         },
         "deprecated": true,
-        "x-ms-examples": {
-          "Certificate list": {
-            "$ref": "./examples/Certificates_ListCertificates.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -483,12 +468,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate create": {
-            "$ref": "./examples/Certificates_CreateCertificate.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})": {
@@ -596,12 +576,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate get": {
-            "$ref": "./examples/Certificates_GetCertificate.json"
-          }
-        }
+        "deprecated": true
       },
       "delete": {
         "operationId": "Certificates_DeleteCertificate",
@@ -693,12 +668,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate delete": {
-            "$ref": "./examples/Certificates_DeleteCertificate.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete": {
@@ -796,12 +766,7 @@
             }
           }
         },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Certificate cancel delete": {
-            "$ref": "./examples/Certificates_CancelCertificateDeletion.json"
-          }
-        }
+        "deprecated": true
       }
     },
     "/jobs": {
@@ -924,11 +889,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Job list": {
-            "$ref": "./examples/Jobs_ListJobs.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -1023,14 +983,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic job": {
-            "$ref": "./examples/Jobs_CreateJob_Basic.json"
-          },
-          "Creates a complex job": {
-            "$ref": "./examples/Jobs_CreateJob_Complex.json"
           }
         }
       }
@@ -1177,11 +1129,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job get": {
-            "$ref": "./examples/Jobs_GetJob.json"
-          }
         }
       },
       "put": {
@@ -1315,11 +1262,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Job patch": {
-            "$ref": "./examples/Jobs_ReplaceJob.json"
           }
         }
       },
@@ -1455,11 +1397,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job update": {
-            "$ref": "./examples/Jobs_UpdateJob.json"
-          }
         }
       },
       "delete": {
@@ -1576,11 +1513,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete Job": {
-            "$ref": "./examples/Jobs_DeleteJob.json"
-          }
         }
       }
     },
@@ -1681,14 +1613,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic collection of tasks": {
-            "$ref": "./examples/Tasks_CreateTaskCollection_Basic.json"
-          },
-          "Creates a complex collection of tasks": {
-            "$ref": "./examples/Tasks_CreateTaskCollection_Complex.json"
           }
         }
       }
@@ -1826,11 +1750,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job disable": {
-            "$ref": "./examples/Jobs_DisableJob.json"
-          }
         }
       }
     },
@@ -1955,11 +1874,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job enable": {
-            "$ref": "./examples/Jobs_EnableJob.json"
-          }
         }
       }
     },
@@ -2079,11 +1993,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Job list preparation and release task status": {
-            "$ref": "./examples/Jobs_ListJobPreparationAndReleaseTaskStatus.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -2174,11 +2083,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Job get task counts": {
-            "$ref": "./examples/Jobs_GetJobTaskCounts.json"
           }
         }
       }
@@ -2310,11 +2214,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Task list": {
-            "$ref": "./examples/Tasks_ListTasks.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -2416,26 +2315,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic task": {
-            "$ref": "./examples/Tasks_CreateTask_Basic.json"
-          },
-          "Creates a task with container settings": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettings.json"
-          },
-          "Creates a task with container settings with data isolation": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettingsWithDataIsolation.json"
-          },
-          "Creates a task with container settings with duplicate source": {
-            "$ref": "./examples/Tasks_CreateTask_ContainerSettingsWithDataIsolation_DuplicateSources.json"
-          },
-          "Creates a task with exit conditions": {
-            "$ref": "./examples/Tasks_CreateTask_ExitConditions.json"
-          },
-          "Creates a task with extra slot requirement": {
-            "$ref": "./examples/Tasks_CreateTask_RequiredSlots.json"
           }
         }
       }
@@ -2593,11 +2472,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task get": {
-            "$ref": "./examples/Tasks_GetTask.json"
-          }
         }
       },
       "put": {
@@ -2738,11 +2612,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task update": {
-            "$ref": "./examples/Tasks_ReplaceTask.json"
-          }
         }
       },
       "delete": {
@@ -2858,11 +2727,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task delete": {
-            "$ref": "./examples/Tasks_DeleteTask.json"
           }
         }
       }
@@ -2984,11 +2848,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File list from task": {
-            "$ref": "./examples/Tasks_ListTaskFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -3146,11 +3005,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get File From Task": {
-            "$ref": "./examples/Tasks_GetTaskFile.json"
-          }
         }
       },
       "delete": {
@@ -3246,11 +3100,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File delete from task": {
-            "$ref": "./examples/Tasks_DeleteTaskFile.json"
           }
         }
       },
@@ -3389,11 +3238,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "File get properties from task": {
-            "$ref": "./examples/Tasks_GetTaskFileProperties.json"
-          }
         }
       }
     },
@@ -3525,11 +3369,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Task reactivate": {
-            "$ref": "./examples/Tasks_ReactivateTask.json"
-          }
         }
       }
     },
@@ -3636,11 +3475,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task list subtasks": {
-            "$ref": "./examples/Tasks_ListSubTasks.json"
           }
         },
         "x-ms-pageable": {
@@ -3775,11 +3609,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Task terminate": {
-            "$ref": "./examples/Tasks_TerminateTask.json"
           }
         }
       }
@@ -3924,11 +3753,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Job terminate": {
-            "$ref": "./examples/Jobs_TerminateJob.json"
-          }
         }
       }
     },
@@ -4052,11 +3876,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "JobSchedule list": {
-            "$ref": "./examples/JobSchedules_ListJobSchedules.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -4151,14 +3970,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a basic JobSchedule": {
-            "$ref": "./examples/JobSchedules_CreateJobSchedule_Basic.json"
-          },
-          "Creates a complex JobScheduleAdd": {
-            "$ref": "./examples/JobSchedules_CreateJobSchedule_Complex.json"
           }
         }
       }
@@ -4304,11 +4115,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule get": {
-            "$ref": "./examples/JobSchedules_GetJobSchedule.json"
-          }
         }
       },
       "put": {
@@ -4442,11 +4248,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule patch": {
-            "$ref": "./examples/JobSchedules_ReplaceJobSchedule.json"
           }
         }
       },
@@ -4582,11 +4383,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule update": {
-            "$ref": "./examples/JobSchedules_UpdateJobSchedule.json"
-          }
         }
       },
       "delete": {
@@ -4702,11 +4498,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule delete": {
-            "$ref": "./examples/JobSchedules_DeleteJobSchedule.json"
           }
         }
       },
@@ -4828,11 +4619,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Check Job Schedule Exists": {
-            "$ref": "./examples/JobSchedules_JobScheduleExists.json"
           }
         }
       }
@@ -4958,11 +4744,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule disable": {
-            "$ref": "./examples/JobSchedules_DisableJobSchedule.json"
-          }
         }
       }
     },
@@ -5086,11 +4867,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "JobSchedule enable": {
-            "$ref": "./examples/JobSchedules_EnableJobSchedule.json"
           }
         }
       }
@@ -5220,11 +4996,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List Job Under Job Schedule": {
-            "$ref": "./examples/Jobs_ListJobsFromSchedule.json"
           }
         },
         "x-ms-pageable": {
@@ -5360,11 +5131,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "JobSchedule terminate": {
-            "$ref": "./examples/JobSchedules_TerminateJobSchedule.json"
-          }
         }
       }
     },
@@ -5463,11 +5229,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "NodeCountsPayload": {
-            "$ref": "./examples/Pools_ListPoolNodeCounts.json"
           }
         },
         "x-ms-pageable": {
@@ -5595,11 +5356,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Pool list": {
-            "$ref": "./examples/Pools_ListPools_Basic.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -5694,35 +5450,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a VirtualMachineConfiguration pool": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfiguration.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/Pools_CreatePool_OSDisk.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithServiceArtifactReference.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with containers": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithContainers.json"
-          },
-          "Creates a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/Pools_CreatePool_VirtualMachineConfigurationWithExtensions.json"
-          },
-          "Creates a pool with SecurityProfile": {
-            "$ref": "./examples/Pools_CreatePool_SecurityProfile.json"
-          },
-          "Creates a pool with accelerated networking": {
-            "$ref": "./examples/Pools_CreatePool_AcceleratedNetworking.json"
-          },
-          "Creates a pool with mount drive specified": {
-            "$ref": "./examples/Pools_CreatePool_MountConfiguration.json"
-          },
-          "Creates a simple pool with resourceTags": {
-            "$ref": "./examples/Pools_CreatePool_ResourceTags.json"
           }
         }
       }
@@ -5868,26 +5595,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Add a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithOSDisk.json"
-          },
-          "Get a VirtualMachineConfiguration pool with SecurityProfile": {
-            "$ref": "./examples/Pools_GetPool_SecurityProfile.json"
-          },
-          "Get a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithServiceArtifactReference.json"
-          },
-          "Get a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/Pools_GetPool_VirtualMachineConfigurationWithExtensions.json"
-          },
-          "Get a pool with AcceleratedNetworking": {
-            "$ref": "./examples/Pools_GetPool_AcceleratedNetworking.json"
-          },
-          "Pool get": {
-            "$ref": "./examples/Pools_GetPool_Basic.json"
-          }
         }
       },
       "patch": {
@@ -6022,11 +5729,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Patch the Pool": {
-            "$ref": "./examples/Pools_UpdatePool.json"
-          }
         }
       },
       "delete": {
@@ -6135,11 +5837,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool delete": {
-            "$ref": "./examples/Pools_DeletePool.json"
           }
         }
       },
@@ -6261,11 +5958,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Check Pool Exists": {
-            "$ref": "./examples/Pools_PoolExists.json"
-          }
         }
       }
     },
@@ -6355,11 +6047,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Disable pool autoscale": {
-            "$ref": "./examples/Pools_DisablePoolAutoScale.json"
           }
         }
       }
@@ -6497,11 +6184,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool enable autoscale": {
-            "$ref": "./examples/Pools_EnablePoolAutoscale.json"
-          }
         }
       }
     },
@@ -6606,11 +6288,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool evaluate autoscale": {
-            "$ref": "./examples/Pools_EvaluatePoolAutoscale.json"
           }
         }
       }
@@ -6731,11 +6408,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Node list": {
-            "$ref": "./examples/Nodes_ListNodes.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -6844,11 +6516,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node get": {
-            "$ref": "./examples/Nodes_GetNode.json"
           }
         }
       }
@@ -6959,11 +6626,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node Deallocate": {
-            "$ref": "./examples/Node_DeallocateNode.json"
-          }
         }
       }
     },
@@ -7073,11 +6735,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node disable scheduling": {
-            "$ref": "./examples/Nodes_DisableNodeScheduling.json"
-          }
         }
       }
     },
@@ -7174,11 +6831,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node enable scheduling": {
-            "$ref": "./examples/Nodes_EnableNodeScheduling.json"
           }
         }
       }
@@ -7299,11 +6951,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List compute node extensions": {
-            "$ref": "./examples/Nodes_ListNodeExtensions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -7419,11 +7066,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get batch node extension": {
-            "$ref": "./examples/Nodes_GetNodeExtension.json"
           }
         }
       }
@@ -7545,11 +7187,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File list from node": {
-            "$ref": "./examples/Nodes_ListNodeFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -7707,11 +7344,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get File From Compute Node": {
-            "$ref": "./examples/Nodes_GetNodeFile.json"
-          }
         }
       },
       "delete": {
@@ -7807,11 +7439,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "File delete from node": {
-            "$ref": "./examples/Nodes_DeleteNodeFile.json"
           }
         }
       },
@@ -7950,11 +7577,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "File get properties from node": {
-            "$ref": "./examples/Nodes_GetNodeFileProperties.json"
-          }
         }
       }
     },
@@ -8063,11 +7685,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node reboot": {
-            "$ref": "./examples/Nodes_RebootNode.json"
           }
         }
       }
@@ -8178,11 +7795,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node reimage": {
-            "$ref": "./examples/Nodes_NodeReimage.json"
-          }
         }
       }
     },
@@ -8278,11 +7890,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node get remote login settings": {
-            "$ref": "./examples/Nodes_GetNodeRemoteLoginSettings.json"
           }
         }
       }
@@ -8380,11 +7987,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node start": {
-            "$ref": "./examples/Node_StartNode.json"
           }
         }
       }
@@ -8494,11 +8096,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Upload BatchService Logs": {
-            "$ref": "./examples/Nodes_UploadNodeLogs.json"
-          }
         }
       }
     },
@@ -8607,11 +8204,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node create user": {
-            "$ref": "./examples/Nodes_CreateNodeUser.json"
           }
         }
       }
@@ -8729,11 +8321,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Node update user": {
-            "$ref": "./examples/Nodes_ReplaceNodeUser.json"
-          }
         }
       },
       "delete": {
@@ -8822,11 +8409,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Node delete user": {
-            "$ref": "./examples/Nodes_DeleteNodeUser.json"
           }
         }
       }
@@ -8964,11 +8546,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool remove nodes": {
-            "$ref": "./examples/Pools_RemoveNodes.json"
-          }
         }
       }
     },
@@ -9105,11 +8682,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool resize": {
-            "$ref": "./examples/Pools_ResizePool.json"
-          }
         }
       }
     },
@@ -9234,11 +8806,6 @@
               "$ref": "#/definitions/BatchError"
             }
           }
-        },
-        "x-ms-examples": {
-          "Pool stop resize": {
-            "$ref": "./examples/Pools_StopPoolResize.json"
-          }
         }
       }
     },
@@ -9340,11 +8907,6 @@
             "schema": {
               "$ref": "#/definitions/BatchError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Pool update": {
-            "$ref": "./examples/Pools_ReplacePoolProperties.json"
           }
         }
       }
@@ -9463,11 +9025,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Pool list usage metrics": {
-            "$ref": "./examples/Pools_ListPoolUsageMetrics.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -9571,11 +9128,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Account list node agent skus": {
-            "$ref": "./examples/Pools_ListSupportedImages.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         }
@@ -9665,7 +9217,8 @@
           "description": "A list of additional error details related to the autoscale error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -9843,7 +9396,8 @@
           "description": "The list of supported Virtual Machine Images.",
           "items": {
             "$ref": "#/definitions/BatchSupportedImage"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -10098,7 +9652,8 @@
           "description": "A list of additional error details related to the Certificate deletion error. This list includes details such as the active Pools and Compute Nodes referencing this Certificate. However, if a large number of resources reference the Certificate, the list contains only about the first hundred.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10135,7 +9690,8 @@
           "description": "The list of Certificates.",
           "items": {
             "$ref": "#/definitions/BatchCertificate"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -10280,7 +9836,8 @@
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
             "$ref": "#/definitions/ContainerRegistryReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10307,7 +9864,8 @@
           "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
           "items": {
             "$ref": "#/definitions/ContainerRegistryReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10321,7 +9879,8 @@
           "items": {
             "$ref": "#/definitions/BatchTaskCreateResult"
           },
-          "x-ms-client-name": "values"
+          "x-ms-client-name": "values",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10352,7 +9911,8 @@
           "description": "A collection of key-value pairs containing additional details about the error.",
           "items": {
             "$ref": "#/definitions/BatchErrorDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -10440,7 +10000,8 @@
           "description": "A list of network security group rules that will be applied to the endpoint. The maximum number of rules that can be specified across all the endpoints on a Batch Pool is 25. If no network security group rules are specified, a default rule will be created to allow inbound access to the specified backendPort. If the maximum number of network security group rules is exceeded the request fails with HTTP status code 400.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityGroupRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10555,7 +10116,8 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -10582,7 +10144,8 @@
           "description": "A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "executionInfo": {
           "$ref": "#/definitions/BatchJobExecutionInfo",
@@ -10698,7 +10261,8 @@
           "description": "The list of common environment variable settings. These environment variables are set for all Tasks in the Job (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -10723,7 +10287,8 @@
           "description": "A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10818,21 +10383,24 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Manager Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10860,7 +10428,8 @@
           "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -10901,21 +10470,24 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Manager Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -10943,7 +10515,8 @@
           "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -11024,7 +10597,8 @@
           "description": "A list of Job Preparation and Job Release Task execution information.",
           "items": {
             "$ref": "#/definitions/BatchJobPreparationAndReleaseTaskStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -11053,14 +10627,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Preparation Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -11189,14 +10765,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Preparation Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "constraints": {
           "$ref": "#/definitions/BatchTaskConstraints",
@@ -11237,14 +10815,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Release Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "maxWallClockTime": {
           "type": "string",
@@ -11360,14 +10940,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Job Release Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "maxWallClockTime": {
           "type": "string",
@@ -11462,7 +11044,8 @@
           "description": "A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "stats": {
           "$ref": "#/definitions/BatchJobScheduleStatistics",
@@ -11526,7 +11109,8 @@
           "description": "A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -11732,7 +11316,8 @@
           "description": "A list of name-value pairs associated with the Job Schedule as metadata. If you do not specify this element, existing metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -11757,7 +11342,8 @@
           "description": "A list of additional error details related to the scheduling error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -11825,7 +11411,8 @@
           "description": "A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfo",
@@ -11836,7 +11423,8 @@
           "description": "A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -11904,7 +11492,8 @@
           "description": "A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "poolInfo": {
           "$ref": "#/definitions/BatchPoolInfoUpdate",
@@ -11915,7 +11504,8 @@
           "description": "A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -12121,7 +11711,8 @@
           "description": "A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "networkConfiguration": {
           "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
@@ -12220,7 +11811,8 @@
           "description": "A list of Tasks whose state has recently changed. This property is present only if at least one Task has run on this Compute Node since it was assigned to the Pool.",
           "items": {
             "$ref": "#/definitions/BatchTaskInfo"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "startTask": {
           "$ref": "#/definitions/BatchStartTask",
@@ -12235,14 +11827,16 @@
           "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errors": {
           "type": "array",
           "description": "The list of errors that are currently being encountered by the Compute Node.",
           "items": {
             "$ref": "#/definitions/BatchNodeError"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isDedicated": {
           "type": "boolean",
@@ -12553,7 +12147,8 @@
           "description": "The list of inbound endpoints that are accessible on the Compute Node.",
           "items": {
             "$ref": "#/definitions/InboundEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -12577,7 +12172,8 @@
           "description": "The list of additional error details related to the Compute Node error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -12613,7 +12209,8 @@
           "description": "The list of files.",
           "items": {
             "$ref": "#/definitions/BatchNodeFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -13066,7 +12663,8 @@
           "description": "The list of Compute Node extensions.",
           "items": {
             "$ref": "#/definitions/BatchNodeVMExtension"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -13182,7 +12780,8 @@
           "items": {
             "$ref": "#/definitions/ResizeError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "resourceTags": {
           "type": "object",
@@ -13257,7 +12856,8 @@
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -13265,7 +12865,8 @@
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -13284,7 +12885,8 @@
           "items": {
             "$ref": "#/definitions/UserAccount"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
@@ -13292,7 +12894,8 @@
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "stats": {
           "$ref": "#/definitions/BatchPoolStatistics",
@@ -13306,7 +12909,8 @@
           "items": {
             "$ref": "#/definitions/MountConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "identity": {
           "$ref": "#/definitions/BatchPoolIdentity",
@@ -13400,14 +13004,16 @@
           "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "taskSlotsPerNode": {
           "type": "integer",
@@ -13423,21 +13029,24 @@
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "mountConfiguration": {
           "type": "array",
           "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/BatchNodeCommunicationMode",
@@ -13478,7 +13087,8 @@
           "items": {
             "$ref": "#/definitions/BatchInboundNatPool"
           },
-          "x-ms-client-name": "inboundNatPools"
+          "x-ms-client-name": "inboundNatPools",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -13495,7 +13105,8 @@
           "items": {
             "$ref": "#/definitions/BatchInboundNatPool"
           },
-          "x-ms-client-name": "inboundNatPools"
+          "x-ms-client-name": "inboundNatPools",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -13525,7 +13136,8 @@
           "description": "The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "items": {
             "$ref": "#/definitions/BatchUserAssignedIdentity"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -13634,7 +13246,8 @@
           "description": "The Pool usage metrics data.",
           "items": {
             "$ref": "#/definitions/BatchPoolUsageMetrics"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -13672,7 +13285,8 @@
           "description": "A list of Compute Node counts by Pool.",
           "items": {
             "$ref": "#/definitions/BatchPoolNodeCounts"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "odata.nextLink": {
           "type": "string",
@@ -13693,21 +13307,24 @@
           "description": "This list replaces any existing Certificate references configured on the Pool.\nIf you specify an empty collection, any existing Certificate references are removed from the Pool.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/BatchNodeCommunicationMode",
@@ -13908,35 +13525,40 @@
           "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userAccounts": {
           "type": "array",
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "mountConfiguration": {
           "type": "array",
           "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/BatchNodeCommunicationMode",
@@ -14025,35 +13647,40 @@
           "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userAccounts": {
           "type": "array",
           "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "mountConfiguration": {
           "type": "array",
           "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "targetNodeCommunicationMode": {
           "$ref": "#/definitions/BatchNodeCommunicationMode",
@@ -14150,21 +13777,24 @@
           "description": "If this element is present, it replaces any existing Certificate references configured on the Pool.\nIf omitted, any existing Certificate references are left unchanged.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
           "items": {
             "$ref": "#/definitions/BatchCertificateReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
           "description": "A list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. If this element is present, it replaces any existing Package references. If you specify an empty collection, then all Package references are removed from the Pool. If omitted, any existing Package references are left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "array",
           "description": "A list of name-value pairs associated with the Pool as metadata. If this element is present, it replaces any existing metadata configured on the Pool. If you specify an empty collection, any metadata is removed from the Pool. If omitted, any existing metadata is left unchanged.",
           "items": {
             "$ref": "#/definitions/BatchMetadataItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
@@ -14199,14 +13829,16 @@
           "description": "The list of user Accounts to be created on each Compute Node in the Pool. This field can be updated only when the pool is empty.",
           "items": {
             "$ref": "#/definitions/UserAccount"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "mountConfiguration": {
           "type": "array",
           "description": "Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.<br /><br />This field can be updated only when the pool is empty.",
           "items": {
             "$ref": "#/definitions/MountConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicyUpdate",
@@ -14289,9 +13921,7 @@
           "type": "array",
           "description": "The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         }
       }
@@ -14313,14 +13943,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the StartTask.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -14433,14 +14065,16 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the StartTask.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -14668,7 +14302,8 @@
           "items": {
             "$ref": "#/definitions/ResourceFile"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "outputFiles": {
           "type": "array",
@@ -14676,7 +14311,8 @@
           "items": {
             "$ref": "#/definitions/OutputFile"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
@@ -14684,7 +14320,8 @@
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "affinityInfo": {
           "$ref": "#/definitions/BatchAffinityInfo",
@@ -14738,7 +14375,8 @@
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -14841,7 +14479,8 @@
           "description": "The paths you want to mounted to container task. If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
           "items": {
             "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -14873,7 +14512,8 @@
           "description": "The paths you want to mounted to container task. If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
           "items": {
             "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -14962,21 +14602,24 @@
           "description": "A list of files that the Batch service will download to the Compute Node before running the command line. For multi-instance Tasks, the resource files will only be downloaded to the Compute Node on which the primary Task is executed. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "outputFiles": {
           "type": "array",
           "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
           "items": {
             "$ref": "#/definitions/OutputFile"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "environmentSettings": {
           "type": "array",
           "description": "A list of environment variable settings for the Task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "affinityInfo": {
           "$ref": "#/definitions/BatchAffinityInfo",
@@ -15008,7 +14651,8 @@
           "description": "A list of Packages that the Batch service will deploy to the Compute Node before running the command line. Application packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced package is already on the Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails.",
           "items": {
             "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "authenticationTokenSettings": {
           "$ref": "#/definitions/AuthenticationTokenSettings",
@@ -15071,7 +14715,8 @@
           "description": "The list of Task ID ranges that this Task depends on. All Tasks in all ranges must complete successfully before the dependent Task can be scheduled.",
           "items": {
             "$ref": "#/definitions/BatchTaskIdRange"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -15177,7 +14822,8 @@
           "description": "A list of additional details related to the error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -16035,14 +15681,16 @@
           "description": "A list of individual Task exit codes and how the Batch service should respond to them.",
           "items": {
             "$ref": "#/definitions/ExitCodeMapping"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "exitCodeRanges": {
           "type": "array",
           "description": "A list of Task exit code ranges and how the Batch service should respond to them.",
           "items": {
             "$ref": "#/definitions/ExitCodeRangeMapping"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "preProcessingError": {
           "$ref": "#/definitions/ExitOptions",
@@ -16351,7 +15999,8 @@
           "description": "A list of files that the Batch service will download before running the coordination command line. The difference between common resource files and Task resource files is that common resource files are downloaded for all subtasks including the primary, whereas Task resource files are downloaded only for the primary. Also note that these resource files are not downloaded to the Task working directory, but instead are downloaded to the Task root directory (one directory above the working directory).  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -16574,7 +16223,8 @@
           "description": "A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.",
           "items": {
             "$ref": "#/definitions/OutputFileUploadHeader"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -16683,7 +16333,8 @@
           "description": "A list of additional error details related to the Pool resize error.",
           "items": {
             "$ref": "#/definitions/NameValuePair"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -17168,14 +16819,16 @@
           "description": "The resource status information.",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "subStatuses": {
           "type": "array",
           "description": "The resource status information.",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -17201,7 +16854,8 @@
           "description": "The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.",
           "items": {
             "$ref": "#/definitions/DataDisk"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "licenseType": {
           "type": "string",
@@ -17224,7 +16878,8 @@
           "description": "The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.",
           "items": {
             "$ref": "#/definitions/VMExtension"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "osDisk": {
           "$ref": "#/definitions/BatchOsDisk",
@@ -17267,7 +16922,8 @@
           "description": "The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.",
           "items": {
             "$ref": "#/definitions/DataDisk"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "licenseType": {
           "type": "string",
@@ -17290,7 +16946,8 @@
           "description": "The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.",
           "items": {
             "$ref": "#/definitions/VMExtension"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "osDisk": {
           "$ref": "#/definitions/BatchOsDisk",
