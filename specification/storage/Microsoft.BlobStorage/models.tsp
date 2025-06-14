@@ -701,7 +701,6 @@ model BlobPropertiesInternal {
   @Xml.name("LegalHold") legalHold?: boolean;
 }
 
-
 /** The immutability policy mode used in requests. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ImmutabilityPolicyMode {
@@ -1223,7 +1222,8 @@ alias AcceptRangesResponseHeader = {
 alias AcceptRangesResponseHeaderPrivate = {
   /** Indicates that the service supports requests for partial blob content. */
   @access(Access.internal)
-  @header("Accept-Ranges") acceptRanges?: string;
+  @header("Accept-Ranges")
+  acceptRanges?: string;
 };
 
 /** The is current version response header. */
@@ -1637,7 +1637,8 @@ alias EtagResponseHeader = {
 alias EtagResponseHeaderPrivate = {
   /** The ETag contains a value that you can use to perform operations conditionally. */
   @access(Access.internal)
-  @header("ETag") eTag: string;
+  @header("ETag")
+  eTag: string;
 };
 
 /** The copy source tags header parameter. */
@@ -2233,12 +2234,6 @@ alias IsHierarchicalNamespaceEnabled = {
 
 alias StructuredBodyTypeResponseHeader = {
   /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
-  @header("x-ms-structured-body")
-  structuredBodyType?: string;
-};
-
-alias StructuredBodyTypeResponseHeaderPrivate = {
-  /** Indicates the response body contains a structured message and specifies the message schema version and properties. */
   @access(Access.internal)
   @header("x-ms-structured-body")
   structuredBodyType?: string;
@@ -2250,20 +2245,7 @@ alias StructuredContentLengthParameter = {
   structuredContentLength?: int64;
 };
 
-alias StructuredContentLengthParameterPrivate = {
-  /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
-  @access(Access.internal)
-  @header("x-ms-structured-content-length")
-  structuredContentLength?: int64;
-};
-
 alias StructuredContentLengthResponseHeader = {
-  /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
-  @header("x-ms-structured-content-length")
-  structuredContentLength?: int64;
-};
-
-alias StructuredContentLengthResponseHeaderPrivate = {
   /** The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length. */
   @access(Access.internal)
   @header("x-ms-structured-content-length")
@@ -2271,12 +2253,6 @@ alias StructuredContentLengthResponseHeaderPrivate = {
 };
 
 alias StructuredBodyParameter = {
-  /** Required if the request body is a structured message. Specifies the message schema version and properties. */
-  @header("x-ms-structured-body")
-  structuredBodyType?: string;
-};
-
-alias StructuredBodyParameterPrivate = {
   /** Required if the request body is a structured message. Specifies the message schema version and properties. */
   @access(Access.internal)
   @header("x-ms-structured-body")

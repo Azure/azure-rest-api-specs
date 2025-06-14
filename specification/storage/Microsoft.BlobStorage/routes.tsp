@@ -734,8 +734,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeaderPrivate;
-        ...StructuredContentLengthResponseHeaderPrivate;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
@@ -787,8 +787,8 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeaderPrivate;
-        ...StructuredContentLengthResponseHeaderPrivate;
+        ...StructuredBodyTypeResponseHeader;
+        ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
       }) | StorageError;
 
@@ -2007,8 +2007,8 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
             ...ContentCrc64Parameter;
-            ...StructuredBodyParameterPrivate;
-            ...StructuredContentLengthParameterPrivate;
+            ...StructuredBodyParameter;
+            ...StructuredContentLengthParameter;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
@@ -2024,7 +2024,7 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeaderPrivate;
+            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
@@ -2112,8 +2112,8 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...StructuredBodyParameterPrivate;
-            ...StructuredContentLengthParameterPrivate;
+            ...StructuredBodyParameter;
+            ...StructuredContentLengthParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2123,7 +2123,7 @@ namespace Storage.Blob {
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeaderPrivate;
+            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
