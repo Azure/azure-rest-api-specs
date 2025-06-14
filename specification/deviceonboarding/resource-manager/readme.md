@@ -41,7 +41,6 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: DeviceOnboarding.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies/{policyName}"].patch.parameters[4].schema.bootstrapAuthentication
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceOnboarding/onboardingServices/{onboardingServiceName}/policies/{policyName}"].patch.parameters[7].schema.resourceDetails
     reason: This is a false positive. Discriminator is required for PATCH.
   - code: MISSING_APIS_IN_DEFAULT_TAG
     from: DeviceOnboarding.json
