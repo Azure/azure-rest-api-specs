@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 
 namespace Products;
 
-@doc("Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit)")
+@doc("Eligibility for Azure consumption commitment benefit. For more details see: https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit")
 union AzureBenefit {
   @doc("The product is eligible for Azure consumption commitment benefit")
   Eligible: "Eligible",
