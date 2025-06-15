@@ -857,6 +857,35 @@
     }
   },
   "definitions": {
+    "AgreedTermsAndConditions": {
+      "type": "object",
+      "description": "Terms and conditions information.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The terms and conditions version."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The terms and conditions URL."
+        },
+        "label": {
+          "type": "string",
+          "description": "The terms and conditions label."
+        },
+        "agreed": {
+          "type": "boolean",
+          "description": "Whether the terms and conditions have been signed."
+        }
+      },
+      "required": [
+        "version",
+        "url",
+        "label",
+        "agreed"
+      ]
+    },
     "ApplicationOwnerProperties": {
       "type": "object",
       "description": "Details about the Application Owner (i.e. organization) that would use the Operator's Network APIs.",
@@ -2114,17 +2143,36 @@
           "type": "string",
           "description": "Azure marketplace Plan ID for this plan."
         },
-        "planTermsAndConditionsLinks": {
+        "termsAndConditions": {
           "type": "array",
-          "description": "Links to the Terms and Conditions of the Plan that must be accepted to create an\nassociated Operator Api Connection",
+          "description": "Terms and Conditions of the Plan that must be accepted to create an\nassociated Operator Api Connection",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/TermsAndConditions"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label"
+          ]
+        },
+        "pricingInformation": {
+          "type": "array",
+          "description": "Information about the pricing of the plan.",
+          "items": {
+            "$ref": "#/definitions/PricingInformation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "pricingTier",
+            "cost",
+            "consumptionUnit"
+          ]
         }
       },
       "required": [
-        "planTermsAndConditionsLinks"
+        "termsAndConditions",
+        "pricingInformation"
       ]
     },
     "OperatorApiConnection": {
@@ -2221,17 +2269,23 @@
           "description": "The status of the OperatorApiConnection resource.",
           "readOnly": true
         },
-        "planTermsAndConditionsAccepted": {
-          "type": "boolean",
-          "description": "Whether the caller has accepted the Terms and Conditions of the associated Operator API Plan.\nAfter creation, the planTermsAndConditionsLink property is set to the Terms and Conditions that\nhave been accepted.\n\nMust be set to True, as the Terms and Conditions must be accepted."
-        },
-        "planTermsAndConditionsLinks": {
+        "agreedTermsAndConditions": {
           "type": "array",
-          "description": "Links to the Terms and Conditions of the Operator API Plan that were accepted on creation.",
+          "description": "A list of terms and conditions that the user has agreed to when creating this OperatorApiConnection resource.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AgreedTermsAndConditions"
           },
-          "readOnly": true
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label",
+            "agreed"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "purposes": {
           "type": "array",
@@ -2259,7 +2313,7 @@
       "required": [
         "operatorApiPlanId",
         "gatewayId",
-        "planTermsAndConditionsAccepted",
+        "agreedTermsAndConditions",
         "purposes",
         "purposeReason",
         "dataProcessingList"
@@ -2304,9 +2358,23 @@
             ]
           }
         },
-        "planTermsAndConditionsAccepted": {
-          "type": "boolean",
-          "description": "Whether the caller has accepted the Terms and Conditions of the associated Operator API Plan.\nAfter creation, the planTermsAndConditionsLink property is set to the Terms and Conditions that\nhave been accepted.\n\nMust be set to True, as the Terms and Conditions must be accepted."
+        "agreedTermsAndConditions": {
+          "type": "array",
+          "description": "A list of terms and conditions that the user has agreed to when creating this OperatorApiConnection resource.",
+          "items": {
+            "$ref": "#/definitions/AgreedTermsAndConditions"
+          },
+          "x-ms-identifiers": [
+            "version",
+            "url",
+            "label",
+            "agreed"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "purposes": {
           "type": "array",
@@ -2490,6 +2558,32 @@
         "familyName",
         "givenName",
         "emailAddress"
+      ]
+    },
+    "PricingInformation": {
+      "type": "object",
+      "description": "Model defining how the plan is priced.",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "The pricing tier of the plan.",
+          "readOnly": true
+        },
+        "cost": {
+          "type": "string",
+          "description": "The cost of the plan.",
+          "readOnly": true
+        },
+        "consumptionUnit": {
+          "type": "string",
+          "description": "The unit of consumption that the pricing tier applies to.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "pricingTier",
+        "cost",
+        "consumptionUnit"
       ]
     },
     "ProcessingOperation": {
@@ -3333,6 +3427,30 @@
           "description": "Explanation of the current state of the OperatorApiConnection resource."
         }
       }
+    },
+    "TermsAndConditions": {
+      "type": "object",
+      "description": "Terms and conditions information.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The terms and conditions version."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The terms and conditions URL."
+        },
+        "label": {
+          "type": "string",
+          "description": "The terms and conditions label."
+        }
+      },
+      "required": [
+        "version",
+        "url",
+        "label"
+      ]
     }
   },
   "parameters": {}
