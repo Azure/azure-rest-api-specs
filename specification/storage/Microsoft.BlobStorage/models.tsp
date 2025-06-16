@@ -437,10 +437,14 @@ enum LeaseStatus {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
-  @Xml.name("Start") start: utcDateTime;
+  @Xml.name("Start")
+  @encode("rfc7231")
+  start: utcDateTime;
 
   /** The date-time the policy expires. */
-  @Xml.name("Expiry") expiry: utcDateTime;
+  @Xml.name("Expiry")
+  @encode("rfc7231")
+  expiry: utcDateTime;
 
   /** The permissions for acl the policy. */
   @Xml.name("Permission") permission: string;
@@ -492,6 +496,57 @@ union AccessTier {
 
   /** The Premium access tier. */
   Premium: "Premium",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** Extensible */
+  string,
+}
+
+/** The access tiers. */
+union AccessTierOptional {
+  /** The hot P4 tier. */
+  P4: "P4",
+
+  /** The hot P6 tier. */
+  P6: "P6",
+
+  /** The hot P10 tier. */
+  P10: "P10",
+
+  /** The hot P15 tier. */
+  P15: "P15",
+
+  /** The hot P20 tier. */
+  P20: "P20",
+
+  /** The hot P30 tier. */
+  P30: "P30",
+
+  /** The hot P40 tier. */
+  P40: "P40",
+
+  /** The hot P50 tier. */
+  P50: "P50",
+
+  /** The hot P60 tier. */
+  P60: "P60",
+
+  /** The hot P70 tier. */
+  P70: "P70",
+
+  /** The hot P80 tier. */
+  P80: "P80",
+
+  /** The hot access tier. */
+  Hot: "Hot",
+
+  /** The cool access tier. */
+  Cool: "Cool",
+
+  /** The archive access tier. */
+  Archive: "Archive",
 
   /** The Cold access tier. */
   Cold: "Cold",
@@ -1379,7 +1434,7 @@ alias ContentCrc64ResponseHeader = {
 alias CopyStatusResponseHeader = {
   /** State of the copy operation identified by x-ms-copy-id. */
   @header("x-ms-copy-status")
-  copyStatus: CopyStatus;
+  copyStatus?: CopyStatus;
 };
 
 /** The copy ID response header. */
@@ -1645,7 +1700,7 @@ alias EtagResponseHeaderPrivate = {
 alias CopySourceTagsParameter = {
   /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
   @header("x-ms-copy-source-tag-option")
-  copySourceTags?: string;
+  copySourceTags?: BlobCopySourceTags;
 };
 
 /** The blob copy source tags types. */
@@ -1725,10 +1780,10 @@ alias ContentCrc64Parameter = {
 };
 
 /** The access tier optional parameter. */
-alias AccessTierOptional = {
+alias AccessTierOptionalHeader = {
   /** The tier to be set on the blob. */
   @header("x-ms-access-tier")
-  tier?: AccessTier;
+  tier?: AccessTierOptional;
 };
 
 /** The content MD5 parameter. */
@@ -2101,10 +2156,18 @@ enum ListBlobsIncludeItem {
 }
 
 /** The lease duration parameter. */
-alias LeaseDurationHeader = {
+alias LeaseDurationResponseHeader = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
   duration?: LeaseDuration;
+};
+
+
+/** The lease duration parameter. */
+alias LeaseDurationHeaderParameter = {
+  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
+  @header("x-ms-lease-duration")
+  duration?: int32;
 };
 
 /** The container name path parameter */

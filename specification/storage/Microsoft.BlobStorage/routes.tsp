@@ -471,7 +471,7 @@ namespace Storage.Blob {
     op acquireLease is StorageOperationNoBody<
       {
         ...ContainerNamePathParameter;
-        ...LeaseDurationHeader;
+        ...LeaseDurationHeaderParameter;
         ...TimeoutParameter;
         ...ProposedLeaseIdOptionalParameter;
         ...IfModifiedSinceParameter;
@@ -716,7 +716,7 @@ namespace Storage.Blob {
         ...CopyProgressResponseHeader;
         ...CopyStatusResponseHeader;
         ...CopySourceResponseHeader;
-        ...LeaseDurationHeader;
+        ...LeaseDurationResponseHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
@@ -769,7 +769,7 @@ namespace Storage.Blob {
         ...CopyProgressResponseHeader;
         ...CopyStatusResponseHeader;
         ...CopySourceResponseHeader;
-        ...LeaseDurationHeader;
+        ...LeaseDurationResponseHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
@@ -808,7 +808,10 @@ namespace Storage.Blob {
           ...EncryptionKeyParameter;
           ...EncryptionKeySha256Parameter;
           ...EncryptionAlgorithmParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
         },
         {
@@ -833,7 +836,7 @@ namespace Storage.Blob {
           @header("x-ms-copy-destination-snapshot")
           destinationSnapshot?: string;
 
-          ...LeaseDurationHeader;
+          ...LeaseDurationResponseHeader;
           ...LeaseStateResponseHeader;
           ...LeaseStatusResponseHeader;
           ...ContentLengthResponseHeader;
@@ -850,7 +853,10 @@ namespace Storage.Blob {
           ...ServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
           ...EncryptionScopeResponseHeader;
-          ...AccessTierOptional;
+
+          /** The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://learn.microsoft.com/azure/virtual-machines/disks-types#premium-ssd. For blob storage LRS accounts, valid values are Hot/Cool/Archive. */
+          @header("x-ms-access-tier")
+          accessTier?: string;
 
           /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
           @header("x-ms-access-tier-inferred")
@@ -897,7 +903,10 @@ namespace Storage.Blob {
           @header("x-ms-delete-snapshots")
           deleteSnapshots?: DeleteSnapshotsOptionType;
 
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
 
           /** Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled. */
@@ -965,7 +974,10 @@ namespace Storage.Blob {
           ...BlobContentLanguageParameter;
           ...LeaseIdOptionalParameter;
           ...BlobContentDispositionParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
         },
         {
@@ -1054,7 +1066,10 @@ namespace Storage.Blob {
           ...EncryptionKeySha256Parameter;
           ...EncryptionAlgorithmParameter;
           ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
         },
         {
@@ -1079,9 +1094,12 @@ namespace Storage.Blob {
           ...ContainerNamePathParameter;
           ...BlobPathParameter;
           ...TimeoutParameter;
-          ...LeaseDurationHeader;
+          ...LeaseDurationHeaderParameter;
           ...ProposedLeaseIdOptionalParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseActionParameter<"acquire">;
         },
@@ -1106,7 +1124,10 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...LeaseIdRequiredParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseActionParameter<"release">;
         },
@@ -1129,7 +1150,10 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...LeaseIdRequiredParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseActionParameter<"renew">;
         },
@@ -1154,7 +1178,10 @@ namespace Storage.Blob {
           ...TimeoutParameter;
           ...LeaseIdRequiredParameter;
           ...ProposedLeaseIdRequiredParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseActionParameter<"change">;
         },
@@ -1178,7 +1205,10 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...LeaseBreakPeriodParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseActionParameter<"break">;
         },
@@ -1207,7 +1237,10 @@ namespace Storage.Blob {
           ...EncryptionKeySha256Parameter;
           ...EncryptionAlgorithmParameter;
           ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...LeaseIdOptionalParameter;
         },
@@ -1238,14 +1271,17 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptional;
+          ...AccessTierOptionalHeader;
           ...RehydratePriorityHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
           ...SourceIfMatchParameter;
           ...SourceIfNoneMatchParameter;
           ...SourceIfTagsParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...CopySourceParameter;
           ...LeaseIdOptionalParameter;
@@ -1286,12 +1322,15 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptional;
+          ...AccessTierOptionalHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
           ...SourceIfMatchParameter;
           ...SourceIfNoneMatchParameter;
-          ...ConditionalRequestHeaders;
+          ...IfModifiedSinceParameter;
+          ...IfUnmodifiedSinceParameter;
+          ...IfNoneMatchParameter;
+          ...IfMatchParameter;
           ...IfTagsParameter;
           ...CopySourceParameter;
           ...LeaseIdOptionalParameter;
@@ -1304,6 +1343,10 @@ namespace Storage.Blob {
           ...EncryptionScopeParameter;
           ...CopySourceTagsParameter;
           ...FileRequestIntentParameter;
+
+          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
+          @header("x-ms-requires-sync")
+          requiresSync: "true";
         },
         {
           @statusCode statusCode: 202;
@@ -1312,7 +1355,11 @@ namespace Storage.Blob {
           ...VersionIdResponseHeader;
           ...DateResponseHeader;
           ...CopyIdResponseHeader;
-          ...CopyStatusResponseHeader;
+
+          /** State of the copy operation identified by x-ms-copy-id. */
+          @header("x-ms-copy-status")
+          copyStatus?: "success";
+
           ...ContentMd5ResponseHeader;
           ...ContentCrc64ResponseHeader;
           ...EncryptionScopeResponseHeader;
@@ -1364,7 +1411,7 @@ namespace Storage.Blob {
 
           /** Indicates the tier to be set on the blob. */
           @header("x-ms-access-tier")
-          tier: AccessTier;
+          tier: AccessTierOptional;
 
           ...RehydratePriorityHeader;
           ...LeaseIdOptionalParameter;
@@ -1475,7 +1522,10 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...BlobContentLengthRequired;
             ...SequenceNumberParameter;
@@ -1534,7 +1584,10 @@ namespace Storage.Blob {
             ...IfSequenceNumberLessThanOrEqualToParameter;
             ...IfSequenceNumberLessThanParameter;
             ...IfSequenceNumberEqualToParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
@@ -1578,7 +1631,10 @@ namespace Storage.Blob {
             ...IfSequenceNumberLessThanOrEqualToParameter;
             ...IfSequenceNumberLessThanParameter;
             ...IfSequenceNumberEqualToParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...PageWriteParameter<"clear">;
           },
@@ -1627,7 +1683,10 @@ namespace Storage.Blob {
             ...IfSequenceNumberLessThanOrEqualToParameter;
             ...IfSequenceNumberLessThanParameter;
             ...IfSequenceNumberEqualToParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...SourceIfModifiedSinceParameter;
             ...SourceIfUnmodifiedSinceParameter;
@@ -1664,7 +1723,10 @@ namespace Storage.Blob {
             ...TimeoutParameter;
             ...RangeParameter;
             ...LeaseIdOptionalParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...MarkerParameter;
             ...MaxResultsParameter;
@@ -1699,7 +1761,10 @@ namespace Storage.Blob {
 
             ...RangeParameter;
             ...LeaseIdOptionalParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...MarkerParameter;
             ...MaxResultsParameter;
@@ -1729,7 +1794,10 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...BlobContentLengthRequired;
           },
@@ -1754,7 +1822,10 @@ namespace Storage.Blob {
             ...BlobPathParameter;
             ...TimeoutParameter;
             ...LeaseIdOptionalParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...SequenceNumberActionParameter;
             ...SequenceNumberParameter;
@@ -1778,7 +1849,10 @@ namespace Storage.Blob {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
             ...TimeoutParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...CopySourceParameter;
           },
@@ -1818,7 +1892,10 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...BlobTagsHeaderParameter;
             ...ImmutabilityPolicyExpiryParameter;
@@ -1873,7 +1950,10 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...StructuredBodyParameter;
             ...StructuredContentLengthParameter;
@@ -1920,7 +2000,10 @@ namespace Storage.Blob {
             ...LeaseIdOptionalParameter;
             ...BlobConditionMaxSizeParameter;
             ...BlobConditionAppendPosParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...SourceIfModifiedSinceParameter;
             ...SourceIfUnmodifiedSinceParameter;
@@ -1957,7 +2040,10 @@ namespace Storage.Blob {
             ...BlobPathParameter;
             ...TimeoutParameter;
             ...LeaseIdOptionalParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...BlobConditionAppendPosParameter;
           },
           {
@@ -1999,8 +2085,11 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
-            ...ConditionalRequestHeaders;
+            ...AccessTierOptionalHeader;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...BlobTagsHeaderParameter;
             ...ImmutabilityPolicyExpiryParameter;
@@ -2055,8 +2144,11 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
-            ...ConditionalRequestHeaders;
+            ...AccessTierOptionalHeader;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
             ...SourceIfModifiedSinceParameter;
             ...SourceIfUnmodifiedSinceParameter;
@@ -2195,8 +2287,11 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptional;
-            ...ConditionalRequestHeaders;
+            ...AccessTierOptionalHeader;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
 
             /** Blob Blocks. */
@@ -2272,7 +2367,10 @@ namespace Storage.Blob {
             ...EncryptionKeyParameter;
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
-            ...ConditionalRequestHeaders;
+            ...IfModifiedSinceParameter;
+            ...IfUnmodifiedSinceParameter;
+            ...IfNoneMatchParameter;
+            ...IfMatchParameter;
             ...IfTagsParameter;
           },
           BodyParameter & {
@@ -2297,7 +2395,7 @@ namespace Storage.Blob {
             ...CopyProgressResponseHeader;
             ...CopySourceResponseHeader;
             ...CopyStatusResponseHeader;
-            ...LeaseDurationHeader;
+            ...LeaseDurationResponseHeader;
             ...LeaseStateResponseHeader;
             ...LeaseStatusResponseHeader;
             ...AcceptRangesResponseHeader;
