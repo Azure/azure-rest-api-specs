@@ -68,7 +68,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "CheckNameAvailabilityRequest",
@@ -82,7 +82,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResponse"
             }
@@ -116,12 +116,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "diagnosticsResourceName",
@@ -246,12 +241,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "simplifiedSolutionsResourceName",
@@ -376,12 +366,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "solutionResourceName",
@@ -580,12 +565,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "solutionResourceName",
@@ -637,12 +617,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "troubleshooterName",
@@ -752,12 +727,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "troubleshooterName",
@@ -809,12 +779,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "troubleshooterName",
@@ -857,12 +822,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
           },
           {
             "name": "troubleshooterName",
@@ -2883,7 +2843,7 @@
     }
   },
   "parameters": {
-    "ScopeParameter": {
+    "Azure.ResourceManager.ResourceUriParameter": {
       "name": "scope",
       "in": "path",
       "description": "The fully qualified Azure Resource manager identifier of the resource.",

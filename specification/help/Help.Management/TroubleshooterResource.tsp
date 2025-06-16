@@ -62,10 +62,7 @@ interface TroubleshooterResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Troubleshooters_Get")
-  get is ArmResourceRead<
-    TroubleshooterResource,
-    BaseParameters = ScopeParameters<TroubleshooterResource>
-  >;
+  get is ArmResourceRead<TroubleshooterResource>;
 
   /**
    * Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/> Azure Troubleshooters help with hard to classify issues, reducing the gap between customer observed problems and solutions by guiding the user effortlessly through the troubleshooting process. Each Troubleshooter flow represents a problem area within Azure and has a complex tree-like structure that addresses many root causes. These flows are prepared with the help of Subject Matter experts and customer support engineers by carefully considering previous support requests raised by customers. Troubleshooters terminate at a well curated solution based off of resource backend signals and customer manual selections.
@@ -86,7 +83,6 @@ interface TroubleshooterResources {
     TroubleshooterResource,
     ContinueRequestBody,
     NoContentResponse,
-    BaseParameters = ScopeParameters<TroubleshooterResource>,
     OptionalRequestBody = true
   >;
 
@@ -95,12 +91,7 @@ interface TroubleshooterResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Troubleshooters_End")
-  end is ArmResourceActionSync<
-    TroubleshooterResource,
-    void,
-    NoContentResponse,
-    BaseParameters = ScopeParameters<TroubleshooterResource>
-  >;
+  end is ArmResourceActionSync<TroubleshooterResource, void, NoContentResponse>;
 
   /**
    * Restarts the troubleshooter API using applicable troubleshooter resource name as the input.<br/> It returns new resource name which should be used in subsequent request. The old resource name is obsolete after this API is invoked.
@@ -110,8 +101,7 @@ interface TroubleshooterResources {
   restart is ArmResourceActionSync<
     TroubleshooterResource,
     void,
-    ArmResponse<RestartTroubleshooterResponse>,
-    BaseParameters = ScopeParameters<TroubleshooterResource>
+    ArmResponse<RestartTroubleshooterResponse>
   >;
 }
 

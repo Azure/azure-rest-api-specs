@@ -15,6 +15,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Help;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@autoRoute
 interface CheckNameAvailabilityOperationGroup {
   /**
    * This API is used to check the uniqueness of a resource name used for a diagnostic, troubleshooter or solutions
@@ -22,23 +23,12 @@ interface CheckNameAvailabilityOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CheckNameAvailability_CheckAvailability")
-  @route("/{+scope}/providers/Microsoft.Help/checkNameAvailability")
-  @post
-  checkAvailability(
-    ...ApiVersionParameter,
-
-    /**
-     * scope = resourceUri of affected resource.<br/> For example: /subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read
-     */
-    ...ScopeParameter,
-
-    /**
-     * The required parameters for availability check.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @bodyRoot
-    CheckNameAvailabilityRequest?: CommonTypes.CheckNameAvailabilityRequest,
-  ): ArmResponse<CheckNameAvailabilityResponse> | ErrorResponse;
+  checkNameAvailability is ArmProviderActionSync<
+    CommonTypes.CheckNameAvailabilityRequest,
+    CheckNameAvailabilityResponse,
+    ExtensionResourceActionScope,
+    OptionalRequestBody = true
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -98,3 +88,7 @@ interface DiscoverySolutionNLPOperationGroup {
     OptionalRequestBody = true
   >;
 }
+
+@@doc(CheckNameAvailabilityOperationGroup.checkNameAvailability::parameters.body,
+  "The required parameters for availability check."
+);

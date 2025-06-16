@@ -85,3 +85,10 @@ using Microsoft.Help;
 @@clientName(TroubleshooterResources.continue::parameters.body,
   "continueRequestBody"
 );
+
+@@clientName(CheckNameAvailabilityOperationGroup.checkNameAvailability::parameters.body,
+  "CheckNameAvailabilityRequest"
+);
+@@Azure.ClientGenerator.Core.clientName(Azure.ResourceManager.Foundations.BaseParameters.resourceUri,
+  "scope"
+);

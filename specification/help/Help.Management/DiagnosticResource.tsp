@@ -62,10 +62,7 @@ interface DiagnosticResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Diagnostics_Get")
-  get is ArmResourceRead<
-    DiagnosticResource,
-    BaseParameters = ScopeParameters<DiagnosticResource>
-  >;
+  get is ArmResourceRead<DiagnosticResource>;
 
   /**
    * Creates a diagnostic for the specific resource using solutionId from discovery solutions. <br/>Diagnostics are powerful solutions that access product resources or other relevant data and provide the root cause of the issue and the steps to address the issue.<br/><br/>

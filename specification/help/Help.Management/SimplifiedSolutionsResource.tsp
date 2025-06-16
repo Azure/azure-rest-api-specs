@@ -62,10 +62,7 @@ interface SimplifiedSolutionsResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SimplifiedSolutions_Get")
-  get is ArmResourceRead<
-    SimplifiedSolutionsResource,
-    BaseParameters = ScopeParameters<SimplifiedSolutionsResource>
-  >;
+  get is ArmResourceRead<SimplifiedSolutionsResource>;
 
   /**
    * Creates Simplified Solutions for an Azure subscription using 'solutionId' from Discovery Solutions as the input. <br/><br/> Simplified Solutions API makes the consumption of solutions APIs easier while still providing access to the same powerful solutions rendered in Solutions API. With Simplified Solutions, users don't have to worry about stitching together the article using replacement maps and can use the content in the API response to directly render as HTML content.<br/>

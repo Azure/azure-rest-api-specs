@@ -13,8 +13,6 @@ namespace Microsoft.Help;
 /**
  * Solution response.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@extensionResource
 model SolutionResource
   is Azure.ResourceManager.ExtensionResource<SolutionResourceProperties> {
   ...ResourceNameParameter<
@@ -62,10 +60,7 @@ interface SolutionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Solution_Get")
-  get is ArmResourceRead<
-    SolutionResource,
-    BaseParameters = ScopeParameters<SolutionResource>
-  >;
+  get is ArmResourceRead<SolutionResource>;
 
   /**
    * Creates a solution for the specific Azure resource or subscription using the inputs ‘solutionId and requiredInputs’ from discovery solutions. <br/> Azure solutions comprise a comprehensive library of self-help resources that have been thoughtfully curated by Azure engineers to aid customers in resolving typical troubleshooting issues. These solutions encompass: <br/> (1.) Dynamic and context-aware diagnostics, guided troubleshooting wizards, and data visualizations. <br/> (2.) Rich instructional video tutorials and illustrative diagrams and images. <br/> (3.) Thoughtfully assembled textual troubleshooting instructions. <br/> All these components are seamlessly converged into unified solutions tailored to address a specific support problem area.
@@ -105,7 +100,6 @@ interface SolutionResources {
     SolutionResource,
     SolutionWarmUpRequestBody,
     NoContentResponse,
-    BaseParameters = ScopeParameters<SolutionResource>,
     OptionalRequestBody = true
   >;
 }
