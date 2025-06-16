@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-05-25-preview",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
+    "alertId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "essentials": {
+            "severity": "Sev2",
+            "signalType": "Metric",
+            "alertState": "New",
+            "monitorCondition": "Fired",
+            "monitorService": "Platform",
+            "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/myresourcegroup/providers/microsoft.compute/virtualmachines/testvm",
+            "targetResourceName": "testvm",
+            "targetResourceGroup": "myresourcegroup",
+            "targetResourceType": "microsoft.compute/virtualmachines",
+            "sourceCreatedId": "123e4567-e89b-12d3-a456-426614174000",
+            "alertRule": "CPU percentage greater than 80%",
+            "startDateTime": "2025-05-25T10:00:00Z",
+            "lastModifiedDateTime": "2025-05-25T10:05:00Z",
+            "lastModifiedUserName": "System",
+            "monitorConditionResolvedDateTime": null,
+            "actionStatus": {
+              "isSuppressed": false
+            },
+            "description": "Virtual machine CPU usage exceeded 80%"
+          },
+          "egressConfig": {},
+          "context": {
+            "metricValue": 85,
+            "metricUnit": "Percentage",
+            "metricName": "CPU Percentage",
+            "metricTimestamp": "2025-05-25T10:00:00Z"
+          }
+        },
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/123e4567-e89b-12d3-a456-426614174000",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "name": "High CPU Alert"
+      }
+    }
+  }
+}

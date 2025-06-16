@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2025-05-25-preview",
+    "subscriptionId": "9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
+    "pageCount": 2,
+    "sortBy": "severity",
+    "sortOrder": "asc",
+    "monitorCondition": "Fired",
+    "severity": "Sev2",
+    "alertState": "New",
+    "monitorService": "Platform"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "essentials": {
+                "severity": "Sev2",
+                "signalType": "Metric",
+                "alertState": "New",
+                "monitorCondition": "Fired",
+                "monitorService": "Platform",
+                "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/myresourcegroup/providers/microsoft.compute/virtualmachines/testvm",
+                "targetResourceName": "testvm",
+                "targetResourceGroup": "myresourcegroup",
+                "targetResourceType": "microsoft.compute/virtualmachines",
+                "sourceCreatedId": "123e4567-e89b-12d3-a456-426614174000",
+                "alertRule": "CPU percentage greater than 80%",
+                "startDateTime": "2025-05-25T10:00:00Z",
+                "lastModifiedDateTime": "2025-05-25T10:05:00Z",
+                "lastModifiedUserName": "System",
+                "monitorConditionResolvedDateTime": null,
+                "actionStatus": {
+                  "isSuppressed": false
+                },
+                "description": "Virtual machine CPU usage exceeded 80%"
+              },
+              "egressConfig": {},
+              "context": {}
+            },
+            "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/123e4567-e89b-12d3-a456-426614174000",
+            "type": "Microsoft.AlertsManagement/alerts",
+            "name": "High CPU Alert"
+          },
+          {
+            "properties": {
+              "essentials": {
+                "severity": "Sev2",
+                "signalType": "Metric",
+                "alertState": "New",
+                "monitorCondition": "Fired",
+                "monitorService": "Platform",
+                "targetResource": "/subscriptions/3b540246-808d-4331-99aa-917b808a9166/resourcegroups/myresourcegroup/providers/microsoft.compute/virtualmachines/prodvm",
+                "targetResourceName": "prodvm",
+                "targetResourceGroup": "myresourcegroup",
+                "targetResourceType": "microsoft.compute/virtualmachines",
+                "sourceCreatedId": "987fcdeb-51a2-34d5-b678-426614174111",
+                "alertRule": "Memory percentage greater than 90%",
+                "startDateTime": "2025-05-25T09:45:00Z",
+                "lastModifiedDateTime": "2025-05-25T09:50:00Z",
+                "lastModifiedUserName": "System",
+                "monitorConditionResolvedDateTime": null,
+                "actionStatus": {
+                  "isSuppressed": false
+                },
+                "description": "Virtual machine memory usage exceeded 90%"
+              },
+              "egressConfig": {},
+              "context": {}
+            },
+            "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/987fcdeb-51a2-34d5-b678-426614174111",
+            "type": "Microsoft.AlertsManagement/alerts",
+            "name": "High Memory Alert"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts?api-version=2025-05-25-preview&pageCount=2&$skipToken=xyz"
+      }
+    }
+  }
+}
