@@ -48,10 +48,12 @@ options:
       loglevel: info
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "eventgrid"
+    package-dir: "eventgrid-namespaces"
     package-details:
-      name: "@azure/eventgrid"
+      name: "@azure/eventgrid-namespaces"
     flavor: azure
+    experimental-extensible-enums: true
+    is-modular-library: true
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/messaging/eventgrid"
