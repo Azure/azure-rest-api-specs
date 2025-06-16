@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PostgreSQLManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
     "version": "2025-01-01-preview"
   },
   "host": "management.azure.com",
@@ -41,11 +41,11 @@
         ],
         "operationId": "Databases_Create",
         "x-ms-examples": {
-          "Create a database": {
+          "Create a database.": {
             "$ref": "./examples/DatabaseCreate.json"
           }
         },
-        "description": "Creates a new database or updates an existing database.",
+        "description": "Creates a new database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -69,7 +69,7 @@
             "schema": {
               "$ref": "#/definitions/Database"
             },
-            "description": "The required parameters for creating or updating a database."
+            "description": "Parameters required to create a new database."
           }
         ],
         "responses": {
@@ -111,11 +111,11 @@
         ],
         "operationId": "Databases_Delete",
         "x-ms-examples": {
-          "Delete a database": {
+          "Delete an existing database": {
             "$ref": "./examples/DatabaseDelete.json"
           }
         },
-        "description": "Deletes a database.",
+        "description": "Deletes an existing database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -166,11 +166,11 @@
         ],
         "operationId": "Databases_Get",
         "x-ms-examples": {
-          "Get a database": {
+          "Get information about an existing database.": {
             "$ref": "./examples/DatabaseGet.json"
           }
         },
-        "description": "Gets information about a database.",
+        "description": "Gets information about an existing database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -211,11 +211,11 @@
         ],
         "operationId": "Databases_ListByServer",
         "x-ms-examples": {
-          "List databases in a server": {
+          "List all databases in a flexible server.": {
             "$ref": "./examples/DatabasesListByServer.json"
           }
         },
-        "description": "List all the databases in a given server.",
+        "description": "Lists all databases in a flexible server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -256,16 +256,16 @@
       "properties": {
         "charset": {
           "type": "string",
-          "description": "The charset of the database.",
+          "description": "Character set of the database.",
           "pattern": "^[a-zA-Z]+\\w*$"
         },
         "collation": {
           "type": "string",
-          "description": "The collation of the database.",
+          "description": "Collation of the database.",
           "pattern": "^[a-zA-Z\\-]+([. ]|\\w)*$"
         }
       },
-      "description": "The properties of a database."
+      "description": "Properties of a database."
     },
     "Database": {
       "type": "object",
@@ -273,7 +273,7 @@
         "properties": {
           "$ref": "#/definitions/DatabaseProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a database."
+          "description": "Properties of a database."
         }
       },
       "allOf": [
@@ -291,15 +291,15 @@
           "items": {
             "$ref": "#/definitions/Database"
           },
-          "description": "The list of databases housed in a server"
+          "description": "List of all databases in a flexible server."
         },
         "nextLink": {
-          "description": "The link used to get the next page of databases.",
+          "description": "Link used to get the next page of results.",
           "type": "string",
           "format": "uri"
         }
       },
-      "description": "A List of databases."
+      "description": "List of all databases in a flexible server."
     }
   },
   "parameters": {
@@ -308,7 +308,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the database.",
+      "description": "Name of the database.",
       "minLength": 1,
       "pattern": "^[a-zA-Z_][a-zA-Z0-9_]{0,30}$",
       "x-ms-parameter-location": "method"

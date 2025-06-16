@@ -1,7 +1,9 @@
-import { checkPropertyAttributeDeleted } from "./helper.js";
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
+import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
-export function checkReadOnly(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
+export function checkReadOnly(jsonObj: any): Suggestion[] {
+  const suggestedFixes: Suggestion[] = [];
 
   const deletedChanges = checkPropertyAttributeDeleted('readOnly', jsonObj);
   if (deletedChanges.length > 0) {
@@ -9,12 +11,12 @@ export function checkReadOnly(jsonObj: any): string[] {
       const { path, value } = change;
       if ((value as any) === false) continue;
 
-      const pathParts = path.split('.');
-      const definitionIndex = pathParts.findIndex(part => part === 'definitions');
-      if (definitionIndex !== -1 && definitionIndex + 3 < pathParts.length) {
-        const definitionName = pathParts[definitionIndex + 1];
-        const propertyName = pathParts[definitionIndex + 3];
-        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@visibility(Lifecycle.Read)\` onto its property "${propertyName}". If the property cannot access directly, add \`@@visibility(${definitionName}.${propertyName}, Lifecycle.Read)\` right after the model.`);
+      if (getPropertyName(path)) {
+        const [definitionName, propertyName] = getPropertyName(path)!;
+        suggestedFixes.push({
+          suggestion: `Find a model called "${definitionName}". Add \`@visibility(Lifecycle.Read)\` onto its property "${propertyName}". If the property cannot access directly, add \`@@visibility(${definitionName}.${propertyName}, Lifecycle.Read);\` RIGHT AFTER the end bracket of the model.`,
+          path: constructJsonPath(path, change.key)
+        });
       }
     }
   }

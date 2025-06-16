@@ -38,6 +38,19 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
     service-name: "Recovery Services Data Replication"
+    rename-model:
+      PrivateEndpointConnectionProxyListResult: "PrivEdpConnProxyListResult"
+      PrivateEndpointConnectionListResult: "PrivEdpConnListResult"
+      ReplicationExtensionModelListResult: "RepExtModelListResult"
+      JobModelCustomPropertiesAffectedObjectDetailsType: "AffectedObjectDetailsType"
+  "@azure-tools/typespec-ts":
+    typespec-title-map:
+      DataReplicationClient: AzureSiteRecoveryManagementServiceAPI
+    experimental-extensible-enums: true
+    package-dir: "arm-recoveryservicesdatareplication"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-recoveryservicesdatareplication"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

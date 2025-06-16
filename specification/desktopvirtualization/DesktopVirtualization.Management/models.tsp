@@ -4881,3 +4881,7 @@ model UpdateStatusProperty {
  */
 model ResourceProviderOperationListResult
   is Azure.Core.Page<ResourceProviderOperation>;
+
+@@Azure.ResourceManager.identifiers(ResourceProviderOperationListResult.value,
+  #[]
+);
