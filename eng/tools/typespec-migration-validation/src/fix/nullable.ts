@@ -1,7 +1,9 @@
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
-export function  checkNullable(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
+export function  checkNullable(jsonObj: any): Suggestion[] {
+  const suggestedFixes: Suggestion[] = [];
 
   const deletedChanges = checkPropertyAttributeDeleted('x-nullable', jsonObj);
   if (deletedChanges.length > 0) {
@@ -11,7 +13,10 @@ export function  checkNullable(jsonObj: any): string[] {
 
       if (getPropertyName(path)) {
         const [definitionName, propertyName] = getPropertyName(path)!;
-        suggestedFixes.push(`Find a model called "${definitionName}". Change its property "${propertyName}" by adding \` | null\` to its property type.`);
+        suggestedFixes.push({
+          suggestion: `Find a model called "${definitionName}". Change its property "${propertyName}" by adding \` | null\` to its property type.`,
+          path: constructJsonPath(path, change.key)
+        });
       }
     }
   }

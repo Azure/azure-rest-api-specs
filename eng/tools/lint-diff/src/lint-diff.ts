@@ -43,6 +43,11 @@ export async function main() {
         short: "m",
         default: "main",
       },
+      "github-repo-path": {
+        type: "string",
+        short: "r",
+        default: process.env.GITHUB_REPOSITORY || "Azure/azure-rest-api-specs",
+      },
     },
     strict: true,
   };
@@ -55,6 +60,7 @@ export async function main() {
       "out-file": outFile,
       "base-branch": baseBranch,
       "compare-sha": compareSha,
+      "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
 
@@ -92,6 +98,7 @@ export async function main() {
     outFile as string,
     baseBranch as string,
     compareSha as string,
+    githubRepoPath as string,
   );
 }
 
@@ -102,6 +109,7 @@ async function runLintDiff(
   outFile: string,
   baseBranch: string,
   compareSha: string,
+  githubRepoPath: string,
 ) {
   let beforeList, afterList, affectedSwaggers;
   try {
@@ -165,6 +173,7 @@ async function runLintDiff(
     outFile,
     baseBranch,
     compareSha,
+    githubRepoPath,
   );
 
   if (!pass) {

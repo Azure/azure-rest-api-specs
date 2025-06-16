@@ -108,6 +108,46 @@ model NetworkDeviceProperties {
   @doc("Additional Device Interface IP address ARM Ids")
   additionalIpsArmId: Array<armResourceIdentifier>;
 
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The Azure Device Type. Distinct from NGS device type in certain cases.")
+  azureDeviceType: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The network function. Ex: Production, Test, etc.")
+  function: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's firmware version.")
+  firmwareProfile: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("Whether the device is managed by PhyNet.")
+  isManagedByNetworkTeam: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("Operating System version number.")
+  osVersion: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The OS Version type. Ex: Golden, Bronze, Silver, etc.")
+  osVersionType: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's network role. Ex. Data, Management, Console, Optical, etc.")
+  role: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's serial number.")
+  serialNumber: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device's status. Ex: InProduction, InMaintenance, etc.")
+  status: string;
+
+  @Versioning.added(Versions.v2025_06_01_preview)
+  @doc("The device vendor/manufacturer.")
+  vendor: string;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
