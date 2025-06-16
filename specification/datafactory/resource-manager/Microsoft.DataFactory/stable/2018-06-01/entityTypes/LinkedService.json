@@ -6631,7 +6631,7 @@
     },
     "QuickBooksLinkedService": {
       "x-ms-discriminator-value": "QuickBooks",
-      "description": "QuickBooks server linked service.",
+      "description": "QuickBooks server linked service. This linked service has supported version property. The Version 1.0 is scheduled for deprecation while your pipeline will continue to run after EOL but without any bug fix or new features.",
       "type": "object",
       "allOf": [
         {
@@ -6668,24 +6668,28 @@
           "x-ms-format": "dfe-string"
         },
         "consumerKey": {
-          "description": "The consumer key for OAuth 1.0 authentication.",
+          "description": "The consumer key for OAuth 2.0 authentication.",
           "type": "object",
           "x-ms-format": "dfe-string"
         },
         "consumerSecret": {
-          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "description": "The consumer secret for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication.",
+          "description": "The access token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication.",
+          "description": "The access token secret is deprecated for OAuth 1.0 authentication. Only used for version 1.0.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The refresh token for OAuth 2.0 authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
-          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true.",
+          "description": "Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Only used for version 1.0.",
           "type": "object",
           "x-ms-format": "dfe-bool"
         },

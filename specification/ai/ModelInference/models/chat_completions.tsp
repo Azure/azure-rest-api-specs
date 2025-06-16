@@ -434,6 +434,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
 
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("The contents of the user message, with available input types varying by selected model.")
   content: string | ChatMessageContentItem[];
 }
@@ -528,6 +529,7 @@ model ChatResponseMessage {
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
 alias ChatCompletionsToolChoice = ChatCompletionsToolChoicePreset | ChatCompletionsNamedToolChoice;
 
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
