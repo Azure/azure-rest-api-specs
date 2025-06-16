@@ -1,7 +1,9 @@
 import "./main.tsp";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Azure.ResourceManager;
 using Microsoft.AVS;
 using TypeSpec.Versioning;
@@ -29,6 +31,205 @@ using TypeSpec.Versioning;
 )
 @useDependency(Microsoft.AVS.Versions.v2024_09_01)
 namespace Customization;
+
+@@clientName(Microsoft.AVS.Addon, "AvsPrivateCloudAddon", "csharp");
+@@clientName(Microsoft.AVS.AddonProperties,
+  "AvsPrivateCloudAddonProperties",
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.CloudLinkProperties.linkedCloud,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Cluster, "AvsPrivateCloudCluster", "csharp");
+@@clientName(Microsoft.AVS.Datastore, "AvsPrivateCloudDatastore", "csharp");
+@@alternateType(Microsoft.AVS.ExpressRouteAuthorizationProperties.expressRouteAuthorizationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.ExpressRouteAuthorizationProperties.expressRouteId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.GlobalReachConnectionProperties.expressRouteId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.GlobalReachConnectionProperties.peerExpressRouteCircuit,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.AvailabilityProperties,
+  "PrivateCloudAvailabilityProperties",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Circuit, "ExpressRouteCircuit", "csharp");
+@@clientName(Microsoft.AVS.Encryption, "CustomerManagedEncryption", "csharp");
+@@clientName(Microsoft.AVS.Endpoints, "AvsPrivateCloudEndpoints", "csharp");
+@@clientName(Microsoft.AVS.IdentitySource,
+  "SingleSignOnIdentitySource",
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.IdentitySource.primaryServer, url, "csharp");
+@@alternateType(Microsoft.AVS.IdentitySource.secondaryServer, url, "csharp");
+@@clientName(Microsoft.AVS.InternetEnum, "InternetConnectivityState", "csharp");
+@@clientName(Microsoft.AVS.ScriptExecutionParameter,
+  "ScriptExecutionParameterDetails",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PSCredentialExecutionParameter,
+  "PSCredentialExecutionParameterDetails",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.ScriptSecureStringExecutionParameter,
+  "ScriptSecureStringExecutionParameterDetails",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.ScriptStringExecutionParameter,
+  "ScriptStringExecutionParameterDetails",
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.ScriptExecutionProperties.scriptCmdletId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.VirtualMachine,
+  "AvsPrivateCloudClusterVirtualMachine",
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.WorkloadNetworkDnsServiceProperties.dnsServiceIp,
+  ipV4Address,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.DnsServiceLogLevelEnum,
+  "DnsServiceLogLevel",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.DnsServiceStatusEnum, "DnsServiceStatus", "csharp");
+@@alternateType(Microsoft.AVS.WorkloadNetworkDnsZoneProperties.sourceIp,
+  ipV4Address,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.WorkloadNetworkPortMirroring,
+  "WorkloadNetworkPortMirroringProfile",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PortMirroringDirectionEnum,
+  "PortMirroringProfileDirection",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.WorkloadNetworkPortMirroringProvisioningState,
+  "WorkloadNetworkPortMirroringProfileProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PortMirroringStatusEnum,
+  "PortMirroringProfileStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.SegmentStatusEnum,
+  "WorkloadNetworkSegmentStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.VMTypeEnum, "WorkloadNetworkVmType", "csharp");
+@@clientName(Microsoft.AVS.VMGroupStatusEnum,
+  "WorkloadNetworkVmGroupStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Quota,
+  "AvsSubscriptionQuotaAvailabilityResult",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.QuotaEnabled,
+  "AvsSubscriptionQuotaEnabled",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Trial,
+  "AvsSubscriptionTrialAvailabilityResult",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.TrialStatus, "AvsSubscriptionTrialStatus", "csharp");
+@@alternateType(Microsoft.AVS.Circuit.expressRouteID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.Circuit.expressRoutePrivatePeeringID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.MountOptionEnum, "LunMountMode", "csharp");
+@@clientName(Microsoft.AVS.SslEnum, "SslCertificateStatus", "csharp");
+@@clientName(Microsoft.AVS.OptionalParamEnum,
+  "ParameterOptionalityStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.VisibilityParameterEnum,
+  "ParameterVisibilityStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.ClusterProvisioningState,
+  "AvsPrivateCloudClusterProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.DatastoreProvisioningState,
+  "AvsPrivateCloudDatastoreProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.VirtualMachineRestrictMovement,
+  "AvsPrivateCloudClusterVirtualMachineRestrictMovement",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PrivateCloudProperties.vmotionNetwork,
+  "VMotionNetwork",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PrivateCloudProperties.vcenterPassword,
+  "VCenterPassword",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.PrivateCloudProperties.vcenterCertificateThumbprint,
+  "VCenterCertificateThumbprint",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.AdminCredentials.vcenterUsername,
+  "VCenterUsername",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.AdminCredentials.vcenterPassword,
+  "VCenterPassword",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.AffinityType,
+  "AvsPlacementPolicyAffinityType",
+  "csharp"
+);
+@@alternateType(Microsoft.AVS.DiskPoolVolume.targetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Microsoft.AVS.EncryptionState, "AvsEncryptionState", "csharp");
+@@clientName(Microsoft.AVS.EncryptionVersionType,
+  "AvsEncryptionVersionType",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.ManagementCluster, "AvsManagementCluster", "csharp");
+@@clientName(Microsoft.AVS.NsxPublicIpQuotaRaisedEnum,
+  "NsxPublicIPQuotaRaisedStatus",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.AffinityStrength,
+  "VmHostPlacementPolicyAffinityStrength",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.ClusterZone, "AvsClusterZone", "csharp");
+@@clientName(Microsoft.AVS.CloudLinkProvisioningState,
+  "AvsCloudLinkProvisioningState",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.DnsZoneType, "AvsDnsZoneType", "csharp");
+@@clientName(Microsoft.AVS.VirtualMachineProvisioningState,
+  "AvsVirtualMachineProvisioningState",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
