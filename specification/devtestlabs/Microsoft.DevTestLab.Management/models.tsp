@@ -1302,20 +1302,22 @@ model ArtifactProperties {
  * The provisioning state of the artifact resource.
  */
 union ArtifactProvisioningState {
-
   /**
    * The operation completed successfully.
    */
   Succeeded: "Succeeded",
+
   /**
    * The operation failed.
    */
   Failed: "Failed",
+
   /**
    * The operation was canceled before completion.
    */
   Canceled: "Canceled",
-  string
+
+  string,
 }
 
 /**
@@ -1392,7 +1394,7 @@ model UpdateResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
-  
+
   /**
    * The identity of the resource.
    */
@@ -1425,7 +1427,16 @@ model LabCostProperties {
    * The resource cost component of the cost data.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["resourceUid", "resourceType", "resourcePricingTier", "resourceStatus", "resourceId"])
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #[
+      "resourceUid",
+      "resourceType",
+      "resourcePricingTier",
+      "resourceStatus",
+      "resourceId"
+    ]
+  )
   resourceCosts?: LabResourceCostProperties[];
 
   /**
@@ -1671,7 +1682,7 @@ model CustomImageProperties {
   /**
    * Storage information about the data disks present in the custom image
    */
-  @OpenAPI.extension("x-ms-identifiers", #["lun","storageType"])
+  @OpenAPI.extension("x-ms-identifiers", #["lun", "storageType"])
   dataDiskStorageInfo?: DataDiskStorageTypeInfo[];
 
   /**
@@ -3908,7 +3919,6 @@ model Port {
   backendPort?: int32;
 }
 
-
 /**
  * Contains a list of bastionHosts and their properties
  */
@@ -4078,7 +4088,6 @@ model LabCostList {
    */
   nextLink?: string;
 }
-
 
 /**
  * Properties of a weekly schedule.

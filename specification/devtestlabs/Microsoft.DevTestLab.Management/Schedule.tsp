@@ -22,12 +22,12 @@ model Schedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
   >;
 }
 
-
 /**
  * A virtual machine schedule.
  */
 @parentResource(LabVirtualMachine)
-model VirtualMachineSchedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
+model VirtualMachineSchedule
+  is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineSchedule,
     SegmentName = "schedules",
@@ -39,7 +39,8 @@ model VirtualMachineSchedule is Azure.ResourceManager.TrackedResource<SchedulePr
  * A Service Fabric schedule.
  */
 @parentResource(ServiceFabric)
-model ServiceFabricSchedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
+model ServiceFabricSchedule
+  is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = ServiceFabricSchedule,
     KeyName = "serviceFabricName",
@@ -288,7 +289,11 @@ interface ServiceFabricSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ServiceFabricScheduleOps.ActionAsync<ServiceFabricSchedule, void, OkResponse>;
+  execute is ServiceFabricScheduleOps.ActionAsync<
+    ServiceFabricSchedule,
+    void,
+    OkResponse
+  >;
 }
 @armResourceOperations
 interface VirtualMachineScheduleOps
@@ -381,7 +386,11 @@ interface VirtualMachineSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is VirtualMachineScheduleOps.ActionAsync<VirtualMachineSchedule, void, OkResponse>;
+  execute is VirtualMachineScheduleOps.ActionAsync<
+    VirtualMachineSchedule,
+    void,
+    OkResponse
+  >;
 }
 
 @@doc(Schedule.name, "The name of the schedule.");
