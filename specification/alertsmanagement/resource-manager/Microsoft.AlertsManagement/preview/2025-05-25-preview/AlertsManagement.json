@@ -29,6 +29,7 @@
   "paths": {
     "/providers/Microsoft.AlertsManagement/operations": {
       "get": {
+        "tags": ["Operations"],
         "operationId": "Operations_List",
         "description": "List all operations available through Azure Alerts Management Resource Provider.",
         "parameters": [
@@ -59,6 +60,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alertsMetaData": {
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_MetaData",
         "description": "List alerts meta data information based on value of identifier parameter.",
         "parameters": [
@@ -95,12 +97,11 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_GetAllByScope",
         "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
         "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
+
           {
             "$ref": "#/parameters/targetResource"
           },
@@ -184,10 +185,21 @@
       }
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts": {
+      "parameters": [
+        {
+          "name": "scope",
+          "in": "path",
+          "description": "scope here is resourceId for which alert is created.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true
+        }
+      ],
       "get": {
-        "operationId": "Alerts_GetAll",
-        "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
-        "parameters": [
+"operationId": "Alerts_GetAll",
+"tags": ["Alerts"],
+"description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
+"parameters": [
           {
             "$ref": "#/parameters/scope"
           },
@@ -275,9 +287,10 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_GetByIdByScope",
         "summary": "Get a specific alert.",
-        "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
+        "description": "Get information related to a specific alert.",
         "produces": [
           "application/json"
         ],
@@ -314,7 +327,18 @@
       }
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
+      "parameters": [
+          {
+            "name": "scope",
+          "in": "path",
+          "description": "scope here is resourceId for which alert is created.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true
+        }
+      ],
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_GetById",
         "summary": "Get a specific alert.",
         "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
@@ -355,6 +379,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_ChangeStateByScope",
         "description": "Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "parameters": [
@@ -396,7 +421,18 @@
       }
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
+      "parameters": [
+        {
+          "name": "scope",
+          "in": "path",
+          "description": "scope here is resourceId for which alert is created.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true
+        }
+      ],
       "post": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_ChangeState",
         "description": "Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "parameters": [
@@ -439,6 +475,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_GetHistoryByScope",
         "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.",
         "parameters": [
@@ -474,7 +511,18 @@
       }
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
+      "parameters": [
+        {
+          "name": "scope",
+          "in": "path",
+          "description": "scope here is resourceId for which alert is created.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true
+        }
+      ],
       "get": {
+        "tags": ["Alerts"],
         "operationId": "Alerts_GetHistory",
         "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.",
         "parameters": [
@@ -510,13 +558,22 @@
       }
     },
     "/{scope}/providers/Microsoft.AlertsManagement/alertsSummary": {
+      "parameters": [
+        {
+          "name": "scope",
+          "in": "path",
+          "description": "scope here is resourceId for which alert is created.",
+          "required": true,
+          "type": "string",
+          "x-ms-skip-url-encoding": true
+        }
+      ],
       "get": {
-        "operationId": "Alerts_GetSummary",
+        "tags": ["Alerts"],
+        "operationId": "Alerts_GetSummary", 
         "description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).",
         "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
+
           {
             "$ref": "#/parameters/alertsSummaryGroupBy"
           },
@@ -603,7 +660,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2019-03-01"
+        "2025-05-25-preview"
       ],
       "x-ms-enum": {
         "name": "api-version",
