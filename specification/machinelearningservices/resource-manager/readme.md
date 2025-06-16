@@ -78,6 +78,10 @@ suppressions:
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
   - code: NestedResourcesMustHaveListOperation
     reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
         mapping with the parent resource, so right now we didn't implement List API, 
