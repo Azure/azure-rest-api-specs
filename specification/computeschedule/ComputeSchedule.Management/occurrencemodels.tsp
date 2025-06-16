@@ -42,9 +42,13 @@ model OccurrenceResultSummary {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Properties for an occurrence")
 model OccurrenceProperties {
-  @doc("The time the occurrence was initial scheduled for. Actual scheduled time for resources can change by calling the delay API")
+  @doc("The time the occurrence is scheduled for. This value can be changed by calling the delay API")
   @visibility(Lifecycle.Read)
-  initialScheduledTime: utcDateTime;
+  @renamedFrom(
+    Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`,
+    "initialScheduledTime"
+  )
+  scheduledTime: utcDateTime;
 
   @doc("The result for occurrences that achieved a terminal state")
   @visibility(Lifecycle.Read)
