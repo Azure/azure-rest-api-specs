@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-05-25-preview",
+    "scope": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "alertId": "b9569f87-9257-4c3f-9350-c5c05f6975f9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alerts/b9569f87-9257-4c3f-9350-c5c05f6975f9",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "name": "CPU Percentage High Alert",
+        "properties": {
+          "essentials": {
+            "severity": "Sev2",
+            "signalType": "Metric",
+            "alertState": "New",
+            "monitorCondition": "Fired",
+            "targetResource": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/myRG/providers/Microsoft.Compute/virtualMachines/myVM",
+            "targetResourceName": "myVM",
+            "targetResourceGroup": "myRG",
+            "targetResourceType": "Microsoft.Compute/virtualMachines",
+            "monitorService": "Platform",
+            "alertRule": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/myRG/providers/Microsoft.Insights/metricAlerts/CPU_Alert",
+            "sourceCreatedId": "123456789",
+            "smartGroupId": "sg123456789",
+            "smartGroupingReason": "SameResourceIdAndAlertRule",
+            "startDateTime": "2025-05-25T10:00:00.000Z",
+            "lastModifiedDateTime": "2025-05-25T10:05:00.000Z",
+            "monitorConditionResolvedDateTime": null,
+            "lastModifiedUserName": "System",
+            "actionStatus": {
+              "isSuppressed": false
+            },
+            "description": "CPU usage exceeded 80% threshold"
+          }
+        }
+      }
+    }
+  }
+}
