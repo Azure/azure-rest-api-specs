@@ -101,7 +101,6 @@ directive:
   - suppress: PatchIdentityProperty
     from: billingbenefits.json
     reason: False-positive. Identity property is never defined on the model.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/discounts/{discountName}"].patch.parameters[4]
 ```
 
 ### Tag: package-preview-2025-05-01-preview
