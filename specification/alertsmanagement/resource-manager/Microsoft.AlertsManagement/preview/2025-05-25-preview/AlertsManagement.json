@@ -93,6 +93,96 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alerts": {
+      "get": {
+        "operationId": "Alerts_GetAll",
+        "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/monitorCondition"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/alertState"
+          },
+          {
+            "$ref": "#/parameters/alertRule"
+          },
+          {
+            "$ref": "#/parameters/smartGroupIdFilter"
+          },
+          {
+            "$ref": "#/parameters/includeContext"
+          },
+          {
+            "$ref": "#/parameters/includeEgressConfig"
+          },
+          {
+            "$ref": "#/parameters/pageCount"
+          },
+          {
+            "$ref": "#/parameters/alertsSortBy"
+          },
+          {
+            "$ref": "#/parameters/sortOrder"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/timeRange"
+          },
+          {
+            "$ref": "#/parameters/customTimeRange"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully listed alert objects.",
+            "schema": {
+              "$ref": "#/definitions/alertsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListAlerts": {
+            "$ref": "./examples/Alerts_List.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -183,6 +273,46 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
+      "get": {
+        "operationId": "Alerts_GetById",
+        "summary": "Get a specific alert.",
+        "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the alert with the specified ID.",
+            "schema": {
+              "$ref": "#/definitions/alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetById": {
+            "$ref": "./examples/Alerts_GetById.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
       "get": {
         "operationId": "Alerts_GetById",
@@ -219,6 +349,48 @@
         "x-ms-examples": {
           "GetById": {
             "$ref": "./examples/Alerts_GetById.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
+      "post": {
+        "operationId": "Alerts_ChangeState",
+        "description": "Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/newState"
+          },
+          {
+            "$ref": "#/parameters/comment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Alert state updated.",
+            "schema": {
+              "$ref": "#/definitions/alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_ChangeState.json"
           }
         }
       }
@@ -261,6 +433,42 @@
         "x-ms-examples": {
           "Resolve": {
             "$ref": "./examples/Alerts_ChangeState.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
+      "get": {
+        "operationId": "Alerts_GetHistory",
+        "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/alertId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the history of the specified alert.",
+            "schema": {
+              "$ref": "#/definitions/alertModification"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AlertsManagementErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resolve": {
+            "$ref": "./examples/Alerts_History.json"
           }
         }
       }
