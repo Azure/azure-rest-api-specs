@@ -1239,22 +1239,28 @@
       "type": "string",
       "description": "Status codes for export dependencies operation",
       "enum": [
-        "Completed",
-        "NoDataFound"
+        "NoMatch",
+        "CompleteMatch",
+        "PartialMatch"
       ],
       "x-ms-enum": {
         "name": "ExportDependenciesStatusCode",
         "modelAsString": true,
         "values": [
           {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Operation completed successfully with data"
+            "name": "NoMatch",
+            "value": "NoMatch",
+            "description": "Operation completed but no data was found for the requested time range"
           },
           {
-            "name": "NoDataFound",
-            "value": "NoDataFound",
-            "description": "Operation completed but no data was found to export"
+            "name": "CompleteMatch",
+            "value": "CompleteMatch",
+            "description": "Operation completed with data found for the entire requested time range"
+          },
+          {
+            "name": "PartialMatch",
+            "value": "PartialMatch",
+            "description": "Operation completed with data found for a portion of the requested time range"
           }
         ]
       }

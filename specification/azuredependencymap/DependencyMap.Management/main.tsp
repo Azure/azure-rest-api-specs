@@ -286,11 +286,14 @@ model ExportDependenciesResultProperties {
 union ExportDependenciesStatusCode {
   string,
 
-  /** Operation completed successfully with data */
-  Completed: "Completed",
+  /** Operation completed but no data was found for the requested time range */
+  NoMatch: "NoMatch",
 
-  /** Operation completed but no data was found to export */
-  NoDataFound: "NoDataFound",
+  /** Operation completed with data found for the entire requested time range */
+  CompleteMatch: "CompleteMatch",
+
+  /** Operation completed with data found for a portion of the requested time range */
+  PartialMatch: "PartialMatch",
 }
 
 @doc("Additional information about the exported dependencies data.")
