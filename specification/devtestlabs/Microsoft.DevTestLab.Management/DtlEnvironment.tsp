@@ -68,7 +68,7 @@ interface DtlEnvironments {
   @operationId("Environments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DtlEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

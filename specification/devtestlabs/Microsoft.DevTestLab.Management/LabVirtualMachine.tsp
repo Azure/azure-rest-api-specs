@@ -68,7 +68,7 @@ interface LabVirtualMachines {
   @operationId("VirtualMachines_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     LabVirtualMachine,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
