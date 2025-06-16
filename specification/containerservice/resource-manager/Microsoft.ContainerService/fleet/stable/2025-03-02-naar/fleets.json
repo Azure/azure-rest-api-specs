@@ -2324,6 +2324,16 @@
         ]
       }
     },
+    "Affinity": {
+      "type": "object",
+      "description": "Affinity is a group of cluster affinity scheduling rules.",
+      "properties": {
+        "clusterAffinity": {
+          "$ref": "#/definitions/ClusterAffinity",
+          "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources."
+        }
+      }
+    },
     "AgentProfile": {
       "type": "object",
       "description": "Agent profile for the Fleet hub.",
@@ -2565,6 +2575,16 @@
         }
       }
     },
+    "ClusterAffinity": {
+      "type": "object",
+      "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources.",
+      "properties": {
+        "requiredDuringSchedulingIgnoredDuringExecution": {
+          "$ref": "#/definitions/ClusterSelector",
+          "description": "If any affinity requirements specified by this field are not met at scheduling time, the resource will not be scheduled onto the cluster."
+        }
+      }
+    },
     "ClusterResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -2579,157 +2599,23 @@
     },
     "ClusterResourcePlacement": {
       "type": "object",
-      "description": "The desired state of ClusterResourcePlacement",
+      "description": "The desired configuration of ClusterResourcePlacement",
       "properties": {
         "policy": {
-          "$ref": "#/definitions/ClusterResourcePlacementPolicy",
-          "description": "Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected."
+          "$ref": "#/definitions/PlacementPolicy",
+          "description": "PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected."
         }
       }
     },
-    "ClusterResourcePlacementAffinity": {
+    "ClusterSelector": {
       "type": "object",
-      "description": "ClusterResourcePlacementAffinity is a group of cluster affinity scheduling rules.",
-      "properties": {
-        "clusterAffinity": {
-          "$ref": "#/definitions/ClusterResourcePlacementClusterAffinity",
-          "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources."
-        }
-      }
-    },
-    "ClusterResourcePlacementClusterAffinity": {
-      "type": "object",
-      "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources.",
-      "properties": {
-        "requiredDuringSchedulingIgnoredDuringExecution": {
-          "$ref": "#/definitions/CrpClusterSelector",
-          "description": "If any affinity requirements specified by this field are not met at scheduling time, the resource will not be scheduled onto the cluster."
-        }
-      }
-    },
-    "ClusterResourcePlacementPolicy": {
-      "type": "object",
-      "description": "ClusterResourcePlacementPolicy contains the rules to select target member clusters to place the selected resources. Only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity.",
-      "properties": {
-        "placementType": {
-          "$ref": "#/definitions/PlacementType",
-          "description": "Type of placement."
-        },
-        "clusterNames": {
-          "type": "array",
-          "description": "ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is PickFixed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "affinity": {
-          "$ref": "#/definitions/ClusterResourcePlacementAffinity",
-          "description": "Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll."
-        },
-        "tolerations": {
-          "type": "array",
-          "description": "If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted.",
-          "items": {
-            "$ref": "#/definitions/CrpToleration"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "CoreV1TaintEffect": {
-      "type": "string",
-      "description": "The available taint effect for the Toleration section",
-      "enum": [
-        "NoSchedule"
-      ],
-      "x-ms-enum": {
-        "name": "CoreV1TaintEffect",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NoSchedule",
-            "value": "NoSchedule",
-            "description": "The NoSchedule taint effect."
-          }
-        ]
-      }
-    },
-    "CoreV1TolerationOperator": {
-      "type": "string",
-      "description": "The available operator for the Toleration section.",
-      "enum": [
-        "Exists",
-        "Equal"
-      ],
-      "x-ms-enum": {
-        "name": "CoreV1TolerationOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "Operator that checks for existence."
-          },
-          {
-            "name": "Equal",
-            "value": "Equal",
-            "description": "Operator that checks for equality."
-          }
-        ]
-      }
-    },
-    "CrpClusterPropertySelector": {
-      "type": "object",
-      "description": "PropertySelector helps user specify property requirements when picking clusters for resource placement.",
-      "properties": {
-        "matchExpressions": {
-          "type": "array",
-          "description": "MatchExpressions is an array of CRPPropertySelectorRequirements. The requirements are AND'd.",
-          "items": {
-            "$ref": "#/definitions/CrpClusterPropertySelectorRequirement"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "matchExpressions"
-      ]
-    },
-    "CrpClusterPropertySelectorRequirement": {
-      "type": "object",
-      "description": "PropertySelectorRequirement is a specific property requirement when picking clusters for resource placement.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name is the name of the property."
-        },
-        "operator": {
-          "$ref": "#/definitions/CrpPropertySelectorOperator",
-          "description": "Operator specifies the relationship between a cluster's observed value of the specified property and the values given in the requirement."
-        },
-        "values": {
-          "type": "array",
-          "description": "Values are a list of values of the specified property which Fleet will compare against the observed values of individual member clusters in accordance with the given operator.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "operator",
-        "values"
-      ]
-    },
-    "CrpClusterSelector": {
-      "type": "object",
-      "description": "CrpClusterSelector allows specifying cluster selector terms.",
+      "description": "ClusterSelector allows specifying cluster selector terms.",
       "properties": {
         "clusterSelectorTerms": {
           "type": "array",
           "description": "ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.",
           "items": {
-            "$ref": "#/definitions/CrpClusterSelectorTerm"
+            "$ref": "#/definitions/ClusterSelectorTerm"
           },
           "x-ms-identifiers": []
         }
@@ -2738,87 +2624,17 @@
         "clusterSelectorTerms"
       ]
     },
-    "CrpClusterSelectorTerm": {
+    "ClusterSelectorTerm": {
       "type": "object",
-      "description": "CrpClusterSelectorTerm allows specifying what clusters in the fleet are in scope. If you specify both label and property selectors in the same term, the results are AND'd.",
+      "description": "ClusterSelectorTerm allows specifying what clusters in the fleet are in scope. If you specify both label and property selectors in the same term, the results are AND'd.",
       "properties": {
         "labelSelector": {
-          "$ref": "#/definitions/MetaV1ClusterLabelSelector",
+          "$ref": "#/definitions/LabelSelector",
           "description": "LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected."
         },
         "propertySelector": {
-          "$ref": "#/definitions/CrpClusterPropertySelector",
+          "$ref": "#/definitions/PropertySelector",
           "description": "PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected."
-        }
-      }
-    },
-    "CrpPropertySelectorOperator": {
-      "type": "string",
-      "description": "The possible operator values, which describe the relationship between a cluster’s observed value of the given property and the list of values in the matcher.",
-      "enum": [
-        "Gt",
-        "Ge",
-        "Eq",
-        "Ne",
-        "Lt",
-        "Le"
-      ],
-      "x-ms-enum": {
-        "name": "CrpPropertySelectorOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Gt",
-            "value": "Gt",
-            "description": "Gt (Greater than): a cluster’s observed value of the given property must be greater than the value in the matcher before it can be picked for resource placement."
-          },
-          {
-            "name": "Ge",
-            "value": "Ge",
-            "description": "Ge (Greater than or equal to): a cluster’s observed value of the given property must be greater than or equal to the value in the matcher before it can be picked for resource placement."
-          },
-          {
-            "name": "Eq",
-            "value": "Eq",
-            "description": "Eq (Equal to): a cluster’s observed value of the given property must be equal to the value in the matcher before it can be picked for resource placement."
-          },
-          {
-            "name": "Ne",
-            "value": "Ne",
-            "description": "Ne (Not equal to): a cluster’s observed value of the given property must be not equal to the value in the matcher before it can be picked for resource placement."
-          },
-          {
-            "name": "Lt",
-            "value": "Lt",
-            "description": "Lt (Less than): a cluster’s observed value of the given property must be less than the value in the matcher before it can be picked for resource placement."
-          },
-          {
-            "name": "Le",
-            "value": "Le",
-            "description": "Le (Less than or equal to): a cluster’s observed value of the given property must be less than or equal to the value in the matcher before it can be picked for resource placement."
-          }
-        ]
-      }
-    },
-    "CrpToleration": {
-      "type": "object",
-      "description": "Toleration allows ClusterResourcePlacement to tolerate any taint that matches <key,value,effect> using the matching operator <operator>",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Key is the taint key that the toleration applies to."
-        },
-        "operator": {
-          "$ref": "#/definitions/CoreV1TolerationOperator",
-          "description": "Operator represents a key's relationship to the value. Default is Equal."
-        },
-        "value": {
-          "type": "string",
-          "description": "Value is the taint value the toleration matches to."
-        },
-        "effect": {
-          "$ref": "#/definitions/CoreV1TaintEffect",
-          "description": "Effect indicates the taint effect to match. Empty means match all taint effects."
         }
       }
     },
@@ -3062,19 +2878,16 @@
           "$ref": "#/definitions/DeletePolicy",
           "description": "Delete options of a fleet managed namespace."
         },
-        "orchestratorProfile": {
-          "$ref": "#/definitions/OrchestratorProfile",
-          "description": "The profile of the orchestrator to create the namespace."
+        "propagationPolicy": {
+          "$ref": "#/definitions/PropagationPolicy",
+          "description": "The profile of the propagation to create the namespace."
         },
         "status": {
           "$ref": "#/definitions/FleetManagedNamespaceStatus",
           "description": "Status information of the last operation for fleet managed namespace.",
           "readOnly": true
         }
-      },
-      "required": [
-        "orchestratorProfile"
-      ]
+      }
     },
     "FleetManagedNamespaceProvisioningState": {
       "type": "string",
@@ -3533,21 +3346,90 @@
         "id"
       ]
     },
-    "HubPolicy": {
+    "KubernetesVersion": {
+      "type": "string"
+    },
+    "LabelSelector": {
       "type": "object",
-      "description": "HubPolicy uses a fleet hub and CRP to propagate the namespace.",
+      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
       "properties": {
-        "defaultClusterResourcePlacement": {
-          "$ref": "#/definitions/ClusterResourcePlacement",
-          "description": "The default ClusterResourcePlacement (CRP) policy configuration."
+        "matchLabels": {
+          "type": "object",
+          "description": "matchLabels is a map of {key,value} pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "items": {
+            "$ref": "#/definitions/LabelSelectorRequirement"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LabelSelectorOperator": {
+      "type": "string",
+      "description": "A label selector operator is the set of operators that can be used in a selector requirement.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "LabelSelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "In validates whether the key is in the list of values."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "NotIn validates whether the key is not in the list of values."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Exists validates the existence of the key."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "DoesNotExists validates the absence of the key."
+          }
+        ]
+      }
+    },
+    "LabelSelectorRequirement": {
+      "type": "object",
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "#/definitions/LabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values."
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values to be compared using the operator.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "defaultClusterResourcePlacement"
+        "key",
+        "operator"
       ]
-    },
-    "KubernetesVersion": {
-      "type": "string"
     },
     "ManagedClusterUpdate": {
       "type": "object",
@@ -3648,88 +3530,6 @@
         }
       }
     },
-    "MetaV1ClusterLabelSelector": {
-      "type": "object",
-      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
-      "properties": {
-        "matchLabels": {
-          "type": "object",
-          "description": "matchLabels is a map of {key,value} pairs.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "matchExpressions": {
-          "type": "array",
-          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
-          "items": {
-            "$ref": "#/definitions/MetaV1LabelSelectorRequirement"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "MetaV1LabelSelectorOperator": {
-      "type": "string",
-      "description": "A label selector operator is the set of operators that can be used in a selector requirement.",
-      "enum": [
-        "In",
-        "NotIn",
-        "Exists",
-        "DoesNotExist"
-      ],
-      "x-ms-enum": {
-        "name": "MetaV1LabelSelectorOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "In",
-            "value": "In",
-            "description": "In validates whether the key is in the list of values."
-          },
-          {
-            "name": "NotIn",
-            "value": "NotIn",
-            "description": "NotIn validates whether the key is not in the list of values."
-          },
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "Exists validates the existence of the key."
-          },
-          {
-            "name": "DoesNotExist",
-            "value": "DoesNotExist",
-            "description": "DoesNotExists validates the absence of the key."
-          }
-        ]
-      }
-    },
-    "MetaV1LabelSelectorRequirement": {
-      "type": "object",
-      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "key is the label key that the selector applies to."
-        },
-        "operator": {
-          "$ref": "#/definitions/MetaV1LabelSelectorOperator",
-          "description": "operator represents a key's relationship to a set of values."
-        },
-        "values": {
-          "type": "array",
-          "description": "values is an array of string values to be compared using the operator.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "key",
-        "operator"
-      ]
-    },
     "NetworkPolicy": {
       "type": "object",
       "description": "The network policy for a managed namespace.",
@@ -3829,49 +3629,43 @@
         }
       }
     },
-    "OrchestratorPolicy": {
+    "PlacementPolicy": {
       "type": "object",
-      "x-nullable": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/HubPolicy"
-        }
-      ]
-    },
-    "OrchestratorProfile": {
-      "type": "object",
-      "description": "The orchestrator profile to manage the lifecycle of the namespace.",
+      "description": "PlacementPolicy contains the rules to select target member clusters to place the selected resources. Only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/OrchestratorProfileType",
-          "description": "The type of the policy to be used."
+        "placementType": {
+          "$ref": "#/definitions/PlacementType",
+          "description": "Type of placement. Default is PickAll."
         },
-        "policy": {
-          "$ref": "#/definitions/OrchestratorPolicy",
-          "description": "The policy configuration for the type of the orchestrator."
-        }
-      },
-      "required": [
-        "type",
-        "policy"
-      ]
-    },
-    "OrchestratorProfileType": {
-      "type": "string",
-      "description": "The type of the namespace orchestrator.",
-      "enum": [
-        "Hub"
-      ],
-      "x-ms-enum": {
-        "name": "OrchestratorProfileType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Hub",
-            "value": "Hub",
-            "description": "Using a fleet hub and kubefleet ClusterResourcePlacement."
+        "clusterNames": {
+          "type": "array",
+          "description": "ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is PickFixed.",
+          "items": {
+            "type": "string"
           }
-        ]
+        },
+        "affinity": {
+          "$ref": "#/definitions/Affinity",
+          "description": "Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll."
+        },
+        "tolerations": {
+          "type": "array",
+          "description": "If specified, the ClusterClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted.",
+          "items": {
+            "$ref": "#/definitions/Toleration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PlacementProfile": {
+      "type": "object",
+      "description": "The configuration profile for default ClusterResourcePlacement for placement.",
+      "properties": {
+        "defaultClusterResourcePlacement": {
+          "$ref": "#/definitions/ClusterResourcePlacement",
+          "description": "The default ClusterResourcePlacement policy configuration."
+        }
       }
     },
     "PlacementType": {
@@ -3927,6 +3721,138 @@
           }
         ]
       }
+    },
+    "PropagationPolicy": {
+      "type": "object",
+      "description": "The propagation to be used for provisioning the namespace among the fleet.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PropagationType",
+          "description": "The type of the policy to be used. Default is Placement."
+        },
+        "propagationProfile": {
+          "$ref": "#/definitions/PropagationProfile",
+          "description": "The propagation profile to be used for the propagation. Default is PlacementProfile."
+        }
+      }
+    },
+    "PropagationProfile": {
+      "type": "object",
+      "x-nullable": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/PlacementProfile"
+        }
+      ]
+    },
+    "PropagationType": {
+      "type": "string",
+      "description": "How the namespace will be provisioned among the fleet members.",
+      "enum": [
+        "Placement"
+      ],
+      "x-ms-enum": {
+        "name": "PropagationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Placement",
+            "value": "Placement",
+            "description": "Using ClusterResourcePlacement."
+          }
+        ]
+      }
+    },
+    "PropertySelector": {
+      "type": "object",
+      "description": "PropertySelector helps user specify property requirements when picking clusters for resource placement.",
+      "properties": {
+        "matchExpressions": {
+          "type": "array",
+          "description": "MatchExpressions is an array of PropertySelectorRequirements. The requirements are AND'd.",
+          "items": {
+            "$ref": "#/definitions/PropertySelectorRequirement"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "matchExpressions"
+      ]
+    },
+    "PropertySelectorOperator": {
+      "type": "string",
+      "description": "The possible operator values, which describe the relationship between a cluster’s observed value of the given property and the list of values in the matcher.",
+      "enum": [
+        "Gt",
+        "Ge",
+        "Eq",
+        "Ne",
+        "Lt",
+        "Le"
+      ],
+      "x-ms-enum": {
+        "name": "PropertySelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gt",
+            "value": "Gt",
+            "description": "Gt (Greater than): a cluster’s observed value of the given property must be greater than the value in the matcher before it can be picked for resource placement."
+          },
+          {
+            "name": "Ge",
+            "value": "Ge",
+            "description": "Ge (Greater than or equal to): a cluster’s observed value of the given property must be greater than or equal to the value in the matcher before it can be picked for resource placement."
+          },
+          {
+            "name": "Eq",
+            "value": "Eq",
+            "description": "Eq (Equal to): a cluster’s observed value of the given property must be equal to the value in the matcher before it can be picked for resource placement."
+          },
+          {
+            "name": "Ne",
+            "value": "Ne",
+            "description": "Ne (Not equal to): a cluster’s observed value of the given property must be not equal to the value in the matcher before it can be picked for resource placement."
+          },
+          {
+            "name": "Lt",
+            "value": "Lt",
+            "description": "Lt (Less than): a cluster’s observed value of the given property must be less than the value in the matcher before it can be picked for resource placement."
+          },
+          {
+            "name": "Le",
+            "value": "Le",
+            "description": "Le (Less than or equal to): a cluster’s observed value of the given property must be less than or equal to the value in the matcher before it can be picked for resource placement."
+          }
+        ]
+      }
+    },
+    "PropertySelectorRequirement": {
+      "type": "object",
+      "description": "PropertySelectorRequirement is a specific property requirement when picking clusters for resource placement.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the name of the property."
+        },
+        "operator": {
+          "$ref": "#/definitions/PropertySelectorOperator",
+          "description": "Operator specifies the relationship between a cluster's observed value of the specified property and the values given in the requirement."
+        },
+        "values": {
+          "type": "array",
+          "description": "Values are a list of values of the specified property which Fleet will compare against the observed values of individual member clusters in accordance with the given operator.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
     },
     "ResourceQuota": {
       "type": "object",
@@ -4000,6 +3926,24 @@
         ]
       }
     },
+    "TaintEffect": {
+      "type": "string",
+      "description": "The available taint effect for the Toleration section",
+      "enum": [
+        "NoSchedule"
+      ],
+      "x-ms-enum": {
+        "name": "TaintEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoSchedule",
+            "value": "NoSchedule",
+            "description": "The NoSchedule taint effect."
+          }
+        ]
+      }
+    },
     "TargetType": {
       "type": "string",
       "description": "The target type of a skip request.",
@@ -4032,6 +3976,52 @@
             "name": "AfterStageWait",
             "value": "AfterStageWait",
             "description": "Skip the update of the after stage wait of a certain stage."
+          }
+        ]
+      }
+    },
+    "Toleration": {
+      "type": "object",
+      "description": "Toleration allows ClusterResourcePlacement to tolerate any taint that matches <key,value,effect> using the matching operator <operator>",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key is the taint key that the toleration applies to.Empty means match all taint keys.If the key is empty, operator must be 'Exists'; this combination means to match all values and all keys."
+        },
+        "operator": {
+          "$ref": "#/definitions/TolerationOperator",
+          "description": "Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Default is Equal. Exists is equivalent to wildcard for value, so that a ClusterResourcePlacement can tolerate all taints of a particular category."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string."
+        },
+        "effect": {
+          "$ref": "#/definitions/TaintEffect",
+          "description": "Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule."
+        }
+      }
+    },
+    "TolerationOperator": {
+      "type": "string",
+      "description": "The available operator for the Toleration section.",
+      "enum": [
+        "Exists",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "TolerationOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Operator that checks for existence."
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Operator that checks for equality."
           }
         ]
       }
