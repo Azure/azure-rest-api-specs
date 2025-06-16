@@ -1,5 +1,3 @@
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
@@ -38,7 +36,7 @@ model PlacementProfile {
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("The desired configuration of ClusterResourcePlacement")
+@doc("ClusterResourcePlacement is used to select cluster scoped resources, including built-in resources and custom resources, and placement them onto selected member clusters in a fleet.")
 model ClusterResourcePlacement {
   @doc("PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
@@ -226,4 +224,3 @@ union TaintEffect {
 
   string,
 }
-
