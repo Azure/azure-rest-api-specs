@@ -95,7 +95,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
-        "operationId": "Alerts_GetAll",
+        "operationId": "Alerts_GetAllByScope",
         "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
         "parameters": [
           {
@@ -275,7 +275,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
       "get": {
-        "operationId": "Alerts_GetById",
+        "operationId": "Alerts_GetByIdByScope",
         "summary": "Get a specific alert.",
         "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "produces": [
@@ -355,7 +355,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
-        "operationId": "Alerts_ChangeState",
+        "operationId": "Alerts_ChangeStateByScope",
         "description": "Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "parameters": [
           {
@@ -439,7 +439,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
-        "operationId": "Alerts_GetHistory",
+        "operationId": "Alerts_GetHistoryByScope",
         "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.",
         "parameters": [
           {
@@ -587,7 +587,7 @@
       "in": "path",
       "required": true,
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "subscriptionId": {
       "name": "subscriptionId",
