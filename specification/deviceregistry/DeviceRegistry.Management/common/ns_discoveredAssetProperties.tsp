@@ -127,7 +127,7 @@ model NamespaceDiscoveredDataset {
   @doc("Name of the dataset.")
   name: string;
 
-  @doc("Name of the data source within a dataset.")
+  @doc("Reference to a data source for a given dataset.")
   @added(Versions.v2025_07_01_preview)
   dataSource?: string;
 
