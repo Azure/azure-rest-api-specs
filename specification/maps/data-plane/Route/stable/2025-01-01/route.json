@@ -204,7 +204,7 @@
     },
     "/route/snapToRoads": {
       "post": {
-        "description": "The Snap to Roads API accepts GPS point data, represented as longitude and latitude coordinates, and generates points that aligns with existing roadways on a map. This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=latest).\n\n\n",
+        "description": "The Snap to Roads API accepts GPS point data, represented as longitude and latitude coordinates, and generates points that aligns with existing roadways on a map. This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 6 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=latest).\n\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -863,7 +863,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to road network. You can have a minimum of 2 points and maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
+          "description": "A set of points to snap to road network. You can have a minimum of 2 points and maximum of 100 points and the two consecutive points must be within 6 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
           "minimum": 2,
           "maximum": 100,
           "items": {
