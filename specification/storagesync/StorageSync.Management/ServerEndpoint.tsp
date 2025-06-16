@@ -39,7 +39,8 @@ interface ServerEndpoints {
   create is ArmResourceCreateOrReplaceAsync<
     ServerEndpoint,
     Response = ArmResourceUpdatedResponse<ServerEndpoint> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = StorageSyncError
   >;
 

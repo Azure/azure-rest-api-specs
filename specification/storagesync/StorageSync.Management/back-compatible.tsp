@@ -68,6 +68,9 @@ using Microsoft.StorageSync;
 @@clientName(RegisteredServers.create::parameters.resource, "parameters");
 @@clientName(RegisteredServers.update::parameters.properties, "parameters");
 @@clientName(RegisteredServers.triggerRollover::parameters.body, "parameters");
+@@clientName(StorageSyncServicesOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(RegisteredServer.properties);
 

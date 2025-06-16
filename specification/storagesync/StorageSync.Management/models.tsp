@@ -572,7 +572,11 @@ model CheckNameAvailabilityParameters {
   /**
    * The resource type. Must be set to Microsoft.StorageSync/storageSyncServices
    */
-  type: "Microsoft.StorageSync/storageSyncServices";
+  type: Type;
+}
+
+enum Type {
+  `Microsoft.StorageSync/storageSyncServices`,
 }
 
 /**
@@ -2657,3 +2661,9 @@ model OperationDisplayResource {
    */
   description?: string;
 }
+
+model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
+@@OpenAPI.extension(OperationEntityListResult.value,
+  "x-ms-identifiers",
+  #["name"]
+);

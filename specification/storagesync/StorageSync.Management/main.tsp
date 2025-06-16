@@ -50,8 +50,17 @@ enum Versions {
 }
 
 interface Operations {
-  /**
-   * List the operations for the provider
-   */
-  list is Azure.ResourceManager.Operations.list;
+  @tag("Operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationEntityListResult> | StorageSyncError;
 }

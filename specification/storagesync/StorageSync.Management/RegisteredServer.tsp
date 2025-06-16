@@ -39,7 +39,8 @@ interface RegisteredServers {
   create is ArmResourceCreateOrReplaceAsync<
     RegisteredServer,
     Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = StorageSyncError
   >;
 
@@ -49,8 +50,7 @@ interface RegisteredServers {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     RegisteredServer,
-    PatchModel = RegisteredServerUpdateParameters,
-    Error = StorageSyncError
+    PatchModel = RegisteredServerUpdateParameters
   >;
 
   /**

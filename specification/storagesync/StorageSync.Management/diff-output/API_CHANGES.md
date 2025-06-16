@@ -96,6 +96,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.OperationEntityListResult.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].patch.parameters[3].required__added` | added | `true` |
 
@@ -111,53 +112,11 @@
 |------|------------|-------|
 | `definitions.CloudEndpointCreateParametersProperties__deleted` | deleted | `{"type":"object","properties":{"storageAccountResourceId":{"type":"string"},"azureFileShareName":{"t...` |
 
-### Changes for `OperationDisplayInfo`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationDisplayInfo__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"operation":{"type":"string"},"provid...` |
-
 ### Changes for `OperationDisplayResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.OperationDisplayResource__deleted` | deleted | `{"type":"object","properties":{"provider":{"type":"string"},"resource":{"type":"string"},"operation"...` |
-
-### Changes for `OperationEntity`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationEntity__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"display":{"$ref":"#/definitions/OperationDi...` |
-
-### Changes for `OperationEntityListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationEntityListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"nextLink":{...` |
-
-### Changes for `OperationProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationProperties__deleted` | deleted | `{"type":"object","properties":{"serviceSpecification":{"$ref":"#/definitions/OperationResourceServic...` |
-
-### Changes for `OperationResourceMetricSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationResourceMetricSpecification__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"displayDesc...` |
-
-### Changes for `OperationResourceMetricSpecificationDimension`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationResourceMetricSpecificationDimension__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"toBeExporte...` |
-
-### Changes for `OperationResourceServiceSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationResourceServiceSpecification__deleted` | deleted | `{"type":"object","properties":{"metricSpecifications":{"type":"array","items":{"$ref":"#/definitions...` |
 
 ### Changes for `PhysicalPath`
 
@@ -255,12 +214,6 @@
 |------|------------|-------|
 | `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object"}` |
 
-### Changes for `name`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CheckNameAvailabilityParameters.properties.type['x-ms-enum'].name__deleted` | deleted | `Type` |
-
 ### Changes for `$ref`
 
 | Path | Change Type | Value |
@@ -280,13 +233,9 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.StorageSyncServiceProperties.properties.privateEndpointConnections.items.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/providers/Microsoft.StorageSync/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationEntityListResult` | `../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult` |
-| `paths['/providers/Microsoft.StorageSync/operations'].get.responses.default.schema.$ref` | `#/definitions/StorageSyncError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability'].post.parameters[1].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.parameters[1].schema.$ref` | `#/definitions/StorageSyncServiceCreateParameters` | `#/definitions/StorageSyncService` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[3].schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].patch.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `#/definitions/StorageSyncError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].put.parameters[2].schema.$ref` | `#/definitions/RegisteredServerCreateParameters` | `#/definitions/RegisteredServer` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put.parameters[2].schema.$ref` | `#/definitions/SyncGroupCreateParameters` | `#/definitions/SyncGroup` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].put.parameters[3].schema.$ref` | `#/definitions/CloudEndpointCreateParameters` | `#/definitions/CloudEndpoint` |

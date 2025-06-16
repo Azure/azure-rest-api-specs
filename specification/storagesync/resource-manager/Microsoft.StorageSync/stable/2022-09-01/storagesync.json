@@ -81,13 +81,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationEntityListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/StorageSyncError"
             }
           }
         },
@@ -120,7 +120,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -1114,7 +1114,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageSyncError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2931,14 +2931,8 @@
           "description": "The name to check for availability"
         },
         "type": {
-          "type": "string",
-          "description": "The resource type. Must be set to Microsoft.StorageSync/storageSyncServices",
-          "enum": [
-            "Microsoft.StorageSync/storageSyncServices"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/Type",
+          "description": "The resource type. Must be set to Microsoft.StorageSync/storageSyncServices"
         }
       },
       "required": [
@@ -3607,6 +3601,170 @@
             "value": "cancel"
           }
         ]
+      }
+    },
+    "OperationDisplayInfo": {
+      "type": "object",
+      "description": "The operation supported by storage sync.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The action that users can perform, based on their permission level."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft StorageSync."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        }
+      }
+    },
+    "OperationEntity": {
+      "type": "object",
+      "description": "The operation supported by storage sync.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by storage sync."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operations resource."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "type": "object",
+      "description": "Paged collection of OperationEntity items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of the operations resource.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationResourceServiceSpecification",
+          "description": "Service specification for the operations resource."
+        }
+      }
+    },
+    "OperationResourceMetricSpecification": {
+      "type": "object",
+      "description": "Operation Display Resource object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description for the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit for the metric."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type for the metric."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Supported aggregation types for the metric.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Fill gaps in the metric with zero."
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "description": "Lock Aggregation type for the metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions for the metric specification.",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecificationDimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "OperationResourceMetricSpecificationDimension": {
+      "type": "object",
+      "description": "OperationResourceMetricSpecificationDimension object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the dimensions."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Indicates metric should be exported for Shoebox."
+        }
+      }
+    },
+    "OperationResourceServiceSpecification": {
+      "type": "object",
+      "description": "Service specification.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "List of metric specifications.",
+          "items": {
+            "$ref": "#/definitions/OperationResourceMetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
       }
     },
     "OperationStatus": {
@@ -5208,6 +5366,16 @@
           "type": "string",
           "description": "Certificate Data"
         }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "enum": [
+        "Microsoft.StorageSync/storageSyncServices"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": false
       }
     },
     "TypeSpec.Http.OkResponse": {

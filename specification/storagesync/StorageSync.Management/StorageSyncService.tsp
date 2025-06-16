@@ -38,7 +38,8 @@ interface StorageSyncServices {
   create is ArmResourceCreateOrReplaceAsync<
     StorageSyncService,
     Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = StorageSyncError
   >;
 

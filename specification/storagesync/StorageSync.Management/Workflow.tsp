@@ -43,7 +43,12 @@ interface Workflows {
   /**
    * Abort the given workflow.
    */
-  abort is ArmResourceActionSync<Workflow, void, OkResponse, Error = StorageSyncError>;
+  abort is ArmResourceActionSync<
+    Workflow,
+    void,
+    OkResponse,
+    Error = StorageSyncError
+  >;
 }
 
 @@doc(Workflow.name, "workflow Id");
