@@ -29,7 +29,7 @@ interface StorageSyncServices {
   /**
    * Get a given StorageSyncService.
    */
-  get is ArmResourceRead<StorageSyncService>;
+  get is ArmResourceRead<StorageSyncService, Error = StorageSyncError>;
 
   /**
    * Create a new StorageSyncService.
@@ -38,7 +38,8 @@ interface StorageSyncServices {
   create is ArmResourceCreateOrReplaceAsync<
     StorageSyncService,
     Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    Error = StorageSyncError
   >;
 
   /**
@@ -47,7 +48,8 @@ interface StorageSyncServices {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StorageSyncService,
-    PatchModel = StorageSyncServiceUpdateParameters
+    PatchModel = StorageSyncServiceUpdateParameters,
+    Error = StorageSyncError
   >;
 
   /**
@@ -56,7 +58,8 @@ interface StorageSyncServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -64,7 +67,8 @@ interface StorageSyncServices {
    */
   listByResourceGroup is ArmResourceListByParent<
     StorageSyncService,
-    Response = ArmResponse<StorageSyncServiceArray>
+    Response = ArmResponse<StorageSyncServiceArray>,
+    Error = StorageSyncError
   >;
 
   /**
@@ -72,7 +76,8 @@ interface StorageSyncServices {
    */
   listBySubscription is ArmListBySubscription<
     StorageSyncService,
-    Response = ArmResponse<StorageSyncServiceArray>
+    Response = ArmResponse<StorageSyncServiceArray>,
+    Error = StorageSyncError
   >;
 
   /**
@@ -86,7 +91,8 @@ interface StorageSyncServices {
   listByStorageSyncService is ArmResourceActionSync<
     StorageSyncService,
     void,
-    ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
+    ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>,
+    Error = StorageSyncError
   >;
 }
 

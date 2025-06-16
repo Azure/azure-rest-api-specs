@@ -29,7 +29,7 @@ interface SyncGroups {
   /**
    * Get a given SyncGroup.
    */
-  get is ArmResourceRead<SyncGroup>;
+  get is ArmResourceRead<SyncGroup, Error = StorageSyncError>;
 
   /**
    * Create a new SyncGroup.
@@ -37,20 +37,22 @@ interface SyncGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceSync<
     SyncGroup,
-    Response = ArmResourceUpdatedResponse<SyncGroup>
+    Response = ArmResourceUpdatedResponse<SyncGroup>,
+    Error = StorageSyncError
   >;
 
   /**
    * Delete a given SyncGroup.
    */
-  delete is ArmResourceDeleteSync<SyncGroup>;
+  delete is ArmResourceDeleteSync<SyncGroup, Error = StorageSyncError>;
 
   /**
    * Get a SyncGroup List.
    */
   listByStorageSyncService is ArmResourceListByParent<
     SyncGroup,
-    Response = ArmResponse<SyncGroupArray>
+    Response = ArmResponse<SyncGroupArray>,
+    Error = StorageSyncError
   >;
 }
 

@@ -49,4 +49,9 @@ enum Versions {
   v2022_09_01: "2022-09-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * List the operations for the provider
+   */
+  list is Azure.ResourceManager.Operations.list;
+}

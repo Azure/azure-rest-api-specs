@@ -30,7 +30,7 @@ interface CloudEndpoints {
   /**
    * Get a given CloudEndpoint.
    */
-  get is ArmResourceRead<CloudEndpoint>;
+  get is ArmResourceRead<CloudEndpoint, Error = StorageSyncError>;
 
   /**
    * Create a new CloudEndpoint.
@@ -39,7 +39,9 @@ interface CloudEndpoints {
   create is ArmResourceCreateOrReplaceAsync<
     CloudEndpoint,
     Response = ArmResourceUpdatedResponse<CloudEndpoint> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = StorageSyncError
   >;
 
   /**
@@ -48,7 +50,8 @@ interface CloudEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -56,14 +59,20 @@ interface CloudEndpoints {
    */
   listBySyncGroup is ArmResourceListByParent<
     CloudEndpoint,
-    Response = ArmResponse<CloudEndpointArray>
+    Response = ArmResponse<CloudEndpointArray>,
+    Error = StorageSyncError
   >;
 
   /**
    * Pre Backup a given CloudEndpoint.
    */
   @action("prebackup")
-  preBackup is ArmResourceActionAsync<CloudEndpoint, BackupRequest, OkResponse>;
+  preBackup is ArmResourceActionAsync<
+    CloudEndpoint,
+    BackupRequest,
+    OkResponse,
+    Error = StorageSyncError
+  >;
 
   /**
    * Post Backup a given CloudEndpoint.
@@ -72,7 +81,8 @@ interface CloudEndpoints {
   postBackup is ArmResourceActionAsync<
     CloudEndpoint,
     BackupRequest,
-    ArmResponse<PostBackupResponse>
+    PostBackupResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -82,7 +92,8 @@ interface CloudEndpoints {
   preRestore is ArmResourceActionAsync<
     CloudEndpoint,
     PreRestoreRequest,
-    OkResponse
+    OkResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -90,7 +101,12 @@ interface CloudEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CloudEndpoints_restoreheartbeat")
-  restoreheartbeat is ArmResourceActionSync<CloudEndpoint, void, OkResponse>;
+  restoreheartbeat is ArmResourceActionSync<
+    CloudEndpoint,
+    void,
+    OkResponse,
+    Error = StorageSyncError
+  >;
 
   /**
    * Post Restore a given CloudEndpoint.
@@ -99,7 +115,8 @@ interface CloudEndpoints {
   postRestore is ArmResourceActionAsync<
     CloudEndpoint,
     PostRestoreRequest,
-    OkResponse
+    OkResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -108,7 +125,8 @@ interface CloudEndpoints {
   triggerChangeDetection is ArmResourceActionAsync<
     CloudEndpoint,
     TriggerChangeDetectionParameters,
-    OkResponse
+    OkResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -118,7 +136,8 @@ interface CloudEndpoints {
   afsShareMetadataCertificatePublicKeys is ArmResourceActionSync<
     CloudEndpoint,
     void,
-    ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys>
+    ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys>,
+    Error = StorageSyncError
   >;
 }
 

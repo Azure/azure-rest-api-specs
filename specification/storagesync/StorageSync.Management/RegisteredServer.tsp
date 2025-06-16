@@ -30,7 +30,7 @@ interface RegisteredServers {
   /**
    * Get a given registered server.
    */
-  get is ArmResourceRead<RegisteredServer>;
+  get is ArmResourceRead<RegisteredServer, Error = StorageSyncError>;
 
   /**
    * Add a new registered server.
@@ -39,7 +39,8 @@ interface RegisteredServers {
   create is ArmResourceCreateOrReplaceAsync<
     RegisteredServer,
     Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    Error = StorageSyncError
   >;
 
   /**
@@ -48,7 +49,8 @@ interface RegisteredServers {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     RegisteredServer,
-    PatchModel = RegisteredServerUpdateParameters
+    PatchModel = RegisteredServerUpdateParameters,
+    Error = StorageSyncError
   >;
 
   /**
@@ -57,7 +59,8 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     RegisteredServer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -65,7 +68,8 @@ interface RegisteredServers {
    */
   listByStorageSyncService is ArmResourceListByParent<
     RegisteredServer,
-    Response = ArmResponse<RegisteredServerArray>
+    Response = ArmResponse<RegisteredServerArray>,
+    Error = StorageSyncError
   >;
 
   /**
@@ -76,7 +80,8 @@ interface RegisteredServers {
   triggerRollover is ArmResourceActionAsync<
     RegisteredServer,
     TriggerRolloverRequest,
-    OkResponse
+    OkResponse,
+    Error = StorageSyncError
   >;
 }
 

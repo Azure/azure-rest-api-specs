@@ -30,7 +30,7 @@ interface ServerEndpoints {
   /**
    * Get a ServerEndpoint.
    */
-  get is ArmResourceRead<ServerEndpoint>;
+  get is ArmResourceRead<ServerEndpoint, Error = StorageSyncError>;
 
   /**
    * Create a new ServerEndpoint.
@@ -39,7 +39,8 @@ interface ServerEndpoints {
   create is ArmResourceCreateOrReplaceAsync<
     ServerEndpoint,
     Response = ArmResourceUpdatedResponse<ServerEndpoint> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    Error = StorageSyncError
   >;
 
   /**
@@ -48,7 +49,8 @@ interface ServerEndpoints {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ServerEndpoint,
-    PatchModel = ServerEndpointUpdateParameters
+    PatchModel = ServerEndpointUpdateParameters,
+    Error = StorageSyncError
   >;
 
   /**
@@ -57,7 +59,8 @@ interface ServerEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -65,7 +68,8 @@ interface ServerEndpoints {
    */
   listBySyncGroup is ArmResourceListByParent<
     ServerEndpoint,
-    Response = ArmResponse<ServerEndpointArray>
+    Response = ArmResponse<ServerEndpointArray>,
+    Error = StorageSyncError
   >;
 
   /**
@@ -76,7 +80,8 @@ interface ServerEndpoints {
   recallAction is ArmResourceActionAsync<
     ServerEndpoint,
     RecallActionParameters,
-    OkResponse
+    OkResponse,
+    Error = StorageSyncError
   >;
 }
 

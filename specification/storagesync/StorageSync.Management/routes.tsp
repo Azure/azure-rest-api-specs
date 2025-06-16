@@ -32,9 +32,35 @@ interface StorageSyncServicesOperationGroup {
       @path
       @segment("locations")
       locationName: string;
-    }
+    },
+    Error = StorageSyncError
   >;
 }
+
+/**
+ * Get Operation status
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
+@get
+@operationId("LocationOperationStatus")
+op locationOperationStatusGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+
+  /**
+   * The desired region to obtain information from.
+   */
+  @path
+  locationName: string,
+
+  /**
+   * operation Id
+   */
+  @path
+  operationId: string,
+): ArmResponse<LocationOperationStatus> | StorageSyncError;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OperationStatusOperationGroup {
@@ -67,28 +93,5 @@ interface OperationStatusOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<OperationStatus> | ErrorResponse;
-  /**
-   * Get Operation status
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/operations/{operationId}")
-  @get
-  @operationId("LocationOperationStatus")
-  locationOperationStatus(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * The desired region to obtain information from.
-     */
-    @path
-    locationName: string,
-
-    /**
-     * operation Id
-     */
-    @path
-    operationId: string,
-  ): ArmResponse<LocationOperationStatus> | ErrorResponse;
+  ): ArmResponse<OperationStatus> | StorageSyncError;
 }

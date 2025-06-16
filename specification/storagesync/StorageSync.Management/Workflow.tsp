@@ -29,20 +29,21 @@ interface Workflows {
   /**
    * Get Workflows resource
    */
-  get is ArmResourceRead<Workflow>;
+  get is ArmResourceRead<Workflow, Error = StorageSyncError>;
 
   /**
    * Get a Workflow List
    */
   listByStorageSyncService is ArmResourceListByParent<
     Workflow,
-    Response = ArmResponse<WorkflowArray>
+    Response = ArmResponse<WorkflowArray>,
+    Error = StorageSyncError
   >;
 
   /**
    * Abort the given workflow.
    */
-  abort is ArmResourceActionSync<Workflow, void, OkResponse>;
+  abort is ArmResourceActionSync<Workflow, void, OkResponse, Error = StorageSyncError>;
 }
 
 @@doc(Workflow.name, "workflow Id");

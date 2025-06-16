@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the storage sync service.
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = StorageSyncError>;
 
   /**
    * Update the state of specified private endpoint connection associated with the storage sync service.
@@ -39,7 +39,8 @@ interface PrivateEndpointConnections {
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
+    Error = StorageSyncError
   >;
 
   /**
@@ -48,7 +49,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = StorageSyncError
   >;
 
   /**
@@ -57,7 +59,8 @@ interface PrivateEndpointConnections {
   #suppress "deprecated" "For backward compatibility"
   listByStorageSyncService is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>,
+    Error = StorageSyncError
   >;
 }
 
