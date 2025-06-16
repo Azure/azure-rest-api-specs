@@ -71,7 +71,7 @@ directive:
     reason: The GetFileServiceUsage API has properties with "IOPS" in its response body. The names need to match feature spec and server code, so cannot be changed now per camel case rule in swagger.
 
   - where:
-    - $.definitions.StorageAccount.properties.placement
+    - $.definitions.StorageAccount
     suppress: BodyTopLevelProperties
     reason: The 'placement' property is already a top-level property in Microsoft.Compute/virtualMachines, so the schema should stay consistent here.
 ```
