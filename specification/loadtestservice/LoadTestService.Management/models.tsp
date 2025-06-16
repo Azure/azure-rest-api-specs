@@ -322,6 +322,7 @@ model QuotaBucketRequestPropertiesDimensions {
   location?: string;
 }
 
+@@identifiers(PagedOutboundEnvironmentEndpoint.value, #[]);
 @doc("Values returned by the List operation.")
 model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
