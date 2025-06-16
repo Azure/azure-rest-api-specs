@@ -32,7 +32,7 @@ using Azure.Core;
   "The Schema Registry service endpoint.",
   {
     @doc("The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.")
-    fullyQualifiedNamespace: url,
+    fullyQualifiedNamespace: string,
   }
 )
 @versioned(ServiceVersion)
