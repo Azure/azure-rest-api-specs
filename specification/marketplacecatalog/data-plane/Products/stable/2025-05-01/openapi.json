@@ -139,6 +139,9 @@
           },
           {
             "$ref": "#/parameters/OdataOrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchParameter"
           }
         ],
         "responses": {
@@ -2430,6 +2433,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "pricingAudience"
+    },
+    "SearchParameter": {
+      "name": "$search",
+      "in": "query",
+      "description": "Optional search by display name, publisher display name, or keywords.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ServiceFamilyParameter": {
       "name": "serviceFamily",

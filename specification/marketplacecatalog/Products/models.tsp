@@ -1201,6 +1201,13 @@ model OdataFilterParameter {
   $filter?: string;
 }
 
+@doc("Search filter parameter")
+model SearchParameter {
+  @query
+  @doc("Optional search by display name, publisher display name, or keywords.")
+  $search?: string;
+}
+
 @doc("OData Select parameter")
 model OdataSelectParameter {
   @query

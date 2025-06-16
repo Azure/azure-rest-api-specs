@@ -18,7 +18,9 @@ alias ProductsListingTraits = NoClientRequestId &
     OdataSelectParameter &
     OdataFilterParameter &
     OdataExpandParameter &
-    OdataOrderByParameter>;
+    OdataOrderByParameter &
+    SearchParameter>;
+
 // Product get traits
 alias ProductsGetTraits = NoClientRequestId &
   SupportsRepeatableRequests &
