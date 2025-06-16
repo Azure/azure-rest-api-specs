@@ -246,10 +246,24 @@ namespace Customization;
   "AvsEncryptionKeyVaultProperties",
   "csharp"
 );
+@@alternateType(Microsoft.AVS.EncryptionKeyVaultProperties.keyVaultUrl,
+  url,
+  "csharp"
+);
 @@clientName(Microsoft.AVS.EncryptionKeyStatus,
   "AvsEncryptionKeyStatus",
   "csharp"
 );
+@@clientName(Microsoft.AVS.Locations.checkQuotaAvailability,
+  "CheckAvsQuotaAvailability",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Locations.checkTrialAvailability,
+  "CheckAvsTrialAvailability",
+  "csharp"
+);
+@@clientName(Microsoft.AVS.Skus.list, "getAvsSkus", "csharp");
+@@clientName(Microsoft.AVS.ResourceSku, "AvsResourceSku", "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
@@ -510,7 +524,7 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkPublicIP.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(CloudLink.properties, "java,python");
+@@flattenProperty(CloudLink.properties, "java,python,csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(VirtualMachine.properties, "java,python");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
