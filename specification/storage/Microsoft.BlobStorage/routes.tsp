@@ -11,6 +11,7 @@ namespace Storage.Blob {
   alias ApiVersionHeader = {
     /** Specifies the version of the operation to use for this request. */
     @apiVersion
+    @access(Access.internal)
     @header("x-ms-version")
     version: string;
   };
