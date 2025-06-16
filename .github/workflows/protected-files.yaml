@@ -33,10 +33,11 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
 
           $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
+          $ignoredFiles = @(".github/CODEOWNERS")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 
           $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
-          $matchedFiles = @($matchedFiles | Where-Object { $_ -ne ".github/CODEOWNERS" })
+          $matchedFiles = @($matchedFiles | Where-Object { $changedFile = $_; -not ($ignoredFiles | Where-Object { $changedFile -like $_ }) })
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
