@@ -10,8 +10,22 @@ import {
 
 import { resolve } from "path";
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { exit } from "node:process";
 import fs from "node:fs/promises";
+import { simpleGit } from "simple-git";
+
+export async function getRootFolder(inputPath: string): Promise<string> {
+  try {
+    const gitRoot = await simpleGit(inputPath).revparse("--show-toplevel");
+    return resolve(gitRoot.trim());
+  }
+  catch (error) {
+    console.error(
+      `Error: Unable to determine the root folder of the git repository.`,
+      `Please ensure you are running this command within a git repository OR providing a targeted directory that is within a git repo.`,
+    );
+    process.exit(1);
+  }
+}
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -37,6 +51,8 @@ export async function main() {
   // just need to resolve that here to make ts aware of it
   const targetDirectory = opts.targetDirectory as string;
 
+  const resolvedGitRoot = await getRootFolder(targetDirectory);
+
   let fileList: string[] | undefined = undefined;
   if (opts.fileList !== undefined) {
     const fileListPath = resolve(opts.fileList as string);
@@ -50,7 +66,7 @@ export async function main() {
       console.error(`Error reading file list from ${opts.fileList}: ${error instanceof Error ? error.message : String(error)}`);
       console.error('User provided file list that is not found.');
       console.error("Please ensure the file exists and is readable, or do not provide the option 'fileList'")
-      exit(1);
+      process.exit(1);
     }
   }
 
@@ -63,7 +79,7 @@ export async function main() {
   }
 
   console.log(
-    `Running oav-runner against ${runType} within ${targetDirectory}.`,
+    `Running oav-runner against ${runType} within ${resolvedGitRoot}.`,
   );
 
   let exitCode = 0;
@@ -73,11 +89,11 @@ export async function main() {
 
   if (runType === "specs") {
     [exitCode, scannedSwaggerFiles, errorList] =
-      await checkSpecs(targetDirectory, fileList);
+      await checkSpecs(resolvedGitRoot, fileList);
     reportName = "Swagger SemanticValidation";
   } else if (runType === "examples") {
     [exitCode, scannedSwaggerFiles, errorList] =
-      await checkExamples(targetDirectory, fileList);
+      await checkExamples(resolvedGitRoot, fileList);
     reportName = "Swagger ModelValidation";
   }
 

@@ -121,12 +121,14 @@ model EnclaveAddressSpaces {
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Maintenance Mode")
 model MaintenanceModeConfiguration {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Current mode of Maintenance Mode Configuration")
   mode: "On" | "CanNotDelete" | "Off" | string;
 
   @doc("The user, group or service principal object affected by Maintenance Mode")
   principals?: Principal[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Justification for entering or exiting Maintenance Mode")
   justification?: "Networking" | "Governance" | "Off" | string;
 }

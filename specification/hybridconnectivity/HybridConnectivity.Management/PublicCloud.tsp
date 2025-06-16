@@ -24,6 +24,7 @@ model GenerateAwsTemplateRequest {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("The list of solution types and their settings")
+  @identifiers(#[])
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
@@ -37,6 +38,7 @@ model GenerateGcpTemplateRequest {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("The list of solution types and their settings")
+  @identifiers(#[])
   solutionTypes?: Array<SolutionTypeSettings>;
 }
 
@@ -330,6 +332,7 @@ model SolutionTypeProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Array of solution settings and its description.")
+  @identifiers(#[])
   solutionSettings?: SolutionTypeSettingsProperties[];
 }
 
