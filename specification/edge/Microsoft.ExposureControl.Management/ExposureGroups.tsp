@@ -30,6 +30,7 @@ model ExposureGroup is ProxyResource<ExposureGroupProperties> {
 model ExposureGroupProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Error items have no unique identifier."
   @doc("filter conditions.")
+  @identifiers(#[])
   filterConditions: Array<FilterCondition>;
 
   @visibility(Lifecycle.Read)

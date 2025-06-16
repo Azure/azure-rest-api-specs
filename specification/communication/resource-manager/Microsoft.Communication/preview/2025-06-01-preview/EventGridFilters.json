@@ -1,0 +1,366 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2025-06-01-preview",
+    "description": "REST API for Azure Communication Services, (internal APIs)"
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/EventGridFilters/{eventGridFilterName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CommunicationServiceName"
+        },
+        {
+          "$ref": "#/parameters/EventGridFilterNameParameter"
+        }
+      ],
+      "patch": {
+        "description": "Update an existing EventGridFilters resource's properties.",
+        "operationId": "EventGridFilter_Update",
+        "summary": "Update",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response includes the updated filter configuration.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update resource": {
+            "$ref": "./examples/eventGridFilterUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Get an existing EventGridFilters resource and its properties",
+        "operationId": "EventGridFilter_Get",
+        "summary": "Get",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding CommunicationService.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get resource": {
+            "$ref": "./examples/eventGridFilterGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a eventgrid filter on an existing resource.",
+        "operationId": "EventGridFilter_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update resource": {
+            "$ref": "./examples/eventGridFilterCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a eventgrid filter.",
+        "operationId": "EventGridFilter_Delete",
+        "summary": "Delete",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been deleted successfully."
+          },
+          "204": {
+            "description": "The resource did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete resource": {
+            "$ref": "./examples/eventGridFilterDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/EventGridFilters": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CommunicationServiceName"
+        }
+      ],
+      "get": {
+        "description": "Handles requests to list all EventGridFilters on a CommunicationService resource.",
+        "operationId": "EventGridFilters_ListByCommunicationServiceResource",
+        "summary": "List All EventGrid Filters on a CommunicationService Resource",
+        "tags": [
+          "EventGridFilter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of EventGridFilters in a CommunicationService.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List by resource group": {
+            "$ref": "./examples/eventGridFilterListByParent.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventGridFilterResource": {
+      "description": "A class representing an eventgrid filter resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridFilterProperties",
+          "description": "The properties of the service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventGridFilterProperties": {
+      "description": "A class that describes the properties of an EventGridFilters resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Pending"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "systemTopicLocation": {
+          "description": "Region the SystemTopic associated with the resource is created in.",
+          "type": "string"
+        },
+        "publishEndpoint": {
+          "description": "EventGrid systemTopic publish uri.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "subjectBeginsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not start with this string",
+              "type": "string"
+            },
+            "subjectEndsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not end with this string",
+              "type": "string"
+            },
+            "includedEventTypes": {
+              "description": "Event types subscribed",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "subscriberIdentityInfo": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "clientPrincipalId": {
+              "description": "The client principal ID",
+              "type": "string"
+            },
+            "clientObjectId": {
+              "description": "The client object ID",
+              "type": "string"
+            },
+            "clientTenantId": {
+              "description": "The client tenant ID",
+              "type": "string"
+            },
+            "clientApplicationId": {
+              "description": "The client application ID",
+              "type": "string"
+            },
+            "clientAuthorizationSource": {
+              "description": "The client authorization source",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "EventGridFilterResourceList": {
+      "description": "Object that includes an array of CommunicationServices and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of EventGridFilter resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGridFilterResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CommunicationServiceName": {
+      "name": "communicationServiceName",
+      "in": "path",
+      "description": "The name of the CommunicationService resource.",
+      "pattern": "^[-\\w]+$",
+      "minLength": 1,
+      "maxLength": 63,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EventGridFilterNameParameter": {
+      "name": "eventGridFilterName",
+      "in": "path",
+      "description": "The name of the eventgrid filter.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

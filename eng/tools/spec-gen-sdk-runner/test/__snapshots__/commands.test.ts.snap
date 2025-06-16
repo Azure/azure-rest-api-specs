@@ -1,0 +1,54 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateSdkForBatchSpecs > should generate SDKs for all specs successfully 1`] = `
+[
+  [
+    "/working/folder/out/logs/generation-summary.md",
+    "
+## Batch Run Type
+ all-specs
+## Successful Specs in the Generation Process
+typespec1,typespec2,typespec3,typespec4,
+## Total Successful Specs
+ 4
+## Total Specs Count
+ 4
+
+",
+  ],
+]
+`;
+
+exports[`generateSdkForBatchSpecs > should handle empty spec paths gracefully 1`] = `
+[
+  [
+    "/working/folder/out/logs/generation-summary.md",
+    "
+## Batch Run Type
+ all-specs
+## Total Specs Count
+ 0
+
+",
+  ],
+]
+`;
+
+exports[`generateSdkForBatchSpecs > should handle errors during SDK generation 1`] = `
+[
+  [
+    "/working/folder/out/logs/generation-summary.md",
+    "
+## Batch Run Type
+ all-specs
+## Spec Failures in the Generation Process
+typespec1,typespec2,
+## Total Failed Specs
+ 2
+## Total Specs Count
+ 2
+
+",
+  ],
+]
+`;

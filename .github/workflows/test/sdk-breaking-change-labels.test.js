@@ -33,8 +33,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should extract inputs and call getLabelAndActionImpl", async () => {
       // Mock extracted inputs
       const mockInputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -62,17 +62,10 @@ describe("sdk-breaking-change-labels", () => {
           JSON.stringify({
             labelAction: true,
             language,
+            prNumber: "123",
           }),
         ),
       };
-
-      // Mock PR search results
-      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
-        data: {
-          total_count: 1,
-          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
-        },
-      });
 
       // Setup fetch to return different responses for each call
       global.fetch.mockImplementation((url) => {
@@ -96,19 +89,12 @@ describe("sdk-breaking-change-labels", () => {
         labelAction: LabelAction.Add,
         issueNumber: 123,
       });
-
-      // Verify mocks were called correctly
-      expect(mockGithub.rest.search.issuesAndPullRequests).toHaveBeenCalledWith(
-        {
-          q: `sha:abc123 type:pr state:open`,
-        },
-      );
     });
     it("should correctly set labelAction to Remove", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -133,6 +119,7 @@ describe("sdk-breaking-change-labels", () => {
           JSON.stringify({
             labelAction: false,
             language,
+            prNumber: "123",
           }),
         ),
       };
@@ -144,14 +131,6 @@ describe("sdk-breaking-change-labels", () => {
         } else {
           return mockContentResponse;
         }
-      });
-
-      // Mock PR search
-      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
-        data: {
-          total_count: 1,
-          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
-        },
       });
 
       // Call function
@@ -171,8 +150,7 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error with invalid inputs", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url: "",
         head_sha: "abc123",
       };
 
@@ -195,8 +173,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should handle API failure", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -208,18 +186,9 @@ describe("sdk-breaking-change-labels", () => {
         text: vi.fn().mockResolvedValue("Artifact not found"),
       });
 
-      // Mock PR search success
-      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
-        data: {
-          total_count: 1,
-          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
-        },
-      });
-
       // Call function
       const result = await getLabelAndActionImpl({
-        ado_build_id: inputs.ado_build_id,
-        ado_project_url: inputs.ado_project_url,
+        details_url: inputs.details_url,
         head_sha: inputs.head_sha,
         github: mockGithub,
         core: mockCore,
@@ -241,31 +210,60 @@ describe("sdk-breaking-change-labels", () => {
     it("should complete without op when artifact does not exist", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
-      // Mock fetch failure
-      global.fetch.mockResolvedValue({
-        ok: false,
-        status: 404,
-        statusText: "Not Found",
-        text: vi.fn().mockResolvedValue("Artifact not found"),
-      });
-
-      // Mock PR search success
-      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
-        data: {
-          total_count: 1,
-          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
-        },
+      // Mock fetch to handle the artifact URL with 404 error and fallback behavior
+      global.fetch.mockImplementation((url) => {
+        if (url.includes("artifacts?artifactName=spec-gen-sdk-artifact")) {
+          // Initial fetch for the specific artifact returns 404
+          return Promise.resolve({
+            ok: false,
+            status: 404,
+            statusText: "Not Found",
+            text: vi.fn().mockResolvedValue("Artifact not found"),
+          });
+        } else if (
+          url.includes("artifacts?api-version=7.0") &&
+          !url.includes("artifactName=")
+        ) {
+          // List artifacts API call (used by fetchFailedArtifact)
+          return Promise.resolve({
+            ok: true,
+            json: vi.fn().mockResolvedValue({
+              value: [
+                {
+                  name: "spec-gen-sdk-artifact-failed",
+                  id: "12345",
+                  resource: {
+                    downloadUrl:
+                      "https://dev.azure.com/download-failed?format=zip",
+                  },
+                },
+              ],
+            }),
+          });
+        } else if (url.includes("artifactName=spec-gen-sdk-artifact-failed")) {
+          // Fetch for the failed artifact version returns 404 too
+          return Promise.resolve({
+            ok: false,
+            status: 404,
+            statusText: "Not Found",
+            text: vi.fn().mockResolvedValue("Failed artifact not found either"),
+          });
+        }
+        // Default response for other URLs
+        return Promise.resolve({
+          ok: true,
+          text: vi.fn().mockResolvedValue("{}"),
+        });
       });
 
       // Call function
       const result = await getLabelAndActionImpl({
-        ado_build_id: inputs.ado_build_id,
-        ado_project_url: inputs.ado_project_url,
+        details_url: inputs.details_url,
         head_sha: inputs.head_sha,
         github: mockGithub,
         core: mockCore,
@@ -282,8 +280,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error if resource is empty from the artifact api response", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -303,8 +301,7 @@ describe("sdk-breaking-change-labels", () => {
       // Call function and expect it to throw
       await expect(
         getLabelAndActionImpl({
-          ado_build_id: inputs.ado_build_id,
-          ado_project_url: inputs.ado_project_url,
+          details_url: inputs.details_url,
           head_sha: inputs.head_sha,
           github: mockGithub,
           core: mockCore,
@@ -315,8 +312,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error if missing download url from the artifact api response", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -338,8 +335,7 @@ describe("sdk-breaking-change-labels", () => {
       // Call function and expect it to throw
       await expect(
         getLabelAndActionImpl({
-          ado_build_id: inputs.ado_build_id,
-          ado_project_url: inputs.ado_project_url,
+          details_url: inputs.details_url,
           head_sha: inputs.head_sha,
           github: mockGithub,
           core: mockCore,
@@ -350,8 +346,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should throw error when fail to fetch artifact content", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -387,8 +383,7 @@ describe("sdk-breaking-change-labels", () => {
       // Call function and expect it to throw
       await expect(
         getLabelAndActionImpl({
-          ado_build_id: inputs.ado_build_id,
-          ado_project_url: inputs.ado_project_url,
+          details_url: inputs.details_url,
           head_sha: inputs.head_sha,
           github: mockGithub,
           core: mockCore,
@@ -399,8 +394,8 @@ describe("sdk-breaking-change-labels", () => {
     it("should handle exception during processing", async () => {
       // Setup inputs
       const inputs = {
-        ado_build_id: "12345",
-        ado_project_url: "https://dev.azure.com/project",
+        details_url:
+          "https://dev.azure.com/project/_build/results?buildId=12345",
         head_sha: "abc123",
       };
 
@@ -409,18 +404,9 @@ describe("sdk-breaking-change-labels", () => {
         throw new Error("Network error");
       });
 
-      // Mock PR search success
-      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
-        data: {
-          total_count: 1,
-          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
-        },
-      });
-
       // Start the async operation that will retry
       const promise = getLabelAndActionImpl({
-        ado_build_id: inputs.ado_build_id,
-        ado_project_url: inputs.ado_project_url,
+        details_url: inputs.details_url,
         head_sha: inputs.head_sha,
         github: mockGithub,
         core: mockCore,

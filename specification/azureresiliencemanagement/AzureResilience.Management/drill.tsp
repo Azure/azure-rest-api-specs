@@ -32,7 +32,10 @@ interface Drills {
       Drill,
       DrillPatchProperties
     >,
-    ServiceGroupParameters
+    ServiceGroupParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @route(ServiceGroupRoute)

@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft.EntraidGovernance management service",
     "version": "2025-02-01-preview",
-    "description": "Microsoft.EntraidGovernance Resource Provider management API.",
+    "description": "Microsoft Entraid Governance Resource Provider management API.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -81,6 +81,62 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
   "parameters": {}
 }

@@ -5,12 +5,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./occurrencemodels.tsp";
 
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
@@ -44,11 +42,14 @@ interface Occurrences {
   get is ArmResourceRead<Occurrence>;
   listByScheduledAction is ArmResourceListByParent<Occurrence>;
 
-  listResources is ArmResourceActionSync<
-    Occurrence,
-    void,
-    OccurrenceResourceListResponse
-  >;
+  @autoRoute
+  @listsResource(OccurrenceResource)
+  @armResourceList(OccurrenceResource)
+  @get
+  @doc("List resources attached to Scheduled Actions for the given occurrence")
+  listResources(
+    ...ResourceInstanceParameters<OccurrenceResource>,
+  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
   cancel is ArmResourceActionSync<
     Occurrence,
     CancelOccurrenceRequest,
@@ -59,4 +60,10 @@ interface Occurrences {
     DelayRequest,
     ResourceOperationResponse
   >;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@armResourceOperations
+interface OccurrenceExtension {
+  listOccurrenceByVms is ArmResourceListByParent<OccurrenceExtensionResource>;
 }

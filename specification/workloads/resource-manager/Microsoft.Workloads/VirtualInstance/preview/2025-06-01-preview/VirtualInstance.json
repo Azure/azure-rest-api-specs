@@ -725,7 +725,8 @@
       "description": "Defines the environment type.",
       "enum": [
         "NonProduction",
-        "Production"
+        "Production",
+        "DisasterRecovery"
       ],
       "x-ms-enum": {
         "name": "EnvironmentType",
@@ -740,6 +741,11 @@
             "name": "Production",
             "value": "Production",
             "description": "Production system."
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery",
+            "description": "Disaster recovery system."
           }
         ]
       }
@@ -884,7 +890,7 @@
       "description": "Defines the update request body properties for updating the Virtual Instance resource.",
       "properties": {
         "workloadInfo": {
-          "$ref": "#/definitions/WorkloadInfo",
+          "$ref": "#/definitions/UpdateWorkloadInfo",
           "description": "The workload specific information including the workload type, definition ID and version."
         },
         "environmentType": {
@@ -977,6 +983,16 @@
         "properties": {
           "$ref": "#/definitions/UpdateWorkloadComponentProperties",
           "description": "The properties to be updated."
+        }
+      }
+    },
+    "UpdateWorkloadInfo": {
+      "type": "object",
+      "description": "Defines the workload information object for update scenarios.",
+      "properties": {
+        "workloadDefinitionVersion": {
+          "type": "string",
+          "description": "The version selected for the corresponding workload definition."
         }
       }
     },
