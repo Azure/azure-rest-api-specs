@@ -152,7 +152,7 @@ union AnalyzeTextLROResultsKind {
 /** Collection of input documents to be analyzed by the service. */
 model MultiLanguageAnalysisInput {
   /** The input documents to be analyzed. */
-  documents?: Array<MultiLanguageInput>;
+  documents?: MultiLanguageInput[];
 }
 
 /** Collection of documents to analyze and a single task to execute. */
@@ -185,17 +185,21 @@ model AnalyzeTextJobsInput {
   analysisInput: MultiLanguageAnalysisInput;
 
   /** List of tasks to be performed as part of the LRO. */
-  tasks: Array<AnalyzeTextLROTask>;
+  tasks: AnalyzeTextLROTask[];
 
   /** Default language to use for records requesting automatic language detection. */
   @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
+
+  /** Optional duration in seconds after which the job will be canceled if not completed. */
+  @added(Versions.v2025_05_15_preview)
+  cancelAfter?: float32;
 }
 
 /** The input object for the prebuilt/default result. */
 model AnalyzeTextPreBuiltResult {
   /** Errors by document id. */
-  errors: Array<AnalyzeTextDocumentError>;
+  errors: AnalyzeTextDocumentError[];
 
   /** if showStats=true was specified in the request this field will contain information about the request payload. */
   statistics?: RequestStatistics;
@@ -221,7 +225,7 @@ model Pagination {
 /** Contains the analyze text LRO errors */
 model AnalyzeTextJobErrors {
   /** Collection of errors encountered during processing. */
-  errors: Array<Error>;
+  errors: Error[];
 }
 
 /** Contains the analyze text job statistics returned only when showStats=true. */
@@ -251,7 +255,7 @@ model Tasks {
   total: int32;
 
   /** Enumerable of Analyze text job results. */
-  items?: Array<AnalyzeTextLROResult>;
+  items?: AnalyzeTextLROResult[];
 }
 
 /** List of job statuses. */
@@ -294,7 +298,7 @@ model DocumentResult {
   id: string;
 
   /** Warnings encountered while processing document. */
-  warnings: Array<DocumentWarning>;
+  warnings: DocumentWarning[];
 
   /** if showStats=true was specified in the request this field will contain information about the document payload. */
   statistics?: DocumentStatistics;
@@ -447,8 +451,20 @@ model TaskParameters {
   loggingOptOut?: boolean = false;
 }
 
+/** Base parameters object for a text analysis task. with logging Opt out */
+model TaskParametersLoggingOptOut {
+  /** logging opt out */
+  loggingOptOut?: boolean = true;
+}
+
 /** Parameters object for a text analysis task using pre-built models. */
 model PreBuiltTaskParameters is TaskParameters {
+  /** model version */
+  modelVersion?: string = "latest";
+}
+
+/** Parameters object for a text analysis task using pre-built models. */
+model PreBuiltTaskParametersLoggingOptOut is TaskParametersLoggingOptOut {
   /** model version */
   modelVersion?: string = "latest";
 }
@@ -501,7 +517,7 @@ model JobState {
 
   /** job ID */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId: uuid;
 
   /** last updated date and time */
@@ -511,7 +527,7 @@ model JobState {
   status: State;
 
   /** errors */
-  errors?: Array<Error>;
+  errors?: Error[];
 
   /** next link */
   nextLink?: string;
@@ -520,7 +536,7 @@ model JobState {
 /** job errors */
 model JobErrors {
   /** errors */
-  errors?: Array<Error>;
+  errors?: Error[];
 }
 
 /** Contains details of errors encountered during a job execution. */
@@ -562,7 +578,7 @@ model RequestStatistics {
 /** Pre built result */
 model PreBuiltResult {
   /** Errors by document id. */
-  errors: Array<DocumentError>;
+  errors: DocumentError[];
 
   /** if showStats=true was specified in the request this field will contain information about the request payload. */
   statistics?: RequestStatistics;
@@ -755,7 +771,7 @@ model CustomTaskParameters is TaskParameters {
 /** Custom Task Results */
 model CustomResult {
   /** Errors by document id. */
-  errors: Array<DocumentError>;
+  errors: DocumentError[];
 
   /** if showStats=true was specified in the request this field will contain information about the request payload. */
   statistics?: RequestStatistics;
@@ -826,7 +842,7 @@ model Error {
   target?: string;
 
   /** An array of details about specific errors that led to this reported error. */
-  details?: Array<Error>;
+  details?: Error[];
 
   /** An object containing more specific information than the current object about the error. */
   innererror?: InnerErrorModel;

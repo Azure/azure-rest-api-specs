@@ -1,0 +1,50 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/liftrweightsandbiases"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.WeightsAndBiases"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/weightsandbiases"
+    package-dir: "azure-mgmt-weightsandbiases"
+    namespace: "azure.mgmt.weightsandbiases"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/weightsandbiases"
+    package-dir: "armweightsandbiases"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    package-dir: "arm-weightsandbiases"
+    package-details:
+      name: "@azure/arm-weightsandbiases"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/weightsandbiases"
+    package-dir: "azure-resourcemanager-weightsandbiases"
+    namespace: "com.azure.resourcemanager.weightsandbiases"
+    service-name: "Weights And Biases"
+    flavor: "azure"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

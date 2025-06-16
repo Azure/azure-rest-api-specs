@@ -50,6 +50,12 @@ directive:
   - suppress: PatchBodyParametersSchema
     reason: Type is required because it is a part of managed identity.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4].schema.properties.identity
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.InstanceProperties.properties.features
+    reason: User defined feature flags that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.InstanceFeature.properties.settings
+    reason: User defined feature flag settings that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
 ```
 
 ### Basic Information
@@ -59,7 +65,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-11-01
+tag: package-2025-04-01
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -88,6 +94,7 @@ These settings apply only when `--tag=package-2024-09-15-preview` is specified o
 input-file:
   - Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
 ```
+
 ### Tag: package-2024-11-01
 
 These settings apply only when `--tag=package-2024-11-01` is specified on the command line.
@@ -95,4 +102,13 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 ```yaml $(tag) == 'package-2024-11-01'
 input-file:
   - Microsoft.IoTOperations/stable/2024-11-01/iotoperations.json
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - Microsoft.IoTOperations/stable/2025-04-01/iotoperations.json
 ```

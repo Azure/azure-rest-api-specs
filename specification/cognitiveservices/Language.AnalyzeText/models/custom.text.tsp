@@ -29,8 +29,8 @@ model CustomEntitiesLROTask extends AnalyzeTextLROTask {
 /** Contains the list of detected custom entities result for the documents. */
 model CustomEntitiesResult is CustomResult {
   /** Enumeration of the document results. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
-  documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesDocumentResult[])
+  documents: EntitiesDocumentResultWithDetectedLanguage[];
 }
 
 /** Contains the entity recognition task result for the document with detected language. */
@@ -56,11 +56,8 @@ model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
 /** Contains the custom label classification results. */
 model CustomLabelClassificationResult is CustomResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    Array<ClassificationDocumentResult>
-  )
-  documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, ClassificationDocumentResult[])
+  documents: ClassificationDocumentResultWithDetectedLanguage[];
 }
 
 /** Contains the classification result. */
@@ -88,7 +85,7 @@ model CustomMultiLabelClassificationLROTask extends AnalyzeTextLROTask {
 /** Contains the classification doc result for the task. */
 model ClassificationDocumentResult is DocumentResult {
   /** Contains the classification doc results for all docs. */
-  class: Array<ClassificationResult>;
+  class: ClassificationResult[];
 }
 
 /** Contains the classification doc result for the task with detected language. */

@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "resourceGroupName": "000pikumar",
+    "vaultName": "PratikPrivatePreviewVault1",
+    "api-version": "2025-07-01",
+    "backupInstanceName": "testInstance1",
+    "parameters": {
+      "objectType": "AzureBackupRecoveryPointBasedRestoreRequest",
+      "recoveryPointId": "33fdef0e0e2e4594b63092ae9a56f58d",
+      "sourceDataStoreType": "VaultStore",
+      "sourceResourceId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.Storage/storageAccounts/azclitestrestore2",
+      "restoreTargetInfo": {
+        "objectType": "RestoreTargetInfo",
+        "recoveryOption": "FailIfExists",
+        "datasourceSetInfo": {
+          "objectType": "DatasourceSet",
+          "resourceID": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.Storage/storageAccounts/azclitestrestore2",
+          "resourceName": "azclitestrestore2",
+          "resourceType": "Microsoft.Storage/storageAccounts",
+          "resourceUri": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.Storage/storageAccounts/azclitestrestore2",
+          "resourceLocation": "southeastasia",
+          "datasourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        },
+        "datasourceInfo": {
+          "objectType": "Datasource",
+          "resourceID": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.Storage/storageAccounts/azclitestrestore2",
+          "resourceName": "azclitestrestore2",
+          "resourceType": "Microsoft.Storage/storageAccounts",
+          "resourceUri": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.Storage/storageAccounts/azclitestrestore2",
+          "resourceLocation": "southeastasia",
+          "datasourceType": "Microsoft.Storage/storageAccounts/blobServices"
+        },
+        "datasourceAuthCredentials": {
+          "secretStoreResource": {
+            "uri": "https://samplevault.vault.azure.net/secrets/credentials",
+            "secretStoreType": "AzureKeyVault"
+          },
+          "objectType": "SecretStoreBasedAuthCredentials"
+        },
+        "restoreCriteria": [
+          {
+            "objectType": "ItemPathBasedRestoreCriteria",
+            "itemPath": "container1",
+            "isPathRelativeToBackupItem": true,
+            "subItemPathPrefix": [
+              "abc",
+              "def",
+              "ghi"
+            ],
+            "renameTo": "container1new"
+          }
+        ],
+        "restoreLocation": "southeastasia"
+      },
+      "identityDetails": {
+        "useSystemAssignedIdentity": false,
+        "userAssignedIdentityArmUrl": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourcegroups/000pikumar/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testUami"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupInstances/testInstance1/operationResults/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-07-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-07-01",
+        "Retry-After": "60"
+      }
+    },
+    "200": {
+      "body": {
+        "jobId": "c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+        "objectType": "OperationJobExtendedInfo"
+      }
+    }
+  }
+}

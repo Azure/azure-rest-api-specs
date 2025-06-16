@@ -2,7 +2,7 @@
 
 These settings apply only when `--az` is specified on the command line.
 
-``` yaml $(az)
+```yaml $(az)
 az:
   extensions: desktopvirtualization
   package-name: azure-mgmt-desktopvirtualization

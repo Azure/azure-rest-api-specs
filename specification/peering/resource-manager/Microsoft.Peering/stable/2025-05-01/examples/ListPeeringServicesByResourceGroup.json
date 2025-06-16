@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "api-version": "2025-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "peeringServiceLocation": "state1",
+              "peeringServiceProvider": "serviceProvider1",
+              "provisioningState": "Succeeded",
+              "providerPrimaryPeeringLocation": "peeringLocation1",
+              "providerBackupPeeringLocation": "peeringLocation2",
+              "logAnalyticsWorkspaceProperties": {
+                "workspaceID": "00000000-0000-0000-0000-000000000000",
+                "key": "key",
+                "connectedAgents": [
+                  "Agent1",
+                  "Agent2"
+                ]
+              }
+            },
+            "location": "eastus",
+            "name": "peeringServiceName",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName",
+            "type": "Microsoft.Peering/peeringServices"
+          }
+        ]
+      }
+    }
+  }
+}

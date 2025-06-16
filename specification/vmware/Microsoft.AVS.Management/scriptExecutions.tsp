@@ -5,7 +5,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface ScriptExecutions {
@@ -103,6 +102,7 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Parameters the script will accept")
+  @identifiers(#[])
   parameters?: ScriptExecutionParameter[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
@@ -110,6 +110,7 @@ model ScriptExecutionProperties {
     Parameters that will be hidden/not visible to ARM, such as passwords and
     credentials
     """)
+  @identifiers(#[])
   hiddenParameters?: ScriptExecutionParameter[];
 
   @doc("""
@@ -125,19 +126,19 @@ model ScriptExecutionProperties {
   retention?: string;
 
   @doc("Time the script execution was submitted")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   submittedAt?: utcDateTime;
 
   @doc("Time the script execution was started")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   @doc("Time the script execution was finished")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   finishedAt?: utcDateTime;
 
   @doc("The state of the script execution resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ScriptExecutionProvisioningState;
 
   @doc("Standard output stream from the powershell execution")
@@ -150,15 +151,15 @@ model ScriptExecutionProperties {
   namedOutputs?: Record<{}>;
 
   @doc("Standard information out stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   information?: string[];
 
   @doc("Standard warning out stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   warnings?: string[];
 
   @doc("Standard error output stream from the powershell execution")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: string[];
 }
 

@@ -1,11 +1,9 @@
 namespace Microsoft.AVS;
 
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 
 @armResourceOperations
 interface WorkloadNetworks {
@@ -51,6 +49,6 @@ union WorkloadNetworkProvisioningState {
 @doc("The properties of a workload network")
 model WorkloadNetworkProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: WorkloadNetworkProvisioningState;
 }

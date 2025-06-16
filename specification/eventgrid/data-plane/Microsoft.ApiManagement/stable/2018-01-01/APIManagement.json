@@ -474,6 +474,143 @@
           "$ref": "./examples/event-grid-schema/gatewayApiRemoved.json"
         }
       }
+    },
+    "ApiManagementCircuitBreakerOpenedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Opened event.",
+      "type": "object",
+      "properties": {
+        "backendName": {
+          "description": "Name of the backend for which the circuit has opened.",
+          "type": "string"
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/circuitBreakerOpened.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/circuitBreakerOpened.json"
+        }
+      }
+    },
+    "ApiManagementCircuitBreakerClosedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event.",
+      "type": "object",
+      "properties": {
+        "backendName": {
+          "description": "Name of the backend for which the circuit has closed.",
+          "type": "string"
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/circuitBreakerClosed.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/circuitBreakerClosed.json"
+        }
+      }
+    },
+    "ApiManagementGatewayTokenNearExpiryEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event.",
+      "type": "object",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayTokenNearExpiryProperties",
+          "x-ms-client-name": "token"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/gatewayTokenNearExpiry.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/gatewayTokenNearExpiry.json"
+        }
+      }
+    },
+    "ApiManagementGatewayTokenExpiredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event.",
+      "type": "object",
+      "properties": {
+        "gatewayInfo": {
+          "$ref": "#/definitions/ApiManagementGatewayProperties",
+          "x-ms-client-name": "gateway"
+        },
+        "tokenInfo": {
+          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenProperties",
+          "x-ms-client-name": "token"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/gatewayTokenExpired.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/gatewayTokenExpired.json"
+        }
+      }
+    },
+    "ApiManagementCircuitBreakerProperties": {
+      "description": "Information related to the circuit breaker configured on the backend.",
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "object",
+          "description": "Overview of all configured rules and respective details.",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ApiManagementGatewayProperties": {
+      "description": "Information related to a given self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Id of Gateway that is used to deploy the gateway to get the configuration for. This is the ARM resource ID referenced in the Azure API Management instance."
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Unique instance ID of the deployed gateway"
+        }
+      }
+    },
+    "ApiManagementExpiredGatewayTokenProperties": {
+      "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token has expired.",
+          "x-ms-client-name": "expiresOn"
+        }
+      }
+    },
+    "ApiManagementGatewayTokenNearExpiryProperties": {
+      "description": "Information related to a gateway token that is near expiry for a self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "expiresAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token will expire.",
+          "x-ms-client-name": "expiresOn"
+        }
+      }
     }
   }
 }

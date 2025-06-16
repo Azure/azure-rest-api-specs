@@ -313,6 +313,9 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: namespaces.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
@@ -344,6 +347,22 @@ directive:
   - suppress: ResourceNameRestriction
     from: Clusters-preview.json
     reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: namespaces.json
+    reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: namespaces.json
+    reason: Breaking Change.
+  - suppress: TrackedResourcePatchOperation
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: TrackedResourcesMustHavePut
+    from: namespaces.json
+    reason: Breaking change.
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json

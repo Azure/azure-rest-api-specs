@@ -20,17 +20,20 @@ on:
         required: false
         type: boolean
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
       matrix:
         os: [ubuntu, windows]
-        node-version: [18, 22]
+        node-version: [20, 22]
         exclude:
           - os: ubuntu
             node-version: 22
           - os: windows
-            node-version: 18
+            node-version: 20
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
@@ -46,8 +49,8 @@ jobs:
             eng
             ${{ inputs.sparse-checkout-paths }}
 
-      - name: Setup Node ${{ matrix.node-version }} and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node ${{ matrix.node-version }} and install deps
+        uses: ./.github/actions/setup-node-install-deps
         with:
           node-version: ${{ matrix.node-version }}.x
 
