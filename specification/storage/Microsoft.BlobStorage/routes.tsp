@@ -247,7 +247,7 @@ namespace Storage.Blob {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
         ...DateResponseHeaderPrivate;
-        ...LeaseDurationHeader;
+        ...LeaseDurationResponseHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
         ...BlobPublicAccess;
