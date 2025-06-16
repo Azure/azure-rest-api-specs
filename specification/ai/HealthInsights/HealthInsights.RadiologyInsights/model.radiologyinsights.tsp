@@ -375,7 +375,7 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("The expansion of the category (which is an abbreviation.)")
   categoryDescription: string;
 
-  @doc("The value. If the value is a range, use field valueRange.")
+  @doc("The value. If the value is a range, use field rangeValue.")
   singleValue?: string;
 
   @doc("The range.")
