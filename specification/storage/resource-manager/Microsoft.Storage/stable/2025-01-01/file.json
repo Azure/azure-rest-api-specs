@@ -810,16 +810,17 @@
           "description": "SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'."
         },
         "encryptionInTransit": {
-          "ref": "#/defintions/EncryptionInTransit",
+          "$ref": "#/definitions/EncryptionInTransit",
           "description": "Encryption in transit setting."
         }
       },
       "description": "Setting for SMB protocol"
     },
     "NfsSetting": {
+      "type": "object",
       "properties": {
         "encryptionInTransit": {
-          "ref": "#/defintions/EncryptionInTransit",
+          "$ref": "#/definitions/EncryptionInTransit",
           "description": "Encryption in transit setting."
         }
       },
@@ -835,6 +836,7 @@
       "description": "Multichannel setting. Applies to Premium FileStorage only."
     },
     "EncryptionInTransit": {
+      "type": "object",
       "properties": {
         "required": {
           "type": "boolean",
