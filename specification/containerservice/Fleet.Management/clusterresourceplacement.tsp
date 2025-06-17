@@ -3,39 +3,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.ContainerService;
 
 @added(Versions.v2025_03_02_naar)
-@doc("The propagation to be used for provisioning the namespace among the fleet.")
-model PropagationPolicy {
-  @doc("The type of the policy to be used. Default is Placement.")
-  type?: PropagationType;
-
-  @doc("The propagation profile to be used for the propagation. Default is PlacementProfile.")
-  propagationProfile?: PropagationProfile;
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("How the namespace will be provisioned among the fleet members.")
-union PropagationType {
-  @doc("Using ClusterResourcePlacement.")
-  Placement: "Placement",
-
-  string,
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("The available Propagation profiles.")
-union PropagationProfile {
-  @doc("Use ClusterResourcePlacement.")
-  PlacementProfile,
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("The configuration profile for default ClusterResourcePlacement for placement.")
-model PlacementProfile {
-  @doc("The default ClusterResourcePlacement policy configuration.")
-  defaultClusterResourcePlacement?: ClusterResourcePlacement;
-}
-
-@added(Versions.v2025_03_02_naar)
 @doc("ClusterResourcePlacement is used to select cluster scoped resources, including built-in resources and custom resources, and placement them onto selected member clusters in a fleet.")
 model ClusterResourcePlacement {
   @doc("PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")

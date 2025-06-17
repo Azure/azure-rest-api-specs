@@ -145,6 +145,39 @@ union DeletePolicy {
   string,
 }
 
+@added(Versions.v2025_03_02_naar)
+@doc("The propagation to be used for provisioning the namespace among the fleet.")
+model PropagationPolicy {
+  @doc("The type of the policy to be used. Default is Placement.")
+  type?: PropagationType;
+
+  @doc("The propagation profile to be used for the propagation. Default is PlacementProfile.")
+  propagationProfile?: PropagationProfile;
+}
+
+@added(Versions.v2025_03_02_naar)
+@doc("How the namespace will be provisioned among the fleet members.")
+union PropagationType {
+  @doc("Using ClusterResourcePlacement.")
+  Placement: "Placement",
+
+  string,
+}
+
+@added(Versions.v2025_03_02_naar)
+@doc("The available Propagation profiles.")
+union PropagationProfile {
+  @doc("Use ClusterResourcePlacement.")
+  PlacementProfile,
+}
+
+@added(Versions.v2025_03_02_naar)
+@doc("The configuration profile for default ClusterResourcePlacement for placement.")
+model PlacementProfile {
+  @doc("The default ClusterResourcePlacement policy configuration.")
+  defaultClusterResourcePlacement?: ClusterResourcePlacement;
+}
+
 @doc("The provisioning state of the fleet managed namespace resource")
 union FleetManagedNamespaceProvisioningState {
   string,
