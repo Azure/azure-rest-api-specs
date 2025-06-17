@@ -147,7 +147,7 @@ model ScriptExecutionProperties {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "It is unknown."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "It is unknown."
   @doc("User-defined dictionary.")
-  namedOutputs?: Record<unknown>;
+  namedOutputs?: Record<{}>;
 
   @doc("Standard information out stream from the powershell execution")
   @visibility(Lifecycle.Read)
