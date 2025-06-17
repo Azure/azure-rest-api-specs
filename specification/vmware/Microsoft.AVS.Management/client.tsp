@@ -87,6 +87,9 @@ namespace Customization;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(ScriptPackageProperties.uri, url, "csharp");
+@@alternateType(ScriptCmdletProperties.timeout, duration, "csharp");
+@@alternateType(ScriptExecutionProperties.namedOutputs, unknown, "csharp");
 @@clientName(VirtualMachine, "AvsPrivateCloudClusterVirtualMachine", "csharp");
 @@alternateType(WorkloadNetworkDnsServiceProperties.dnsServiceIp,
   ipV4Address,
@@ -103,6 +106,10 @@ namespace Customization;
 @@clientName(DnsServiceStatusEnum.FAILURE, "Failure", "csharp");
 @@alternateType(WorkloadNetworkDnsZoneProperties.sourceIp,
   ipV4Address,
+  "csharp"
+);
+@@alternateType(WorkloadNetworkDnsZoneProperties.dnsServerIps,
+  ipV4Address[],
   "csharp"
 );
 @@clientName(WorkloadNetworkPortMirroring,
@@ -499,7 +506,7 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
   "java,python,csharp"
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVMGroup.properties, "java,python");
+@@flattenProperty(WorkloadNetworkVMGroup.properties, "java,python,csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkVirtualMachine.properties,
   "java,python,csharp"
