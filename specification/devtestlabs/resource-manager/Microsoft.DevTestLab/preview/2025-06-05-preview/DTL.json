@@ -218,7 +218,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/schedules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
       "get": {
         "operationId": "GlobalSchedules_ListBySubscription",
         "tags": [
@@ -231,6 +231,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "$expand",
@@ -3231,6 +3239,87 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}": {
+      "patch": {
+        "operationId": "GlobalSchedules_Update",
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Allows modifying tags of schedules. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the schedule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schedule",
+            "in": "body",
+            "description": "Allows modifying tags of schedules. All other properties will be ignored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GlobalSchedules_Update": {
+            "$ref": "./examples/GlobalSchedules_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/secrets": {
       "get": {
         "operationId": "LabSecrets_List",
@@ -4663,7 +4752,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}": {
       "get": {
         "operationId": "VirtualMachines_Get",
         "tags": [
@@ -4689,7 +4778,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -4748,7 +4837,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -4830,7 +4919,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -4909,7 +4998,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -4952,7 +5041,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/addDataDisk": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/addDataDisk": {
       "post": {
         "operationId": "VirtualMachines_AddDataDisk",
         "tags": [
@@ -4978,7 +5067,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5030,7 +5119,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/applyArtifacts": {
       "post": {
         "operationId": "VirtualMachines_ApplyArtifacts",
         "tags": [
@@ -5056,7 +5145,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5108,7 +5197,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/changeSecurityProfile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/changeSecurityProfile": {
       "post": {
         "operationId": "VirtualMachines_ChangeSecurityProfile",
         "tags": [
@@ -5134,7 +5223,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5186,7 +5275,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/claim": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/claim": {
       "post": {
         "operationId": "VirtualMachines_Claim",
         "tags": [
@@ -5212,7 +5301,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5255,7 +5344,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/clearArtifactResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/clearArtifactResults": {
       "post": {
         "operationId": "VirtualMachines_ClearArtifactResults",
         "tags": [
@@ -5281,7 +5370,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5306,7 +5395,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/detachDataDisk": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/detachDataDisk": {
       "post": {
         "operationId": "VirtualMachines_DetachDataDisk",
         "tags": [
@@ -5332,7 +5421,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5384,7 +5473,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/getRdpFileContents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/getRdpFileContents": {
       "post": {
         "operationId": "VirtualMachines_GetRdpFileContents",
         "tags": [
@@ -5410,7 +5499,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5438,7 +5527,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/hibernate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/hibernate": {
       "post": {
         "operationId": "VirtualMachines_Hibernate",
         "tags": [
@@ -5464,7 +5553,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5507,7 +5596,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/listApplicableSchedules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/listApplicableSchedules": {
       "post": {
         "operationId": "VirtualMachines_ListApplicableSchedules",
         "tags": [
@@ -5533,7 +5622,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5561,7 +5650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/redeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/redeploy": {
       "post": {
         "operationId": "VirtualMachines_Redeploy",
         "tags": [
@@ -5587,7 +5676,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5630,7 +5719,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/resize": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/resize": {
       "post": {
         "operationId": "VirtualMachines_Resize",
         "tags": [
@@ -5656,7 +5745,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5708,7 +5797,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/restart": {
       "post": {
         "operationId": "VirtualMachines_Restart",
         "tags": [
@@ -5734,7 +5823,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -5862,7 +5951,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{virtualMachineScheduleName}": {
       "get": {
         "operationId": "VirtualMachineSchedules_Get",
         "tags": [
@@ -5894,9 +5983,9 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualMachineScheduleName",
             "in": "path",
-            "description": "The name of the Schedule",
+            "description": "virtualmachines schedules",
             "required": true,
             "type": "string"
           },
@@ -5959,9 +6048,9 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualMachineScheduleName",
             "in": "path",
-            "description": "The name of the Schedule",
+            "description": "virtualmachines schedules",
             "required": true,
             "type": "string"
           },
@@ -6001,66 +6090,6 @@
           }
         }
       },
-      "delete": {
-        "operationId": "VirtualMachineSchedules_Delete",
-        "tags": [
-          "VirtualMachineSchedules"
-        ],
-        "description": "Delete schedule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "labs",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "virtualMachineName",
-            "in": "path",
-            "description": "virtualmachines",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the Schedule",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualMachineSchedules_Delete": {
-            "$ref": "./examples/VirtualMachineSchedules_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/schedules/{virtualMachineScheduleName}": {
       "patch": {
         "operationId": "VirtualMachineSchedules_Update",
         "tags": [
@@ -6086,7 +6115,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -6146,9 +6175,67 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualMachineSchedules_Delete",
+        "tags": [
+          "VirtualMachineSchedules"
+        ],
+        "description": "Delete schedule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "virtualmachines",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualMachineScheduleName",
+            "in": "path",
+            "description": "virtualmachines schedules",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineSchedules_Delete": {
+            "$ref": "./examples/VirtualMachineSchedules_Delete.json"
+          }
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{name}/execute": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/schedules/{virtualMachineScheduleName}/execute": {
       "post": {
         "operationId": "VirtualMachineSchedules_Execute",
         "tags": [
@@ -6180,9 +6267,9 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualMachineScheduleName",
             "in": "path",
-            "description": "The name of the Schedule",
+            "description": "virtualmachines schedules",
             "required": true,
             "type": "string"
           }
@@ -6223,7 +6310,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/start": {
       "post": {
         "operationId": "VirtualMachines_Start",
         "tags": [
@@ -6249,7 +6336,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -6292,7 +6379,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/stop": {
       "post": {
         "operationId": "VirtualMachines_Stop",
         "tags": [
@@ -6318,7 +6405,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -6361,7 +6448,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/transferDisks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/transferDisks": {
       "post": {
         "operationId": "VirtualMachines_TransferDisks",
         "tags": [
@@ -6387,7 +6474,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -6430,7 +6517,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/unClaim": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{virtualMachineName}/unClaim": {
       "post": {
         "operationId": "VirtualMachines_UnClaim",
         "tags": [
@@ -6456,7 +6543,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "name",
+            "name": "virtualMachineName",
             "in": "path",
             "description": "The name of the virtual machine.",
             "required": true,
@@ -6491,6 +6578,763 @@
         "x-ms-examples": {
           "VirtualMachines_UnClaim": {
             "$ref": "./examples/VirtualMachines_UnClaim.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks": {
+      "get": {
+        "operationId": "VirtualNetworks_List",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "List virtual networks in a given lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($expand=externalSubnets)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_List": {
+            "$ref": "./examples/VirtualNetworks_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
+      "get": {
+        "operationId": "VirtualNetworks_Get",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Get virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($expand=externalSubnets)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Get": {
+            "$ref": "./examples/VirtualNetworks_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworks_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetwork",
+            "in": "body",
+            "description": "A virtual network.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetwork' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_CreateOrUpdate": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworks_Update",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Allows modifying tags of virtual networks. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualNetwork",
+            "in": "body",
+            "description": "Allows modifying tags of virtual networks. All other properties will be ignored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Update": {
+            "$ref": "./examples/VirtualNetworks_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworks_Delete",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Delete virtual network. This operation can take a while to complete.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Delete": {
+            "$ref": "./examples/VirtualNetworks_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}/bastionhosts": {
+      "get": {
+        "operationId": "BastionHosts_List",
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "List bastionhosts in a given virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BastionHostList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_List": {
+            "$ref": "./examples/BastionHosts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}/bastionhosts/{bastionHostName}": {
+      "get": {
+        "operationId": "BastionHosts_Get",
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Get bastionhost.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_Get": {
+            "$ref": "./examples/BastionHosts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BastionHosts_CreateOrUpdate",
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Create or replace an existing bastionHost. This operation can take a while to complete.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHost",
+            "in": "body",
+            "description": "Profile of a Bastion Host",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BastionHost' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "201": {
+            "description": "Resource 'BastionHost' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_CreateOrUpdate": {
+            "$ref": "./examples/BastionHosts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BastionHosts_Update",
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Allows modifying tags of bastionhosts. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHost",
+            "in": "body",
+            "description": "Allows modifying tags of bastionhosts. All other properties will be ignored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BastionHostTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_Update": {
+            "$ref": "./examples/BastionHosts_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BastionHosts_Delete",
+        "tags": [
+          "BastionHosts"
+        ],
+        "description": "Delete bastionhost. This operation can take a while to complete.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "description": "The name of the bastionhost.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BastionHosts_Delete": {
+            "$ref": "./examples/BastionHosts_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6978,77 +7822,6 @@
             "$ref": "./examples/GlobalSchedules_CreateOrUpdate.json"
           }
         }
-      },
-      "patch": {
-        "operationId": "GlobalSchedules_Update",
-        "tags": [
-          "Schedules"
-        ],
-        "description": "Allows modifying tags of schedules. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the schedule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "schedule",
-            "in": "body",
-            "description": "Allows modifying tags of schedules. All other properties will be ignored.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ScheduleTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Schedule"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GlobalSchedules_Update": {
-            "$ref": "./examples/GlobalSchedules_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "GlobalSchedules_Delete",
@@ -9529,683 +10302,6 @@
             "$ref": "./examples/Secrets_Delete.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/virtualnetworks": {
-      "get": {
-        "operationId": "VirtualNetworks_List",
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "description": "List virtual networks in a given lab.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($expand=externalSubnets)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualNetworks_List": {
-            "$ref": "./examples/VirtualNetworks_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/virtualnetworks/{name}": {
-      "get": {
-        "operationId": "VirtualNetworks_Get",
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "description": "Get virtual network.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($expand=externalSubnets)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualNetworks_Get": {
-            "$ref": "./examples/VirtualNetworks_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VirtualNetworks_CreateOrUpdate",
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "description": "Create or replace an existing virtual network. This operation can take a while to complete.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "virtualNetwork",
-            "in": "body",
-            "description": "A virtual network.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VirtualNetwork' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          },
-          "201": {
-            "description": "Resource 'VirtualNetwork' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualNetworks_CreateOrUpdate": {
-            "$ref": "./examples/VirtualNetworks_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "VirtualNetworks_Update",
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "description": "Allows modifying tags of virtual networks. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "virtualNetwork",
-            "in": "body",
-            "description": "Allows modifying tags of virtual networks. All other properties will be ignored.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualNetworkTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualNetwork"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualNetworks_Update": {
-            "$ref": "./examples/VirtualNetworks_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "VirtualNetworks_Delete",
-        "tags": [
-          "VirtualNetworks"
-        ],
-        "description": "Delete virtual network. This operation can take a while to complete.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualNetworks_Delete": {
-            "$ref": "./examples/VirtualNetworks_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/virtualnetworks/{name}/bastionhosts": {
-      "get": {
-        "operationId": "BastionHosts_List",
-        "tags": [
-          "BastionHosts"
-        ],
-        "description": "List bastionhosts in a given virtual network.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BastionHostList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BastionHosts_List": {
-            "$ref": "./examples/BastionHosts_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/virtualnetworks/{name}/bastionhosts/{bastionHostName}": {
-      "get": {
-        "operationId": "BastionHosts_Get",
-        "tags": [
-          "BastionHosts"
-        ],
-        "description": "Get bastionhost.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHostName",
-            "in": "path",
-            "description": "The name of the bastionhost.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BastionHost"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BastionHosts_Get": {
-            "$ref": "./examples/BastionHosts_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "BastionHosts_CreateOrUpdate",
-        "tags": [
-          "BastionHosts"
-        ],
-        "description": "Create or replace an existing bastionHost. This operation can take a while to complete.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHostName",
-            "in": "path",
-            "description": "The name of the bastionhost.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHost",
-            "in": "body",
-            "description": "Profile of a Bastion Host",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BastionHost"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'BastionHost' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BastionHost"
-            }
-          },
-          "201": {
-            "description": "Resource 'BastionHost' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/BastionHost"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BastionHosts_CreateOrUpdate": {
-            "$ref": "./examples/BastionHosts_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "BastionHosts_Update",
-        "tags": [
-          "BastionHosts"
-        ],
-        "description": "Allows modifying tags of bastionhosts. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHostName",
-            "in": "path",
-            "description": "The name of the bastionhost.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHost",
-            "in": "body",
-            "description": "Allows modifying tags of bastionhosts. All other properties will be ignored.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BastionHostTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BastionHost"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BastionHosts_Update": {
-            "$ref": "./examples/BastionHosts_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "BastionHosts_Delete",
-        "tags": [
-          "BastionHosts"
-        ],
-        "description": "Delete bastionhost. This operation can take a while to complete.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the virtual network.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "bastionHostName",
-            "in": "path",
-            "description": "The name of the bastionhost.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BastionHosts_Delete": {
-            "$ref": "./examples/BastionHosts_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },

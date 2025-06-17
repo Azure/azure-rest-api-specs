@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
+@parentResource(Lab)
 model VirtualNetwork
   is Azure.ResourceManager.TrackedResource<VirtualNetworkProperties> {
   ...ResourceNameParameter<

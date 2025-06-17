@@ -18,7 +18,7 @@ model LabVirtualMachine
   is Azure.ResourceManager.TrackedResource<LabVirtualMachineProperties> {
   ...ResourceNameParameter<
     Resource = LabVirtualMachine,
-    KeyName = "name",
+    KeyName = "virtualMachineName",
     SegmentName = "virtualmachines",
     NamePattern = ""
   >;

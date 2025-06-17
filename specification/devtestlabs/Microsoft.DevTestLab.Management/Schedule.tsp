@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
+@parentResource(Lab)
 model Schedule is Azure.ResourceManager.TrackedResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = Schedule,
@@ -310,12 +311,8 @@ interface VirtualMachineScheduleOps
         /** virtualmachines */
         @path @segment("virtualmachines") virtualMachineName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = Schedule,
-        KeyName = "name",
-        SegmentName = "schedules",
-        NamePattern = ""
-      >>
+      {/** virtualmachines schedules */
+      @path @segment("schedules") virtualMachineScheduleName: string}      
     > {}
 
 @armResourceOperations
