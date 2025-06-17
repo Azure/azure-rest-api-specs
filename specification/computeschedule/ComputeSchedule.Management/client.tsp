@@ -11,6 +11,9 @@ using Microsoft.ComputeSchedule;
   "java"
 );
 
+@@clientName(CancelOccurrenceRequest, "CancelOccurrenceContent", "csharp");
+@@clientName(DelayRequest, "DelayContent", "csharp");
+
 @@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
   "csharp"
