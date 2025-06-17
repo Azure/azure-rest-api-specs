@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-01'
 input-file:
-  - PureStorage.Block/preview/2024-11-01/purestorage.json
+  - PureStorage.Block/stable/2024-11-01/purestorage.json
 
 suppressions:
  - code: PathContainsResourceType
