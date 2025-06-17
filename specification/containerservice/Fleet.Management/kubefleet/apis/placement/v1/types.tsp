@@ -14,7 +14,7 @@ model ClusterResourcePlacementSpec {
   policy?: PlacementPolicy;
 }
 
-@doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity.")
+@doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.")
 model PlacementPolicy {
   @doc("Type of placement. Can be \"PickAll\", \"PickN\" or \"PickFixed\". Default is PickAll.")
   placementType?: PlacementType;
@@ -25,7 +25,7 @@ model PlacementPolicy {
   @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll.") // don't forget to update this when we add PickN.
   affinity?: Affinity;
 
-  @doc("If specified, the ClusterClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted.")
+  @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
   @OpenAPI.extension("x-ms-identifiers", [])
   tolerations?: Toleration[];
 }
@@ -65,7 +65,7 @@ model ClusterSelectorTerm {
   @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd.")
   labelSelector?: LabelSelector;
 
-  @doc("PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd. At this moment, PropertySelector can only be used with `RequiredDuringSchedulingIgnoredDuringExecution` affinity terms.")
+  @doc("PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd. At this moment, PropertySelector can only be used with `RequiredDuringSchedulingIgnoredDuringExecution` affinity terms. This field is beta-level; it is for the property-based scheduling feature and is only functional when a property provider is enabled in the deployment.")
   propertySelector?: PropertySelector;
 }
 

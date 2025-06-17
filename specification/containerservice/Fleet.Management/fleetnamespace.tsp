@@ -18,8 +18,7 @@ namespace Microsoft.ContainerService;
 @resource("managedNamespaces")
 @added(Versions.v2025_03_02_naar)
 @parentResource(Fleet)
-model FleetManagedNamespace
-  is TrackedResource<FleetManagedNamespaceProperties> {
+model ManagedNamespace is TrackedResource<ManagedNamespaceProperties> {
   @doc("The name of the fleet managed namespace resource.")
   @key("fleetManagedNamespaceName")
   @segment("fleetManagedNamespaces")
@@ -38,7 +37,7 @@ model FleetManagedNamespace
 
 @added(Versions.v2025_03_02_naar)
 @doc("Status information for the fleet managed namespace.")
-model FleetManagedNamespaceStatus {
+model ManagedNamespaceStatus {
   @visibility("read")
   @doc("The last operation ID for the fleet managed namespace")
   lastOperationId?: string;
@@ -50,7 +49,7 @@ model FleetManagedNamespaceStatus {
 
 @doc("A fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
-model FleetManagedNamespaceProperties {
+model ManagedNamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the fleet managed namespace.")
   labels?: Record<string>;
@@ -61,7 +60,7 @@ model FleetManagedNamespaceProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: FleetManagedNamespaceProvisioningState;
+  provisioningState?: ManagedNamespaceProvisioningState;
 
   @doc("The default resource quota for the fleet managed namespace.")
   defaultResourceQuota?: ResourceQuota;
@@ -70,17 +69,17 @@ model FleetManagedNamespaceProperties {
   defaultNetworkPolicy?: NetworkPolicy;
 
   @doc("Action if the managed namespace with the same name already exists. Default is Never.")
-  adoptionPolicy?: AdoptionPolicy = "Never";
+  adoptionPolicy: AdoptionPolicy;
 
   @doc("Delete options of a fleet managed namespace. Default is Keep.")
-  deletePolicy?: DeletePolicy = "Keep";
+  deletePolicy: DeletePolicy;
 
   @doc("The profile of the propagation to create the namespace.")
   propagationPolicy?: PropagationPolicy;
 
   @visibility("read")
   @doc("Status information of the last operation for fleet managed namespace.")
-  status?: FleetManagedNamespaceStatus;
+  status?: ManagedNamespaceStatus;
 }
 
 @doc("The resource quota for the managed namespace.")
@@ -150,7 +149,7 @@ union DeletePolicy {
 @doc("The propagation to be used for provisioning the namespace among the fleet.")
 model PropagationPolicy {
   @doc("The type of the policy to be used. Default is Placement.")
-  type?: PropagationType;
+  type: PropagationType;
 
   @doc("The propagation profile to be used for the propagation. Default is PlacementProfile.")
   propagationProfile?: PropagationProfile;
@@ -180,7 +179,7 @@ model PlacementProfile {
 }
 
 @doc("The provisioning state of the fleet managed namespace resource")
-union FleetManagedNamespaceProvisioningState {
+union ManagedNamespaceProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -197,20 +196,20 @@ union FleetManagedNamespaceProvisioningState {
 @added(Versions.v2025_03_02_naar)
 @armResourceOperations
 interface FleetManagedNamespaces {
-  get is ArmResourceRead<FleetManagedNamespace>;
+  get is ArmResourceRead<ManagedNamespace>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    FleetManagedNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
-      IfMatchParameters<FleetManagedNamespace> &
-      IfNoneMatchParameters<FleetManagedNamespace>
+    ManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<ManagedNamespace> &
+      IfMatchParameters<ManagedNamespace> &
+      IfNoneMatchParameters<ManagedNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    FleetManagedNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
-      IfMatchParameters<FleetManagedNamespace>
+    ManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<ManagedNamespace> &
+      IfMatchParameters<ManagedNamespace>
   >;
 
-  listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
+  listByFleet is ArmResourceListByParent<ManagedNamespace>;
 }
