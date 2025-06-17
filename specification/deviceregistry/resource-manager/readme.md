@@ -46,7 +46,7 @@ suppressions:
       - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
-      - $.definitions.DiscoveredDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredDeviceProperties.properties.attributes
       - $.definitions.NamespaceDiscoveredDeviceUpdateProperties.properties.attributes
       - $.definitions.DeviceBaseProperties.properties.attributes
       - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes

@@ -1762,6 +1762,7 @@ model GuestAgentInstallStatus {
 
   @doc("Details about the error state.")
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 

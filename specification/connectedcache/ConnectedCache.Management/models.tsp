@@ -682,6 +682,7 @@ model AdditionalCacheNodeProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("Cache node resource drive configurations.")
+  @Azure.ResourceManager.identifiers(#[])
   driveConfiguration?: CacheNodeDriveConfiguration[];
 
   @doc("Cache node resource Bgp configuration.")
@@ -853,6 +854,7 @@ model CacheNodeInstallProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @added(Versions.v2024_11_30_preview)
   @doc("Cache node resource drive configurations.")
+  @Azure.ResourceManager.identifiers(#[])
   driveConfiguration?: CacheNodeDriveConfiguration[];
 
   @added(Versions.v2024_11_30_preview)
@@ -882,6 +884,7 @@ model MccCacheNodeAutoUpdateHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource auto update history information.")
+  @Azure.ResourceManager.identifiers(#[])
   autoUpdateHistory?: MccCacheNodeAutoUpdateInfo[];
 }
 
@@ -979,6 +982,7 @@ model MccCacheNodeIssueHistoryProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource issue details history.")
+  @Azure.ResourceManager.identifiers(#[])
   mccIssueHistory?: MccIssue[];
 }
 
@@ -1032,6 +1036,7 @@ model MccCacheNodeTlsCertificateProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Cache node resource tls certificate history details.")
+  @Azure.ResourceManager.identifiers(#[])
   tlsCertificateHistory?: MccCacheNodeTlsCertificate[];
 }
 
