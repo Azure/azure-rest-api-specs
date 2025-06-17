@@ -15,5 +15,5 @@ title: ContainerServiceSafeguardsMgmtClient
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/safeguards/azure/mgmt/containerservice/safeguards
+output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservicesafeguards/azure/mgmt/containerservicesafeguards
 ```
