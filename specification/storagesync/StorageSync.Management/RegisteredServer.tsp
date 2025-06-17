@@ -41,7 +41,8 @@ interface RegisteredServers {
     Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = StorageSyncError
+    Error = StorageSyncError,
+    Parameters = RegisteredServerCreateParameters
   >;
 
   /**
