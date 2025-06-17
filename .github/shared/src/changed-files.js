@@ -238,6 +238,20 @@ export function swagger(file) {
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
-    !example(file)
+    !example(file) &&
+    !scenario(file)
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function scenario(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/scenarios/")
   );
 }

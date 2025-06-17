@@ -19,6 +19,7 @@ import {
   resourceManager,
   specification,
   swagger,
+  scenario,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
 
@@ -54,6 +55,7 @@ describe("changedFiles", () => {
     "specification/contosowidgetmanager/resource-manager/readme.md",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
     "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
+    "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
   ];
 
   it("filter:json", () => {
@@ -63,6 +65,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/examples/2021-11-01/Employees_Get.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
+      "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
     expect(files.filter(json)).toEqual(expected);
@@ -86,6 +89,7 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/readme.md",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
+      "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
     ];
 
     expect(files.filter(specification)).toEqual(expected);
@@ -116,6 +120,14 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(example)).toEqual(expected);
+  });
+
+  it("filter:scenarios", () => {
+    const expected = [
+      "specification/contosowidgetmanager/Contoso.Management/scenarios/2021-11-01/Employees_Get.json",
+    ];
+
+    expect(files.filter(scenario)).toEqual(expected);
   });
 
   it("filter:swagger", () => {
