@@ -11,7 +11,7 @@ typescript:
   generate-metadata: true
 
 directive: 
-  - from: dataConnectors.json
+  - from: DataConnectors.json
     where: $.definitions.CcpResponseConfig.properties.csvEscape
     transform: >
       $["default"] = "\\\""
