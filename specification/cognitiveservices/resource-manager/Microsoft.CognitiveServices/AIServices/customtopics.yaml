@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: Customization Service
+  version: 0.0.0
+tags: []
+paths:
+  /:
+    delete:
+      operationId: CustomTopic_delete
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomTopicBasicQueryParameters'
+          explode: false
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topicName:
+                  type: string
+              required:
+                - topicName
+  /raitopics/:
+    get:
+      operationId: CustomTopic_listTopics
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomTopicBasicQueryParameters'
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomTopicModelResponse'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+  /raitopics/{topicName}:
+    get:
+      operationId: CustomTopic_get
+      parameters:
+        - name: topicName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomTopicBasicQueryParameters'
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTopicModelResponse'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+  /raitopics/{topicName}:createAndTrain:
+    put:
+      operationId: CustomTopic_createAndTrain
+      parameters:
+        - name: topicName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: query
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomTopicBasicQueryParameters'
+          explode: false
+      responses:
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTopicModelResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomTopicCreationRequest'
+components:
+  schemas:
+    CustomTopicBasicQueryParameters:
+      type: object
+      required:
+        - api-version
+      properties:
+        api-version:
+          type: string
+    CustomTopicCreationRequest:
+      type: object
+      required:
+        - topicName
+        - description
+        - sampleBlobUrl
+      properties:
+        topicName:
+          type: string
+        description:
+          type: string
+        sampleBlobUrl:
+          type: string
+    CustomTopicModelResponse:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - sampleBlobUrl
+        - status
+        - failedReason
+        - createdAt
+        - lastModifiedAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        sampleBlobUrl:
+          type: string
+        status:
+          type: string
+        failedReason:
+          type: string
+        createdAt:
+          type: string
+        lastModifiedAt:
+          type: string
+    InternalServerError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          enum:
+            - INTERNAL_SERVER_ERROR
+        message:
+          type: string
+    NotFoundError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          enum:
+            - NOT_FOUND
+        message:
+          type: string
+    ValidationError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          enum:
+            - VALIDATION_ERROR
+        message:
+          type: string
