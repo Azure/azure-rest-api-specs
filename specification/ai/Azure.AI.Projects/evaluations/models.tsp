@@ -187,7 +187,7 @@ model EvaluationConfig {
   name: string;
 
   @doc("Continuous evaluation configuration.")
-  continuousEvaluationConfig: ContinuousEvaluationConfig;
+  continuousEvaluationConfig?: ContinuousEvaluationConfig;
 
   @doc("Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted.")
   disableEvaluationRunPersistence?: boolean;
