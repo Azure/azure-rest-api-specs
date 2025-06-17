@@ -306,6 +306,7 @@ model DrillStartRequest {
   @doc("Mode of starting the Drill")
   mode: DrillMode;
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Inputs needed for the Recovery Orchestration Plan")
   roInputs: {
     @doc("Direction of the failover")

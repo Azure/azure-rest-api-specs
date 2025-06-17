@@ -5,9 +5,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./Configuration.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationModel.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationType.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ProvisioningState.tsp";
+import "./ConfigurationModel.tsp";
+import "./ConfigurationType.tsp";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
