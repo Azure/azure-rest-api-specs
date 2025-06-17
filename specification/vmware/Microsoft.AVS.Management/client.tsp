@@ -486,8 +486,6 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Cluster.properties, "java,python,csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(PrivateCloud.properties, "csharp");
-#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Datastore.properties, "java,python,csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(HcxEnterpriseSite.properties, "java,python,csharp");
@@ -529,6 +527,8 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 @@flattenProperty(ScriptExecution.properties, "java,python,csharp");
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(IscsiPath.properties, "java,python,csharp");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(PrivateCloud.properties, "csharp");
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PrivateCloudUpdate.properties, "java,python");
