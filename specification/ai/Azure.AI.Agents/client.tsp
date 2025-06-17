@@ -485,6 +485,11 @@ using Azure.AI.Agents;
 @client({ name: "PersistentAgentsClient", service: Azure.AI.Agents}, "java")
 @useDependency(Azure.AI.Agents.Versions.v2025_05_01)
 namespace Agents.Persistent {
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+  op createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup("java")
@@ -495,7 +500,7 @@ namespace Agents.Persistent {
     @access(Access.internal)
     deleteAgentInternal is Azure.AI.Agents.deleteAgent;
     listAgents is Azure.AI.Agents.listAgents;
-    createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
+    // createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
   }
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
