@@ -6978,25 +6978,6 @@
         ]
       }
     },
-    "DatafloGraphDestinationNode": {
-      "type": "object",
-      "description": "DataflowGraph destination node properties.",
-      "properties": {
-        "destinationSettings": {
-          "$ref": "#/definitions/DataflowGraphDestinationNodeSettings",
-          "description": "Destination configuration."
-        }
-      },
-      "required": [
-        "destinationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataflowGraphNode"
-        }
-      ],
-      "x-ms-discriminator-value": "Destination"
-    },
     "DataflowBuiltInTransformationDataset": {
       "type": "object",
       "description": "Dataflow BuiltIn Transformation dataset properties",
@@ -8261,6 +8242,25 @@
           "description": "Reference to the schema that describes the output of the transformation."
         }
       }
+    },
+    "DataflowGraphDestinationNode": {
+      "type": "object",
+      "description": "DataflowGraph destination node properties.",
+      "properties": {
+        "destinationSettings": {
+          "$ref": "#/definitions/DataflowGraphDestinationNodeSettings",
+          "description": "Destination configuration."
+        }
+      },
+      "required": [
+        "destinationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphNode"
+        }
+      ],
+      "x-ms-discriminator-value": "Destination"
     },
     "DataflowGraphDestinationNodeSettings": {
       "type": "object",

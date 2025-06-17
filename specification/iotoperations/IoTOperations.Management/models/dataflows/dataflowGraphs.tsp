@@ -136,7 +136,7 @@ model DataflowGraphGraphNodeConfiguration {
 
 /** DataflowGraph destination node properties. */
 @added(Versions.`2025-07-01-preview`)
-model DatafloGraphDestinationNode extends DataflowGraphNode {
+model DataflowGraphDestinationNode extends DataflowGraphNode {
   /** Type of the destination node. */
   nodeType: Destination;
 
