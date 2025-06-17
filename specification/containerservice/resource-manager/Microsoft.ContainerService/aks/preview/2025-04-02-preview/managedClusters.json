@@ -4774,6 +4774,10 @@
           "title": "Whether to enable Custom CA Trust feature.",
           "description": "When set to true, AKS adds a label to the node indicating that the feature is enabled and deploys a daemonset along with host services to sync custom certificate authorities from user-provided list of base64 encoded certificates into node trust stores. Defaults to false."
         },
+        "nodeCustomization": {
+          "$ref": "#/definitions/NodeCustomization",
+          "description": "Settings to determine the node customization used to provision nodes in a pool."
+        },
         "nodePublicIPPrefixID": {
           "type": "string",
           "format": "arm-id",
@@ -4954,6 +4958,24 @@
         }
       },
       "description": "Network settings of an agent pool."
+    },
+    "NodeCustomization": {
+      "type": "object",
+      "description": "Settings to determine the node customization used to provision nodes in a pool.",
+      "properties": {
+        "nodeCustomization": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the node customization resource to use. This can be a version.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainserService/nodeCustomizations"
+              }
+            ]
+          }
+        }
+      }
     },
     "NodePublicIPTags": {
       "type": "array",
