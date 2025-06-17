@@ -90,6 +90,7 @@ model TestRun {
   id: string;
 
   @doc("The test-run display name.")
+  @minLength(1)
   @maxLength(200)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   displayName: string;
@@ -100,7 +101,7 @@ model TestRun {
 
   @doc("The test-run creator's name.")
   @visibility(Lifecycle.Read)
-  creatorName: string;
+  creatorName?: string;
 
   @doc("The test-run config.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -119,11 +120,17 @@ model TestRun {
 model RunConfig {
   @doc("The framework used for run.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  framework: RunFramework;
+  framework?: RunFramework;
 
   @doc("The SDK Language used for run.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  sdkLanguage: SDKLanguage;
+  sdkLanguage?: SDKLanguage;
+
+  @doc("The maximum number of workers required for the run.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minValue(1)
+  @maxValue(500)
+  maxWorkers?: int64;
 }
 
 @doc("The SDK Language used for run.")
@@ -144,38 +151,38 @@ union SDKLanguage {
 model RunFramework {
   @doc("The framework name.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  name: string;
+  name?: string;
 
   @doc("The framework version.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  version: string;
+  version?: string;
 
   @doc("The framework runner name.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  runnerName: string;
+  runnerName?: string;
 }
 
 @doc("The run CI config.")
 model CiConfig {
   @doc("The CI provider name.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  providerName: string;
+  providerName?: string;
 
   @doc("The CI branch.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  branch: string;
+  branch?: string;
 
   @doc("The CI author.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  author: string;
+  author?: string;
 
   @doc("The CI commit id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  commitId: string;
+  commitId?: string;
 
   @doc("The CI revision URL.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  revisionUrl: string;
+  revisionUrl?: string;
 }
 
 @doc("The run summary.")
@@ -185,16 +192,16 @@ model RunSummary {
   status: RunStatus;
 
   @doc("The run billable time.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   billableTime?: int64;
 
-  @doc("The number of browser sessions corresponding to the run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The total number of browser sessions allocated to the run.")
+  @visibility(Lifecycle.Read)
   numBrowserSessions?: int64;
 
-  @doc("The maximum number of browser sessions available for the run.")
+  @doc("The highest number of browser sessions that were running at the same time during the run.")
   @visibility(Lifecycle.Read)
-  maxConcurrentBrowserSesssions?: int64;
+  maxConcurrentBrowserSessions?: int64;
 
   @doc("The run start time as utcDateTime.")
   @visibility(Lifecycle.Read)
@@ -209,7 +216,7 @@ model RunSummary {
   duration?: int64;
 
   @doc("The list of error messages corresponding to the run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   errorMessages?: Array<string>;
 }
 

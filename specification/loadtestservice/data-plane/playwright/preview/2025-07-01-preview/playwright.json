@@ -755,59 +755,6 @@
             "create"
           ]
         }
-      },
-      "required": [
-        "providerName",
-        "branch",
-        "author",
-        "commitId",
-        "revisionUrl"
-      ]
-    },
-    "CiConfigCreateOrUpdate": {
-      "type": "object",
-      "description": "The run CI config.",
-      "properties": {
-        "providerName": {
-          "type": "string",
-          "description": "The CI provider name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "branch": {
-          "type": "string",
-          "description": "The CI branch.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "author": {
-          "type": "string",
-          "description": "The CI author.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "commitId": {
-          "type": "string",
-          "description": "The CI commit id.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "revisionUrl": {
-          "type": "string",
-          "description": "The CI revision URL.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
       }
     },
     "PagedAccessToken": {
@@ -871,28 +818,13 @@
             "read",
             "create"
           ]
-        }
-      },
-      "required": [
-        "framework",
-        "sdkLanguage"
-      ]
-    },
-    "RunConfigCreateOrUpdate": {
-      "type": "object",
-      "description": "The run config.",
-      "properties": {
-        "framework": {
-          "$ref": "#/definitions/RunFrameworkCreateOrUpdate",
-          "description": "The framework used for run.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
-        "sdkLanguage": {
-          "$ref": "#/definitions/SDKLanguage",
-          "description": "The SDK Language used for run.",
+        "maxWorkers": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of workers required for the run.",
+          "minimum": 1,
+          "maximum": 500,
           "x-ms-mutability": [
             "read",
             "create"
@@ -901,41 +833,6 @@
       }
     },
     "RunFramework": {
-      "type": "object",
-      "description": "The run framework.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The framework name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "version": {
-          "type": "string",
-          "description": "The framework version.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "runnerName": {
-          "type": "string",
-          "description": "The framework runner name.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "name",
-        "version",
-        "runnerName"
-      ]
-    },
-    "RunFrameworkCreateOrUpdate": {
       "type": "object",
       "description": "The run framework.",
       "properties": {
@@ -1008,26 +905,18 @@
           "type": "integer",
           "format": "int64",
           "description": "The run billable time.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "numBrowserSessions": {
           "type": "integer",
           "format": "int64",
-          "description": "The number of browser sessions corresponding to the run.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "The total number of browser sessions allocated to the run.",
+          "readOnly": true
         },
-        "maxConcurrentBrowserSesssions": {
+        "maxConcurrentBrowserSessions": {
           "type": "integer",
           "format": "int64",
-          "description": "The maximum number of browser sessions available for the run.",
+          "description": "The highest number of browser sessions that were running at the same time during the run.",
           "readOnly": true
         },
         "startTime": {
@@ -1054,11 +943,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         }
       },
       "required": [
@@ -1111,6 +996,7 @@
         "displayName": {
           "type": "string",
           "description": "The test-run display name.",
+          "minLength": 1,
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1154,7 +1040,6 @@
         "id",
         "displayName",
         "creatorId",
-        "creatorName",
         "summary"
       ]
     },
@@ -1165,6 +1050,7 @@
         "displayName": {
           "type": "string",
           "description": "The test-run display name.",
+          "minLength": 1,
           "maxLength": 200,
           "x-ms-mutability": [
             "read",
@@ -1173,7 +1059,7 @@
           ]
         },
         "config": {
-          "$ref": "#/definitions/RunConfigCreateOrUpdate",
+          "$ref": "#/definitions/RunConfig",
           "description": "The test-run config.",
           "x-ms-mutability": [
             "read",
@@ -1181,7 +1067,7 @@
           ]
         },
         "ciConfig": {
-          "$ref": "#/definitions/CiConfigCreateOrUpdate",
+          "$ref": "#/definitions/CiConfig",
           "description": "The test-run CI Config.",
           "x-ms-mutability": [
             "read",
