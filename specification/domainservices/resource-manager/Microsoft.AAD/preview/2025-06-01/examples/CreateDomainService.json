@@ -6,14 +6,11 @@
     "domainServiceName": "TestDomainService.com",
     "domainService": {
       "properties": {
+        "domainName": "TestDomainService.com",
         "replicaSets": [
           {
             "location": "West US",
             "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS"
-          },
-          {
-            "location": "East US",
-            "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS"
           }
         ],
         "ldapsSettings": {
@@ -25,7 +22,8 @@
         "domainSecuritySettings": {
           "ntlmV1": "Enabled",
           "tlsV1": "Disabled",
-          "syncNtlmPasswords": "Enabled"
+          "syncNtlmPasswords": "Enabled",
+          "syncOnPremSamAccountName": "Disabled"
         },
         "filteredSync": "Enabled",
         "notificationSettings": {
@@ -34,22 +32,6 @@
           "additionalRecipients": [
             "jicha@microsoft.com",
             "caalmont@microsoft.com"
-          ]
-        },
-        "configDiagnostics": {
-          "lastExecuted": "05 May 2021 12:00:23 GMT",
-          "validatorResults": [
-            {
-              "validatorId": "AADDS-CFG-DIAG-V06",
-              "replicaSetSubnetDisplayName": "West US/aadds-subnet",
-              "status": "Warning",
-              "issues": [
-                {
-                  "id": "AADDS-CFG-DIAG-I20",
-                  "descriptionParams": []
-                }
-              ]
-            }
           ]
         }
       }
@@ -80,17 +62,6 @@
               ],
               "externalAccessIpAddress": "13.64.148.151",
               "serviceStatus": "Running"
-            },
-            {
-              "replicaSetId": "5057347d-cad1-4ec8-8db6-66cf7eedf4b8",
-              "location": "East US",
-              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS",
-              "domainControllerIpAddress": [
-                "10.0.0.3",
-                "10.0.0.4"
-              ],
-              "externalAccessIpAddress": "13.64.148.152",
-              "serviceStatus": "Running"
             }
           ],
           "ldapsSettings": {
@@ -103,7 +74,8 @@
           "domainSecuritySettings": {
             "ntlmV1": "Enabled",
             "tlsV1": "Disabled",
-            "syncNtlmPasswords": "Enabled"
+            "syncNtlmPasswords": "Enabled",
+            "syncOnPremSamAccountName": "Disabled"
           },
           "filteredSync": "Enabled",
           "notificationSettings": {
@@ -118,11 +90,8 @@
         }
       }
     },
-    "202": {
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/domainServices/TestDomainService.com?api-version=2022-09-01"
-      },
-      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+    "201": {
+      "description": "HTTP 201 (Created) if the operation completed successfully.",
       "body": {
         "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
         "name": "TestDomainService.com",
@@ -143,11 +112,8 @@
                 "10.0.0.1",
                 "10.0.0.2"
               ],
+              "externalAccessIpAddress": "13.64.148.151",
               "serviceStatus": "Running"
-            },
-            {
-              "location": "East US",
-              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetEUS/subnets/TestSubnetEUS"
             }
           ],
           "ldapsSettings": {
@@ -160,7 +126,8 @@
           "domainSecuritySettings": {
             "ntlmV1": "Enabled",
             "tlsV1": "Disabled",
-            "syncNtlmPasswords": "Enabled"
+            "syncNtlmPasswords": "Enabled",
+            "syncOnPremSamAccountName": "Disabled"
           },
           "filteredSync": "Enabled",
           "notificationSettings": {
@@ -172,6 +139,45 @@
             ]
           },
           "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+      "body": {
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "properties": {
+          "version": 2,
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "domainName": "TestDomainService.com",
+          "replicaSets": [
+            {
+              "location": "West US",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS"
+            }
+          ],
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "externalAccess": "Enabled"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled",
+            "syncOnPremSamAccountName": "Disabled"
+          },
+          "filteredSync": "Enabled",
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "provisioningState": "Accepted"
         }
       }
     }

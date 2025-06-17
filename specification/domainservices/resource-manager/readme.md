@@ -119,7 +119,7 @@ directive:
     reason: Microsoft.AAD is the correct provider name for legacy reasons.
   - suppress: PatchBodyParametersSchema
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}"].patch.parameters[4].schema.properties.properties
-    reason: Properties of a PATCH request body can have default value , property:syncOnPremSamAccountName
+    reason: Properties of a PATCH request body can have default value, property:syncOnPremSamAccountName
 ```
 
 # Code Generation
