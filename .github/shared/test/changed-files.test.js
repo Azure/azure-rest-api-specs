@@ -13,6 +13,7 @@ import {
   dataPlane,
   example,
   getChangedFiles,
+  getCategorizedChangedFiles,
   json,
   readme,
   resourceManager,
@@ -123,5 +124,116 @@ describe("changedFiles", () => {
     ];
 
     expect(files.filter(swagger)).toEqual(expected);
+  });
+
+  describe("getCategorizedChangedFiles", () => {
+    it("should categorize files correctly with all types of changes", async () => {
+      const gitOutput = [
+        "A\tspecification/new-service/readme.md",
+        "M\tspecification/existing-service/main.tsp",
+        "D\tspecification/old-service/contoso.json",
+        "R100\tspecification/service/old-name.json\tspecification/service/new-name.json",
+        "C90\tspecification/template/base.json\tspecification/service/derived.json",
+        "T\tspecification/service/type-changed.json"
+      ].join("\n");
+
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+      const result = await getCategorizedChangedFiles();
+      expect(result).toEqual({
+        additions: [
+          "specification/new-service/readme.md",
+          "specification/service/derived.json"
+        ],
+        modifications: [
+          "specification/existing-service/main.tsp",
+          "specification/service/type-changed.json"
+        ],
+        deletions: [
+          "specification/old-service/contoso.json"
+        ],
+        renames: [
+          {
+            from: "specification/service/old-name.json",
+            to: "specification/service/new-name.json"
+          }
+        ],
+        total: 6
+      });
+    });
+
+    it("should handle empty git output", async () => {
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
+      const result = await getCategorizedChangedFiles();
+      expect(result).toEqual({
+        additions: [],
+        modifications: [],
+        deletions: [],
+        renames: [],
+        total: 0
+      });
+    });
+
+    it("should handle only additions", async () => {
+      const gitOutput = [
+        "A\tspecification/service1/readme.md",
+        "A\tspecification/service2/main.tsp"
+      ].join("\n");
+
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+      const result = await getCategorizedChangedFiles();
+      expect(result).toEqual({
+        additions: [
+          "specification/service1/readme.md",
+          "specification/service2/main.tsp"
+        ],
+        modifications: [],
+        deletions: [],
+        renames: [],
+        total: 2
+      });
+    });
+
+    it("should handle only renames", async () => {
+      const gitOutput = [
+        "R95\told/path/file1.json\tnew/path/file1.json",
+        "R100\tservice/old.tsp\tservice/new.tsp"
+      ].join("\n");
+
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+      const result = await getCategorizedChangedFiles();
+      expect(result).toEqual({
+        additions: [],
+        modifications: [],
+        deletions: [],
+        renames: [
+          {
+            from: "old/path/file1.json",
+            to: "new/path/file1.json"
+          },
+          {
+            from: "service/old.tsp",
+            to: "service/new.tsp"
+          }
+        ],
+        total: 2
+      });
+    });
+
+    it("should pass git options correctly", async () => {
+      const options = {
+        baseCommitish: "origin/main",
+        headCommitish: "feature-branch",
+        cwd: "/custom/path"
+      };
+
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("A\ttest.json");
+      await getCategorizedChangedFiles(options);
+      expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
+      expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
+        "--name-status",
+        "origin/main",
+        "feature-branch"
+      ]);
+    });
   });
 });
