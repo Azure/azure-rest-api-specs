@@ -2294,36 +2294,6 @@
         }
       }
     },
-    "AdoptionPolicy": {
-      "type": "string",
-      "description": "Action if Kubernetes managed namespace with the same name already exists.",
-      "enum": [
-        "Never",
-        "IfIdentical",
-        "Always"
-      ],
-      "x-ms-enum": {
-        "name": "AdoptionPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Never",
-            "value": "Never",
-            "description": "If k8s managed namespace already exists, do not take over the existing managed namespace to be managed by ARM."
-          },
-          {
-            "name": "IfIdentical",
-            "value": "IfIdentical",
-            "description": "If there is an identical managed namespace, take over the existing managed namespace to be managed by ARM."
-          },
-          {
-            "name": "Always",
-            "value": "Always",
-            "description": "Always take over the existing managed namespace to be managed by ARM, even if it is not identical."
-          }
-        ]
-      }
-    },
     "Affinity": {
       "type": "object",
       "description": "Affinity is a group of cluster affinity scheduling rules.",
@@ -2597,9 +2567,9 @@
         ]
       }
     },
-    "ClusterResourcePlacement": {
+    "ClusterResourcePlacementSpec": {
       "type": "object",
-      "description": "ClusterResourcePlacement is used to select cluster scoped resources, including built-in resources and custom resources, and placement them onto selected member clusters in a fleet.",
+      "description": "ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.",
       "properties": {
         "policy": {
           "$ref": "#/definitions/PlacementPolicy",
@@ -2629,37 +2599,13 @@
       "description": "ClusterSelectorTerm allows specifying what clusters in the fleet are in scope. If you specify both label and property selectors in the same term, the results are AND'd.",
       "properties": {
         "labelSelector": {
-          "$ref": "#/definitions/LabelSelector",
+          "$ref": "#/definitions/K8s.ApiMachinery.Apis.Meta.V1.LabelSelector",
           "description": "LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected."
         },
         "propertySelector": {
           "$ref": "#/definitions/PropertySelector",
           "description": "PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected."
         }
-      }
-    },
-    "DeletePolicy": {
-      "type": "string",
-      "description": "Delete options of a managed namespace.",
-      "enum": [
-        "Keep",
-        "Delete"
-      ],
-      "x-ms-enum": {
-        "name": "DeletePolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Keep",
-            "value": "Keep",
-            "description": "Delete ARM resource but keep k8s managed namespace."
-          },
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Delete both ARM resource and k8s managed namespace."
-          }
-        ]
       }
     },
     "Fleet": {
@@ -2871,12 +2817,60 @@
           "description": "The default network policy for the fleet managed namespace."
         },
         "adoptionPolicy": {
-          "$ref": "#/definitions/AdoptionPolicy",
-          "description": "Action if Kubernetes managed namespace with the same name already exists."
+          "type": "string",
+          "description": "Action if the managed namespace with the same name already exists. Default is Never.",
+          "default": "Never",
+          "enum": [
+            "Never",
+            "IfIdentical",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "AdoptionPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Never",
+                "value": "Never",
+                "description": "If the Namespace already exists, do not take over the existing Namespace to be managed by ARM."
+              },
+              {
+                "name": "IfIdentical",
+                "value": "IfIdentical",
+                "description": "If there is an identical Namespace, take over the existing Namespace to be managed by ARM."
+              },
+              {
+                "name": "Always",
+                "value": "Always",
+                "description": "Always take over the existing Namespace to be managed by ARM, even if it is not identical."
+              }
+            ]
+          }
         },
         "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of a fleet managed namespace."
+          "type": "string",
+          "description": "Delete options of a fleet managed namespace. Default is Keep.",
+          "default": "Keep",
+          "enum": [
+            "Keep",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "DeletePolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Keep",
+                "value": "Keep",
+                "description": "Delete the ARM resource but keep the Namespace."
+              },
+              {
+                "name": "Delete",
+                "value": "Delete",
+                "description": "Delete both ARM resource and Namespace."
+              }
+            ]
+          }
         },
         "propagationPolicy": {
           "$ref": "#/definitions/PropagationPolicy",
@@ -3346,10 +3340,7 @@
         "id"
       ]
     },
-    "KubernetesVersion": {
-      "type": "string"
-    },
-    "LabelSelector": {
+    "K8s.ApiMachinery.Apis.Meta.V1.LabelSelector": {
       "type": "object",
       "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
       "properties": {
@@ -3364,13 +3355,13 @@
           "type": "array",
           "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
           "items": {
-            "$ref": "#/definitions/LabelSelectorRequirement"
+            "$ref": "#/definitions/K8s.ApiMachinery.Apis.Meta.V1.LabelSelectorRequirement"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "LabelSelectorOperator": {
+    "K8s.ApiMachinery.Apis.Meta.V1.LabelSelectorOperator": {
       "type": "string",
       "description": "A label selector operator is the set of operators that can be used in a selector requirement.",
       "enum": [
@@ -3406,7 +3397,7 @@
         ]
       }
     },
-    "LabelSelectorRequirement": {
+    "K8s.ApiMachinery.Apis.Meta.V1.LabelSelectorRequirement": {
       "type": "object",
       "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
       "properties": {
@@ -3415,7 +3406,7 @@
           "description": "key is the label key that the selector applies to."
         },
         "operator": {
-          "$ref": "#/definitions/LabelSelectorOperator",
+          "$ref": "#/definitions/K8s.ApiMachinery.Apis.Meta.V1.LabelSelectorOperator",
           "description": "operator represents a key's relationship to a set of values."
         },
         "values": {
@@ -3430,6 +3421,51 @@
         "key",
         "operator"
       ]
+    },
+    "K8s.Io.Api.Core.V1.TaintEffect": {
+      "type": "string",
+      "description": "The available taint effect for the Toleration section",
+      "enum": [
+        "NoSchedule"
+      ],
+      "x-ms-enum": {
+        "name": "TaintEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoSchedule",
+            "value": "NoSchedule",
+            "description": "The NoSchedule taint effect."
+          }
+        ]
+      }
+    },
+    "K8s.Io.Api.Core.V1.TolerationOperator": {
+      "type": "string",
+      "description": "The available operator for the Toleration section.",
+      "enum": [
+        "Exists",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "TolerationOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Operator that checks for existence."
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Operator that checks for equality."
+          }
+        ]
+      }
+    },
+    "KubernetesVersion": {
+      "type": "string"
     },
     "ManagedClusterUpdate": {
       "type": "object",
@@ -3532,7 +3568,7 @@
     },
     "NetworkPolicy": {
       "type": "object",
-      "description": "The network policy for a managed namespace.",
+      "description": "The network policy for the managed namespace.",
       "properties": {
         "ingress": {
           "$ref": "#/definitions/PolicyRule",
@@ -3663,7 +3699,7 @@
       "description": "The configuration profile for default ClusterResourcePlacement for placement.",
       "properties": {
         "defaultClusterResourcePlacement": {
-          "$ref": "#/definitions/ClusterResourcePlacement",
+          "$ref": "#/definitions/ClusterResourcePlacementSpec",
           "description": "The default ClusterResourcePlacement policy configuration."
         }
       }
@@ -3680,12 +3716,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "PickAll",
+            "name": "PickAllPlacementType",
             "value": "PickAll",
             "description": "PickAll selects all clusters that match the specified requirements."
           },
           {
-            "name": "PickFixed",
+            "name": "PickFixedPlacementType",
             "value": "PickFixed",
             "description": "PickFixed selects a fixed set of clusters"
           }
@@ -3796,32 +3832,32 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Gt",
+            "name": "PropertySelectorGreaterThan",
             "value": "Gt",
             "description": "Gt (Greater than): a cluster’s observed value of the given property must be greater than the value in the matcher before it can be picked for resource placement."
           },
           {
-            "name": "Ge",
+            "name": "PropertySelectorGreaterThanOrEqualTo",
             "value": "Ge",
             "description": "Ge (Greater than or equal to): a cluster’s observed value of the given property must be greater than or equal to the value in the matcher before it can be picked for resource placement."
           },
           {
-            "name": "Eq",
+            "name": "PropertySelectorEqualTo",
             "value": "Eq",
             "description": "Eq (Equal to): a cluster’s observed value of the given property must be equal to the value in the matcher before it can be picked for resource placement."
           },
           {
-            "name": "Ne",
+            "name": "PropertySelectorNotEqualTo",
             "value": "Ne",
             "description": "Ne (Not equal to): a cluster’s observed value of the given property must be not equal to the value in the matcher before it can be picked for resource placement."
           },
           {
-            "name": "Lt",
+            "name": "PropertySelectorLessThan",
             "value": "Lt",
             "description": "Lt (Less than): a cluster’s observed value of the given property must be less than the value in the matcher before it can be picked for resource placement."
           },
           {
-            "name": "Le",
+            "name": "PropertySelectorLessThanOrEqualTo",
             "value": "Le",
             "description": "Le (Less than or equal to): a cluster’s observed value of the given property must be less than or equal to the value in the matcher before it can be picked for resource placement."
           }
@@ -3856,7 +3892,7 @@
     },
     "ResourceQuota": {
       "type": "object",
-      "description": "The resource quota for a managed namespace.",
+      "description": "The resource quota for the managed namespace.",
       "properties": {
         "cpuRequest": {
           "type": "string",
@@ -3926,24 +3962,6 @@
         ]
       }
     },
-    "TaintEffect": {
-      "type": "string",
-      "description": "The available taint effect for the Toleration section",
-      "enum": [
-        "NoSchedule"
-      ],
-      "x-ms-enum": {
-        "name": "TaintEffect",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NoSchedule",
-            "value": "NoSchedule",
-            "description": "The NoSchedule taint effect."
-          }
-        ]
-      }
-    },
     "TargetType": {
       "type": "string",
       "description": "The target type of a skip request.",
@@ -3989,7 +4007,7 @@
           "description": "Key is the taint key that the toleration applies to.Empty means match all taint keys.If the key is empty, operator must be 'Exists'; this combination means to match all values and all keys."
         },
         "operator": {
-          "$ref": "#/definitions/TolerationOperator",
+          "$ref": "#/definitions/K8s.Io.Api.Core.V1.TolerationOperator",
           "description": "Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Default is Equal. Exists is equivalent to wildcard for value, so that a ClusterResourcePlacement can tolerate all taints of a particular category."
         },
         "value": {
@@ -3997,33 +4015,9 @@
           "description": "Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string."
         },
         "effect": {
-          "$ref": "#/definitions/TaintEffect",
+          "$ref": "#/definitions/K8s.Io.Api.Core.V1.TaintEffect",
           "description": "Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule."
         }
-      }
-    },
-    "TolerationOperator": {
-      "type": "string",
-      "description": "The available operator for the Toleration section.",
-      "enum": [
-        "Exists",
-        "Equal"
-      ],
-      "x-ms-enum": {
-        "name": "TolerationOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "Operator that checks for existence."
-          },
-          {
-            "name": "Equal",
-            "value": "Equal",
-            "description": "Operator that checks for equality."
-          }
-        ]
       }
     },
     "UpdateGroup": {

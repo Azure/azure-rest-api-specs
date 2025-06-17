@@ -68,11 +68,11 @@ model FleetManagedNamespaceProperties {
   @doc("The default network policy for the fleet managed namespace.")
   defaultNetworkPolicy?: NetworkPolicy;
 
-  @doc("Action if Kubernetes managed namespace with the same name already exists.")
-  adoptionPolicy?: AdoptionPolicy;
+  @doc("Action if the managed namespace with the same name already exists. Default is Never.")
+  adoptionPolicy?: AdoptionPolicy = "Never";
 
-  @doc("Delete options of a fleet managed namespace.")
-  deletePolicy?: DeletePolicy;
+  @doc("Delete options of a fleet managed namespace. Default is Keep.")
+  deletePolicy?: DeletePolicy = "Keep";
 
   @doc("The profile of the propagation to create the namespace.")
   propagationPolicy?: PropagationPolicy;
@@ -82,7 +82,7 @@ model FleetManagedNamespaceProperties {
   status?: FleetManagedNamespaceStatus;
 }
 
-@doc("The resource quota for a managed namespace.")
+@doc("The resource quota for the managed namespace.")
 model ResourceQuota {
   @doc("The CPU request for the managed namespace.")
   cpuRequest?: string;
@@ -97,7 +97,7 @@ model ResourceQuota {
   memoryLimit?: string;
 }
 
-@doc("The network policy for a managed namespace.")
+@doc("The network policy for the managed namespace.")
 model NetworkPolicy {
   @doc("The ingress policy for the managed namespace.")
   ingress?: PolicyRule;
@@ -120,26 +120,26 @@ union PolicyRule {
   string,
 }
 
-@doc("Action if Kubernetes managed namespace with the same name already exists.")
+@doc("Action if the Namespace with the same name already exists.")
 union AdoptionPolicy {
-  @doc("If k8s managed namespace already exists, do not take over the existing managed namespace to be managed by ARM.")
+  @doc("If the Namespace already exists, do not take over the existing Namespace to be managed by ARM.")
   Never: "Never",
 
-  @doc("If there is an identical managed namespace, take over the existing managed namespace to be managed by ARM.")
+  @doc("If there is an identical Namespace, take over the existing Namespace to be managed by ARM.")
   IfIdentical: "IfIdentical",
 
-  @doc("Always take over the existing managed namespace to be managed by ARM, even if it is not identical.")
+  @doc("Always take over the existing Namespace to be managed by ARM, even if it is not identical.")
   Always: "Always",
 
   string,
 }
 
-@doc("Delete options of a managed namespace.")
+@doc("Delete options for the ARM managed namespace.")
 union DeletePolicy {
-  @doc("Delete ARM resource but keep k8s managed namespace.")
+  @doc("Delete the ARM resource but keep the Namespace.")
   Keep: "Keep",
 
-  @doc("Delete both ARM resource and k8s managed namespace.")
+  @doc("Delete both ARM resource and Namespace.")
   Delete: "Delete",
 
   string,
@@ -175,7 +175,7 @@ union PropagationProfile {
 @doc("The configuration profile for default ClusterResourcePlacement for placement.")
 model PlacementProfile {
   @doc("The default ClusterResourcePlacement policy configuration.")
-  defaultClusterResourcePlacement?: ClusterResourcePlacement;
+  defaultClusterResourcePlacement?: ClusterResourcePlacementSpec;
 }
 
 @doc("The provisioning state of the fleet managed namespace resource")

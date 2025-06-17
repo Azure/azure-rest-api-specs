@@ -1,10 +1,15 @@
+import "./k8s.io/api/core/v1/types.tsp";
+import "./k8s.io/apimachinery/apis/meta/v1/types.tsp";
+
 using TypeSpec.Versioning;
+using K8s.Io.Api.Core.V1;
+using K8s.ApiMachinery.Apis.Meta.V1;
 
 namespace Microsoft.ContainerService;
 
 @added(Versions.v2025_03_02_naar)
-@doc("ClusterResourcePlacement is used to select cluster scoped resources, including built-in resources and custom resources, and placement them onto selected member clusters in a fleet.")
-model ClusterResourcePlacement {
+@doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
+model ClusterResourcePlacementSpec {
   @doc("PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
 }
@@ -30,10 +35,10 @@ model PlacementPolicy {
 @doc("PlacementType identifies the type of placement.")
 union PlacementType {
   @doc("PickAll selects all clusters that match the specified requirements.")
-  PickAll: "PickAll",
+  PickAllPlacementType: "PickAll",
 
   @doc("PickFixed selects a fixed set of clusters")
-  PickFixed: "PickFixed",
+  PickFixedPlacementType: "PickFixed",
 
   string,
 }
@@ -70,49 +75,6 @@ model ClusterSelectorTerm {
 }
 
 @added(Versions.v2025_03_02_naar)
-@doc("A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.")
-model LabelSelector {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("matchLabels is a map of {key,value} pairs.")
-  matchLabels?: Record<string>;
-
-  @doc("matchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  matchExpressions?: LabelSelectorRequirement[];
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.")
-model LabelSelectorRequirement {
-  @doc("key is the label key that the selector applies to.")
-  key: string;
-
-  @doc("operator represents a key's relationship to a set of values.")
-  operator: LabelSelectorOperator;
-
-  @doc("values is an array of string values to be compared using the operator.")
-  values?: string[];
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("A label selector operator is the set of operators that can be used in a selector requirement.")
-union LabelSelectorOperator {
-  @doc("In validates whether the key is in the list of values.")
-  In: "In",
-
-  @doc("NotIn validates whether the key is not in the list of values.")
-  NotIn: "NotIn",
-
-  @doc("Exists validates the existence of the key.")
-  Exists: "Exists",
-
-  @doc("DoesNotExists validates the absence of the key.")
-  DoesNotExist: "DoesNotExist",
-
-  string,
-}
-
-@added(Versions.v2025_03_02_naar)
 @doc("PropertySelector helps user specify property requirements when picking clusters for resource placement.")
 model PropertySelector {
   @doc("MatchExpressions is an array of PropertySelectorRequirements. The requirements are AND'd.")
@@ -137,22 +99,22 @@ model PropertySelectorRequirement {
 @doc("The possible operator values, which describe the relationship between a cluster’s observed value of the given property and the list of values in the matcher.")
 union PropertySelectorOperator {
   @doc("Gt (Greater than): a cluster’s observed value of the given property must be greater than the value in the matcher before it can be picked for resource placement.")
-  Gt: "Gt",
+  PropertySelectorGreaterThan: "Gt",
 
   @doc("Ge (Greater than or equal to): a cluster’s observed value of the given property must be greater than or equal to the value in the matcher before it can be picked for resource placement.")
-  Ge: "Ge",
+  PropertySelectorGreaterThanOrEqualTo: "Ge",
 
   @doc("Eq (Equal to): a cluster’s observed value of the given property must be equal to the value in the matcher before it can be picked for resource placement.")
-  Eq: "Eq",
+  PropertySelectorEqualTo: "Eq",
 
   @doc("Ne (Not equal to): a cluster’s observed value of the given property must be not equal to the value in the matcher before it can be picked for resource placement.")
-  Ne: "Ne",
+  PropertySelectorNotEqualTo: "Ne",
 
   @doc("Lt (Less than): a cluster’s observed value of the given property must be less than the value in the matcher before it can be picked for resource placement.")
-  Lt: "Lt",
+  PropertySelectorLessThan: "Lt",
 
   @doc("Le (Less than or equal to): a cluster’s observed value of the given property must be less than or equal to the value in the matcher before it can be picked for resource placement.")
-  Le: "Le",
+  PropertySelectorLessThanOrEqualTo: "Le",
 
   string,
 }
@@ -171,23 +133,4 @@ model Toleration {
 
   @doc("Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule.")
   effect?: TaintEffect;
-}
-
-@doc("The available operator for the Toleration section.")
-union TolerationOperator {
-  @doc("Operator that checks for existence.")
-  Exists: "Exists",
-
-  @doc("Operator that checks for equality.")
-  Equal: "Equal",
-
-  string,
-}
-
-@doc("The available taint effect for the Toleration section")
-union TaintEffect {
-  @doc("The NoSchedule taint effect.")
-  NoSchedule: "NoSchedule",
-
-  string,
 }
