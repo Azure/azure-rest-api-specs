@@ -8,7 +8,7 @@ using Http;
  * content filter.
  *
  * The APIs defined here are for control plane. The caller (e.g. the AOAI UX) will call https://management.azure.com/batch
- * API and in the request body, there is a feild named "RelativeURL" which indicate the API defined here.
+ * API and in the request body, there is a field named "RelativeURL" which indicate the API defined here.
  * e.g.
  * "RelativeUrl":"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.CognitiveServices/accounts/{account}/raiTopics/{topicName}?api-version=2025-05-01-preview"
  */
