@@ -71,78 +71,81 @@ export async function getCategorizedChangedFiles(options = {}) {
       modifications: /** @type {string[]} */ ([]),
       deletions: /** @type {string[]} */ ([]),
       renames: /** @type {{from: string, to: string}[]} */ ([]),
-      total: 0
+      total: 0,
     };
 
     if (result.trim()) {
       const lines = result.trim().split("\n");
-      
+
       for (const line of lines) {
         const parts = line.split("\t");
         const status = parts[0];
-        
+
         switch (status[0]) {
-          case 'A':
+          case "A":
             categorizedFiles.additions.push(parts[1]);
             break;
-          case 'M':
+          case "M":
             categorizedFiles.modifications.push(parts[1]);
             break;
-          case 'D':
+          case "D":
             categorizedFiles.deletions.push(parts[1]);
             break;
-          case 'R':
+          case "R":
             categorizedFiles.renames.push({
               from: parts[1],
-              to: parts[2]
+              to: parts[2],
             });
             break;
-          case 'C':
+          case "C":
             categorizedFiles.additions.push(parts[2]);
             break;
           default:
             categorizedFiles.modifications.push(parts[1]);
         }
       }
-      
-      categorizedFiles.total = categorizedFiles.additions.length + 
-                              categorizedFiles.modifications.length + 
-                              categorizedFiles.deletions.length + 
-                              categorizedFiles.renames.length;
+
+      categorizedFiles.total =
+        categorizedFiles.additions.length +
+        categorizedFiles.modifications.length +
+        categorizedFiles.deletions.length +
+        categorizedFiles.renames.length;
     }
 
     // Log all changed files by categories
     if (logger) {
       logger.info("Categorized Changed Files:");
-      
+
       if (categorizedFiles.additions.length > 0) {
         logger.info(`  Additions (${categorizedFiles.additions.length}):`);
         for (const file of categorizedFiles.additions) {
           logger.info(`    + ${file}`);
         }
       }
-      
+
       if (categorizedFiles.modifications.length > 0) {
-        logger.info(`  Modifications (${categorizedFiles.modifications.length}):`);
+        logger.info(
+          `  Modifications (${categorizedFiles.modifications.length}):`,
+        );
         for (const file of categorizedFiles.modifications) {
           logger.info(`    M ${file}`);
         }
       }
-      
+
       if (categorizedFiles.deletions.length > 0) {
         logger.info(`  Deletions (${categorizedFiles.deletions.length}):`);
         for (const file of categorizedFiles.deletions) {
           logger.info(`    - ${file}`);
         }
       }
-      
+
       if (categorizedFiles.renames.length > 0) {
         logger.info(`  Renames (${categorizedFiles.renames.length}):`);
         for (const rename of categorizedFiles.renames) {
           logger.info(`    R ${rename.from} -> ${rename.to}`);
         }
       }
-      
+
       logger.info(`  Total: ${categorizedFiles.total} files`);
       logger.info("");
     }
@@ -155,7 +158,7 @@ export async function getCategorizedChangedFiles(options = {}) {
       modifications: /** @type {string[]} */ ([]),
       deletions: /** @type {string[]} */ ([]),
       renames: /** @type {{from: string, to: string}[]} */ ([]),
-      total: 0
+      total: 0,
     };
   }
 }
