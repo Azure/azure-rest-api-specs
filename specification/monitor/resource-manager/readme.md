@@ -45,11 +45,11 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
-  - Microsoft.Insights.Management/2024-03-01-preview/main.tsp
-  - Microsoft.Insights.Management/2024-03-01-preview/models.tsp
+  - ../Microsoft.Insights.Management/2024-03-01-preview/main.tsp
+  - ../Microsoft.Insights.Management/2024-03-01-preview/models.tsp
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
 examples-dir:
-  - Microsoft.Insights.Management/examples
+  - ../Microsoft.Insights.Management/examples
 ```
 
 ### Tag: package-2024-03-01-preview
@@ -58,10 +58,10 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Insights.Management/2024-03-01-preview/main.tsp
-  - Microsoft.Insights.Management/2024-03-01-preview/models.tsp
+  - ../Microsoft.Insights.Management/2024-03-01-preview/main.tsp
+  - ../Microsoft.Insights.Management/2024-03-01-preview/models.tsp
 examples-dir:
-  - Microsoft.Insights.Management/examples
+  - ../Microsoft.Insights.Management/examples
 ```
 
 ### Tag: package-preview-2024-10
