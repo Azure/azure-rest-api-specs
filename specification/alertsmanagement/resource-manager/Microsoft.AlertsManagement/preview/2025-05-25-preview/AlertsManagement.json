@@ -887,6 +887,9 @@
         },
         "egressConfig": {
           "$ref": "#/definitions/egressConfig"
+        },
+        "customProperties": {
+          "$ref": "#/definitions/customProperties"
         }
       }
     },
@@ -1502,6 +1505,13 @@
           "type": "string",
           "description": "Monitor service display name"
         }
+      }
+    },
+    "customProperties": {
+      "type": "object",
+      "description": "Custom properties that can hold any user defined key-value pairs",
+      "additionalProperties": {
+        "type": "string"
       }
     }
   }
