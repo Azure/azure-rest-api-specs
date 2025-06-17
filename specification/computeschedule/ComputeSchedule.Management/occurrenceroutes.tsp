@@ -55,7 +55,7 @@ interface Occurrences {
     CancelOccurrenceRequest,
     ResourceOperationResponse
   >;
-  delay is ArmResourceActionSync<
+  delay is ArmResourceActionAsync<
     Occurrence,
     DelayRequest,
     ResourceOperationResponse
