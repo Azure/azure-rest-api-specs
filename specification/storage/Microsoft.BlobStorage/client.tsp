@@ -101,4 +101,3 @@ model BlobServiceClientParameters {
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.submitBatch, "!rust");
-

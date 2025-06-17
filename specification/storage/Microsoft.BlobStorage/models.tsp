@@ -1189,6 +1189,12 @@ alias SequenceNumberParameter = {
 };
 
 /** The blob content length required parameter. */
+alias BlobContentLengthResponseHeader = {
+  /** The size of the blob in bytes. */
+  @header("x-ms-blob-content-length")
+  blobContentLength?: int64;
+};
+/** The blob content length required parameter. */
 alias BlobContentLengthRequired = {
   /** This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary. */
   @header("x-ms-blob-content-length")
@@ -1427,7 +1433,7 @@ alias SkuNameResponseHeader = {
 alias ContentCrc64ResponseHeader = {
   /** This response header is returned so that the client can check for the integrity of the copied content. */
   @header("x-ms-content-crc64")
-  contentCrc64: bytes;
+  contentCrc64?: bytes;
 };
 
 /** The copy status response header. */
@@ -2161,7 +2167,6 @@ alias LeaseDurationResponseHeader = {
   @header("x-ms-lease-duration")
   duration?: LeaseDuration;
 };
-
 
 /** The lease duration parameter. */
 alias LeaseDurationHeaderParameter = {

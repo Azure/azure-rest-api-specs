@@ -52,7 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/": {
+    "": {
       "get": {
         "operationId": "GetProperties",
         "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
@@ -11176,7 +11176,7 @@
               "x-ms-blob-content-length": {
                 "type": "integer",
                 "format": "int64",
-                "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
+                "description": "The size of the blob in bytes."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -11390,7 +11390,7 @@
               "x-ms-blob-content-length": {
                 "type": "integer",
                 "format": "int64",
-                "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
+                "description": "The size of the blob in bytes."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -15137,7 +15137,7 @@
               "x-ms-blob-content-length": {
                 "type": "integer",
                 "format": "int64",
-                "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
+                "description": "The size of the blob in bytes."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -16146,8 +16146,7 @@
           "description": "The Apache Arrow schema",
           "items": {
             "$ref": "#/definitions/ArrowField"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -16273,8 +16272,7 @@
           "description": "The blob items.",
           "items": {
             "$ref": "#/definitions/BlobItemInternal"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -16290,16 +16288,14 @@
           "description": "The blob items",
           "items": {
             "$ref": "#/definitions/BlobItemInternal"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "blobPrefixes": {
           "type": "array",
           "description": "The blob prefixes.",
           "items": {
             "$ref": "#/definitions/BlobPrefix"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -16638,8 +16634,7 @@
           "description": "Represents the blob tags.",
           "items": {
             "$ref": "#/definitions/BlobTag"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -16704,16 +16699,14 @@
           "description": "The list of committed blocks.",
           "items": {
             "$ref": "#/definitions/Block"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "uncommittedBlocks": {
           "type": "array",
           "description": "The list of uncommitted blocks.",
           "items": {
             "$ref": "#/definitions/Block"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -17096,8 +17089,7 @@
           "description": "The blob segment.",
           "items": {
             "$ref": "#/definitions/FilterBlobItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextMarker": {
           "type": "string",
@@ -17537,8 +17529,7 @@
           "description": "The container segment.",
           "items": {
             "$ref": "#/definitions/ContainerItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "NextMarker": {
           "type": "string",
@@ -17624,16 +17615,14 @@
           "description": "The page ranges.",
           "items": {
             "$ref": "#/definitions/PageRange"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "clearRange": {
           "type": "array",
           "description": "The clear ranges.",
           "items": {
             "$ref": "#/definitions/ClearRange"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextMarker": {
           "type": "string",
@@ -18107,8 +18096,7 @@
           "description": "The CORS properties.",
           "items": {
             "$ref": "#/definitions/CorsRule"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultServiceVersion": {
           "type": "string",

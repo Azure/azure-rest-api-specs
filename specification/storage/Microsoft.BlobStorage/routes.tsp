@@ -1735,7 +1735,7 @@ namespace Storage.Blob {
           PageList & {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
-            ...BlobContentLengthRequired;
+            ...BlobContentLengthResponseHeader;
             ...DateResponseHeader;
           }
         >;
@@ -1773,7 +1773,7 @@ namespace Storage.Blob {
           PageList & {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
-            ...BlobContentLengthRequired;
+            ...BlobContentLengthResponseHeader;
             ...DateResponseHeader;
           }
         >;
@@ -2343,7 +2343,7 @@ namespace Storage.Blob {
 
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
-            ...BlobContentLengthRequired;
+            ...BlobContentLengthResponseHeader;
             ...DateResponseHeaderPrivate;
           }
         >;
