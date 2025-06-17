@@ -117,6 +117,9 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend"]
     reason: Microsoft.AAD is the correct provider name for legacy reasons.
+  - supress: PatchBodyParametersSchema
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}"].patch.parameters[4].schema.properties.properties
+    reason: Properties of a PATCH request body can have default value , property:syncOnPremSamAccountName
 ```
 
 # Code Generation
