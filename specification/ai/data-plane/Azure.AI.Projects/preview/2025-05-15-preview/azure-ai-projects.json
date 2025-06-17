@@ -2369,6 +2369,136 @@
         "evaluators"
       ]
     },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Abstract base model for defining evaluation targets.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationTargetType",
+          "description": "Discriminator that defines the type of the evaluation target."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationTargetFoundryAgent": {
+      "type": "object",
+      "description": "(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "The agent Id."
+        }
+      },
+      "required": [
+        "agentId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgent"
+    },
+    "EvaluationTargetFoundryAgentData": {
+      "type": "object",
+      "description": "(Example of targets, pending PM design) Evaluation target in AI Foundry agent format.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgentData"
+    },
+    "EvaluationTargetFoundryDataset": {
+      "type": "object",
+      "description": "Evaluation target in AI Foundry dataset format.",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset Id."
+        }
+      },
+      "required": [
+        "datasetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryDataset"
+    },
+    "EvaluationTargetSimpleJson": {
+      "type": "object",
+      "description": "Evaluation target in simple JSON format.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The LLM query."
+        },
+        "response": {
+          "type": "string",
+          "description": "The LLM response."
+        },
+        "context": {
+          "type": "string",
+          "description": "The context for the LLM query."
+        },
+        "groundTruth": {
+          "type": "string",
+          "description": "The ground truth for the LLM response."
+        }
+      },
+      "required": [
+        "query",
+        "response"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "simpleJson"
+    },
+    "EvaluationTargetType": {
+      "type": "string",
+      "description": "Allowed types of evaluation targets.",
+      "enum": [
+        "simpleJson",
+        "foundryAgentData",
+        "foundryDataset",
+        "foundryAgent"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "simpleJson",
+            "description": "Evaluation target in simple JSON format with query/response/context/ground-truth."
+          },
+          {
+            "name": "foundryAgentData",
+            "value": "foundryAgentData",
+            "description": "Evaluation target in AI Foundry agent data format."
+          },
+          {
+            "name": "foundryDataset",
+            "value": "foundryDataset",
+            "description": "Evaluation target in AI Foundry dataset."
+          },
+          {
+            "name": "foundryAgent",
+            "value": "foundryAgent",
+            "description": "(Example of targets, not for review) Evaluation AI Foundry agent as a target."
+          }
+        ]
+      }
+    },
     "EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",

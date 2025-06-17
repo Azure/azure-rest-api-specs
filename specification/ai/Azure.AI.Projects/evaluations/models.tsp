@@ -46,6 +46,82 @@ model InputDataset extends InputData {
   id: string;
 }
 
+@doc("Allowed types of evaluation targets.")
+@added(Versions.v2025_05_15_preview)
+union EvaluationTargetType {
+  @doc("Evaluation target in simple JSON format with query/response/context/ground-truth.")
+  simpleJson: "simpleJson";
+  string;
+
+  @doc("Evaluation target in AI Foundry agent data format.")
+  foundryAgentData: "foundryAgentData";
+  string;
+
+  @doc("Evaluation target in AI Foundry dataset.")
+  foundryDataset: "foundryDataset";
+  string;
+
+  @doc("(Example of targets, not for review) Evaluation AI Foundry agent as a target.")
+  foundryAgent: "foundryAgent";
+  string;
+}
+
+@doc("Abstract base model for defining evaluation targets.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTarget {
+  @doc("Discriminator that defines the type of the evaluation target.")
+  type: EvaluationTargetType;
+}
+
+@doc("Evaluation target in simple JSON format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetSimpleJson extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "simpleJson";
+
+  @doc("The LLM query.")
+  query: string;
+
+  @doc("The LLM response.")
+  response: string;
+
+  @doc("The context for the LLM query.")
+  context?: string;
+
+  @doc("The ground truth for the LLM response.")
+  groundTruth?: string;
+}
+
+@doc("Evaluation target in AI Foundry dataset format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryDataset extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryDataset";
+
+  @doc("The dataset Id.")
+  datasetId: string;
+}
+
+@doc("(Example of targets, pending PM design) Evaluation target in AI Foundry agent format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryAgentData extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryAgentData";
+
+  // Placeholder for the future AI Foundry agent data format.
+}
+
+@doc("(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryAgent extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryAgent";
+
+  @doc("The agent Id.")
+  agentId: string;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -57,8 +133,11 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Data for evaluation.")
-  data: InputData;
+  @doc("Deprecated: data for evaluation.")
+  data?: InputData;
+
+  @doc("Specifies the type and configuration of the entity used for this evaluation.")
+  target: EvaluationTarget;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
