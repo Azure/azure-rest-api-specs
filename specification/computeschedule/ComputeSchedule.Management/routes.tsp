@@ -188,7 +188,6 @@ interface ScheduledActions {
     void,
     Occurrence
   >;
-
   // Recurring scheduledaction routes
 }
 
