@@ -38,6 +38,19 @@ directive:
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
 ```
 
+### TypeSpec Settings
+
+```yaml
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "."
+    examples-directory: "Microsoft.Insights.Management/examples"
+```
+
 ### Tag: package-2025-01-01-preview
 
 These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
@@ -54,7 +67,10 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
+  - Microsoft.Insights.Management/2024-03-01-preview/main.tsp
+  - Microsoft.Insights.Management/2024-03-01-preview/models.tsp
+examples-dir:
+  - Microsoft.Insights.Management/examples
 ```
 
 ### Tag: package-preview-2024-10
