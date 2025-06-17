@@ -40,6 +40,19 @@ interface Evaluations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation configuration.")
+  @route("configs")
+  @post
+  createOrUpdateEvalConfig is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation configuration to be created")
+      @body
+      evaluationConfig: EvaluationConfig;
+    },
+    ResourceCreatedResponse<EvaluationConfig>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an agent evaluation run.")
   @route("runs:runAgent")
   @post

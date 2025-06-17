@@ -139,6 +139,9 @@ model Evaluation {
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   target: EvaluationTarget;
 
+  @doc("Configuration Id for the evaluation.")
+  evaluationConfigId?: string;
+
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
 
@@ -157,6 +160,40 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+}
+
+@doc("Continuous Evaluation Specific Configuration Definition")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model ContinuousEvaluationConfig {
+  @doc("Percentage of sampling per hour (0-100).")
+  samplingPercent: float32;
+
+  @doc("Maximum token usage per hour (0 to 1000).")
+  maxHourlyTokenLimit: int32;
+}
+
+@doc("Evaluation Configuration Definition")
+@resource("configs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationConfig {
+  @doc("Identifier of the evaluation configuration.")
+  @key("id")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  id: string;
+
+  @doc("Name of the evaluation configuration.")
+  name: string;
+
+  @doc("Continuous evaluation configuration.")
+  continuousEvaluationConfig: ContinuousEvaluationConfig;
+
+  @doc("Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted.")
+  disableEvaluationRunPersistence?: boolean;
+
+  @doc("Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.")
+  extraEvaluationRunStorageOptions?: Array<unknown>;
 }
 
 @doc("Definition for sampling strategy.")

@@ -796,6 +796,46 @@
         }
       }
     },
+    "/evaluations/configs": {
+      "post": {
+        "operationId": "Evaluations_CreateOrUpdateEvalConfig",
+        "description": "Creates an evaluation configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluationConfig",
+            "in": "body",
+            "description": "Evaluation configuration to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationConfig"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -2026,6 +2066,26 @@
         ]
       }
     },
+    "ContinuousEvaluationConfig": {
+      "type": "object",
+      "description": "Continuous Evaluation Specific Configuration Definition",
+      "properties": {
+        "samplingPercent": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of sampling per hour (0-100)."
+        },
+        "maxHourlyTokenLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum token usage per hour (0 to 1000)."
+        }
+      },
+      "required": [
+        "samplingPercent",
+        "maxHourlyTokenLimit"
+      ]
+    },
     "CosmosDBIndex": {
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
@@ -2326,7 +2386,15 @@
         },
         "data": {
           "$ref": "#/definitions/InputData",
-          "description": "Data for evaluation."
+          "description": "Deprecated: data for evaluation."
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Specifies the type and configuration of the entity used for this evaluation."
+        },
+        "evaluationConfigId": {
+          "type": "string",
+          "description": "Configuration Id for the evaluation."
         },
         "displayName": {
           "type": "string",
@@ -2367,6 +2435,43 @@
         "id",
         "data",
         "evaluators"
+      ]
+    },
+    "EvaluationConfig": {
+      "type": "object",
+      "description": "Evaluation Configuration Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation configuration."
+        },
+        "continuousEvaluationConfig": {
+          "$ref": "#/definitions/ContinuousEvaluationConfig",
+          "description": "Continuous evaluation configuration."
+        },
+        "disableEvaluationRunPersistence": {
+          "type": "boolean",
+          "description": "Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted."
+        },
+        "extraEvaluationRunStorageOptions": {
+          "type": "array",
+          "description": "Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.",
+          "items": {}
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "continuousEvaluationConfig"
       ]
     },
     "EvaluationTarget": {
