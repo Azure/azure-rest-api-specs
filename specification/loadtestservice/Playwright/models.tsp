@@ -103,11 +103,11 @@ model TestRun {
   creatorName: string;
 
   @doc("The test-run config.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   config?: RunConfig;
 
   @doc("The test-run CI Config.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   ciConfig?: CiConfig;
 
   @doc("The test-run summary.")
@@ -118,11 +118,11 @@ model TestRun {
 @doc("The run config.")
 model RunConfig {
   @doc("The framework used for run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   framework: RunFramework;
 
   @doc("The SDK Language used for run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sdkLanguage: SDKLanguage;
 }
 
@@ -143,38 +143,38 @@ union SDKLanguage {
 @doc("The run framework.")
 model RunFramework {
   @doc("The framework name.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name: string;
 
   @doc("The framework version.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   version: string;
 
   @doc("The framework runner name.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   runnerName: string;
 }
 
 @doc("The run CI config.")
 model CiConfig {
   @doc("The CI provider name.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   providerName: string;
 
   @doc("The CI branch.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   branch: string;
 
   @doc("The CI author.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   author: string;
 
   @doc("The CI commit id.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   commitId: string;
 
   @doc("The CI revision URL.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   revisionUrl: string;
 }
 
@@ -192,28 +192,20 @@ model RunSummary {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   numBrowserSessions?: int64;
 
-  @doc("The list of jobs corresponding to the run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  jobs?: Array<string>;
-
-  @doc("The list of projects corresponding to the run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  projects?: Array<string>;
-
-  @doc("The list of tags corresponding to the run.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Array<string>;
+  @doc("The maximum number of browser sessions available for the run.")
+  @visibility(Lifecycle.Read)
+  maxConcurrentBrowserSesssions?: int64;
 
   @doc("The run start time as utcDateTime.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   startTime: utcDateTime;
 
   @doc("The run end time as utcDateTime.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   @doc("The run duration.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   duration?: int64;
 
   @doc("The list of error messages corresponding to the run.")

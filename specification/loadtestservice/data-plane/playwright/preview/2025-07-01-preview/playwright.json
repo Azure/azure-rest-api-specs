@@ -720,7 +720,6 @@
           "description": "The CI provider name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -729,7 +728,6 @@
           "description": "The CI branch.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -738,7 +736,6 @@
           "description": "The CI author.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -747,7 +744,6 @@
           "description": "The CI commit id.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -756,7 +752,6 @@
           "description": "The CI revision URL.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -778,7 +773,6 @@
           "description": "The CI provider name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -787,7 +781,6 @@
           "description": "The CI branch.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -796,7 +789,6 @@
           "description": "The CI author.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -805,7 +797,6 @@
           "description": "The CI commit id.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -814,7 +805,6 @@
           "description": "The CI revision URL.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -871,7 +861,6 @@
           "description": "The framework used for run.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -880,7 +869,6 @@
           "description": "The SDK Language used for run.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -899,7 +887,6 @@
           "description": "The framework used for run.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -908,7 +895,6 @@
           "description": "The SDK Language used for run.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -923,7 +909,6 @@
           "description": "The framework name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -932,7 +917,6 @@
           "description": "The framework version.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -941,7 +925,6 @@
           "description": "The framework runner name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -961,7 +944,6 @@
           "description": "The framework name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -970,7 +952,6 @@
           "description": "The framework version.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -979,7 +960,6 @@
           "description": "The framework runner name.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
@@ -1044,71 +1024,29 @@
             "create"
           ]
         },
-        "jobs": {
-          "type": "array",
-          "description": "The list of jobs corresponding to the run.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "projects": {
-          "type": "array",
-          "description": "The list of projects corresponding to the run.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "The list of tags corresponding to the run.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "maxConcurrentBrowserSesssions": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of browser sessions available for the run.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "The run start time as utcDateTime.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "description": "The run end time as utcDateTime.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "duration": {
           "type": "integer",
           "format": "int64",
           "description": "The run duration.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         },
         "errorMessages": {
           "type": "array",
@@ -1195,7 +1133,6 @@
           "description": "The test-run config.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1204,7 +1141,6 @@
           "description": "The test-run CI Config.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1241,7 +1177,6 @@
           "description": "The test-run config.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1250,7 +1185,6 @@
           "description": "The test-run CI Config.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         }
