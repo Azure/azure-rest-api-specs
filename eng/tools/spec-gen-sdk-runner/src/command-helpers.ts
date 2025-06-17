@@ -263,24 +263,21 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
  * Process the breaking change label artifacts.
  *
  * @param executionReport - The spec-gen-sdk execution report.
- * @returns [flag of lable breaking change, breaking change label].
+ * @returns flag of lable breaking change.
  */
-export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
-  let breakingChangeLabel = "";
+export function getBreakingChangeInfo(executionReport: any): boolean {
   for (const packageInfo of executionReport.packages) {
-    breakingChangeLabel = packageInfo.breakingChangeLabel;
     if (packageInfo.shouldLabelBreakingChange) {
-      return [true, breakingChangeLabel];
+      return true;
     }
   }
-  return [false, breakingChangeLabel];
+  return false;
 }
 
 /**
  * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
  * @param result - The spec-gen-sdk execution result.
- * @param breakingChangeLabel - The breaking change label.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param stagedArtifactsFolder - The staged artifacts folder.
@@ -291,7 +288,6 @@ export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
 export function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
   result: string,
-  breakingChangeLabel: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
   stagedArtifactsFolder: string,
@@ -333,8 +329,6 @@ export function generateArtifact(
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
     setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
-    setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
-    setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
     setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
