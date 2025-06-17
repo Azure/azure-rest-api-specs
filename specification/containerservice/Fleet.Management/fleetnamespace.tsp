@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./helpers.tsp";
-import "./clusterresourceplacement.tsp";
+import "./kubefleet/apis/placement/v1/types.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using KubeFleet.Apis.Placement.V1;
 
 namespace Microsoft.ContainerService;
 
