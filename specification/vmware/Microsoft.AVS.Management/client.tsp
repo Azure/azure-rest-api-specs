@@ -88,6 +88,7 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(ScriptPackageProperties.uri, url, "csharp");
+// @@usage(ScriptCmdlet, Usage.input, "csharp");
 @@alternateType(ScriptCmdletProperties.timeout, duration, "csharp");
 @@alternateType(ScriptExecutionProperties.namedOutputs, unknown, "csharp");
 @@clientName(VirtualMachine, "AvsPrivateCloudClusterVirtualMachine", "csharp");
