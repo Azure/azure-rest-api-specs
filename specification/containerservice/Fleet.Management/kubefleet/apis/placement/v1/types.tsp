@@ -10,7 +10,7 @@ namespace KubeFleet.Apis.Placement.V1;
 
 @doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
 model ClusterResourcePlacementSpec {
-  @doc("PlacementPolicy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
+  @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
   policy?: PlacementPolicy;
 }
 
@@ -22,7 +22,7 @@ model PlacementPolicy {
   @doc("ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is PickFixed.")
   clusterNames?: string[];
 
-  @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll.") // don't forget to update this when we add PickN.
+  @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll.")
   affinity?: Affinity;
 
   @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
