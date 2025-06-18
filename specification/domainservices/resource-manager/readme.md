@@ -25,24 +25,24 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-06-01-preview
+tag: package-preview-2025-06-01
 ```
 
-``` yaml $(tag) == 'package-2025-06-01-preview'
+``` yaml $(tag) == 'package-preview-2025-06-01'
 input-file:
-  - Microsoft.AAD/preview/2025-06-01-preview/domainservices.json
+  - Microsoft.AAD/preview/2025-06-01/domainservices.json
 modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-2025-06-01-preview
+### Tag: package-preview-2025-06-01
 
-These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-06-01-preview'
+```yaml $(tag) == 'package-preview-2025-06-01'
 input-file:
-  - Microsoft.AAD/preview/2025-06-01-preview/domainservices.json
-  - Microsoft.AAD/preview/2025-06-01-preview/oucontainer.json
+  - Microsoft.AAD/preview/2025-06-01/domainservices.json
+  - Microsoft.AAD/preview/2025-06-01/oucontainer.json
 ```
 
 ``` yaml
