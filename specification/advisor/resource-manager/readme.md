@@ -26,9 +26,15 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-11-preview
+tag: package-2024-05
 ```
+## Tag: package-2025-05
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
 
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Advisor/stable/2025-05-31/advisor.json
+```
 ### Tag: package-2024-11-preview
 These settings apply only when `--tag=package-2024-11-preview` is specified on the command line.
 
