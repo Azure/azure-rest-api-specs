@@ -14,6 +14,33 @@ options:
     clear-output-folder: true
     model-namespace: true
     namespace: "Microsoft.Azure.Management.DevTestLabs"
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.devtestlabs"
+    package-name: "azure-mgmt-devtestlabs"
+    payload-flattening-threshold: 2
+    generate-test: true
+    generate-sample: true
+    license-header: MICROSOFT_MIT_NO_VERSION
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-mgmt-devtestlabs"
+    namespace: "com.microsoft.azure.management.devtestlabs"
+    service-name: "DevTestLabs"
+    license-header: MICROSOFT_MIT_NO_CODEGEN
+    payload-flattening-threshold: 1
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-devtestlabs"
+    flavor: azure
+    experimental-extensible-enums: true
+    generate-metadata: true
+    package-details:
+      name: "@azure/arm-devtestlabs"
+  "@azure-tools/typespec-go":
+    module-name: "sdk/resourcemanager/devtestlabs/armdevtestlabs"
+    module: "github.com/Azure/azure-sdk-for-go/{module-name}"
+    license-header: MICROSOFT_MIT_NO_VERSION
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
