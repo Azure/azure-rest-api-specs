@@ -17,6 +17,7 @@ alias ListIndexVersionParameters = {};
 interface Indexes
   extends VersionedOperations<
       Index,
+      InputParameters<Index, "index">,
       ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}
