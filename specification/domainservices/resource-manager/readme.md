@@ -26,6 +26,21 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
+tag: package-preview-2025-06-01
+```
+
+### Tag: package-preview-2025-06-01
+
+These settings apply only when `--tag=package-preview-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01'
+input-file:
+  - Microsoft.AAD/preview/2025-06-01/domainservices.json
+  - Microsoft.AAD/preview/2025-06-01/oucontainer.json
+```
+
+``` yaml
+openapi-type: arm
 tag: package-preview-2025-05-01
 ```
 
