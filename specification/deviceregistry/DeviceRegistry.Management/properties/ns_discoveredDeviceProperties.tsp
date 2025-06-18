@@ -78,13 +78,13 @@ model DiscoveredInboundEndpoints {
   @doc("The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com).")
   address: string;
 
-  @doc("Version associated with device endpoint.")
+  @doc("Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc.")
   version?: string;
 
   @doc("List of supported authentication methods supported by device for Inbound connections.")
   supportedAuthenticationMethods?: AuthenticationMethod[];
 
-  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF).")
+  @doc("Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF).")
   additionalConfiguration?: string;
 
   @doc("The timestamp (in UTC) when the endpoint was discovered.")

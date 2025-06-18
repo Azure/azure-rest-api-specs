@@ -4724,7 +4724,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4735,7 +4735,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         },
         "lastUpdatedOn": {
           "type": "string",
@@ -4762,7 +4762,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "supportedAuthenticationMethods": {
           "type": "array",
@@ -4773,7 +4773,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         },
         "lastUpdatedOn": {
           "type": "string",
@@ -5183,7 +5183,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "authentication": {
           "$ref": "#/definitions/HostAuthentication",
@@ -5195,7 +5195,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         }
       },
       "required": [
@@ -5217,7 +5217,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Version associated with device endpoint."
+          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
         },
         "authentication": {
           "$ref": "#/definitions/HostAuthenticationUpdate",
@@ -5229,7 +5229,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
         }
       }
     },
@@ -6135,7 +6135,7 @@
         },
         "dataSource": {
           "type": "string",
-          "description": "Name of the data source within a dataset."
+          "description": "Reference to a data source for a given dataset."
         },
         "typeRef": {
           "type": "string",
@@ -6253,7 +6253,7 @@
         },
         "enabled": {
           "type": "boolean",
-          "description": "Indicates if the resource and identity are enabled or not. A disabled device cannot authenticate with Microsoft Entra ID.",
+          "description": "Indicates if the resource is enabled or not.",
           "default": true
         },
         "externalDeviceId": {
@@ -6730,7 +6730,7 @@
         },
         "dataSource": {
           "type": "string",
-          "description": "Name of the data source within a dataset."
+          "description": "Reference to a data source for a given dataset."
         },
         "typeRef": {
           "type": "string",
