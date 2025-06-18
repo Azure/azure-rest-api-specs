@@ -3,7 +3,7 @@
   "info": {
     "title": "Domain Services Resource Provider",
     "description": "The AAD Domain Services API.",
-    "version": "2025-06-01"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1006,6 +1006,19 @@
           "description": "A flag to determine whether or not ChannelBinding is enabled or disabled.",
           "x-ms-enum": {
             "name": "ChannelBinding",
+            "modelAsString": true
+          }
+        },
+        "syncOnPremSamAccountName": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "description": "A flag to determine whether or not SyncOnPremSamAccountName is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncOnPremSamAccountName",
             "modelAsString": true
           }
         }
