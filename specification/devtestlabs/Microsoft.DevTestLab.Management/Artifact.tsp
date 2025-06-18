@@ -13,11 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
+@parentResource(ArtifactSource)
 model Artifact
   is Azure.ResourceManager.TrackedResource<ArtifactProperties, false> {
   ...ResourceNameParameter<
     Resource = Artifact,
-    KeyName = "name",
     SegmentName = "artifacts",
     NamePattern = ""
   >;

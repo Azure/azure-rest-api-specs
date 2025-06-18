@@ -13,11 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
+@parentResource(Lab)
 model Schedule
   is Azure.ResourceManager.TrackedResource<ScheduleProperties, false> {
   ...ResourceNameParameter<
     Resource = Schedule,
-    KeyName = "name",
     SegmentName = "schedules",
     NamePattern = ""
   >;

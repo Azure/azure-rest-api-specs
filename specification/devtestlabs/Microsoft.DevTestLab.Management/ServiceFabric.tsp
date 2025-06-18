@@ -13,11 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A Service Fabric.
  */
+@parentResource(User)
 model ServiceFabric
   is Azure.ResourceManager.TrackedResource<ServiceFabricProperties, false> {
   ...ResourceNameParameter<
     Resource = ServiceFabric,
-    KeyName = "name",
     SegmentName = "servicefabrics",
     NamePattern = ""
   >;

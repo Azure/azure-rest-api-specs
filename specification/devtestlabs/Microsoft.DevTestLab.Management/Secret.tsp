@@ -13,10 +13,10 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
+@parentResource(User)
 model Secret is Azure.ResourceManager.TrackedResource<SecretProperties, false> {
   ...ResourceNameParameter<
     Resource = Secret,
-    KeyName = "name",
     SegmentName = "secrets",
     NamePattern = ""
   >;

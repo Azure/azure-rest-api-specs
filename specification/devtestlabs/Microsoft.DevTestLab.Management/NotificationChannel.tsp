@@ -6,11 +6,13 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 
 namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
+@parentResource(Lab)
 model NotificationChannel
   is Azure.ResourceManager.TrackedResource<
     NotificationChannelProperties,
@@ -18,7 +20,6 @@ model NotificationChannel
   > {
   ...ResourceNameParameter<
     Resource = NotificationChannel,
-    KeyName = "name",
     SegmentName = "notificationchannels",
     NamePattern = ""
   >;

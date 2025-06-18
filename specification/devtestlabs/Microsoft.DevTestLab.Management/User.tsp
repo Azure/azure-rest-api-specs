@@ -13,10 +13,10 @@ namespace Microsoft.DevTestLab;
 /**
  * Profile of a lab user.
  */
+@parentResource(Lab)
 model User is Azure.ResourceManager.TrackedResource<UserProperties> {
   ...ResourceNameParameter<
     Resource = User,
-    KeyName = "name",
     SegmentName = "users",
     NamePattern = ""
   >;

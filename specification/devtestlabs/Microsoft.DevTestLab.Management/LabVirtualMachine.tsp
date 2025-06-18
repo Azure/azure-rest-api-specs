@@ -13,6 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
+@parentResource(Lab)
 model LabVirtualMachine
   is Azure.ResourceManager.TrackedResource<LabVirtualMachineProperties, false> {
   ...ResourceNameParameter<

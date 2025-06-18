@@ -16,7 +16,7 @@ namespace Microsoft.DevTestLab;
 model Lab is Azure.ResourceManager.TrackedResource<LabProperties> {
   ...ResourceNameParameter<
     Resource = Lab,
-    KeyName = "name",
+    KeyName = "devtestLabName",
     SegmentName = "labs",
     NamePattern = ""
   >;
