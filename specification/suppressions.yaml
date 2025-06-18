@@ -4,7 +4,8 @@
 - tool: TypeSpecValidation
   rules: [Compile]
   sub-rules: [ExtraSwagger]
-  reason: Extra swaggers left behind when versions were  paths:
+  reason: Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
     - ai/DocumentIntelligence/tspconfig.yaml
     - ai/Face/tspconfig.yaml
     - ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml
@@ -16,8 +17,7 @@
     - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
     - dell/Dell.Storage.Management/tspconfig.yaml
     - devcenter/DevCenter/tspconfig.yaml
-    - trustedsigning/TrustedSigning/tspconfig.yamlm *.tsp files
-  paths:
+    - trustedsigning/TrustedSigning/tspconfig.yaml
     - ai/data-plane/DocumentIntelligence/preview/2023-10-31-preview/DocumentIntelligence.json
     - ai/data-plane/DocumentIntelligence/preview/2024-02-29-preview/DocumentIntelligence.json
     - ai/data-plane/DocumentIntelligence/preview/2024-07-31-preview/DocumentIntelligence.json
@@ -46,7 +46,6 @@
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
-    - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
     - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
     - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/certificates.json
     - keyvault/data-plane/Microsoft.KeyVault/preview/7.6-preview.1/keys.json
@@ -253,7 +252,24 @@
     - migrate/AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml
     - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml
     - migrate/AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml
-    
+- tool: TypeSpecValidation
+  reason: Remove specs contain incorrect or missing emitter options or parameters
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+  paths: 
+    - liftrastronomer/Astronomer.Astro.Management/tspconfig.yaml
+    - scvmm/ScVmm.Management/tspconfig.yaml
+    - sphere/Sphere.Management/tspconfig.yaml
+    - verifiedid/Microsoft.VerifiedId.Management/tspconfig.yaml
+    - workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml
+    - workloads/Workloads.SAPMonitor.Management/tspconfig.yaml
+    - appcomplianceautomation/AppComplianceAutomation.Management/tspconfig.yaml
+    - liftrqumulo/Qumulo.Storage.Management/tspconfig.yaml
+    - machinelearningservices/AzureAI.Assets/tspconfig.yaml
+    - monitor/Microsoft.Monitor.Management/tspconfig.yaml
+    - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
+
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -297,12 +313,6 @@
     - options.@azure-tools/typespec-python.generate-test
     - options.@azure-tools/typespec-python.package-dir
   paths: [app/Microsoft.App.DynamicSessions/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [appcomplianceautomation/AppComplianceAutomation.Management/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -482,18 +492,8 @@
     - options.@azure-tools/typespec-go.flavor
   paths: [keyvault/Security.KeyVault.Settings/tspconfig.yaml]
 
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [liftrastronomer/Astronomer.Astro.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [liftrqumulo/Qumulo.Storage.Management/tspconfig.yaml]
+
+
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -521,20 +521,8 @@
     - options.@azure-tools/typespec-ts.package-details.name
     - options.@azure-tools/typespec-ts.package-dir
   paths: [machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [machinelearningservices/AzureAI.Assets/tspconfig.yaml]
 
 
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [monitor/Microsoft.Monitor.Management/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -560,12 +548,6 @@
     - options.@azure-tools/typespec-python.generate-test
   paths: [playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml]
 
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml]
 
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
@@ -607,21 +589,9 @@
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [scvmm/ScVmm.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
     - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-go.generate-samples
   paths: [servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [sphere/Sphere.Management/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -631,12 +601,6 @@
     - options.@azure-tools/typespec-python.generate-test
   paths: [translation/Azure.AI.DocumentTranslation/tspconfig.yaml]
 
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [verifiedid/Microsoft.VerifiedId.Management/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -653,15 +617,3 @@
     - options.@azure-tools/typespec-ts.package-details.name
     - options.@azure-tools/typespec-ts.package-dir
   paths: [widget/resource-manager/Microsoft.Widget/Widget/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths: [workloads/Workloads.SAPMonitor.Management/tspconfig.yaml]
