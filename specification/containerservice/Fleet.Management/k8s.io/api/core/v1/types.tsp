@@ -1,4 +1,4 @@
-namespace K8s.Io.Api.Core.V1;
+namespace Core.V1;
 
 @doc("TolerationOperator is the set of operators that can be used in a toleration.")
 union TolerationOperator {

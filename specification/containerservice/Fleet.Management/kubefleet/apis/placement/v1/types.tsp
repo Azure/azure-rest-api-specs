@@ -3,10 +3,10 @@ import "../../../../k8s.io/api/core/v1/types.tsp";
 import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
 
 using TypeSpec.Versioning;
-using K8s.Io.Api.Core.V1;
-using K8s.ApiMachinery.Apis.Meta.V1;
+using Core.V1;
+using Meta.V1;
 
-namespace KubeFleet.Apis.Placement.V1;
+namespace Placement.V1;
 
 @doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
 model ClusterResourcePlacementSpec {

@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
-using KubeFleet.Apis.Placement.V1;
+using Placement.V1;
 
 namespace Microsoft.ContainerService;
 
