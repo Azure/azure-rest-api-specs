@@ -41,7 +41,7 @@ jobs:
 
       # TODO: Use variables for triggering repository instead of hardcoding
       - script: |
-          npm exec --no -- api-doc-preview --output AzureRestPreview
+          npm exec --no -- api-doc-preview --output $(System.DefaultWorkingDirectory)/AzureRestPreview
         displayName: 'Generate Swagger API documentation preview'
         workingDirectory: .github/shared
 
