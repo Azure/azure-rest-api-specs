@@ -27,6 +27,49 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
+      "post": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Unsuspend",
+        "summary": "Unsuspend Domain Service",
+        "description": "Unsuspend a suspended Domain Service resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain service resumed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed, including cases where the domain service could not be resumed (not in a suspended state, not eligible, not found, or other errors).",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsuspend Domain Service": {
+            "$ref": "./examples/UnsuspendDomainService.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AAD/operations": {
       "get": {
         "tags": [
@@ -979,7 +1022,6 @@
             "modelAsString": true
           }
         }
-      }
     },
     "ConfigDiagnostics": {
       "description": "Configuration Diagnostics",
@@ -1092,6 +1134,16 @@
       },
       "description": "An error response from the Domain Services."
     },
+    "UnsuspendDomainServiceResponse": {
+      "description": "Response for successful unsuspend of a domain service.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Domain service resumed successfully."
+        }
+      }
+    },
     "OperationEntityListResult": {
       "description": "The list of domain service operation response.",
       "type": "object",
@@ -1183,6 +1235,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the domain service.",
+      "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$",
       "x-ms-parameter-location": "method"
     }
   }
