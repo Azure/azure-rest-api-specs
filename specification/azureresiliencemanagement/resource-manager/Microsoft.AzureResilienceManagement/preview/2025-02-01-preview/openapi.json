@@ -5187,15 +5187,7 @@
           "$ref": "#/definitions/JobExtendedInfo",
           "description": "Additional information about the job."
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation"
-      ]
+      }
     },
     "ChaosExperimentProperties": {
       "type": "object",
@@ -5235,8 +5227,7 @@
         "subscription",
         "region",
         "identity",
-        "chaosExperimentIdentityForFaults",
-        "chaosExperimentId"
+        "chaosExperimentIdentityForFaults"
       ]
     },
     "ChaosExperimentPropertiesUpdate": {
@@ -5509,17 +5500,6 @@
       },
       "discriminator": "jobType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "parentJobId",
-        "parentJobTaskId",
-        "parentJobTaskName",
-        "parentJobResourceId",
-        "parentJobRetryAttempt",
         "jobType"
       ]
     },
@@ -5617,10 +5597,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "jobId"
-      ]
+      }
     },
     "DrillAttestation": {
       "type": "string",
@@ -5815,16 +5792,8 @@
       },
       "discriminator": "drillType",
       "required": [
-        "sgId",
         "roPlanProperties",
         "chaosExperimentProperties",
-        "executionState",
-        "readinessState",
-        "rbacSetupMode",
-        "attentionReason",
-        "systemMetadata",
-        "lastRunProperties",
-        "lastSyncTime",
         "drillType"
       ]
     },
@@ -6027,12 +5996,7 @@
       "required": [
         "resourceId",
         "resourceType",
-        "inclusionState",
-        "roInclusionState",
-        "readinessState",
-        "faultState",
-        "faultProperties",
-        "haStatus"
+        "inclusionState"
       ]
     },
     "DrillResourceReadinessState": {
@@ -6133,10 +6097,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "jobId"
-      ]
+      }
     },
     "DrillRunAddNotesRequest": {
       "type": "object",
@@ -6157,12 +6118,7 @@
           "description": "System generated Object Id of the notes author.",
           "readOnly": true
         }
-      },
-      "required": [
-        "notes",
-        "timestamp",
-        "author"
-      ]
+      }
     },
     "DrillRunChildJob": {
       "type": "object",
@@ -6337,15 +6293,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "drillUrl",
-        "metricValue",
-        "drillMode",
-        "attestation",
-        "notes",
-        "supportedVerbsForStage",
-        "currentActiveOperationId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/JobProperties"
@@ -6768,9 +6715,7 @@
         }
       },
       "required": [
-        "resourceId",
-        "tAndcAssignmentError",
-        "rbacAssignmentError"
+        "resourceId"
       ]
     },
     "FailoverDirectionTypes": {
@@ -6914,11 +6859,7 @@
           "$ref": "#/definitions/CustomFaultDetails",
           "description": "Custom Fault Details selected by user"
         }
-      },
-      "required": [
-        "availableFaults",
-        "defaultFault"
-      ]
+      }
     },
     "GoalAssignment": {
       "type": "object",
@@ -7464,10 +7405,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "errorCode"
-      ]
+      }
     },
     "JobExecutionDetails": {
       "type": "object",
@@ -7500,13 +7438,7 @@
           "$ref": "#/definitions/JobErrorInfo",
           "description": "Details of any errors that occurred during the execution of this job."
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration"
-      ]
+      }
     },
     "JobExtendedInfo": {
       "type": "object",
@@ -7526,11 +7458,7 @@
           "description": "Non localized error message on job execution.",
           "readOnly": true
         }
-      },
-      "required": [
-        "tasksList",
-        "dynamicErrorMessage"
-      ]
+      }
     },
     "JobProperties": {
       "type": "object",
@@ -7599,14 +7527,7 @@
       },
       "discriminator": "jobType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "jobType",
-        "triggeredBy"
+        "jobType"
       ]
     },
     "JobResourceProperties": {
@@ -7685,15 +7606,6 @@
       },
       "discriminator": "jobResourceType",
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "resourceId",
-        "operation",
-        "jobId",
-        "taskId",
-        "taskName",
         "jobResourceType"
       ]
     },
@@ -7777,10 +7689,6 @@
         }
       },
       "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
         "retryAttempt"
       ]
     },
@@ -7914,16 +7822,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "duration",
-        "taskId",
-        "taskName",
-        "subTasksList"
-      ]
+      }
     },
     "JobTriggeredBy": {
       "type": "string",
@@ -8018,10 +7917,7 @@
           "description": "User Comment",
           "readOnly": true
         }
-      },
-      "required": [
-        "commentTime"
-      ]
+      }
     },
     "LastRunProperties": {
       "type": "object",
@@ -8049,13 +7945,7 @@
           "description": "Attestation state of the last run of this Drill.",
           "readOnly": true
         }
-      },
-      "required": [
-        "lastRunTime",
-        "lastRunState",
-        "lastRunDuration",
-        "lastRunAttestation"
-      ]
+      }
     },
     "ManagedOnBehalfOfConfiguration": {
       "type": "object",
@@ -8069,10 +7959,7 @@
           },
           "readOnly": true
         }
-      },
-      "required": [
-        "moboBrokerResources"
-      ]
+      }
     },
     "MarkAsCompleteRequest": {
       "type": "object",
@@ -8100,10 +7987,7 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "supportedVerbsForStage"
-      ]
+      }
     },
     "MetricsProperties": {
       "type": "object",
@@ -8194,10 +8078,7 @@
           "description": "The fully qualified resource ID of the MoboBroker resource.\nExample: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
           "readOnly": true
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "NotQualifiedReasons": {
       "type": "string",
@@ -8974,8 +8855,7 @@
       },
       "required": [
         "lastExecutedAt",
-        "operationStatus",
-        "recoveryTimeActual"
+        "operationStatus"
       ]
     },
     "RecoveryPlanListResult": {
@@ -9069,7 +8949,6 @@
       },
       "required": [
         "planType",
-        "planState",
         "planDescription",
         "recoveryGroupsSetting"
       ]
@@ -9275,10 +9154,6 @@
         }
       },
       "required": [
-        "resourceId",
-        "needsAttention",
-        "protectionStatus",
-        "resourceProtectionSolutions",
         "selectedProtectionSolutionType"
       ]
     },
@@ -9627,9 +9502,6 @@
       },
       "required": [
         "protectionSolutionType",
-        "protectionStatus",
-        "resourceId",
-        "activeLocation",
         "isAutoFailover"
       ]
     },
@@ -9853,9 +9725,7 @@
         }
       },
       "required": [
-        "identity",
-        "roPlanId",
-        "roResourceExcludedCount"
+        "identity"
       ]
     },
     "RoPlanPropertiesUpdate": {
@@ -10248,9 +10118,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "vmsPresent"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DrillProperties"
