@@ -642,6 +642,9 @@
           },
           "Create or update a simple Gallery Image Version with Direct Drive replicas": {
             "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithAdditionalReplicaSets.json"
+          },
+          "Create or update a simple Gallery Image Version with StorageAccountStrategy and regional StorageAccountType override.": {
+            "$ref": "./examples/galleryExamples/GalleryImageVersion_Create_WithStorageAccountStrategy.json"
           }
         }
       },
@@ -3254,7 +3257,7 @@
         },
         "storageAccountType": {
           "type": "string",
-          "description": "Specifies the storage account type to be used to store the image. This property is not updatable.",
+          "description": "Specifies the storage account type to be used to store the image. Cannot be specified along with storageAccountStrategy. This property is not updatable.",
           "enum": [
             "Standard_LRS",
             "Standard_ZRS",
@@ -3264,6 +3267,28 @@
           "x-ms-enum": {
             "name": "StorageAccountType",
             "modelAsString": true
+          }
+        },
+        "storageAccountStrategy": {
+          "type": "string",
+          "description": "Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.",
+          "enum": [
+            "PreferStandard_ZRS",
+            "DefaultStandard_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAccountStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PreferStandard_ZRS",
+                "description": "Choose Standard_ZRS storage if the region supports it, else choose Standard_LRS storage, unless overridden by specifying regional storageAccountType. If no storageAccountStrategy is specified, this is the default strategy (from API version 2025-03-03 onwards)."
+              },
+              {
+                "value": "DefaultStandard_LRS",
+                "description": "Choose Standard_LRS storage unless overridden by specifying regional storageAccountType."
+              }
+            ]
           }
         },
         "replicationMode": {
