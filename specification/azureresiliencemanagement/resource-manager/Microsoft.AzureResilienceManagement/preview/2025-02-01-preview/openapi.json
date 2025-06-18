@@ -96,7 +96,7 @@
       "name": "ChaosJobChildJobs"
     },
     {
-      "name": "UnifiedResiliencyItems"
+      "name": "UnifiedResilienceItems"
     }
   ],
   "paths": {
@@ -4790,13 +4790,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResilienceItems": {
       "get": {
-        "operationId": "UnifiedResiliencyItems_List",
+        "operationId": "UnifiedResilienceItems_List",
         "tags": [
-          "UnifiedResiliencyItems"
+          "UnifiedResilienceItems"
         ],
-        "description": "List UnifiedResiliencyItem resources by tenant",
+        "description": "List UnifiedResilienceItem resources by tenant",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -4815,7 +4815,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UnifiedResiliencyItemListResult"
+              "$ref": "#/definitions/UnifiedResilienceItemListResult"
             }
           },
           "default": {
@@ -4826,8 +4826,8 @@
           }
         },
         "x-ms-examples": {
-          "UnifiedResiliencyItems_List_MaximumSet": {
-            "$ref": "./examples/UnifiedResiliencyItems_List_MaximumSet_Gen.json"
+          "UnifiedResilienceItems_List_MaximumSet": {
+            "$ref": "./examples/UnifiedResilienceItems_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -4835,13 +4835,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResiliencyItems/{unifiedResiliencyItemName}": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/unifiedResilienceItems/{unifiedResilienceItemName}": {
       "get": {
-        "operationId": "UnifiedResiliencyItems_Get",
+        "operationId": "UnifiedResilienceItems_Get",
         "tags": [
-          "UnifiedResiliencyItems"
+          "UnifiedResilienceItems"
         ],
-        "description": "Get a UnifiedResiliencyItem",
+        "description": "Get a UnifiedResilienceItem",
         "parameters": [
           {
             "$ref": "#/parameters/ServiceGroupBaseParameters"
@@ -4850,9 +4850,9 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "unifiedResiliencyItemName",
+            "name": "unifiedResilienceItemName",
             "in": "path",
-            "description": "The name of the unified resiliency item.",
+            "description": "The name of the unified resilience item.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -4862,7 +4862,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UnifiedResiliencyItem"
+              "$ref": "#/definitions/UnifiedResilienceItem"
             }
           },
           "default": {
@@ -4873,8 +4873,8 @@
           }
         },
         "x-ms-examples": {
-          "UnifiedResiliencyItems_Get_MaximumSet": {
-            "$ref": "./examples/UnifiedResiliencyItems_Get_MaximumSet_Gen.json"
+          "UnifiedResilienceItems_Get_MaximumSet": {
+            "$ref": "./examples/UnifiedResilienceItems_Get_MaximumSet_Gen.json"
           }
         }
       }
@@ -7103,19 +7103,19 @@
           "format": "arm-id",
           "description": "Arm Id of resource under the SG for which the extension resource is maintained."
         },
-        "excludedFromHighAvailabilityGoals": {
+        "highAvailabilityGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for high availability recommendation."
         },
-        "manuallyAttestedForHighAvailability": {
+        "highAvailabilityAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
-        "excludedFromDisasterRecoveryGoals": {
+        "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
         },
-        "manuallyAttestedForDisasterRecovery": {
+        "disasterRecoveryAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
@@ -7137,10 +7137,10 @@
       },
       "required": [
         "resourceArmId",
-        "excludedFromHighAvailabilityGoals",
-        "manuallyAttestedForHighAvailability",
-        "excludedFromDisasterRecoveryGoals",
-        "manuallyAttestedForDisasterRecovery"
+        "highAvailabilityGoalParticipation",
+        "highAvailabilityAttestationStatus",
+        "disasterRecoveryGoalParticipation",
+        "disasterRecoveryAttestationStatus"
       ]
     },
     "GoalTemplate": {
@@ -7292,7 +7292,7 @@
     },
     "GoalsData": {
       "type": "object",
-      "description": "Definition of goals data in unified resiliency item.",
+      "description": "Definition of goals data in unified resilience item.",
       "properties": {
         "goalTemplateId": {
           "type": "string",
@@ -7306,26 +7306,26 @@
         },
         "regionalRpoInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RPO set in resiliency goal in minutes."
+          "description": "Regional RPO set in resilience goal in minutes."
         },
         "regionalRpaInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RPA for the service group in minutes."
         },
         "regionalRpoStatus": {
-          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         },
         "regionalRtoInMinutes": {
           "$ref": "#/definitions/IsoDuration",
-          "description": "Regional RTO set in resiliency goal in minutes."
+          "description": "Regional RTO set in resilience goal in minutes."
         },
         "regionalRtaInMinutes": {
           "$ref": "#/definitions/IsoDuration",
           "description": "Computed RTA for the service group in minutes."
         },
         "regionalRtoStatus": {
-          "$ref": "#/definitions/ResiliencyHealthStatus",
+          "$ref": "#/definitions/ResilienceHealthStatus",
           "description": "Regional RPO status of the service group."
         }
       },
@@ -8427,11 +8427,11 @@
     },
     "RecommendationsData": {
       "type": "object",
-      "description": "Definition of recommendations data in unified resiliency item.",
+      "description": "Definition of recommendations data in unified resilience item.",
       "properties": {
         "highAvailability": {
           "$ref": "#/definitions/RecommendationsHighAvailabilityData",
-          "description": "The high availability section of resiliency recommendation."
+          "description": "The high availability section of resilience recommendation."
         }
       },
       "required": [
@@ -8440,7 +8440,7 @@
     },
     "RecommendationsHighAvailabilityData": {
       "type": "object",
-      "description": "Definition of recommendation data related to high availability in unified resiliency item.",
+      "description": "Definition of recommendation data related to high availability in unified resilience item.",
       "properties": {
         "includedResourceCount": {
           "type": "integer",
@@ -9377,16 +9377,16 @@
         ]
       }
     },
-    "ResiliencyHealthStatus": {
+    "ResilienceHealthStatus": {
       "type": "string",
-      "description": "enum for Resiliency health status.",
+      "description": "enum for Resilience health status.",
       "enum": [
         "NotEvaluated",
         "Unhealthy",
         "Healthy"
       ],
       "x-ms-enum": {
-        "name": "ResiliencyHealthStatus",
+        "name": "ResilienceHealthStatus",
         "modelAsString": true,
         "values": [
           {
@@ -10029,12 +10029,12 @@
         ]
       }
     },
-    "UnifiedResiliencyItem": {
+    "UnifiedResilienceItem": {
       "type": "object",
-      "description": "A unified resiliency item represents a computed and aggregated resilience information of Azure Applications.",
+      "description": "A unified resilience item represents a computed and aggregated resilience information of Azure Applications.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UnifiedResiliencyItemProperties",
+          "$ref": "#/definitions/UnifiedResilienceItemProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -10044,15 +10044,15 @@
         }
       ]
     },
-    "UnifiedResiliencyItemListResult": {
+    "UnifiedResilienceItemListResult": {
       "type": "object",
-      "description": "The response of a UnifiedResiliencyItem list operation.",
+      "description": "The response of a UnifiedResilienceItem list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UnifiedResiliencyItem items on this page",
+          "description": "The UnifiedResilienceItem items on this page",
           "items": {
-            "$ref": "#/definitions/UnifiedResiliencyItem"
+            "$ref": "#/definitions/UnifiedResilienceItem"
           }
         },
         "nextLink": {
@@ -10065,9 +10065,9 @@
         "value"
       ]
     },
-    "UnifiedResiliencyItemProperties": {
+    "UnifiedResilienceItemProperties": {
       "type": "object",
-      "description": "Definition of unified resiliency item property.",
+      "description": "Definition of unified resilience item property.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -10076,7 +10076,7 @@
         },
         "goals": {
           "$ref": "#/definitions/GoalsData",
-          "description": "Computed and copied data of resiliency goals."
+          "description": "Computed and copied data of resilience goals."
         },
         "recommendations": {
           "$ref": "#/definitions/RecommendationsData",
