@@ -84,7 +84,7 @@ model DiscoveredInboundEndpoints {
   @doc("List of supported authentication methods supported by device for Inbound connections.")
   supportedAuthenticationMethods?: AuthenticationMethod[];
 
-  @doc("Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF).")
+  @doc("Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF).")
   additionalConfiguration?: string;
 
   @doc("The timestamp (in UTC) when the endpoint was discovered.")
