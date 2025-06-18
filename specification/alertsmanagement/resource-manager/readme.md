@@ -69,7 +69,6 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
   - Microsoft.AlertsManagement/preview/2021-01-01-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
@@ -117,7 +116,6 @@ input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
   - Microsoft.AlertsManagement/preview/2021-01-01-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
   - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
