@@ -96,7 +96,7 @@ export interface Context {
   localSpecRepoPath: string;
   workingFolder: string;
   logFileFolder: string;
-  swaggerDir: string;
+  swaggerDirs: string[];
   baseBranch: string;
   headCommit: string;
   runType: BreakingChangesCheckType;

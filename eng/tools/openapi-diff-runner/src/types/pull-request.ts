@@ -66,9 +66,11 @@ export const createPullRequestProperties = async (
 
   if (!branches.all.includes(sourceBranch)) {
     await originGitRepository.branch([sourceBranch]);
+    console.log(`finish creating source branch ${sourceBranch}`);
   }
   if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
     await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
+    console.log(`finish creating base branch ${baseBranch}`);
   }
 
   if (!branches.all.includes(context.prTargetBranch)) {
@@ -76,6 +78,7 @@ export const createPullRequestProperties = async (
       context.prTargetBranch,
       `remotes/origin/${context.prTargetBranch}`,
     ]);
+    console.log(`finish creating target branch ${context.prTargetBranch}`);
   }
 
   // we have to clone the repository because we need to switch branches.

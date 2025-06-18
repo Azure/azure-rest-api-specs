@@ -20,9 +20,7 @@ export function initContext(): Context {
   const localSpecRepoPath: string = path.resolve(
     getArgumentValue(args, "--srp", path.join(__dirname, "..")),
   );
-  const swaggerDir: string = path.resolve(
-    getArgumentValue(args, "--sd", path.join(localSpecRepoPath, "specification")),
-  );
+  const swaggerDirs: string[] = ["specification", "dev"];
   const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
   const prNumber: string = getArgumentValue(args, "--number", "");
   const workingFolder: string = path.join(localSpecRepoPath, "..");
@@ -38,7 +36,7 @@ export function initContext(): Context {
   return {
     localSpecRepoPath,
     workingFolder,
-    swaggerDir,
+    swaggerDirs,
     logFileFolder,
     baseBranch: getArgumentValue(args, "--bb", "main"),
     runType: getArgumentValue(args, "--rt", "SameVersion") as BreakingChangesCheckType,
