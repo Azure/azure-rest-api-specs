@@ -2819,11 +2819,8 @@
           "RaiTopics"
         ],
         "operationId": "RaiTopics_CreateOrUpdate",
-        "description": "Update the state of specified blocklist associated with the Azure OpenAI account.",
+        "description": "Update the state of specified topic associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "PutRaiBlocklist": {
-            "$ref": "./examples/PutRaiBlocklist.json"
-          }
         },
         "parameters": [
           {
@@ -2848,7 +2845,7 @@
             "schema": {
               "$ref": "#/definitions/RaiTopic"
             },
-            "description": "Properties describing the custom blocklist."
+            "description": "Properties describing the custom topic."
           }
         ],
         "responses": {
@@ -2879,8 +2876,6 @@
         "operationId": "RaiTopics_Delete",
         "description": "Deletes the specified custom topic associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "DeleteRaiBlocklist": {
-          }
         },
         "parameters": [
           {
@@ -2952,9 +2947,6 @@
         "responses": {
           "200": {
             "description": "Successfully retrieved topics.",
-            "schema": {
-              "$ref": "#/definitions/RaiTopicResult"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
