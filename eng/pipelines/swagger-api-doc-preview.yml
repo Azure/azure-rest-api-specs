@@ -34,6 +34,9 @@ jobs:
               Commitish: refs/heads/doc-preview-migration-test
               WorkingDirectory: AzureRestPreview
 
+      - pwsh: Get-ChildItem *
+        workingDirectory: AzureRestPreview
+
       - template: /eng/pipelines/templates/steps/npm-install.yml
 
       # TODO: Use variables for triggering repository instead of hardcoding
