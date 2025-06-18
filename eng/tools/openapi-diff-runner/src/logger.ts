@@ -3,7 +3,8 @@ import fs from "fs";
 import { OadMessage } from "./types/oad-types.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "./types/message.js";
 import { sourceBranchHref, specificBranchHref } from "./utils.js";
-import { Context, logFileName } from "./types/breaking-change-check.js";
+import { logFileName } from "./types/breaking-change-check.js";
+import { defaultBreakingChangeBaseBranch as defaultBaseBranch } from "./command-helpers.js";
 
 export function convertOadMessagesToResultMessageRecords(
   messages: OadMessage[],
@@ -23,7 +24,10 @@ export function convertOadMessagesToResultMessageRecords(
     if (oadMessage.old.location) {
       paths.push({
         tag: "Old",
-        path: specificBranchHref(oadMessage.old.location || "", baseBranchName || "main"),
+        path: specificBranchHref(
+          oadMessage.old.location || "",
+          baseBranchName || defaultBaseBranch,
+        ),
         jsonPath: oadMessage.old?.path,
       });
     }

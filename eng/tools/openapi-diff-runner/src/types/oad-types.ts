@@ -11,9 +11,9 @@
 import { basename } from "path";
 import { getVersionFromInputFile, specificBranchHref } from "../utils.js";
 import { MessageLevel } from "./message.js";
-import { ApiVersionLifecycleStage, defaultBaseBranch } from "./breaking-change-check.js";
 import { sourceBranchHref } from "../utils.js";
-import { Context } from "./breaking-change-check.js";
+import { ApiVersionLifecycleStage, Context } from "./breaking-change-check.js";
+import { defaultBreakingChangeBaseBranch } from "../command-helpers.js";
 const packageJson = require("../package.json");
 /**
  * A type that represents AutoRest.Swagger.ComparisonMessage from OAD
@@ -45,7 +45,7 @@ export type ChangeProperties = {
 // record oad invoking trace
 export class OadTrace {
   private traces: { old: string; new: string; baseBranch: string }[] = [];
-  private baseBranch = defaultBaseBranch;
+  private baseBranch = defaultBreakingChangeBaseBranch;
   private context: Context;
 
   constructor(context: Context) {

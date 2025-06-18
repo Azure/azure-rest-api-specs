@@ -1,5 +1,6 @@
 import { Logger } from "../logger.js";
 import { anyLabelMatches } from "./label.js";
+import { PullRequestProperties } from "./pull-request.js";
 
 /**
  * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
@@ -48,7 +49,6 @@ export const breakingChangesCheckType: {
 };
 
 export type BreakingChangesCheckType = "SameVersion" | "CrossVersion";
-export const defaultBaseBranch = "main";
 export type SpecsBreakingChangesLabel =
   | ReviewRequiredLabel
   | ReviewApprovalPrefixLabel
@@ -105,4 +105,6 @@ export interface Context {
   prSourceBranch: string;
   prTargetBranch: string;
   logger: Logger;
+  prUrl: string;
+  prInfo?: PullRequestProperties;
 }

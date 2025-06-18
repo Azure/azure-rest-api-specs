@@ -53,15 +53,15 @@ const options: SimpleGitOptions = {
  * the `cwd` should point to the source Git repository.
  */
 export const createPullRequestProperties = async (
-  Context: Context,
+  context: Context,
   prefix: string,
   skipInitializeBase: boolean = false,
 ): Promise<PullRequestProperties | undefined> => {
-  const baseBranch = Context.baseBranch;
+  const baseBranch = context.baseBranch;
   if (baseBranch === undefined) {
     return undefined;
   }
-  const originGitRepository = simpleGit({ ...options, baseDir: Context.localSpecRepoPath });
+  const originGitRepository = simpleGit({ ...options, baseDir: context.localSpecRepoPath });
   const branches = await originGitRepository.branch();
 
   if (!branches.all.includes(sourceBranch)) {
@@ -71,10 +71,10 @@ export const createPullRequestProperties = async (
     await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
   }
 
-  if (!branches.all.includes(Context.prTargetBranch)) {
+  if (!branches.all.includes(context.prTargetBranch)) {
     await originGitRepository.branch([
-      Context.prTargetBranch,
-      `remotes/origin/${Context.prTargetBranch}`,
+      context.prTargetBranch,
+      `remotes/origin/${context.prTargetBranch}`,
     ]);
   }
 
@@ -89,17 +89,17 @@ export const createPullRequestProperties = async (
   }
   const workingGitRepository = simpleGit({ ...options, baseDir: workingDir });
   await workingGitRepository.init();
-  await workingGitRepository.addRemote("origin", Context.localSpecRepoPath);
-  await workingGitRepository.pull("origin", Context.prTargetBranch);
+  await workingGitRepository.addRemote("origin", context.localSpecRepoPath);
+  await workingGitRepository.pull("origin", context.prTargetBranch);
   await workingGitRepository.fetch("origin", `${sourceBranch}`);
   if (!skipInitializeBase) {
     await workingGitRepository.fetch("origin", `${baseBranch}`);
   }
-  await workingGitRepository.checkout(Context.prTargetBranch);
+  await workingGitRepository.checkout(context.prTargetBranch);
 
   return {
-    baseBranch: Context.prTargetBranch,
-    targetBranch: Context.prTargetBranch,
+    baseBranch: context.prTargetBranch,
+    targetBranch: context.prTargetBranch,
     sourceBranch,
     workingDir,
     checkout: async function (this: any, branch: string) {
@@ -109,6 +109,6 @@ export const createPullRequestProperties = async (
         this.currentBranch = branch;
       }
     },
-    currentBranch: Context.prTargetBranch,
+    currentBranch: context.prTargetBranch,
   };
 };

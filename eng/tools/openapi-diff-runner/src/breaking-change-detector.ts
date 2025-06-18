@@ -18,34 +18,27 @@ import * as path from "path";
 import { applyRules } from "./apply-rules.js";
 import { OadMessage, OadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
-import { Logger } from "./logger.js";
 
 /**
  * The entry points of the class BreakingChangeDetector are
  * - checkBreakingChangeOnSameVersion()
  * - checkCrossVersionBreakingChange()
  * both of which are invoked by the function detectBreakingChange.ts / detectBreakingChange()
+ * TODO migrate swaggerVersionManager to support cross-version checks
  */
 export class BreakingChangeDetector {
-  //versionManager: SwaggerVersionManager = new SwaggerVersionManager();
-  logger: Logger;
-  context: Context;
   errors: Map<[string, string], RuntimeError[]>;
   tempTagName = "oad-default-tag";
-  oadTracer: OadTrace;
   private msgs: ResultMessageRecord[] = [];
 
   constructor(
     private context: Context,
-    private newSwaggers: string[],
     private oldSwaggers: string[],
-    private changedNewSwaggers: string[],
-    private tracer: OadTrace,
+    private oadTracer: OadTrace,
   ) {
     this.errors = new Map<[string, string], RuntimeError[]>();
     this.context = context;
-    this.oadTracer = tracer;
-    this.logger = new Logger(this.context);
+    this.oadTracer = oadTracer;
   }
 
   /** The function checkBreakingChangeOnSameVersion()
@@ -127,8 +120,9 @@ export class BreakingChangeDetector {
     let oadViolationsCnt = 0;
     let errorCnt = 0;
     try {
-      await this.pr.checkout(this.pr.baseBranch);
+      await this.context.prInfo!.checkout(this.context.prInfo!.baseBranch);
       const oadMessages: OadMessage[] = await runOad(
+        this.oadTracer,
         path.resolve(this.context.localSpecRepoPath, oldSpec),
         newSpec,
       );
@@ -143,16 +137,16 @@ export class BreakingChangeDetector {
         (oadMessage) => oadMessage.type === "Error",
       ).length;
 
-      const msgs: ResultMessageRecord[] = this.logger.appendOadMessages(
+      const msgs: ResultMessageRecord[] = this.context.logger.appendOadMessages(
         modifiedOadMessages,
         this.context.baseBranch,
       );
       this.msgs = this.msgs.concat(msgs);
     } catch (e) {
-      const errors = [];
+      const errors: RuntimeError[] = [];
 
       errors.push({
-        error: e,
+        error: e instanceof Error ? e : new Error(String(e)),
         groupName: previousApiVersionLifecycleStage,
         old: branchHref(
           getRelativeSwaggerPathToRepo(path.resolve(this.context.localSpecRepoPath, oldSpec)),
