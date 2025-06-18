@@ -77,6 +77,6 @@ interface TestRuns {
   @doc("Creates/Updates a test-run for the workspace with given test-run id. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
 
-  @doc("Lists test-runs for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
+  @doc("Lists test-runs for the given workspace id. It can use OData query params like $filter, $top etc. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
   list is Operations.ResourceList<TestRun>;
 }
