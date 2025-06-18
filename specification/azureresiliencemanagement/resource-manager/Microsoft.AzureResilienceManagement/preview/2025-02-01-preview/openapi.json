@@ -7103,19 +7103,19 @@
           "format": "arm-id",
           "description": "Arm Id of resource under the SG for which the extension resource is maintained."
         },
-        "excludedFromHighAvailabilityGoals": {
+        "highAvailabilityGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for high availability recommendation."
         },
-        "manuallyAttestedForHighAvailability": {
+        "highAvailabilityAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for high availability recommendation."
         },
-        "excludedFromDisasterRecoveryGoals": {
+        "disasterRecoveryGoalParticipation": {
           "$ref": "#/definitions/ExclusionState",
           "description": "Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation."
         },
-        "manuallyAttestedForDisasterRecovery": {
+        "disasterRecoveryAttestationStatus": {
           "$ref": "#/definitions/AttestationState",
           "description": "Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation."
         },
@@ -7137,10 +7137,10 @@
       },
       "required": [
         "resourceArmId",
-        "excludedFromHighAvailabilityGoals",
-        "manuallyAttestedForHighAvailability",
-        "excludedFromDisasterRecoveryGoals",
-        "manuallyAttestedForDisasterRecovery"
+        "highAvailabilityGoalParticipation",
+        "highAvailabilityAttestationStatus",
+        "disasterRecoveryGoalParticipation",
+        "disasterRecoveryAttestationStatus"
       ]
     },
     "GoalTemplate": {
