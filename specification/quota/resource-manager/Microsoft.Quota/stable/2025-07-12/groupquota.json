@@ -1395,24 +1395,24 @@
     },
     "GroupQuotaLimitItem": {
       "type": "object",
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "$ref": "#/definitions/RequestState"
-            },
-            "value": {
-              "type": "array",
-              "description": "List of Group Quota Limit details.",
-              "items": {
-                "$ref": "#/definitions/GroupQuotaLimit"
-              }
-            },
-            "nextLink": {
-              "description": "The URL to use for getting the next set of results.",
-              "type": "string",
-              "readOnly": true
-            }
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
+        },
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit details.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaLimit"
           }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "GroupQuotaLimitList": {
       "type": "object",
@@ -1638,44 +1638,44 @@
       ],
       "properties": {
         "properties": {
-          "$ref" : "#/definitions/SubscriptionQuotaAllocationItem"
+          "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
         }
       }
     },
     "SubscriptionQuotaAllocationItem": {
       "type": "object",
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "$ref": "#/definitions/RequestState"
-            },
-            "value": {
-              "type": "array",
-              "description": "Subscription quota list.",
-              "items": {
-                "$ref": "#/definitions/SubscriptionQuotaAllocations"
-              }
-            },
-            "nextLink": {
-              "description": "The URL to use for getting the next set of results.",
-              "type": "string",
-              "readOnly": true
-            }
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
+        },
+        "value": {
+          "type": "array",
+          "description": "Subscription quota list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaAllocations"
           }
         },
-      "SubscriptionQuotaAllocationsList": {
-        "type": "object",
-        "description": "Subscription quota list.",
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-          }
-        ],
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
-          }
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
+      }
+    },
+    "SubscriptionQuotaAllocationsList": {
+      "type": "object",
+      "description": "Subscription quota list.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
+        }
+      }
     },
     "GroupQuotasEntityBase": {
       "type": "object",
@@ -1791,8 +1791,7 @@
         }
       }
     }
-    },
-    
+  },
   "parameters": {
     "RequestId": {
       "name": "requestId",
