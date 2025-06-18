@@ -50,23 +50,12 @@ model ManagedNamespaceStatus {
 @doc("A fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
 model ManagedNamespaceProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The labels for the fleet managed namespace.")
-  labels?: Record<string>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @doc("The annotations for the fleet managed namespace.")
-  annotations?: Record<string>;
-
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ManagedNamespaceProvisioningState;
 
-  @doc("The default resource quota for the fleet managed namespace.")
-  defaultResourceQuota?: ResourceQuota;
-
-  @doc("The default network policy for the fleet managed namespace.")
-  defaultNetworkPolicy?: NetworkPolicy;
+  @doc("The namespace properties for the fleet managed namespace.")
+  namespaceProperties: NamespaceProperties;
 
   @doc("Action if the managed namespace with the same name already exists. Default is Never.")
   adoptionPolicy: AdoptionPolicy;
@@ -82,7 +71,26 @@ model ManagedNamespaceProperties {
   status?: ManagedNamespaceStatus;
 }
 
+@doc("The namespace properties for the fleet managed namespace.")
+@added(Versions.v2025_03_02_naar)
+model NamespaceProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
+  @doc("The labels for the fleet managed namespace.")
+  labels?: Record<string>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
+  @doc("The annotations for the fleet managed namespace.")
+  annotations?: Record<string>;
+
+  @doc("The default resource quota for the fleet managed namespace.")
+  defaultResourceQuota?: ResourceQuota;
+
+  @doc("The default network policy for the fleet managed namespace.")
+  defaultNetworkPolicy?: NetworkPolicy;
+}
+
 @doc("The resource quota for the managed namespace.")
+@added(Versions.v2025_03_02_naar)
 model ResourceQuota {
   @doc("The CPU request for the managed namespace.")
   cpuRequest?: string;
@@ -98,6 +106,7 @@ model ResourceQuota {
 }
 
 @doc("The network policy for the managed namespace.")
+@added(Versions.v2025_03_02_naar)
 model NetworkPolicy {
   @doc("The ingress policy for the managed namespace.")
   ingress?: PolicyRule;
@@ -107,6 +116,7 @@ model NetworkPolicy {
 }
 
 @doc("The possible values representing different network policy rules.")
+@added(Versions.v2025_03_02_naar)
 union PolicyRule {
   @doc("Allow all network traffic.")
   AllowAll: "AllowAll",
@@ -121,6 +131,7 @@ union PolicyRule {
 }
 
 @doc("Action if the Namespace with the same name already exists.")
+@added(Versions.v2025_03_02_naar)
 union AdoptionPolicy {
   @doc("If the Namespace already exists, do not take over the existing Namespace to be managed by ARM.")
   Never: "Never",
@@ -135,6 +146,7 @@ union AdoptionPolicy {
 }
 
 @doc("Delete options for the ARM managed namespace.")
+@added(Versions.v2025_03_02_naar)
 union DeletePolicy {
   @doc("Delete the ARM resource but keep the Namespace.")
   Keep: "Keep",

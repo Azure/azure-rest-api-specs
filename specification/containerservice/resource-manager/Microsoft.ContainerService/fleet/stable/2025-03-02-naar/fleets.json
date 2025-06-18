@@ -3287,32 +3287,14 @@
       "type": "object",
       "description": "A fleet managed namespace.",
       "properties": {
-        "labels": {
-          "type": "object",
-          "description": "The labels for the fleet managed namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "annotations": {
-          "type": "object",
-          "description": "The annotations for the fleet managed namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedNamespaceProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "defaultResourceQuota": {
-          "$ref": "#/definitions/ResourceQuota",
-          "description": "The default resource quota for the fleet managed namespace."
-        },
-        "defaultNetworkPolicy": {
-          "$ref": "#/definitions/NetworkPolicy",
-          "description": "The default network policy for the fleet managed namespace."
+        "namespaceProperties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The namespace properties for the fleet managed namespace."
         },
         "adoptionPolicy": {
           "$ref": "#/definitions/AdoptionPolicy",
@@ -3333,6 +3315,7 @@
         }
       },
       "required": [
+        "namespaceProperties",
         "adoptionPolicy",
         "deletePolicy"
       ]
@@ -3514,6 +3497,34 @@
         "key",
         "operator"
       ]
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "description": "The namespace properties for the fleet managed namespace.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet managed namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "The annotations for the fleet managed namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultResourceQuota": {
+          "$ref": "#/definitions/ResourceQuota",
+          "description": "The default resource quota for the fleet managed namespace."
+        },
+        "defaultNetworkPolicy": {
+          "$ref": "#/definitions/NetworkPolicy",
+          "description": "The default network policy for the fleet managed namespace."
+        }
+      }
     },
     "NetworkPolicy": {
       "type": "object",
