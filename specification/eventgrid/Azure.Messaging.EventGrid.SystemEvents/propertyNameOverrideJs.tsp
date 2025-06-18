@@ -60,10 +60,6 @@ using Microsoft.EventGrid.SystemEvents;
   "completedOn",
   "javascript"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "javascript"
-);
 
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
@@ -134,7 +130,7 @@ using Microsoft.EventGrid.SystemEvents;
   "javascript"
 );
 @@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
-@@clientName(AcsCallParticipantEventProperties,
+@@clientName(AcsCallParticipantEventData,
   "AcsCallParticipantEvent",
   "javascript"
 );
