@@ -27,7 +27,16 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-03-01-preview
+tag: package-2025-06-01
+```
+
+### Tag: package-2025-06-01
+
+These settings apply only when `--tag=package-2025-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-01'
+input-file:
+  - stable/2025-06-01/operations.json
 ```
 
 ### Tag: package-2025-03-01-preview
@@ -55,17 +64,9 @@ input-file:
 
 See configuration in [readme.az.md](./readme.az.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

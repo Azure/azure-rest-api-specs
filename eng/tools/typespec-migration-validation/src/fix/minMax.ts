@@ -1,4 +1,6 @@
-import { checkPropertyAttributeDeleted } from "./helper.js";
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
+import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
 const knownPropertyDecoratorMapping: { [key: string]: string } = {
   'minimum': 'minValue',
@@ -7,20 +9,20 @@ const knownPropertyDecoratorMapping: { [key: string]: string } = {
   'maxLength': 'maxLength'
 };
 
-export function checkMinMax(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
-  
+export function checkMinMax(jsonObj: any): Suggestion[] {
+  const suggestedFixes: Suggestion[] = [];
+
   for (const [key, decoratorName] of Object.entries(knownPropertyDecoratorMapping)) {
     const deletedChanges = checkPropertyAttributeDeleted(key, jsonObj);
     if (deletedChanges.length > 0) {
       for (const change of deletedChanges) {
         const { path, value } = change;
-        const pathParts = path.split('.');
-        const definitionIndex = pathParts.findIndex(part => part === 'definitions');
-        if (definitionIndex !== -1 && definitionIndex + 3 < pathParts.length) {
-          const definitionName = pathParts[definitionIndex + 1];
-          const propertyName = pathParts[definitionIndex + 3];
-          suggestedFixes.push(`Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value})\` right after the model.`);
+        if (getPropertyName(path)) {
+          const [definitionName, propertyName] = getPropertyName(path)!;
+          suggestedFixes.push({
+            suggestion: `Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value});\` right after the model.`,
+            path: constructJsonPath(path, change.key)
+          });
         }
       }
     }

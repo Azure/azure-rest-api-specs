@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "peeringServiceName": "peeringServiceName",
+    "api-version": "2025-05-01",
+    "connectionMonitorTestName": "connectionMonitorTestName",
+    "connectionMonitorTest": {
+      "properties": {
+        "sourceAgent": "Example Source Agent",
+        "destination": "Example Destination",
+        "destinationPort": 443,
+        "testFrequencyInSec": 30
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceAgent": "Example Source Agent",
+          "destination": "Example Destination",
+          "destinationPort": 443,
+          "testFrequencyInSec": 30,
+          "isTestSuccessful": false,
+          "path": [],
+          "provisioningState": "Succeeded"
+        },
+        "name": "connectionMonitorTestName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "sourceAgent": "Example Source Agent",
+          "destination": "Example Destination",
+          "destinationPort": 443,
+          "testFrequencyInSec": 30,
+          "isTestSuccessful": false,
+          "path": [],
+          "provisioningState": "Succeeded"
+        },
+        "name": "connectionMonitorTestName",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName"
+      }
+    }
+  }
+}

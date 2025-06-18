@@ -63,3 +63,35 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.KeyVaultAccessPolicyChangedEventData,
+  "csharp"
+);
