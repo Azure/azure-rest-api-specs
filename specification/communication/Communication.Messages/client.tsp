@@ -15,15 +15,12 @@ namespace ClientForAcsMessages;
   service: Azure.Communication.MessagesService,
 })
 interface NotificationMessagesClient
-  extends Azure.Communication.MessagesService.NotificationMessagesOperations {}
-
-@@clientName(Azure.Communication.MessagesService.StreamOperations.getMedia,
-  "downloadMedia",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
-@@access(Azure.Communication.MessagesService.StreamOperations.getMedia, Access.internal, "csharp");
-
+  extends Azure.Communication.MessagesService.NotificationMessagesOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
+  @access(Access.internal, "csharp")
+  @clientName("downloadMediaInternal", "csharp")
+  downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
+}
 
 @client({
   name: "MessageTemplateClient",
