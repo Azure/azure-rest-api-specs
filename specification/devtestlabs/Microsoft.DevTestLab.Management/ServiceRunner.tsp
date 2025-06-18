@@ -14,6 +14,8 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ServiceRunner is Azure.ResourceManager.TrackedResource<{}> {
   ...ResourceNameParameter<
     Resource = ServiceRunner,

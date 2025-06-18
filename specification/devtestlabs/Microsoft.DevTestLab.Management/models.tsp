@@ -966,6 +966,7 @@ model ArmTemplateProperties {
   /**
    * The contents of the ARM template.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   contents?: Record<unknown>;
 
@@ -980,6 +981,7 @@ model ArmTemplateProperties {
    * File name and parameter values information from all azuredeploy.*.parameters.json for the ARM template.
    */
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   parametersValueFilesInfo?: ParametersValueFileInfo[];
 
   /**
@@ -1001,6 +1003,7 @@ model ParametersValueFileInfo {
   /**
    * Contents of the file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   parametersValueInfo?: Record<unknown>;
 }
 
@@ -1053,6 +1056,7 @@ model ArtifactProperties {
   /**
    * The artifact's parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   parameters?: Record<unknown>;
 
@@ -1111,11 +1115,13 @@ model ArmTemplateInfo {
   /**
    * The template's contents.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   template?: Record<unknown>;
 
   /**
    * The parameters of the ARM template.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   parameters?: Record<unknown>;
 }
 
@@ -1123,6 +1129,7 @@ model ArmTemplateInfo {
  * Properties of an artifact source.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ArtifactSourceFragment extends UpdateResource {}
 
 /**
@@ -1155,12 +1162,14 @@ model LabCostProperties {
    * The lab cost details component of the cost data.
    */
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   labCostDetails?: LabCostDetailsProperties[];
 
   /**
    * The resource cost component of the cost data.
    */
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceCosts?: LabResourceCostProperties[];
 
   /**
@@ -1217,6 +1226,7 @@ model TargetCostProperties {
   /**
    * Cost thresholds.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   costThresholds?: CostThresholdProperties[];
 
   /**
@@ -1320,6 +1330,7 @@ model LabResourceCostProperties {
   /**
    * The unique identifier of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   resourceUId?: string;
 
   /**
@@ -1405,6 +1416,7 @@ model CustomImageProperties {
   /**
    * Storage information about the data disks present in the custom image
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDiskStorageInfo?: DataDiskStorageTypeInfo[];
 
   /**
@@ -1530,6 +1542,7 @@ model CustomImagePropertiesFromPlan {
  * A custom image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model CustomImageFragment extends UpdateResource {}
 
 /**
@@ -1694,6 +1707,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -1735,6 +1749,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -1896,6 +1911,7 @@ model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   inboundNatRules?: InboundNatRule[];
 }
 
@@ -2047,6 +2063,7 @@ model FormulaPropertiesFromVm {
  * A formula for creating a VM, specifying an image base and other parameters
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model FormulaFragment extends UpdateResource {}
 
 /**
@@ -2146,6 +2163,7 @@ model NotificationChannelProperties {
   /**
    * The list of event for which this notification is enabled.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   events?: Event[];
 
   /**
@@ -2183,6 +2201,7 @@ model Event {
  * A notification.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model NotificationChannelFragment extends UpdateResource {}
 
 /**
@@ -2207,6 +2226,7 @@ model EvaluatePoliciesRequest {
   /**
    * Policies to evaluate.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   policies?: EvaluatePoliciesProperties[];
 }
 
@@ -2242,6 +2262,7 @@ model EvaluatePoliciesResponse {
   /**
    * Results of evaluating a policy set.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   results?: PolicySetResult[];
 }
 
@@ -2257,6 +2278,7 @@ model PolicySetResult {
   /**
    * The list of policy violations.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   policyViolations?: PolicyViolation[];
 }
 
@@ -2339,12 +2361,14 @@ model PolicyProperties {
  * A Policy.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model PolicyFragment extends UpdateResource {}
 
 /**
  * A schedule.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ScheduleFragment extends UpdateResource {}
 
 /**
@@ -2461,6 +2485,7 @@ model UserSecretStore {
  * Profile of a lab user.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model UserFragment extends UpdateResource {}
 
 /**
@@ -2537,6 +2562,7 @@ model DiskProperties {
  * A Disk.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model DiskFragment extends UpdateResource {}
 
 /**
@@ -2638,6 +2664,7 @@ model ArmTemplateParameterProperties {
  * An environment, which is essentially an ARM template deployment.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model DtlEnvironmentFragment extends UpdateResource {}
 
 /**
@@ -2672,6 +2699,7 @@ model SecretProperties {
  * A secret.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model SecretFragment extends UpdateResource {}
 
 /**
@@ -2745,6 +2773,7 @@ model ApplicableScheduleProperties {
  * A Service Fabric.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ServiceFabricFragment extends UpdateResource {}
 
 /**
@@ -2855,6 +2884,7 @@ model LabVirtualMachineProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -2920,6 +2950,7 @@ model LabVirtualMachineProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -2974,6 +3005,7 @@ model ComputeVmProperties {
   /**
    * Gets the statuses of the virtual machine.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   statuses?: ComputeVmInstanceViewStatus[];
 
   /**
@@ -3056,6 +3088,7 @@ model ComputeDataDisk {
  * A virtual machine.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model LabVirtualMachineFragment extends UpdateResource {}
 
 /**
@@ -3065,6 +3098,7 @@ model ApplyArtifactsRequest {
   /**
    * The list of artifacts to apply.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   artifacts?: ArtifactInstallProperties[];
 }
 
@@ -3110,6 +3144,7 @@ model VirtualNetworkProperties {
   /**
    * The allowed subnets of the virtual network.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   allowedSubnets?: Subnet[];
 
   /**
@@ -3131,6 +3166,7 @@ model VirtualNetworkProperties {
   /**
    * The subnet overrides of the virtual network.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   subnetOverrides?: SubnetOverride[];
 
   /**
@@ -3231,6 +3267,7 @@ model SubnetSharedPublicIpAddressConfiguration {
   /**
    * Backend ports that virtual machines on this subnet are allowed to expose
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   allowedPorts?: Port[];
 }
 
@@ -3253,12 +3290,14 @@ model Port {
  * A virtual network.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model VirtualNetworkFragment extends UpdateResource {}
 
 /**
  * A lab.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model LabFragment extends UpdateResource {}
 
 /**
@@ -3346,6 +3385,7 @@ model RetargetScheduleProperties {
  * Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ApplicableScheduleFragment extends UpdateResource {}
 
 /**
