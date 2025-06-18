@@ -8,6 +8,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DTL.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.DevTestLabs"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Microsoft.Azure.Management.DevTestLabs"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
