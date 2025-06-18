@@ -578,6 +578,22 @@ model ScheduledOperationsType {
   scheduledStopTime?: string;
 }
 
+@doc("The list of scheduled operations.")
+model ScheduledOperationsTypeUpdate {
+  @doc("Day of week")
+  dayOfWeek: DayOfWeekUpdate;
+
+  @doc("auto start time. value must be of ISO-8601 format HH:mm")
+  @minLength(1)
+  @maxLength(50)
+  scheduledStartTime?: string;
+
+  @doc("auto stop time. value must be of ISO-8601 format HH:mm")
+  @minLength(1)
+  @maxLength(50)
+  scheduledStopTime?: string;
+}
+
 @doc("Autonomous Database  resource model.")
 model AutonomousDatabase is TrackedResource<AutonomousDatabaseBaseProperties> {
   @doc("The database name.")
@@ -590,6 +606,129 @@ model AutonomousDatabase is TrackedResource<AutonomousDatabaseBaseProperties> {
   name: string;
 }
 
+@doc("The type used for update operations of the AutonomousDatabase.")
+model AutonomousDatabaseUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    AutonomousDatabase,
+    "Name" | "name" | "properties"
+  >>> {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "backward compatibility"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: AutonomousDatabaseUpdateProperties;
+}
+
+@doc("The updatable properties of the AutonomousDatabase.")
+model AutonomousDatabaseUpdateProperties {
+  @doc("Admin password.")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @minLength(12)
+  @maxLength(30)
+  adminPassword?: Password;
+
+  @doc("The maintenance schedule type of the Autonomous Database Serverless.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  autonomousMaintenanceScheduleType?: AutonomousMaintenanceScheduleType;
+
+  @doc("The compute amount (CPUs) available to the database.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minValue(0.1)
+  @maxValue(512)
+  computeCount?: float32;
+
+  @doc("The number of CPU cores to be made available to the database.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(128)
+  cpuCoreCount?: int32;
+
+  @doc("Customer Contacts.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @Azure.ResourceManager.identifiers(#[])
+  customerContacts?: CustomerContact[];
+
+  @doc("The quantity of data in the database, in terabytes.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minValue(1)
+  @maxValue(384)
+  dataStorageSizeInTbs?: int32;
+
+  @doc("The size, in gigabytes, of the data volume that will be created and attached to the database.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minValue(20)
+  @maxValue(393216)
+  dataStorageSizeInGbs?: int32;
+
+  @doc("The user-friendly name for the Autonomous Database.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @minLength(1)
+  @maxLength(255)
+  displayName?: string;
+
+  @doc("Indicates if auto scaling is enabled for the Autonomous Database CPU core count.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAutoScalingEnabled?: boolean;
+
+  @doc("Indicates if auto scaling is enabled for the Autonomous Database storage.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAutoScalingForStorageEnabled?: boolean;
+
+  @doc("The Azure resource ID of the Disaster Recovery peer database, which is located in a different region from the current peer database.")
+  @visibility(Lifecycle.Update)
+  @minLength(1)
+  @maxLength(255)
+  peerDbId?: string;
+
+  @doc("Indicates whether the Autonomous Database has local or called in-region Data Guard enabled.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isLocalDataGuardEnabled?: boolean;
+
+  @doc("Specifies if the Autonomous Database requires mTLS connections.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isMtlsConnectionRequired?: boolean;
+
+  @doc("The Oracle license model that applies to the Oracle Autonomous Database. The default is LICENSE_INCLUDED.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  licenseModel?: LicenseModel;
+
+  @doc("The list of scheduled operations.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  scheduledOperations?: ScheduledOperationsTypeUpdate;
+
+  @doc("The Oracle Database Edition that applies to the Autonomous databases.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  databaseEdition?: DatabaseEditionType;
+
+  @doc("Details for the long-term backup schedule.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  longTermBackupSchedule?: LongTermBackUpScheduleDetails;
+
+  @doc("Parameter that allows users to select an acceptable maximum data loss limit in seconds, up to which Automatic Failover will be triggered when necessary for a Local Autonomous Data Guard")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  @minValue(0)
+  @maxValue(3600)
+  localAdgAutoFailoverMaxDataLossLimit?: int32;
+
+  @doc("Indicates the Autonomous Database mode.")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  openMode?: OpenModeType;
+
+  @doc("The Autonomous Database permission level.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  permissionLevel?: PermissionLevelType;
+
+  @doc("The Data Guard role of the Autonomous Container Database or Autonomous Database, if Autonomous Data Guard is enabled.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  role?: RoleType;
+
+  @doc("Retention period, in days, for long-term backups")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  backupRetentionPeriodInDays?: int32;
+
+  @doc("The client IP access control list (ACL). This is an array of CIDR notations and/or IP addresses. Values should be separate strings, separated by commas. Example: ['1.1.1.1','1.1.1.0/24','1.1.2.25']")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  whitelistedIps?: aclString[];
+}
 @doc("Autonomous Database resource model.")
 model AutonomousDatabaseProperties extends AutonomousDatabaseBaseProperties {
   @doc("Database type to be created.")
