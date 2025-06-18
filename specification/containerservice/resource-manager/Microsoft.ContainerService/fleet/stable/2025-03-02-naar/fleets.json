@@ -839,7 +839,7 @@
         "tags": [
           "FleetManagedNamespaces"
         ],
-        "description": "List ManagedNamespace resources by Fleet",
+        "description": "List FleetManagedNamespace resources by Fleet",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -865,7 +865,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespaceListResult"
+              "$ref": "#/definitions/FleetManagedNamespaceListResult"
             }
           },
           "default": {
@@ -880,13 +880,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces/{fleetManagedNamespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces/{managedNamespaceName}": {
       "get": {
         "operationId": "FleetManagedNamespaces_Get",
         "tags": [
           "FleetManagedNamespaces"
         ],
-        "description": "Get a ManagedNamespace",
+        "description": "Get a FleetManagedNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -908,7 +908,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "fleetManagedNamespaceName",
+            "name": "managedNamespaceName",
             "in": "path",
             "description": "The name of the fleet managed namespace resource.",
             "required": true,
@@ -922,7 +922,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/FleetManagedNamespace"
             }
           },
           "default": {
@@ -938,7 +938,7 @@
         "tags": [
           "FleetManagedNamespaces"
         ],
-        "description": "Create a ManagedNamespace",
+        "description": "Create a FleetManagedNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -976,7 +976,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "fleetManagedNamespaceName",
+            "name": "managedNamespaceName",
             "in": "path",
             "description": "The name of the fleet managed namespace resource.",
             "required": true,
@@ -991,21 +991,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/FleetManagedNamespace"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ManagedNamespace' update operation succeeded",
+            "description": "Resource 'FleetManagedNamespace' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/FleetManagedNamespace"
             }
           },
           "201": {
-            "description": "Resource 'ManagedNamespace' create operation succeeded",
+            "description": "Resource 'FleetManagedNamespace' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ManagedNamespace"
+              "$ref": "#/definitions/FleetManagedNamespace"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1036,7 +1036,7 @@
         "tags": [
           "FleetManagedNamespaces"
         ],
-        "description": "Delete a ManagedNamespace",
+        "description": "Delete a FleetManagedNamespace",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1066,7 +1066,7 @@
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
-            "name": "fleetManagedNamespaceName",
+            "name": "managedNamespaceName",
             "in": "path",
             "description": "The name of the fleet managed namespace resource.",
             "required": true,
@@ -2771,6 +2771,157 @@
         "value"
       ]
     },
+    "FleetManagedNamespace": {
+      "type": "object",
+      "description": "A fleet managed namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetManagedNamespaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FleetManagedNamespaceListResult": {
+      "type": "object",
+      "description": "The response of a FleetManagedNamespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetManagedNamespace items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetManagedNamespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetManagedNamespaceProperties": {
+      "type": "object",
+      "description": "A fleet managed namespace.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetManagedNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "managedNamespaceProperties": {
+          "$ref": "#/definitions/ManagedNamespaceProperties",
+          "description": "The namespace properties for the fleet managed namespace."
+        },
+        "adoptionPolicy": {
+          "$ref": "#/definitions/AdoptionPolicy",
+          "description": "Action if the managed namespace with the same name already exists. Default is Never."
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of a fleet managed namespace. Default is Keep."
+        },
+        "propagationPolicy": {
+          "$ref": "#/definitions/PropagationPolicy",
+          "description": "The profile of the propagation to create the namespace."
+        },
+        "status": {
+          "$ref": "#/definitions/FleetManagedNamespaceStatus",
+          "description": "Status information of the last operation for fleet managed namespace.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedNamespaceProperties",
+        "adoptionPolicy",
+        "deletePolicy"
+      ]
+    },
+    "FleetManagedNamespaceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the fleet managed namespace resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "FleetManagedNamespaceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a fleet managed namespace being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a fleet managed namespace being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a fleet managed namespace being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "FleetManagedNamespaceStatus": {
+      "type": "object",
+      "description": "Status information for the fleet managed namespace.",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the fleet managed namespace",
+          "readOnly": true
+        },
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error of the fleet managed namespace",
+          "readOnly": true
+        }
+      }
+    },
     "FleetMember": {
       "type": "object",
       "description": "A member of the Fleet. It contains a reference to an existing Kubernetes cluster on Azure.",
@@ -3234,154 +3385,31 @@
         ]
       }
     },
-    "ManagedNamespace": {
+    "ManagedNamespaceProperties": {
       "type": "object",
-      "description": "A fleet managed namespace.",
+      "description": "The namespace properties for the fleet managed namespace.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagedNamespaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
-        },
-        "tags": {
+        "labels": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "The labels for the fleet managed namespace.",
           "additionalProperties": {
             "type": "string"
           }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ManagedNamespaceListResult": {
-      "type": "object",
-      "description": "The response of a ManagedNamespace list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagedNamespace items on this page",
-          "items": {
-            "$ref": "#/definitions/ManagedNamespace"
+        },
+        "annotations": {
+          "type": "object",
+          "description": "The annotations for the fleet managed namespace.",
+          "additionalProperties": {
+            "type": "string"
           }
         },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ManagedNamespaceProperties": {
-      "type": "object",
-      "description": "A fleet managed namespace.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ManagedNamespaceProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
+        "defaultResourceQuota": {
+          "$ref": "#/definitions/ResourceQuota",
+          "description": "The default resource quota for the fleet managed namespace."
         },
-        "namespaceProperties": {
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "The namespace properties for the fleet managed namespace."
-        },
-        "adoptionPolicy": {
-          "$ref": "#/definitions/AdoptionPolicy",
-          "description": "Action if the managed namespace with the same name already exists. Default is Never."
-        },
-        "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of a fleet managed namespace. Default is Keep."
-        },
-        "propagationPolicy": {
-          "$ref": "#/definitions/PropagationPolicy",
-          "description": "The profile of the propagation to create the namespace."
-        },
-        "status": {
-          "$ref": "#/definitions/ManagedNamespaceStatus",
-          "description": "Status information of the last operation for fleet managed namespace.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "namespaceProperties",
-        "adoptionPolicy",
-        "deletePolicy"
-      ]
-    },
-    "ManagedNamespaceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of the fleet managed namespace resource",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedNamespaceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The provisioning state of a fleet managed namespace being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The provisioning state of a fleet managed namespace being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The provisioning state of a fleet managed namespace being deleted."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "ManagedNamespaceStatus": {
-      "type": "object",
-      "description": "Status information for the fleet managed namespace.",
-      "properties": {
-        "lastOperationId": {
-          "type": "string",
-          "description": "The last operation ID for the fleet managed namespace",
-          "readOnly": true
-        },
-        "lastOperationError": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "The last operation error of the fleet managed namespace",
-          "readOnly": true
+        "defaultNetworkPolicy": {
+          "$ref": "#/definitions/NetworkPolicy",
+          "description": "The default network policy for the fleet managed namespace."
         }
       }
     },
@@ -3497,34 +3525,6 @@
         "key",
         "operator"
       ]
-    },
-    "NamespaceProperties": {
-      "type": "object",
-      "description": "The namespace properties for the fleet managed namespace.",
-      "properties": {
-        "labels": {
-          "type": "object",
-          "description": "The labels for the fleet managed namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "annotations": {
-          "type": "object",
-          "description": "The annotations for the fleet managed namespace.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "defaultResourceQuota": {
-          "$ref": "#/definitions/ResourceQuota",
-          "description": "The default resource quota for the fleet managed namespace."
-        },
-        "defaultNetworkPolicy": {
-          "$ref": "#/definitions/NetworkPolicy",
-          "description": "The default network policy for the fleet managed namespace."
-        }
-      }
     },
     "NetworkPolicy": {
       "type": "object",

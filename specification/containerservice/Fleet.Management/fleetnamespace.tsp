@@ -18,10 +18,11 @@ namespace Microsoft.ContainerService;
 @resource("managedNamespaces")
 @added(Versions.v2025_03_02_naar)
 @parentResource(Fleet)
-model ManagedNamespace is TrackedResource<ManagedNamespaceProperties> {
+model FleetManagedNamespace
+  is TrackedResource<FleetManagedNamespaceProperties> {
   @doc("The name of the fleet managed namespace resource.")
-  @key("fleetManagedNamespaceName")
-  @segment("fleetManagedNamespaces")
+  @key("managedNamespaceName")
+  @segment("managedNamespaces")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
   @maxLength(63)
@@ -35,27 +36,15 @@ model ManagedNamespace is TrackedResource<ManagedNamespaceProperties> {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
+@doc("The properties of a fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
-@doc("Status information for the fleet managed namespace.")
-model ManagedNamespaceStatus {
-  @visibility("read")
-  @doc("The last operation ID for the fleet managed namespace")
-  lastOperationId?: string;
-
-  @visibility("read")
-  @doc("The last operation error of the fleet managed namespace")
-  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
-}
-
-@doc("A fleet managed namespace.")
-@added(Versions.v2025_03_02_naar)
-model ManagedNamespaceProperties {
+model FleetManagedNamespaceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
-  provisioningState?: ManagedNamespaceProvisioningState;
+  provisioningState?: FleetManagedNamespaceProvisioningState;
 
   @doc("The namespace properties for the fleet managed namespace.")
-  namespaceProperties: NamespaceProperties;
+  managedNamespaceProperties: ManagedNamespaceProperties;
 
   @doc("Action if the managed namespace with the same name already exists. Default is Never.")
   adoptionPolicy: AdoptionPolicy;
@@ -68,12 +57,24 @@ model ManagedNamespaceProperties {
 
   @visibility("read")
   @doc("Status information of the last operation for fleet managed namespace.")
-  status?: ManagedNamespaceStatus;
+  status?: FleetManagedNamespaceStatus;
+}
+
+@added(Versions.v2025_03_02_naar)
+@doc("Status information for the fleet managed namespace.")
+model FleetManagedNamespaceStatus {
+  @visibility("read")
+  @doc("The last operation ID for the fleet managed namespace")
+  lastOperationId?: string;
+
+  @visibility("read")
+  @doc("The last operation error of the fleet managed namespace")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("The namespace properties for the fleet managed namespace.")
 @added(Versions.v2025_03_02_naar)
-model NamespaceProperties {
+model ManagedNamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the fleet managed namespace.")
   labels?: Record<string>;
@@ -191,7 +192,7 @@ model PlacementProfile {
 }
 
 @doc("The provisioning state of the fleet managed namespace resource")
-union ManagedNamespaceProvisioningState {
+union FleetManagedNamespaceProvisioningState {
   string,
   ResourceProvisioningState,
 
@@ -208,20 +209,20 @@ union ManagedNamespaceProvisioningState {
 @added(Versions.v2025_03_02_naar)
 @armResourceOperations
 interface FleetManagedNamespaces {
-  get is ArmResourceRead<ManagedNamespace>;
+  get is ArmResourceRead<FleetManagedNamespace>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    ManagedNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<ManagedNamespace> &
-      IfMatchParameters<ManagedNamespace> &
-      IfNoneMatchParameters<ManagedNamespace>
+    FleetManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace> &
+      IfNoneMatchParameters<FleetManagedNamespace>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<
-    ManagedNamespace,
-    Azure.ResourceManager.Foundations.BaseParameters<ManagedNamespace> &
-      IfMatchParameters<ManagedNamespace>
+    FleetManagedNamespace,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace>
   >;
 
-  listByFleet is ArmResourceListByParent<ManagedNamespace>;
+  listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 }
