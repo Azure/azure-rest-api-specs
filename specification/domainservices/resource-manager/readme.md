@@ -23,14 +23,16 @@ To see additional help and options, run:
 
 These are the global settings for the DomainServices API.
 
-```yaml
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ``` yaml
 openapi-type: arm
 tag: package-preview-2025-06-01-preview
+```
+
+``` yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - Microsoft.AAD/preview/2025-06-01-preview/domainservices.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-preview-2025-06-01-preview
