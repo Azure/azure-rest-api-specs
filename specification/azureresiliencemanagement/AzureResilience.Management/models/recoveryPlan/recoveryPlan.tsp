@@ -41,7 +41,7 @@ model RecoveryPlanOperationStatus {
 model RecoveryPlanFailoverOperationStatus is RecoveryPlanOperationStatus {
   @doc("The actual recovery time of the most recent recovery orchestration plan.")
   @visibility(Lifecycle.Read)
-  recoveryTimeActual: duration;
+  recoveryTimeActual?: duration;
 }
 
 @doc("Properties of the recovery orchestration plan.")
@@ -56,7 +56,7 @@ model RecoveryPlanProperties {
 
   @doc("The current state of the recovery orchestration plan.")
   @visibility(Lifecycle.Read)
-  planState: RecoveryPlanState;
+  planState?: RecoveryPlanState;
 
   @doc("A description of the recovery orchestration plan.")
   @minLength(5)

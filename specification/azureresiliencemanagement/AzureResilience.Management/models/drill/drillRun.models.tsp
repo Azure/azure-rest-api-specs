@@ -41,7 +41,7 @@ model DrillRunProperties extends JobProperties {
 
   @doc("Parent Drill resource.")
   @visibility(Lifecycle.Read)
-  drillUrl: armResourceIdentifier<[
+  drillUrl?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/drills";
     }
@@ -49,43 +49,43 @@ model DrillRunProperties extends JobProperties {
 
   @doc("Measured aggregated Metric value.")
   @visibility(Lifecycle.Read)
-  metricValue: string;
+  metricValue?: string;
 
   @doc("Drill mode.")
   @visibility(Lifecycle.Read)
-  drillMode: DrillMode;
+  drillMode?: DrillMode;
 
   @doc("Attestation of this Drill Run.")
   @visibility(Lifecycle.Read)
-  attestation: DrillAttestation;
+  attestation?: DrillAttestation;
 
   @doc("Notes for this Drill.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  notes: string[];
+  notes?: string[];
 
   @doc("Matrix of Actions supported on Operations.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  supportedVerbsForStage: SupportedVerbsForStage[];
+  supportedVerbsForStage?: SupportedVerbsForStage[];
 
   @doc("The currently active operationID on this Drill Run. There can be only one active.")
   @visibility(Lifecycle.Read)
-  currentActiveOperationId: string;
+  currentActiveOperationId?: string;
 }
 
 @doc("Request body for AddNotes API.")
 model DrillRunAddNotesRequest {
   @doc("The notes string.")
-  notes: string;
+  notes?: string;
 
   @doc("System generated current Timestamp.")
   @visibility(Lifecycle.Read)
-  timestamp: utcDateTime;
+  timestamp?: utcDateTime;
 
   @doc("System generated Object Id of the notes author.")
   @visibility(Lifecycle.Read)
-  author: string;
+  author?: string;
 }
 
 @doc("Request body for Failover API.")
@@ -110,7 +110,7 @@ model DrillRunTestFailoverCleanupRequest {
 model DrillRunActionResponse {
   @doc("JobId of the RO job.")
   @visibility(Lifecycle.Read)
-  jobId: armResourceIdentifier<[
+  jobId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs";
     }
@@ -128,7 +128,7 @@ model MarkAsCompleteResponse {
   @doc("Matrix of Actions supported on Operations.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  supportedVerbsForStage: SupportedVerbsForStage[];
+  supportedVerbsForStage?: SupportedVerbsForStage[];
 }
 
 @doc("Model for supported verbs for stage.")

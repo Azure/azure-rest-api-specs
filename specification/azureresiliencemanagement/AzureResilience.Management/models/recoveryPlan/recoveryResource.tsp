@@ -24,7 +24,7 @@ model RecoveryResourceProperties {
 
   @doc("Resource ID of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
-  resourceId: armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
@@ -35,7 +35,7 @@ model RecoveryResourceProperties {
 
   @doc("Indicating if resource needs user attention and action, details will be found in attentionReasons")
   @visibility(Lifecycle.Read)
-  needsAttention: boolean = false;
+  needsAttention?: boolean = false;
 
   @doc("Reason for the resource to be in need of attention")
   @visibility(Lifecycle.Read)
@@ -43,12 +43,12 @@ model RecoveryResourceProperties {
 
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @visibility(Lifecycle.Read)
-  protectionStatus: ResourceProtectionStatus;
+  protectionStatus?: ResourceProtectionStatus;
 
   @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  resourceProtectionSolutions: ResourceProtectionSolutionSettings[];
+  resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("A setting that indicates the protection solution selected.")
   selectedProtectionSolutionType: ResourceProtectionSolutionType;
