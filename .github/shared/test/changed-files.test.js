@@ -13,7 +13,7 @@ import {
   dataPlane,
   example,
   getChangedFiles,
-  getCategorizedChangedFiles,
+  getChangedFilesStatuses,
   json,
   readme,
   resourceManager,
@@ -138,7 +138,7 @@ describe("changedFiles", () => {
     expect(files.filter(swagger)).toEqual(expected);
   });
 
-  describe("getCategorizedChangedFiles", () => {
+  describe("getChangedFilesStatuses", () => {
     it("should categorize files correctly with all types of changes", async () => {
       const gitOutput = [
         "A\tspecification/new-service/readme.md",
@@ -150,7 +150,7 @@ describe("changedFiles", () => {
       ].join("\n");
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
-      const result = await getCategorizedChangedFiles();
+      const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [
           "specification/new-service/readme.md",
@@ -173,7 +173,7 @@ describe("changedFiles", () => {
 
     it("should handle empty git output", async () => {
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
-      const result = await getCategorizedChangedFiles();
+      const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [],
         modifications: [],
@@ -190,7 +190,7 @@ describe("changedFiles", () => {
       ].join("\n");
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
-      const result = await getCategorizedChangedFiles();
+      const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [
           "specification/service1/readme.md",
@@ -210,7 +210,7 @@ describe("changedFiles", () => {
       ].join("\n");
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
-      const result = await getCategorizedChangedFiles();
+      const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [],
         modifications: [],
@@ -237,7 +237,7 @@ describe("changedFiles", () => {
       };
 
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("A\ttest.json");
-      await getCategorizedChangedFiles(options);
+      await getChangedFilesStatuses(options);
       expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
       expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
         "--name-status",

@@ -52,7 +52,7 @@ export async function getChangedFiles(options = {}) {
  * @param {import('./logger.js').ILogger} [options.logger]
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
-export async function getCategorizedChangedFiles(options = {}) {
+export async function getChangedFilesStatuses(options = {}) {
   const {
     baseCommitish = "HEAD^",
     cwd,
