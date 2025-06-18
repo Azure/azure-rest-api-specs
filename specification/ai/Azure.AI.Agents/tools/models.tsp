@@ -144,6 +144,30 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   connectedAgent: ConnectedAgentDetails;
 }
 
+@doc("The input definition information for a Browser Automation tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The browser_automation tool definition configuration.")
+  @maxItems(1)
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationDetails;
+}
+
+@doc("The input definition information for a Deep Research tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model DeepResearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The deep_research tool definition configuration.")
+  @maxItems(1)
+  @encodedName("application/json", "deep_research")
+  deepResearch: DeepResearchDetails;
+}
+
 // Definition details: File Search
 
 /**
@@ -537,6 +561,34 @@ model RunStepOpenAPIToolCall extends RunStepToolCall {
   openAPI: Record<string>;
 }
 
+@doc("""
+  A record of a call to a Browser Automation tool, issued by the model in evaluation of a defined tool, that represents
+  executed automated browser operations.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The detailed information about the automated browser tasks performed by the model.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: RunStepBrowserAutomationToolCallDetails;
+}
+
+@doc("""
+  A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents
+  executed deep research operations.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The detailed information about the automated browser tasks performed by the model.")
+  @encodedName("application/json", "deep_research")
+  deepResearch: RunStepDeepResearchToolCallDetails;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -619,6 +671,68 @@ model BingGroundingSearchConfiguration {
 
   @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
   freshness?: string;
+}
+
+// Call details: Browser Automation
+
+@doc("The detailed information about the automated browser tasks performed by the model.")
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCallDetails {
+  @doc("The input provided by the model to the browser automation tool.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "input")
+  input: string;
+  
+  @doc("The final output for the browser automation tool.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "output")
+  output: string;
+  
+  @doc("The intermediate browser goals taken to achieve the final user goal.")
+  @added(Versions.v2025_05_15_preview)
+  @encodedName("application/json", "steps")
+  steps: RunStepBrowserAutomationToolStepDetail[];
+}
+
+@doc("The details of each step taken by the browser automation tool to achieve the final user goal.")
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolStepDetail {
+  @doc("The evaluated result of the previous step that'll help the model decide what to do next.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "last_step_result")
+  lastStepResult: string;
+
+  @doc("The model interpretation of the current state of the browser after the action for the current step has been performed.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "current_state")
+  currentState: string;
+  
+  @doc("The model decision summary of the next step to be performed to reach closer to the final user goal.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "next_step")
+  nextStep: string;
+}
+
+// Call details: Deep Research
+@doc("The detailed information about the deep research tasks performed by the model.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCallDetails {
+  @doc("The input provided by the model to the deep research tool.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "input")
+  input: string;
+
+  @doc("The final output for the deep research tool.")
+  @added(Versions.v2025_05_15_preview)
+  @maxItems(1)
+  @encodedName("application/json", "output")
+  output?: string;
 }
 
 //
@@ -708,6 +822,14 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
+
+  /** Tool type `browser_automation` */
+  @added(Versions.v2025_05_15_preview)
+  browserAutomation: "browser_automation",
+
+  /** Tool type `deep_research` */
+  @added(Versions.v2025_05_15_preview)
+  deepResearch: "deep_research",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -780,6 +902,53 @@ model ConnectedAgentDetails {
 
   @doc("A description of what the agent does, used by the model to choose when and how to call the agent.")
   description: string;
+}
+
+/**
+ * The details of the browser automation tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationDetails {
+  @added(Versions.v2025_05_15_preview)
+  @doc("Information about the remote browser to be used for automation.")
+  @maxItems(1)
+  @encodedName("application/json", "connection")
+  connection: BrowserAutomationRemoteBrowserConnection;
+}
+
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationRemoteBrowserConnection {
+  @added(Versions.v2025_05_15_preview)
+  @doc("The connection ID for the remote browser.")
+  @maxItems(1)
+  @encodedName("application/json", "id")
+  connectionId: string;
+}
+
+/**
+ * The details of the Deep Research tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model DeepResearchDetails {
+  @added(Versions.v2025_05_15_preview)
+  @doc("The reasoning model deployment name.")
+  @maxItems(1)
+  @encodedName("application/json", "deployment_name")
+  deploymentName: string;
+
+  @added(Versions.v2025_05_15_preview)
+  @doc("The array containing bing grounding connection IDs to enhance deep research capabilities.")
+  @encodedName("application/json", "bing_grounding_connections")
+  BingGroundingConnections?: BingGroundingConnectionInformation[];
+}
+
+@added(Versions.v2025_05_15_preview)
+model BingGroundingConnectionInformation {
+  @added(Versions.v2025_05_15_preview)
+  @doc("The connection ID for the Bing grounding connection.")
+  @maxItems(1)
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
 }
 
 /**
