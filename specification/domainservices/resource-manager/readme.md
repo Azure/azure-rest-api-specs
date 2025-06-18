@@ -132,6 +132,7 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend"]
     reason: Microsoft.AAD is the correct provider name for legacy reasons.
+  - suppress: 
 ```
 
 # Code Generation
