@@ -582,8 +582,8 @@ export class SdkTspConfigValidationRule implements Rule {
     const failedResults = [];
     let success = true;
     for (const subRule of this.subRules) {
-      // TODO: support wildcard
-      if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
+      // Check for both direct matches and wildcard patterns
+      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
 
@@ -622,5 +622,24 @@ export class SdkTspConfigValidationRule implements Rule {
         console.warn(`Skip validation on ${ignoredKey}.`);
       }
     }
+  }
+
+  private isKeyPathSuppressed(keyPath: string): boolean {
+    // Direct match
+    if (this.suppressedKeyPaths.has(keyPath)) {
+      return true;
+    }
+
+    // Only check for wildcard at the end (format: prefix.*)
+    for (const suppressedPath of this.suppressedKeyPaths) {
+      if (suppressedPath.endsWith('.*')) {
+        const prefix = suppressedPath.slice(0, -2); // Remove the '.*' at the end
+        if (keyPath.startsWith(prefix)) {
+          return true;
+        }
+      }
+    }
+    
+    return false;
   }
 }

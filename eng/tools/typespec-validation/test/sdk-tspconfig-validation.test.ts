@@ -557,6 +557,24 @@ options:
     success: true,
     ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
   },
+  {
+    description: "Suppress option with wildcard at the end",
+    folder: managementTspconfigFolder,
+    subRules: [
+      new TspConfigGoMgmtPackageDirectorySubRule(),
+      new TspConfigGoMgmtModuleEqualStringSubRule(),
+      new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
+    ],
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    package-dir: "wrong/directory"
+    module-name: "invalid-module"
+    generate-consts: false
+`,
+    success: true,
+    ignoredKeyPaths: ["options.@azure-tools/typespec-go.*"],
+  },
 ];
 
 describe("tspconfig", function () {
