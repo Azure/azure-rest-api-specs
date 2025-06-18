@@ -62,7 +62,13 @@ using Azure.Core;
 @@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana");
 @@clientLocation(ManagedGrafanas.refresh, "Grafana");
 @@clientLocation(ManagedPrivateEndpointModels.get, "ManagedPrivateEndpoints");
-@@clientLocation(ManagedPrivateEndpointModels.create, "ManagedPrivateEndpoints");
-@@clientLocation(ManagedPrivateEndpointModels.update, "ManagedPrivateEndpoints");
-@@clientLocation(ManagedPrivateEndpointModels.delete, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedPrivateEndpointModels.create,
+  "ManagedPrivateEndpoints"
+);
+@@clientLocation(ManagedPrivateEndpointModels.update,
+  "ManagedPrivateEndpoints"
+);
+@@clientLocation(ManagedPrivateEndpointModels.delete,
+  "ManagedPrivateEndpoints"
+);
 @@clientLocation(ManagedPrivateEndpointModels.list, "ManagedPrivateEndpoints");

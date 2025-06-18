@@ -35,14 +35,8 @@ using Microsoft.Dashboard;
   "csharp"
 );
 
-@@clientName(DeterministicOutboundIP,
-  "DeterministicOutboundIp",
-  "java"
-);
-@@clientName(StartTLSPolicy,
-  "StartTlsPolicy",
-  "java"
-);
+@@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
+@@clientName(StartTLSPolicy, "StartTlsPolicy", "java");
 @@clientName(ManagedGrafanaProperties.deterministicOutboundIP,
   "deterministicOutboundIp",
   "java"
@@ -51,7 +45,4 @@ using Microsoft.Dashboard;
   "privateLinkServicePrivateIp",
   "java"
 );
-@@clientName(Smtp.startTLSPolicy,
-  "startTlsPolicy",
-  "java"
-);
+@@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
