@@ -1022,222 +1022,222 @@
             "modelAsString": true
           }
         }
-    },
-    "ConfigDiagnostics": {
-      "description": "Configuration Diagnostics",
-      "type": "object",
-      "properties": {
-        "lastExecuted": {
-          "type": "string",
-          "format": "date-time-rfc1123",
-          "description": "Last domain configuration diagnostics DateTime"
-        },
-        "validatorResults": {
-          "type": "array",
-          "description": "List of Configuration Diagnostics validator results.",
-          "items": {
-            "$ref": "#/definitions/ConfigDiagnosticsValidatorResult"
-          }
-        }
-      }
-    },
-    "ConfigDiagnosticsValidatorResult": {
-      "description": "Config Diagnostics validator result data",
-      "type": "object",
-      "properties": {
-        "validatorId": {
-          "type": "string",
-          "description": "Validator identifier"
-        },
-        "replicaSetSubnetDisplayName": {
-          "type": "string",
-          "description": "Replica set location and subnet name"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Running",
-            "OK",
-            "Failure",
-            "Warning",
-            "Skipped"
-          ],
-          "default": "None",
-          "description": "Status for individual validator after running diagnostics.",
-          "x-ms-enum": {
-            "name": "status",
-            "modelAsString": true
-          }
-        },
-        "issues": {
-          "type": "array",
-          "description": "List of resource config validation issues.",
-          "items": {
-            "$ref": "#/definitions/ConfigDiagnosticsValidatorResultIssue"
-          }
-        }
-      }
-    },
-    "ConfigDiagnosticsValidatorResultIssue": {
-      "description": "Specific issue for a particular config diagnostics validator",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Validation issue identifier."
-        },
-        "descriptionParams": {
-          "type": "array",
-          "items": {
+      },
+      "ConfigDiagnostics": {
+        "description": "Configuration Diagnostics",
+        "type": "object",
+        "properties": {
+          "lastExecuted": {
             "type": "string",
-            "description": "Single resource property involved in issue description."
+            "format": "date-time-rfc1123",
+            "description": "Last domain configuration diagnostics DateTime"
           },
-          "description": "List of domain resource property name or values used to compose a rich description."
-        }
-      }
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "description": "An error response from the Domain Services.",
-          "$ref": "#/definitions/CloudErrorBody"
+          "validatorResults": {
+            "type": "array",
+            "description": "List of Configuration Diagnostics validator results.",
+            "items": {
+              "$ref": "#/definitions/ConfigDiagnosticsValidatorResult"
+            }
+          }
         }
       },
-      "description": "An error response from the Domain Services."
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
+      "ConfigDiagnosticsValidatorResult": {
+        "description": "Config Diagnostics validator result data",
+        "type": "object",
+        "properties": {
+          "validatorId": {
+            "type": "string",
+            "description": "Validator identifier"
+          },
+          "replicaSetSubnetDisplayName": {
+            "type": "string",
+            "description": "Replica set location and subnet name"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "None",
+              "Running",
+              "OK",
+              "Failure",
+              "Warning",
+              "Skipped"
+            ],
+            "default": "None",
+            "description": "Status for individual validator after running diagnostics.",
+            "x-ms-enum": {
+              "name": "status",
+              "modelAsString": true
+            }
+          },
+          "issues": {
+            "type": "array",
+            "description": "List of resource config validation issues.",
+            "items": {
+              "$ref": "#/definitions/ConfigDiagnosticsValidatorResultIssue"
+            }
+          }
+        }
+      },
+      "ConfigDiagnosticsValidatorResultIssue": {
+        "description": "Specific issue for a particular config diagnostics validator",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Validation issue identifier."
+          },
+          "descriptionParams": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Single resource property involved in issue description."
+            },
+            "description": "List of domain resource property name or values used to compose a rich description."
+          }
+        }
+      },
+      "CloudError": {
+        "type": "object",
+        "x-ms-external": true,
+        "properties": {
+          "error": {
+            "description": "An error response from the Domain Services.",
             "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Domain Services."
-    },
-    "UnsuspendDomainServiceResponse": {
-      "description": "Response for successful unsuspend of a domain service.",
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "example": "Domain service resumed successfully."
-        }
-      }
-    },
-    "OperationEntityListResult": {
-      "description": "The list of domain service operation response.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of operations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationEntity"
           }
         },
-        "nextLink": {
-          "type": "string",
-          "description": "The continuation token for the next page of results.",
-          "readOnly": true
+        "description": "An error response from the Domain Services."
+      },
+      "CloudErrorBody": {
+        "type": "object",
+        "x-ms-external": true,
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+          },
+          "message": {
+            "type": "string",
+            "description": "A message describing the error, intended to be suitable for display in a user interface."
+          },
+          "target": {
+            "type": "string",
+            "description": "The target of the particular error. For example, the name of the property in error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/CloudErrorBody"
+            },
+            "description": "A list of additional details about the error."
+          }
+        },
+        "description": "An error response from the Domain Services."
+      },
+      "UnsuspendDomainServiceResponse": {
+        "description": "Response for successful unsuspend of a domain service.",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Domain service resumed successfully."
+          }
+        }
+      },
+      "OperationEntityListResult": {
+        "description": "The list of domain service operation response.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The list of operations.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OperationEntity"
+            }
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "The continuation token for the next page of results.",
+            "readOnly": true
+          }
+        }
+      },
+      "OperationEntity": {
+        "description": "The operation supported by Domain Services.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Operation name: {provider}/{resource}/{operation}.",
+            "type": "string"
+          },
+          "display": {
+            "$ref": "#/definitions/OperationDisplayInfo",
+            "description": "The operation supported by Domain Services."
+          },
+          "origin": {
+            "description": "The origin of the operation.",
+            "type": "string"
+          }
+        }
+      },
+      "OperationDisplayInfo": {
+        "description": "The operation supported by Domain Services.",
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "The description of the operation.",
+            "type": "string"
+          },
+          "operation": {
+            "description": "The action that users can perform, based on their permission level.",
+            "type": "string"
+          },
+          "provider": {
+            "description": "Service provider: Domain Services.",
+            "type": "string"
+          },
+          "resource": {
+            "description": "Resource on which the operation is performed.",
+            "type": "string"
+          }
         }
       }
     },
-    "OperationEntity": {
-      "description": "The operation supported by Domain Services.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}.",
-          "type": "string"
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplayInfo",
-          "description": "The operation supported by Domain Services."
-        },
-        "origin": {
-          "description": "The origin of the operation.",
-          "type": "string"
-        }
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90,
+        "x-ms-parameter-location": "method"
+      },
+      "DomainServiceNameParameter": {
+        "name": "domainServiceName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the domain service.",
+        "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$",
+        "x-ms-parameter-location": "method"
       }
-    },
-    "OperationDisplayInfo": {
-      "description": "The operation supported by Domain Services.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the operation.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "The action that users can perform, based on their permission level.",
-          "type": "string"
-        },
-        "provider": {
-          "description": "Service provider: Domain Services.",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Resource on which the operation is performed.",
-          "type": "string"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "DomainServiceNameParameter": {
-      "name": "domainServiceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the domain service.",
-      "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$",
-      "x-ms-parameter-location": "method"
     }
   }
-}
 }
