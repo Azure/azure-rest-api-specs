@@ -41,6 +41,10 @@ using Microsoft.Dashboard;
   "deterministicOutboundIp",
   "java"
 );
+@@clientName(ManagedGrafanaPropertiesUpdateParameters.deterministicOutboundIP,
+  "deterministicOutboundIp",
+  "java"
+);
 @@clientName(ManagedPrivateEndpointModelProperties.privateLinkServicePrivateIP,
   "privateLinkServicePrivateIp",
   "java"
