@@ -30,6 +30,26 @@ openapi-type: arm
 tag: package-2025-05-01
 ```
 
+### Tag: package-2025-04-15-preview
+
+These settings apply only when `--tag=package-2025-04-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-15-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2025-04-15-preview/computeschedule.json
+
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2024-08-01-preview/computeschedule.json
+  
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
