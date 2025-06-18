@@ -1,23 +1,27 @@
 {
   "parameters": {
-    "configurationName": "array_nulls",
-    "serverName": "testserver",
-    "resourceGroupName": "testrg",
     "api-version": "2024-08-01",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "configurationName": "array_nulls"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
           "value": "on",
-          "description": "Enable input of NULL elements in arrays.",
+          "description": "Enables input of NULL (case insensitive) to be considered as NULL value rather than the literal String 'NULL'.",
           "defaultValue": "on",
           "dataType": "Boolean",
           "allowedValues": "on,off",
-          "source": "system-default"
+          "source": "system-default",
+          "isDynamicConfig": true,
+          "isReadOnly": false,
+          "isConfigPendingRestart": false,
+          "documentationLink": "https://www.postgresql.org/docs/13/runtime-config-compatible.html#GUC-ARRAY-NULLS"
         },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/configurations/array_nulls",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/configurations/array_nulls",
         "name": "array_nulls",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/configurations"
       }

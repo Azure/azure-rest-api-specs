@@ -25,12 +25,16 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.Vision.ImageAnalysis
+    model-namespace: false
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-vision-imageanalysis"
     namespace: "com.azure.ai.vision.imageanalysis"
     # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
     customization-class: customization/src/main/java/ImageAnalysisCustomization.java
+    use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-image-analysis-rest"

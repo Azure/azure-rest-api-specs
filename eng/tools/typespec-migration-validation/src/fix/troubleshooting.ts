@@ -1,3 +1,5 @@
+import { jsonOutput, Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkDefault } from "./default.js";
 import { checkPropertyAttributeAdded, checkPropertyAttributeChanged, checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 import { checkMinMax } from "./minMax.js";
@@ -12,8 +14,16 @@ export function suggestFix(jsonObj: any): string[] {
   for (const statement of clientNameStatement) {
     const { path, value } = statement;
     if (getPropertyName(path)) {
-      const [definitionName, propertyName] = getPropertyName(path)!; 
-      suggestedFixes.push(`@@clientName(${definitionName}.${propertyName}, "${value}");`);
+      const [definitionName, propertyName] = getPropertyName(path)!;
+      const s = `@@clientName(${definitionName}.${propertyName}, "${value}");`
+      suggestedFixes.push(s);
+      jsonOutput.suggestions.push({
+        suggestion: `Find file "back-compatible.tsp" or "client.tsp" and add the following statement exactly as it is::
+\`\`\`typespec
+${s}
+\`\`\``,
+        path: constructJsonPath(path, statement.key)
+      });
     }
   }
 
@@ -23,26 +33,39 @@ export function suggestFix(jsonObj: any): string[] {
     if ((value as any) === false) continue;
 
     if (getPropertyName(path)) {
-      const [definitionName, propertyName] = getPropertyName(path)!; 
-      suggestedFixes.push(`@@flattenProperty(${definitionName}.${propertyName});`);
+      const [definitionName, propertyName] = getPropertyName(path)!;
+      const s = `@@flattenProperty(${definitionName}.${propertyName});`;
+      suggestedFixes.push(s);
+      jsonOutput.suggestions.push({
+        suggestion: `Find file "back-compatible.tsp" or "client.tsp" and add the following statement exactly as it is::
+\`\`\`typespec
+${s}
+\`\`\``,
+        path: constructJsonPath(path, statement.key)
+      });
     }
   }
 
   if (suggestedFixes.length > 0) {
-    suggestedFixes.unshift(`Add the following clientName statements to back-compatible.tsp or client.tsp:`);
+    suggestedFixes.unshift(
+      `Add the following clientName statements to back-compatible.tsp or client.tsp:`,
+    );
   }
   return suggestedFixes;
 }
 
 export function suggestPrompt(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
+  const suggestedFixes: Suggestion[] = [];
 
   const clientNameChanges = checkPropertyAttributeChanged('x-ms-client-name', jsonObj);
   for (const change of clientNameChanges) {
     const { path, oldValue, newValue } = change;
     if (getPropertyName(path)) {
-      const [definitionName, propertyName] = getPropertyName(path)!; 
-      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${newValue}") in file back-compatible.tsp or client.tsp. Change it to @@clientName(${definitionName}.${propertyName}, "${oldValue})"`);
+      const [definitionName, propertyName] = getPropertyName(path)!;
+      suggestedFixes.push({
+        suggestion: `Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${newValue}") in file back-compatible.tsp or client.tsp. Change it to @@clientName(${definitionName}.${propertyName}, "${oldValue})"`,
+        path: path
+      });
     }
   }
 
@@ -50,8 +73,11 @@ export function suggestPrompt(jsonObj: any): string[] {
   for (const change of clientNameAdded) {
     const { path, value } = change;
     if (getPropertyName(path)) {
-      const [definitionName, propertyName] = getPropertyName(path)!; 
-      suggestedFixes.push(`Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement`);
+      const [definitionName, propertyName] = getPropertyName(path)!;
+      suggestedFixes.push({
+        suggestion: `Find this TypeSpec statement @@clientName(${definitionName}.${propertyName}, "${value}") in file back-compatible.tsp or client.tsp. Delete this statement.`,
+        path: constructJsonPath(path, change.key)
+      });
     }
   }
 
@@ -61,11 +87,13 @@ export function suggestPrompt(jsonObj: any): string[] {
   suggestedFixes.push(...checkNullable(jsonObj));
   suggestedFixes.push(...checkSecret(jsonObj));
 
+  const suggestionsAsString = suggestedFixes.map(s => s.suggestion);
   if (suggestedFixes.length > 0) {
-    suggestedFixes.unshift(`You are an expert in TypeSpec. Do the following changes to the TypeSpec file:`);
-    for (let i = 1; i < suggestedFixes.length; i++) {
-      suggestedFixes[i] = `${i}. ${suggestedFixes[i]}`;
+    jsonOutput.suggestions.push(...suggestedFixes);
+    suggestionsAsString.unshift(`You are an expert in TypeSpec. Follow the prompt exactly as written. Do not add any additional suggestions or modifications unless explicitly requested.`);
+    for (let i = 1; i < suggestionsAsString.length; i++) {
+      suggestionsAsString[i] = `${i}. ${suggestionsAsString[i]}`;
     }
   }
-  return suggestedFixes;
+  return suggestionsAsString;
 }
