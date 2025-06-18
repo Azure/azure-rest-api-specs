@@ -34,3 +34,24 @@ using Microsoft.Dashboard;
   "ManagedGrafanaPatchProperties",
   "csharp"
 );
+
+@@clientName(DeterministicOutboundIP,
+  "DeterministicOutboundIp",
+  "java"
+);
+@@clientName(StartTLSPolicy,
+  "StartTlsPolicy",
+  "java"
+);
+@@clientName(ManagedGrafanaProperties.deterministicOutboundIP,
+  "deterministicOutboundIp",
+  "java"
+);
+@@clientName(ManagedPrivateEndpointModelProperties.privateLinkServicePrivateIP,
+  "privateLinkServicePrivateIp",
+  "java"
+);
+@@clientName(Smtp.startTLSPolicy,
+  "startTlsPolicy",
+  "java"
+);
