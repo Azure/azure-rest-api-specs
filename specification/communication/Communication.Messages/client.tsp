@@ -15,12 +15,15 @@ namespace ClientForAcsMessages;
   service: Azure.Communication.MessagesService,
 })
 interface NotificationMessagesClient
-  extends Azure.Communication.MessagesService.NotificationMessagesOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
-  @access(Access.internal, "csharp")
-  @clientName("downloadMediaInternal", "csharp")
-  downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
-}
+  extends Azure.Communication.MessagesService.NotificationMessagesOperations {}
+
+@@clientName(Azure.Communication.MessagesService.StreamOperations.getMedia,
+  "downloadMedia",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
+@@access(Azure.Communication.MessagesService.StreamOperations.getMedia, Access.internal, "csharp");
+
 
 @client({
   name: "MessageTemplateClient",
@@ -36,13 +39,7 @@ interface MessageTemplateClient
   service: Azure.Communication.MessagesService,
 })
 interface ConversationAdministrationClient
-  extends Azure.Communication.MessagesService.ConversationAdministrationOperations {
-  listConversations is Azure.Communication.MessagesService.ConversationThreadOperations.listConversations;
-  listMessages is Azure.Communication.MessagesService.ConversationThreadOperations.listMessages;
-  addParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.addParticipants;
-  removeParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.removeParticipants;
-  analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
-}
+  extends Azure.Communication.MessagesService.ConversationAdministrationOperations {}
 
 @added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({
