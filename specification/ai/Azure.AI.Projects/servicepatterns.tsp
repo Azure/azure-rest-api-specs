@@ -23,6 +23,7 @@ interface VersionedOperations<
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @Http.get
+  @list
   listVersions is CoreOps.ResourceAction<
     TEntityType,
     TListVersionsParameters,

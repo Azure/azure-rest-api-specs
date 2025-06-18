@@ -293,6 +293,7 @@ interface LoadTestRun {
   @doc("List the metric values for a load test run.")
   @route("/test-runs/{testRunId}/metrics")
   @post
+  @list
   listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""
@@ -322,6 +323,7 @@ interface LoadTestRun {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
   @summary("List the dimension values for the given metric dimension name.")
   @doc("List the dimension values for the given metric dimension name.")
+  @list
   @route("/test-runs/{testRunId}/metric-dimensions/{name}/values")
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {

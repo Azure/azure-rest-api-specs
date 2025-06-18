@@ -174,6 +174,7 @@ interface NodeTypes {
    * Gets the list of recent fault simulations for the node type.
    */
   @tag("FaultSimulation")
+  @list
   listFaultSimulation is ArmResourceActionSync<
     NodeType,
     void,
@@ -188,6 +189,7 @@ interface NodeTypeSkus {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @get
+  @list
   @action("skus")
   @operationId("NodeTypeSkus_List")
   list is ArmResourceActionSync<

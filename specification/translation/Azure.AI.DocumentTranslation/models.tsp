@@ -323,10 +323,9 @@ model InnerTranslationError {
 }
 
 @doc("Translation job Status Response")
-@pagedResult
 model TranslationsStatus {
   @doc("The summary status of individual operation")
-  @items
+  @pageItems
   value: TranslationStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")
@@ -440,10 +439,9 @@ model DocumentStatus {
 }
 
 @doc("Documents Status Response")
-@pagedResult
 model DocumentsStatus {
   @doc("The detail status of individual documents")
-  @items
+  @pageItems
   value: DocumentStatus[];
 
   @doc("Url for the next page.  Null if no more pages available")

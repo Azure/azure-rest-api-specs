@@ -335,12 +335,11 @@ model RoleDefinitionCreateParameters {
 /**
  * Role definition list operation result.
  */
-@pagedResult
 model RoleDefinitionListResult {
   /**
    * Role definition list.
    */
-  @items
+  @pageItems
   value?: RoleDefinition[];
 
   /**
@@ -426,12 +425,11 @@ model RoleAssignmentProperties {
 /**
  * Role assignment list operation result.
  */
-@pagedResult
 model RoleAssignmentListResult {
   /**
    * Role assignment list.
    */
-  @items
+  @pageItems
   value?: RoleAssignment[];
 
   /**

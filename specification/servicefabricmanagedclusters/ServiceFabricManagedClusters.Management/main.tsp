@@ -44,6 +44,7 @@ interface Operations {
   @summary("Lists all of the available Service Fabric resource provider API operations.")
   @route("/providers/Microsoft.ServiceFabric/operations")
   @get
+  @list
   @armResourceList(OperationListResult)
   list(
     ...ApiVersionParameter,
