@@ -56,30 +56,13 @@ directive:
 ```
 
 
-### Tag: package-2022-10
-
-These settings apply only when `--tag=package-2022-10` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-10'
-input-file:
-  - Qumulo.Storage/stable/2022-10-12/Qumulo.Storage.json
-```
-### Tag: package-2022-06-27-preview
-
-These settings apply only when `--tag=package-2022-06-27-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-06-27-preview'
-input-file:
-  - Qumulo.Storage/preview/2022-06-27-preview/Qumulo.Storage.json
-```
-
 ### Tag: package-2022-10-12-preview
 
 These settings apply only when `--tag=package-2022-10-12-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-10-12-preview'
 input-file:
-  - Qumulo.Storage/preview/2022-10-12-preview/Qumulo.Storage.json
+  - preview/2022-10-12-preview/Qumulo.Storage.json
 ```
 
 ### Tag: package-2024-06-19
@@ -88,7 +71,7 @@ These settings apply only when `--tag=package-2024-06-19` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-06-19'
 input-file:
-  - Qumulo.Storage/stable/2024-06-19/Qumulo.Storage.json
+  - stable/2024-06-19/Qumulo.Storage.json
 ```
 
 ---
@@ -120,7 +103,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
