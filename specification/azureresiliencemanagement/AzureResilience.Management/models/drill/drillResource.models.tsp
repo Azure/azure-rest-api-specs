@@ -29,7 +29,7 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
   name: string;
 }
 
-@doc("Properties of the Resiliency Drill Resource.")
+@doc("Properties of the Resiliency Drill Resource")
 model DrillResourceProperties {
   @doc("Id of the resource.")
   resourceId: string;
