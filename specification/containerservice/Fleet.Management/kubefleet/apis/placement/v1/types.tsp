@@ -32,11 +32,11 @@ model PlacementPolicy {
 
 @doc("PlacementType identifies the type of placement.")
 union PlacementType {
-  @doc("PickAllPlacementType picks all clusters that satisfy the rules")
-  PickAllPlacementType: "PickAll",
+  @doc("PickAll picks all clusters that satisfy the rules")
+  PickAll: "PickAll",
 
-  @doc("PickFixedPlacementType picks a fixed set of clusters.")
-  PickFixedPlacementType: "PickFixed",
+  @doc("PickFixed picks a fixed set of clusters.")
+  PickFixed: "PickFixed",
 
   string,
 }
