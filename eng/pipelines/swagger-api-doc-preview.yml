@@ -19,6 +19,7 @@ jobs:
     steps:
       # TODO: Use sparse checkout instead
       - checkout: self
+        fetchDepth: 2
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
