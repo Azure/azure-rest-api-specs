@@ -19,10 +19,14 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the DomainServices API.
+
+```yaml
+modelerfour:
+  lenient-model-deduplication: true
+```
 
 ``` yaml
 openapi-type: arm
