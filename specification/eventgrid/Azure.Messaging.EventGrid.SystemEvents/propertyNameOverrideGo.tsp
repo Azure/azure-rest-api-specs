@@ -380,10 +380,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSMessageDeliveryStatusUpdatedEventData",
   "go"
 );
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
-  "ChannelKind",
-  "go"
-);
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
   "ReceivedTimestamp",
   "go"
@@ -414,7 +410,6 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageMediaContent.id, "MediaID", "go");
 
 @@clientName(AcsMessageReceivedEventData, "ACSMessageReceivedEventData", "go");
-@@clientName(AcsMessageReceivedEventData.channelType, "ChannelKind", "go");
 @@clientName(AcsMessageReceivedEventData.interactive,
   "InteractiveContent",
   "go"
@@ -435,7 +430,7 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 
-@@clientName(recordingChannelType, "ACSRecordingChannelKind", "go");
+@@clientName(recordingChannelType, "ACSRecordingChannelType", "go");
 @@clientName(recordingContentType, "ACSRecordingContentType", "go");
 @@clientName(recordingFormatType, "ACSRecordingFormatType", "go");
 @@clientName(KeyVaultAccessPolicyChangedEventData.NBF, "NBF", "go");
@@ -458,11 +453,6 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(KeyVaultSecretNearExpiryEventData.EXP, "EXP", "go");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "NBF", "go");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "EXP", "go");
-
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
-  "recordingChannelKind",
-  "go"
-);
 
 @@clientName(AcsRecordingStorageInfoProperties,
   "ACSRecordingStorageInfoProperties",
@@ -609,10 +599,7 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSCallParticipantAddedEventData",
   "go"
 );
-@@clientName(AcsCallParticipantEventProperties,
-  "ACSCallParticipantEventProperties",
-  "go"
-);
+@@clientName(AcsCallParticipantEventData, "ACSCallParticipantEventData", "go");
 @@clientName(AcsCallParticipantProperties,
   "ACSCallParticipantProperties",
   "go"
@@ -632,6 +619,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSChatTypingIndicatorReceivedInThreadEventData",
   "go"
 );
-@@clientName(AcsCallParticipantRoleKind, "ACSCallParticipantRoleKind", "go");
+@@clientName(AcsCallParticipantKind, "ACSCallParticipantRoleKind", "go");
 
 // [END] ACS renames (and acronym casing)
