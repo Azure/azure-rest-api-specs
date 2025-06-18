@@ -47,7 +47,13 @@ model SchemaVersionWithUpdateType {
 @doc("Schema Resource")
 @resource("schemas")
 model Schema is TrackedResource<SchemaProperties> {
-  ...ResourceNameParameter<Schema>;
+  @doc("The name of the Schema")
+  @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
+  @path
+  @key("schemaName")
+  @segment("schemas")
+  name: string;
+
   ...EntityTagProperty;
 }
 
