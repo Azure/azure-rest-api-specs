@@ -2822,7 +2822,7 @@
     },
     "FleetManagedNamespaceProperties": {
       "type": "object",
-      "description": "A fleet managed namespace.",
+      "description": "The properties of a fleet managed namespace.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/FleetManagedNamespaceProvisioningState",
@@ -2852,7 +2852,6 @@
         }
       },
       "required": [
-        "managedNamespaceProperties",
         "adoptionPolicy",
         "deletePolicy"
       ]
@@ -3772,34 +3771,34 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "PropertySelectorGreaterThan",
+            "name": "Gt",
             "value": "Gt",
-            "description": "PropertySelectorGreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement."
+            "description": "GreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement."
           },
           {
-            "name": "PropertySelectorGreaterThanOrEqualTo",
+            "name": "Ge",
             "value": "Ge",
-            "description": "PropertySelectorGreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement."
+            "description": "GreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement."
           },
           {
-            "name": "PropertySelectorEqualTo",
+            "name": "Eq",
             "value": "Eq",
-            "description": "PropertySelectorEqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement."
+            "description": "EqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement."
           },
           {
-            "name": "PropertySelectorNotEqualTo",
+            "name": "Ne",
             "value": "Ne",
-            "description": "PropertySelectorNotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement."
+            "description": "NotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement."
           },
           {
-            "name": "PropertySelectorLessThan",
+            "name": "Lt",
             "value": "Lt",
-            "description": "PropertySelectorLessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement."
+            "description": "LessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement."
           },
           {
-            "name": "PropertySelectorLessThanOrEqualTo",
+            "name": "Le",
             "value": "Le",
-            "description": "PropertySelectorLessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement."
+            "description": "LessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement."
           }
         ]
       }
@@ -3901,21 +3900,12 @@
           "description": "The type of the policy to be used. Default is Placement."
         },
         "propagationProfile": {
-          "$ref": "#/definitions/PropagationProfile",
+          "$ref": "#/definitions/PlacementProfile",
           "description": "The propagation profile to be used for the propagation. Default is PlacementProfile."
         }
       },
       "required": [
         "type"
-      ]
-    },
-    "PropagationProfile": {
-      "type": "object",
-      "x-nullable": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/PlacementProfile"
-        }
       ]
     },
     "PropagationType": {

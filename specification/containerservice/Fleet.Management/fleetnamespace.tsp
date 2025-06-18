@@ -44,7 +44,7 @@ model FleetManagedNamespaceProperties {
   provisioningState?: FleetManagedNamespaceProvisioningState;
 
   @doc("The namespace properties for the fleet managed namespace.")
-  managedNamespaceProperties: ManagedNamespaceProperties;
+  managedNamespaceProperties?: ManagedNamespaceProperties;
 
   @doc("Action if the managed namespace with the same name already exists. Default is Never.")
   adoptionPolicy: AdoptionPolicy;
@@ -164,8 +164,8 @@ model PropagationPolicy {
   @doc("The type of the policy to be used. Default is Placement.")
   type: PropagationType;
 
-  @doc("The propagation profile to be used for the propagation. Default is PlacementProfile.")
-  propagationProfile?: PropagationProfile;
+  @doc("The profile to be used for propagation via placement.")
+  placementProfile?: PlacementProfile;
 }
 
 @added(Versions.v2025_03_02_naar)
@@ -175,13 +175,6 @@ union PropagationType {
   Placement: "Placement",
 
   string,
-}
-
-@added(Versions.v2025_03_02_naar)
-@doc("The available Propagation profiles.")
-union PropagationProfile {
-  @doc("Use ClusterResourcePlacement.")
-  PlacementProfile,
 }
 
 @added(Versions.v2025_03_02_naar)
@@ -226,3 +219,4 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 }
+

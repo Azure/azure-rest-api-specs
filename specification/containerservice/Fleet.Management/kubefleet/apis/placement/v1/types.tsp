@@ -90,23 +90,23 @@ model PropertySelectorRequirement {
 
 @doc("PropertySelectorOperator is the operator that can be used with PropertySelectorRequirements.")
 union PropertySelectorOperator {
-  @doc("PropertySelectorGreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement.")
-  PropertySelectorGreaterThan: "Gt",
+  @doc("GreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement.")
+  Gt: "Gt",
 
-  @doc("PropertySelectorGreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement.")
-  PropertySelectorGreaterThanOrEqualTo: "Ge",
+  @doc("GreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement.")
+  Ge: "Ge",
 
-  @doc("PropertySelectorEqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement.")
-  PropertySelectorEqualTo: "Eq",
+  @doc("EqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement.")
+  Eq: "Eq",
 
-  @doc("PropertySelectorNotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement.")
-  PropertySelectorNotEqualTo: "Ne",
+  @doc("NotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement.")
+  Ne: "Ne",
 
-  @doc("PropertySelectorLessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement.")
-  PropertySelectorLessThan: "Lt",
+  @doc("LessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement.")
+  Lt: "Lt",
 
-  @doc("PropertySelectorLessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement.")
-  PropertySelectorLessThanOrEqualTo: "Le",
+  @doc("LessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement.")
+  Le: "Le",
 
   string,
 }
