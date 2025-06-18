@@ -60,7 +60,7 @@ using Azure.Core;
 @@clientLocation(ManagedGrafanas.list, "Grafana");
 @@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana");
 @@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana");
-@@clientLocation(ManagedGrafanas.refresh, "Grafana");
+@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints");
 @@clientLocation(ManagedPrivateEndpointModels.get, "ManagedPrivateEndpoints");
 @@clientLocation(ManagedPrivateEndpointModels.create,
   "ManagedPrivateEndpoints"
