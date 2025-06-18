@@ -539,6 +539,6 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 @@flattenProperty(PlacementPolicyUpdate.properties, "java,python");
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
-  Record<string>,
+  Record<unknown>,
   "java,go,csharp"
 );
