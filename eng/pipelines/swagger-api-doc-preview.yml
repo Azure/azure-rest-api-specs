@@ -34,7 +34,7 @@ jobs:
               Commitish: refs/heads/doc-preview-migration-test
               WorkingDirectory: AzureRestPreview
 
-      - pwsh: Get-ChildItem *
+      - pwsh: Get-ChildItem * | Select-Object -Property FullName
         workingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
@@ -44,6 +44,12 @@ jobs:
           npm exec --no -- api-doc-preview --output AzureRestPreview
         displayName: 'Generate Swagger API documentation preview'
         workingDirectory: .github/shared
+
+      - script: |
+          pwd
+          ls -lh
+          git diff --name-only
+        workingDirectory: AzureRestPreview
 
       - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
         parameters:
