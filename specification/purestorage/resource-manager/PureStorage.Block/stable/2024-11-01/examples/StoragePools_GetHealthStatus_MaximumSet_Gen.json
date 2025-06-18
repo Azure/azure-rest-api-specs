@@ -1,0 +1,43 @@
+{
+  "title": "StoragePools_GetHealthStatus",
+  "operationId": "StoragePools_GetHealthStatus",
+  "parameters": {
+    "api-version": "2024-11-01",
+    "subscriptionId": "BC47D6CC-AA80-4374-86F8-19D94EC70666",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagePoolname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "health": {
+          "usedCapacityPercentage": 21,
+          "bandwidthUsage": {
+            "current": 15,
+            "provisioned": 23,
+            "max": 21
+          },
+          "iopsUsage": {
+            "current": 5,
+            "provisioned": 19,
+            "max": 15
+          },
+          "space": {
+            "totalUsed": 28,
+            "unique": 4,
+            "snapshots": 5,
+            "shared": 9
+          },
+          "dataReductionRatio": 28,
+          "estimatedMaxCapacity": 1
+        },
+        "alerts": [
+          {
+            "level": "info",
+            "message": "uasvakccxihgmdz"
+          }
+        ]
+      }
+    }
+  }
+}
