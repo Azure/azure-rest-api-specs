@@ -57,10 +57,35 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2023-03
+tag: package-preview-2025-05-25-preview
 ```
 
 =======
+### Tag: package-preview-2025-05-25-preview
+
+These settings apply only when `--tag=package-preview-2025-05-25-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-25-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
+```
+
+#### New Features in 2025-05-25-preview
+
+1. Added customProperties field to Alert type
+   - Optional field that can hold user-defined key-value pairs
+   - Can be null, empty object {}, or contain string key-value pairs
+   - Available in both Alerts_GetById and Alerts_List responses
+
+2. Added non-scoped endpoints that mirror existing functionality:
+   - GET /providers/Microsoft.AlertsManagement/alerts
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}
+   - GET /providers/Microsoft.AlertsManagement/alerts/{alertId}/history
+   - POST /providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate
+
+   These endpoints provide the same functionality as their scoped counterparts but without requiring the scope parameter.
+   The operations are available through new operationIds with "_Global" suffix (e.g., Alerts_GetAll_Global, Alerts_GetById_Global).
+
 ### Tag: package-preview-2025-05-01-preview
 
 These settings apply only when `--tag=package-preview-2025-05-01-preview` is specified on the command line.
@@ -283,6 +308,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-
-
