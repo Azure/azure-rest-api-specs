@@ -219,3 +219,10 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 }
+
+@doc("Properties of a Fleet Managed Namespace that can be patched.")
+model FleetManagedNamespacePatch {
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  
+}
