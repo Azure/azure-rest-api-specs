@@ -76,15 +76,19 @@ interface WorkloadNetworks {
   deletePortMirroring is WorkloadNetworkPortMirroringProfiles.delete;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("list_public_ips", "python")
   listPublicIPs is WorkloadNetworkPublicIps.list;
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("getPublicIp", "java")
   getPublicIP is WorkloadNetworkPublicIps.get;
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @clientName("createPublicIp", "java")
   createPublicIP is WorkloadNetworkPublicIps.create;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("deletePublicIp", "java")
   deletePublicIP is WorkloadNetworkPublicIps.delete;
 
   listSegments is WorkloadNetworkSegments.list;
@@ -200,15 +204,15 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
@@ -232,7 +236,78 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
   "java"
 );
 
-@@clientName(Locations.checkTrialAvailability::parameters.sku, "SKU", "go");
+// parameter
+@@clientName(PublicIPIdParameter.publicIPId, "publicIpId", "java");
+@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
+  "workloadNetworkPublicIp",
+  "java"
+);
+
+@@clientName(Customization, "AvsClient", "java");
+
+// flatten
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.TrackedResource.properties,
+  "java,python"
+);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+  "java,python"
+);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+  "java,python"
+);
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Location.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Cluster.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Datastore.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(HcxEnterpriseSite.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ExpressRouteAuthorization.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(GlobalReachConnection.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetwork.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkSegment.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkGateway.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPortMirroring.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVMGroup.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVirtualMachine.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsService.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsZone.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPublicIP.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(CloudLink.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(VirtualMachine.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptPackage.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptCmdlet.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptExecution.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(IscsiPath.properties, "java,python");
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(PrivateCloudUpdate.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ClusterUpdate.properties, "java,python");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(PlacementPolicyUpdate.properties, "java,python");
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
   Record<unknown>,

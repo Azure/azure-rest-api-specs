@@ -188,7 +188,14 @@ export async function fetchFailedArtifact({
     .filter((artifact) => artifact.name.includes(artifactName))
     .sort((a, b) => b.name.localeCompare(a.name)); // Descending order (Z to A)
   if (artifactsList.length === 0) {
-    throw new Error(`No artifacts found with name containing ${artifactName}`);
+    const message = `No artifacts found with name containing ${artifactName}`;
+    core.warning(message);
+    // Return a Response-like object using the global Response constructor
+    return new Response(message, {
+      status: 404,
+      statusText: message,
+      headers: { "Content-Type": "text/plain" },
+    });
   }
   artifactName = artifactsList[0].name;
   apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;

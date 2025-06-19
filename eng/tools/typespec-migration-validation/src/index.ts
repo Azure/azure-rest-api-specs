@@ -7,17 +7,10 @@ import { configuration } from "./configuration.js";
 import { processDocument } from "./document.js";
 import { suggestFix, suggestPrompt } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
+import { addIgnorePath, processIgnoreList } from "./ignore.js";
+import { jsonOutput } from "./jsonOutput.js";
 import { logHeader, logWarning } from "./log.js";
 import { findChangedPaths, findDifferences, findModifiedValues, formatChangedPathsReport, formatDifferenceReport, formatModifiedValuesReport } from "./summary.js";
-import { addIgnorePath, processIgnoreList } from "./ignore.js";
-
-export interface JsonOutput {
-  suggestions: string[];
-}
-
-export const jsonOutput: JsonOutput = {
-  suggestions: [],
-};
 
 function parseArguments() {
   return yargs(hideBin(process.argv))
@@ -207,7 +200,7 @@ export async function main() {
   if (outputFolder) {
     fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
     logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
-
+    
     const suggestedFixes = suggestFix(diffForFile);
     if (suggestedFixes.length > 0) {
       logWarning(`Considering these suggested fixes for the diff:`);
@@ -223,9 +216,9 @@ export async function main() {
       });
     }
     if (args.jsonOutput) {
-      console.log(`---- Start of Json Output ----
-${JSON.stringify(jsonOutput, null, 2)}
----- End of Json Output ----`);
+      fs.writeFileSync(`${outputFolder}/tsmv_output.json`, JSON.stringify(jsonOutput, null, 2));
+      logHeader(`JSON output written to ${outputFolder}/tsmv_output.json`);
+      console.log(`---- Start of Json Output ----\n${JSON.stringify(jsonOutput, null, 2)}\n---- End of Json Output ----`);
     }
   }
   else {
