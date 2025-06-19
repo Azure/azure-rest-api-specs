@@ -1,0 +1,87 @@
+{
+  "title": "CreateOrUpdateMetric_Percentile",
+  "operationId": "CreateOrUpdateMetric",
+  "parameters": {
+    "experimentMetricId": "p95_page_load_time",
+    "api-version": "2025-05-31-preview",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "displayName": "95th percentile of page load time [ms]",
+      "description": "The 95th percentile of the page load time for all pages. Measured in milliseconds. Review page-specific metric results to identify pages that need optimization.",
+      "lifecycle": "Active",
+      "categories": [
+        "Performance",
+        "Important"
+      ],
+      "desiredDirection": "Decrease",
+      "definition": {
+        "type": "Percentile",
+        "value": {
+          "eventName": "PageLoad",
+          "eventProperty": "LoadTime_ms"
+        },
+        "percentile": 95
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "p95_page_load_time",
+        "displayName": "95th percentile of page load time [ms]",
+        "description": "The 95th percentile of the page load time for all pages. Measured in milliseconds. Review page-specific metric results to identify pages that need optimization.",
+        "lifecycle": "Active",
+        "categories": [
+          "Performance",
+          "Important"
+        ],
+        "desiredDirection": "Decrease",
+        "definition": {
+          "type": "Percentile",
+          "value": {
+            "eventName": "PageLoad",
+            "eventProperty": "LoadTime_ms"
+          },
+          "percentile": 95
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "p95_page_load_time",
+        "displayName": "95th percentile of page load time [ms]",
+        "description": "The 95th percentile of the page load time for all pages. Measured in milliseconds. Review page-specific metric results to identify pages that need optimization.",
+        "lifecycle": "Active",
+        "categories": [
+          "Performance",
+          "Important"
+        ],
+        "desiredDirection": "Decrease",
+        "definition": {
+          "type": "Percentile",
+          "value": {
+            "eventName": "PageLoad",
+            "eventProperty": "LoadTime_ms"
+          },
+          "percentile": 95
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    }
+  }
+}
