@@ -174,96 +174,174 @@ model NginxConfigurationListResponse {
 }
 
 /**
- * Response model for configuration analysis.
+ * The request body for creating an analysis for an NGINX configuration.
  */
-model ConfigurationAnalysisResponse {
+model AnalysisCreate {
   /**
-   * List of analysis results for the configuration.
+   * Configuration details for analysis.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
-  value: ConfigurationAnalysisResult[];
-
-  /**
-   * URL to fetch the next page of analysis results.
-   */
-  nextLink?: string;
+  config: AnalysisConfig;
 }
 
 /**
- * Configuration analysis result.
+ * Configuration details for analysis.
  */
-model ConfigurationAnalysisResult {
+model AnalysisConfig {
   /**
-   * Unique identifier for the analysis result.
+   * The root file of the NGINX config file(s). It must match one of the files' filepath.
    */
-  id: string;
+  rootFile?: string;
 
   /**
-   * Severity level of the analysis finding.
+   * List of configuration files.
    */
-  severity: AnalysisSeverity;
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  files?: NginxConfigurationFile[];
 
   /**
-   * The type of analysis finding.
+   * List of protected files.
    */
-  type: string;
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  protectedFiles?: NginxConfigurationProtectedFileRequest[];
 
   /**
-   * Descriptive message about the analysis finding.
+   * Configuration package details.
+   */
+  package?: NginxConfigurationPackage;
+}
+
+/**
+ * The response body for an analysis request. Contains the status of the analysis and any errors.
+ */
+model AnalysisResult {
+  /**
+   * The status of the analysis.
+   */
+  status: string;
+
+  /**
+   * Analysis result data.
+   */
+  data?: AnalysisResultData;
+}
+
+/**
+ * Analysis result data containing errors and diagnostics.
+ */
+model AnalysisResultData {
+  /**
+   * List of errors found during analysis.
+   */
+  errors?: AnalysisDiagnostic[];
+
+  /**
+   * List of diagnostics found during analysis.
+   */
+  diagnostics?: DiagnosticItem[];
+}
+
+/**
+ * An error object found during the analysis of an NGINX configuration.
+ */
+model AnalysisDiagnostic {
+  /**
+   * Unique identifier for the error.
+   */
+  id?: string;
+
+  /**
+   * The directive being analyzed.
+   */
+  directive: string;
+
+  /**
+   * Description of the error.
+   */
+  description: string;
+
+  /**
+   * The filepath of the most relevant config file.
+   */
+  file: string;
+
+  /**
+   * Line number where the error was found.
+   */
+  line: int32;
+
+  /**
+   * Error message.
    */
   message: string;
 
   /**
-   * File path where the issue was found.
+   * Rule that triggered the error.
    */
-  filePath?: string;
-
-  /**
-   * Line number where the issue was found.
-   */
-  lineNumber?: int32;
-
-  /**
-   * Suggested resolution for the issue.
-   */
-  resolution?: string;
+  rule: string;
 }
 
 /**
- * Severity level of an analysis finding.
+ * A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.
  */
-union AnalysisSeverity {
-  /** Error level finding that should be addressed immediately. */
-  Error: "Error",
+model DiagnosticItem {
+  /**
+   * Unique identifier for the diagnostic.
+   */
+  id?: string;
 
-  /** Warning level finding that should be reviewed. */
-  Warning: "Warning",
+  /**
+   * The directive being analyzed.
+   */
+  directive: string;
 
-  /** Information level finding that may be helpful but not critical. */
+  /**
+   * Description of the diagnostic.
+   */
+  description: string;
+
+  /**
+   * The filepath of the most relevant config file.
+   */
+  file: string;
+
+  /**
+   * Line number where the diagnostic was found.
+   */
+  line: int32;
+
+  /**
+   * Diagnostic message.
+   */
+  message: string;
+
+  /**
+   * Rule that triggered the diagnostic.
+   */
+  rule: string;
+
+  /**
+   * Warning or Info.
+   */
+  level: DiagnosticLevel;
+
+  /**
+   * Category of warning like Best-practices, Recommendation, Security etc.
+   */
+  category?: string;
+}
+
+/**
+ * Diagnostic level indicating the importance of the diagnostic.
+ */
+union DiagnosticLevel {
+  /** Information level diagnostic. */
   Info: "Info",
 
-  /** Other severity levels not covered by pre-defined values. */
+  /** Warning level diagnostic. */
+  Warning: "Warning",
+
+  /** Other diagnostic levels not covered by pre-defined values. */
   string,
-}
-
-/**
- * Request model for analyzing a configuration.
- */
-model ConfigurationAnalysisRequest {
-  /**
-   * Specific files to analyze. If not provided, all configuration files will be analyzed.
-   */
-  files?: string[];
-
-  /**
-   * Specific analysis types to run. If not provided, all available analyses will be run.
-   */
-  analysisTypes?: string[];
-
-  /**
-   * Minimum severity level of findings to include in the results.
-   */
-  minimumSeverity?: AnalysisSeverity;
 }
 
 /**
@@ -316,13 +394,13 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is not a long-running operation"
   @post
   @action("analyze")
-  @armResourceAction(ConfigurationAnalysisResponse)
+  @armResourceAction(AnalysisResult)
   analyze(
     ...ResourceInstanceParameters<Configuration>,
 
     /**
      * Request body for the analysis.
      */
-    @body request: ConfigurationAnalysisRequest,
-  ): ArmResponse<ConfigurationAnalysisResponse> | ArmAcceptedResponse | ErrorResponse;
+    @body request: AnalysisCreate,
+  ): ArmResponse<AnalysisResult> | ErrorResponse;
 }

@@ -1316,7 +1316,7 @@
             "description": "Request body for the analysis.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConfigurationAnalysisRequest"
+              "$ref": "#/definitions/AnalysisCreate"
             }
           }
         ],
@@ -1324,17 +1324,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationAnalysisResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+              "$ref": "#/definitions/AnalysisResult"
             }
           },
           "default": {
@@ -1342,11 +1332,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Configurations_Analyze": {
-            "$ref": "./examples/Configurations_Analyze.json"
           }
         }
       }
@@ -1674,34 +1659,127 @@
         ]
       }
     },
-    "AnalysisSeverity": {
-      "type": "string",
-      "description": "Severity level of an analysis finding.",
-      "enum": [
-        "Error",
-        "Warning",
-        "Info"
-      ],
-      "x-ms-enum": {
-        "name": "AnalysisSeverity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Error level finding that should be addressed immediately."
+    "AnalysisConfig": {
+      "type": "object",
+      "description": "Configuration details for analysis.",
+      "properties": {
+        "rootFile": {
+          "type": "string",
+          "description": "The root file of the NGINX config file(s). It must match one of the files' filepath."
+        },
+        "files": {
+          "type": "array",
+          "description": "List of configuration files.",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
           },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "Warning level finding that should be reviewed."
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "description": "List of protected files.",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
           },
-          {
-            "name": "Info",
-            "value": "Info",
-            "description": "Information level finding that may be helpful but not critical."
+          "x-ms-identifiers": []
+        },
+        "package": {
+          "$ref": "#/definitions/NginxConfigurationPackage",
+          "description": "Configuration package details."
+        }
+      }
+    },
+    "AnalysisCreate": {
+      "type": "object",
+      "description": "The request body for creating an analysis for an NGINX configuration.",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/AnalysisConfig",
+          "description": "Configuration details for analysis."
+        }
+      },
+      "required": [
+        "config"
+      ]
+    },
+    "AnalysisDiagnostic": {
+      "type": "object",
+      "description": "An error object found during the analysis of an NGINX configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the error."
+        },
+        "directive": {
+          "type": "string",
+          "description": "The directive being analyzed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "file": {
+          "type": "string",
+          "description": "The filepath of the most relevant config file."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Line number where the error was found."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "rule": {
+          "type": "string",
+          "description": "Rule that triggered the error."
+        }
+      },
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule"
+      ]
+    },
+    "AnalysisResult": {
+      "type": "object",
+      "description": "The response body for an analysis request. Contains the status of the analysis and any errors.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the analysis."
+        },
+        "data": {
+          "$ref": "#/definitions/AnalysisResultData",
+          "description": "Analysis result data."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "AnalysisResultData": {
+      "type": "object",
+      "description": "Analysis result data containing errors and diagnostics.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "List of errors found during analysis.",
+          "items": {
+            "$ref": "#/definitions/AnalysisDiagnostic"
           }
-        ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "description": "List of diagnostics found during analysis.",
+          "items": {
+            "$ref": "#/definitions/DiagnosticItem"
+          }
+        }
       }
     },
     "ApiKey": {
@@ -2013,94 +2091,6 @@
         }
       ]
     },
-    "ConfigurationAnalysisRequest": {
-      "type": "object",
-      "description": "Request model for analyzing a configuration.",
-      "properties": {
-        "files": {
-          "type": "array",
-          "description": "Specific files to analyze. If not provided, all configuration files will be analyzed.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "analysisTypes": {
-          "type": "array",
-          "description": "Specific analysis types to run. If not provided, all available analyses will be run.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "minimumSeverity": {
-          "$ref": "#/definitions/AnalysisSeverity",
-          "description": "Minimum severity level of findings to include in the results."
-        }
-      }
-    },
-    "ConfigurationAnalysisResponse": {
-      "type": "object",
-      "description": "Response model for configuration analysis.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of analysis results for the configuration.",
-          "items": {
-            "$ref": "#/definitions/ConfigurationAnalysisResult"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to fetch the next page of analysis results."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConfigurationAnalysisResult": {
-      "type": "object",
-      "description": "Configuration analysis result.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the analysis result."
-        },
-        "severity": {
-          "$ref": "#/definitions/AnalysisSeverity",
-          "description": "Severity level of the analysis finding."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of analysis finding."
-        },
-        "message": {
-          "type": "string",
-          "description": "Descriptive message about the analysis finding."
-        },
-        "filePath": {
-          "type": "string",
-          "description": "File path where the issue was found."
-        },
-        "lineNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Line number where the issue was found."
-        },
-        "resolution": {
-          "type": "string",
-          "description": "Suggested resolution for the issue."
-        }
-      },
-      "required": [
-        "id",
-        "severity",
-        "type",
-        "message"
-      ]
-    },
     "ConfigurationListResult": {
       "type": "object",
       "description": "The response of a Configuration list operation.",
@@ -2164,6 +2154,82 @@
           "type": "string",
           "description": "Root file path."
         }
+      }
+    },
+    "DiagnosticItem": {
+      "type": "object",
+      "description": "A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the diagnostic."
+        },
+        "directive": {
+          "type": "string",
+          "description": "The directive being analyzed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the diagnostic."
+        },
+        "file": {
+          "type": "string",
+          "description": "The filepath of the most relevant config file."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Line number where the diagnostic was found."
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message."
+        },
+        "rule": {
+          "type": "string",
+          "description": "Rule that triggered the diagnostic."
+        },
+        "level": {
+          "$ref": "#/definitions/DiagnosticLevel",
+          "description": "Warning or Info."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of warning like Best-practices, Recommendation, Security etc."
+        }
+      },
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule",
+        "level"
+      ]
+    },
+    "DiagnosticLevel": {
+      "type": "string",
+      "description": "Diagnostic level indicating the importance of the diagnostic.",
+      "enum": [
+        "Info",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Information level diagnostic."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level diagnostic."
+          }
+        ]
       }
     },
     "IdentityProperties": {
