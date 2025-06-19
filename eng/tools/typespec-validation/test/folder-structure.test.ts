@@ -24,6 +24,14 @@ describe("folder-structure", function () {
     vi.clearAllMocks();
   });
 
+  it("should fail if folder doesn't exist", async function () {
+    fileExistsSpy.mockResolvedValue(false);
+
+    const result = await new FolderStructureRule().execute(mockFolder);
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("does not exist"));
+  });
+
   it("should fail if tspconfig has incorrect extension", async function () {
     vi.mocked(globby.globby).mockImplementation(async () => {
       return ["/foo/bar/tspconfig.yml"];
@@ -87,7 +95,7 @@ describe("folder-structure", function () {
 
     const result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
     assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
+    assert(result.errorOutput.includes("does not match regex"));
   });
 
   it("should fail if second level folder is resource-manager", async function () {
@@ -100,7 +108,7 @@ describe("folder-structure", function () {
       "/gitroot/specification/foo/resource-manager",
     );
     assert(result.errorOutput);
-    assert(result.errorOutput.includes("must be capitalized"));
+    assert(result.errorOutput.includes("does not match regex"));
   });
 
   it("should fail if Shared does not follow Management ", async function () {
@@ -259,5 +267,79 @@ options:
 
     assert(result.errorOutput);
     assert(result.errorOutput.includes(".Management"));
+  });
+
+  it("v2: should fail if no tspconfig.yaml", async function () {
+    vi.mocked(globby.globby).mockImplementation(async () => {
+      return ["main.tsp"];
+    });
+    normalizePathSpy.mockReturnValue("/gitroot");
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
+      if (file.includes("tspconfig.yaml")) {
+        return false;
+      }
+      return true;
+    });
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo",
+    );
+
+    assert(result.errorOutput?.includes("must contain"));
+  });
+
+  it("v2: should fail if incorrect folder depth", async function () {
+    vi.mocked(globby.globby).mockImplementation(async () => {
+      return ["tspconfig.yaml"];
+    });
+    normalizePathSpy.mockReturnValue("/gitroot");
+
+    let result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
+    assert(result.errorOutput?.includes("level under"));
+
+    result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo/too-deep",
+    );
+    assert(result.errorOutput?.includes("level under"));
+
+    result = await new FolderStructureRule().execute("/gitroot/specification/foo/resource-manager");
+    assert(result.errorOutput?.includes("levels under"));
+
+    result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/resource-manager/RP.Namespace",
+    );
+    assert(result.errorOutput?.includes("levels under"));
+
+    result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/resource-manager/RP.Namespace/FooManagement/too-deep",
+    );
+    assert(result.errorOutput?.includes("levels under"));
+  });
+
+  it("v2: should succeed with data-plane", async function () {
+    vi.mocked(globby.globby).mockImplementation(async (patterns) => {
+      return patterns[0].includes("tspconfig") ? ["tspconfig.yaml"] : ["main.tsp"];
+    });
+    normalizePathSpy.mockReturnValue("/gitroot");
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo",
+    );
+
+    assert(result.success);
+  });
+
+  it("v2: should succeed with resource-manager", async function () {
+    vi.mocked(globby.globby).mockImplementation(async (patterns) => {
+      return patterns[0].includes("tspconfig") ? ["tspconfig.yaml"] : ["main.tsp"];
+    });
+    normalizePathSpy.mockReturnValue("/gitroot");
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/resource-manager/Microsoft.Foo/FooManagement",
+    );
+
+    assert(result.success);
   });
 });

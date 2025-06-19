@@ -39,9 +39,15 @@ input-file:
   - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
 suppressions:  
   - code: AvoidAdditionalProperties
-    reason: Record unknown because we don't want copy VMextensionProperties type here and update when dependency changes
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
-    where: $.definitions.VirtualMachineExtensionData.properties.properties
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  
+
 ```
 
 ### Tag: package-2024-10-01
@@ -66,7 +72,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -79,9 +84,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp 
 
