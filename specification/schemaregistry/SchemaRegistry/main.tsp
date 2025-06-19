@@ -248,7 +248,7 @@ model SchemaGroups {
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
   @nextLink
-  NextLink?: string;
+  NextLink?: url;
 }
 
 /**
@@ -264,7 +264,7 @@ model SchemaVersions {
   /** The link to the next page of items */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Already public casing from service is not camelCase."
   @nextLink
-  NextLink?: string;
+  NextLink?: url;
 }
 
 // Resource Models
