@@ -68,3 +68,25 @@ using Microsoft.ElasticSan;
 @@clientName(SnapshotCreationData, "SnapshotCreationContent", "csharp");
 @@clientName(PreValidationResponse, "PreValidationResult", "csharp");
 @@clientName(SourceCreationData, "SourceCreationContent", "csharp");
+
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
+// ElasticSans interface operations
+@@clientLocation(ElasticSans.listByElasticSan, "PrivateLinkResources");
+
+// SkusOperationGroup interface operations
+@@clientLocation(SkusOperationGroup.list, "Skus");
+
+// Snapshots interface operations
+@@clientLocation(Snapshots.get, "VolumeSnapshots");
+@@clientLocation(Snapshots.create, "VolumeSnapshots");
+@@clientLocation(Snapshots.delete, "VolumeSnapshots");
+@@clientLocation(Snapshots.listByVolumeGroup, "VolumeSnapshots");
+
+// VolumeGroups interface operations
+@@clientLocation(VolumeGroups.preBackup, Volumes);
+@@clientLocation(VolumeGroups.preRestore, Volumes);
+
+// Volumes interface operations
+@@clientLocation(Volumes.restoreVolume, "RestoreVolume");
