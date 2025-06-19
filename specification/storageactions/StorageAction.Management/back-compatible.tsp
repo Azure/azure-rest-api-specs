@@ -17,3 +17,11 @@ using Microsoft.StorageActions;
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageTask.properties, "!csharp");
+
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+@@clientLocation(StorageTasksOperationGroup.previewActions, "StorageTasks");
+@@clientLocation(StorageTasks.list, "StorageTasksReport");
+@@clientLocation(StorageTasks.storageTaskAssignmentList,
+  "StorageTaskAssignment"
+);
