@@ -72,6 +72,18 @@ union Status {
   string,
 }
 
+@added(Versions.v2025_06_01_preview)
+@doc("Type of Logical Network")
+union LogicalNetworkTypeEnum {
+  @doc("Logical Network of type Workload")
+  Workload: "Workload",
+
+  @doc("Logical Network of type Infrastructure")
+  Infrastructure: "Infrastructure",
+
+  string,
+}
+
 @doc("The type of extendedLocation.")
 union ExtendedLocationTypes {
   @doc("Custom extended location type")
@@ -703,6 +715,11 @@ model LogicalNetworkProperties {
   @doc("The observed state of logical networks")
   @visibility(Lifecycle.Read)
   status?: LogicalNetworkStatus;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("Type of the Logical Network")
+  @visibility(Lifecycle.Read)
+  networkType?: LogicalNetworkTypeEnum;
 }
 
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
