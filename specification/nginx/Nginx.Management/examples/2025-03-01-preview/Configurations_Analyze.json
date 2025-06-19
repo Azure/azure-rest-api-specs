@@ -1,64 +1,39 @@
 {
-  "title": "Configurations_AnalyzeConfiguration_MaximumSet",
-  "operationId": "Configurations_AnalyzeConfiguration",
   "parameters": {
-    "api-version": "2025-03-01-preview",
-    "subscriptionId": "9BB2C4E7-6B29-4C27-BB9E-0000ABC1D7A1",
-    "resourceGroupName": "rgopenapi",
-    "nginxDeploymentName": "myDeployment",
-    "configurationName": "myConfiguration",
-    "resource": {
+    "api-version": "2024-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "myDeployment",
+    "configurationName": "default",
+    "requestBody": {
       "config": {
-        "rootFile": "sedmdskaehvplg",
         "files": [
           {
-            "content": "pxgzttkizmsybzysxmllpkh",
-            "virtualPath": "pxzhnufma"
-          }
-        ],
-        "protectedFiles": [
-          {
-            "content": "vnxnfueqilsaaju",
-            "virtualPath": "gimryycwbevcsmissgxwsmz",
-            "contentHash": "wvn"
+            "content": "ABCDEF==",
+            "virtualPath": "/etc/nginx/nginx.conf"
           }
         ],
         "package": {
-          "data": "keqlxsmplfoxr",
-          "protectedFiles": [
-            "vkhjyqwusaslsltxmswdtpwefrqyd"
-          ]
-        }
+          "data": null
+        },
+        "rootFile": "/etc/nginx/nginx.conf"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "status": "qpyhkquemzwjxieen",
+        "status": "FAILED",
         "data": {
           "errors": [
             {
-              "id": "nfexvcxfklxevpbm",
-              "directive": "bucqvqayzeyy",
-              "description": "ntsyo",
-              "file": "gksmaqppvizhovbt",
-              "line": 10,
-              "message": "orrejqowb",
-              "rule": "hlyxosqxid"
-            }
-          ],
-          "diagnostics": [
-            {
-              "id": "bkdxrgtdgv",
-              "directive": "frhdh",
-              "description": "arzxpe",
-              "file": "vzxirjtcfkcccaczoubvfihemuabzn",
-              "line": 29,
-              "message": "swwxrjxebwsisvdohbkhxkrv",
-              "rule": "sotqneapuvymospn",
-              "level": "Info",
-              "category": "giagupzqayhvrvmummulz"
+              "id": "config-analysis-error-1",
+              "directive": "worker_processes",
+              "description": "Directives outside the http context are not allowed",
+              "file": "/etc/nginx/nginx.conf",
+              "line": 2,
+              "message": "You are not allowed to set the worker_processes directive",
+              "rule": "nginx-azure-load-balancer-allowed-directives"
             }
           ]
         }
