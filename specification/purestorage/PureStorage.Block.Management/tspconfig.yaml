@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "{package-dir}"
 output-dir: "{project-root}/"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -17,3 +20,25 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-purestorage"
+    namespace: "com.azure.resourcemanager.purestorage"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-purestorage"
+    package-details:
+      name: "@azure/arm-purestorage"
+  "@azure-tools/typespec-go":
+    service-dir: "purestorage"
+    package-dir: "armpurestorage"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/purestorage/armpurestorage"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-purestorage"
+    namespace: "azure.mgmt.purestorage"
+    generate-test: true
+    generate-sample: true
