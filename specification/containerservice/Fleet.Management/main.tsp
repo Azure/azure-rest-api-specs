@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./fleetnamespace.tsp";
-import "./gate.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";
@@ -74,4 +73,10 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_07_01_preview: "2025-07-01-preview",
+
+  @doc("Azure Kubernetes Fleet Manager api version 2025-08-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_08_01_preview: "2025-08-01-preview",
 }
