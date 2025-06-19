@@ -3,6 +3,24 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.BillingBenefits;
 
+// @@clientLocation decorators for operations with @operationId
+@@clientLocation(SavingsPlanOperationGroup.listAll, "SavingsPlan");
+@@clientLocation(SavingsPlanOperationGroup.validatePurchase, "ValidatePurchase");
+@@clientLocation(DiscountsOperationGroup.scopeList, "Discounts");
+@@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");
+@@clientLocation(ReservationOrderAliasResponses.create, "ReservationOrderAlias");
+@@clientLocation(SavingsPlanModels.get, "SavingsPlan");
+@@clientLocation(SavingsPlanModels.update, "SavingsPlan");
+@@clientLocation(SavingsPlanModels.list, "SavingsPlan");
+@@clientLocation(SavingsPlanModels.validateUpdate, "SavingsPlan");
+@@clientLocation(SavingsPlanOrderAliasModels.get, "SavingsPlanOrderAlias");
+@@clientLocation(SavingsPlanOrderAliasModels.create, "SavingsPlanOrderAlias");
+@@clientLocation(SavingsPlanOrderModels.get, "SavingsPlanOrder");
+@@clientLocation(SavingsPlanOrderModels.list, "SavingsPlanOrder");
+@@clientLocation(SavingsPlanOrderModels.elevate, "SavingsPlanOrder");
+@@clientLocation(Discounts.get, "Discount");
+@@clientLocation(Discounts.update, "Discount");
+
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RoleAssignmentEntity.properties);
 
