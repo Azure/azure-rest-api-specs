@@ -320,6 +320,9 @@
     - ai/OpenAI.Assistants/tspconfig.yaml
     - cognitiveservices/OpenAI.Inference/tspconfig.yaml
     - keyvault/Security.KeyVault.Administration/tspconfig.yaml
+    - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
+    - keyvault/Security.KeyVault.Keys/tspconfig.yaml
+    - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
     - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
     - schemaregistry/SchemaRegistry/tspconfig.yaml
 
@@ -334,6 +337,15 @@
     - loadtestservice/LoadTestService/tspconfig.yaml
     - onlineexperimentation/Azure.Analytics.OnlineExperimentation/tspconfig.yaml
     - widget/data-plane/WidgetAnalytics/tspconfig.yaml
+    - batch/Azure.Batch/tspconfig.yaml
+    - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
+    - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
+    - keyvault/Security.KeyVault.Settings/tspconfig.yaml
+    - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
+    - keyvault/Security.KeyVault.Keys/tspconfig.yaml
+    - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
+    - servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml
+
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -400,7 +412,10 @@
     - cognitiveservices/Language.QuestionAnswering/tspconfig.yaml
     - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
     - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
+    - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
+    - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
     - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
+    - keyvault/Security.KeyVault.Settings/tspconfig.yaml
     - orbital/Microsoft.PlanetaryComputer/tspconfig.yaml
     - quantum/Quantum.Workspace/tspconfig.yaml
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
@@ -425,21 +440,23 @@
     - loadtestservice/LoadTestService.Management/tspconfig.yaml
     - loadtestservice/Playwright.Management/tspconfig.yaml
     - recoveryservicesdatareplication/DataReplication.Management/tspconfig.yaml
+    - servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml
+    - connectedcache/ConnectedCache.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-go.generate-fakes
   paths:
     - batch/Azure.Batch/tspconfig.yaml
+    - eventgrid/Azure.Messaging.EventGrid.SystemEvents/tspconfig.yaml
+    - eventgrid/Azure.Messaging.EventGrid/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.generate-samples
     - options.@azure-tools/typespec-ts.experimental-extensible-enums
     - options.@azure-tools/typespec-ts.package-details.name
   paths:
@@ -458,33 +475,11 @@
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.generate-fakes
     - options.@azure-tools/typespec-go.inject-spans
     - options.@azure-tools/typespec-ts.package-details.name
   paths:
     - eventgrid/Azure.Messaging.EventGrid.SystemEvents/tspconfig.yaml
     - eventgrid/Azure.Messaging.EventGrid/tspconfig.yaml
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.flavor
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
-    - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
-    - keyvault/Security.KeyVault.Settings/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.flavor
-    - options.@azure-tools/typespec-ts.package-details.name
-  paths:
-    - keyvault/Security.KeyVault.Certificates/tspconfig.yaml
-    - keyvault/Security.KeyVault.Keys/tspconfig.yaml
-    - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
@@ -501,15 +496,6 @@
     - migrate/AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml
     - migrate/AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml
     - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.flavor
-    - options.@azure-tools/typespec-go.generate-samples
-  paths:
-    - servicefabricmanagedclusters/ServiceFabricManagedClusters.Management/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
