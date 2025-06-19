@@ -92,3 +92,29 @@ using Microsoft.Help;
 @@Azure.ClientGenerator.Core.clientName(Azure.ResourceManager.Foundations.BaseParameters.resourceUri,
   "scope"
 );
+
+// @@clientLocation decorators for operations with @operationId
+@@clientLocation(CheckNameAvailabilityOperationGroup.checkNameAvailability,
+  "CheckNameAvailability"
+);
+@@clientLocation(DiscoverySolutionOperationGroup.list, "DiscoverySolution");
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
+  "DiscoverySolutionNLP"
+);
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
+  "DiscoverySolutionNLP"
+);
+@@clientLocation(DiagnosticResources.get, "Diagnostics");
+@@clientLocation(DiagnosticResources.create, "Diagnostics");
+@@clientLocation(SolutionResources.get, "Solution");
+@@clientLocation(SolutionResources.create, "Solution");
+@@clientLocation(SolutionResources.update, "Solution");
+@@clientLocation(SolutionResources.warmUp, "Solution");
+@@clientLocation(SimplifiedSolutionsResources.get, "SimplifiedSolutions");
+@@clientLocation(SimplifiedSolutionsResources.create, "SimplifiedSolutions");
+@@clientLocation(TroubleshooterResources.get, "Troubleshooters");
+@@clientLocation(TroubleshooterResources.create, "Troubleshooters");
+@@clientLocation(TroubleshooterResources.continue, "Troubleshooters");
+@@clientLocation(TroubleshooterResources.end, "Troubleshooters");
+@@clientLocation(TroubleshooterResources.restart, "Troubleshooters");
+@@clientLocation(SolutionResourceSelfHelps.get, "SolutionSelfHelp");
