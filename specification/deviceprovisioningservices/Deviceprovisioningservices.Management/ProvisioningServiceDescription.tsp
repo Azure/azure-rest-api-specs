@@ -60,11 +60,12 @@ model ProvisioningServiceDescription
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ProvisioningServiceDescriptionOperationOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Name of the provisioning service to retrieve.
@@ -90,20 +91,17 @@ interface ProvisioningServiceDescriptionOperations {
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @get
   @operationId("IotDpsResource_GetOperationResult")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/operationresults/{operationId}")
-  getOperationResult is ProvisioningServiceDescriptionOperationOps.ActionSync<
+  getOperationResult is ProvisioningServiceDescriptionOperationOps.Read<
     ProvisioningServiceDescription,
-    void,
-    ArmResponse<AsyncOperationResult>,
     Parameters = {
       /**
        * Async header used to poll on the status of the operation, obtained while creating the long running operation.
        */
       @query("asyncinfo")
       asyncinfo: string = "true";
-    }
+    },
+    Response = ArmResponse<AsyncOperationResult>
   >;
 }
 
