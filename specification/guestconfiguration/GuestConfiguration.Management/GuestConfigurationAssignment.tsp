@@ -51,17 +51,19 @@ interface GuestConfigurationAssignmentOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GuestConfigurationAssignmentOpsList
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = GuestConfigurationAssignment,
         KeyName = "guestConfigurationAssignmentName",
         SegmentName = "guestConfigurationAssignments",
         NamePattern = ""
-      >>
+      >>,
+      ErrorType = Microsoft.GuestConfiguration.ErrorResponse
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -101,7 +103,6 @@ interface GuestConfigurationAssignments {
    * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")
   SubscriptionList is GuestConfigurationAssignmentOpsList.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse
