@@ -39,7 +39,12 @@ model DynamicConfigurationProperties {
 @doc("Dynamic Configuration Resource")
 @parentResource(Configuration)
 model DynamicConfiguration is ProxyResource<DynamicConfigurationProperties> {
-  ...ResourceNameParameter<DynamicConfiguration>;
+  @doc("Name of the dynamic configuration")
+  @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
+  @path
+  @key("dynamicConfigurationName")
+  @segment("dynamicConfigurations")
+  name: string;
 }
 
 @armResourceOperations

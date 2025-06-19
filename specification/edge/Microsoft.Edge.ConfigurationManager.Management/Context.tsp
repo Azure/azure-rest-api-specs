@@ -85,6 +85,7 @@ interface Contexts {
   @doc("Delete Context Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Context>;
 
+  @removed(Versions.v2025_06_01)
   @doc("Post request to resolve configuration")
   resolve is ArmResourceActionAsync<
     Context,
@@ -92,6 +93,7 @@ interface Contexts {
     WorkflowVersion
   >;
 
+  @removed(Versions.v2025_06_01)
   @doc("Post request to review configuration")
   review is ArmResourceActionAsync<
     Context,
@@ -99,6 +101,7 @@ interface Contexts {
     WorkflowVersion
   >;
 
+  @removed(Versions.v2025_06_01)
   @doc("Post request to publish")
   publish is ArmResourceActionAsync<
     Context,
@@ -106,6 +109,7 @@ interface Contexts {
     WorkflowVersion
   >;
 
+  @removed(Versions.v2025_06_01)
   @doc("Post request to execute")
   execute is ArmResourceActionAsync<
     Context,
@@ -114,6 +118,7 @@ interface Contexts {
   >;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Version Parameter")
 model WorkflowVersionParameter {
   @doc("Workflow Name")
@@ -126,6 +131,7 @@ model WorkflowVersionParameter {
   reviewId: string;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Review Parameter")
 model WorkflowTemplateReviewParameter {
   @doc("Workflow Template Name")
@@ -140,6 +146,7 @@ model WorkflowTemplateReviewParameter {
   stageTargetMap: Record<unknown>;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Workflow Template Execute Parameter")
 model WorkflowExecuteParameter {
   @doc("Workflow Name")
