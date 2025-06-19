@@ -27,15 +27,15 @@ These are the global settings for the Carbon Optimization API.
 title: CarbonOptimizationClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-04-01-beta
+tag: package-2025-04-01
 ```
 
 
-### Tag: package-2025-04-01-beta
+### Tag: package-2025-04-01
 
-These settings apply only when `--tag=package-2025-04-01-beta` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-04-01-beta'
+``` yaml $(tag) == 'package-2025-04-01'
 input-file:
 - Microsoft.Carbon/stable/2025-04-01/main.json
 ```
