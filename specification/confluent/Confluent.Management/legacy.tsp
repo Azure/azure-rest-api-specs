@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the PUT operation
      * @template OptionalRequestBody Optional. Indicates whether the request body is optional
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Legacy {
       ...ResourceTypeParameter,
       ...Parameters,
 
-      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @doc("Resource create parameters.")
       @armBodyRoot(OptionalRequestBody)
       resource: Resource,
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response Optional. The success response(s) for the PUT operation
      * @template OptionalRequestBody Optional. Indicates whether the request body is optional
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Legacy {
       ...ResourceTypeParameter,
       ...Parameters,
 
-      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @doc("Resource create parameters.")
       @armBodyRoot(OptionalRequestBody)
       resource: Resource,
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Legacy {
       ...ResourceTypeParameter,
       ...Parameters,
 
-      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @doc("Resource create parameters.")
       @armBodyRoot(OptionalRequestBody)
       properties: PatchModel,
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)
     @post
@@ -147,8 +147,8 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "ARM"
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)

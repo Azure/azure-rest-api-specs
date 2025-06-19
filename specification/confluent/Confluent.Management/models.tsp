@@ -33,13 +33,13 @@ model OperationListResult {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -48,23 +48,23 @@ union CreatedByType {
  */
 union ProvisionState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NotSpecified: "NotSpecified",
 }
 
@@ -73,25 +73,25 @@ union ProvisionState {
  */
 union SaaSOfferStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Started: "Started",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PendingFulfillmentStart: "PendingFulfillmentStart",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Subscribed: "Subscribed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Suspended: "Suspended",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Reinstated: "Reinstated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unsubscribed: "Unsubscribed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
 }
 
@@ -100,9 +100,9 @@ union SaaSOfferStatus {
  */
 union Package {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ESSENTIALS: "ESSENTIALS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ADVANCED: "ADVANCED",
 }
 
@@ -111,9 +111,9 @@ union Package {
  */
 union ConnectorType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SINK: "SINK",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SOURCE: "SOURCE",
 }
 
@@ -122,9 +122,9 @@ union ConnectorType {
  */
 union ConnectorClass {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AZUREBLOBSOURCE: "AZUREBLOBSOURCE",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AZUREBLOBSINK: "AZUREBLOBSINK",
 }
 
@@ -133,13 +133,13 @@ union ConnectorClass {
  */
 union ConnectorStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PROVISIONING: "PROVISIONING",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RUNNING: "RUNNING",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PAUSED: "PAUSED",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FAILED: "FAILED",
 }
 
@@ -148,15 +148,15 @@ union ConnectorStatus {
  */
 union ConnectorServiceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureBlobStorageSinkConnector: "AzureBlobStorageSinkConnector",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureBlobStorageSourceConnector: "AzureBlobStorageSourceConnector",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureCosmosDBSinkConnector: "AzureCosmosDBSinkConnector",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureCosmosDBSourceConnector: "AzureCosmosDBSourceConnector",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureSynapseAnalyticsSinkConnector: "AzureSynapseAnalyticsSinkConnector",
 }
 
@@ -165,15 +165,15 @@ union ConnectorServiceType {
  */
 union PartnerConnectorType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KafkaAzureBlobStorageSource: "KafkaAzureBlobStorageSource",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KafkaAzureBlobStorageSink: "KafkaAzureBlobStorageSink",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KafkaAzureCosmosDBSource: "KafkaAzureCosmosDBSource",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KafkaAzureCosmosDBSink: "KafkaAzureCosmosDBSink",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KafkaAzureSynapseAnalyticsSink: "KafkaAzureSynapseAnalyticsSink",
 }
 
@@ -182,9 +182,9 @@ union PartnerConnectorType {
  */
 union AuthType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SERVICE_ACCOUNT: "SERVICE_ACCOUNT",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KAFKA_API_KEY: "KAFKA_API_KEY",
 }
 
@@ -193,15 +193,15 @@ union AuthType {
  */
 union DataFormatType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AVRO: "AVRO",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   JSON: "JSON",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   STRING: "STRING",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BYTES: "BYTES",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PROTOBUF: "PROTOBUF",
 }
 
@@ -242,7 +242,7 @@ model ConfluentAgreementResource {
   /**
    * Represents the properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConfluentAgreementProperties;
 }
 
@@ -531,7 +531,7 @@ model OrganizationResourceUpdate {
   /**
    * ARM resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -542,7 +542,7 @@ model ValidationResponse {
   /**
    * Info from the response
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<string>;
 }
 
@@ -553,7 +553,7 @@ model ListAccessRequestModel {
   /**
    * Search filters for the request
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   searchFilters?: Record<string>;
 }
 
@@ -604,7 +604,7 @@ model ConfluentListMetadata {
   /**
    * Total size of the list
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   total_size?: int32;
 }
 
@@ -635,13 +635,13 @@ model UserRecord {
   /**
    * Name of the user
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   full_name?: string;
 
   /**
    * Auth type of the user
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   auth_type?: string;
 }
 
@@ -657,25 +657,25 @@ model MetadataEntity {
   /**
    * Resource name of the record
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource_name?: string;
 
   /**
    * Created Date Time
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   created_at?: string;
 
   /**
    * Updated Date time
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updated_at?: string;
 
   /**
    * Deleted Date time
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleted_at?: string;
 }
 
@@ -721,7 +721,7 @@ model ServiceAccountRecord {
   /**
    * Name of the service account
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   display_name?: string;
 
   /**
@@ -777,7 +777,7 @@ model InvitationRecord {
   /**
    * Auth type of the user
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   auth_type?: string;
 
   /**
@@ -788,13 +788,13 @@ model InvitationRecord {
   /**
    * Accepted date time of the invitation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accepted_at?: string;
 
   /**
    * Expiration date time of the invitation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expires_at?: string;
 }
 
@@ -835,7 +835,7 @@ model AccessInvitedUserDetails {
   /**
    * Auth type of the user
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   auth_type?: string;
 }
 
@@ -881,7 +881,7 @@ model EnvironmentRecord {
   /**
    * Display name of the user
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   display_name?: string;
 }
 
@@ -927,7 +927,7 @@ model ClusterRecord {
   /**
    * Display name of the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   display_name?: string;
 
   /**
@@ -948,7 +948,7 @@ model ClusterSpecEntity {
   /**
    * The name of the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   display_name?: string;
 
   /**
@@ -974,19 +974,19 @@ model ClusterSpecEntity {
   /**
    * The bootstrap endpoint used by Kafka clients to connect to the cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kafka_bootstrap_endpoint?: string;
 
   /**
    * The cluster HTTP request URL.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   http_endpoint?: string;
 
   /**
    * The Kafka API cluster endpoint
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   api_endpoint?: string;
 
   /**
@@ -1042,7 +1042,7 @@ model ClusterEnvironmentEntity {
   /**
    * CRN reference to the referred resource
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource_name?: string;
 }
 
@@ -1068,7 +1068,7 @@ model ClusterNetworkEntity {
   /**
    * CRN reference to the referred resource
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource_name?: string;
 }
 
@@ -1089,7 +1089,7 @@ model ClusterByokEntity {
   /**
    * CRN reference to the referred resource
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource_name?: string;
 }
 
@@ -1155,13 +1155,13 @@ model RoleBindingRecord {
   /**
    * The name of the role to bind to the principal
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   role_name?: string;
 
   /**
    * A CRN that specifies the scope and resource patterns necessary for the role to bind
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   crn_pattern?: string;
 }
 
@@ -1177,13 +1177,13 @@ model AccessCreateRoleBindingRequestModel {
   /**
    * The name of the role to bind to the principal
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   role_name?: string;
 
   /**
    * A CRN that specifies the scope and resource patterns necessary for the role to bind
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   crn_pattern?: string;
 }
 
@@ -1215,7 +1215,7 @@ model GetEnvironmentsResponse is Azure.Core.Page<SCEnvironmentRecord>;
 /**
  * Environment resource property
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EnvironmentProperties {
   /**
    * Stream governance configuration
@@ -1241,7 +1241,7 @@ model StreamGovernanceConfig {
 /**
  * Metadata of the data record
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SCMetadataEntity {
   /**
    * Self lookup url
@@ -1277,7 +1277,7 @@ model ListClustersSuccessResponse is Azure.Core.Page<SCClusterRecord>;
 /**
  * Service Connector Cluster Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterProperties {
   /**
    * Metadata of the record
@@ -1298,7 +1298,7 @@ model ClusterProperties {
 /**
  * Spec of the cluster record
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SCClusterSpecEntity {
   /**
    * The name of the cluster
@@ -1369,7 +1369,7 @@ model SCClusterSpecEntity {
 /**
  * The environment or the network to which cluster belongs
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SCClusterNetworkEnvironmentEntity {
   /**
    * ID of the referred resource
@@ -1395,7 +1395,7 @@ model SCClusterNetworkEnvironmentEntity {
 /**
  * The network associated with this object
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SCClusterByokEntity {
   /**
    * ID of the referred resource
@@ -1436,7 +1436,7 @@ model SchemaRegistryClusterRecord {
   /**
    * Schema Registry Cluster Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: SchemaRegistryClusterProperties;
 }
 
@@ -1553,7 +1553,7 @@ model RegionRecord {
   /**
    * Region Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RegionProperties;
 }
 
@@ -1591,14 +1591,14 @@ model RegionSpecEntity {
    */
   regionName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   packages?: string[];
 }
 
 /**
  * Create API Key model
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CreateAPIKeyModel {
   /**
    * Name of the API Key
@@ -1614,7 +1614,7 @@ model CreateAPIKeyModel {
 /**
  * Details API key
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model APIKeyRecord {
   /**
    * Type of api key
@@ -1629,14 +1629,14 @@ model APIKeyRecord {
   /**
    * API Key Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: APIKeyProperties;
 }
 
 /**
  * API Key Properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model APIKeyProperties {
   /**
    * Metadata of the record
@@ -1652,7 +1652,7 @@ model APIKeyProperties {
 /**
  * Spec of the API Key record
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model APIKeySpecEntity {
   /**
    * The description of the API Key
@@ -1685,7 +1685,7 @@ model APIKeySpecEntity {
 /**
  * API Key Resource details which can be kafka cluster or schema registry cluster
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model APIKeyResourceEntity {
   /**
    * Id of the resource
@@ -1716,7 +1716,7 @@ model APIKeyResourceEntity {
 /**
  * API Key Owner details which can be a user or service account
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model APIKeyOwnerEntity {
   /**
    * API Key owner id
@@ -1742,7 +1742,7 @@ model APIKeyOwnerEntity {
 /**
  * The resource properties of the Connector
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectorResourceProperties {
   /**
    * Connector Info Base
@@ -1825,7 +1825,7 @@ model ListTopicsSuccessResponse is Azure.Core.Page<TopicRecord>;
 /**
  * Topic Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TopicProperties {
   /**
    * Type of topic
@@ -1916,7 +1916,7 @@ model TopicsInputConfig {
 /**
  * Metadata of the list
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SCConfluentListMetadata {
   /**
    * First page of the list
@@ -2000,7 +2000,7 @@ model AzureBlobStorageSourceConnectorServiceInfo
 /**
  * The authentication info when auth_type is AzureCosmosDBSinkConnector
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureCosmosDBSinkConnectorServiceInfo
   extends ConnectorServiceTypeInfoBase {
   /**
@@ -2037,7 +2037,7 @@ model AzureCosmosDBSinkConnectorServiceInfo
 /**
  * The authentication info when auth_type is AzureCosmosDBSourceConnector
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureCosmosDBSourceConnectorServiceInfo
   extends ConnectorServiceTypeInfoBase {
   /**
@@ -2231,7 +2231,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
 /**
  * The partner connector type is KafkaAzureCosmosDBSink
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Auth Type
@@ -2297,7 +2297,7 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
 /**
  * The partner connector type is KafkaAzureCosmosDBSource
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka Auth Type
