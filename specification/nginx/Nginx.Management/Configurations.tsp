@@ -401,6 +401,6 @@ interface Configurations {
     /**
      * Request body for the analysis.
      */
-    @body body: AnalysisCreate,
+    @body requestBody: AnalysisCreate,
   ): ArmResponse<AnalysisResult> | ErrorResponse;
 }
