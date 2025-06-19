@@ -18,6 +18,10 @@ namespace Microsoft.AzureResilienceManagement;
 // Define the main model
 @doc("Definition of recovery orchestration resource property associated with recovery orchestration plan.")
 model RecoveryResourceProperties {
+  @doc("A unique id for the recovery resource, which is a GUID.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  recoveryResourceUniqueId: string;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
