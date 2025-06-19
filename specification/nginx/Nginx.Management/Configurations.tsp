@@ -364,6 +364,10 @@ interface Configurations {
   @armResourceCreateOrUpdate(NginxConfigurationRequest)
   createOrUpdate(
     ...ResourceInstanceParameters<Configuration>,
+
+    /**
+     * The configuration resource to create or update.
+     */
     @body resource: NginxConfigurationRequest,
   ): ArmResponse<Configuration> | ArmCreatedResponse<Configuration> | ErrorResponse;
 
@@ -396,11 +400,17 @@ interface Configurations {
   @action("analyze")
   @armResourceAction(AnalysisResult)
   analyze(
-    ...ResourceInstanceParameters<Configuration>,
+    // Replace the ResourceInstanceParameters spread with individual parameters
+    @path subscriptionId: string,
+
+    @path resourceGroupName: string,
+    @path nginxDeploymentName: string,
+    @path configurationName: string,
+    @query("api-version") apiVersion: string,
 
     /**
      * Request body for the analysis.
      */
-    @body requestBody: AnalysisCreate,
+    @body body: AnalysisCreate,
   ): ArmResponse<AnalysisResult> | ErrorResponse;
 }
