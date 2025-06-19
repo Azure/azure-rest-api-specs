@@ -42,3 +42,12 @@ using Microsoft.Network;
 @@clientName(DnsResourceReferenceOperationGroup.getByTargetResources::parameters.body,
   "parameters"
 );
+
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+@@clientLocation(RecordSets.listByType, RecordSets);
+@@clientLocation(Zones.listByDnsZone, RecordSets);
+@@clientLocation(Zones.listAllByDnsZone, RecordSets);
+@@clientLocation(DnsResourceReferenceOperationGroup.getByTargetResources,
+  "DnsResourceReference"
+);
