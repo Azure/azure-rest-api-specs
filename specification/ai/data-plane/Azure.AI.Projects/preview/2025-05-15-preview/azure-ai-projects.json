@@ -796,6 +796,46 @@
         }
       }
     },
+    "/evaluations/configs": {
+      "post": {
+        "operationId": "Evaluations_CreateOrUpdateEvalConfig",
+        "description": "Creates an evaluation configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluationConfig",
+            "in": "body",
+            "description": "Evaluation configuration to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationConfig"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -2026,6 +2066,26 @@
         ]
       }
     },
+    "ContinuousEvaluationConfig": {
+      "type": "object",
+      "description": "Continuous Evaluation Specific Configuration Definition",
+      "properties": {
+        "samplingPercent": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of sampling per hour (0-100)."
+        },
+        "maxHourlyTokenLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum token usage per hour (0 to 1000)."
+        }
+      },
+      "required": [
+        "samplingPercent",
+        "maxHourlyTokenLimit"
+      ]
+    },
     "CosmosDBIndex": {
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
@@ -2326,7 +2386,15 @@
         },
         "data": {
           "$ref": "#/definitions/InputData",
-          "description": "Data for evaluation."
+          "description": "Deprecated: data for evaluation."
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Specifies the type and configuration of the entity used for this evaluation."
+        },
+        "evaluationConfigId": {
+          "type": "string",
+          "description": "Configuration Id for the evaluation."
         },
         "displayName": {
           "type": "string",
@@ -2368,6 +2436,173 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationConfig": {
+      "type": "object",
+      "description": "Evaluation Configuration Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation configuration."
+        },
+        "continuousEvaluationConfig": {
+          "$ref": "#/definitions/ContinuousEvaluationConfig",
+          "description": "Continuous evaluation configuration."
+        },
+        "disableEvaluationRunPersistence": {
+          "type": "boolean",
+          "description": "Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted."
+        },
+        "extraEvaluationRunStorageOptions": {
+          "type": "array",
+          "description": "Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.",
+          "items": {}
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "continuousEvaluationConfig"
+      ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Abstract base model for defining evaluation targets.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationTargetType",
+          "description": "Discriminator that defines the type of the evaluation target."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationTargetFoundryAgent": {
+      "type": "object",
+      "description": "(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "The agent Id."
+        }
+      },
+      "required": [
+        "agentId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgent"
+    },
+    "EvaluationTargetFoundryAgentData": {
+      "type": "object",
+      "description": "(Example of targets, pending PM design) Evaluation target in AI Foundry agent format.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgentData"
+    },
+    "EvaluationTargetFoundryDataset": {
+      "type": "object",
+      "description": "Evaluation target in AI Foundry dataset format.",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset Id."
+        }
+      },
+      "required": [
+        "datasetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryDataset"
+    },
+    "EvaluationTargetSimpleJson": {
+      "type": "object",
+      "description": "Evaluation target in simple JSON format.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The LLM query."
+        },
+        "response": {
+          "type": "string",
+          "description": "The LLM response."
+        },
+        "context": {
+          "type": "string",
+          "description": "The context for the LLM query."
+        },
+        "groundTruth": {
+          "type": "string",
+          "description": "The ground truth for the LLM response."
+        }
+      },
+      "required": [
+        "query",
+        "response"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationTarget"
+        }
+      ],
+      "x-ms-discriminator-value": "simpleJson"
+    },
+    "EvaluationTargetType": {
+      "type": "string",
+      "description": "Allowed types of evaluation targets.",
+      "enum": [
+        "simpleJson",
+        "foundryAgentData",
+        "foundryDataset",
+        "foundryAgent"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simpleJson",
+            "value": "simpleJson",
+            "description": "Evaluation target in simple JSON format with query/response/context/ground-truth."
+          },
+          {
+            "name": "foundryAgentData",
+            "value": "foundryAgentData",
+            "description": "Evaluation target in AI Foundry agent data format."
+          },
+          {
+            "name": "foundryDataset",
+            "value": "foundryDataset",
+            "description": "Evaluation target in AI Foundry dataset."
+          },
+          {
+            "name": "foundryAgent",
+            "value": "foundryAgent",
+            "description": "(Example of targets, not for review) Evaluation AI Foundry agent as a target."
+          }
+        ]
+      }
     },
     "EvaluatorConfiguration": {
       "type": "object",

@@ -46,6 +46,82 @@ model InputDataset extends InputData {
   id: string;
 }
 
+@doc("Allowed types of evaluation targets.")
+@added(Versions.v2025_05_15_preview)
+union EvaluationTargetType {
+  @doc("Evaluation target in simple JSON format with query/response/context/ground-truth.")
+  simpleJson: "simpleJson";
+  string;
+
+  @doc("Evaluation target in AI Foundry agent data format.")
+  foundryAgentData: "foundryAgentData";
+  string;
+
+  @doc("Evaluation target in AI Foundry dataset.")
+  foundryDataset: "foundryDataset";
+  string;
+
+  @doc("(Example of targets, not for review) Evaluation AI Foundry agent as a target.")
+  foundryAgent: "foundryAgent";
+  string;
+}
+
+@doc("Abstract base model for defining evaluation targets.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTarget {
+  @doc("Discriminator that defines the type of the evaluation target.")
+  type: EvaluationTargetType;
+}
+
+@doc("Evaluation target in simple JSON format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetSimpleJson extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "simpleJson";
+
+  @doc("The LLM query.")
+  query: string;
+
+  @doc("The LLM response.")
+  response: string;
+
+  @doc("The context for the LLM query.")
+  context?: string;
+
+  @doc("The ground truth for the LLM response.")
+  groundTruth?: string;
+}
+
+@doc("Evaluation target in AI Foundry dataset format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryDataset extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryDataset";
+
+  @doc("The dataset Id.")
+  datasetId: string;
+}
+
+@doc("(Example of targets, pending PM design) Evaluation target in AI Foundry agent format.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryAgentData extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryAgentData";
+
+  // Placeholder for the future AI Foundry agent data format.
+}
+
+@doc("(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryAgent extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryAgent";
+
+  @doc("The agent Id.")
+  agentId: string;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -57,8 +133,14 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Data for evaluation.")
-  data: InputData;
+  @doc("Deprecated: data for evaluation.")
+  data?: InputData;
+
+  @doc("Specifies the type and configuration of the entity used for this evaluation.")
+  target: EvaluationTarget;
+
+  @doc("Configuration Id for the evaluation.")
+  evaluationConfigId?: string;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
@@ -78,6 +160,40 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+}
+
+@doc("Continuous Evaluation Specific Configuration Definition")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model ContinuousEvaluationConfig {
+  @doc("Percentage of sampling per hour (0-100).")
+  samplingPercent: float32;
+
+  @doc("Maximum token usage per hour (0 to 1000).")
+  maxHourlyTokenLimit: int32;
+}
+
+@doc("Evaluation Configuration Definition")
+@resource("configs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationConfig {
+  @doc("Identifier of the evaluation configuration.")
+  @key("id")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  id: string;
+
+  @doc("Name of the evaluation configuration.")
+  name: string;
+
+  @doc("Continuous evaluation configuration.")
+  continuousEvaluationConfig?: ContinuousEvaluationConfig;
+
+  @doc("Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted.")
+  disableEvaluationRunPersistence?: boolean;
+
+  @doc("Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.")
+  extraEvaluationRunStorageOptions?: Array<unknown>;
 }
 
 @doc("Definition for sampling strategy.")
