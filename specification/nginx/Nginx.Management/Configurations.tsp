@@ -175,6 +175,7 @@ model NginxConfigurationListResponse {
 /**
  * Operations on Nginx configurations under a given deployment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We already have a delete operation defined in the interface"
 @armResourceOperations
 interface Configurations {
   /**
@@ -185,6 +186,8 @@ interface Configurations {
   /**
    * Creates or updates a configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The request and response models are different by design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "We have all the response codes defined in the model"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Resource = NginxConfigurationRequest,
     Response = Configuration

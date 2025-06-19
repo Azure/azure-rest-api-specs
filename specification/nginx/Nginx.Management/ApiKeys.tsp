@@ -75,6 +75,7 @@ model ApiKeyListResponse {
 /**
  * Operations on API Keys under a given Nginx deployment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We already have a delete operation defined in the interface"
 @armResourceOperations
 interface ApiKeys {
   /**
@@ -88,6 +89,7 @@ interface ApiKeys {
    * @returns The created or updated API key.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "We have different data models by design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "We have all the response codes defined in the model"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     Resource = ApiKeyRequest,
     Response = ApiKey
