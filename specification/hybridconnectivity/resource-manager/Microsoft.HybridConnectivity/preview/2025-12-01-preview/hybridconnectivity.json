@@ -2019,6 +2019,16 @@
         }
       }
     },
+    "GcpCloudProfileUpdate": {
+      "type": "object",
+      "description": "cloud profile for GCP.",
+      "properties": {
+        "organizationProperties": {
+          "$ref": "#/definitions/GcpOrganizationPropertiesUpdate",
+          "description": "The organization properties of the GCP organization."
+        }
+      }
+    },
     "GcpOrganizationProperties": {
       "type": "object",
       "description": "GCP organization properties.",
@@ -2057,6 +2067,26 @@
       "required": [
         "organizationId"
       ]
+    },
+    "GcpOrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "GCP organization properties for update.",
+      "properties": {
+        "excludedProjectNumbers": {
+          "type": "array",
+          "description": "List of GCP projects which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedFolderIds": {
+          "type": "array",
+          "description": "List of GCP folders which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "GcpProjectProperties": {
       "type": "object",
@@ -2429,6 +2459,10 @@
         "awsCloudProfile": {
           "$ref": "#/definitions/AwsCloudProfileUpdate",
           "description": "Cloud profile for AWS."
+        },
+        "gcpCloudProfile": {
+          "$ref": "#/definitions/GcpCloudProfileUpdate",
+          "description": "Cloud profile for GCP."
         }
       }
     },

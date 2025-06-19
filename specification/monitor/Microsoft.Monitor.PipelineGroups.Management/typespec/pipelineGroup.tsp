@@ -10,6 +10,7 @@ import "./receivers/TcpReceivers.tsp";
 import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
+import "./processors/TransformLanguageProcessor.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -112,6 +113,10 @@ model Processor {
 
   @doc("Batch processor configurations.")
   batch?: BatchProcessor;
+
+  @doc("Transform language processor configurations.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  transformLanguage?: TransformLanguageProcessor;
 }
 
 @doc("The processor type.")
@@ -120,6 +125,18 @@ union ProcessorType {
 
   @doc("Batch processor.")
   Batch: "Batch",
+
+  @doc("Transform language processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  TransformLanguage: "TransformLanguage",
+
+  @doc("Microsoft Syslog processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  MicrosoftSyslog: "MicrosoftSyslog",
+
+  @doc("Microsoft CEF/Common Security Log processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  MicrosoftCommonSecurityLog: "MicrosoftCommonSecurityLog",
 }
 
 @doc("Exporter Info.")

@@ -16,6 +16,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @doc("Configuration Template Version Properties")
 model ConfigurationTemplateVersionProperties {
   @doc("Configuration values")
@@ -26,6 +27,7 @@ model ConfigurationTemplateVersionProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Configuration Template Version Resource")
 @parentResource(ConfigurationTemplate)
 @resource("versions")
@@ -38,6 +40,7 @@ model ConfigurationTemplateVersion
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface ConfigurationTemplateVersions {
   @doc("Get a Configuration Template Version Resource")
