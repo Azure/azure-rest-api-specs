@@ -6,11 +6,13 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 
 namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
+@parentResource(ArtifactSource)
 model ArmTemplate
   is Azure.ResourceManager.TrackedResource<ArmTemplateProperties, false> {
   ...ResourceNameParameter<

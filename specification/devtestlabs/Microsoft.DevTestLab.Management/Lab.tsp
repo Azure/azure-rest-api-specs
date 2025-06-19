@@ -16,7 +16,6 @@ namespace Microsoft.DevTestLab;
 model Lab is Azure.ResourceManager.TrackedResource<LabProperties> {
   ...ResourceNameParameter<
     Resource = Lab,
-    KeyName = "devtestLabName",
     SegmentName = "labs",
     NamePattern = ""
   >;
@@ -186,12 +185,6 @@ interface Labs {
     ArmResponse<GalleryImageList>,
     Parameters = {
       /**
-       * The name of the lab.
-       */
-      @path
-      labName: string;
-
-      /**
        * Specify the $expand query. Example: 'properties($select=author)'
        */
       @query("$expand")
@@ -221,6 +214,8 @@ interface Labs {
    * Evaluates lab policy.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @post
+  @action("policysets/{policySetName}/evaluatePolicies")
   @operationId("PolicySets_EvaluatePolicies")
   evaluatePolicies is ArmResourceActionSync<
     Lab,
@@ -228,10 +223,10 @@ interface Labs {
     ArmResponse<EvaluatePoliciesResponse>,
     Parameters = {
       /**
-       * The name of the lab.
+       * The name of the policy set.
        */
       @path
-      labName: string;
+      policySetName: string;
     }
   >;
 }

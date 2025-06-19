@@ -321,130 +321,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/armtemplates": {
-      "get": {
-        "operationId": "ArmTemplates_List",
-        "tags": [
-          "ArmTemplates"
-        ],
-        "description": "List azure resource manager templates in a given artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArmTemplateList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArmTemplates_List": {
-            "$ref": "./examples/ArmTemplates_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/armtemplates/{name}": {
-      "get": {
-        "operationId": "ArmTemplates_Get",
-        "tags": [
-          "ArmTemplates"
-        ],
-        "description": "Get azure resource manager template.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the azure resource manager template.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArmTemplate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArmTemplates_Get": {
-            "$ref": "./examples/ArmTemplates_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs": {
       "get": {
         "operationId": "Labs_ListByResourceGroup",
@@ -516,7 +392,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}": {
       "get": {
         "operationId": "Labs_Get",
         "tags": [
@@ -534,7 +410,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -585,7 +461,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -659,7 +535,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -712,7 +588,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -758,7 +634,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/{labName}/evaluatePolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/{policySetName}/policysets/{policySetName}/evaluatePolicies": {
       "post": {
         "operationId": "PolicySets_EvaluatePolicies",
         "tags": [
@@ -776,16 +652,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "labName",
+            "name": "policySetName",
             "in": "path",
-            "description": "The name of the lab.",
+            "description": "The name of the policy set.",
             "required": true,
             "type": "string"
           },
@@ -820,92 +696,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/{labName}/galleryimages": {
-      "get": {
-        "operationId": "GalleryImages_List",
-        "tags": [
-          "Labs"
-        ],
-        "description": "List gallery images in a given lab.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "devtestLabName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=author)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GalleryImageList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GalleryImages_List": {
-            "$ref": "./examples/GalleryImages_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/artifactsources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
       "get": {
         "operationId": "ArtifactSources_List",
         "tags": [
@@ -923,7 +714,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -983,7 +774,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/artifactsources/{artifactSourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}": {
       "get": {
         "operationId": "ArtifactSources_Get",
         "tags": [
@@ -1001,7 +792,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1059,7 +850,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1125,7 +916,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1185,7 +976,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1220,7 +1011,159 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/artifactsources/{artifactSourceName}/artifacts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates": {
+      "get": {
+        "operationId": "ArmTemplates_List",
+        "tags": [
+          "ArmTemplates"
+        ],
+        "description": "List azure resource manager templates in a given artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmTemplateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArmTemplates_List": {
+            "$ref": "./examples/ArmTemplates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
+      "get": {
+        "operationId": "ArmTemplates_Get",
+        "tags": [
+          "ArmTemplates"
+        ],
+        "description": "Get azure resource manager template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the azure resource manager template.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArmTemplates_Get": {
+            "$ref": "./examples/ArmTemplates_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
       "get": {
         "operationId": "Artifacts_List",
         "tags": [
@@ -1238,7 +1181,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1305,7 +1248,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/artifactsources/{artifactSourceName}/artifacts/{artifactName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{artifactName}": {
       "get": {
         "operationId": "Artifacts_Get",
         "tags": [
@@ -1323,7 +1266,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1372,7 +1315,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/artifactsources/{artifactSourceName}/artifacts/{artifactName}/generateArmTemplate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{artifactName}/generateArmTemplate": {
       "post": {
         "operationId": "Artifacts_GenerateArmTemplate",
         "tags": [
@@ -1390,7 +1333,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1441,7 +1384,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/claimAnyVm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/claimAnyVm": {
       "post": {
         "operationId": "Labs_ClaimAnyVm",
         "tags": [
@@ -1459,7 +1402,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1502,7 +1445,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/costs/{labCostName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{labCostName}": {
       "get": {
         "operationId": "Costs_Get",
         "tags": [
@@ -1520,7 +1463,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1578,7 +1521,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1628,7 +1571,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/createEnvironment": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/createEnvironment": {
       "post": {
         "operationId": "Labs_CreateEnvironment",
         "tags": [
@@ -1646,7 +1589,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1698,7 +1641,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/customimages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages": {
       "get": {
         "operationId": "CustomImages_List",
         "tags": [
@@ -1716,7 +1659,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1776,7 +1719,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/customimages/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}": {
       "get": {
         "operationId": "CustomImages_Get",
         "tags": [
@@ -1794,7 +1737,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1852,7 +1795,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1933,7 +1876,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1993,7 +1936,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2046,7 +1989,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/exportResourceUsage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/exportResourceUsage": {
       "post": {
         "operationId": "Labs_ExportResourceUsage",
         "tags": [
@@ -2064,7 +2007,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2116,7 +2059,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/formulas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas": {
       "get": {
         "operationId": "Formulas_List",
         "tags": [
@@ -2134,7 +2077,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2194,7 +2137,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/formulas/{formulaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{formulaName}": {
       "get": {
         "operationId": "Formulas_Get",
         "tags": [
@@ -2212,7 +2155,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2270,7 +2213,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2351,7 +2294,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2411,7 +2354,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2446,7 +2389,85 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/generateUploadUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
+      "get": {
+        "operationId": "GalleryImages_List",
+        "tags": [
+          "Labs"
+        ],
+        "description": "List gallery images in a given lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=author)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GalleryImageList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GalleryImages_List": {
+            "$ref": "./examples/GalleryImages_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/generateUploadUri": {
       "post": {
         "operationId": "Labs_GenerateUploadUri",
         "tags": [
@@ -2464,7 +2485,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2501,7 +2522,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/importVirtualMachine": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/importVirtualMachine": {
       "post": {
         "operationId": "Labs_ImportVirtualMachine",
         "tags": [
@@ -2519,7 +2540,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2571,7 +2592,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/listVhds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/listVhds": {
       "post": {
         "operationId": "Labs_ListVhds",
         "tags": [
@@ -2589,7 +2610,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2620,7 +2641,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/notificationchannels": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels": {
       "get": {
         "operationId": "NotificationChannels_List",
         "tags": [
@@ -2638,7 +2659,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2698,7 +2719,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/notificationchannels/{notificationChannelName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{notificationChannelName}": {
       "get": {
         "operationId": "NotificationChannels_Get",
         "tags": [
@@ -2716,7 +2737,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2774,7 +2795,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2840,7 +2861,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2900,7 +2921,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2935,7 +2956,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/notificationchannels/{notificationChannelName}/notify": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{notificationChannelName}/notify": {
       "post": {
         "operationId": "NotificationChannels_Notify",
         "tags": [
@@ -2953,7 +2974,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3433,7 +3454,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/servicerunners/{serviceRunnerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{serviceRunnerName}": {
       "get": {
         "operationId": "ServiceRunners_Get",
         "tags": [
@@ -3451,7 +3472,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3502,7 +3523,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3568,7 +3589,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3603,7 +3624,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users": {
       "get": {
         "operationId": "Users_List",
         "tags": [
@@ -3621,7 +3642,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3681,7 +3702,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}": {
       "get": {
         "operationId": "Users_Get",
         "tags": [
@@ -3699,7 +3720,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3757,7 +3778,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3838,7 +3859,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3898,7 +3919,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -3951,7 +3972,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/disks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks": {
       "get": {
         "operationId": "Disks_List",
         "tags": [
@@ -3969,7 +3990,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4036,7 +4057,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/disks/{diskName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{diskName}": {
       "get": {
         "operationId": "Disks_Get",
         "tags": [
@@ -4054,7 +4075,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4119,7 +4140,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4207,7 +4228,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4274,7 +4295,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4334,7 +4355,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/disks/{diskName}/attach": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{diskName}/attach": {
       "post": {
         "operationId": "Disks_Attach",
         "tags": [
@@ -4352,7 +4373,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4418,7 +4439,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/disks/{diskName}/detach": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/disks/{diskName}/detach": {
       "post": {
         "operationId": "Disks_Detach",
         "tags": [
@@ -4436,7 +4457,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4502,7 +4523,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/environments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments": {
       "get": {
         "operationId": "Environments_List",
         "tags": [
@@ -4520,7 +4541,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4587,7 +4608,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/environments/{dtlEnvironmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/environments/{dtlEnvironmentName}": {
       "get": {
         "operationId": "Environments_Get",
         "tags": [
@@ -4605,7 +4626,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4670,7 +4691,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4758,7 +4779,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4825,7 +4846,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4885,7 +4906,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/secrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets": {
       "get": {
         "operationId": "Secrets_List",
         "tags": [
@@ -4903,7 +4924,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -4970,7 +4991,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/secrets/{secretName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{secretName}": {
       "get": {
         "operationId": "Secrets_Get",
         "tags": [
@@ -4988,7 +5009,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5053,7 +5074,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5141,7 +5162,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5208,7 +5229,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5250,7 +5271,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/servicefabrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics": {
       "get": {
         "operationId": "ServiceFabrics_List",
         "tags": [
@@ -5268,7 +5289,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5335,7 +5356,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/servicefabrics/{serviceFabricName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}": {
       "get": {
         "operationId": "ServiceFabrics_Get",
         "tags": [
@@ -5353,7 +5374,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5418,7 +5439,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5506,7 +5527,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5573,7 +5594,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -5633,7 +5654,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/servicefabrics/{serviceFabricName}/listApplicableSchedules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/listApplicableSchedules": {
       "post": {
         "operationId": "ServiceFabrics_ListApplicableSchedules",
         "tags": [
@@ -5651,7 +5672,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6160,7 +6181,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/servicefabrics/{serviceFabricName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/start": {
       "post": {
         "operationId": "ServiceFabrics_Start",
         "tags": [
@@ -6178,7 +6199,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6235,7 +6256,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/users/{userName}/servicefabrics/{serviceFabricName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/stop": {
       "post": {
         "operationId": "ServiceFabrics_Stop",
         "tags": [
@@ -6253,7 +6274,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6310,7 +6331,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines": {
       "get": {
         "operationId": "VirtualMachines_List",
         "tags": [
@@ -6328,7 +6349,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6388,7 +6409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}": {
       "get": {
         "operationId": "VirtualMachines_Get",
         "tags": [
@@ -6406,7 +6427,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6464,7 +6485,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6545,7 +6566,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6605,7 +6626,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6658,7 +6679,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/addDataDisk": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/addDataDisk": {
       "post": {
         "operationId": "VirtualMachines_AddDataDisk",
         "tags": [
@@ -6676,7 +6697,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6735,7 +6756,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/applyArtifacts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts": {
       "post": {
         "operationId": "VirtualMachines_ApplyArtifacts",
         "tags": [
@@ -6753,7 +6774,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6812,7 +6833,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/claim": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/claim": {
       "post": {
         "operationId": "VirtualMachines_Claim",
         "tags": [
@@ -6830,7 +6851,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6880,7 +6901,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/detachDataDisk": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/detachDataDisk": {
       "post": {
         "operationId": "VirtualMachines_DetachDataDisk",
         "tags": [
@@ -6898,7 +6919,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -6957,7 +6978,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/getRdpFileContents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/getRdpFileContents": {
       "post": {
         "operationId": "VirtualMachines_GetRdpFileContents",
         "tags": [
@@ -6975,7 +6996,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7010,7 +7031,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/listApplicableSchedules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/listApplicableSchedules": {
       "post": {
         "operationId": "VirtualMachines_ListApplicableSchedules",
         "tags": [
@@ -7028,7 +7049,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7063,7 +7084,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/redeploy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/redeploy": {
       "post": {
         "operationId": "VirtualMachines_Redeploy",
         "tags": [
@@ -7081,7 +7102,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7131,7 +7152,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/resize": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/resize": {
       "post": {
         "operationId": "VirtualMachines_Resize",
         "tags": [
@@ -7149,7 +7170,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7208,7 +7229,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/restart": {
       "post": {
         "operationId": "VirtualMachines_Restart",
         "tags": [
@@ -7226,7 +7247,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7701,7 +7722,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start": {
       "post": {
         "operationId": "VirtualMachines_Start",
         "tags": [
@@ -7719,7 +7740,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7769,7 +7790,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop": {
       "post": {
         "operationId": "VirtualMachines_Stop",
         "tags": [
@@ -7787,7 +7808,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7837,7 +7858,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/transferDisks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/transferDisks": {
       "post": {
         "operationId": "VirtualMachines_TransferDisks",
         "tags": [
@@ -7855,7 +7876,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7905,7 +7926,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualmachines/{name}/unClaim": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/unClaim": {
       "post": {
         "operationId": "VirtualMachines_UnClaim",
         "tags": [
@@ -7923,7 +7944,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -7973,7 +7994,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualnetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks": {
       "get": {
         "operationId": "VirtualNetworks_List",
         "tags": [
@@ -7991,7 +8012,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -8051,7 +8072,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{devtestLabName}/virtualnetworks/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
       "get": {
         "operationId": "VirtualNetworks_Get",
         "tags": [
@@ -8069,7 +8090,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -8127,7 +8148,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -8208,7 +8229,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -8268,7 +8289,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "devtestLabName",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
