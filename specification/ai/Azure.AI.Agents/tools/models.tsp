@@ -891,6 +891,9 @@ model BrowserAutomationDetails {
   connection: BrowserAutomationRemoteBrowserConnection;
 }
 
+/**
+ * The connection ID containing information about the remote browser.
+ */
 @added(Versions.v2025_05_15_preview)
 model BrowserAutomationRemoteBrowserConnection {
   @doc("The connection ID for the remote browser.")
@@ -912,6 +915,9 @@ model DeepResearchDetails {
   bingGroundingConnections: BingGroundingConnectionInformation[];
 }
 
+/**
+ * The connection resource ID for the Bing grounding resource.
+ */
 @added(Versions.v2025_05_15_preview)
 model BingGroundingConnectionInformation {
   @doc("The connection ID for the Bing grounding connection.")
