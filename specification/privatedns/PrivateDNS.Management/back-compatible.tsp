@@ -19,3 +19,6 @@ using Microsoft.Network;
 @@clientName(RecordSets.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RecordSet.properties);
+
+// @@clientLocation decorators for operations with @operationId
+@@clientLocation(PrivateZones.recordSetsList, RecordSets);
