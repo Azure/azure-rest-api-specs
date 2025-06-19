@@ -3252,6 +3252,7 @@
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
         "id": {
+          "readOnly": true,
           "description": "Id of the cosmos DB sql container endpoint",
           "type": "string"
         },
@@ -3265,7 +3266,8 @@
         },
         "endpointUri": {
           "description": "The url of the cosmos DB account. It must include the protocol https://",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "authenticationType": {
           "description": "Method used to authenticate against the cosmos DB sql container endpoint",
