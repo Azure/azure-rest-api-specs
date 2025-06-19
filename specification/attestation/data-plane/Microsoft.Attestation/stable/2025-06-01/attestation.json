@@ -373,6 +373,49 @@
         }
       }
     },
+    "/attest/AzureGuest": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest to an Azure Guest VM.",
+        "description": "Processes an Azure Guest TCG Log, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "Attestation_AttestAzureGuest",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing TCG Logs from the Azure Guest.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestAzureGuestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SealedAttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest Azure Guest VM": {
+            "$ref": "./examples/AttestAzureGuestVm.json"
+          }
+        }
+      }
+    },
     "/attest/Tpm": {
       "post": {
         "tags": [
@@ -458,6 +501,49 @@
         "x-ms-examples": {
           "Attest SevSnpVm": {
             "$ref": "./examples/AttestSevSnpVm.json"
+          }
+        }
+      }
+    },
+    "/attest/TdxVm": {
+      "post": {
+        "tags": [
+          "Attestation"
+        ],
+        "summary": "Attest to a TDX Virtual Machine.",
+        "description": "Processes an TDX quote, producing an artifact. The type of artifact produced is dependent upon attestation policy.",
+        "operationId": "Attestation_AttestTdxVm",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Request object containing the quote",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttestTdxVmRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AttestationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attest SgxEnclave": {
+            "$ref": "./examples/AttestTdxVm.json"
           }
         }
       }
@@ -1002,6 +1088,16 @@
         }
       }
     },
+    "SealedAttestationResponse": {
+      "type": "object",
+      "description": "The sealed result of an attestation operation",
+      "properties": {
+        "token": {
+          "description": "A sealed RFC 7519 JSON Web Token, the body of which is an AttestationResult object.",
+          "type": "string"
+        }
+      }
+    },
     "DataType": {
       "description": "Specifies the type of the data encoded contained within the \"data\" field of a \"RuntimeData\" or \"InitTimeData\" object",
       "type": "string",
@@ -1130,6 +1226,16 @@
         }
       }
     },
+    "AttestAzureGuestRequest": {
+      "type": "object",
+      "description": "Attestation request for Azure Guest Gen2 VMs",
+      "properties": {
+        "attestationInfo": {
+          "description": "Attestation client information containing all artifacts required for Guest Attestation.",
+          "type": "string"
+        }
+      }
+    },
     "AttestSevSnpVmRequest": {
       "type": "object",
       "description": "Attestation request for AMD SEV SNP Virtual Machine",
@@ -1149,6 +1255,29 @@
         "draftPolicyForAttestation": {
           "description": "Attest against the provided draft policy. Note that the resulting token cannot be validated.",
           "type": "string"
+        },
+        "nonce": {
+          "description": "Nonce for incoming request - emitted in the generated attestation token",
+          "type": "string"
+        }
+      }
+    },
+    "AttestTdxVmRequest": {
+      "type": "object",
+      "description": "Attestation request for Intel TDX Virtual Machine",
+      "properties": {
+        "quote": {
+          "description": "Quote of the TDX virtual machine to be attested",
+          "type": "string",
+          "format": "base64url"
+        },
+        "runtimeData": {
+          "description": "Runtime data provided by the enclave at the time of quote generation. The MAA will verify that the first 32 bytes of the report_data field of the quote contains the SHA256 hash of the decoded \"data\" field of the runtime data.",
+          "$ref": "#/definitions/RuntimeData"
+        },
+        "initTimeData": {
+          "description": "Initialization data provided when the enclave is created. MAA will verify that the init data was known to the enclave.",
+          "$ref": "#/definitions/InitTimeData"
         },
         "nonce": {
           "description": "Nonce for incoming request - emitted in the generated attestation token",
@@ -1185,20 +1314,30 @@
             "description": "OpenEnclave extensions to SGX"
           },
           {
+            "value": "AzureGuest",
+            "description": "Azure Guest Attestation"
+          },
+          {
             "value": "SevSnpVm",
             "description": "AMD SEV SNP Virtual Machine"
           },
           {
             "value": "Tpm",
             "description": "Edge TPM Virtualization Based Security"
+          },
+          {
+            "value": "TdxVm",
+            "description": "Intel TDX Virtual Machine"
           }
         ]
       },
       "enum": [
         "SgxEnclave",
         "OpenEnclave",
+        "AzureGuest",
         "SevSnpVm",
-        "Tpm"
+        "Tpm",
+        "TdxVm"
       ]
     }
   }
