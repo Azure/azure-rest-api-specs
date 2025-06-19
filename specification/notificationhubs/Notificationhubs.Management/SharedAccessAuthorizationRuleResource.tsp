@@ -34,12 +34,12 @@ model SharedAccessAuthorizationRuleResource
 
 @armResourceOperations
 interface SharedAccessAuthorizationRuleResourceOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
         ...KeysOf<ResourceNameParameter<
           Resource = NamespaceResource,
           KeyName = "namespaceName",
@@ -118,12 +118,12 @@ interface SharedAccessAuthorizationRuleResources {
 }
 @armResourceOperations
 interface NamespaceOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
         ...KeysOf<ResourceNameParameter<
           Resource = NamespaceResource,
           KeyName = "namespaceName",
