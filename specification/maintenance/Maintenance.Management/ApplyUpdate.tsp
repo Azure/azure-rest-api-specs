@@ -26,7 +26,7 @@ model ApplyUpdate
 
 @armResourceOperations
 interface ApplyUpdateOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,

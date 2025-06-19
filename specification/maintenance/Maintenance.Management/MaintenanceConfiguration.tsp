@@ -26,7 +26,7 @@ model MaintenanceConfiguration
 
 @armResourceOperations
 interface MaintenanceConfigurationOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,

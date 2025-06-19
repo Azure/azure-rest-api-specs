@@ -43,7 +43,7 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
 
 @armResourceOperations
 interface ConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -115,7 +115,7 @@ interface ConfigurationAssignments {
 }
 @armResourceOperations
 interface ConfigurationAssignmentOperationGroupOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -175,7 +175,7 @@ interface ConfigurationAssignmentOperationGroup {
 }
 @armResourceOperations
 interface ConfigurationAssignmentsForSubscriptionOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -231,7 +231,7 @@ interface ConfigurationAssignmentsForSubscriptions {
 }
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroupOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
