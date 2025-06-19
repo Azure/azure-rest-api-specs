@@ -26,10 +26,19 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-04-01
+tag: package-2025-05-01
 azure-validator: true
 ```
 
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.ResourceHealth/stable/2025-05-01/ResourceHealth.json
+```
 
 ### Tag: package-2025-04-01
 

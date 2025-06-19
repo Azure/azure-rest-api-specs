@@ -469,8 +469,8 @@ describe("extractInputs", () => {
       issue_number: NaN,
       head_sha: "abc123",
       run_id: NaN,
-      ado_build_id: "56789",
-      ado_project_url: "https://dev.azure.com/abc/123-456",
+      details_url:
+        "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
     });
   });
 
@@ -481,25 +481,17 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         check_run: {
-          details_url: "https://debc/123-456/_build/result/buildId=56789",
+          details_url:
+            "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
           head_sha: "abc123",
         },
         repository: {
-          name: "TestRepoName",
           owner: {
             login: "TestRepoOwnerLogin",
           },
         },
       },
     };
-
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).rejects.toThrow("from check run details URL");
-
-    context.payload.check_run.details_url =
-      "https://dev.azure.com/abc/123-456/_build/results?buildId=56789";
-    delete context.payload.repository.name;
 
     await expect(
       extractInputs(github, context, createMockCore()),
