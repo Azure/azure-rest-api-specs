@@ -24,6 +24,10 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_06_31_preview: "2025-06-31-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -107,6 +111,17 @@ interface Maps {
     MapsResource,
     ExportDependenciesRequest
   >;
+  @doc("Get dependencies for all machines")
+  @action("GetDependenciesForAllMachines")
+  @added(Versions.v2025_06_31_preview)
+  getDependenciesForAllMachines is ArmResourceActionAsync<
+    MapsResource,
+    GetDependenciesForAllMachinesRequest,
+    GetDependenciesForAllMachinesResponse,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = GetDependenciesForAllMachinesResponse> &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = GetDependenciesForAllMachinesResponse>
+  >;
 }
 
 @doc("Filters for dependency map visualization apis")
@@ -187,6 +202,20 @@ model ExportDependenciesRequest {
 
   @doc("Filters for ExportDependencies")
   filters?: DependencyMapVisualizationFilter;
+}
+
+@added(Versions.v2025_06_31_preview)
+@doc("GetDependenciesForAllMachines request model")
+model GetDependenciesForAllMachinesRequest {
+  @doc("Filters for ExportDependencies")
+  filters?: ProcessNameFilter;
+}
+
+@added(Versions.v2025_06_31_preview)
+@doc("GetDependenciesForAllMachines response model")
+model GetDependenciesForAllMachinesResponse {
+  @doc("SAS URL For Blob containing the pre-computed layout file")
+  blobSasUrl: string;
 }
 
 @doc("A Discovery Source resource")
