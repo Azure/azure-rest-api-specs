@@ -2773,6 +2773,201 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raitopics/{raiTopicName}": {
+      "get": {
+        "tags": [
+          "RaiTopics"
+        ],
+        "operationId": "RaiTopics_Get",
+        "description": "Gets the specified custom topic associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiTopicNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the custom topic successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiTopic"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RaiTopics"
+        ],
+        "operationId": "RaiTopics_CreateOrUpdate",
+        "description": "Update the state of specified blocklist associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "PutRaiBlocklist": {
+            "$ref": "./examples/PutRaiBlocklist.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiTopicNameParameter"
+          },
+          {
+            "name": "raiTopic",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiTopic"
+            },
+            "description": "Properties describing the custom blocklist."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created/updated the custom topic successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiTopic"
+            }
+          },
+          "201": {
+            "description": "Created/updated the custom topic successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiTopic"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RaiTopics"
+        ],
+        "operationId": "RaiTopics_Delete",
+        "description": "Deletes the specified custom topic associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "DeleteRaiBlocklist": {
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiTopicNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content -- The Content Filters does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raitopics": {
+      "get": {
+        "tags": [
+          "RaiTopics"
+        ],
+        "operationId": "RaiTopics_List",
+        "description": "Gets the custom topics associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "ListBlocklists": {
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved topics.",
+            "schema": {
+              "$ref": "#/definitions/RaiTopicResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
       "get": {
         "tags": [
@@ -7738,6 +7933,102 @@
               "$ref": "#/definitions/RaiPolicyContentSource"
             }
           }
+        }
+      }
+    },
+    "RaiTopicResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of RaiTopics.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiTopic"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of RaiTopic."
+        }
+      },
+      "description": "The list of cognitive services RAI Topics."
+    },
+    "RaiTopic": {
+      "description": "Cognitive Services Rai Topic.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiTopicProperties",
+          "description": "Properties of Cognitive Services Rai Topic."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RaiTopicProperties": {
+      "description": "RAI Custom Topic properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the custom topic."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the custom topic."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the custom topic."
+        },
+        "sampleBlobUrl": {
+          "type": "string",
+          "description": "Sample blob url for the custom topic."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the custom topic."
+        },
+        "failedReason": {
+          "type": "string",
+          "description": "Failed reason if the status is Failed."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the custom topic."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the custom topic."
         }
       }
     },
