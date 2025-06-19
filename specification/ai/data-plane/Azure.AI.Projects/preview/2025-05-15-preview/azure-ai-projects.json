@@ -446,14 +446,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the DatasetVersion to create or replace.",
+            "description": "The specific version id of the DatasetVersion to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "datasetVersion",
             "in": "body",
-            "description": "The definition of the DatasetVersion to create or update",
+            "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatasetVersion"
@@ -620,9 +620,9 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "pendingUploadRequest",
             "in": "body",
-            "description": "Parameters for the action",
+            "description": "The pending upload request parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PendingUploadRequest"
@@ -1157,14 +1157,14 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the Index to create or replace.",
+            "description": "The specific version id of the Index to create or update.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "index",
             "in": "body",
-            "description": "The definition of the Index to create or update",
+            "description": "The Index to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Index"
@@ -1428,8 +1428,7 @@
           "description": "The agent evaluation result.",
           "items": {
             "$ref": "#/definitions/AgentEvaluationResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1775,8 +1774,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -2723,8 +2721,7 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2745,8 +2742,7 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2788,8 +2784,7 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
