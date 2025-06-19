@@ -3015,6 +3015,356 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies": {
+      "get": {
+        "operationId": "Policies_List",
+        "tags": [
+          "Policies"
+        ],
+        "description": "List policies in a given policy set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "policysets",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=description)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_List": {
+            "$ref": "./examples/Policies_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}": {
+      "get": {
+        "operationId": "Policies_Get",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Get policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "policysets",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Schedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=description)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Get": {
+            "$ref": "./examples/Policies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Policies_CreateOrUpdate",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Create or replace an existing policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "policysets",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Schedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "A Policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Policy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "201": {
+            "description": "Resource 'Policy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_CreateOrUpdate": {
+            "$ref": "./examples/Policies_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Policies_Update",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Allows modifying tags of policies. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "policysets",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Schedule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policy",
+            "in": "body",
+            "description": "A Policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyFragment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Update": {
+            "$ref": "./examples/Policies_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Policies_Delete",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Delete policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "labs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "policysets",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Schedule",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_Delete": {
+            "$ref": "./examples/Policies_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules": {
       "get": {
         "operationId": "Schedules_List",
@@ -8340,286 +8690,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/policies": {
-      "get": {
-        "operationId": "Policies_List",
-        "tags": [
-          "Policies"
-        ],
-        "description": "List policies in a given policy set.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=description)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PolicyList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Policies_List": {
-            "$ref": "./examples/Policies_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/policies/{name}": {
-      "get": {
-        "operationId": "Policies_Get",
-        "tags": [
-          "Policies"
-        ],
-        "description": "Get policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=description)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Policies_Get": {
-            "$ref": "./examples/Policies_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Policies_CreateOrUpdate",
-        "tags": [
-          "Policies"
-        ],
-        "description": "Create or replace an existing policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "policy",
-            "in": "body",
-            "description": "A Policy.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Policy' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "201": {
-            "description": "Resource 'Policy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Policies_CreateOrUpdate": {
-            "$ref": "./examples/Policies_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Policies_Update",
-        "tags": [
-          "Policies"
-        ],
-        "description": "Allows modifying tags of policies. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "policy",
-            "in": "body",
-            "description": "A Policy.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyFragment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Policy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Policies_Update": {
-            "$ref": "./examples/Policies_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Policies_Delete",
-        "tags": [
-          "Policies"
-        ],
-        "description": "Delete policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Policies_Delete": {
-            "$ref": "./examples/Policies_Delete.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/schedules": {

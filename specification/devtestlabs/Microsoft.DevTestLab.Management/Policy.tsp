@@ -23,11 +23,34 @@ model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties, false> {
 }
 
 @armResourceOperations
+interface PolicySetsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** labs */
+        @path @segment("labs") labName: string,
+
+        /** policysets */
+        @path @segment("policysets") policySetName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Schedule,
+        KeyName = "name",
+        SegmentName = "policies",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Policies {
   /**
    * Get policy.
    */
-  get is ArmResourceRead<
+  get is PolicySetsOps.Read<
     Policy,
     Parameters = {
       /**
@@ -41,23 +64,23 @@ interface Policies {
   /**
    * Create or replace an existing policy.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Policy>;
+  createOrUpdate is PolicySetsOps.CreateOrUpdateSync<Policy>;
 
   /**
    * Allows modifying tags of policies. All other properties will be ignored.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Policy, PatchModel = PolicyFragment>;
+  update is PolicySetsOps.CustomPatchSync<Policy, PatchModel = PolicyFragment>;
 
   /**
    * Delete policy.
    */
-  delete is ArmResourceDeleteSync<Policy>;
+  delete is PolicySetsOps.DeleteSync<Policy>;
 
   /**
    * List policies in a given policy set.
    */
-  list is ArmResourceListByParent<
+  list is PolicySetsOps.List<
     Policy,
     Parameters = {
       /**
