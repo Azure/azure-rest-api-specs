@@ -22,9 +22,7 @@
         "in": "path",
         "description": "The Schema Registry service endpoint, for example 'my-namespace.servicebus.windows.net'.",
         "required": true,
-        "type": "string",
-        "format": "uri",
-        "x-ms-skip-url-encoding": true
+        "type": "string"
       }
     ]
   },
@@ -521,8 +519,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -612,6 +609,7 @@
         },
         "NextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
@@ -637,6 +635,7 @@
         },
         "NextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The link to the next page of items"
         }
       },
