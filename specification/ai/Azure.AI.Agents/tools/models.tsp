@@ -151,7 +151,6 @@ model BrowserAutomationToolDefinition extends ToolDefinition {
   type: "browser_automation";
 
   @doc("The browser_automation tool definition configuration.")
-  @maxItems(1)
   @encodedName("application/json", "browser_automation")
   browserAutomation: BrowserAutomationDetails;
 }
@@ -163,7 +162,6 @@ model DeepResearchToolDefinition extends ToolDefinition {
   type: "deep_research";
 
   @doc("The deep_research tool definition configuration.")
-  @maxItems(1)
   @encodedName("application/json", "deep_research")
   deepResearch: DeepResearchDetails;
 }
@@ -679,20 +677,12 @@ model BingGroundingSearchConfiguration {
 @added(Versions.v2025_05_15_preview)
 model RunStepBrowserAutomationToolCallDetails {
   @doc("The input provided by the model to the browser automation tool.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
-  @encodedName("application/json", "input")
   input: string;
   
   @doc("The final output for the browser automation tool.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
-  @encodedName("application/json", "output")
   output: string;
   
   @doc("The intermediate browser goals taken to achieve the final user goal.")
-  @added(Versions.v2025_05_15_preview)
-  @encodedName("application/json", "steps")
   steps: RunStepBrowserAutomationToolStepDetail[];
 }
 
@@ -700,20 +690,14 @@ model RunStepBrowserAutomationToolCallDetails {
 @added(Versions.v2025_05_15_preview)
 model RunStepBrowserAutomationToolStepDetail {
   @doc("The evaluated result of the previous step that'll help the model decide what to do next.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
   @encodedName("application/json", "last_step_result")
   lastStepResult: string;
 
   @doc("The model interpretation of the current state of the browser after the action for the current step has been performed.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
   @encodedName("application/json", "current_state")
   currentState: string;
   
   @doc("The model decision summary of the next step to be performed to reach closer to the final user goal.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
   @encodedName("application/json", "next_step")
   nextStep: string;
 }
@@ -723,15 +707,9 @@ model RunStepBrowserAutomationToolStepDetail {
 @added(Versions.v2025_05_15_preview)
 model RunStepDeepResearchToolCallDetails {
   @doc("The input provided by the model to the deep research tool.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
-  @encodedName("application/json", "input")
   input: string;
 
   @doc("The final output for the deep research tool.")
-  @added(Versions.v2025_05_15_preview)
-  @maxItems(1)
-  @encodedName("application/json", "output")
   output?: string;
 }
 
@@ -909,18 +887,13 @@ model ConnectedAgentDetails {
  */
 @added(Versions.v2025_05_15_preview)
 model BrowserAutomationDetails {
-  @added(Versions.v2025_05_15_preview)
   @doc("Information about the remote browser to be used for automation.")
-  @maxItems(1)
-  @encodedName("application/json", "connection")
   connection: BrowserAutomationRemoteBrowserConnection;
 }
 
 @added(Versions.v2025_05_15_preview)
 model BrowserAutomationRemoteBrowserConnection {
-  @added(Versions.v2025_05_15_preview)
   @doc("The connection ID for the remote browser.")
-  @maxItems(1)
   @encodedName("application/json", "id")
   connectionId: string;
 }
@@ -930,23 +903,18 @@ model BrowserAutomationRemoteBrowserConnection {
  */
 @added(Versions.v2025_05_15_preview)
 model DeepResearchDetails {
-  @added(Versions.v2025_05_15_preview)
-  @doc("The reasoning model deployment name.")
-  @maxItems(1)
-  @encodedName("application/json", "deployment_name")
-  deploymentName: string;
+  @doc("The deep research model deployment name.")
+  @encodedName("application/json", "deep_research_model")
+  deepResearchModelDeploymentName: string;
 
-  @added(Versions.v2025_05_15_preview)
-  @doc("The array containing bing grounding connection IDs to enhance deep research capabilities.")
+  @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
   @encodedName("application/json", "bing_grounding_connections")
-  BingGroundingConnections?: BingGroundingConnectionInformation[];
+  bingGroundingConnections: BingGroundingConnectionInformation[];
 }
 
 @added(Versions.v2025_05_15_preview)
 model BingGroundingConnectionInformation {
-  @added(Versions.v2025_05_15_preview)
   @doc("The connection ID for the Bing grounding connection.")
-  @maxItems(1)
   @encodedName("application/json", "connection_id")
   connectionId: string;
 }
