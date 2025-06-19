@@ -5,8 +5,10 @@ using Microsoft.SqlVirtualMachine;
 
 // @@clientLocation decorators for @operationId operations
 @@clientLocation(SqlVirtualMachineGroups.listBySqlVmGroup, SqlVirtualMachines);
-@@clientLocation(SqlVirtualMachines.fetchDCAssessment, SqlVirtualMachines);  
-@@clientLocation(SqlVirtualMachines.troubleshoot, "SqlVirtualMachineTroubleshoot");
+@@clientLocation(SqlVirtualMachines.fetchDCAssessment, SqlVirtualMachines);
+@@clientLocation(SqlVirtualMachines.troubleshoot,
+  "SqlVirtualMachineTroubleshoot"
+);
 
 @@clientName(AvailabilityGroupListeners.createOrUpdate::parameters.resource,
   "parameters"
