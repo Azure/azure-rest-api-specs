@@ -112,8 +112,8 @@ interface Maps {
     MapsResource,
     ExportDependenciesRequest,
     ExportDependenciesOperationResult,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExportDependenciesOperationResult> &
+      ArmLroLocationHeader<FinalResult = ExportDependenciesOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
