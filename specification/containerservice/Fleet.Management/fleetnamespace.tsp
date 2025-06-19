@@ -219,21 +219,17 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 
-    patch is ArmCustomPatchAsync<
-      FleetManagedNamespace,
-      FleetManagedNamespacePatch,
-      Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
-        IfMatchParameters<FleetManagedNamespace>
-    >;
-  }
+  patch is ArmCustomPatchAsync<
+    FleetManagedNamespace,
+    FleetManagedNamespacePatch,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
+      IfMatchParameters<FleetManagedNamespace>
+  >;
+}
 
-  /**
-   * Properties of a Fleet Managed Namespace that can be patched.
-   */
-  @added(Versions.v2025_08_01_preview)
-  model FleetManagedNamespacePatch {
-    /**
-     * The ARM tags of the fleet managed namespace resource.
-     */
-    ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  }
+@added(Versions.v2025_08_01_preview)
+@doc("The properties of a fleet managed namespace that can be patched.")
+model FleetManagedNamespacePatch {
+  /* The ARM tags of the fleet managed namespace resource.*/
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}
