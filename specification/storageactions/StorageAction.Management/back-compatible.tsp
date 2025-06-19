@@ -20,7 +20,7 @@ using Microsoft.StorageActions;
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
-@@clientLocation(StorageTasksOperationGroup.previewActions, "StorageTasks");
+@@clientLocation(StorageTasksOperationGroup.previewActions, StorageTasks);
 @@clientLocation(StorageTasks.list, "StorageTasksReport");
 @@clientLocation(StorageTasks.storageTaskAssignmentList,
   "StorageTaskAssignment"
