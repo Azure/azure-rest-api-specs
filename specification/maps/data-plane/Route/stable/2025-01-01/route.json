@@ -1521,6 +1521,9 @@
               "type": "string",
               "format": "date-time"
             },
+            "trafficCongestion": {
+              "$ref": "#/definitions/TrafficCongestionEnum"
+            },
             "legs": {
               "description": "An array of route Legs. Check route Leg object description for more information.",
               "type": "array",
@@ -2222,6 +2225,48 @@
             "value": "Right",
             "name": "Right",
             "description": "Right-hand side driving."
+          }
+        ]
+      }
+    },
+    "TrafficCongestionEnum": {
+      "description": "The level of traffic congestion along the route. `Note`: Only supported for driving travelMode",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "None",
+        "Mild",
+        "Medium",
+        "Heavy"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficCongestionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "name": "Unknown",
+            "description": "Unknown."
+          },
+          {
+            "value": "None",
+            "name": "None",
+            "description": "None."
+          },
+          {
+            "value": "Mild",
+            "name": "Mild",
+            "description": "Mild."
+          },
+          {
+            "value": "Medium",
+            "name": "Medium",
+            "description": "Medium."
+          },
+          {
+            "value": "Heavy",
+            "name": "Heavy",
+            "description": "Heavy."
           }
         ]
       }

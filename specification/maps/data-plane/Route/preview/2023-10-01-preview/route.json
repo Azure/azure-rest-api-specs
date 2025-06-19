@@ -698,6 +698,9 @@
               "type": "integer",
               "readOnly": true
             },
+            "trafficCongestion": {
+              "$ref": "#/definitions/TrafficCongestionEnum"
+            },
             "departureTime": {
               "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "format": "date-time",
@@ -1366,6 +1369,48 @@
             "value": "Unknown",
             "name": "Unknown",
             "description": "Unknown."
+          }
+        ]
+      }
+    },
+    "TrafficCongestionEnum": {
+      "description": "The level of traffic congestion along the route. `Note`: Only supported for driving travelMode",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "None",
+        "Mild",
+        "Medium",
+        "Heavy"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficCongestionEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "name": "Unknown",
+            "description": "Unknown."
+          },
+          {
+            "value": "None",
+            "name": "None",
+            "description": "None."
+          },
+          {
+            "value": "Mild",
+            "name": "Mild",
+            "description": "Mild."
+          },
+          {
+            "value": "Medium",
+            "name": "Medium",
+            "description": "Medium."
+          },
+          {
+            "value": "Heavy",
+            "name": "Heavy",
+            "description": "Heavy."
           }
         ]
       }
