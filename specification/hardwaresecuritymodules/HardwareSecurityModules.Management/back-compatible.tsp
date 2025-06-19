@@ -38,3 +38,36 @@ using Microsoft.HardwareSecurityModules;
 @@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
   "restoreRequestProperties"
 );
+
+// @@clientLocation for @operationId operations
+@@clientLocation(CloudHsmClusters.listByCloudHsmCluster,
+  "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster"
+);
+@@clientLocation(CloudHsmClusters.cloudHsmClusterBackupStatusGet,
+  "CloudHsmClusterBackupStatus_Get"
+);
+@@clientLocation(CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
+  "CloudHsmClusterRestoreStatus_Get"
+);
+@@clientLocation(PrivateEndpointConnections.get,
+  "CloudHsmClusterPrivateEndpointConnections_Get"
+);
+@@clientLocation(PrivateEndpointConnections.create,
+  "CloudHsmClusterPrivateEndpointConnections_Create"
+);
+@@clientLocation(PrivateEndpointConnections.delete,
+  "CloudHsmClusterPrivateEndpointConnections_Delete"
+);
+@@clientLocation(DedicatedHsms.get, "DedicatedHsm_Get");
+@@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm_CreateOrUpdate");
+@@clientLocation(DedicatedHsms.update, "DedicatedHsm_Update");
+@@clientLocation(DedicatedHsms.delete, "DedicatedHsm_Delete");
+@@clientLocation(DedicatedHsms.listByResourceGroup,
+  "DedicatedHsm_ListByResourceGroup"
+);
+@@clientLocation(DedicatedHsms.listBySubscription,
+  "DedicatedHsm_ListBySubscription"
+);
+@@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
+  "DedicatedHsm_ListOutboundNetworkDependenciesEndpoints"
+);
