@@ -55,3 +55,41 @@ using Microsoft.EdgeOrder;
 @@clientName(ProductsAndConfigurationsOperationGroup.listProductFamilies::parameters.body,
   "productFamiliesRequest"
 );
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
+// AddressResources interface operations
+@@clientLocation(AddressResources.get, "Addresses");
+@@clientLocation(AddressResources.create, "Addresses");
+@@clientLocation(AddressResources.update, "Addresses");
+@@clientLocation(AddressResources.delete, "Addresses");
+@@clientLocation(AddressResources.listByResourceGroup, "Addresses");
+@@clientLocation(AddressResources.listBySubscription, "Addresses");
+
+// OrderItemResources interface operations
+@@clientLocation(OrderItemResources.get, "OrderItems");
+@@clientLocation(OrderItemResources.create, "OrderItems");
+@@clientLocation(OrderItemResources.update, "OrderItems");
+@@clientLocation(OrderItemResources.delete, "OrderItems");
+@@clientLocation(OrderItemResources.listByResourceGroup, "OrderItems");
+@@clientLocation(OrderItemResources.listBySubscription, "OrderItems");
+@@clientLocation(OrderItemResources.cancel, "OrderItems");
+@@clientLocation(OrderItemResources.returnOrderItem, "OrderItems");
+
+// OrderResources interface operations
+@@clientLocation(OrderResources.get, "Orders");
+
+// ProductsAndConfigurationsOperationGroup interface operations
+@@clientLocation(ProductsAndConfigurationsOperationGroup.listConfigurations,
+  "ProductsAndConfigurations"
+);
+@@clientLocation(ProductsAndConfigurationsOperationGroup.listProductFamilies,
+  "ProductsAndConfigurations"
+);
+@@clientLocation(ProductsAndConfigurationsOperationGroup.listProductFamiliesMetadata,
+  "ProductsAndConfigurations"
+);
+
+// OrdersOperationGroup interface operations
+@@clientLocation(OrdersOperationGroup.listBySubscription, "Orders");
+@@clientLocation(OrdersOperationGroup.listByResourceGroup, "Orders");
