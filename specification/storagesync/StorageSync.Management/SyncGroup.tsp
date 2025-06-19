@@ -7,6 +7,7 @@ import "./StorageSyncService.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -35,10 +36,13 @@ interface SyncGroups {
    * Create a new SyncGroup.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceSync<
-    SyncGroup,
-    Response = ArmResourceUpdatedResponse<SyncGroup>,
-    Error = StorageSyncError
+  @put
+  create is ArmCreateOperation<
+    ResourceInstanceParameters<SyncGroup, DefaultBaseParameters<SyncGroup>>,
+    SyncGroupCreateParameters,
+    Response = ArmResourceUpdatedResponse<SyncGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = StorageSyncError
   >;
 
   /**

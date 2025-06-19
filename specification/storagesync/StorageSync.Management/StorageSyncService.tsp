@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -35,12 +36,16 @@ interface StorageSyncServices {
    * Create a new StorageSyncService.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    StorageSyncService,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = StorageSyncError
+  @put
+  create is ArmCreateOperation<
+    ResourceInstanceParameters<
+      StorageSyncService,
+      DefaultBaseParameters<StorageSyncService>
+    >,
+    StorageSyncServiceCreateParameters,
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = StorageSyncError
   >;
 
   /**

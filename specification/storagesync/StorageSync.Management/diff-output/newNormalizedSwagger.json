@@ -265,7 +265,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageSyncService"
+              "$ref": "#/definitions/StorageSyncServiceCreateParameters"
             }
           }
         ],
@@ -649,7 +649,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegisteredServer"
+              "$ref": "#/definitions/RegisteredServerCreateParameters"
             }
           }
         ],
@@ -902,7 +902,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SyncGroup"
+              "$ref": "#/definitions/SyncGroupCreateParameters"
             }
           }
         ],
@@ -912,6 +912,9 @@
             "schema": {
               "$ref": "#/definitions/SyncGroup"
             }
+          },
+          "202": {
+            "description": "ignore"
           },
           "default": {
             "description": "ignore",
@@ -924,7 +927,8 @@
           "SyncGroups_Create": {
             "$ref": "./examples/SyncGroups_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SyncGroups_Delete",
@@ -1070,7 +1074,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CloudEndpoint"
+              "$ref": "#/definitions/CloudEndpointCreateParameters"
             }
           }
         ],
@@ -2099,6 +2103,37 @@
         }
       }
     },
+    "CloudEndpointCreateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudEndpointCreateParametersProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CloudEndpointCreateParametersProperties": {
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string"
+        },
+        "azureFileShareName": {
+          "type": "string"
+        },
+        "storageAccountTenantId": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        }
+      }
+    },
     "CloudEndpointLastChangeEnumerationStatus": {
       "type": "object",
       "properties": {
@@ -2687,6 +2722,58 @@
           "x-ms-identifiers": [
             "id"
           ]
+        }
+      }
+    },
+    "RegisteredServerCreateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegisteredServerCreateParametersProperties": {
+      "type": "object",
+      "properties": {
+        "serverCertificate": {
+          "type": "string"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "serverOSVersion": {
+          "type": "string"
+        },
+        "lastHeartBeat": {
+          "type": "string"
+        },
+        "serverRole": {
+          "type": "string"
+        },
+        "clusterId": {
+          "type": "string"
+        },
+        "clusterName": {
+          "type": "string"
+        },
+        "serverId": {
+          "type": "string"
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "identity": {
+          "type": "boolean"
         }
       }
     },
@@ -3622,6 +3709,42 @@
         }
       }
     },
+    "StorageSyncServiceCreateParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageSyncServiceCreateParametersProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageSyncServiceCreateParametersProperties": {
+      "type": "object",
+      "properties": {
+        "incomingTrafficPolicy": {
+          "type": "string",
+          "enum": [
+            "AllowAllTraffic",
+            "AllowVirtualNetworksOnly"
+          ],
+          "x-ms-enum": {
+            "name": "IncomingTrafficPolicy",
+            "modelAsString": true
+          }
+        },
+        "useIdentity": {
+          "type": "boolean"
+        }
+      }
+    },
     "StorageSyncServiceProperties": {
       "type": "object",
       "properties": {
@@ -3737,6 +3860,21 @@
           ]
         }
       }
+    },
+    "SyncGroupCreateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {},
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SyncGroupProperties": {
       "type": "object",

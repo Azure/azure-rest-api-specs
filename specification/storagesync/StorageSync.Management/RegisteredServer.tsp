@@ -7,6 +7,7 @@ import "./StorageSyncService.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -36,13 +37,16 @@ interface RegisteredServers {
    * Add a new registered server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    RegisteredServer,
-    Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = StorageSyncError,
-    Parameters = RegisteredServerCreateParameters
+  @put
+  create is ArmCreateOperation<
+    ResourceInstanceParameters<
+      RegisteredServer,
+      DefaultBaseParameters<RegisteredServer>
+    >,
+    RegisteredServerCreateParameters,
+    Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = StorageSyncError
   >;
 
   /**

@@ -406,7 +406,7 @@
             "description": "Storage Sync Service resource name.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageSyncService"
+              "$ref": "#/definitions/StorageSyncServiceCreateParameters"
             }
           }
         ],
@@ -1008,7 +1008,7 @@
             "description": "Body of Registered Server object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegisteredServer"
+              "$ref": "#/definitions/RegisteredServerCreateParameters"
             }
           }
         ],
@@ -1409,7 +1409,7 @@
             "description": "Sync Group Body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SyncGroup"
+              "$ref": "#/definitions/SyncGroupCreateParameters"
             }
           }
         ],
@@ -1418,6 +1418,20 @@
             "description": "Resource 'SyncGroup' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SyncGroup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1431,7 +1445,11 @@
           "SyncGroups_Create": {
             "$ref": "./examples/SyncGroups_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "SyncGroups_Delete",
@@ -1640,7 +1658,7 @@
             "description": "Body of Cloud Endpoint resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CloudEndpoint"
+              "$ref": "#/definitions/CloudEndpointCreateParameters"
             }
           }
         ],
@@ -3167,6 +3185,44 @@
         ]
       }
     },
+    "CloudEndpointCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a cloud endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudEndpointCreateParametersProperties",
+          "description": "The parameters used to create the cloud endpoint.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CloudEndpointCreateParametersProperties": {
+      "type": "object",
+      "description": "CloudEndpoint Properties object.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Storage Account Resource Id"
+        },
+        "azureFileShareName": {
+          "type": "string",
+          "description": "Azure file share name"
+        },
+        "storageAccountTenantId": {
+          "type": "string",
+          "description": "Storage Account Tenant Id"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        }
+      }
+    },
     "CloudEndpointLastChangeEnumerationStatus": {
       "type": "object",
       "description": "Cloud endpoint change enumeration status object",
@@ -4006,6 +4062,72 @@
           "x-ms-identifiers": [
             "id"
           ]
+        }
+      }
+    },
+    "RegisteredServerCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a registered server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
+          "description": "The parameters used to create the registered server.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegisteredServerCreateParametersProperties": {
+      "type": "object",
+      "description": "RegisteredServer Create Properties object.",
+      "properties": {
+        "serverCertificate": {
+          "type": "string",
+          "description": "Registered Server Certificate"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Registered Server Agent Version"
+        },
+        "serverOSVersion": {
+          "type": "string",
+          "description": "Registered Server OS Version"
+        },
+        "lastHeartBeat": {
+          "type": "string",
+          "description": "Registered Server last heart beat"
+        },
+        "serverRole": {
+          "type": "string",
+          "description": "Registered Server serverRole"
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Registered Server clusterId"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Registered Server clusterName"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Registered Server serverId"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Server ServicePrincipal Id"
+        },
+        "identity": {
+          "type": "boolean",
+          "description": "Apply server with newly discovered ApplicationId if available."
         }
       }
     },
@@ -5200,6 +5322,40 @@
         }
       }
     },
+    "StorageSyncServiceCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a storage sync service.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "managed identities for the Storage Sync to interact with other Azure services without maintaining any secrets or credentials in code."
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageSyncServiceCreateParametersProperties",
+          "description": "The parameters used to create the storage sync service.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageSyncServiceCreateParametersProperties": {
+      "type": "object",
+      "description": "StorageSyncService Properties object.",
+      "properties": {
+        "incomingTrafficPolicy": {
+          "$ref": "#/definitions/IncomingTrafficPolicy",
+          "description": "Incoming Traffic Policy"
+        },
+        "useIdentity": {
+          "type": "boolean",
+          "description": "Use Identity authorization when customer have finished setup RBAC permissions."
+        }
+      }
+    },
     "StorageSyncServiceProperties": {
       "type": "object",
       "description": "Storage Sync Service Properties object.",
@@ -5319,6 +5475,23 @@
           ]
         }
       }
+    },
+    "SyncGroupCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a sync group.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The parameters used to create the sync group",
+          "additionalProperties": {},
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SyncGroupProperties": {
       "type": "object",

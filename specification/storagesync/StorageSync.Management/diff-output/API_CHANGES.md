@@ -97,20 +97,21 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.OperationEntityListResult.required__added` | added | `["value"]` |
+| `definitions.StorageSyncServiceCreateParameters.required__deleted` | deleted | `["location"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.parameters[1].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].patch.parameters[3].required__added` | added | `true` |
 
-### Changes for `CloudEndpointCreateParameters`
+### Changes for `x-ms-long-running-operation`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CloudEndpointCreateParameters__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/CloudEndpointCreateParametersProp...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put['x-ms-long-running-operation__added']` | added | `true` |
 
-### Changes for `CloudEndpointCreateParametersProperties`
+### Changes for `202`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CloudEndpointCreateParametersProperties__deleted` | deleted | `{"type":"object","properties":{"storageAccountResourceId":{"type":"string"},"azureFileShareName":{"t...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put.responses.202__added` | added | `{"description":"ignore"}` |
 
 ### Changes for `OperationDisplayResource`
 
@@ -123,18 +124,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PhysicalPath__deleted` | deleted | `{"type":"string"}` |
-
-### Changes for `RegisteredServerCreateParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RegisteredServerCreateParameters__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RegisteredServerCreateParametersP...` |
-
-### Changes for `RegisteredServerCreateParametersProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.RegisteredServerCreateParametersProperties__deleted` | deleted | `{"type":"object","properties":{"serverCertificate":{"type":"string"},"agentVersion":{"type":"string"...` |
 
 ### Changes for `ResourceId`
 
@@ -160,18 +149,6 @@
 |------|------------|-------|
 | `definitions.ServerEndpointCreateParametersProperties__deleted` | deleted | `{"type":"object","properties":{"serverLocalPath":{"$ref":"#/definitions/PhysicalPath"},"cloudTiering...` |
 
-### Changes for `StorageSyncServiceCreateParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StorageSyncServiceCreateParameters__deleted` | deleted | `{"type":"object","properties":{"identity":{"$ref":"../../../../../common-types/resource-management/v...` |
-
-### Changes for `StorageSyncServiceCreateParametersProperties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.StorageSyncServiceCreateParametersProperties__deleted` | deleted | `{"type":"object","properties":{"incomingTrafficPolicy":{"type":"string","enum":["AllowAllTraffic","A...` |
-
 ### Changes for `SubscriptionState`
 
 | Path | Change Type | Value |
@@ -183,12 +160,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.SubscriptionStateProperties__deleted` | deleted | `{"type":"object"}` |
-
-### Changes for `SyncGroupCreateParameters`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.SyncGroupCreateParameters__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/SyncGroupCreateParametersProperti...` |
 
 ### Changes for `SyncGroupCreateParametersProperties`
 
@@ -220,6 +191,7 @@
 |------|------------|-------|
 | `definitions.ServerEndpointProperties.properties.serverLocalPath.$ref__deleted` | deleted | `#/definitions/PhysicalPath` |
 | `definitions.ServerEndpointProperties.properties.serverResourceId.$ref__deleted` | deleted | `#/definitions/ResourceId` |
+| `definitions.SyncGroupCreateParameters.properties.properties.$ref__deleted` | deleted | `#/definitions/SyncGroupCreateParametersProperties` |
 
 ### Changes for `type`
 
@@ -227,17 +199,20 @@
 |------|------------|-------|
 | `definitions.ServerEndpointProperties.properties.serverLocalPath.type__added` | added | `string` |
 | `definitions.ServerEndpointProperties.properties.serverResourceId.type__added` | added | `string` |
+| `definitions.SyncGroupCreateParameters.properties.properties.type__added` | added | `object` |
+
+### Changes for `additionalProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.SyncGroupCreateParameters.properties.properties.additionalProperties__added` | added | `{}` |
 
 ## Modified Values
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.StorageSyncServiceProperties.properties.privateEndpointConnections.items.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.parameters[1].schema.$ref` | `#/definitions/StorageSyncServiceCreateParameters` | `#/definitions/StorageSyncService` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[3].schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].put.parameters[2].schema.$ref` | `#/definitions/RegisteredServerCreateParameters` | `#/definitions/RegisteredServer` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put.parameters[2].schema.$ref` | `#/definitions/SyncGroupCreateParameters` | `#/definitions/SyncGroup` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].put.parameters[3].schema.$ref` | `#/definitions/CloudEndpointCreateParameters` | `#/definitions/CloudEndpoint` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].put.parameters[3].schema.$ref` | `#/definitions/ServerEndpointCreateParameters` | `#/definitions/ServerEndpoint` |
 
