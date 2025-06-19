@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
+using Http;
 using Azure.ResourceManager;
 
 namespace Nginx.NginxPlus;
@@ -173,6 +174,99 @@ model NginxConfigurationListResponse {
 }
 
 /**
+ * Response model for configuration analysis.
+ */
+model ConfigurationAnalysisResponse {
+  /**
+   * List of analysis results for the configuration.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  value: ConfigurationAnalysisResult[];
+
+  /**
+   * URL to fetch the next page of analysis results.
+   */
+  nextLink?: string;
+}
+
+/**
+ * Configuration analysis result.
+ */
+model ConfigurationAnalysisResult {
+  /**
+   * Unique identifier for the analysis result.
+   */
+  id: string;
+
+  /**
+   * Severity level of the analysis finding.
+   */
+  severity: AnalysisSeverity;
+
+  /**
+   * The type of analysis finding.
+   */
+  type: string;
+
+  /**
+   * Descriptive message about the analysis finding.
+   */
+  message: string;
+
+  /**
+   * File path where the issue was found.
+   */
+  filePath?: string;
+
+  /**
+   * Line number where the issue was found.
+   */
+  lineNumber?: int32;
+
+  /**
+   * Suggested resolution for the issue.
+   */
+  resolution?: string;
+}
+
+/**
+ * Severity level of an analysis finding.
+ */
+union AnalysisSeverity {
+  /** Error level finding that should be addressed immediately. */
+  Error: "Error",
+
+  /** Warning level finding that should be reviewed. */
+  Warning: "Warning",
+
+  /** Information level finding that may be helpful but not critical. */
+  Info: "Info",
+
+  /** Other severity levels not covered by pre-defined values. */
+  string,
+}
+
+/**
+ * Request model for analyzing a configuration.
+ */
+model ConfigurationAnalysisRequest {
+  /**
+   * Specific files to analyze. If not provided, all configuration files will be analyzed.
+   */
+  files?: string[];
+
+  /**
+   * Specific analysis types to run. If not provided, all available analyses will be run.
+   */
+  analysisTypes?: string[];
+
+  /**
+   * Minimum severity level of findings to include in the results.
+   */
+  minimumSeverity?: AnalysisSeverity;
+}
+
+/**
  * Operations on Nginx configurations under a given deployment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We already have a delete operation defined in the interface"
@@ -213,4 +307,20 @@ interface Configurations {
    * Lists all configurations in a parent deployment.
    */
   listByDeployment is ArmResourceListByParent<Configuration>;
+
+  /**
+   * Analyzes a configuration for potential issues or optimizations.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is not a long-running operation"
+  @post
+  @action("analyze")
+  @armResourceAction(ConfigurationAnalysisResponse)
+  analyze(
+    ...ResourceInstanceParameters<Configuration>,
+
+    /**
+     * Request body for the analysis.
+     */
+    @body request: ConfigurationAnalysisRequest,
+  ): ArmResponse<ConfigurationAnalysisResponse> | ArmAcceptedResponse | ErrorResponse;
 }
