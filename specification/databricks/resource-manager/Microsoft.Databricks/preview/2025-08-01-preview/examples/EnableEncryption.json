@@ -8,6 +8,18 @@
       "properties": {
         "managedResourceGroupId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myManagedRG",
         "parameters": {
+          "customPrivateSubnetName": {
+            "type": "String",
+            "value": "PrivateBob"
+          },
+          "customPublicSubnetName": {
+            "type": "String",
+            "value": "PublicSarah"
+          },
+          "customVirtualNetworkId": {
+            "type": "String",
+            "value": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork"
+          },
           "prepareEncryption": {
             "value": true
           },
@@ -109,6 +121,33 @@
         },
         "properties": {
           "managedResourceGroupId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myManagedRG",
+          "parameters": {
+            "customPrivateSubnetName": {
+              "type": "String",
+              "value": "PrivateBob"
+            },
+            "customPublicSubnetName": {
+              "type": "String",
+              "value": "PublicSarah"
+            },
+            "customVirtualNetworkId": {
+              "type": "String",
+              "value": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork"
+            },
+            "prepareEncryption": {
+              "type": "Bool",
+              "value": true
+            },
+            "encryption": {
+              "type": "Object",
+              "value": {
+                "keySource": "Microsoft.Keyvault",
+                "keyvaulturi": "https://myKeyVault.vault.azure.net/",
+                "KeyName": "myKeyName",
+                "keyversion": "00000000000000000000000000000000"
+              }
+            }
+          },
           "provisioningState": "Accepted",
           "uiDefinitionUri": "https://path/to/workspaceCreateUiDefinition.json",
           "authorizations": [
