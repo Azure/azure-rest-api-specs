@@ -76,6 +76,7 @@ interface WorkloadNetworks {
   deletePortMirroring is WorkloadNetworkPortMirroringProfiles.delete;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("list_public_ips", "python")
   listPublicIPs is WorkloadNetworkPublicIps.list;
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @clientName("getPublicIp", "java")
@@ -203,15 +204,15 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
-  "java,go"
+  "java,go,javascript"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
