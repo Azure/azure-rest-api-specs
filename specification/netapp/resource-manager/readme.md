@@ -65,7 +65,6 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
   - Microsoft.NetApp/stable/2024-09-01/netapp.json
-tag: package-preview-2025-03-01-preview
 ```
 
 ### Tag: package-preview-2024-09-01-preview
@@ -520,7 +519,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current"].get
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current"].get
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default"].get
-  
+
   - code: RequiredPropertiesMissingInResourceModel
     reason: https://eng.ms/docs/products/arm/api_contracts/usagesapicontract
     where:
