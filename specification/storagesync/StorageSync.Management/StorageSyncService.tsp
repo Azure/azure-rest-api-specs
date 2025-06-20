@@ -60,7 +60,7 @@ interface StorageSyncServices {
    * Patch a given StorageSyncService.
    */
   @patch(#{ implicitOptionality: false })
-  update is Legacy.LegacyOperations.CustomPatchAsync<
+  update is ArmCustomPatchAsync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
     Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
@@ -73,7 +73,7 @@ interface StorageSyncServices {
       @doc("request id.")
       requestId?: string;
     }),
-    OptionalRequestBody = true
+    Error = StorageSyncError
   >;
 
   /**

@@ -152,7 +152,7 @@ interface RegisteredServers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegisteredServers_triggerRollover")
-  triggerRollover is ArmResourceActionAsync<
+  triggerRollover is ArmResourceActionSync<
     RegisteredServer,
     TriggerRolloverRequest,
     Response = OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &

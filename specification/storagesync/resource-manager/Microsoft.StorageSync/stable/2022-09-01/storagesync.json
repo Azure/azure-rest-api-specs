@@ -237,9 +237,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageSyncServiceArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -255,7 +265,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextlink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -297,9 +307,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -364,7 +384,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextlink"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -454,7 +474,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -464,6 +484,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -519,13 +547,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'StorageSyncService' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/StorageSyncService"
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -535,6 +563,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -581,10 +617,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -594,6 +640,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -645,9 +699,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -764,7 +828,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -774,6 +838,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -830,7 +902,7 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -840,6 +912,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -937,9 +1017,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RegisteredServerArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -990,9 +1080,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -1050,13 +1150,23 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'RegisteredServer' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1066,6 +1176,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -1128,13 +1246,23 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1144,6 +1272,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -1197,10 +1333,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1210,6 +1356,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -1290,7 +1444,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1300,6 +1454,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -1348,9 +1510,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SyncGroupArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -1401,9 +1573,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SyncGroup"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -1461,22 +1643,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SyncGroup' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SyncGroup"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
+            },
             "headers": {
-              "Location": {
+              "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "correlation request id."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -1491,11 +1669,7 @@
           "SyncGroups_Create": {
             "$ref": "./examples/SyncGroups_Create.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "SyncGroups_Delete",
@@ -5574,7 +5748,7 @@
             "id"
           ]
         },
-        "nextlink": {
+        "nextLink": {
           "type": "string"
         }
       }

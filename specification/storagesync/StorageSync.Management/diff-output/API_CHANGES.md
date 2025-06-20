@@ -22,30 +22,9 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/storageSyncServices'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].delete.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].delete.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].patch.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].patch.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].put.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}'].put.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}/triggerRollover'].post.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].delete.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].delete.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id"},"x-ms-reques...` |
@@ -93,18 +72,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
-### Changes for `x-ms-long-running-operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put['x-ms-long-running-operation__added']` | added | `true` |
-
-### Changes for `202`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].put.responses.202__added` | added | `{"description":"ignore"}` |
 
 ### Changes for `OperationDisplayResource`
 
@@ -198,11 +165,18 @@
 |------|------------|-------|
 | `definitions.ServerEndpointCreateParametersProperties.properties.tierFilesOlderThanDays.default__deleted` | deleted | `0` |
 
-### Changes for `nextlink`
+### Changes for `description`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.StorageSyncServiceArray.properties.nextlink__added` | added | `{"type":"string"}` |
+| `definitions.StorageSyncServiceArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.StorageSyncServiceArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.StorageSyncServiceArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
 ### Changes for `additionalProperties`
 
@@ -215,8 +189,16 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.StorageSyncServiceProperties.properties.privateEndpointConnections.items.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/storageSyncServices'].get['x-ms-pageable'].nextLinkName` | `nextLink` | `nextlink` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices'].get['x-ms-pageable'].nextLinkName` | `nextLink` | `nextlink` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].delete.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].delete.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[3].schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
 
