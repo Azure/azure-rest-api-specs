@@ -4850,6 +4850,11 @@
           "$ref": "#/definitions/LogicalNetworkStatus",
           "description": "The observed state of logical networks",
           "readOnly": true
+        },
+        "networkType": {
+          "$ref": "#/definitions/LogicalNetworkTypeEnum",
+          "description": "Type of the Logical Network",
+          "readOnly": true
         }
       }
     },
@@ -4897,6 +4902,30 @@
           "description": "The status of the operation performed on the logical network [Succeeded, Failed, InProgress]"
         }
       }
+    },
+   "LogicalNetworkTypeEnum": {
+        "type": "string",
+        "description": "Type of Logical Network",
+        "enum": [
+          "Workload",
+          "Infrastructure"
+        ],
+        "x-ms-enum": {
+          "name": "LogicalNetworkTypeEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "Workload",
+              "value": "Workload",
+              "description": "Logical Network of type Workload"
+            },
+            {
+              "name": "Infrastructure",
+              "value": "Infrastructure",
+              "description": "Logical Network of type Infrastructure"
+            }
+          ]
+        }
     },
     "LogicalNetworksUpdateRequest": {
       "type": "object",
