@@ -7,6 +7,7 @@ import "./SyncGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -36,12 +37,16 @@ interface ServerEndpoints {
    * Create a new ServerEndpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    ServerEndpoint,
-    Response = ArmResourceUpdatedResponse<ServerEndpoint> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = StorageSyncError
+  @put
+  create is ArmCreateOperation<
+    ResourceInstanceParameters<
+      ServerEndpoint,
+      DefaultBaseParameters<ServerEndpoint>
+    >,
+    ServerEndpointCreateParameters,
+    Response = ArmResourceUpdatedResponse<ServerEndpoint> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = StorageSyncError
   >;
 
   /**

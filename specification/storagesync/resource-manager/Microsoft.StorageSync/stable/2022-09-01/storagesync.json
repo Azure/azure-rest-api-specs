@@ -79,9 +79,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -1241,7 +1251,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -1974,7 +1994,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2058,7 +2088,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2142,7 +2182,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2217,7 +2267,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2283,7 +2343,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2472,7 +2542,7 @@
             "description": "Body of Server Endpoint object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerEndpoint"
+              "$ref": "#/definitions/ServerEndpointCreateParameters"
             }
           }
         ],
@@ -2723,7 +2793,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -2890,7 +2970,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Standard OK response with Azure request tracking headers.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3631,6 +3721,10 @@
         "name": "NameAvailabilityReason",
         "modelAsString": false
       }
+    },
+    "OkResponse": {
+      "type": "object",
+      "description": "Standard OK response with Azure request tracking headers."
     },
     "OperationDirection": {
       "type": "string",
@@ -4445,6 +4539,140 @@
           "$ref": "#/definitions/CloudTieringLowDiskMode",
           "description": "Information regarding the low disk mode state",
           "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointCreateParameters": {
+      "type": "object",
+      "description": "The parameters used when creating a server endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerEndpointCreateParametersProperties",
+          "description": "The parameters used to create the server endpoint.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerEndpointCreateParametersProperties": {
+      "type": "object",
+      "description": "ServerEndpoint Properties object.",
+      "properties": {
+        "serverLocalPath": {
+          "type": "string",
+          "description": "Server Local path."
+        },
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
+          "default": 20,
+          "maximum": 100
+        },
+        "tierFilesOlderThanDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Tier files older than days.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "serverResourceId": {
+          "type": "string",
+          "description": "Server Resource Id."
+        },
+        "offlineDataTransfer": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Offline data transfer"
+        },
+        "offlineDataTransferShareName": {
+          "type": "string",
+          "description": "Offline data transfer share name"
+        },
+        "initialDownloadPolicy": {
+          "type": "string",
+          "description": "Policy for how namespace and files are recalled during FastDr.",
+          "default": "NamespaceThenModifiedFiles",
+          "enum": [
+            "NamespaceOnly",
+            "NamespaceThenModifiedFiles",
+            "AvoidTieredFiles"
+          ],
+          "x-ms-enum": {
+            "name": "InitialDownloadPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NamespaceOnly",
+                "value": "NamespaceOnly"
+              },
+              {
+                "name": "NamespaceThenModifiedFiles",
+                "value": "NamespaceThenModifiedFiles"
+              },
+              {
+                "name": "AvoidTieredFiles",
+                "value": "AvoidTieredFiles"
+              }
+            ]
+          }
+        },
+        "localCacheMode": {
+          "type": "string",
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
+          "default": "UpdateLocallyCachedFiles",
+          "enum": [
+            "DownloadNewAndModifiedFiles",
+            "UpdateLocallyCachedFiles"
+          ],
+          "x-ms-enum": {
+            "name": "LocalCacheMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "DownloadNewAndModifiedFiles",
+                "value": "DownloadNewAndModifiedFiles"
+              },
+              {
+                "name": "UpdateLocallyCachedFiles",
+                "value": "UpdateLocallyCachedFiles"
+              }
+            ]
+          }
+        },
+        "initialUploadPolicy": {
+          "type": "string",
+          "description": "Policy for how the initial upload sync session is performed.",
+          "default": "Merge",
+          "enum": [
+            "ServerAuthoritative",
+            "Merge"
+          ],
+          "x-ms-enum": {
+            "name": "InitialUploadPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ServerAuthoritative",
+                "value": "ServerAuthoritative"
+              },
+              {
+                "name": "Merge",
+                "value": "Merge"
+              }
+            ]
+          }
         }
       }
     },
@@ -5550,10 +5778,6 @@
         "name": "Type",
         "modelAsString": false
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "Workflow": {
       "type": "object",

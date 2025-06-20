@@ -73,7 +73,15 @@ interface StorageSyncServices {
    */
   listByResourceGroup is ArmResourceListByParent<
     StorageSyncService,
-    Response = ArmResponse<StorageSyncServiceArray>,
+    Response = ArmResponse<StorageSyncServiceArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 

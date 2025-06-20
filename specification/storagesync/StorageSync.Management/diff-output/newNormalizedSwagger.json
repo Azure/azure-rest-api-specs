@@ -26,6 +26,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/OperationEntityListResult"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -793,7 +803,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1282,7 +1302,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1335,7 +1365,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1388,7 +1428,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1433,7 +1483,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -1482,7 +1542,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1609,7 +1679,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerEndpoint"
+              "$ref": "#/definitions/ServerEndpointCreateParameters"
             }
           }
         ],
@@ -1768,7 +1838,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
             "description": "ignore"
@@ -1877,7 +1957,17 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -2417,6 +2507,9 @@
           "readOnly": true
         }
       }
+    },
+    "OkResponse": {
+      "type": "object"
     },
     "OperationDisplayInfo": {
       "type": "object",
@@ -3039,6 +3132,108 @@
         "lowDiskMode": {
           "$ref": "#/definitions/CloudTieringLowDiskMode",
           "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointCreateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerEndpointCreateParametersProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerEndpointCreateParametersProperties": {
+      "type": "object",
+      "properties": {
+        "serverLocalPath": {
+          "type": "string"
+        },
+        "cloudTiering": {
+          "type": "string",
+          "enum": [
+            "on",
+            "off"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureStatus",
+            "modelAsString": true
+          }
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "format": "int32",
+          "default": 20,
+          "maximum": 100
+        },
+        "tierFilesOlderThanDays": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "friendlyName": {
+          "type": "string"
+        },
+        "serverResourceId": {
+          "type": "string"
+        },
+        "offlineDataTransfer": {
+          "type": "string",
+          "enum": [
+            "on",
+            "off"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureStatus",
+            "modelAsString": true
+          }
+        },
+        "offlineDataTransferShareName": {
+          "type": "string"
+        },
+        "initialDownloadPolicy": {
+          "type": "string",
+          "default": "NamespaceThenModifiedFiles",
+          "enum": [
+            "NamespaceOnly",
+            "NamespaceThenModifiedFiles",
+            "AvoidTieredFiles"
+          ],
+          "x-ms-enum": {
+            "name": "InitialDownloadPolicy",
+            "modelAsString": true
+          }
+        },
+        "localCacheMode": {
+          "type": "string",
+          "default": "UpdateLocallyCachedFiles",
+          "enum": [
+            "DownloadNewAndModifiedFiles",
+            "UpdateLocallyCachedFiles"
+          ],
+          "x-ms-enum": {
+            "name": "LocalCacheMode",
+            "modelAsString": true
+          }
+        },
+        "initialUploadPolicy": {
+          "type": "string",
+          "default": "Merge",
+          "enum": [
+            "ServerAuthoritative",
+            "Merge"
+          ],
+          "x-ms-enum": {
+            "name": "InitialUploadPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3921,9 +4116,6 @@
           "type": "string"
         }
       }
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object"
     },
     "Workflow": {
       "type": "object",

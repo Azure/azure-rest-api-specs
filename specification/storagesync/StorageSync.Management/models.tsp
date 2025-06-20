@@ -739,6 +739,9 @@ model StorageSyncServiceArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: StorageSyncService[];
+
+  @nextLink
+  nextlink?: string;
 }
 
 /**
@@ -2667,3 +2670,20 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
   "x-ms-identifiers",
   #["name"]
 );
+
+/**
+ * Standard OK response with Azure request tracking headers.
+ */
+model OkResponse {
+  @doc("HTTP 200 OK status code")
+  @statusCode
+  _: 200;
+
+  @header("x-ms-correlation-request-id")
+  @doc("correlation request id.")
+  correlationRequestId?: string;
+
+  @header("x-ms-request-id")
+  @doc("request id.")
+  requestId?: string;
+}

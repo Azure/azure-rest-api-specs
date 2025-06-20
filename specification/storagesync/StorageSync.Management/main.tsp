@@ -62,5 +62,13 @@ interface Operations {
     @segment("providers")
     @doc("The provider namespace (this parameter will not show up in operations).")
     provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationEntityListResult> | StorageSyncError;
+  ): (ArmResponse<OperationEntityListResult> & {
+    @header("x-ms-correlation-request-id")
+    @doc("correlation request id.")
+    correlationRequestId?: string;
+
+    @header("x-ms-request-id")
+    @doc("request id.")
+    requestId?: string;
+  }) | StorageSyncError;
 }

@@ -60,7 +60,15 @@ op locationOperationStatusGet(
    */
   @path
   operationId: string,
-): ArmResponse<LocationOperationStatus> | StorageSyncError;
+): (ArmResponse<LocationOperationStatus> & {
+  @header("x-ms-correlation-request-id")
+  @doc("correlation request id.")
+  correlationRequestId?: string;
+
+  @header("x-ms-request-id")
+  @doc("request id.")
+  requestId?: string;
+}) | StorageSyncError;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OperationStatusOperationGroup {
