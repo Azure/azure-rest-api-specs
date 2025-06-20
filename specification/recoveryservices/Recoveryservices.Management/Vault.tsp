@@ -54,28 +54,48 @@ model Vault extends Foundations.TrackedResource {
 
 @armResourceOperations
 interface VaultOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = Vault,
         KeyName = "vaultName",
         SegmentName = "vaults",
         NamePattern = ""
-      >>
+      >>,
+      ErrorType = ErrorResponse
+    > {}
+
+@armResourceOperations
+interface VaultOpsWithCloudError
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Vault,
+        KeyName = "vaultName",
+        SegmentName = "vaults",
+        NamePattern = ""
+      >>,
+      ErrorType = CloudError
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultCreateOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       KeysOf<ResourceNameParameter<
         Resource = Vault,
@@ -86,12 +106,31 @@ interface VaultCreateOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface VaultOperationOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+interface VaultCreateOpsWithCloudError
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Vault,
+        KeyName = "vaultName",
+        SegmentName = "vaults",
+        NamePattern = ""
+      >>,
+      ErrorType = CloudError
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface VaultOperationOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -112,11 +151,12 @@ interface VaultOperationOps
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultStatusOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -130,16 +170,18 @@ interface VaultStatusOps
         @path
         @segment("operationStatus")
         operationId: string,
-      }
+      },
+      ErrorType = CloudError
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultDeleteOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
       },
       {
         /**
@@ -162,13 +204,12 @@ interface Vaults {
   /**
    * Get the Vault details.
    */
-  get is VaultOps.Read<Vault, ErrorType = CloudError>;
+  get is VaultOpsWithCloudError.Read<Vault>;
 
   /**
    * Creates or updates a Recovery Services vault.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}")
-  createOrUpdate is VaultCreateOps.CreateOrUpdateAsync<
+  createOrUpdate is VaultCreateOpsWithCloudError.CreateOrUpdateAsync<
     Vault,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -176,16 +217,14 @@ interface Vaults {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    ErrorType = CloudError
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates the vault.
    */
   @patch(#{ implicitOptionality: false })
-  update is VaultOps.CustomPatchAsync<
+  update is VaultOpsWithCloudError.CustomPatchAsync<
     Vault,
     PatchModel = PatchVault,
     Parameters = {
@@ -193,8 +232,7 @@ interface Vaults {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-authorization-auxiliary`?: string;
-    },
-    ErrorType = CloudError
+    }
   >;
 
   /**
@@ -222,22 +260,40 @@ interface Vaults {
   @put
   @operationId("VaultCertificates_Create")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
-  create is VaultOperationOps.ActionNoAutoSync<
-    Vault,
+  create is Azure.ResourceManager.Legacy.UpdateOperation<
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+
+      /**
+       * The name of the recovery services vault.
+       */
+      @path
+      vaultName: string;
+
+      /**
+       * Certificate friendly name.
+       */
+      @path
+      @segment("certificates")
+      certificateName: string;
+    },
     CertificateRequest,
-    ArmResponse<VaultCertificateResponse>
+    ArmResourceUpdatedResponse<VaultCertificateResponse>,
+    ErrorResponse
   >;
 
   /**
    * Unregisters the given container from your Recovery Services vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("RegisteredIdentities_Delete")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}")
-  registeredIdentitiesDelete is VaultDeleteOps.ActionNoAutoSync<
+  registeredIdentitiesDelete is VaultDeleteOps.DeleteSync<
     Vault,
-    void,
+    {},
     NoContentResponse
   >;
 
@@ -256,12 +312,9 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("GetOperationStatus")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationStatus/{operationId}")
-  getOperationStatus is VaultStatusOps.ActionNoAutoSync<
+  getOperationStatus is VaultStatusOps.Read<
     Vault,
-    void,
-    ArmResponse<OperationResource>,
-    ErrorType = CloudError
+    Response = ArmResponse<OperationResource>
   >;
 
   /**
@@ -275,12 +328,12 @@ interface Vaults {
 }
 @armResourceOperations
 interface GetOperationResultOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
         ...KeysOf<ResourceNameParameter<
           Resource = Vault,
           KeyName = "vaultName",
@@ -293,7 +346,8 @@ interface GetOperationResultOps
         KeyName = "operationId",
         SegmentName = "operationResults",
         NamePattern = ""
-      >>
+      >>,
+      ErrorType = CloudError
     > {}
 
 @armResourceOperations
@@ -306,8 +360,7 @@ interface GetOperationResult {
   @operationId("GetOperationResult")
   getOperationResult is GetOperationResultOps.Read<
     Vault,
-    Response = ArmResponse<Vault> | AcceptedResponse,
-    ErrorType = CloudError
+    Response = ArmResponse<Vault> | AcceptedResponse
   >;
 
   /**
@@ -331,6 +384,6 @@ interface GetOperationResult {
   "Recovery Services Vault to be created."
 );
 
-@@doc(Vaults.create::parameters.body,
+@@doc(Vaults.create::parameters.properties,
   "Input parameters for uploading the vault certificate."
 );
