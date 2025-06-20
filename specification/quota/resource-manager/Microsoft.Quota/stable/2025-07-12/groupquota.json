@@ -1323,11 +1323,72 @@
         }
       }
     },
+    "GroupQuotaWriteLimit": {
+      "type": "object",
+      "description": "Group Quota limit.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaWriteDetails"
+        }
+      }
+    },
     "RegionScope": {
       "description": "Location/Azure region for the quota requested for resource.",
       "type": "string"
     },
     "GroupQuotaDetails": {
+      "type": "object",
+      "description": "Group Quota details.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name, such as SKU name."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current Group Quota Limit at the parentId level."
+        },
+        "comment": {
+          "description": "Any comment related to quota request.",
+          "type": "string"
+        },
+        "unit": {
+          "description": " The usages units, such as Count and Bytes. When requesting quota, use the **unit** value returned in the GET response in the request body of your PUT operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "properties": {
+            "value": {
+              "description": "Resource name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "localizedValue": {
+              "description": "Resource display name.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "availableLimit": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The available Group Quota Limit at the MG level. This Group quota can be allocated to subscription(s)."
+        },
+        "allocatedToSubscriptions": {
+          "readOnly": true,
+          "$ref": "#/definitions/AllocatedQuotaToSubscriptionList"
+        }
+      }
+    },
+    "GroupQuotaWriteDetails": {
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
@@ -1389,7 +1450,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GroupQuotaLimitItem"
+          "$ref": "#/definitions/GroupQuotaLimitWriteItem"
         }
       }
     },
@@ -1405,6 +1466,23 @@
           "description": "List of Group Quota Limit details.",
           "items": {
             "$ref": "#/definitions/GroupQuotaLimit"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaLimitWriteItem": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit details.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaWriteLimit"
           }
         },
         "nextLink": {
@@ -1534,7 +1612,61 @@
         }
       }
     },
+    "SubscriptionQuotaWriteAllocations": {
+      "type": "object",
+      "description": "Quota allocated to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
+      "properties": {
+        "properties": {
+          "description": "Quota properties for the specified resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionQuotaWriteDetails"
+            }
+          ]
+        }
+      }
+    },
     "SubscriptionQuotaDetails": {
+      "type": "object",
+      "description": "Subscription Quota details.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name, such as SKU name."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total quota limit for the subscription.",
+          "readOnly": false
+        },
+        "shareableQuota": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The shareable quota for the subscription.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
+          "properties": {
+            "value": {
+              "description": "Resource name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "localizedValue": {
+              "description": "Resource display name.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "SubscriptionQuotaWriteDetails": {
       "type": "object",
       "description": "Subscription Quota details.",
       "properties": {
@@ -1638,7 +1770,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
+          "$ref": "#/definitions/SubscriptionQuotaAllocationWriteItem"
         }
       }
     },
@@ -1663,6 +1795,27 @@
         }
       }
     },
+    "SubscriptionQuotaAllocationWriteItem": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
+        },
+        "value": {
+          "type": "array",
+          "description": "Subscription quota list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaWriteAllocations"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SubscriptionQuotaAllocationsList": {
       "type": "object",
       "description": "Subscription quota list.",
@@ -1674,6 +1827,21 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
+        }
+      }
+    },
+    "GroupQuotasWriteEntityBase": {
+      "type": "object",
+      "description": "Properties and filters for ShareQuota. The request parameter is optional, if there are no filters specified.",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the GroupQuota entity.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the operation.",
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
         }
       }
     },
@@ -1761,13 +1929,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "title": "Properties",
-              "type": "object",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/GroupQuotasEntityBase"
-                }
-              ]
+              "$ref": "#/definitions/GroupQuotasWriteEntityBase"
             }
           }
         }
