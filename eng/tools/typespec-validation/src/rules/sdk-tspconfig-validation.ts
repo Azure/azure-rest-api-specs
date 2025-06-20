@@ -149,7 +149,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 function isManagementSdk(folder: string): boolean {
-  return folder.includes(".Management");
+  return folder.includes("/resource-manager/") || folder.includes(".Management");
 }
 
 function skipForDataPlane(folder: string): SkipResult {
