@@ -113,7 +113,36 @@ batch:
   - tag: package-2025-01
   - tag: package-preview-2025-02
   - tag: package-2025-02
+  - tag: package-preview-2025-03
   - tag: package-2025-03
+  - tag: package-preview-2025-04
+  - tag: package-2025-04
+```
+
+### Tag: package-2025-04 and java
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2025_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2025-04 and java
+
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2025-04' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2025_04_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_04_02_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2025-03 and java
@@ -125,6 +154,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.containerservice.v2025_03_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_03_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2025-03 and java
+
+These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2025-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2025_03_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_03_02_preview
 regenerate-manager: true
 generate-interface: true
 ```

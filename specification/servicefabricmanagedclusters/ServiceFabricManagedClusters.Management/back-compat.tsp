@@ -15,10 +15,46 @@ using Microsoft.ServiceFabric;
   "ManagedMaintenanceWindowStatuses",
   "java"
 );
+@@clientName(ManagedClusterProperties.adminUserName, "adminUsername", "java");
+@@clientName(ManagedClusterProperties.VMImage, "vmImage", "java");
+@@clientName(ManagedClusterProperties.enableServicePublicIP,
+  "enableServicePublicIp",
+  "java"
+);
+@@clientName(ManagedClusterProperties.publicIPPrefixId,
+  "publicIpPrefixId",
+  "java"
+);
+@@clientName(PublicIPAddressConfiguration.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(IpConfiguration.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+@@clientName(IpConfiguration.publicIPAddressConfiguration,
+  "publicIpAddressConfiguration",
+  "java"
+);
+@@clientName(NodeTypeProperties.enableNodePublicIP,
+  "enableNodePublicIp",
+  "java"
+);
+@@clientName(IPAddressType, "IpAddressType", "java");
+@@clientName(PublicIPAddressConfiguration,
+  "IpConfigurationPublicIpAddressConfiguration",
+  "java"
+);
+@@clientName(PrivateIPAddressVersion, "PrivateIpAddressVersion", "java");
+@@clientName(PublicIPAddressVersion, "PublicIpAddressVersion", "java");
+@@clientName(VMSSExtension, "VmssExtension", "java");
+@@alternateType(VMSSExtensionProperties.settings, unknown, "java");
+@@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "java");
 
 @@clientName(PublicIPAddressConfiguration,
   "IPConfigurationPublicIPAddressConfiguration",
-  "go, java, javascript, python"
+  "go, javascript, python"
 );
 
 /**
@@ -73,11 +109,6 @@ using Microsoft.ServiceFabric;
   "IsRdpAccessAllowed",
   "csharp"
 );
-@@clientName(ManagedClusterProperties.clusterCertificateThumbprints,
-  "-|any",
-  "csharp"
-);
-@@clientName(ManagedClusterProperties.clusterId, "-|uuid", "csharp");
 @@clientName(ManagedClusterProperties.enableAutoOSUpgrade,
   "IsAutoOSUpgradeEnabled",
   "csharp"
@@ -134,7 +165,6 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(ServiceEndpoint, "ManagedClusterServiceEndpoint", "csharp");
-@@clientName(ServiceEndpoint.locations, "-|azure-location", "csharp");
 @@clientName(NodeType, "ServiceFabricManagedNodeType", "csharp");
 @@clientName(NodeTypeProperties.dataDiskSizeGB, "DataDiskSizeInGB", "csharp");
 @@clientName(NodeTypeProperties.enableAcceleratedNetworking,
@@ -170,7 +200,6 @@ using Microsoft.ServiceFabric;
 @@clientName(VaultCertificate, "NodeTypeVaultCertificate", "csharp");
 @@clientName(DiskType, "ServiceFabricManagedDataDiskType", "csharp");
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
-@@clientName(VmManagedIdentity.userAssignedIdentities, "-|arm-id", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(ServiceResource, "ServiceFabricManagedService", "csharp");
@@ -205,7 +234,6 @@ using Microsoft.ServiceFabric;
 @@clientName(Partition, "ManagedServicePartitionScheme", "csharp");
 @@clientName(NsgProtocol, "ServiceFabricManagedNsgProtocol", "csharp");
 @@clientName(NsgProtocol.ah, "AH", "csharp");
-@@clientName(NodeTypeAvailableSku.resourceType, "-|resource-type", "csharp");
 @@clientName(PartitionInstanceCountScaleMechanism,
   "PartitionInstanceCountScalingMechanism",
   "csharp"
@@ -242,7 +270,6 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(EvictionPolicyType, "SpotNodeVmEvictionPolicyType", "csharp");
-@@clientName(ResourceAzStatus.resourceType, "-|resource-type", "csharp");
 @@clientName(SecurityType, "ServiceFabricManagedClusterSecurityType", "csharp");
 @@clientName(UpdateType, "ServiceFabricManagedClusterUpdateType", "csharp");
 @@clientName(ClusterHealthPolicy, "ManagedClusterHealthPolicy", "csharp");
@@ -283,8 +310,44 @@ using Microsoft.ServiceFabric;
   "LastWindowEndOn",
   "csharp"
 );
+@@clientName(VMSSExtensionProperties.type,
+  "vmssExtensionPropertiesType",
+  "csharp"
+);
+@@clientName(DiskType.Standard_LRS, "StandardLrs", "csharp");
+@@clientName(DiskType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
+@@clientName(DiskType.Premium_LRS, "PremiumLrs", "csharp");
+@@clientName(DiskType.StandardSSD_ZRS, "PremiumV2Lrs", "csharp");
+@@clientName(DiskType.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
+@@clientName(DiskType.StandardSSD_ZRS, "PremiumZrs", "csharp");
+
+@@alternateType(ManagedClusterVersion.list::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedClusterVersion.get::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedClusterVersion.getByEnvironment::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedClusterVersion.listByEnvironment::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedUnsupportedVMSizes.get::parameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ManagedUnsupportedVMSizes.list::parameters.location,
+  azureLocation,
+  "csharp"
+);
 
 @@alternateType(ManagedClusterProperties.clusterId, uuid, "csharp");
+@@alternateType(ManagedCluster.etag, eTag, "csharp");
 @@alternateType(ManagedClusterProperties.ipv4Address, ipV4Address, "csharp");
 @@alternateType(ManagedClusterProperties.ipv6Address, ipV6Address, "csharp");
 @@alternateType(Subnet.networkSecurityGroupId, armResourceIdentifier, "csharp");
@@ -304,3 +367,16 @@ using Microsoft.ServiceFabric;
 );
 @@alternateType(AzureActiveDirectory.tenantId, uuid, "csharp");
 @@alternateType(VaultCertificate.certificateUrl, url, "csharp");
+@@alternateType(ServiceEndpoint.locations, azureLocation[], "csharp");
+@@alternateType(ManagedClusterProperties.clusterCertificateThumbprints,
+  unknown[],
+  "csharp"
+);
+@@alternateType(ClientCertificate.thumbprint, unknown, "csharp");
+@@alternateType(ClientCertificate.issuerThumbprint, unknown, "csharp");
+@@alternateType(VMSSExtensionProperties.settings, unknown, "csharp");
+@@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "csharp");
+@@alternateType(VmManagedIdentity.userAssignedIdentities,
+  armResourceIdentifier[],
+  "csharp"
+);

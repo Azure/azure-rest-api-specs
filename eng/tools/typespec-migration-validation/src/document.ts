@@ -28,7 +28,7 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
     if (configuration.ignorePathCase) {
-      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/');
+      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/').replace(/\/subscriptions\//i, '/subscriptions/');
       delete newDocument.paths[route];  
       newDocument.paths[normalizedRoute] = processedPath;
     }

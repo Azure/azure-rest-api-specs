@@ -413,6 +413,21 @@ suppressions:
       - $.definitions.ManagedClusterCodeVersionResult
       - $.definitions.LongRunningOperationResult
       - $.definitions.NodeTypeListSkuResult
+  
+  - code: ValidFormats
+    reason: duration-constant is an expected format to the .NET SDK generator
+    where:
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.ClusterMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckWaitDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckStableDuration.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.healthCheckRetryTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeTimeout.format
+      - $.definitions.RollingUpgradeMonitoringPolicy.properties.upgradeDomainTimeout.format
+      - $.definitions.StatefulServiceProperties.properties.replicaRestartWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.quorumLossWaitDuration.format
+      - $.definitions.StatefulServiceProperties.properties.standByReplicaKeepDuration.format
+      - $.definitions.StatefulServiceProperties.properties.servicePlacementTimeLimit.format
 ```
 
 ---

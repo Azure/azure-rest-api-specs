@@ -1,9 +1,11 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
-import { pathExists } from "./util.js";
+import { pathExists, getDependencyVersion, getPathToDependency } from "./util.js";
 import { getRunList } from "./processChanges.js";
 import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
+import { writeFile } from "node:fs/promises";
+import { SpecModelError } from "@azure-tools/specs-shared/spec-model-error";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -41,6 +43,11 @@ export async function main() {
         short: "m",
         default: "main",
       },
+      "github-repo-path": {
+        type: "string",
+        short: "r",
+        default: process.env.GITHUB_REPOSITORY || "Azure/azure-rest-api-specs",
+      },
     },
     strict: true,
   };
@@ -53,6 +60,7 @@ export async function main() {
       "out-file": outFile,
       "base-branch": baseBranch,
       "compare-sha": compareSha,
+      "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
 
@@ -78,14 +86,10 @@ export async function main() {
     process.exit(1);
   }
 
-  // const versionResult = await executeCommand("npm exec -- autorest --version");
-  // if (versionResult.error) {
-  //   console.error("Error running autorest --version", versionResult.error);
-  //   process.exit(1);
-  // }
-
-  // console.log("Autorest version:");
-  // console.log(versionResult.stdout);
+  const validatorVersion = await getDependencyVersion(
+    await getPathToDependency("@microsoft.azure/openapi-validator"),
+  );
+  console.log(`Using @microsoft.azure/openapi-validator version: ${validatorVersion}\n`);
 
   await runLintDiff(
     beforeArg as string,
@@ -94,6 +98,7 @@ export async function main() {
     outFile as string,
     baseBranch as string,
     compareSha as string,
+    githubRepoPath as string,
   );
 }
 
@@ -104,15 +109,38 @@ async function runLintDiff(
   outFile: string,
   baseBranch: string,
   compareSha: string,
+  githubRepoPath: string,
 ) {
-  const [beforeList, afterList, affectedSwaggers] = await getRunList(
-    beforePath,
-    afterPath,
-    changedFilesPath,
-  );
+  let beforeList, afterList, affectedSwaggers;
+  try {
+    [beforeList, afterList, affectedSwaggers] = await getRunList(
+      beforePath,
+      afterPath,
+      changedFilesPath,
+    );
+  } catch (error) {
+    if (error instanceof SpecModelError) { 
+      console.log("\n\n");
+      console.log("❌ Error building Spec Model from changed file list:");
+      console.log(`${error}`);
+      console.log("Ensure input files and references are valid.");
+
+      process.exitCode = 1;
+      return;
+    }
+
+    throw error;
+  }
 
   if (beforeList.size === 0 && afterList.size === 0) {
+    await writeFile(outFile, "No changes found. Exiting.");
     console.log("No changes found. Exiting.");
+    return;
+  }
+
+  if (afterList.size === 0) { 
+    await writeFile(outFile, "No applicable files found in after. Exiting.");
+    console.log("No applicable files found in after. Exiting.");
     return;
   }
 
@@ -120,6 +148,7 @@ async function runLintDiff(
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
+
 
   // If afterChecks has AutoRest errors, fail the run.
   const autoRestErrors = afterChecks
@@ -144,6 +173,7 @@ async function runLintDiff(
     outFile,
     baseBranch,
     compareSha,
+    githubRepoPath,
   );
 
   if (!pass) {
@@ -151,13 +181,9 @@ async function runLintDiff(
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
   }
 
-  if (
-    process.env.GITHUB_SERVER_URL &&
-    process.env.GITHUB_REPOSITORY &&
-    process.env.GITHUB_RUN_ID
-  ) {
+  if (process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID) {
     console.log(
-    `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+      `See workflow summary at: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
     );
   }
 }

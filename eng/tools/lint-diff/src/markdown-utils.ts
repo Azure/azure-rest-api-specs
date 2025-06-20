@@ -1,13 +1,7 @@
-import * as commonmark from "commonmark";
-import { readFile } from "fs/promises";
-
-// TODO: Can this be eliminated?
-import { parseMarkdown } from "@azure-tools/openapi-tools-common";
-// TODO: Can this be eliminated?
-import * as amd from "@azure/openapi-markdown";
+import { marked } from "marked";
 import { kebabCase } from "change-case";
 import axios from "axios";
-import * as YAML from "js-yaml";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -17,39 +11,23 @@ export enum MarkdownType {
 
 /**
  *
- * @param markdownFile Path to the markdown file to parse
+ * @param readme Readme object to extract
  * @returns {Promise<MarkdownType>} The type of OpenAPI spec in the markdown file, or "default" if not found
  */
-export async function getOpenapiType(markdownFile: string): Promise<MarkdownType> {
-  let markdownContent = await readFile(markdownFile, { encoding: "utf-8" });
-  for (const codeBlock of parseCodeblocks(markdownContent)) {
-    if (
-      !codeBlock.info ||
-      codeBlock.info.trim().toLocaleLowerCase() !== "yaml" ||
-      !codeBlock.literal
-    ) {
-      continue;
-    }
-
-    let lines = codeBlock.literal.trim().split("\n");
-
-    for (const line of lines) {
-      if (line.trim().startsWith("openapi-type:")) {
-        let openapiType = line.trim().split(":")[1].trim().toLowerCase();
-
-        if (Object.values(MarkdownType).includes(openapiType as MarkdownType)) {
-          return openapiType as MarkdownType;
-        }
-      }
-    }
+// TODO: Should this be placed in the Readme class?
+export async function getOpenapiType(readme: Readme): Promise<MarkdownType> {
+  const openapiType = (await readme.getGlobalConfig() as { "openapi-type"?: string })["openapi-type"];
+  if (openapiType && Object.values(MarkdownType).includes(openapiType as MarkdownType)) {
+    return openapiType as MarkdownType;
   }
+
 
   // Fallback, no openapi-type found in the file. Look at path to determine type
   // resource-manager: Arm
   // data-plane: DataPlane
-  if (markdownFile.match(/.*specification\/.*\/resource-manager\/.*readme.md$/g)) {
+  if (readme.path.match(/.*specification\/.*\/resource-manager\/.*readme.md$/g)) {
     return MarkdownType.Arm;
-  } else if (markdownFile.match(/.*specification\/.*\/data-plane\/.*readme.md$/g)) {
+  } else if (readme.path.match(/.*specification\/.*\/data-plane\/.*readme.md$/g)) {
     return MarkdownType.DataPlane;
   }
 
@@ -57,50 +35,7 @@ export async function getOpenapiType(markdownFile: string): Promise<MarkdownType
   return MarkdownType.Default;
 }
 
-// TODO: Direct copy/paste from utils, factor appropriately
-function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
-  const parsed = parseCommonmark(markdown);
-  const walker = parsed.walker();
-  let event;
-  while ((event = walker.next())) {
-    const node = event.node;
-    if (event.entering && node.type === "code_block") {
-      yield node;
-    }
-  }
-}
-
-// TODO: Direct copy/paste from utils, factor appropriately
-function parseCommonmark(markdown: string): commonmark.Node {
-  return new commonmark.Parser().parse(markdown);
-}
-
-/**
- * Returns all tags from the given readme document
- * @param readMeContent
- * @returns
- */
-export function getAllTags(readMeContent: string): string[] {
-  const cmd = parseMarkdown(readMeContent);
-  const allTags = new amd.ReadMeManipulator(
-    { error: (_msg: string) => {} },
-    new amd.ReadMeBuilder(),
-  ).getAllTags(cmd);
-  return [...allTags];
-}
-
 type TagInputFile = { tagName: string; inputFiles: readonly string[] };
-
-export function getTagsAndInputFiles(tags: string[], readmeContent: string): TagInputFile[] {
-  const tagResults: TagInputFile[] = [];
-  for (const tag of tags) {
-    const inputFiles = getInputFiles(readmeContent, tag);
-    if (inputFiles.length > 0) {
-      tagResults.push({ tagName: tag, inputFiles });
-    }
-  }
-  return tagResults;
-}
 
 /**
  * Given a list of tags and the content of a readme file, remove tags that are
@@ -125,12 +60,6 @@ export function deduplicateTags(tagInfo: TagInputFile[]) {
     .map((tag) => tag.tagName);
 }
 
-export function getInputFiles(readMeContent: string, tag: string): readonly string[] {
-  const cmd = parseMarkdown(readMeContent);
-  const inputFiles = amd.getInputFilesForTag(cmd.markDown, tag);
-  return inputFiles || [];
-}
-
 export function getDocRawUrl(code: string) {
   if (code == "FATAL") {
     return `N/A`;
@@ -143,7 +72,6 @@ export function getDocRawUrl(code: string) {
 
 const rpcInfoCache = new Map<string, string[]>();
 
-// TODO: Tests
 export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[]> {
   if (ruleName == "FATAL") {
     return [];
@@ -164,60 +92,34 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
     return rpcRules;
   }
 
-  let walker = new commonmark.Parser().parse(response.data).walker();
-  let event;
-  while ((event = walker.next())) {
-    const node = event.node;
+  // Use marked to parse the markdown and extract the related ARM guideline codes
+  const tokens = marked.lexer(response.data);
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
     if (
-      event.entering &&
-      node.type === "heading" &&
-      node.firstChild?.literal?.toLowerCase() === "related arm guideline code"
+      token.type === "heading" &&
+      token.depth >= 1 &&
+      token.text.trim().toLowerCase() === "related arm guideline code"
     ) {
-      const next = node.next;
-      if (next?.type == "list") {
-        let currentItem = next.firstChild;
-        while (currentItem) {
-          const code = currentItem?.firstChild?.firstChild?.literal;
-          if (code) {
-            rpcRules.push(...code.split(",").map((c) => c.trim()));
+      // The next token should be a list
+      const next = tokens[i + 1];
+      if (next && next.type === "list" && Array.isArray(next.items)) {
+        for (const item of next.items) {
+          // item.text may contain comma-separated codes
+          if (typeof item.text === "string") {
+            rpcRules.push(...item.text.split(",").map((c: string) => c.trim()));
           }
-          currentItem = currentItem.next;
         }
       }
       break;
     }
   }
+
   rpcInfoCache.set(ruleName, rpcRules);
   return rpcRules;
 }
 
-export function getDefaultTag(markdownContent: string): string {
-  const parsed = parseMarkdown(markdownContent);
-  const startNode = parsed.markDown;
-  const codeBlockMap = amd.getCodeBlocksAndHeadings(startNode);
-
-  const latestHeader = "Basic Information";
-
-  const lh = codeBlockMap[latestHeader];
-  if (lh) {
-    const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as undefined | { tag: string };
-    if (latestDefinition) {
-      return latestDefinition.tag;
-    }
-  } else {
-    for (let idx of Object.keys(codeBlockMap)) {
-      const lh = codeBlockMap[idx];
-      if (!lh || !lh.info || lh.info.trim().toLocaleLowerCase() !== "yaml") {
-        continue;
-      }
-      const latestDefinition = YAML.load(lh.literal!, { schema: YAML.FAILSAFE_SCHEMA }) as
-        | undefined
-        | { tag: string };
-
-      if (latestDefinition) {
-        return latestDefinition.tag;
-      }
-    }
-  }
-  return "";
+export async function getDefaultTag(readme: Readme): Promise<string> { 
+  const tag = (await readme.getGlobalConfig() as { tag?: string }).tag;
+  return tag ? tag : "";
 }
