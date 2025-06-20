@@ -88,7 +88,9 @@ using Microsoft.NotificationHubs;
 @@clientLocation(NamespaceResources.delete, Namespaces);
 @@clientLocation(NamespaceResources.list, Namespaces);
 @@clientLocation(NamespaceResources.listAll, Namespaces);
-@@clientLocation(NamespaceResources.checkNotificationHubAvailability, "NotificationHubs");
+@@clientLocation(NamespaceResources.checkNotificationHubAvailability,
+  "NotificationHubs"
+);
 @@clientLocation(NamespaceResources.getPnsCredentials, Namespaces);
 @@clientLocation(NotificationHubResources.get, "NotificationHubs");
 @@clientLocation(NotificationHubResources.createOrUpdate, "NotificationHubs");
@@ -96,17 +98,41 @@ using Microsoft.NotificationHubs;
 @@clientLocation(NotificationHubResources.delete, "NotificationHubs");
 @@clientLocation(NotificationHubResources.list, "NotificationHubs");
 @@clientLocation(NotificationHubResources.debugSend, "NotificationHubs");
-@@clientLocation(NotificationHubResources.getPnsCredentials, "NotificationHubs");
-@@clientLocation(PrivateEndpointConnectionResources.get, "PrivateEndpointConnections");
-@@clientLocation(PrivateEndpointConnectionResources.update, "PrivateEndpointConnections");
-@@clientLocation(PrivateEndpointConnectionResources.delete, "PrivateEndpointConnections");
-@@clientLocation(PrivateEndpointConnectionResources.list, "PrivateEndpointConnections");
+@@clientLocation(NotificationHubResources.getPnsCredentials,
+  "NotificationHubs"
+);
+@@clientLocation(PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnections"
+);
+@@clientLocation(PrivateEndpointConnectionResources.update,
+  "PrivateEndpointConnections"
+);
+@@clientLocation(PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnections"
+);
+@@clientLocation(PrivateEndpointConnectionResources.list,
+  "PrivateEndpointConnections"
+);
 @@clientLocation(PrivateLinkResources.getGroupId, "PrivateEndpointConnections");
-@@clientLocation(PrivateLinkResources.listGroupIds, "PrivateEndpointConnections");
+@@clientLocation(PrivateLinkResources.listGroupIds,
+  "PrivateEndpointConnections"
+);
 @@clientLocation(NamespacesOperationGroup.checkAvailability, Namespaces);
-@@clientLocation(SharedAccessAuthorizationRuleResources.getAuthorizationRule, "NotificationHubs");
-@@clientLocation(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule, "NotificationHubs");
-@@clientLocation(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule, "NotificationHubs");
-@@clientLocation(SharedAccessAuthorizationRuleResources.listAuthorizationRules, "NotificationHubs");
-@@clientLocation(SharedAccessAuthorizationRuleResources.listKeys, "NotificationHubs");
-@@clientLocation(SharedAccessAuthorizationRuleResources.regenerateKeys, "NotificationHubs");
+@@clientLocation(SharedAccessAuthorizationRuleResources.getAuthorizationRule,
+  "NotificationHubs"
+);
+@@clientLocation(SharedAccessAuthorizationRuleResources.createOrUpdateAuthorizationRule,
+  "NotificationHubs"
+);
+@@clientLocation(SharedAccessAuthorizationRuleResources.deleteAuthorizationRule,
+  "NotificationHubs"
+);
+@@clientLocation(SharedAccessAuthorizationRuleResources.listAuthorizationRules,
+  "NotificationHubs"
+);
+@@clientLocation(SharedAccessAuthorizationRuleResources.listKeys,
+  "NotificationHubs"
+);
+@@clientLocation(SharedAccessAuthorizationRuleResources.regenerateKeys,
+  "NotificationHubs"
+);
