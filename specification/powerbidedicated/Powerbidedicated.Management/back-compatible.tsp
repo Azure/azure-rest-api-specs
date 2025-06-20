@@ -26,3 +26,7 @@ using Microsoft.PowerBIDedicated;
 @@clientName(CapacitiesOperationGroup.checkNameAvailability::parameters.body,
   "capacityParameters"
 );
+
+// @@clientLocation decorators for @operationId operations
+@@clientLocation(CapacitiesOperationGroup.listSkus, Capacities);
+@@clientLocation(CapacitiesOperationGroup.checkNameAvailability, Capacities);
