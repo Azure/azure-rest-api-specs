@@ -1549,7 +1549,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1605,7 +1605,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1658,7 +1658,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
           }
         >;
 
@@ -1818,7 +1818,7 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
           }
         >;
 
@@ -1929,7 +1929,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
