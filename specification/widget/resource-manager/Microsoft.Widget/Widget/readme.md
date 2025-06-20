@@ -19,7 +19,7 @@ To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g
 
 ### Basic Information
 
-These are the global settings.
+These are the global settings test.
 
 ```yaml
 openapi-type: arm
