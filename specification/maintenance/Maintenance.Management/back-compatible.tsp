@@ -48,25 +48,55 @@ using Microsoft.Maintenance;
 @@flattenProperty(Microsoft.Maintenance.Update.properties);
 
 // @@clientLocation decorators for operations with @operationId
-@@clientLocation(MaintenanceConfigurations.get, "PublicMaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurations.list, "PublicMaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurationOperationGroup.get, MaintenanceConfigurations);
-@@clientLocation(MaintenanceConfigurationOperationGroup.createOrUpdate, MaintenanceConfigurations);
-@@clientLocation(MaintenanceConfigurationOperationGroup.update, MaintenanceConfigurations);
-@@clientLocation(MaintenanceConfigurationOperationGroup.delete, MaintenanceConfigurations);
-@@clientLocation(MaintenanceConfigurationOperationGroup.list, "MaintenanceConfigurationsForResourceGroup");
-@@clientLocation(MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList, MaintenanceConfigurations);
+@@clientLocation(MaintenanceConfigurations.get,
+  "PublicMaintenanceConfigurations"
+);
+@@clientLocation(MaintenanceConfigurations.list,
+  "PublicMaintenanceConfigurations"
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.get,
+  MaintenanceConfigurations
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.createOrUpdate,
+  MaintenanceConfigurations
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.update,
+  MaintenanceConfigurations
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.delete,
+  MaintenanceConfigurations
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.list,
+  "MaintenanceConfigurationsForResourceGroup"
+);
+@@clientLocation(MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList,
+  MaintenanceConfigurations
+);
 @@clientLocation(ApplyUpdateOperationGroup.get, ApplyUpdates);
-@@clientLocation(ApplyUpdateOperationGroup.createOrUpdateOrCancel, ApplyUpdates);
+@@clientLocation(ApplyUpdateOperationGroup.createOrUpdateOrCancel,
+  ApplyUpdates
+);
 @@clientLocation(ApplyUpdateOperationGroup.list, ApplyUpdates);
-@@clientLocation(ConfigurationAssignmentOperationGroup.get, ConfigurationAssignments);
-@@clientLocation(ConfigurationAssignmentOperationGroup.createOrUpdate, ConfigurationAssignments);
-@@clientLocation(ConfigurationAssignmentOperationGroup.delete, ConfigurationAssignments);
-@@clientLocation(ConfigurationAssignmentsForSubscriptions.list, "ConfigurationAssignmentsWithinSubscription");
+@@clientLocation(ConfigurationAssignmentOperationGroup.get,
+  ConfigurationAssignments
+);
+@@clientLocation(ConfigurationAssignmentOperationGroup.createOrUpdate,
+  ConfigurationAssignments
+);
+@@clientLocation(ConfigurationAssignmentOperationGroup.delete,
+  ConfigurationAssignments
+);
+@@clientLocation(ConfigurationAssignmentsForSubscriptions.list,
+  "ConfigurationAssignmentsWithinSubscription"
+);
 @@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvent");
 @@clientLocation(ApplyUpdatesOperationGroup.createOrUpdateParent, ApplyUpdates);
 @@clientLocation(ApplyUpdatesOperationGroup.createOrUpdate, ApplyUpdates);
-@@clientLocation(ApplyUpdateForResourceGroupOperationGroup.list, "ApplyUpdateForResourceGroup");
-@@clientLocation(ConfigurationAssignmentForResourceGroupOperationGroup.list, ConfigurationAssignments);
+@@clientLocation(ApplyUpdateForResourceGroupOperationGroup.list,
+  "ApplyUpdateForResourceGroup"
+);
+@@clientLocation(ConfigurationAssignmentForResourceGroupOperationGroup.list,
+  ConfigurationAssignments
+);
 @@clientLocation(UpdatesOperationGroup.listParent, "Updates");
 @@clientLocation(UpdatesOperationGroup.list, "Updates");
