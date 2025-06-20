@@ -120,6 +120,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/LocationOperationStatus"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -158,6 +168,9 @@
           "StorageSyncServices_ListBySubscription": {
             "$ref": "./examples/StorageSyncServices_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextlink"
         }
       }
     },
@@ -214,6 +227,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/StorageSyncServiceArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -227,6 +250,9 @@
           "StorageSyncServices_ListByResourceGroup": {
             "$ref": "./examples/StorageSyncServices_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextlink"
         }
       }
     },
@@ -3901,6 +3927,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextlink": {
+          "type": "string"
         }
       }
     },

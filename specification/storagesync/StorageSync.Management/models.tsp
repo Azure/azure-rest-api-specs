@@ -741,7 +741,7 @@ model StorageSyncServiceArray {
   value?: StorageSyncService[];
 
   @nextLink
-  nextlink?: string;
+  nextLink?: string;
 }
 
 /**

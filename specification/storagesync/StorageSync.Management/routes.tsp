@@ -101,5 +101,13 @@ interface OperationStatusOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<OperationStatus> | StorageSyncError;
+  ): (ArmResponse<OperationStatus> & {
+    @header("x-ms-correlation-request-id")
+    @doc("correlation request id.")
+    correlationRequestId?: string;
+
+    @header("x-ms-request-id")
+    @doc("request id.")
+    requestId?: string;
+  }) | StorageSyncError;
 }

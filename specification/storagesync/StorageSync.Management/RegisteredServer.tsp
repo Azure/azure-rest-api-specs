@@ -31,7 +31,19 @@ interface RegisteredServers {
   /**
    * Get a given registered server.
    */
-  get is ArmResourceRead<RegisteredServer, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    RegisteredServer,
+    Response = RegisteredServer & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Add a new registered server.
@@ -44,8 +56,24 @@ interface RegisteredServers {
       DefaultBaseParameters<RegisteredServer>
     >,
     RegisteredServerCreateParameters,
-    Response = ArmResourceUpdatedResponse<RegisteredServer> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     ErrorResponse = StorageSyncError
   >;
 
@@ -55,7 +83,25 @@ interface RegisteredServers {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     RegisteredServer,
-    PatchModel = RegisteredServerUpdateParameters
+    PatchModel = RegisteredServerUpdateParameters,
+    Response = (ArmResourceUpdatedResponse<RegisteredServer> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    })
   >;
 
   /**
@@ -64,7 +110,23 @@ interface RegisteredServers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     RegisteredServer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmDeleteAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -73,7 +135,15 @@ interface RegisteredServers {
    */
   listByStorageSyncService is ArmResourceListByParent<
     RegisteredServer,
-    Response = ArmResponse<RegisteredServerArray>,
+    Response = ArmResponse<RegisteredServerArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 
@@ -85,7 +155,16 @@ interface RegisteredServers {
   triggerRollover is ArmResourceActionAsync<
     RegisteredServer,
     TriggerRolloverRequest,
-    OkResponse,
+    Response = OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 }

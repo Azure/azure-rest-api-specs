@@ -38,7 +38,15 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = StorageSyncError
@@ -50,7 +58,15 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -60,7 +76,15 @@ interface PrivateEndpointConnections {
   #suppress "deprecated" "For backward compatibility"
   listByStorageSyncService is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>,
+    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 }

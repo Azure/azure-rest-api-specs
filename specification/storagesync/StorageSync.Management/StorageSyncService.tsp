@@ -43,8 +43,16 @@ interface StorageSyncServices {
       DefaultBaseParameters<StorageSyncService>
     >,
     StorageSyncServiceCreateParameters,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     ErrorResponse = StorageSyncError
   >;
 
@@ -52,10 +60,20 @@ interface StorageSyncServices {
    * Patch a given StorageSyncService.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is Legacy.LegacyOperations.CustomPatchAsync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
-    Error = StorageSyncError
+    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
+    OptionalRequestBody = true
   >;
 
   /**
@@ -64,7 +82,23 @@ interface StorageSyncServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmDeleteAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -90,7 +124,15 @@ interface StorageSyncServices {
    */
   listBySubscription is ArmListBySubscription<
     StorageSyncService,
-    Response = ArmResponse<StorageSyncServiceArray>,
+    Response = ArmResponse<StorageSyncServiceArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 

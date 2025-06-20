@@ -30,7 +30,19 @@ interface SyncGroups {
   /**
    * Get a given SyncGroup.
    */
-  get is ArmResourceRead<SyncGroup, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    SyncGroup,
+    Response = SyncGroup & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Create a new SyncGroup.
@@ -40,8 +52,15 @@ interface SyncGroups {
   create is ArmCreateOperation<
     ResourceInstanceParameters<SyncGroup, DefaultBaseParameters<SyncGroup>>,
     SyncGroupCreateParameters,
-    Response = ArmResourceUpdatedResponse<SyncGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<SyncGroup> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     ErrorResponse = StorageSyncError
   >;
 
@@ -55,7 +74,15 @@ interface SyncGroups {
    */
   listByStorageSyncService is ArmResourceListByParent<
     SyncGroup,
-    Response = ArmResponse<SyncGroupArray>,
+    Response = ArmResponse<SyncGroupArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 }
