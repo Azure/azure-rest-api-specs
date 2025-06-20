@@ -51,3 +51,24 @@ using Azure.Core;
 @@alternateType(AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
   armResourceIdentifier
 );
+
+@@clientLocation(ManagedGrafanas.get, "Grafana");
+@@clientLocation(ManagedGrafanas.create, "Grafana");
+@@clientLocation(ManagedGrafanas.update, "Grafana");
+@@clientLocation(ManagedGrafanas.delete, "Grafana");
+@@clientLocation(ManagedGrafanas.listByResourceGroup, "Grafana");
+@@clientLocation(ManagedGrafanas.list, "Grafana");
+@@clientLocation(ManagedGrafanas.checkEnterpriseDetails, "Grafana");
+@@clientLocation(ManagedGrafanas.fetchAvailablePlugins, "Grafana");
+@@clientLocation(ManagedGrafanas.refresh, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedPrivateEndpointModels.get, "ManagedPrivateEndpoints");
+@@clientLocation(ManagedPrivateEndpointModels.create,
+  "ManagedPrivateEndpoints"
+);
+@@clientLocation(ManagedPrivateEndpointModels.update,
+  "ManagedPrivateEndpoints"
+);
+@@clientLocation(ManagedPrivateEndpointModels.delete,
+  "ManagedPrivateEndpoints"
+);
+@@clientLocation(ManagedPrivateEndpointModels.list, "ManagedPrivateEndpoints");
