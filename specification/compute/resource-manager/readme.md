@@ -302,6 +302,10 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: gallery.json
     reason: Existing issue from last version. 
+  - code: XmsPageableForListCalls
+    from: virtualMachineImage.json
+    where: $["x-ms-paths"]["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=properties"].get
+    reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
 ```
 
 ### Tag: package-2025-02-01
