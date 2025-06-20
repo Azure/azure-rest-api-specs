@@ -41,11 +41,60 @@ options:
     examples-directory: "{project-root}/examples"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: true
+    generate-samples: false
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    package-dir: "DependencyMap/DependencyMap.Autorest"
+    clear-output-folder: true
+    debug: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "DependencyMap"
+    service-name: DependencyMap
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+    exclude-tableview-properties:
+      - Id
+      - Type
+    directive:
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update|Export)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          subject: MapConnection
+          variant: ^(Get)(?!.*?Expanded|ViaJsonString|ViaJsonFilePath)
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
+      # Remove four post operations since there are issues in tsp and response schema are not defined.
+      - where:
+          subject: MapConnection|MapDependencyView
+          verb: Get
+        remove: true
+      - where:
+          verb: Export
+        remove: true
+      - no-inline:
+          - DiscoverySourceResourceProperties
+      - model-cmdlet:
+          - model-name: OffAzureDiscoverySourceResourceProperties
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
