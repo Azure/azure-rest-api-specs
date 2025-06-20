@@ -15,3 +15,7 @@ using Microsoft.StorageActions;
 @@clientName(RunResult, "StorageTaskRunResult", "csharp");
 @@clientName(RunStatusEnum, "StorageTaskRunStatus", "csharp");
 @@clientName(StorageTaskProperties.enabled, "IsEnabled", "csharp");
+@@clientName(StorageTasks.storageTaskAssignmentList,
+  "GetStorageTaskAssignments",
+  "csharp"
+);
