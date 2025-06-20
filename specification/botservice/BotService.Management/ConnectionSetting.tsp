@@ -16,13 +16,26 @@ namespace Microsoft.BotService;
  */
 @parentResource(Bot)
 model ConnectionSetting
-  is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
+  is Azure.ResourceManager.ProxyResource<ConnectionSettingProperties> {
   ...ResourceNameParameter<
     Resource = ConnectionSetting,
     KeyName = "connectionName",
     SegmentName = "connections",
     NamePattern = "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$"
   >;
+
+  /**
+   * Specifies the location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Contains resource tags defined as key/value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Gets or sets the SKU of the resource.
