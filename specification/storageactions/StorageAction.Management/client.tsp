@@ -4,6 +4,8 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
+@@clientName(Microsoft.StorageActions, "StorageActionsMgmtClient", "python");
+
 @@clientName(StorageTaskOperation, "StorageTaskOperationInfo", "csharp");
 @@clientName(OnSuccess, "OnSuccessAction", "csharp");
 @@clientName(OnFailure, "OnFailureAction", "csharp");
