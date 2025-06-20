@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-06-05-preview",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{sharedGalleryName}",
+            "type": "Microsoft.DevTestLab/labs/sharedGalleries",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/sharedgalleries/{sharedGalleryName}",
+            "location": "{location}",
+            "properties": {
+              "allowAllImages": "{Enabled|Disabled}",
+              "galleryId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.compute/galleries/{sharedGalleryName}",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "{uniqueIdentifier}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SharedGalleries_List",
+  "title": "SharedGalleries_List"
+}
