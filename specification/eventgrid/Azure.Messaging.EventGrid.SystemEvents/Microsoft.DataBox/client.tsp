@@ -23,3 +23,14 @@ using Azure.ClientGenerator.Core;
 //Enums
 @@usage(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Access.public);
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DataBoxCopyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DataBoxCopyStartedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.DataBoxOrderCompletedEventData,
+  "csharp"
+);

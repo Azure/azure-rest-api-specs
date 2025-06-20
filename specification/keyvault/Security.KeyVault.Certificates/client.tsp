@@ -2,6 +2,11 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
+
+@versioned(KeyVault.Versions)
+namespace Customizations;
 
 @@clientName(KeyVault, "Certificate", "java");
 @@clientName(KeyVault, "Client", "go");
@@ -24,8 +29,92 @@ using KeyVault;
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
 
-// rename Go operations
+// Go configuration
+
+/**
+ * The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List certificates in a specified key vault")
+@route("/certificates")
+@get
+op listCertificateProperties is KeyVaultOperation<
+  {
+    /**
+     * Specifies whether to include certificates which are not completely provisioned.
+     */
+    @query("includePending")
+    includePending?: boolean;
+  },
+  CertificateListResult
+>;
+
+/**
+ * The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List certificate issuers for a specified key vault.")
+@route("/certificates/issuers")
+@get
+op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
+
+/**
+ * The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List the versions of a certificate.")
+@route("/certificates/{certificate-name}/versions")
+@get
+op listCertificatePropertiesVersions is KeyVaultOperation<
+  {
+    /**
+     * The name of the certificate.
+     */
+    @path("certificate-name")
+    @clientName("name", "go")
+    certificateName: string;
+  },
+  CertificateListResult
+>;
+
+/**
+ * The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("Lists the deleted certificates in the specified vault currently available for recovery.")
+@route("/deletedcertificates")
+@get
+op listDeletedCertificateProperties is KeyVaultOperation<
+  {
+    /**
+     * Specifies whether to include certificates which are not completely provisioned.
+     */
+    @query("includePending")
+    includePending?: boolean;
+  },
+  DeletedCertificateListResult
+>;
+
+@@override(getCertificates, listCertificateProperties, "go");
+@@override(getCertificateIssuers, listIssuerProperties, "go");
+@@override(getCertificateVersions, listCertificatePropertiesVersions, "go");
+@@override(getDeletedCertificates, listDeletedCertificateProperties, "go");
+
 @@clientName(setCertificateContacts, "SetContacts", "go");
+@@clientName(getCertificates, "ListCertificateProperties", "go");
+@@clientName(getCertificateIssuers, "ListIssuerProperties", "go");
+@@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "go");
+@@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "go");
+@@clientName(getCertificateContacts, "GetContacts", "go");
+@@clientName(deleteCertificateContacts, "DeleteContacts", "go");
+@@clientName(setCertificateIssuer, "SetIssuer", "go");
+@@clientName(updateCertificateIssuer, "UpdateIssuer", "go");
+@@clientName(getCertificateIssuer, "GetIssuer", "go");
+@@clientName(deleteCertificateIssuer, "DeleteIssuer", "go");
 
 @@clientName(CertificateCreateParameters, "CreateCertificateParameters", "go");
 @@clientName(CertificateImportParameters, "ImportCertificateParameters", "go");
@@ -41,23 +130,11 @@ using KeyVault;
   "go"
 );
 @@clientName(CertificateUpdateParameters, "UpdateCertificateParameters", "go");
-
-@@clientName(getCertificates, "ListCertificateProperties", "go");
-@@clientName(getCertificateIssuers, "ListIssuerProperties", "go");
-@@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "go");
-@@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "go");
 @@clientName(CertificateListResult, "CertificatePropertiesListResult", "go");
 @@clientName(DeletedCertificateListResult,
   "DeletedCertificatePropertiesListResult",
   "go"
 );
-
-@@clientName(getCertificateContacts, "GetContacts", "go");
-@@clientName(deleteCertificateContacts, "DeleteContacts", "go");
-@@clientName(setCertificateIssuer, "SetIssuer", "go");
-@@clientName(updateCertificateIssuer, "UpdateIssuer", "go");
-@@clientName(getCertificateIssuer, "GetIssuer", "go");
-@@clientName(deleteCertificateIssuer, "DeleteIssuer", "go");
 @@clientName(CertificateIssuerListResult, "IssuerPropertiesListResult", "go");
 
 @@clientName(Action, "LifetimeActionType", "go");
