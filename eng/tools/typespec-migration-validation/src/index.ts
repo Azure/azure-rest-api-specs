@@ -5,7 +5,7 @@ import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { configuration } from "./configuration.js";
 import { processDocument } from "./document.js";
-import { suggestFix, suggestPrompt } from "./fix/troubleshooting.js";
+import { generatePrompts } from "./fix/troubleshooting.js";
 import { mergeFiles, readFileContent } from "./helper.js";
 import { addIgnorePath, processIgnoreList } from "./ignore.js";
 import { jsonOutput } from "./jsonOutput.js";
@@ -15,7 +15,7 @@ import { findChangedPaths, findDifferences, findModifiedValues, formatChangedPat
 function parseArguments() {
   return yargs(hideBin(process.argv))
     .usage('Usage: $0 [options]')
-    .command('add-ignore', 'Add paths to ignore file', 
+    .command('add-ignore', 'Add paths to ignore file',
       (yargs) => {
         return yargs
           .option('path', {
@@ -30,7 +30,7 @@ function parseArguments() {
             type: 'string',
             demandOption: true
           });
-      }, 
+      },
       (argv) => {
         handleAddIgnore(argv.path as string, argv.outputFolder as string);
       }
@@ -71,7 +71,7 @@ function parseArguments() {
       if (argv._[0] === 'add-ignore') {
         return true;
       }
-      
+
       const positional = argv._;
       if (!argv.oldPath && positional.length > 0) {
         argv.oldPath = positional[0]!.toString();
@@ -111,17 +111,17 @@ function parseArguments() {
 function handleAddIgnore(path: string, outputFolder: string) {
   const ignoreFilePath = `${outputFolder}/ignore.json`;
   let ignoreList: string[] = [];
-  
+
   // Create output folder if it doesn't exist
   if (!fs.existsSync(outputFolder)) {
     fs.mkdirSync(outputFolder, { recursive: true });
   }
-  
+
   // Read existing ignore file if present
   if (fs.existsSync(ignoreFilePath)) {
     ignoreList = JSON.parse(fs.readFileSync(ignoreFilePath, 'utf-8'));
   }
-  
+
   // Add new path if not already present
   if (!ignoreList.includes(path)) {
     ignoreList.push(path);
@@ -130,15 +130,15 @@ function handleAddIgnore(path: string, outputFolder: string) {
   } else {
     console.log(`Path "${path}" already exists in ignore list`);
   }
-  
+
   process.exit(0);
 }
 
 export async function main() {
   const args = parseArguments();
-  
+
   // If using add-ignore command, the command handler will exit the process
-  
+
   const { oldPath, newPath, outputFolder, ignoreDescription, ignorePathCase } = args;
   configuration.ignoreDescription = ignoreDescription;
   if (ignorePathCase !== undefined) {
@@ -174,7 +174,6 @@ export async function main() {
 
   let report: string = "";
   const diffForFile = diff(sortedOldFile, sortedNewFile);
-  //fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
 
   // // TO-DELETE: Read the diff file from disk
   // const diffForFile = JSON.parse(fs.readFileSync(`C:/Users/pashao/GIT/azure-rest-api-specs/specification/agrifood/validation-results/diff.json`, 'utf-8'));
@@ -196,19 +195,13 @@ export async function main() {
   const modifiedValuesReport = formatModifiedValuesReport(modifiedValues);
   console.log(modifiedValuesReport);
   report += modifiedValuesReport;
-    
+
   if (outputFolder) {
+    fs.writeFileSync(`${outputFolder}/diff.json`, JSON.stringify(diffForFile, null, 2));
     fs.writeFileSync(`${outputFolder}/API_CHANGES.md`, report);
     logHeader(`Difference report written to ${outputFolder}/API_CHANGES.md`);
-    
-    const suggestedFixes = suggestFix(diffForFile);
-    if (suggestedFixes.length > 0) {
-      logWarning(`Considering these suggested fixes for the diff:`);
-      suggestedFixes.forEach(fix => {
-        console.log(fix);
-      });
-    }
-    const suggestedPrompt = suggestPrompt(diffForFile);
+
+    const suggestedPrompt = generatePrompts(diffForFile);
     if (suggestedPrompt.length > 0) {
       logWarning(`Considering these suggested prompts for the diff:`);
       suggestedPrompt.forEach(prompt => {
