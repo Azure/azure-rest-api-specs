@@ -60,10 +60,6 @@ using Microsoft.EventGrid.SystemEvents;
   "completedOn",
   "javascript"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "javascript"
-);
 
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",

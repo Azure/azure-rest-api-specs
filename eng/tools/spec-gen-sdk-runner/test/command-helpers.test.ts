@@ -597,8 +597,8 @@ describe("commands.ts", () => {
       // Based on the constants in types.ts, Go SDK requires check for management plane
       expect(result).toBe(true);
 
-      const result2 = getRequiredSettingValue(true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for management plane
+      const result2 = getRequiredSettingValue(true, "azure-sdk-for-net");
+      // Based on the constants in types.ts, .NET SDK does not require check for management plane
       expect(result2).toBe(false);
     });
 
