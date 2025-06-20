@@ -19,10 +19,10 @@ model PlacementPolicy {
   @doc("Type of placement. Can be \"PickAll\", \"PickN\" or \"PickFixed\". Default is PickAll.")
   placementType?: PlacementType;
 
-  @doc("ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is PickFixed.")
+  @doc("ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is \"PickFixed\"")
   clusterNames?: string[];
 
-  @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll.")
+  @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\".")
   affinity?: Affinity;
 
   @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
@@ -31,7 +31,7 @@ model PlacementPolicy {
 
 @doc("PlacementType identifies the type of placement.")
 union PlacementType {
-  @doc("PickAll picks all clusters that satisfy the rules")
+  @doc("PickAll picks all clusters that satisfy the rules.")
   PickAll: "PickAll",
 
   @doc("PickFixed picks a fixed set of clusters.")
@@ -40,7 +40,7 @@ union PlacementType {
   string,
 }
 
-@doc("Affinity is a group of cluster affinity scheduling rules.")
+@doc("Affinity is a group of cluster affinity scheduling rules. More to be added.")
 model Affinity {
   @doc("ClusterAffinity contains cluster affinity scheduling rules for the selected resources.")
   clusterAffinity?: ClusterAffinity;
@@ -52,7 +52,7 @@ model ClusterAffinity {
   requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelector;
 }
 
-@doc("ClusterSelector.")
+@doc("ClusterSelector")
 model ClusterSelector {
   @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
   clusterSelectorTerms: ClusterSelectorTerm[];
@@ -87,22 +87,22 @@ model PropertySelectorRequirement {
 
 @doc("PropertySelectorOperator is the operator that can be used with PropertySelectorRequirements.")
 union PropertySelectorOperator {
-  @doc("GreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement.")
+  @doc("Gt dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement.")
   Gt: "Gt",
 
-  @doc("GreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement.")
+  @doc("Ge dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement.")
   Ge: "Ge",
 
-  @doc("EqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement.")
+  @doc("Eq dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement.")
   Eq: "Eq",
 
-  @doc("NotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement.")
+  @doc("Ne dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement.")
   Ne: "Ne",
 
-  @doc("LessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement.")
+  @doc("Lt dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement.")
   Lt: "Lt",
 
-  @doc("LessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement.")
+  @doc("Le dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement.")
   Le: "Le",
 
   string,
@@ -122,4 +122,3 @@ model Toleration {
   @doc("Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule.")
   effect?: TaintEffect;
 }
-

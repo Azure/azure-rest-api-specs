@@ -2674,7 +2674,7 @@
     },
     "Core.V1.TaintEffect": {
       "type": "string",
-      "description": "TaintEffect defines the effects of Taint",
+      "description": "TaintEffect",
       "enum": [
         "NoSchedule"
       ],
@@ -2692,7 +2692,7 @@
     },
     "Core.V1.TolerationOperator": {
       "type": "string",
-      "description": "TolerationOperator is the set of operators that can be used in a toleration.",
+      "description": "A toleration operator is the set of operators that can be used in a toleration.",
       "enum": [
         "Exists",
         "Equal"
@@ -2704,12 +2704,12 @@
           {
             "name": "Exists",
             "value": "Exists",
-            "description": "TolerationOperator Exists"
+            "description": "Exists"
           },
           {
             "name": "Equal",
             "value": "Equal",
-            "description": "TolerationOperator Equal"
+            "description": "Equal"
           }
         ]
       }
@@ -3585,22 +3585,22 @@
           {
             "name": "In",
             "value": "In",
-            "description": "LabelSelectorOperator In"
+            "description": "In"
           },
           {
             "name": "NotIn",
             "value": "NotIn",
-            "description": "LabelSelectorOperator NotIn"
+            "description": "NotIn"
           },
           {
             "name": "Exists",
             "value": "Exists",
-            "description": "LabelSelectorOperator Exists"
+            "description": "Exists"
           },
           {
             "name": "DoesNotExist",
             "value": "DoesNotExist",
-            "description": "LabelSelectorOperator DoesNotExist"
+            "description": "DoesNotExist"
           }
         ]
       }
@@ -3731,7 +3731,7 @@
     },
     "Placement.V1.Affinity": {
       "type": "object",
-      "description": "Affinity is a group of cluster affinity scheduling rules.",
+      "description": "Affinity is a group of cluster affinity scheduling rules. More to be added.",
       "properties": {
         "clusterAffinity": {
           "$ref": "#/definitions/Placement.V1.ClusterAffinity",
@@ -3761,7 +3761,7 @@
     },
     "Placement.V1.ClusterSelector": {
       "type": "object",
-      "description": "ClusterSelector.",
+      "description": "ClusterSelector",
       "properties": {
         "clusterSelectorTerms": {
           "type": "array",
@@ -3800,14 +3800,14 @@
         },
         "clusterNames": {
           "type": "array",
-          "description": "ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is PickFixed.",
+          "description": "ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is \"PickFixed\"",
           "items": {
             "type": "string"
           }
         },
         "affinity": {
           "$ref": "#/definitions/Placement.V1.Affinity",
-          "description": "Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is PickAll."
+          "description": "Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\"."
         },
         "tolerations": {
           "type": "array",
@@ -3833,7 +3833,7 @@
           {
             "name": "PickAll",
             "value": "PickAll",
-            "description": "PickAll picks all clusters that satisfy the rules"
+            "description": "PickAll picks all clusters that satisfy the rules."
           },
           {
             "name": "PickFixed",
@@ -3878,32 +3878,32 @@
           {
             "name": "Gt",
             "value": "Gt",
-            "description": "GreaterThan dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement."
+            "description": "Gt dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement."
           },
           {
             "name": "Ge",
             "value": "Ge",
-            "description": "GreaterThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement."
+            "description": "Ge dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement."
           },
           {
             "name": "Eq",
             "value": "Eq",
-            "description": "EqualTo dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement."
+            "description": "Eq dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement."
           },
           {
             "name": "Ne",
             "value": "Ne",
-            "description": "NotEqualTo dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement."
+            "description": "Ne dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement."
           },
           {
             "name": "Lt",
             "value": "Lt",
-            "description": "LessThan dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement."
+            "description": "Lt dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement."
           },
           {
             "name": "Le",
             "value": "Le",
-            "description": "LessThanOrEqualTo dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement."
+            "description": "Le dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement."
           }
         ]
       }
