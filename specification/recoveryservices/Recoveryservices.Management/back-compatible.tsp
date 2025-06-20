@@ -23,11 +23,19 @@ using Microsoft.RecoveryServices;
 );
 
 // @@clientLocation decorators for @operationId operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get, PrivateLinkResourceOperationGroup);
-@@clientLocation(PrivateLinkResourceOperationGroup.list, PrivateLinkResourceOperationGroup);
+@@clientLocation(PrivateLinkResourceOperationGroup.get,
+  PrivateLinkResourceOperationGroup
+);
+@@clientLocation(PrivateLinkResourceOperationGroup.list,
+  PrivateLinkResourceOperationGroup
+);
 
-@@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability, RecoveryServicesOperationGroup);
-@@clientLocation(RecoveryServicesOperationGroup.capabilities, RecoveryServicesOperationGroup);
+@@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
+  RecoveryServicesOperationGroup
+);
+@@clientLocation(RecoveryServicesOperationGroup.capabilities,
+  RecoveryServicesOperationGroup
+);
 
 @@clientLocation(Vaults.create, Vaults);
 @@clientLocation(Vaults.registeredIdentitiesDelete, Vaults);
@@ -39,5 +47,7 @@ using Microsoft.RecoveryServices;
 @@clientLocation(GetOperationResult.listByResourceGroup, GetOperationResult);
 
 @@clientLocation(VaultExtendedInfoResources.get, VaultExtendedInfoResources);
-@@clientLocation(VaultExtendedInfoResources.createOrUpdate, VaultExtendedInfoResources);
+@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
+  VaultExtendedInfoResources
+);
 @@clientLocation(VaultExtendedInfoResources.update, VaultExtendedInfoResources);
