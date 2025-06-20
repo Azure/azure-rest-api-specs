@@ -1313,7 +1313,6 @@ model DiscountProperties {
   billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts";
-      scopes: ["tenant"];
     }
   ]>;
 
@@ -1324,7 +1323,6 @@ model DiscountProperties {
   billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts";
-      scopes: ["tenant"];
     }
   ]>;
 
@@ -1335,7 +1333,6 @@ model DiscountProperties {
   customerResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Billing/billingAccounts/customers";
-      scopes: ["tenant"];
     }
   ]>;
 
@@ -1357,7 +1354,6 @@ model DiscountProperties {
   benefitResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.BillingBenefits/discounts";
-      scopes: ["resourceGroup"];
     }
   ]>;
 

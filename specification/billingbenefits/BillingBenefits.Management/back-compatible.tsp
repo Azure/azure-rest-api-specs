@@ -6,7 +6,7 @@ using Microsoft.BillingBenefits;
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(SavingsPlanOperationGroup.listAll, "SavingsPlan");
 @@clientLocation(SavingsPlanOperationGroup.validatePurchase, "ValidatePurchase");
-@@clientLocation(DiscountsOperationGroup.scopeList, "Discounts");
+@@clientLocation(DiscountsOperationGroup.scopeList, DiscountsOperationGroup);
 @@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");
 @@clientLocation(ReservationOrderAliasResponses.create, "ReservationOrderAlias");
 @@clientLocation(SavingsPlanModels.get, "SavingsPlan");

@@ -1465,8 +1465,7 @@
           "description": "The set of BigCat claims. Validation: Required. Must contain AgreementType, NationalCloud, and PricingAudience claims. Additionally requires AccessPass claim when creating custom price with action == consume on the pricing instructions.",
           "items": {
             "$ref": "#/definitions/CatalogClaimsItem"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "termUnits": {
           "type": "string",
@@ -1485,8 +1484,7 @@
           "description": "The set of market set prices of the priceable node. Validation: Required. Must contain at least one element.",
           "items": {
             "$ref": "#/definitions/MarketSetPricesItems"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -1700,10 +1698,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts",
-                "scopes": [
-                  "tenant"
-                ]
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -1716,10 +1711,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts",
-                "scopes": [
-                  "tenant"
-                ]
+                "type": "Microsoft.Billing/billingAccounts"
               }
             ]
           }
@@ -1732,10 +1724,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Billing/billingAccounts/customers",
-                "scopes": [
-                  "tenant"
-                ]
+                "type": "Microsoft.Billing/billingAccounts/customers"
               }
             ]
           }
@@ -1757,10 +1746,7 @@
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.BillingBenefits/discounts",
-                "scopes": [
-                  "resourceGroup"
-                ]
+                "type": "Microsoft.BillingBenefits/discounts"
               }
             ]
           }
@@ -2051,8 +2037,7 @@
           "description": "Array of conditions for the discount. Validation: Optional. Maximum length is 1000.",
           "items": {
             "$ref": "#/definitions/ConditionsItem"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "discriminator": "discountType",
@@ -2990,8 +2975,7 @@
           "items": {
             "$ref": "#/definitions/SavingsPlanSummary"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
