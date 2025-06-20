@@ -650,5 +650,5 @@ interface NginxDeployments {
   @armResourceCollectionAction
   listDefaultWafPolicies(
     ...ResourceInstanceParameters<NginxDeployment>,
-  ): ArmResponse<NginxDeploymentDefaultWafPolicyListResponse>;
+  ): ArmResponse<NginxDeploymentDefaultWafPolicyListResponse> | ErrorResponse;
 }
