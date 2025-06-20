@@ -28,3 +28,36 @@ using Microsoft.BotService;
 @@clientName(QnAMakerEndpointKeysOperationGroup.get::parameters.body,
   "parameters"
 );
+
+// @@clientLocation decorators for @operationId operations
+// Bots interface
+@@clientLocation(Bots.createSignInUrl, "Email");
+@@clientLocation(Bots.listByBotResource, "PrivateLinkResources");
+
+// BotChannels interface
+@@clientLocation(BotChannels.get, "Channels");
+@@clientLocation(BotChannels.create, "Channels");
+@@clientLocation(BotChannels.update, "Channels");
+@@clientLocation(BotChannels.delete, "Channels");
+@@clientLocation(BotChannels.listByResourceGroup, "Channels");
+@@clientLocation(BotChannels.listWithKeys, "Channels");
+@@clientLocation(BotChannels.regenerateKeys, "DirectLine");
+
+// ConnectionSettings interface
+@@clientLocation(ConnectionSettings.get, "BotConnection");
+@@clientLocation(ConnectionSettings.create, "BotConnection");
+@@clientLocation(ConnectionSettings.update, "BotConnection");
+@@clientLocation(ConnectionSettings.delete, "BotConnection");
+@@clientLocation(ConnectionSettings.listByBotService, "BotConnection");
+@@clientLocation(ConnectionSettings.listWithSecrets, "BotConnection");
+
+// OperationGroup interfaces from routes.tsp - use interface references to avoid conflicts
+@@clientLocation(BotsOperationGroup.getCheckNameAvailability, Bots);
+@@clientLocation(BotConnectionOperationGroup.listServiceProviders,
+  BotConnectionOperationGroup
+);
+@@clientLocation(QnAMakerEndpointKeysOperationGroup.get,
+  "QnAMakerEndpointKeys"
+);
+@@clientLocation(HostSettingsOperationGroup.get, "HostSettings");
+@@clientLocation(OperationResultsOperationGroup.get, "OperationResults");
