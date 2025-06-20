@@ -219,7 +219,7 @@ interface FleetManagedNamespaces {
 
   listByFleet is ArmResourceListByParent<FleetManagedNamespace>;
 
-  patch is ArmCustomPatchAsync<
+  update is ArmCustomPatchAsync<
     FleetManagedNamespace,
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
