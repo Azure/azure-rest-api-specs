@@ -25,7 +25,7 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-managedapplications-2019-07
   - tag: package-policy-2023-04
-  - tag: package-resources-2025-04-python-only
+  - tag: package-resources-2025-04
   - tag: package-subscriptions-2022-12
   - tag: package-changes-2022-05
   - tag: package-databoundaries-2024-08
@@ -91,18 +91,15 @@ namespace: azure.mgmt.resource.policy
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy
 ```
 
-### Tag: package-resources-2025-04-python-only and python
+### Tag: package-resources-2025-04 and python
 
-These settings apply only when `--tag=package-resources-2025-04-python-only --python` is specified on the command line. Please also
+These settings apply only when `--tag=package-resources-2025-04 --python` is specified on the command line. Please also
 specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-resources-2025-04-python-only'
+``` yaml $(tag) == 'package-resources-2025-04'
 title: ResourceManagementClient
 namespace: azure.mgmt.resource.resources
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
-input-file:
-  - Microsoft.Resources/stable/2025-04-01/resources.json
-  - Microsoft.Resources/deployments/stable/2025-04-01/deployments.json
 ```
 
 ### Tag: package-subscriptions-2022-12 and python
