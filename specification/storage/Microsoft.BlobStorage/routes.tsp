@@ -1409,7 +1409,11 @@ namespace Storage.Blob {
           ...SnapshotParameter;
           ...VersionIdParameter;
           ...TimeoutParameter;
-          ...AccessTierHeader;
+
+          /** Indicates the tier to be set on the blob. */
+          @header("x-ms-access-tier")
+          tier: AccessTier;
+
           ...RehydratePriorityHeader;
           ...LeaseIdOptionalParameter;
           ...IfTagsParameter;
