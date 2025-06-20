@@ -13,7 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A Policy.
  */
-model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties, false> {
+model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties, false> {
   ...ResourceNameParameter<
     Resource = Policy,
     KeyName = "name",

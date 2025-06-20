@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * A secret.
  */
 @parentResource(User)
-model Secret is Azure.ResourceManager.TrackedResource<SecretProperties, false> {
+model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
   ...ResourceNameParameter<
     Resource = Secret,
     SegmentName = "secrets",

@@ -17,7 +17,7 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @parentResource(Lab)
-model ServiceRunner is Azure.ResourceManager.TrackedResource<{}> {
+model ServiceRunner is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = ServiceRunner,
     SegmentName = "servicerunners",

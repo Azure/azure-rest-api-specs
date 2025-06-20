@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * A schedule.
  */
 model Schedule
-  is Azure.ResourceManager.TrackedResource<ScheduleProperties, false> {
+  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
   ...ResourceNameParameter<
     Resource = Schedule,
     SegmentName = "schedules",

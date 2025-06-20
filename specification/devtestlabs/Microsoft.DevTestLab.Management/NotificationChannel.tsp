@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model NotificationChannel
-  is Azure.ResourceManager.TrackedResource<
+  is Azure.ResourceManager.ProxyResource<
     NotificationChannelProperties,
     false
   > {

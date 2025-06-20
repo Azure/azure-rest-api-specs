@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model LabVirtualMachine
-  is Azure.ResourceManager.TrackedResource<LabVirtualMachineProperties, false> {
+  is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties, false> {
   ...ResourceNameParameter<
     Resource = LabVirtualMachine,
     KeyName = "name",

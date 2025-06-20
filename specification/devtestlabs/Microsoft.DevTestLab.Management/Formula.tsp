@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model Formula
-  is Azure.ResourceManager.TrackedResource<FormulaProperties, false> {
+  is Azure.ResourceManager.ProxyResource<FormulaProperties, false> {
   ...ResourceNameParameter<
     Resource = Formula,
     SegmentName = "formulas",

@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model CustomImage
-  is Azure.ResourceManager.TrackedResource<CustomImageProperties, false> {
+  is Azure.ResourceManager.ProxyResource<CustomImageProperties, false> {
   ...ResourceNameParameter<
     Resource = CustomImage,
     SegmentName = "customimages",

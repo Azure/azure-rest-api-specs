@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model VirtualNetwork
-  is Azure.ResourceManager.TrackedResource<VirtualNetworkProperties> {
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkProperties> {
   ...ResourceNameParameter<
     Resource = VirtualNetwork,
     KeyName = "name",

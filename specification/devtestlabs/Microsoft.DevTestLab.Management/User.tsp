@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * Profile of a lab user.
  */
 @parentResource(Lab)
-model User is Azure.ResourceManager.TrackedResource<UserProperties> {
+model User is Azure.ResourceManager.ProxyResource<UserProperties> {
   ...ResourceNameParameter<
     Resource = User,
     SegmentName = "users",

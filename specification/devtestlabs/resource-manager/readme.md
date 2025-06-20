@@ -39,7 +39,7 @@ input-file:
 - Microsoft.DevTestLab/stable/2018-09-15/DTL.json
 suppressions:
   - code: ResourceNameRestriction
-    from: Microsoft.DevTestLab/stable/2018-09-15/DTL.json
+    from: DTL.json
     reason: This is already released to customers, hence suppressing the rule for compatibility
 ```
 

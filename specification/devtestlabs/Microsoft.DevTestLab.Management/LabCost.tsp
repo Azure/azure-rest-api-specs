@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model LabCost
-  is Azure.ResourceManager.TrackedResource<LabCostProperties, false> {
+  is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
   ...ResourceNameParameter<
     Resource = LabCost,
     SegmentName = "costs",

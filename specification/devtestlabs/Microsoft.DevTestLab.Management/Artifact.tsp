@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(ArtifactSource)
 model Artifact
-  is Azure.ResourceManager.TrackedResource<ArtifactProperties, false> {
+  is Azure.ResourceManager.ProxyResource<ArtifactProperties, false> {
   ...ResourceNameParameter<
     Resource = Artifact,
     SegmentName = "artifacts",
