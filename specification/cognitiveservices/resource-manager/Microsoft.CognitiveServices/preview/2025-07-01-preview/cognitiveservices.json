@@ -9082,27 +9082,35 @@
           "readOnly": true,
           "description": "The date on which the current tier was assigned to the subscription (UTC)."
         },
+        "tierUpgradeEligibilityInfo": {
+          "$ref": "#/definitions/QuotaTierUpgradeEligibilityInfo",
+          "description": "Information about the quota tier upgrade eligibility for the subscription.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "QuotaTierUpgradeEligibilityInfo": {
+      "description": "Information about the quota tier upgrade eligibility for the subscription.",
+      "type": "object",
+      "properties": {
         "nextTierName": {
           "type": "string",
-          "readOnly": true,
           "x-nullable": true,
           "description": "Name of the next quota tier for the subscription."
         },
         "isUpgradeAvailable": {
           "type": "boolean",
-          "readOnly": true,
           "description": "Is the subscription eligible to be upgraded to the next quota tier."
         },
         "upgradeApplicableDate": {
           "type": "string",
           "format": "date-time",
           "x-nullable": true,
-          "readOnly": true,
           "description": "The date on which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
         },
         "upgradeUnavailabilityReason": {
           "type": "string",
-          "readOnly": true,
           "x-nullable": true,
           "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
         }
