@@ -6495,15 +6495,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Import operation accepted. Use operation location URL to monitor status.",
+            "description": "Accepted. The operation has been accepted and is being processed asynchronously. Use the URL in the Location header to monitor the status of the operation.",
             "headers": {
-              "Operation-Location": {
-                "description": "URL to monitor operation status",
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation. This must be a full absolute URI and a public-facing endpoint.",
                 "type": "string"
               },
-              "Location": {
-                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
-                "type": "string"
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before polling the operation status. Value must be between 10 and 600 seconds.",
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -16280,12 +16281,12 @@
           "description": "Server type.",
           "readOnly": true
         },
-        "hypervisor": {
+        "hyperVisor": {
           "type": "string",
           "description": "Fabric type.",
           "readOnly": true
         },
-        "hypervisorVersionNumber": {
+        "hyperVisorVersionNumber": {
           "type": "string",
           "description": "Hypervisor version number.",
           "readOnly": true
@@ -18235,7 +18236,7 @@
           "description": "Gets the discovery state of the server.",
           "readOnly": true
         },
-        "hypervisor": {
+        "hyperVisor": {
           "type": "string",
           "description": "Gets or sets the hypervisor type of the server.",
           "readOnly": true
