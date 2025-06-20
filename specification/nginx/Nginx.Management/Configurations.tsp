@@ -12,7 +12,6 @@ namespace Nginx.NginxPlus;
 /**
  * Represents an Nginx configuration resource.
  */
-#suppress "@typespec/http/metadata-ignored" "This is expected for ARM resource models that use path parameters"
 @parentResource(NginxDeployment)
 model Configuration is ProxyResource<NginxConfigurationResponseProperties> {
   ...ResourceNameParameter<Configuration>;
@@ -21,7 +20,6 @@ model Configuration is ProxyResource<NginxConfigurationResponseProperties> {
 /**
  * Request model for creating or updating an Nginx configuration.
  */
-#suppress "@typespec/http/metadata-ignored" "This is expected for ARM resource models that use path parameters"
 @parentResource(NginxDeployment)
 @resource("configurations")
 model NginxConfigurationRequest
@@ -370,7 +368,7 @@ interface Configurations {
     /**
      * The configuration resource to create or update.
      */
-    @body resource: NginxConfigurationRequest,
+    @bodyRoot resource: NginxConfigurationRequest,
   ): ArmResponse<Configuration> | ArmCreatedResponse<Configuration> | ErrorResponse;
 
   /**
