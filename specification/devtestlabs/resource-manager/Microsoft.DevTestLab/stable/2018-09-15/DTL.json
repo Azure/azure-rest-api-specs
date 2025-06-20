@@ -239,6 +239,12 @@
               "$ref": "#/definitions/OperationResult"
             }
           },
+          "202": {
+            "description": "Response for operations that return with 202 Accepted status code.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -632,68 +638,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/{policySetName}/policysets/{policySetName}/evaluatePolicies": {
-      "post": {
-        "operationId": "PolicySets_EvaluatePolicies",
-        "tags": [
-          "Labs"
-        ],
-        "description": "Evaluates lab policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "policySetName",
-            "in": "path",
-            "description": "The name of the policy set.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "evaluatePoliciesRequest",
-            "in": "body",
-            "description": "Request body for evaluating a policy set.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EvaluatePoliciesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EvaluatePoliciesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PolicySets_EvaluatePolicies": {
-            "$ref": "./examples/PolicySets_EvaluatePolicies.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
@@ -1719,7 +1663,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{customImageName}": {
       "get": {
         "operationId": "CustomImages_Get",
         "tags": [
@@ -1744,7 +1688,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "customImageName",
             "in": "path",
             "description": "The name of the custom image.",
             "required": true,
@@ -1802,7 +1746,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "customImageName",
             "in": "path",
             "description": "The name of the custom image.",
             "required": true,
@@ -1883,7 +1827,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "customImageName",
             "in": "path",
             "description": "The name of the custom image.",
             "required": true,
@@ -1943,7 +1887,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "customImageName",
             "in": "path",
             "description": "The name of the custom image.",
             "required": true,
@@ -3011,6 +2955,68 @@
         "x-ms-examples": {
           "NotificationChannels_Notify": {
             "$ref": "./examples/NotificationChannels_Notify.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/evaluatePolicies": {
+      "post": {
+        "operationId": "PolicySets_EvaluatePolicies",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Evaluates lab policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetName",
+            "in": "path",
+            "description": "The name of the policy set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluatePoliciesRequest",
+            "in": "body",
+            "description": "Request body for evaluating a policy set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluatePoliciesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvaluatePoliciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicySets_EvaluatePolicies": {
+            "$ref": "./examples/PolicySets_EvaluatePolicies.json"
           }
         }
       }

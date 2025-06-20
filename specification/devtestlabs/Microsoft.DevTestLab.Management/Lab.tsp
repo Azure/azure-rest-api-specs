@@ -215,7 +215,6 @@ interface Labs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @post
-  @action("policysets/{policySetName}/evaluatePolicies")
   @operationId("PolicySets_EvaluatePolicies")
   evaluatePolicies is ArmResourceActionSync<
     Lab,
@@ -225,7 +224,7 @@ interface Labs {
       /**
        * The name of the policy set.
        */
-      @path
+      @path @segment("policysets")
       policySetName: string;
     }
   >;

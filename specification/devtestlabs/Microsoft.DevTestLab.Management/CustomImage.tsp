@@ -18,7 +18,6 @@ model CustomImage
   is Azure.ResourceManager.TrackedResource<CustomImageProperties, false> {
   ...ResourceNameParameter<
     Resource = CustomImage,
-    KeyName = "name",
     SegmentName = "customimages",
     NamePattern = ""
   >;

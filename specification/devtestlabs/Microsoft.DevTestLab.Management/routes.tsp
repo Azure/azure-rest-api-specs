@@ -19,7 +19,9 @@ interface OperationsOperationGroup {
    * Get operation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Operations_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/locations/{locationName}/operations/{name}")
   @get
@@ -38,5 +40,22 @@ interface OperationsOperationGroup {
      */
     @path
     name: string,
-  ): ArmResponse<OperationResult> | ErrorResponse;
+  ): ArmResponse<OperationResult> | AcceptedResponse | ErrorResponse;
+}
+
+/**
+ * Response for operations that return with 202 Accepted status code.
+ */
+model AcceptedResponse {
+  /**
+   * HTTP status code 202
+   */
+  @statusCode
+  statusCode: 202;
+
+  /**
+   * The operation result object.
+   */
+  @body
+  body: OperationResult;
 }
