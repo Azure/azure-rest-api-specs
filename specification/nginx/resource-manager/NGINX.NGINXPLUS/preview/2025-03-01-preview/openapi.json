@@ -70,33 +70,33 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "The Azure subscription ID.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "nginxDeploymentName",
             "in": "path",
+            "description": "The name of the NGINX deployment.",
             "required": true,
             "type": "string"
           },
           {
             "name": "configurationName",
             "in": "path",
+            "description": "The name of the configuration.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -123,7 +123,7 @@
           }
         },
         "x-ms-examples": {
-          "Configurations_Analyze": {
+          "Analyze NGINX Configuration": {
             "$ref": "./examples/Configurations_Analyze.json"
           }
         }

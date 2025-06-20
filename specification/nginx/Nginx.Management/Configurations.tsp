@@ -12,6 +12,7 @@ namespace Nginx.NginxPlus;
 /**
  * Represents an Nginx configuration resource.
  */
+#suppress "@typespec/http/metadata-ignored" "This is expected for ARM resource models that use path parameters"
 @parentResource(NginxDeployment)
 model Configuration is ProxyResource<NginxConfigurationResponseProperties> {
   ...ResourceNameParameter<Configuration>;
@@ -20,6 +21,7 @@ model Configuration is ProxyResource<NginxConfigurationResponseProperties> {
 /**
  * Request model for creating or updating an Nginx configuration.
  */
+#suppress "@typespec/http/metadata-ignored" "This is expected for ARM resource models that use path parameters"
 @parentResource(NginxDeployment)
 @resource("configurations")
 model NginxConfigurationRequest
@@ -400,13 +402,27 @@ interface Configurations {
   @action("analyze")
   @armResourceAction(AnalysisResult)
   analyze(
-    // Replace the ResourceInstanceParameters spread with individual parameters
+    /**
+     * The Azure subscription ID.
+     */
     @path subscriptionId: string,
 
+    /**
+     * The name of the resource group.
+     */
     @path resourceGroupName: string,
+
+    /**
+     * The name of the NGINX deployment.
+     */
     @path nginxDeploymentName: string,
+
+    /**
+     * The name of the configuration.
+     */
     @path configurationName: string,
-    @query("api-version") apiVersion: string,
+
+    ...ApiVersionParameter,
 
     /**
      * Request body for the analysis.
