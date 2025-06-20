@@ -31,7 +31,7 @@ interface BlobInventoryPolicies {
   /**
    * Gets the blob inventory policy associated with the specified storage account.
    */
-  get is ArmResourceRead<BlobInventoryPolicy>;
+  get is ArmResourceRead<BlobInventoryPolicy, Error = CloudError>;
 
   /**
    * Sets the blob inventory policy to the specified storage account.
@@ -39,13 +39,14 @@ interface BlobInventoryPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BlobInventoryPolicy,
-    Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>
+    Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>,
+    Error = CloudError
   >;
 
   /**
    * Deletes the blob inventory policy associated with the specified storage account.
    */
-  delete is ArmResourceDeleteSync<BlobInventoryPolicy>;
+  delete is ArmResourceDeleteSync<BlobInventoryPolicy, Error = CloudError>;
 
   /**
    * Gets the blob inventory policy associated with the specified storage account.

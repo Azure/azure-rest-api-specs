@@ -41,10 +41,7 @@ interface StorageTaskAssignments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<
-      StorageTaskAssignment,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>>
   >;
 
   /**
@@ -53,13 +50,17 @@ interface StorageTaskAssignments {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StorageTaskAssignment,
-    PatchModel = StorageTaskAssignmentUpdateParameters
+    PatchModel = StorageTaskAssignmentUpdateParameters,
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>>
   >;
 
   /**
    * Delete the storage task assignment sub-resource
    */
-  delete is ArmResourceDeleteWithoutOkAsync<StorageTaskAssignment>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    StorageTaskAssignment,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse
+  >;
 
   /**
    * List all the storage task assignments in an account

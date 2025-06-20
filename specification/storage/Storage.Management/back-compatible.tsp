@@ -9,23 +9,12 @@ using Microsoft.Storage;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImmutabilityPolicyProperties.properties);
 
-@@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops");
-
-@@clientName(FileShareLimits.minProvisionedIOPS, "minProvisionedIops");
-@@clientName(FileShareLimits.maxProvisionedIOPS, "maxProvisionedIops");
-
-@@clientName(FileShareRecommendations.baseIOPS, "baseIops");
-
-@@clientName(BurstingConstants.burstFloorIOPS, "burstFloorIops");
-
-@@clientName(AccountUsageElements.provisionedIOPS, "provisionedIops");
-
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShareItem.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ListQueue.properties);
-@@clientName(ListQueue.properties, "queueProperties");
+@@clientName(ListQueue.properties, "QueueProperties");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Operation.properties);
@@ -53,41 +42,76 @@ using Microsoft.Storage;
   "enableNfsV3"
 );
 
-@@clientName(Encryption.keyvaultproperties, "keyVaultProperties");
-@@clientName(Encryption.identity, "encryptionIdentity");
+@@clientName(Encryption.keyvaultproperties, "KeyVaultProperties");
+@@clientName(Encryption.identity, "EncryptionIdentity");
+@@clientName(Encryption.requireInfrastructureEncryption,
+  "RequireInfrastructureEncryption"
+);
 
-@@clientName(KeyVaultProperties.keyname, "keyName");
-@@clientName(KeyVaultProperties.keyversion, "keyVersion");
-@@clientName(KeyVaultProperties.keyvaulturi, "keyVaultUri");
+@@clientName(KeyVaultProperties.keyname, "KeyName");
+@@clientName(KeyVaultProperties.keyversion, "KeyVersion");
+@@clientName(KeyVaultProperties.keyvaulturi, "KeyVaultUri");
+@@clientName(KeyVaultProperties.currentVersionedKeyIdentifier,
+  "CurrentVersionedKeyIdentifier"
+);
+@@clientName(KeyVaultProperties.lastKeyRotationTimestamp,
+  "LastKeyRotationTimestamp"
+);
+@@clientName(KeyVaultProperties.currentVersionedKeyExpirationTimestamp,
+  "CurrentVersionedKeyExpirationTimestamp"
+);
 
 @@clientName(EncryptionIdentity.userAssignedIdentity,
-  "encryptionUserAssignedIdentity"
+  "EncryptionUserAssignedIdentity"
 );
 @@clientName(EncryptionIdentity.federatedIdentityClientId,
-  "encryptionFederatedIdentityClientId"
+  "EncryptionFederatedIdentityClientId"
 );
 
-@@clientName(VirtualNetworkRule.id, "virtualNetworkResourceId");
+@@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
 @@clientName(IPRule.value, "IPAddressOrRange");
 
+@@clientName(NetworkRuleSet.bypass, "Bypass");
+
 @@clientName(StorageAccountProperties.supportsHttpsTrafficOnly,
-  "enableHttpsTrafficOnly"
+  "EnableHttpsTrafficOnly"
 );
-@@clientName(StorageAccountProperties.networkAcls, "networkRuleSet");
+@@clientName(StorageAccountProperties.networkAcls, "NetworkRuleSet");
 @@clientName(StorageAccountProperties.isSftpEnabled, "IsSftpEnabled");
 @@clientName(StorageAccountProperties.isLocalUserEnabled, "IsLocalUserEnabled");
 @@clientName(StorageAccountProperties.isHnsEnabled, "IsHnsEnabled");
-@@clientName(StorageAccountProperties.isNfsV3Enabled, "enableNfsV3");
+@@clientName(StorageAccountProperties.isNfsV3Enabled, "EnableNfsV3");
 @@clientName(StorageAccountProperties.isSkuConversionBlocked,
   "IsSkuConversionBlocked"
+);
+@@clientName(StorageAccountProperties.enableExtendedGroups,
+  "EnableExtendedGroups"
+);
+@@clientName(StorageAccountProperties.geoReplicationStats,
+  "GeoReplicationStats"
+);
+@@clientName(StorageAccountProperties.failoverInProgress, "FailoverInProgress");
+@@clientName(StorageAccountProperties.routingPreference, "RoutingPreference");
+@@clientName(StorageAccountProperties.blobRestoreStatus, "BlobRestoreStatus");
+@@clientName(StorageAccountProperties.allowBlobPublicAccess,
+  "AllowBlobPublicAccess"
+);
+@@clientName(StorageAccountProperties.immutableStorageWithVersioning,
+  "ImmutableStorageWithVersioning"
+);
+@@clientName(StorageAccountProperties.storageAccountSkuConversionStatus,
+  "StorageAccountSkuConversionStatus"
+);
+@@clientName(StorageAccountProperties.accountMigrationInProgress,
+  "AccountMigrationInProgress"
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccountUpdateParameters.properties);
 
 @@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
-  "enableHttpsTrafficOnly"
+  "EnableHttpsTrafficOnly"
 );
 @@clientName(StorageAccountPropertiesUpdateParameters.isSftpEnabled,
   "IsSftpEnabled"
@@ -96,33 +120,45 @@ using Microsoft.Storage;
   "IsLocalUserEnabled"
 );
 @@clientName(StorageAccountPropertiesUpdateParameters.networkAcls,
-  "networkRuleSet"
+  "NetworkRuleSet"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.enableExtendedGroups,
+  "EnableExtendedGroups"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.routingPreference,
+  "RoutingPreference"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.allowBlobPublicAccess,
+  "AllowBlobPublicAccess"
+);
+@@clientName(StorageAccountPropertiesUpdateParameters.immutableStorageWithVersioning,
+  "ImmutableStorageWithVersioning"
 );
 
-@@clientName(AccountSasParameters.signedServices, "services");
-@@clientName(AccountSasParameters.signedResourceTypes, "resourceTypes");
-@@clientName(AccountSasParameters.signedPermission, "permissions");
+@@clientName(AccountSasParameters.signedServices, "Services");
+@@clientName(AccountSasParameters.signedResourceTypes, "ResourceTypes");
+@@clientName(AccountSasParameters.signedPermission, "Permissions");
 @@clientName(AccountSasParameters.signedIp, "IPAddressOrRange");
-@@clientName(AccountSasParameters.signedProtocol, "protocols");
-@@clientName(AccountSasParameters.signedStart, "sharedAccessStartTime");
-@@clientName(AccountSasParameters.signedExpiry, "sharedAccessExpiryTime");
+@@clientName(AccountSasParameters.signedProtocol, "Protocols");
+@@clientName(AccountSasParameters.signedStart, "SharedAccessStartTime");
+@@clientName(AccountSasParameters.signedExpiry, "SharedAccessExpiryTime");
 
-@@clientName(ServiceSasParameters.signedResource, "resource");
-@@clientName(ServiceSasParameters.signedPermission, "permissions");
+@@clientName(ServiceSasParameters.signedResource, "Resource");
+@@clientName(ServiceSasParameters.signedPermission, "Permissions");
 @@clientName(ServiceSasParameters.signedIp, "IPAddressOrRange");
-@@clientName(ServiceSasParameters.signedProtocol, "protocols");
-@@clientName(ServiceSasParameters.signedStart, "sharedAccessStartTime");
-@@clientName(ServiceSasParameters.signedExpiry, "sharedAccessExpiryTime");
-@@clientName(ServiceSasParameters.signedIdentifier, "identifier");
-@@clientName(ServiceSasParameters.startPk, "partitionKeyStart");
-@@clientName(ServiceSasParameters.endPk, "partitionKeyEnd");
-@@clientName(ServiceSasParameters.startRk, "rowKeyStart");
-@@clientName(ServiceSasParameters.endRk, "rowKeyEnd");
-@@clientName(ServiceSasParameters.rscc, "cacheControl");
-@@clientName(ServiceSasParameters.rscd, "contentDisposition");
-@@clientName(ServiceSasParameters.rsce, "contentEncoding");
-@@clientName(ServiceSasParameters.rscl, "contentLanguage");
-@@clientName(ServiceSasParameters.rsct, "contentType");
+@@clientName(ServiceSasParameters.signedProtocol, "Protocols");
+@@clientName(ServiceSasParameters.signedStart, "SharedAccessStartTime");
+@@clientName(ServiceSasParameters.signedExpiry, "SharedAccessExpiryTime");
+@@clientName(ServiceSasParameters.signedIdentifier, "Identifier");
+@@clientName(ServiceSasParameters.startPk, "PartitionKeyStart");
+@@clientName(ServiceSasParameters.endPk, "PartitionKeyEnd");
+@@clientName(ServiceSasParameters.startRk, "RowKeyStart");
+@@clientName(ServiceSasParameters.endRk, "RowKeyEnd");
+@@clientName(ServiceSasParameters.rscc, "CacheControl");
+@@clientName(ServiceSasParameters.rscd, "ContentDisposition");
+@@clientName(ServiceSasParameters.rsce, "ContentEncoding");
+@@clientName(ServiceSasParameters.rscl, "ContentLanguage");
+@@clientName(ServiceSasParameters.rsct, "ContentType");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
@@ -132,6 +168,7 @@ using Microsoft.Storage;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobServiceProperties.properties);
+@@clientName(BlobServiceProperties.properties, "BlobServiceProperties");
 
 @@clientName(BlobContainers.create::parameters.resource, "blobContainer");
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
@@ -139,10 +176,10 @@ using Microsoft.Storage;
 @@clientName(BlobContainers.clearLegalHold::parameters.body, "LegalHold");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobContainer.properties);
+@@clientName(BlobContainer.properties, "ContainerProperties");
 
-@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
-  "parameters"
-);
+@@clientName(ContainerProperties.immutabilityPolicy, "ImmutabilityPolicy");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImmutabilityPolicy.properties);
 
@@ -151,23 +188,27 @@ using Microsoft.Storage;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileServiceProperties.properties);
+@@clientName(FileServiceProperties.properties, "FileServiceProperties");
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShare.properties);
+@@clientName(FileShare.properties, "FileShareProperties");
 
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(QueueServiceProperties.properties);
+@@clientName(QueueServiceProperties.properties, "QueueServiceProperties");
 
 @@clientName(StorageQueues.create::parameters.resource, "queue");
 @@clientName(StorageQueues.update::parameters.properties, "queue");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageQueue.properties);
+@@clientName(StorageQueue.properties, "QueueProperties");
 
 @@clientName(StorageAccounts.create::parameters.resource, "parameters");
 @@clientName(StorageAccounts.update::parameters.properties, "parameters");
@@ -190,6 +231,9 @@ using Microsoft.Storage;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(StorageAccountMigration.properties);
+@@clientName(StorageAccountMigration.properties,
+  "StorageAccountMigrationDetails"
+);
 
 @@clientName(ManagementPolicies.createOrUpdate::parameters.resource,
   "properties"
@@ -219,17 +263,20 @@ using Microsoft.Storage;
 @@clientName(EncryptionScopes.patch::parameters.properties, "encryptionScope");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(EncryptionScope.properties);
+@@clientName(EncryptionScope.properties, "EncryptionScopeProperties");
 
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(TableServiceProperties.properties);
+@@clientName(TableServiceProperties.properties, "TableServiceProperties");
 
 @@clientName(Tables.create::parameters.resource, "parameters");
 @@clientName(Tables.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Table.properties);
+@@clientName(Table.properties, "TableProperties");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
@@ -238,3 +285,40 @@ using Microsoft.Storage;
 @@clientName(StorageTaskAssignments.update::parameters.properties,
   "parameters"
 );
+@@visibility(FileShareItems.value, Lifecycle.Read);
+@@visibility(ListContainerItems.value, Lifecycle.Read);
+@@visibility(ListQueueResource.value, Lifecycle.Read);
+@@visibility(ListTableResource.value, Lifecycle.Read);
+@@visibility(NetworkSecurityPerimeterConfigurationList.value, Lifecycle.Read);
+@@visibility(FileServiceUsages.value, Lifecycle.Read);
+@@visibility(StorageTaskReportSummary.value, Lifecycle.Read);
+
+@@clientName(StorageAccounts.checkNameAvailability::parameters.body,
+  "accountName"
+);
+@@clientName(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+  "parameters"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.enableExtendedGroups,
+  "EnableExtendedGroups"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.routingPreference,
+  "RoutingPreference"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.allowBlobPublicAccess,
+  "AllowBlobPublicAccess"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.immutableStorageWithVersioning,
+  "ImmutableStorageWithVersioning"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
+  "NetworkRuleSet"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.supportsHttpsTrafficOnly,
+  "EnableHttpsTrafficOnly"
+);
+@@clientName(StorageAccountPropertiesCreateParameters.isNfsV3Enabled,
+  "EnableNfsV3"
+);
+
+@@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);

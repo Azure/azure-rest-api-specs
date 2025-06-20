@@ -31,22 +31,6 @@ interface SkusOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface StorageAccountsOperationGroup {
-  /**
-   * Checks that the storage account name is valid and is not already in use.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("StorageAccounts_CheckNameAvailability")
-  @autoRoute
-  checkNameAvailability is ArmProviderActionSync<
-    Request = StorageAccountCheckNameAvailabilityParameters,
-    Response = CheckNameAvailabilityResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {}
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeletedAccountsOperationGroup {
   /**
    * Lists deleted accounts under the subscription.

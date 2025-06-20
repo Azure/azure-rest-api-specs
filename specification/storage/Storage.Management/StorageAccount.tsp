@@ -52,6 +52,18 @@ model StorageAccount
 @armResourceOperations
 interface StorageAccounts {
   /**
+   * Checks that the storage account name is valid and is not already in use.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("StorageAccounts_CheckNameAvailability")
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = StorageAccountCheckNameAvailabilityParameters,
+    Response = CheckNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+  /**
    * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
    */
   getProperties is ArmResourceRead<
@@ -69,10 +81,17 @@ interface StorageAccounts {
    * Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  create is ArmResourceCreateOrReplaceAsync<
-    StorageAccount,
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @armResourceCreateOrUpdate(StorageAccount)
+  @autoRoute
+  create is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<
+      StorageAccount,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>
+    >,
+    StorageAccountCreateParameters,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    ErrorResponse = ErrorResponse
   >;
 
   /**
@@ -111,7 +130,7 @@ interface StorageAccounts {
        * Specifies type of the key to be listed. Possible value is kerb.
        */
       @query("$expand")
-      $expand?: "kerb";
+      $expand?: ListKeyExpand;
     }
   >;
 
@@ -128,6 +147,7 @@ interface StorageAccounts {
    * List SAS credentials of a storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListAccountSas")
   @operationId("StorageAccounts_ListAccountSAS")
   listAccountSAS is ArmResourceActionSync<
@@ -140,6 +160,7 @@ interface StorageAccounts {
    * List service SAS credentials of a specific resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @action("ListServiceSas")
   @operationId("StorageAccounts_ListServiceSAS")
   listServiceSAS is ArmResourceActionSync<
@@ -160,7 +181,7 @@ interface StorageAccounts {
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
        */
       @query("failoverType")
-      failoverType?: "Planned";
+      failoverType?: FailoverType;
     }
   >;
 
@@ -204,10 +225,15 @@ interface StorageAccounts {
   /**
    * Restore blobs in the specified blob ranges
    */
-  restoreBlobRanges is ArmResourceActionAsync<
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
+  restoreBlobRanges is ArmResourceActionAsyncBase<
     StorageAccount,
     BlobRestoreParameters,
-    ArmResponse<BlobRestoreStatus>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAccount>,
+    Response = ArmResponse<BlobRestoreStatus> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: BlobRestoreStatus;
+    })
   >;
 
   /**

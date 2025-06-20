@@ -14,14 +14,24 @@ namespace Microsoft.Storage;
 /**
  * The usage of file service in storage account.
  */
-@singleton("default")
-@parentResource(StorageAccount)
+@parentResource(FileServiceHolder)
 model FileServiceUsage
   is Azure.ResourceManager.ProxyResource<FileServiceUsageProperties> {
   ...ResourceNameParameter<
     Resource = FileServiceUsage,
-    KeyName = "usage",
+    KeyName = "fileServiceUsageName",
     SegmentName = "usages",
+    NamePattern = ""
+  >;
+}
+
+@parentResource(StorageAccount)
+model FileServiceHolder
+  is Azure.ResourceManager.ProxyResource<FileServiceProperties> {
+  ...ResourceNameParameter<
+    Resource = FileServiceProperties,
+    KeyName = "FileServicesName",
+    SegmentName = "fileServices",
     NamePattern = ""
   >;
 }
@@ -33,7 +43,7 @@ interface FileServiceUsageOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("FileServices_GetServiceUsage")
-  getServiceUsage is ArmResourceRead<FileServiceUsage>;
+  getServiceUsage is ArmResourceRead<FileServiceUsage, Error = CloudError>;
 
   /**
    * Gets the usages of file service in storage account.
@@ -49,7 +59,8 @@ interface FileServiceUsageOperationGroup {
       @query("$maxpagesize")
       $maxpagesize?: int32;
     },
-    Response = ArmResponse<FileServiceUsages>
+    Response = ArmResponse<FileServiceUsages>,
+    Error = CloudError
   >;
 }
 

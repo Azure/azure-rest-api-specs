@@ -26,12 +26,16 @@ model QueueServiceProperties
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface QueueServices {
   /**
    * Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  getServiceProperties is ArmResourceRead<QueueServiceProperties>;
+  getServiceProperties is ArmResourceRead<
+    QueueServiceProperties,
+    Error = CloudError
+  >;
 
   /**
    * Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -39,7 +43,8 @@ interface QueueServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     QueueServiceProperties,
-    Response = ArmResourceUpdatedResponse<QueueServiceProperties>
+    Response = ArmResourceUpdatedResponse<QueueServiceProperties>,
+    Error = CloudError
   >;
 
   /**
@@ -47,7 +52,8 @@ interface QueueServices {
    */
   list is ArmResourceListByParent<
     QueueServiceProperties,
-    Response = ArmResponse<ListQueueServices>
+    Response = ArmResponse<ListQueueServices>,
+    Error = CloudError
   >;
 
   /**
@@ -73,7 +79,8 @@ interface QueueServices {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

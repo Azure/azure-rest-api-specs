@@ -41,9 +41,11 @@ interface FileShares {
       /**
        * Optional, used to retrieve properties of a snapshot.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
       @header
       `x-ms-snapshot`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -57,14 +59,19 @@ interface FileShares {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<FileShare, PatchModel = FileShare>;
+  update is ArmCustomPatchSync<
+    FileShare,
+    PatchModel = FileShare,
+    Error = CloudError
+  >;
 
   /**
    * Deletes specified share under its account.
@@ -75,6 +82,7 @@ interface FileShares {
       /**
        * Optional, used to delete a snapshot.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
       @header
       `x-ms-snapshot`?: string;
 
@@ -83,13 +91,19 @@ interface FileShares {
        */
       @query("$include")
       $include?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
    * Restore a file share within a valid retention days if share soft delete is enabled
    */
-  restore is ArmResourceActionSync<FileShare, DeletedShare, OkResponse>;
+  restore is ArmResourceActionSync<
+    FileShare,
+    DeletedShare,
+    OkResponse,
+    Error = CloudError
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
@@ -103,13 +117,21 @@ interface FileShares {
       @bodyRoot
       parameters?: LeaseShareRequest;
     },
-    ArmResponse<LeaseShareResponse>,
     Parameters = {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
       @header
       `x-ms-snapshot`?: string;
+    },
+    Error = CloudError,
+    Response = ArmResponse<LeaseShareResponse> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 }

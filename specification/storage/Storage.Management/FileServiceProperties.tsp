@@ -14,13 +14,14 @@ namespace Microsoft.Storage;
 /**
  * The properties of File services in storage account.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @singleton("default")
 @parentResource(StorageAccount)
 model FileServiceProperties
   is Azure.ResourceManager.ProxyResource<FileServicePropertiesProperties> {
   ...ResourceNameParameter<
     Resource = FileServiceProperties,
-    KeyName = "fileService",
+    KeyName = "FileServicesName",
     SegmentName = "fileServices",
     NamePattern = ""
   >;
@@ -33,12 +34,16 @@ model FileServiceProperties
   sku?: Sku;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface FileServices {
   /**
    * Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
    */
-  getServiceProperties is ArmResourceRead<FileServiceProperties>;
+  getServiceProperties is ArmResourceRead<
+    FileServiceProperties,
+    Error = CloudError
+  >;
 
   /**
    * Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.
@@ -46,7 +51,8 @@ interface FileServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     FileServiceProperties,
-    Response = ArmResourceUpdatedResponse<FileServiceProperties>
+    Response = ArmResourceUpdatedResponse<FileServiceProperties>,
+    Error = CloudError
   >;
 
   /**
@@ -54,7 +60,8 @@ interface FileServices {
    */
   list is ArmResourceListByParent<
     FileServiceProperties,
-    Response = ArmResponse<FileServiceItems>
+    Response = ArmResponse<FileServiceItems>,
+    Error = CloudError
   >;
 
   /**
@@ -86,7 +93,8 @@ interface FileServices {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

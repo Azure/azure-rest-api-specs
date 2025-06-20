@@ -995,6 +995,9 @@ model BlobServiceItems {
   @visibility(Lifecycle.Read)
   @items
   value?: BlobServiceProperties[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1055,6 +1058,8 @@ model CorsRules {
   /**
    * The List of CORS rules. You can include up to five CorsRule elements in the request.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
+  @OpenAPI.extension("x-ms-identifiers", #[])
   corsRules?: CorsRule[];
 }
 
@@ -1354,6 +1359,7 @@ model ImmutabilityPolicyProperties {
    * The ImmutabilityPolicy update history of the blob container.
    */
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   updateHistory?: UpdateHistoryProperty[];
 }
 
@@ -1449,6 +1455,7 @@ model LegalHoldProperties {
   /**
    * The list of LegalHold tags of a blob container.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   tags?: TagProperty[];
 
   /**
@@ -1632,6 +1639,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   details?: CloudErrorBody[];
 }
 
@@ -1775,12 +1783,14 @@ model AccountLimits {
   /**
    * The maximum provisioned IOPS limit for the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   maxProvisionedIOPS?: int32;
 
   /**
    * The maximum provisioned bandwidth limit in mebibytes per second for the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   maxProvisionedBandwidthMiBPerSec?: int32;
 }
@@ -1804,24 +1814,28 @@ model FileShareLimits {
   /**
    * The minimum provisioned IOPS limit for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   minProvisionedIOPS?: int32;
 
   /**
    * The maximum provisioned IOPS limit for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   maxProvisionedIOPS?: int32;
 
   /**
    * The minimum provisioned bandwidth limit in mebibytes per second for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   minProvisionedBandwidthMiBPerSec?: int32;
 
   /**
    * The maximum provisioned bandwidth limit in mebibytes per second for a file share in the storage account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   maxProvisionedBandwidthMiBPerSec?: int32;
 }
@@ -1833,6 +1847,7 @@ model FileShareRecommendations {
   /**
    * The base IOPS in the file share provisioned IOPS recommendation formula.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   baseIOPS?: int32;
 
@@ -1845,6 +1860,7 @@ model FileShareRecommendations {
   /**
    * The base bandwidth in the file share provisioned bandwidth recommendation formula.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   baseBandwidthMiBPerSec?: int32;
 
@@ -1862,12 +1878,14 @@ model BurstingConstants {
   /**
    * The guaranteed floor of burst IOPS for small file shares.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   burstFloorIOPS?: int32;
 
   /**
    * The scalar against provisioned IOPS in the file share included burst IOPS formula.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   burstIOScalar?: float64;
 
@@ -1914,12 +1932,14 @@ model AccountUsageElements {
   /**
    * The total provisioned IOPS.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   provisionedIOPS?: int32;
 
   /**
    * The total provisioned bandwidth in mebibytes per second.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   provisionedBandwidthMiBPerSec?: int32;
 }
@@ -2426,6 +2446,10 @@ model StorageSkuListResult {
   @visibility(Lifecycle.Read)
   @items
   value?: SkuInformation[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2470,12 +2494,14 @@ model SkuInformation {
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   restrictions?: Restriction[];
 }
 
 /**
  * The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model SKUCapability {
   /**
    * The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.
@@ -2524,7 +2550,12 @@ model StorageAccountCheckNameAvailabilityParameters {
   /**
    * The type of resource, Microsoft.Storage/storageAccounts
    */
-  type: "Microsoft.Storage/storageAccounts";
+  type: Type = Type.`Microsoft.Storage/storageAccounts`;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum Type {
+  `Microsoft.Storage/storageAccounts`,
 }
 
 /**
@@ -2765,6 +2796,7 @@ model StorageAccountPropertiesCreateParameters {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -2963,6 +2995,7 @@ model NetworkRuleSet {
   /**
    * Sets the resource access rules
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resourceAccessRules?: ResourceAccessRule[];
 
   /**
@@ -2973,6 +3006,7 @@ model NetworkRuleSet {
   /**
    * Sets the IP ACL rules
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   ipRules?: IPRule[];
 
   /**
@@ -3008,7 +3042,7 @@ model VirtualNetworkRule {
   /**
    * The action of virtual network rule.
    */
-  action?: "Allow";
+  action?: Action = Action.Allow;
 
   /**
    * Gets the state of virtual network rule.
@@ -3028,9 +3062,40 @@ model IPRule {
   /**
    * The action of IP ACL rule.
    */
-  action?: "Allow";
+  action?: Action = Action.Allow;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum Action {
+  Allow: "Allow",
+}
+
+/**
+ * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum FailoverType {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  Planned: "Planned",
+}
+
+/**
+ * Specifies type of the key to be listed. Possible value is kerb.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum ListKeyExpand {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  kerb: "kerb",
+}
+
+/**
+ * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum IntervalUnit {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  days: "Days",
+}
 /**
  * Settings for Azure Files identity based authentication.
  */
@@ -3347,6 +3412,7 @@ model StorageAccountProperties {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3657,6 +3723,7 @@ model BlobRestoreParameters {
   /**
    * Blob ranges to restore.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   blobRanges: BlobRestoreRange[];
 }
 
@@ -3828,6 +3895,7 @@ model StorageAccountPropertiesUpdateParameters {
   /**
    * A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   defaultToOAuthAuthentication?: boolean;
 
   /**
@@ -3921,6 +3989,7 @@ model StorageAccountListKeysResult {
    * Gets the list of storage account keys and their properties for the specified storage account.
    */
   @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   keys?: StorageAccountKey[];
 }
 
@@ -3974,6 +4043,10 @@ model UsageListResult {
    */
   @items
   value?: Usage[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4348,21 +4421,25 @@ model DateAfterModification {
   /**
    * Value indicating the age in days after last modification
    */
+  @minValue(0)
   daysAfterModificationGreaterThan?: float32;
 
   /**
    * Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy
    */
+  @minValue(0)
   daysAfterLastAccessTimeGreaterThan?: float32;
 
   /**
    * Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterModificationGreaterThan to be set for baseBlobs based actions. The blob will be archived if both the conditions are satisfied.
    */
+  @minValue(0)
   daysAfterLastTierChangeGreaterThan?: float32;
 
   /**
    * Value indicating the age in days after blob creation.
    */
+  @minValue(0)
   daysAfterCreationGreaterThan?: float32;
 }
 
@@ -4403,11 +4480,13 @@ model DateAfterCreation {
   /**
    * Value indicating the age in days after creation
    */
+  @minValue(0)
   daysAfterCreationGreaterThan: float32;
 
   /**
    * Value indicating the age in days after last blob tier change time. This property is only applicable for tierToArchive actions and requires daysAfterCreationGreaterThan to be set for snapshots and blob version based actions. The blob will be archived if both the conditions are satisfied.
    */
+  @minValue(0)
   daysAfterLastTierChangeGreaterThan?: float32;
 }
 
@@ -4481,6 +4560,7 @@ model TagFilter {
    * This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters
    */
   @maxLength(256)
+  @minLength(0)
   value: string;
 }
 
@@ -4630,6 +4710,7 @@ model BlobInventoryCreationTime {
   /**
    * When set the policy filters the objects that are created in the last N days. Where N is an integer value between 1 to 36500.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @maxValue(36500)
   @minValue(1)
   lastNDays?: int32;
@@ -4646,6 +4727,10 @@ model ListBlobInventoryPolicy {
   @visibility(Lifecycle.Read)
   @items
   value?: BlobInventoryPolicy[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4658,6 +4743,10 @@ model PrivateEndpointConnectionListResult {
    */
   @items
   value?: PrivateEndpointConnection[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4715,6 +4804,10 @@ model ObjectReplicationPolicies {
    */
   @items
   value?: ObjectReplicationPolicy[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4748,6 +4841,7 @@ model ObjectReplicationPolicyProperties {
   /**
    * The storage account object replication rules.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   rules?: ObjectReplicationPolicyRule[];
 
   /**
@@ -4819,6 +4913,7 @@ model LocalUserProperties {
   /**
    * The permission scopes of the local user.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   permissionScopes?: PermissionScope[];
 
   /**
@@ -4829,6 +4924,7 @@ model LocalUserProperties {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
@@ -4876,6 +4972,7 @@ model LocalUserProperties {
   /**
    * Indicates if the local user is enabled for access with NFSv3 protocol.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   isNFSv3Enabled?: boolean;
 }
 
@@ -4917,12 +5014,14 @@ model LocalUserKeys {
   /**
    * Optional, local user ssh authorized keys for SFTP.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   sshAuthorizedKeys?: SshPublicKey[];
 
   /**
    * Auto generated by the server for SMB authentication.
    */
   @visibility(Lifecycle.Read)
+  @secret
   sharedKey?: string;
 }
 
@@ -4934,6 +5033,7 @@ model LocalUserRegeneratePasswordResult {
    * Auto generated password by the server for SSH authentication if hasSshPassword is set to true on the creation of local user.
    */
   @visibility(Lifecycle.Read)
+  @secret
   sshPassword?: string;
 }
 
@@ -5385,7 +5485,7 @@ model TriggerParameters {
   /**
    * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit;
 
   /**
    * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
@@ -5612,7 +5712,7 @@ model TriggerParametersUpdate {
   /**
    * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit;
 
   /**
    * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'

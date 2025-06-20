@@ -31,7 +31,7 @@ interface Tables {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Table_Get")
-  get is ArmResourceRead<Table>;
+  get is ArmResourceRead<Table, Error = CloudError>;
 
   /**
    * Creates a new table with the specified table name, under the specified account.
@@ -41,7 +41,8 @@ interface Tables {
   @operationId("Table_Create")
   create is ArmResourceCreateOrReplaceSync<
     Table,
-    Response = ArmResourceUpdatedResponse<Table>
+    Response = ArmResourceUpdatedResponse<Table>,
+    Error = CloudError
   >;
 
   /**
@@ -50,7 +51,7 @@ interface Tables {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Table_Update")
-  update is ArmCustomPatchSync<Table, PatchModel = Table>;
+  update is ArmCustomPatchSync<Table, PatchModel = Table, Error = CloudError>;
 
   /**
    * Deletes the table with the specified table name, under the specified account if it exists.
@@ -60,7 +61,8 @@ interface Tables {
   @operationId("Table_Delete")
   delete is ArmResourceDeleteSync<
     Table,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -70,7 +72,8 @@ interface Tables {
   @operationId("Table_List")
   list is ArmResourceListByParent<
     Table,
-    Response = ArmResponse<ListTableResource>
+    Response = ArmResponse<ListTableResource>,
+    Error = CloudError
   >;
 }
 

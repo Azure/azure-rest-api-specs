@@ -39,8 +39,16 @@ interface ImmutabilityPolicies {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      @header("If-Match")
       `If-Match`?: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
@@ -56,10 +64,17 @@ interface ImmutabilityPolicies {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<ImmutabilityPolicy>
+    Response = ArmResourceUpdatedResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 
   /**
@@ -74,10 +89,17 @@ interface ImmutabilityPolicies {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      @header("If-Match")
       `If-Match`: string;
     },
-    Response = ArmResponse<ImmutabilityPolicy>
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 
   /**
@@ -89,13 +111,20 @@ interface ImmutabilityPolicies {
   lockImmutabilityPolicy is ArmResourceActionSync<
     ImmutabilityPolicy,
     void,
-    ArmResponse<ImmutabilityPolicy>,
     Parameters = {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
@@ -114,13 +143,20 @@ interface ImmutabilityPolicies {
       @bodyRoot
       parameters?: ImmutabilityPolicy;
     },
-    ArmResponse<ImmutabilityPolicy>,
     Parameters = {
       /**
        * The entity state (ETag) version of the immutability policy to update must be returned to the server for all update operations. The ETag value must include the leading and trailing double quotes as returned by the service.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ImmutabilityPolicy> & {
+      /**
+       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 }

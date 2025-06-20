@@ -29,7 +29,7 @@ interface StorageQueues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queue_Get")
-  get is ArmResourceRead<StorageQueue>;
+  get is ArmResourceRead<StorageQueue, Error = CloudError>;
 
   /**
    * Creates a new queue with the specified queue name, under the specified account.
@@ -39,7 +39,8 @@ interface StorageQueues {
   @operationId("Queue_Create")
   create is ArmResourceCreateOrReplaceSync<
     StorageQueue,
-    Response = ArmResourceUpdatedResponse<StorageQueue>
+    Response = ArmResourceUpdatedResponse<StorageQueue>,
+    Error = CloudError
   >;
 
   /**
@@ -48,7 +49,11 @@ interface StorageQueues {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Queue_Update")
-  update is ArmCustomPatchSync<StorageQueue, PatchModel = StorageQueue>;
+  update is ArmCustomPatchSync<
+    StorageQueue,
+    PatchModel = StorageQueue,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the queue with the specified queue name, under the specified account if it exists.
@@ -58,7 +63,8 @@ interface StorageQueues {
   @operationId("Queue_Delete")
   delete is ArmResourceDeleteSync<
     StorageQueue,
-    Response = ArmDeletedNoContentResponse
+    Response = ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 }
 

@@ -26,12 +26,16 @@ model TableServiceProperties
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface TableServices {
   /**
    * Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  getServiceProperties is ArmResourceRead<TableServiceProperties>;
+  getServiceProperties is ArmResourceRead<
+    TableServiceProperties,
+    Error = CloudError
+  >;
 
   /**
    * Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
@@ -39,7 +43,8 @@ interface TableServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     TableServiceProperties,
-    Response = ArmResourceUpdatedResponse<TableServiceProperties>
+    Response = ArmResourceUpdatedResponse<TableServiceProperties>,
+    Error = CloudError
   >;
 
   /**
@@ -47,7 +52,8 @@ interface TableServices {
    */
   list is ArmResourceListByParent<
     TableServiceProperties,
-    Response = ArmResponse<ListTableServices>
+    Response = ArmResponse<ListTableServices>,
+    Error = CloudError
   >;
 }
 
