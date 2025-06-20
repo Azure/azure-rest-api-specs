@@ -14,8 +14,7 @@ namespace Microsoft.DevTestLab;
  * A cost item.
  */
 @parentResource(Lab)
-model LabCost
-  is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
+model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
   ...ResourceNameParameter<
     Resource = LabCost,
     SegmentName = "costs",
