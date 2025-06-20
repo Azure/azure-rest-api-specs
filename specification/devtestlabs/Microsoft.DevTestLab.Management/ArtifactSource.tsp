@@ -21,6 +21,19 @@ model ArtifactSource
     SegmentName = "artifactsources",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -48,6 +61,7 @@ interface ArtifactSources {
    * Allows modifying tags of artifact sources. All other properties will be ignored.
    */
   @patch(#{ implicitOptionality: false })
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "ArtifactSourceFragment contains tags as expected by the patch operation."
   update is ArmCustomPatchSync<
     ArtifactSource,
     PatchModel = ArtifactSourceFragment
@@ -100,3 +114,5 @@ interface ArtifactSources {
 @@doc(ArtifactSources.update::parameters.properties,
   "Properties of an artifact source."
 );
+@@doc(ArtifactSource.tags, "The tags of the resource.");
+@@doc(ArtifactSource.location, "The location of the resource.");

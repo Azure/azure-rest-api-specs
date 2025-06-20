@@ -41,6 +41,12 @@ suppressions:
   - code: ResourceNameRestriction
     from: DTL.json
     reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: DeleteResponseCodes
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: ParametersInPointGet
+    from: DTL.json
+    reason: This is already released to customers, hence suppressing the rule for compatibility
 ```
 
 ### Tag: package-2016-05
