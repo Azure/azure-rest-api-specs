@@ -304,7 +304,7 @@ suppressions:
     reason: Existing issue from last version. 
   - code: XmsPageableForListCalls
     from: virtualMachineImage.json
-    where: $.paths.*[?(@.operationId == "VirtualMachineImages_ListWithProperties")]
+    where: $["x-ms-paths"].*[?(@.operationId == "VirtualMachineImages_ListWithProperties")]
     reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
 ```
 
