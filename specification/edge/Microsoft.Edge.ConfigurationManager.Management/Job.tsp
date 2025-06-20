@@ -157,7 +157,10 @@ model JobProperties {
 
 @doc("Job extension resource for tracking job execution and substatuses.")
 model Job is ExtensionResource<JobProperties> {
-  ...ResourceNameParameter<Job>;
+  ...ResourceNameParameter<
+    Job,
+    NamePattern = "^(?=.{3,60}$)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+  >;
   ...EntityTagProperty;
 }
 

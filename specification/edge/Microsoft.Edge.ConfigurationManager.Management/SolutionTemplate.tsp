@@ -45,10 +45,15 @@ model SolutionTemplateProperties {
 @doc("Solution Template Resource. Contains capabilities and operations for creating versions.")
 model SolutionTemplate
   is Azure.ResourceManager.TrackedResource<SolutionTemplateProperties> {
-  ...ResourceNameParameter<
-    SolutionTemplate,
-    NamePattern = "^(?!v-)(?!.*-v-)[a-zA-Z0-9-]{3,24}$"
-  >;
+  @doc("The name of the SolutionTemplate")
+  @maxLength(61)
+  @minLength(3)
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  @path
+  @key("solutionTemplateName")
+  @segment("solutionTemplates")
+  name: string;
+
   ...EntityTagProperty;
 }
 

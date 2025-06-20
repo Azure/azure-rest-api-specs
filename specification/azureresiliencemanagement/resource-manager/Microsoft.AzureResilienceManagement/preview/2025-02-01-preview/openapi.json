@@ -8519,6 +8519,11 @@
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
       "properties": {
+        "groupUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery orchestration group, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "orderId": {
           "type": "integer",
           "format": "int32",
@@ -8552,6 +8557,7 @@
         }
       },
       "required": [
+        "groupUniqueId",
         "orderId",
         "description"
       ]
@@ -8560,6 +8566,11 @@
       "type": "object",
       "description": "Properties of the recovery orchestration group.",
       "properties": {
+        "groupUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery orchestration group, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "orderId": {
           "type": "integer",
           "format": "int32",
@@ -9082,6 +9093,11 @@
       "type": "object",
       "description": "Definition of recovery orchestration resource property associated with recovery orchestration plan.",
       "properties": {
+        "recoveryResourceUniqueId": {
+          "type": "string",
+          "description": "A unique id for the recovery resource, which is a GUID.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
@@ -9154,6 +9170,7 @@
         }
       },
       "required": [
+        "recoveryResourceUniqueId",
         "selectedProtectionSolutionType"
       ]
     },
