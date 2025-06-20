@@ -398,31 +398,11 @@ interface Configurations {
    * Analyzes a configuration for potential issues or optimizations.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is not a long-running operation"
+  @armResourceAction(Configuration)
   @post
   @action("analyze")
-  @armResourceAction(AnalysisResult)
   analyze(
-    /**
-     * The Azure subscription ID.
-     */
-    @path subscriptionId: string,
-
-    /**
-     * The name of the resource group.
-     */
-    @path resourceGroupName: string,
-
-    /**
-     * The name of the NGINX deployment.
-     */
-    @path nginxDeploymentName: string,
-
-    /**
-     * The name of the configuration.
-     */
-    @path configurationName: string,
-
-    ...ApiVersionParameter,
+    ...ResourceInstanceParameters<Configuration>,
 
     /**
      * Request body for the analysis.

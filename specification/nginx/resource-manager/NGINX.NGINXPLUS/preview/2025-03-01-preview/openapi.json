@@ -59,76 +59,6 @@
     }
   ],
   "paths": {
-    "/{subscriptionId}/{resourceGroupName}/{nginxDeploymentName}/{configurationName}/analyze": {
-      "post": {
-        "operationId": "Configurations_Analyze",
-        "tags": [
-          "Configurations"
-        ],
-        "description": "Analyzes a configuration for potential issues or optimizations.",
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nginxDeploymentName",
-            "in": "path",
-            "description": "The name of the NGINX deployment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "The name of the configuration.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body for the analysis.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalysisCreate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AnalysisResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Analyze NGINX Configuration": {
-            "$ref": "./examples/Configurations_Analyze.json"
-          }
-        }
-      }
-    },
     "/providers/Nginx.NginxPlus/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -1346,6 +1276,70 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze": {
+      "post": {
+        "operationId": "Configurations_Analyze",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Analyzes a configuration for potential issues or optimizations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nginxDeploymentName",
+            "in": "path",
+            "description": "The name of the NginxDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for the analysis.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalysisCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze NGINX Configuration": {
+            "$ref": "./examples/Configurations_Analyze.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies": {
