@@ -40,11 +40,11 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("request id")
       requestId?: string;
     }),
     LroHeaders = ArmLroLocationHeader &

@@ -46,11 +46,11 @@ interface StorageSyncServices {
     Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("request id")
       requestId?: string;
     }),
     ErrorResponse = StorageSyncError
@@ -63,14 +63,22 @@ interface StorageSyncServices {
   update is ArmCustomPatchAsync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> & {
+    Response = (ArmResourceUpdatedResponse<StorageSyncService> & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("request id")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id")
       requestId?: string;
     }),
     Error = StorageSyncError
@@ -92,11 +100,11 @@ interface StorageSyncServices {
       requestId?: string;
     }) | (ArmDeleteAcceptedLroResponse & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("request id")
       requestId?: string;
     }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
@@ -124,7 +132,7 @@ interface StorageSyncServices {
    */
   listBySubscription is ArmListBySubscription<
     StorageSyncService,
-    Response = ArmResponse<StorageSyncServiceArray> & {
+    Response = StorageSyncServiceArray & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
