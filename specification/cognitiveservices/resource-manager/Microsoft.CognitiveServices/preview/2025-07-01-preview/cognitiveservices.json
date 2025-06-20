@@ -9059,7 +9059,7 @@
       "description": "Properties of Quota Tier resource'.",
       "type": "object",
       "properties": {
-        "tierName": {
+        "currentTierName": {
           "type": "string",
           "readOnly": true,
           "description": "Name of the current quota tier for the subscription."
@@ -9082,21 +9082,10 @@
           "readOnly": true,
           "description": "The date on which the current tier was assigned to the subscription (UTC)."
         },
-        "tierUpgradeEligibilityInfo": {
-          "readonly": true,
-          "x-nullable": true,
-          "$ref": "#/definitions/QuotaTierUpgradeEligibilityInfo",
-          "description": "Tier upgade eligibility info for the subscription."
-        }
-      }
-    },
-    "QuotaTierUpgradeEligibilityInfo": {
-      "description": "Tier upgrade eligiblity info.",
-      "type": "object",
-      "properties": {
-        "nextTier": {
+        "nextTierName": {
           "type": "string",
           "readOnly": true,
+          "x-nullable": true,
           "description": "Name of the next quota tier for the subscription."
         },
         "isUpgradeAvailable": {
