@@ -2035,7 +2035,7 @@ alias IfNoneMatchParameter = {
 /** The range parameter. */
 alias RangeParameter = {
   /** Return only the bytes of the blob in the specified range. */
-  @header("x-ms-range")
+  @header("Range")
   range?: string;
 };
 
