@@ -1272,7 +1272,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptionalHeader;
+          ...AccessTierHeader;
           ...RehydratePriorityHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
@@ -1323,7 +1323,7 @@ namespace Storage.Blob {
           ...BlobPathParameter;
           ...TimeoutParameter;
           ...MetadataHeaders;
-          ...AccessTierOptionalHeader;
+          ...AccessTierHeader;
           ...SourceIfModifiedSinceParameter;
           ...SourceIfUnmodifiedSinceParameter;
           ...SourceIfMatchParameter;
@@ -1409,11 +1409,7 @@ namespace Storage.Blob {
           ...SnapshotParameter;
           ...VersionIdParameter;
           ...TimeoutParameter;
-
-          /** Indicates the tier to be set on the blob. */
-          @header("x-ms-access-tier")
-          tier: AccessTierOptional;
-
+          ...AccessTierHeader;
           ...RehydratePriorityHeader;
           ...LeaseIdOptionalParameter;
           ...IfTagsParameter;
@@ -2086,7 +2082,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
@@ -2145,7 +2141,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
@@ -2288,7 +2284,7 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...AccessTierOptionalHeader;
+            ...AccessTierHeader;
             ...IfModifiedSinceParameter;
             ...IfUnmodifiedSinceParameter;
             ...IfNoneMatchParameter;
