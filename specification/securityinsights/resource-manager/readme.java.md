@@ -5,12 +5,8 @@ These settings apply only when `--java` is specified on the command line.
 
 ``` yaml $(java)
 directive:
-  - from: ThreatIntelligence.json
-    where: $.definitions.ThreatIntelligenceInformation.allOf[1]
-    set:
-      type: object
-    reason: discriminator property is required to be defined in the model
-  - from: ThreatIntelligence.json
-    where: $.definitions
-    transform: $.ThreatIntelligenceInformation.properties = $.ThreatIntelligenceResourceKind.properties
+  - from: EntityTypes.json
+    where: $.definitions.AccountEntityProperties.properties.ntDomain
+    transform: >
+      $.description = 'The NetBIOS domain name as it appears in the alert format - domain\\\\username. Examples: NT AUTHORITY.'
 ```
