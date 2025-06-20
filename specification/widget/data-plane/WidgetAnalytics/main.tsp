@@ -33,9 +33,6 @@ model WidgetSuite {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The ID of the widget's manufacturer.")
-  manufacturerId: string;
-
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
 }
