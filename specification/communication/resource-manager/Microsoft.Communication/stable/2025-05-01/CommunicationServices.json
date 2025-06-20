@@ -331,6 +331,12 @@
           },
           "Update resource to add System and User managed identities": {
             "$ref": "./examples/communicationServices/updateWithSystemAndUserIdentity.json"
+          },
+          "Update resource to add DisableLocalAuth": {
+            "$ref": "./examples/communicationServices/updateWithDisableLocalAuth.json"
+          },
+          "Update resource to add PublicNetworkAccess": {
+            "$ref": "./examples/communicationServices/updateWithPublicNetworkAccess.json"
           }
         }
       },
@@ -450,6 +456,12 @@
           },
           "Create or update resource with managed identity": {
             "$ref": "./examples/communicationServices/createOrUpdateWithSystemAssignedIdentity.json"
+          },
+          "Create or update resource with PublicNetworkAccess": {
+            "$ref": "./examples/communicationServices/createOrUpdateWithPublicNetworkAccess.json"
+          },
+          "Create or update resource with DisableLocalAuth": {
+            "$ref": "./examples/communicationServices/createOrUpdateWithDisableLocalAuth.json"
           }
         }
       },
@@ -778,6 +790,18 @@
         },
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
+        },
+        "publicNetworkAccess": {
+          "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/PublicNetworkAccess"
+        },
+        "disableLocalAuth": {
+          "description": "Disable local authentication for the CommunicationService.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         }
       }
     },
@@ -827,6 +851,16 @@
       "properties": {
         "linkedDomains": {
           "$ref": "#/definitions/DomainsResourceList"
+        },
+        "publicNetworkAccess": {
+          "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/PublicNetworkAccess"
+        },
+        "disableLocalAuth": {
+          "description": "Disable local authentication for the CommunicationService.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
