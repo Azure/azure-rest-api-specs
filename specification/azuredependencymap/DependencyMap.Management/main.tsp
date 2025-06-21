@@ -24,6 +24,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
+
+  /** 2025-05-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -103,9 +108,13 @@ interface Maps {
   >;
   @doc("Export dependencies")
   @action("exportDependencies")
-  exportDependencies is ArmResourceActionNoResponseContentAsync<
+  exportDependencies is ArmResourceActionAsync<
     MapsResource,
-    ExportDependenciesRequest
+    ExportDependenciesRequest,
+    ExportDependenciesOperationResult,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExportDependenciesOperationResult> &
+      ArmLroLocationHeader<FinalResult = ExportDependenciesOperationResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -183,10 +192,14 @@ model GetConnectionsForProcessOnFocusedMachineRequest {
 @doc("ExportDependencies request model")
 model ExportDependenciesRequest {
   @doc("Machine arm id")
-  focusedMachineId: string;
+  focusedMachineId?: string;
 
   @doc("Filters for ExportDependencies")
   filters?: DependencyMapVisualizationFilter;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("List of Appliance Names")
+  applianceNameList?: string[];
 }
 
 @doc("A Discovery Source resource")
@@ -231,6 +244,62 @@ union SourceType {
   OffAzure: "OffAzure",
 
   string,
+}
+
+@doc("Model representing the result of the export dependencies asynchronous operation.")
+model ExportDependenciesOperationResult {
+  @doc("The status URL of export dependencies operation.")
+  id?: string;
+
+  @doc("The resource name of the operation status. It must match the last segment of 'id' field.")
+  name?: string;
+
+  @doc("The overall arm status of the operation. It has one of the terminal states - Succeeded/Failed/Canceled.")
+  status: string;
+
+  @doc("Contains error details if status is Failed/Canceled.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+
+  @doc("Properties for export dependencies. These should only be set if the status is Succeeded.")
+  properties?: ExportDependenciesResultProperties;
+}
+
+@doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
+model ExportDependenciesResultProperties {
+  @doc("The SAS URI of the blob containing the exported dependencies data.")
+  exportedDataSasUri?: string;
+
+  @doc("A status code returned by the service with additional context about the export dependencies operation.")
+  statusCode?: ExportDependenciesStatusCode;
+
+  @doc("Additional information about the exported data.")
+  additionalInfo?: ExportDependenciesAdditionalInfo;
+}
+
+/** Status codes for export dependencies operation */
+union ExportDependenciesStatusCode {
+  string,
+
+  /** Operation completed but no data was found for the requested time range */
+  NoMatch: "NoMatch",
+
+  /** Operation completed with data found for the entire requested time range */
+  CompleteMatch: "CompleteMatch",
+
+  /** Operation completed with data found for a portion of the requested time range */
+  PartialMatch: "PartialMatch",
+}
+
+@doc("Additional information about the exported dependencies data.")
+model ExportDependenciesAdditionalInfo {
+  @doc("Number of days for which data was available in the exported results.")
+  availableDaysCount?: int32;
 }
 
 @armResourceOperations
