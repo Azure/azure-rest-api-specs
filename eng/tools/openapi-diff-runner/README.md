@@ -95,21 +95,3 @@ npm run test:ci
 
 # Lint code
 npm run prettier
-```
-
-### Project Structure
-
-```
-src/
-├── commands.ts              # Main command implementations
-├── command-helpers.ts       # Context initialization and utilities
-├── breaking-change-detector.ts  # Core detection logic
-├── apply-rules.ts          # Rule processing engine
-├── logger.ts               # Logging functionality
-├── utils.ts                # Utility functions
-└── types/                  # TypeScript type definitions
-    ├── breaking-change-check.ts
-    ├── message.ts
-    ├── oad-types.ts
-    └── pull-request.ts
-```

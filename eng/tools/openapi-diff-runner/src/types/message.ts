@@ -82,6 +82,23 @@ export type MarkdownMessageRecord = BaseMessageRecord & {
 export type MessageRecord = ResultMessageRecord | RawMessageRecord | MarkdownMessageRecord;
 
 /**
+ * Represents a message record that is either a result of a validation rule violation or a raw message
+ * (e.g. an AutoRest exception).
+ *
+ * These records originate from "runOad" invocation.
+ */
+export type BrChMsgRecord = ResultMessageRecord | RawMessageRecord;
+
+export function getKey(msg: BrChMsgRecord): string {
+  if (msg.type === "Result") {
+    return [msg.id, msg.code].filter((s) => s).join(" - ");
+  } else {
+    // Example value of msgRecord.message here: "Runtime Exception"
+    return msg.message;
+  }
+}
+
+/**
  * See type MessageRecord
  */
 export type MessageLine = MessageRecord | MessageRecord[];
@@ -89,4 +106,10 @@ export type MessageLine = MessageRecord | MessageRecord[];
 export type FilePosition = {
   readonly line: number;
   readonly column: number;
+};
+
+export type CheckResult = {
+  errorCount: number;
+  warningCount: number;
+  message: MessageRecord[];
 };
