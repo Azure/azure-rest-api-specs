@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/widgetanalytics"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    # TODO: Does anything need this set, if it's not used in output-file?
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/widgetanalytics.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-widget-analytics"
+    namespace: "azure.widget.analytics"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.WidgetAnalytics"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "widget-analytics-rest"
+    package-details:
+      name: "@azure-rest/azure-widget-analytics"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-widget-analytics"
+    namespace: com.azure.widget.analytics
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/widget-analytics"
+    package-dir: "azmanager"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure

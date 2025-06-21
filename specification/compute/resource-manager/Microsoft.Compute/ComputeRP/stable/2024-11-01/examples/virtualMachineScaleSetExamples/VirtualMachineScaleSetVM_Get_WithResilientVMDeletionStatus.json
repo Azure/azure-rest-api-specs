@@ -1,0 +1,172 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "instanceId": "1",
+    "api-version": "2024-11-01",
+    "expand": "ResiliencyView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{vmss-vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/1",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
+        "location": "eastus2euap",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/{subscription-id}/resourceGroups/AzSecPackAutoConfigRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/AzSecPackAutoConfigUA-eastus2euap": {
+              "principalId": "f31e5089-a1e5-44a6-9048-a767ce07d26c",
+              "clientId": "215414c9-8a82-4439-95ea-d09e3543a6e2"
+            }
+          }
+        },
+        "instanceId": "1",
+        "sku": {
+          "name": "Standard_D2ls_v5",
+          "tier": "Standard"
+        },
+        "properties": {
+          "latestModelApplied": true,
+          "modelDefinitionApplied": "VirtualMachineScaleSet",
+          "networkProfileConfiguration": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "vnet-eastus2euap-2-nic01",
+                "properties": {
+                  "primary": true,
+                  "enableAcceleratedNetworking": true,
+                  "disableTcpStateTracking": false,
+                  "networkSecurityGroup": {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/basicNsgvnet-eastus2euap-2-nic01"
+                  },
+                  "dnsSettings": {
+                    "dnsServers": []
+                  },
+                  "enableIPForwarding": false,
+                  "ipConfigurations": [
+                    {
+                      "name": "vnet-eastus2euap-2-nic01-defaultIpConfiguration",
+                      "properties": {
+                        "primary": true,
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet-eastus2euap-2/subnets/snet-eastus2euap-1"
+                        },
+                        "privateIPAddressVersion": "IPv4"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2ls_v5"
+          },
+          "resilientVMDeletionStatus": "Enabled",
+          "vmId": "eb282db2-12d4-4fc6-8bd5-0c6473a4078c",
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "canonical",
+              "offer": "0001-com-ubuntu-server-focal",
+              "sku": "20_04-lts-gen2",
+              "version": "latest",
+              "exactVersion": "20.04.202501110"
+            },
+            "osDisk": {
+              "osType": "Linux",
+              "name": "{vmss-name}_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182",
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Premium_LRS",
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/{vmss-name}_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182"
+              },
+              "diskSizeGB": 30
+            },
+            "dataDisks": [],
+            "diskControllerType": "SCSI"
+          },
+          "osProfile": {
+            "computerName": "statustes000001",
+            "adminUsername": "SomeRandomUser",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": false,
+              "provisionVMAgent": true,
+              "patchSettings": {
+                "patchMode": "ImageDefault",
+                "assessmentMode": "ImageDefault"
+              },
+              "enableVMAgentPlatformUpdates": true
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+          },
+          "securityProfile": {
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            },
+            "securityType": "TrustedLaunch"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/1/networkInterfaces/vnet-eastus2euap-2-nic01"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true
+            }
+          },
+          "timeCreated": "2025-02-05T20:11:32.5722157+00:00"
+        },
+        "etag": "\"3\"",
+        "resources": [
+          {
+            "name": "Microsoft.Azure.Security.Monitoring.AzureSecurityLinuxAgent",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vmss-vm-name}/extensions/Microsoft.Azure.Security.Monitoring.AzureSecurityLinuxAgent",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "eastus2euap",
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "enableAutomaticUpgrade": true,
+              "publisher": "Microsoft.Azure.Security.Monitoring",
+              "type": "AzureSecurityLinuxAgent",
+              "typeHandlerVersion": "2.0",
+              "settings": {
+                "enableGenevaUpload": true,
+                "enableAutoConfig": true,
+                "reportSuccessOnUnsupportedDistro": true
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Azure.Monitor.AzureMonitorLinuxAgent",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vmss-vm-name}/extensions/Microsoft.Azure.Monitor.AzureMonitorLinuxAgent",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "eastus2euap",
+            "properties": {
+              "autoUpgradeMinorVersion": true,
+              "provisioningState": "Succeeded",
+              "enableAutomaticUpgrade": true,
+              "publisher": "Microsoft.Azure.Monitor",
+              "type": "AzureMonitorLinuxAgent",
+              "typeHandlerVersion": "1.0",
+              "settings": {
+                "GCS_AUTO_CONFIG": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

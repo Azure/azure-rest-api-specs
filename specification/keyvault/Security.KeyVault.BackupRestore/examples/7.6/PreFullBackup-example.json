@@ -1,0 +1,28 @@
+{
+  "operationId": "PreFullBackup",
+  "title": "Check whether the customer can perform a full backup operation",
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "preBackupOperationParameters": {
+      "storageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+      "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=REDACTED"
+    },
+    "api-version": "7.6"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsyncOperation": "https://myvault.vault.azure.net/backup/45aacd568ab049a2803861e8dd3ae21f/pending"
+      },
+      "body": {
+        "status": "InProgress",
+        "statusDetails": "Pre Full backup is in progress",
+        "azureStorageBlobContainerUri": null,
+        "jobId": "45aacd568ab049a2803861e8dd3ae21f",
+        "startTime": 1490790000,
+        "endTime": 0
+      }
+    }
+  }
+}

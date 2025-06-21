@@ -11,6 +11,9 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.DocumentIntelligence
+    model-namespace: false
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
@@ -20,8 +23,8 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Document Intelligence"
     package-dir: "azure-ai-documentintelligence"
-    package-name: "{package-dir}"
-    package-version: 1.0.0b2
+    namespace: "azure.ai.documentintelligence"
+    package-version: 1.0.0
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -31,7 +34,9 @@ options:
     enable-sync-stack: true
     custom-types-subpackage: "implementation.models"
     generate-tests: false
+    partial-update: true
     customization-class: customization/src/main/java/DocumentIntelligenceCustomizations.java
+    use-eclipse-language-server: false
     polling:
       buildDocumentModel:
         final-type: com.azure.ai.documentintelligence.models.DocumentModelDetails
@@ -50,9 +55,8 @@ options:
   "@azure-tools/typespec-ts":
     title: DocumentIntelligence
     package-dir: "ai-document-intelligence-rest"
-    generateMetadata: true
-    generate-tests: false
-    packageDetails:
+    generate-metadata: true
+    package-details:
       name: "@azure-rest/ai-document-intelligence"
       description: "Document Intelligence Rest Client"
       version: "1.0.0"

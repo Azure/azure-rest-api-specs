@@ -5,8 +5,8 @@ parameters:
     default: "{project-root}/azure-sdk-for-js/"
   "csharp-sdk-folder":
     default: "{project-root}/azure-sdk-for-net/"
-  "service-directory-name":
-    default: "anomalydetector"
+  "service-dir":
+    default: "sdk/anomalydetector"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -23,11 +23,14 @@ options:
     emitter-output-dir: "{project-root}/../"
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   "@azure-tools/typespec-java":
+    package-dir: "azure-ai-anomalydetector"
     namespace: com.azure.ai.anomalydetector
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
     flavor: azure
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.AnomalyDetector
+    model-namespace: false
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
@@ -36,8 +39,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
+    generate-metadata: true
+    package-dir: "ai-anomaly-detector-rest"
+    package-details:
       name: "@azure-rest/ai-anomaly-detector"
     flavor: azure

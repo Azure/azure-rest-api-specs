@@ -40,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2024-08-01-only
+tag: package-2024-08-01
 ```
 
 ### Suppression
@@ -247,6 +247,39 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}"]'
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+  - suppress: MISSING_RESOURCE_ID
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'This api has existed since 2015, it will break existing customers if we add new property to payload'
+  - suppress: ArmResourcePropertiesBag
+    where: $.definitions.ApplicationInsightsComponentProactiveDetectionConfiguration
+    from: componentProactiveDetection_API.json
+    reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
+```
+
+### Tag: package-2024-08-01
+
+These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-08-01'
+input-file:
+  - Microsoft.Insights/stable/2020-02-02/components_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2022-06-15/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
 ### Tag: package-2024-08-01-only
@@ -271,6 +304,15 @@ input-file:
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+  - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
+```
+
+### Tag: package-2024-02-01-preview-only
+
+These settings apply only when `--tag=package-2024-02-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02-01-preview-only'
+input-file:
   - Microsoft.Insights/preview/2024-02-01-preview/deletedWorkbooks_API.json
 ```
 
@@ -344,6 +386,15 @@ input-file:
   - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
   - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
   - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+```
+
+### Tag: package-2023-06-01-python-only
+
+These settings apply only when `--tag=package-2023-06-01-python-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-python-only'
+input-file:
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
 ```
 
 ### Tag: package-2022-12-09-only
@@ -802,7 +853,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -819,21 +870,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.ApplicationInsights
-  output-folder: $(csharp-sdks-folder)/applicationinsights/Microsoft.Azure.Management.ApplicationInsights/src/Generated
-  clear-output-folder: true
-```
 
 ## Java
 

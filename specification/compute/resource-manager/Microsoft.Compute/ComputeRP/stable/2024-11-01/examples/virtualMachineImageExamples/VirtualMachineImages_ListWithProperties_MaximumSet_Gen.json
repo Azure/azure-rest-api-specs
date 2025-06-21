@@ -1,0 +1,71 @@
+{
+  "title": "VirtualMachineImages_ListWithProperties_MaximumSet",
+  "operationId": "VirtualMachineImages_ListWithProperties",
+  "parameters": {
+    "location": "eastus",
+    "publisherName": "MicrosoftWindowsServer",
+    "offer": "WindowsServer",
+    "skus": "2022-datacenter-azure-edition",
+    "$expand": "Properties",
+    "$top": 4,
+    "$orderby": "aa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "plan": {
+                "publisher": "MicrosoftWindowsServer",
+                "name": "aaaaaaaaa",
+                "product": "aaaaaaaaaaaaaa"
+              },
+              "osDiskImage": {
+                "operatingSystem": "Windows"
+              },
+              "dataDiskImages": [
+                {
+                  "lun": 17
+                }
+              ],
+              "automaticOSUpgradeProperties": {
+                "automaticOSUpgradeSupported": true
+              },
+              "hyperVGeneration": "V1",
+              "disallowed": {
+                "vmDiskType": "None"
+              },
+              "features": [
+                {
+                  "name": "aaaaaaaaaaaaaaaaaaaaa",
+                  "value": "aaaaaaaaaaaaaaaaaaaa"
+                }
+              ],
+              "imageDeprecationStatus": {
+                "imageState": "ScheduledForDeprecation",
+                "scheduledDeprecationTime": "2023-01-13T00:00:00+00:00",
+                "alternativeOption": {
+                  "type": "Offer",
+                  "value": "aaaaaaa"
+                }
+              },
+              "architecture": "x64"
+            },
+            "name": "aaaaaaaaa",
+            "location": "aaaaa",
+            "tags": {},
+            "extendedLocation": {
+              "name": "aaaaaaaaaaaaaaaaaaaaa",
+              "type": "EdgeZone"
+            },
+            "id": "aaaaaaaaaaa"
+          }
+        ],
+        "nextLink": "aaaa"
+      }
+    }
+  }
+}

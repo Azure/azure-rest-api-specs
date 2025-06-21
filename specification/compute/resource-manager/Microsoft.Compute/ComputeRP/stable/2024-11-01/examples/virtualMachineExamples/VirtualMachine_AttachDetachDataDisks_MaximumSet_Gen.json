@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmName": "aaaaaaaaaaaaaaaaaaaa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
+    "parameters": {
+      "dataDisksToAttach": [
+        {
+          "lun": 1,
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "caching": "ReadOnly",
+          "deleteOption": "Delete",
+          "writeAcceleratorEnabled": true
+        },
+        {
+          "lun": 2,
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+          "diskEncryptionSet": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+          },
+          "caching": "ReadWrite",
+          "deleteOption": "Detach",
+          "writeAcceleratorEnabled": false
+        }
+      ],
+      "dataDisksToDetach": [
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x",
+          "detachOption": "ForceDetach"
+        },
+        {
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_4_disk4_4d4e784bdafa49baa780eb2d256ff41z",
+          "detachOption": "ForceDetach"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2016-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "osType": "Windows",
+          "name": "myOsDisk",
+          "createOption": "FromImage",
+          "caching": "ReadWrite",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"
+          },
+          "diskSizeGB": 30
+        },
+        "dataDisks": [
+          {
+            "lun": 1,
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "createOption": "Attach",
+            "caching": "ReadOnly",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
+            },
+            "deleteOption": "Delete",
+            "diskSizeGB": 30,
+            "writeAcceleratorEnabled": true
+          },
+          {
+            "lun": 2,
+            "name": "vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+            "createOption": "Attach",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
+            },
+            "deleteOption": "Detach",
+            "diskSizeGB": 100,
+            "writeAcceleratorEnabled": false
+          }
+        ]
+      },
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}

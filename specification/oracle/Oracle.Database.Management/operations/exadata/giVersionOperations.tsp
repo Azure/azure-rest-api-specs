@@ -1,17 +1,30 @@
-import "../../../models/exadata/giVersions.tsp";
+import "../../models/exadata/giVersions.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
 @armResourceOperations
-interface GiVersions extends OracleLocationBasedResource<GiVersion> {}
+interface GiVersions extends OracleLocationBasedResource<GiVersion> {
+  #suppress "Deprecated" "Backward compatibility"
+  @removed(Versions.v20241201_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v20241201_preview, "listByLocation")
+  listByLocationDeprecated is ArmResourceListByParent<GiVersion>;
 
-@@doc(GiVersions.listByLocation, "List GiVersion resources by Location");
+  @added(Versions.v20241201_preview)
+  @sharedRoute
+  listByLocation is ArmResourceListByParent<
+    GiVersion,
+    Parameters = GiVersionFilter
+  >;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(GiVersions.listByLocation,
+@@Autorest.example(GiVersions.listByLocationDeprecated,
   "./examples/giVersions_listByLocation.json",
   "List GiVersions by location"
 );
