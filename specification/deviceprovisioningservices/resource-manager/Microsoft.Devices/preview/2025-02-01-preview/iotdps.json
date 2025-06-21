@@ -1947,10 +1947,6 @@
           "readOnly": true,
           "description": "Host name of the IoT hub."
         },
-        "hostName": {
-          "type": "string",
-          "description": "Host name of the IoT hub. This is required when connectionString is not provided."
-        },
         "connectionString": {
           "type": "string",
           "description": "Connection string of the IoT hub."
@@ -1958,34 +1954,10 @@
         "location": {
           "type": "string",
           "description": "ARM region of the IoT hub."
-        },
-        "authenticationType": {
-          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
-          "enum": [
-            "KeyBased",
-            "UserAssigned",
-            "SystemAssigned"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotHubAuthenticationType",
-            "modelAsString": true
-          }
-        },
-        "selectedUserAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
         }
       },
       "required": [
+        "connectionString",
         "location"
       ]
     },
