@@ -124,6 +124,33 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
 
+@@clientName(ApiManagementUserCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementUserUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementUserDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementProductCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementProductUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementProductDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementApiUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri, "resourceUrl");
+@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri, "resourceUrl");
+
 // autorest specific renames
 @@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
 @@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");
