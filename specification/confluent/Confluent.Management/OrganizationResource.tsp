@@ -29,11 +29,12 @@ model OrganizationResource
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceAPIKeyOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Organization resource name
@@ -59,10 +60,9 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("Organization_GetClusterAPIKey")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
-  getClusterAPIKey is OrganizationResourceAPIKeyOps.ActionSync<
+  getClusterAPIKey is OrganizationResourceAPIKeyOps.Read<
     OrganizationResource,
-    void,
+    {},
     ArmResponse<APIKeyRecord>
   >;
 
@@ -73,44 +73,56 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Organization_DeleteClusterAPIKey")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}")
-  deleteClusterAPIKey is OrganizationResourceAPIKeyOps.ActionSync<
+  deleteClusterAPIKey is OrganizationResourceAPIKeyOps.DeleteSync<
     OrganizationResource,
-    void,
+    {},
     OkResponse | NoContentResponse
   >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Organization resource name
          */
-        @path @segment("organizations") organizationName: string,
+        @path
+        @segment("organizations")
+        organizationName: string,
       },
       {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @path
+        access: "access",
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        @path
+        default: "default",
+
         /**
          * Confluent Role binding id
          */
-        @path @segment("deleteRoleBinding") roleBindingId: string,
+        @path
+        @segment("deleteRoleBinding")
+        roleBindingId: string,
       },
       ResourceProviderDefaultErrorResponse
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdOperationGroup
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Organization resource name
@@ -129,10 +141,9 @@ interface OrganizationResourceRoleBindingIdActions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @operationId("Access_DeleteRoleBinding")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/access/default/deleteRoleBinding/{roleBindingId}")
-  deleteRoleBinding is OrganizationResourceRoleBindingIdOps.ActionSync<
+  deleteRoleBinding is OrganizationResourceRoleBindingIdOps.DeleteSync<
     OrganizationResource,
-    void,
+    {},
     OkResponse | NoContentResponse
   >;
 }

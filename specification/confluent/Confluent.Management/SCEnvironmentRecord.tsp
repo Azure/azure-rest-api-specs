@@ -44,12 +44,12 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SCEnvironmentRecordsOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.CustomProvider,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Organization resource name
@@ -154,11 +154,12 @@ interface SCEnvironmentRecords {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SCEnvironmentRecordClusterOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * Organization resource name
@@ -188,10 +189,9 @@ interface SCEnvironmentRecordCluster {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @operationId("Organization_GetSchemaRegistryClusterById")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/schemaRegistryClusters/{clusterId}")
-  getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.ActionSync<
+  getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.Read<
     SCEnvironmentRecord,
-    void,
+    {},
     ArmResponse<SchemaRegistryClusterRecord>
   >;
 }

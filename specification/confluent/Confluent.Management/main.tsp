@@ -20,7 +20,6 @@ import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
 import "./TopicRecord.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
