@@ -2781,6 +2781,9 @@
         "operationId": "RaiTopics_Get",
         "description": "Gets the specified custom topic associated with the Azure OpenAI account.",
         "x-ms-examples": {
+          "GetRaiTopic": {
+            "$ref": "./examples/GetRaiTopic.json"
+          }
         },
         "parameters": [
           {
@@ -2819,10 +2822,10 @@
           "RaiTopics"
         ],
         "operationId": "RaiTopics_CreateOrUpdate",
-        "description": "Update the state of specified blocklist associated with the Azure OpenAI account.",
+        "description": "Create the rai topic associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "PutRaiBlocklist": {
-            "$ref": "./examples/PutRaiBlocklist.json"
+          "PutRaiTopic": {
+            "$ref": "./examples/PutRaiTopic.json"
           }
         },
         "parameters": [
@@ -2846,9 +2849,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiTopic"
+              "$ref": "#/definitions/RaiTopicCreationRequest"
             },
-            "description": "Properties describing the custom blocklist."
+            "description": "Properties describing the rai topic."
           }
         ],
         "responses": {
@@ -2879,7 +2882,8 @@
         "operationId": "RaiTopics_Delete",
         "description": "Deletes the specified custom topic associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "DeleteRaiBlocklist": {
+          "DeleteRaiTopic": {
+            "$ref": "./examples/DeleteRaiTopic.json"
           }
         },
         "parameters": [
@@ -2932,7 +2936,8 @@
         "operationId": "RaiTopics_List",
         "description": "Gets the custom topics associated with the Azure OpenAI account.",
         "x-ms-examples": {
-          "ListBlocklists": {
+          "ListRaiTopics": {
+            "$ref": "./examples/ListRaiTopics.json"
           }
         },
         "parameters": [
@@ -7811,6 +7816,14 @@
           },
           "x-ms-identifiers": [],
           "description": "The list of custom Blocklist."
+        },
+        "customTopics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomTopicConfig"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of custom rai topics."
         }
       }
     },
@@ -7825,6 +7838,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/RaiBlocklistConfig"
+        }
+      ]
+    },
+    "CustomTopicConfig": {
+      "description": "Gets or sets the source to which filter applies.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RaiTopicConfig"
         }
       ]
     },
@@ -7881,6 +7908,20 @@
         "blocklistName": {
           "type": "string",
           "description": "Name of ContentFilter."
+        },
+        "blocking": {
+          "type": "boolean",
+          "description": "If blocking would occur."
+        }
+      }
+    },
+    "RaiTopicConfig": {
+      "description": "Azure OpenAI RAI topic config.",
+      "type": "object",
+      "properties": {
+        "topicName": {
+          "type": "string",
+          "description": "Name of RAI topic."
         },
         "blocking": {
           "type": "boolean",
@@ -8031,6 +8072,55 @@
           "description": "Last modified time of the custom topic."
         }
       }
+    },
+    "RaiTopicCreationRequest": {
+      "description": "Cognitive Services Rai Topic Creation Request.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the custom topic."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the custom topic."
+            },
+            "sampleBlobUrl": {
+              "type": "string",
+              "description": "Sample blob url for the custom topic."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "NetworkSecurityPerimeterConfigurationList": {
       "description": "A list of NSP configurations for an Cognitive Services account.",
@@ -9314,6 +9404,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the RaiBlocklist Item associated with the custom blocklist",
+      "x-ms-parameter-location": "method"
+    },
+    "raiTopicNameParameter": {
+      "name": "raiTopicName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Rai Topic associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
     "commitmentPlanNameParameter": {
