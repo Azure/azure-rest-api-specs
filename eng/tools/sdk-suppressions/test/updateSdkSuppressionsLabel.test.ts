@@ -57,37 +57,30 @@ test("test validateSdkSuppressionsFile for sdk-suppression file", () => {
 
 test("test validateSdkSuppressionsFile for empty file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
-  expect(() => validateSdkSuppressionsFile(null)).toThrow("process.exit called");
+  expect(validateSdkSuppressionsFile(null)).toEqual({
+    result: false,
+    message: "This suppression file is a empty file",
+  });
   expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a empty file");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test validateSdkSuppressionsFile for undefined file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
-  expect(() => validateSdkSuppressionsFile(undefined)).toThrow("process.exit called");
+  expect(validateSdkSuppressionsFile(undefined)).toEqual({
+    message: "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.",
+    result: false,
+  });
   expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test validateSdkSuppressionsFile for error structor file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
   const suppressionContent = {
     "suppressions": {
@@ -107,12 +100,13 @@ test("test validateSdkSuppressionsFile for error structor file", () => {
     }
   };
 
-  expect(() => validateSdkSuppressionsFile(suppressionContent)).toThrow("process.exit called");
+  expect(validateSdkSuppressionsFile(suppressionContent)).toEqual({
+    message: "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'",
+    result: false,
+  });
   expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test getSdkNamesWithChangedSuppressions", () => {
