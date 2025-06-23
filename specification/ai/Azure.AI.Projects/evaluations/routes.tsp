@@ -121,6 +121,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" ""
   @doc("Poll for the operation results.")
   @route("/operations/{operationId}")
   @get
@@ -138,7 +139,8 @@ interface Evaluations {
 
     @doc("The operation results.")
     @body
-    operationResults: Record<unknown>[];
+    
+    operationResults: Record<unknown>[] | ChatCompletions;
   };
 
   // Upload API set
@@ -158,6 +160,7 @@ interface Evaluations {
     Evaluation
   >;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update the uploaded the result to an evaluation run.")
   @route("runs:updateUpload/{name}")
@@ -176,5 +179,92 @@ interface Evaluations {
       evaluation: EvaluationUpload;
     },
     Evaluation
+  >;
+
+  // Simulation Private APIs
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset with type.")
+  @route("/simulation/jailbreak/{type}")
+  @get
+  getJailBreakDatasetWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Type of jailbreak dataset")
+      @path
+      type: string;
+    },
+    Array<string>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode"
+  @doc("Get the attack objectives.")
+  @route("/simulation/attackobjectives")
+  @get
+  getAttackObjectives is Azure.Core.Foundations.Operation<
+    {
+      @doc("Risk types for the attack objectives dataset")
+      @query(#{ explode: true })
+      riskTypes?: string[];
+
+      @doc("The language for the attack objectives dataset, defaults to 'en'")
+      @query
+      lang?: string;
+
+      @doc("The strategy")
+      @query
+      strategy?: string;
+    },
+    Array<AttackObjective>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset.")
+  @route("/simulation/jailbreak/")
+  @get
+  getJailBreakDataset is Azure.Core.Foundations.Operation<{}, Array<string>>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters with type.")
+  @route("/simulation/template/parameters/{type}")
+  @get
+  getTemplateParametersWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Type for the template parameters")
+      @path
+      type: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters.")
+  @route("/simulation/template/parameters/")
+  @get
+  getTemplateParameters is Azure.Core.Foundations.Operation<{}, string>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the template parameters image.")
+  @route("/simulation/template/parameters/image")
+  @get
+  getTemplateParametersImage is Azure.Core.Foundations.Operation<
+    {
+      @doc("Image path.")
+      @query
+      path: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Submit a request for simulation.")
+  @route("/simulation/chat/completions/submit")
+  @post
+  submitSimulation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Properties of a Prompt Version.")
+      @body
+      body: SimulationDTO;
+    },
+    ResourceCreatedOrOkResponse<LongRunningResponse>
   >;
 }

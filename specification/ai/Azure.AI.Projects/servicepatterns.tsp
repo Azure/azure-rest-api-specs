@@ -72,6 +72,7 @@ namespace Azure.AI.Projects.ServicePatterns {
     >;
     */
 
+    #suppress "@typespec/http/patch-implicit-optional" ""
     @doc(
       "Create a new or update an existing {name} with the given version id",
       TEntityType

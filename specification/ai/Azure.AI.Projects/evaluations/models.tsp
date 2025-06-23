@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
 import "@typespec/openapi";
+import "../red-teams/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -91,7 +92,20 @@ model MAASModelConfig extends TargetModelConfig {
 @doc("Target for the evaluation process.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
+@discriminator("type")
 model EvaluationTarget {
+  @doc("Type of the evaluation target.")
+  type: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Evaluation target for model-based evaluations.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model EvaluationModelTarget extends EvaluationTarget {
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  type: "model";
+
   @doc("System message related to the evaluation target.")
   systemMessage: string;
 
@@ -101,6 +115,30 @@ model EvaluationTarget {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Needed since value type is not fixed"
   @doc("A dictionary of parameters for the model.")
   modelParams?: Record<unknown>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Evaluation target for model-based evaluations.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model RedTeamTarget extends EvaluationTarget {
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  type: "redteam";
+
+  @doc("Number of simulation rounds.")
+  numTurns: int32;
+
+  @doc("List of attack strategies or nested lists of attack strategies.")
+  attackStrategies: AttackStrategy[];
+
+  @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
+  simulationOnly: boolean;
+
+  @doc("List of risk categories to generate attack objectives for.")
+  riskCategories: RiskCategory[];
+
+  @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
+  applicationScenario?: string;
 }
 
 @doc("Evaluation Definition")
