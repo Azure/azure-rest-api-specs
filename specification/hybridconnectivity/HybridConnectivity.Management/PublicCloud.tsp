@@ -131,12 +131,33 @@ model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
 model PublicCloudConnectorPropertiesUpdate {
   @doc("Cloud profile for AWS.")
   awsCloudProfile?: AwsCloudProfileUpdate;
+
+  @added(Versions.v2025_12_01_preview)
+  @doc("Cloud profile for GCP.")
+  gcpCloudProfile?: GcpCloudProfileUpdate;
 }
 
 @doc("cloud profile for AWS.")
 model AwsCloudProfileUpdate {
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("cloud profile for GCP.")
+model GcpCloudProfileUpdate {
+  @doc("The organization properties of the GCP organization.")
+  organizationProperties?: GcpOrganizationPropertiesUpdate;
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("GCP organization properties for update.")
+model GcpOrganizationPropertiesUpdate {
+  @doc("List of GCP projects which need to be excluded.")
+  excludedProjectNumbers?: string[];
+
+  @doc("List of GCP folders which need to be excluded.")
+  excludedFolderIds?: string[];
 }
 
 @doc("Properties of public cloud connectors.")

@@ -85,6 +85,7 @@ model DeviceProperties {
 }
 
 @doc("The backing Microsoft Entra ID for the device used for authentication to other services.")
+@removed(Versions.v2025_07_01_preview)
 model DeviceIdentity {
   @doc("Principal id for the device resource.")
   @visibility(Lifecycle.Read)

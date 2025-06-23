@@ -139,6 +139,11 @@ model DisconnectedOperationDeploymentManifest {
   @visibility(Lifecycle.Read)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
+
+  @visibility(Lifecycle.Read)
+  @doc("The cloud in which the resource is registered")
+  @added(Microsoft.Edge.Versions.v2025_06_01)
+  cloud?: string;
 }
 
 /**

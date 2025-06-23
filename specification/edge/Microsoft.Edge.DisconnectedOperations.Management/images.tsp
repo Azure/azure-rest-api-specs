@@ -22,6 +22,7 @@ model Image is ProxyResource<ImageProperties> {
 @armResourceOperations
 interface Images {
   @doc("List by parent")
+  @removed(Microsoft.Edge.Versions.v2025_06_01)
   listByParent is ArmResourceListByParent<
     Image,
     {
