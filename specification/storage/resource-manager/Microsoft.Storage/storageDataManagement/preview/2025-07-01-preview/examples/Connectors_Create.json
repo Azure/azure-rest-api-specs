@@ -4,7 +4,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2025-01-01-preview",
+    "api-version": "2025-07-01-preview",
     "connectorName": "testconnector",
     "storageAccountName": "teststorageaccount",
     "resource": {
@@ -12,21 +12,17 @@
       "properties": {
         "state": "Active",
         "description": "Example connector",
-        "dataSourceType": "AWS_S3",
+        "dataSourceType": "Azure_DataShare",
         "source": {
-          "type": "Bucket",
+          "type": "DataShare",
           "connection": {
-            "type": "Endpoint",
-            "endpoint": "https://example.com/bucket",
-            "tlsVerification": "Perform"
+            "type": "DataShare",
+            "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
           },
           "authProperties": {
-            "type": "AccessKey",
-            "accessKeyId": "exampleKeyId",
-            "secretAccessKey": "exampleSecret",
-            "signingRegion": "us-west-2"
-          },
-          "hostOverride": "example.com"
+            "type": "ManagedIdentity",
+            "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+          }
         }
       }
     }
@@ -39,23 +35,21 @@
         "type": "Microsoft.Storage/storageAccounts/connectors",
         "location": "eastus",
         "properties": {
-          "uniqueId": "12345",
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
           "state": "Active",
           "creationTime": "2023-04-01T00:00:00Z",
           "description": "Example connector",
-          "dataSourceType": "AWS_S3",
+          "dataSourceType": "Azure_DataShare",
           "source": {
-            "type": "Bucket",
+            "type": "DataShare",
             "connection": {
-              "type": "Endpoint",
-              "endpoint": "https://example.com/bucket"
+              "type": "DataShare",
+              "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
             },
             "authProperties": {
-              "type": "AccessKey",
-              "accessKeyId": "exampleKeyId",
-              "signingRegion": "us-west-2"
-            },
-            "hostOverride": "example.com"
+              "type": "ManagedIdentity",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+            }
           },
           "provisioningState": "Succeeded"
         }
@@ -68,23 +62,21 @@
         "type": "Microsoft.Storage/storageAccounts/connectors",
         "location": "eastus",
         "properties": {
-          "uniqueId": "12345",
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
           "state": "Active",
           "creationTime": "2023-04-01T00:00:00Z",
           "description": "Example connector",
-          "dataSourceType": "AWS_S3",
+          "dataSourceType": "Azure_DataShare",
           "source": {
-            "type": "Bucket",
+            "type": "DataShare",
             "connection": {
-              "type": "Endpoint",
-              "endpoint": "https://example.com/bucket"
+              "type": "DataShare",
+              "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
             },
             "authProperties": {
-              "type": "AccessKey",
-              "accessKeyId": "exampleKeyId",
-              "signingRegion": "us-west-2"
-            },
-            "hostOverride": "example.com"
+              "type": "ManagedIdentity",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+            }
           },
           "provisioningState": "Succeeded"
         }
