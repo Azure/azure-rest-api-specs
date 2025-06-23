@@ -550,6 +550,6 @@ union AuthenticationMode {
   /** Native mongo authentication mode using username and password with auth mechanism 'SCRAM-SHA-256'. */
   "NativeAuth",
 
-  /** Microsot Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
+  /** Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
   "MicrosoftEntraID",
 }

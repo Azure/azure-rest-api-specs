@@ -86,7 +86,7 @@ union IdentityProviderType {
   MicrosoftEntraID: "MicrosoftEntraID",
 }
 
-/** Defines a Microsot Entra ID Mongo user. */
+/** Defines a Microsoft Entra ID Mongo user. */
 @added(Versions.v2025_04_01_preview)
 model EntraIdentityProvider extends IdentityProvider {
   /** The type of identity provider that the user belongs to. */
@@ -109,10 +109,10 @@ union EntraPrincipalType {
   string,
 
   /** Entra user type. */
-  User: "User",
+  User: "user",
 
   /** Entra service principal type. */
-  ServiePrincipal: "ServicePrincipal",
+  ServicePrincipal: "servicePrincipal",
 }
 
 /** Built-in database role that can be assigned to a user. */
