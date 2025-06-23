@@ -12,7 +12,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -28,17 +27,18 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure Queue Storage" })
 @server(
   "{url}",
-  "// FIXME: (missing-service-description) Add service description",
+  "The host name of the queue storage account, e.g. accountName.queue.core.windows.net",
   {
+    @doc("The host name of the queue storage account, e.g. accountName.queue.core.windows.net")
     url: string,
   }
 )
 @versioned(Versions)
-namespace AzureQueueStorage;
+namespace Storage.Queue;
 
 @doc("The Azure.Storage.Queue service versions.")
 enum Versions {
-  @doc("The 2018-03-28 version of the Azure.Storage.Blob service.")
+  @doc("The 2018-03-28 version of the Azure.Storage.Queue service.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2018_03_28: "2018-03-28",
 }
