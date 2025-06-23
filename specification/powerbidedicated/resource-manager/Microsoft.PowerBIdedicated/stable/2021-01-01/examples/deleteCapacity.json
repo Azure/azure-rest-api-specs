@@ -7,14 +7,18 @@
   },
   "responses": {
     "200": {
-      "description": "OK."
+      "description": "OK.",
+      "headers": {}
     },
     "202": {
       "description": "Accepted.",
-      "headers": {}
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/providers/Microsoft.PowerBIDedicated/locations/westus/operationStatuses/01234567-89ab-cdef-0123-456789abcdef",
+        "Retry-After": "10"
+      }
     },
     "204": {
-      "description": "No Content."
+      "headers": {}
     }
   },
   "operationId": "Capacities_Delete",
