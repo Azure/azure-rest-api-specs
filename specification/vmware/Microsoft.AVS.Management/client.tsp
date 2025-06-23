@@ -300,6 +300,7 @@ interface WorkloadNetworks {
   deletePortMirroring is WorkloadNetworkPortMirroringProfiles.delete;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
+  @clientName("list_public_ips", "python")
   listPublicIPs is WorkloadNetworkPublicIps.list;
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
   @clientName("getPublicIp", "java")
