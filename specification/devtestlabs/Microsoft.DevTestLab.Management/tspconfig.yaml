@@ -19,7 +19,7 @@ options:
     namespace: "Azure.ResourceManager.DevTestLabs"
   "@azure-tools/typespec-python":
     namespace: "azure.mgmt.devtestlabs"
-    package-name: "azure-mgmt-devtestlabs"
+    package-dir: "azure-mgmt-devtestlabs"
     payload-flattening-threshold: 2
     generate-test: true
     generate-sample: true
@@ -38,8 +38,9 @@ options:
     package-details:
       name: "@azure/arm-devtestlabs"
   "@azure-tools/typespec-go":
-    module-name: "sdk/resourcemanager/devtestlabs/armdevtestlabs"
-    module: "github.com/Azure/azure-sdk-for-go/{module-name}"
+    service-dir: "sdk/resourcemanager/devtestlabs"
+    package-dir: "armdevtestlabs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
