@@ -13,8 +13,8 @@ namespace Microsoft.HealthBot;
 /**
  * Azure Health Bot resource definition
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(HealthBotProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model HealthBot extends Foundations.TrackedResource {
@@ -28,19 +28,19 @@ model HealthBot extends Foundations.TrackedResource {
   /**
    * SKU of the Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 
   /**
    * The identity of the Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   identity?: Identity;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("The set of properties specific to Azure Health Bot resource.")
   @Azure.ResourceManager.Private.conditionalClientFlatten
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
@@ -52,14 +52,14 @@ interface HealthBots {
   /**
    * Get a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_Get")
   get is ArmResourceRead<HealthBot, Error = Error>;
 
   /**
    * Create a new Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_Create")
   create is ArmResourceCreateOrReplaceAsync<
     HealthBot,
@@ -73,8 +73,8 @@ interface HealthBots {
   /**
    * Patch a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Bots_Update")
   update is ArmCustomPatchAsync<
@@ -90,8 +90,8 @@ interface HealthBots {
   /**
    * Delete a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
@@ -102,7 +102,7 @@ interface HealthBots {
   /**
    * Returns all the resources of a particular type belonging to a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     HealthBot,
@@ -113,7 +113,7 @@ interface HealthBots {
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_List")
   list is ArmListBySubscription<
     HealthBot,
@@ -124,7 +124,7 @@ interface HealthBots {
   /**
    * List all secrets of a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_ListSecrets")
   listSecrets is ArmResourceActionSync<
     HealthBot,
@@ -136,7 +136,7 @@ interface HealthBots {
   /**
    * Regenerate the API JWT Secret of a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Bots_RegenerateApiJwtSecret")
   regenerateApiJwtSecret is ArmResourceActionSync<
     HealthBot,

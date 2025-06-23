@@ -11,28 +11,28 @@ using Azure.Core;
 
 namespace Microsoft.HealthBot;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserAssignedIdentityMap is Record<UserAssignedIdentity>;
 /**
  * The type of identity that creates/modifies resources
  */
 union IdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
 /**
  * The name of the Azure Health Bot SKU
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
   F0,
   S1,
@@ -44,7 +44,7 @@ enum SkuName {
 /**
  * The identity type. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the Azure Health Bot
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -98,7 +98,7 @@ model HealthBotProperties {
   /**
    * The provisioning state of the Azure Health Bot resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -176,7 +176,7 @@ model Error {
   /**
    * The error object.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorDetail;
 }
 
@@ -230,7 +230,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional error information.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   info?: {};
 }
@@ -264,7 +264,7 @@ model HealthBotUpdateParameters {
   /**
    * Tags for a Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -278,7 +278,7 @@ model HealthBotUpdateParameters {
    */
   identity?: Identity;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
@@ -361,8 +361,8 @@ model OperationDetail {
   /**
    * Additional properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: {};
 }
 
