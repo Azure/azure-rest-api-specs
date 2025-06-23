@@ -20,6 +20,7 @@ namespace Microsoft.StorageDiscovery;
 model StorageDiscoveryWorkspaceProperties {
   @doc("The storage discovery sku.")
   @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
+  @madeOptional(ApiVersion.v2025_06_01_preview)
   sku?: StorageDiscoverySku = StorageDiscoverySku.Standard;
 
   @doc("The state of storage discovery workspace")
