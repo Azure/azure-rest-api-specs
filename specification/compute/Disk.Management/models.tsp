@@ -123,12 +123,12 @@ union DiskCreateOption {
   CopyStart: "CopyStart",
 
   /**
-   * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId
+   * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blobs for VM guest state specified by securityDataUri and VM metadata specified by securityMetadataUri in storage account specified by storageAccountId. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM.
    */
   ImportSecure: "ImportSecure",
 
   /**
-   * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state
+   * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in disk, VM guest state and VM metadata. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM.
    */
   UploadPreparedSecure: "UploadPreparedSecure",
 
@@ -747,6 +747,10 @@ model CreationData {
    */
   securityDataUri?: string;
 
+  /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM.*/
+  @added(Versions.v2025_01_02)
+  securityMetadataUri?: string;
+
   /**
    * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
    */
@@ -1090,6 +1094,12 @@ model AccessUri {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
   securityDataAccessSAS?: string;
+
+  /** A SAS uri for accessing a VM metadata.*/
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  securityMetadataAccessSAS?: string;
 }
 
 /**
