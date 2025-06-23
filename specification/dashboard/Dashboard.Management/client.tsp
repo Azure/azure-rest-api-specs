@@ -39,7 +39,7 @@ using Microsoft.Dashboard;
   "GrafanaIntegrationFabricProperties",
   "csharp"
 );
-@@clientName(Snapshots, "GfrafanaSnapshotsSettings", "csharp");
+@@clientName(Snapshots, "GrafanaSnapshotsSettings", "csharp");
 @@clientName(Snapshots.externalEnabled, "IsExternalEnabled", "csharp");
 @@clientName(Security, "GrafanaSecuritySettings", "csharp");
 @@clientName(Security.csrfAlwaysCheck, "IsCsrfAlwaysCheckEnabled", "csharp");
