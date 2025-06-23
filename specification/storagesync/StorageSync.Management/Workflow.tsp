@@ -29,14 +29,34 @@ interface Workflows {
   /**
    * Get Workflows resource
    */
-  get is ArmResourceRead<Workflow, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    Workflow,
+    Response = ArmResponse<Workflow> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Get a Workflow List
    */
   listByStorageSyncService is ArmResourceListByParent<
     Workflow,
-    Response = ArmResponse<WorkflowArray>,
+    Response = ArmResponse<WorkflowArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 

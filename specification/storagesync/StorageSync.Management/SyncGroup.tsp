@@ -67,7 +67,19 @@ interface SyncGroups {
   /**
    * Delete a given SyncGroup.
    */
-  delete is ArmResourceDeleteSync<SyncGroup, Error = StorageSyncError>;
+  delete is ArmResourceDeleteSync<
+    SyncGroup,
+    Response = ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Get a SyncGroup List.

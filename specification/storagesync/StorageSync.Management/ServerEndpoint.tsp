@@ -31,7 +31,19 @@ interface ServerEndpoints {
   /**
    * Get a ServerEndpoint.
    */
-  get is ArmResourceRead<ServerEndpoint, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    ServerEndpoint,
+    Response = ServerEndpoint & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Create a new ServerEndpoint.
@@ -44,8 +56,24 @@ interface ServerEndpoints {
       DefaultBaseParameters<ServerEndpoint>
     >,
     ServerEndpointCreateParameters,
-    Response = ArmResourceUpdatedResponse<ServerEndpoint> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = (ArmResourceUpdatedResponse<ServerEndpoint> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     ErrorResponse = StorageSyncError
   >;
 
@@ -56,6 +84,24 @@ interface ServerEndpoints {
   update is ArmCustomPatchAsync<
     ServerEndpoint,
     PatchModel = ServerEndpointUpdateParameters,
+    Response = (ArmResponse<ServerEndpoint> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -65,7 +111,23 @@ interface ServerEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmDeleteAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -74,7 +136,15 @@ interface ServerEndpoints {
    */
   listBySyncGroup is ArmResourceListByParent<
     ServerEndpoint,
-    Response = ArmResponse<ServerEndpointArray>,
+    Response = ArmResponse<ServerEndpointArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 
@@ -86,7 +156,16 @@ interface ServerEndpoints {
   recallAction is ArmResourceActionAsync<
     ServerEndpoint,
     RecallActionParameters,
-    OkResponse,
+    OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 }

@@ -31,7 +31,19 @@ interface CloudEndpoints {
   /**
    * Get a given CloudEndpoint.
    */
-  get is ArmResourceRead<CloudEndpoint, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    CloudEndpoint,
+    Response = CloudEndpoint & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Create a new CloudEndpoint.
@@ -44,8 +56,24 @@ interface CloudEndpoints {
       DefaultBaseParameters<CloudEndpoint>
     >,
     CloudEndpointCreateParameters,
-    Response = ArmResourceUpdatedResponse<CloudEndpoint> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response = (ArmResourceUpdatedResponse<CloudEndpoint> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     ErrorResponse = StorageSyncError
   >;
 
@@ -55,7 +83,23 @@ interface CloudEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmDeleteAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -64,7 +108,15 @@ interface CloudEndpoints {
    */
   listBySyncGroup is ArmResourceListByParent<
     CloudEndpoint,
-    Response = ArmResponse<CloudEndpointArray>,
+    Response = ArmResponse<CloudEndpointArray> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 
@@ -72,10 +124,19 @@ interface CloudEndpoints {
    * Pre Backup a given CloudEndpoint.
    */
   @action("prebackup")
-  preBackup is ArmResourceActionAsync<
+  preBackup is ArmResourceActionSync<
     CloudEndpoint,
     BackupRequest,
-    OkResponse,
+    Response = OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -86,7 +147,15 @@ interface CloudEndpoints {
   postBackup is ArmResourceActionAsync<
     CloudEndpoint,
     BackupRequest,
-    PostBackupResponse,
+    PostBackupResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 
@@ -94,10 +163,19 @@ interface CloudEndpoints {
    * Pre Restore a given CloudEndpoint.
    */
   @action("prerestore")
-  preRestore is ArmResourceActionAsync<
+  preRestore is ArmResourceActionSync<
     CloudEndpoint,
     PreRestoreRequest,
-    OkResponse,
+    OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -117,20 +195,38 @@ interface CloudEndpoints {
    * Post Restore a given CloudEndpoint.
    */
   @action("postrestore")
-  postRestore is ArmResourceActionAsync<
+  postRestore is ArmResourceActionSync<
     CloudEndpoint,
     PostRestoreRequest,
-    OkResponse,
+    OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
   /**
    * Triggers detection of changes performed on Azure File share connected to the specified Azure File Sync Cloud Endpoint.
    */
-  triggerChangeDetection is ArmResourceActionAsync<
+  triggerChangeDetection is ArmResourceActionSync<
     CloudEndpoint,
     TriggerChangeDetectionParameters,
-    OkResponse,
+    OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -141,7 +237,15 @@ interface CloudEndpoints {
   afsShareMetadataCertificatePublicKeys is ArmResourceActionSync<
     CloudEndpoint,
     void,
-    ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys>,
+    ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 }
