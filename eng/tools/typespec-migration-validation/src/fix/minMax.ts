@@ -1,3 +1,5 @@
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
 const knownPropertyDecoratorMapping: { [key: string]: string } = {
@@ -7,9 +9,9 @@ const knownPropertyDecoratorMapping: { [key: string]: string } = {
   'maxLength': 'maxLength'
 };
 
-export function checkMinMax(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
-  
+export function checkMinMax(jsonObj: any): Suggestion[] {
+  const suggestedFixes: Suggestion[] = [];
+
   for (const [key, decoratorName] of Object.entries(knownPropertyDecoratorMapping)) {
     const deletedChanges = checkPropertyAttributeDeleted(key, jsonObj);
     if (deletedChanges.length > 0) {
@@ -17,7 +19,10 @@ export function checkMinMax(jsonObj: any): string[] {
         const { path, value } = change;
         if (getPropertyName(path)) {
           const [definitionName, propertyName] = getPropertyName(path)!;
-          suggestedFixes.push(`Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value});\` right after the model.`);
+          suggestedFixes.push({
+            suggestion: `Find a model called "${definitionName}". Add \`@${decoratorName}(${value})\` onto its property "${propertyName}". If the property cannot access directly, add \`@@${decoratorName}(${definitionName}.${propertyName}, ${value});\` right after the model.`,
+            path: constructJsonPath(path, change.key)
+          });
         }
       }
     }
