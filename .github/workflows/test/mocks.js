@@ -58,6 +58,13 @@ export function createMockCore() {
       console.log(`setOutput('${name}', '${value}')`),
     ),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
+    summary: {
+      // eslint-disable-next-line no-unused-vars
+      addRaw: vi.fn(function (content) {
+        return this; // Return 'this' for method chaining
+      }),
+      write: vi.fn().mockResolvedValue(undefined),
+    },
   };
 }
 

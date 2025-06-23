@@ -4,7 +4,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-namespace Neon.Postgres.Models;
+namespace Neon.Postgres;
 
 @doc("The Branch resource type.")
 @added(Neon.Postgres.Versions.v2_preview)
@@ -37,14 +37,14 @@ model BranchProperties {
   databaseName?: string;
 
   @doc("Roles associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   roles?: NeonRoleProperties[];
 
   @doc("Neon Databases associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   databases?: NeonDatabaseProperties[];
 
   @doc("Endpoints associated with the branch")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   endpoints?: EndpointProperties[];
 }

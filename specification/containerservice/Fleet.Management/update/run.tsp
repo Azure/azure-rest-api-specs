@@ -212,7 +212,7 @@ model UpdateRunStatus {
   status?: UpdateStatus;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The stages composing an update run. Stages are run sequentially withing an UpdateRun.")
   stages?: UpdateStageStatus[];
 
@@ -250,7 +250,7 @@ model UpdateStageStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The list of groups to be updated as part of this UpdateStage.")
   groups?: UpdateGroupStatus[];
 
@@ -270,7 +270,7 @@ model UpdateGroupStatus {
   name?: string;
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
 }

@@ -156,6 +156,8 @@ input-file:
  - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
  - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
  - Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
+ - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
+ - Microsoft.Monitor/stable/2023-04-03/operations_API.json
 ```
 
 ### Tag: package-preview-2023-09
@@ -1439,7 +1441,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

@@ -27,6 +27,12 @@ using Microsoft.WeightsAndBiases;
 @@clientName(LiftrBase.OfferDetails, "WeightsAndBiasesOfferDetails", "csharp");
 @@clientName(PartnerProperties, "WeightsAndBiasesPartnerProperties", "csharp");
 @@clientName(Region, "WeightsAndBiasesRegion", "csharp");
+@@clientName(Region.eastus, "EastUS", "csharp");
+@@clientName(Region.centralus, "CentralUS", "csharp");
+@@clientName(Region.westus, "WestUS", "csharp");
+@@clientName(Region.westeurope, "WestEurope", "csharp");
+@@clientName(Region.japaneast, "JapanEast", "csharp");
+@@clientName(Region.koreacentral, "KoreaCentral", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "WeightsAndBiasesProvisioningState",
   "csharp"

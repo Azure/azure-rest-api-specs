@@ -79,7 +79,7 @@ op CreateOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@patch
+@patch(#{ implicitOptionality: true })
 op UpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
@@ -394,7 +394,8 @@ alias CommonParameters = {
   @clientName("timeOutInSeconds", "csharp")
   @clientName("timeOutInSeconds", "javascript")
   @clientName("timeout", "go,python")
-  timeOut?: int32 = 30;
+  @encode("seconds", int32)
+  timeOut?: duration;
 
   @doc("""
     The caller-generated request identity, in the form of a GUID with no decoration
@@ -414,6 +415,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
+  @clientName("ocpDate", "csharp")
   ocpdate?: utcDateTime;
 };
 
@@ -457,7 +459,7 @@ alias ListPoolUsageMetricsOptionalParameters = {
 alias CreatePoolRequiredParameters = {
   @body
   @doc("The Pool to be created.")
-  pool: BatchPoolCreateContent;
+  pool: BatchPoolCreateOptions;
 };
 
 alias ListPoolsOptionalParameters = {
@@ -537,7 +539,7 @@ alias UpdatePoolRequiredParameters = {
 
   @doc("The pool properties to update.")
   @bodyRoot
-  pool: BatchPoolUpdateContent;
+  pool: BatchPoolUpdateOptions;
 };
 
 alias EnablePoolAutoscaleRequiredParameters = {
@@ -547,7 +549,7 @@ alias EnablePoolAutoscaleRequiredParameters = {
 
   @doc("The options to use for enabling automatic scaling.")
   @bodyRoot
-  content: BatchPoolEnableAutoScaleContent;
+  enableAutoScaleOptions: BatchPoolEnableAutoScaleOptions;
 };
 
 alias EvaluatePoolAutoScaleRequiredParameters = {
@@ -557,7 +559,7 @@ alias EvaluatePoolAutoScaleRequiredParameters = {
 
   @doc("The options to use for evaluating the automatic scaling formula.")
   @bodyRoot
-  content: BatchPoolEvaluateAutoScaleContent;
+  evaluateAutoScaleOptions: BatchPoolEvaluateAutoScaleOptions;
 };
 
 alias ResizePoolRequiredParameters = {
@@ -567,7 +569,7 @@ alias ResizePoolRequiredParameters = {
 
   @doc("The options to use for resizing the pool.")
   @bodyRoot
-  content: BatchPoolResizeContent;
+  resizeOptions: BatchPoolResizeOptions;
 };
 
 alias StopPoolResizeRequiredParameters = {
@@ -583,7 +585,7 @@ alias ReplacePoolPropertiesRequiredParameters = {
 
   @doc("The options to use for replacing properties on the pool.")
   @bodyRoot
-  pool: BatchPoolReplaceContent;
+  pool: BatchPoolReplaceOptions;
 };
 
 alias PoolExistsRequiredParameters = {
@@ -599,7 +601,7 @@ alias RemoveNodesRequiredParameters = {
 
   @doc("The options to use for removing the node.")
   @bodyRoot
-  content: BatchNodeRemoveContent;
+  removeOptions: BatchNodeRemoveOptions;
 };
 
 // Job Aliases
@@ -640,7 +642,7 @@ alias UpdateJobRequiredParameters = {
 
   @doc("The options to use for updating the Job.")
   @bodyRoot
-  job: BatchJobUpdateContent;
+  job: BatchJobUpdateOptions;
 };
 
 alias ReplaceJobRequiredParameters = {
@@ -660,7 +662,7 @@ alias DisableJobRequiredParameters = {
 
   @doc("The options to use for disabling the Job.")
   @bodyRoot
-  content: BatchJobDisableContent;
+  disableOptions: BatchJobDisableOptions;
 };
 
 alias EnableJobRequiredParameters = {
@@ -678,7 +680,7 @@ alias TerminateJobRequiredParameters = {
 alias TerminateJobOptionalParameters = {
   @doc("The options to use for terminating the Job.")
   @bodyRoot
-  parameters?: BatchJobTerminateContent;
+  options?: BatchJobTerminateOptions;
 
   @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
   @query
@@ -688,7 +690,7 @@ alias TerminateJobOptionalParameters = {
 alias CreateJobRequiredParameters = {
   @doc("The Job to be created.")
   @bodyRoot
-  job: BatchJobCreateContent;
+  job: BatchJobCreateOptions;
 };
 
 alias ListJobsOptionalParameters = {
@@ -873,7 +875,7 @@ alias UpdateJobScheduleRequiredParameters = {
 
   @doc("The options to use for updating the Job Schedule.")
   @bodyRoot
-  jobSchedule: BatchJobScheduleUpdateContent;
+  jobSchedule: BatchJobScheduleUpdateOptions;
 };
 
 alias ReplaceJobScheduleRequiredParameters = {
@@ -913,7 +915,7 @@ alias TerminateJobScheduleOptionalParameters = {
 alias CreateJobScheduleRequiredParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
-  jobSchedule: BatchJobScheduleCreateContent;
+  jobSchedule: BatchJobScheduleCreateOptions;
 };
 
 alias ListJobSchedulesOptionalParameters = {
@@ -944,7 +946,7 @@ alias CreateTaskRequiredParameters = {
 
   @doc("The Task to be created.")
   @bodyRoot
-  task: BatchTaskCreateContent;
+  task: BatchTaskCreateOptions;
 };
 
 alias ListTasksRequiredParameters = {
@@ -1148,7 +1150,7 @@ alias CreateNodeUserRequiredParameters = {
 
   @doc("The options to use for creating the user.")
   @bodyRoot
-  user: BatchNodeUserCreateContent;
+  user: BatchNodeUserCreateOptions;
 };
 
 alias DeleteNodeUserRequiredParameters = {
@@ -1186,7 +1188,7 @@ alias ReplaceNodeUserRequiredParameters = {
 
   @doc("The options to use for updating the user.")
   @bodyRoot
-  content: BatchNodeUserUpdateContent;
+  updateOptions: BatchNodeUserUpdateOptions;
 };
 
 alias GetNodeRequiredParameters = {
@@ -1229,7 +1231,7 @@ alias RebootNodeRequiredParameters = {
 alias RebootNodeOptionalParameters = {
   @doc("The options to use for rebooting the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeRebootContent;
+  options?: BatchNodeRebootOptions;
 };
 
 alias DeallocateNodeRequiredParameters = {
@@ -1245,7 +1247,7 @@ alias DeallocateNodeRequiredParameters = {
 alias DeallocateNodeOptionalParameters = {
   @doc("The options to use for deallocating the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeDeallocateContent;
+  options?: BatchNodeDeallocateOptions;
 };
 
 alias ReimageNodeRequiredParameters = {
@@ -1261,7 +1263,7 @@ alias ReimageNodeRequiredParameters = {
 alias ReimageNodeOptionalParameters = {
   @doc("The options to use for reimaging the Compute Node.")
   @body
-  parameters?: BatchNodeReimageContent;
+  options?: BatchNodeReimageOptions;
 };
 
 alias DisableNodeSchedulingRequiredParameters = {
@@ -1277,7 +1279,7 @@ alias DisableNodeSchedulingRequiredParameters = {
 alias DisableNodeSchedulingOptionalParameters = {
   @doc("The options to use for disabling scheduling on the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeDisableSchedulingContent;
+  options?: BatchNodeDisableSchedulingOptions;
 };
 
 alias EnableNodeSchedulingRequiredParameters = {
@@ -1314,7 +1316,7 @@ alias UploadNodeLogsRequiredParameters = {
 
   @doc("The Azure Batch service log files upload options.")
   @bodyRoot
-  content: UploadBatchServiceLogsContent;
+  uploadOptions: UploadBatchServiceLogsOptions;
 };
 
 alias ListNodesRequiredParameters = {

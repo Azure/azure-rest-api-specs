@@ -27,9 +27,29 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: rpaas
 openapi-type: arm
-tag: package-2024-10-01
+tag: package-2025-05-01
 ```
- 
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  
+
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
@@ -52,7 +72,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -65,9 +84,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp 
 

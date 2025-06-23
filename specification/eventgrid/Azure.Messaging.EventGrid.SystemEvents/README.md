@@ -33,15 +33,50 @@ Adding `@usage` and `@access` to `client.tsp`:
 @@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 
+### Add Examples
 
+Using the `@example` decorator in TypeSpec, add an example for your event. A sample valid example is show below:
+
+~~~ typespec
+const MicrosoftCachePatchingCompletedExample: RedisPatchingCompletedEventData = #{
+  name: "PatchingCompleted",
+  timestamp: utcDateTime.fromISO("2020-12-09T13:50:19.9995668-08:00"),
+  status: "Succeeded",
+  propertyList: #[],
+  exampleIndicatorWrapping: #{
+    `dash-value`: "myString";
+    `https://something.com` : "myUrl"
+  }
+
+};
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event. */
+
+@example(MicrosoftCachePatchingCompletedExample)
+model RedisPatchingCompletedEventData {
+  ...RedisBaseEventData;
+
+  propertyList: string[];
+  exampleIndicatorWrapping: Record<string>;
+}
+~~~
+
+A few things to keep in mind when formatting a TypeSpec example:
+
+1. As shown above, for scalar types such as `utcDateTime` you will need to wrap the value with the scalar constructor.
+2. When defining a dictionary or an array you must preface it with a `#`.
+3. For properties and keys that have a wording style that TypeSpec does not agree with, for example `iothub-encoding-value`, you can surround the key with ` indicators. 
+
+More on `@example` can be found [here](https://typespec.io/docs/standard-library/examples/#define-typed-examples-using-const)
 
 # For Service System Events PR Approval
 
 1) Write your service's system events in TypeSpec.
 1) Generate the swagger for your service's system events off of TypeSpec, following the steps below:
-    - Install TypeSpec `npm install @typespec/compiler`
+    - Install TypeSpec `npm install -g @typespec/compiler`
     - Install the emitter `npm install @azure-tools/typespec-autorest`
     - Under `/Azure.Messaging.EventGrid.SystemEvents/`:
-        - Run `npx tsp compile main.tsp --emit @azure-tools/typespec-autorest`
-1) Verify the generated swagger under `/data-plane/Microsoft.EventGrid/2024-01-01/` accurately depicts your system events and commit it.
+        - Run `tsp compile .`
+1) Verify the generated swaggers `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` and `/data-plane/Microsoft.EventGrid/2024-01-01/GeneratedSystemEvents.json` accurately depicts your system events.
+1) Copy the delta from `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` into your resource provider-specific swagger, e.g. `data-plane/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json`. Make any manual adjustments as needed.
 1) Final PR must contain the TypeSpec and the Swagger generated from the TypeSpec.
