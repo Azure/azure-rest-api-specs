@@ -541,5 +541,5 @@ interface PureStoragePolicies extends Microsoft.AVS.PureStoragePolicies {}
 
 @@alternateType(ScriptExecutionProperties.namedOutputs,
   Record<unknown>,
-  "java,go,csharp"
+  "java,go"
 );
