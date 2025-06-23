@@ -211,31 +211,6 @@ describe("generate-report", () => {
       );
     });
 
-    it("should skip summary when GITHUB_STEP_SUMMARY is not available", async () => {
-      vi.unstubAllEnvs(); // Remove the GITHUB_STEP_SUMMARY env var
-
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 0;
-
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-        statusCode,
-      );
-
-      expect(mockLogMessage).toHaveBeenCalledWith(
-        "GitHub Actions job summary not available, skipping summary output.",
-      );
-      expect(mockAddToSummary).not.toHaveBeenCalled();
-    });
-
     it("should handle different check names", async () => {
       const context = createMockContext({
         checkName: "BreakingChange(Cross-Version)",

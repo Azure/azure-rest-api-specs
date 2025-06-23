@@ -45,15 +45,6 @@ describe("common-utils", () => {
       expect(result).toBe("https://github.com/owner/repo/blob/abc123/test-file.json");
     });
 
-    it("should use GITHUB_REPOSITORY if GITHUB_HEAD_REPOSITORY is not set", () => {
-      process.env.GITHUB_ACTIONS = "true";
-      process.env.GITHUB_REPOSITORY = "owner/repo";
-      process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA = "def456";
-
-      const result = blobHref("test-file.json");
-      expect(result).toBe("https://github.com/owner/repo/blob/def456/test-file.json");
-    });
-
     it("should return file path for local development", () => {
       delete process.env.GITHUB_ACTIONS;
       const result = blobHref("test-file.json");

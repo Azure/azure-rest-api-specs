@@ -1,8 +1,7 @@
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
-import { Context } from "../types/breaking-change.js";
-import { logError, logMessage } from "../log.js";
+import { Context } from "./breaking-change-check.js";
 
 /**
  * Properties of Pull Request in Azure DevOps CI.
@@ -65,26 +64,21 @@ export const createPullRequestProperties = async (
   const originGitRepository = simpleGit({ ...options, baseDir: context.localSpecRepoPath });
   const branches = await originGitRepository.branch();
 
-  try {
-    if (!branches.all.includes(sourceBranch)) {
-      await originGitRepository.branch([sourceBranch]);
-      logMessage(`finish creating source branch ${sourceBranch}`);
-    }
-    if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
-      await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
-      logMessage(`finish creating base branch ${baseBranch}`);
-    }
+  if (!branches.all.includes(sourceBranch)) {
+    await originGitRepository.branch([sourceBranch]);
+    console.log(`finish creating source branch ${sourceBranch}`);
+  }
+  if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
+    await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
+    console.log(`finish creating base branch ${baseBranch}`);
+  }
 
-    if (!branches.all.includes(context.prTargetBranch)) {
-      await originGitRepository.branch([
-        context.prTargetBranch,
-        `remotes/origin/${context.prTargetBranch}`,
-      ]);
-      logMessage(`finish creating target branch ${context.prTargetBranch}`);
-    }
-  } catch (error: any) {
-    logError(`Failed to create branch: ${error.message}`);
-    throw error;
+  if (!branches.all.includes(context.prTargetBranch)) {
+    await originGitRepository.branch([
+      context.prTargetBranch,
+      `remotes/origin/${context.prTargetBranch}`,
+    ]);
+    console.log(`finish creating target branch ${context.prTargetBranch}`);
   }
 
   // we have to clone the repository because we need to switch branches.
@@ -132,7 +126,7 @@ export const createPullRequestProperties = async (
     checkout: async function (this: any, branch: string) {
       if (this.currentBranch !== branch) {
         await workingGitRepository.checkout([branch]);
-        logMessage(`checkout to ${branch} in ${workingDir}`);
+        console.log(`checkout to ${branch} in ${workingDir}`);
         this.currentBranch = branch;
       }
     },
