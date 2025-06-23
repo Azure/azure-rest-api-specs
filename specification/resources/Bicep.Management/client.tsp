@@ -3,7 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(BicepClient,
-  "BicepMgmtClient",
-  "python"
-);
+@@clientName(BicepClient, "BicepMgmtClient", "python");
