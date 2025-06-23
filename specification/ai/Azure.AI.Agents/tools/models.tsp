@@ -912,7 +912,7 @@ model DeepResearchDetails {
 
   @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
   @encodedName("application/json", "bing_grounding_connections")
-  bingGroundingConnections: DeepResearchBingGroundingConnection[];
+  deepResearchBingGroundingConnections: DeepResearchBingGroundingConnection[];
 }
 
 /**
