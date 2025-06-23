@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models-languages.tsp";
 import "./models-translate.tsp";
 import "./models-transliterate.tsp";
 import "./models-breaksentence.tsp";
 import "./models-dictionary.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -47,15 +49,31 @@ op getSupportedLanguages is CustomGetOperation<
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
-@route("translate")
 @summary("Translate Text")
 @doc("Translate Text")
-op translate is CustomOperation<
+@sharedRoute
+@renamedFrom(APIVersion.v2025_05_01_preview,"translate")
+@removed(APIVersion.v2025_05_01_preview)
+op translateV3 is CustomOperation<
   InputTextItem[],
   TranslateParameters,
   TranslationResult,
   ErrorResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
+@post
+@sharedRoute
+@summary("Translate Text")
+@doc("Translate Text")
+@added(APIVersion.v2025_05_01_preview)
+op translate is CustomOperation<
+  TranslateBody,
+  TranslateParameters,
+  TranslationResult,
+  ErrorResponse
+>;
+
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post

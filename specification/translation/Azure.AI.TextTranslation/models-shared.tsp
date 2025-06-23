@@ -16,17 +16,17 @@ alias CommonParameters = {
   clientTraceId?: string;
 };
 
-/*
+
 @doc("Element containing the text for translation.")
 model InputTextItem {
   @doc("Text to translate.")
   text: string;
 }
-  */
+
 
 @doc("Element containing the text for translation.")
-//model TranslateBody extends InputTextItem {
-model InputTextItem {
+@added(APIVersion.v2025_05_01_preview)
+model TranslateBody {
 
   @doc("Text to translate.")
   text: string;
