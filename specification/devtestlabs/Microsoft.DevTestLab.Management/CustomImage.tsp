@@ -63,8 +63,8 @@ interface CustomImages {
   /**
    * Allows modifying tags of custom images. All other properties will be ignored.
    */
-  @patch(#{ implicitOptionality: false })
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "CustomImageFragment contains tags as expected by the patch operation."
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<CustomImage, PatchModel = CustomImageFragment>;
 
   /**

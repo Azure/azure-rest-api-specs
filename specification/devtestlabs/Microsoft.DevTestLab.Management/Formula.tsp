@@ -62,8 +62,8 @@ interface Formulas {
   /**
    * Allows modifying tags of formulas. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   update is ArmCustomPatchSync<Formula, PatchModel = FormulaFragment>;
 
   /**
