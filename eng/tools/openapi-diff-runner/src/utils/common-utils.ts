@@ -169,8 +169,8 @@ export function processOadRuntimeErrorMessage(
       `Remaining lines should contain the main message reported by AutoRest.`;
 
     const stackTraceLines: string[] = lines
-      .slice(0, Math.min(stackTraceMaxLength, lines.length))
       .filter((line) => line.length > 0)
+      .slice(0, Math.min(stackTraceMaxLength, lines.length))
       .map((line, i) => `${i + 1}: ${line}`);
 
     outputMsg = [introLine, "===================="]

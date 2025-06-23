@@ -1,3 +1,5 @@
+import { appendFileSync } from "fs";
+
 /**
  * Log prefix for all messages from openapi-diff-runner
  */
@@ -102,8 +104,7 @@ export function logWarning(message: string, file?: string, line?: number, col?: 
  */
 export function setOutput(name: string, value: string): void {
   if (process.env.GITHUB_OUTPUT) {
-    const fs = require("fs");
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
+    appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
   } else {
     // Fallback to older syntax
     console.log(`::set-output name=${name}::${value}`);
@@ -116,9 +117,9 @@ export function setOutput(name: string, value: string): void {
  */
 export function addToSummary(content: string): void {
   if (process.env.GITHUB_STEP_SUMMARY) {
-    const fs = require("fs");
-    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, content);
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, content);
   }
+  // Do nothing if GITHUB_STEP_SUMMARY is not available
 }
 
 /**

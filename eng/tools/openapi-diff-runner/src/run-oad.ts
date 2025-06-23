@@ -6,6 +6,7 @@
  */
 import * as oad from "@azure/oad";
 import { OadMessage } from "./types/oad-types.js";
+import { logMessage } from "./log.js";
 
 /**
  * The runOad() function is a wrapper around the "@azure/oad" library whose source is https://github.com/Azure/openapi-diff.
@@ -29,7 +30,7 @@ export async function runOad(
   oldTag?: string,
   newTag?: string,
 ): Promise<OadMessage[]> {
-  console.log(
+  logMessage(
     `ENTER definition runOad oldSpec: ${oldSpec}, newSpec: ${newSpec}, oldTag: ${oldTag}, newTag: ${newTag}`,
   );
 
@@ -57,18 +58,18 @@ export async function runOad(
 
   let oadCompareOutput: string;
   if (oldTag && newTag) {
-    console.log("oad.CompareTags() when (oldTag && newTag)");
+    logMessage("oad.CompareTags() when (oldTag && newTag)");
 
     oadCompareOutput = await oad.compareTags(oldSpec, oldTag, newSpec, newTag, {
       consoleLogLevel: "warn",
     });
   } else {
-    console.log("oad.CompareTags() when !(oldTag && newTag)");
+    logMessage("oad.CompareTags() when !(oldTag && newTag)");
 
     oadCompareOutput = await oad.compare(oldSpec, newSpec, { consoleLogLevel: "warn" });
   }
 
-  console.log(`oadCompareOutput: ${oadCompareOutput}`);
+  logMessage(`oadCompareOutput: ${oadCompareOutput}`);
 
   // The oadCompareOutput is emitted by this OAD source:
   // OpenApiDiff.Program.Main():
@@ -78,7 +79,7 @@ export async function runOad(
   // after it was transformed by ComparisonMessage.GetValidationMessagesAsJson().
   const oadMessages: OadMessage[] = JSON.parse(oadCompareOutput);
 
-  console.log(
+  logMessage(
     `RETURN definition runOad. oadMessages.length: ${oadMessages.length}, ` +
       `oldSpec: ${oldSpec}, newSpec: ${newSpec}, oldTag: ${oldTag}, newTag: ${newTag}.`,
   );

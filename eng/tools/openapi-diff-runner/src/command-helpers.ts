@@ -200,6 +200,8 @@ export function cleanDummySwagger(): void {
   for (const swagger of createdDummySwagger) {
     rmSync(swagger, { recursive: true, force: true });
   }
+  // Clear the array after removing files
+  createdDummySwagger.length = 0;
 }
 
 /**
