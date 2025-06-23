@@ -510,6 +510,36 @@
         ]
       }
     },
+    "StorageDiscoveryTier": {
+      "type": "string",
+      "description": "Storage Discovery Tier (for older API versions)",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDiscoveryTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic Tier"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Tier"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Tier"
+          }
+        ]
+      }
+    },
     "StorageDiscoveryWorkspace": {
       "type": "object",
       "description": "A Storage Discovery Workspace resource. This resource configures the collection of storage account metrics.",
@@ -551,35 +581,8 @@
       "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
-          "type": "string",
-          "description": "The storage discovery sku.",
-          "default": "Standard",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StorageDiscoveryTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "Basic Sku"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard Sku"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium Sku"
-              }
-            ]
-          }
+          "$ref": "#/definitions/StorageDiscoveryTier",
+          "description": "The storage discovery tier."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",
@@ -620,35 +623,8 @@
       "description": "Storage Discovery Workspace Properties",
       "properties": {
         "tier": {
-          "type": "string",
-          "description": "The storage discovery sku.",
-          "default": "Standard",
-          "enum": [
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StorageDiscoveryTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Basic",
-                "value": "Basic",
-                "description": "Basic Sku"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard Sku"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium Sku"
-              }
-            ]
-          }
+          "$ref": "#/definitions/StorageDiscoveryTier",
+          "description": "The storage discovery tier."
         },
         "exportState": {
           "$ref": "#/definitions/DataExportState",

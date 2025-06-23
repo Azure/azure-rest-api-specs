@@ -18,8 +18,12 @@ namespace Microsoft.StorageDiscovery;
  * Storage Discovery Workspace Properties
  */
 model StorageDiscoveryWorkspaceProperties {
+  @doc("The storage discovery tier.")
+  @removed(ApiVersion.v2025_03_01_preview)
+  tier: StorageDiscoveryTier;
+
   @doc("The storage discovery sku.")
-  @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
+  @added(ApiVersion.v2025_03_01_preview)
   @madeOptional(ApiVersion.v2025_06_01_preview)
   sku?: StorageDiscoverySku = StorageDiscoverySku.Standard;
 
@@ -104,16 +108,28 @@ union DataExportState {
 }
 
 /**
- * Storage Discovery Sku
+ * Storage Discovery Tier (for older API versions)
  */
-@renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryTier")
-union StorageDiscoverySku {
-  @doc("Basic Sku")
-  @removed(ApiVersion.v2025_03_01_preview)
+@removed(ApiVersion.v2025_03_01_preview)
+union StorageDiscoveryTier {
+  @doc("Basic Tier")
   Basic: "Basic",
 
+  @doc("Standard Tier")
+  Standard: "Standard",
+
+  @doc("Premium Tier")
+  Premium: "Premium",
+
+  string,
+}
+
+/**
+ * Storage Discovery Sku (for newer API versions)
+ */
+@added(ApiVersion.v2025_03_01_preview)
+union StorageDiscoverySku {
   @doc("Free Sku")
-  @added(ApiVersion.v2025_03_01_preview)
   Free: "Free",
 
   @doc("Standard Sku")
