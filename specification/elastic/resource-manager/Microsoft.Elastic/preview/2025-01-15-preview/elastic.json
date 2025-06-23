@@ -2622,7 +2622,9 @@
           "items": {
             "$ref": "#/definitions/ConnectedPartnerResourcesListFormat"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "properties/azureResourceId"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -4101,7 +4103,8 @@
         },
         "emailAddress": {
           "type": "string",
-          "description": "Email of the user used by Elastic for contacting them if needed"
+          "description": "Email of the user used by Elastic for contacting them if needed",
+          "pattern": "^([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$"
         },
         "companyInfo": {
           "$ref": "#/definitions/CompanyInfo",
@@ -4132,8 +4135,7 @@
           "description": "The VMResources items on this page",
           "items": {
             "$ref": "#/definitions/VMResources"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

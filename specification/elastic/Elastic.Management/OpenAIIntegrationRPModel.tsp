@@ -14,7 +14,7 @@ namespace Microsoft.Elastic;
 /**
  * Capture properties of Open AI resource Integration.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ElasticMonitorResource)
 model OpenAIIntegrationRPModel
   is Azure.ResourceManager.ProxyResource<OpenAIIntegrationProperties> {
@@ -26,13 +26,13 @@ model OpenAIIntegrationRPModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface OpenAIIntegrationRPModels {
   /**
    * Get OpenAI integration rule for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OpenAI_Get")
   get is ArmResourceRead<
     OpenAIIntegrationRPModel,
@@ -42,7 +42,7 @@ interface OpenAIIntegrationRPModels {
   /**
    * Create or update a OpenAI integration rule for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OpenAI_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenAIIntegrationRPModel,
@@ -52,7 +52,7 @@ interface OpenAIIntegrationRPModels {
   /**
    * Delete OpenAI integration rule for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OpenAI_Delete")
   delete is ArmResourceDeleteSync<
     OpenAIIntegrationRPModel,
@@ -62,7 +62,7 @@ interface OpenAIIntegrationRPModels {
   /**
    * List OpenAI integration rule for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OpenAI_List")
   list is ArmResourceListByParent<
     OpenAIIntegrationRPModel,
@@ -73,7 +73,7 @@ interface OpenAIIntegrationRPModels {
   /**
    * Get OpenAI integration status for a given integration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("OpenAI_GetStatus")
   getStatus is ArmResourceActionSync<
     OpenAIIntegrationRPModel,

@@ -21,3 +21,8 @@ using Microsoft.Elastic;
   "x-ms-identifiers",
   #["properties/version"]
 );
+
+@@OpenAPI.extension(ConnectedPartnerResourcesListResponse.value,
+  "x-ms-identifiers",
+  #["properties/azureResourceId"]
+);
