@@ -5,6 +5,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.DevTestLab;
 
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using OpenAPI;
+
 /**
  * The storage type for the disk (i.e. Standard, Premium).
  */
@@ -653,6 +658,8 @@ model LabSupportProperties {
 /**
  * An Azure resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard resource"
+@extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * The identifier of the resource.
