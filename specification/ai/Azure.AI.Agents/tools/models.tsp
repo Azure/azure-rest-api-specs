@@ -908,18 +908,18 @@ model BrowserAutomationRemoteBrowserConnection {
 model DeepResearchDetails {
   @doc("The deep research model deployment name.")
   @encodedName("application/json", "deep_research_model")
-  deepResearchModelDeploymentName: string;
+  deepResearchModel: string;
 
   @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
   @encodedName("application/json", "bing_grounding_connections")
-  bingGroundingConnections: BingGroundingConnectionInformation[];
+  bingGroundingConnections: DeepResearchBingGroundingConnection[];
 }
 
 /**
- * The connection resource ID for the Bing grounding resource.
+ * The connection resource ID for the Bing grounding resource .
  */
 @added(Versions.v2025_05_15_preview)
-model BingGroundingConnectionInformation {
+model DeepResearchBingGroundingConnection {
   @doc("The connection ID for the Bing grounding connection.")
   @encodedName("application/json", "connection_id")
   connectionId: string;
