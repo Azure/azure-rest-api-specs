@@ -175,7 +175,7 @@ model ListQueuesSegmentResponse {
   /** The queue segment. */
   @items
   @Xml.name("Queues")
-  queueItems: QueueItems;
+  queueItems: QueueItem[];
 
   /** The next marker of the queues. */
   @nextLink
@@ -184,18 +184,9 @@ model ListQueuesSegmentResponse {
 }
 
 /**
- * Container for list of queue segment response.
- */
-model QueueItems {
-  /**
-   * The name of the Queue.
-   */
-  @Xml.name("Queue") values: QueueItem[];
-}
-
-/**
  * An Azure Storage Queue.
  */
+@Xml.name("Queue")
 model QueueItem {
   /** The name of the queue. */
   @Xml.name("Name") name: string;
@@ -205,7 +196,6 @@ model QueueItem {
 }
 
 /** The signed identifier. */
-@Xml.name("SignedIdentifier")
 model SignedIdentifier {
   /** The unique ID for the signed identifier. */
   @Xml.name("Id") id: string;
@@ -234,7 +224,7 @@ model AccessPolicy {
  * The object returned in the QueueMessageList array when calling Get Messages on
  * a Queue.
  */
-model DequeuedMessageItem {
+model DequeuedMessage {
   /**
    * The Id of the Message.
    */
@@ -287,48 +277,46 @@ model ListOfSignedIdentifier {
    */
   @Xml.unwrapped
   @Xml.name("SignedIdentifier")
-  value: SignedIdentifier[];
+  items: Array<SignedIdentifier>;
 }
 
 /**
  * List wrapper for DequeuedMessageItem array
  */
 @Xml.name("QueueMessagesList")
-model ListOfDequeuedMessageItem {
+model ListOfDequeuedMessage {
   /**
    * The list of dequeued messages.
    */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
-  value: DequeuedMessageItem[];
+  items: Array<DequeuedMessage>;
 }
 
 /**
  * List wrapper for EnqueuedMessage array
  */
 @Xml.name("QueueMessagesList")
-@mediaTypeHint("application/xml")
 model ListOfEnqueuedMessage {
   /**
    * The list of enqueued messages.
    */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
-  value: Array<EnqueuedMessage>;
+  items: Array<EnqueuedMessage>;
 }
 
 /**
  * List wrapper for PeekedMessageItem array
  */
 @Xml.name("QueueMessagesList")
-@mediaTypeHint("application/xml")
-model ListOfPeekedMessageItem {
+model ListOfPeekedMessage {
   /**
    * The list of peeked messages.
    */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
-  value: PeekedMessageItem[];
+  items: Array<PeekedMessage>;
 }
 
 /**
@@ -383,7 +371,7 @@ model EnqueuedMessage {
  * The object returned in the QueueMessageList array when calling Peek Messages on
  * a Queue
  */
-model PeekedMessageItem {
+model PeekedMessage {
   /**
    * The Id of the Message.
    */
