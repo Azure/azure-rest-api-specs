@@ -772,7 +772,10 @@ union SessionHostManagementProvisioningOperationStatus {
 /**
  * Operation status for SessionHostManagementUpdate.
  */
-@renamedFrom(Versions.v2025_04_01_preview, "SessionHostManagementUpdateOperationStatus")
+@renamedFrom(
+  Versions.v2025_04_01_preview,
+  "SessionHostManagementUpdateOperationStatus"
+)
 union updateStatus {
   string,
 
@@ -1171,7 +1174,7 @@ union CanaryPolicy {
   string,
 
   /**
-   * Auto.
+   * Auto provision Canary VM.
    */
   Auto: "Auto",
 
