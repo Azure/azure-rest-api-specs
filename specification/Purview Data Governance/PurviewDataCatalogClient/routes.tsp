@@ -75,7 +75,7 @@ op getAttribute is Azure.Core.Foundations.Operation<
   void
 >;
 
-@route("/attributes/{attributeId}")
+@route("/attributes/{attributeId}/GetAsync")
 @get
 op attributeAttributeId is Azure.Core.Foundations.Operation<
   {
@@ -86,7 +86,7 @@ op attributeAttributeId is Azure.Core.Foundations.Operation<
   void
 >;
 
-@route("/attributes/{attributeId}")
+@route("/attributes/{attributeId}/DeleteAsync")
 @delete
 op attribute is Azure.Core.Foundations.Operation<
   {
@@ -603,7 +603,7 @@ op customMetadataQuery is Azure.Core.Foundations.Operation<
   void
 >;
 
-@route("/customMetadata/{metadataId}")
+@route("/customMetadata/{metadataId}/GetAsync")
 @get
 op customMetadataMetadataId is Azure.Core.Foundations.Operation<
   {
@@ -614,7 +614,7 @@ op customMetadataMetadataId is Azure.Core.Foundations.Operation<
   void
 >;
 
-@route("/customMetadata/{metadataId}")
+@route("/customMetadata/{metadataId}/DeleteAsync")
 @delete
 op deleteCustomMetadata is Azure.Core.Foundations.Operation<
   {

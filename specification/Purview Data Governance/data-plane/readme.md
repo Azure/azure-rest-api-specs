@@ -31,7 +31,7 @@ These settings apply only when `--tag=package-2025-06-16-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-06-16-preview'
 input-file:
-- preview/2025-06-16-preview/CatalogApiService.json
+- Microsoft.Purview.ActiveGlossary.Catalog.ApiService/preview/2025-06-16-preview/CatalogApiService.json
 ```
 
 ---
