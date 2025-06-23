@@ -8,8 +8,8 @@ import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
   Context,
-  logFileName,
-} from "./types/breaking-change-check.js";
+} from "./types/breaking-change.js";
+import { logFileName } from "./utils/breaking-change-config.js";
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import {
   blobHref,
@@ -20,9 +20,10 @@ import {
 import { appendFileSync } from "node:fs";
 import _ from "lodash";
 import * as path from "path";
-import { applyRules } from "./apply-rules.js";
-import { OadMessage, OadTrace } from "./types/oad-types.js";
+import { applyRules } from "./utils/apply-rules.js";
+import { OadMessage, OadTraceData, addOadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
+import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
 import { logError } from "./log.js";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
@@ -46,7 +47,7 @@ export class BreakingChangeDetector {
   constructor(
     private context: Context,
     private oldSwaggers: string[],
-    private oadTracer: OadTrace,
+    private oadTracer: OadTraceData,
   ) {
     this.context = context;
     this.oadTracer = oadTracer;
@@ -134,11 +135,13 @@ export class BreakingChangeDetector {
     let errorCnt = 0;
     try {
       await this.context.prInfo!.checkout(this.context.prInfo!.baseBranch);
-      const oadMessages: OadMessage[] = await runOad(
-        this.oadTracer,
+      const oadMessages = await runOad(
         path.resolve(this.context.localSpecRepoPath, oldSpec),
         newSpec,
       );
+
+      // Handle tracing separately - no need for a trace of two tags comparison
+      this.oadTracer = addOadTrace(this.oadTracer, getRelativeSwaggerPathToRepo(oldSpec), newSpec);
 
       const modifiedOadMessages: OadMessage[] = applyRules(
         oadMessages,
@@ -150,7 +153,8 @@ export class BreakingChangeDetector {
         (oadMessage) => oadMessage.type === "Error",
       ).length;
 
-      const msgs: ResultMessageRecord[] = this.context.logger.appendOadMessages(
+      const msgs: ResultMessageRecord[] = processAndAppendOadMessages(
+        this.context.logger,
         modifiedOadMessages,
         this.context.baseBranch,
       );

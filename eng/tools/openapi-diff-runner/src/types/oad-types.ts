@@ -12,11 +12,12 @@ import { basename } from "path";
 import { getVersionFromInputFile, specificBranchHref } from "../utils/common-utils.js";
 import { MessageLevel } from "./message.js";
 import { sourceBranchHref } from "../utils/common-utils.js";
-import { ApiVersionLifecycleStage, Context } from "./breaking-change-check.js";
+import { ApiVersionLifecycleStage, Context } from "./breaking-change.js";
 import { defaultBreakingChangeBaseBranch } from "../command-helpers.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { appendMarkdownToLog } from "../utils/oad-message-processor.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,48 +49,79 @@ export type ChangeProperties = {
   readonly ref?: string;
 };
 
-// record oad invoking trace
-export class OadTrace {
-  private traces: { old: string; new: string; baseBranch: string }[] = [];
-  private baseBranch = defaultBreakingChangeBaseBranch;
-  private context: Context;
+/**
+ * Represents the state of OAD tracing with immutable data structure
+ */
+export type OadTraceData = {
+  readonly traces: readonly {
+    readonly old: string;
+    readonly new: string;
+    readonly baseBranch: string;
+  }[];
+  readonly baseBranch: string;
+  readonly context: Context;
+};
 
-  constructor(context: Context) {
-    this.context = context;
+/**
+ * Creates a new OAD trace data structure
+ */
+export const createOadTrace = (context: Context): OadTraceData => ({
+  traces: [],
+  baseBranch: defaultBreakingChangeBaseBranch,
+  context,
+});
+
+/**
+ * Adds a new trace entry to the OAD trace data
+ */
+export const addOadTrace = (
+  traceData: OadTraceData,
+  oldSwagger: string,
+  newSwagger: string,
+): OadTraceData => ({
+  ...traceData,
+  traces: [
+    ...traceData.traces,
+    { old: oldSwagger, new: newSwagger, baseBranch: traceData.baseBranch },
+  ],
+});
+
+/**
+ * Sets the base branch for the OAD trace data
+ */
+export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): OadTraceData => ({
+  ...traceData,
+  baseBranch: branchName,
+});
+
+/**
+ * Generates markdown content from OAD trace data
+ */
+export const generateOadMarkdown = (traceData: OadTraceData): string => {
+  const oadVersion = packageJson.dependencies["@azure/oad"].replace(/[\^~]/, "");
+  if (traceData.traces.length === 0) {
+    return "";
   }
-
-  add(oldSwagger: string, newSwagger: string) {
-    this.traces.push({ old: oldSwagger, new: newSwagger, baseBranch: this.baseBranch });
-    return this;
-  }
-
-  setBaseBranch(branchName: string) {
-    this.baseBranch = branchName;
-  }
-
-  save() {
-    const markdown = this.genMarkdown();
-    if (markdown) {
-      return this.context.logger.appendMarkdown(markdown);
-    }
-  }
-
-  genMarkdown() {
-    const oadVersion = packageJson.dependencies["@azure/oad"].replace(/[\^~]/, "");
-    if (this.traces.length === 0) {
-      return "";
-    }
-    let content = `
+  let content = `
 | Compared specs ([v${oadVersion}](https://www.npmjs.com/package/@azure/oad/v/${oadVersion}))| new version | base version |
 |-------|-------------|--------------|
 `;
-    for (const value of this.traces.values()) {
-      content += `|${basename(value.new)} |${getVersionFromInputFile(value.new, true)}([${this.context.headCommit}](${sourceBranchHref(value.new)}))|${getVersionFromInputFile(value.old, true)}([${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)}))|\n`;
-    }
-    content += `\n`;
-    return content;
+  for (const value of traceData.traces) {
+    content += `|${basename(value.new)} |${getVersionFromInputFile(value.new, true)}([${traceData.context.headCommit}](${sourceBranchHref(value.new)}))|${getVersionFromInputFile(value.old, true)}([${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)}))|\n`;
   }
-}
+  content += `\n`;
+  return content;
+};
+
+/**
+ * Saves the OAD trace by generating markdown and appending to logger
+ */
+export const saveOadTrace = (traceData: OadTraceData): void => {
+  const markdown = generateOadMarkdown(traceData);
+  if (markdown) {
+    appendMarkdownToLog(traceData.context.logger, markdown);
+  }
+};
 
 // Codes correspond to members of openapi-diff ComparisonMessages:
 // https://github.com/Azure/openapi-diff/blob/4c158308aca2cfd584e556fe8a05ce6967de2912/openapi-diff/src/modeler/AutoRest.Swagger/ComparisonMessages.cs

@@ -8,16 +8,16 @@ import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
   ReviewRequiredLabel,
-} from "./types/breaking-change-check.js";
-import { OadMessage } from "./types/oad-types.js";
-import { BreakingChangeLabels } from "./command-helpers.js";
+} from "../types/breaking-change.js";
+import { OadMessage } from "../types/oad-types.js";
+import { BreakingChangeLabels } from "../command-helpers.js";
 
 import {
   OadMessageRule,
   fallbackLabel,
   fallbackRule as fallbackOadMessageRule,
   oadMessagesRuleMap,
-} from "./oad-message-rule-map.js";
+} from "./oad-rule-map.js";
 
 /**
  * The function applyRules() applies oadMessagesRuleMap to OAD messages returned by runOad().

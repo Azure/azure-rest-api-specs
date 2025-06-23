@@ -5,7 +5,7 @@ import {
   RawMessageRecord,
   ResultMessageRecord,
 } from "./types/message.js";
-import { ApiVersionLifecycleStage, Context } from "./types/breaking-change-check.js";
+import { ApiVersionLifecycleStage, Context } from "./types/breaking-change.js";
 import {
   BreakingChangeMdReport,
   createBreakingChangeMdReport,

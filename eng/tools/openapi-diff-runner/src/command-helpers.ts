@@ -1,11 +1,13 @@
 import path from "node:path";
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { BreakingChangesCheckType, Context } from "./types/breaking-change-check.js";
+import { BreakingChangesCheckType, Context } from "./types/breaking-change.js";
+import { ResultMessageRecord } from "./types/message.js";
 import { getArgumentValue } from "./utils/common-utils.js";
-import { Logger } from "./logger.js";
+import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { logMessage } from "./log.js";
 
 /**
  * Parse the arguments.
@@ -33,7 +35,7 @@ export function initContext(): Context {
   }
 
   const prUrl = `https://github.com/${repo}/pull/${prNumber}`;
-  const logger = new Logger(logFileFolder, prUrl);
+  const logger = createOadMessageProcessor(logFileFolder, prUrl);
   return {
     localSpecRepoPath,
     workingFolder,
@@ -126,4 +128,90 @@ export async function buildPrInfo(context: Context): Promise<void> {
     throw new Error("create PR failed!");
   }
   context.prInfo = prInfo;
+}
+
+// Constants and state for dummy swagger management
+const whitelistsBranches = ["ARMCoreRPDev", "rpsaasmaster"];
+const createdDummySwagger: string[] = [];
+
+/**
+ * Change the base branch for comparison based on context and whitelist rules
+ */
+export function changeBaseBranch(context: Context): void {
+  /*
+   * always compare against main
+   * we still use the changed files got from the PR, because the main branch may quite different with the PR target branch
+   */
+  function isBreakingChangeWhiteListBranch() {
+    return (
+      isSameVersionBreakingType(context.runType) &&
+      whitelistsBranches.some((b) => context.prTargetBranch.toLowerCase() === b.toLowerCase())
+    );
+  }
+  // same version breaking change for PR targets to rpaas or armCoreRpDev, will compare with the original target branch.
+  if (context.baseBranch !== context.prTargetBranch && !isBreakingChangeWhiteListBranch()) {
+    context.prInfo!.baseBranch = context.baseBranch;
+    logMessage(`switch target branch to ${context.baseBranch}`);
+  }
+}
+
+/**
+ * Log the full list of OAD messages to console
+ */
+export function logFullOadMessagesList(msgs: ResultMessageRecord[]): void {
+  logMessage("---- Full list of messages ----");
+  logMessage("[");
+  // Printing the messages one by one because the console.log appears to elide the messages with "... X more items"
+  // after approximately 292 messages.
+  for (const msg of msgs) {
+    logMessage(JSON.stringify(msg, null, 4) + ",");
+  }
+  logMessage("]");
+  logMessage("---- End of full list of messages ----");
+}
+
+/**
+ * Create a dummy swagger file for comparison purposes
+ */
+export function createDummySwagger(fromSwagger: string, toSwagger: string): void {
+  if (!existsSync(path.dirname(toSwagger))) {
+    mkdirSync(path.dirname(toSwagger), { recursive: true });
+  }
+  const content = readFileSync(fromSwagger).toString();
+  const swaggerJson = JSON.parse(content);
+  swaggerJson.paths = {};
+  if (swaggerJson["x-ms-paths"]) {
+    swaggerJson["x-ms-paths"] = {};
+  }
+  if (swaggerJson["x-ms-parameterized-host"]) {
+    delete swaggerJson["x-ms-parameterized-host"];
+  }
+  swaggerJson.parameters = {};
+  swaggerJson.definitions = {};
+  writeFileSync(toSwagger, JSON.stringify(swaggerJson, null, 2));
+  createdDummySwagger.push(toSwagger);
+  logMessage(`created a dummy swagger: ${toSwagger} from ${fromSwagger}`);
+}
+
+/**
+ * Clean up all created dummy swagger files
+ */
+export function cleanDummySwagger(): void {
+  for (const swagger of createdDummySwagger) {
+    rmSync(swagger, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Return true if the type indicates the same version breaking change
+ */
+export function isSameVersionBreakingType(type: BreakingChangesCheckType): boolean {
+  return type === "SameVersion";
+}
+
+/**
+ * Get the count of created dummy swagger files
+ */
+export function getCreatedDummySwaggerCount(): number {
+  return createdDummySwagger.length;
 }

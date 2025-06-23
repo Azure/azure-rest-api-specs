@@ -5,8 +5,7 @@
  * i.e. it is invoked by files with depth 2.
  */
 import * as oad from "@azure/oad";
-import { getRelativeSwaggerPathToRepo } from "./utils/common-utils.js";
-import { OadMessage, OadTrace } from "./types/oad-types.js";
+import { OadMessage } from "./types/oad-types.js";
 
 /**
  * The runOad() function is a wrapper around the "@azure/oad" library whose source is https://github.com/Azure/openapi-diff.
@@ -25,7 +24,6 @@ import { OadMessage, OadTrace } from "./types/oad-types.js";
  * [2] https://github.com/Azure/openapi-diff/blob/4c158308aca2cfd584e556fe8a05ce6967de2912/openapi-diff/src/core/OpenApiDiff/Program.cs#L40
  */
 export async function runOad(
-  oadTracer: OadTrace,
   oldSpec: string,
   newSpec: string,
   oldTag?: string,
@@ -79,11 +77,6 @@ export async function runOad(
   // https://github.com/Azure/openapi-diff/blob/7a3f705224e03de762689eeeb6d4f1b6820dc463/openapi-diff/src/modeler/AutoRest.Swagger/ComparisonMessage.cs#L17-L17
   // after it was transformed by ComparisonMessage.GetValidationMessagesAsJson().
   const oadMessages: OadMessage[] = JSON.parse(oadCompareOutput);
-
-  // No need for a trace of two tags comparison.
-  if (!oldTag || !newTag) {
-    oadTracer.add(getRelativeSwaggerPathToRepo(oldSpec), newSpec);
-  }
 
   console.log(
     `RETURN definition runOad. oadMessages.length: ${oadMessages.length}, ` +

@@ -10,13 +10,27 @@
  */
 
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
-import { mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from "node:fs";
+import { existsSync } from "node:fs";
 import * as path from "path";
-import { OadTrace } from "./types/oad-types.js";
+import {
+  createOadTrace,
+  setOadBaseBranch,
+  saveOadTrace,
+  generateOadMarkdown,
+} from "./types/oad-types.js";
 import { BreakingChangeDetector } from "./breaking-change-detector.js";
-import { BreakingChangesCheckType, Context } from "./types/breaking-change-check.js";
-import { getSwaggerDiffs } from "./command-helpers.js";
+import { BreakingChangesCheckType, Context } from "./types/breaking-change.js";
+import {
+  getSwaggerDiffs,
+  changeBaseBranch,
+  logFullOadMessagesList,
+  createDummySwagger,
+  cleanDummySwagger,
+  isSameVersionBreakingType,
+  getCreatedDummySwaggerCount,
+} from "./command-helpers.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
+import { logMessage } from "./log.js";
 
 /**
  * The function detectBreakingChange() is executed with type SameVersion or CrossVersion, by
@@ -46,20 +60,20 @@ import { generateBreakingChangeResultSummary } from "./generate-report.js";
  */
 export async function detectBreakingChange(context: Context): Promise<number> {
   let statusCode: number = 0;
-  const oadTracer = new OadTrace(context);
-  console.log("ENTER definition detectBreakingChange");
+  let oadTracer = createOadTrace(context);
+  logMessage("ENTER definition detectBreakingChange");
 
-  console.log(`PR target branch is ${context.prInfo ? context.prTargetBranch : ""}`);
+  logMessage(`PR target branch is ${context.prInfo ? context.prTargetBranch : ""}`);
 
   const diffs = await getSwaggerDiffs();
 
-  console.log("Found PR changes:");
-  console.log(JSON.stringify(diffs, null, 2));
+  logMessage("Found PR changes:");
+  logMessage(JSON.stringify(diffs, null, 2));
 
   let swaggersToProcess = diffs.modifications?.concat(diffs.additions || []) as Array<string>;
 
-  console.log("Processing swaggers:");
-  console.log(swaggersToProcess);
+  logMessage("Processing swaggers:");
+  logMessage(JSON.stringify(swaggersToProcess, null, 2));
 
   // 1 switch pr to base branch
   changeBaseBranch(context);
@@ -101,22 +115,22 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     .concat(newExistingVersionSwaggers)
     .concat(needCompareDeletedSwaggers);
 
-  console.log("Found new version swaggers:");
-  console.log(newVersionSwaggers);
+  logMessage("Found new version swaggers:");
+  logMessage(JSON.stringify(newVersionSwaggers, null, 2));
 
-  console.log("Found new existing version swaggers:");
-  console.log(newExistingVersionSwaggers);
+  logMessage("Found new existing version swaggers:");
+  logMessage(JSON.stringify(newExistingVersionSwaggers, null, 2));
 
-  console.log("Found changed existing swaggers:");
-  console.log(existingChangedSwaggers);
+  logMessage("Found changed existing swaggers:");
+  logMessage(JSON.stringify(existingChangedSwaggers, null, 2));
 
-  console.log("The following changed swaggers are not existed in base branch:");
-  console.log(nonExistingChangedSwaggers);
+  logMessage("The following changed swaggers are not existed in base branch:");
+  logMessage(JSON.stringify(nonExistingChangedSwaggers, null, 2));
 
-  console.log("The following are deleted swaggers that need to do the comparison: ");
-  console.log(needCompareDeletedSwaggers);
+  logMessage("The following are deleted swaggers that need to do the comparison: ");
+  logMessage(JSON.stringify(needCompareDeletedSwaggers, null, 2));
 
-  console.log(
+  logMessage(
     `Creating dummy files to compare for deleted Swagger files. Count: ${needCompareDeletedSwaggers.length}`,
   );
 
@@ -128,7 +142,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     }
   }
 
-  console.log(
+  logMessage(
     `Creating dummy files to compare for new Swagger files in existing API version folders. ` +
       `Count: ${newExistingVersionSwaggers.length}`,
   );
@@ -142,7 +156,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
   });
 
   if (context.prInfo) {
-    oadTracer.setBaseBranch(context.prInfo.baseBranch);
+    oadTracer = setOadBaseBranch(oadTracer, context.prInfo.baseBranch);
     const detector = new BreakingChangeDetector(context, needCompareOldSwaggers, oadTracer);
 
     let msgs: ResultMessageRecord[] = [];
@@ -157,8 +171,8 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
       await detector.checkBreakingChangeOnSameVersion());
 
-    oadTracer.save();
-    const comparedSpecsTableContent = oadTracer.genMarkdown();
+    saveOadTrace(oadTracer);
+    const comparedSpecsTableContent = generateOadMarkdown(oadTracer);
     //TODO process breaking change labels
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
@@ -184,7 +198,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
       process.exitCode = errorCnt > 0 ? 1 : 0;
     }
 
-    console.log(
+    logMessage(
       `detectBreakingChange: prUrl: ${context.prUrl}, ` +
         `comparisonType: ${comparisonType}, labelsAddedCount: , ` +
         `errorCnt: ${errorCnt}, oadViolationsCnt: ${oadViolationsCnt}, ` +
@@ -194,7 +208,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     if (process.exitCode === 0 && oadViolationsCnt > 0) {
       // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 2/22/2024.
       // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
-      console.log(
+      logMessage(
         `detectBreakingChange: ` +
           `Prevented spurious failure of breaking change check. prUrl: ${context.prUrl}, ` +
           `comparisonType: ${comparisonType}, oadViolationsCnt: ${oadViolationsCnt}, ` +
@@ -220,79 +234,14 @@ export async function detectBreakingChange(context: Context): Promise<number> {
       !isSameVersionBreakingType(type) ? "CrossVersionBreakingChange" : "BreakingChange",
     );*/
   } else {
-    console.log("!pr. Skipping the process of breaking change detection.");
+    logMessage("!pr. Skipping the process of breaking change detection.");
   }
 
-  console.log(`Cleaning up dummy files. Count: ${createdDummySwagger.length}`);
+  logMessage(`Cleaning up dummy files. Count: ${getCreatedDummySwaggerCount()}`);
 
   cleanDummySwagger();
 
-  console.log("RETURN definition detectBreakingChange");
+  logMessage("RETURN definition detectBreakingChange");
 
   return statusCode;
-}
-
-const whitelistsBranches = ["ARMCoreRPDev", "rpsaasmaster"];
-
-function changeBaseBranch(context: Context) {
-  /*
-   * always compare against main
-   * we still use the changed files got from the PR, because the main branch may quite different with the PR target branch
-   */
-  function isBreakingChangeWhiteListBranch() {
-    return (
-      isSameVersionBreakingType(context.runType) &&
-      whitelistsBranches.some((b) => context.prTargetBranch.toLowerCase() === b.toLowerCase())
-    );
-  }
-  // same version breaking change for PR targets to rpaas or armCoreRpDev, will compare with the original target branch.
-  if (context.baseBranch !== context.prTargetBranch && !isBreakingChangeWhiteListBranch()) {
-    context.prInfo!.baseBranch = context.baseBranch;
-    console.log(`switch target branch to ${context.baseBranch}`);
-  }
-}
-
-function logFullOadMessagesList(msgs: ResultMessageRecord[]) {
-  console.log("---- Full list of messages ----");
-  console.log("[");
-  // Printing the messages one by one because the console.log appears to elide the messages with "... X more items"
-  // after approximately 292 messages.
-  for (const msg of msgs) {
-    console.log(JSON.stringify(msg, null, 4) + ",");
-  }
-  console.log("]");
-  console.log("---- End of full list of messages ----");
-}
-
-const createdDummySwagger: string[] = [];
-
-function createDummySwagger(fromSwagger: string, toSwagger: string) {
-  if (!existsSync(path.dirname(toSwagger))) {
-    mkdirSync(path.dirname(toSwagger), { recursive: true });
-  }
-  const content = readFileSync(fromSwagger).toString();
-  const swaggerJson = JSON.parse(content);
-  swaggerJson.paths = {};
-  if (swaggerJson["x-ms-paths"]) {
-    swaggerJson["x-ms-paths"] = {};
-  }
-  if (swaggerJson["x-ms-parameterized-host"]) {
-    delete swaggerJson["x-ms-parameterized-host"];
-  }
-  swaggerJson.parameters = {};
-  swaggerJson.definitions = {};
-  writeFileSync(toSwagger, JSON.stringify(swaggerJson, null, 2));
-  createdDummySwagger.push(toSwagger);
-  console.log(`created a dummpy swagger:${toSwagger} from ${fromSwagger}`);
-}
-
-function cleanDummySwagger() {
-  for (const swagger of createdDummySwagger) {
-    rmSync(swagger, { recursive: true, force: true });
-  }
-}
-
-// return true if the type indicates the same version breaking change
-function isSameVersionBreakingType(type: BreakingChangesCheckType) {
-  return type === "SameVersion";
 }
