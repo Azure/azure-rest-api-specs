@@ -21,6 +21,19 @@ model CustomImage
     SegmentName = "customimages",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -51,6 +64,7 @@ interface CustomImages {
    * Allows modifying tags of custom images. All other properties will be ignored.
    */
   @patch(#{ implicitOptionality: false })
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "CustomImageFragment contains tags as expected by the patch operation."
   update is ArmCustomPatchSync<CustomImage, PatchModel = CustomImageFragment>;
 
   /**
@@ -100,3 +114,5 @@ interface CustomImages {
 @@doc(CustomImage.properties, "The properties of the resource.");
 @@doc(CustomImages.createOrUpdate::parameters.resource, "A custom image.");
 @@doc(CustomImages.update::parameters.properties, "A custom image.");
+@@doc(CustomImage.tags, "The tags of the resource.");
+@@doc(CustomImage.location, "The location of the resource.");

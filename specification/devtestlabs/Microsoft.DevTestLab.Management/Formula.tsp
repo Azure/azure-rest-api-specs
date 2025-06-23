@@ -20,6 +20,19 @@ model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties, false> {
     SegmentName = "formulas",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -50,6 +63,7 @@ interface Formulas {
    * Allows modifying tags of formulas. All other properties will be ignored.
    */
   @patch(#{ implicitOptionality: false })
+   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   update is ArmCustomPatchSync<Formula, PatchModel = FormulaFragment>;
 
   /**
@@ -99,3 +113,6 @@ interface Formulas {
 @@doc(Formulas.update::parameters.properties,
   "A formula for creating a VM, specifying an image base and other parameters"
 );
+
+@@doc(Formula.tags, "The tags of the resource.");
+@@doc(Formula.location, "The location of the resource.");

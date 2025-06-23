@@ -21,6 +21,19 @@ model Artifact
     SegmentName = "artifacts",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -87,3 +100,5 @@ interface Artifacts {
 @@doc(Artifacts.generateArmTemplate::parameters.body,
   "Parameters for generating an ARM template for deploying artifacts."
 );
+@@doc(Artifact.tags, "The tags of the resource.");
+@@doc(Artifact.location, "The location of the resource.");

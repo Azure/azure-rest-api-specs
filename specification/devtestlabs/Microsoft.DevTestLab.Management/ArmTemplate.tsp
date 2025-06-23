@@ -17,7 +17,6 @@ model ArmTemplate
   is Azure.ResourceManager.ProxyResource<ArmTemplateProperties, false> {
   ...ResourceNameParameter<
     Resource = ArmTemplate,
-    KeyName = "name",
     SegmentName = "armtemplates",
     NamePattern = ""
   >;

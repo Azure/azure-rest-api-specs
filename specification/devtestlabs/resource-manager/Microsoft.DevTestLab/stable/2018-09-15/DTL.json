@@ -1040,7 +1040,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{armTemplateName}": {
       "get": {
         "operationId": "ArmTemplates_Get",
         "tags": [
@@ -1072,7 +1072,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "armTemplateName",
             "in": "path",
             "description": "The name of the azure resource manager template.",
             "required": true,
@@ -9308,6 +9308,17 @@
           "$ref": "#/definitions/ArtifactProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -9782,6 +9793,17 @@
           "$ref": "#/definitions/CustomImageProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -10398,6 +10420,17 @@
           "$ref": "#/definitions/FormulaProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -11045,6 +11078,17 @@
           "$ref": "#/definitions/LabCostProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [

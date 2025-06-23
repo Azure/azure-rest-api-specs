@@ -20,6 +20,19 @@ model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
     SegmentName = "costs",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
@@ -52,3 +65,5 @@ interface LabCosts {
 @@doc(LabCost.name, "The name of the cost.");
 @@doc(LabCost.properties, "The properties of the resource.");
 @@doc(LabCosts.createOrUpdate::parameters.resource, "A cost item.");
+@@doc(LabCost.tags, "The tags of the resource.");
+@@doc(LabCost.location, "The location of the resource.");
