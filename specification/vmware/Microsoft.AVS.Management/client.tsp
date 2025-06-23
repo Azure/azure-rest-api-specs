@@ -88,10 +88,13 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(ScriptPackageProperties.uri, url, "csharp");
-// @@usage(ScriptCmdlet, Usage.input, "csharp");
+@@usage(ScriptPackage, Usage.input, "csharp");
+@@usage(ScriptCmdlet, Usage.input, "csharp");
 @@alternateType(ScriptCmdletProperties.timeout, duration, "csharp");
 @@alternateType(ScriptExecutionProperties.namedOutputs, unknown, "csharp");
 @@clientName(VirtualMachine, "AvsPrivateCloudClusterVirtualMachine", "csharp");
+@@usage(VirtualMachine, Usage.input, "csharp");
+@@usage(WorkloadNetwork, Usage.input, "csharp");
 @@alternateType(WorkloadNetworkDnsServiceProperties.dnsServiceIp,
   ipV4Address,
   "csharp"
@@ -109,6 +112,8 @@ namespace Customization;
   ipV4Address,
   "csharp"
 );
+@@usage(WorkloadNetworkGateway, Usage.input, "csharp");
+@@usage(WorkloadNetworkVirtualMachine, Usage.input, "csharp");
 @@alternateType(WorkloadNetworkDnsZoneProperties.dnsServerIps,
   ipV4Address[],
   "csharp"
