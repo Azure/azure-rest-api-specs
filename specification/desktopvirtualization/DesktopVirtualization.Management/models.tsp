@@ -61,6 +61,18 @@ union HostPoolUpdateAction {
 }
 
 /**
+ * Action types for controlling hostpool provisioning.
+ */
+union HostPoolProvisioningAction {
+  string,
+
+  /**
+   * Cancel the hostpool provisioning.
+   */
+  Cancel: "Cancel",
+}
+
+/**
  * Provisioning state of the Session Host Configuration.
  */
 union ProvisioningStateSHC {
@@ -718,7 +730,50 @@ union AppAttachPackageArchitectures {
 /**
  * Operation status for SessionHostManagementUpdate.
  */
-union SessionHostManagementUpdateOperationStatus {
+union SessionHostManagementProvisioningOperationStatus {
+  string,
+
+  /**
+   * The operation is scheduled.
+   */
+  Scheduled: "Scheduled",
+
+  /**
+   * The operation is currently validating the provisioning.
+   */
+  ValidatingSessionHostProvisioning: "ValidatingSessionHostProvisioning",
+
+  /**
+   * Canceling the operation.
+   */
+  Cancelling: "Cancelling",
+
+  /**
+   * The operation is currently provisioning session hosts.
+   */
+  ProvisioningSessionHosts: "ProvisioningSessionHosts",
+
+  /**
+   * The operation succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The operation failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The operation is canceled.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Operation status for SessionHostManagementUpdate.
+ */
+@renamedFrom(Versions.v2025_04_01_preview, "SessionHostManagementUpdateOperationStatus")
+union updateStatus {
   string,
 
   /**
@@ -1110,6 +1165,79 @@ union ScalingMethodPatchType {
 }
 
 /**
+ * Policy on whether a Canary VM should be provisioned during a session host provisioning operation.
+ */
+union CanaryPolicy {
+  string,
+
+  /**
+   * Auto.
+   */
+  Auto: "Auto",
+
+  /**
+   * Never provision Canary VM.
+   */
+  Never: "Never",
+
+  /**
+   * Always provision Canary VM.
+   */
+  Always: "Always",
+}
+
+/**
+ * The policy that should be applied when the Session Host provisioning operation fails.
+ */
+union FailedSessionHostCleanupPolicySHC {
+  string,
+
+  /**
+   * Keep All.
+   */
+  KeepAll: "KeepAll",
+
+  /**
+   * Keep One.
+   */
+  KeepOne: "KeepOne",
+
+  /**
+   * Keep None.
+   */
+  KeepNone: "KeepNone",
+}
+
+/**
+ * Specifies the ephemeral disk settings for operating system disk.
+ */
+union DiffDiskOption {
+  string,
+
+  /**
+   * Operating system disk local setting.
+   */
+  Local: "Local",
+}
+
+/**
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+ */
+union DiffDiskPlacement {
+  string,
+
+  /**
+   * Cache disk placement
+   */
+  CacheDisk: "CacheDisk",
+
+  /**
+   * Resource disk placement
+   */
+  ResourceDisk: "ResourceDisk",
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -1480,12 +1608,51 @@ model DiskInfoProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
    */
+  @removed(Versions.v2025_04_01_preview)
   type: VirtualMachineDiskType;
+
+  /**
+   * The managed disk parameters.
+   */
+  @added(Versions.v2025_04_01_preview)
+  managedDisk?: ManagedDiskProperties;
+
+  /**
+   * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
+   */
+  @added(Versions.v2025_04_01_preview)
+  diffDiskSettings?: DiffDiskProperties;
+}
+
+/**
+ * Managed Disk information.
+ */
+model ManagedDiskProperties {
+  /**
+   * Managed Disk information.
+   */
+  type?: VirtualMachineDiskType;
+}
+
+/**
+ * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
+ */
+model DiffDiskProperties {
+  /**
+   * Specifies the ephemeral disk settings for operating system disk.
+   */
+  option?: DiffDiskOption;
+
+  /**
+   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+   */
+  placement?: DiffDiskPlacement;
 }
 
 /**
  * Disk information.
  */
+@removed(Versions.v2025_04_01_preview)
 model DiskInfoPatchProperties {
   /**
    * The disk type used by virtual machine in hostpool session host.
@@ -1941,6 +2108,39 @@ model SessionHostManagementProperties {
    * Parameters for a hostpool update.
    */
   update: HostPoolUpdateConfigurationProperties;
+
+  /**
+   * Parameters that apply when session hosts are provisioned.
+   */
+  @added(Versions.v2025_04_01_preview)
+  provisioning?: SessionHostProvisioningConfigurationProperties;
+
+  /**
+   * The policy that should be applied when the Session Host provisioning operation fails.
+   */
+  @added(Versions.v2025_04_01_preview)
+  failedSessionHostCleanupPolicy?: FailedSessionHostCleanupPolicySHC;
+}
+
+/**
+ * The configuration for session host provisioning operations.
+ */
+model SessionHostProvisioningConfigurationProperties {
+  /**
+   * Whether the session host should be set in drain mode following provisioning.
+   */
+  setDrainMode?: boolean;
+
+  /**
+   * The number of session hosts to exist in the Host Pool.
+   */
+  @minValue(1)
+  instanceCount?: int32;
+
+  /**
+   * Policy on whether a Canary VM should be provisioned during a session host provisioning operation.
+   */
+  canaryPolicy?: CanaryPolicy;
 }
 
 /**
@@ -3167,6 +3367,23 @@ model HostPoolUpdateControlParameter {
   @maxLength(260)
   cancelMessage?: string;
 }
+
+/**
+ * Object containing control action for hostpool provisioning.
+ */
+model HostPoolProvisioningControlParameter {
+  /**
+   * Action types for controlling hostpool update.
+   */
+  action: HostPoolProvisioningAction;
+
+  /**
+   * The cancel message sent to the user on the session host.
+   */
+  @maxLength(260)
+  cancelMessage?: string;
+}
+
 /**
  * HostPool properties that can be patched.
  */
@@ -4642,7 +4859,8 @@ model SessionHostConfigurationPatchProperties {
   /**
    * Disk Information
    */
-  diskInfo?: DiskInfoPatchProperties;
+  @typeChangedFrom(Versions.v2025_04_01_preview, DiskInfoPatchProperties)
+  diskInfo?: DiskInfoProperties;
 
   /**
    * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
@@ -4681,7 +4899,7 @@ model SessionHostConfigurationPatchProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model SessionHostManagementUpdateStatusProperties {
   /**
-   * The Log Analytics.
+   * The correlation Id for Log Analytics..
    */
   correlationId?: string;
 
@@ -4699,6 +4917,61 @@ model SessionHostManagementUpdateStatusProperties {
    * SessionHostManagement properties used for the operation.
    */
   sessionHostManagement?: SessionHostManagement;
+}
+
+/**
+ * Properties bag for sessionHostManagement Provisioning Statuses.
+ */
+model SessionHostManagementProvisioningStatusProperties {
+  /**
+   * The correlation Id for Log Analytics.
+   */
+  correlationId?: string;
+
+  /**
+   * Progress information on the sessionHostManagement operation.
+   */
+  progress?: SessionHostManagementProvisioningOperationProgress;
+
+  /**
+   * The timestamp that the update is scheduled for.
+   */
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * SessionHostManagement properties used for the operation.
+   */
+  sessionHostManagement?: SessionHostManagement;
+}
+
+/**
+ * SessionHostManagement Provisioning Operation Progress information.
+ */
+model SessionHostManagementProvisioningOperationProgress {
+  /**
+   * Time that the sessionHostManagement operation was created.
+   */
+  executionStartTime?: utcDateTime;
+
+  /**
+   * The number of sessionHosts in progress in the sessionHostManagement provisioning operation
+   */
+  sessionHostsInProgress?: int32;
+
+  /**
+   * The number of sessionHosts completed in the sessionHostManagement provisioning operation.
+   */
+  sessionHostsCompleted?: int32;
+
+  /**
+   * The final instance count of the host pool for this provisioning operation.
+   */
+  finalSessionHostsCount?: int32;
+
+  /**
+   * The initial instance count of the host pool for this provisioning operation.
+   */
+  initialSessionHostsCount?: int32;
 }
 
 /**
@@ -4862,18 +5135,38 @@ model StatusProperty {
   /**
    * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
    */
-  status: SessionHostManagementUpdateOperationStatus;
+  status: updateStatus;
 }
 
 /**
- * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+ * Operation status.
+ */
+model ProvisioningOperationStatusProperty {
+  /**
+   * Operation status.
+   */
+  status: SessionHostManagementProvisioningOperationStatus;
+}
+
+/**
+ * Properties bag for sessionHostManagement Update Statuses.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
 model UpdateStatusProperty {
   /**
-   * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+   * Properties bag for sessionHostManagement Update Statuses.
    */
   properties?: SessionHostManagementUpdateStatusProperties;
+}
+
+/**
+ * Properties bag for sessionHostManagement Provisioning Statuses.
+ */
+model ProvisioningStatusProperty {
+  /**
+   * The custom properties of the SessionHost Provisioning Status.
+   */
+  properties?: SessionHostManagementProvisioningStatusProperties;
 }
 
 /**
