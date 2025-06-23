@@ -133,7 +133,7 @@ export async function checkBreakingChangeOnSameVersion(
  *    applyRules() function
  *
  *    which uses the oadMessagesRuleMap.ts config to schedule
- *    appropriate "review required" labels to be added downstream by doBreakingChangeDetection() calling addBreakingChangeLabels()
+ *    appropriate "review required" labels to be added downstream by doBreakingChangeDetection() calling addBreakingChangeLabelsToBeAdded()
  *    as well as updates the OAD messages severity.
  *
  * 3. It saves the OadMessage[] collection to the unified pipeline store ("pipe.log" file) in call to:

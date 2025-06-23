@@ -21,8 +21,11 @@ export type SpecsBreakingChangesLabel =
   | ValidBreakingChangeApproval
   | ValidVersioningApproval;
 
-export type ReviewRequiredLabel = "VersioningReviewRequired" | "BreakingChangeReviewRequired";
-
+export const BreakingChangeReviewRequiredLabel = "BreakingChangeReviewRequired";
+export const VersioningReviewRequiredLabel = "VersioningReviewRequired";
+export type ReviewRequiredLabel =
+  | typeof BreakingChangeReviewRequiredLabel
+  | typeof VersioningReviewRequiredLabel;
 export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChange-Approved-*";
 
 export type ValidVersioningApproval =

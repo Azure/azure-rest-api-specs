@@ -26,6 +26,7 @@ import {
   cleanDummySwagger,
   isSameVersionBreakingType,
   getCreatedDummySwaggerCount,
+  outputBreakingChangeLabelVariables,
 } from "./command-helpers.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
 import { LOG_PREFIX, logMessage } from "./log.js";
@@ -50,7 +51,7 @@ import { LOG_PREFIX, logMessage } from "./log.js";
  *   Instead, they are saved to unified pipeline store within step 1.
  *
  * 3. Adds "review required" labels to ADO pipeline variable, in call to:
- *     ruleManager.addBreakingChangeLabels(comparisonType);
+ *     ruleManager.addBreakingChangeLabelsToBeAdded(comparisonType);
  *
  * 4. Outputs full list of the OAD messages to build log for human review, in call to:
  *     logFullOadMessagesList()
@@ -173,7 +174,8 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
       await checkBreakingChangeOnSameVersion(detectionContext));
     const comparedSpecsTableContent = generateOadMarkdown(oadTracer);
-    //TODO process breaking change labels
+    // process breaking change labels
+    outputBreakingChangeLabelVariables();
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
     if (process.exitCode === undefined || process.exitCode === 0) {

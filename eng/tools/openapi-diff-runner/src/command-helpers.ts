@@ -1,13 +1,18 @@
 import path from "node:path";
 import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { BreakingChangesCheckType, Context } from "./types/breaking-change.js";
+import {
+  BreakingChangesCheckType,
+  Context,
+  BreakingChangeReviewRequiredLabel,
+  VersioningReviewRequiredLabel,
+} from "./types/breaking-change.js";
 import { ResultMessageRecord } from "./types/message.js";
 import { getArgumentValue } from "./utils/common-utils.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { logMessage } from "./log.js";
+import { logMessage, setOutput } from "./log.js";
 
 /**
  * Parse the arguments.
@@ -58,13 +63,46 @@ export function initContext(): Context {
  * This set contains labels denoting which kind of review is required.
  *
  * Appropriate labels are added to this set by applyRules() function.
- *
- * This collection is then read by addBreakingChangeLabels().
  */
-export const BreakingChangeLabels = new Set<string>();
+export const BreakingChangeLabelsToBeAdded = new Set<string>();
 export let defaultBreakingChangeBaseBranch = "main";
 function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
   return runType === "SameVersion" ? "Swagger BreakingChange" : "BreakingChange(Cross-Version)";
+}
+
+/**
+ * Output the breaking change labels as GitHub Actions environment variables.
+ * This function checks the BreakingChangeLabelsToBeAdded set and sets the appropriate outputs.
+ */
+export function outputBreakingChangeLabelVariables(): void {
+  // Output the breaking change labels as GitHub Actions environment variables
+  if (BreakingChangeLabelsToBeAdded.size === 0) {
+    logMessage("None of the breaking change review labels need to be added.");
+    logMessage("Setting default breaking change labels to false.");
+    setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+    setOutput("breakingChangeReviewLabelValue", "false");
+    setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+    setOutput("versioningReviewLabelValue", "false");
+  } else {
+    if (BreakingChangeLabelsToBeAdded.has(BreakingChangeReviewRequiredLabel)) {
+      logMessage("'BreakingChangeReviewRequired' label needs to be added.");
+      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      setOutput("breakingChangeReviewLabelValue", "true");
+    } else {
+      logMessage("'BreakingChangeReviewRequired' label needs to be deleted.");
+      setOutput("breakingChangeReviewLabelName", BreakingChangeReviewRequiredLabel);
+      setOutput("breakingChangeReviewLabelValue", "false");
+    }
+    if (BreakingChangeLabelsToBeAdded.has(VersioningReviewRequiredLabel)) {
+      logMessage("'VersioningReviewRequired' label needs to be added.");
+      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      setOutput("versioningReviewLabelValue", "true");
+    } else {
+      logMessage("'VersioningReviewRequired' label needs to be deleted.");
+      setOutput("versioningReviewLabelName", VersioningReviewRequiredLabel);
+      setOutput("versioningReviewLabelValue", "false");
+    }
+  }
 }
 
 /**

@@ -10,7 +10,7 @@ import {
   ReviewRequiredLabel,
 } from "../types/breaking-change.js";
 import { OadMessage } from "../types/oad-types.js";
-import { BreakingChangeLabels } from "../command-helpers.js";
+import { BreakingChangeLabelsToBeAdded } from "../command-helpers.js";
 
 import {
   OadMessageRule,
@@ -109,8 +109,8 @@ function applyRule(
     // Specifically, it overrides the "BreakingChangeReviewRequired" label in the "Breaking change" column.
     labelToAdd = isSameVersionOnPreview ? "VersioningReviewRequired" : labelToAdd;
 
-    // Note: these labels are processed downstream by addBreakingChangeLabels().
-    BreakingChangeLabels.add(labelToAdd);
+    // Note: these labels are processed downstream by addBreakingChangeLabelsToBeAdded().
+    BreakingChangeLabelsToBeAdded.add(labelToAdd);
   }
 
   // Here by design the oadMessage.type is ignored and overridden by appliedSeverity.

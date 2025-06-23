@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
   initContext,
-  BreakingChangeLabels,
+  BreakingChangeLabelsToBeAdded,
   getSwaggerDiffs,
   buildPrInfo,
   changeBaseBranch,
@@ -13,8 +13,13 @@ import {
   cleanDummySwagger,
   isSameVersionBreakingType,
   getCreatedDummySwaggerCount,
+  outputBreakingChangeLabelVariables,
 } from "../src/command-helpers.js";
-import { Context } from "../src/types/breaking-change.js";
+import {
+  Context,
+  BreakingChangeReviewRequiredLabel,
+  VersioningReviewRequiredLabel,
+} from "../src/types/breaking-change.js";
 import { ResultMessageRecord } from "../src/types/message.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 
@@ -51,8 +56,8 @@ describe("command-helpers", () => {
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
 
-    // Clear BreakingChangeLabels set
-    BreakingChangeLabels.clear();
+    // Clear BreakingChangeLabelsToBeAdded set
+    BreakingChangeLabelsToBeAdded.clear();
 
     // Clean up any dummy swagger files between tests
     cleanDummySwagger();
@@ -166,17 +171,17 @@ describe("command-helpers", () => {
     });
   });
 
-  describe("BreakingChangeLabels", () => {
+  describe("BreakingChangeLabelsToBeAdded", () => {
     it("should be a Set that can be modified", () => {
-      expect(BreakingChangeLabels).toBeInstanceOf(Set);
-      expect(BreakingChangeLabels.size).toBe(0);
+      expect(BreakingChangeLabelsToBeAdded).toBeInstanceOf(Set);
+      expect(BreakingChangeLabelsToBeAdded.size).toBe(0);
 
-      BreakingChangeLabels.add("test-label");
-      expect(BreakingChangeLabels.has("test-label")).toBe(true);
-      expect(BreakingChangeLabels.size).toBe(1);
+      BreakingChangeLabelsToBeAdded.add("test-label");
+      expect(BreakingChangeLabelsToBeAdded.has("test-label")).toBe(true);
+      expect(BreakingChangeLabelsToBeAdded.size).toBe(1);
 
-      BreakingChangeLabels.clear();
-      expect(BreakingChangeLabels.size).toBe(0);
+      BreakingChangeLabelsToBeAdded.clear();
+      expect(BreakingChangeLabelsToBeAdded.size).toBe(0);
     });
   });
 
@@ -768,6 +773,122 @@ describe("command-helpers", () => {
       // Clean them
       cleanDummySwagger();
       expect(getCreatedDummySwaggerCount()).toBe(0);
+    });
+  });
+
+  describe("outputBreakingChangeLabelVariables", () => {
+    beforeEach(() => {
+      // Clear the labels set before each test
+      BreakingChangeLabelsToBeAdded.clear();
+    });
+
+    it("should set both labels to false when no labels need to be added", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      outputBreakingChangeLabelVariables();
+
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+    });
+
+    it("should set BreakingChangeReviewRequired to true when present in labels set", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
+
+      outputBreakingChangeLabelVariables();
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+    });
+
+    it("should set VersioningReviewRequired to true when present in labels set", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
+
+      outputBreakingChangeLabelVariables();
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "true");
+    });
+
+    it("should set both labels to true when both are present in labels set", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
+      BreakingChangeLabelsToBeAdded.add(VersioningReviewRequiredLabel);
+
+      outputBreakingChangeLabelVariables();
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "true");
+    });
+
+    it("should handle labels set with non-review labels", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
+
+      outputBreakingChangeLabelVariables();
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "false");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
+    });
+
+    it("should handle mixed labels including one review label", async () => {
+      const { setOutput } = await import("../src/log.js");
+
+      BreakingChangeLabelsToBeAdded.add("SomeOtherLabel");
+      BreakingChangeLabelsToBeAdded.add(BreakingChangeReviewRequiredLabel);
+
+      outputBreakingChangeLabelVariables();
+      expect(setOutput).toHaveBeenCalledWith(
+        "breakingChangeReviewLabelName",
+        BreakingChangeReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("breakingChangeReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith(
+        "versioningReviewLabelName",
+        VersioningReviewRequiredLabel,
+      );
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
   });
 });

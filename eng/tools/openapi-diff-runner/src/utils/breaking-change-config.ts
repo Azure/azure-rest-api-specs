@@ -1,4 +1,3 @@
-import { anyLabelMatches } from "../types/label.js";
 import {
   BreakingChangesCheckType,
   ReviewRequiredLabel,
@@ -45,12 +44,5 @@ export const breakingChangesCheckType: {
     ],
   },
 };
-
-export function anyApprovalLabelPresent(approvalType: BreakingChangesCheckType, labels: string[]) {
-  const labelsToMatchAgainst: string[] = [
-    breakingChangesCheckType[approvalType].approvalPrefixLabel,
-  ];
-  return anyLabelMatches(labelsToMatchAgainst, labels);
-}
 
 export const logFileName = "openapi-diff-runner.log";

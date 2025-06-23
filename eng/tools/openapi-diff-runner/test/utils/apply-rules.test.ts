@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { applyRules } from "../../src/utils/apply-rules.js";
 import { OadMessage } from "../../src/types/oad-types.js";
-import { BreakingChangeLabels } from "../../src/command-helpers.js";
+import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.js";
 import { logMessage, logWarning } from "../../src/log.js";
 
 // Mock the command-helpers module
 vi.mock("../../src/command-helpers.js", () => ({
-  BreakingChangeLabels: {
+  BreakingChangeLabelsToBeAdded: {
     add: vi.fn(),
     clear: vi.fn(),
     values: [],
@@ -81,7 +81,9 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe("stable");
-      expect(BreakingChangeLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
+      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
+        "BreakingChangeReviewRequired",
+      );
     });
 
     it("should apply matching rule for cross version scenario", () => {
@@ -92,7 +94,9 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe("stable");
-      expect(BreakingChangeLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
+      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
+        "BreakingChangeReviewRequired",
+      );
     });
 
     it("should downgrade error to warning for cross version against previous preview", () => {
@@ -103,7 +107,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe("preview");
-      expect(BreakingChangeLabels.add).not.toHaveBeenCalled();
+      expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
     it("should use VersioningReviewRequired label for same version preview", () => {
@@ -114,7 +118,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
       expect(result[0].groupName).toBe("preview");
-      expect(BreakingChangeLabels.add).toHaveBeenCalledWith("VersioningReviewRequired");
+      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith("VersioningReviewRequired");
     });
 
     it("should not add label for warning severity", () => {
@@ -125,7 +129,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe("stable");
-      expect(BreakingChangeLabels.add).not.toHaveBeenCalled();
+      expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
     it("should use fallback rule when no matching rule found", () => {
@@ -154,8 +158,10 @@ describe("apply-rules", () => {
       expect(result[0].groupName).toBe("stable");
       expect(result[1].type).toBe("Warning");
       expect(result[1].groupName).toBe("stable");
-      expect(BreakingChangeLabels.add).toHaveBeenCalledTimes(1);
-      expect(BreakingChangeLabels.add).toHaveBeenCalledWith("BreakingChangeReviewRequired");
+      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledTimes(1);
+      expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith(
+        "BreakingChangeReviewRequired",
+      );
     });
 
     it("should preserve original message properties", () => {
