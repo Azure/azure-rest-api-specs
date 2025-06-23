@@ -52,7 +52,7 @@ op getSupportedLanguages is CustomGetOperation<
 @summary("Translate Text")
 @doc("Translate Text")
 @sharedRoute
-@renamedFrom(APIVersion.v2025_05_01_preview,"translate")
+@renamedFrom(APIVersion.v2025_05_01_preview, "translate")
 @removed(APIVersion.v2025_05_01_preview)
 op translateV3 is CustomOperation<
   InputTextItem[],
@@ -73,7 +73,6 @@ op translate is CustomOperation<
   TranslationResult,
   ErrorResponse
 >;
-
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
