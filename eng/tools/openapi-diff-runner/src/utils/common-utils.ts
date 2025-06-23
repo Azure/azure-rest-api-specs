@@ -136,3 +136,61 @@ export function cutoffMsg(msg: string | undefined, size: number = 1024): string 
   }
   return msg.substring(0, size);
 }
+
+/**
+ * Post-processes the message of an error coming from OAD.
+ * Notably, the kind of errors that need post-processing is when OAD
+ * throws a runtime error because it has invoked AutoRest, it threw,
+ * and OAD has re-thrown it.
+ * We want to make such errors more readable, which we do here.
+ * Issue capturing this work and providing more context:
+ * https://github.com/Azure/azure-sdk-tools/issues/6998
+ */
+export function processOadRuntimeErrorMessage(
+  message: string,
+  stackTraceMaxLength: number,
+): string {
+  let outputMsg: string = "";
+
+  // Example "message" string, truncated with cutoffMsg():
+  //
+  //   Command failed: node "/mnt/vss/_work/_tasks/AzureApiValidation_5654d05d-82c1-48da-ad8f-161b817f6d41/0.0.59/common/temp/node_modules/.pnpm/https://github.com/Azure+oad@0.10.4/node_modules/autorest/dist/app.js" --v2 --input-file=specification/servicebus/resource-manager/Microsoft.ServiceBus/preview/2023-01-01-preview/namespace-preview.json --output-artifact=swagger-document.json --output-artifact=swagger-document.map --output-file=new --output-folder=/tmp\nERROR: Schema violation: Data does not match any schemas from 'oneOf'\n - file:///mnt/vss/_work/1/azure-rest-api-specs/specification/servicebus/resource-manager/Microsoft.ServiceBus/preview/2023-01-01-preview/namespace-preview.json:347:10 ($.paths["/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ServiceBus/namespaces/namespaceName/failover"].post["x-ms-examples"].NamespaceFailOver)\nFATAL: swagger-document/individual/schema-validator - FAILED\nFATAL: Error: [OperationAbortedException] Error occurred. Exiting.\nProcess() cancelled due to e
+  //
+  const oadAutorestInvocationRuntimeError =
+    message.startsWith("Command failed: node") && message.includes("autorest/dist/app.js");
+
+  if (oadAutorestInvocationRuntimeError) {
+    let lines: string[] = message.split(/[\r\n]+/);
+
+    const introLine: string =
+      `Breaking change detector (OAD) invoked AutoRest. AutoRest threw a runtime error. ` +
+      `First ${stackTraceMaxLength} lines of stack trace follow, indexed. ` +
+      `First line should contain AutoRest command line invocation details. ` +
+      `Remaining lines should contain the main message reported by AutoRest.`;
+
+    const stackTraceLines: string[] = lines
+      .slice(0, Math.min(stackTraceMaxLength, lines.length))
+      .filter((line) => line.length > 0)
+      .map((line, i) => `${i + 1}: ${line}`);
+
+    outputMsg = [introLine, "===================="]
+      .concat(stackTraceLines)
+      // We join with '<br/>' as this will display correctly as a line break inside
+      // a cell of a table generated in given GitHub check description.
+      // This '<br/>' will be interpreted downstream by
+      // 'msgInterfaceUtils.ts / commonHelper.renderExtra',
+      // as called by the 'checker.handlebars' template.
+      .join("<br/>");
+  } else {
+    outputMsg = cutoffMsg(message) || "";
+  }
+  return outputMsg;
+}
+
+/**
+ * Check if a spec path is a preview version
+ */
+export function specIsPreview(specPath: string): boolean {
+  // Example input value: specification/maps/data-plane/Creator/preview/2022-09-01-preview/wayfind.json
+  return specPath.includes("/preview/") && !specPath.includes("/stable/");
+}

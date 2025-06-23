@@ -1,5 +1,5 @@
 import { exit } from "node:process";
-import { detectBreakingChange } from "./commands.js";
+import { validateBreakingChange } from "./commands.js";
 import { buildPrInfo, initContext } from "./command-helpers.js";
 
 export async function main() {
@@ -11,6 +11,6 @@ export async function main() {
   const context = initContext();
   await buildPrInfo(context);
   let statusCode = 0;
-  statusCode = await detectBreakingChange(context);
+  statusCode = await validateBreakingChange(context);
   exit(statusCode);
 }

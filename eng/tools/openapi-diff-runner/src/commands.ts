@@ -1,6 +1,6 @@
 /**
  * By design, the only members exported from this file are:
- * - function detectBreakingChange()
+ * - function validateBreakingChange()
  * - let defaultBreakingChangeBaseBranch
  *
  * defaultBreakingChangeBaseBranch must be exported as it is a static variable. TODO: refactor it.
@@ -18,7 +18,10 @@ import {
   saveOadTrace,
   generateOadMarkdown,
 } from "./types/oad-types.js";
-import { BreakingChangeDetector } from "./breaking-change-detector.js";
+import {
+  createBreakingChangeDetectionContext,
+  checkBreakingChangeOnSameVersion,
+} from "./detect-breaking-change.js";
 import { BreakingChangesCheckType, Context } from "./types/breaking-change.js";
 import {
   getSwaggerDiffs,
@@ -33,7 +36,7 @@ import { generateBreakingChangeResultSummary } from "./generate-report.js";
 import { logMessage } from "./log.js";
 
 /**
- * The function detectBreakingChange() is executed with type SameVersion or CrossVersion, by
+ * The function validateBreakingChange() is executed with type SameVersion or CrossVersion, by
  * corresponding runScript functions in:
  * - breakingChangeValidationPipeline.ts
  * - crossVersionBreakingChangeValidationPipeline.ts
@@ -41,9 +44,9 @@ import { logMessage } from "./log.js";
  * Most importantly, this function does the following:
  *
  * 1. Invokes
- *     BreakingChangeDetector.checkBreakingChangeOnSameVersion()
+ *     detect-breaking-change.checkBreakingChangeOnSameVersion()
  *   or
- *     BreakingChangeDetector.checkCrossVersionBreakingChange(),
+ *     detect-breaking-change.checkCrossVersionBreakingChange(),
  *   depending on the input type.
  *
  * 2. Saves the PR context to the unified pipeline store ("pipe.log" file) in call to:
@@ -58,10 +61,10 @@ import { logMessage } from "./log.js";
  *     logFullOadMessagesList()
  * TODO: add breaking change labels
  */
-export async function detectBreakingChange(context: Context): Promise<number> {
+export async function validateBreakingChange(context: Context): Promise<number> {
   let statusCode: number = 0;
   let oadTracer = createOadTrace(context);
-  logMessage("ENTER definition detectBreakingChange");
+  logMessage("ENTER definition validateBreakingChange");
 
   logMessage(`PR target branch is ${context.prInfo ? context.prTargetBranch : ""}`);
 
@@ -157,7 +160,11 @@ export async function detectBreakingChange(context: Context): Promise<number> {
 
   if (context.prInfo) {
     oadTracer = setOadBaseBranch(oadTracer, context.prInfo.baseBranch);
-    const detector = new BreakingChangeDetector(context, needCompareOldSwaggers, oadTracer);
+    const detectionContext = createBreakingChangeDetectionContext(
+      context,
+      needCompareOldSwaggers,
+      oadTracer,
+    );
 
     let msgs: ResultMessageRecord[] = [];
     let runtimeErrors: RawMessageRecord[] = [];
@@ -169,7 +176,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
       : "CrossVersion";
 
     ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
-      await detector.checkBreakingChangeOnSameVersion());
+      await checkBreakingChangeOnSameVersion(detectionContext));
 
     saveOadTrace(oadTracer);
     const comparedSpecsTableContent = generateOadMarkdown(oadTracer);
@@ -199,7 +206,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     }
 
     logMessage(
-      `detectBreakingChange: prUrl: ${context.prUrl}, ` +
+      `validateBreakingChange: prUrl: ${context.prUrl}, ` +
         `comparisonType: ${comparisonType}, labelsAddedCount: , ` +
         `errorCnt: ${errorCnt}, oadViolationsCnt: ${oadViolationsCnt}, ` +
         `process.exitCode: ${process.exitCode}`,
@@ -209,7 +216,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
       // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 2/22/2024.
       // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
       logMessage(
-        `detectBreakingChange: ` +
+        `validateBreakingChange: ` +
           `Prevented spurious failure of breaking change check. prUrl: ${context.prUrl}, ` +
           `comparisonType: ${comparisonType}, oadViolationsCnt: ${oadViolationsCnt}, ` +
           `process.exitCode: ${process.exitCode}.`,
@@ -241,7 +248,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
 
   cleanDummySwagger();
 
-  logMessage("RETURN definition detectBreakingChange");
+  logMessage("RETURN definition validateBreakingChange");
 
   return statusCode;
 }
