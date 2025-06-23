@@ -2,24 +2,23 @@
   "operationId": "StorageDiscoveryWorkspaces_Update",
   "title": "Update a StorageDiscoveryWorkspace",
   "parameters": {
-    "storageDiscoveryWorkspaceName": "sampleworkspace",
+    "storageDiscoveryWorkspaceName": "Sample-Storage-Workspace",
     "resourceGroupName": "sample-rg",
-    "api-version": "2025-04-01-preview",
+    "api-version": "2025-06-01-preview",
     "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09",
     "properties": {
       "properties": {
         "sku": "Premium",
-        "workspaceState": "Disabled",
         "exportState": "Stopped",
         "workspaceRoots": [
           "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09"
         ],
         "description": "Updated Sample Storage Discovery Workspace",
-        "discoveryScopes": [
+        "scopes": [
           {
             "displayName": "Updated-Sample-Collection",
             "resourceTypes": [
-              "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+              "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
             ],
             "tagKeysOnly": [
               "updated-filtertag1",
@@ -32,7 +31,7 @@
           }
         ],
         "destinations": {
-          "storageAccountResourceId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+          "storageAccountResourceId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
         }
       }
     }
@@ -51,17 +50,16 @@
         "properties": {
           "provisioningState": "Succeeded",
           "sku": "Premium",
-          "workspaceState": "Disabled",
           "exportState": "Stopped",
           "workspaceRoots": [
             "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09"
           ],
           "description": "Updated Sample Storage Discovery Workspace",
-          "discoveryScopes": [
+          "scopes": [
             {
               "displayName": "Updated-Sample-Collection",
               "resourceTypes": [
-                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/updated-sample-storageAccount"
               ],
               "tagKeysOnly": [
                 "updated-filtertag1",
@@ -74,7 +72,7 @@
             }
           ],
           "destinations": {
-            "storageAccountResourceId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+            "storageAccountResourceId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
           }
         }
       }
