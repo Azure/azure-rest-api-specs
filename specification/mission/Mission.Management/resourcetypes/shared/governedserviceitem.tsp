@@ -66,7 +66,7 @@ model GovernedServiceItem {
   id: ServiceIdentifier;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Service ID")
+  @doc("Service identifier. Acceptable Values: AKS, AppService, ContainerRegistry, CosmosDB, KeyVault, MicrosoftSQL, Monitoring, PostgreSQL, ServiceBus, Storage, AzureFirewalls, Insights, Logic, PrivateDNSZones, DataConnectors")
   serviceId: ServiceIdentifier;
 
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
