@@ -4,7 +4,7 @@ import {
   getDeficitRow,
   rowToString,
 } from "./markdown-report-row.js";
-import { BrChMsgRecord, MessageLevel, ResultMessageRecord, getKey } from "./message.js";
+import { BrChMsgRecord, MessageLevel, ResultMessageRecord, getKey } from "../types/message.js";
 import { logMessage, LogLevel } from "../log.js";
 
 /**

@@ -5,7 +5,7 @@
  * i.e. it is invoked by files with depth 2.
  */
 import * as oad from "@azure/oad";
-import { getRelativeSwaggerPathToRepo } from "./utils.js";
+import { getRelativeSwaggerPathToRepo } from "./utils/common-utils.js";
 import { OadMessage, OadTrace } from "./types/oad-types.js";
 
 /**

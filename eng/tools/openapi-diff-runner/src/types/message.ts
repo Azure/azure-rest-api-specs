@@ -107,9 +107,3 @@ export type FilePosition = {
   readonly line: number;
   readonly column: number;
 };
-
-export type CheckResult = {
-  errorCount: number;
-  warningCount: number;
-  message: MessageRecord[];
-};

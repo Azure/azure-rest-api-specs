@@ -2,9 +2,9 @@ import path from "node:path";
 import { existsSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { BreakingChangesCheckType, Context } from "./types/breaking-change-check.js";
-import { getArgumentValue } from "./utils.js";
+import { getArgumentValue } from "./utils/common-utils.js";
 import { Logger } from "./logger.js";
-import { createPullRequestProperties } from "./types/pull-request.js";
+import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 
 /**
@@ -23,6 +23,7 @@ export function initContext(): Context {
   const swaggerDirs: string[] = ["specification", "dev"];
   const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
   const prNumber: string = getArgumentValue(args, "--number", "");
+  const runType = getArgumentValue(args, "--rt", "SameVersion") as BreakingChangesCheckType;
   const workingFolder: string = path.join(localSpecRepoPath, "..");
   const logFileFolder: string = path.join(workingFolder, "out/logs");
 
@@ -39,7 +40,8 @@ export function initContext(): Context {
     swaggerDirs,
     logFileFolder,
     baseBranch: getArgumentValue(args, "--bb", "main"),
-    runType: getArgumentValue(args, "--rt", "SameVersion") as BreakingChangesCheckType,
+    runType,
+    checkName: getBreakingChangeCheckName(runType),
     headCommit: getArgumentValue(args, "--hc", "HEAD"),
     repo,
     prNumber,
@@ -59,6 +61,9 @@ export function initContext(): Context {
  */
 export const BreakingChangeLabels = new Set<string>();
 export let defaultBreakingChangeBaseBranch = "main";
+function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
+  return runType === "SameVersion" ? "Swagger BreakingChange" : "BreakingChange(Cross-Version)";
+}
 
 /**
  * Get categorized changed files by calling the shared getCategorizedChangedFiles function.

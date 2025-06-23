@@ -9,13 +9,14 @@
  * i.e. it is invoked by files with depth 0 and invokes files with depth 2.
  */
 
-import { ResultMessageRecord } from "./types/message.js";
+import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import { mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from "node:fs";
 import * as path from "path";
 import { OadTrace } from "./types/oad-types.js";
 import { BreakingChangeDetector } from "./breaking-change-detector.js";
 import { BreakingChangesCheckType, Context } from "./types/breaking-change-check.js";
 import { getSwaggerDiffs } from "./command-helpers.js";
+import { generateBreakingChangeResultSummary } from "./generate-report.js";
 
 /**
  * The function detectBreakingChange() is executed with type SameVersion or CrossVersion, by
@@ -44,6 +45,7 @@ import { getSwaggerDiffs } from "./command-helpers.js";
  * TODO: add breaking change labels
  */
 export async function detectBreakingChange(context: Context): Promise<number> {
+  let statusCode: number = 0;
   const oadTracer = new OadTrace(context);
   console.log("ENTER definition detectBreakingChange");
 
@@ -144,6 +146,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
     const detector = new BreakingChangeDetector(context, needCompareOldSwaggers, oadTracer);
 
     let msgs: ResultMessageRecord[] = [];
+    let runtimeErrors: RawMessageRecord[] = [];
     let oadViolationsCnt: number = 0;
     let errorCnt: number = 0;
 
@@ -151,9 +154,11 @@ export async function detectBreakingChange(context: Context): Promise<number> {
       ? "SameVersion"
       : "CrossVersion";
 
-    ({ msgs, oadViolationsCnt, errorCnt } = await detector.checkBreakingChangeOnSameVersion());
+    ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
+      await detector.checkBreakingChangeOnSameVersion());
 
     oadTracer.save();
+    const comparedSpecsTableContent = oadTracer.genMarkdown();
     //TODO process breaking change labels
 
     // If exitCode is already defined and non-zero, we do not interfere with its value here.
@@ -196,8 +201,20 @@ export async function detectBreakingChange(context: Context): Promise<number> {
           `process.exitCode: ${process.exitCode}.`,
       );
     }
+    if (oadViolationsCnt > 0 || errorCnt > 0) {
+      // set statusCode to 1 if there are any OAD violations(errors) or runtime errors occurred.
+      statusCode = 1;
+    }
 
     logFullOadMessagesList(msgs);
+    await generateBreakingChangeResultSummary(
+      context,
+      msgs,
+      runtimeErrors,
+      comparedSpecsTableContent,
+      "",
+      statusCode,
+    );
     /*
     generateJunitReport(
       !isSameVersionBreakingType(type) ? "CrossVersionBreakingChange" : "BreakingChange",
@@ -212,7 +229,7 @@ export async function detectBreakingChange(context: Context): Promise<number> {
 
   console.log("RETURN definition detectBreakingChange");
 
-  return 0;
+  return statusCode;
 }
 
 const whitelistsBranches = ["ARMCoreRPDev", "rpsaasmaster"];

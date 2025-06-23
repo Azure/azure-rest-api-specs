@@ -1,6 +1,5 @@
 import { existsSync, readFileSync } from "node:fs";
-import { FilePosition } from "./types/message.js";
-7;
+import { FilePosition } from "../types/message.js";
 
 export function blobHref(file: unknown): string {
   // GitHub Actions scenario

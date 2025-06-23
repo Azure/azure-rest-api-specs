@@ -10,14 +10,26 @@ import {
   Context,
   logFileName,
 } from "./types/breaking-change-check.js";
-import { MessageLine, ResultMessageRecord } from "./types/message.js";
-import { blobHref, branchHref, cutoffMsg, getRelativeSwaggerPathToRepo } from "./utils.js";
+import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
+import {
+  blobHref,
+  branchHref,
+  cutoffMsg,
+  getRelativeSwaggerPathToRepo,
+} from "./utils/common-utils.js";
 import { appendFileSync } from "node:fs";
 import _ from "lodash";
 import * as path from "path";
 import { applyRules } from "./apply-rules.js";
 import { OadMessage, OadTrace } from "./types/oad-types.js";
 import { runOad } from "./run-oad.js";
+import { logError } from "./log.js";
+
+// We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
+// https://github.com/Azure/autorest/pull/4934
+// For console (diagnostic) logs we want to display the entire stack trace.
+// The value here is an arbitrary high number to limit the stack trace in case a bug would cause it to be excessively long.
+const stackTraceMaxLength = 500;
 
 /**
  * The entry points of the class BreakingChangeDetector are
@@ -27,16 +39,15 @@ import { runOad } from "./run-oad.js";
  * TODO migrate swaggerVersionManager to support cross-version checks
  */
 export class BreakingChangeDetector {
-  errors: Map<[string, string], RuntimeError[]>;
   tempTagName = "oad-default-tag";
   private msgs: ResultMessageRecord[] = [];
+  private runtimeErrors: RawMessageRecord[] = [];
 
   constructor(
     private context: Context,
     private oldSwaggers: string[],
     private oadTracer: OadTrace,
   ) {
-    this.errors = new Map<[string, string], RuntimeError[]>();
     this.context = context;
     this.oadTracer = oadTracer;
   }
@@ -50,6 +61,7 @@ export class BreakingChangeDetector {
    */
   async checkBreakingChangeOnSameVersion(): Promise<{
     msgs: ResultMessageRecord[];
+    runtimeErrors: RawMessageRecord[];
     oadViolationsCnt: number;
     errorCnt: number;
   }> {
@@ -76,6 +88,7 @@ export class BreakingChangeDetector {
 
     return {
       msgs: this.msgs,
+      runtimeErrors: this.runtimeErrors,
       oadViolationsCnt: aggregateOadViolationsCnt,
       errorCnt: aggregateErrorCnt,
     };
@@ -143,22 +156,26 @@ export class BreakingChangeDetector {
       );
       this.msgs = this.msgs.concat(msgs);
     } catch (e) {
-      const errors: RuntimeError[] = [];
-
-      errors.push({
-        error: e instanceof Error ? e : new Error(String(e)),
+      const error = e instanceof Error ? e : new Error(String(e));
+      const runtimeError: RawMessageRecord = {
+        type: "Raw",
+        level: "Error",
+        message: "Runtime Exception",
+        time: new Date(),
         groupName: previousApiVersionLifecycleStage,
-        old: branchHref(
-          getRelativeSwaggerPathToRepo(path.resolve(this.context.localSpecRepoPath, oldSpec)),
-          this.context.baseBranch,
-        ),
-        new: blobHref(getRelativeSwaggerPathToRepo(newSpec)),
-      });
-
-      this.errors = this.errors.set([oldSpec, newSpec], errors);
+        extra: {
+          new: blobHref(getRelativeSwaggerPathToRepo(newSpec)),
+          old: branchHref(
+            getRelativeSwaggerPathToRepo(path.resolve(this.context.localSpecRepoPath, oldSpec)),
+            this.context.baseBranch,
+          ),
+          details: processOadRuntimeErrorMessage(error.message, stackTraceMaxLength),
+        },
+      };
+      this.runtimeErrors.push(runtimeError);
       errorCnt += 1;
-
-      appendOadRuntimeErrors(errors);
+      appendFileSync(logFileName, JSON.stringify(runtimeError) + "\n");
+      logError(`appendOadRuntimeErrors: ${JSON.stringify(runtimeError)}`);
     }
 
     console.log(
@@ -171,44 +188,6 @@ export class BreakingChangeDetector {
 
     return { oadViolationsCnt, errorCnt };
   }
-}
-
-function appendOadRuntimeErrors(errors: RuntimeError[]) {
-  // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
-  // https://github.com/Azure/autorest/pull/4934
-  // But we also don't want to display too much, due to GitHub check description length limit,
-  // which would start causing truncation of messages: see buildCompletedBreakingChangeCheckText.ts / checkPaneLengthLimit.
-  const githubCheckPageStackTraceMaxLength = 20;
-
-  // For console (diagnostic) logs we want to display the entire stack trace.
-  // The value here is an arbitrary high number to limit the stack trace in case a bug would cause it to be excessively long.
-  const consoleLogStackTraceMaxLength = 500;
-
-  // This should have been done by one of the methods in logger.ts
-  appendFileSync(
-    logFileName,
-    JSON.stringify(getErrorResult(errors, githubCheckPageStackTraceMaxLength)) + "\n",
-  );
-  console.log(
-    `appendOadRuntimeErrors: ${JSON.stringify(
-      getErrorResult(errors, consoleLogStackTraceMaxLength),
-    )}`,
-  );
-}
-
-function getErrorResult(errors: RuntimeError[], stackTraceMaxLength: number): MessageLine {
-  return errors.map((it) => ({
-    type: "Raw",
-    level: "Error",
-    message: "Runtime Exception",
-    time: new Date(),
-    groupName: it.groupName,
-    extra: {
-      new: it.new,
-      old: it.old,
-      details: processOadRuntimeErrorMessage(it.error.message, stackTraceMaxLength),
-    },
-  }));
 }
 
 /**
@@ -262,10 +241,3 @@ function specIsPreview(specPath: string) {
   // Example input value: specification/maps/data-plane/Creator/preview/2022-09-01-preview/wayfind.json
   return specPath.includes("/preview/") && !specPath.includes("/stable/");
 }
-
-type RuntimeError = {
-  error: Error;
-  old: string;
-  new: string;
-  groupName?: ApiVersionLifecycleStage;
-};

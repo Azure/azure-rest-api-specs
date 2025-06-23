@@ -1,6 +1,6 @@
 import { Logger } from "../logger.js";
 import { anyLabelMatches } from "./label.js";
-import { PullRequestProperties } from "./pull-request.js";
+import { PullRequestProperties } from "../utils/pull-request.js";
 
 /**
  * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
@@ -100,6 +100,7 @@ export interface Context {
   baseBranch: string;
   headCommit: string;
   runType: BreakingChangesCheckType;
+  checkName: string;
   repo: string; // The format is: "owner/repoName"
   prNumber: string;
   prSourceBranch: string;

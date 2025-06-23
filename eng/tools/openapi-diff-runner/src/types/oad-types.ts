@@ -9,9 +9,9 @@
  *   https://github.com/Azure/azure-sdk-tools/issues/6374
  */
 import { basename } from "path";
-import { getVersionFromInputFile, specificBranchHref } from "../utils.js";
+import { getVersionFromInputFile, specificBranchHref } from "../utils/common-utils.js";
 import { MessageLevel } from "./message.js";
-import { sourceBranchHref } from "../utils.js";
+import { sourceBranchHref } from "../utils/common-utils.js";
 import { ApiVersionLifecycleStage, Context } from "./breaking-change-check.js";
 import { defaultBreakingChangeBaseBranch } from "../command-helpers.js";
 import { readFileSync } from "fs";
@@ -144,4 +144,3 @@ export type OadRuleCode =
   | "VersionsReversed"
   | "XmsEnumChanged"
   | "XmsLongRunningOperationChanged";
-7;

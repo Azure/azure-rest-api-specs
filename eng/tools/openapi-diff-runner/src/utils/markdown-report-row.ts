@@ -1,4 +1,4 @@
-import { BrChMsgRecord, JsonPath, ResultMessageRecord } from "./message.js";
+import { BrChMsgRecord, JsonPath, ResultMessageRecord } from "../types/message.js";
 
 /**
  * Represents a single row in the markdown table for GitHub check pane
