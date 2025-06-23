@@ -30,8 +30,13 @@ union DiagnosticDestination {
 
 @doc("Subnet Configuration")
 model SubnetConfiguration {
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Subnet name.")
   name: string;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Subnet name.")
+  subnetName: string;
 
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Subnet Resource ID.")
@@ -41,7 +46,7 @@ model SubnetConfiguration {
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Subnet Resource ID.")
   @visibility(Lifecycle.Read)
-  subnetResourceid?: SubnetResourceId;
+  subnetResourceId?: SubnetResourceId;
 
   @doc("Network prefix size.")
   networkPrefixSize: int32;

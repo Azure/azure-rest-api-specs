@@ -90,7 +90,7 @@ model GovernedServiceItem {
   auditOnly?: boolean;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Policies set to auditOnly (True or False).")
+  @doc("Enforcement mode for policy. AuditOnly, Enforce, or None.")
   policyAction?: "AuditOnly" | "Enforce" | "None" | string;
 
   @doc("Initiatives associated with this service.")

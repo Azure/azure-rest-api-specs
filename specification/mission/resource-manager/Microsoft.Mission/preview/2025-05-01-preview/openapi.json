@@ -5308,7 +5308,7 @@
         },
         "policyAction": {
           "type": "string",
-          "description": "Policies set to auditOnly (True or False).",
+          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None.",
           "enum": [
             "AuditOnly",
             "Enforce",
@@ -5814,11 +5814,11 @@
       "type": "object",
       "description": "Subnet Configuration",
       "properties": {
-        "name": {
+        "subnetName": {
           "type": "string",
           "description": "Subnet name."
         },
-        "subnetResourceid": {
+        "subnetResourceId": {
           "$ref": "#/definitions/SubnetResourceId",
           "description": "Subnet Resource ID.",
           "readOnly": true
@@ -5844,7 +5844,7 @@
         }
       },
       "required": [
-        "name",
+        "subnetName",
         "networkPrefixSize"
       ]
     },
