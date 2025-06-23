@@ -50,6 +50,9 @@ suppressions:
   - code: PostResponseCodes
     from: DTL.json
     reason: This is already released to customers, hence suppressing the rule for compatibility
+  - code: AvoidAdditionalProperties
+    from: DTL.json
+    reason: This is already released to customers with type object as a parameter, hence suppressing the rule for compatibility
 ```
 
 ### Tag: package-2016-05

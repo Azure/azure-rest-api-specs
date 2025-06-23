@@ -20,6 +20,19 @@ model Disk is Azure.ResourceManager.ProxyResource<DiskProperties, false> {
     SegmentName = "disks",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -49,6 +62,7 @@ interface Disks {
   /**
    * Allows modifying tags of disks. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Disk, PatchModel = DiskFragment>;
 
@@ -107,6 +121,8 @@ interface Disks {
 
 @@doc(Disk.name, "The name of the disk.");
 @@doc(Disk.properties, "The properties of the resource.");
+@@doc(Disk.location, "The location of the resource.");
+@@doc(Disk.tags, "The tags of the resource.");
 @@doc(Disks.createOrUpdate::parameters.resource, "A Disk.");
 @@doc(Disks.update::parameters.properties, "A Disk.");
 @@doc(Disks.attach::parameters.body, "Properties of the disk to attach.");

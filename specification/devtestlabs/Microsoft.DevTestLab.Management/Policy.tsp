@@ -20,6 +20,19 @@ model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties, false> {
     SegmentName = "policies",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -69,6 +82,7 @@ interface Policies {
   /**
    * Allows modifying tags of policies. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is PolicySetsOps.CustomPatchSync<Policy, PatchModel = PolicyFragment>;
 
@@ -113,5 +127,7 @@ interface Policies {
 
 @@doc(Policy.name, "The name of the policy.");
 @@doc(Policy.properties, "The properties of the resource.");
+@@doc(Policy.location, "The location of the resource.");
+@@doc(Policy.tags, "The tags of the resource.");
 @@doc(Policies.createOrUpdate::parameters.resource, "A Policy.");
 @@doc(Policies.update::parameters.properties, "A Policy.");

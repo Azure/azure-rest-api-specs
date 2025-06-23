@@ -22,6 +22,19 @@ model LabVirtualMachine
     SegmentName = "virtualmachines",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -56,6 +69,7 @@ interface LabVirtualMachines {
    * Allows modifying tags of virtual machines. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   @operationId("VirtualMachines_Update")
   update is ArmCustomPatchSync<
@@ -227,6 +241,8 @@ interface LabVirtualMachines {
 
 @@doc(LabVirtualMachine.name, "The name of the virtual machine.");
 @@doc(LabVirtualMachine.properties, "The properties of the resource.");
+@@doc(LabVirtualMachine.location, "The location of the resource.");
+@@doc(LabVirtualMachine.tags, "The tags of the resource.");
 @@doc(LabVirtualMachines.createOrUpdate::parameters.resource,
   "A virtual machine."
 );

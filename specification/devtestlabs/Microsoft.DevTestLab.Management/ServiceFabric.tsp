@@ -21,6 +21,19 @@ model ServiceFabric
     SegmentName = "servicefabrics",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -50,6 +63,7 @@ interface ServiceFabrics {
   /**
    * Allows modifying tags of service fabrics. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ServiceFabric,
@@ -120,5 +134,7 @@ interface ServiceFabrics {
 
 @@doc(ServiceFabric.name, "The name of the service fabric.");
 @@doc(ServiceFabric.properties, "The properties of the resource.");
+@@doc(ServiceFabric.location, "The location of the resource.");
+@@doc(ServiceFabric.tags, "The tags of the resource.");
 @@doc(ServiceFabrics.createOrUpdate::parameters.resource, "A Service Fabric.");
 @@doc(ServiceFabrics.update::parameters.properties, "A Service Fabric.");

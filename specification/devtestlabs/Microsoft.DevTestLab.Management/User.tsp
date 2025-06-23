@@ -20,6 +20,19 @@ model User is Azure.ResourceManager.ProxyResource<UserProperties> {
     SegmentName = "users",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -49,6 +62,7 @@ interface Users {
   /**
    * Allows modifying tags of user profiles. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<User, PatchModel = UserFragment>;
 
@@ -97,5 +111,7 @@ interface Users {
 
 @@doc(User.name, "The name of the user profile.");
 @@doc(User.properties, "The properties of the resource.");
+@@doc(User.location, "The location of the resource.");
+@@doc(User.tags, "The tags of the resource.");
 @@doc(Users.createOrUpdate::parameters.resource, "Profile of a lab user.");
 @@doc(Users.update::parameters.properties, "Profile of a lab user.");

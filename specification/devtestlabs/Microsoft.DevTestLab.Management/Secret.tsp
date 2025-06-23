@@ -20,6 +20,19 @@ model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
     SegmentName = "secrets",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -49,6 +62,7 @@ interface Secrets {
   /**
    * Allows modifying tags of secrets. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Secret, PatchModel = SecretFragment>;
 
@@ -93,5 +107,7 @@ interface Secrets {
 
 @@doc(Secret.name, "The name of the secret.");
 @@doc(Secret.properties, "The properties of the resource.");
+@@doc(Secret.location, "The location of the resource.");
+@@doc(Secret.tags, "The tags of the resource.");
 @@doc(Secrets.createOrUpdate::parameters.resource, "A secret.");
 @@doc(Secrets.update::parameters.properties, "A secret.");
