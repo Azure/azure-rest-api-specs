@@ -2647,6 +2647,7 @@
         },
         "securityMetadataUri": {
           "type": "string",
+          "format": "uri",
           "description": "If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM."
         },
         "performancePlus": {
@@ -2664,7 +2665,8 @@
         "instantAccessDurationMinutes": {
           "type": "integer",
           "format": "int64",
-          "description": "For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore."
+          "description": "For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore.",
+          "minimum": 1
         }
       },
       "required": [

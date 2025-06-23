@@ -841,7 +841,7 @@ model CreationData {
 
   /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM.*/
   @added(Versions.v2025_01_02)
-  securityMetadataUri?: string;
+  securityMetadataUri?: url;
 
   /**
    * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
@@ -862,6 +862,7 @@ model CreationData {
    * For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore.
    */
   @added(Versions.v2025_01_02)
+  @minValue(1)
   instantAccessDurationMinutes?: int64;
 }
 
