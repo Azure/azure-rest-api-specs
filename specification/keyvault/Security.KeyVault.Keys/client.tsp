@@ -2,6 +2,11 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
+
+@versioned(KeyVault.Versions)
+namespace Customizations;
 
 @@clientName(KeyVault, "Key", "java");
 @@clientName(KeyVault, "Client", "go");
@@ -12,11 +17,70 @@ using KeyVault;
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");
 @@clientName(KeyReleaseResult, "ReleaseKeyResult", "java");
+@@clientName(JsonWebKeyCurveName.P256, "P_256", "java");
+@@clientName(JsonWebKeyCurveName.P384, "P_384", "java");
+@@clientName(JsonWebKeyCurveName.P521, "P_521", "java");
+@@clientName(JsonWebKeyCurveName.P256_K, "P_256K", "java");
 @@clientName(JsonWebKeyCurveName, "KeyCurveName", "java");
 @@clientName(JsonWebKeyOperation, "KeyOperation", "java");
 @@clientName(JsonWebKeyType, "KeyType", "java");
 
 // Go configuration
+
+/**
+ * The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("Retrieves a list of individual key versions with the same key name.")
+@route("/keys/{key-name}/versions")
+@get
+op listKeyPropertiesVersions is KeyVaultOperation<
+  {
+    /**
+     * The name of the key.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+  },
+  KeyListResult
+>;
+
+/**
+ * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. This operation requires the keys/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("List keys in the specified vault.")
+@route("/keys")
+@get
+op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
+
+/**
+ * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/list permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
+@summary("Lists the deleted keys in the specified vault.")
+@route("/deletedkeys")
+@get
+op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
+
+@@override(getKeyVersions, listKeyPropertiesVersions, "go");
+@@override(getKeys, listKeyProperties, "go");
+@@override(getDeletedKeys, listDeletedKeyProperties, "go");
+
+@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "go");
+@@clientName(getKeys, "ListKeyProperties", "go");
+@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "go");
+
+// renaming KeyItem to KeyProperties.
+// renaming existing KeyProperties to something else
+// to avoid a naming conflict as it's not part of the public surface area
+@@clientName(KeyProperties, "ShouldNotGenerate", "go");
+@@clientName(KeyItem, "KeyProperties", "go");
+
 @@clientName(KeyCreateParameters, "CreateKeyParameters", "go");
 @@clientName(KeyExportParameters, "ExportKeyParameters", "go");
 @@clientName(KeyImportParameters, "ImportKeyParameters", "go");
@@ -26,12 +90,8 @@ using KeyVault;
 @@clientName(KeyUpdateParameters, "UpdateKeyParameters", "go");
 @@clientName(KeyVerifyParameters, "VerifyParameters", "go");
 @@clientName(GetRandomBytesRequest, "GetRandomBytesParameters", "go");
-@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "go");
-@@clientName(getKeys, "ListKeyProperties", "go");
-@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "go");
+
 @@clientName(DeletedKeyBundle, "DeletedKey", "go");
-@@clientName(KeyProperties, "KeyP", "go");
-@@clientName(KeyItem, "KeyProperties", "go");
 @@clientName(DeletedKeyItem, "DeletedKeyProperties", "go");
 @@clientName(DeletedKeyListResult, "DeletedKeyPropertiesListResult", "go");
 @@clientName(KeyListResult, "KeyPropertiesListResult", "go");

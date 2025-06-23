@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e",
+    "resourceGroupName": "sampleResourceGroup",
+    "dnsResolverName": "sampleDnsResolver",
+    "outboundEndpointName": "sampleOutboundEndpoint",
+    "parameters": {
+      "tags": {
+        "key1": "value1"
+      },
+      "location": "westus2",
+      "properties": {
+        "subnet": {
+          "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet"
+        }
+      }
+    },
+    "api-version": "2025-05-01"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints/sampleOutboundEndpoint",
+        "name": "sampleOutboundEndpoint",
+        "type": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "westus2",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "systemData": {
+          "createdByType": "Application",
+          "createdAt": "2021-04-01T01:01:01.1075056Z",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-04-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "subnet": {
+            "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/outboundEndpoints/sampleOutboundEndpoint",
+        "name": "sampleOutboundEndpoint",
+        "type": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "westus2",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "systemData": {
+          "createdByType": "Application",
+          "createdAt": "2021-04-01T01:01:01.1075056Z",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2021-04-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "subnet": {
+            "id": "/subscriptions/0403cfa9-9659-4f33-9f30-1f191c51d111/resourceGroups/sampleVnetResourceGroupName/providers/Microsoft.Network/virtualNetworks/sampleVirtualNetwork/subnets/sampleSubnet"
+          },
+          "provisioningState": "Succeeded",
+          "resourceGuid": "87b3e20a-5833-4c40-8ad7-c5160bb1c5bd"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/api/mresolver/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/locations/westus2/dnsResolverOperationResults/asyncOperationId?api-version=2025-05-01",
+        "Azure-AsyncOperation": "https://management.azure.com/api/mresolver/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/locations/westus2/dnsResolverOperationStatuses/asyncOperationId?api-version=2025-05-01"
+      }
+    }
+  }
+}
