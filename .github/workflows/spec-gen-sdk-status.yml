@@ -6,24 +6,40 @@ on:
 
 permissions:
   contents: read
+  checks: read
   statuses: write
+  id-token: write
 
 jobs:
   sdk-validation-status:
-    # Only run this job when the check run is from Azure Pipelines(SDK Validation) in the azure-sdk/public(id: 29ec6040-b234-4e31-b139-33dc4287b756) project
     if: |
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
-      contains(github.event.check_run.name, 'SDK Validation') &&
-      endsWith(github.event.check_run.external_id, '29ec6040-b234-4e31-b139-33dc4287b756')
-    name: "SDK Validation - Status"
+      contains(github.event.check_run.name, 'SDK Validation')
+    name: "SDK Validation Status"
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
             .github
-      
-      - name: "SDK Validation - Status"
+
+      # Only run the login and get token steps when the respository is azure-rest-api-specs-pr
+      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
+        name: Azure Login with Workload Identity Federation
+        uses: azure/login@v2
+        with:
+          client-id: "936c56f0-298b-467f-b702-3ad5bf4b15c1"
+          tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          allow-no-subscriptions: true
+
+      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
+        name: Get ADO Token via Managed Identity
+        run: |
+          # Get token for Azure DevOps resource
+          ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
+          echo "ADO_TOKEN=$ADO_TOKEN" >> $GITHUB_ENV
+
+      - name: "SDK Validation Set Status"
         id: sdk-validation-status
         uses: actions/github-script@v7
         with:
