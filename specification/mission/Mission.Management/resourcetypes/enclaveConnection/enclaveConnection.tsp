@@ -3,6 +3,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
+using TypeSpec.Versioning;
+
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
@@ -49,6 +51,7 @@ model EnclaveConnectionProperties {
   @doc("Source CIDR.")
   sourceCidr?: string;
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Source IP group Resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ipGroup?: IPGroupResourceId;

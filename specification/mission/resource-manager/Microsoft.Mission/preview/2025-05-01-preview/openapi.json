@@ -4158,10 +4158,6 @@
         "lastUpdatedAt"
       ]
     },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
-    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -4434,9 +4430,9 @@
           },
           "readOnly": true
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Managed resource group name.",
           "readOnly": true
         },
         "managedOnBehalfOfConfiguration": {
@@ -4449,18 +4445,27 @@
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
-        "allowEnclavePolicyOverride": {
-          "type": "boolean",
-          "description": "Allow enclaves to override community policies"
+        "policyOverride": {
+          "type": "string",
+          "description": "Allow enclaves to override community policies",
+          "enum": [
+            "Enclave",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "communityRoleAssignments": {
           "type": "array",
           "description": "Community role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "firewallSku": {
           "type": "string",
@@ -4540,18 +4545,27 @@
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
-        "allowEnclavePolicyOverride": {
-          "type": "boolean",
-          "description": "Allow enclaves to override community policies"
+        "policyOverride": {
+          "type": "string",
+          "description": "Allow enclaves to override community policies",
+          "enum": [
+            "Enclave",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "communityRoleAssignments": {
           "type": "array",
           "description": "Community role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "firewallSku": {
           "$ref": "#/definitions/FirewallSKU",
@@ -4770,14 +4784,6 @@
         "sourceCidr": {
           "type": "string",
           "description": "Source CIDR."
-        },
-        "ipGroup": {
-          "$ref": "#/definitions/IPGroupResourceId",
-          "description": "Source IP group Resource Id.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "destinationEndpointId": {
           "$ref": "#/definitions/DestinationEndpointResourceId",
@@ -5194,7 +5200,7 @@
       "type": "object",
       "description": "Enclave Virtual Network Properties",
       "properties": {
-        "name": {
+        "networkName": {
           "type": "string",
           "description": "Network Name."
         },
@@ -5219,20 +5225,12 @@
           "description": "Subnet Configurations.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "allowSubnetCommunication": {
           "type": "boolean",
           "description": "Allow Subnet Communication.",
-          "default": false,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectToAzureServices": {
-          "type": "boolean",
-          "description": "Connect to Azure Services (True or False).",
           "default": false,
           "x-ms-mutability": [
             "read",
@@ -5275,11 +5273,11 @@
       "type": "object",
       "description": "GovernedServiceItem Properties",
       "properties": {
-        "id": {
+        "serviceId": {
           "$ref": "#/definitions/ServiceIdentifier",
           "description": "Service ID"
         },
-        "name": {
+        "serviceName": {
           "type": "string",
           "description": "Service name.",
           "readOnly": true
@@ -5308,9 +5306,17 @@
             "modelAsString": true
           }
         },
-        "auditOnly": {
-          "type": "boolean",
-          "description": "Policies set to auditOnly (True or False)."
+        "policyAction": {
+          "type": "string",
+          "description": "Policies set to auditOnly (True or False).",
+          "enum": [
+            "AuditOnly",
+            "Enforce",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "initiatives": {
           "type": "array",
@@ -5322,20 +5328,8 @@
         }
       },
       "required": [
-        "id"
+        "serviceId"
       ]
-    },
-    "IPGroupResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Network/IpGroups"
-          }
-        ]
-      }
     },
     "InitiatorCallbackRequest": {
       "type": "object",
@@ -5478,24 +5472,6 @@
         }
       }
     },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "ManagedResourceGroup related properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of managed resource group"
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "MandatoryApprover": {
       "type": "object",
       "description": "Approver Metadata for approvals request.",
@@ -5555,12 +5531,9 @@
         "Failed",
         "Canceled",
         "Accepted",
-        "Created",
         "Creating",
-        "Deleted",
         "Deleting",
         "NotSpecified",
-        "Ready",
         "Running",
         "Updating"
       ],
@@ -5589,19 +5562,9 @@
             "description": "Provisioning State Type Accepted"
           },
           {
-            "name": "Created",
-            "value": "Created",
-            "description": "Provisioning State Type Created"
-          },
-          {
             "name": "Creating",
             "value": "Creating",
             "description": "Provisioning State Type Creating"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Provisioning State Type Deleted"
           },
           {
             "name": "Deleting",
@@ -5612,11 +5575,6 @@
             "name": "NotSpecified",
             "value": "NotSpecified",
             "description": "Provisioning State Type NotSpecified"
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Provisioning State Type Ready"
           },
           {
             "name": "Running",
@@ -5722,7 +5680,7 @@
       "type": "object",
       "description": "Role assignment item that indicates which principals should be assigned this role definition",
       "properties": {
-        "id": {
+        "roleDefinitionId": {
           "type": "string",
           "description": "Role definition identifier"
         },
@@ -5735,7 +5693,7 @@
         }
       },
       "required": [
-        "id"
+        "roleDefinitionId"
       ]
     },
     "ServiceIdentifier": {
@@ -5860,9 +5818,9 @@
           "type": "string",
           "description": "Subnet name."
         },
-        "id": {
+        "subnetResourceid": {
           "$ref": "#/definitions/SubnetResourceId",
-          "description": "Subnet ID.",
+          "description": "Subnet Resource ID.",
           "readOnly": true
         },
         "networkPrefixSize": {
@@ -5879,7 +5837,7 @@
           "description": "Address prefix.",
           "readOnly": true
         },
-        "networkSecurityGroupId": {
+        "networkSecurityGroupResourceId": {
           "$ref": "#/definitions/NsgResourceId",
           "description": "Network security group ID.",
           "readOnly": true
@@ -6146,9 +6104,9 @@
           },
           "readOnly": true
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Managed resource group name.",
           "readOnly": true
         },
         "managedOnBehalfOfConfiguration": {
@@ -6166,21 +6124,24 @@
           "description": "Enclave role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "workloadRoleAssignments": {
           "type": "array",
           "description": "Workload role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "governedServiceList": {
           "type": "array",
           "description": "Enclave specific policies",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "enclaveDefaultSettings": {
           "$ref": "#/definitions/EnclaveDefaultSettingsModel",
@@ -6234,21 +6195,24 @@
           "description": "Enclave role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "workloadRoleAssignments": {
           "type": "array",
           "description": "Workload role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "governedServiceList": {
           "type": "array",
           "description": "Enclave specific policies",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "enclaveDefaultSettings": {
           "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",

@@ -1,3 +1,11 @@
+// cspell:enableCompoundWords
+// cspell:words managedonbehalfofconfiguration
+
+import "@typespec/rest";
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
@@ -53,12 +61,23 @@ union ServiceIdentifier {
 
 @doc("GovernedServiceItem Properties")
 model GovernedServiceItem {
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Service ID")
   id: ServiceIdentifier;
 
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Service ID")
+  serviceId: ServiceIdentifier;
+
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Service name.")
   @visibility(Lifecycle.Read)
   name?: string;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Service name.")
+  @visibility(Lifecycle.Read)
+  serviceName?: string;
 
   @doc("Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
   option?: "Allow" | "Deny" | "ExceptionOnly" | "NotApplicable" | string;
@@ -66,8 +85,13 @@ model GovernedServiceItem {
   @doc("Initiative enforcement (Enabled or Disabled).")
   enforcement?: "Enabled" | "Disabled" | string;
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policies set to auditOnly (True or False).")
   auditOnly?: boolean;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Policies set to auditOnly (True or False).")
+  policyAction?: "AuditOnly" | "Enforce" | "None" | string;
 
   @doc("Initiatives associated with this service.")
   @visibility(Lifecycle.Read)

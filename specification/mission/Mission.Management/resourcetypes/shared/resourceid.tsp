@@ -1,7 +1,9 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @doc("Microsoft Mission Resource Provider management API.")
@@ -63,13 +65,6 @@ scalar StorageAccountResourceId
     }
   ]>;
 
-scalar EndpointResourceId
-  extends armResourceIdentifier<[
-    {
-      type: "Microsoft.Mission/virtualEnclaves/endpoints",
-    }
-  ]>;
-
 scalar EnclaveConnectionSourceResourceId
   extends armResourceIdentifier<[
     {
@@ -97,6 +92,7 @@ scalar TransitHubResourceId
     }
   ]>;
 
+@removed(Microsoft.Mission.Versions.v2025_05_01_preview)
 scalar IPGroupResourceId
   extends armResourceIdentifier<[
     {

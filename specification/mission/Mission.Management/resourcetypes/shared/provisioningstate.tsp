@@ -15,23 +15,14 @@ union ProvisioningState {
   @doc("Provisioning State Type Accepted")
   Accepted: "Accepted",
 
-  @doc("Provisioning State Type Created")
-  Created: "Created",
-
   @doc("Provisioning State Type Creating")
   Creating: "Creating",
-
-  @doc("Provisioning State Type Deleted")
-  Deleted: "Deleted",
 
   @doc("Provisioning State Type Deleting")
   Deleting: "Deleting",
 
   @doc("Provisioning State Type NotSpecified")
   NotSpecified: "NotSpecified",
-
-  @doc("Provisioning State Type Ready")
-  Ready: "Ready",
 
   @doc("Provisioning State Type Running")
   Running: "Running",

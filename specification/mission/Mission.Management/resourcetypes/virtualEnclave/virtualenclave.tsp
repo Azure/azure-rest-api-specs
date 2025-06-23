@@ -33,9 +33,15 @@ model SubnetConfiguration {
   @doc("Subnet name.")
   name: string;
 
-  @doc("Subnet ID.")
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Subnet Resource ID.")
   @visibility(Lifecycle.Read)
   id?: SubnetResourceId;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Subnet Resource ID.")
+  @visibility(Lifecycle.Read)
+  subnetResourceid?: SubnetResourceId;
 
   @doc("Network prefix size.")
   networkPrefixSize: int32;
@@ -47,15 +53,26 @@ model SubnetConfiguration {
   @visibility(Lifecycle.Read)
   addressPrefix?: string;
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Network security group ID.")
   @visibility(Lifecycle.Read)
   networkSecurityGroupId?: NsgResourceId;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Network security group ID.")
+  @visibility(Lifecycle.Read)
+  networkSecurityGroupResourceId?: NsgResourceId;
 }
 
 @doc("Enclave Virtual Network Properties")
 model EnclaveVirtualNetworkModel {
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Network Name.")
   name?: string;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Network Name.")
+  networkName?: string;
 
   @doc("Network Size.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -72,6 +89,7 @@ model EnclaveVirtualNetworkModel {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   allowSubnetCommunication?: boolean = false;
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Connect to Azure Services (True or False).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   connectToAzureServices?: boolean = false;
@@ -129,9 +147,15 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read)
   resourceCollection?: armResourceIdentifier[];
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed resource group configuration.")
   @visibility(Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Managed resource group name.")
+  @visibility(Lifecycle.Read)
+  managedResourceGroupName?: string;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed On Behalf Of Configuration.")
