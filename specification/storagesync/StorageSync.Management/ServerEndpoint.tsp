@@ -153,7 +153,7 @@ interface ServerEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ServerEndpoints_recallAction")
-  recallAction is ArmResourceActionAsync<
+  recallAction is ArmResourceActionSync<
     ServerEndpoint,
     RecallActionParameters,
     OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &

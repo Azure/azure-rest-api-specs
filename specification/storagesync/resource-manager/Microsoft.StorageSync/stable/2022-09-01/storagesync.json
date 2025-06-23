@@ -3090,10 +3090,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -3103,6 +3113,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -3187,7 +3205,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -3197,6 +3215,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -3245,9 +3271,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/WorkflowArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -3298,9 +3334,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Workflow"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -4102,10 +4148,6 @@
         "name": "NameAvailabilityReason",
         "modelAsString": false
       }
-    },
-    "OkResponse": {
-      "type": "object",
-      "description": "Standard OK response with Azure request tracking headers."
     },
     "OperationDirection": {
       "type": "string",

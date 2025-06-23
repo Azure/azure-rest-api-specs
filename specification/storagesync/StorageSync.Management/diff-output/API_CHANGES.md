@@ -27,11 +27,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].delete.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].delete.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}/recallAction'].post.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 
 ### Changes for `required`
 
@@ -106,12 +101,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.TagsObject__deleted` | deleted | `{"type":"object"}` |
-
-### Changes for `OkResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OkResponse__added` | added | `{"type":"object"}` |
 
 ### Changes for `PrivateEndpointConnection`
 

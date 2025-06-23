@@ -2214,10 +2214,30 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -2280,7 +2300,17 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -2313,6 +2343,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/WorkflowArray"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -2351,6 +2391,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Workflow"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -2936,9 +2986,6 @@
           "readOnly": true
         }
       }
-    },
-    "OkResponse": {
-      "type": "object"
     },
     "OperationDisplayInfo": {
       "type": "object",
