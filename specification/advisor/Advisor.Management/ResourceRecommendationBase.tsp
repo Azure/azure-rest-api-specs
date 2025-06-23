@@ -13,7 +13,7 @@ namespace Microsoft.Advisor;
 /**
  * Advisor Recommendation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model ResourceRecommendationBase
   is Azure.ResourceManager.ExtensionResource<RecommendationProperties> {
@@ -21,16 +21,18 @@ model ResourceRecommendationBase
     Resource = ResourceRecommendationBase,
     KeyName = "recommendationId",
     SegmentName = "recommendations",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ResourceRecommendationBases {
   /**
    * Obtains details of a cached recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_Get")
   get is ArmResourceRead<
     ResourceRecommendationBase,
@@ -41,7 +43,8 @@ interface ResourceRecommendationBases {
   /**
    * Update the tracked properties of a Recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Recommendations_Patch")
   patch is ArmCustomPatchSync<
@@ -54,7 +57,8 @@ interface ResourceRecommendationBases {
   /**
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Recommendations_List")
   list is ArmResourceListByParent<
     ResourceRecommendationBase,

@@ -20,17 +20,18 @@ model AdvisorScoreEntity
     Resource = AdvisorScoreEntity,
     KeyName = "name",
     SegmentName = "advisorScore",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
 @armResourceOperations
 interface AdvisorScoreEntities {
   /**
-   * Gets the advisor score.
+   * Gets score for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AdvisorScores_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("AdvisorScore_Get")
   get is ArmResourceRead<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -38,10 +39,11 @@ interface AdvisorScoreEntities {
   >;
 
   /**
-   * Gets the list of advisor scores.
+   * Gets advisor scores for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AdvisorScores_List")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("AdvisorScore_List")
   list is ArmResourceListByParent<
     AdvisorScoreEntity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

@@ -20,7 +20,7 @@ model MetadataEntity
     Resource = MetadataEntity,
     KeyName = "name",
     SegmentName = "metadata",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
@@ -29,7 +29,8 @@ interface MetadataEntities {
   /**
    * Gets the metadata entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RecommendationMetadata_Get")
   get is ArmResourceRead<
     MetadataEntity,
@@ -41,7 +42,8 @@ interface MetadataEntities {
   /**
    * Gets the list of metadata entities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RecommendationMetadata_List")
   list is ArmResourceListByParent<
     MetadataEntity,

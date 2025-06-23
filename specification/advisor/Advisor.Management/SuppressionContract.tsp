@@ -14,7 +14,7 @@ namespace Microsoft.Advisor;
 /**
  * The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 @parentResource(ResourceRecommendationBase)
 model SuppressionContract
@@ -23,7 +23,7 @@ model SuppressionContract
     Resource = SuppressionContract,
     KeyName = "name",
     SegmentName = "suppressions",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
@@ -32,7 +32,8 @@ interface SuppressionContracts {
   /**
    * Obtains the details of a suppression.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Suppressions_Get")
   get is ArmResourceRead<
     SuppressionContract,
@@ -44,8 +45,9 @@ interface SuppressionContracts {
   /**
    * Enables the snoozed or dismissed attribute of a recommendation. The snoozed or dismissed attribute is referred to as a suppression. Use this API to create or update the snoozed or dismissed status of a recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Suppressions_Create")
   create is ArmResourceCreateOrReplaceSync<
     SuppressionContract,
@@ -57,8 +59,8 @@ interface SuppressionContracts {
   /**
    * Enables the activation of a snoozed or dismissed recommendation. The snoozed or dismissed attribute of a recommendation is referred to as a suppression.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Suppressions_Delete")
   delete is ArmResourceDeleteSync<
     SuppressionContract,

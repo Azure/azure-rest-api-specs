@@ -22,11 +22,11 @@ model TriageRecommendation
     Resource = TriageRecommendation,
     KeyName = "recommendationId",
     SegmentName = "triageRecommendations",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TriageRecommendationOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -42,15 +42,16 @@ interface TriageRecommendationOps
         Resource = TriageRecommendation,
         KeyName = "recommendationId",
         SegmentName = "triageRecommendations",
-        NamePattern = ""
+        NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TriageRecommendations {
   /**
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
@@ -58,7 +59,7 @@ interface TriageRecommendations {
   /**
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
   list is TriageRecommendationOps.List<
@@ -82,7 +83,7 @@ interface TriageRecommendations {
   /**
    * Approve a triage recommendation for a given id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   approveTriageRecommendation is TriageRecommendationOps.ActionSync<
@@ -94,7 +95,7 @@ interface TriageRecommendations {
   /**
    * Reject an existing triage recommendation for a given id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject")
   @operationId("triageRecommendations_RejectTriageRecommendation")
   rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
@@ -106,7 +107,7 @@ interface TriageRecommendations {
   /**
    * Reset an existing triage recommendation for a given id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset")
   @operationId("triageRecommendations_ResetTriageRecommendation")
   resetTriageRecommendation is TriageRecommendationOps.ActionSync<

@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the PUT operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the PUT operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
     @put
@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the delete operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @doc("Delete a {name}", Resource)
     @delete
@@ -156,7 +156,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Parameters Optional. Additional parameters after the path parameters
      * @template Response Optional. The success response(s) for the delete operation
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "Valid"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @doc("Delete a {name}", Resource)
     @delete
     @deletesResource(Resource)
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)
     @post
@@ -279,8 +279,8 @@ namespace Azure.ResourceManager.Legacy {
      * @template Response The response model for the action
      * @template Parameters Optional. Additional parameters after the path parameters
      */
-    #suppress "@azure-tools/typespec-azure-core/no-response-body" "ARM"
-    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "template"
+    #suppress "@azure-tools/typespec-azure-core/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @autoRoute
     @armResourceAction(Resource)
     @Private.enforceConstraint(Resource, Foundations.Resource)

@@ -21,11 +21,11 @@ model TriageResource
     Resource = TriageResource,
     KeyName = "recommendationResourceId",
     SegmentName = "triageResources",
-    NamePattern = ""
+    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TriageResourceOps
   extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
       {
@@ -41,15 +41,16 @@ interface TriageResourceOps
         Resource = TriageRecommendation,
         KeyName = "recommendationId",
         SegmentName = "triageRecommendations",
-        NamePattern = ""
+        NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TriageResources {
   /**
    * Get a triage resource for a given review and recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}")
   @operationId("triageResources_Get")
   get is TriageResourceOps.Read<
@@ -67,12 +68,13 @@ interface TriageResources {
   /**
    * List all triage resources that belong to a review and recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources")
   @operationId("triageResources_List")
   list is TriageResourceOps.List<
     TriageResource,
     Parameters = {
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       recommendationId: string;
     },

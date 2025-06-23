@@ -442,11 +442,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore": {
       "get": {
-        "operationId": "AdvisorScores_List",
+        "operationId": "AdvisorScore_List",
         "tags": [
           "AdvisorScoreEntities"
         ],
-        "description": "Gets the list of advisor scores.",
+        "description": "Gets advisor scores for a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -468,21 +468,16 @@
               "$ref": "#/definitions/ArmErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ListAdvisorScore": {
-            "$ref": "./examples/ListAdvisorScore.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore/{name}": {
       "get": {
-        "operationId": "AdvisorScores_Get",
+        "operationId": "AdvisorScore_Get",
         "tags": [
           "AdvisorScoreEntities"
         ],
-        "description": "Gets the advisor score.",
+        "description": "Gets score for a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -510,11 +505,6 @@
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetAdvisorScoreDetail": {
-            "$ref": "./examples/GetAdvisorScoreDetail.json"
           }
         }
       }
@@ -792,7 +782,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}": {
       "put": {
         "operationId": "Configurations_CreateInSubscription",
-        "summary": "Create/Overwrite Azure Advisor configuration.",
+        "summary": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
         "description": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
         "parameters": [
           {
@@ -855,7 +845,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations": {
       "post": {
         "operationId": "Recommendations_Generate",
-        "description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a cache in the Advisor service.",
+        "summary": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.",
+        "description": "Initiates the recommendation generation or computation process for a subscription. This operation is asynchronous. The generated recommendations are stored in a database so they can be retrieved later.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -892,6 +883,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/generateRecommendations/{operationId}": {
       "get": {
         "operationId": "Recommendations_GetGenerateStatus",
+        "summary": "Retrieves the status of the recommendation computation or generation process. Invoke it after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
         "description": "Retrieves the status of the recommendation computation or generation process. Invoke this API after calling the generation recommendation. The URI of this API is returned in the Location field of the response header.",
         "parameters": [
           {
@@ -940,7 +932,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/predict": {
       "post": {
         "operationId": "Predict",
-        "summary": "Predicts a recommendation.",
+        "summary": "Predicts Microsoft.Advisor services.",
         "description": "Predicts a recommendation.",
         "parameters": [
           {
@@ -1587,7 +1579,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "operationId": "Configurations_ListByResourceGroup",
-        "summary": "Retrieve Azure Advisor configurations.",
+        "summary": "Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.",
         "description": "Retrieve Azure Advisor configurations.",
         "parameters": [
           {
@@ -1743,8 +1735,7 @@
           "description": "The historic Advisor score data.",
           "items": {
             "$ref": "#/definitions/TimeSeriesEntity"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

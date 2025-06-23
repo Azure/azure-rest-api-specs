@@ -29,7 +29,7 @@ interface AssessmentResults {
   /**
    * Get a existing Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Assessments_Get")
   get is ArmResourceRead<
     AssessmentResult,
@@ -39,7 +39,7 @@ interface AssessmentResults {
   /**
    * Create or Overwrite Azure Advisor assessment resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Assessments_Put")
   put is ArmResourceCreateOrReplaceSync<
     AssessmentResult,
@@ -49,7 +49,7 @@ interface AssessmentResults {
   /**
    * Delete a existing Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Assessments_Delete")
   delete is ArmResourceDeleteSync<
     AssessmentResult,
@@ -59,7 +59,7 @@ interface AssessmentResults {
   /**
    * Get list of Azure Advisor assessment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Assessments_List")
   list is ArmResourceListByParent<
     AssessmentResult,
