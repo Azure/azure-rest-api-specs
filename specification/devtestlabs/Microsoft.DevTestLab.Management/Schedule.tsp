@@ -20,6 +20,19 @@ model Schedule
     SegmentName = "schedules",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -68,6 +81,7 @@ interface Schedules {
    * Allows modifying tags of schedules. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   @operationId("GlobalSchedules_Update")
   update is ScheduleOps.CustomPatchSync<
@@ -219,6 +233,7 @@ interface ScheduleOperationGroup {
    * Allows modifying tags of schedules. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   @operationId("Schedules_Update")
   update is ScheduleOperationGroupOps.CustomPatchSync<
@@ -336,6 +351,7 @@ interface ServiceFabricSchedules {
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ServiceFabricScheduleOps.CustomPatchSync<
     Schedule,
@@ -432,6 +448,7 @@ interface VirtualMachineSchedules {
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineScheduleOps.CustomPatchSync<
     Schedule,
@@ -484,6 +501,8 @@ interface VirtualMachineSchedules {
 
 @@doc(Schedule.name, "The name of the schedule.");
 @@doc(Schedule.properties, "The properties of the resource.");
+@@doc(Schedule.location, "The location of the resource.");
+@@doc(Schedule.tags, "The tags of the resource.");
 @@doc(Schedules.createOrUpdate::parameters.resource, "A schedule.");
 @@doc(Schedules.update::parameters.properties, "A schedule.");
 @@doc(Schedules.retarget::parameters.body,

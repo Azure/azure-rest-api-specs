@@ -20,6 +20,19 @@ model NotificationChannel
     SegmentName = "notificationchannels",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -46,6 +59,7 @@ interface NotificationChannels {
   /**
    * Allows modifying tags of notification channels. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     NotificationChannel,
@@ -102,6 +116,8 @@ interface NotificationChannels {
 
 @@doc(NotificationChannel.name, "The name of the notification channel.");
 @@doc(NotificationChannel.properties, "The properties of the resource.");
+@@doc(NotificationChannel.location, "The location of the resource.");
+@@doc(NotificationChannel.tags, "The tags of the resource.");
 @@doc(NotificationChannels.createOrUpdate::parameters.resource,
   "A notification."
 );

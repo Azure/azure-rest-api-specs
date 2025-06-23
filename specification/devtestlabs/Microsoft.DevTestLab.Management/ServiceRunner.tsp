@@ -25,6 +25,19 @@ model ServiceRunner is Azure.ResourceManager.ProxyResource<{}> {
   >;
 
   /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
+
+  /**
    * The identity of the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -50,6 +63,8 @@ interface ServiceRunners {
 }
 
 @@doc(ServiceRunner.name, "The name of the service runner.");
+@@doc(ServiceRunner.location, "The location of the resource.");
+@@doc(ServiceRunner.tags, "The tags of the resource.");
 @@doc(ServiceRunners.createOrUpdate::parameters.resource,
   "A container for a managed identity to execute DevTest lab services."
 );

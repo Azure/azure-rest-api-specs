@@ -22,6 +22,19 @@ model VirtualNetwork
     SegmentName = "virtualnetworks",
     NamePattern = ""
   >;
+
+  /**
+   * The location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -51,6 +64,7 @@ interface VirtualNetworks {
   /**
    * Allows modifying tags of virtual networks. All other properties will be ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     VirtualNetwork,
@@ -102,6 +116,8 @@ interface VirtualNetworks {
 
 @@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "The properties of the resource.");
+@@doc(VirtualNetwork.location, "The location of the resource.");
+@@doc(VirtualNetwork.tags, "The tags of the resource.");
 @@doc(VirtualNetworks.createOrUpdate::parameters.resource,
   "A virtual network."
 );
