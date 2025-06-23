@@ -1133,6 +1133,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   type: AcsCallEndedByKind;
 
   /** The name of the call ended by. */
@@ -1315,6 +1316,9 @@ union CommunicationIdentifierModelKind {
 
   /** Microsoft Teams User */
   "microsoftTeamsUser",
+
+  /** Microsoft Teams App */
+  "microsoftTeamsApp",
 
   string,
 }

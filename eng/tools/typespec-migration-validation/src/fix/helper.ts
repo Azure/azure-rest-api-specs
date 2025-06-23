@@ -1,5 +1,5 @@
-export function checkPropertyAttributeDeleted(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, value: string}> {
-  const results: Array<{path: string, value: string}> = [];
+export function checkPropertyAttributeDeleted(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, value: string, key: string}> {
+  const results: Array<{path: string, value: string, key: string}> = [];
 
   if (!jsonObj || typeof jsonObj !== 'object') {
     return results;
@@ -16,7 +16,8 @@ export function checkPropertyAttributeDeleted(checkKey: string, jsonObj: any, cu
       // Store both the path and the value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
-        value: jsonObj[key]
+        value: jsonObj[key],
+        key: key
       });
     }
 
@@ -30,8 +31,8 @@ export function checkPropertyAttributeDeleted(checkKey: string, jsonObj: any, cu
   return results;
 }
 
-export function checkPropertyAttributeAdded(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, value: string}> {
-  const results: Array<{path: string, value: string}> = [];
+export function checkPropertyAttributeAdded(checkKey: string, jsonObj: any, currentPath: string = ''): Array<{path: string, value: string, key: string}> {
+  const results: Array<{path: string, value: string, key: string}> = [];
   if (!jsonObj || typeof jsonObj !== 'object') {
     return results;
   }
@@ -44,7 +45,8 @@ export function checkPropertyAttributeAdded(checkKey: string, jsonObj: any, curr
       // Store both the path and the value
       results.push({
         path: currentPath, // Use parent path since we're interested in the property that has this extension
-        value: jsonObj[key]
+        value: jsonObj[key],
+        key: key
       });
     }
 
