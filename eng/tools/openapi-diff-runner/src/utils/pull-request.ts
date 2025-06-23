@@ -2,7 +2,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
 import { Context } from "../types/breaking-change.js";
-import { logMessage } from "../log.js";
+import { logError, logMessage } from "../log.js";
 
 /**
  * Properties of Pull Request in Azure DevOps CI.
@@ -65,21 +65,26 @@ export const createPullRequestProperties = async (
   const originGitRepository = simpleGit({ ...options, baseDir: context.localSpecRepoPath });
   const branches = await originGitRepository.branch();
 
-  if (!branches.all.includes(sourceBranch)) {
-    await originGitRepository.branch([sourceBranch]);
-    logMessage(`finish creating source branch ${sourceBranch}`);
-  }
-  if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
-    await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
-    logMessage(`finish creating base branch ${baseBranch}`);
-  }
+  try {
+    if (!branches.all.includes(sourceBranch)) {
+      await originGitRepository.branch([sourceBranch]);
+      logMessage(`finish creating source branch ${sourceBranch}`);
+    }
+    if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
+      await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
+      logMessage(`finish creating base branch ${baseBranch}`);
+    }
 
-  if (!branches.all.includes(context.prTargetBranch)) {
-    await originGitRepository.branch([
-      context.prTargetBranch,
-      `remotes/origin/${context.prTargetBranch}`,
-    ]);
-    logMessage(`finish creating target branch ${context.prTargetBranch}`);
+    if (!branches.all.includes(context.prTargetBranch)) {
+      await originGitRepository.branch([
+        context.prTargetBranch,
+        `remotes/origin/${context.prTargetBranch}`,
+      ]);
+      logMessage(`finish creating target branch ${context.prTargetBranch}`);
+    }
+  } catch (error: any) {
+    logError(`Failed to create branch: ${error.message}`);
+    throw error;
   }
 
   // we have to clone the repository because we need to switch branches.
