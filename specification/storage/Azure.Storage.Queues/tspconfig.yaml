@@ -1,0 +1,22 @@
+parameters:
+  "service-dir":
+    default: "sdk/storage"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Microsoft.QueueStorage/{version-status}/{version}/queue.json"
+  "@azure-tools/typespec-rust":
+    package-dir: "azure_storage_queue"
+    crate-name: "azure_storage_queue"
+    crate-version: "0.1.0"
+    flavor: azure
+    temp-omit-doc-links: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
