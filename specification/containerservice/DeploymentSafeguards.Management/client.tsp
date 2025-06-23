@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.ContainerService, "ContainerServiceSafeguardsMgmtClient", "python");
+@@clientName(Microsoft.ContainerService,
+  "ContainerServiceSafeguardsMgmtClient",
+  "python"
+);
