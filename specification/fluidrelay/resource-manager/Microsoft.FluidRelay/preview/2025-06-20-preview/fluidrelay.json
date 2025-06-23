@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Fluid Relay",
-    "version": "2025-05-14-preview"
+    "version": "2025-06-20-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -848,6 +848,57 @@
             "description": "OK",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": "Error in operation.",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.FluidRelay/locations/{location}/operationstatus/{operationStatusId}": {
+      "get": {
+        "tags": [
+          "OperationStatus"
+        ],
+        "operationId": "FluidRelayServers_OperationStatus",
+        "x-ms-examples": {
+          "Workspace Operation Status": {
+            "$ref": "./examples/FluidRelayServers_OperationStatus.json"
+          }
+        },
+        "description": "The status of provisioning operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name where the operation status is located."
+          },
+          {
+            "name": "operationStatusId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation status Id."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
