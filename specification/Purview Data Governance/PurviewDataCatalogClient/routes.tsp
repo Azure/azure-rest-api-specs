@@ -547,7 +547,7 @@ op getsCriticalDataElement is Azure.Core.Foundations.Operation<
 
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @delete
-op deletsCriticalDataElement is Azure.Core.Foundations.Operation<
+op deletesCriticalDataElement is Azure.Core.Foundations.Operation<
   {
     @format("uuid")
     @path
@@ -773,7 +773,7 @@ op dataAsset is Azure.Core.Foundations.Operation<
 
 @route("/dataAssets/{dataAssetId}/relationships")
 @delete
-op deletsDataAsset is Azure.Core.Foundations.Operation<
+op deletesDataAsset is Azure.Core.Foundations.Operation<
   {
     @format("uuid")
     @path
@@ -928,7 +928,7 @@ op postsDataProduct is Azure.Core.Foundations.Operation<
 
 @route("/dataProducts/{dataProductId}/relationships")
 @delete
-op deletsDataProduct is Azure.Core.Foundations.Operation<
+op deletesDataProduct is Azure.Core.Foundations.Operation<
   {
     @format("uuid")
     @path
@@ -1203,7 +1203,7 @@ op okrObjectiveIdRelationships is Azure.Core.Foundations.Operation<
 
 @route("/objectives/{objectiveId}/relationships")
 @delete
-op delets2Okr is Azure.Core.Foundations.Operation<
+op deletes2Okr is Azure.Core.Foundations.Operation<
   {
     @path
     objectiveId: string;

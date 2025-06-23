@@ -443,10 +443,6 @@ model MicrosoftPurviewDataGovernanceCatalogModelCriticalDataElement {
 
   description?: string;
 
-  /**
-   * Dictionary of
-   * <components·hxkref·schemas·microsoft-purview-datagovernance-catalog-model-criticaldataelement·properties·contacts·additionalproperties>
-   */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
 
   managedAttributes?: MicrosoftPurviewDataGovernanceCatalogModelManagedAttribute[];
@@ -1072,10 +1068,6 @@ model MicrosoftPurviewDataGovernanceCatalogModelObjectiveWithAdditionalPropertie
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   targetDate?: utcDateTime;
 
-  /**
-   * Dictionary of
-   * <components·1qqzdxi·schemas·microsoft-purview-datagovernance-catalog-model-objectivewithadditionalproperties·properties·contacts·additionalproperties>
-   */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
 
   additionalProperties?: MicrosoftPurviewDataGovernanceCatalogModelObjectiveAdditionalProperties;
@@ -1162,10 +1154,6 @@ model MicrosoftPurviewDataGovernanceCatalogModelTerm {
   systemData?: MicrosoftPurviewDataGovernanceCatalogModelSystemDataWithExpired;
   description?: string;
 
-  /**
-   * Dictionary of
-   * <components·qhlu6r·schemas·microsoft-purview-datagovernance-catalog-model-term·properties·contacts·additionalproperties>
-   */
   contacts?: Record<MicrosoftPurviewDataGovernanceCatalogModelContactsValueInner[]>;
 
   @format("uuid")
