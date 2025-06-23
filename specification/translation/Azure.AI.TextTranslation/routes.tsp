@@ -68,7 +68,7 @@ op translateV3 is CustomOperation<
 @doc("Translate Text")
 @added(APIVersion.v2025_05_01_preview)
 op translate is CustomOperation<
-  TranslateBody,
+  TranslateBody[],
   TranslateParameters,
   TranslationResult,
   ErrorResponse
