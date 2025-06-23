@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 /**
  * Creates a data plane client for Purview Data Catalog.
  */
-@service(#{ title: "Purview Data Catalog Client" })
+@service(#{ title: "purviewdatacatalog" })
 @server(
   "{$host}",
   "Creates a data plane client for Purview Data Catalog.",
