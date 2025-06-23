@@ -1373,6 +1373,9 @@
           "create a managed disk from elastic san volume snapshot.": {
             "$ref": "./examples/diskExamples/Disk_Create_FromAnElasticSanVolumeSnapshot.json"
           },
+          "create a managed disk with availability policy.": {
+            "$ref": "./examples/diskExamples/Disk_CreateOrUpdate_AvailabilityPolicy.json"
+          },
           "create a managed disk with dataAccessAuthMode": {
             "$ref": "./examples/diskExamples/Disk_Create_WithDataAccessAuthMode.json"
           },
@@ -2169,6 +2172,9 @@
           },
           "Create a snapshot from an existing snapshot in the same or a different subscription.": {
             "$ref": "./examples/snapshotExamples/Snapshot_Create_FromAnExistingSnapshot.json"
+          },
+          "create a snapshot which can be instantly accessable.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_Create_InstantAccessSnapshot.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2522,6 +2528,40 @@
         ]
       }
     },
+    "AvailabilityPolicy": {
+      "type": "object",
+      "description": "In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM",
+      "properties": {
+        "actionOnDiskDelay": {
+          "$ref": "#/definitions/AvailabilityPolicyDiskDelay",
+          "description": "Determines on how to handle disks with slow I/O."
+        }
+      }
+    },
+    "AvailabilityPolicyDiskDelay": {
+      "type": "string",
+      "description": "Determines on how to handle disks with slow I/O.",
+      "enum": [
+        "None",
+        "AutomaticReattach"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityPolicyDiskDelay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Defaults to behavior without av policy specified, which is VM restart upon slow disk io."
+          },
+          {
+            "name": "AutomaticReattach",
+            "value": "AutomaticReattach",
+            "description": "Upon a disk io failure or slow response, try detaching then reattaching the disk."
+          }
+        ]
+      }
+    },
     "CopyCompletionError": {
       "type": "object",
       "description": "Indicates the error details if the background copy of a resource created via the CopyStart operation fails.",
@@ -2620,6 +2660,11 @@
         "provisionedBandwidthCopySpeed": {
           "$ref": "#/definitions/ProvisionedBandwidthCopyOption",
           "description": "If this field is set on a snapshot and createOption is CopyStart, the snapshot will be copied at a quicker speed."
+        },
+        "instantAccessDurationMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore."
         }
       },
       "required": [
@@ -3174,6 +3219,10 @@
           "description": "The UTC time when the ownership state of the disk was last changed i.e., the time the disk was last attached or detached from a VM or the time when the VM to which the disk was attached was deallocated or started.",
           "readOnly": true,
           "x-ms-client-name": "lastOwnershipUpdateTime"
+        },
+        "availabilityPolicy": {
+          "$ref": "#/definitions/AvailabilityPolicy",
+          "description": "Determines how platform treats disk failures"
         }
       },
       "required": [
@@ -3631,6 +3680,10 @@
         "optimizedForFrequentAttach": {
           "type": "boolean",
           "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
+        },
+        "availabilityPolicy": {
+          "$ref": "#/definitions/AvailabilityPolicy",
+          "description": "Determines how platform treats disk failures"
         }
       }
     },
@@ -4314,6 +4367,48 @@
         }
       ]
     },
+    "SnapshotAccessState": {
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "name": "InstantAccess",
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "name": "AvailableWithInstantAccess",
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
+          }
+        ]
+      }
+    },
     "SnapshotList": {
       "type": "object",
       "description": "The List Snapshots operation response.",
@@ -4440,6 +4535,11 @@
         "dataAccessAuthMode": {
           "$ref": "#/definitions/DataAccessAuthMode",
           "description": "Additional authentication requirements when exporting or uploading to a disk or snapshot."
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4557,6 +4657,11 @@
         "supportedCapabilities": {
           "$ref": "#/definitions/SupportedCapabilities",
           "description": "List of supported capabilities for the image from which the OS disk was created."
+        },
+        "snapshotAccessState": {
+          "$ref": "#/definitions/SnapshotAccessState",
+          "description": "The state of snapshot which determines the access availability of the snapshot.",
+          "readOnly": true
         }
       }
     },

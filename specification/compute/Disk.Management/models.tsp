@@ -237,6 +237,57 @@ union EncryptionType {
 }
 
 /**
+ * Determines on how to handle disks with slow I/O.
+ */
+@added(Versions.v2025_01_02)
+union AvailabilityPolicyDiskDelay {
+  string,
+
+  /**
+   * Defaults to behavior without av policy specified, which is VM restart upon slow disk io.
+   */
+  None: "None",
+
+  /**
+   * Upon a disk io failure or slow response, try detaching then reattaching the disk.
+   */
+  AutomaticReattach: "AutomaticReattach",
+}
+
+/**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2025_01_02)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
+}
+
+/**
  * Policy for accessing the disk via network.
  */
 union NetworkAccessPolicy {
@@ -485,6 +536,17 @@ model DiskSku {
 }
 
 /**
+ * In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM
+ */
+@added(Versions.v2025_01_02)
+model AvailabilityPolicy {
+  /**
+   * Determines on how to handle disks with slow I/O.
+   */
+  actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
+}
+
+/**
  * Disk resource properties.
  */
 model DiskProperties {
@@ -663,6 +725,12 @@ model DiskProperties {
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "LastOwnershipUpdateTime")
   lastOwnershipUpdateTime?: utcDateTime;
+
+  /**
+   * Determines how platform treats disk failures
+   */
+  @added(Versions.v2025_01_02)
+  availabilityPolicy?: AvailabilityPolicy;
 }
 
 /**
@@ -789,6 +857,12 @@ model CreationData {
    * If this field is set on a snapshot and createOption is CopyStart, the snapshot will be copied at a quicker speed.
    */
   provisionedBandwidthCopySpeed?: ProvisionedBandwidthCopyOption;
+
+  /**
+   * For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore.
+   */
+  @added(Versions.v2025_01_02)
+  instantAccessDurationMinutes?: int64;
 }
 
 /**
@@ -1073,6 +1147,12 @@ model DiskUpdateProperties {
    * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
   optimizedForFrequentAttach?: boolean;
+
+  /**
+   * Determines how platform treats disk failures
+   */
+  @added(Versions.v2025_01_02)
+  availabilityPolicy?: AvailabilityPolicy;
 }
 
 /**
@@ -1748,6 +1828,13 @@ model SnapshotProperties {
    * Additional authentication requirements when exporting or uploading to a disk or snapshot.
    */
   dataAccessAuthMode?: DataAccessAuthMode;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 /**
@@ -1843,6 +1930,13 @@ model SnapshotUpdateProperties {
    * List of supported capabilities for the image from which the OS disk was created.
    */
   supportedCapabilities?: SupportedCapabilities;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 @@doc(SnapshotList.value, "A list of snapshots.");
