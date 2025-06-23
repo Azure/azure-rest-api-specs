@@ -30,7 +30,7 @@ These are the global settings for the CognitiveServices API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-06-01
+tag: package-2025-07-01-preview
 ```
 
 ### Tag: package-2025-07-01-preview
