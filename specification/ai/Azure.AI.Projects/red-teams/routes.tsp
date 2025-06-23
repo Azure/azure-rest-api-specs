@@ -62,6 +62,7 @@ interface RedTeams {
     RedTeam
   >;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update the uploaded the result to an redteam run.")
   @route("runs:updateUpload/{name}")
