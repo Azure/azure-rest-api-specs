@@ -20,7 +20,7 @@ using Storage.Queue;
 
 @@clientName(Metrics.version, "version");
 @@clientName(Metrics.enabled, "enabled");
-@@clientName(Metrics.includeApis, "includeAPIs");
+@@clientName(Metrics.includeApis, "includeApis");
 @@clientName(Metrics.retentionPolicy, "retentionPolicy");
 
 @@clientName(CorsRule.allowedOrigins, "allowedOrigins");
@@ -53,13 +53,13 @@ using Storage.Queue;
 @@clientName(AccessPolicy.expiry, "expiry");
 @@clientName(AccessPolicy.permission, "permission");
 
-@@clientName(DequeuedMessageItem.messageId, "messageId");
-@@clientName(DequeuedMessageItem.insertionTime, "insertionTime");
-@@clientName(DequeuedMessageItem.expirationTime, "expirationTime");
-@@clientName(DequeuedMessageItem.popReceipt, "popReceipt");
-@@clientName(DequeuedMessageItem.timeNextVisible, "timeNextVisible");
-@@clientName(DequeuedMessageItem.dequeueCount, "dequeueCount");
-@@clientName(DequeuedMessageItem.messageText, "messageText");
+@@clientName(DequeuedMessage.messageId, "messageId");
+@@clientName(DequeuedMessage.insertionTime, "insertionTime");
+@@clientName(DequeuedMessage.expirationTime, "expirationTime");
+@@clientName(DequeuedMessage.popReceipt, "popReceipt");
+@@clientName(DequeuedMessage.timeNextVisible, "timeNextVisible");
+@@clientName(DequeuedMessage.dequeueCount, "dequeueCount");
+@@clientName(DequeuedMessage.messageText, "messageText");
 
 @@clientName(QueueMessage.messageText, "messageText");
 
@@ -69,8 +69,8 @@ using Storage.Queue;
 @@clientName(EnqueuedMessage.popReceipt, "popReceipt");
 @@clientName(EnqueuedMessage.timeNextVisible, "timeNextVisible");
 
-@@clientName(PeekedMessageItem.messageId, "messageId");
-@@clientName(PeekedMessageItem.insertionTime, "insertionTime");
-@@clientName(PeekedMessageItem.expirationTime, "expirationTime");
-@@clientName(PeekedMessageItem.dequeueCount, "dequeueCount");
-@@clientName(PeekedMessageItem.messageText, "messageText");
+@@clientName(PeekedMessage.messageId, "messageId");
+@@clientName(PeekedMessage.insertionTime, "insertionTime");
+@@clientName(PeekedMessage.expirationTime, "expirationTime");
+@@clientName(PeekedMessage.dequeueCount, "dequeueCount");
+@@clientName(PeekedMessage.messageText, "messageText");

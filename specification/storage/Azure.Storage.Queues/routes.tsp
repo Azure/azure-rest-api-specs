@@ -274,13 +274,12 @@ namespace Storage.Queue {
     setAccessPolicy is StorageOperation<
       {
         ...QueueNamePathParameter;
+        ...TimeoutParameter;
 
         /** The access control list for the queue. */
         #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
         @body
         queueAcl: ListOfSignedIdentifier;
-
-        ...TimeoutParameter;
       },
       {
         ...DateResponseHeader;
@@ -315,9 +314,7 @@ namespace Storage.Queue {
         ...VisibilityTimeoutParameter;
         ...TimeoutParameter;
       },
-      {
-        @body body: ListOfDequeuedMessageItem;
-      }
+      ListOfDequeuedMessage
     >;
 
     /**
@@ -368,7 +365,7 @@ namespace Storage.Queue {
         /**
          * A Message object which can be stored in a Queue
          */
-        @bodyRoot
+        @body
         queueMessage: QueueMessage;
       },
       ListOfEnqueuedMessage
@@ -397,7 +394,7 @@ namespace Storage.Queue {
         @query("numofmessages")
         numberOfMessages?: int32;
       },
-      ListOfPeekedMessageItem
+      ListOfPeekedMessage
     >;
   }
 
@@ -438,7 +435,7 @@ namespace Storage.Queue {
         /**
          * A Message object which can be stored in a Queue
          */
-        @bodyRoot
+        @body
         queueMessage?: QueueMessage;
       },
       {}
