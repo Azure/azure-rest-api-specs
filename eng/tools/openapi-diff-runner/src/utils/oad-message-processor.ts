@@ -68,8 +68,18 @@ export function createOadMessageProcessor(
   logFileFolder: string,
   prUrl: string,
 ): OadMessageProcessorContext {
+  const logFilePath = path.join(logFileFolder || ".", logFileName);
+
+  // Remove the log file if it exists
+  if (fs.existsSync(logFilePath)) {
+    fs.unlinkSync(logFilePath);
+  }
+
+  // Create the log file explicitly
+  fs.writeFileSync(logFilePath, "");
+
   return {
-    logFilePath: path.join(logFileFolder || ".", logFileName),
+    logFilePath,
     prUrl,
     messageCache: [],
   };
@@ -100,7 +110,7 @@ export function createMessageKey(message: OadMessage): string {
 export function appendToLogFile(logFilePath: string, msg: string): void {
   fs.appendFileSync(logFilePath, msg);
   fs.appendFileSync(logFilePath, "\n");
-  logMessage("appendMsg: " + msg);
+  logMessage("oad-message-processor.appendMsg: " + msg);
 }
 
 /**

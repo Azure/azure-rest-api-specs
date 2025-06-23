@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { applyRules } from "../../src/utils/apply-rules.js";
 import { OadMessage } from "../../src/types/oad-types.js";
 import { BreakingChangeLabels } from "../../src/command-helpers.js";
+import { logMessage, logWarning } from "../../src/log.js";
 
 // Mock the command-helpers module
 vi.mock("../../src/command-helpers.js", () => ({
@@ -9,6 +10,17 @@ vi.mock("../../src/command-helpers.js", () => ({
     add: vi.fn(),
     clear: vi.fn(),
     values: [],
+  },
+}));
+
+// Mock the log module
+vi.mock("../../src/log.js", () => ({
+  logMessage: vi.fn(),
+  logWarning: vi.fn(),
+  LogLevel: {
+    Info: "Info",
+    Warning: "Warning",
+    Error: "Error",
   },
 }));
 
@@ -56,13 +68,8 @@ const createTestOadMessage = (
 });
 
 describe("apply-rules", () => {
-  let consoleLogSpy: any;
-  let consoleWarnSpy: any;
-
   beforeEach(() => {
     vi.clearAllMocks();
-    consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-    consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
   });
 
   describe("applyRules", () => {
@@ -129,7 +136,7 @@ describe("apply-rules", () => {
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
       expect(result[0].groupName).toBe("stable");
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect(logWarning).toHaveBeenCalledWith(
         expect.stringContaining("No rule found for scenario"),
       );
     });
@@ -189,8 +196,8 @@ describe("apply-rules", () => {
 
       applyRules(oadMessages, "SameVersion", "stable");
 
-      expect(consoleLogSpy).toHaveBeenCalledWith("ENTER definition applyRules");
-      expect(consoleLogSpy).toHaveBeenCalledWith("RETURN definition applyRules");
+      expect(logMessage).toHaveBeenCalledWith("ENTER definition applyRules");
+      expect(logMessage).toHaveBeenCalledWith("RETURN definition applyRules");
     });
 
     it("should warn when rule has error severity but no label", () => {
@@ -201,7 +208,7 @@ describe("apply-rules", () => {
       const result = applyRules(oadMessages, "SameVersion", "stable");
 
       expect(result[0].type).toBe("Warning");
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect(logWarning).toHaveBeenCalledWith(
         expect.stringContaining("No rule found for scenario"),
       );
     });

@@ -3,7 +3,7 @@ import { appendFileSync } from "fs";
 /**
  * Log prefix for all messages from openapi-diff-runner
  */
-const LOG_PREFIX = "Runner-";
+export const LOG_PREFIX = "Runner-";
 
 export enum LogLevel {
   Error = "error",
@@ -22,11 +22,9 @@ export enum LogLevel {
  * @param level The log level (e.g., LogLevel.Group, LogLevel.EndGroup, LogLevel.Debug, LogLevel.Error).
  */
 export function logMessage(message: string, level?: LogLevel): void {
-  const prefixedMessage = LOG_PREFIX + message;
-
   switch (level) {
     case LogLevel.Group: {
-      console.log(`::group::${prefixedMessage}`);
+      console.log(`::group::${message}`);
       break;
     }
     case LogLevel.EndGroup: {
@@ -34,24 +32,24 @@ export function logMessage(message: string, level?: LogLevel): void {
       break;
     }
     case LogLevel.Debug: {
-      console.log(`::debug::${prefixedMessage}`);
+      console.log(`::debug::${message}`);
       break;
     }
     case LogLevel.Error: {
-      console.log(`::error::${prefixedMessage}`);
+      console.log(`::error::${message}`);
       break;
     }
     case LogLevel.Warn: {
-      console.log(`::warning::${prefixedMessage}`);
+      console.log(`::warning::${message}`);
       break;
     }
     case LogLevel.Notice: {
-      console.log(`::notice::${prefixedMessage}`);
+      console.log(`::notice::${message}`);
       break;
     }
     case LogLevel.Info:
     default: {
-      console.log(prefixedMessage);
+      console.log(message);
       break;
     }
   }
@@ -66,14 +64,12 @@ export function logMessage(message: string, level?: LogLevel): void {
  * @param col Column number (optional)
  */
 export function logError(message: string, file?: string, line?: number, col?: number): void {
-  const prefixedMessage = LOG_PREFIX + message;
-
   if (file) {
     const location = line && col ? `line=${line},col=${col}` : line ? `line=${line}` : "";
     const fileLocation = location ? `file=${file},${location}` : `file=${file}`;
-    console.log(`::error ${fileLocation}::${prefixedMessage}`);
+    console.log(`::error ${fileLocation}::${message}`);
   } else {
-    console.log(`::error::${prefixedMessage}`);
+    console.log(`::error::${message}`);
   }
 }
 
@@ -86,14 +82,12 @@ export function logError(message: string, file?: string, line?: number, col?: nu
  * @param col Column number (optional)
  */
 export function logWarning(message: string, file?: string, line?: number, col?: number): void {
-  const prefixedMessage = LOG_PREFIX + message;
-
   if (file) {
     const location = line && col ? `line=${line},col=${col}` : line ? `line=${line}` : "";
     const fileLocation = location ? `file=${file},${location}` : `file=${file}`;
-    console.log(`::warning ${fileLocation}::${prefixedMessage}`);
+    console.log(`::warning ${fileLocation}::${message}`);
   } else {
-    console.log(`::warning::${prefixedMessage}`);
+    console.log(`::warning::${message}`);
   }
 }
 

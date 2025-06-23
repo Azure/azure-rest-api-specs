@@ -110,17 +110,8 @@ export const generateOadMarkdown = (traceData: OadTraceData): string => {
     content += `|${basename(value.new)} |${getVersionFromInputFile(value.new, true)}([${traceData.context.headCommit}](${sourceBranchHref(value.new)}))|${getVersionFromInputFile(value.old, true)}([${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)}))|\n`;
   }
   content += `\n`;
+  appendMarkdownToLog(traceData.context.logger, content);
   return content;
-};
-
-/**
- * Saves the OAD trace by generating markdown and appending to logger
- */
-export const saveOadTrace = (traceData: OadTraceData): void => {
-  const markdown = generateOadMarkdown(traceData);
-  if (markdown) {
-    appendMarkdownToLog(traceData.context.logger, markdown);
-  }
 };
 
 // Codes correspond to members of openapi-diff ComparisonMessages:

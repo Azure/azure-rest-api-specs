@@ -12,12 +12,7 @@
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import { existsSync } from "node:fs";
 import * as path from "path";
-import {
-  createOadTrace,
-  setOadBaseBranch,
-  saveOadTrace,
-  generateOadMarkdown,
-} from "./types/oad-types.js";
+import { createOadTrace, setOadBaseBranch, generateOadMarkdown } from "./types/oad-types.js";
 import {
   createBreakingChangeDetectionContext,
   checkBreakingChangeOnSameVersion,
@@ -33,7 +28,7 @@ import {
   getCreatedDummySwaggerCount,
 } from "./command-helpers.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
-import { logMessage } from "./log.js";
+import { LOG_PREFIX, logMessage } from "./log.js";
 
 /**
  * The function validateBreakingChange() is executed with type SameVersion or CrossVersion, by
@@ -177,8 +172,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
     ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
       await checkBreakingChangeOnSameVersion(detectionContext));
-
-    saveOadTrace(oadTracer);
     const comparedSpecsTableContent = generateOadMarkdown(oadTracer);
     //TODO process breaking change labels
 
@@ -206,7 +199,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     }
 
     logMessage(
-      `validateBreakingChange: prUrl: ${context.prUrl}, ` +
+      `${LOG_PREFIX}validateBreakingChange: prUrl: ${context.prUrl}, ` +
         `comparisonType: ${comparisonType}, labelsAddedCount: , ` +
         `errorCnt: ${errorCnt}, oadViolationsCnt: ${oadViolationsCnt}, ` +
         `process.exitCode: ${process.exitCode}`,
@@ -216,7 +209,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       // We are using this log as a metric to track and measure impact of the work on improving "breaking changes" tooling. Log statement added around 2/22/2024.
       // See: https://github.com/Azure/azure-sdk-tools/issues/7223#issuecomment-1839830834
       logMessage(
-        `validateBreakingChange: ` +
+        `${LOG_PREFIX}validateBreakingChange: ` +
           `Prevented spurious failure of breaking change check. prUrl: ${context.prUrl}, ` +
           `comparisonType: ${comparisonType}, oadViolationsCnt: ${oadViolationsCnt}, ` +
           `process.exitCode: ${process.exitCode}.`,
@@ -236,10 +229,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       "",
       statusCode,
     );
-    /*
-    generateJunitReport(
-      !isSameVersionBreakingType(type) ? "CrossVersionBreakingChange" : "BreakingChange",
-    );*/
   } else {
     logMessage("!pr. Skipping the process of breaking change detection.");
   }
@@ -249,6 +238,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   cleanDummySwagger();
 
   logMessage("RETURN definition validateBreakingChange");
-
+  logMessage(`${LOG_PREFIX}validateBreakingChange: statusCode: ${statusCode}`);
   return statusCode;
 }

@@ -1,3 +1,5 @@
+import { logMessage, logWarning } from "../log.js";
+
 /**
  * Represents a GitHub label.
  * Currently used in the context of processing
@@ -61,7 +63,7 @@ export function applyLabelStateChange(
   labelsToRemove: Set<string>,
 ): void {
   if (label.shouldBePresent === undefined) {
-    console.warn(
+    logWarning(
       "ASSERTION VIOLATION! " +
         `Cannot applyStateChange for label '${label.name}' ` +
         "as its desired presence hasn't been defined. Returning early.",
@@ -71,32 +73,32 @@ export function applyLabelStateChange(
 
   if (!label.present && label.shouldBePresent) {
     if (!labelsToAdd.has(label.name)) {
-      console.log(
+      logMessage(
         `Label.applyStateChange: '${label.name}' was not present and should be present. Scheduling addition.`,
       );
       labelsToAdd.add(label.name);
     } else {
-      console.log(
+      logMessage(
         `Label.applyStateChange: '${label.name}' was not present and should be present. It is already scheduled for addition.`,
       );
     }
   } else if (label.present && !label.shouldBePresent) {
     if (!labelsToRemove.has(label.name)) {
-      console.log(
+      logMessage(
         `Label.applyStateChange: '${label.name}' was present and should not be present. Scheduling removal.`,
       );
       labelsToRemove.add(label.name);
     } else {
-      console.log(
+      logMessage(
         `Label.applyStateChange: '${label.name}' was present and should not be present. It is already scheduled for removal.`,
       );
     }
   } else if (label.present === label.shouldBePresent) {
-    console.log(
+    logMessage(
       `Label.applyStateChange: '${label.name}' is ${label.present ? "present" : "not present"}. This is the desired state.`,
     );
   } else {
-    console.warn(
+    logWarning(
       "ASSERTION VIOLATION! " +
         `Label.applyStateChange: '${label.name}' is ${label.present ? "present" : "not present"} while it should be ${label.shouldBePresent ? "present" : "not present"}. ` +
         `At this point of execution this should not happen.`,

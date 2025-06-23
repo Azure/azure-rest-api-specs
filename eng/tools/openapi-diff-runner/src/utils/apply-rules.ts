@@ -18,6 +18,7 @@ import {
   fallbackRule as fallbackOadMessageRule,
   oadMessagesRuleMap,
 } from "./oad-rule-map.js";
+import { logMessage, logWarning } from "../log.js";
 
 /**
  * The function applyRules() applies oadMessagesRuleMap to OAD messages returned by runOad().
@@ -32,7 +33,7 @@ export function applyRules(
   scenario: BreakingChangesCheckType,
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): OadMessage[] {
-  console.log("ENTER definition applyRules");
+  logMessage("ENTER definition applyRules");
   let outputOadMessages: OadMessage[] = [];
   let outputOadMessage: OadMessage;
 
@@ -44,7 +45,7 @@ export function applyRules(
     if (rule !== undefined) {
       outputOadMessage = applyRule(oadMessage, rule, previousApiVersionLifecycleStage);
     } else {
-      console.warn(
+      logWarning(
         `ASSERTION VIOLATION! No rule found for scenario: '${scenario}', oadMessage: '${JSON.stringify(
           oadMessage,
         )}'. Using fallback rule: '${JSON.stringify(fallbackOadMessageRule)}'.`,
@@ -65,7 +66,7 @@ export function applyRules(
     outputOadMessages.push(outputOadMessage);
   }
 
-  console.log("RETURN definition applyRules");
+  logMessage("RETURN definition applyRules");
   return outputOadMessages;
 }
 
@@ -94,7 +95,7 @@ function applyRule(
   let labelToAdd: ReviewRequiredLabel = fallbackLabel;
   if (addLabel) {
     if (rule.label == null) {
-      console.warn(
+      logWarning(
         `ASSERTION VIOLATION! Missing "label" for 'Error' severity rule '${JSON.stringify(
           rule,
         )}'. Using fallback label '${labelToAdd}'.`,
@@ -118,7 +119,7 @@ function applyRule(
     type: appliedSeverity,
   } as OadMessage;
 
-  console.log(
+  logMessage(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
       rule,
     )}', outputOadMessage: '${JSON.stringify(outputOadMessage)}'.`,

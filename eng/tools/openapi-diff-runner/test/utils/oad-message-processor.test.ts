@@ -261,7 +261,7 @@ describe("oad-message-processor", () => {
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       expect(mockAppendFileSync).toHaveBeenNthCalledWith(1, logFilePath, message);
       expect(mockAppendFileSync).toHaveBeenNthCalledWith(2, logFilePath, "\n");
-      expect(mockLogMessage).toHaveBeenCalledWith("appendMsg: " + message);
+      expect(mockLogMessage).toHaveBeenCalledWith("oad-message-processor.appendMsg: " + message);
     });
   });
 

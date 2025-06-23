@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { FilePosition } from "../types/message.js";
+import { logMessage } from "../log.js";
 
 export function blobHref(file: unknown): string {
   // GitHub Actions scenario
@@ -36,7 +37,7 @@ export function getTargetBranch(): string {
   // For GitHub Actions, use GITHUB_BASE_REF for pull requests, fallback to GITHUB_REF_NAME for direct pushes
   const githubBaseRef = process.env["GITHUB_BASE_REF"]; // Target branch for PR
   const githubRefName = process.env["GITHUB_REF_NAME"]; // Current branch name
-  console.log(
+  logMessage(
     `@@@@@ process.env['GITHUB_BASE_REF'] - ${githubBaseRef}, process.env['GITHUB_REF_NAME'] - ${githubRefName}`,
   );
 
@@ -44,7 +45,7 @@ export function getTargetBranch(): string {
   // For direct pushes, use GITHUB_REF_NAME (current branch) or fallback to "main"
   let result = githubBaseRef || githubRefName || "main";
   result = result.trim();
-  console.log(`>>>>> The target branch is: "${result}".`);
+  logMessage(`>>>>> The target branch is: "${result}".`);
   return result;
 }
 
