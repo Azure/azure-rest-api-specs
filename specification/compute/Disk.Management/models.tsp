@@ -77,6 +77,24 @@ union Architecture {
 }
 
 /**
+ * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
+ */
+@added(Versions.v2025_01_02)
+union SupportedSecurityOption {
+  string,
+
+  /**
+   * The disk supports creating Trusted Launch VMs.
+   */
+  TrustedLaunchSupported: "TrustedLaunchSupported",
+
+  /**
+   * The disk supports creating both Trusted Launch and Confidential VMs.
+   */
+  TrustedLaunchAndConfidentialVMSupported: "TrustedLaunchAndConfidentialVMSupported",
+}
+
+/**
  * This enumerates the possible sources of a disk's creation.
  */
 union DiskCreateOption {
@@ -690,6 +708,12 @@ model SupportedCapabilities {
    * CPU architecture supported by an OS disk.
    */
   architecture?: Architecture;
+
+  /**
+   * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
+   */
+  @added(Versions.v2025_01_02)
+  supportedSecurityOption?: SupportedSecurityOption;
 }
 
 /**

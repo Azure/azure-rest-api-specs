@@ -4585,7 +4585,35 @@
         "architecture": {
           "$ref": "#/definitions/Architecture",
           "description": "CPU architecture supported by an OS disk."
+        },
+        "supportedSecurityOption": {
+          "$ref": "#/definitions/SupportedSecurityOption",
+          "description": "Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM"
         }
+      }
+    },
+    "SupportedSecurityOption": {
+      "type": "string",
+      "description": "Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM",
+      "enum": [
+        "TrustedLaunchSupported",
+        "TrustedLaunchAndConfidentialVMSupported"
+      ],
+      "x-ms-enum": {
+        "name": "SupportedSecurityOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TrustedLaunchSupported",
+            "value": "TrustedLaunchSupported",
+            "description": "The disk supports creating Trusted Launch VMs."
+          },
+          {
+            "name": "TrustedLaunchAndConfidentialVMSupported",
+            "value": "TrustedLaunchAndConfidentialVMSupported",
+            "description": "The disk supports creating both Trusted Launch and Confidential VMs."
+          }
+        ]
       }
     },
     "TypeSpec.Http.OkResponse": {
