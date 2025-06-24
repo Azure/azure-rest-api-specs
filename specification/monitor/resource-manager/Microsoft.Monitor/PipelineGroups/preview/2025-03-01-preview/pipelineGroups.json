@@ -397,9 +397,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/validateTransformLanguageQuery": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/validateTransformLanguageProcessor": {
       "post": {
-        "operationId": "PipelineGroups_ValidateTransformLanguageQuery",
+        "operationId": "PipelineGroups_ValidateTransformLanguageProcessor",
         "tags": [
           "PipelineGroups"
         ],
@@ -458,6 +458,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Error response when validating a TransformLanguageProcessor expression": {
+            "$ref": "./examples/PipelineGroupValidateTransformLanguageProcessorError.json"
           }
         },
         "x-ms-long-running-operation-options": {
