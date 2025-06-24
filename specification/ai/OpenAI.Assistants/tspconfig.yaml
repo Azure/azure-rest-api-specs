@@ -28,6 +28,10 @@ options:
     model-namespace: false
     generate-protocol-methods: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.OpenAI.Assistants
+    model-namespace: false
+    generate-protocol-methods: false
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai-assistants"
     namespace: "com.azure.ai.openai.assistants"
@@ -40,9 +44,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "openai"
-    generateMetadata: false
-    generateTest: false
-    isModularLibrary: true
-    packageDetails:
+    generate-metadata: false
+    is-modular-library: true
+    package-details:
       name: "@azure/openai-assistants"
     flavor: azure

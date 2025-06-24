@@ -13,6 +13,7 @@ export function createMockGithub() {
     },
     rest: {
       actions: {
+        listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi
           .fn()
           .mockResolvedValue({ data: { artifacts: [] } }),
@@ -32,6 +33,7 @@ export function createMockGithub() {
         get: vi.fn(),
       },
       repos: {
+        createCommitStatus: vi.fn(),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
           data: [],
         }),
@@ -56,6 +58,13 @@ export function createMockCore() {
       console.log(`setOutput('${name}', '${value}')`),
     ),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
+    summary: {
+      // eslint-disable-next-line no-unused-vars
+      addRaw: vi.fn(function (content) {
+        return this; // Return 'this' for method chaining
+      }),
+      write: vi.fn().mockResolvedValue(undefined),
+    },
   };
 }
 

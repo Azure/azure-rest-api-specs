@@ -1293,6 +1293,11 @@ model ListTestRunQueryParams {
   @doc("Number of results in response.")
   @query
   maxpagesize?: int32 = 50;
+
+  @doc("Comma separated list of type of entities that have created the test run.")
+  @query(#{ explode: false })
+  @added(APIVersions.v2024_07_01_preview)
+  createdByTypes?: string[];
 }
 
 @doc("Parameters for list test operation")

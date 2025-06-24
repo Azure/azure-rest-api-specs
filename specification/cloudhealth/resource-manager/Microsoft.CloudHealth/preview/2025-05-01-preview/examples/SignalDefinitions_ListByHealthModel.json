@@ -1,0 +1,92 @@
+{
+  "title": "SignalDefinitions_ListByHealthModel",
+  "operationId": "SignalDefinitions_ListByHealthModel",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "metricNamespace": "microsoft.compute/virtualMachines",
+              "metricName": "cpuusage",
+              "aggregationType": "None",
+              "dimension": "node",
+              "dimensionFilter": "node1",
+              "provisioningState": "Succeeded",
+              "displayName": "cpu usage",
+              "signalKind": "AzureResourceMetric",
+              "refreshInterval": "PT1M",
+              "labels": {
+                "key4788": "bar"
+              },
+              "timeGrain": "PT10M",
+              "dataUnit": "Count",
+              "evaluationRules": {
+                "degradedRule": {
+                  "operator": "LowerThan",
+                  "threshold": "10"
+                },
+                "unhealthyRule": {
+                  "operator": "LowerThan",
+                  "threshold": "1"
+                }
+              }
+            },
+            "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/signalDefinitions/sig1",
+            "name": "sig1",
+            "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+            "systemData": {
+              "createdBy": "cbhzxxlvkmufetjjjwtk",
+              "createdByType": "User",
+              "createdAt": "2023-09-18T14:04:09.327Z",
+              "lastModifiedBy": "arz",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+            }
+          },
+          {
+            "properties": {
+              "metricNamespace": "microsoft.compute/virtualMachines",
+              "metricName": "memoryusage",
+              "aggregationType": "Average",
+              "provisioningState": "Succeeded",
+              "displayName": "memorey usage",
+              "signalKind": "AzureResourceMetric",
+              "refreshInterval": "PT1M",
+              "labels": {
+                "key4788": "bar"
+              },
+              "timeGrain": "PT10M",
+              "dataUnit": "Count",
+              "evaluationRules": {
+                "dynamicDetectionRule": {
+                  "dynamicThresholdModel": "AnomalyDetection",
+                  "modelSensitivity": 4.5,
+                  "dynamicThresholdDirection": "GreaterThan"
+                }
+              }
+            },
+            "id": "/subscriptions/4980D7D5-4E07-47AD-AD34-E76C6BC9F061/resourceGroups/rgopenapi/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/signalDefinitions/sig2",
+            "name": "sig2",
+            "type": "Microsoft.CloudHealth/healthmodels/signalDefinitions",
+            "systemData": {
+              "createdBy": "cbhzxxlvkmufetjjjwtk",
+              "createdByType": "User",
+              "createdAt": "2023-09-18T14:04:09.327Z",
+              "lastModifiedBy": "arz",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/aqvdhgvi"
+      }
+    }
+  }
+}

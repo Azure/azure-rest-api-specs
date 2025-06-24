@@ -145,6 +145,7 @@ op getKeyValue is Foundations.ResourceOperation<
 @put
 op putKeyValue is AppConfigOperation<
   {
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
@@ -277,6 +278,7 @@ op getSnapshot is StandardOps.ResourceRead<
 @put
 op createSnapshot is Foundations.LongRunningOperation<
   {
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
@@ -302,10 +304,11 @@ op createSnapshot is Foundations.LongRunningOperation<
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
-@patch
+@patch(#{ implicitOptionality: true })
 op updateSnapshot is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
     @doc("Content-Type header")
     @header("Content-Type")
     contentType: "application/merge-patch+json" | "application/json";
