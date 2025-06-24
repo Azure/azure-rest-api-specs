@@ -376,7 +376,6 @@ model ConfigData extends Azure.ResourceManager.Foundations.Resource {
    * The Advisor configuration data structure.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConfigDataProperties;
 }
 
@@ -794,7 +793,6 @@ model PredictionRequest {
    * Request properties for prediction recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PredictionRequestProperties;
 }
 
@@ -822,7 +820,6 @@ model PredictionResponse {
    * The properties of the prediction.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PredictionResponseProperties;
 }
 
