@@ -9,7 +9,7 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
+
 namespace Azure.AI.Projects;
 
 @doc("Evaluator Configuration")
@@ -68,7 +68,7 @@ model Evaluation {
 
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility(Lifecycle.Read)
-  status?: EvaluationStatus;
+  status?: string;
 
   @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
   tags?: Record<string>;
@@ -175,48 +175,4 @@ model AgentEvaluation {
 
   @doc("The agent evaluation result.")
   result?: Array<AgentEvaluationResult>;
-}
-
-@doc("The provisioning state of the last accepted operation.")
-union EvaluationStatus {
-  string,
-
-  @doc("Evaluation hasn't started yet.")
-  NotStarted: "NotStarted",
-
-  @doc("Evaluation has been unapproved.")
-  Unapproved: "Unapproved",
-
-  @doc("Evaluation is pausing")
-  Pausing: "Pausing",
-
-  @doc("Evaluation has been paused")
-  Paused: "Paused",
-
-  @doc("Evaluation has started.")
-  Starting: "Starting",
-
-  @doc("The evaluation run environment is being prepared.")
-  Preparing: "Preparing",
-
-  @doc("Evaluation is queued.")
-  Queued: "Queued",
-
-  @doc("Evaluation started to run.")
-  Running: "Running",
-
-  @doc("Evaluation is completed.")
-  Finalizing: "Finalizing",
-
-  @doc("Cancelation has been requested for the evaluation.")
-  CancelRequested: "CancelRequested",
-
-  @doc("Evaluation completed successfully.")
-  Succeeded: "Completed",
-
-  @doc("Evaluation failed.")
-  Failed: "Failed",
-
-  @doc("Following cancelation request, the evaluation is now successfully canceled.")
-  Canceled: "Canceled",
 }

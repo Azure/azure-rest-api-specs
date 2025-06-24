@@ -2427,7 +2427,7 @@
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
         "status": {
-          "$ref": "#/definitions/EvaluationStatus",
+          "type": "string",
           "description": "Status of the evaluation. It is set by service and is read-only.",
           "readOnly": true
         },
@@ -2458,96 +2458,6 @@
         "data",
         "evaluators"
       ]
-    },
-    "EvaluationStatus": {
-      "type": "string",
-      "description": "The provisioning state of the last accepted operation.",
-      "enum": [
-        "NotStarted",
-        "Unapproved",
-        "Pausing",
-        "Paused",
-        "Starting",
-        "Preparing",
-        "Queued",
-        "Running",
-        "Finalizing",
-        "CancelRequested",
-        "Completed",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "EvaluationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "Evaluation hasn't started yet."
-          },
-          {
-            "name": "Unapproved",
-            "value": "Unapproved",
-            "description": "Evaluation has been unapproved."
-          },
-          {
-            "name": "Pausing",
-            "value": "Pausing",
-            "description": "Evaluation is pausing"
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "Evaluation has been paused"
-          },
-          {
-            "name": "Starting",
-            "value": "Starting",
-            "description": "Evaluation has started."
-          },
-          {
-            "name": "Preparing",
-            "value": "Preparing",
-            "description": "The evaluation run environment is being prepared."
-          },
-          {
-            "name": "Queued",
-            "value": "Queued",
-            "description": "Evaluation is queued."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Evaluation started to run."
-          },
-          {
-            "name": "Finalizing",
-            "value": "Finalizing",
-            "description": "Evaluation is completed."
-          },
-          {
-            "name": "CancelRequested",
-            "value": "CancelRequested",
-            "description": "Cancelation has been requested for the evaluation."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Completed",
-            "description": "Evaluation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Evaluation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Following cancelation request, the evaluation is now successfully canceled."
-          }
-        ]
-      }
     },
     "EvaluatorConfiguration": {
       "type": "object",

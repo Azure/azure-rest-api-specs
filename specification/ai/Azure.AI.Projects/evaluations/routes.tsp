@@ -58,7 +58,7 @@ interface Evaluations {
   cancel is EvaluationsOperations.ResourceAction<
     Evaluation,
     {},
-    NoContentResponse
+    Http.NoContentResponse
   >;
 
   @doc("Delete an evaluation run by name")
