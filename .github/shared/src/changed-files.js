@@ -1,6 +1,10 @@
 // @ts-check
 
-import { diff } from "./git.js";
+import debug from "debug";
+import { simpleGit } from "simple-git";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  * @param {Object} [options]
@@ -23,11 +27,11 @@ export async function getChangedFiles(options = {}) {
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await diff(baseCommitish, headCommitish, {
-    args: ["--name-only"],
-    cwd,
-    logger: logger,
-  });
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    baseCommitish,
+    headCommitish,
+  ]);
 
   const files = result.trim().split("\n");
 
@@ -38,6 +42,125 @@ export async function getChangedFiles(options = {}) {
   logger?.info("");
 
   return files;
+}
+
+/**
+ * @param {Object} [options]
+ * @param {string} [options.baseCommitish] Default: "HEAD^".
+ * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string} [options.headCommitish] Default: "HEAD".
+ * @param {import('./logger.js').ILogger} [options.logger]
+ * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
+ */
+export async function getChangedFilesStatuses(options = {}) {
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    headCommitish = "HEAD",
+    logger,
+  } = options;
+  try {
+    const result = await simpleGit(cwd).diff([
+      "--name-status",
+      baseCommitish,
+      headCommitish,
+    ]);
+
+    const categorizedFiles = {
+      additions: /** @type {string[]} */ ([]),
+      modifications: /** @type {string[]} */ ([]),
+      deletions: /** @type {string[]} */ ([]),
+      renames: /** @type {{from: string, to: string}[]} */ ([]),
+      total: 0,
+    };
+
+    if (result.trim()) {
+      const lines = result.trim().split("\n");
+
+      for (const line of lines) {
+        const parts = line.split("\t");
+        const status = parts[0];
+
+        switch (status[0]) {
+          case "A":
+            categorizedFiles.additions.push(parts[1]);
+            break;
+          case "M":
+            categorizedFiles.modifications.push(parts[1]);
+            break;
+          case "D":
+            categorizedFiles.deletions.push(parts[1]);
+            break;
+          case "R":
+            categorizedFiles.renames.push({
+              from: parts[1],
+              to: parts[2],
+            });
+            break;
+          case "C":
+            categorizedFiles.additions.push(parts[2]);
+            break;
+          default:
+            categorizedFiles.modifications.push(parts[1]);
+        }
+      }
+
+      categorizedFiles.total =
+        categorizedFiles.additions.length +
+        categorizedFiles.modifications.length +
+        categorizedFiles.deletions.length +
+        categorizedFiles.renames.length;
+    }
+
+    // Log all changed files by categories
+    if (logger) {
+      logger.info("Categorized Changed Files:");
+
+      if (categorizedFiles.additions.length > 0) {
+        logger.info(`  Additions (${categorizedFiles.additions.length}):`);
+        for (const file of categorizedFiles.additions) {
+          logger.info(`    + ${file}`);
+        }
+      }
+
+      if (categorizedFiles.modifications.length > 0) {
+        logger.info(
+          `  Modifications (${categorizedFiles.modifications.length}):`,
+        );
+        for (const file of categorizedFiles.modifications) {
+          logger.info(`    M ${file}`);
+        }
+      }
+
+      if (categorizedFiles.deletions.length > 0) {
+        logger.info(`  Deletions (${categorizedFiles.deletions.length}):`);
+        for (const file of categorizedFiles.deletions) {
+          logger.info(`    - ${file}`);
+        }
+      }
+
+      if (categorizedFiles.renames.length > 0) {
+        logger.info(`  Renames (${categorizedFiles.renames.length}):`);
+        for (const rename of categorizedFiles.renames) {
+          logger.info(`    R ${rename.from} -> ${rename.to}`);
+        }
+      }
+
+      logger.info(`  Total: ${categorizedFiles.total} files`);
+      logger.info("");
+    }
+
+    return categorizedFiles;
+  } catch (error) {
+    logger?.error(`Error getting categorized changed files: ${error}`);
+    return {
+      additions: /** @type {string[]} */ ([]),
+      modifications: /** @type {string[]} */ ([]),
+      deletions: /** @type {string[]} */ ([]),
+      renames: /** @type {{from: string, to: string}[]} */ ([]),
+      total: 0,
+    };
+  }
 }
 
 // Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
@@ -118,6 +241,20 @@ export function swagger(file) {
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
-    !example(file)
+    !example(file) &&
+    !scenario(file)
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function scenario(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/scenarios/")
   );
 }

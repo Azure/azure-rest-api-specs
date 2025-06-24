@@ -1,0 +1,25 @@
+name: "[TEST-IGNORE] Swagger ModelValidation"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  oav:
+    name: "[TEST-IGNORE] Swagger ModelValidation"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Swagger Model Validation
+        run: |
+          npm exec --no -- oav-runner examples
+
