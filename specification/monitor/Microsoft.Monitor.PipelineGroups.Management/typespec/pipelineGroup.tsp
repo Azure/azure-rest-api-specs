@@ -273,7 +273,7 @@ interface PipelineGroups {
 
   @doc("This method is used to validate a TransformLanguageProcessor.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-  validateTransformLanguageQuery is ArmResourceActionAsync<
+  validateTransformLanguageProcessor is ArmResourceActionAsync<
     PipelineGroup,
     ValidateTransformLanguageProcessorRequest,
     ValidateTransformLanguageProcessorResponse
