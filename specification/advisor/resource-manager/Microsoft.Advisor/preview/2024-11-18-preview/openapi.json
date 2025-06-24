@@ -1198,6 +1198,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
+      "get": {
+        "operationId": "triageRecommendations_List",
+        "description": "Get list of recommendations for an existing Azure Advisor Resiliency Review Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "reviewId",
+            "in": "path",
+            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to be included in the result.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of items to skip before starting to collect the result set.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TriageRecommendationCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriageRecommendations": {
+            "$ref": "./examples/TriageRecommendationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
       "get": {
         "operationId": "triageRecommendations_Get",
@@ -1221,8 +1280,7 @@
             "in": "path",
             "description": "The name of the TriageRecommendation",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1269,8 +1327,7 @@
             "in": "path",
             "description": "The name of the TriageRecommendation",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1314,8 +1371,7 @@
             "in": "path",
             "description": "The name of the TriageRecommendation",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "recommendationRejectBody",
@@ -1368,8 +1424,7 @@
             "in": "path",
             "description": "The name of the TriageRecommendation",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1434,65 +1489,6 @@
           "GetTriageResource": {
             "$ref": "./examples/TriageResourcesGet.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/triageRecommendations/providers/Microsoft.Advisor/triageRecommendations": {
-      "get": {
-        "operationId": "triageRecommendations_List",
-        "description": "Get list of recommendations for an existing Azure Advisor Resiliency Review Id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of items to be included in the result.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "The number of items to skip before starting to collect the result set.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TriageRecommendationCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageRecommendations": {
-            "$ref": "./examples/TriageRecommendationsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

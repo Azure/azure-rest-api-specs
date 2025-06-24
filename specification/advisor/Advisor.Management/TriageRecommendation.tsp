@@ -21,7 +21,7 @@ model TriageRecommendation
     Resource = TriageRecommendation,
     KeyName = "recommendationId",
     SegmentName = "triageRecommendations",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 
@@ -42,7 +42,7 @@ interface TriageRecommendationOps
         Resource = TriageRecommendation,
         KeyName = "recommendationId",
         SegmentName = "providers/Microsoft.Advisor/triageRecommendations",
-        NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+        NamePattern = ""
       >>
     > {}
 
@@ -59,7 +59,7 @@ interface TriageRecommendations {
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Rest.Private.actionSegment("providers/Microsoft.Advisor/triageRecommendations")
+  @segment("providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
   list is TriageRecommendationOps.List<
     TriageRecommendation,

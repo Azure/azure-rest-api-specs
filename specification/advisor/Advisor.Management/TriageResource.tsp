@@ -21,7 +21,7 @@ model TriageResource
     Resource = TriageResource,
     KeyName = "recommendationResourceId",
     SegmentName = "triageResources",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 
