@@ -26,6 +26,7 @@ jobs:
 
       - name: Swagger Breaking Change - Analyze Code
         id: swagger-breaking-change-analyze-code
+        continue-on-error: true
         run: |
           npm exec --no -- openapi-diff-runner \
             --srp "${{ github.workspace }}" \
@@ -37,7 +38,8 @@ jobs:
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
-          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
+          (steps.swagger-breaking-change-analyze-code.outcome == 'success' && 
+          steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
@@ -46,7 +48,8 @@ jobs:
 
       # Upload artifact for 'VersioningReviewRequired' label
       - if: |
-          (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
+          (steps.swagger-breaking-change-analyze-code.outcome == 'success' && 
+          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
@@ -56,7 +59,8 @@ jobs:
 
       # Upload artifact with issue number if labels are present and PR number is valid
       - if: |
-          ((steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
+          (steps.swagger-breaking-change-analyze-code.outcome == 'success' &&
+          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
           steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
           github.event.pull_request.number > 0)
         name: Upload artifact with issue number
