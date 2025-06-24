@@ -1,7 +1,5 @@
 {
   "parameters": {
-    "fileWorkspaceName": "testworkspace",
-    "fileName": "test.txt",
     "api-version": "2024-04-01",
     "createFileParameters": {
       "properties": {
@@ -9,21 +7,25 @@
         "fileSize": 41423,
         "numberOfChunks": 1
       }
-    }
+    },
+    "fileName": "test.txt",
+    "fileWorkspaceName": "testworkspace"
   },
   "responses": {
     "201": {
       "body": {
-        "id": "/providers/Microsoft.Support/fileWorkspaces/testworkspace/files/test.txt",
         "name": "test.txt",
         "type": "Microsoft.Support/files",
+        "id": "/providers/Microsoft.Support/fileWorkspaces/testworkspace/files/test.txt",
         "properties": {
-          "createdOn": "2022-08-24T20:18:19Z",
           "chunkSize": 41423,
+          "createdOn": "2022-08-24T20:18:19Z",
           "fileSize": 41423,
           "numberOfChunks": 1
         }
       }
     }
-  }
+  },
+  "operationId": "FilesNoSubscription_Create",
+  "title": "Create a file workspace"
 }

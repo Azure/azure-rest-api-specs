@@ -1,98 +1,100 @@
 {
   "parameters": {
-    "subscriptionId": "132d901f-189d-4381-9214-fe68e27e05a1",
-    "supportTicketName": "testticket",
     "api-version": "2024-04-01",
     "createSupportTicketParameters": {
       "properties": {
-        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
-        "title": "my title",
         "description": "my description",
-        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
-        "severity": "moderate",
         "advancedDiagnosticConsent": "Yes",
-        "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
         "contactDetails": {
+          "country": "usa",
           "firstName": "abc",
           "lastName": "xyz",
-          "primaryEmailAddress": "abc@contoso.com",
           "preferredContactMethod": "email",
-          "preferredTimeZone": "Pacific Standard Time",
           "preferredSupportLanguage": "en-US",
-          "country": "usa"
+          "preferredTimeZone": "Pacific Standard Time",
+          "primaryEmailAddress": "abc@contoso.com"
         },
+        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
         "quotaTicketDetails": {
-          "quotaChangeRequestVersion": "1.0",
           "quotaChangeRequestSubType": "Account",
+          "quotaChangeRequestVersion": "1.0",
           "quotaChangeRequests": [
             {
-              "region": "EastUS",
-              "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"Pools\"}"
+              "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"Pools\"}",
+              "region": "EastUS"
             }
           ]
-        }
-      }
-    }
-  },
-  "responses": {
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationResults/operationid?api-version=2024-04-01",
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationsStatus/operationid?api-version=2024-04-01"
+        },
+        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+        "severity": "moderate",
+        "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+        "title": "my title"
       }
     },
+    "subscriptionId": "132d901f-189d-4381-9214-fe68e27e05a1",
+    "supportTicketName": "testticket"
+  },
+  "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testticket",
         "name": "testticket",
         "type": "Microsoft.Support/supportTickets",
+        "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testticket",
         "properties": {
-          "supportTicketId": "119120321001170",
           "description": "my description",
-          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
-          "problemClassificationDisplayName": "Batch",
-          "severity": "moderate",
-          "require24X7Response": false,
           "advancedDiagnosticConsent": "Yes",
-          "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
-          "fileWorkspaceName": "testticket",
           "contactDetails": {
+            "country": "usa",
             "firstName": "abc",
             "lastName": "xyz",
             "preferredContactMethod": "email",
-            "primaryEmailAddress": "abc@contoso.com",
+            "preferredSupportLanguage": "en-US",
             "preferredTimeZone": "Pacific Standard Time",
-            "country": "usa",
-            "preferredSupportLanguage": "en-US"
+            "primaryEmailAddress": "abc@contoso.com"
           },
+          "createdDate": "2020-03-20T21:36:18Z",
+          "fileWorkspaceName": "testticket",
+          "modifiedDate": "2020-03-20T21:36:23Z",
+          "problemClassificationDisplayName": "Batch",
+          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/batch_problemClassification_guid",
           "quotaTicketDetails": {
-            "quotaChangeRequestVersion": "1.0",
             "quotaChangeRequestSubType": "Account",
+            "quotaChangeRequestVersion": "1.0",
             "quotaChangeRequests": [
               {
-                "region": "EastUS",
-                "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"Pools\"}"
+                "payload": "{\"AccountName\":\"test\",\"NewLimit\":200,\"Type\":\"Pools\"}",
+                "region": "EastUS"
               }
             ]
           },
+          "require24X7Response": false,
+          "serviceDisplayName": "Service and subscription limits (quotas)",
+          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
           "serviceLevelAgreement": {
-            "startTime": "2020-03-20T21:36:18Z",
             "expirationTime": "2020-03-21T17:36:18Z",
-            "slaMinutes": 240
+            "slaMinutes": 240,
+            "startTime": "2020-03-20T21:36:18Z"
           },
+          "severity": "moderate",
+          "status": "Open",
           "supportEngineer": {
             "emailAddress": null
           },
-          "supportPlanType": "Premier",
           "supportPlanDisplayName": "Premier",
-          "title": "my title",
-          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
-          "serviceDisplayName": "Service and subscription limits (quotas)",
-          "status": "Open",
-          "createdDate": "2020-03-20T21:36:18Z",
-          "modifiedDate": "2020-03-20T21:36:23Z"
+          "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+          "supportPlanType": "Premier",
+          "supportTicketId": "119120321001170",
+          "title": "my title"
         }
       }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationsStatus/operationid?api-version=2024-04-01",
+        "location": "https://management.azure.com/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/operationResults/operationid?api-version=2024-04-01"
+      }
     }
-  }
+  },
+  "operationId": "SupportTickets_Create",
+  "title": "Create a ticket to request Quota increase for Pools for a Batch account"
 }
