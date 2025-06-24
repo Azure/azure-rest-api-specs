@@ -15,28 +15,28 @@ model TransformLanguageProcessor {
   query: string;
 }
 
-@doc("Request to validate a query expression.")
+@doc("Request to validate a TransformLanguageProcessor definition.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-model ValidateTransformLanguageQueryRequest {
+model ValidateTransformLanguageProcessorRequest {
   @doc("Query to validate.")
   @minLength(1)
   @maxLength(10000)
   query: string;
 }
 
-@doc("Response for the query validation.")
+@doc("Response for the TransformLanguageProcessor validation.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-model ValidateTransformLanguageQueryResponse {
+model ValidateTransformLanguageProcessorResponse {
   @doc("Result of the query validation.")
   status: string;
 
   @doc("Optional error details if the validation failed.")
-  error?: ValidateTransformLanguageQueryResponseError;
+  error?: ValidateTransformLanguageProcessorResponseError;
 }
 
-@doc("Error details for query validation failures.")
+@doc("Error details for TransformLanguageProcessor validation failures.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-model ValidateTransformLanguageQueryResponseError {
+model ValidateTransformLanguageProcessorResponseError {
   @doc("Type of the error.")
   type: string;
 

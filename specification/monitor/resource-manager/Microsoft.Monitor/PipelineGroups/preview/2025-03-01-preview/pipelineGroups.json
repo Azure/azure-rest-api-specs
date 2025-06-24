@@ -403,7 +403,7 @@
         "tags": [
           "PipelineGroups"
         ],
-        "description": "This method is used to validate a query expression to be used in a TransformLanguage processor.",
+        "description": "This method is used to validate a TransformLanguageProcessor.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -428,7 +428,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidateTransformLanguageQueryRequest"
+              "$ref": "#/definitions/ValidateTransformLanguageProcessorRequest"
             }
           }
         ],
@@ -436,7 +436,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateTransformLanguageQueryResponse"
+              "$ref": "#/definitions/ValidateTransformLanguageProcessorResponse"
             }
           },
           "202": {
@@ -458,14 +458,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Error response when validating a TransformLanguage query expression": {
-            "$ref": "./examples/PipelineGroupValidateTransformLanguageQueryError.json"
-          },
-          "Success response when validating a TransformLanguage query expression": {
-            "$ref": "./examples/PipelineGroupValidateTransformLanguageQuerySuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1579,9 +1571,9 @@
         "endpoint"
       ]
     },
-    "ValidateTransformLanguageQueryRequest": {
+    "ValidateTransformLanguageProcessorRequest": {
       "type": "object",
-      "description": "Request to validate a query expression.",
+      "description": "Request to validate a TransformLanguageProcessor definition.",
       "properties": {
         "query": {
           "type": "string",
@@ -1594,16 +1586,16 @@
         "query"
       ]
     },
-    "ValidateTransformLanguageQueryResponse": {
+    "ValidateTransformLanguageProcessorResponse": {
       "type": "object",
-      "description": "Response for the query validation.",
+      "description": "Response for the TransformLanguageProcessor validation.",
       "properties": {
         "status": {
           "type": "string",
           "description": "Result of the query validation."
         },
         "error": {
-          "$ref": "#/definitions/ValidateTransformLanguageQueryResponseError",
+          "$ref": "#/definitions/ValidateTransformLanguageProcessorResponseError",
           "description": "Optional error details if the validation failed."
         }
       },
@@ -1611,9 +1603,9 @@
         "status"
       ]
     },
-    "ValidateTransformLanguageQueryResponseError": {
+    "ValidateTransformLanguageProcessorResponseError": {
       "type": "object",
-      "description": "Error details for query validation failures.",
+      "description": "Error details for TransformLanguageProcessor validation failures.",
       "properties": {
         "type": {
           "type": "string",
