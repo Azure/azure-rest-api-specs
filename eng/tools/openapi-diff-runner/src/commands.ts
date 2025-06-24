@@ -229,7 +229,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
       runtimeErrors,
       comparedSpecsTableContent,
       "",
-      statusCode,
     );
   } else {
     logMessage("!pr. Skipping the process of breaking change detection.");

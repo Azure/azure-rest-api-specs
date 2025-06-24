@@ -31,11 +31,9 @@ export async function generateBreakingChangeResultSummary(
   runtimeErrors: RawMessageRecord[],
   comparedSpecsTableContent: string,
   summaryDataSuppressionAndDetailsText: string,
-  statusCode: number,
 ): Promise<void> {
   const allMessageRecords: BrChMsgRecord[] = [...messages, ...runtimeErrors];
 
-  const title = getTitle(context.checkName, statusCode);
   const summaryData = getSummaryData(
     context.checkName,
     allMessageRecords,
@@ -50,7 +48,7 @@ export async function generateBreakingChangeResultSummary(
   );
 
   // Construct complete markdown report for GitHub Actions job summary
-  const markdownReport = title + summaryData + commentData;
+  const markdownReport = summaryData + commentData;
 
   // Output to GitHub Actions job summary
   await writeToJobSummary(markdownReport);
@@ -61,20 +59,6 @@ export async function generateBreakingChangeResultSummary(
       `length summary/comment/(summary+comment): ` +
       `${summaryData.length}/${commentData.length}/${summaryData.length + commentData.length}.`,
   );
-}
-
-function getTitle(checkName: string, statusCode?: number) {
-  const checkPrefix = `Check \`${checkName}\``;
-  if (statusCode !== 0) {
-    // Returning "detected problems" instead of just "failed" because "failed"
-    // has strong connotation that there is a problem with the check itself.
-    // However, in reality most likely the check ran successfully but
-    // detected violations of whatever it was checking.
-    // In some cases, though, the problem still might be with the check itself.
-    return `${checkPrefix} detected problems`;
-  } else {
-    return `${checkPrefix} succeeded`;
-  }
 }
 
 async function getCommentData(
@@ -256,9 +240,9 @@ function getSummaryData(
   if (errorCount > 0) {
     summaryTitle =
       `Detected: ${getMessageLevelCounts(messageRecords, "Error")} Errors, ` +
-      `${getMessageLevelCounts(messageRecords, "Warning")} Warnings`;
+      `${getMessageLevelCounts(messageRecords, "Warning")} Warnings\n`;
   } else if (warningCount > 0) {
-    summaryTitle = `Detected: ${getMessageLevelCounts(messageRecords, "Warning")} Warnings`;
+    summaryTitle = `Detected: ${getMessageLevelCounts(messageRecords, "Warning")} Warnings\n`;
   }
 
   return (

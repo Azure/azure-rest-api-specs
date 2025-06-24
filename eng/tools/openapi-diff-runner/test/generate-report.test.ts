@@ -98,7 +98,6 @@ describe("generate-report", () => {
       const comparedSpecsTableContent =
         "| Spec | Status |\n|------|--------|\n| test.json | Modified |";
       const summaryDataSuppressionAndDetailsText = "\n\nAdditional details...";
-      const statusCode = 0;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -106,12 +105,8 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("Check `Swagger BreakingChange` succeeded"),
-      );
       expect(mockLogMessage).toHaveBeenCalledWith(expect.stringContaining("Successfully wrote"));
     });
 
@@ -124,7 +119,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -132,12 +126,8 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("Check `Swagger BreakingChange` detected problems"),
-      );
       expect(mockAddToSummary).toHaveBeenCalledWith(
         expect.stringContaining("Detected: 1 Errors, 1 Warnings"),
       );
@@ -152,7 +142,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -160,7 +149,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(
@@ -175,7 +163,6 @@ describe("generate-report", () => {
       const comparedSpecsTableContent =
         "| Spec | Status |\n|------|--------|\n| test.json | Modified |";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 0;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -183,7 +170,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("| Spec | Status |"));
@@ -195,7 +181,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [createMockRawMessage({ level: "Error" })];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -203,7 +188,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockLogMessage).toHaveBeenCalledWith(
@@ -222,7 +206,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -230,12 +213,9 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
-      expect(mockAddToSummary).toHaveBeenCalledWith(
-        expect.stringContaining("Check `BreakingChange(Cross-Version)` detected problems"),
-      );
+      expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("Detected"));
     });
 
     it("should handle mixed stable and preview messages", async () => {
@@ -248,7 +228,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       mockCreateBreakingChangeMdReport.mockReturnValue({
         msgs: [],
@@ -264,7 +243,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockCreateBreakingChangeMdReport).toHaveBeenCalled();
@@ -277,7 +255,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 0;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -285,7 +262,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(
@@ -304,7 +280,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -312,7 +287,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(
@@ -333,7 +307,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "x".repeat(60000); // Very long table content
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       // Mock a very long report string
       mockReportToString.mockReturnValue("x".repeat(10000));
@@ -344,7 +317,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockLogWarning).toHaveBeenCalledWith(
@@ -363,7 +335,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 1;
 
       // First call returns long string, subsequent calls return shorter strings
       mockReportToString
@@ -377,7 +348,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockLogMessage).toHaveBeenCalledWith(
@@ -392,7 +362,6 @@ describe("generate-report", () => {
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText =
         "\n\n**Suppression Info:**\nSome details about suppressions.";
-      const statusCode = 0;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -400,7 +369,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(
@@ -414,7 +382,6 @@ describe("generate-report", () => {
       const runtimeErrors: RawMessageRecord[] = [];
       const comparedSpecsTableContent = "";
       const summaryDataSuppressionAndDetailsText = "";
-      const statusCode = 0;
 
       await generateBreakingChangeResultSummary(
         context,
@@ -422,7 +389,6 @@ describe("generate-report", () => {
         runtimeErrors,
         comparedSpecsTableContent,
         summaryDataSuppressionAndDetailsText,
-        statusCode,
       );
 
       expect(mockAddToSummary).toHaveBeenCalledWith(
