@@ -4918,6 +4918,93 @@
           "final-state-via": "original-uri"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/quotaTiers/{default}": {
+      "get": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "operationId": "QuotaTiers_Get",
+        "summary": "Gets the Quota Tier for a subscription",
+        "description": "Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the Quota Tier information for a subscription": {
+            "$ref": "./examples/GetQuotaTier.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "QuotaTier"
+        ],
+        "operationId": "QuotaTiers_Update",
+        "summary": "Updates the Quota Tier resource for a subscription. The only properties that can be updated are  \"tierUpgradePolicy\"",
+        "description": "Gets the Quota Tier information for the given subscription. QuotaTiers is a subscription wide resource type. It holds current tier information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
+          },
+          {
+            "name": "tier",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            },
+            "description": "The parameters to provide for the quota tier resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTier"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the quota tier resource for a subscription": {
+            "$ref": "./examples/UpdateQuotaTier.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8952,6 +9039,82 @@
         }
       },
       "description": "The list of cognitive services projects operation response."
+    },
+    "QuotaTier": {
+      "description": "The quota tier information for the subscription",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaTierProperties",
+          "description": "Properties of quota tier resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaTierProperties": {
+      "description": "Properties of Quota Tier resource'.",
+      "type": "object",
+      "properties": {
+        "currentTierName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the current quota tier for the subscription."
+        },
+        "tierUpgradePolicy": {
+          "type": "string",
+          "description": "Gets the tier upgrade policy for the subscription.",
+          "enum": [
+            "OnceUpgradeIsAvailable",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "TierUpgradePolicy",
+            "modelAsString": true
+          }
+        },
+        "assignmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The date on which the current tier was assigned to the subscription (UTC)."
+        },
+        "tierUpgradeEligibilityInfo": {
+          "$ref": "#/definitions/QuotaTierUpgradeEligibilityInfo",
+          "description": "Information about the quota tier upgrade eligibility for the subscription.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "QuotaTierUpgradeEligibilityInfo": {
+      "description": "Information about the quota tier upgrade eligibility for the subscription.",
+      "type": "object",
+      "properties": {
+        "nextTierName": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Name of the next quota tier for the subscription."
+        },
+        "isUpgradeAvailable": {
+          "type": "boolean",
+          "description": "Is the subscription eligible to be upgraded to the next quota tier."
+        },
+        "upgradeApplicableDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "The date on which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
+        },
+        "upgradeUnavailabilityReason": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
+        }
+      }
     }
   },
   "parameters": {
@@ -9156,6 +9319,14 @@
       "description": "The name of the capability host associated with the Cognitive Services Resource",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+    },
+    "defaultParameter": {
+      "name": "default",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Default parameter. Leave the value as \"default\".",
+      "x-ms-parameter-location": "method"
     }
   }
 }
