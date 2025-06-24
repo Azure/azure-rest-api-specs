@@ -1,0 +1,2224 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Approvals",
+    "version": "2025-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ApprovalWorkflowDefinitions"
+    },
+    {
+      "name": "ApprovalWorkflowAssignments"
+    },
+    {
+      "name": "ApprovalWorkflowInstances"
+    },
+    {
+      "name": "ApprovalSettings"
+    },
+    {
+      "name": "ApprovalProvider"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowAssignments": {
+      "get": {
+        "operationId": "ApprovalWorkflowAssignments_ListByParent",
+        "tags": [
+          "ApprovalWorkflowAssignments"
+        ],
+        "description": "List ApprovalWorkflowAssignment resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowAssignments_ListByParent_MaximumSet_Gen": {
+            "$ref": "./examples/ApprovalWorkflowAssignments_ListByParent_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowAssignments/{approvalWorkflowAssignmentName}": {
+      "get": {
+        "operationId": "ApprovalWorkflowAssignments_Get",
+        "tags": [
+          "ApprovalWorkflowAssignments"
+        ],
+        "description": "Get a ApprovalWorkflowAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowAssignmentName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowAssignments_Get_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowAssignments_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApprovalWorkflowAssignments_CreateOrUpdate",
+        "tags": [
+          "ApprovalWorkflowAssignments"
+        ],
+        "description": "Create a ApprovalWorkflowAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowAssignmentName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApprovalWorkflowAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApprovalWorkflowAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowAssignments_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowAssignments_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ApprovalWorkflowAssignments_Update",
+        "tags": [
+          "ApprovalWorkflowAssignments"
+        ],
+        "description": "Update a ApprovalWorkflowAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowAssignmentName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignmentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowAssignment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowAssignments_Update_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowAssignments_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ApprovalWorkflowAssignments_Delete",
+        "tags": [
+          "ApprovalWorkflowAssignments"
+        ],
+        "description": "Delete a ApprovalWorkflowAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowAssignmentName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowAssignments_Delete_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowAssignments_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowDefinitions": {
+      "get": {
+        "operationId": "ApprovalWorkflowDefinitions_ListByParent",
+        "tags": [
+          "ApprovalWorkflowDefinitions"
+        ],
+        "description": "List ApprovalWorkflowDefinition resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowDefinitions_ListByParent_MaximumSet_Gen": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_ListByParent_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowDefinitions/{approvalWorkflowDefinitionName}": {
+      "get": {
+        "operationId": "ApprovalWorkflowDefinitions_Get",
+        "tags": [
+          "ApprovalWorkflowDefinitions"
+        ],
+        "description": "Get a ApprovalWorkflowDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowDefinitions_Get_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApprovalWorkflowDefinitions_CreateOrUpdate",
+        "tags": [
+          "ApprovalWorkflowDefinitions"
+        ],
+        "description": "Create a ApprovalWorkflowDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApprovalWorkflowDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApprovalWorkflowDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinition"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowDefinitions_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ApprovalWorkflowDefinitions_Update",
+        "tags": [
+          "ApprovalWorkflowDefinitions"
+        ],
+        "description": "Update a ApprovalWorkflowDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinitionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowDefinition"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowDefinitions_Update_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_Update_MaximumSet_Gen.json"
+          },
+          "ApprovalWorkflowDefinitions_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ApprovalWorkflowDefinitions_Delete",
+        "tags": [
+          "ApprovalWorkflowDefinitions"
+        ],
+        "description": "Delete a ApprovalWorkflowDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowDefinitions_Delete_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowDefinitions_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowDefinitions/{approvalWorkflowDefinitionName}/approvalWorkflowInstances": {
+      "get": {
+        "operationId": "ApprovalWorkflowInstances_ListByParent",
+        "tags": [
+          "ApprovalWorkflowInstances"
+        ],
+        "description": "List ApprovalWorkflowInstance resources by ApprovalWorkflowDefinition",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowInstances_ListByParent_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowInstances_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowDefinitions/{approvalWorkflowDefinitionName}/approvalWorkflowInstances/{approvalWorkflowInstanceName}": {
+      "get": {
+        "operationId": "ApprovalWorkflowInstances_Get",
+        "tags": [
+          "ApprovalWorkflowInstances"
+        ],
+        "description": "Get a ApprovalWorkflowInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "approvalWorkflowInstanceName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowInstances_Get_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowInstances_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApprovalWorkflowInstances_Create",
+        "tags": [
+          "ApprovalWorkflowInstances"
+        ],
+        "description": "Create a ApprovalWorkflowInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "approvalWorkflowInstanceName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApprovalWorkflowInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApprovalWorkflowInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowInstances_Create_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowInstances_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApprovalWorkflowInstances_Delete",
+        "tags": [
+          "ApprovalWorkflowInstances"
+        ],
+        "description": "Delete a ApprovalWorkflowInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "approvalWorkflowInstanceName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowInstances_Delete_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowInstances_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Approvals/approvalWorkflowDefinitions/{approvalWorkflowDefinitionName}/approvalWorkflowInstances/{approvalWorkflowInstanceName}/executeStage": {
+      "post": {
+        "operationId": "ApprovalWorkflowInstances_ExecuteStage",
+        "tags": [
+          "ApprovalWorkflowInstances"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "approvalWorkflowDefinitionName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowDefinition",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "approvalWorkflowInstanceName",
+            "in": "path",
+            "description": "The name of the ApprovalWorkflowInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalStageExecutionInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalWorkflowInstances_ExecuteStage_MaximumSet": {
+            "$ref": "./examples/ApprovalWorkflowInstances_ExecuteStage_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Approvals/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Approvals/approvalSettings": {
+      "get": {
+        "operationId": "ApprovalSettings_ListBySubscription",
+        "tags": [
+          "ApprovalSettings"
+        ],
+        "description": "List ApprovalSetting resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalSettings_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/ApprovalSettings_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Approvals/approvalSettings/default": {
+      "get": {
+        "operationId": "ApprovalSettings_Get",
+        "tags": [
+          "ApprovalSettings"
+        ],
+        "description": "Get a ApprovalSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalSettings_Get_MaximumSet": {
+            "$ref": "./examples/ApprovalSettings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApprovalSettings_CreateOrUpdate",
+        "tags": [
+          "ApprovalSettings"
+        ],
+        "description": "Create a ApprovalSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApprovalSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'ApprovalSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApprovalSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalSettings_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ApprovalSettings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ApprovalSettings_Update",
+        "tags": [
+          "ApprovalSettings"
+        ],
+        "description": "Update a ApprovalSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalSettingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalSettings_Update_MaximumSet": {
+            "$ref": "./examples/ApprovalSettings_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApprovalSettings_Delete",
+        "tags": [
+          "ApprovalSettings"
+        ],
+        "description": "Delete a ApprovalSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalSettings_Delete_MaximumSet": {
+            "$ref": "./examples/ApprovalSettings_Delete_MaximumSet_Gen.json"
+          },
+          "ApprovalSettings_Delete_MinimumSet": {
+            "$ref": "./examples/ApprovalSettings_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Approvals/invokeAndFetchApprovalRequest": {
+      "post": {
+        "operationId": "ApprovalProvider_InvokeAndFetchApprovalRequest",
+        "tags": [
+          "ApprovalProvider"
+        ],
+        "description": "The ProviderLevelAction POST call to invoke and fetch the approval request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalRequestInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalRequestOutput"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApprovalProvider_InvokeAndFetchApprovalRequest_MaximumSet_Gen": {
+            "$ref": "./examples/ApprovalProvider_InvokeAndFetchApprovalRequest_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApprovalRequestCredentialsSetting": {
+      "type": "object",
+      "description": "Settings of the requested verifiable credentials in the approvals service.",
+      "properties": {
+        "approver": {
+          "$ref": "#/definitions/RequestCredentialSetting",
+          "description": "The requested verifiable credentials for approvers."
+        },
+        "admin": {
+          "$ref": "#/definitions/RequestCredentialSetting",
+          "description": "The requested verifiable credentials for admins."
+        },
+        "device": {
+          "$ref": "#/definitions/RequestCredentialSetting",
+          "description": "The requested verifiable credentials for devices."
+        },
+        "approverManagementPortal": {
+          "$ref": "#/definitions/RequestCredentialSetting",
+          "description": "The requested verifiable credentials for the approver management portal."
+        }
+      },
+      "required": [
+        "approver",
+        "admin",
+        "device",
+        "approverManagementPortal"
+      ]
+    },
+    "ApprovalRequestCredentialsSettingUpdate": {
+      "type": "object",
+      "description": "Settings of the requested verifiable credentials in the approvals service.",
+      "properties": {
+        "approver": {
+          "$ref": "#/definitions/RequestCredentialSettingUpdate",
+          "description": "The requested verifiable credentials for approvers."
+        },
+        "admin": {
+          "$ref": "#/definitions/RequestCredentialSettingUpdate",
+          "description": "The requested verifiable credentials for admins."
+        },
+        "device": {
+          "$ref": "#/definitions/RequestCredentialSettingUpdate",
+          "description": "The requested verifiable credentials for devices."
+        },
+        "approverManagementPortal": {
+          "$ref": "#/definitions/RequestCredentialSettingUpdate",
+          "description": "The requested verifiable credentials for the approver management portal."
+        }
+      }
+    },
+    "ApprovalRequestInput": {
+      "type": "object",
+      "description": "The input for the invokeAndFetchApprovalRequest POST call.",
+      "properties": {
+        "changeStateId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the ChangeState resource that the approval request is associated with.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ChangeSafety/changeStates"
+              }
+            ]
+          }
+        },
+        "stageProgression": {
+          "type": "string",
+          "description": "The name of the current stage progression of the ChangeState resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource that the approval request is associated with, if multiple resources are included in the ChangeState."
+        }
+      },
+      "required": [
+        "changeStateId",
+        "stageProgression"
+      ]
+    },
+    "ApprovalRequestOutput": {
+      "type": "object",
+      "description": "The output for the invokeAndFetchApprovalRequest POST call.",
+      "properties": {
+        "approvalRequestState": {
+          "$ref": "#/definitions/ApprovalWorkflowExecutionState",
+          "description": "The current state of the approval request."
+        },
+        "approvalToken": {
+          "type": "string",
+          "description": "The approval token of the approval request."
+        }
+      },
+      "required": [
+        "approvalRequestState",
+        "approvalToken"
+      ]
+    },
+    "ApprovalRule": {
+      "type": "object",
+      "description": "Rule rule about the stages, approvers and their orders for the approval workflow.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "The definitions of all the stages in the approval workflow.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum time in minutes that the approval workflow can be executed. The min value is 1 minute. The max value is 90 days. The default value is 7 days in the backend service.",
+          "minimum": 1,
+          "maximum": 129600
+        }
+      },
+      "required": [
+        "stages"
+      ]
+    },
+    "ApprovalRuleUpdate": {
+      "type": "object",
+      "description": "Rule rule about the stages, approvers and their orders for the approval workflow.",
+      "properties": {
+        "stages": {
+          "type": "array",
+          "description": "The definitions of all the stages in the approval workflow.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum time in minutes that the approval workflow can be executed. The min value is 1 minute. The max value is 90 days. The default value is 7 days in the backend service.",
+          "minimum": 1,
+          "maximum": 129600
+        }
+      }
+    },
+    "ApprovalSetting": {
+      "type": "object",
+      "description": "ApprovalSetting singleton resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalSettingProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalSettingListResult": {
+      "type": "object",
+      "description": "The response of a ApprovalSetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApprovalSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/ApprovalSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApprovalSettingProperties": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalSetting resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "verificationAuthorities": {
+          "type": "array",
+          "description": "The list of verification authorities.",
+          "items": {
+            "$ref": "#/definitions/VerificationAuthority"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "requestedCredentialsSetting": {
+          "$ref": "#/definitions/ApprovalRequestCredentialsSetting",
+          "description": "The settings of the requested verifiable credentials in the approvals service."
+        },
+        "secureLedgerSetting": {
+          "$ref": "#/definitions/SecureLedgerSetting",
+          "description": "The settings of backend storage for approval service to use as a ledger.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "verificationAuthorities",
+        "requestedCredentialsSetting",
+        "secureLedgerSetting"
+      ]
+    },
+    "ApprovalSettingPropertiesUpdate": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalSetting resource.",
+      "properties": {
+        "verificationAuthorities": {
+          "type": "array",
+          "description": "The list of verification authorities.",
+          "items": {
+            "$ref": "#/definitions/VerificationAuthority"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "requestedCredentialsSetting": {
+          "$ref": "#/definitions/ApprovalRequestCredentialsSettingUpdate",
+          "description": "The settings of the requested verifiable credentials in the approvals service."
+        }
+      }
+    },
+    "ApprovalSettingUpdate": {
+      "type": "object",
+      "description": "ApprovalSetting singleton resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalSettingPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalStage": {
+      "type": "object",
+      "description": "Definition of an stage in an approval workflow.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the stage, unique within a single approval workflow definition."
+        },
+        "dependsOn": {
+          "type": "object",
+          "description": "The logic rules about how the stage depends on other stages, representing as a JSON object."
+        },
+        "approvers": {
+          "type": "array",
+          "description": "The list of identifiers of approvers in the stage.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quorum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimal number of approvals required to complete the stage. The default value '1' means at least one approval is needed.",
+          "default": 1
+        }
+      },
+      "required": [
+        "name",
+        "approvers",
+        "quorum"
+      ]
+    },
+    "ApprovalStageExecutionInput": {
+      "type": "object",
+      "description": "Input for starting execution of a stage in an approval workflow instance.",
+      "properties": {
+        "stageName": {
+          "type": "string",
+          "description": "The name of the stage."
+        }
+      },
+      "required": [
+        "stageName"
+      ]
+    },
+    "ApprovalStageExecutionState": {
+      "type": "string",
+      "description": "Enum of state of a stage in an approval workflow instance.",
+      "enum": [
+        "Created",
+        "Started",
+        "Approved",
+        "Rejected",
+        "Faulted"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalStageExecutionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The initial state of the approval stage."
+          },
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "The stage is ready to accept signoffs."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The stage has finished with approved result."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The stage has ended with rejected result."
+          },
+          {
+            "name": "Faulted",
+            "value": "Faulted",
+            "description": "The stage has been faulted."
+          }
+        ]
+      }
+    },
+    "ApprovalStageExecutionStatus": {
+      "type": "object",
+      "description": "Execution status of a stage in an approval workflow instance.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the stage."
+        },
+        "state": {
+          "$ref": "#/definitions/ApprovalStageExecutionState",
+          "description": "The latest execution state of the stage."
+        },
+        "signoffs": {
+          "type": "array",
+          "description": "The approvers' sign-off statuses for the stage.",
+          "items": {
+            "$ref": "#/definitions/ApproverSignoffStatus"
+          },
+          "x-ms-identifiers": [
+            "approver"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "state",
+        "signoffs"
+      ]
+    },
+    "ApprovalWorkflowAssignment": {
+      "type": "object",
+      "description": "ApprovalWorkflowAssignment ARM resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalWorkflowAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalWorkflowAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a ApprovalWorkflowAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApprovalWorkflowAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/ApprovalWorkflowAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApprovalWorkflowAssignmentProperties": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalWorkflowAssignment resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "The hierarchical scope at which the approval workflow is assigned."
+        },
+        "approvalWorkflowDefinitionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of the ApprovalWorkflowDefinition associated with this assignment.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Approvals/approvalWorkflowDefinitions"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "approvalWorkflowDefinitionId"
+      ]
+    },
+    "ApprovalWorkflowAssignmentPropertiesUpdate": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalWorkflowAssignment resource",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The hierarchical scope at which the approval workflow is assigned."
+        },
+        "approvalWorkflowDefinitionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of the ApprovalWorkflowDefinition associated with this assignment.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Approvals/approvalWorkflowDefinitions"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ApprovalWorkflowAssignmentUpdate": {
+      "type": "object",
+      "description": "ApprovalWorkflowAssignment ARM resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalWorkflowAssignmentPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalWorkflowDefinition": {
+      "type": "object",
+      "description": "ApprovalWorkflowDefinition ARM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalWorkflowDefinitionProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalWorkflowDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a ApprovalWorkflowDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApprovalWorkflowDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/ApprovalWorkflowDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApprovalWorkflowDefinitionProperties": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalWorkflowDefinition resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "logicAppRef": {
+          "$ref": "#/definitions/LogicAppRef",
+          "description": "The reference to a custom Logic App."
+        },
+        "approvalRule": {
+          "$ref": "#/definitions/ApprovalRule",
+          "description": "The rule about the stages, approvers and their orders for the approval workflow."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The hierarchical scope under which this approval workflow is assignable."
+        }
+      },
+      "required": [
+        "approvalRule"
+      ]
+    },
+    "ApprovalWorkflowDefinitionPropertiesUpdate": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalWorkflowDefinition resource.",
+      "properties": {
+        "logicAppRef": {
+          "$ref": "#/definitions/LogicAppRefUpdate",
+          "description": "The reference to a custom Logic App."
+        },
+        "approvalRule": {
+          "$ref": "#/definitions/ApprovalRuleUpdate",
+          "description": "The rule about the stages, approvers and their orders for the approval workflow."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The hierarchical scope under which this approval workflow is assignable."
+        }
+      }
+    },
+    "ApprovalWorkflowDefinitionUpdate": {
+      "type": "object",
+      "description": "ApprovalWorkflowDefinition ARM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalWorkflowDefinitionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalWorkflowExecutionState": {
+      "type": "string",
+      "description": "Enum of the overall execution state of an approval workflow instance.",
+      "enum": [
+        "InProgress",
+        "Approved",
+        "Rejected",
+        "Timedout",
+        "Faulted"
+      ],
+      "x-ms-enum": {
+        "name": "ApprovalWorkflowExecutionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The approval workflow instance is in progress."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The approval workflow instance has finished with all approval rules satisfied."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The approval workflow instance has ended without approval rules satisfied."
+          },
+          {
+            "name": "Timedout",
+            "value": "Timedout",
+            "description": "The approval workflow instance has been timed out."
+          },
+          {
+            "name": "Faulted",
+            "value": "Faulted",
+            "description": "The approval workflow instance has been faulted."
+          }
+        ]
+      }
+    },
+    "ApprovalWorkflowInstance": {
+      "type": "object",
+      "description": "The ApprovalWorkflowInstance ARM resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalWorkflowInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApprovalWorkflowInstanceListResult": {
+      "type": "object",
+      "description": "The response of a ApprovalWorkflowInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApprovalWorkflowInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/ApprovalWorkflowInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApprovalWorkflowInstanceProperties": {
+      "type": "object",
+      "description": "RP-specific properties of an ApprovalWorkflowInstance resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "requestedBy": {
+          "type": "string",
+          "description": "The one who attempted to make the change for approvals.",
+          "readOnly": true
+        },
+        "requestedFor": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of the change that the approval workflow instance was associated with. For example, the change state resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the change.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "changeManifest": {
+          "type": "string",
+          "description": "The change manifest associated with the approval workflow instance, free-formed and could be a serialized json string.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "approvalRuleSnapshot": {
+          "$ref": "#/definitions/ApprovalRule",
+          "description": "The snapshot of the approval rule of the parent ApprovalWorkflowDefinition resource at the time the approval workflow instance was created.",
+          "readOnly": true
+        },
+        "executionState": {
+          "$ref": "#/definitions/ApprovalWorkflowExecutionState",
+          "description": "The latest execution state of the approval workflow instance.",
+          "readOnly": true
+        },
+        "stageStatuses": {
+          "type": "array",
+          "description": "The latest status of each stage.",
+          "items": {
+            "$ref": "#/definitions/ApprovalStageExecutionStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "requestedBy",
+        "changeManifest",
+        "approvalRuleSnapshot",
+        "executionState",
+        "stageStatuses"
+      ]
+    },
+    "ApproverSignoffAction": {
+      "type": "string",
+      "description": "Enum of approver sign-off action.",
+      "enum": [
+        "NotStarted",
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "ApproverSignoffAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The approver has not yet being asked to take an action."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The approver has not taken an action."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The approver has approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The approver has rejected."
+          }
+        ]
+      }
+    },
+    "ApproverSignoffStatus": {
+      "type": "object",
+      "description": "Approver's sign-off status.",
+      "properties": {
+        "approver": {
+          "type": "string",
+          "description": "The identifier of the person who takes the sign-off action."
+        },
+        "signoffAction": {
+          "$ref": "#/definitions/ApproverSignoffAction",
+          "description": "The action the approver has taken."
+        },
+        "signoffDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime when the approver took the sign-off action."
+        }
+      },
+      "required": [
+        "approver",
+        "signoffAction",
+        "signoffDateTime"
+      ]
+    },
+    "LogicAppRef": {
+      "type": "object",
+      "description": "Reference to a Logic App resource.",
+      "properties": {
+        "workflowUrl": {
+          "type": "string",
+          "description": "The workflow URL of the Logic App."
+        }
+      },
+      "required": [
+        "workflowUrl"
+      ]
+    },
+    "LogicAppRefUpdate": {
+      "type": "object",
+      "description": "Reference to a Logic App resource.",
+      "properties": {
+        "workflowUrl": {
+          "type": "string",
+          "description": "The workflow URL of the Logic App."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RequestCredentialSetting": {
+      "type": "object",
+      "description": "The requested verifiable credentials for a specific type.",
+      "properties": {
+        "acceptedIssuers": {
+          "type": "array",
+          "description": "The list of issuers' decentralized identifiers that can be accepted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vcType": {
+          "type": "string",
+          "description": "The type of verifiable credential.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "acceptedIssuers",
+        "vcType"
+      ]
+    },
+    "RequestCredentialSettingUpdate": {
+      "type": "object",
+      "description": "The requested verifiable credentials for a specific type.",
+      "properties": {
+        "acceptedIssuers": {
+          "type": "array",
+          "description": "The list of issuers' decentralized identifiers that can be accepted.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SecureLedgerSetting": {
+      "type": "object",
+      "description": "Settings of backend storage for approval service to use as a ledger.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/secureLedgerStorageType",
+          "description": "The storage type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "regions": {
+          "type": "array",
+          "description": "The regions the storage should be created at and replicated to.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "regions"
+      ]
+    },
+    "VerificationAuthority": {
+      "type": "object",
+      "description": "Information about a verification authority.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the verification authority.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "apiEndpoint": {
+          "type": "string",
+          "description": "The API endpoint of the verification authority."
+        },
+        "requestedCredential": {
+          "$ref": "#/definitions/RequestCredentialSetting",
+          "description": "The requested verifiable credentials for the verification authority."
+        }
+      },
+      "required": [
+        "name",
+        "apiEndpoint",
+        "requestedCredential"
+      ]
+    },
+    "secureLedgerStorageType": {
+      "type": "string",
+      "description": "Enum of the backend storage types for approval service to use as a ledger.",
+      "enum": [
+        "AzureCosmosDB",
+        "AzureConfidentialLedger"
+      ],
+      "x-ms-enum": {
+        "name": "secureLedgerStorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CosmosDB",
+            "value": "AzureCosmosDB",
+            "description": "Azure Cosmos DB."
+          },
+          {
+            "name": "AzureConfidentialLedger",
+            "value": "AzureConfidentialLedger",
+            "description": "Azure Confidential Ledger."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

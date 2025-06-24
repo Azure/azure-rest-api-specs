@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/approvals"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{output-dir}"
+    azure-resource-provider-folder: resource-manager
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Approvals"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: true
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: "azure-resourcemanager-approvals"
+    namespace: "com.azure.resourcemanager.approvals"
+    service-name: "Approvals"
+  "@azure-tools/typespec-python":
+    flavor: "azure"
+    package-dir: "azure-mgmt-approvals"
+    namespace: "azure.mgmt.approvals"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    package-dir: "arm-approvals"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-approvals"
+  "@azure-tools/typespec-go":
+    flavor: azure
+    service-dir: "sdk/resourcemanager/approvals"
+    package-dir: "armapprovals"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
