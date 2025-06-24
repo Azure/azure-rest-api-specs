@@ -24,14 +24,7 @@ model AssessedMachineV2 is ProxyResource<AssessedMachineV2Properties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AvsAssessedMachine doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Assessed machine properties class.")
 model AssessedMachineV2Properties
-  is AssessedWorkloadProperties<
-    Linkages,
-    Recommendations<
-      MigrationIssues,
-      MigrationSuitability,
-      Skus<MigrationSuitability>
-    >
-  > {
+  is AssessedWorkloadProperties<Linkages, MachineAssessmentRecommendation> {
   @doc("The assessed machine extended details.")
   @visibility(Lifecycle.Read)
   extendedDetails?: AssessedMachineExtendedDetails;
@@ -132,4 +125,21 @@ model AssessedMachineNetworkAdaptersV3 is AssessedNetworkAdaptersV3 {
   @doc("Display Name of the Machine.")
   @visibility(Lifecycle.Read)
   displayName?: string;
+}
+
+@doc("Machine Assessment Recommendation with additional properties.")
+model MachineAssessmentRecommendation
+  is Recommendations<
+    MigrationIssues,
+    MigrationSuitability,
+    Skus<MigrationSuitability>
+  > {
+  @doc("VM Security Suitability Results.")
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
+  vmSecuritySuitabilityResults?: VmSecuritySuitability[];
+
+  @doc("Recommended security type for the VM.")
+  @visibility(Lifecycle.Read)
+  recommendedVmSecurityType?: AzureVmSecurityType;
 }

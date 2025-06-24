@@ -1098,132 +1098,7 @@
           "type": "array",
           "description": "The recommendation list.",
           "items": {
-            "type": "object",
-            "description": "Recommendation details",
-            "properties": {
-              "configuration": {
-                "$ref": "#/definitions/Configuration",
-                "description": "The configuration data.",
-                "readOnly": true
-              },
-              "recommendedFor": {
-                "$ref": "#/definitions/RecommendedFor",
-                "description": "The recommended details.",
-                "readOnly": true
-              },
-              "migrationPlatform": {
-                "$ref": "#/definitions/MigrationPlatform",
-                "description": "The migration Platform.",
-                "readOnly": true
-              },
-              "confidenceScore": {
-                "type": "number",
-                "format": "float",
-                "description": "The confidence score.",
-                "readOnly": true
-              },
-              "migrationSuitability": {
-                "$ref": "#/definitions/MigrationSuitability",
-                "description": "The migration suitability.",
-                "readOnly": true
-              },
-              "securitySuitability": {
-                "$ref": "#/definitions/SecuritySuitability",
-                "description": "The security suitability.",
-                "readOnly": true
-              },
-              "totalCost": {
-                "type": "array",
-                "description": "The total cost details.",
-                "items": {
-                  "$ref": "#/definitions/CostDetailsCommon"
-                },
-                "readOnly": true,
-                "x-ms-identifiers": []
-              },
-              "totalSavings": {
-                "type": "array",
-                "description": "The total cost details.",
-                "items": {
-                  "$ref": "#/definitions/SavingsDetailsCommon"
-                },
-                "readOnly": true,
-                "x-ms-identifiers": []
-              },
-              "migrationIssues": {
-                "type": "array",
-                "description": "The migration issues list.",
-                "items": {
-                  "$ref": "#/definitions/MigrationIssues"
-                },
-                "readOnly": true,
-                "x-ms-identifiers": []
-              },
-              "skus": {
-                "type": "array",
-                "description": "The Skus list.",
-                "items": {
-                  "type": "object",
-                  "description": "Skus details.",
-                  "properties": {
-                    "kind": {
-                      "$ref": "#/definitions/SkuKind",
-                      "description": "The Sku kind.",
-                      "readOnly": true
-                    },
-                    "resourceUri": {
-                      "type": "string",
-                      "description": "The resource uri.",
-                      "readOnly": true
-                    },
-                    "displayName": {
-                      "type": "string",
-                      "description": "The sku name.",
-                      "readOnly": true
-                    },
-                    "id": {
-                      "type": "string",
-                      "description": "The sku id.",
-                      "readOnly": true
-                    },
-                    "type": {
-                      "$ref": "#/definitions/SkuType",
-                      "description": "The sku type.",
-                      "readOnly": true
-                    },
-                    "sources": {
-                      "type": "array",
-                      "description": "The source name.",
-                      "items": {
-                        "type": "object",
-                        "description": "Source recommendation details.",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "The sku name.",
-                            "readOnly": true
-                          },
-                          "migrationSuitability": {
-                            "$ref": "#/definitions/MigrationSuitability",
-                            "description": "The sku type.",
-                            "readOnly": true
-                          }
-                        }
-                      },
-                      "readOnly": true,
-                      "x-ms-identifiers": []
-                    },
-                    "details": {
-                      "$ref": "#/definitions/SkuDetails",
-                      "description": "The sku details.",
-                      "readOnly": true
-                    }
-                  }
-                },
-                "readOnly": true,
-                "x-ms-identifiers": []
-              }
-            }
+            "$ref": "#/definitions/MachineAssessmentRecommendation"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -3365,6 +3240,186 @@
             "name": "Ebdsv5Series",
             "value": "Ebdsv5_series",
             "description": "Ebdsv5_series"
+          }
+        ]
+      }
+    },
+    "AzureVmSecuritySuitabilityDetail": {
+      "type": "string",
+      "description": "Azure Vm Security Suitability Detail",
+      "enum": [
+        "Unknown",
+        "NotApplicable",
+        "GuestOperatingSystemNotSupported",
+        "BootTypeNotSupported",
+        "DiskSizeLarge",
+        "AllDiskSizeExceeds4TB",
+        "AnyDiskSizeExceeds4TB",
+        "AnyDiskSizeExceeds4TBConditional",
+        "OSNotSupported",
+        "StandardReady",
+        "TVMReady",
+        "StandardNotReadyOSNotSupported",
+        "TVMNotReadyOSNotSupported",
+        "StandardNotReady2TBBiosBoot",
+        "AllDiskSizeExceeds2TB",
+        "DiskSize2TBConditionalReadyBiosBoot",
+        "TVMCannotMigrateOSNotSupported",
+        "StandardCannotMigrateOSNotSupported",
+        "StandardCanMigrate",
+        "TVMCanMigrateConditional",
+        "OSNameCannotBeRead",
+        "TVMNotSupportedForBiosBoot"
+      ],
+      "x-ms-enum": {
+        "name": "AzureVmSecuritySuitabilityDetail",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Azure Vm Security Suitability Detail"
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "NotApplicable - Azure Vm Security Suitability Detail"
+          },
+          {
+            "name": "GuestOperatingSystemNotSupported",
+            "value": "GuestOperatingSystemNotSupported",
+            "description": "GuestOperatingSystemNotSupported Azure Vm Security Suitability Detail"
+          },
+          {
+            "name": "BootTypeNotSupported",
+            "value": "BootTypeNotSupported",
+            "description": "BootTypeNotSupported Azure Vm Security Suitability Detail"
+          },
+          {
+            "name": "DiskSizeLarge",
+            "value": "DiskSizeLarge",
+            "description": "DiskSizeLarge Azure Vm Security Suitability Detail"
+          },
+          {
+            "name": "AllDiskSizeExceeds4TB",
+            "value": "AllDiskSizeExceeds4TB",
+            "description": "Azure does not support VM with OS disk size greater than 4TB."
+          },
+          {
+            "name": "AnyDiskSizeExceeds4TB",
+            "value": "AnyDiskSizeExceeds4TB",
+            "description": "Azure does not support VM with OS disk size greater than 4TB. If OS disk size is less than 4TB, proceed with migration."
+          },
+          {
+            "name": "AnyDiskSizeExceeds4TBConditional",
+            "value": "AnyDiskSizeExceeds4TBConditional",
+            "description": "Azure does not support VM with any disk size greater than 4TB. Please proceed only if you know the OS disk size is less than 4TB."
+          },
+          {
+            "name": "OSNotSupported",
+            "value": "OSNotSupported",
+            "description": "The VM is not ready to be migrated to Azure because the OS is not supported."
+          },
+          {
+            "name": "StandardReady",
+            "value": "StandardReady",
+            "description": "The VM is ready to be migrated to Azure with standard VM security type."
+          },
+          {
+            "name": "TVMReady",
+            "value": "TVMReady",
+            "description": "The VM is ready to be migrated to Azure with Trusted launch VM security type."
+          },
+          {
+            "name": "StandardNotReadyOSNotSupported",
+            "value": "StandardNotReadyOSNotSupported",
+            "description": "The VM is not ready to be migrated to Azure with standard VM security type because the OS is not supported."
+          },
+          {
+            "name": "TVMNotReadyOSNotSupported",
+            "value": "TVMNotReadyOSNotSupported",
+            "description": "The VM is not ready to be migrated to Azure with Trusted launch VM security type because the OS is not supported for Trusted launch VM. Get more information [here]."
+          },
+          {
+            "name": "StandardNotReady2TBBiosBoot",
+            "value": "StandardNotReady2TBBiosBoot",
+            "description": "The VM is not ready to be migrated to Azure with standard VM security type. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type."
+          },
+          {
+            "name": "AllDiskSizeExceeds2TB",
+            "value": "AllDiskSizeExceeds2TB",
+            "description": "The VM is not ready to be migrated to Azure with Trusted launch VM security type. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type."
+          },
+          {
+            "name": "DiskSize2TBConditionalReadyBiosBoot",
+            "value": "DiskSize2TBConditionalReadyBiosBoot",
+            "description": "The VM readiness is unknown. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type. Please proceed with migration only if OS disk size is less than 2TB."
+          },
+          {
+            "name": "TVMCannotMigrateOSNotSupported",
+            "value": "TVMCannotMigrateOSNotSupported",
+            "description": "The VM cannot be migrated to Trusted launch VM because the OS is not supported. Learn more [here]."
+          },
+          {
+            "name": "StandardCannotMigrateOSNotSupported",
+            "value": "StandardCannotMigrateOSNotSupported",
+            "description": "The VM cannot be migrated to Azure because the OS is not supported."
+          },
+          {
+            "name": "StandardCanMigrate",
+            "value": "StandardCanMigrate",
+            "description": "The VM can be migrated to Azure with standard VM security type."
+          },
+          {
+            "name": "TVMCanMigrateConditional",
+            "value": "TVMCanMigrateConditional",
+            "description": "The VM can be migrated to Trusted launch VM. Currently, Azure Migrate does not support migration to Trusted launch for VM with BIOS boot type. You can convert the VM post-migration to Trusted Launch VM. The steps are mentioned in this documentation."
+          },
+          {
+            "name": "OSNameCannotBeRead",
+            "value": "OSNameCannotBeRead",
+            "description": "Readiness is marked as unknown because the OS name cannot be read."
+          },
+          {
+            "name": "TVMNotSupportedForBiosBoot",
+            "value": "TVMNotSupportedForBiosBoot",
+            "description": "Migration to Trusted Launch VM is not supported for BIOS boot type VMs at this time."
+          }
+        ]
+      }
+    },
+    "AzureVmSecurityType": {
+      "type": "string",
+      "description": "Azure Vm Security Type",
+      "enum": [
+        "Unknown",
+        "Standard",
+        "TVM",
+        "CVM"
+      ],
+      "x-ms-enum": {
+        "name": "AzureVmSecurityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown - Azure Vm Security Type"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Azure Vm Security Type"
+          },
+          {
+            "name": "TVM",
+            "value": "TVM",
+            "description": "TVM Azure Vm Security Type"
+          },
+          {
+            "name": "CVM",
+            "value": "CVM",
+            "description": "CVM Azure Vm Security Type"
           }
         ]
       }
@@ -7108,6 +7163,13 @@
           "items": {
             "$ref": "#/definitions/AzureOffer"
           }
+        },
+        "azureVmSecurityOptions": {
+          "type": "array",
+          "description": "Gets or sets the Azure VM security options.",
+          "items": {
+            "$ref": "#/definitions/AzureVmSecurityType"
+          }
         }
       },
       "required": [
@@ -7121,6 +7183,148 @@
         "ultraDiskSupport",
         "azureOfferCode"
       ]
+    },
+    "MachineAssessmentRecommendation": {
+      "type": "object",
+      "description": "Machine Assessment Recommendation with additional properties.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/Configuration",
+          "description": "The configuration data.",
+          "readOnly": true
+        },
+        "recommendedFor": {
+          "$ref": "#/definitions/RecommendedFor",
+          "description": "The recommended details.",
+          "readOnly": true
+        },
+        "migrationPlatform": {
+          "$ref": "#/definitions/MigrationPlatform",
+          "description": "The migration Platform.",
+          "readOnly": true
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score.",
+          "readOnly": true
+        },
+        "migrationSuitability": {
+          "$ref": "#/definitions/MigrationSuitability",
+          "description": "The migration suitability.",
+          "readOnly": true
+        },
+        "securitySuitability": {
+          "$ref": "#/definitions/SecuritySuitability",
+          "description": "The security suitability.",
+          "readOnly": true
+        },
+        "totalCost": {
+          "type": "array",
+          "description": "The total cost details.",
+          "items": {
+            "$ref": "#/definitions/CostDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "totalSavings": {
+          "type": "array",
+          "description": "The total cost details.",
+          "items": {
+            "$ref": "#/definitions/SavingsDetailsCommon"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "migrationIssues": {
+          "type": "array",
+          "description": "The migration issues list.",
+          "items": {
+            "$ref": "#/definitions/MigrationIssues"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "skus": {
+          "type": "array",
+          "description": "The Skus list.",
+          "items": {
+            "type": "object",
+            "description": "Skus details.",
+            "properties": {
+              "kind": {
+                "$ref": "#/definitions/SkuKind",
+                "description": "The Sku kind.",
+                "readOnly": true
+              },
+              "resourceUri": {
+                "type": "string",
+                "description": "The resource uri.",
+                "readOnly": true
+              },
+              "displayName": {
+                "type": "string",
+                "description": "The sku name.",
+                "readOnly": true
+              },
+              "id": {
+                "type": "string",
+                "description": "The sku id.",
+                "readOnly": true
+              },
+              "type": {
+                "$ref": "#/definitions/SkuType",
+                "description": "The sku type.",
+                "readOnly": true
+              },
+              "sources": {
+                "type": "array",
+                "description": "The source name.",
+                "items": {
+                  "type": "object",
+                  "description": "Source recommendation details.",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "The sku name.",
+                      "readOnly": true
+                    },
+                    "migrationSuitability": {
+                      "$ref": "#/definitions/MigrationSuitability",
+                      "description": "The sku type.",
+                      "readOnly": true
+                    }
+                  }
+                },
+                "readOnly": true,
+                "x-ms-identifiers": []
+              },
+              "details": {
+                "$ref": "#/definitions/SkuDetails",
+                "description": "The sku details.",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "vmSecuritySuitabilityResults": {
+          "type": "array",
+          "description": "VM Security Suitability Results.",
+          "items": {
+            "$ref": "#/definitions/VmSecuritySuitability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "recommendedVmSecurityType": {
+          "$ref": "#/definitions/AzureVmSecurityType",
+          "description": "Recommended security type for the VM.",
+          "readOnly": true
+        }
+      }
     },
     "MachineAssessmentSettings": {
       "type": "object",
@@ -7201,6 +7405,13 @@
         "vmUptime": {
           "$ref": "#/definitions/VmUptime",
           "description": "Gets or sets the duration for which the VMs are up in the on-premises\nenvironment."
+        },
+        "azureVmSecurityOptions": {
+          "type": "array",
+          "description": "Gets or sets the Azure VM security options.",
+          "items": {
+            "$ref": "#/definitions/AzureVmSecurityType"
+          }
         }
       }
     },
@@ -8793,6 +9004,35 @@
           }
         ]
       }
+    },
+    "VmSecuritySuitability": {
+      "type": "object",
+      "description": "VM Security Suitability",
+      "properties": {
+        "vmSecurityType": {
+          "$ref": "#/definitions/AzureVmSecurityType",
+          "description": "Gets and sets the security type for this secure VM.",
+          "readOnly": true
+        },
+        "securitySuitability": {
+          "$ref": "#/definitions/CloudSuitabilityCommon",
+          "description": "Gets the suitability for this secure VM.",
+          "readOnly": true
+        },
+        "securitySuitabilityDetails": {
+          "type": "array",
+          "description": "Gets the security suitability details for this VM.",
+          "items": {
+            "$ref": "#/definitions/AzureVmSecuritySuitabilityDetail"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "vmSecurityType",
+        "securitySuitability",
+        "securitySuitabilityDetails"
+      ]
     },
     "VmUptime": {
       "type": "object",
