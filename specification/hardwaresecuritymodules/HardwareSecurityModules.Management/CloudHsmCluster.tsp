@@ -99,6 +99,7 @@ interface CloudHsmClusters {
     BackupRequestProperties,
     ArmResponse<BackupResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -112,6 +113,7 @@ interface CloudHsmClusters {
     BackupRequestProperties,
     ArmResponse<BackupResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -125,6 +127,7 @@ interface CloudHsmClusters {
     RestoreRequestProperties,
     ArmResponse<RestoreResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = RestoreResult> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -138,6 +141,7 @@ interface CloudHsmClusters {
     RestoreRequestProperties,
     ArmResponse<RestoreResult>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = RestoreResult> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
