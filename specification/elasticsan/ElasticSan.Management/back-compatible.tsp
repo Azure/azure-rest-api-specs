@@ -87,6 +87,3 @@ using Microsoft.ElasticSan;
 // VolumeGroups interface operations
 @@clientLocation(VolumeGroups.preBackup, Volumes);
 @@clientLocation(VolumeGroups.preRestore, Volumes);
-
-// Volumes interface operations
-@@clientLocation(Volumes.restoreVolume, "RestoreVolume");
