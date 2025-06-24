@@ -28,7 +28,7 @@ interface ManagedDashboards {
   /**
    * Get the properties of a specific dashboard for grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Dashboards_Get")
   get is ArmResourceRead<ManagedDashboard>;
 
@@ -54,7 +54,7 @@ interface ManagedDashboards {
   /**
    * List all resources of dashboards under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Dashboards_List")
   list is ArmResourceListByParent<
     ManagedDashboard,
@@ -64,7 +64,7 @@ interface ManagedDashboards {
   /**
    * List all resources of dashboards under the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Dashboards_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ManagedDashboard,
