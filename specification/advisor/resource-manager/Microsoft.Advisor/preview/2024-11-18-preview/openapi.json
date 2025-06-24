@@ -81,8 +81,7 @@
             "in": "path",
             "description": "The recommendation ID.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -123,8 +122,7 @@
             "in": "path",
             "description": "The recommendation ID.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "trackedProperties",
@@ -176,16 +174,14 @@
             "in": "path",
             "description": "The recommendation ID.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "name",
             "in": "path",
             "description": "The name of the suppression.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -233,16 +229,14 @@
             "in": "path",
             "description": "The recommendation ID.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "name",
             "in": "path",
             "description": "The name of the suppression.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "suppressionContract",
@@ -299,16 +293,14 @@
             "in": "path",
             "description": "The recommendation ID.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           },
           {
             "name": "name",
             "in": "path",
             "description": "The name of the suppression.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -381,8 +373,7 @@
             "in": "path",
             "description": "Name of metadata entity.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -451,11 +442,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore": {
       "get": {
-        "operationId": "AdvisorScore_List",
+        "operationId": "AdvisorScores_List",
         "tags": [
           "AdvisorScoreEntities"
         ],
-        "description": "Gets advisor scores for a subscription.",
+        "description": "Gets the list of advisor scores.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -477,16 +468,21 @@
               "$ref": "#/definitions/ArmErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ListAdvisorScore": {
+            "$ref": "./examples/ListAdvisorScore.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore/{name}": {
       "get": {
-        "operationId": "AdvisorScore_Get",
+        "operationId": "AdvisorScores_Get",
         "tags": [
           "AdvisorScoreEntities"
         ],
-        "description": "Gets score for a subscription.",
+        "description": "Gets the advisor score.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -499,8 +495,7 @@
             "in": "path",
             "description": "The scope of Advisor score entity.",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {
@@ -515,6 +510,11 @@
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAdvisorScoreDetail": {
+            "$ref": "./examples/GetAdvisorScoreDetail.json"
           }
         }
       }
@@ -1124,8 +1124,7 @@
             "in": "path",
             "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
             "required": true,
-            "type": "string",
-            "pattern": "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+            "type": "string"
           }
         ],
         "responses": {

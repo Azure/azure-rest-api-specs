@@ -20,7 +20,7 @@ model ResiliencyReview
     Resource = ResiliencyReview,
     KeyName = "reviewId",
     SegmentName = "resiliencyReviews",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 

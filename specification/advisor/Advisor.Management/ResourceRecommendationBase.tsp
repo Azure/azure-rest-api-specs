@@ -21,7 +21,7 @@ model ResourceRecommendationBase
     Resource = ResourceRecommendationBase,
     KeyName = "recommendationId",
     SegmentName = "recommendations",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 

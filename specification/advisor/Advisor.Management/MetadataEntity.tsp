@@ -20,7 +20,7 @@ model MetadataEntity
     Resource = MetadataEntity,
     KeyName = "name",
     SegmentName = "metadata",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 

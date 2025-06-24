@@ -23,7 +23,7 @@ model SuppressionContract
     Resource = SuppressionContract,
     KeyName = "name",
     SegmentName = "suppressions",
-    NamePattern = "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    NamePattern = ""
   >;
 }
 
