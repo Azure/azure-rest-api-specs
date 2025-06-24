@@ -155,7 +155,6 @@ union GeoReplicationStatusType {
 }
 
 /** The list queue segment response */
-@pagedResult
 @Xml.name("EnumerationResults")
 model ListQueuesSegmentResponse {
   /** The service endpoint. */
@@ -173,12 +172,12 @@ model ListQueuesSegmentResponse {
   @Xml.name("MaxResults") maxResults?: int32;
 
   /** The queue segment. */
-  @items
+  @pageItems
   @Xml.name("Queues")
   queueItems: QueueItem[];
 
   /** The next marker of the queues. */
-  @nextLink
+  @continuationToken
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
