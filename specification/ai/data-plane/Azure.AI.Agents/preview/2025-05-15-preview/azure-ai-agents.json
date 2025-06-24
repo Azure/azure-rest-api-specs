@@ -3101,7 +3101,8 @@
         "sharepoint_grounding",
         "azure_ai_search",
         "bing_custom_search",
-        "connected_agent"
+        "connected_agent",
+        "browser_automation"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3151,6 +3152,11 @@
             "name": "connectedAgent",
             "value": "connected_agent",
             "description": "Tool type `connected_agent`"
+          },
+          {
+            "name": "browserAutomation",
+            "value": "browser_automation",
+            "description": "Tool type `browser_automation`"
           }
         ]
       }
@@ -3537,6 +3543,53 @@
         }
       ],
       "x-ms-discriminator-value": "bing_grounding"
+    },
+    "BrowserAutomationDetails": {
+      "type": "object",
+      "description": "The details of the browser automation tool.",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/BrowserAutomationRemoteBrowserConnection",
+          "description": "Information about the remote browser to be used for automation."
+        }
+      },
+      "required": [
+        "connection"
+      ]
+    },
+    "BrowserAutomationRemoteBrowserConnection": {
+      "type": "object",
+      "description": "The connection ID containing information about the remote browser.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The connection ID for the remote browser.",
+          "x-ms-client-name": "connectionId"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "BrowserAutomationToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Browser Automation tool as used to configure an agent.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/BrowserAutomationDetails",
+          "description": "The browser_automation tool definition configuration.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
     },
     "CodeInterpreterToolDefinition": {
       "type": "object",
@@ -5923,6 +5976,78 @@
         }
       ],
       "x-ms-discriminator-value": "bing_grounding"
+    },
+    "RunStepBrowserAutomationToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Browser Automation tool, issued by the model in evaluation of a defined tool, that represents\nexecuted automated browser operations.",
+      "properties": {
+        "browser_automation": {
+          "$ref": "#/definitions/RunStepBrowserAutomationToolCallDetails",
+          "description": "The detailed information about the automated browser tasks performed by the model.",
+          "x-ms-client-name": "browserAutomation"
+        }
+      },
+      "required": [
+        "browser_automation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation"
+    },
+    "RunStepBrowserAutomationToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about the automated browser tasks performed by the model.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided by the model to the browser automation tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The final output for the browser automation tool."
+        },
+        "steps": {
+          "type": "array",
+          "description": "The intermediate browser goals taken to achieve the final user goal.",
+          "items": {
+            "$ref": "#/definitions/RunStepBrowserAutomationToolStepDetail"
+          }
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "steps"
+      ]
+    },
+    "RunStepBrowserAutomationToolStepDetail": {
+      "type": "object",
+      "description": "The details of each step taken by the browser automation tool to achieve the final user goal.",
+      "properties": {
+        "last_step_result": {
+          "type": "string",
+          "description": "The evaluated result of the previous step that'll help the model decide what to do next.",
+          "x-ms-client-name": "lastStepResult"
+        },
+        "current_state": {
+          "type": "string",
+          "description": "The model interpretation of the current state of the browser after the action for the current step has been performed.",
+          "x-ms-client-name": "currentState"
+        },
+        "next_step": {
+          "type": "string",
+          "description": "The model decision summary of the next step to be performed to reach closer to the final user goal.",
+          "x-ms-client-name": "nextStep"
+        }
+      },
+      "required": [
+        "last_step_result",
+        "current_state",
+        "next_step"
+      ]
     },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",

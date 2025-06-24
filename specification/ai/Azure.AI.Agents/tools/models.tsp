@@ -144,6 +144,17 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   connectedAgent: ConnectedAgentDetails;
 }
 
+@doc("The input definition information for a Browser Automation tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The browser_automation tool definition configuration.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: BrowserAutomationDetails;
+}
+
 // Definition details: File Search
 
 /**
@@ -537,6 +548,20 @@ model RunStepOpenAPIToolCall extends RunStepToolCall {
   openAPI: Record<string>;
 }
 
+@doc("""
+  A record of a call to a Browser Automation tool, issued by the model in evaluation of a defined tool, that represents
+  executed automated browser operations.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'browser_automation'.")
+  type: "browser_automation";
+
+  @doc("The detailed information about the automated browser tasks performed by the model.")
+  @encodedName("application/json", "browser_automation")
+  browserAutomation: RunStepBrowserAutomationToolCallDetails;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -619,6 +644,37 @@ model BingGroundingSearchConfiguration {
 
   @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
   freshness?: string;
+}
+
+// Call details: Browser Automation
+
+@doc("The detailed information about the automated browser tasks performed by the model.")
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolCallDetails {
+  @doc("The input provided by the model to the browser automation tool.")
+  input: string;
+
+  @doc("The final output for the browser automation tool.")
+  output: string;
+
+  @doc("The intermediate browser goals taken to achieve the final user goal.")
+  steps: RunStepBrowserAutomationToolStepDetail[];
+}
+
+@doc("The details of each step taken by the browser automation tool to achieve the final user goal.")
+@added(Versions.v2025_05_15_preview)
+model RunStepBrowserAutomationToolStepDetail {
+  @doc("The evaluated result of the previous step that'll help the model decide what to do next.")
+  @encodedName("application/json", "last_step_result")
+  lastStepResult: string;
+
+  @doc("The model interpretation of the current state of the browser after the action for the current step has been performed.")
+  @encodedName("application/json", "current_state")
+  currentState: string;
+
+  @doc("The model decision summary of the next step to be performed to reach closer to the final user goal.")
+  @encodedName("application/json", "next_step")
+  nextStep: string;
 }
 
 //
@@ -708,6 +764,10 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
+
+  /** Tool type `browser_automation` */
+  @added(Versions.v2025_05_15_preview)
+  browserAutomation: "browser_automation",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -844,4 +904,23 @@ model AzureFunctionStorageQueue {
   @doc("The name of an Azure function storage queue.")
   @encodedName("application/json", "queue_name")
   queueName: string;
+}
+
+/**
+ * The details of the browser automation tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationDetails {
+  @doc("Information about the remote browser to be used for automation.")
+  connection: BrowserAutomationRemoteBrowserConnection;
+}
+
+/**
+ * The connection ID containing information about the remote browser.
+ */
+@added(Versions.v2025_05_15_preview)
+model BrowserAutomationRemoteBrowserConnection {
+  @doc("The connection ID for the remote browser.")
+  @encodedName("application/json", "id")
+  connectionId: string;
 }
