@@ -15,7 +15,6 @@ import "./models.tsp";
 import "./DryrunResource.tsp";
 import "./LinkerResource.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
