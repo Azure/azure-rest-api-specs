@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./common.tsp";
+import "../common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -55,6 +55,7 @@ model Source {
   type: SourceType;
 }
 
+// Bucket Source Properties
 @doc("The properties of the backing data store.")
 model BucketSource extends Source {
   @visibility(Lifecycle.Read)
@@ -72,6 +73,21 @@ model BucketSource extends Source {
   hostOverride?: string;
 }
 
+// DataShare Source Properties
+@doc("The properties of the backing data store.")
+@added(Versions.v2025_07_01_preview)
+model DataShareSource extends Source {
+  @visibility(Lifecycle.Read)
+  type: SourceType.DataShare;
+
+  @doc("Details for how to connect to the backing data store.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  connection: Connection;
+
+  @doc("Details for how to authenticate to the backing data store.")
+  authProperties: AuthProperties;
+}
+
 // Connection Properties
 @discriminator("type")
 @doc("Details related to the type of bucket connection")
@@ -80,7 +96,8 @@ model Connection {
   type: ConnectionType;
 }
 
-@doc("Details related to endpoint based bucket connection")
+// Endpoint Connection Properties
+@doc("Details related to endpoint based connection")
 model EndpointConnection extends Connection {
   @visibility(Lifecycle.Read)
   type: ConnectionType.Endpoint;
@@ -93,6 +110,19 @@ model EndpointConnection extends Connection {
   tlsVerification?: TlsVerification = TlsVerification.Perform;
 }
 
+// DataShare Connection Properties
+@doc("Details related to DataShare based connection")
+@added(Versions.v2025_07_01_preview)
+model DataShareConnection extends Connection {
+  @visibility(Lifecycle.Read)
+  type: ConnectionType.DataShare;
+
+  @doc("The URI of the backing DataShare. Must be in the format: azds://<region>:<DataShareName>:<DataShareIdentifier>")
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri: string;
+}
+
+// PrivateLink Connection Properties
 @doc("Details related to PrivateLink based connection")
 @added(Versions.v2025_05_01_preview)
 model PrivateLinkConnection extends Connection {
@@ -128,6 +158,7 @@ model AuthProperties {
   type: AuthType;
 }
 
+// AccessKey Auth Properties
 @doc("The access key properties for bucket connection.")
 model AccessKeyProperties extends AuthProperties {
   @visibility(Lifecycle.Read)
@@ -144,6 +175,17 @@ model AccessKeyProperties extends AuthProperties {
 
   @doc("Region to use in the signing algorithm.  If not provided, defaults to us-east-1.")
   signingRegion?: string;
+}
+
+// Managed Identity Auth Properties
+@doc("The managed identity properties for dataShare connection.")
+@added(Versions.v2025_07_01_preview)
+model ManagedIdentityAuthProperties extends AuthProperties {
+  @visibility(Lifecycle.Read)
+  type: AuthType.ManagedIdentity;
+
+  @doc("ARM ID of the managed identity that should be used to authenticate to the backing data source.")
+  identityResourceId?: string;
 }
 
 // Test Existing Connection request
