@@ -25,7 +25,7 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface PrivateEndpointConnectionsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -67,7 +67,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   approve is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
+    Response = ArmResourceCreatedResponse<
       Resource = PrivateEndpointConnection,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
         Azure.Core.Foundations.RetryAfterHeader
