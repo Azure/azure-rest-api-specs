@@ -15,7 +15,7 @@ using Microsoft.Support;
 @@clientName(SupportTickets.update::parameters.properties,
   "updateSupportTicket"
 );
-@@clientName(SupportTickets.checkNameAvailability::parameters.body,
+@@clientName(SupportTicketsNoSubscriptionOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
 @@clientName(SupportTicketsNoSubscription.create::parameters.resource,
@@ -24,7 +24,7 @@ using Microsoft.Support;
 @@clientName(SupportTicketsNoSubscription.update::parameters.properties,
   "updateSupportTicket"
 );
-@@clientName(SupportTicketsNoSubscription.checkNameAvailability::parameters.body,
+@@clientName(SupportTicketsOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
