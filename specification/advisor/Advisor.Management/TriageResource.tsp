@@ -38,7 +38,12 @@ interface TriageResourceOps
         @segment("resiliencyReviews")
         reviewId: string,
       },
-      {}
+      KeysOf<ResourceNameParameter<
+        Resource = TriageRecommendation,
+        KeyName = "recommendationId",
+        SegmentName = "providers/Microsoft.Advisor/triageRecommendations",
+        NamePattern = ""
+      >>
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
