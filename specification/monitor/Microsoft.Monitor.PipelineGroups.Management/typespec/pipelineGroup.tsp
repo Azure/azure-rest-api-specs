@@ -270,4 +270,12 @@ interface PipelineGroups {
 
   @doc("Lists all workspaces in the specified subscription")
   listBySubscription is ArmListBySubscription<PipelineGroup>;
+
+  @doc("This method is used to validate a query expression to be used in a TransformLanguage processor.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  validateTransformLanguageQuery is ArmResourceActionAsync<
+    PipelineGroup,
+    ValidateTransformLanguageQueryRequest,
+    ValidateTransformLanguageQueryResponse
+  >;
 }

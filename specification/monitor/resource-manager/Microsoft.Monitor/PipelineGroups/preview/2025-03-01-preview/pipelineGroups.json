@@ -396,6 +396,75 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/validateTransformLanguageQuery": {
+      "post": {
+        "operationId": "PipelineGroups_ValidateTransformLanguageQuery",
+        "tags": [
+          "PipelineGroups"
+        ],
+        "description": "This method is used to validate a query expression to be used in a TransformLanguage processor.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "pipelineGroupName",
+            "in": "path",
+            "description": "The name of pipeline group. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateTransformLanguageQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateTransformLanguageQueryResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1500,6 +1569,56 @@
       },
       "required": [
         "endpoint"
+      ]
+    },
+    "ValidateTransformLanguageQueryRequest": {
+      "type": "object",
+      "description": "Request to validate a query expression.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Query to validate.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "ValidateTransformLanguageQueryResponse": {
+      "type": "object",
+      "description": "Response for the query validation.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Result of the query validation."
+        },
+        "error": {
+          "$ref": "#/definitions/ValidateTransformLanguageQueryResponseError",
+          "description": "Optional error details if the validation failed."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "ValidateTransformLanguageQueryResponseError": {
+      "type": "object",
+      "description": "Error details for query validation failures.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message providing details about the validation failure."
+        }
+      },
+      "required": [
+        "type",
+        "message"
       ]
     }
   },
