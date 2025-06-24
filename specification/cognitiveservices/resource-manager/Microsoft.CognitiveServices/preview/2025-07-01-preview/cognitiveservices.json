@@ -2849,7 +2849,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiTopicCreationRequest"
+              "$ref": "#/definitions/RaiTopic"
             },
             "description": "Properties describing the rai topic."
           }
@@ -8037,11 +8037,11 @@
       "description": "RAI Custom Topic properties.",
       "type": "object",
       "properties": {
-        "id": {
+        "topicId": {
           "type": "string",
           "description": "The unique identifier of the custom topic."
         },
-        "name": {
+        "topicName": {
           "type": "string",
           "description": "The name of the custom topic."
         },
@@ -8072,55 +8072,6 @@
           "description": "Last modified time of the custom topic."
         }
       }
-    },
-    "RaiTopicCreationRequest": {
-      "description": "Cognitive Services Rai Topic Creation Request.",
-      "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "properties": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The name of the custom topic."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the custom topic."
-            },
-            "sampleBlobUrl": {
-              "type": "string",
-              "description": "Sample blob url for the custom topic."
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "NetworkSecurityPerimeterConfigurationList": {
       "description": "A list of NSP configurations for an Cognitive Services account.",
