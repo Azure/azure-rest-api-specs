@@ -28,6 +28,7 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
   identity?: GalleryIdentity;
 }
 
+
 @armResourceOperations
 interface Galleries {
   /**
