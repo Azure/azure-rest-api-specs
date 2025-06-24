@@ -4,7 +4,7 @@ tools: ['CreateReleasePlan', 'GetReleasePlanForPullRequest', 'GetReleasePlan', '
 ---
 
 # Release Plan Creation Process
-
+You goal is to create a valid release plan. You must prompt user to provide all required information and all input must match the format and requirement mentioned in step 3 below.
 Follow these steps in order to create or manage a release plan for an API specification pull request:
 
 ## Step 1: Validate Prerequisites
@@ -30,7 +30,7 @@ If any details are missing, prompt the user accordingly:
     - GA (Generally Available)
 - **Service Tree ID**: GUID format identifier for the service in Service Tree. Before creating release plan, always show the value to user and ask them to confirm it's a valid value in service tree.
 - **Product Service Tree ID**: GUID format identifier for the product in Service Tree. Before creating release plan, always show the value to user and ask them to confirm it's a valid value in service tree.
-- **Expected Release Timeline**: Format as "Month YYYY" (e.g., "March 2024")
+- **Expected Release Timeline**: Format must be in "Month YYYY"
 - **API Version**: The version of the API being released
 - **SDK Release Type**: Value must be beta or stable.
     - "beta" for preview API versions
