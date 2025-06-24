@@ -142,7 +142,7 @@ scalar ScheduledActionsId
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The properties of the occurrence extension")
 model OccurrenceExtensionProperties {
-    @doc("""
+  @doc("""
     The ARM Id of the resource.
     "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
     """)
