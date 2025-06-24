@@ -124,6 +124,10 @@ interface RedTeams {
       @query(#{ explode: true })
       riskTypes?: string[];
 
+      @doc("Risk category for the attack objectives.")
+      @query
+      riskCategory: string;
+      
       @doc("The language for the attack objectives dataset, defaults to 'en'")
       @query
       lang?: string;
