@@ -77,7 +77,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge'].<br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationControl eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'",
+            "description": "The filter to apply to the recommendation metadata.<br>Filter can be applied to properties ['[Category](#category)', '[SubCategory](#SubCategory)', 'RetirementDate'] with operators ['eq', 'and', 'le', 'ge'].<br>Example:<br>- $filter=recommendationCategory eq 'HighAvailability' and recommendationSubCategory eq 'ServiceUpgradeAndRetirement' and retirementDate ge '2024-01-01' and retirementDate le '2028-01-01'",
             "required": false,
             "type": "string"
           }
@@ -428,7 +428,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[Control](#control)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=Control eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[SubCategory](#SubCategory)', 'RetirementDate'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'",
             "required": false,
             "type": "string"
           },
@@ -923,6 +923,26 @@
     }
   },
   "definitions": {
+    "SubCategory": {
+        "description": "The sub-category of the recommendation.",
+        "enum": [
+          "HighAvailability",
+          "BusinessContinuity",
+          "DisasterRecovery",
+          "Scalability",
+          "MonitoringAndAlerting",
+          "ServiceUpgradeAndRetirement",
+          "Other",
+          "PrioritizedRecommendations",
+          "Personalized",
+          "EfficiencyOptimization"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "SubCategory",
+          "modelAsString": true
+        }
+    },
     "MetadataEntityListResult": {
       "description": "The list of metadata entities",
       "type": "object",
