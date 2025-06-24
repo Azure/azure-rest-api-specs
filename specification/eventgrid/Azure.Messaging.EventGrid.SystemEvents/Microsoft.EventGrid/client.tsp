@@ -90,4 +90,3 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   "csharp"
 );
-
