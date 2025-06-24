@@ -66,6 +66,7 @@ interface FabricCapacities {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @get
+  @list
   @doc("List eligible SKUs for a Microsoft Fabric resource")
   @segment("skus")
   listSkusForCapacity(
@@ -78,6 +79,7 @@ interface FabricCapacities {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
   @get
+  @list
   @doc("List eligible SKUs for Microsoft Fabric resource provider")
   @segment("skus")
   listSkus(
@@ -90,6 +92,7 @@ interface FabricCapacities {
   @get
   @doc("List the current consumption and limit in this location for the provided subscription")
   @segment("usages")
+  @list
   listUsages(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
