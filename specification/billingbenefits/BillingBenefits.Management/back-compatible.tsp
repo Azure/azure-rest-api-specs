@@ -8,7 +8,7 @@ using Microsoft.BillingBenefits;
 @@clientLocation(SavingsPlanOperationGroup.validatePurchase,
   "ValidatePurchase"
 );
-@@clientLocation(DiscountsOperationGroup.scopeList, "Discounts");
+@@clientLocation(DiscountsOperationGroup.scopeList, Discounts);
 @@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");
 @@clientLocation(ReservationOrderAliasResponses.create,
   "ReservationOrderAlias"
