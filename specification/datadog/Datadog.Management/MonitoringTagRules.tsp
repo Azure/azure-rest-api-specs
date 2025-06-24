@@ -25,7 +25,6 @@ model MonitoringTagRules
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @armResourceOperations
 interface TagRulesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -53,7 +52,7 @@ interface TagRulesOps
       ErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface TagRules {
   /**
@@ -64,7 +63,7 @@ interface TagRules {
   /**
    * Create or update a tag rule set for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is TagRulesOps.CreateOrUpdateAsync<
     MonitoringTagRules,
     Response = ArmResourceUpdatedResponse<MonitoringTagRules>,

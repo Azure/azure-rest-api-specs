@@ -25,7 +25,6 @@ model MonitoredSubscriptionProperties
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @armResourceOperations
 interface MonitoredSubscriptionsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -63,7 +62,7 @@ interface MonitoredSubscriptions {
   /**
    * Add the subscriptions that should be monitored by the Datadog monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createorUpdate is MonitoredSubscriptionsOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
@@ -87,7 +86,7 @@ interface MonitoredSubscriptions {
   /**
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MonitoredSubscriptionProperties,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

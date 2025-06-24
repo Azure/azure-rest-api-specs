@@ -11,12 +11,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Datadog;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MarketplaceAgreementsOperationGroup {
   /**
    * List Datadog marketplace agreements in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List Datadog marketplace agreements in the subscription.")
   @operationId("MarketplaceAgreements_List")
   @autoRoute
@@ -30,7 +30,7 @@ interface MarketplaceAgreementsOperationGroup {
   /**
    * Create Datadog marketplace agreement in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create Datadog marketplace agreement in the subscription.")
   @operationId("MarketplaceAgreements_CreateOrUpdate")
   @autoRoute
@@ -45,12 +45,12 @@ interface MarketplaceAgreementsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CreationSupportedOperationGroup {
   /**
    * Informs if the current subscription is being already monitored for selected Datadog organization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Datadog organization.")
   @operationId("CreationSupported_List")
   @autoRoute
@@ -70,7 +70,7 @@ interface CreationSupportedOperationGroup {
   /**
    * Informs if the current subscription is being already monitored for selected Datadog organization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Datadog organization.")
   @operationId("CreationSupported_Get")
   @autoRoute

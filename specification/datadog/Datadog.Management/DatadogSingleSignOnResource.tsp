@@ -23,7 +23,6 @@ model DatadogSingleSignOnResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @armResourceOperations
 interface DatadogSingleSignOnResourcesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -51,20 +50,20 @@ interface DatadogSingleSignOnResourcesOps
       ErrorResponse
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DatadogSingleSignOnResources {
   /**
    * Gets the datadog single sign-on resource for the given Monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOnConfigurations_Get")
   get is ArmResourceRead<DatadogSingleSignOnResource>;
 
   /**
    * Configures single-sign-on for this resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOnConfigurations_CreateOrUpdate")
   createOrUpdate is DatadogSingleSignOnResourcesOps.CreateOrUpdateAsync<
     DatadogSingleSignOnResource,
@@ -74,7 +73,7 @@ interface DatadogSingleSignOnResources {
   /**
    * List the single sign-on configurations for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SingleSignOnConfigurations_List")
   list is ArmResourceListByParent<
     DatadogSingleSignOnResource,
