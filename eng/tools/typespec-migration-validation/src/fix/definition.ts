@@ -9,10 +9,13 @@ const knownPropertyDecoratorMapping: { [key: string]: string } = {
   'maxLength': 'maxLength'
 };
 
+const addedKey = '__added';
+const deletedKey = '__deleted';
+
 export function handleAdded(diff: { path: string, value: string, key: string }): Suggestion | undefined {
   const { path, value, key } = diff;
-  if (key.endsWith('__added')) {
-    const originalKey = key.slice(0, -7); // Remove '__added' suffix
+  if (key.endsWith(addedKey)) {
+    const originalKey = key.slice(0, addedKey.length); // Remove '__added' suffix
     const property = getPropertyName(path);
 
     if (originalKey === 'x-ms-client-name') {
@@ -31,8 +34,8 @@ export function handleAdded(diff: { path: string, value: string, key: string }):
 
 export function handleDeleted(diff: { path: string, value: string, key: string }): Suggestion | undefined {
   const { path, value, key } = diff;
-  if (key.endsWith('__deleted')) {
-    const originalKey = key.slice(0, -9); // Remove '__deleted' suffix
+  if (key.endsWith(deletedKey)) {
+    const originalKey = key.slice(0, deletedKey.length); // Remove '__deleted' suffix
     const property = getPropertyName(path);
 
     if (originalKey === 'x-ms-client-name') {
