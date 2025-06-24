@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
+    "api-version": "2025-01-01",
     "location": "eastus2(stage)",
-    "api-version": "2025-01-01"
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "unit": "Count",
+            "name": {
+              "localizedValue": "Storage Accounts",
+              "value": "StorageAccounts"
+            },
             "currentValue": 55,
             "limit": 250,
-            "name": {
-              "value": "StorageAccounts",
-              "localizedValue": "Storage Accounts"
-            }
+            "unit": "Count"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Usages_ListByLocation",
+  "title": "UsageList"
 }
