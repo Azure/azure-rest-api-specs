@@ -37,27 +37,27 @@ jobs:
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
-          (fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).breakingChangeReviewLabelName != '')
-        name: Upload artifact with results
+          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
+        name: Upload artifact with BreakingChangeReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).breakingChangeReviewLabelName }}"          
-          value: "${{ fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).breakingChangeReviewLabelValue == 'true' }}"
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"          
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
 
       # Upload artifact for 'VersioningReviewRequired' label
       - if: |
-          (fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).versioningReviewLabelName != '')
-        name: Upload artifact with results
+          (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
+        name: Upload artifact with VersioningReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).versioningReviewLabelName }}"
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
           # Convert "add/remove" to "true/false"
-          value: "${{ fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).versioningReviewLabelValue == 'true' }}"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
 
       # Upload artifact with issue number if labels are present and PR number is valid
       - if: |
-          ((fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).breakingChangeReviewLabelName != '' ||
-          fromJson(steps.swagger-breaking-change-analyze-code.outputs.result).versioningReviewLabelName != '') &&
+          ((steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
+          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
           github.event.pull_request.number > 0)
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
