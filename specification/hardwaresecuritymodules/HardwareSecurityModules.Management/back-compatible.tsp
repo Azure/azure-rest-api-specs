@@ -39,35 +39,24 @@ using Microsoft.HardwareSecurityModules;
   "restoreRequestProperties"
 );
 
-// @@clientLocation for @operationId operations
-@@clientLocation(CloudHsmClusters.listByCloudHsmCluster,
-  "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster"
-);
-@@clientLocation(CloudHsmClusters.cloudHsmClusterBackupStatusGet,
-  "CloudHsmClusterBackupStatus_Get"
-);
-@@clientLocation(CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
-  "CloudHsmClusterRestoreStatus_Get"
-);
-@@clientLocation(PrivateEndpointConnections.get,
-  "CloudHsmClusterPrivateEndpointConnections_Get"
-);
-@@clientLocation(PrivateEndpointConnections.create,
-  "CloudHsmClusterPrivateEndpointConnections_Create"
-);
-@@clientLocation(PrivateEndpointConnections.delete,
-  "CloudHsmClusterPrivateEndpointConnections_Delete"
-);
-@@clientLocation(DedicatedHsms.get, "DedicatedHsm_Get");
-@@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm_CreateOrUpdate");
-@@clientLocation(DedicatedHsms.update, "DedicatedHsm_Update");
-@@clientLocation(DedicatedHsms.delete, "DedicatedHsm_Delete");
-@@clientLocation(DedicatedHsms.listByResourceGroup,
-  "DedicatedHsm_ListByResourceGroup"
-);
-@@clientLocation(DedicatedHsms.listBySubscription,
-  "DedicatedHsm_ListBySubscription"
-);
-@@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
-  "DedicatedHsm_ListOutboundNetworkDependenciesEndpoints"
-);
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
+// CloudHsmClusters operations
+@@clientLocation(CloudHsmClusters.listByCloudHsmCluster, "CloudHsmClusterPrivateLinkResources");
+@@clientLocation(CloudHsmClusters.cloudHsmClusterBackupStatusGet, "CloudHsmClusterBackupStatus");
+@@clientLocation(CloudHsmClusters.cloudHsmClusterRestoreStatusGet, "CloudHsmClusterRestoreStatus");
+
+// PrivateEndpointConnections operations  
+@@clientLocation(PrivateEndpointConnections.get, "CloudHsmClusterPrivateEndpointConnections");
+@@clientLocation(PrivateEndpointConnections.create, "CloudHsmClusterPrivateEndpointConnections");
+@@clientLocation(PrivateEndpointConnections.delete, "CloudHsmClusterPrivateEndpointConnections");
+
+// DedicatedHsms operations
+@@clientLocation(DedicatedHsms.get, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.update, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.delete, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.listByResourceGroup, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.listBySubscription, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints, "DedicatedHsm");
