@@ -446,7 +446,6 @@
   "definitions": {
     "Error": {
       "type": "object",
-      "description": "The key vault server error.",
       "properties": {
         "code": {
           "type": "string",
@@ -459,12 +458,13 @@
           "readOnly": true
         },
         "innererror": {
-          "$ref": "#/definitions/NullableError",
+          "$ref": "#/definitions/Error",
           "description": "The key vault server error.",
           "readOnly": true,
           "x-ms-client-name": "innerError"
         }
-      }
+      },
+      "x-nullable": true
     },
     "FullBackupOperation": {
       "type": "object",
@@ -508,15 +508,11 @@
       "description": "The key vault error exception.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/NullableError",
+          "$ref": "#/definitions/Error",
           "description": "The key vault server error.",
           "readOnly": true
         }
       }
-    },
-    "NullableError": {
-      "$ref": "#/definitions/Error",
-      "x-nullable": true
     },
     "OperationStatus": {
       "type": "string",
