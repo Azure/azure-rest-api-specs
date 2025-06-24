@@ -54,7 +54,7 @@ using Microsoft.BotService;
 // OperationGroup interfaces from routes.tsp - use interface references to avoid conflicts
 @@clientLocation(BotsOperationGroup.getCheckNameAvailability, Bots);
 @@clientLocation(BotConnectionOperationGroup.listServiceProviders,
-  BotConnectionOperationGroup
+  "BotConnection"
 );
 @@clientLocation(QnAMakerEndpointKeysOperationGroup.get,
   "QnAMakerEndpointKeys"
