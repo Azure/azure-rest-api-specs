@@ -39,9 +39,13 @@ interface StorageTaskAssignments {
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -51,7 +55,9 @@ interface StorageTaskAssignments {
   update is ArmCustomPatchAsync<
     StorageTaskAssignment,
     PatchModel = StorageTaskAssignmentUpdateParameters,
-    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>>
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -59,7 +65,9 @@ interface StorageTaskAssignments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
+      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
   >;
 
   /**
