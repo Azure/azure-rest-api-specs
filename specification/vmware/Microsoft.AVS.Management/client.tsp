@@ -256,8 +256,51 @@ namespace Customization;
   "csharp"
 );
 @@clientName(Host, "AvsHost", "csharp");
+@@clientName(HostProperties, "AvsHostProperties", "csharp");
+@@clientName(GeneralHostProperties, "GeneralAvsHostProperties", "csharp");
+@@clientName(SpecializedHostProperties,
+  "SpecializedAvsHostProperties",
+  "csharp"
+);
+@@clientName(HostMaintenance, "AvsHostMaintenance", "csharp");
+@@clientName(HostProvisioningState, "AvsHostProvisioningState", "csharp");
+@@clientName(ProvisionedNetworkProperties,
+  "AvsProvisionedNetworkProperties",
+  "csharp"
+);
+@@clientName(ProvisionedNetworkProvisioningState,
+  "AvsProvisionedNetworkProvisioningState",
+  "csharp"
+);
+@@clientName(ProvisionedNetworkTypes, "AvsProvisionedNetworkType", "csharp");
+@@clientName(PureStoragePolicyProperties,
+  "AvsPureStoragePolicyProperties",
+  "csharp"
+);
+@@clientName(PureStoragePolicyProvisioningState,
+  "AvsPureStoragePolicyProvisioningState",
+  "csharp"
+);
+@@clientName(PureStorageVolume, "AvsPureStorageVolume", "csharp");
 @@clientName(ProvisionedNetwork, "AvsProvisionedNetwork", "csharp");
 @@clientName(PureStoragePolicy, "AvsPureStoragePolicy", "csharp");
+@@clientName(ResourceSkuCapabilities, "AvsResourceSkuCapabilities", "csharp");
+@@clientName(ResourceSkuLocationInfo, "AvsResourceSkuLocationInfo", "csharp");
+@@clientName(ResourceSkuResourceType, "AvsResourceSkuResourceType", "csharp");
+@@clientName(ResourceSkuRestrictionInfo,
+  "AvsResourceSkuRestrictionInfo",
+  "csharp"
+);
+@@clientName(ResourceSkuRestrictions, "AvsResourceSkuRestrictions", "csharp");
+@@clientName(ResourceSkuRestrictionsReasonCode,
+  "AvsResourceSkuRestrictionsReasonCode",
+  "csharp"
+);
+@@clientName(ResourceSkuRestrictionsType,
+  "AvsResourceSkuRestrictionsType",
+  "csharp"
+);
+@@clientName(ResourceSkuZoneDetails, "AvsResourceSkuZoneDetails", "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
