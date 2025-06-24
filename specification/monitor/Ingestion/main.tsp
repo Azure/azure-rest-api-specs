@@ -18,9 +18,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
-  title: "Azure Monitor Ingestion",
-})
+@service(#{ title: "Azure Monitor Ingestion" })
 @versioned(Versions)
 @server(
   "{endpoint}",
