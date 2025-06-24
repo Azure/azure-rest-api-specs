@@ -20,7 +20,7 @@ model FileWorkspaceDetails
     Resource = FileWorkspaceDetails,
     KeyName = "fileWorkspaceName",
     SegmentName = "fileWorkspaces",
-    NamePattern = ""
+    NamePattern = "^[0-9a-zA-Z_\\-. ]+$"
   >;
 }
 
@@ -72,6 +72,7 @@ interface FileWorkspacesNoSubscriptionOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface FileWorkspacesNoSubscription {
   /**

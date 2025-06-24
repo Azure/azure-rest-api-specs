@@ -114,6 +114,7 @@ interface SupportTicketsNoSubscriptionOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface SupportTicketsNoSubscription {
   /**
