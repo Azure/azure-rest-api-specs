@@ -889,6 +889,91 @@
         }
       }
     },
+    "AcsCallParticipantAddedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ],
+      "type": "object",
+      "properties": {},
+      "x-ms-examples": {
+        "callCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_participant_added.json"
+        },
+        "callCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_participant_added.json"
+        }
+      }
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ],
+      "type": "object",
+      "properties": {},
+      "x-ms-examples": {
+        "callCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_participant_removed.json"
+        },
+        "callCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_participant_removed.json"
+        }
+      }
+    },
+    "AcsCallStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {},
+      "x-ms-examples": {
+        "callCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_started.json"
+        },
+        "callCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_started.json"
+        }
+      }
+    },
+    "AcsCallEndedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "endedBy": {
+          "description": "The communication identifier of the user who was disconnected",
+          "$ref": "#/definitions/AcsCallEndedByProperties"
+        },
+        "reason": {
+          "description": "The reason for ending the call.",
+          "$ref": "#/definitions/AcsCallEndReasonProperties"
+        },
+        "callDurationInSeconds": {
+          "description": "Duration of the call in seconds.",
+          "type": "number"
+        }
+      },
+      "x-ms-examples": {
+        "callCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/call_ended.json"
+        },
+        "callCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/call_ended.json"
+        }
+      }
+    },
     "AcsChatMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
@@ -908,6 +993,72 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ],
+      "x-ms-examples": {
+        "chatCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/chat_azure_bot_command_received_in_thread.json"
+        },
+        "chatCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/chat_azure_bot_command_received_in_thread.json"
+        }
+      }
+    },
+    "AcsChatTypingIndicatorReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ],
+      "x-ms-examples": {
+        "chatCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/chat_typing_indicator_received_in_thread.json"
+        },
+        "chatCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/chat_typing_indicator_received_in_thread.json"
         }
       }
     },
@@ -931,7 +1082,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "messageBody"
+      ]
     },
     "AcsChatMessageEditedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
@@ -958,7 +1112,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageBody"
+      ]
     },
     "AcsChatMessageEditedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
@@ -985,7 +1142,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageBody"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
@@ -1053,7 +1213,12 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
         }
-      }
+      },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "participants"
+      ]
     },
     "AcsChatThreadCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -1089,7 +1254,12 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
         }
-      }
+      },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "participants"
+      ]
     },
     "AcsChatThreadWithUserDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
@@ -1109,7 +1279,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deletedByCommunicationIdentifier"
+      ]
     },
     "AcsChatThreadDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
@@ -1129,7 +1302,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deletedByCommunicationIdentifier"
+      ]
     },
     "AcsChatThreadPropertiesUpdatedPerUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
@@ -1163,7 +1339,11 @@
             "type": "object"
           }
         }
-      }
+      },
+      "required": [
+        "editedByCommunicationIdentifier",
+        "properties"
+      ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
@@ -1197,7 +1377,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "editedByCommunicationIdentifier",
+        "properties",
+        "metadata"
+      ]
     },
     "AcsChatParticipantAddedToThreadWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
@@ -1221,7 +1406,11 @@
           "description": "The details of the user who was added",
           "$ref": "#/definitions/AcsChatThreadParticipantProperties"
         }
-      }
+      },
+      "required": [
+        "addedByCommunicationIdentifier",
+        "participantAdded"
+      ]
     },
     "AcsChatParticipantRemovedFromThreadWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
@@ -1245,7 +1434,11 @@
           "description": "The details of the user who was removed",
           "$ref": "#/definitions/AcsChatThreadParticipantProperties"
         }
-      }
+      },
+      "required": [
+        "removedByCommunicationIdentifier",
+        "participantRemoved"
+      ]
     },
     "AcsChatParticipantAddedToThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
@@ -1274,7 +1467,11 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "addedByCommunicationIdentifier",
+        "participantAdded"
+      ]
     },
     "AcsChatParticipantRemovedFromThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
@@ -1303,7 +1500,11 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "removedByCommunicationIdentifier",
+        "participantRemoved"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
@@ -1338,7 +1539,12 @@
           "description": "Customer Content",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
+        "deliveryAttempts"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
@@ -1357,8 +1563,17 @@
           "description": "The time at which the SMS was received",
           "format": "date-time",
           "type": "string"
+        },
+        "segmentCount": {
+          "description": "Number of segments in the message",
+          "format": "int32",
+          "type": "integer"
         }
-      }
+      },
+      "required": [
+        "segmentCount",
+        "message"
+      ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
@@ -1420,7 +1635,10 @@
           "description": "The reason for ending recording session",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "recordingStorageInfo"
+      ]
     },
     "AcsEmailDeliveryReportReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
@@ -1432,6 +1650,10 @@
         },
         "recipient": {
           "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The Internet Message Id of the email been sent",
           "type": "string"
         },
         "messageId": {
@@ -1489,7 +1711,13 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "sender",
+        "recipient",
+        "internetMessageId",
+        "deliveryStatusDetails"
+      ]
     },
     "AcsEmailEngagementTrackingReportReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
@@ -1548,6 +1776,10 @@
           "description": "The received message content",
           "type": "string"
         },
+        "messageId": {
+          "description": "Message ID. Format is Guid as string.",
+          "type": "string"
+        },
         "channelType": {
           "description": "The received message channel Kind",
           "type": "string",
@@ -1566,11 +1798,20 @@
             ]
           }
         },
+        "messageType": {
+          "description": "WhatsApp Message Type",
+          "type": "string"
+        },
         "media": {
           "description": "The received message media content",
           "$ref": "#/definitions/AcsMessageMediaContent",
           "type": "object",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "description": "The received message reaction content",
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "type": "object"
         },
         "context": {
           "description": "The received message context",
@@ -1589,6 +1830,9 @@
           "x-ms-client-name": "interactiveContent"
         }
       },
+      "required": [
+        "messageType"
+      ],
       "x-ms-examples": {
         "snapshotCreatedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/advanced_message_received.json"
@@ -1697,7 +1941,11 @@
           "$ref": "#/definitions/AcsMessageChannelEventError",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
     },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
@@ -1741,6 +1989,196 @@
         }
       }
     },
+    "AcsCallParticipantEventData": {
+      "description": "Schema of common properties of participant events",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "properties": {
+        "user": {
+          "description": "The user of the call participant.",
+          "$ref": "#/definitions/AcsCallParticipantProperties"
+        },
+        "displayName": {
+          "description": "The display name of the participant.",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The Id of the participant.",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent of the participant. ",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallingEventProperties": {
+      "description": "Schema of common properties of all calling events",
+      "type": "object",
+      "properties": {
+        "startedBy": {
+          "description": "The call participant who initiated the call.",
+          "$ref": "#/definitions/AcsCallParticipantProperties"
+        },
+        "serverCallId": {
+          "description": "The callId of the server",
+          "type": "string"
+        },
+        "group": {
+          "description": "The group metadata",
+          "$ref": "#/definitions/AcsCallGroupProperties"
+        },
+        "room": {
+          "description": "The group metadata",
+          "$ref": "#/definitions/AcsCallRoomProperties"
+        },
+        "isTwoParty": {
+          "description": "Is two-party in calling event.",
+          "type": "boolean"
+        },
+        "correlationId": {
+          "description": "The correlation ID of the calling event",
+          "type": "string"
+        },
+        "isRoomsCall": {
+          "description": "Is the calling event a room call.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "startedBy",
+        "serverCallId",
+        "correlationId"
+      ]
+    },
+    "AcsCallGroupProperties": {
+      "description": "Schema of calling event group properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Group Id. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallRoomProperties": {
+      "description": "Schema of calling event room properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Room Id. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallEndedByProperties": {
+      "description": "Schema of calling event endedby properties",
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "type": {
+          "description": "The type of the call ended by.",
+          "x-ms-client-name": "kind",
+          "type": "string",
+          "enum": [
+            "Participant",
+            "MicrosoftInternal"
+          ],
+          "x-ms-enum": {
+            "name": "AcsCallEndedByKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Participant",
+                "description": "Call end initiator is a participant"
+              },
+              {
+                "value": "MicrosoftInternal",
+                "description": "Call end initiator is the local participant"
+              }
+            ]
+          }
+        },
+        "name": {
+          "description": "The name of the call ended by.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallParticipantProperties": {
+      "description": "Schema of calling event participant user",
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "role": {
+          "description": "The role of participant user.",
+          "type": "string",
+          "enum": [
+            "Attendee",
+            "Presenter",
+            "Organizer",
+            "Consumer",
+            "Collaborator"
+          ],
+          "x-ms-enum": {
+            "name": "AcsCallParticipantKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Attendee",
+                "description": "Call participant role is an attendee."
+              },
+              {
+                "value": "Presenter",
+                "description": "Call participant role is presenter."
+              },
+              {
+                "value": "Consumer",
+                "description": "Call participant role is consumer."
+              },
+              {
+                "value": "Collaborator",
+                "description": "Call participant role is collaborator."
+              },
+              {
+                "value": "Organizer",
+                "description": "Call participant role is organizer."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AcsCallEndReasonProperties": {
+      "description": "Schema of calling event reason properties",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Reason code for ending the call.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "subCode": {
+          "description": "Reason subcode for ending the call.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "phrase": {
+          "description": "Reason for ending the call.",
+          "type": "string"
+        }
+      }
+    },
     "AcsChatMessageEventBaseProperties": {
       "description": "Schema of common properties of all chat message events",
       "allOf": [
@@ -1776,7 +2214,12 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "type",
+        "senderCommunicationIdentifier"
+      ]
     },
     "AcsChatMessageEventInThreadBaseProperties": {
       "description": "Schema of common properties of all thread-level chat message events",
@@ -1813,7 +2256,12 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "senderCommunicationIdentifier",
+        "type"
+      ]
     },
     "AcsChatEventInThreadBaseProperties": {
       "description": "Schema of common properties of all thread-level chat events",
@@ -1827,7 +2275,11 @@
           "description": "The chat thread id",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "transactionId",
+        "threadId"
+      ]
     },
     "AcsRouterJobEventData": {
       "description": "Schema of common properties of all Router Job events",
@@ -1856,7 +2308,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "labels",
+        "tags"
+      ]
     },
     "AcsRouterWorkerEventData": {
       "description": "Schema of common properties of all Router Worker events",
@@ -1928,7 +2384,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "participantCommunicationIdentifier"
+      ]
     },
     "AcsSmsEventBaseProperties": {
       "description": "Schema of common properties of all SMS events",
@@ -1946,7 +2405,12 @@
           "description": "The identity of SMS message receiver",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsDeliveryAttemptProperties": {
       "description": "Schema for details of a delivery attempt",
@@ -1959,11 +2423,13 @@
         },
         "segmentsSucceeded": {
           "description": "Number of segments that were successfully delivered",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "segmentsFailed": {
           "description": "Number of segments whose delivery failed",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -2015,6 +2481,10 @@
       "description": "Detailed information about the status if any",
       "type": "object",
       "properties": {
+        "recipientMailServerHostName": {
+          "description": "Recipient Mail Server Host Name",
+          "type": "string"
+        },
         "statusMessage": {
           "description": "Detailed status message",
           "type": "string"
@@ -2233,8 +2703,33 @@
         "caption": {
           "description": "The caption for the media object, if supported and provided",
           "type": "string"
+        },
+        "animated": {
+          "description": "Set to true if the sticker is animated; false otherwise.",
+          "type": "boolean"
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id"
+      ]
+    },
+    "AcsMessageReactionContent": {
+      "description": "Message Reaction Content",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "WhatsApp message ID of message you want to apply the emoji to.",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "Unicode escape sequence of the emoji.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageId"
+      ]
     },
     "AcsMessageContext": {
       "description": "Message Context",

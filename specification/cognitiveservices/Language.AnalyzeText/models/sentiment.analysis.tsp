@@ -77,8 +77,8 @@ union TokenSentimentValue {
 /** Sentiment analysis results for the input documents. */
 model SentimentResponse is PreBuiltResult {
   /** The sentiment analysis results for each document in the input. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<SentimentDocumentResult>)
-  documents: Array<SentimentDocumentResultWithDetectedLanguage>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, SentimentDocumentResult[])
+  documents: SentimentDocumentResultWithDetectedLanguage[];
 }
 
 /** Sentiment analysis per document. */
@@ -96,7 +96,7 @@ model SentimentDocumentResult is DocumentResult {
   confidenceScores: SentimentConfidenceScores;
 
   /** The document's sentences sentiment. */
-  sentences: Array<SentenceSentiment>;
+  sentences: SentenceSentiment[];
 }
 
 /** A document's sentence sentiment. */
@@ -117,10 +117,10 @@ model SentenceSentiment {
   length: int32;
 
   /** The array of sentence targets for the sentence. */
-  targets?: Array<SentenceTarget>;
+  targets?: SentenceTarget[];
 
   /** The array of assessments for the sentence. */
-  assessments?: Array<SentenceAssessment>;
+  assessments?: SentenceAssessment[];
 }
 
 /** Represents a sentence target and the assessments or target objects related to it. */
@@ -141,7 +141,7 @@ model SentenceTarget {
   text: string;
 
   /** The array of either assessment or target objects which is related to the target. */
-  relations: Array<TargetRelation>;
+  relations: TargetRelation[];
 }
 
 /** Represents a sentence assessment and the assessments or target objects related to it. */

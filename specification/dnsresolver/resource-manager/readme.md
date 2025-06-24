@@ -28,7 +28,17 @@ These are the global settings for the DNS resolver API.
 title: DnsResolverManagementClient
 description: DNS Resolver Client
 openapi-type: arm
-tag: package-preview-2023-07
+tag: package-2025-05
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05'
+input-file:
+  - Microsoft.Network/stable/2025-05-01/dnsresolver.json
+  - Microsoft.Network/stable/2025-05-01/dnsresolverpolicy.json
 ```
 
 ### Tag: package-preview-2023-07
@@ -68,25 +78,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.DnsResolver
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/dnsresolver/Microsoft.Azure.Management.DnsResolver/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

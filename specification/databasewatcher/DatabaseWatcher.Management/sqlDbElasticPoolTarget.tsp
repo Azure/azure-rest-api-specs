@@ -10,19 +10,19 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("The properties specific to elastic pool in Azure SQL Database.")
+@doc("The properties specific to an elastic pool in Azure SQL Database.")
 model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB elastic pool target.")
   targetType: "SqlEp";
 
-  @doc("The Azure ResourceId of an Azure SQL DB elastic pool target.")
+  @doc("The Azure resource ID of an Azure SQL DB elastic pool target.")
   sqlEpResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/elasticPools";
     }
   ]>;
 
-  @doc("The Azure ResourceId of the anchor database used to connect to an elastic pool.")
+  @doc("The Azure resource ID of the anchor database used to connect to an elastic pool.")
   anchorDatabaseResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";

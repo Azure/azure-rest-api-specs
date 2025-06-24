@@ -22,22 +22,28 @@ options:
     model-namespace: false
     generate-protocol-methods: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    generate-protocol-methods: false
+    namespace: Azure.AI.OpenAI
+    model-namespace: false
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai"
     namespace: "com.azure.ai.openai"
+    service-version-exclude-preview: false
     partial-update: true
     enable-sync-stack: true
     generate-tests: false
     generate-samples: false
-    custom-types-subpackage: "implementation.models"
-    custom-types: "FunctionCallPreset,FileListResponse,OpenAIPageableListOfBatch"
     customization-class: customization/src/main/java/OpenAICustomizations.java
+    use-eclipse-language-server: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "openai"
-    generateMetadata: false
-    generateTest: false
-    isModularLibrary: true
-    packageDetails:
+    generate-metadata: false
+    generate-test: false
+    is-modular-library: true
+    package-details:
       name: "@azure/openai"
     flavor: azure

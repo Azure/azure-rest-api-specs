@@ -20,17 +20,20 @@ options:
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.ChatProtocol
+    model-namespace: false
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-chatprotocol"
-    package-name: "{package-dir}"
+    namespace: "azure.ai.chatprotocol"
     package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     package-dir: "ai-chat-protocol"
-    isModularLibrary: true
-    packageDetails:
+    is-modular-library: true
+    package-details:
       name: "@azure/ai-chat-protocol"
     flavor: azure
   "@azure-tools/typespec-java":

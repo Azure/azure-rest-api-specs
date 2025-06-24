@@ -14,19 +14,14 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/scvmm.json"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-scvmm"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-scvmm"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-scvmm"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.scvmm"
     flavor: "azure"
     generate-test: true
     generate-sample: true
