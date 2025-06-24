@@ -1502,6 +1502,26 @@
       "type": "object",
       "description": "Describes a Private DNS zone.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
           "description": "The ETag of the zone."
@@ -1514,7 +1534,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1886,6 +1906,26 @@
       "type": "object",
       "description": "Describes a link to virtual network for a Private DNS zone.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
           "description": "The ETag of the virtual network link."
@@ -1898,7 +1938,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
