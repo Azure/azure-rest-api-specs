@@ -159,7 +159,9 @@ namespace Storage.Queue {
     /** The List Queues Segment operation returns a list of the queues under the specified account */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
+    @list
     @route("?comp=list")
     listQueuesSegment is StorageOperation<
       {
