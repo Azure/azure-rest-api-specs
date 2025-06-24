@@ -115,3 +115,67 @@ model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
 }
+
+@doc("System metadata for an asset")
+model SystemData {
+  @doc("The creator of the asset")
+  createdBy?: string;
+  
+  @doc("The datetime of when the asset was created")
+  createdAt?: datetime;
+
+  @doc("The datetime of when the asset was last modified")
+  lastModifiedAt?: datetime;
+}
+
+@doc("Base catalog information for an asset in the public catalog")
+model CatalogInformation {
+  @doc("The id of the publisher of the asset")
+  publisherId: string;
+
+  @doc("The license the asset is under")
+  license: string;
+}
+
+@doc("Base parameter definition for an asset")
+model BaseParameterDefinition {
+  @doc("type of the parameter")
+  type: string;
+
+  @doc("display name of the parameter")
+  displayName: string;
+
+  @doc("description of the parameter")
+  description: string;
+
+  @doc("indicates if the parameter is required")
+  required: boolean;
+}
+
+@doc("String parameter definition for an asset")
+model StringParameterDefinition extends BaseParBaseParameterDefinitionameter {
+  @doc("default value of the parameter")
+  defaultValue?: string;
+}
+
+@doc("connection parameter definition for an asset")
+model ConnectionParameterDefinition extends BaseParameterDefinition {
+  @doc("type of the connection")
+  connectionType: string;
+}
+
+@doc("base parameter value for an asset's parameter")
+model BaseParameterValue {
+}
+
+@doc("string parameter value")
+model StringParameterValue extends BaseParameterValue {
+  @doc("value of the parameter")
+  value: string;
+}
+
+@doc("connection parameter value")
+model ConnectionParameterValue extends BaseParameterValue {
+  @doc("value of the parameter")
+  connectionName: string;
+}
