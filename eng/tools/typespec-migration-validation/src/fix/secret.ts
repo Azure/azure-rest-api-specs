@@ -1,7 +1,9 @@
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
 import { checkPropertyAttributeDeleted, getPropertyName } from "./helper.js";
 
-export function checkSecret(jsonObj: any): string[] {
-  const suggestedFixes: string[] = [];
+export function checkSecret(jsonObj: any): Suggestion[] {
+  const suggestedFixes: Suggestion[] = [];
 
   const deletedChanges = checkPropertyAttributeDeleted('x-ms-secret', jsonObj);
   if (deletedChanges.length > 0) {
@@ -11,7 +13,11 @@ export function checkSecret(jsonObj: any): string[] {
 
       if (getPropertyName(path)) {
         const [definitionName, propertyName] = getPropertyName(path)!;
-        suggestedFixes.push(`Find a model called "${definitionName}". Add \`@secret\` onto its property "${propertyName}". If the property cannot access directly, add \`@@secret(${definitionName}.${propertyName});\` right after the model.`);
+        suggestedFixes.push({
+          suggestion: `Find a model called "${definitionName}". Add \`@secret\` onto its property "${propertyName}". If the property cannot access directly, add \`@@secret(${definitionName}.${propertyName});\` right after the model.`,
+          //path: `${path}['x-ms-secret__deleted']`
+          path: constructJsonPath(path, change.key)
+        });
       }
     }
   }

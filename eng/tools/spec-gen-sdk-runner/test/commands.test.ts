@@ -209,7 +209,7 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport);
-    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue([false, ""]);
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
@@ -239,7 +239,6 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "succeeded", // overallExecutionResult
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       true, // hasManagementPlaneSpecs
       "", // stagedArtifactsFolder
@@ -282,7 +281,6 @@ describe("generateSdkForSpecPr", () => {
     expect(generateArtifactSpy).toHaveBeenCalledWith(
       mockCommandInput,
       "succeeded", // overallExecutionResult should be set to "succeeded"
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
       "", // stagedArtifactsFolder
@@ -321,7 +319,6 @@ describe("generateSdkForSpecPr", () => {
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "", // overallExecutionResult is empty because no spec was actually processed
-      "", // breakingChangeLabel
       false, // overallRunHasBreakingChange
       false, // hasManagementPlaneSpecs
       "", // stagedArtifactsFolder
