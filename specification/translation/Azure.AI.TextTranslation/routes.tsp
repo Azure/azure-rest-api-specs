@@ -51,6 +51,7 @@ op getSupportedLanguages is CustomGetOperation<
 @post
 @summary("Translate Text")
 @doc("Translate Text")
+@route("translate")
 @sharedRoute
 @renamedFrom(APIVersion.v2025_05_01_preview, "translate")
 @removed(APIVersion.v2025_05_01_preview)
@@ -66,6 +67,7 @@ op translateV3 is CustomOperation<
 @sharedRoute
 @summary("Translate Text")
 @doc("Translate Text")
+@route("translate")
 @added(APIVersion.v2025_05_01_preview)
 op translate is CustomOperation<
   TranslateBody[],
