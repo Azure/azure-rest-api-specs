@@ -42,13 +42,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
-  v3_preview: "2025-06-23-preview",
+  v2025_03_01: "2025-03-01",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v2_preview)
-  v2025_03_01: "2025-03-01",
+  v3_preview: "2025-06-23-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -128,16 +128,31 @@ interface Computes {
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonDatabases {
   list is ArmResourceListByParent<NeonDatabase>;
+
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<NeonDatabase>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonRoles {
   list is ArmResourceListByParent<NeonRole>;
+
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonRole>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<NeonRole>;
 }
 
 @armResourceOperations
 @added(Neon.Postgres.Versions.v2_preview)
 interface Endpoints {
   list is ArmResourceListByParent<Endpoint>;
+
+  @added(Neon.Postgres.Versions.v3_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
+  @added(Neon.Postgres.Versions.v3_preview)
+  delete is ArmResourceDeleteSync<Endpoint>;
 }

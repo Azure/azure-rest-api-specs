@@ -33,6 +33,26 @@ model EndpointProperties {
 
   @doc("The type of the endpoint")
   endpointType?: EndpointType;
+
+  @doc("The current state of the endpoint")
+  @added(Neon.Postgres.Versions.v3_preview)
+  currentState?: string;
+
+  @doc("The pending state of the endpoint")
+  @added(Neon.Postgres.Versions.v3_preview)
+  pendingState?: string;
+
+  @doc("The minimum compute units for autoscaling")
+  @added(Neon.Postgres.Versions.v3_preview)
+  autoscalingLimitMinCu?: int32;
+
+  @doc("The maximum compute units for autoscaling")
+  @added(Neon.Postgres.Versions.v3_preview)
+  autoscalingLimitMaxCu?: int32;
+
+  @doc("The timestamp when the endpoint was last active")
+  @added(Neon.Postgres.Versions.v3_preview)
+  lastActive?: string;
 }
 
 @doc("The compute endpoint type. Either read_write or read_only.")
