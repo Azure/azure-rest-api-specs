@@ -404,7 +404,6 @@ model DryrunPatch {
    * The properties of the dryrun job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DryrunProperties;
 }
 
@@ -703,7 +702,6 @@ model LinkerPatch {
    * Linker properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LinkerProperties;
 }
 
@@ -715,7 +713,6 @@ model ValidateOperationResult {
    * The validation result detail.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ValidateResult | null;
 
   /**
@@ -860,7 +857,6 @@ model ConfigurationNameItem {
    * The result detail.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ConfigurationNames | null;
 }
 
@@ -930,7 +926,6 @@ model DaprConfigurationResource {
    * The properties of the dapr configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DaprConfigurationProperties;
 }
 
