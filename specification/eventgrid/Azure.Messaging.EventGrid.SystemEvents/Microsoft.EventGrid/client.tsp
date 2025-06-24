@@ -8,6 +8,7 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   Access.public
 );
+
 @@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   Usage.output
 );
