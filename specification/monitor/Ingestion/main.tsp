@@ -18,14 +18,13 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
-  title: "Azure Monitor Ingestion",
-})
+@service(#{ title: "Azure Monitor Ingestion" })
 @versioned(Versions)
 @server(
   "{endpoint}",
-  "The Data Collection Endpoint for the Data Collection Rule. For example, https://dce-name.eastus-2.ingest.monitor.azure.com",
+  "Azure Monitor Logs Ingestion API",
   {
+    /** The Data Collection Endpoint for the Data Collection Rule. For example, https://dce-name.eastus-2.ingest.monitor.azure.com */
     endpoint: url,
   }
 )
