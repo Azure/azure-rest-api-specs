@@ -13,20 +13,19 @@ namespace Microsoft.GuestConfiguration;
 /**
  * Guest configuration assignment is an association between a machine and guest configuration.
  */
-model GuestConfigurationAssignment
-  is Azure.ResourceManager.ProxyResource<GuestConfigurationAssignmentProperties> {
-  ...ResourceNameParameter<
-    Resource = GuestConfigurationAssignment,
-    KeyName = "guestConfigurationAssignmentName",
-    SegmentName = "guestConfigurationAssignments",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model GuestConfigurationAssignment extends ProxyResource {
+  /**
+   * Properties of the Guest configuration assignment.
+   */
+  properties?: GuestConfigurationAssignmentProperties;
 
   /**
-   * Region where the VM is located.
+   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -41,12 +40,13 @@ interface GuestConfigurationAssignmentOps
         @path
         vmName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = GuestConfigurationAssignment,
-        KeyName = "guestConfigurationAssignmentName",
-        SegmentName = "guestConfigurationAssignments",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * The name of the GuestConfigurationAssignment
+         */
+        @path
+        guestConfigurationAssignmentName: string,
+      }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -57,12 +57,7 @@ interface GuestConfigurationAssignmentOpsList
         ...SubscriptionIdParameter,
         ...Azure.ResourceManager.Legacy.Provider,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = GuestConfigurationAssignment,
-        KeyName = "guestConfigurationAssignmentName",
-        SegmentName = "guestConfigurationAssignments",
-        NamePattern = ""
-      >>,
+      {},
       ErrorType = Microsoft.GuestConfiguration.ErrorResponse
     > {}
 
@@ -103,6 +98,7 @@ interface GuestConfigurationAssignments {
    * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @action("guestConfigurationAssignments")
   SubscriptionList is GuestConfigurationAssignmentOpsList.List<
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse

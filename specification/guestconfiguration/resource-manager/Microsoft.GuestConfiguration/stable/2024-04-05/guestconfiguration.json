@@ -1631,6 +1631,10 @@
         ]
       }
     },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
+    },
     "ComplianceStatus": {
       "type": "string",
       "description": "A value indicating compliance status of the machine for the assigned guest configuration.",
@@ -1782,14 +1786,15 @@
           "$ref": "#/definitions/GuestConfigurationAssignmentProperties",
           "description": "Properties of the Guest configuration assignment."
         },
-        "location": {
-          "type": "string",
-          "description": "Region where the VM is located."
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -2155,6 +2160,31 @@
             "value": "Created"
           }
         ]
+      }
+    },
+    "ProxyResource": {
+      "type": "object",
+      "description": "ARM proxy resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource id of the guest configuration assignment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The guest configuration assignment name."
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where the VM is located."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource.",
+          "readOnly": true
+        }
       }
     },
     "Type": {
