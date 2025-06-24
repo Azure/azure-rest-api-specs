@@ -26,7 +26,7 @@ model QueueServiceProperties
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface QueueServices {
   /**
@@ -40,7 +40,7 @@ interface QueueServices {
   /**
    * Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setServiceProperties is ArmResourceCreateOrReplaceSync<
     QueueServiceProperties,
     Response = ArmResourceUpdatedResponse<QueueServiceProperties>,
@@ -59,7 +59,7 @@ interface QueueServices {
   /**
    * Gets a list of all the queues under the specified storage account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("queues")
   @operationId("Queue_List")

@@ -1973,7 +1973,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2391,7 +2391,14 @@
               "Planned"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "FailoverType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "Planned",
+                  "value": "Planned"
+                }
+              ]
             }
           }
         ],
@@ -3710,7 +3717,14 @@
               "kerb"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "ListKeyExpand",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "kerb",
+                  "value": "kerb"
+                }
+              ]
             }
           }
         ],
@@ -5749,7 +5763,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/BlobRestoreStatus"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -6086,18 +6103,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -6117,7 +6125,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6177,18 +6185,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -6205,7 +6204,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6250,18 +6249,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -6281,7 +6271,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -6690,6 +6680,9 @@
         "x-ms-examples": {
           "TableOperationPut": {
             "$ref": "./examples/TableOperationPut.json"
+          },
+          "TableOperationPutOrPatchAcls": {
+            "$ref": "./examples/TableOperationPutOrPatchAclsTableCreate.json"
           }
         }
       },
@@ -7184,17 +7177,21 @@
         ]
       }
     },
-    "Azure.ResourceManager.ArmResponse<BlobRestoreStatus>": {
+    "AzureEntityResource": {
       "type": "object",
-      "description": "Azure operation completed successfully.",
+      "title": "Entity Resource",
+      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
       "properties": {
-        "body": {
-          "$ref": "#/definitions/BlobRestoreStatus",
-          "description": "The body type of the operation request or response."
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
         }
       },
-      "required": [
-        "body"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
       ]
     },
     "AzureFilesIdentityBasedAuthentication": {
@@ -8684,6 +8681,11 @@
           "description": "Properties of the file share.",
           "x-ms-client-flatten": true,
           "x-ms-client-name": "FileShareProperties"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -8704,7 +8706,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/AzureEntityResource"
         }
       ]
     },
@@ -8818,19 +8820,19 @@
         },
         "nextAllowedQuotaDowngradeTime": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Returns the next allowed provisioned storage size downgrade time for the share. This property is only for file shares created under Files Provisioned v1 SSD and Files Provisioned v2 account type",
           "readOnly": true
         },
         "nextAllowedProvisionedIopsDowngradeTime": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Returns the next allowed provisioned IOPS downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
           "readOnly": true
         },
         "nextAllowedProvisionedBandwidthDowngradeTime": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc1123",
           "description": "Returns the next allowed provisioned bandwidth downgrade time for the share. This property is only for file shares created under Files Provisioned v2 account type.",
           "readOnly": true
         },
@@ -9173,6 +9175,11 @@
           "$ref": "#/definitions/ImmutabilityPolicyProperty",
           "description": "The properties of an ImmutabilityPolicy of a blob container.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
         }
       },
       "required": [
@@ -9325,7 +9332,7 @@
       ],
       "x-ms-enum": {
         "name": "IntervalUnit",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "days",
@@ -9897,7 +9904,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/AzureEntityResource"
         }
       ]
     },
@@ -10418,43 +10425,6 @@
           {
             "name": "Completed",
             "value": "Completed"
-          }
-        ]
-      }
-    },
-    "MigrationStatus": {
-      "type": "string",
-      "description": "Current status of migration",
-      "enum": [
-        "Invalid",
-        "SubmittedForConversion",
-        "InProgress",
-        "Complete",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "MigrationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid"
-          },
-          {
-            "name": "SubmittedForConversion",
-            "value": "SubmittedForConversion"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Complete",
-            "value": "Complete"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
           }
         ]
       }
@@ -11441,7 +11411,45 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "ResolvingDNS",
+            "value": "ResolvingDNS"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "ValidateSubscriptionQuotaBegin",
+            "value": "ValidateSubscriptionQuotaBegin"
+          },
+          {
+            "name": "ValidateSubscriptionQuotaEnd",
+            "value": "ValidateSubscriptionQuotaEnd"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          }
+        ]
       }
     },
     "PublicAccess": {
@@ -12706,7 +12714,7 @@
           "description": "Target sku name for the account"
         },
         "migrationStatus": {
-          "$ref": "#/definitions/MigrationStatus",
+          "$ref": "#/definitions/migrationStatus",
           "description": "Current status of migration",
           "readOnly": true
         },
@@ -13822,7 +13830,17 @@
       ],
       "x-ms-enum": {
         "name": "TriggerType",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RunOnce",
+            "value": "RunOnce"
+          },
+          {
+            "name": "OnSchedule",
+            "value": "OnSchedule"
+          }
+        ]
       }
     },
     "TypeSpec.Http.OkResponse": {
@@ -14022,6 +14040,43 @@
           {
             "name": "None",
             "value": "None"
+          }
+        ]
+      }
+    },
+    "migrationStatus": {
+      "type": "string",
+      "description": "Current status of migration",
+      "enum": [
+        "Invalid",
+        "SubmittedForConversion",
+        "InProgress",
+        "Complete",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "migrationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid"
+          },
+          {
+            "name": "SubmittedForConversion",
+            "value": "SubmittedForConversion"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress"
+          },
+          {
+            "name": "Complete",
+            "value": "Complete"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
           }
         ]
       }

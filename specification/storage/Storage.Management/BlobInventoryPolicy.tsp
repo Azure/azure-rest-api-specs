@@ -36,7 +36,7 @@ interface BlobInventoryPolicies {
   /**
    * Sets the blob inventory policy to the specified storage account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BlobInventoryPolicy,
     Response = ArmResourceUpdatedResponse<BlobInventoryPolicy>,

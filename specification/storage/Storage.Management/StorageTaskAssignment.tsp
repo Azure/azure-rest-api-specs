@@ -38,14 +38,10 @@ interface StorageTaskAssignments {
   /**
    * Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     StorageTaskAssignment,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>,
-    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<StorageTaskAssignment> | ArmResourceCreatedResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>
   >;
 
   /**
@@ -55,9 +51,7 @@ interface StorageTaskAssignments {
   update is ArmCustomPatchAsync<
     StorageTaskAssignment,
     PatchModel = StorageTaskAssignmentUpdateParameters,
-    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>>
   >;
 
   /**
@@ -65,9 +59,7 @@ interface StorageTaskAssignments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTaskAssignment,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTaskAssignment> &
-      ArmLroLocationHeader<FinalResult = StorageTaskAssignment> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageTaskAssignment>> | NoContentResponse
   >;
 
   /**
@@ -88,7 +80,7 @@ interface StorageTaskAssignments {
   /**
    * Fetch the report summary of a single storage task assignment's instances
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
   @operationId("StorageTaskAssignmentInstancesReport_List")

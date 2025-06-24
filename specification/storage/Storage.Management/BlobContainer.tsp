@@ -86,7 +86,12 @@ interface BlobContainers {
    * This operation migrates a blob container from container level WORM to object level immutability enabled container. Prerequisites require a container level immutability policy either in locked or unlocked state, Account level versioning must be enabled and there should be no Legal hold on the container.
    */
   @action("migrate")
-  objectLevelWorm is ArmResourceActionAsync<BlobContainer, void, OkResponse>;
+  objectLevelWorm is ArmResourceActionAsync<
+    BlobContainer,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 }
 
 @@maxLength(BlobContainer.name, 63);

@@ -22,6 +22,7 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     SegmentName = "shares",
     NamePattern = ""
   >;
+  ...EntityTagProperty;
 }
 
 @armResourceOperations
@@ -41,7 +42,7 @@ interface FileShares {
       /**
        * Optional, used to retrieve properties of a snapshot.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-snapshot`?: string;
     },
@@ -82,7 +83,7 @@ interface FileShares {
       /**
        * Optional, used to delete a snapshot.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-snapshot`?: string;
 
@@ -121,7 +122,7 @@ interface FileShares {
       /**
        * Optional. Specify the snapshot time to lease a snapshot.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-snapshot`?: string;
     },

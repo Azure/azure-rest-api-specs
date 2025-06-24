@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.1
- * Date: 2025-06-12T07:55:21.213Z
+ * Date: 2025-06-24T07:05:39.182Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -48,8 +48,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "StorageManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version v1 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Storage;
 
 /**
@@ -57,11 +56,11 @@ namespace Microsoft.Storage;
  */
 enum Versions {
   /**
-   * The 2024-01-01 API version.
+   * The 2025-01-01 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_01_01: "2024-01-01",
+  v2025_01_01: "2025-01-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

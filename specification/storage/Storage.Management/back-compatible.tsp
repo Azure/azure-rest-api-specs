@@ -3,24 +3,24 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Storage;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ListContainerItem.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ImmutabilityPolicyProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileShareItem.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ListQueue.properties);
 @@clientName(ListQueue.properties, "QueueProperties");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "operationProperties");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountCreateParameters.properties);
 
 @@clientName(StorageAccountPropertiesCreateParameters.networkAcls,
@@ -107,7 +107,7 @@ using Microsoft.Storage;
   "AccountMigrationInProgress"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountUpdateParameters.properties);
 
 @@clientName(StorageAccountPropertiesUpdateParameters.supportsHttpsTrafficOnly,
@@ -160,13 +160,13 @@ using Microsoft.Storage;
 @@clientName(ServiceSasParameters.rscl, "ContentLanguage");
 @@clientName(ServiceSasParameters.rsct, "ContentType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobServiceProperties.properties);
 @@clientName(BlobServiceProperties.properties, "BlobServiceProperties");
 
@@ -174,39 +174,39 @@ using Microsoft.Storage;
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
 @@clientName(BlobContainers.setLegalHold::parameters.body, "LegalHold");
 @@clientName(BlobContainers.clearLegalHold::parameters.body, "LegalHold");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobContainer.properties);
 @@clientName(BlobContainer.properties, "ContainerProperties");
 
 @@clientName(ContainerProperties.immutabilityPolicy, "ImmutabilityPolicy");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ImmutabilityPolicy.properties);
 
 @@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileServiceProperties.properties);
 @@clientName(FileServiceProperties.properties, "FileServiceProperties");
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
 @@clientName(FileShares.restore::parameters.body, "deletedShare");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileShare.properties);
 @@clientName(FileShare.properties, "FileShareProperties");
 
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(QueueServiceProperties.properties);
 @@clientName(QueueServiceProperties.properties, "QueueServiceProperties");
 
 @@clientName(StorageQueues.create::parameters.resource, "queue");
 @@clientName(StorageQueues.update::parameters.properties, "queue");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageQueue.properties);
 @@clientName(StorageQueue.properties, "QueueProperties");
 
@@ -219,17 +219,17 @@ using Microsoft.Storage;
   "parameters"
 );
 @@clientName(StorageAccounts.restoreBlobRanges::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccount.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedAccount.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StorageAccountMigration.properties);
 @@clientName(StorageAccountMigration.properties,
   "StorageAccountMigrationDetails"
@@ -238,47 +238,47 @@ using Microsoft.Storage;
 @@clientName(ManagementPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ManagementPolicy.properties);
 
 @@clientName(BlobInventoryPolicies.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BlobInventoryPolicy.properties);
 
 @@clientName(ObjectReplicationPolicyOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ObjectReplicationPolicy.properties);
 
 @@clientName(LocalUserOperationGroup.createOrUpdate::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(LocalUser.properties);
 
 @@clientName(EncryptionScopes.put::parameters.resource, "encryptionScope");
 @@clientName(EncryptionScopes.patch::parameters.properties, "encryptionScope");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(EncryptionScope.properties);
 @@clientName(EncryptionScope.properties, "EncryptionScopeProperties");
 
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TableServiceProperties.properties);
 @@clientName(TableServiceProperties.properties, "TableServiceProperties");
 
 @@clientName(Tables.create::parameters.resource, "parameters");
 @@clientName(Tables.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Table.properties);
 @@clientName(Table.properties, "TableProperties");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NetworkSecurityPerimeterConfiguration.properties);
 
 @@clientName(StorageTaskAssignments.create::parameters.resource, "parameters");

@@ -27,15 +27,15 @@ interface StorageQueues {
   /**
    * Gets the queue with the specified queue name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queue_Get")
   get is ArmResourceRead<StorageQueue, Error = CloudError>;
 
   /**
    * Creates a new queue with the specified queue name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queue_Create")
   create is ArmResourceCreateOrReplaceSync<
     StorageQueue,
@@ -46,7 +46,7 @@ interface StorageQueues {
   /**
    * Creates a new queue with the specified queue name, under the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Queue_Update")
   update is ArmCustomPatchSync<
@@ -58,8 +58,8 @@ interface StorageQueues {
   /**
    * Deletes the queue with the specified queue name, under the specified account if it exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Queue_Delete")
   delete is ArmResourceDeleteSync<
     StorageQueue,
