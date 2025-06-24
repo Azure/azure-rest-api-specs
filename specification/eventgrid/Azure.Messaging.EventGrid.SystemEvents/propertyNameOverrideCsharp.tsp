@@ -253,31 +253,109 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
 
-@@clientName(ApiManagementUserCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementUserUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementUserDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementProductCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementProductUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementProductDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementApiUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri, "resourceUri", "csharp");
-@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri, "resourceUri", "csharp");
+@@clientName(ApiManagementUserCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementUserUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementUserDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementProductCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementProductUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementProductDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementApiUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri,
+  "resourceUri",
+  "csharp"
+);
 
 @@clientName(ContainerRegistryEventSource.instanceID, "instanceID", "csharp");
