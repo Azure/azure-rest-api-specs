@@ -1,4 +1,8 @@
-import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/openapi";
 import "@typespec/versioning";
 
 using TypeSpec.Http;
@@ -44,4 +48,14 @@ model AgentDeploymentRequest {
 
     @doc("deployment configuration")
     parameters: Record<BaseParameterValue>;
+}
+
+@doc("Agent pause or resume request")
+model PauseOrResumeRequest {
+    @doc("pause or resume the agent")
+    action: "pause" | "resume";
+}
+
+@doc("Agent pause or resume response")
+model PauseOrResumeResponse {
 }

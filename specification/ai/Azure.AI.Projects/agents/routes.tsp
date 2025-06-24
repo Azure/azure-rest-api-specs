@@ -39,4 +39,20 @@ interface Agents
     },
     AgentDeploymentResponse
   >;
+
+  @doc("Pause or resume an agent instance")
+  @Rest.action("pauseOrResume")
+  pauseOrResumeAgent is Azure.Core.Foundations.ResourceOperation<
+    Agent,
+    {
+      @doc("The pause or resume request parameters")
+      @Http.bodyRoot
+      pauseOrResumeRequest: PauseOrResumeRequest;
+
+      @doc("The specific version id of the Agent to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+    },
+    PauseOrResumeResponse;
 }
