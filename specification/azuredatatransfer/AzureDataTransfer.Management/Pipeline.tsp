@@ -90,6 +90,7 @@ interface Pipelines {
    * Lists the flows in a pipeline.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("listFlows")
   @operationId("ListFlowsByPipeline_List")
   list is ArmResourceActionSync<

@@ -4,10 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -129,6 +126,7 @@ op setCertificateIssuer is KeyVaultOperation<
      * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -155,6 +153,7 @@ op updateCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -181,6 +180,7 @@ op getCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -199,6 +199,7 @@ op deleteCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
