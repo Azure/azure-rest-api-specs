@@ -212,3 +212,6 @@ By following these rules, the SDK release process will remain clear, structured,
 ## Steps to generate SDK from TypeSpec API specification
 Follow `/typespec-to-sdk` prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
 Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
+
+## Release readiness of SDK and information about the release pipeline
+Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
