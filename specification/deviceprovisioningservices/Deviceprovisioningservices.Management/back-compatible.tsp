@@ -25,95 +25,66 @@ using Microsoft.Devices;
   "arguments"
 );
 
-// Add client location decorators for all operations with @operationId
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
 // CertificateResponses interface operations
-@@clientLocation(CertificateResponses.get, "DpsCertificate", "Get");
-@@clientLocation(CertificateResponses.createOrUpdate,
-  "DpsCertificate",
-  "CreateOrUpdate"
-);
-@@clientLocation(CertificateResponses.delete, "DpsCertificate", "Delete");
-@@clientLocation(CertificateResponses.list, "DpsCertificate", "List");
+@@clientLocation(CertificateResponses.get, "DpsCertificate");
+@@clientLocation(CertificateResponses.createOrUpdate, "DpsCertificate");
+@@clientLocation(CertificateResponses.delete, "DpsCertificate");
+@@clientLocation(CertificateResponses.list, "DpsCertificate");
 @@clientLocation(CertificateResponses.generateVerificationCode,
-  "DpsCertificate",
-  "GenerateVerificationCode"
+  "DpsCertificate"
 );
-@@clientLocation(CertificateResponses.verifyCertificate,
-  "DpsCertificate",
-  "VerifyCertificate"
-);
+@@clientLocation(CertificateResponses.verifyCertificate, "DpsCertificate");
 
 // GroupIdInformations interface operations
-@@clientLocation(GroupIdInformations.getPrivateLinkResources,
-  "IotDpsResource",
-  "GetPrivateLinkResources"
-);
+@@clientLocation(GroupIdInformations.getPrivateLinkResources, "IotDpsResource");
 @@clientLocation(GroupIdInformations.listPrivateLinkResources,
-  "IotDpsResource",
-  "ListPrivateLinkResources"
+  "IotDpsResource"
 );
 
 // PrivateEndpointConnections interface operations
 @@clientLocation(PrivateEndpointConnections.getPrivateEndpointConnection,
-  "IotDpsResource",
-  "GetPrivateEndpointConnection"
+  "IotDpsResource"
 );
 @@clientLocation(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection,
-  "IotDpsResource",
-  "CreateOrUpdatePrivateEndpointConnection"
+  "IotDpsResource"
 );
 @@clientLocation(PrivateEndpointConnections.deletePrivateEndpointConnection,
-  "IotDpsResource",
-  "DeletePrivateEndpointConnection"
+  "IotDpsResource"
 );
 @@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
-  "IotDpsResource",
-  "ListPrivateEndpointConnections"
+  "IotDpsResource"
 );
 
 // ProvisioningServiceDescriptions interface operations
-@@clientLocation(ProvisioningServiceDescriptions.get, "IotDpsResource", "Get");
+@@clientLocation(ProvisioningServiceDescriptions.get, "IotDpsResource");
 @@clientLocation(ProvisioningServiceDescriptions.createOrUpdate,
-  "IotDpsResource",
-  "CreateOrUpdate"
+  "IotDpsResource"
 );
-@@clientLocation(ProvisioningServiceDescriptions.update,
-  "IotDpsResource",
-  "Update"
-);
-@@clientLocation(ProvisioningServiceDescriptions.delete,
-  "IotDpsResource",
-  "Delete"
-);
+@@clientLocation(ProvisioningServiceDescriptions.update, "IotDpsResource");
+@@clientLocation(ProvisioningServiceDescriptions.delete, "IotDpsResource");
 @@clientLocation(ProvisioningServiceDescriptions.listByResourceGroup,
-  "IotDpsResource",
-  "ListByResourceGroup"
+  "IotDpsResource"
 );
 @@clientLocation(ProvisioningServiceDescriptions.listBySubscription,
-  "IotDpsResource",
-  "ListBySubscription"
+  "IotDpsResource"
 );
 @@clientLocation(ProvisioningServiceDescriptions.listValidSkus,
-  "IotDpsResource",
-  "listValidSkus"
+  "IotDpsResource"
 );
-@@clientLocation(ProvisioningServiceDescriptions.listKeys,
-  "IotDpsResource",
-  "ListKeys"
-);
+@@clientLocation(ProvisioningServiceDescriptions.listKeys, "IotDpsResource");
 @@clientLocation(ProvisioningServiceDescriptions.listKeysForKeyName,
-  "IotDpsResource",
-  "ListKeysForKeyName"
+  "IotDpsResource"
 );
 
 // ProvisioningServiceDescriptionOperations interface operations
 @@clientLocation(ProvisioningServiceDescriptionOperations.getOperationResult,
-  "IotDpsResource",
-  "GetOperationResult"
+  "IotDpsResource"
 );
 
 // IotDpsResourceOperationGroup interface operations
 @@clientLocation(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
-  "IotDpsResource",
-  "CheckProvisioningServiceNameAvailability"
+  "IotDpsResource"
 );
