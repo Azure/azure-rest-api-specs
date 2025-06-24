@@ -63,29 +63,40 @@ export const createPullRequestProperties = async (
     return undefined;
   }
   const originGitRepository = simpleGit({ ...options, baseDir: context.localSpecRepoPath });
-  const branches = await originGitRepository.branch();
+  // Helper function to safely create a branch if it doesn't exist
+  const createBranchIfNotExists = async (branchName: string, startPoint?: string) => {
+    try {
+      // Get fresh branch list to avoid stale data
+      const currentBranches = await originGitRepository.branch();
+      if (!currentBranches.all.includes(branchName)) {
+        const branchArgs = startPoint ? [branchName, startPoint] : [branchName];
+        await originGitRepository.branch(branchArgs);
+        logMessage(`Created branch ${branchName}${startPoint ? ` from ${startPoint}` : ""}`);
+      } else {
+        logMessage(`Branch ${branchName} already exists, skipping creation`);
+      }
+    } catch (error: any) {
+      // If the error is about branch already existing, that's fine - continue
+      if (
+        error.message?.includes("already exists") ||
+        error.message?.includes("fatal: a branch named")
+      ) {
+        logMessage(`Branch ${branchName} already exists (caught during creation), continuing`);
+      } else {
+        logError(`Failed to create branch ${branchName}: ${error.message}`);
+        throw error;
+      }
+    }
+  };
 
-  try {
-    if (!branches.all.includes(sourceBranch)) {
-      await originGitRepository.branch([sourceBranch]);
-      logMessage(`finish creating source branch ${sourceBranch}`);
-    }
-    if (!skipInitializeBase && !branches.all.includes(baseBranch)) {
-      await originGitRepository.branch([baseBranch, `remotes/origin/${baseBranch}`]);
-      logMessage(`finish creating base branch ${baseBranch}`);
-    }
+  // Create branches if they don't exist
+  await createBranchIfNotExists(sourceBranch);
 
-    if (!branches.all.includes(context.prTargetBranch)) {
-      await originGitRepository.branch([
-        context.prTargetBranch,
-        `remotes/origin/${context.prTargetBranch}`,
-      ]);
-      logMessage(`finish creating target branch ${context.prTargetBranch}`);
-    }
-  } catch (error: any) {
-    logError(`Failed to create branch: ${error.message}`);
-    throw error;
+  if (!skipInitializeBase) {
+    await createBranchIfNotExists(baseBranch, `remotes/origin/${baseBranch}`);
   }
+
+  await createBranchIfNotExists(context.prTargetBranch, `remotes/origin/${context.prTargetBranch}`);
 
   // we have to clone the repository because we need to switch branches.
   // Switching branches in the current repository can be dangerous because Avocado
