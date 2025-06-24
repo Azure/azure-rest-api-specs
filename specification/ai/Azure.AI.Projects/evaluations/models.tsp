@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
 import "@typespec/openapi";
+import "../red-teams/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -46,6 +47,26 @@ model InputDataset extends InputData {
   id: string;
 }
 
+@doc("Seed dataset for red teaming based evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model SeedDataset extends InputData {
+  type: "seeddataset";
+
+  @doc("Seed dataset asset id")
+  id: string;
+}
+
+@doc("Seed dataset for red teaming based evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model PolicyDataset extends InputData {
+  type: "policydataset";
+
+  @doc("Policy asset id")
+  id: string;
+}
+
 @doc("Allowed types of evaluation targets.")
 @added(Versions.v2025_05_15_preview)
 union EvaluationTargetType {
@@ -63,6 +84,14 @@ union EvaluationTargetType {
 
   @doc("(Example of targets, not for review) Evaluation AI Foundry agent as a target.")
   foundryAgent: "foundryAgent";
+  string;
+
+  @doc("(Example of targets, not for review) Evaluation model as target.")
+  foundryModel: "foundryModel";
+  string;
+
+  @doc("(Example of targets, not for review) Evaluation target in AI Foundry callback format.")
+  callback: "callback";
   string;
 }
 
@@ -122,6 +151,29 @@ model EvaluationTargetFoundryAgent extends EvaluationTarget {
   agentId: string;
 }
 
+@doc("(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetFoundryModel extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "foundryModel";
+
+  @doc("The model deployment.")
+  modelDeployment: string;
+
+  @doc("The model deployment api key.")
+  authType: "apiKey" | "entraID" | string;
+}
+
+@doc("(Example of targets, pending PM design) Evaluation AI Foundry agent as a target.")
+@added(Versions.v2025_05_15_preview)
+model EvaluationTargetCallback extends EvaluationTarget {
+  @doc("The type of evaluation target.")
+  type: "callback";
+
+  @doc("The asset id for the environment.")
+  id: string;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -160,6 +212,17 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+}
+
+@doc("RedTeam Evaluation Specific Configuration Definition")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model RedTeamEvaluationConfig {
+  @doc("Number of turns in the red team evaluation.")
+  numTurns: int32;
+
+  @doc("RedTeam attack strategies.")
+  attackStragies: AttackStrategy[];
 }
 
 @doc("Continuous Evaluation Specific Configuration Definition")
