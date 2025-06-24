@@ -144,6 +144,25 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   connectedAgent: ConnectedAgentDetails;
 }
 
+@doc("The input definition information for a MCP tool which defines a MCP server endpoint")
+@added(Versions.v2025_05_15_preview)
+model MCPToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The endpoint for the MCP server")
+  @encodedName("application/json", "server_url")
+  serverUrl: string;
+
+  @doc("Does MCP server require approval")
+  @encodedName("application/json", "require_approval")
+  requireApproval?: "never";
+}
+
 // Definition details: File Search
 
 /**
