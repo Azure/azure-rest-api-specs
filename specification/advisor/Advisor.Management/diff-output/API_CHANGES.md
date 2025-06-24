@@ -1,11 +1,3 @@
-## Changed Paths
-
-Path: /subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/{recommendationId}/providers/Microsoft.Advisor/triageResources
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources
-Change Type: deleted
-
 ## Swagger Changes
 
 ### Changes for `x-typespec-generated`
@@ -13,18 +5,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `info['x-typespec-generated__added']` | added | `[{"emitter":"@azure-tools/typespec-autorest"}]` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources__deleted']` | deleted | `{"get":{"operationId":"triageResources_List","parameters":[{"name":"reviewId","in":"path","required"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/{recommendationId}/providers/Microsoft.Advisor/triageResources`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/{recommendationId}/providers/Microsoft.Advisor/triageResources__added']` | added | `{"get":{"operationId":"triageResources_List","parameters":[{"name":"reviewId","in":"path","required"...` |
 
 ### Changes for `deprecated`
 
@@ -54,6 +34,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations'].get.deprecated__deleted` | deleted | `false` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}'].get.deprecated__deleted` | deleted | `false` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve'].post.deprecated__deleted` | deleted | `false` |
+| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources'].get.deprecated__deleted` | deleted | `false` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}'].get.deprecated__deleted` | deleted | `false` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject'].post.deprecated__deleted` | deleted | `false` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset'].post.deprecated__deleted` | deleted | `false` |
@@ -387,6 +368,8 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}'].get.responses.200.schema.$ref` | `#/definitions/triageRecommendation` | `#/definitions/TriageRecommendation` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}'].get.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve'].post.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources'].get.responses.200.schema.$ref` | `#/definitions/triageResourceCollection` | `#/definitions/TriageResourceCollection` |
+| `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources'].get.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}'].get.responses.200.schema.$ref` | `#/definitions/triageResource` | `#/definitions/TriageResource` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}'].get.responses.default.schema.$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse` | `../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject'].post.parameters[2].schema.$ref` | `#/definitions/recommendationRejectBody` | `#/definitions/RecommendationRejectBody` |
