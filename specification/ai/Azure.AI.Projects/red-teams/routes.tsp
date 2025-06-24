@@ -38,8 +38,12 @@ interface RedTeams {
   @post
   createRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Redteam to be run")
-      @body
+      @Http.bodyRoot
       RedTeam: RedTeam;
     },
     ResourceCreatedResponse<RedTeam>
@@ -55,13 +59,18 @@ interface RedTeams {
   @removed(Versions.v_latest)
   UploadRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Redteam to upload.")
-      @body
+      @Http.bodyRoot
       redteam: RedTeamUpload;
     },
     RedTeam
   >;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update the uploaded the result to an redteam run.")
   @route("runs:updateUpload/{name}")
@@ -71,12 +80,16 @@ interface RedTeams {
   @removed(Versions.v_latest)
   UploadUpdateRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Name of the redteam run to update.")
       @path
       name: string;
 
       @doc("Redteam upload to update.")
-      @body
+      @Http.bodyRoot
       redteam: RedTeamUpload;
     },
     RedTeam
@@ -89,6 +102,8 @@ interface RedTeams {
   @get
   getJailBreakDatasetWithType is Azure.Core.Foundations.Operation<
     {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+
       @doc("Type of jailbreak dataset")
       @path
       type: string;
@@ -103,6 +118,8 @@ interface RedTeams {
   @get
   getAttackObjectives is Azure.Core.Foundations.Operation<
     {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+
       @doc("Risk types for the attack objectives dataset")
       @query(#{ explode: true })
       riskTypes?: string[];
@@ -122,7 +139,10 @@ interface RedTeams {
   @doc("Get the jailbreak dataset.")
   @route("/simulation/jailbreak/")
   @get
-  getJailBreakDataset is Azure.Core.Foundations.Operation<{}, Array<string>>;
+  getJailBreakDataset is Azure.Core.Foundations.Operation<
+  {
+    ...Azure.Core.Traits.SupportsClientRequestId;
+  }, Array<string>>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get template parameters with type.")
@@ -130,6 +150,8 @@ interface RedTeams {
   @get
   getTemplateParametersWithType is Azure.Core.Foundations.Operation<
     {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+
       @doc("Type for the template parameters")
       @path
       type: string;
@@ -141,7 +163,10 @@ interface RedTeams {
   @doc("Get template parameters.")
   @route("/simulation/template/parameters/")
   @get
-  getTemplateParameters is Azure.Core.Foundations.Operation<{}, string>;
+  getTemplateParameters is Azure.Core.Foundations.Operation<
+  {
+    ...Azure.Core.Traits.SupportsClientRequestId;
+  }, string>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get the template parameters image.")
@@ -149,6 +174,8 @@ interface RedTeams {
   @get
   getTemplateParametersImage is Azure.Core.Foundations.Operation<
     {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+
       @doc("Image path.")
       @query
       path: string;
@@ -162,8 +189,12 @@ interface RedTeams {
   @post
   submitSimulation is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Properties of a Prompt Version.")
-      @body
+      @Http.bodyRoot
       body: SimulationDTO;
     },
     ResourceCreatedOrOkResponse<LongRunningResponse>
@@ -177,17 +208,20 @@ interface RedTeams {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  operationResults(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+  operationResults is Azure.Core.Foundations.Operation<
+    {
+      ...Azure.Core.Traits.SupportsClientRequestId;
 
-    @doc("Operation ID for the polling operation.")
-    @path
-    operationId: string,
-  ): {
-    @statusCode statusCode: 200 | 202;
+      @doc("Operation ID for the polling operation.")
+      @path
+      operationId: string;
+    },
+    {
+      @statusCode statusCode: 200 | 202;
 
-    @doc("The operation results.")
-    @body
-    operationResults: ChatCompletions;
-  };
+      @doc("The operation results.")
+      @body
+      operationResults: ChatCompletions;
+    }
+  >;
 }

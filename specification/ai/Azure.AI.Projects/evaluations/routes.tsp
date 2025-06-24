@@ -49,8 +49,12 @@ interface Evaluations {
   @post
   createRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Evaluation to be run")
-      @body
+      @Http.bodyRoot
       evaluation: Evaluation;
     },
     ResourceCreatedResponse<Evaluation>
@@ -62,8 +66,12 @@ interface Evaluations {
   @post
   createAgentEvaluation is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Agent evaluation to be run")
-      @body
+      @Http.bodyRoot
       evaluation: AgentEvaluationRequest;
     },
     ResourceCreatedResponse<AgentEvaluation>
@@ -75,6 +83,8 @@ interface Evaluations {
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<
     {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+
       @doc("Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.")
       @path
       runId: string;
@@ -90,13 +100,18 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  checkAnnotation(...Azure.Core.Foundations.ApiVersionParameter): {
-    @statusCode statusCode: 200;
+  checkAnnotation is Azure.Core.Foundations.Operation<
+    {
+      ...Azure.Core.Traits.SupportsClientRequestId;
+    },
+    {
+      @statusCode statusCode: 200;
 
-    @doc("List of supported annotation.")
-    @body
-    supportedAnnotationList: string[];
-  };
+      @doc("List of supported annotation.")
+      @body
+      supportedAnnotationList: string[];
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Submit the annotation.")
@@ -105,19 +120,24 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  submitAnnotation(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+  submitAnnotation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
-    @doc("Annotation data inputList of supported annotation.")
-    @body
-    annotationDTO: AnnotationDTO,
-  ): {
-    @statusCode statusCode: 202;
+      @doc("Annotation data inputList of supported annotation.")
+      @Http.bodyRoot
+      annotationDTO: AnnotationDTO;
+    },
+    {
+      @statusCode statusCode: 202;
 
-    @doc("The data for annotation.")
-    @body
-    fileContentResult: string;
-  };
+      @doc("The data for annotation.")
+      @Http.bodyRoot
+      fileContentResult: string;
+    }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
@@ -127,19 +147,22 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
-  operationResults(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+  operationResults is Azure.Core.Foundations.Operation<
+    {
+      ...Azure.Core.Traits.SupportsClientRequestId;
 
-    @doc("Operation ID for the polling operation.")
-    @path
-    operationId: string,
-  ): {
-    @statusCode statusCode: 200 | 202;
+      @doc("Operation ID for the polling operation.")
+      @path
+      operationId: string;
+    },
+    {
+      @statusCode statusCode: 200 | 202;
 
-    @doc("The operation results.")
-    @body
-    operationResults: Record<unknown>[];
-  };
+      @doc("The operation results.")
+      @body
+      operationResults: Record<unknown>[];
+    }
+  >;
 
   // Upload API set
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -151,13 +174,18 @@ interface Evaluations {
   @removed(Versions.v_latest)
   UploadRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Evaluation to upload.")
-      @body
+      @Http.bodyRoot
       evaluation: EvaluationUpload;
     },
     Evaluation
   >;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update the uploaded the result to an evaluation run.")
   @route("runs:updateUpload/{name}")
@@ -167,12 +195,16 @@ interface Evaluations {
   @removed(Versions.v_latest)
   UploadUpdateRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Name of the evaluation run to update.")
       @path
       name: string;
 
       @doc("Evaluation upload to update.")
-      @body
+      @Http.bodyRoot
       evaluation: EvaluationUpload;
     },
     Evaluation
