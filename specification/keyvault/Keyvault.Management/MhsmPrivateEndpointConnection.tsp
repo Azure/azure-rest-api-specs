@@ -38,7 +38,10 @@ interface MhsmPrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MHSMPrivateEndpointConnections_Get")
-  get is ArmResourceRead<MhsmPrivateEndpointConnection>;
+  get is ArmResourceRead<
+    MhsmPrivateEndpointConnection,
+    Error = ManagedHsmError
+  >;
 
   /**
    * Updates the specified private endpoint connection associated with the managed hsm pool.
@@ -48,8 +51,8 @@ interface MhsmPrivateEndpointConnections {
   @operationId("MHSMPrivateEndpointConnections_Put")
   put is ArmResourceCreateOrReplaceSync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MhsmPrivateEndpointConnection>,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +63,8 @@ interface MhsmPrivateEndpointConnections {
   @operationId("MHSMPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     MhsmPrivateEndpointConnection,
-    Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response = ArmResponse<MhsmPrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -70,6 +74,7 @@ interface MhsmPrivateEndpointConnections {
   @operationId("MHSMPrivateEndpointConnections_ListByResource")
   listByResource is ArmResourceListByParent<
     MhsmPrivateEndpointConnection,
+    Response = ArmResponse<MHSMPrivateEndpointConnectionsListResult>,
     Error = ManagedHsmError
   >;
 }

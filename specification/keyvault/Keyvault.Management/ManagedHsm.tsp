@@ -30,7 +30,7 @@ interface ManagedHsms {
    */
   get is ArmResourceRead<
     ManagedHsm,
-    Response = ArmResponse<ManagedHsm> | NoContentResponse,
+    Response = ArmResponse<ManagedHsm> | ArmNoContentResponse,
     Error = ManagedHsmError
   >;
 
@@ -53,13 +53,14 @@ interface ManagedHsms {
   /**
    * Update a managed HSM Pool in the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedHsm,
     PatchModel = ManagedHsm,
-    Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
-      @bodyRoot _: ManagedHsm;
+    Response = ArmResponse<ManagedHsm> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: ManagedHsm;
     }),
     Error = ManagedHsmError
   >;
@@ -114,7 +115,8 @@ interface ManagedHsms {
   listByMHSMResource is ArmResourceActionSync<
     ManagedHsm,
     void,
-    ArmResponse<MhsmPrivateLinkResourceListResult>
+    ArmResponse<MhsmPrivateLinkResourceListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -127,7 +129,8 @@ interface ManagedHsms {
   listByResource is ArmResourceActionSync<
     ManagedHsm,
     void,
-    ArmResponse<MhsmRegionsListResult>
+    ArmResponse<MhsmRegionsListResult>,
+    Error = ManagedHsmError
   >;
 }
 

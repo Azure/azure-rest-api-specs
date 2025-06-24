@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.10.9
- * Date: 2025-02-19T07:38:41.410Z
+ * Version: 0.10.14
+ * Date: 2025-06-13T07:07:09.000Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -32,8 +32,7 @@ using TypeSpec.Versioning;
  * The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
-@service(#{ title: "RedisManagementClient" })
+@service(#{ title: "KeyVaultManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.KeyVault;
@@ -50,4 +49,21 @@ enum Versions {
   v2024_11_01: "2024-11-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations {
+  /**
+   * Lists all of the available Key Vault Rest API operations.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Operations")
+  @autoRoute
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.KeyVault",
+  ): ArmResponse<OperationListResult> | CloudError;
+}

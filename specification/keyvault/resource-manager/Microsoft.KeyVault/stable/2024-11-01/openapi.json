@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "RedisManagementClient",
+    "title": "KeyVaultManagementClient",
     "version": "2024-11-01",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
     "x-typespec-generated": [
@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -72,7 +71,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Key Vault Rest API operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -82,14 +81,19 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists available Rest API operations.": {
+            "$ref": "./examples/listOperations.json"
           }
         },
         "x-ms-pageable": {
@@ -203,7 +207,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -641,7 +645,7 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -765,7 +769,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ManagedHsm' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
             }
@@ -896,13 +900,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/MHSMPrivateEndpointConnectionsListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -952,13 +956,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateEndpointConnection"
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -1004,28 +1008,21 @@
             "description": "The intended state of private endpoint connection.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateEndpointConnection"
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'MhsmPrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateEndpointConnection"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1070,7 +1067,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateEndpointConnection"
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
             }
           },
           "202": {
@@ -1079,6 +1076,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1088,7 +1090,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1132,13 +1134,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MhsmPrivateLinkResourceListResult"
+              "$ref": "#/definitions/MHSMPrivateLinkResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1178,13 +1180,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MhsmRegionsListResult"
+              "$ref": "#/definitions/MHSMRegionsListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ManagedHsmError"
             }
           }
         },
@@ -1234,7 +1236,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1283,7 +1285,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1353,7 +1355,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1396,7 +1398,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Parameters to patch the vault",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VaultPatchParameters"
@@ -1419,7 +1421,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1463,7 +1465,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1474,7 +1476,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}/{operationKind}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}": {
       "put": {
         "operationId": "Vaults_UpdateAccessPolicy",
         "tags": [
@@ -1494,9 +1496,10 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the vault.",
+            "description": "Name of the vault",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "operationKind",
@@ -1532,16 +1535,9 @@
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'VaultAccessPolicyParameters' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -1593,7 +1589,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1647,12 +1643,12 @@
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
+            "description": "Operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1712,7 +1708,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1780,7 +1776,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1830,7 +1826,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1884,7 +1880,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1940,7 +1936,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2013,7 +2009,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2079,7 +2075,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2133,7 +2129,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2231,15 +2227,17 @@
           "type": "boolean",
           "description": "Determines whether the object is enabled."
         },
-        "notBefore": {
+        "nbf": {
           "type": "integer",
           "format": "unixtime",
-          "description": "Not before date in seconds since 1970-01-01T00:00:00Z."
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "NotBefore"
         },
-        "expires": {
+        "exp": {
           "type": "integer",
           "format": "unixtime",
-          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z."
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z.",
+          "x-ms-client-name": "Expires"
         },
         "created": {
           "type": "integer",
@@ -2845,13 +2843,13 @@
           "type": "integer",
           "format": "int64",
           "description": "Not before date in seconds since 1970-01-01T00:00:00Z.",
-          "x-ms-client-name": "notBefore"
+          "x-ms-client-name": "NotBefore"
         },
         "exp": {
           "type": "integer",
           "format": "int64",
           "description": "Expiry date in seconds since 1970-01-01T00:00:00Z.",
-          "x-ms-client-name": "expires"
+          "x-ms-client-name": "Expires"
         },
         "created": {
           "type": "integer",
@@ -3035,8 +3033,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty",
-          "x-ms-client-name": "releasePolicy"
+          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
         }
       }
     },
@@ -3197,6 +3194,97 @@
           "description": "The action of key rotation policy lifetimeAction."
         }
       }
+    },
+    "MHSMPrivateEndpointConnection": {
+      "type": "object",
+      "description": "Private endpoint connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MhsmPrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MHSMPrivateEndpointConnectionsListResult": {
+      "type": "object",
+      "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MhsmPrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MHSMPrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MhsmPrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedHsmResource"
+        }
+      ]
+    },
+    "MHSMPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/MHSMPrivateLinkResource"
+          }
+        }
+      }
+    },
+    "MHSMRegionsListResult": {
+      "type": "object",
+      "description": "List of regions associated with a managed HSM Pools",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MhsmGeoReplicatedRegion items on this page",
+          "items": {
+            "$ref": "#/definitions/MhsmGeoReplicatedRegion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ManagedHSMSecurityDomainProperties": {
       "type": "object",
@@ -3773,26 +3861,6 @@
         }
       }
     },
-    "MhsmPrivateEndpointConnection": {
-      "type": "object",
-      "description": "Private endpoint connection resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MhsmPrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "Modified whenever there is a change in the state of private endpoint connection."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "MhsmPrivateEndpointConnectionItem": {
       "type": "object",
       "description": "Private endpoint connection item.",
@@ -3812,27 +3880,6 @@
         }
       }
     },
-    "MhsmPrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "The response of a MhsmPrivateEndpointConnection list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MhsmPrivateEndpointConnection items on this page",
-          "items": {
-            "$ref": "#/definitions/MhsmPrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MhsmPrivateEndpointConnectionProperties": {
       "type": "object",
       "description": "Properties of the private endpoint connection resource.",
@@ -3848,35 +3895,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ManagedHsmPrivateEndpointConnectionProvisioningState",
           "description": "Provisioning state of the private endpoint connection."
-        }
-      }
-    },
-    "MhsmPrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MhsmPrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedHsmResource"
-        }
-      ]
-    },
-    "MhsmPrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private link resources",
-          "items": {
-            "$ref": "#/definitions/MhsmPrivateLinkResource"
-          }
         }
       }
     },
@@ -3924,27 +3942,6 @@
         }
       }
     },
-    "MhsmRegionsListResult": {
-      "type": "object",
-      "description": "List of regions associated with a managed HSM Pools",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MhsmGeoReplicatedRegion items on this page",
-          "items": {
-            "$ref": "#/definitions/MhsmGeoReplicatedRegion"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MhsmVirtualNetworkRule": {
       "type": "object",
       "description": "A rule governing the accessibility of a managed hsm pool from a specific virtual network.",
@@ -3964,8 +3961,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).",
-          "x-ms-client-name": "AddressRange"
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
         }
       },
       "required": [
@@ -4003,6 +3999,30 @@
           ]
         }
       }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The paginated list of connected cluster API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of connected cluster API operations.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch the next page of connected cluster API operations."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Permissions": {
       "type": "object",
@@ -4061,10 +4081,6 @@
         "location": {
           "type": "string",
           "description": "Azure location of the key vault resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "string",
           "readOnly": true
         },
         "etag": {
@@ -4382,7 +4398,7 @@
     },
     "ResourceListResult": {
       "type": "object",
-      "description": "Paged collection of Resource items",
+      "description": "The response of a Resource list operation.",
       "properties": {
         "value": {
           "type": "array",
@@ -5031,15 +5047,18 @@
         },
         "enabledForDeployment": {
           "type": "boolean",
-          "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
+          "description": "Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.",
+          "default": false
         },
         "enabledForDiskEncryption": {
           "type": "boolean",
-          "description": "Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys."
+          "description": "Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.",
+          "default": false
         },
         "enabledForTemplateDeployment": {
           "type": "boolean",
-          "description": "Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault."
+          "description": "Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.",
+          "default": false
         },
         "enableSoftDelete": {
           "type": "boolean",
@@ -5054,7 +5073,8 @@
         },
         "enableRbacAuthorization": {
           "type": "boolean",
-          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC."
+          "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.",
+          "default": false
         },
         "createMode": {
           "$ref": "#/definitions/KeyVaultCreateMode",

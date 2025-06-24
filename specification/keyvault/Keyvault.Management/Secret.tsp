@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.KeyVault;
 /**
@@ -43,7 +42,7 @@ interface Secrets {
   /**
    * Gets the specified secret.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
-  get is ArmResourceRead<Secret>;
+  get is ArmResourceRead<Secret, Error = CloudError>;
 
   /**
    * Create or update a secret in a key vault in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
@@ -56,8 +55,9 @@ interface Secrets {
     >,
     SecretCreateOrUpdateParameters,
     Secret | ArmResourceCreatedResponse<Secret>,
-    ErrorResponse
+    CloudError
   >;
+
   /**
    * Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.
    */
@@ -65,7 +65,8 @@ interface Secrets {
   update is ArmCustomPatchSync<
     Secret,
     PatchModel = SecretPatchParameters,
-    Response = ArmResponse<Secret> | ArmResourceCreatedSyncResponse<Secret>
+    Response = ArmResponse<Secret> | ArmResourceCreatedSyncResponse<Secret>,
+    Error = CloudError
   >;
 
   /**
@@ -79,7 +80,8 @@ interface Secrets {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 }
 

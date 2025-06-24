@@ -27,7 +27,7 @@ interface Vaults {
   /**
    * Gets the specified Azure key vault.
    */
-  get is ArmResourceRead<Vault>;
+  get is ArmResourceRead<Vault, Error = CloudError>;
 
   /**
    * Create or update a key vault in the specified subscription.
@@ -44,7 +44,7 @@ interface Vaults {
       LroHeaders = ArmLroLocationHeader &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    ErrorResponse
+    CloudError
   >;
 
   /**
@@ -54,13 +54,14 @@ interface Vaults {
   update is ArmCustomPatchSync<
     Vault,
     PatchModel = VaultPatchParameters,
-    Response = ArmResponse<Vault> | ArmResourceCreatedSyncResponse<Vault>
+    Response = ArmResponse<Vault> | ArmResourceCreatedSyncResponse<Vault>,
+    Error = CloudError
   >;
 
   /**
    * Deletes the specified Azure key vault.
    */
-  delete is ArmResourceDeleteSync<Vault>;
+  delete is ArmResourceDeleteSync<Vault, Error = CloudError>;
 
   /**
    * The List operation gets information about the vaults associated with the subscription and within the specified resource group.
@@ -73,7 +74,8 @@ interface Vaults {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -95,12 +97,21 @@ interface Vaults {
    * Update access policies in a key vault in the specified subscription.
    */
   @put
-  @action("{operationKind}")
-  updateAccessPolicy is ArmResourceActionSync<
-    Vault,
-    VaultAccessPolicyParameters,
-    ArmResponse<VaultAccessPolicyParameters> | ArmCreatedResponse<VaultAccessPolicyParameters>,
-    Parameters = {
+  updateAccessPolicy is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...Azure.ResourceManager.Legacy.Provider;
+
+      /**
+       * Name of the vault
+       */
+      @path
+      @segment("vaults")
+      @pattern("^[a-zA-Z0-9-]{3,24}$")
+      vaultName: string;
+
       /**
        * Name of the operation
        */
@@ -108,7 +119,9 @@ interface Vaults {
       @segment("accessPolicies")
       operationKind: AccessPolicyUpdateKind;
     },
-    Error = CloudError
+    VaultAccessPolicyParameters,
+    ArmResponse<VaultAccessPolicyParameters> | ArmResourceCreatedSyncResponse<VaultAccessPolicyParameters>,
+    CloudError
   >;
 
   /**
@@ -121,7 +134,8 @@ interface Vaults {
   listByVault is ArmResourceActionSync<
     Vault,
     void,
-    ArmResponse<PrivateLinkResourceListResult>
+    ArmResponse<PrivateLinkResourceListResult>,
+    Error = CloudError
   >;
 }
 
@@ -130,6 +144,7 @@ interface Vaults {
 @@doc(Vaults.createOrUpdate::parameters.resource,
   "Parameters to create or update the vault"
 );
-@@doc(Vaults.updateAccessPolicy::parameters.body,
+@@doc(Vaults.update::parameters.properties, "Parameters to patch the vault");
+@@doc(Vaults.updateAccessPolicy::parameters.resource,
   "Access policy to merge into the vault"
 );

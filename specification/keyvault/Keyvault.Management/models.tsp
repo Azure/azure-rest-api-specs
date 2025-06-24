@@ -659,17 +659,17 @@ model VaultProperties {
   /**
    * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
    */
-  enabledForDeployment?: boolean;
+  enabledForDeployment?: boolean = false;
 
   /**
    * Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
    */
-  enabledForDiskEncryption?: boolean;
+  enabledForDiskEncryption?: boolean = false;
 
   /**
    * Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
    */
-  enabledForTemplateDeployment?: boolean;
+  enabledForTemplateDeployment?: boolean = false;
 
   /**
    * Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false.
@@ -684,7 +684,7 @@ model VaultProperties {
   /**
    * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.
    */
-  enableRbacAuthorization?: boolean;
+  enableRbacAuthorization?: boolean = false;
 
   /**
    * The vault's create mode to indicate whether the vault need to be recovered or not.
@@ -1943,13 +1943,13 @@ model Attributes {
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
-  notBefore?: utcDateTime;
+  nbf?: utcDateTime;
 
   /**
    * Expiry date in seconds since 1970-01-01T00:00:00Z.
    */
   @encode("unixTimestamp", int32)
-  expires?: utcDateTime;
+  exp?: utcDateTime;
 
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
@@ -2049,8 +2049,7 @@ model KeyProperties {
   /**
    * Key release policy in response. It will be used for both output and input. Omitted if empty
    */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: KeyReleasePolicy;
+  release_policy?: KeyReleasePolicy;
 }
 
 /**
@@ -2066,13 +2065,13 @@ model KeyAttributes {
    * Not before date in seconds since 1970-01-01T00:00:00Z.
    */
   @encodedName("application/json", "nbf")
-  notBefore?: int64;
+  nbf?: int64;
 
   /**
    * Expiry date in seconds since 1970-01-01T00:00:00Z.
    */
   @encodedName("application/json", "exp")
-  expires?: int64;
+  exp?: int64;
 
   /**
    * Creation time in seconds since 1970-01-01T00:00:00Z.
@@ -2474,20 +2473,29 @@ model ManagedHsmKeyListResult {
   nextLink?: string;
 }
 /**
- * Describes a page of resource object.
- * @template Resource The resource type.
+ * The paginated list of connected cluster API operations.
  */
-@pagedResult
-@doc("Paged collection of {name} items", Resource)
-model ResourceListResult {
-  @doc("The {name} items on this page", Resource)
-  @items
-  value: Resource[];
+@Azure.Core.pagedResult
+model OperationListResult {
+  /**
+   * The list of connected cluster API operations.
+   */
+  @Azure.Core.items
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value: Operation[];
 
-  @doc("The link to the next page of items")
-  @TypeSpec.nextLink
-  nextLink?: ResourceLocation<Resource>;
+  /**
+   * The link to fetch the next page of connected cluster API operations.
+   */
+  @nextLink
+  nextLink?: string;
 }
+/**
+ * aaaaaaaaaaaaaaaaaaaaaaaaaaa
+ */
+model MHSMPrivateEndpointConnectionsListResult
+  is Azure.Core.Page<MhsmPrivateEndpointConnection>;
 
 @@doc(ManagedHsmCreateMode.default,
   "Create a new managed HSM pool. This is the default option."

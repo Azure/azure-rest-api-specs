@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.KeyVault;
 /**
@@ -32,12 +31,6 @@ model PrivateEndpointConnection
   location?: string;
 
   /**
-   *
-   */
-  @visibility(Lifecycle.Read)
-  tags?: string;
-
-  /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -51,7 +44,8 @@ interface PrivateEndpointConnections {
    */
   get is ArmResourceRead<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection> | NoContentResponse
+    Response = ArmResponse<PrivateEndpointConnection> | ArmNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +54,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   put is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
+    Error = CloudError
   >;
 
   /**
@@ -69,13 +64,17 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmResponse<PrivateEndpointConnection> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * The List operation gets information about the private endpoint connections associated with the vault.
    */
-  listByResource is ArmResourceListByParent<PrivateEndpointConnection>;
+  listByResource is ArmResourceListByParent<
+    PrivateEndpointConnection,
+    Error = CloudError
+  >;
 }
 
 @@doc(PrivateEndpointConnection.name,
