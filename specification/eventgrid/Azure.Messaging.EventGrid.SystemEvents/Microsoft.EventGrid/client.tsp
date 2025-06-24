@@ -8,6 +8,7 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   Access.public
 );
+
 @@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   Usage.output
 );
@@ -89,3 +90,4 @@ using Azure.ClientGenerator.Core;
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   "csharp"
 );
+

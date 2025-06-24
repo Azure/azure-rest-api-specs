@@ -122,6 +122,7 @@ long, and supports UTF-8 characters.
   clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
+  @visibility(Lifecycle.Read)
   clientName?: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
