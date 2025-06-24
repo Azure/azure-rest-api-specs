@@ -37,6 +37,7 @@ describe("SpecModel", () => {
     const readme = readmes[0];
     expect(readme.toString()).toContain("Readme");
     expect(readme.path).toBe(resolve(folder, "readme.md"));
+    expect(readme.specModel).toBe(specModel);
 
     expect(readme.getGlobalConfig()).resolves.toEqual({
       "openapi-type": "arm",
@@ -51,6 +52,7 @@ describe("SpecModel", () => {
 
     expect(tags[0].toString()).toContain("Tag");
     expect(tags[0].name).toBe("package-2021-10-01-preview");
+    expect(tags[0].readme).toBe(readme);
 
     const inputFiles0 = [...tags[0].inputFiles.values()];
     expect(inputFiles0.length).toBe(1);
@@ -61,6 +63,7 @@ describe("SpecModel", () => {
         "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
       ),
     );
+    expect(inputFiles0[0].tag).toBe(tags[0]);
 
     const refs0 = [...(await inputFiles0[0].getRefs()).values()].sort((a, b) =>
       a.path.localeCompare(b.path),
@@ -74,6 +77,7 @@ describe("SpecModel", () => {
         "../../../../../common-types/resource-management/v5/types.json",
       ),
     );
+    expect(refs0[0].tag).toBe(tags[0]);
 
     expect(tags[1].name).toBe("package-2021-11-01");
     const inputFiles1 = [...tags[1].inputFiles.values()];
@@ -81,6 +85,7 @@ describe("SpecModel", () => {
     expect(inputFiles1[0].path).toBe(
       resolve(folder, "Microsoft.Contoso/stable/2021-11-01/contoso.json"),
     );
+    expect(inputFiles1[0].tag).toBe(tags[1]);
 
     const jsonDefault = await specModel.toJSONAsync();
     const readmePathDefault = jsonDefault.readmes[0].path;
@@ -187,6 +192,30 @@ describe("SpecModel", () => {
       expect(tagNames[0]).toBe("tag-1");
       expect(tagNames[1]).toBe("tag-2");
     });
+
+    it("throws when an input-file is not found", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-not-found",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
+    });
+
+    it("throws when an input-file is invalid JSON", async () => {
+      const folder = resolve(
+        __dirname,
+        "fixtures/getAffectedReadmeTags/specification/input-file-invalid-json",
+      );
+      const specModel = new SpecModel(folder, options);
+
+      expect(
+        specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
+      ).rejects.toThrowError(/is not a valid JSON Schema/i);
+    });
   });
 
   describe("getAffectedSwaggers", async () => {
@@ -290,18 +319,6 @@ describe("SpecModel", () => {
 
       expect(actual).toEqual(expected);
     });
-  });
-});
-
-describe("getReadme regex", () => {
-  it.each([
-    ["```yaml $(package-A-tag) == 'package-A-[[Version]]'", false],
-    ["``` yaml $(tag)=='package-2017-03' && $(go)", true],
-    ["``` yaml $(csharp) && $(tag) == 'release_4_0'", true],
-    ["``` yaml $(tag) == 'package-2021-12-01-preview'", true], // Typical case
-  ])("ignores tags that don't match the regex: %s", (example, expected) => {
-    const regex = /yaml.*\$\(tag\) ?== ?'([^']*)'/;
-    expect(regex.test(example)).toEqual(expected);
   });
 });
 

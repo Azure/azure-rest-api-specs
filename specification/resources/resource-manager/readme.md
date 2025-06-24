@@ -65,28 +65,12 @@ tag: package-links-2016-09
 tag: package-managedapplications-2018-06
 ```
 
-``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2023-08
-```
-
-``` yaml $(package-templatespecs)
-tag: package-templatespecs-2022-02
-```
-
-``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2024-03
-```
-
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
 tag: package-snapshots-2022-11
-```
-
-``` yaml $(package-bicep)
-tag: package-bicep-2023-11
 ```
 
 ### Tag: package-policy-2025-03-stable
@@ -165,14 +149,6 @@ input-file:
   - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
 ```
 
-### Tag: package-bicep-2023-11
-
-These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-bicep-2023-11'
-input-file:
-  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
-```
 
 ### Tag: package-policy-2023-04
 
@@ -212,18 +188,6 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-deploymentscripts-2023-08
-
-These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2023-08'
-input-file:
-  - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
-
-suppressions:
-  - code: OperationsAPIImplementation
-    reason: OperationsAPI will come from Resources
-```
 
 ### Tag: package-resources-2023-07
 
@@ -540,23 +504,7 @@ input-file:
 - Microsoft.Resources/stable/2021-01-01/subscriptions.json
 ```
 
-### Tag: package-deploymentscripts-2020-10
 
-These settings apply only when `--tag=package-deploymentscripts-2020-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2020-10'
-input-file:
-- Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
-```
-
-### Tag: package-deploymentscripts-2019-10-preview
-
-These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
-input-file:
-- Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
-```
 
 ### Tag: package-features-2021-07
 
@@ -746,59 +694,11 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-templatespecs-2022-02
 
-These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-templatespecs-2022-02'
-input-file:
-- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
-```
 
-### Tag: package-templatespecs-2021-05
 
-These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-templatespecs-2021-05'
-input-file:
-- Microsoft.Resources/stable/2021-05-01/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2021-03-preview
-
-These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
-input-file:
-- Microsoft.Resources/preview/2021-03-01-preview/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2019-06-preview
-
-These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
-input-file:
-- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
-```
-
-### Tag: package-deploymentstacks-2022-08-preview
-
-These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
-input-file:
-- Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
-```
-
-### Tag: package-deploymentstacks-2024-03
-
-These settings apply only when `--tag=package-deploymentstacks-2024-03` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentstacks-2024-03'
-input-file:
-- Microsoft.Resources/stable/2024-03-01/deploymentStacks.json
-```
 
 ### Tag: package-policy-2016-12
 
@@ -1226,88 +1126,6 @@ directive:
     from: managedapplications.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
-  - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation
-    where: $.definitions.AzureCliScript
-    reason: Tooling issue.
-  - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation
-    where: $.definitions.AzureCliScript
-    reason: Tooling issue.
-  - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation
-    where: $.definitions.AzurePowerShellScript
-    reason: Tooling issue
-  - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation
-    where: $.definitions.AzurePowerShellScript
-    reason: Tooling issue
-  - suppress: OperationsAPIImplementation
-    from: deploymentScripts.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - suppress: IntegerTypeMustHaveFormat
-    from: deploymentScripts.json
-    reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
-  - suppress: ResourceNameRestriction
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: PropertiesTypeObjectNoDefinition
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: SubscriptionsAndResourceGroupCasing
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: ParametersInPointGet
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: PatchIdentityProperty
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: LroErrorContent
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - suppress: ProvisioningStateSpecifiedForLROPut
-    from: deploymentScripts.json
-    reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
-  - from: deploymentScripts.json
-    suppress: R3006
-    where:
-      - $.definitions.DeploymentScript.properties
-      - $.definitions.AzureCliScript.properties
-      - $.definitions.AzurePowerShellScript.properties
-    reason: Currently systemData is not allowed
-  - from: deploymentStacks.json
-    suppress: OperationsAPIImplementation
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - suppress: OperationsAPIImplementation
-    from: templateSpecs.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - suppress: R3006
-    from: templateSpecs.json
-    where:
-      - $.definitions.TemplateSpec.properties
-      - $.definitions.TemplateSpecVersion.properties
-      - $.definitions.TemplateSpecUpdateModel.properties
-      - $.definitions.TemplateSpecVersionUpdateModel.properties
-    reason: Currently systemData is not allowed
-  - suppress: TrackedResourceListByImmediateParent
-    from: templateSpecs.json
-    where: $.definitions
-    reason: Tooling issue
-  - suppress: TrackedResourceListByResourceGroup
-    from: templateSpecs.json
-    where: $.definitions.TemplateSpecVersion
-    reason: Tooling issue
-  - from: deploymentStacks.json
-    suppress: TrackedResourcePatchOperation
-    where: $.definitions
-    reason: Not a tracked resource.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: dataPolicyManifests.json
@@ -1568,36 +1386,6 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future
-  - suppress: PathForTrackedResourceTypes
-    from: deploymentStacks.json
-    reason: "A deployment stack resource is a proxy location-mapped resource type."
-  - suppress: TenantLevelAPIsNotAllowed
-    from: deploymentStacks.json
-    reason: "Working with deployment stacks at the management group scope is supported."
-  - suppress: TrackedResourcePatchOperation
-    from: deploymentStacks.json
-    reason: "A deployment stack resource is a proxy location-mapped resource type."
-  - suppress: AvoidAdditionalProperties
-    from: deploymentStacks.json
-    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
-  - suppress: PostResponseCodes
-    from: deploymentStacks.json
-    reason: "Validate endpoints have 200, 202, 400, and default responses. The 400 response inherits the error response."
-  - suppress: LroErrorContent
-    from: deploymentStacks.json
-    reason: Error response is inherited via allOf on flagged response.
-  - suppress: NoErrorCodeResponses
-    from: deploymentStacks.json
-    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
-  - suppress: MissingXmsErrorResponse
-    from: deploymentStacks.json
-    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
-  - suppress: DeleteResponseCodes
-    from: deploymentStacks.json
-    reason: Deployment stacks supports synchronous delete with 200 response.
-  - suppress: OperationsAPIImplementation
-    from: deploymentStacks.json
-    reason: This comes from resources.json
   - suppress: PathForPutOperation
     from: policyDefinitions.json
     reason: Policy definitions can be created at management group or subscriptions
@@ -1705,6 +1493,21 @@ directive:
     from: resources.json
     where: $.definitions.ProviderPermissionListResult
     reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-02-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-07-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2016-09-01/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2017-05-10/resources.json
+    reason: Pre-existing lint error.
+  - suppress: OperationsAPIImplementation
+    from: Microsoft.Resources/stable/2018-02-01/resources.json
+    reason: Pre-existing lint error.
 ```
 
 ---
@@ -1753,10 +1556,6 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
-  - package-deploymentscripts: true
-  - package-templatespecs: true
-  - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
-  - package-bicep: true
 ```
