@@ -11,7 +11,7 @@ import { ResultMessageRecord } from "./types/message.js";
 import { getArgumentValue } from "./utils/common-utils.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
-import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
 import { logMessage, setOutput } from "./log.js";
 
 /**
@@ -107,11 +107,12 @@ export function outputBreakingChangeLabelVariables(): void {
 
 /**
  * Get categorized changed files by calling the shared getCategorizedChangedFiles function.
+ * Filters results to only include Swagger/OpenAPI files using the swagger filter from changed-files.js
  * @param options - Options for getting changed files
  * @param options.baseCommitish - Base commit to compare from (default: "HEAD^")
  * @param options.cwd - Current working directory (default: process.cwd())
  * @param options.headCommitish - Head commit to compare to (default: "HEAD")
- * @returns Promise resolving to categorized changed files
+ * @returns Promise resolving to categorized changed files filtered for Swagger files only
  */
 export async function getSwaggerDiffs(
   options: {
@@ -134,7 +135,25 @@ export async function getSwaggerDiffs(
       headCommitish: options.headCommitish,
     });
 
-    return result;
+    // Filter each array to only include Swagger files using the swagger filter from changed-files.js
+    const filteredAdditions = result.additions.filter(swagger);
+    const filteredModifications = result.modifications.filter(swagger);
+    const filteredDeletions = result.deletions.filter(swagger);
+    const filteredRenames = result.renames.filter(
+      (rename) => swagger(rename.from) && swagger(rename.to),
+    );
+
+    return {
+      additions: filteredAdditions,
+      modifications: filteredModifications,
+      deletions: filteredDeletions,
+      renames: filteredRenames,
+      total:
+        filteredAdditions.length +
+        filteredModifications.length +
+        filteredDeletions.length +
+        filteredRenames.length,
+    };
   } catch (error) {
     console.error("Error getting categorized changed files:", error);
     // Return empty result on error

@@ -31,7 +31,13 @@ vi.mock("../src/utils/common-utils.js");
 vi.mock("../src/utils/oad-message-processor.js");
 vi.mock("../src/utils/pull-request.js");
 vi.mock("../src/log.js");
-vi.mock("@azure-tools/specs-shared/changed-files");
+vi.mock("@azure-tools/specs-shared/changed-files", async () => {
+  const actual = await vi.importActual("@azure-tools/specs-shared/changed-files");
+  return {
+    ...actual,
+    getChangedFilesStatuses: vi.fn(),
+  };
+});
 
 describe("command-helpers", () => {
   const mockExistsSync = vi.mocked(existsSync);
@@ -188,11 +194,21 @@ describe("command-helpers", () => {
   describe("getSwaggerDiffs", () => {
     it("should return changed files successfully", async () => {
       const mockResult = {
-        additions: ["file1.json", "file2.json"],
-        modifications: ["file3.json"],
-        deletions: ["file4.json"],
-        renames: [{ from: "old.json", to: "new.json" }],
-        total: 4,
+        additions: [
+          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json",
+          "specification/bar/data-plane/stable/2023-01-01/bar.json",
+        ],
+        modifications: [
+          "specification/baz/resource-manager/Microsoft.Baz/stable/2023-01-01/baz.json",
+        ],
+        deletions: ["specification/qux/data-plane/stable/2023-01-01/qux.json"],
+        renames: [
+          {
+            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json",
+            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json",
+          },
+        ],
+        total: 5,
       };
 
       mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
@@ -227,6 +243,60 @@ describe("command-helpers", () => {
         "Error getting categorized changed files:",
         expect.any(Error),
       );
+    });
+
+    it("should filter out non-Swagger files", async () => {
+      const mockResult = {
+        additions: [
+          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json", // Valid Swagger
+          ".github/workflows/test.yaml", // Non-Swagger (YAML)
+          "specification/bar/resource-manager/Microsoft.Bar/stable/2023-01-01/examples/example.json", // Example file
+          "README.md", // Non-JSON
+          "specification/baz/data-plane/stable/2023-01-01/baz.json", // Valid Swagger
+        ],
+        modifications: [
+          "specification/qux/resource-manager/Microsoft.Qux/stable/2023-01-01/qux.json", // Valid Swagger
+          "package.json", // Non-Swagger JSON
+        ],
+        deletions: [
+          "specification/old/data-plane/stable/2023-01-01/old.json", // Valid Swagger
+          "dist/build.js", // Non-Swagger
+        ],
+        renames: [
+          {
+            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json", // Valid Swagger
+            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json", // Valid Swagger
+          },
+          {
+            from: "old-readme.md", // Non-Swagger
+            to: "new-readme.md", // Non-Swagger
+          },
+        ],
+        total: 9,
+      };
+
+      mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
+
+      const result = await getSwaggerDiffs();
+
+      // Only Swagger files should be returned
+      expect(result).toEqual({
+        additions: [
+          "specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/foo.json",
+          "specification/baz/data-plane/stable/2023-01-01/baz.json",
+        ],
+        modifications: [
+          "specification/qux/resource-manager/Microsoft.Qux/stable/2023-01-01/qux.json",
+        ],
+        deletions: ["specification/old/data-plane/stable/2023-01-01/old.json"],
+        renames: [
+          {
+            from: "specification/old/resource-manager/Microsoft.Old/stable/2023-01-01/old.json",
+            to: "specification/new/resource-manager/Microsoft.New/stable/2023-01-01/new.json",
+          },
+        ],
+        total: 5,
+      });
     });
 
     it("should use default options when none provided", async () => {
