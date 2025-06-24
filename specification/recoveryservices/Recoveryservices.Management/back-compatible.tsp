@@ -22,32 +22,37 @@ using Microsoft.RecoveryServices;
   "input"
 );
 
-// @@clientLocation decorators for @operationId operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get,
-  PrivateLinkResourceOperationGroup
-);
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
+// PrivateLinkResourceOperationGroup operations
+@@clientLocation(PrivateLinkResourceOperationGroup.get, "PrivateLinkResources");
 @@clientLocation(PrivateLinkResourceOperationGroup.list,
-  PrivateLinkResourceOperationGroup
+  "PrivateLinkResources"
 );
 
+// RecoveryServicesOperationGroup operations
 @@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
-  RecoveryServicesOperationGroup
+  "RecoveryServices"
 );
 @@clientLocation(RecoveryServicesOperationGroup.capabilities,
-  RecoveryServicesOperationGroup
+  "RecoveryServices"
 );
 
-@@clientLocation(Vaults.create, Vaults);
-@@clientLocation(Vaults.registeredIdentitiesDelete, Vaults);
-@@clientLocation(Vaults.list, Vaults);
-@@clientLocation(Vaults.getOperationStatus, Vaults);
-@@clientLocation(Vaults.listByVaults, Vaults);
+// Vaults operations
+@@clientLocation(Vaults.create, "VaultCertificates");
+@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
+@@clientLocation(Vaults.list, "ReplicationUsages");
+@@clientLocation(Vaults.getOperationStatus, "GetOperationStatus");
+@@clientLocation(Vaults.listByVaults, "Usages");
 
+// GetOperationResult operations
 @@clientLocation(GetOperationResult.getOperationResult, GetOperationResult);
-@@clientLocation(GetOperationResult.listByResourceGroup, GetOperationResult);
+@@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
-@@clientLocation(VaultExtendedInfoResources.get, VaultExtendedInfoResources);
+// VaultExtendedInfoResources operations
+@@clientLocation(VaultExtendedInfoResources.get, "VaultExtendedInfo");
 @@clientLocation(VaultExtendedInfoResources.createOrUpdate,
-  VaultExtendedInfoResources
+  "VaultExtendedInfo"
 );
-@@clientLocation(VaultExtendedInfoResources.update, VaultExtendedInfoResources);
+@@clientLocation(VaultExtendedInfoResources.update, "VaultExtendedInfo");
