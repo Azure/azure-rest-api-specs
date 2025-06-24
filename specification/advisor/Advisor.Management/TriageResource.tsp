@@ -38,12 +38,7 @@ interface TriageResourceOps
         @segment("resiliencyReviews")
         reviewId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TriageRecommendation,
-        KeyName = "recommendationId",
-        SegmentName = "providers/Microsoft.Advisor/triageRecommendations",
-        NamePattern = ""
-      >>
+      {}
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -59,6 +54,11 @@ interface TriageResources {
       /**
        * The triage resource id.
        */
+      @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
+      recommendationId: string;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @segment("providers/Microsoft.Advisor/triageResources")
       recommendationResourceId: string;
@@ -76,6 +76,7 @@ interface TriageResources {
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
+      @segment("providers/Microsoft.Advisor/triageRecommendations")
       recommendationId: string;
     },
     Response = ArmResponse<TriageResourceCollection>

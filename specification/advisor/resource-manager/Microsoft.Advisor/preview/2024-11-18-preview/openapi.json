@@ -1148,55 +1148,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
-      "get": {
-        "operationId": "triageResources_List",
-        "description": "List all triage resources that belong to a review and recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TriageResourceCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageResources": {
-            "$ref": "./examples/TriageResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
       "get": {
         "operationId": "triageRecommendations_List",
@@ -1347,6 +1298,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
+      "get": {
+        "operationId": "triageResources_List",
+        "description": "List all triage resources that belong to a review and recommendation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "reviewId",
+            "in": "path",
+            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TriageResourceCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListTriageResources": {
+            "$ref": "./examples/TriageResourcesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
       "get": {
         "operationId": "triageResources_Get",
@@ -1368,14 +1368,13 @@
           {
             "name": "recommendationId",
             "in": "path",
-            "description": "The name of the TriageRecommendation",
+            "description": "The triage resource id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "recommendationResourceId",
             "in": "path",
-            "description": "The triage resource id.",
             "required": true,
             "type": "string"
           }
