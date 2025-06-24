@@ -203,11 +203,14 @@ model AgentEvaluationSamplingConfiguration {
   @doc("Name of the sampling strategy.")
   name: string;
 
-  @doc("Percentage of sampling per hour (0-100).")
+  @doc("Percentage of sampling for the requests per hour (0-100).")
   samplingPercent: float32;
 
-  @doc("Maximum request rate per hour (0 to 1000).")
-  maxRequestRate: float32;
+  @doc("Maximum input token usage per hour.")
+  maxHourlyInputTokenLimit: int32;
+
+  @doc("Maximum output token usage per hour.")
+  maxHourlyOutputTokenLimit: int32;
 }
 
 @doc("The redaction configuration will allow the user to control what is redacted.")

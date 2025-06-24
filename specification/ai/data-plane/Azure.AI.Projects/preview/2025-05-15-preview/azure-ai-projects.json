@@ -1592,18 +1592,24 @@
         "samplingPercent": {
           "type": "number",
           "format": "float",
-          "description": "Percentage of sampling per hour (0-100)."
+          "description": "Percentage of sampling for the requests per hour (0-100)."
         },
-        "maxRequestRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Maximum request rate per hour (0 to 1000)."
+        "maxHourlyInputTokenLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum input token usage per hour."
+        },
+        "maxHourlyOutputTokenLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum output token usage per hour."
         }
       },
       "required": [
         "name",
         "samplingPercent",
-        "maxRequestRate"
+        "maxHourlyInputTokenLimit",
+        "maxHourlyOutputTokenLimit"
       ]
     },
     "ApiKeyCredentials": {
@@ -2470,8 +2476,7 @@
       },
       "required": [
         "id",
-        "name",
-        "continuousEvaluationConfig"
+        "name"
       ]
     },
     "EvaluationTarget": {
