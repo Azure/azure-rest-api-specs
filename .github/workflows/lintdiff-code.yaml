@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+name: "Swagger LintDiff - Analyze Code"
 
 on: pull_request
 
@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   lintdiff:
-    name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code"
+    name: "Swagger LintDiff - Analyze Code"
     runs-on: ubuntu-24.04
 
     steps:
@@ -49,12 +49,6 @@ jobs:
             writeFileSync(filePath, changedFiles.join('\n'), 'utf8');
             console.log(`Changed files written to ${filePath}`);
 
-      - name: Prepend test notice to summary
-        if: always()
-        run: |
-          temp_file=$(mktemp)
-          echo -e "> [!IMPORTANT]\n> This check is testing a new version of 'Swagger LintDiff'.\n> Failures are expected, and should be completely ignored by spec authors and reviewers.\n> Meaningful results for this PR are are in required check 'Swagger LintDiff'.\n" > $GITHUB_STEP_SUMMARY
-
       # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
         run: |
@@ -65,10 +59,6 @@ jobs:
             --base-branch ${{ github.event.pull_request.base.ref }} \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
-
-          echo "⚠️ This check is testing a new version of 'Swagger LintDiff'."
-          echo "⚠️ Failures are expected, and should be completely ignored by spec authors and reviewers."
-          echo "⚠️ Meaningful results for this PR are are in required check 'Swagger LintDiff'."
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
