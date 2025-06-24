@@ -151,6 +151,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(ApiManagementGatewayApiAddedEventData.resourceUri, "resourceUrl");
 @@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri, "resourceUrl");
 
+@@clientName(ContainerRegistryEventSource.instanceID, "instanceId");
+
 // autorest specific renames
 @@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
 @@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");

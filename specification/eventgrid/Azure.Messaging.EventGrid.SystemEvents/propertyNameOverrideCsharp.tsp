@@ -279,3 +279,5 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUrl, "resourceUri");
 @@clientName(ApiManagementGatewayApiAddedEventData.resourceUrl, "resourceUri");
 @@clientName(ApiManagementGatewayApiRemovedEventData.resourceUrl, "resourceUri");
+
+@@clientName(ContainerRegistryEventSource.instanceId, "instanceID");
