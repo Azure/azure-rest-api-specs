@@ -48,6 +48,16 @@ suppressions:
     where:
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
         - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
 ```
 
 ### Tag: package-preview-2025-03-01-preview
