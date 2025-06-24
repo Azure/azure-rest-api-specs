@@ -113,6 +113,11 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
+@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
+  "summaryReportBlobUri",
+  "csharp"
+);
+
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "csharp"
