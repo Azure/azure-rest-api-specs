@@ -102,7 +102,9 @@ interface RedTeams {
   @get
   getJailBreakDatasetWithType is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Type of jailbreak dataset")
       @path
@@ -118,7 +120,9 @@ interface RedTeams {
   @get
   getAttackObjectives is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Risk types for the attack objectives dataset")
       @query(#{ explode: true })
@@ -145,7 +149,9 @@ interface RedTeams {
   @get
   getJailBreakDataset is Azure.Core.Foundations.Operation<
   {
-    ...Azure.Core.Traits.SupportsClientRequestId;
+    @doc("Client request ID header")
+    @header("x-ms-client-request-id")
+    clientRequestId?: uuid;
   }, Array<string>>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -154,7 +160,9 @@ interface RedTeams {
   @get
   getTemplateParametersWithType is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Type for the template parameters")
       @path
@@ -169,7 +177,9 @@ interface RedTeams {
   @get
   getTemplateParameters is Azure.Core.Foundations.Operation<
   {
-    ...Azure.Core.Traits.SupportsClientRequestId;
+    @doc("Client request ID header")
+    @header("x-ms-client-request-id")
+    clientRequestId?: uuid;
   }, string>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
@@ -178,7 +188,9 @@ interface RedTeams {
   @get
   getTemplateParametersImage is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Image path.")
       @query
@@ -214,14 +226,16 @@ interface RedTeams {
   @removed(Versions.v_latest)
   operationResults is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Operation ID for the polling operation.")
       @path
       operationId: string;
     },
     {
-      @statusCode statusCode: 200 | 202;
+      @statusCode statusCode: 200;
 
       @doc("The operation results.")
       @body

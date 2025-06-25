@@ -83,7 +83,9 @@ interface Evaluations {
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.")
       @path
@@ -102,7 +104,9 @@ interface Evaluations {
   @removed(Versions.v_latest)
   checkAnnotation is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
     },
     {
       @statusCode statusCode: 200;
@@ -149,14 +153,16 @@ interface Evaluations {
   @removed(Versions.v_latest)
   operationResults is Azure.Core.Foundations.Operation<
     {
-      ...Azure.Core.Traits.SupportsClientRequestId;
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
 
       @doc("Operation ID for the polling operation.")
       @path
       operationId: string;
     },
     {
-      @statusCode statusCode: 200 | 202;
+      @statusCode statusCode: 200;
 
       @doc("The operation results.")
       @body
