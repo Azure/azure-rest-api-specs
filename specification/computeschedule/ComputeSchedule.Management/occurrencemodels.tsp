@@ -88,7 +88,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @parentResource(Occurrence)
 model OccurrenceResource is ScheduledActionResource {
-  @doc("The time the occurrence is scheduled for the resource. Specified in UTC.")
+  @doc("The time the occurrence is scheduled for the resource.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
