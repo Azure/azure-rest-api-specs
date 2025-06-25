@@ -57,6 +57,17 @@ model AgentRevision {
     createdBy: string;
 }
 
+@doc("Agent revision update request")
+model AgentRevisionUpdateRequest {
+    @doc("Updated revision log for the agent")
+    revisions: AgentRevision[];
+}
+
+@doc("Agent revision retireval response")
+model AgentRevisionGetResponse {
+    @doc("Revision log for the agent")
+    revisions: AgentRevision[];
+}
 
 @doc("Agent deployment response")
 model AgentDeploymentResponse {

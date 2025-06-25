@@ -26,7 +26,7 @@ interface Agents {
   @doc("Get a deployed agent.")
   get is DeploymentOperations.ResourceRead<Agent>;
 
-  @doc("List all deployed models in the project")
+  @doc("List all deployed agents in the project")
   list is DeploymentOperations.ResourceList<
     Agent,
     ListQueryParametersTrait<{
@@ -34,6 +34,24 @@ interface Agents {
       @query("blueprintId")
       blueprintId?: string;
     }>
+  >;
+
+  @doc("updates revisions of an agent")
+  updateRevisions is Azure.Core.Foundations.ResourceOperation<
+    Agent,
+    {
+      @doc("The updated revision log")
+      @Http.bodyRoot
+      revisionUpdateRequest: AgentRevisionUpdateRequest;
+    },
+    void
+  >;
+
+  @doc("get revisions of an agent")
+  getRevisions is Azure.Core.Foundations.ResourceOperation<
+    Agent,
+    {},
+    AgentRevisionGetResponse
   >;
 
   @doc("Revert latest revision of an agent")
