@@ -126,107 +126,108 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(ApiManagementUserCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
+
 @@clientName(ApiManagementUserUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementUserDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementProductCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementProductUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementProductDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementApiUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayApiAddedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 @@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri,
   "resourceUrl",
-  "!go"
+  "!go, !csharp"
 );
 
 @@clientName(ContainerRegistryEventSource.instanceID, "instanceId");
