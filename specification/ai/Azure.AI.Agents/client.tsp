@@ -2,6 +2,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+using TypeSpec.Http;
 using Azure.AI.Agents;
 
 // --------------------------------------------------------------------------------
@@ -28,7 +30,7 @@ using Azure.AI.Agents;
 @@clientName(Azure.AI.Agents.Files.listFiles, "list", "python");
 @@access(Azure.AI.Agents.Files.uploadFile,
   Access.internal,
-  "python, java, javascript"
+  "python, javascript"
 );
 @@clientName(Azure.AI.Agents.Files.getFile, "get", "python");
 @@access(Azure.AI.Agents.Files.getFileContent, Access.internal, "python");
@@ -188,6 +190,9 @@ using Azure.AI.Agents;
   "PersistentAgentThreadCreationOptions",
   "csharp,java"
 );
+
+@@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
+@@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
 
 // --------------------------------------------------------------------------------
 // Internal C# overrides for operations & models
@@ -476,3 +481,197 @@ using Azure.AI.Agents;
 @@clientName(ThreadRun.assistantId, "agentId", "python");
 @@clientName(CreateRunOptions.assistantId, "agentId", "python");
 @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
+
+@client({ name: "PersistentAgentsClient", service: Azure.AI.Agents}, "java")
+@useDependency(Azure.AI.Agents.Versions.v2025_05_01)
+namespace Agents.Persistent {
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+  op createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  interface PersistentAgentsAdministration {
+    getAgent is Azure.AI.Agents.getAgent;
+    createAgent is Azure.AI.Agents.createAgent;
+    updateAgent is Azure.AI.Agents.updateAgent;
+    @access(Access.internal)
+    deleteAgentInternal is Azure.AI.Agents.deleteAgent;
+    listAgents is Azure.AI.Agents.listAgents;
+    // createThreadAndRun is Azure.AI.Agents.createThreadAndRun;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/files")
+  interface Files {
+    listFilesInternal is Azure.AI.Agents.Files.listFiles;
+    #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
+    uploadFile is Azure.AI.Agents.Files.uploadFile;
+    getFile is Azure.AI.Agents.Files.getFile;
+    getFileContent is Azure.AI.Agents.Files.getFileContent;
+    @access(Access.internal)
+    deleteFileInternal is Azure.AI.Agents.Files.deleteFile;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/threads/{threadId}/messages")
+  interface Messages {
+    createMessage is Azure.AI.Agents.Messages.createMessage;
+    listMessages is Azure.AI.Agents.Messages.listMessages;
+    getMessage is Azure.AI.Agents.Messages.getMessage;
+    updateMessage is Azure.AI.Agents.Messages.updateMessage;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
+  @operationGroup("java")
+  @route("/threads/{threadId}/runs")
+  interface Runs {
+    createRun is Azure.AI.Agents.Runs.createRun;
+    listRuns is Azure.AI.Agents.Runs.listRuns;
+    getRun is Azure.AI.Agents.Runs.getRun;
+    updateRun is Azure.AI.Agents.Runs.updateRun;
+    submitToolOutputsToRun is Azure.AI.Agents.Runs.submitToolOutputsToRun;
+    cancelRun is Azure.AI.Agents.Runs.cancelRun;
+    
+    listRunSteps is Azure.AI.Agents.RunSteps.listRunSteps;  
+    @route("/{runId}/steps/{stepId}")
+    getRunStep is Azure.AI.Agents.RunSteps.getRunStep;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @operationGroup("java")
+  @route("/threads")
+  interface Threads {
+    createThread is Azure.AI.Agents.Threads.createThread;
+    listThreads is Azure.AI.Agents.Threads.listThreads;
+    getThread is Azure.AI.Agents.Threads.getThread;
+    updateThread is Azure.AI.Agents.Threads.updateThread;
+    @access(Access.internal)
+    deleteThreadInternal is Azure.AI.Agents.Threads.deleteThread;
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @operationGroup("java")
+  interface VectorStores {
+    @route("/vector_stores")
+    createVectorStore is Azure.AI.Agents.VectorStores.createVectorStore;
+    @route("/vector_stores/{vectorStoreId}")
+    getVectorStore is Azure.AI.Agents.VectorStores.getVectorStore;
+    @route("/vector_stores/{vectorStoreId}")
+    modifyVectorStore is Azure.AI.Agents.VectorStores.modifyVectorStore;
+    @route("/vector_stores")
+    listVectorStores is Azure.AI.Agents.VectorStores.listVectorStores;
+    @route("/vector_stores/{vectorStoreId}")
+    @access(Access.internal)
+    deleteVectorStoreInternal is Azure.AI.Agents.VectorStores.deleteVectorStore;
+
+    @route("/vector_stores/{vectorStoreId}/files")
+    createVectorStoreFile is Azure.AI.Agents.VectorStoreFiles.createVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files/{fileId}")
+    getVectorStoreFile is Azure.AI.Agents.VectorStoreFiles.getVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files/{fileId}")
+    @access(Access.internal)
+    deleteVectorStoreFileInternal is Azure.AI.Agents.VectorStoreFiles.deleteVectorStoreFile;
+    @route("/vector_stores/{vectorStoreId}/files")
+    listVectorStoreFiles is Azure.AI.Agents.VectorStoreFiles.listVectorStoreFiles;
+
+    @route("/vector_stores/{vectorStoreId}/file_batches")
+    createVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.createVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}")
+    getVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.getVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel")
+    cancelVectorStoreFileBatch is Azure.AI.Agents.VectorStoreFileBatches.cancelVectorStoreFileBatch;
+    @route("/vector_stores/{vectorStoreId}/file_batches/{batchId}/files")
+    listVectorStoreFileBatchFiles is Azure.AI.Agents.VectorStoreFileBatches.listVectorStoreFileBatchFiles;
+  }
+
+  /** Available market codes for Bing search configuration */
+  // union MarketCode {
+  //   string;
+  //   /** MarketCode `es-AR` for Spanish - Argentina */
+  //   "esAR": "es-AR";
+  //   /** MarketCode `en-AU` for English - Australia */
+  //   "enAU": "en-AU";
+  //   /** MarketCode `de-AT` for German - Austria */
+  //   "deAT": "de-AT";
+  //   /** MarketCode `nl-BE` for Dutch - Belgium */
+  //   "nlBE": "nl-BE";
+  //   /** MarketCode `fr-BE` for French - Belgium */
+  //   "frBE": "fr-BE";
+  //   /** MarketCode `pt-BR` for Portuguese - Brazil */
+  //   "ptBR": "pt-BR";
+  //   /** MarketCode `en-CA` for English - Canada */
+  //   "enCA": "en-CA";
+  //   /** MarketCode `fr-CA` for French - Canada */
+  //   "frCA": "fr-CA";
+  //   /** MarketCode `es-CL` for Spanish - Chile */
+  //   "esCL": "es-CL";
+  //   /** MarketCode `da-DK` for Danish - Denmark */
+  //   "daDK": "da-DK";
+  //   /** MarketCode `fi-FI` for Finnish - Finland */
+  //   "fiFI": "fi-FI";
+  //   /** MarketCode `fr-FR` for French - France */
+  //   "frFR": "fr-FR";
+  //   /** MarketCode `de-DE` for German - Germany */
+  //   "deDE": "de-DE";
+  //   /** MarketCode `zh-HK` for Traditional Chinese - Hong Kong SAR */
+  //   "zhHK": "zh-HK";
+  //   /** MarketCode `en-IN` for English - India */
+  //   "enIN": "en-IN";
+  //   /** MarketCode `en-ID` for English - Indonesia */
+  //   "enID": "en-ID";
+  //   /** MarketCode `it-IT` for Italian - Italy */
+  //   "itIT": "it-IT";
+  //   /** MarketCode `ja-JP` for Japanese - Japan */
+  //   "jaJP": "ja-JP";
+  //   /** MarketCode `ko-KR` for Korean - Korea */
+  //   "koKR": "ko-KR";
+  //   /** MarketCode `en-MY` for English - Malaysia */
+  //   "enMY": "en-MY";
+  //   /** MarketCode `es-MX` for Spanish - Mexico */
+  //   "esMX": "es-MX";
+  //   /** MarketCode `nl-NL` for Dutch - Netherlands */
+  //   "nlNL": "nl-NL";
+  //   /** MarketCode `en-NZ` for English - New Zealand */
+  //   "enNZ": "en-NZ";
+  //   /** MarketCode `no-NO` for Norwegian - Norway */
+  //   "noNO": "no-NO";
+  //   /** MarketCode `zh-CN` for Chinese - People's Republic of China */
+  //   "zhCN": "zh-CN";
+  //   /** MarketCode `pl-PL` for Polish - Poland */
+  //   "plPL": "pl-PL";
+  //   /** MarketCode `en-PH` for English - Republic of the Philippines */
+  //   "enPH": "en-PH";
+  //   /** MarketCode `ru-RU` for Russian - Russia */
+  //   "ruRU": "ru-RU";
+  //   /** MarketCode `en-ZA` for English - South Africa */
+  //   "enZA": "en-ZA";
+  //   /** MarketCode `es-ES` for Spanish - Spain */
+  //   "esES": "es-ES";
+  //   /** MarketCode `sv-SE` for Swedish - Sweden */
+  //   "svSE": "sv-SE";
+  //   /** MarketCode `fr-CH` for French - Switzerland */
+  //   "frCH": "fr-CH";
+  //   /** MarketCode `de-CH` for German - Switzerland */
+  //   "deCH": "de-CH";
+  //   /** MarketCode `zh-TW` for Traditional Chinese - Taiwan */
+  //   "zhTW": "zh-TW";
+  //   /** MarketCode `tr-TR` for Turkish - Türkiye */
+  //   "trTR": "tr-TR";
+  //   /** MarketCode `en-GB` for English - United Kingdom */
+  //   "enGB": "en-GB";
+  //   /** MarketCode `en-US` for English - United States */
+  //   "enUS": "en-US";
+  //   /** MarketCode `es-US` for Spanish - United States */
+  //   "esUS": "es-US";
+  // }
+}
+
+@@clientName(Azure.AI.Agents.BingCustomSearchConfiguration.setLang , "Language", "java");
