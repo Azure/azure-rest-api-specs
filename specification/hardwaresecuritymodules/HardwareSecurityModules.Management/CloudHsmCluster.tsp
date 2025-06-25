@@ -97,10 +97,12 @@ interface CloudHsmClusters {
   validateBackupProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
-    ArmResponse<BackupResult>,
+    ArmResponse<BackupResult> & 
+    Azure.Core.RequestIdResponseHeader, 
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader &
+      Azure.Core.RequestIdResponseHeader,
     OptionalRequestBody = true
   >;
 
@@ -111,10 +113,12 @@ interface CloudHsmClusters {
   backup is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
-    ArmResponse<BackupResult>,
+    ArmResponse<BackupResult> & 
+    Azure.Core.RequestIdResponseHeader,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupResult> &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader & 
+      Azure.Core.RequestIdResponseHeader,
     OptionalRequestBody = true
   >;
 
@@ -125,10 +129,12 @@ interface CloudHsmClusters {
   validateRestoreProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
-    ArmResponse<RestoreResult>,
+    ArmResponse<RestoreResult> &
+    Azure.Core.RequestIdResponseHeader,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = RestoreResult> &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader &
+      Azure.Core.RequestIdResponseHeader,
     OptionalRequestBody = true
   >;
 
@@ -139,10 +145,12 @@ interface CloudHsmClusters {
   restore is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
-    ArmResponse<RestoreResult>,
+    ArmResponse<RestoreResult> & 
+    Azure.Core.RequestIdResponseHeader,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = RestoreResult> &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader & 
+      Azure.Core.RequestIdResponseHeader
   >;
 
   /**
@@ -186,7 +194,7 @@ interface CloudHsmClusters {
     @path
     @segment("backupOperationStatus")
     jobId: string,
-  ): BackupResult | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> | ErrorResponse;
+  ): BackupResult & Azure.Core.RequestIdResponseHeader | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader &  Azure.Core.RequestIdResponseHeader> | ErrorResponse;
   /**
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
@@ -217,7 +225,7 @@ interface CloudHsmClusters {
     @path
     @segment("restoreOperationStatus")
     jobId: string,
-  ): RestoreResult | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> | ErrorResponse;
+  ): RestoreResult & Azure.Core.RequestIdResponseHeader| ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> | ErrorResponse ;
 }
 
 @@maxLength(CloudHsmCluster.name, 23);
