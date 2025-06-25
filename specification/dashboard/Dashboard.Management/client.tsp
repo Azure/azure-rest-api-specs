@@ -35,6 +35,30 @@ using Microsoft.Dashboard;
   "csharp"
 );
 
+@@clientName(IntegrationFabric, "GrafanaIntegrationFabric", "csharp");
+@@clientName(IntegrationFabricProperties,
+  "GrafanaIntegrationFabricProperties",
+  "csharp"
+);
+@@clientName(Snapshots, "GrafanaSnapshotsSettings", "csharp");
+@@clientName(Snapshots.externalEnabled, "IsExternalEnabled", "csharp");
+@@clientName(Security, "GrafanaSecuritySettings", "csharp");
+@@clientName(Security.csrfAlwaysCheck, "IsCsrfAlwaysCheckEnabled", "csharp");
+@@clientName(UnifiedAlertingScreenshots.captureEnabled,
+  "IsCaptureEnabled",
+  "csharp"
+);
+@@clientName(Smtp, "GrafanaSmtpSettings", "csharp");
+@@clientName(Smtp.enabled, "IsEnabled", "csharp");
+@@clientName(Users, "GrafanaUserSettings", "csharp");
+@@clientName(StartTLSPolicy, "GrafanaStartTlsPolicy", "csharp");
+@@clientName(StartTLSPolicy.OpportunisticStartTLS,
+  "OpportunisticStartTls",
+  "csharp"
+);
+@@clientName(StartTLSPolicy.MandatoryStartTLS, "MandatoryStartTls", "csharp");
+@@clientName(StartTLSPolicy.NoStartTLS, "NoStartTls", "csharp");
+
 @@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
 @@clientName(StartTLSPolicy, "StartTlsPolicy", "java");
 @@clientName(ManagedGrafanaProperties.deterministicOutboundIP,
