@@ -88,7 +88,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @parentResource(Occurrence)
 model OccurrenceResource is ScheduledActionResource {
-  @doc("The time the occurrence is scheduled for the resource.")
+  @doc("The time the occurrence is scheduled for the resource. Specified in UTC.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
@@ -152,7 +152,7 @@ model OccurrenceExtensionProperties {
   @Azure.ResourceManager.identifiers(#["destination"])
   notificationSettings?: Array<NotificationProperties>;
 
-  @doc("The time the occurrence is scheduled for the resource.")
+  @doc("The time the occurrence is scheduled for the resource. Specified in UTC.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;
 
