@@ -322,3 +322,4 @@ using Microsoft.Storage;
 );
 
 @@visibility(StorageTaskAssignmentsList.value, Lifecycle.Read);
+@@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
