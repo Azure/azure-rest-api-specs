@@ -12,30 +12,6 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeSchedule;
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(
-  Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`,
-  "Occurrences"
-)
-@armResourceOperations
-interface OccurrencesOld {
-  get is ArmResourceRead<OccurrenceOld>;
-  listByAutoAction is ArmResourceListByParent<OccurrenceOld>;
-
-  listResources is ArmResourceActionSync<
-    OccurrenceOld,
-    void,
-    OccurrenceResourceListResponse
-  >;
-  cancel is ArmResourceActionSync<
-    OccurrenceOld,
-    CancelOccurrenceRequest,
-    OccurrenceOld
-  >;
-  delay is ArmResourceActionSync<OccurrenceOld, DelayRequestOld, OccurrenceOld>;
-}
-
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @armResourceOperations
 interface Occurrences {

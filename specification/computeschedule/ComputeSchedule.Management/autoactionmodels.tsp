@@ -6,15 +6,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The type of resource being targeted")
 union ResourceType {
@@ -27,7 +24,7 @@ union ResourceType {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Specify which action user wants to be performed on the resources")
 union ActionType {
   @doc("Perform a start action on the specified resources")
@@ -42,7 +39,7 @@ union ActionType {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Representation of the possible selection of days in a week in a gregorian calendar")
 union WeekDay {
   @doc("Monday weekday.")
@@ -72,7 +69,6 @@ union WeekDay {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Representation of the months available selection in a gregorian calendar")
 union Month {
@@ -120,38 +116,10 @@ union Month {
 
 @minValue(1)
 @maxValue(31)
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Represents the possible days in a month")
 scalar DayOfTheMonth extends int32;
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Specify the schedule in which the auto action is supposed to follow")
-model AutoActionSchedule {
-  @doc("The time the auto action is supposed to run on")
-  scheduledTime: plainTime;
-
-  @doc("The timezone the scheduled time is specified on")
-  timeZone: string;
-
-  @doc("The week days the auto action is supposed to run on")
-  requestedWeekDays: WeekDay[];
-
-  @doc("The months the auto action is supposed to run on")
-  requestedMonths: Month[];
-
-  @doc("The days of the month the auto action is supposed to run on. If empty, it means it will run on every day of the month.")
-  requestedDaysOfTheMonth: DayOfTheMonth[];
-
-  @doc("The execution parameters the auto action is supposed to follow")
-  executionParameters: ExecutionParameters;
-
-  @doc("The type of deadline the auto action is supposed to follow for the schedule")
-  deadlineType: DeadlineType;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The state the occurrence is at a given time")
 union OccurrenceState {
@@ -181,7 +149,6 @@ union OccurrenceState {
 
 @doc("The type of notification supported")
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 union NotificationType {
   @doc("Notify through e-mail")
   Email: "Email",
@@ -189,7 +156,6 @@ union NotificationType {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The notification languages currently supported")
 union Language {
@@ -199,7 +165,6 @@ union Language {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The information about notifications to be send to about upcoming operations.")
 model NotificationProperties {
@@ -216,31 +181,6 @@ model NotificationProperties {
   disabled?: boolean = false;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-scalar ValidAutoActionResourceId
-  extends armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines",
-    },
-    {
-      type: "Microsoft.Compute/virtualMachineScaleSets",
-    }
-  ]>;
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@parentResource(AutoAction)
-@doc("Represents an auto action resource metadata.")
-model AutoActionResource {
-  @doc("The ARM Id of the resource.")
-  resourceId: ValidAutoActionResourceId;
-
-  @doc("The desired notification settings for the specified resource.")
-  @Azure.ResourceManager.identifiers(#["destination"])
-  notificationSettings?: Array<NotificationProperties>;
-}
-
 @doc("Provisioning state")
 @lroStatus
 union ProvisioningState {
@@ -252,71 +192,6 @@ union ProvisioningState {
   string,
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Auto action properties")
-model AutoActionProperties {
-  @doc("The type of resource the auto action is targeting")
-  resourceType: ResourceType;
-
-  @doc("The action the auto action should perform in the resources")
-  actionType: ActionType;
-
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-  @doc("The time which the auto action is supposed to start running")
-  startTime: offsetDateTime;
-
-  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
-  @doc("The time when the auto action is supposed to stop scheduling")
-  endTime?: offsetDateTime;
-
-  @doc("The schedule the auto action is supposed to follow")
-  schedule: AutoActionSchedule;
-
-  @doc("The notification settings for the auto action")
-  @Azure.ResourceManager.identifiers(#["destination"])
-  notificationSettings: Array<NotificationProperties>;
-
-  @doc("Tell if the auto action is disabled or not")
-  disabled?: boolean = false;
-
-  @doc("The status of the last provisioning operation performed on the resource.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-@@identifiers(AutoActionResourceListResponse.value, #[]);
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model to attach a list of auto action resources.")
-model AutoActionResourceAttachRequest {
-  @doc("List of resources to be attached/patched")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<AutoActionResource>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model to detach a list of auto action resources.")
-model AutoActionResourceDetachRequest {
-  @doc("List of resources to be detached")
-  resources: Array<ValidAutoActionResourceId>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model perform a resource operation in a list of resources")
-model AutoActionResourcePatchRequest {
-  @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resources: Array<AutoActionResource>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The state the resource is on after the resource operation is applied")
 union ResourceOperationStatus {
@@ -327,30 +202,4 @@ union ResourceOperationStatus {
   Failed: "Failed",
 
   string,
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("The response from auto action resource requests, which contains the status of each resource")
-model AutoActionResourceOperationResponse {
-  @doc("The total number of resources operated on")
-  totalResources: int32;
-
-  @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
-  resourcesStatuses: Array<ResourceStatus>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("The auto action resource")
-model AutoAction is TrackedResource<AutoActionProperties> {
-  ...ResourceNameParameter<AutoAction>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("The auto action extension")
-model AutoActionResources is ExtensionResource<AutoActionProperties> {
-  ...ResourceNameParameter<AutoActionResources>;
 }

@@ -8,14 +8,12 @@ import "./scheduledactionmodels.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The status of the resources")
 model ResourceResultSummary {
   @doc("The error code for those resources. In case of success, code is populated with Success.")
@@ -28,7 +26,7 @@ model ResourceResultSummary {
   errorDetails?: Azure.Core.Foundations.Error;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The summarized provisioning result of an occurrence")
 model OccurrenceResultSummary {
   @doc("The total number of resources that the occurrence was supposed to act on.")
@@ -39,7 +37,7 @@ model OccurrenceResultSummary {
   statuses: ResourceResultSummary[];
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Properties for an occurrence")
 model OccurrenceProperties {
   @doc("The time the occurrence is scheduled for. This value can be changed by calling the delay API")
@@ -60,21 +58,6 @@ model OccurrenceProperties {
   provisioningState?: OccurrenceState;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(
-  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
-  "Occurrence"
-)
-@parentResource(AutoAction)
-model OccurrenceOld is ProxyResource<OccurrenceProperties> {
-  ...ResourceNameParameter<
-    Occurrence,
-    KeyName = "occurrenceId",
-    NamePattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-  >;
-}
-
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @parentResource(ScheduledAction)
 model Occurrence is ProxyResource<OccurrenceProperties> {
@@ -85,7 +68,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
   >;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @parentResource(Occurrence)
 model OccurrenceResource is ScheduledActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
@@ -102,23 +85,8 @@ model OccurrenceResource is ScheduledActionResource {
 }
 
 @@identifiers(OccurrenceResourceListResponse.value, #[]);
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
-
-@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(
-  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
-  "DelayRequest"
-)
-@doc("Request to ask for a delay in an occurrence")
-model DelayRequestOld {
-  @doc("The amount of delay the occurrence should apply")
-  delay: duration;
-
-  @doc("The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.")
-  resourceIds: Array<ValidAutoActionResourceId>;
-}
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (ACST) 2025-05-30T22:03:00+09:30, (PST) 2025-05-30T06:35:00-07:00")
