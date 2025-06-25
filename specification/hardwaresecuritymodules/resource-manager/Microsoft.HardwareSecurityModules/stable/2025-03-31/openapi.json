@@ -46,6 +46,27 @@
       "name": "CloudHsmClusters"
     },
     {
+      "name": "CloudHsmValidateBackupProperties"
+    },
+    {
+      "name": "CloudHsmBackup"
+    },
+    {
+      "name": "CloudHsmValidateRestoreProperties"
+    },
+    {
+      "name": "CloudHsmRestore"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "CloudHsmBackupStatus"
+    },
+    {
+      "name": "CloudHsmRestoreStatus"
+    },
+    {
       "name": "PrivateEndpointConnections"
     },
     {
@@ -500,7 +521,8 @@
       "post": {
         "operationId": "CloudHsmClusters_Backup",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmBackup"
         ],
         "description": "Create a backup of the Cloud HSM Cluster in the specified subscription",
         "parameters": [
@@ -592,7 +614,8 @@
       "get": {
         "operationId": "CloudHsmClusterBackupStatus_Get",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmBackupStatus"
         ],
         "description": "Gets the backup operation status of the specified Cloud HSM Cluster",
         "parameters": [
@@ -917,7 +940,8 @@
       "get": {
         "operationId": "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "PrivateLinkResources"
         ],
         "description": "Gets the private link resources supported for the Cloud Hsm Cluster.",
         "parameters": [
@@ -969,7 +993,8 @@
       "post": {
         "operationId": "CloudHsmClusters_Restore",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmRestore"
         ],
         "description": "Restores all key materials of a specified Cloud HSM Cluster",
         "parameters": [
@@ -1061,7 +1086,8 @@
       "get": {
         "operationId": "CloudHsmClusterRestoreStatus_Get",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmRestoreStatus"
         ],
         "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
         "parameters": [
@@ -1138,7 +1164,8 @@
       "post": {
         "operationId": "CloudHsmClusters_ValidateBackupProperties",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmValidateBackupProperties"
         ],
         "description": "Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.",
         "parameters": [
@@ -1230,7 +1257,8 @@
       "post": {
         "operationId": "CloudHsmClusters_ValidateRestoreProperties",
         "tags": [
-          "CloudHsmClusters"
+          "CloudHsmClusters",
+          "CloudHsmValidateRestoreProperties"
         ],
         "description": "Queued validating pre restore operation",
         "parameters": [
