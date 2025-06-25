@@ -286,12 +286,12 @@ model AnalysisDiagnostic {
  */
 model DiagnosticItem {
   /**
-   * Unique identifier for the diagnostic.
+   * Unique identifier for the diagnostic. This can be any free form text that can be used to identify the diagnostic.
    */
   id?: string;
 
   /**
-   * The directive being analyzed.
+   * The directive being analyzed. This is a free form text that can be used to identify the directive.
    */
   directive: string;
 
@@ -316,7 +316,7 @@ model DiagnosticItem {
   message: string;
 
   /**
-   * Rule that triggered the diagnostic.
+   * Rule that triggered the diagnostic. Rule names can be any free form text that can be used to identify.
    */
   rule: string;
 
@@ -326,7 +326,7 @@ model DiagnosticItem {
   level: DiagnosticLevel;
 
   /**
-   * Category of warning like Best-practices, Recommendation, Security etc.
+   * Category of warning like Best-practices, Recommendation, Security etc. Can be any free form text.
    */
   category?: string;
 }

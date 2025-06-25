@@ -1851,11 +1851,13 @@
       "properties": {
         "secretText": {
           "type": "string",
-          "description": "The secret text for the API key"
+          "format": "password",
+          "description": "The secret text for the API key",
+          "x-ms-secret": true
         },
         "endDateTime": {
           "type": "string",
-          "description": "Expiry of the key"
+          "description": "Expiry of the key in UTC date-time format."
         }
       },
       "required": [
@@ -1869,11 +1871,11 @@
       "properties": {
         "hint": {
           "type": "string",
-          "description": "Hint for the secret (read-only)"
+          "description": "This is the name of the API key."
         },
         "endDateTime": {
           "type": "string",
-          "description": "Expiry of the key"
+          "description": "Expiry of the key in UTC date-time format."
         }
       },
       "required": [
@@ -2154,7 +2156,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The apply status code."
+          "description": "The apply status code. Can be any free form text"
         },
         "displayStatus": {
           "type": "string",
@@ -2177,7 +2179,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The compilation status code."
+          "description": "The compilation status code. Can be any free form text"
         },
         "displayStatus": {
           "type": "string",
@@ -2200,11 +2202,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the diagnostic."
+          "description": "Unique identifier for the diagnostic. This can be any free form text that can be used to identify the diagnostic."
         },
         "directive": {
           "type": "string",
-          "description": "The directive being analyzed."
+          "description": "The directive being analyzed. This is a free form text that can be used to identify the directive."
         },
         "description": {
           "type": "string",
@@ -2225,7 +2227,7 @@
         },
         "rule": {
           "type": "string",
-          "description": "Rule that triggered the diagnostic."
+          "description": "Rule that triggered the diagnostic. Rule names can be any free form text that can be used to identify."
         },
         "level": {
           "$ref": "#/definitions/DiagnosticLevel",
@@ -2233,7 +2235,7 @@
         },
         "category": {
           "type": "string",
-          "description": "Category of warning like Best-practices, Recommendation, Security etc."
+          "description": "Category of warning like Best-practices, Recommendation, Security etc. Can be any free form text."
         }
       },
       "required": [

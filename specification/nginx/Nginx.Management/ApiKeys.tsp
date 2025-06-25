@@ -31,12 +31,12 @@ model ApiKeyRequest is ProxyResource<ApiKeyRequestProperties> {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "We intentionally do not include provisioning state for API keys."
 model ApiKeyResponseProperties {
   /**
-   * Hint for the secret (read-only)
+   * This is the name of the API key.
    */
   hint: string;
 
   /**
-   * Expiry of the key
+   * Expiry of the key in UTC date-time format.
    */
   endDateTime: string;
 }
@@ -49,10 +49,11 @@ model ApiKeyRequestProperties {
   /**
    * The secret text for the API key
    */
+  @secret
   secretText: string;
 
   /**
-   * Expiry of the key
+   * Expiry of the key in UTC date-time format.
    */
   endDateTime: string;
 }

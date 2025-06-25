@@ -41,7 +41,7 @@ model NginxDeploymentWafPolicyProperties {
  * Compilation status for a WAF policy.
  */
 model DeploymentWafPolicyCompilingStatus {
-  /** The compilation status code. */
+  /** The compilation status code. Can be any free form text */
   code: string;
 
   /** The human-readable compilation status. */
@@ -55,7 +55,7 @@ model DeploymentWafPolicyCompilingStatus {
  * Applying status for a WAF policy.
  */
 model DeploymentWafPolicyApplyingStatus {
-  /** The apply status code. */
+  /** The apply status code. Can be any free form text */
   code: string;
 
   /** The human-readable apply status. */
