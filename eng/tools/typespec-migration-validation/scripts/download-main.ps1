@@ -16,21 +16,18 @@ function Download-Swagger-InMain($swaggerFolder, $latestCommitId) {
   Push-Location $cloneDir
   try {
     if (!(Test-Path ".git")) {
-      Write-Host "Initializing sparse clone for repo: $repoUrl"
-      git clone --no-checkout --filter=tree:0 $repoUrl .
+      git clone --no-checkout --filter=tree:0 $repoUrl . | Out-Null
       if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      git sparse-checkout init
+      git sparse-checkout init | Out-Null
       if ($LASTEXITCODE) { exit $LASTEXITCODE }
       Remove-Item .git/info/sparse-checkout -Force
     }
 
-    Write-Host "Updating sparse checkout file with directory: $swaggerFolder"
     Add-Content .git/info/sparse-checkout $swaggerFolder
-    git sparse-checkout reapply
+    git sparse-checkout reapply | Out-Null
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
-    Write-Host "Checking out commit: $latestCommitId"
-    git checkout $latestCommitId
+    git checkout $latestCommitId | Out-Null
     if ($LASTEXITCODE) { exit $LASTEXITCODE }
 
     return Join-Path $cloneDir $swaggerFolder
@@ -48,9 +45,7 @@ if ($swaggerPath -eq "") {
     exit 0
   }
 
-  Write-Host "Processing changed swagger files:"
   $changedSwaggers | ForEach-Object {
-    Write-Host "Processing $_"
     try {
       $content = Get-Content $_ -Raw
       $jsonContent = $content | ConvertFrom-Json
@@ -58,7 +53,6 @@ if ($swaggerPath -eq "") {
       # Check if the swagger is TypeSpec generated
       if ($null -ne $jsonContent.info -and $jsonContent.info.'x-typespec-generated' -ne $null){
         $swaggerPath = $_
-        Write-Host "Found TypeSpec generated swagger file: $swaggerPath"
       }
     }
     catch {
@@ -75,13 +69,11 @@ if ($swaggerPath -eq "") {
 
 # Get latest commit id from main branch
 $latestCommitId = git ls-remote "https://github.com/Azure/azure-rest-api-specs.git" main | Select-String -Pattern "refs/heads/main" | ForEach-Object { $_.ToString().Split("`t")[0] }
-Write-Host "Latest commit id from main branch: $latestCommitId"
 
 $swaggerFolder = ""
 $swaggerPath = $swaggerPath.Replace("\", "/")
 if ($swaggerPath -match "specification/([a-z]*)/resource-manager/(.*)/(stable|preview)/([a-z0-9-]+)/(.*).json") {
   $swaggerFolder = "specification/$($matches[1])/resource-manager/$($matches[2])/$($matches[3])/$($matches[4])/"
-  Write-Host "Swagger folder: $swaggerFolder"
 }
 else {
   Write-Host "Please provide the path of the swagger that generated from your TypeSpec."
@@ -96,7 +88,6 @@ if ($swaggerPath.StartsWith("specification")) {
 }
 
 if ($callValidation -eq $true) {
-  Write-Host "Executing TypeSpec migration validation..."
   npx tsmv $swaggerInMain $swaggerPath
 }
 else {
