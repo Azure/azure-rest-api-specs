@@ -7,7 +7,7 @@ using Rest;
 using Http;
 using Azure.ResourceManager;
 
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /**
  * Represents an Nginx configuration resource.

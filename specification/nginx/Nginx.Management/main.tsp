@@ -9,17 +9,14 @@ import "./Configurations.tsp";
 import "./ApiKeys.tsp";
 import "./WafPolicies.tsp";
 
-using Http;
-using Rest;
 using Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Nginx.NginxPlus Resource Provider management API. */
 @armProviderNamespace
 @service(#{ title: "Microsoft.Nginx.NginxPlus management service" })
 @versioned(Versions)
-namespace Nginx.NginxPlus;
+namespace NGINX.NGINXPLUS;
 
 /** The available API versions. */
 enum Versions {
