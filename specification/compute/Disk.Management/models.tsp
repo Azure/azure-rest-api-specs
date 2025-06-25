@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -75,6 +77,24 @@ union Architecture {
 }
 
 /**
+ * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
+ */
+@added(Versions.v2025_01_02)
+union SupportedSecurityOption {
+  string,
+
+  /**
+   * The disk supports creating Trusted Launch VMs.
+   */
+  TrustedLaunchSupported: "TrustedLaunchSupported",
+
+  /**
+   * The disk supports creating both Trusted Launch and Confidential VMs.
+   */
+  TrustedLaunchAndConfidentialVMSupported: "TrustedLaunchAndConfidentialVMSupported",
+}
+
+/**
  * This enumerates the possible sources of a disk's creation.
  */
 union DiskCreateOption {
@@ -121,12 +141,12 @@ union DiskCreateOption {
   CopyStart: "CopyStart",
 
   /**
-   * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blob for VM guest state specified by securityDataUri in storage account specified by storageAccountId
+   * Similar to Import create option. Create a new Trusted Launch VM or Confidential VM supported disk by importing additional blobs for VM guest state specified by securityDataUri and VM metadata specified by securityMetadataUri in storage account specified by storageAccountId. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM.
    */
   ImportSecure: "ImportSecure",
 
   /**
-   * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in both disk and VM guest state
+   * Similar to Upload create option. Create a new Trusted Launch VM or Confidential VM supported disk and upload using write token in disk, VM guest state and VM metadata. The VM metadata is optional and only required for certain Confidential VM configurations and not required for Trusted Launch VM.
    */
   UploadPreparedSecure: "UploadPreparedSecure",
 
@@ -214,6 +234,57 @@ union EncryptionType {
    * Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed.
    */
   EncryptionAtRestWithPlatformAndCustomerKeys: "EncryptionAtRestWithPlatformAndCustomerKeys",
+}
+
+/**
+ * Determines on how to handle disks with slow I/O.
+ */
+@added(Versions.v2025_01_02)
+union AvailabilityPolicyDiskDelay {
+  string,
+
+  /**
+   * Defaults to behavior without av policy specified, which is VM restart upon slow disk io.
+   */
+  None: "None",
+
+  /**
+   * Upon a disk io failure or slow response, try detaching then reattaching the disk.
+   */
+  AutomaticReattach: "AutomaticReattach",
+}
+
+/**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2025_01_02)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
 }
 
 /**
@@ -465,6 +536,17 @@ model DiskSku {
 }
 
 /**
+ * In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM
+ */
+@added(Versions.v2025_01_02)
+model AvailabilityPolicy {
+  /**
+   * Determines on how to handle disks with slow I/O.
+   */
+  actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
+}
+
+/**
  * Disk resource properties.
  */
 model DiskProperties {
@@ -643,6 +725,12 @@ model DiskProperties {
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "LastOwnershipUpdateTime")
   lastOwnershipUpdateTime?: utcDateTime;
+
+  /**
+   * Determines how platform treats disk failures
+   */
+  @added(Versions.v2025_01_02)
+  availabilityPolicy?: AvailabilityPolicy;
 }
 
 /**
@@ -688,6 +776,12 @@ model SupportedCapabilities {
    * CPU architecture supported by an OS disk.
    */
   architecture?: Architecture;
+
+  /**
+   * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
+   */
+  @added(Versions.v2025_01_02)
+  supportedSecurityOption?: SupportedSecurityOption;
 }
 
 /**
@@ -745,6 +839,10 @@ model CreationData {
    */
   securityDataUri?: string;
 
+  /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM.*/
+  @added(Versions.v2025_01_02)
+  securityMetadataUri?: url;
+
   /**
    * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
    */
@@ -759,6 +857,13 @@ model CreationData {
    * If this field is set on a snapshot and createOption is CopyStart, the snapshot will be copied at a quicker speed.
    */
   provisionedBandwidthCopySpeed?: ProvisionedBandwidthCopyOption;
+
+  /**
+   * For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore.
+   */
+  @added(Versions.v2025_01_02)
+  @minValue(1)
+  instantAccessDurationMinutes?: int64;
 }
 
 /**
@@ -1043,6 +1148,12 @@ model DiskUpdateProperties {
    * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
    */
   optimizedForFrequentAttach?: boolean;
+
+  /**
+   * Determines how platform treats disk failures
+   */
+  @added(Versions.v2025_01_02)
+  availabilityPolicy?: AvailabilityPolicy;
 }
 
 /**
@@ -1088,6 +1199,12 @@ model AccessUri {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
   securityDataAccessSAS?: string;
+
+  /** A SAS uri for accessing a VM metadata.*/
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  securityMetadataAccessSAS?: string;
 }
 
 /**
@@ -1712,6 +1829,13 @@ model SnapshotProperties {
    * Additional authentication requirements when exporting or uploading to a disk or snapshot.
    */
   dataAccessAuthMode?: DataAccessAuthMode;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 /**
@@ -1807,6 +1931,13 @@ model SnapshotUpdateProperties {
    * List of supported capabilities for the image from which the OS disk was created.
    */
   supportedCapabilities?: SupportedCapabilities;
+
+  /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_01_02)
+  snapshotAccessState?: SnapshotAccessState;
 }
 
 @@doc(SnapshotList.value, "A list of snapshots.");

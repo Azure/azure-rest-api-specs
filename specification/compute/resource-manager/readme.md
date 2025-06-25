@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-02-01
+tag: package-2025-01-02
 
 directive:
   - where:
@@ -337,6 +337,29 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: GalleryRP.json
     reason: Existing issue from last version.
+```
+
+### Tag: package-2025-01-02
+
+These settings apply only when `--tag=package-2025-01-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01-02'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
+  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2024-03-03/GalleryRP.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
+### Tag: package-2025-01-02-only
+
+These settings apply only when `--tag=package-2025-01-02-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-02-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
 ```
 
 ### Tag: package-2025-02-01
