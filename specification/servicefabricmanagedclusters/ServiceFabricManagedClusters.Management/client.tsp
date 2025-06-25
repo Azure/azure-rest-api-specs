@@ -399,7 +399,10 @@ using Microsoft.ServiceFabric;
 @@clientName(DiskType.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
 @@clientName(DiskType.StandardSSD_ZRS, "PremiumZrs", "csharp");
 
-@@clientName(SecurityEncryptionType, "NodeTypeSecurityEncryptionType", "csharp");
+@@clientName(SecurityEncryptionType,
+  "NodeTypeSecurityEncryptionType",
+  "csharp"
+);
 
 @@alternateType(ManagedClusterVersion.list::parameters.location,
   azureLocation,
