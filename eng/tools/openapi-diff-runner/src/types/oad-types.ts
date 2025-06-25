@@ -102,23 +102,29 @@ export const generateOadMarkdown = (traceData: OadTraceData): string => {
   if (traceData.traces.length === 0) {
     return "";
   }
-  let content = `
-    | Compared specs ([v${oadVersion}](https://www.npmjs.com/package/@azure/oad/v/${oadVersion}))| new version | base version |
-    |-------|-------------|--------------|
-    `;
+
+  // Create properly formatted markdown table without leading whitespace
+  let content = `| Compared specs ([v${oadVersion}](https://www.npmjs.com/package/@azure/oad/v/${oadVersion})) | new version | base version |
+|-------|-------------|--------------|
+`;
+
   for (const value of traceData.traces) {
     // Compose each column for clarity
     const newFileName = basename(value.new);
     const newVersion = getVersionFromInputFile(value.new, true);
-    const newCommitLink = `[${traceData.context.headCommit}](${sourceBranchHref(value.new)})`;
+
+    // Truncate commit hash to first 8 characters for better readability
+    const shortCommit = traceData.context.headCommit.substring(0, 8);
+    const newCommitLink = `[${shortCommit}](${sourceBranchHref(value.new)})`;
 
     const oldVersion = getVersionFromInputFile(value.old, true);
     const oldCommitLink = `[${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)})`;
 
-    // Add a row to the markdown table
-    content += `|${newFileName} |${newVersion}${newCommitLink}|${oldVersion}${oldCommitLink}|\n`;
+    // Add a row to the markdown table with proper spacing
+    content += `| ${newFileName} | ${newVersion} ${newCommitLink} | ${oldVersion} ${oldCommitLink} |
+`;
   }
-  content += `\n`;
+
   return content;
 };
 
