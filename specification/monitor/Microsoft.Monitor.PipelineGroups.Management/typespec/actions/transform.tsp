@@ -17,16 +17,13 @@ model TransformRequest {
 @doc("Response for the transform request.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model TransformResponse {
-  @doc("Optional error details if the transform failed.")
-  error?: TransformResponseError;
+  @doc("Validation information for the transform request.")
+  validation: TransfromResponseValidation;
 }
 
-@doc("Error details for transform failures.")
+@doc("Validation information for the transform request.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-model TransformResponseError {
-  @doc("Type of the error.")
-  type: string;
-
-  @doc("Error message providing details about the failure.")
-  message: string;
+model TransfromResponseValidation {
+  @doc("Whether the transform statement is syntactically valid or not.")
+  syntaxValid: boolean;
 }

@@ -1511,28 +1511,26 @@
       "type": "object",
       "description": "Response for the transform request.",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/TransformResponseError",
-          "description": "Optional error details if the transform failed."
-        }
-      }
-    },
-    "TransformResponseError": {
-      "type": "object",
-      "description": "Error details for transform failures.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message providing details about the failure."
+        "validation": {
+          "$ref": "#/definitions/TransfromResponseValidation",
+          "description": "Validation information for the transform request."
         }
       },
       "required": [
-        "type",
-        "message"
+        "validation"
+      ]
+    },
+    "TransfromResponseValidation": {
+      "type": "object",
+      "description": "Validation information for the transform request.",
+      "properties": {
+        "syntaxValid": {
+          "type": "boolean",
+          "description": "Whether the transform statement is syntactically valid or not."
+        }
+      },
+      "required": [
+        "syntaxValid"
       ]
     },
     "UdpReceiver": {
