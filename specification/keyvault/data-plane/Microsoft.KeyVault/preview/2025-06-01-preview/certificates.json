@@ -2355,7 +2355,7 @@
     },
     "SubjectAlternativeNames": {
       "type": "object",
-      "description": "The subject alternate names of a X509 object.",
+      "description": "The Subject Alternative Names of a X509 object.",
       "properties": {
         "emails": {
           "type": "array",
@@ -2366,7 +2366,7 @@
         },
         "dns_names": {
           "type": "array",
-          "description": "Domain names.",
+          "description": "Domain Names.",
           "items": {
             "type": "string"
           },
@@ -2374,7 +2374,21 @@
         },
         "upns": {
           "type": "array",
-          "description": "User principal names.",
+          "description": "User Principal Names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uris": {
+          "type": "array",
+          "description": "Uniform Resource Identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "IP addresses; supports IPv4 and IPv6.",
           "items": {
             "type": "string"
           }
