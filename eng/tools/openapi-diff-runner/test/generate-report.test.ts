@@ -59,7 +59,7 @@ describe("generate-report", () => {
     prNumber: "123",
     prSourceBranch: "feature",
     prTargetBranch: "main",
-    logger: {
+    oadMessageProcessorContext: {
       logFilePath: "/log/path",
       prUrl: "https://github.com/test/repo/pull/123",
       messageCache: [],

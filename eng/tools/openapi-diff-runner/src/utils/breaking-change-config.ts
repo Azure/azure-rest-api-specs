@@ -45,4 +45,5 @@ export const breakingChangesCheckType: {
   },
 };
 
+/** The name of the log file used by the openapi-diff-runner utility. */
 export const logFileName = "openapi-diff-runner.log";

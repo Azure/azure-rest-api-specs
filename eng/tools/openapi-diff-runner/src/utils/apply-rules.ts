@@ -8,6 +8,7 @@ import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
   ReviewRequiredLabel,
+  VersioningReviewRequiredLabel,
 } from "../types/breaking-change.js";
 import { OadMessage } from "../types/oad-types.js";
 import { BreakingChangeLabelsToBeAdded } from "../command-helpers.js";
@@ -107,7 +108,7 @@ function applyRule(
     // This is the "Same-version check / Preview" row at:
     // https://aka.ms/azsdk/pr-brch-deep#diagram-explaining-breaking-changes-and-versioning-issues
     // Specifically, it overrides the "BreakingChangeReviewRequired" label in the "Breaking change" column.
-    labelToAdd = isSameVersionOnPreview ? "VersioningReviewRequired" : labelToAdd;
+    labelToAdd = isSameVersionOnPreview ? VersioningReviewRequiredLabel : labelToAdd;
 
     // Note: these labels are processed downstream by addBreakingChangeLabelsToBeAdded().
     BreakingChangeLabelsToBeAdded.add(labelToAdd);
@@ -117,7 +118,7 @@ function applyRule(
   const outputOadMessage: OadMessage = {
     ...oadMessage,
     type: appliedSeverity,
-  } as OadMessage;
+  };
 
   logMessage(
     `applyRule: addLabel: ${addLabel}, labelToAdd: ${labelToAdd}, rule: '${JSON.stringify(
