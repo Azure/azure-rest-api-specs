@@ -1,5 +1,5 @@
-suppressions:
-  - code: PatchBodyParametersSchema
-    from: specification/storagediscovery/resource-manager/Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
-    jsonpath: $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{workspaceName}'].patch.requestBody.content.application/json.schema.properties.sku
-    reason: "Suppressing due to known default value on PATCH body property 'sku'."
+- tool: LintDiff
+  rules: [PatchBodyParametersSchema]
+  reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  paths:
+    - resource-manager/Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
