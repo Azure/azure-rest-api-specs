@@ -16,151 +16,151 @@ namespace Microsoft.KeyVault;
  */
 union SkuFamily {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   A: "A",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KeyPermissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   all: "all",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   encrypt: "encrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   decrypt: "decrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   wrapKey: "wrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   unwrapKey: "unwrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sign: "sign",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   verify: "verify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get: "get",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list: "list",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create: "create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update: "update",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `import`: "import",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete: "delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backup: "backup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restore: "restore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recover: "recover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge: "purge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   release: "release",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rotate: "rotate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getrotationpolicy: "getrotationpolicy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setrotationpolicy: "setrotationpolicy",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SecretPermissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   all: "all",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get: "get",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list: "list",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   set: "set",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete: "delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backup: "backup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restore: "restore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recover: "recover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge: "purge",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CertificatePermissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   all: "all",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get: "get",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list: "list",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete: "delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create: "create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `import`: "import",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update: "update",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managecontacts: "managecontacts",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getissuers: "getissuers",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listissuers: "listissuers",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setissuers: "setissuers",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteissuers: "deleteissuers",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   manageissuers: "manageissuers",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recover: "recover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge: "purge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backup: "backup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restore: "restore",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StoragePermissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   all: "all",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get: "get",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list: "list",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete: "delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   set: "set",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update: "update",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   regeneratekey: "regeneratekey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recover: "recover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge: "purge",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backup: "backup",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   restore: "restore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setsas: "setsas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listsas: "listsas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getsas: "getsas",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletesas: "deletesas",
 }
 
@@ -169,9 +169,9 @@ union StoragePermissions {
  */
 union KeyVaultNetworkRuleBypassOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureServices: "AzureServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 /**
@@ -179,9 +179,9 @@ union KeyVaultNetworkRuleBypassOption {
  */
 union ManagedHsmNetworkRuleBypassOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureServices: "AzureServices",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 /**
@@ -189,9 +189,9 @@ union ManagedHsmNetworkRuleBypassOption {
  */
 union KeyVaultNetworkRuleAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deny: "Deny",
 }
 
@@ -200,20 +200,20 @@ union KeyVaultNetworkRuleAction {
  */
 union ManagedHsmNetworkRuleAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deny: "Deny",
 }
 /**
  * Provisioning state of the vault.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union VaultProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RegisteringDns: "RegisteringDns",
 }
 
@@ -222,13 +222,13 @@ union VaultProvisioningState {
  */
 union PrivateEndpointServiceConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
 }
 
@@ -237,13 +237,13 @@ union PrivateEndpointServiceConnectionStatus {
  */
 union ManagedHsmPrivateEndpointServiceConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
 }
 
@@ -252,7 +252,7 @@ union ManagedHsmPrivateEndpointServiceConnectionStatus {
  */
 union KeyVaultActionsRequiredMessage {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 
@@ -261,46 +261,46 @@ union KeyVaultActionsRequiredMessage {
  */
 union ManagedHsmActionsRequiredMessage {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
 }
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ManagedHsmPrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
 }
 /**
@@ -308,20 +308,20 @@ union ManagedHsmPrivateEndpointConnectionProvisioningState {
  */
 union IdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
 /**
  * Provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
 
@@ -369,20 +369,20 @@ union ProvisioningState {
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union GeoReplicationRegionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Preprovisioning: "Preprovisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Provisioning: "Provisioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cleanup: "Cleanup",
 }
 
@@ -391,9 +391,9 @@ union GeoReplicationRegionProvisioningState {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -429,9 +429,9 @@ union ActivationStatus {
  */
 union ManagedHsmSkuFamily {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   B: "B",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   C: "C",
 }
 
@@ -440,88 +440,20 @@ union ManagedHsmSkuFamily {
  */
 union ManagedServiceIdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
-}
-
-/**
- * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
- */
-union DeletionRecoveryLevel {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Purgeable: "Purgeable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Recoverable+Purgeable`: "Recoverable+Purgeable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  Recoverable: "Recoverable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `Recoverable+ProtectedSubscription`: "Recoverable+ProtectedSubscription",
-}
-
-/**
- * The type of the key. For valid values, see JsonWebKeyType.
- */
-union JsonWebKeyType {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  EC: "EC",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `EC-HSM`: "EC-HSM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  RSA: "RSA",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `RSA-HSM`: "RSA-HSM",
-}
-
-/**
- * The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.
- */
-union JsonWebKeyOperation {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  encrypt: "encrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  decrypt: "decrypt",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  sign: "sign",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  verify: "verify",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  wrapKey: "wrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  unwrapKey: "unwrapKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `import`: "import",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  release: "release",
-}
-
-/**
- * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
- */
-union JsonWebKeyCurveName {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-256`: "P-256",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-384`: "P-384",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-521`: "P-521",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  `P-256K`: "P-256K",
 }
 
 /**
  * SKU name to specify whether the key vault is a standard vault or a premium vault.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
   standard,
   premium,
@@ -530,7 +462,7 @@ enum SkuName {
 /**
  * The vault's create mode to indicate whether the vault need to be recovered or not.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultCreateMode {
   recover,
   default,
@@ -539,7 +471,7 @@ enum KeyVaultCreateMode {
 /**
  * The vault's create mode to indicate whether the vault need to be recovered or not.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultPatchMode {
   recover,
   default,
@@ -548,14 +480,14 @@ enum KeyVaultPatchMode {
 /**
  * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ManagedHsmCreateMode {
   recover,
   default,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessPolicyUpdateKind {
   add,
   replace,
@@ -565,7 +497,7 @@ enum AccessPolicyUpdateKind {
 /**
  * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ManagedHsmNameUnavailableReason {
   AccountNameInvalid,
   AlreadyExists,
@@ -574,7 +506,7 @@ enum ManagedHsmNameUnavailableReason {
 /**
  * The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultNameUnavailableReason {
   AccountNameInvalid,
   AlreadyExists,
@@ -583,7 +515,7 @@ enum KeyVaultNameUnavailableReason {
 /**
  * SKU of the managed HSM Pool
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ManagedHsmSkuName {
   Standard_B1,
   Custom_B32,
@@ -592,15 +524,10 @@ enum ManagedHsmSkuName {
   Custom_C10,
 }
 
-/**
- * The type of action.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum KeyRotationPolicyActionType {
-  rotate,
-  notify,
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum VaultListFilterTypes {
+  `resourceType eq 'Microsoft.KeyVault/vaults'`,
 }
-
 /**
  * Parameters for creating or updating a vault
  */
@@ -613,7 +540,7 @@ model VaultCreateOrUpdateParameters {
   /**
    * The tags that will be assigned to the key vault.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -705,6 +632,7 @@ model VaultProperties {
   /**
    * Provisioning state of the vault.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: VaultProvisioningState;
 
   /**
@@ -741,7 +669,7 @@ model AccessPolicyEntry {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   tenantId: string;
 
@@ -753,7 +681,7 @@ model AccessPolicyEntry {
   /**
    *  Application ID of the client making request on behalf of a principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   applicationId?: string;
 
@@ -857,8 +785,7 @@ model PrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -947,7 +874,7 @@ model VaultPatchParameters {
   /**
    * The tags that will be assigned to the key vault.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1081,7 +1008,7 @@ model VaultAccessPolicyProperties {
 /**
  * Properties of the deleted vault.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedVaultProperties {
   /**
    * The resource id of the original vault.
@@ -1112,7 +1039,7 @@ model DeletedVaultProperties {
   /**
    * Tags of the original vault.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 
@@ -1154,7 +1081,7 @@ model Resource {
   /**
    * Tags assigned to the key vault resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
@@ -1210,13 +1137,12 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends Resource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrivateLinkResourceProperties;
 }
 
@@ -1249,6 +1175,8 @@ model ManagedHsmProperties {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @format("uuid")
   tenantId?: string;
 
   /**
@@ -1415,8 +1343,7 @@ model MhsmPrivateEndpointConnectionItem {
   /**
    * Private endpoint connection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: MhsmPrivateEndpointConnectionProperties;
 }
 
@@ -1437,6 +1364,7 @@ model MhsmPrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the private endpoint connection.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ManagedHsmPrivateEndpointConnectionProvisioningState;
 }
 
@@ -1474,6 +1402,7 @@ model MhsmPrivateLinkServiceConnectionState {
 /**
  * The security domain properties of the managed hsm.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedHSMSecurityDomainProperties {
   /**
    * Activation Status
@@ -1524,7 +1453,7 @@ model ManagedHsmResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1578,7 +1507,7 @@ model ManagedServiceIdentity {
   /**
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -1621,7 +1550,7 @@ model Error {
 /**
  * Properties of the deleted managed HSM.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedManagedHsmProperties {
   /**
    * The resource id of the original managed HSM.
@@ -1658,7 +1587,7 @@ model DeletedManagedHsmProperties {
   /**
    * Tags of the original managed HSM.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tags?: Record<string>;
 }
@@ -1676,13 +1605,12 @@ model MhsmPrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MhsmPrivateLinkResource extends ManagedHsmResource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: MhsmPrivateLinkResourceProperties;
 }
 
@@ -1881,7 +1809,7 @@ model SecretCreateOrUpdateParameters {
   /**
    * The tags that will be assigned to the secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1893,7 +1821,7 @@ model SecretCreateOrUpdateParameters {
 /**
  * Properties of the secret
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecretProperties {
   /**
    * The value of the secret. NOTE: 'value' will never be returned from the service, as APIs using this model are is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
@@ -1926,8 +1854,8 @@ model SecretProperties {
 /**
  * The secret management attributes.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecretAttributes extends Attributes {}
 
 /**
@@ -1973,7 +1901,7 @@ model SecretPatchParameters {
   /**
    * The tags that will be assigned to the secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -2003,432 +1931,6 @@ model SecretPatchProperties {
 }
 
 /**
- * The properties of the key.
- */
-model KeyProperties {
-  /**
-   * The attributes of the key.
-   */
-  attributes?: KeyAttributes;
-
-  /**
-   * The type of the key. For valid values, see JsonWebKeyType.
-   */
-  kty?: JsonWebKeyType;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  keyOps?: JsonWebKeyOperation[];
-
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
-   */
-  keySize?: int32;
-
-  /**
-   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
-   */
-  curveName?: JsonWebKeyCurveName;
-
-  /**
-   * The URI to retrieve the current version of the key.
-   */
-  @visibility(Lifecycle.Read)
-  keyUri?: string;
-
-  /**
-   * The URI to retrieve the specific version of the key.
-   */
-  @visibility(Lifecycle.Read)
-  keyUriWithVersion?: string;
-
-  /**
-   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
-   */
-  rotationPolicy?: RotationPolicy;
-
-  /**
-   * Key release policy in response. It will be used for both output and input. Omitted if empty
-   */
-  release_policy?: KeyReleasePolicy;
-}
-
-/**
- * The object attributes managed by the Azure Key Vault service.
- */
-model KeyAttributes {
-  /**
-   * Determines whether or not the object is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * Not before date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "nbf")
-  nbf?: int64;
-
-  /**
-   * Expiry date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "exp")
-  exp?: int64;
-
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  updated?: int64;
-
-  /**
-   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
-   */
-  @visibility(Lifecycle.Read)
-  recoveryLevel?: DeletionRecoveryLevel;
-
-  /**
-   * Indicates if the private key can be exported.
-   */
-  exportable?: boolean;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model RotationPolicy {
-  /**
-   * The attributes of key rotation policy.
-   */
-  attributes?: KeyRotationPolicyAttributes;
-
-  /**
-   * The lifetimeActions for key rotation action.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  lifetimeActions?: LifetimeAction[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model KeyRotationPolicyAttributes {
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  updated?: int64;
-
-  /**
-   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
-   */
-  expiryTime?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model LifetimeAction {
-  /**
-   * The trigger of key rotation policy lifetimeAction.
-   */
-  trigger?: Trigger;
-
-  /**
-   * The action of key rotation policy lifetimeAction.
-   */
-  action?: Action;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model Trigger {
-  /**
-   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeAfterCreate?: string;
-
-  /**
-   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeBeforeExpiry?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model Action {
-  /**
-   * The type of action.
-   */
-  type?: KeyRotationPolicyActionType;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model KeyReleasePolicy {
-  /**
-   * Content type and version of key release policy
-   */
-  contentType?: string = "application/json; charset=utf-8";
-
-  /**
-   * Blob encoding the policy rules under which the key can be released.
-   */
-  data?: bytes;
-}
-
-/**
- * The parameters used to create a key.
- */
-model KeyCreateParameters {
-  /**
-   * The tags that will be assigned to the key.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * The properties of the key to be created.
-   */
-  properties: KeyProperties;
-}
-
-/**
- * The key resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model Key extends Resource {
-  /**
-   * The properties of the key.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: KeyProperties;
-}
-
-/**
- * The page of keys.
- */
-model KeyListResult {
-  /**
-   * The key resources.
-   */
-  value?: Key[];
-
-  /**
-   * The URL to get the next page of keys.
-   */
-  nextLink?: string;
-}
-
-/**
- * The properties of the key.
- */
-model ManagedHsmKeyProperties {
-  /**
-   * The attributes of the key.
-   */
-  attributes?: ManagedHsmKeyAttributes;
-
-  /**
-   * The type of the key. For valid values, see JsonWebKeyType.
-   */
-  kty?: JsonWebKeyType;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  keyOps?: JsonWebKeyOperation[];
-
-  /**
-   * The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096.
-   */
-  keySize?: int32;
-
-  /**
-   * The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256
-   */
-  curveName?: JsonWebKeyCurveName;
-
-  /**
-   * The URI to retrieve the current version of the key.
-   */
-  @visibility(Lifecycle.Read)
-  keyUri?: string;
-
-  /**
-   * The URI to retrieve the specific version of the key.
-   */
-  @visibility(Lifecycle.Read)
-  keyUriWithVersion?: string;
-
-  /**
-   * Key rotation policy in response. It will be used for both output and input. Omitted if empty
-   */
-  rotationPolicy?: ManagedHsmRotationPolicy;
-
-  /**
-   * Key release policy in response. It will be used for both output and input. Omitted if empty
-   */
-  @encodedName("application/json", "release_policy")
-  releasePolicy?: ManagedHsmKeyReleasePolicy;
-}
-
-/**
- * The object attributes managed by the Azure Key Vault service.
- */
-model ManagedHsmKeyAttributes {
-  /**
-   * Determines whether or not the object is enabled.
-   */
-  enabled?: boolean;
-
-  /**
-   * Not before date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "nbf")
-  notBefore?: int64;
-
-  /**
-   * Expiry date in seconds since 1970-01-01T00:00:00Z.
-   */
-  @encodedName("application/json", "exp")
-  expires?: int64;
-
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  updated?: int64;
-
-  /**
-   * The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.
-   */
-  @visibility(Lifecycle.Read)
-  recoveryLevel?: DeletionRecoveryLevel;
-
-  /**
-   * Indicates if the private key can be exported.
-   */
-  exportable?: boolean;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmRotationPolicy {
-  /**
-   * The attributes of key rotation policy.
-   */
-  attributes?: ManagedHsmKeyRotationPolicyAttributes;
-
-  /**
-   * The lifetimeActions for key rotation action.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  lifetimeActions?: ManagedHsmLifetimeAction[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmKeyRotationPolicyAttributes {
-  /**
-   * Creation time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  created?: int64;
-
-  /**
-   * Last updated time in seconds since 1970-01-01T00:00:00Z.
-   */
-  @visibility(Lifecycle.Read)
-  updated?: int64;
-
-  /**
-   * The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'.
-   */
-  expiryTime?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmLifetimeAction {
-  /**
-   * The trigger of key rotation policy lifetimeAction.
-   */
-  trigger?: ManagedHsmTrigger;
-
-  /**
-   * The action of key rotation policy lifetimeAction.
-   */
-  action?: ManagedHsmAction;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmTrigger {
-  /**
-   * The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeAfterCreate?: string;
-
-  /**
-   * The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'.
-   */
-  timeBeforeExpiry?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmAction {
-  /**
-   * The type of action.
-   */
-  type?: KeyRotationPolicyActionType;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model ManagedHsmKeyReleasePolicy {
-  /**
-   * Content type and version of key release policy
-   */
-  contentType?: string = "application/json; charset=utf-8";
-
-  /**
-   * Blob encoding the policy rules under which the key can be released.
-   */
-  data?: bytes;
-}
-
-/**
- * The parameters used to create a key.
- */
-model ManagedHsmKeyCreateParameters {
-  /**
-   * The tags that will be assigned to the key.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  /**
-   * The properties of the key to be created.
-   */
-  properties: ManagedHsmKeyProperties;
-}
-
-/**
- * The key resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ManagedHsmKey extends ProxyResourceWithoutSystemData {
-  /**
-   * The properties of the key.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: ManagedHsmKeyProperties;
-}
-
-/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 model ProxyResourceWithoutSystemData {
@@ -2453,47 +1955,33 @@ model ProxyResourceWithoutSystemData {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
 
 /**
- * The page of keys.
- */
-model ManagedHsmKeyListResult {
-  /**
-   * The key resources.
-   */
-  value?: ManagedHsmKey[];
-
-  /**
-   * The URL to get the next page of keys.
-   */
-  nextLink?: string;
-}
-/**
- * The paginated list of connected cluster API operations.
+ * Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.
  */
 @Azure.Core.pagedResult
 model OperationListResult {
   /**
-   * The list of connected cluster API operations.
+   * List of Storage operations supported by the Storage resource provider.
    */
   @Azure.Core.items
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value: Operation[];
 
   /**
-   * The link to fetch the next page of connected cluster API operations.
+   * The URL to get the next set of operations.
    */
   @nextLink
   nextLink?: string;
 }
 /**
- * aaaaaaaaaaaaaaaaaaaaaaaaaaa
+ * List of private endpoint connections associated with a managed HSM Pools
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MHSMPrivateEndpointConnectionsListResult
   is Azure.Core.Page<MhsmPrivateEndpointConnection>;
 

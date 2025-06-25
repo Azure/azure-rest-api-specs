@@ -2104,6 +2104,7 @@
               "resourceType eq 'Microsoft.KeyVault/vaults'"
             ],
             "x-ms-enum": {
+              "name": "VaultListFilterTypes",
               "modelAsString": false
             }
           },
@@ -2173,15 +2174,6 @@
         "objectId",
         "permissions"
       ]
-    },
-    "Action": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/KeyRotationPolicyActionType",
-          "description": "The type of action."
-        }
-      }
     },
     "ActivationStatus": {
       "type": "string",
@@ -2435,8 +2427,7 @@
         "properties": {
           "$ref": "#/definitions/DeletedManagedHsmProperties",
           "description": "Properties of the deleted managed HSM",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2514,8 +2505,7 @@
         "properties": {
           "$ref": "#/definitions/DeletedVaultProperties",
           "description": "Properties of the vault",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2584,38 +2574,6 @@
           "description": "Purge protection status of the original vault.",
           "readOnly": true
         }
-      }
-    },
-    "DeletionRecoveryLevel": {
-      "type": "string",
-      "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
-      "enum": [
-        "Purgeable",
-        "Recoverable+Purgeable",
-        "Recoverable",
-        "Recoverable+ProtectedSubscription"
-      ],
-      "x-ms-enum": {
-        "name": "DeletionRecoveryLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Purgeable",
-            "value": "Purgeable"
-          },
-          {
-            "name": "Recoverable+Purgeable",
-            "value": "Recoverable+Purgeable"
-          },
-          {
-            "name": "Recoverable",
-            "value": "Recoverable"
-          },
-          {
-            "name": "Recoverable+ProtectedSubscription",
-            "value": "Recoverable+ProtectedSubscription"
-          }
-        ]
       }
     },
     "Error": {
@@ -2695,184 +2653,6 @@
       "required": [
         "value"
       ]
-    },
-    "JsonWebKeyCurveName": {
-      "type": "string",
-      "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256",
-      "enum": [
-        "P-256",
-        "P-384",
-        "P-521",
-        "P-256K"
-      ],
-      "x-ms-enum": {
-        "name": "JsonWebKeyCurveName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "P-256",
-            "value": "P-256"
-          },
-          {
-            "name": "P-384",
-            "value": "P-384"
-          },
-          {
-            "name": "P-521",
-            "value": "P-521"
-          },
-          {
-            "name": "P-256K",
-            "value": "P-256K"
-          }
-        ]
-      }
-    },
-    "JsonWebKeyOperation": {
-      "type": "string",
-      "description": "The permitted JSON web key operations of the key. For more information, see JsonWebKeyOperation.",
-      "enum": [
-        "encrypt",
-        "decrypt",
-        "sign",
-        "verify",
-        "wrapKey",
-        "unwrapKey",
-        "import",
-        "release"
-      ],
-      "x-ms-enum": {
-        "name": "JsonWebKeyOperation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "encrypt",
-            "value": "encrypt"
-          },
-          {
-            "name": "decrypt",
-            "value": "decrypt"
-          },
-          {
-            "name": "sign",
-            "value": "sign"
-          },
-          {
-            "name": "verify",
-            "value": "verify"
-          },
-          {
-            "name": "wrapKey",
-            "value": "wrapKey"
-          },
-          {
-            "name": "unwrapKey",
-            "value": "unwrapKey"
-          },
-          {
-            "name": "import",
-            "value": "import"
-          },
-          {
-            "name": "release",
-            "value": "release"
-          }
-        ]
-      }
-    },
-    "JsonWebKeyType": {
-      "type": "string",
-      "description": "The type of the key. For valid values, see JsonWebKeyType.",
-      "enum": [
-        "EC",
-        "EC-HSM",
-        "RSA",
-        "RSA-HSM"
-      ],
-      "x-ms-enum": {
-        "name": "JsonWebKeyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EC",
-            "value": "EC"
-          },
-          {
-            "name": "EC-HSM",
-            "value": "EC-HSM"
-          },
-          {
-            "name": "RSA",
-            "value": "RSA"
-          },
-          {
-            "name": "RSA-HSM",
-            "value": "RSA-HSM"
-          }
-        ]
-      }
-    },
-    "Key": {
-      "type": "object",
-      "description": "The key resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/KeyProperties",
-          "description": "The properties of the key.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "KeyAttributes": {
-      "type": "object",
-      "description": "The object attributes managed by the Azure Key Vault service.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Determines whether or not the object is enabled."
-        },
-        "nbf": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Not before date in seconds since 1970-01-01T00:00:00Z.",
-          "x-ms-client-name": "NotBefore"
-        },
-        "exp": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z.",
-          "x-ms-client-name": "Expires"
-        },
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
-          "readOnly": true
-        },
-        "updated": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
-          "readOnly": true
-        },
-        "recoveryLevel": {
-          "$ref": "#/definitions/DeletionRecoveryLevel",
-          "description": "The deletion recovery level currently in effect for the object. If it contains 'Purgeable', then the object can be permanently deleted by a privileged user; otherwise, only the system can purge the object at the end of the retention interval.",
-          "readOnly": true
-        },
-        "exportable": {
-          "type": "boolean",
-          "description": "Indicates if the private key can be exported."
-        }
-      }
     },
     "KeyPermissions": {
       "type": "string",
@@ -2990,101 +2770,6 @@
         ]
       }
     },
-    "KeyProperties": {
-      "type": "object",
-      "description": "The properties of the key.",
-      "properties": {
-        "attributes": {
-          "$ref": "#/definitions/KeyAttributes",
-          "description": "The attributes of the key."
-        },
-        "kty": {
-          "$ref": "#/definitions/JsonWebKeyType",
-          "description": "The type of the key. For valid values, see JsonWebKeyType."
-        },
-        "keyOps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JsonWebKeyOperation"
-          }
-        },
-        "keySize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA. Default for RSA and RSA-HSM keys is 2048. Exception made for bring your own key (BYOK), key exchange keys default to 4096."
-        },
-        "curveName": {
-          "$ref": "#/definitions/JsonWebKeyCurveName",
-          "description": "The elliptic curve name. For valid values, see JsonWebKeyCurveName. Default for EC and EC-HSM keys is P-256"
-        },
-        "keyUri": {
-          "type": "string",
-          "description": "The URI to retrieve the current version of the key.",
-          "readOnly": true
-        },
-        "keyUriWithVersion": {
-          "type": "string",
-          "description": "The URI to retrieve the specific version of the key.",
-          "readOnly": true
-        },
-        "rotationPolicy": {
-          "$ref": "#/definitions/RotationPolicy",
-          "description": "Key rotation policy in response. It will be used for both output and input. Omitted if empty"
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy in response. It will be used for both output and input. Omitted if empty"
-        }
-      }
-    },
-    "KeyReleasePolicy": {
-      "type": "object",
-      "properties": {
-        "contentType": {
-          "type": "string",
-          "description": "Content type and version of key release policy",
-          "default": "application/json; charset=utf-8"
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Blob encoding the policy rules under which the key can be released."
-        }
-      }
-    },
-    "KeyRotationPolicyActionType": {
-      "type": "string",
-      "description": "The type of action.",
-      "enum": [
-        "rotate",
-        "notify"
-      ],
-      "x-ms-enum": {
-        "name": "KeyRotationPolicyActionType",
-        "modelAsString": false
-      }
-    },
-    "KeyRotationPolicyAttributes": {
-      "type": "object",
-      "properties": {
-        "created": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Creation time in seconds since 1970-01-01T00:00:00Z.",
-          "readOnly": true
-        },
-        "updated": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z.",
-          "readOnly": true
-        },
-        "expiryTime": {
-          "type": "string",
-          "description": "The expiration time for the new key version. It should be in ISO8601 format. Eg: 'P90D', 'P1Y'."
-        }
-      }
-    },
     "KeyVaultActionsRequiredMessage": {
       "type": "string",
       "description": "A message indicating if changes on the service provider require any updates on the consumer.",
@@ -3182,16 +2867,77 @@
         "modelAsString": false
       }
     },
-    "LifetimeAction": {
+    "MHSMGeoReplicatedRegion": {
       "type": "object",
+      "description": "A region that this managed HSM Pool has been extended to.",
       "properties": {
-        "trigger": {
-          "$ref": "#/definitions/Trigger",
-          "description": "The trigger of key rotation policy lifetimeAction."
+        "name": {
+          "type": "string",
+          "description": "Name of the geo replicated region."
         },
-        "action": {
-          "$ref": "#/definitions/Action",
-          "description": "The action of key rotation policy lifetimeAction."
+        "provisioningState": {
+          "$ref": "#/definitions/GeoReplicationRegionProvisioningState",
+          "description": "Provisioning state of the geo replicated region.",
+          "readOnly": true
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "A boolean value that indicates whether the region is the primary region or a secondary region."
+        }
+      }
+    },
+    "MHSMIPRule": {
+      "type": "object",
+      "description": "A rule governing the accessibility of a managed HSM pool from a specific IP address or IP range.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MHSMNetworkRuleSet": {
+      "type": "object",
+      "description": "A set of rules governing the network accessibility of a managed hsm pool.",
+      "properties": {
+        "bypass": {
+          "$ref": "#/definitions/ManagedHsmNetworkRuleBypassOption",
+          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/ManagedHsmNetworkRuleAction",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
+        },
+        "ipRules": {
+          "type": "array",
+          "description": "The list of IP address rules.",
+          "items": {
+            "$ref": "#/definitions/MHSMIPRule"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "The list of virtual network rules.",
+          "items": {
+            "$ref": "#/definitions/MHSMVirtualNetworkRule"
+          }
+        }
+      }
+    },
+    "MHSMPrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint object properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full identifier of the private endpoint resource.",
+          "readOnly": true
         }
       }
     },
@@ -3200,7 +2946,7 @@
       "description": "Private endpoint connection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MhsmPrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
@@ -3215,9 +2961,47 @@
         }
       ]
     },
+    "MHSMPrivateEndpointConnectionItem": {
+      "type": "object",
+      "description": "Private endpoint connection item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MHSMPrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the private endpoint connection resource.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/MHSMPrivateEndpoint",
+          "description": "Properties of the private endpoint object."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/MHSMPrivateLinkServiceConnectionState",
+          "description": "Approval state of the private link connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedHsmPrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection.",
+          "readOnly": true
+        }
+      }
+    },
     "MHSMPrivateEndpointConnectionsListResult": {
       "type": "object",
-      "description": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "description": "List of private endpoint connections associated with a managed HSM Pools",
       "properties": {
         "value": {
           "type": "array",
@@ -3241,7 +3025,7 @@
       "description": "A private link resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MhsmPrivateLinkResourceProperties",
+          "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
@@ -3265,6 +3049,50 @@
         }
       }
     },
+    "MHSMPrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Group identifier of private link resource.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "Required member names of private link resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "Required DNS zone names of the the private link resource.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MHSMPrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "An object that represents the approval state of the private link connection.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ManagedHsmPrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval or rejection."
+        },
+        "actionsRequired": {
+          "$ref": "#/definitions/ManagedHsmActionsRequiredMessage",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
     "MHSMRegionsListResult": {
       "type": "object",
       "description": "List of regions associated with a managed HSM Pools",
@@ -3273,7 +3101,7 @@
           "type": "array",
           "description": "The MhsmGeoReplicatedRegion items on this page",
           "items": {
-            "$ref": "#/definitions/MhsmGeoReplicatedRegion"
+            "$ref": "#/definitions/MHSMGeoReplicatedRegion"
           }
         },
         "nextLink": {
@@ -3284,6 +3112,19 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "MHSMVirtualNetworkRule": {
+      "type": "object",
+      "description": "A rule governing the accessibility of a managed hsm pool from a specific virtual network.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "ManagedHSMSecurityDomainProperties": {
@@ -3308,8 +3149,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedHsmProperties",
-          "description": "Properties of the managed HSM",
-          "x-ms-client-flatten": true
+          "description": "Properties of the managed HSM"
         }
       },
       "allOf": [
@@ -3528,6 +3368,7 @@
       "properties": {
         "tenantId": {
           "type": "string",
+          "format": "uuid",
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool."
         },
         "initialAdminObjectIds": {
@@ -3577,14 +3418,14 @@
           "readOnly": true
         },
         "networkAcls": {
-          "$ref": "#/definitions/MhsmNetworkRuleSet",
+          "$ref": "#/definitions/MHSMNetworkRuleSet",
           "description": "Rules governing the accessibility of the key vault from specific network locations."
         },
         "regions": {
           "type": "array",
           "description": "List of all regions associated with the managed hsm pool.",
           "items": {
-            "$ref": "#/definitions/MhsmGeoReplicatedRegion"
+            "$ref": "#/definitions/MHSMGeoReplicatedRegion"
           },
           "x-ms-identifiers": [
             "name"
@@ -3594,7 +3435,7 @@
           "type": "array",
           "description": "List of private endpoint connections associated with the managed hsm pool.",
           "items": {
-            "$ref": "#/definitions/MhsmPrivateEndpointConnectionItem"
+            "$ref": "#/definitions/MHSMPrivateEndpointConnectionItem"
           },
           "readOnly": true
         },
@@ -3800,174 +3641,6 @@
         ]
       }
     },
-    "MhsmGeoReplicatedRegion": {
-      "type": "object",
-      "description": "A region that this managed HSM Pool has been extended to.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the geo replicated region."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/GeoReplicationRegionProvisioningState",
-          "description": "Provisioning state of the geo replicated region.",
-          "readOnly": true
-        },
-        "isPrimary": {
-          "type": "boolean",
-          "description": "A boolean value that indicates whether the region is the primary region or a secondary region."
-        }
-      }
-    },
-    "MhsmNetworkRuleSet": {
-      "type": "object",
-      "description": "A set of rules governing the network accessibility of a managed hsm pool.",
-      "properties": {
-        "bypass": {
-          "$ref": "#/definitions/ManagedHsmNetworkRuleBypassOption",
-          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'."
-        },
-        "defaultAction": {
-          "$ref": "#/definitions/ManagedHsmNetworkRuleAction",
-          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
-        },
-        "ipRules": {
-          "type": "array",
-          "description": "The list of IP address rules.",
-          "items": {
-            "$ref": "#/definitions/MhsmipRule"
-          },
-          "x-ms-identifiers": [
-            "value"
-          ]
-        },
-        "virtualNetworkRules": {
-          "type": "array",
-          "description": "The list of virtual network rules.",
-          "items": {
-            "$ref": "#/definitions/MhsmVirtualNetworkRule"
-          }
-        }
-      }
-    },
-    "MhsmPrivateEndpoint": {
-      "type": "object",
-      "description": "Private endpoint object properties.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Full identifier of the private endpoint resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "MhsmPrivateEndpointConnectionItem": {
-      "type": "object",
-      "description": "Private endpoint connection item.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of private endpoint connection."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Modified whenever there is a change in the state of private endpoint connection."
-        },
-        "properties": {
-          "$ref": "#/definitions/MhsmPrivateEndpointConnectionProperties",
-          "description": "Private endpoint connection properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "MhsmPrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of the private endpoint connection resource.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/MhsmPrivateEndpoint",
-          "description": "Properties of the private endpoint object."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/MhsmPrivateLinkServiceConnectionState",
-          "description": "Approval state of the private link connection."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ManagedHsmPrivateEndpointConnectionProvisioningState",
-          "description": "Provisioning state of the private endpoint connection."
-        }
-      }
-    },
-    "MhsmPrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "Group identifier of private link resource.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "Required member names of private link resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "Required DNS zone names of the the private link resource.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "MhsmPrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "An object that represents the approval state of the private link connection.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/ManagedHsmPrivateEndpointServiceConnectionStatus",
-          "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval or rejection."
-        },
-        "actionsRequired": {
-          "$ref": "#/definitions/ManagedHsmActionsRequiredMessage",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      }
-    },
-    "MhsmVirtualNetworkRule": {
-      "type": "object",
-      "description": "A rule governing the accessibility of a managed hsm pool from a specific virtual network.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "MhsmipRule": {
-      "type": "object",
-      "description": "A rule governing the accessibility of a managed HSM pool from a specific IP address or IP range.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NetworkRuleSet": {
       "type": "object",
       "description": "A set of rules governing the network accessibility of a vault.",
@@ -4002,22 +3675,19 @@
     },
     "OperationListResult": {
       "type": "object",
-      "description": "The paginated list of connected cluster API operations.",
+      "description": "Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of connected cluster API operations.",
+          "description": "List of Storage operations supported by the Storage resource provider.",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Operation"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to fetch the next page of connected cluster API operations."
+          "description": "The URL to get the next set of operations."
         }
       },
       "required": [
@@ -4417,31 +4087,13 @@
         "value"
       ]
     },
-    "RotationPolicy": {
-      "type": "object",
-      "properties": {
-        "attributes": {
-          "$ref": "#/definitions/KeyRotationPolicyAttributes",
-          "description": "The attributes of key rotation policy."
-        },
-        "lifetimeActions": {
-          "type": "array",
-          "description": "The lifetimeActions for key rotation action.",
-          "items": {
-            "$ref": "#/definitions/LifetimeAction"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Secret": {
       "type": "object",
       "description": "Resource information with extended details.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecretProperties",
-          "description": "Properties of the secret",
-          "x-ms-client-flatten": true
+          "description": "Properties of the secret"
         },
         "location": {
           "type": "string",
@@ -4768,19 +4420,6 @@
         ]
       }
     },
-    "Trigger": {
-      "type": "object",
-      "properties": {
-        "timeAfterCreate": {
-          "type": "string",
-          "description": "The time duration after key creation to rotate the key. It only applies to rotate. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
-        },
-        "timeBeforeExpiry": {
-          "type": "string",
-          "description": "The time duration before key expiring to rotate or notify. It will be in ISO 8601 duration format. Eg: 'P90D', 'P1Y'."
-        }
-      }
-    },
     "TypeSpec.Http.OkResponse": {
       "type": "object",
       "description": "The request has succeeded."
@@ -4791,8 +4430,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VaultProperties",
-          "description": "Properties of the vault",
-          "x-ms-client-flatten": true
+          "description": "Properties of the vault"
         }
       },
       "required": [

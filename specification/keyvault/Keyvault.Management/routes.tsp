@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VaultsOperationGroup {
   /**
    * Gets information about the deleted vaults in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Vaults_ListDeleted")
   @autoRoute
   @get
@@ -32,8 +32,8 @@ interface VaultsOperationGroup {
   /**
    * The List operation gets information about the vaults associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Vaults_List")
   @route("/subscriptions/{subscriptionId}/resources")
   @get
@@ -44,7 +44,7 @@ interface VaultsOperationGroup {
      * The filter to apply on the operation.
      */
     @query("$filter")
-    $filter: "resourceType eq 'Microsoft.KeyVault/vaults'",
+    $filter: VaultListFilterTypes,
 
     /**
      * Maximum number of results to return.
@@ -58,7 +58,7 @@ interface VaultsOperationGroup {
   /**
    * Checks that the vault name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Vaults_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
@@ -70,12 +70,12 @@ interface VaultsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedHsmsOperationGroup {
   /**
    * The List operation gets information about the deleted managed HSMs associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedHsms_ListDeleted")
   @autoRoute
   @get
@@ -89,7 +89,7 @@ interface ManagedHsmsOperationGroup {
   /**
    * Checks that the managed hsm name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ManagedHsms_CheckMhsmNameAvailability")
   @autoRoute
   checkMhsmNameAvailability is ArmProviderActionSync<

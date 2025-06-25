@@ -17,7 +17,6 @@ using Azure.Core;
   "MhsmNameAvailabilityParameters",
   "csharp"
 );
-//@@clientName(Reason, "NameUnavailableReason", "csharp");
 @@clientName(ActivationStatus,
   "ManagedHSMSecurityDomainActivationStatus",
   "csharp"
@@ -36,11 +35,8 @@ using Azure.Core;
   "ManagedHsmPrivateLinkResourceData",
   "csharp"
 );
-//@@clientName(ActionsRequired, "ManagedHsmActionsRequiredMessage", "csharp");
-//@@clientName(NetworkRuleAction, "ManagedHsmNetworkRuleAction", "csharp");
-//@@clientName(NetworkRuleBypassOptions, "ManagedHsmNetworkRuleBypassOption","csharp");
+
 @@clientName(PublicNetworkAccess, "ManagedHsmPublicNetworkAccess", "csharp");
-//@@clientName(CreateMode, "ManagedHsmCreateMode", "csharp");
 @@clientName(ManagedHsmProperties.networkAcls, "NetworkRuleSet", "csharp");
 @@clientName(MhsmipRule, "ManagedHsmIPRule", "csharp");
 @@clientName(DeletedVaultProperties, "DeletedKeyVaultProperties", "csharp");
@@ -85,14 +81,7 @@ using Azure.Core;
   "KeyVaultNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Trigger, "KeyRotationTrigger", "csharp");
-@@clientName(Action, "KeyRotationAction", "csharp");
-@@clientName(Key, "KeyVaultKey", "csharp");
-//@@clientName(Key.properties.kty,"keyType","csharp");
-@@clientName(KeyAttributes.enabled, "keyType", "csharp");
-@@clientName(ManagedHsmKeyAttributes.enabled, "isEnabled", "csharp");
-@@clientName(ManagedHsmKeyAttributes.exportable, "canExported", "csharp");
-@@clientName(ManagedHsmKeyProperties.kty, "keyType", "csharp");
+
 @@clientName(MhsmPrivateEndpointConnection,
   "ManagedHsmPrivateEndpointConnection",
   "csharp"
@@ -109,13 +98,13 @@ using Azure.Core;
 @@clientName(MhsmNetworkRuleSet, "ManagedHsmNetworkRuleSet", "csharp");
 @@alternateType(VaultProperties.tenantId, uuid, "csharp");
 @@clientName(MhsmPrivateEndpoint, "ManagedHsmPrivateEndpoint", "csharp");
-//@@clientName(MhsmVirtualNetworkRule, "ManagedHsmVirtualNetworkRule", "csharp");
+@@clientName(MhsmVirtualNetworkRule, "ManagedHsmVirtualNetworkRule", "csharp");
 @@clientName(MhsmPrivateLinkServiceConnectionState,
   "ManagedHsmPrivateLinkServiceConnectionState",
   "csharp"
 );
 @@clientName(ProvisioningState, "ManagedHsmProvisioningState", "csharp");
-//@@clientName(PrivateEndpointConnectionProvisioningState,"ManagedHsmPrivateEndpointConnectionProvisioningState","csharp");
+
 @@clientName(MhsmPrivateEndpointConnectionProperties,
   "ManagedHsmPrivateEndpointConnectionProperties",
   "csharp"

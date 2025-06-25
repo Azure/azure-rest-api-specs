@@ -4,18 +4,16 @@ using Azure.ClientGenerator.Core;
 using Microsoft.KeyVault;
 using Azure.Core;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnectionItem.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateLinkResource.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateEndpointConnectionItem.properties);
-/*
-@@clientName(Error.innererror, "innerError");
-*/
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateLinkResource.properties);
 @@clientName(Attributes.nbf, "NotBefore");
 @@clientName(Attributes.exp, "Expires");
@@ -25,7 +23,7 @@ using Azure.Core;
 @@clientName(Vaults.updateAccessPolicy::parameters.resource, "parameters");
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(ManagedHsms.createOrUpdate::parameters.resource, "parameters");
@@ -34,7 +32,7 @@ using Azure.Core;
 @@clientName(MhsmPrivateEndpointConnections.put::parameters.resource,
   "properties"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MhsmPrivateEndpointConnection.properties);
 
 @@clientName(Secrets.createOrUpdate::parameters.resource, "parameters");
@@ -49,9 +47,25 @@ using Azure.Core;
 @@visibility(DeletedManagedHsm.properties, Lifecycle.Read);
 @@clientName(MhsmPrivateEndpointConnection, "MHSMPrivateEndpointConnection");
 @@clientName(MhsmPrivateLinkResource, "MHSMPrivateLinkResource");
-@@clientName(KeyAttributes.nbf, "NotBefore");
-@@clientName(KeyAttributes.exp, "Expires");
+
 @@clientName(MhsmPrivateLinkResourceListResult,
   "MHSMPrivateLinkResourceListResult"
 );
 @@clientName(MhsmRegionsListResult, "MHSMRegionsListResult");
+@@clientName(MhsmPrivateEndpointConnectionProperties,
+  "MHSMPrivateEndpointConnectionProperties"
+);
+@@clientName(MhsmPrivateEndpoint, "MHSMPrivateEndpoint");
+@@clientName(MhsmPrivateLinkServiceConnectionState,
+  "MHSMPrivateLinkServiceConnectionState"
+);
+@@clientName(MhsmPrivateEndpointConnectionItem,
+  "MHSMPrivateEndpointConnectionItem"
+);
+@@clientName(MhsmNetworkRuleSet, "MHSMNetworkRuleSet");
+@@clientName(MhsmGeoReplicatedRegion, "MHSMGeoReplicatedRegion");
+@@clientName(MhsmVirtualNetworkRule, "MHSMVirtualNetworkRule");
+@@clientName(MhsmipRule, "MHSMIPRule");
+@@clientName(MhsmPrivateLinkResourceProperties,
+  "MHSMPrivateLinkResourceProperties"
+);

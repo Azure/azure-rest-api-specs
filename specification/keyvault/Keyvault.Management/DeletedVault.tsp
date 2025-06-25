@@ -30,7 +30,7 @@ interface DeletedVaults {
   /**
    * Gets the deleted Azure key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Vaults_GetDeleted")
   getDeleted is ArmResourceRead<
     DeletedVault,
@@ -41,7 +41,7 @@ interface DeletedVaults {
   /**
    * Permanently deletes the specified vault. aka Purges the deleted Azure key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("purge")
   @operationId("Vaults_PurgeDeleted")
   purgeDeleted is ArmResourceActionAsync<
