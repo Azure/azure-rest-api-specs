@@ -11,6 +11,7 @@ import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
+import "./actions/transform.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -271,11 +272,11 @@ interface PipelineGroups {
   @doc("Lists all workspaces in the specified subscription")
   listBySubscription is ArmListBySubscription<PipelineGroup>;
 
-  @doc("This method is used to validate a TransformLanguageProcessor.")
+  @doc("This method is used to execute a transform configuration to be used in a pipeline group.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-  validateTransformLanguageProcessor is ArmResourceActionAsync<
+  transform is ArmResourceActionAsync<
     PipelineGroup,
-    ValidateTransformLanguageProcessorRequest,
-    ValidateTransformLanguageProcessorResponse
+    TransformRequest,
+    TransformResponse
   >;
 }

@@ -406,13 +406,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/validateTransformLanguageProcessor": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/transform": {
       "post": {
-        "operationId": "PipelineGroups_ValidateTransformLanguageProcessor",
+        "operationId": "PipelineGroups_Transform",
         "tags": [
           "PipelineGroups"
         ],
-        "description": "This method is used to validate a TransformLanguageProcessor.",
+        "description": "This method is used to execute a transform configuration to be used in a pipeline group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -437,7 +437,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidateTransformLanguageProcessorRequest"
+              "$ref": "#/definitions/TransformRequest"
             }
           }
         ],
@@ -445,7 +445,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateTransformLanguageProcessorResponse"
+              "$ref": "#/definitions/TransformResponse"
             }
           },
           "202": {
@@ -470,8 +470,11 @@
           }
         },
         "x-ms-examples": {
-          "Error response when validating a TransformLanguageProcessor expression": {
-            "$ref": "./examples/PipelineGroupValidateTransformLanguageProcessorError.json"
+          "Error response when executing a transform": {
+            "$ref": "./examples/PipelineGroupTransformError.json"
+          },
+          "Success response when executing a transform": {
+            "$ref": "./examples/PipelineGroupTransformSuccess.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1499,15 +1502,65 @@
       "type": "object",
       "description": "Transform language processor.",
       "properties": {
-        "query": {
+        "transformStatement": {
           "type": "string",
-          "description": "Query to execute on data passing through the processor.",
+          "description": "Transform statement to execute on data passing through the processor.",
           "minLength": 1,
           "maxLength": 10000
         }
       },
       "required": [
-        "query"
+        "transformStatement"
+      ]
+    },
+    "TransformRequest": {
+      "type": "object",
+      "description": "Request to execute a transform.",
+      "properties": {
+        "transformStatement": {
+          "type": "string",
+          "description": "Transform statement to execute.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "transformStatement"
+      ]
+    },
+    "TransformResponse": {
+      "type": "object",
+      "description": "Response for the transform request.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Result of the transform."
+        },
+        "error": {
+          "$ref": "#/definitions/TransformResponseError",
+          "description": "Optional error details if the transform failed."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "TransformResponseError": {
+      "type": "object",
+      "description": "Error details for transform failures.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message providing details about the failure."
+        }
+      },
+      "required": [
+        "type",
+        "message"
       ]
     },
     "UdpReceiver": {
@@ -1583,56 +1636,6 @@
       },
       "required": [
         "endpoint"
-      ]
-    },
-    "ValidateTransformLanguageProcessorRequest": {
-      "type": "object",
-      "description": "Request to validate a TransformLanguageProcessor definition.",
-      "properties": {
-        "query": {
-          "type": "string",
-          "description": "Query to validate.",
-          "minLength": 1,
-          "maxLength": 10000
-        }
-      },
-      "required": [
-        "query"
-      ]
-    },
-    "ValidateTransformLanguageProcessorResponse": {
-      "type": "object",
-      "description": "Response for the TransformLanguageProcessor validation.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Result of the query validation."
-        },
-        "error": {
-          "$ref": "#/definitions/ValidateTransformLanguageProcessorResponseError",
-          "description": "Optional error details if the validation failed."
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "ValidateTransformLanguageProcessorResponseError": {
-      "type": "object",
-      "description": "Error details for TransformLanguageProcessor validation failures.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message providing details about the validation failure."
-        }
-      },
-      "required": [
-        "type",
-        "message"
       ]
     }
   },

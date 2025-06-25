@@ -1,6 +1,6 @@
 {
-  "title": "Error response when validating a TransformLanguage query expression",
-  "operationId": "PipelineGroups_ValidateTransformLanguageQuery",
+  "title": "Error response when executing a transform",
+  "operationId": "PipelineGroups_Transform",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
@@ -12,7 +12,7 @@
   },
   "responses": {
     "200": {
-      "description": "Query validation failed",
+      "description": "Transform execution failed",
       "body": {
         "status": "Failure",
         "error": {
@@ -22,9 +22,9 @@
       }
     },
     "202": {
-      "description": "Query validation accepted for processing",
+      "description": "Transform request accepted for processing",
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1/validateTransformLanguageQuery/operationResults/12345678-1234-1234-1234-123456789012",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1/transform/operationResults/12345678-1234-1234-1234-123456789012",
         "Retry-After": "30"
       }
     }
