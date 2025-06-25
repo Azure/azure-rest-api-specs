@@ -68,7 +68,7 @@ model AkriConnectorTemplateDeviceInboundEndpointType {
   endpointType: NonEmptyString;
 
   /** The version of the device inbound endpoint. */
-  version: NonEmptyString;
+  version?: NonEmptyString;
 
   /** The configuration schema references for the device inbound endpoint. */
   configurationSchemaRefs?: AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
