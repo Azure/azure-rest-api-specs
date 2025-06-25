@@ -33,4 +33,6 @@ namespace SdkCustomizations;
 
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@alternateType(KeyValueListResult.`@nextLink`, Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>, "csharp");
 
