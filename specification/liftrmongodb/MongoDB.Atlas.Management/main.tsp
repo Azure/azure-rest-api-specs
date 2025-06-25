@@ -58,6 +58,34 @@ model UserDetails {
   companyName?: string;
 }
 
+@doc("Base patch resource properties that can be extended for arm resources.")
+model BaseResourcePatchProperties {
+  @doc("Marketplace details of the resource.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  marketplace?: MarketplaceDetails;
+
+  @doc("Details of the user.")
+  user?: UserDetails;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+/** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
+ * BaseResourceProperties contains Marketplace, useDetail related properties*/
+@doc("Properties specific to update Organization")
+model OrganizationPropertiesUpdate is BaseResourcePatchProperties {
+  @doc("MongoDB properties")
+  partnerProperties?: PartnerProperties;
+}
+
+@doc("The update request model definition for an Azure Organization")
+model OrganizationResourceUpdate
+  is UpdateableProperties<Azure.ResourceManager.TrackedResource<OrganizationPropertiesUpdate>> {
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
@@ -116,7 +144,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
+  update is ArmCustomPatchAsync<
+    OrganizationResource,
+    OrganizationResourceUpdate
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
