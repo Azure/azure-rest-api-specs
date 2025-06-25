@@ -25,5 +25,5 @@ using Azure.Core;
   }
 )
 @versioned(Versions)
-@doc("Azure Communication Messages Service")
+@doc("Azure Communication Messages Service test")
 namespace Azure.Communication.MessagesService;
