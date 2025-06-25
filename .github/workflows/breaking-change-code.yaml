@@ -34,6 +34,8 @@ jobs:
             --tb "${{ github.event.pull_request.base.ref }}" \
             --hc "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}"
+        env:
+          NODE_NO_WARNINGS: 1
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
