@@ -20,7 +20,12 @@ namespace Microsoft.StorageDiscovery;
 model StorageDiscoveryWorkspaceProperties {
   @doc("The storage discovery sku.")
   @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
-  @madeOptional(ApiVersion.v2025_06_01_preview)
+  @renamedFrom(ApiVersion.v2025_06_01_preview, "sku")
+  @removed(ApiVersion.v2025_06_01_preview)
+  oldsku : StorageDiscoverySku;
+
+  @doc("The storage discovery sku")
+  @added(ApiVersion.v2025_06_01_preview)
   sku?: StorageDiscoverySku = StorageDiscoverySku.Standard;
 
   @doc("The state of storage discovery workspace")
@@ -30,6 +35,7 @@ model StorageDiscoveryWorkspaceProperties {
 
   @doc("The state of storage discovery data export")
   @madeOptional(ApiVersion.v2025_03_01_preview)
+  @removed(ApiVersion.v2025_06_01_preview)
   exportState?: DataExportState;
 
   @doc("The description of the storage discovery workspace")
@@ -68,6 +74,7 @@ model StorageDiscoveryWorkspaceProperties {
   @removed(ApiVersion.v2025_01_01_preview)
   @added(ApiVersion.v2025_03_01_preview)
   @madeOptional(ApiVersion.v2025_03_01_preview)
+  @removed(ApiVersion.v2025_06_01_preview)
   destinations?: StorageDiscoveryDestination;
 
   @visibility(Lifecycle.Read)
@@ -93,6 +100,7 @@ union WorkspaceState {
 /**
  * The state of storage discovery data export
  */
+@removed(ApiVersion.v2025_06_01_preview)
 union DataExportState {
   @doc("Data export is stopped.")
   Stopped: "Stopped",
@@ -199,6 +207,7 @@ union StorageDiscoveryResourceType {
  */
 @removed(ApiVersion.v2025_01_01_preview)
 @added(ApiVersion.v2025_03_01_preview)
+@removed(ApiVersion.v2025_06_01_preview)
 model StorageDiscoveryDestination {
   @doc("The ADX destination sink for analytics data")
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageAccountArmId")

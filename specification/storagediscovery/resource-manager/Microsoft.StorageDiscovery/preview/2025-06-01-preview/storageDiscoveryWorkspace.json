@@ -751,30 +751,6 @@
       },
       "readOnly": true
     },
-    "DataExportState": {
-      "type": "string",
-      "description": "The state of storage discovery data export",
-      "enum": [
-        "Stopped",
-        "Running"
-      ],
-      "x-ms-enum": {
-        "name": "DataExportState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Stopped",
-            "value": "Stopped",
-            "description": "Data export is stopped."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Data export is running continuously"
-          }
-        ]
-      }
-    },
     "GetReportContent": {
       "type": "object",
       "description": "Request to get StorageDiscoveryWorkspace data from ADX",
@@ -902,24 +878,6 @@
         }
       }
     },
-    "StorageDiscoveryDestination": {
-      "type": "object",
-      "description": "Destinations for storage discovery data",
-      "properties": {
-        "storageAccountResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ADX destination sink for analytics data",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Storage/storageAccounts"
-              }
-            ]
-          }
-        }
-      }
-    },
     "StorageDiscoveryResourceType": {
       "type": "string",
       "description": "Storage Discovery Resource Type",
@@ -1018,7 +976,7 @@
       "properties": {
         "sku": {
           "type": "string",
-          "description": "The storage discovery sku.",
+          "description": "The storage discovery sku",
           "default": "Standard",
           "enum": [
             "Free",
@@ -1046,10 +1004,6 @@
               }
             ]
           }
-        },
-        "exportState": {
-          "$ref": "#/definitions/DataExportState",
-          "description": "The state of storage discovery data export"
         },
         "description": {
           "type": "string",
@@ -1085,10 +1039,6 @@
           "x-ms-identifiers": [
             "displayName"
           ]
-        },
-        "destinations": {
-          "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace sends data"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1107,7 +1057,7 @@
       "properties": {
         "sku": {
           "type": "string",
-          "description": "The storage discovery sku.",
+          "description": "The storage discovery sku",
           "default": "Standard",
           "enum": [
             "Free",
@@ -1135,10 +1085,6 @@
               }
             ]
           }
-        },
-        "exportState": {
-          "$ref": "#/definitions/DataExportState",
-          "description": "The state of storage discovery data export"
         },
         "description": {
           "type": "string",
@@ -1174,10 +1120,6 @@
           "x-ms-identifiers": [
             "displayName"
           ]
-        },
-        "destinations": {
-          "$ref": "#/definitions/StorageDiscoveryDestination",
-          "description": "The destinations to which the storage workspace sends data"
         }
       }
     },

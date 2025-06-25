@@ -684,6 +684,36 @@
         "resourceTypes"
       ]
     },
+    "StorageDiscoverySku": {
+      "type": "string",
+      "description": "Storage Discovery Sku",
+      "enum": [
+        "Free",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDiscoverySku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free Sku"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard Sku"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium Sku"
+          }
+        ]
+      }
+    },
     "StorageDiscoveryWorkspace": {
       "type": "object",
       "description": "A Storage Discovery Workspace resource. This resource configures the collection of storage account metrics.",
@@ -725,35 +755,8 @@
       "description": "Storage Discovery Workspace Properties",
       "properties": {
         "sku": {
-          "type": "string",
-          "description": "The storage discovery sku.",
-          "default": "Standard",
-          "enum": [
-            "Free",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StorageDiscoverySku",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Free",
-                "value": "Free",
-                "description": "Free Sku"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard Sku"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium Sku"
-              }
-            ]
-          }
+          "$ref": "#/definitions/StorageDiscoverySku",
+          "description": "The storage discovery sku."
         },
         "workspaceState": {
           "$ref": "#/definitions/WorkspaceState",
@@ -818,35 +821,8 @@
       "description": "Storage Discovery Workspace Properties",
       "properties": {
         "sku": {
-          "type": "string",
-          "description": "The storage discovery sku.",
-          "default": "Standard",
-          "enum": [
-            "Free",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StorageDiscoverySku",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Free",
-                "value": "Free",
-                "description": "Free Sku"
-              },
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard Sku"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium Sku"
-              }
-            ]
-          }
+          "$ref": "#/definitions/StorageDiscoverySku",
+          "description": "The storage discovery sku."
         },
         "workspaceState": {
           "$ref": "#/definitions/WorkspaceState",
