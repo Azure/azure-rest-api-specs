@@ -34,7 +34,6 @@ using Microsoft.Dashboard;
   "ManagedGrafanaPatchProperties",
   "csharp"
 );
-
 @@clientName(IntegrationFabric, "GrafanaIntegrationFabric", "csharp");
 @@clientName(IntegrationFabricProperties,
   "GrafanaIntegrationFabricProperties",
