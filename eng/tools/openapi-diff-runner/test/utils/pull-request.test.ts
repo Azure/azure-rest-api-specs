@@ -57,7 +57,7 @@ describe("pull-request", () => {
       prNumber: "123",
       prSourceBranch: "feature-branch",
       prTargetBranch: "main",
-      logger: {
+      oadMessageProcessorContext: {
         logFilePath: "/path/to/log/file.log",
         prUrl: "https://github.com/owner/repo/pull/123",
         messageCache: [],

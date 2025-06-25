@@ -40,7 +40,7 @@ export function initContext(): Context {
   }
 
   const prUrl = `https://github.com/${repo}/pull/${prNumber}`;
-  const logger = createOadMessageProcessor(logFileFolder, prUrl);
+  const oadMessageProcessorContext = createOadMessageProcessor(logFileFolder, prUrl);
   return {
     localSpecRepoPath,
     workingFolder,
@@ -54,7 +54,7 @@ export function initContext(): Context {
     prNumber,
     prSourceBranch: getArgumentValue(args, "--sb", ""),
     prTargetBranch: getArgumentValue(args, "--tb", ""),
-    logger,
+    oadMessageProcessorContext,
     prUrl,
   };
 }

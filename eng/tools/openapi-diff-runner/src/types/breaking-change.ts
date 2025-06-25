@@ -66,7 +66,7 @@ export interface Context {
   prNumber: string;
   prSourceBranch: string;
   prTargetBranch: string;
-  logger: OadMessageProcessorContext;
+  oadMessageProcessorContext: OadMessageProcessorContext;
   prUrl: string;
   prInfo?: PullRequestProperties;
 }

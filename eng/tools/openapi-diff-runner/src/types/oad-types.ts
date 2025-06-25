@@ -17,7 +17,6 @@ import { defaultBreakingChangeBaseBranch } from "../command-helpers.js";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { appendMarkdownToLog } from "../utils/oad-message-processor.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -78,13 +77,14 @@ export const addOadTrace = (
   traceData: OadTraceData,
   oldSwagger: string,
   newSwagger: string,
-): OadTraceData => ({
-  ...traceData,
-  traces: [
-    ...traceData.traces,
-    { old: oldSwagger, new: newSwagger, baseBranch: traceData.baseBranch },
-  ],
-});
+): OadTraceData =>
+  ({
+    ...traceData,
+    traces: [
+      ...traceData.traces,
+      { old: oldSwagger, new: newSwagger, baseBranch: traceData.baseBranch },
+    ],
+  }) as OadTraceData;
 
 /**
  * Sets the base branch for the OAD trace data
@@ -98,19 +98,27 @@ export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): O
  * Generates markdown content from OAD trace data
  */
 export const generateOadMarkdown = (traceData: OadTraceData): string => {
-  const oadVersion = packageJson.dependencies["@azure/oad"].replace(/[\^~]/, "");
+  const oadVersion = packageJson.dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
   if (traceData.traces.length === 0) {
     return "";
   }
   let content = `
-| Compared specs ([v${oadVersion}](https://www.npmjs.com/package/@azure/oad/v/${oadVersion}))| new version | base version |
-|-------|-------------|--------------|
-`;
+    | Compared specs ([v${oadVersion}](https://www.npmjs.com/package/@azure/oad/v/${oadVersion}))| new version | base version |
+    |-------|-------------|--------------|
+    `;
   for (const value of traceData.traces) {
-    content += `|${basename(value.new)} |${getVersionFromInputFile(value.new, true)}([${traceData.context.headCommit}](${sourceBranchHref(value.new)}))|${getVersionFromInputFile(value.old, true)}([${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)}))|\n`;
+    // Compose each column for clarity
+    const newFileName = basename(value.new);
+    const newVersion = getVersionFromInputFile(value.new, true);
+    const newCommitLink = `[${traceData.context.headCommit}](${sourceBranchHref(value.new)})`;
+
+    const oldVersion = getVersionFromInputFile(value.old, true);
+    const oldCommitLink = `[${value.baseBranch}](${specificBranchHref(value.old, value.baseBranch)})`;
+
+    // Add a row to the markdown table
+    content += `|${newFileName} |${newVersion}${newCommitLink}|${oldVersion}${oldCommitLink}|\n`;
   }
   content += `\n`;
-  appendMarkdownToLog(traceData.context.logger, content);
   return content;
 };
 

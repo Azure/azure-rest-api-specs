@@ -337,7 +337,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -378,7 +378,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -418,7 +418,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -447,7 +447,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -487,7 +487,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "develop", // Different from baseBranch
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -523,7 +523,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main", // Same as baseBranch
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -559,7 +559,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "ARMCoreRPDev", // Whitelisted branch
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],
@@ -597,7 +597,7 @@ describe("command-helpers", () => {
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "develop", // Different from baseBranch
-        logger: {
+        oadMessageProcessorContext: {
           logFilePath: "/log/path",
           prUrl: "https://github.com/test/repo/pull/123",
           messageCache: [],

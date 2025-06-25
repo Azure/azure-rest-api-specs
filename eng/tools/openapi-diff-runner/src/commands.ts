@@ -30,6 +30,7 @@ import {
 } from "./command-helpers.js";
 import { generateBreakingChangeResultSummary } from "./generate-report.js";
 import { LOG_PREFIX, logMessage } from "./log.js";
+import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
 
 /**
  * The function validateBreakingChange() is executed with type SameVersion or CrossVersion, by
@@ -173,7 +174,13 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
     ({ msgs, runtimeErrors, oadViolationsCnt, errorCnt } =
       await checkBreakingChangeOnSameVersion(detectionContext));
-    const comparedSpecsTableContent = generateOadMarkdown(oadTracer);
+    const comparedSpecsTableContent = generateOadMarkdown(detectionContext.oadTracer);
+
+    // Log the markdown content to the pipeline log file
+    if (comparedSpecsTableContent) {
+      appendMarkdownToLog(context.oadMessageProcessorContext, comparedSpecsTableContent);
+    }
+
     // process breaking change labels
     outputBreakingChangeLabelVariables();
 

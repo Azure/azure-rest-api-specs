@@ -128,9 +128,17 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
 
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
   const index = args.indexOf(flag);
-  return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
+  return index !== -1 && index + 1 < args.length && args[index + 1]
+    ? args[index + 1]
+    : defaultValue;
 }
 
+/**
+ * Truncates the input message to a specified maximum size.
+ * @param msg The message to be truncated.
+ * @param size The maximum length of the returned string. Defaults to 1024.
+ * @returns The truncated message, or an empty string if msg is undefined.
+ */
 export function cutoffMsg(msg: string | undefined, size: number = 1024): string {
   if (!msg || msg.length <= size) {
     return msg ? msg : "";
@@ -190,6 +198,8 @@ export function processOadRuntimeErrorMessage(
 
 /**
  * Check if a spec path is a preview version
+ * @param specPath The specification file path to check.
+ * @returns {boolean} True if the spec path is a preview version, false otherwise.
  */
 export function specIsPreview(specPath: string): boolean {
   // Example input value: specification/maps/data-plane/Creator/preview/2022-09-01-preview/wayfind.json

@@ -179,7 +179,7 @@ export async function doBreakingChangeDetection(
     ).length;
 
     const msgs: ResultMessageRecord[] = processAndAppendOadMessages(
-      detectionContext.context.logger,
+      detectionContext.context.oadMessageProcessorContext,
       modifiedOadMessages,
       detectionContext.context.baseBranch,
     );
