@@ -128,14 +128,13 @@ model SystemData {
   lastModifiedAt?: utcDateTime;
 }
 
-@doc("Base catalog information for an asset in the public catalog")
-model CatalogInformation {
+alias CatalogInformation = {
   @doc("The id of the publisher of the asset")
   publisherId: string;
 
   @doc("The license the asset is under")
   license: string;
-}
+};
 
 @discriminator("type")
 @doc("Base parameter definition for an asset")

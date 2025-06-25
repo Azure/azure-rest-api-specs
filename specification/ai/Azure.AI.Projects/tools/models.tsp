@@ -2,6 +2,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "../common/models.tsp";
+import "../main.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
@@ -13,11 +15,10 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("AgentBlueprint resource Definition")
-@Rest.resource("agentblueprints")
-@discriminator("type")
-@added(Versions.v2025_05_01)
+@Rest.resource("agenttools")
+@added(Versions.v1)
 model AgentTool {
-    ..AssetBase
+    ...AssetBase;
 
     @doc ("System related metadata")
     @visibility(Lifecycle.Read)
@@ -33,16 +34,17 @@ model AgentTool {
     protocol: AgentToolProtocolDetails;
 
     @doc("Dependencies for the tool")
-    dependencies?: Record<string, BaseAgentDependency>;
+    dependencies?: Record<BaseAgentDependency>;
 
     @doc("Parameters for the tool")
-    parameters?: Record<string, BaseParameter>;
+    parameters?: Record<BaseParameterDefinition>;
 }
 
 
 
 @doc("Catalog information for the agent tool")
-model AgentToolCatalogInformation extends CatalogInformation {  
+model AgentToolCatalogInformation {
+    ...CatalogInformation;  
 }
 
 @doc("Implementation details for the agent tool")
@@ -60,7 +62,7 @@ model AgentToolProtocolDetails {
     auth: AuthorizationDetails;
 
     @doc("spec for the tool that contains {{mustache}} string which are replaced from parameters")
-    spec: Record<unkown>;
+    spec: Record<unknown>;
 }
 
 @doc("Authorization specification for a tool protocol")

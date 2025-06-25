@@ -1059,6 +1059,140 @@
     }
   },
   "definitions": {
+    "AgentBlueprintCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the agent blueprint",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
+    "AgentCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the agent",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
+    "AgentDeploymentRequest": {
+      "type": "object",
+      "description": "Agent deployment request",
+      "properties": {
+        "blueprint": {
+          "type": "string",
+          "description": "blueprint id used by the agent"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "deployment configuration",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseParameterValue"
+          }
+        }
+      },
+      "required": [
+        "blueprint",
+        "parameters"
+      ]
+    },
+    "AgentDeploymentResponse": {
+      "type": "object",
+      "description": "Agent deployment response"
+    },
+    "AgentImplementationDetails": {
+      "type": "object",
+      "description": "An abstract representation of instructions on how to deploy and run the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of agent"
+        },
+        "instructions": {
+          "type": "string",
+          "description": "instructions/prompt for the agent"
+        }
+      },
+      "required": [
+        "type",
+        "instructions"
+      ]
+    },
+    "AgentToolCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the agent tool",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
+    "AgentToolImplementationDetails": {
+      "type": "object",
+      "description": "Implementation details for the agent tool",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of agent tool"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AgentToolProtocolDetails": {
+      "type": "object",
+      "description": "instructions for how to deploy the tool",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of protocol"
+        },
+        "auth": {
+          "$ref": "#/definitions/AuthorizationDetails",
+          "description": "authorization details"
+        },
+        "spec": {
+          "type": "object",
+          "description": "spec for the tool that contains {{mustache}} string which are replaced from parameters",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "type",
+        "auth",
+        "spec"
+      ]
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1088,6 +1222,19 @@
       },
       "required": [
         "blobReference"
+      ]
+    },
+    "AuthorizationDetails": {
+      "type": "object",
+      "description": "Authorization specification for a tool protocol",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of authorization"
+        }
+      },
+      "required": [
+        "type"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -1187,6 +1334,25 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "BaseAgentDependency": {
+      "type": "object",
+      "description": "An abstract representation of a dependency for the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of dependency"
+        },
+        "assetId": {
+          "type": "string",
+          "description": "identifier of the dependency"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "assetId"
+      ]
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -1266,24 +1432,6 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
-      ]
-    },
-    "CatalogInformation": {
-      "type": "object",
-      "description": "Base catalog information for an asset in the public catalog",
-      "properties": {
-        "publisherId": {
-          "type": "string",
-          "description": "The id of the publisher of the asset"
-        },
-        "license": {
-          "type": "string",
-          "description": "The license the asset is under"
-        }
-      },
-      "required": [
-        "publisherId",
-        "license"
       ]
     },
     "Connection": {
@@ -1912,6 +2060,25 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "ModelDependency": {
+      "type": "object",
+      "description": "Representation of a model dependency for the agent",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "description": "parameters for the model",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "model"
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2058,6 +2225,23 @@
         "value"
       ]
     },
+    "PauseOrResumeRequest": {
+      "type": "object",
+      "description": "Agent pause or resume request",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "pause or resume the agent"
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "PauseOrResumeResponse": {
+      "type": "object",
+      "description": "Agent pause or resume response"
+    },
     "PendingUploadCredentialType": {
       "type": "string",
       "description": "The type of credential used to access the storage account.",
@@ -2202,6 +2386,34 @@
       "required": [
         "sasUri",
         "type"
+      ]
+    },
+    "ScaffoldRequest": {
+      "type": "object",
+      "description": "Represents the request for a blueprint scaffold operation"
+    },
+    "ScaffoldResponse": {
+      "type": "object",
+      "description": "Represents the response for a blueprint scaffold request",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the blueprint",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseParameterValue"
+          }
+        },
+        "_meta": {
+          "type": "object",
+          "description": "comment metadata for each parameter",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parameters",
+        "_meta"
       ]
     },
     "Sku": {

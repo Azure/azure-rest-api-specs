@@ -2,6 +2,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "../common/models.tsp";
+import "../main.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
@@ -14,10 +16,9 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("AgentBlueprint resource Definition")
 @Rest.resource("agentblueprints")
-@discriminator("type")
-@added(Versions.v2025_05_01)
+@added(Versions.v1)
 model AgentBlueprint {
-    ..AssetBase
+    ...AssetBase;
 
     @doc ("System related metadata")
     @visibility(Lifecycle.Read)
@@ -30,10 +31,10 @@ model AgentBlueprint {
     implementation: AgentImplementationDetails;
 
     @doc("Dependencies for the agent")
-    dependencies?: Record<string, BaseAgentDependency>;
+    dependencies?: Record<BaseAgentDependency>;
 
     @doc("Parameters for the agent")
-    parameters?: Record<string, BaseParameter>;
+    parameters?: Record<BaseParameterDefinition>;
 }
 
 @doc("An abstract representation of instructions on how to deploy and run the agent")
@@ -46,6 +47,7 @@ model AgentImplementationDetails {
 }
 
 @doc("An abstract representation of a dependency for the agent")
+@discriminator("type")
 model BaseAgentDependency {
     @doc("type of dependency")
     type: string;
@@ -64,7 +66,8 @@ model ModelDependency extends BaseAgentDependency {
 }
 
 @doc("Catalog information for the agent blueprint")
-model AgentBlueprintCatalogInformation extends CatalogInformation {  
+model AgentBlueprintCatalogInformation {
+    ...CatalogInformation;  
 }
 
 @doc("Represents the request for a blueprint scaffold operation")
@@ -74,8 +77,8 @@ model ScaffoldRequest {
 @doc("Represents the response for a blueprint scaffold request")
 model ScaffoldResponse {
     @doc("The parameters for the blueprint")
-    parameters: Record<string, BaseParameterValue>;
+    parameters: Record<BaseParameterValue>;
 
     @doc("comment metadata for each parameter")
-    _meta: Record<string, string>;
+    _meta: Record<string>;
 }

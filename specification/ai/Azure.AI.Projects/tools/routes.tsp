@@ -15,12 +15,11 @@ namespace Azure.AI.Projects;
 alias ListAgentToolVersionsParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
-@added(Versions.v2025_05_01)
+@added(Versions.v1)
 interface AgentTools
   extends VersionedOperations<
       AgentTool,
-      InputParameters<AgentTool, "agenttool">,
+      InputParameters<AgentTool, "agenttools">,
       ListAgentToolVersionsParameters,
       ListAgentToolVersionsParameters
-    > {
-}
+    > {}

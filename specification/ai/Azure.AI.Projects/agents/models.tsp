@@ -2,6 +2,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "../common/models.tsp";
+import "../main.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
@@ -14,10 +16,9 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Agent resource Definition")
 @Rest.resource("agents")
-@discriminator("type")
-@added(Versions.v2025_05_01)
+@added(Versions.v1)
 model Agent {
-    ..AssetBase
+    ...AssetBase;
 
     @doc ("System related metadata")
     @visibility(Lifecycle.Read)
@@ -30,11 +31,12 @@ model Agent {
     blueprint: string;
 
     @doc("Parameters for the agent")
-    parameters?: Record<string, BaseParameterValue>;
+    parameters?: Record<BaseParameterValue>;
 }
 
 @doc("Catalog information for the agent")
-model AgentCatalogInformation extends CatalogInformation {  
+model AgentCatalogInformation {
+    ...CatalogInformation;  
 }
 
 @doc("Agent deployment response")
@@ -53,7 +55,7 @@ model AgentDeploymentRequest {
 @doc("Agent pause or resume request")
 model PauseOrResumeRequest {
     @doc("pause or resume the agent")
-    action: "pause" | "resume";
+    action: string;
 }
 
 @doc("Agent pause or resume response")
