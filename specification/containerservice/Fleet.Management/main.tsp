@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./fleet.tsp";
 import "./fleetmember.tsp";
+import "./fleetnamespace.tsp";
 import "./gate.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
@@ -79,3 +80,4 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_08_01_preview: "2025-08-01-preview",
 }
+
