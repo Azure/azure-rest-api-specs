@@ -27,10 +27,20 @@ model NeonDatabaseProperties {
   branchId?: string;
 
   @doc("The name of the role that owns the database")
+  @removed(Neon.Postgres.Versions.v3_preview)
   ownerName?: string;
+
+  @doc("The name of the role that owns the database")
+  @added(Neon.Postgres.Versions.v3_preview)
+  owner?: string;
 
   @doc("Name of the database")
   @pattern("^\\S.{0,62}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
   databaseName?: string;
+
+  @doc("Timestamp indicating when the database was last updated")
+  @visibility(Lifecycle.Read)
+  @added(Neon.Postgres.Versions.v3_preview)
+  lastUpdated?: string;
 }

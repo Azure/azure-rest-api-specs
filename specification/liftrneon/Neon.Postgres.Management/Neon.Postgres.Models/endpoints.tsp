@@ -1,10 +1,8 @@
 import "./commons.tsp"; // Import common types
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase.Data;
 
 namespace Neon.Postgres;
 
@@ -34,6 +32,17 @@ model EndpointProperties {
   @doc("The type of the endpoint")
   endpointType?: EndpointType;
 
+  @doc("Unique identifier for the endpoint")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-z0-9-]{1,60}$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  endpointId?: string;
+
+  @doc("Name of the endpoint")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  endpointName?: string;
+
   @doc("The current state of the endpoint")
   @added(Neon.Postgres.Versions.v3_preview)
   currentState?: string;
@@ -53,6 +62,10 @@ model EndpointProperties {
   @doc("The timestamp when the endpoint was last active")
   @added(Neon.Postgres.Versions.v3_preview)
   lastActive?: string;
+
+  @doc("The compute units size range for autoscaling (MinCU-MaxCU)")
+  @added(Neon.Postgres.Versions.v3_preview)
+  size?: string;
 }
 
 @doc("The compute endpoint type. Either read_write or read_only.")

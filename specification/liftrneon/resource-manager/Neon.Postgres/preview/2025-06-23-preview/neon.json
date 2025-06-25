@@ -2077,6 +2077,33 @@
             "$ref": "#/definitions/EndpointProperties"
           },
           "x-ms-identifiers": []
+        },
+        "branchId": {
+          "type": "string",
+          "description": "Unique identifier for the branch",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "branchName": {
+          "type": "string",
+          "description": "Name of the branch",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "dataSize": {
+          "type": "string",
+          "description": "Total data size"
+        },
+        "lastActive": {
+          "type": "string",
+          "description": "Last active compute for the branch"
+        },
+        "computeHours": {
+          "type": "string",
+          "description": "Compute hours for the branch"
+        },
+        "primaryCompute": {
+          "type": "string",
+          "description": "Primary compute for the branch"
         }
       }
     },
@@ -2323,6 +2350,17 @@
           "$ref": "#/definitions/EndpointType",
           "description": "The type of the endpoint"
         },
+        "endpointId": {
+          "type": "string",
+          "description": "Unique identifier for the endpoint",
+          "pattern": "^[a-z0-9-]{1,60}$",
+          "readOnly": true
+        },
+        "endpointName": {
+          "type": "string",
+          "description": "Name of the endpoint",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
         "currentState": {
           "type": "string",
           "description": "The current state of the endpoint"
@@ -2344,6 +2382,10 @@
         "lastActive": {
           "type": "string",
           "description": "The timestamp when the endpoint was last active"
+        },
+        "size": {
+          "type": "string",
+          "description": "The compute units size range for autoscaling (MinCU-MaxCU)"
         }
       }
     },
@@ -2822,7 +2864,7 @@
           "type": "string",
           "description": "The ID of the branch this database belongs to"
         },
-        "ownerName": {
+        "owner": {
           "type": "string",
           "description": "The name of the role that owns the database"
         },
@@ -2830,6 +2872,11 @@
           "type": "string",
           "description": "Name of the database",
           "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Timestamp indicating when the database was last updated",
+          "readOnly": true
         }
       }
     },
@@ -2921,6 +2968,15 @@
           "type": "string",
           "description": "Name of the role",
           "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Timestamp indicating when the role was last updated",
+          "readOnly": true
+        },
+        "owns": {
+          "type": "string",
+          "description": "Databases name associated with the role"
         }
       }
     },
