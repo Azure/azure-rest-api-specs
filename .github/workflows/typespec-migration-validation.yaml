@@ -23,5 +23,6 @@ jobs:
 
       - name: Run TypeSpec Migration Validation 
         run: |
-          ./eng/tools/typespec-migration-validation/scripts/download-main.ps1 -Verbose -callValidation $true
+          $output = ./eng/tools/typespec-migration-validation/scripts/download-main.ps1 -Verbose -callValidation $true
+          $output | Out-String | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8
         shell: pwsh
