@@ -1,0 +1,1458 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AppLink management service",
+    "version": "2025-08-01-preview",
+    "description": "Microsoft.AppLink Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AppLinks"
+    },
+    {
+      "name": "AppLinkMembers"
+    },
+    {
+      "name": "AppLinkReleaseChannelProfiles"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AppLink/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppLink/locations/{locationName}/appLinkReleaseChannelProfiles": {
+      "get": {
+        "operationId": "AppLinkReleaseChannelProfiles_ListByLocation",
+        "tags": [
+          "AppLinkReleaseChannelProfiles"
+        ],
+        "description": "List AppLinkReleaseChannelProfile resources by Location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the Location",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkReleaseChannelProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/appLinks": {
+      "get": {
+        "operationId": "AppLinks_ListByResourceGroup",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "List AppLink resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/appLinks/{appLinkName}": {
+      "get": {
+        "operationId": "AppLinks_Get",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "Get a AppLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLink"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppLinks_CreateOrUpdate",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "Create a AppLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppLink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AppLink' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppLink"
+            }
+          },
+          "201": {
+            "description": "Resource 'AppLink' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppLink"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AppLinks_Update",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "Update a AppLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppLinkUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLink"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AppLinks_Delete",
+        "tags": [
+          "AppLinks"
+        ],
+        "description": "Delete a AppLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/appLinks/{appLinkName}/appLinkMembers": {
+      "get": {
+        "operationId": "AppLinkMembers_ListByAppLink",
+        "tags": [
+          "AppLinkMembers"
+        ],
+        "description": "List AppLinkMember resources by AppLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkMemberListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/appLinks/{appLinkName}/appLinkMembers/{appLinkMemberName}": {
+      "get": {
+        "operationId": "AppLinkMembers_Get",
+        "tags": [
+          "AppLinkMembers"
+        ],
+        "description": "Get a AppLinkMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appLinkMemberName",
+            "in": "path",
+            "description": "The name of the AppLinkMember",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkMember"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppLinkMembers_CreateOrUpdate",
+        "tags": [
+          "AppLinkMembers"
+        ],
+        "description": "Create a AppLinkMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appLinkMemberName",
+            "in": "path",
+            "description": "The name of the AppLinkMember",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppLinkMember"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AppLinkMember' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppLinkMember"
+            }
+          },
+          "201": {
+            "description": "Resource 'AppLinkMember' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AppLinkMember"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AppLinkMembers_Update",
+        "tags": [
+          "AppLinkMembers"
+        ],
+        "description": "Update a AppLinkMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appLinkMemberName",
+            "in": "path",
+            "description": "The name of the AppLinkMember",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppLinkMemberUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppLinkMember"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AppLinkMembers_Delete",
+        "tags": [
+          "AppLinkMembers"
+        ],
+        "description": "Delete a AppLinkMember",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "appLinkName",
+            "in": "path",
+            "description": "The name of the AppLink",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appLinkMemberName",
+            "in": "path",
+            "description": "The name of the AppLinkMember",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AppLink": {
+      "type": "object",
+      "description": "AppLink resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppLinkProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AppLinkInternalMetadata": {
+      "type": "object",
+      "description": "AppLink internal metadata",
+      "properties": {
+        "akvResource": {
+          "$ref": "#/definitions/ProvisionResource",
+          "description": "Azure Key Vault resource details"
+        },
+        "rootCert": {
+          "$ref": "#/definitions/ProvisionResource",
+          "description": "Root certificate details"
+        },
+        "underlay": {
+          "$ref": "#/definitions/UnderlayMetadata",
+          "description": "Underlay metadata for AppLink Provisioning"
+        }
+      },
+      "required": [
+        "akvResource",
+        "rootCert",
+        "underlay"
+      ]
+    },
+    "AppLinkInternalMetadataUpdate": {
+      "type": "object",
+      "description": "AppLink internal metadata",
+      "properties": {
+        "akvResource": {
+          "$ref": "#/definitions/ProvisionResourceUpdate",
+          "description": "Azure Key Vault resource details"
+        },
+        "rootCert": {
+          "$ref": "#/definitions/ProvisionResourceUpdate",
+          "description": "Root certificate details"
+        },
+        "underlay": {
+          "$ref": "#/definitions/UnderlayMetadataUpdate",
+          "description": "Underlay metadata for AppLink Provisioning"
+        }
+      }
+    },
+    "AppLinkListResult": {
+      "type": "object",
+      "description": "The response of a AppLink list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AppLink items on this page",
+          "items": {
+            "$ref": "#/definitions/AppLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppLinkMember": {
+      "type": "object",
+      "description": "AppLink Member resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppLinkMemberProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AppLinkMemberInternalMetadata": {
+      "type": "object",
+      "description": "Internal metadata for AppLink Member",
+      "properties": {
+        "umiResource": {
+          "$ref": "#/definitions/UmiResource",
+          "description": "UMI Resource for AppLink Member Internal Metadata"
+        },
+        "dnsRecordSet": {
+          "$ref": "#/definitions/ProvisionResource",
+          "description": "DNS resource details for AppLink Member Internal Metadata"
+        },
+        "extension": {
+          "$ref": "#/definitions/ProvisionResource",
+          "description": "Extension resource details for AppLink Member Internal Metadata"
+        },
+        "underlay": {
+          "$ref": "#/definitions/UnderlayMetadata",
+          "description": "Underlay metadata for AppLink Member Provisioning"
+        },
+        "mcpNameSpace": {
+          "type": "string",
+          "description": "MCP name space for AppLink Member Internal Metadata"
+        }
+      },
+      "required": [
+        "umiResource",
+        "dnsRecordSet",
+        "extension",
+        "underlay",
+        "mcpNameSpace"
+      ]
+    },
+    "AppLinkMemberInternalMetadataUpdate": {
+      "type": "object",
+      "description": "Internal metadata for AppLink Member",
+      "properties": {
+        "umiResource": {
+          "$ref": "#/definitions/UmiResourceUpdate",
+          "description": "UMI Resource for AppLink Member Internal Metadata"
+        },
+        "dnsRecordSet": {
+          "$ref": "#/definitions/ProvisionResourceUpdate",
+          "description": "DNS resource details for AppLink Member Internal Metadata"
+        },
+        "extension": {
+          "$ref": "#/definitions/ProvisionResourceUpdate",
+          "description": "Extension resource details for AppLink Member Internal Metadata"
+        },
+        "underlay": {
+          "$ref": "#/definitions/UnderlayMetadataUpdate",
+          "description": "Underlay metadata for AppLink Member Provisioning"
+        },
+        "mcpNameSpace": {
+          "type": "string",
+          "description": "MCP name space for AppLink Member Internal Metadata"
+        }
+      }
+    },
+    "AppLinkMemberListResult": {
+      "type": "object",
+      "description": "The response of a AppLinkMember list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AppLinkMember items on this page",
+          "items": {
+            "$ref": "#/definitions/AppLinkMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppLinkMemberProperties": {
+      "type": "object",
+      "description": "AppLink Member properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of member cluster"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The metadata for the member cluster"
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/AppLinkMemberInternalMetadata",
+          "description": "Internal metadata for AppLink Member"
+        },
+        "upgradeProfile": {
+          "$ref": "#/definitions/UpgradeProfile",
+          "description": "Upgrade profile for AppLink Member"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the AppLink Member resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "metadata",
+        "internalMetadata",
+        "upgradeProfile"
+      ]
+    },
+    "AppLinkMemberPropertiesUpdate": {
+      "type": "object",
+      "description": "AppLink Member properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of member cluster"
+        },
+        "metadata": {
+          "$ref": "#/definitions/MetadataUpdate",
+          "description": "The metadata for the member cluster"
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/AppLinkMemberInternalMetadataUpdate",
+          "description": "Internal metadata for AppLink Member"
+        },
+        "upgradeProfile": {
+          "$ref": "#/definitions/UpgradeProfileUpdate",
+          "description": "Upgrade profile for AppLink Member"
+        }
+      }
+    },
+    "AppLinkMemberUpdate": {
+      "type": "object",
+      "description": "AppLink Member resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppLinkMemberPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "AppLinkProperties": {
+      "type": "object",
+      "description": "AppLink properties",
+      "properties": {
+        "internalMetadata": {
+          "$ref": "#/definitions/AppLinkInternalMetadata",
+          "description": "Internal metadata for AppLink"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the AppLink resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "internalMetadata"
+      ]
+    },
+    "AppLinkPropertiesUpdate": {
+      "type": "object",
+      "description": "AppLink properties",
+      "properties": {
+        "internalMetadata": {
+          "$ref": "#/definitions/AppLinkInternalMetadataUpdate",
+          "description": "Internal metadata for AppLink"
+        }
+      }
+    },
+    "AppLinkReleaseChannel": {
+      "type": "object",
+      "description": "AppLink Release Channel",
+      "properties": {
+        "releaseChannel": {
+          "type": "string",
+          "description": "The name of the AppLink Release Channel"
+        },
+        "revision": {
+          "type": "string",
+          "description": "The version of the AppLink Release Channel"
+        },
+        "compatibleWith": {
+          "type": "array",
+          "description": "Compatible with other AppLink Release Channels",
+          "items": {
+            "$ref": "#/definitions/CompatibleWith"
+          }
+        }
+      },
+      "required": [
+        "releaseChannel",
+        "revision",
+        "compatibleWith"
+      ]
+    },
+    "AppLinkReleaseChannelProfile": {
+      "type": "object",
+      "description": "AppLink Release Channel Profile resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppLinkReleaseChannelProfileProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AppLinkReleaseChannelProfileListResult": {
+      "type": "object",
+      "description": "The response of a AppLinkReleaseChannelProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AppLinkReleaseChannelProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/AppLinkReleaseChannelProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AppLinkReleaseChannelProfileProperties": {
+      "type": "object",
+      "description": "AppLink Release Channel Profile properties",
+      "properties": {
+        "appLinkReleaseChannels": {
+          "type": "array",
+          "description": "AppLink Release Channels",
+          "items": {
+            "$ref": "#/definitions/AppLinkReleaseChannel"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "appLinkReleaseChannels"
+      ]
+    },
+    "AppLinkUpdate": {
+      "type": "object",
+      "description": "AppLink resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AppLinkPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CompatibleWith": {
+      "type": "object",
+      "description": "Compatible With version of AppLink Release Channel",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the compatible AppLink Release Channel"
+        },
+        "versions": {
+          "type": "array",
+          "description": "The versions of the compatible AppLink Release Channel",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "versions"
+      ]
+    },
+    "Location": {
+      "type": "object",
+      "description": "Location resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LocationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LocationProperties": {
+      "type": "object",
+      "description": "Location properties"
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata for AppLink Member",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the member cluster"
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "MetadataUpdate": {
+      "type": "object",
+      "description": "Metadata for AppLink Member",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the member cluster"
+        }
+      }
+    },
+    "ProvisionResource": {
+      "type": "object",
+      "description": "Provisioning resource details for Internal Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "resourceId"
+      ]
+    },
+    "ProvisionResourceUpdate": {
+      "type": "object",
+      "description": "Provisioning resource details for Internal Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is getting provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is Updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is Deleting."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been Accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "UmiResource": {
+      "type": "object",
+      "description": "UMI Resource for AppLink Member Internal Metadata",
+      "properties": {
+        "umi": {
+          "$ref": "#/definitions/ProvisionResource",
+          "description": "UMI resource"
+        },
+        "roleAssignments": {
+          "type": "array",
+          "description": "Role assignments for UMI resource",
+          "items": {
+            "$ref": "#/definitions/ProvisionResource"
+          }
+        }
+      },
+      "required": [
+        "umi",
+        "roleAssignments"
+      ]
+    },
+    "UmiResourceUpdate": {
+      "type": "object",
+      "description": "UMI Resource for AppLink Member Internal Metadata",
+      "properties": {
+        "umi": {
+          "$ref": "#/definitions/ProvisionResourceUpdate",
+          "description": "UMI resource"
+        },
+        "roleAssignments": {
+          "type": "array",
+          "description": "Role assignments for UMI resource",
+          "items": {
+            "$ref": "#/definitions/ProvisionResource"
+          }
+        }
+      }
+    },
+    "UnderlayMetadata": {
+      "type": "object",
+      "description": "UMI resource details for AppLink Member Internal Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the underlay resource"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the underlay resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the underlay resource"
+        },
+        "resourceProvisionSubId": {
+          "type": "string",
+          "description": "The subscription ID of the resource provisioning"
+        },
+        "resourceProvisionRg": {
+          "type": "string",
+          "description": "The resource group of the resource provisioning"
+        },
+        "ingressGatewayIp": {
+          "type": "string",
+          "description": "Ingress gateway IP address for the underlay"
+        },
+        "meshManagerAddress": {
+          "type": "string",
+          "description": "Underlay address"
+        }
+      },
+      "required": [
+        "name",
+        "tenantId",
+        "location",
+        "resourceProvisionSubId",
+        "resourceProvisionRg",
+        "ingressGatewayIp",
+        "meshManagerAddress"
+      ]
+    },
+    "UnderlayMetadataUpdate": {
+      "type": "object",
+      "description": "UMI resource details for AppLink Member Internal Metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the underlay resource"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the underlay resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the underlay resource"
+        },
+        "resourceProvisionSubId": {
+          "type": "string",
+          "description": "The subscription ID of the resource provisioning"
+        },
+        "resourceProvisionRg": {
+          "type": "string",
+          "description": "The resource group of the resource provisioning"
+        },
+        "ingressGatewayIp": {
+          "type": "string",
+          "description": "Ingress gateway IP address for the underlay"
+        },
+        "meshManagerAddress": {
+          "type": "string",
+          "description": "Underlay address"
+        }
+      }
+    },
+    "UpgradeMode": {
+      "type": "string",
+      "description": "Upgrade mode for AppLink Member",
+      "enum": [
+        "AutoUpgrade",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AutoUpgrade",
+            "value": "AutoUpgrade",
+            "description": "Auto upgrade mode"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled upgrade mode"
+          }
+        ]
+      }
+    },
+    "UpgradeProfile": {
+      "type": "object",
+      "description": "Upgrade profile for AppLink Member",
+      "properties": {
+        "releaseChannel": {
+          "$ref": "#/definitions/UpgradeReleaseChannel",
+          "description": "The release channel for the upgrade"
+        },
+        "mode": {
+          "$ref": "#/definitions/UpgradeMode",
+          "description": "The upgrade mode for the member"
+        }
+      },
+      "required": [
+        "releaseChannel",
+        "mode"
+      ]
+    },
+    "UpgradeProfileUpdate": {
+      "type": "object",
+      "description": "Upgrade profile for AppLink Member",
+      "properties": {
+        "releaseChannel": {
+          "$ref": "#/definitions/UpgradeReleaseChannel",
+          "description": "The release channel for the upgrade"
+        },
+        "mode": {
+          "$ref": "#/definitions/UpgradeMode",
+          "description": "The upgrade mode for the member"
+        }
+      }
+    },
+    "UpgradeReleaseChannel": {
+      "type": "string",
+      "description": "AppLink Member release channel profile for upgrade",
+      "enum": [
+        "Rapid",
+        "Stable",
+        "Legacy"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeReleaseChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rapid",
+            "value": "Rapid",
+            "description": "Rapid release channel"
+          },
+          {
+            "name": "Stable",
+            "value": "Stable",
+            "description": "Stable release channel"
+          },
+          {
+            "name": "legacy",
+            "value": "Legacy",
+            "description": "Legacy release channel"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

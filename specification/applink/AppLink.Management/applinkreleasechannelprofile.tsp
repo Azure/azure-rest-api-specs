@@ -1,0 +1,65 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.AppLink;
+
+@doc("Location resource")
+@subscriptionResource
+model Location is ProxyResource<LocationProperties> {
+  ...ResourceNameParameter<Location>;
+}
+
+@doc("Location properties")
+model LocationProperties {}
+
+@doc("AppLink Release Channel Profile resource")
+@parentResource(Location)
+model AppLinkReleaseChannelProfile
+  is ProxyResource<AppLinkReleaseChannelProfileProperties> {
+  ...ResourceNameParameter<AppLinkReleaseChannelProfile>;
+}
+
+@doc("AppLink Release Channel Profile properties")
+model AppLinkReleaseChannelProfileProperties {
+  @doc("AppLink Release Channels")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  appLinkReleaseChannels: AppLinkReleaseChannel[];
+}
+
+@doc("AppLink Release Channel")
+model AppLinkReleaseChannel {
+  @doc("The name of the AppLink Release Channel")
+  releaseChannel: string;
+
+  @doc("The version of the AppLink Release Channel")
+  revision: string;
+
+  @doc("Compatible with other AppLink Release Channels")
+  compatibleWith: CompatibleWith[];
+}
+
+@doc("Compatible With version of AppLink Release Channel")
+model CompatibleWith {
+  @doc("The name of the compatible AppLink Release Channel")
+  name: string;
+
+  @doc("The versions of the compatible AppLink Release Channel")
+  versions: string[];
+}
+
+/** Location operations */
+@armResourceOperations
+interface Locations {}
+
+/** AppLinkReleaseChannelProfiles operations */
+@armResourceOperations
+interface AppLinkReleaseChannelProfiles {
+  listByLocation is ArmResourceListByParent<AppLinkReleaseChannelProfile>;
+}
