@@ -186,7 +186,7 @@ interface CloudHsmClusters {
     @path
     @segment("backupOperationStatus")
     jobId: string,
-  ): BackupResult | ArmAcceptedResponse | ErrorResponse;
+  ): BackupResult | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> | ErrorResponse;
   /**
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
@@ -217,7 +217,7 @@ interface CloudHsmClusters {
     @path
     @segment("restoreOperationStatus")
     jobId: string,
-  ): RestoreResult | ArmAcceptedResponse | ErrorResponse;
+  ): RestoreResult | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader> | ErrorResponse;
 }
 
 @@maxLength(CloudHsmCluster.name, 23);
