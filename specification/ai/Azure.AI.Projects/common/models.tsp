@@ -122,10 +122,10 @@ model SystemData {
   createdBy?: string;
   
   @doc("The datetime of when the asset was created")
-  createdAt?: datetime;
+  createdAt?: utcDateTime;
 
   @doc("The datetime of when the asset was last modified")
-  lastModifiedAt?: datetime;
+  lastModifiedAt?: utcDateTime;
 }
 
 @doc("Base catalog information for an asset in the public catalog")
@@ -137,6 +137,7 @@ model CatalogInformation {
   license: string;
 }
 
+@discriminator("type")
 @doc("Base parameter definition for an asset")
 model BaseParameterDefinition {
   @doc("type of the parameter")
@@ -153,29 +154,38 @@ model BaseParameterDefinition {
 }
 
 @doc("String parameter definition for an asset")
-model StringParameterDefinition extends BaseParBaseParameterDefinitionameter {
+model StringParameterDefinition extends BaseParameterDefinition {
+  type: "string";
+
   @doc("default value of the parameter")
   defaultValue?: string;
 }
 
 @doc("connection parameter definition for an asset")
 model ConnectionParameterDefinition extends BaseParameterDefinition {
+  type: "connection";
+
   @doc("type of the connection")
   connectionType: string;
 }
 
+@discriminator("type")
 @doc("base parameter value for an asset's parameter")
 model BaseParameterValue {
 }
 
 @doc("string parameter value")
 model StringParameterValue extends BaseParameterValue {
+  type: "string";
+
   @doc("value of the parameter")
   value: string;
 }
 
 @doc("connection parameter value")
 model ConnectionParameterValue extends BaseParameterValue {
+type: "connection";
+
   @doc("value of the parameter")
   connectionName: string;
 }

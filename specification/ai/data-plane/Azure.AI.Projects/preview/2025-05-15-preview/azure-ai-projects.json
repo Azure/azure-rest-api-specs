@@ -1884,6 +1884,49 @@
         "type"
       ]
     },
+    "BaseParameterDefinition": {
+      "type": "object",
+      "description": "Base parameter definition for an asset",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of the parameter"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the parameter"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the parameter"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "indicates if the parameter is required"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "displayName",
+        "description",
+        "required"
+      ]
+    },
+    "BaseParameterValue": {
+      "type": "object",
+      "description": "base parameter value for an asset's parameter",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for BaseParameterValue."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "BlobReference": {
       "type": "object",
       "description": "Blob reference details.",
@@ -1905,6 +1948,24 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
+      ]
+    },
+    "CatalogInformation": {
+      "type": "object",
+      "description": "Base catalog information for an asset in the public catalog",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
       ]
     },
     "Connection": {
@@ -1959,6 +2020,44 @@
         "credentials",
         "metadata"
       ]
+    },
+    "ConnectionParameterDefinition": {
+      "type": "object",
+      "description": "connection parameter definition for an asset",
+      "properties": {
+        "connectionType": {
+          "type": "string",
+          "description": "type of the connection"
+        }
+      },
+      "required": [
+        "connectionType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
+    "ConnectionParameterValue": {
+      "type": "object",
+      "description": "connection parameter value",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "connectionName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
     },
     "ConnectionType": {
       "type": "string",
@@ -3082,6 +3181,61 @@
         "size",
         "tier"
       ]
+    },
+    "StringParameterDefinition": {
+      "type": "object",
+      "description": "String parameter definition for an asset",
+      "properties": {
+        "defaultValue": {
+          "type": "string",
+          "description": "default value of the parameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "StringParameterValue": {
+      "type": "object",
+      "description": "string parameter value",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified"
+        }
+      }
     },
     "TargetConfig": {
       "type": "object",
