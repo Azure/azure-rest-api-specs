@@ -1425,24 +1425,6 @@
         "license"
       ]
     },
-    "AgentCatalogInformation": {
-      "type": "object",
-      "description": "Catalog information for the agent",
-      "properties": {
-        "publisherId": {
-          "type": "string",
-          "description": "The id of the publisher of the asset"
-        },
-        "license": {
-          "type": "string",
-          "description": "The license the asset is under"
-        }
-      },
-      "required": [
-        "publisherId",
-        "license"
-      ]
-    },
     "AgentDeploymentRequest": {
       "type": "object",
       "description": "Agent deployment request",
@@ -1643,6 +1625,34 @@
       "required": [
         "type",
         "instructions"
+      ]
+    },
+    "AgentRevision": {
+      "type": "object",
+      "description": "Agent revision entry",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Revision identifier"
+        },
+        "description": {
+          "type": "string",
+          "description": "Revision description"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Revision creation time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Revision creator"
+        }
+      },
+      "required": [
+        "id",
+        "createdAt",
+        "createdBy"
       ]
     },
     "AgentToolCatalogInformation": {
