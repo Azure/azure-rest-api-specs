@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-01-02
+tag: package-2025-03-01
 
 directive:
   - where:
@@ -339,11 +339,11 @@ suppressions:
     reason: Existing issue from last version.
 ```
 
-### Tag: package-2025-01-02
+### Tag: package-2025-03-01
 
-These settings apply only when `--tag=package-2025-01-02` is specified on the command line.
+These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-01-02'
+``` yaml $(tag) == 'package-2025-03-01'
 input-file:
   - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
   - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
@@ -352,11 +352,11 @@ input-file:
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
-### Tag: package-2025-01-02-only
+### Tag: package-2025-03-01-only
 
-These settings apply only when `--tag=package-2025-01-02-only` is specified on the command line.
+These settings apply only when `--tag=package-2025-03-01-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-01-02-only'
+```yaml $(tag) == 'package-2025-03-01-only'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
