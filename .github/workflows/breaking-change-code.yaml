@@ -18,6 +18,8 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          node-version: '20.x'
 
       - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v4
@@ -34,8 +36,6 @@ jobs:
             --tb "${{ github.event.pull_request.base.ref }}" \
             --hc "${{ github.event.pull_request.head.sha }}" \
             --repo "${{ github.repository }}"
-        env:
-          NODE_NO_WARNINGS: 1
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
