@@ -330,7 +330,7 @@
     "/agents": {
       "get": {
         "operationId": "Agents_List",
-        "description": "List all deployed models in the project",
+        "description": "List all deployed agents in the project",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -470,6 +470,44 @@
         }
       }
     },
+    "/agents/{name}/listRevisions": {
+      "post": {
+        "operationId": "Agents_GetRevisions",
+        "description": "get revisions of an agent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentRevisionGetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/agents/{name}/pauseOrResume": {
       "post": {
         "operationId": "Agents_PauseOrResumeAgent",
@@ -528,6 +566,50 @@
             "description": "The name of the resource",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{name}/updateRevisions": {
+      "post": {
+        "operationId": "Agents_UpdateRevisions",
+        "description": "updates revisions of an agent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "revisionUpdateRequest",
+            "in": "body",
+            "description": "The updated revision log",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentRevisionUpdateRequest"
+            }
           }
         ],
         "responses": {
@@ -1981,6 +2063,38 @@
         "id",
         "createdAt",
         "createdBy"
+      ]
+    },
+    "AgentRevisionGetResponse": {
+      "type": "object",
+      "description": "Agent revision retireval response",
+      "properties": {
+        "revisions": {
+          "type": "array",
+          "description": "Revision log for the agent",
+          "items": {
+            "$ref": "#/definitions/AgentRevision"
+          }
+        }
+      },
+      "required": [
+        "revisions"
+      ]
+    },
+    "AgentRevisionUpdateRequest": {
+      "type": "object",
+      "description": "Agent revision update request",
+      "properties": {
+        "revisions": {
+          "type": "array",
+          "description": "Updated revision log for the agent",
+          "items": {
+            "$ref": "#/definitions/AgentRevision"
+          }
+        }
+      },
+      "required": [
+        "revisions"
       ]
     },
     "AgentTool": {

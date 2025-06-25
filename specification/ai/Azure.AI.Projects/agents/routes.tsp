@@ -37,6 +37,7 @@ interface Agents {
   >;
 
   @doc("updates revisions of an agent")
+  @Rest.action("updateRevisions")
   updateRevisions is Azure.Core.Foundations.ResourceOperation<
     Agent,
     {
@@ -48,6 +49,7 @@ interface Agents {
   >;
 
   @doc("get revisions of an agent")
+  @Rest.action("listRevisions")
   getRevisions is Azure.Core.Foundations.ResourceOperation<
     Agent,
     {},

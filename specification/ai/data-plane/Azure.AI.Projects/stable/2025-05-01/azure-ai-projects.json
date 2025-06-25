@@ -1148,6 +1148,38 @@
         "createdBy"
       ]
     },
+    "AgentRevisionGetResponse": {
+      "type": "object",
+      "description": "Agent revision retireval response",
+      "properties": {
+        "revisions": {
+          "type": "array",
+          "description": "Revision log for the agent",
+          "items": {
+            "$ref": "#/definitions/AgentRevision"
+          }
+        }
+      },
+      "required": [
+        "revisions"
+      ]
+    },
+    "AgentRevisionUpdateRequest": {
+      "type": "object",
+      "description": "Agent revision update request",
+      "properties": {
+        "revisions": {
+          "type": "array",
+          "description": "Updated revision log for the agent",
+          "items": {
+            "$ref": "#/definitions/AgentRevision"
+          }
+        }
+      },
+      "required": [
+        "revisions"
+      ]
+    },
     "AgentToolCatalogInformation": {
       "type": "object",
       "description": "Catalog information for the agent tool",
