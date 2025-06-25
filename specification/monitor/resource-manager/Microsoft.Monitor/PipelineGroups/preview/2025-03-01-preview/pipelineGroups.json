@@ -1524,13 +1524,14 @@
       "type": "object",
       "description": "Validation information for the transform request.",
       "properties": {
-        "syntaxValid": {
-          "type": "boolean",
-          "description": "Whether the transform statement is syntactically valid or not."
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "Duration of validation portion of transform request in seconds."
         }
       },
       "required": [
-        "syntaxValid"
+        "duration"
       ]
     },
     "UdpReceiver": {

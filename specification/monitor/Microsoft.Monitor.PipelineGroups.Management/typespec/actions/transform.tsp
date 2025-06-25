@@ -24,6 +24,6 @@ model TransformResponse {
 @doc("Validation information for the transform request.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model TransfromResponseValidation {
-  @doc("Whether the transform statement is syntactically valid or not.")
-  syntaxValid: boolean;
+  @doc("Duration of validation portion of transform request in seconds.")
+  duration: float32;
 }
