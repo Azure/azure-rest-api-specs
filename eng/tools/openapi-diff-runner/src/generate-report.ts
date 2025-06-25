@@ -67,7 +67,10 @@ async function getCommentData(
   msgs: BrChMsgRecord[],
   maxCommentDataLength: number,
 ): Promise<string> {
-  const markdownMessageRow = comparedSpecsTableContent ? comparedSpecsTableContent + "\n" : "";
+  // Add blank line before table if table content exists to ensure proper markdown rendering
+  const markdownMessageRow = comparedSpecsTableContent
+    ? "\n" + comparedSpecsTableContent + "\n"
+    : "";
   const textPrefixLength = markdownMessageRow.length;
   const reportsString: string = await getReportsAsString(
     checkName,
