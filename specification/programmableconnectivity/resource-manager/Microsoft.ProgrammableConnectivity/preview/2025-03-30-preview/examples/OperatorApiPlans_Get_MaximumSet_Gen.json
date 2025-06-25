@@ -26,8 +26,24 @@
             "offerId": "offerId",
             "publisherId": "publisherId",
             "planId": "planId",
-            "planTermsAndConditionsLinks": [
-              "https://www.contoso.com/terms"
+            "termsAndConditions": [
+              {
+                "label": "TermsOfService",
+                "url": "https://www.contoso.com/terms",
+                "version": "1.0.0"
+              }
+            ],
+            "pricingInformation": [
+              {
+                "pricingTier": "0-10000 API Requests/Month",
+                "cost": "$0.10",
+                "consumptionUnit": "API Request"
+              },
+              {
+                "pricingTier": ">10000 API Requests/Month",
+                "cost": "$0.08",
+                "consumptionUnit": "API Request"
+              }
             ]
           },
           "provisioningState": "Succeeded"
