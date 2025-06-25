@@ -17,9 +17,6 @@ model TransformRequest {
 @doc("Response for the transform request.")
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model TransformResponse {
-  @doc("Result of the transform.")
-  status: string;
-
   @doc("Optional error details if the transform failed.")
   error?: TransformResponseError;
 }

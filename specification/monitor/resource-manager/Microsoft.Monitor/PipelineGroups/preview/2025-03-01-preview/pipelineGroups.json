@@ -1504,7 +1504,7 @@
       "properties": {
         "transformStatement": {
           "type": "string",
-          "description": "Transform statement to execute on data passing through the processor.",
+          "description": "Transform statement to execute over the data passing through the processor.",
           "minLength": 1,
           "maxLength": 10000
         }
@@ -1532,18 +1532,11 @@
       "type": "object",
       "description": "Response for the transform request.",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "Result of the transform."
-        },
         "error": {
           "$ref": "#/definitions/TransformResponseError",
           "description": "Optional error details if the transform failed."
         }
-      },
-      "required": [
-        "status"
-      ]
+      }
     },
     "TransformResponseError": {
       "type": "object",
