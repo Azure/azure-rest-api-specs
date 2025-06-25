@@ -58,21 +58,6 @@ model ApiKeyRequestProperties {
 }
 
 /**
- * Response model for listing API keys.
- */
-model ApiKeyListResponse {
-  /**
-   * List of API key resources.
-   */
-  value: ApiKey[];
-
-  /**
-   * URL to fetch the next page of API key responses.
-   */
-  nextLink?: string;
-}
-
-/**
  * Operations on API Keys under a given Nginx deployment.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We already have a delete operation defined in the interface"

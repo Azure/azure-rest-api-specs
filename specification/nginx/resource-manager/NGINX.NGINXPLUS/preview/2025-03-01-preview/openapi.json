@@ -1736,7 +1736,7 @@
         },
         "line": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Line number where the error was found."
         },
         "message": {
@@ -1807,26 +1807,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ApiKeyListResponse": {
-      "type": "object",
-      "description": "Response model for listing API keys.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of API key resources.",
-          "items": {
-            "$ref": "#/definitions/ApiKey"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to fetch the next page of API key responses."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ApiKeyListResult": {
@@ -2168,6 +2148,52 @@
         }
       }
     },
+    "DeploymentWafPolicyApplyingStatus": {
+      "type": "object",
+      "description": "Applying status for a WAF policy.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The apply status code."
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The human-readable apply status."
+        },
+        "time": {
+          "type": "string",
+          "description": "The timestamp when apply status was recorded in UTC."
+        }
+      },
+      "required": [
+        "code",
+        "displayStatus",
+        "time"
+      ]
+    },
+    "DeploymentWafPolicyCompilingStatus": {
+      "type": "object",
+      "description": "Compilation status for a WAF policy.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The compilation status code."
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "The human-readable compilation status."
+        },
+        "time": {
+          "type": "string",
+          "description": "The timestamp when compilation status was recorded in UTC."
+        }
+      },
+      "required": [
+        "code",
+        "displayStatus",
+        "time"
+      ]
+    },
     "DiagnosticItem": {
       "type": "object",
       "description": "A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category.",
@@ -2190,7 +2216,7 @@
         },
         "line": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Line number where the diagnostic was found."
         },
         "message": {
@@ -2360,26 +2386,6 @@
         }
       }
     },
-    "NginxCertificateListResponse": {
-      "type": "object",
-      "description": "Response model for listing Nginx certificates.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of certificate resources.",
-          "items": {
-            "$ref": "#/definitions/Certificate"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to fetch the next page of certificates."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "NginxCertificateProperties": {
       "type": "object",
       "description": "Properties of an Nginx certificate resource.",
@@ -2425,7 +2431,7 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "File content."
+          "description": "File content in Nginx configuration format, UTF-8 encoded."
         },
         "virtualPath": {
           "type": "string",
@@ -2459,11 +2465,11 @@
       "properties": {
         "data": {
           "type": "string",
-          "description": "Package data."
+          "description": "Package data. This is base64 encoded content of the files archive."
         },
         "protectedFiles": {
           "type": "array",
-          "description": "List of protected files in the package.",
+          "description": "List of protected files in the package.\nThese are standard file paths relative to the archive uploaded",
           "items": {
             "type": "string"
           }
@@ -2476,7 +2482,7 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "File content."
+          "description": "File content in Nginx configuration format, UTF-8 encoded."
         },
         "virtualPath": {
           "type": "string",
@@ -2484,7 +2490,7 @@
         },
         "contentHash": {
           "type": "string",
-          "description": "Content hash of the file."
+          "description": "Content hash of the file using SHA-256 algorithm."
         }
       }
     },
@@ -2498,7 +2504,7 @@
         },
         "contentHash": {
           "type": "string",
-          "description": "Content hash of the file."
+          "description": "Content hash of the file using SHA-256 algorithm."
         }
       }
     },
@@ -2989,52 +2995,6 @@
         }
       }
     },
-    "NginxDeploymentWafPolicyApplyingStatus": {
-      "type": "object",
-      "description": "Applying status for a WAF policy.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The apply status code."
-        },
-        "displayStatus": {
-          "type": "string",
-          "description": "The human-readable apply status."
-        },
-        "time": {
-          "type": "string",
-          "description": "The timestamp when apply status was recorded."
-        }
-      },
-      "required": [
-        "code",
-        "displayStatus",
-        "time"
-      ]
-    },
-    "NginxDeploymentWafPolicyCompilingStatus": {
-      "type": "object",
-      "description": "Compilation status for a WAF policy.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The compilation status code."
-        },
-        "displayStatus": {
-          "type": "string",
-          "description": "The human-readable compilation status."
-        },
-        "time": {
-          "type": "string",
-          "description": "The timestamp when compilation status was recorded."
-        }
-      },
-      "required": [
-        "code",
-        "displayStatus",
-        "time"
-      ]
-    },
     "NginxDeploymentWafPolicyMetadata": {
       "type": "object",
       "description": "Metadata for a WAF policy under an Nginx deployment.",
@@ -3085,11 +3045,11 @@
           "readOnly": true
         },
         "compilingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus",
+          "$ref": "#/definitions/DeploymentWafPolicyCompilingStatus",
           "description": "The compiling status of the WAF policy metadata."
         },
         "applyingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus",
+          "$ref": "#/definitions/DeploymentWafPolicyApplyingStatus",
           "description": "The applying status of the WAF policy metadata."
         }
       },
@@ -3118,11 +3078,11 @@
           "readOnly": true
         },
         "compilingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyCompilingStatus",
+          "$ref": "#/definitions/DeploymentWafPolicyCompilingStatus",
           "description": "The compiling status of the WAF policy."
         },
         "applyingState": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyApplyingStatus",
+          "$ref": "#/definitions/DeploymentWafPolicyApplyingStatus",
           "description": "The applying status of the WAF policy."
         }
       },
@@ -3508,26 +3468,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "WafPolicyMetadataListResponse": {
-      "type": "object",
-      "description": "Response model for listing WAF policy metadata.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The collection of WAF policy metadata.",
-          "items": {
-            "$ref": "#/definitions/NginxDeploymentWafPolicyMetadata"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of results."
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "WebApplicationFirewallComponentVersions": {

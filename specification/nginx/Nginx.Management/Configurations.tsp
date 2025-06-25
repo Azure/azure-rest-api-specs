@@ -32,7 +32,7 @@ model NginxConfigurationRequest
  */
 model NginxConfigurationFile {
   /**
-   * File content.
+   * File content in Nginx configuration format, UTF-8 encoded.
    */
   content?: string;
 
@@ -47,7 +47,7 @@ model NginxConfigurationFile {
  */
 model NginxConfigurationProtectedFileRequest {
   /**
-   * File content.
+   * File content in Nginx configuration format, UTF-8 encoded.
    */
   content?: string;
 
@@ -57,7 +57,7 @@ model NginxConfigurationProtectedFileRequest {
   virtualPath?: string;
 
   /**
-   * Content hash of the file.
+   * Content hash of the file using SHA-256 algorithm.
    */
   contentHash?: string;
 }
@@ -72,7 +72,7 @@ model NginxConfigurationProtectedFileResponse {
   virtualPath?: string;
 
   /**
-   * Content hash of the file.
+   * Content hash of the file using SHA-256 algorithm.
    */
   contentHash?: string;
 }
@@ -82,12 +82,13 @@ model NginxConfigurationProtectedFileResponse {
  */
 model NginxConfigurationPackage {
   /**
-   * Package data.
+   * Package data. This is base64 encoded content of the files archive.
    */
   data?: string;
 
   /**
    * List of protected files in the package.
+   * These are standard file paths relative to the archive uploaded
    */
   protectedFiles?: string[];
 }
@@ -267,7 +268,7 @@ model AnalysisDiagnostic {
   /**
    * Line number where the error was found.
    */
-  line: int32;
+  line: int64;
 
   /**
    * Error message.
@@ -307,7 +308,7 @@ model DiagnosticItem {
   /**
    * Line number where the diagnostic was found.
    */
-  line: int32;
+  line: int64;
 
   /**
    * Diagnostic message.

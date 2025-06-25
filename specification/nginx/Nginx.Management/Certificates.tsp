@@ -76,21 +76,6 @@ model NginxCertificateErrorResponseBody {
 }
 
 /**
- * Response model for listing Nginx certificates.
- */
-model NginxCertificateListResponse {
-  /**
-   * List of certificate resources.
-   */
-  value: Certificate[];
-
-  /**
-   * URL to fetch the next page of certificates.
-   */
-  nextLink?: string;
-}
-
-/**
  * Operations on Nginx certificates under a given deployment.
  */
 @armResourceOperations

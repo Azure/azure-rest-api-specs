@@ -31,49 +31,38 @@ model NginxDeploymentWafPolicyProperties {
   provisioningState?: ProvisioningState;
 
   /** The compiling status of the WAF policy. */
-  compilingState: NginxDeploymentWafPolicyCompilingStatus;
+  compilingState: DeploymentWafPolicyCompilingStatus;
 
   /** The applying status of the WAF policy. */
-  applyingState: NginxDeploymentWafPolicyApplyingStatus;
+  applyingState: DeploymentWafPolicyApplyingStatus;
 }
 
 /**
  * Compilation status for a WAF policy.
  */
-model NginxDeploymentWafPolicyCompilingStatus {
+model DeploymentWafPolicyCompilingStatus {
   /** The compilation status code. */
   code: string;
 
   /** The human-readable compilation status. */
   displayStatus: string;
 
-  /** The timestamp when compilation status was recorded. */
+  /** The timestamp when compilation status was recorded in UTC. */
   time: string;
 }
 
 /**
  * Applying status for a WAF policy.
  */
-model NginxDeploymentWafPolicyApplyingStatus {
+model DeploymentWafPolicyApplyingStatus {
   /** The apply status code. */
   code: string;
 
   /** The human-readable apply status. */
   displayStatus: string;
 
-  /** The timestamp when apply status was recorded. */
+  /** The timestamp when apply status was recorded in UTC. */
   time: string;
-}
-
-/**
- * Response model for listing WAF policy metadata.
- */
-model WafPolicyMetadataListResponse {
-  /** The collection of WAF policy metadata. */
-  value: NginxDeploymentWafPolicyMetadata[];
-
-  /** The link to the next page of results. */
-  nextLink?: string;
 }
 
 /**
@@ -98,10 +87,10 @@ model NginxDeploymentWafPolicyMetadataProperties {
   provisioningState?: ProvisioningState;
 
   /** The compiling status of the WAF policy metadata. */
-  compilingState: NginxDeploymentWafPolicyCompilingStatus;
+  compilingState: DeploymentWafPolicyCompilingStatus;
 
   /** The applying status of the WAF policy metadata. */
-  applyingState: NginxDeploymentWafPolicyApplyingStatus;
+  applyingState: DeploymentWafPolicyApplyingStatus;
 }
 
 /**
