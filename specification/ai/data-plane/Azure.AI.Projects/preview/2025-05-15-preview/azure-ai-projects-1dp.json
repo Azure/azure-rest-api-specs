@@ -1402,36 +1402,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1468,7 +1445,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "operationId",
@@ -1476,51 +1459,11 @@
             "description": "Operation ID for the polling operation.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "additionalProperties": {}
-              },
-              "x-ms-identifiers": []
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "type": "array",
               "items": {
@@ -1669,7 +1612,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "runId",
@@ -1677,35 +1626,6 @@
             "description": "Agent run id, for agent API v1, it's `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
@@ -2323,7 +2243,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "operationId",
@@ -2331,46 +2257,11 @@
             "description": "Operation ID for the polling operation.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatCompletions"
-            }
-          },
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/ChatCompletions"
             }
@@ -2654,7 +2545,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "riskTypes",
@@ -2687,35 +2584,6 @@
             "description": "The strategy",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
@@ -2802,7 +2670,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "type",
@@ -2810,35 +2684,6 @@
             "description": "Type of jailbreak dataset",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
@@ -2875,36 +2720,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2945,7 +2767,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "type",
@@ -2953,35 +2781,6 @@
             "description": "Type for the template parameters",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
@@ -3019,36 +2818,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3086,7 +2862,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "path",
@@ -3094,35 +2876,6 @@
             "description": "Image path.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "description": "Provides clientRequestId headers for requests and responses.",
-              "properties": {
-                "clientRequestId": {
-                  "type": "object",
-                  "properties": {
-                    "parameters": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    },
-                    "response": {
-                      "$ref": "#/definitions/Azure.Core.ClientRequestIdHeader"
-                    }
-                  },
-                  "required": [
-                    "parameters",
-                    "response"
-                  ]
-                }
-              },
-              "required": [
-                "clientRequestId"
-              ]
-            }
           }
         ],
         "responses": {
@@ -3648,10 +3401,6 @@
           }
         ]
       }
-    },
-    "Azure.Core.ClientRequestIdHeader": {
-      "type": "object",
-      "description": "Provides the 'x-ms-client-request-id' header to enable request correlation in requests and responses."
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
