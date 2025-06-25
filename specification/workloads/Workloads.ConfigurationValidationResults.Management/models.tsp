@@ -364,7 +364,7 @@ model ConfigurationValidationResultsProperties {
    * The name of the role within the workload instance being validated.
    */
   @doc("The name of the role being validated.")
-  roleName: string;
+  roleName?: string;
 
   /**
    * The ARM IDs of resources associated with this validation.
