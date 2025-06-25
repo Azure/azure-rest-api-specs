@@ -15,8 +15,7 @@ namespace Customizations;
 
 using KeyVault;
 
-// Make optional path parameter required for all languages except Rust
-// TODO: have other languages eventually adopt optional path parameters
+// Make optional path parameter required for all languages
 
 /**
  * In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.

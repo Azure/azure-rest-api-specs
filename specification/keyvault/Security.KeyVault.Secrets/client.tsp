@@ -14,8 +14,7 @@ namespace Customizations;
 
 using KeyVault;
 
-// Make optional path parameter required for all languages except Rust
-// TODO: have other languages eventually adopt optional path parameters
+// Make optional path parameter required for all languages
 
 /**
  * The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.

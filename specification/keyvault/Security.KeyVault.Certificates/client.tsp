@@ -14,8 +14,7 @@ namespace Customizations;
 
 using KeyVault;
 
-// Make optional path parameter required for all languages except Rust
-// TODO: have other languages eventually adopt optional path parameters
+// Make optional path parameter required for all languages
 
 /**
  * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
