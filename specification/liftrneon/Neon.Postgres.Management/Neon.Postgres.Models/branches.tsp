@@ -47,4 +47,31 @@ model BranchProperties {
   @doc("Endpoints associated with the branch")
   @identifiers(#[])
   endpoints?: EndpointProperties[];
+
+  @doc("Unique identifier for the branch")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-z0-9-]{1,60}$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  branchId?: string;
+
+  @doc("Name of the branch")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  branchName?: string;
+
+  @doc("Total data size")
+  @added(Neon.Postgres.Versions.v3_preview)
+  dataSize?: string;
+
+  @doc("Last active compute for the branch")
+  @added(Neon.Postgres.Versions.v3_preview)
+  lastActive?: string;
+
+  @doc("Compute hours for the branch")
+  @added(Neon.Postgres.Versions.v3_preview)
+  computeHours?: string;
+
+  @doc("Primary compute for the branch")
+  @added(Neon.Postgres.Versions.v3_preview)
+  primaryCompute?: string;
 }

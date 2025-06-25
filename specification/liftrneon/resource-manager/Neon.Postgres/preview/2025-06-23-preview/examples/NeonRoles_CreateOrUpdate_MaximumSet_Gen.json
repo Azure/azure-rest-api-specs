@@ -1,0 +1,101 @@
+{
+  "title": "NeonRoles_CreateOrUpdate_MaximumSet",
+  "operationId": "NeonRoles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-06-23-preview",
+    "subscriptionId": "671936A4-ED6C-445D-ACEE-5637920E7051",
+    "resourceGroupName": "rgneon",
+    "organizationName": "contoso-org",
+    "projectName": "sample-resource",
+    "branchName": "sample-resource",
+    "neonRoleName": "sample-role",
+    "parameters": {
+      "properties": {
+        "entityId": "sample-role-id",
+        "entityName": "sample-role-name",
+        "branchId": "sample-branch-id",
+        "permissions": [
+          "CREATEDB",
+          "CREATEROLE"
+        ],
+        "isSuperUser": false,
+        "roleName": "sample-role",
+        "owns": "sample-database"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "entityId": "sample-role-id",
+          "entityName": "sample-role-name",
+          "createdAt": "2025-06-25T10:20:30.123Z",
+          "provisioningState": "Succeeded",
+          "attributes": [
+            {
+              "name": "attribute1",
+              "value": "value1"
+            }
+          ],
+          "branchId": "sample-branch-id",
+          "permissions": [
+            "CREATEDB",
+            "CREATEROLE"
+          ],
+          "isSuperUser": false,
+          "roleName": "sample-role",
+          "lastUpdated": "2025-06-25T10:30:00.000Z",
+          "owns": "sample-database"
+        },
+        "id": "/subscriptions/671936A4-ED6C-445D-ACEE-5637920E7051/resourceGroups/rgneon/providers/Microsoft.Neon/organizations/contoso-org/projects/sample-resource/branches/sample-resource/roles/sample-role",
+        "name": "sample-role",
+        "type": "Microsoft.Neon/organizations/projects/branches/roles",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-06-25T10:20:30.123Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-25T10:20:30.123Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "entityId": "sample-role-id",
+          "entityName": "sample-role-name",
+          "createdAt": "2025-06-25T10:20:30.123Z",
+          "provisioningState": "Creating",
+          "attributes": [
+            {
+              "name": "attribute1",
+              "value": "value1"
+            }
+          ],
+          "branchId": "sample-branch-id",
+          "permissions": [
+            "CREATEDB",
+            "CREATEROLE"
+          ],
+          "isSuperUser": false,
+          "roleName": "sample-role",
+          "lastUpdated": "2025-06-25T10:30:00.000Z",
+          "owns": "sample-database"
+        },
+        "id": "/subscriptions/671936A4-ED6C-445D-ACEE-5637920E7051/resourceGroups/rgneon/providers/Microsoft.Neon/organizations/contoso-org/projects/sample-resource/branches/sample-resource/roles/sample-role",
+        "name": "sample-role",
+        "type": "Microsoft.Neon/organizations/projects/branches/roles",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-06-25T10:20:30.123Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-25T10:20:30.123Z"
+        }
+      }
+    }
+  }
+}
