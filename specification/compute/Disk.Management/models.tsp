@@ -839,7 +839,7 @@ model CreationData {
    */
   securityDataUri?: string;
 
-  /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM.*/
+  /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM. */
   @added(Versions.v2025_01_02)
   securityMetadataUri?: url;
 
@@ -1200,7 +1200,7 @@ model AccessUri {
   @visibility(Lifecycle.Read)
   securityDataAccessSAS?: string;
 
-  /** A SAS uri for accessing a VM metadata.*/
+  /** A SAS uri for accessing a VM metadata. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_01_02)
