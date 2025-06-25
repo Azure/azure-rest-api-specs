@@ -373,6 +373,12 @@ model ConfigurationValidationResultsProperties {
   resourceArmIds: string[];
 
   /**
+   * The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.
+   */
+  @doc("The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc.")
+  workloadType?: string;
+
+  /**
    * The template ID of the configuration checks being applied to the workload instance.
    */
   @doc("The template ID of the configuration checks being applied.")
