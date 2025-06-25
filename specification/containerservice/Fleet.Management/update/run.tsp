@@ -50,6 +50,13 @@ scalar AutoUpgradeProfileId
     }
   ]>;
 
+scalar GateResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/gates",
+    }
+  ]>;
+
 @doc("The properties of the UpdateRun.")
 model UpdateRunProperties {
   @visibility(Lifecycle.Read)
@@ -182,6 +189,9 @@ union UpdateState {
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has failed.")
   "Failed",
 
+  @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that is pending.")
+  "Pending",
+
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   "Completed",
 }
@@ -255,6 +265,18 @@ model UpdateStageStatus {
   groups?: UpdateGroupStatus[];
 
   @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
+  @doc("The list of Gates that will run before this UpdateStage.")
+  @added(Versions.v2025_04_01_preview)
+  beforeGates?: UpdateRunGateStatus[];
+
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
+  @doc("The list of Gates that will run after this UpdateStage.")
+  @added(Versions.v2025_04_01_preview)
+  afterGates?: UpdateRunGateStatus[];
+
+  @visibility(Lifecycle.Read)
   @doc("The status of the wait period configured on the UpdateStage.")
   afterStageWaitStatus?: WaitStatus;
 }
@@ -273,6 +295,18 @@ model UpdateGroupStatus {
   @identifiers(#["name"])
   @doc("The list of member this UpdateGroup updates.")
   members?: MemberUpdateStatus[];
+
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
+  @doc("The list of Gates that will run before this UpdateGroup.")
+  @added(Versions.v2025_04_01_preview)
+  beforeGates?: UpdateRunGateStatus[];
+
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
+  @doc("The list of Gates that will run after this UpdateGroup.")
+  @added(Versions.v2025_04_01_preview)
+  afterGates?: UpdateRunGateStatus[];
 }
 
 @doc("The status of the wait duration.")
@@ -284,6 +318,24 @@ model WaitStatus {
   @visibility(Lifecycle.Read)
   @doc("The wait duration configured in seconds.")
   waitDurationInSeconds?: int32;
+}
+
+@doc("The status of the Gate, as represented in the Update Run.")
+@added(Versions.v2025_04_01_preview)
+model UpdateRunGateStatus {
+  @doc("The human-readable display name of the Gate.")
+  @visibility(Lifecycle.Read)
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
+  @doc("The resource id of the Gate.")
+  @visibility(Lifecycle.Read)
+  gateId?: GateResourceId;
+
+  @doc("The status of the Gate.")
+  @visibility(Lifecycle.Read)
+  status?: UpdateStatus;
 }
 
 @doc("The status of a member update operation.")
