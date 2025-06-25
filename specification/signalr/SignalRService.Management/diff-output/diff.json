@@ -1,0 +1,808 @@
+{
+  "paths": {
+    "/providers/Microsoft.SignalRService/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationList",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "body"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}": {
+      "put": {
+        "x-ms-long-running-operation-options__deleted": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}": {
+      "put": {
+        "consumes__deleted": [
+          "application/json",
+          "text/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains/{name}": {
+      "put": {
+        "consumes__deleted": [
+          "application/json",
+          "text/json"
+        ],
+        "x-ms-long-running-operation-options": {
+          "final-state-via": {
+            "__old": "azure-async-operation",
+            "__new": "original-uri"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/regenerateKey": {
+      "post": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "schema__deleted": {
+              "$ref": "#/definitions/SignalRKeys"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}": {
+      "put": {
+        "consumes__deleted": [
+          "application/json",
+          "text/json"
+        ]
+      },
+      "patch": {
+        "consumes__deleted": [
+          "application/json",
+          "text/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ]
+        ]
+      },
+      "put": {
+        "consumes__deleted": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "minLength__deleted": 3,
+              "maxLength__deleted": 63
+            }
+          ],
+          [
+            "-",
+            {
+              "name": "resourceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
+              "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Dimension__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LogSpecification__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Operation__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay__deleted": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationList__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "OperationProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification__deleted": {
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Azure.ResourceManager.ArmResponse<SignalRKeys>__added": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SignalRKeys"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TypeSpec.Http.NoContentResponse__added": {
+      "type": "object"
+    },
+    "ApplicationFirewallSettings": {
+      "properties": {
+        "clientConnectionCountRules": {
+          "maxItems__deleted": 10
+        },
+        "clientTrafficControlRules": {
+          "maxItems__deleted": 10
+        },
+        "maxClientConnectionLifetimeInSeconds": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "CustomCertificateList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "CustomDomainList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ReplicaList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "RouteSettings": {
+      "properties": {
+        "serverBalanceWeight": {
+          "minimum__deleted": 0
+        },
+        "connectionBalanceWeight": {
+          "minimum__deleted": 0
+        },
+        "latencyWeight": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "SharedPrivateLinkResourceList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SignalRKeys": {
+      "properties": {
+        "primaryKey": {
+          "x-ms-secret__deleted": true
+        },
+        "secondaryKey": {
+          "x-ms-secret__deleted": true
+        },
+        "primaryConnectionString": {
+          "x-ms-secret__deleted": true
+        },
+        "secondaryConnectionString": {
+          "x-ms-secret__deleted": true
+        }
+      }
+    },
+    "SignalRNetworkACLs": {
+      "properties": {
+        "ipRules": {
+          "maxItems__deleted": 30
+        }
+      }
+    },
+    "SignalRProperties": {
+      "properties": {
+        "disableLocalAuth": {
+          "default__deleted": false
+        },
+        "disableAadAuth": {
+          "default__deleted": false
+        }
+      }
+    },
+    "SignalRResourceList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SignalRTlsSettings": {
+      "properties": {
+        "clientCertEnabled": {
+          "default__deleted": false
+        }
+      }
+    },
+    "SignalRUsageList": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ThrottleByJwtCustomClaimRule": {
+      "properties": {
+        "maxCount": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "ThrottleByJwtSignatureRule": {
+      "properties": {
+        "maxCount": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "ThrottleByUserIdRule": {
+      "properties": {
+        "maxCount": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "TrafficThrottleByJwtCustomClaimRule": {
+      "properties": {
+        "maxInboundMessageBytes": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "TrafficThrottleByJwtSignatureRule": {
+      "properties": {
+        "maxInboundMessageBytes": {
+          "minimum__deleted": 0
+        }
+      }
+    },
+    "TrafficThrottleByUserIdRule": {
+      "properties": {
+        "maxInboundMessageBytes": {
+          "minimum__deleted": 0
+        }
+      }
+    }
+  }
+}
