@@ -10,32 +10,24 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
-// FIXME: ServiceRunner has no properties property
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model ServiceRunner is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = ServiceRunner,
-    SegmentName = "servicerunners",
-    NamePattern = ""
-  >;
-
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ServiceRunner extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("servicerunners")
+  serviceRunnerName: string;
 
   /**
    * The identity of the resource.
@@ -62,7 +54,7 @@ interface ServiceRunners {
   delete is ArmResourceDeleteSync<ServiceRunner>;
 }
 
-@@doc(ServiceRunner.name, "The name of the service runner.");
+@@doc(ServiceRunner.serviceRunnerName, "The name of the service runner.");
 @@doc(ServiceRunner.location, "The location of the resource.");
 @@doc(ServiceRunner.tags, "The tags of the resource.");
 @@doc(ServiceRunners.createOrUpdate::parameters.resource,

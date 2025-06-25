@@ -13,26 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Formula,
-    SegmentName = "formulas",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Formula extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("formulas")
+  formulaName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: FormulaProperties;
 }
 
 @armResourceOperations
@@ -105,7 +100,7 @@ interface Formulas {
   >;
 }
 
-@@doc(Formula.name, "The name of the formula.");
+@@doc(Formula.formulaName, "The name of the formula.");
 @@doc(Formula.properties, "The properties of the resource.");
 @@doc(Formulas.createOrUpdate::parameters.resource,
   "A formula for creating a VM, specifying an image base and other parameters"

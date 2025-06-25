@@ -13,26 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(User)
-model Disk is Azure.ResourceManager.ProxyResource<DiskProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Disk,
-    SegmentName = "disks",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Disk extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("disks")
+  diskName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: DiskProperties;
 }
 
 @armResourceOperations
@@ -119,7 +114,7 @@ interface Disks {
   detach is ArmResourceActionAsync<Disk, DetachDiskProperties, OkResponse>;
 }
 
-@@doc(Disk.name, "The name of the disk.");
+@@doc(Disk.diskName, "The name of the disk.");
 @@doc(Disk.properties, "The properties of the resource.");
 @@doc(Disk.location, "The location of the resource.");
 @@doc(Disk.tags, "The tags of the resource.");

@@ -13,26 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(User)
-model Secret is Azure.ResourceManager.ProxyResource<SecretProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Secret,
-    SegmentName = "secrets",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Secret extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("secrets")
+  secretName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: SecretProperties;
 }
 
 @armResourceOperations
@@ -105,7 +100,7 @@ interface Secrets {
   >;
 }
 
-@@doc(Secret.name, "The name of the secret.");
+@@doc(Secret.secretName, "The name of the secret.");
 @@doc(Secret.properties, "The properties of the resource.");
 @@doc(Secret.location, "The location of the resource.");
 @@doc(Secret.tags, "The tags of the resource.");

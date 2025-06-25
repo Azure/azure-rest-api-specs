@@ -13,28 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model LabVirtualMachine
-  is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties, false> {
-  ...ResourceNameParameter<
-    Resource = LabVirtualMachine,
-    KeyName = "name",
-    SegmentName = "virtualmachines",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LabVirtualMachine extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("virtualmachines")
+  name: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: LabVirtualMachineProperties;
 }
 
 @armResourceOperations

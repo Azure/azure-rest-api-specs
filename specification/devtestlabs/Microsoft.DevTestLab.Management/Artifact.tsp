@@ -13,27 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(ArtifactSource)
-model Artifact
-  is Azure.ResourceManager.ProxyResource<ArtifactProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Artifact,
-    SegmentName = "artifacts",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Artifact extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("artifacts")
+  artifactName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: ArtifactProperties;
 }
 
 @armResourceOperations
@@ -95,7 +89,7 @@ interface Artifacts {
   >;
 }
 
-@@doc(Artifact.name, "The name of the artifact.");
+@@doc(Artifact.artifactName, "The name of the artifact.");
 @@doc(Artifact.properties, "The properties of the resource.");
 @@doc(Artifacts.generateArmTemplate::parameters.body,
   "Parameters for generating an ARM template for deploying artifacts."

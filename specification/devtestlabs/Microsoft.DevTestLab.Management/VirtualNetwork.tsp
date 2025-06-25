@@ -13,28 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model VirtualNetwork
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkProperties> {
-  ...ResourceNameParameter<
-    Resource = VirtualNetwork,
-    KeyName = "name",
-    SegmentName = "virtualnetworks",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("virtualnetworks")
+  virtualNetworkName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: VirtualNetworkProperties;
 }
 
 @armResourceOperations
@@ -114,7 +107,7 @@ interface VirtualNetworks {
   >;
 }
 
-@@doc(VirtualNetwork.name, "The name of the virtual network.");
+@@doc(VirtualNetwork.virtualNetworkName, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "The properties of the resource.");
 @@doc(VirtualNetwork.location, "The location of the resource.");
 @@doc(VirtualNetwork.tags, "The tags of the resource.");

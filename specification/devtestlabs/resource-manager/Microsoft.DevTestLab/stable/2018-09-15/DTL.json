@@ -8433,7 +8433,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{virtualNetworkName}": {
       "get": {
         "operationId": "VirtualNetworks_Get",
         "tags": [
@@ -8458,7 +8458,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualNetworkName",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8516,7 +8516,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualNetworkName",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8597,7 +8597,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualNetworkName",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8657,7 +8657,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "virtualNetworkName",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -9180,17 +9180,6 @@
           "$ref": "#/definitions/ArmTemplateProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -9198,7 +9187,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -9227,7 +9216,11 @@
           "description": "The ArmTemplate items on this page",
           "items": {
             "$ref": "#/definitions/ArmTemplate"
-          }
+          },
+          "x-ms-identifiers": [
+            "armTemplateName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -9313,17 +9306,6 @@
           "$ref": "#/definitions/ArtifactProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -9331,7 +9313,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -9402,7 +9384,11 @@
           "description": "The Artifact items on this page",
           "items": {
             "$ref": "#/definitions/Artifact"
-          }
+          },
+          "x-ms-identifiers": [
+            "artifactName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -9484,17 +9470,6 @@
           "$ref": "#/definitions/ArtifactSourceProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -9502,7 +9477,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -9524,7 +9499,11 @@
           "description": "The ArtifactSource items on this page",
           "items": {
             "$ref": "#/definitions/ArtifactSource"
-          }
+          },
+          "x-ms-identifiers": [
+            "artifactSourceName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -9798,17 +9777,6 @@
           "$ref": "#/definitions/CustomImageProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -9816,7 +9784,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -9838,7 +9806,11 @@
           "description": "The CustomImage items on this page",
           "items": {
             "$ref": "#/definitions/CustomImage"
-          }
+          },
+          "x-ms-identifiers": [
+            "customImageName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -10066,17 +10038,6 @@
           "$ref": "#/definitions/DiskProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -10084,7 +10045,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -10106,7 +10067,11 @@
           "description": "The Disk items on this page",
           "items": {
             "$ref": "#/definitions/Disk"
-          }
+          },
+          "x-ms-identifiers": [
+            "diskName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -10181,17 +10146,6 @@
           "$ref": "#/definitions/EnvironmentProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -10199,7 +10153,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -10221,7 +10175,11 @@
           "description": "The DtlEnvironment items on this page",
           "items": {
             "$ref": "#/definitions/DtlEnvironment"
-          }
+          },
+          "x-ms-identifiers": [
+            "dtlEnvironmentName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -10447,17 +10405,6 @@
           "$ref": "#/definitions/FormulaProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -10465,7 +10412,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -10487,7 +10434,11 @@
           "description": "The Formula items on this page",
           "items": {
             "$ref": "#/definitions/Formula"
-          }
+          },
+          "x-ms-identifiers": [
+            "formulaName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -11105,17 +11056,6 @@
           "$ref": "#/definitions/LabCostProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -11123,7 +11063,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -11454,17 +11394,6 @@
           "$ref": "#/definitions/LabVirtualMachineProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -11472,7 +11401,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -11637,7 +11566,11 @@
           "description": "The LabVirtualMachine items on this page",
           "items": {
             "$ref": "#/definitions/LabVirtualMachine"
-          }
+          },
+          "x-ms-identifiers": [
+            "properties/applicableSchedule/properties/labVmsShutdown/scheduleName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -11941,17 +11874,6 @@
           "$ref": "#/definitions/NotificationChannelProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -11959,7 +11881,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -12003,7 +11925,11 @@
           "description": "The NotificationChannel items on this page",
           "items": {
             "$ref": "#/definitions/NotificationChannel"
-          }
+          },
+          "x-ms-identifiers": [
+            "notificationChannelName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12182,17 +12108,6 @@
           "$ref": "#/definitions/PolicyProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -12200,7 +12115,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -12306,7 +12221,11 @@
           "description": "The Policy items on this page",
           "items": {
             "$ref": "#/definitions/Policy"
-          }
+          },
+          "x-ms-identifiers": [
+            "policyName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12552,17 +12471,6 @@
           "$ref": "#/definitions/ScheduleProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -12570,7 +12478,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -12657,7 +12565,11 @@
           "description": "The Schedule items on this page",
           "items": {
             "$ref": "#/definitions/Schedule"
-          }
+          },
+          "x-ms-identifiers": [
+            "scheduleName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12731,17 +12643,6 @@
           "$ref": "#/definitions/SecretProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -12749,7 +12650,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -12771,7 +12672,11 @@
           "description": "The Secret items on this page",
           "items": {
             "$ref": "#/definitions/Secret"
-          }
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12811,17 +12716,6 @@
           "$ref": "#/definitions/ServiceFabricProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -12829,7 +12723,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -12851,7 +12745,12 @@
           "description": "The ServiceFabric items on this page",
           "items": {
             "$ref": "#/definitions/ServiceFabric"
-          }
+          },
+          "x-ms-identifiers": [
+            "serviceFabricName",
+            "properties/applicableSchedule/properties/labVmsShutdown/scheduleName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -12896,22 +12795,6 @@
       "type": "object",
       "description": "A container for a managed identity to execute DevTest lab services.",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "The identity of the resource."
@@ -12919,7 +12802,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -13186,22 +13069,14 @@
           "$ref": "#/definitions/UserProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -13249,7 +13124,11 @@
           "description": "The User items on this page",
           "items": {
             "$ref": "#/definitions/User"
-          }
+          },
+          "x-ms-identifiers": [
+            "userName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -13340,22 +13219,14 @@
           "$ref": "#/definitions/VirtualNetworkProperties",
           "description": "The properties of the resource.",
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -13377,7 +13248,11 @@
           "description": "The VirtualNetwork items on this page",
           "items": {
             "$ref": "#/definitions/VirtualNetwork"
-          }
+          },
+          "x-ms-identifiers": [
+            "virtualNetworkName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",

@@ -12,27 +12,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model NotificationChannel
-  is Azure.ResourceManager.ProxyResource<NotificationChannelProperties, false> {
-  ...ResourceNameParameter<
-    Resource = NotificationChannel,
-    SegmentName = "notificationchannels",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NotificationChannel extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("notificationchannels")
+  notificationChannelName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: NotificationChannelProperties;
 }
 
 @armResourceOperations
@@ -114,7 +108,9 @@ interface NotificationChannels {
   >;
 }
 
-@@doc(NotificationChannel.name, "The name of the notification channel.");
+@@doc(NotificationChannel.notificationChannelName,
+  "The name of the notification channel."
+);
 @@doc(NotificationChannel.properties, "The properties of the resource.");
 @@doc(NotificationChannel.location, "The location of the resource.");
 @@doc(NotificationChannel.tags, "The tags of the resource.");

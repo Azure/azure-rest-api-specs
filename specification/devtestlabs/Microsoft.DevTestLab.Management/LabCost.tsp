@@ -13,26 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
-  ...ResourceNameParameter<
-    Resource = LabCost,
-    SegmentName = "costs",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LabCost extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("costs")
+  labCostName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: LabCostProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
@@ -62,7 +57,7 @@ interface LabCosts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
 }
 
-@@doc(LabCost.name, "The name of the cost.");
+@@doc(LabCost.labCostName, "The name of the cost.");
 @@doc(LabCost.properties, "The properties of the resource.");
 @@doc(LabCosts.createOrUpdate::parameters.resource, "A cost item.");
 @@doc(LabCost.tags, "The tags of the resource.");

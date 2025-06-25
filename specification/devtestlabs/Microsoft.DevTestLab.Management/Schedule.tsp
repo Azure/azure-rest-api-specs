@@ -13,26 +13,20 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-model Schedule
-  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
-  ...ResourceNameParameter<
-    Resource = Schedule,
-    SegmentName = "schedules",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Schedule extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("schedules")
+  scheduleName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: ScheduleProperties;
 }
 
 @armResourceOperations
@@ -499,7 +493,7 @@ interface VirtualMachineSchedules {
   execute is VirtualMachineScheduleOps.ActionAsync<Schedule, void, OkResponse>;
 }
 
-@@doc(Schedule.name, "The name of the schedule.");
+@@doc(Schedule.scheduleName, "The name of the schedule.");
 @@doc(Schedule.properties, "The properties of the resource.");
 @@doc(Schedule.location, "The location of the resource.");
 @@doc(Schedule.tags, "The tags of the resource.");

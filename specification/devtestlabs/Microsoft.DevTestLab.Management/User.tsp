@@ -13,26 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * Profile of a lab user.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(Lab)
-model User is Azure.ResourceManager.ProxyResource<UserProperties> {
-  ...ResourceNameParameter<
-    Resource = User,
-    SegmentName = "users",
-    NamePattern = ""
-  >;
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model User extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("users")
+  userName: string;
 
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Required to avoid SDK breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Required to avoid SDK breaking change."
-  tags?: Record<string>;
+  properties: UserProperties;
 }
 
 @armResourceOperations
@@ -109,7 +104,7 @@ interface Users {
   >;
 }
 
-@@doc(User.name, "The name of the user profile.");
+@@doc(User.userName, "The name of the user profile.");
 @@doc(User.properties, "The properties of the resource.");
 @@doc(User.location, "The location of the resource.");
 @@doc(User.tags, "The tags of the resource.");
