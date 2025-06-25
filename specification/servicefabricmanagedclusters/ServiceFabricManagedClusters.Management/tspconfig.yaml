@@ -18,6 +18,8 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
+    suppress-abstract-base-class:
+      - "ManagedServiceProperties"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-servicefabricmanagedclusters"
     package-name: "azure-mgmt-servicefabricmanagedclusters"
@@ -46,6 +48,8 @@ options:
     package-dir: "azure-resourcemanager-servicefabricmanagedclusters"
     namespace: com.azure.resourcemanager.servicefabricmanagedclusters
     flavor: azure
+    service-name: Service Fabric Managed Clusters
+    use-object-for-unknown: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -23,11 +23,21 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   if (document.tags) {
     delete newDocument.tags;
   }
+  if (document.info && document.info["x-typespec-generated"]) {
+    delete newDocument.info["x-typespec-generated"];
+  }
 
   for (const route in document.paths) {
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
-    newDocument.paths[route] = processedPath;
+    if (configuration.ignorePathCase) {
+      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/').replace(/\/subscriptions\//i, '/subscriptions/');
+      delete newDocument.paths[route];  
+      newDocument.paths[normalizedRoute] = processedPath;
+    }
+    else {
+      newDocument.paths[route] = processedPath;
+    }
   }
 
   for (const definitionName in document.definitions) {
@@ -100,15 +110,19 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
     delete newOperation["x-ms-pageable"]["itemName"];
   }
 
-  if (newOperation.produces && newOperation.produces.length === 1 && newOperation.produces[0] === "application/json") {
+  if (newOperation.produces && (newOperation.produces.length === 1 && newOperation.produces[0] === "application/json" || newOperation.produces.length === 0)) {
     delete newOperation.produces;
   }
-  if (newOperation.consumes && newOperation.consumes.length === 1 && newOperation.consumes[0] === "application/json") {
+  if (newOperation.consumes && (newOperation.consumes.length === 1 && newOperation.consumes[0] === "application/json" || newOperation.consumes.length === 0)) {
     delete newOperation.consumes;
   }
 
   if (newOperation.tags) {
     delete newOperation.tags;
+  }
+
+  if (newOperation.deprecated === false) {
+    delete newOperation.deprecated;
   }
 
   if (configuration.ignoreDescription) {
@@ -189,6 +203,10 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
     delete newDefinition.additionalProperties;
   }
 
+  if ((newDefinition.properties || newDefinition.additionalProperties) && newDefinition.type === undefined) {
+    newDefinition.type = "object";
+  }
+
   if (newDefinition.allOf) {
     newDefinition.allOf = newDefinition.allOf.map((item) => {
       if ((item as Ref<OpenAPI2Schema>).$ref) {
@@ -219,10 +237,14 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
 }
 
 function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProperty {
+  function isOpenAPI2SchemaRefProperty(prop: OpenAPI2SchemaProperty): prop is OpenAPI2SchemaRefProperty {
+    return (prop as OpenAPI2SchemaRefProperty).$ref !== undefined;
+  }
+
   const newProperty: OpenAPI2SchemaProperty = deepCopy(property);
-  const isRef = (property as OpenAPI2SchemaRefProperty).$ref !== undefined;
+  const isRef = isOpenAPI2SchemaRefProperty(newProperty);
   if (isRef) {
-    const refPath = (property as OpenAPI2SchemaRefProperty).$ref;
+    const refPath = newProperty.$ref;
     if (refPath.startsWith("#/definitions/")) {
       const definitionName = refPath.substring("#/definitions/".length);
       const originalDefinition = originalDocument?.definitions?.[definitionName];
@@ -233,12 +255,47 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
         }
         delete (newProperty as any).$ref;
       }
+      else if (originalDefinition?.type && ["boolean", "integer", "number", "string"].includes(originalDefinition.type)) {
+        delete (newProperty as any).$ref;
+        for (const key in originalDefinition) {
+          (newProperty as any)[key] = (originalDefinition as any)[key];
+        }
+      }
     }
   } else {
-    processEnumInplace(newProperty as OpenAPI2Schema);
+    if (newProperty.type === "array" && newProperty.items) {
+      const refPath = (newProperty.items as Ref<OpenAPI2Schema>).$ref;
+      if (refPath !== undefined) {
+        if (refPath.startsWith("#/definitions/")) {
+          const definitionName = refPath.substring("#/definitions/".length);
+          const originalDefinition = originalDocument?.definitions?.[definitionName];
+          if (originalDefinition && originalDefinition.enum) {
+            const processedDefinition = processDefinition(originalDefinition);
+            for (const key in processedDefinition) {
+              (newProperty.items as any)[key] = (processedDefinition as any)[key as string];
+            }
+            delete (newProperty.items as any).$ref;
+          }
+        }
+      }
+      else {
+        processEnumInplace(newProperty.items as OpenAPI2Schema);
+      }
+    }
+
+    processEnumInplace(newProperty);
+    if ((newProperty.properties || newProperty.additionalProperties) && newProperty.type === undefined) {
+      newProperty.type = "object";
+    }
   }
 
-  newProperty
+  const identifiers = (newProperty as any)["x-ms-identifiers"];
+  if (identifiers && Array.isArray(identifiers) && identifiers.length === 0) {
+    delete (newProperty as any)["x-ms-identifiers"];
+  }
+  if ((newProperty as OpenAPI2Schema).uniqueItems === false) {
+    delete (newProperty as OpenAPI2Schema).uniqueItems;
+  }
   if (newProperty["x-ms-mutability"]) {
     newProperty["x-ms-mutability"] = newProperty["x-ms-mutability"].sort((a, b) => a.localeCompare(b));
   }
@@ -290,7 +347,6 @@ function processPageModel(definition: OpenAPI2Schema): OpenAPI2Schema {
   newDefinition.properties!["value"]!.description = "[Placeholder] Discription for value property";
   newDefinition.properties!["nextLink"]!.description = "[Placeholder] Discription for nextLink property";
   (newDefinition.properties!["nextLink"] as any)["format"] = "uri";
-  newDefinition.required = ["value"];
   if (newDefinition.properties!["nextLink"]?.readOnly) {
     delete newDefinition.properties!["nextLink"]?.readOnly;
   }

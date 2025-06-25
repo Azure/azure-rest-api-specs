@@ -115,3 +115,15 @@ export async function execNpm(args, options = {}) {
 
   return await execFile(file, [...defaultArgs, ...args], options);
 }
+
+/**
+ * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
+ *
+ * @param {string[]} args
+ * @param {ExecOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execNpmExec(args, options = {}) {
+  return await execNpm(["exec", "--no", "--", ...args], options);
+}

@@ -3,23 +3,40 @@
   "compilerOptions": {
     "target": "es2024",
     "module": "NodeNext",
-
     // override "importHelpers:true" in root tsconfig.json
     "importHelpers": false,
-
     // required to use project references
     "composite": true,
   },
   // Compile nothing at this level
   "files": [],
   "references": [
-    { "path": "./suppressions" },
-    { "path": "./tsp-client-tests" },
-    { "path": "./typespec-requirement" },
-    { "path": "./typespec-validation" },
-    { "path": "./sdk-suppressions" },
-    { "path": "./spec-gen-sdk-runner"},
-    { "path": "./lint-diff" },
-    { "path": "./typespec-migration-validation"}
+    {
+      "path": "./lint-diff"
+    },
+    {
+      "path": "./oav-runner"
+    },
+    {
+      "path": "./sdk-suppressions"
+    },
+    {
+      "path": "./spec-gen-sdk-runner"
+    },
+    {
+      "path": "./suppressions"
+    },
+    {
+      "path": "./tsp-client-tests"
+    },
+    {
+      "path": "./typespec-migration-validation"
+    },
+    {
+      "path": "./typespec-requirement"
+    },
+    {
+      "path": "./typespec-validation"
+    },
   ]
 }

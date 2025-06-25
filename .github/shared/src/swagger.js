@@ -1,13 +1,33 @@
 // @ts-check
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { relative, resolve } from "path";
+import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
+import { readFile } from "fs/promises";
+import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { includesFolder } from "./path.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /**
- * @typedef {import('./spec-model.js').SpecModel} SpecModel
+ * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
+
+/**
+ * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
+ */
+const excludeExamples = {
+  order: 1,
+  canRead: true,
+  read: async (
+    /** @type import('@apidevtools/json-schema-ref-parser').FileInfo */
+    file,
+  ) => {
+    if (example(file.url)) {
+      return "";
+    }
+    return await readFile(file.url, { encoding: "utf8" });
+  },
+};
 
 export class Swagger {
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -16,52 +36,89 @@ export class Swagger {
   /** @type {string} absolute path */
   #path;
 
-  /** @type {Set<Swagger> | undefined} */
+  /** @type {Map<string, Swagger> | undefined} */
   #refs;
 
-  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
-  #specModel;
+  /** @type {Tag | undefined} Tag that contains this Swagger */
+  #tag;
 
   /**
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
-   * @param {SpecModel} [options.specModel]
+   * @param {Tag} [options.tag]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    const rootDir = dirname(options?.tag?.readme?.path ?? "");
+    this.#path = resolve(rootDir, path);
     this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#tag = options?.tag;
   }
 
   /**
-   * @returns {Promise<Set<Swagger>>}
+   * @returns {Promise<Map<string, Swagger>>}
    */
   async getRefs() {
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
+
+    return filtered;
+  }
+
+  async #getRefs() {
     if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { http: false },
-      });
+      let schema;
+      try {
+        schema = await $RefParser.resolve(this.#path, {
+          resolve: { file: excludeExamples, http: false },
+        });
+      } catch (error) {
+        if (error instanceof ResolverError) {
+          throw new SpecModelError(
+            `Failed to resolve file for swagger: ${this.#path}`,
+            {
+              cause: error,
+              source: error.source,
+              tag: this.#tag?.name,
+              readme: this.#tag?.readme?.path,
+            },
+          );
+        }
+
+        throw error;
+      }
 
       const refPaths = schema
         .paths("file")
-        // Exclude examples
-        .filter((p) => !example(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
-      this.#refs = new Set(
-        refPaths.map(
-          (p) =>
-            new Swagger(p, {
-              logger: this.#logger,
-              specModel: this.#specModel,
-            }),
-        ),
+      this.#refs = new Map(
+        refPaths.map((p) => {
+          const swagger = new Swagger(p, {
+            logger: this.#logger,
+            tag: this.#tag,
+          });
+          return [swagger.path, swagger];
+        }),
       );
     }
 
     return this.#refs;
+  }
+
+  /**
+   * @returns {Promise<Map<string, Swagger>>}
+   */
+  async getExamples() {
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map([...allRefs].filter(([path]) => example(path)));
+
+    return filtered;
   }
 
   /**
@@ -72,18 +129,25 @@ export class Swagger {
   }
 
   /**
+   * @returns {Tag | undefined} Tag that contains this Swagger
+   */
+  get tag() {
+    return this.#tag;
+  }
+
+  /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     return {
       path:
-        options?.relativePaths && this.#specModel
-          ? relative(this.#specModel.folder, this.#path)
+        options?.relativePaths && this.#tag?.readme?.specModel
+          ? relative(this.#tag?.readme?.specModel.folder, this.#path)
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
-            [...(await this.getRefs())].sort((a, b) =>
+            [...(await this.getRefs()).values()].sort((a, b) =>
               a.path.localeCompare(b.path),
             ),
             async (s) =>
@@ -107,7 +171,9 @@ export class Swagger {
  */
 function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && file.includes("/examples/");
+  return (
+    typeof file === "string" && json(file) && includesFolder(file, "examples")
+  );
 }
 
 /**

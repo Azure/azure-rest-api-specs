@@ -22,6 +22,292 @@
   "tags": [],
   "paths": {},
   "definitions": {
+    "AcsCallEndReasonProperties": {
+      "type": "object",
+      "description": "Schema of calling event reason properties",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Reason code for ending the call."
+        },
+        "subCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Reason subcode for ending the call."
+        },
+        "phrase": {
+          "type": "string",
+          "description": "Reason for the ending the call."
+        }
+      }
+    },
+    "AcsCallEndedByKind": {
+      "type": "string",
+      "description": "Call ended participant kind.",
+      "enum": [
+        "Participant",
+        "MicrosoftInternal"
+      ],
+      "x-ms-enum": {
+        "name": "AcsCallEndedByKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Participant",
+            "value": "Participant",
+            "description": "Participant"
+          },
+          {
+            "name": "MicrosoftInternal",
+            "value": "MicrosoftInternal",
+            "description": "MicrosoftInternal"
+          }
+        ]
+      }
+    },
+    "AcsCallEndedByProperties": {
+      "type": "object",
+      "description": "Schema of calling event ended by properties",
+      "properties": {
+        "communicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the call ended by"
+        },
+        "type": {
+          "$ref": "#/definitions/AcsCallEndedByKind",
+          "description": "The type of call ended by.",
+          "x-ms-client-name": "kind"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the call ended by."
+        }
+      },
+      "required": [
+        "communicationIdentifier",
+        "type",
+        "name"
+      ]
+    },
+    "AcsCallEndedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
+      "properties": {
+        "endedBy": {
+          "$ref": "#/definitions/AcsCallEndedByProperties",
+          "description": "The communication identifier of the user who was disconnected"
+        },
+        "reason": {
+          "$ref": "#/definitions/AcsCallEndReasonProperties",
+          "description": "The reason for ending the call."
+        },
+        "callDurationInSeconds": {
+          "type": "number",
+          "format": "double",
+          "description": "Duration of the call in seconds."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ]
+    },
+    "AcsCallGroupProperties": {
+      "type": "object",
+      "description": "Schema of calling event group properties",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Group Id."
+        }
+      }
+    },
+    "AcsCallParticipantAddedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ]
+    },
+    "AcsCallParticipantEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all participant events",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/AcsCallParticipantProperties",
+          "description": "The user of the call participant"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the participant."
+        },
+        "participantId": {
+          "type": "string",
+          "description": "The id of the participant."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent of the participant."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ]
+    },
+    "AcsCallParticipantKind": {
+      "type": "string",
+      "description": "Call participant kind.",
+      "enum": [
+        "Attendee",
+        "Presenter",
+        "Organizer",
+        "Consumer",
+        "Collaborator"
+      ],
+      "x-ms-enum": {
+        "name": "AcsCallParticipantKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Attendee",
+            "value": "Attendee",
+            "description": "Attendee"
+          },
+          {
+            "name": "Presenter",
+            "value": "Presenter",
+            "description": "Presenter"
+          },
+          {
+            "name": "Organizer",
+            "value": "Organizer",
+            "description": "Organizer"
+          },
+          {
+            "name": "Consumer",
+            "value": "Consumer",
+            "description": "Consumer"
+          },
+          {
+            "name": "Collaborator",
+            "value": "Collaborator",
+            "description": "Collaborator"
+          }
+        ]
+      }
+    },
+    "AcsCallParticipantProperties": {
+      "type": "object",
+      "description": "Schema of common properties of all participant event user",
+      "properties": {
+        "communicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the participant user"
+        },
+        "role": {
+          "$ref": "#/definitions/AcsCallParticipantKind",
+          "description": "The role of the participant"
+        }
+      }
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ]
+    },
+    "AcsCallRoomProperties": {
+      "type": "object",
+      "description": "Schema of calling event room properties",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Room Id."
+        }
+      }
+    },
+    "AcsCallStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ]
+    },
+    "AcsCallingEventProperties": {
+      "type": "object",
+      "description": "Schema of common properties of all calling events",
+      "properties": {
+        "startedBy": {
+          "$ref": "#/definitions/AcsCallParticipantProperties",
+          "description": "The call participant who initiated the call."
+        },
+        "serverCallId": {
+          "type": "string",
+          "description": "The call id of the server"
+        },
+        "group": {
+          "$ref": "#/definitions/AcsCallGroupProperties",
+          "description": "The group metadata"
+        },
+        "room": {
+          "$ref": "#/definitions/AcsCallRoomProperties",
+          "description": "The room metadata"
+        },
+        "isTwoParty": {
+          "type": "boolean",
+          "description": "Is two-party in calling event."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlationId of calling event"
+        },
+        "isRoomsCall": {
+          "type": "boolean",
+          "description": "Is the calling event a room call."
+        }
+      },
+      "required": [
+        "startedBy",
+        "serverCallId",
+        "correlationId"
+      ]
+    },
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event.",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The chat message metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
     "AcsChatEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat events",
@@ -40,7 +326,8 @@
         }
       },
       "required": [
-        "recipientCommunicationIdentifier"
+        "recipientCommunicationIdentifier",
+        "threadId"
       ]
     },
     "AcsChatEventInThreadBaseProperties": {
@@ -55,7 +342,10 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      }
+      },
+      "required": [
+        "threadId"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "type": "object",
@@ -117,7 +407,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -148,7 +438,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -189,8 +479,11 @@
         }
       },
       "required": [
+        "messageId",
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -230,8 +523,11 @@
         }
       },
       "required": [
+        "messageId",
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -256,7 +552,7 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
@@ -281,7 +577,7 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
@@ -441,14 +737,12 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -483,14 +777,12 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -592,8 +884,7 @@
         }
       },
       "required": [
-        "participantCommunicationIdentifier",
-        "metadata"
+        "participantCommunicationIdentifier"
       ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
@@ -663,7 +954,6 @@
       "required": [
         "editedByCommunicationIdentifier",
         "editTime",
-        "metadata",
         "properties"
       ],
       "allOf": [
@@ -693,6 +983,31 @@
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatTypingIndicatorReceivedInThreadEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event.",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The chat message metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
       ]
     },
@@ -1263,6 +1578,30 @@
         }
       ]
     },
+    "AcsRecordingChannelType": {
+      "type": "string",
+      "description": "Recording channel type",
+      "enum": [
+        "Mixed",
+        "Unmixed"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingChannelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Mixed channel type"
+          },
+          {
+            "name": "Unmixed",
+            "value": "Unmixed",
+            "description": "Unmixed channel type"
+          }
+        ]
+      }
+    },
     "AcsRecordingChunkInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of  Recording Chunk Information.",
@@ -1294,6 +1633,30 @@
         }
       }
     },
+    "AcsRecordingContentType": {
+      "type": "string",
+      "description": "Recording content type",
+      "enum": [
+        "AudioVideo",
+        "Audio"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingContentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AudioVideo",
+            "value": "AudioVideo",
+            "description": "AudioVideo content type"
+          },
+          {
+            "name": "Audio",
+            "value": "Audio",
+            "description": "Audio content type"
+          }
+        ]
+      }
+    },
     "AcsRecordingFileStatusUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
@@ -1313,15 +1676,15 @@
           "description": "The recording duration in milliseconds"
         },
         "recordingContentType": {
-          "$ref": "#/definitions/recordingContentType",
+          "$ref": "#/definitions/AcsRecordingContentType",
           "description": "The recording content type- AudioVideo, or Audio"
         },
         "recordingChannelType": {
-          "$ref": "#/definitions/recordingChannelType",
+          "$ref": "#/definitions/AcsRecordingChannelType",
           "description": "The recording  channel type - Mixed, Unmixed"
         },
         "recordingFormatType": {
-          "$ref": "#/definitions/recordingFormatType",
+          "$ref": "#/definitions/AcsRecordingFormatType",
           "description": "The recording format type - Mp4, Mp3, Wav"
         },
         "sessionEndReason": {
@@ -1337,6 +1700,36 @@
         "recordingFormatType"
       ]
     },
+    "AcsRecordingFormatType": {
+      "type": "string",
+      "description": "Recording format type",
+      "enum": [
+        "Wav",
+        "Mp3",
+        "Mp4"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wav",
+            "value": "Wav",
+            "description": "WAV format"
+          },
+          {
+            "name": "Mp3",
+            "value": "Mp3",
+            "description": "MP3 format"
+          },
+          {
+            "name": "Mp4",
+            "value": "Mp4",
+            "description": "MP4 format"
+          }
+        ]
+      }
+    },
     "AcsRecordingStorageInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of Recording Storage Information.",
@@ -1347,8 +1740,7 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1395,19 +1787,18 @@
           "$ref": "#/definitions/AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
-        "errors": {
+        "details": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
         "innererror",
-        "errors"
+        "details"
       ]
     },
     "AcsRouterEventData": {
@@ -1426,7 +1817,10 @@
           "type": "string",
           "description": "Router Event Channel ID"
         }
-      }
+      },
+      "required": [
+        "jobId"
+      ]
     },
     "AcsRouterJobCancelledEventData": {
       "type": "object",
@@ -1461,8 +1855,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1497,8 +1890,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1629,8 +2021,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "requestedWorkerSelectors": {
           "type": "array",
@@ -1638,11 +2029,11 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
+        "priority",
         "attachedWorkerSelectors",
         "requestedWorkerSelectors"
       ],
@@ -1675,8 +2066,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -1715,8 +2105,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -1724,8 +2113,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -1738,6 +2126,7 @@
         }
       },
       "required": [
+        "priority",
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
         "scheduledOn"
@@ -1866,8 +2255,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -1875,8 +2263,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -1889,6 +2276,7 @@
         }
       },
       "required": [
+        "priority",
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
         "scheduledOn",
@@ -1910,8 +2298,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredAttachedWorkerSelectors": {
           "type": "array",
@@ -1919,8 +2306,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -2298,8 +2684,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "totalCapacity": {
           "type": "integer",
@@ -2413,8 +2798,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "totalCapacity": {
           "type": "integer",
@@ -2473,7 +2857,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
       ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
@@ -2494,8 +2880,7 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "receivedTimestamp": {
           "type": "string",
@@ -2508,6 +2893,8 @@
         }
       },
       "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
         "deliveryAttempts",
         "receivedTimestamp"
       ],
@@ -2533,7 +2920,12 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "type": "object",
@@ -2555,6 +2947,7 @@
         }
       },
       "required": [
+        "message",
         "receivedTimestamp",
         "segmentCount"
       ],
@@ -2764,6 +3157,7 @@
           "type": "object",
           "description": "Overview of all configured rules and respective details.",
           "additionalProperties": {
+            "additionalProperties": {},
             "type": "object"
           }
         }
@@ -3214,10 +3608,7 @@
           "$ref": "#/definitions/AppAction",
           "description": "Type of action of the operation."
         }
-      },
-      "required": [
-        "action"
-      ]
+      }
     },
     "AppServicePlanAction": {
       "type": "string",
@@ -3253,12 +3644,7 @@
           "$ref": "#/definitions/AsyncStatus",
           "description": "Asynchronous operation status of the operation on the app service plan."
         }
-      },
-      "required": [
-        "stampKind",
-        "action",
-        "status"
-      ]
+      }
     },
     "AsyncStatus": {
       "type": "string",
@@ -3564,11 +3950,8 @@
         }
       },
       "required": [
-        "kind",
-        "communicationUser",
-        "phoneNumber",
-        "microsoftTeamsUser",
-        "microsoftTeamsApp"
+        "rawId",
+        "communicationUser"
       ]
     },
     "CommunicationIdentifierModelKind": {
@@ -3578,7 +3961,8 @@
         "unknown",
         "communicationUser",
         "phoneNumber",
-        "microsoftTeamsUser"
+        "microsoftTeamsUser",
+        "microsoftTeamsApp"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -3603,6 +3987,11 @@
             "name": "microsoftTeamsUser",
             "value": "microsoftTeamsUser",
             "description": "Microsoft Teams User"
+          },
+          {
+            "name": "microsoftTeamsApp",
+            "value": "microsoftTeamsApp",
+            "description": "Microsoft Teams App"
           }
         ]
       }
@@ -4508,7 +4897,6 @@
       },
       "required": [
         "clientAuthenticationName",
-        "clientName",
         "namespaceName"
       ]
     },
@@ -4595,8 +4983,7 @@
       "properties": {
         "fileUrl": {
           "type": "string",
-          "description": "The path to the capture file.",
-          "x-ms-client-name": "fileurl"
+          "description": "The path to the capture file."
         },
         "fileType": {
           "type": "string",
@@ -5915,12 +6302,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -5960,12 +6349,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6005,12 +6396,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6050,12 +6443,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6095,12 +6490,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6140,12 +6537,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6185,12 +6584,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6230,12 +6631,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6275,12 +6678,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6320,12 +6725,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6560,8 +6967,7 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",
@@ -8486,8 +8892,7 @@
         "summaryReportBlobUrl": {
           "type": "string",
           "format": "uri",
-          "description": "The summary report blob url for a storage task",
-          "x-ms-client-name": "summaryReportBlobUri"
+          "description": "The summary report blob url for a storage task"
         }
       },
       "required": [
@@ -8694,11 +9099,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appServicePlanEventTypeDetail",
-        "sku"
-      ]
+      }
     },
     "WebAppServicePlanUpdatedEventDataSku": {
       "type": "object",
@@ -8758,10 +9159,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationCompletedEventData": {
       "type": "object",
@@ -8795,10 +9193,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationFailedEventData": {
       "type": "object",
@@ -8832,10 +9227,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationStartedEventData": {
       "type": "object",
@@ -8869,10 +9261,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationCompletedEventData": {
       "type": "object",
@@ -8906,10 +9295,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationFailedEventData": {
       "type": "object",
@@ -8943,10 +9329,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationStartedEventData": {
       "type": "object",
@@ -8980,10 +9363,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapCompletedEventData": {
       "type": "object",
@@ -9017,10 +9397,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapFailedEventData": {
       "type": "object",
@@ -9054,10 +9431,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapStartedEventData": {
       "type": "object",
@@ -9091,10 +9465,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapWithPreviewCancelledEventData": {
       "type": "object",
@@ -9128,10 +9499,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapWithPreviewStartedEventData": {
       "type": "object",
@@ -9165,87 +9533,6 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
-    },
-    "recordingChannelType": {
-      "type": "string",
-      "description": "Recording channel type",
-      "enum": [
-        "Mixed",
-        "Unmixed"
-      ],
-      "x-ms-enum": {
-        "name": "recordingChannelType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Mixed",
-            "value": "Mixed",
-            "description": "Mixed channel type"
-          },
-          {
-            "name": "Unmixed",
-            "value": "Unmixed",
-            "description": "Unmixed channel type"
-          }
-        ]
-      }
-    },
-    "recordingContentType": {
-      "type": "string",
-      "description": "Recording content type",
-      "enum": [
-        "AudioVideo",
-        "Audio"
-      ],
-      "x-ms-enum": {
-        "name": "recordingContentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AudioVideo",
-            "value": "AudioVideo",
-            "description": "AudioVideo content type"
-          },
-          {
-            "name": "Audio",
-            "value": "Audio",
-            "description": "Audio content type"
-          }
-        ]
-      }
-    },
-    "recordingFormatType": {
-      "type": "string",
-      "description": "Recording format type",
-      "enum": [
-        "Wav",
-        "Mp3",
-        "Mp4"
-      ],
-      "x-ms-enum": {
-        "name": "recordingFormatType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Wav",
-            "value": "Wav",
-            "description": "WAV format"
-          },
-          {
-            "name": "Mp3",
-            "value": "Mp3",
-            "description": "MP3 format"
-          },
-          {
-            "name": "Mp4",
-            "value": "Mp4",
-            "description": "MP4 format"
-          }
-        ]
       }
     }
   },
