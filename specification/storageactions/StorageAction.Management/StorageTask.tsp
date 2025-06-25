@@ -64,22 +64,22 @@ interface StorageTasks {
   /**
    * Update storage task properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StorageTask,
     PatchModel = StorageTaskUpdateParameters,
     Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
+      ArmLroLocationHeader<FinalResult = StorageTask> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Delete the storage task resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTask,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
+      ArmLroLocationHeader<FinalResult = StorageTask> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
