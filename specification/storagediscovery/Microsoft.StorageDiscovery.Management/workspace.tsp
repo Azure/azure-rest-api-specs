@@ -22,7 +22,7 @@ model StorageDiscoveryWorkspaceProperties {
   @renamedFrom(ApiVersion.v2025_03_01_preview, "tier")
   @renamedFrom(ApiVersion.v2025_06_01_preview, "sku")
   @removed(ApiVersion.v2025_06_01_preview)
-  oldsku : StorageDiscoverySku;
+  oldsku: StorageDiscoverySku;
 
   @doc("The storage discovery sku")
   @added(ApiVersion.v2025_06_01_preview)
