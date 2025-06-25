@@ -152,6 +152,10 @@ model MCPToolResource {
 
   @doc("The headers for the MCP server updates")
   headers: Record<string>;
+
+  @doc("Does MCP server require approval")
+  @encodedName("application/json", "require_approval")
+  requireApproval?: "never";
 }
 
 /** Available query types for Azure AI Search tool. */

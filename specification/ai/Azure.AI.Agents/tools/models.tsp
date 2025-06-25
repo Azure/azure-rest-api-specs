@@ -158,9 +158,9 @@ model MCPToolDefinition extends ToolDefinition {
   @encodedName("application/json", "server_url")
   serverUrl: string;
 
-  @doc("Does MCP server require approval")
-  @encodedName("application/json", "require_approval")
-  requireApproval?: "never";
+  @doc("List of allowed tools for MCP server")
+  @encodedName("application/json", "allowed_tools")
+  allowedTools?: string[];
 }
 
 // Definition details: File Search
