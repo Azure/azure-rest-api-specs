@@ -360,16 +360,16 @@ op getKeyAttestation is KeyVaultOperation<
   KeyBundle
 >;
 
-@@override(KeyVault.updateKey, updateKey, "!rust");
-@@override(KeyVault.getKey, getKey, "!rust");
-@@override(KeyVault.encrypt, encrypt, "!rust");
-@@override(KeyVault.decrypt, decrypt, "!rust");
-@@override(KeyVault.sign, sign, "!rust");
-@@override(KeyVault.verify, verify, "!rust");
-@@override(KeyVault.wrapKey, wrapKey, "!rust");
-@@override(KeyVault.unwrapKey, unwrapKey, "!rust");
-@@override(KeyVault.release, release, "!rust");
-@@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
+@@override(KeyVault.updateKey, updateKey);
+@@override(KeyVault.getKey, getKey);
+@@override(KeyVault.encrypt, encrypt);
+@@override(KeyVault.decrypt, decrypt);
+@@override(KeyVault.sign, sign);
+@@override(KeyVault.verify, verify);
+@@override(KeyVault.wrapKey, wrapKey);
+@@override(KeyVault.unwrapKey, unwrapKey);
+@@override(KeyVault.release, release);
+@@override(KeyVault.getKeyAttestation, getKeyAttestation);
 
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");

@@ -77,8 +77,8 @@ op getCertificate is KeyVaultOperation<
   CertificateBundle
 >;
 
-@@override(KeyVault.updateCertificate, updateCertificate, "!rust");
-@@override(KeyVault.getCertificate, getCertificate, "!rust");
+@@override(KeyVault.updateCertificate, updateCertificate);
+@@override(KeyVault.getCertificate, getCertificate);
 
 // Java configuration
 @@usage(CertificateIssuerItem, Usage.input, "java");
