@@ -2,12 +2,12 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../common/models.tsp";
 import "../main.tsp";
+import "../common/models.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
-using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
@@ -18,26 +18,45 @@ namespace Azure.AI.Projects;
 @Rest.resource("agents")
 @added(Versions.v1)
 model Agent {
-    ...AssetBase;
+    @doc("Asset ID, a unique identifier for the asset")
+    @visibility(Lifecycle.Read)
+    id?: string;
+
+    @doc("The name of the resource")
+    @visibility(Lifecycle.Read)
+    @key
+    name: string;
 
     @doc ("System related metadata")
     @visibility(Lifecycle.Read)
     SystemData?: SystemData;
-
-    @doc("Catalog information for the agent")
-    catalogInfo: AgentCatalogInformation;
 
     @doc("blueprint the agent is based on")
     blueprint: string;
 
     @doc("Parameters for the agent")
     parameters?: Record<BaseParameterValue>;
+
+    @doc("Agent revision history")
+    @visibility(Lifecycle.Read)
+    revisions?: AgentRevision[];
 }
 
-@doc("Catalog information for the agent")
-model AgentCatalogInformation {
-    ...CatalogInformation;  
+@doc("Agent revision entry")
+model AgentRevision {
+    @doc("Revision identifier")
+    id: string;
+
+    @doc("Revision description")
+    description?: string;
+
+    @doc("Revision creation time")
+    createdAt: utcDateTime;
+
+    @doc("Revision creator")
+    createdBy: string;
 }
+
 
 @doc("Agent deployment response")
 model AgentDeploymentResponse {

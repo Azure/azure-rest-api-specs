@@ -8,22 +8,43 @@ import "./models.tsp";
 import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
+using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ListAgentVersionsParameters = {};
+
+alias AgentServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
+
+alias AgentOperations = Azure.Core.ResourceOperations<AgentServiceTraits>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v1)
-interface Agents
-  extends VersionedOperations<
-      Agent,
-      InputParameters<Agent, "agent">,
-      ListAgentVersionsParameters,
-      ListAgentVersionsParameters
-    > {
-  @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
+interface Agents {
+  @doc("Get a deployed agent.")
+  get is DeploymentOperations.ResourceRead<Agent>;
+
+  @doc("List all deployed models in the project")
+  list is DeploymentOperations.ResourceList<
+    Agent,
+    ListQueryParametersTrait<{
+      @doc("blueprint to filter on")
+      @query("blueprintId")
+      blueprintId?: string;
+    }>
+  >;
+
+  @doc("Revert latest revision of an agent")
+  @Rest.action("revertLatest")
+  revertLatest is Azure.Core.Foundations.ResourceOperation<
+    Agent,
+    {},
+    void
+  >;
+
+  @doc("Revert latest revision of an agent")
   @Rest.action("deploy")
   deployAgent is Azure.Core.Foundations.ResourceOperation<
     Agent,
@@ -31,16 +52,11 @@ interface Agents
       @doc("The deployment request parameters")
       @Http.bodyRoot
       deploymentRequest: AgentDeploymentRequest;
-
-      @doc("The specific version id of the Agent to operate on.")
-      @Rest.segment("versions")
-      @Http.path
-      version: string;
     },
     void
   >;
 
-  @doc("Pause or resume an agent instance")
+ @doc("Pause or resume an agent instance")
   @Rest.action("pauseOrResume")
   pauseOrResumeAgent is Azure.Core.Foundations.ResourceOperation<
     Agent,
@@ -48,11 +64,6 @@ interface Agents
       @doc("The pause or resume request parameters")
       @Http.bodyRoot
       pauseOrResumeRequest: PauseOrResumeRequest;
-
-      @doc("The specific version id of the Agent to operate on.")
-      @Rest.segment("versions")
-      @Http.path
-      version: string;
     },
     void
   >;
