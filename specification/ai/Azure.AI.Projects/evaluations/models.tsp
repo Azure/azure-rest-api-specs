@@ -26,6 +26,26 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
+@doc("Dataset as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model MetricSummary extends Results {
+  type: "metricSummary";
+
+  //Todo
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract result class.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Results {
+  @doc("Type of the evaluation result")
+  type: string;
+}
+
+
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Abstract data class.")
 @discriminator("type")
@@ -160,6 +180,9 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Output Results.")
+  outputs: Array<Results>;
 }
 
 @doc("Continuous Evaluation Specific Configuration Definition")
