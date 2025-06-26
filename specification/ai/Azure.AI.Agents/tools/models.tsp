@@ -369,6 +369,22 @@ model RequiredFunctionToolCallDetails {
   arguments: string;
 }
 
+@doc("A representation of a requested call to a MCP tool, needed by the model to continue evaluation of a run.")
+@added(Versions.v2025_05_15_preview)
+model RequiredMcpToolCall extends RequiredToolCall {
+  @doc("The object type of the required tool call. Always 'mcp' for MCP tools.")
+  type: "mcp";
+
+  @doc("The arguments to use when invoking the mcp tool, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("The name of the function used on the MCP server.")
+  name: string;
+
+  @doc("The label of the MCP server.")
+  server_label: string;
+}
+
 //
 // Tool calls -- present in run steps and provide information about tool execution
 //
