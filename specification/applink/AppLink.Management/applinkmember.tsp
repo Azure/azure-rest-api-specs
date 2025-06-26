@@ -24,7 +24,8 @@ model AppLinkMemberProperties {
   metadata: Metadata;
 
   @doc("Internal metadata for AppLink Member")
-  internalMetadata: AppLinkMemberInternalMetadata;
+  @visibility(Lifecycle.Read)
+  internalMetadata?: AppLinkMemberInternalMetadata;
 
   @doc("Upgrade profile for AppLink Member")
   upgradeProfile: UpgradeProfile;

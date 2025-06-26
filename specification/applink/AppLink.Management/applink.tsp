@@ -18,8 +18,9 @@ model AppLink is TrackedResource<AppLinkProperties> {
 
 @doc("AppLink properties")
 model AppLinkProperties {
+  @visibility(Lifecycle.Read)
   @doc("Internal metadata for AppLink")
-  internalMetadata: AppLinkInternalMetadata;
+  internalMetadata?: AppLinkInternalMetadata;
 
   @doc("Provisioning state of the AppLink resource")
   @visibility(Lifecycle.Read)
