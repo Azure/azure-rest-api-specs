@@ -33,6 +33,16 @@ directive:
   - suppress: RequiredPropertiesModified
     from: storageDiscoveryWorkspace.json
     reason: Properties are correctly optional in PATCH operations (StorageDiscoveryWorkspacePropertiesUpdate) while being required in PUT operations (StorageDiscoveryWorkspaceProperties). This follows ARM best practices where PATCH operations allow partial updates with optional properties.
+  - suppress: ReferenceRedirection
+    from: storageDiscoveryWorkspace.json
+    reason: The model references change due to intentional model renames using @renamedFrom decorators (e.g., GetReportContent renamed to GetReportRequest in v2025-06-01-preview). This is the expected behavior for API evolution and maintains backward compatibility.
+  - suppress: NoVersionChange
+    from: 
+      - Microsoft.StorageDiscovery/preview/2024-12-01-preview/storageDiscoveryWorkspace.json
+      - Microsoft.StorageDiscovery/preview/2025-01-01-preview/storageDiscoveryWorkspace.json
+      - Microsoft.StorageDiscovery/preview/2025-03-01-preview/storageDiscoveryWorkspace.json
+      - Microsoft.StorageDiscovery/preview/2025-04-01-preview/storageDiscoveryWorkspace.json
+    reason: These are stable preview API versions that are not being actively modified. The NoVersionChange detection correctly identifies that these versions have not changed between branches, which is the expected behavior for stable API versions. Only the current development version (2025-06-01-preview) should have active changes.
 ```
 
 ### Basic Information
