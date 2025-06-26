@@ -26,6 +26,59 @@ model EvaluatorConfiguration {
   dataMapping?: Record<string>;
 }
 
+@doc("Dataset as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model MetricSummary extends Results {
+  type: "metricSummary";
+
+  @doc("Aggregated summary per evaluator across all rows.")
+    data: Record<{
+    score: string;
+    gpt_score: string;
+    threshold: string;
+    binary_aggregate: string;
+  }>;
+}
+
+@doc("Raw data per row output up to truncation data max size threshold.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model RawData extends Results {
+  type: "rawData";
+
+  data: Array<{
+    label: string;
+    reasoning: string;
+    version: string;
+  }>;
+}
+
+@doc("Currently blob storage only supported for evaluation result/result uploading.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Storage extends Results {
+  type: "storage";
+
+  @doc("Empty if raw data is stored.")
+  evaluationResultAssetId: string;
+
+  storageConnectionId: string;
+
+  dataTableName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract result class.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Results {
+  @doc("Type of the evaluation result")
+  type: string;
+}
+
+
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Abstract data class.")
 @discriminator("type")
@@ -160,6 +213,9 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Output Results.")
+  outputs: Array<Results>;
 }
 
 @doc("Continuous Evaluation Specific Configuration Definition")
