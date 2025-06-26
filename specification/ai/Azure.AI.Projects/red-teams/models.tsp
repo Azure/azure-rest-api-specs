@@ -129,7 +129,7 @@ union RiskCategory {
 model RedTeam {
   @doc("Identifier of the red team.")
   @key("name")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   id: string;
 
   @doc("Display name of the red-team scan.")
@@ -213,7 +213,7 @@ model TargetHarm {
 model RedTeamUpload {
   @doc("Identifier of the red team.")
   @key("name")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: string;
 
   @doc("Display mame of the red-team scan.")
@@ -241,11 +241,9 @@ model RedTeamUpload {
   properties?: Record<string>;
 
   @doc("Status of the red-team. It is set by service and is read-only.")
-  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }")
-  @visibility(Lifecycle.Read)
   outputs?: Record<string>;
 
   @doc("Metadata containing createdBy and modifiedBy information.")
