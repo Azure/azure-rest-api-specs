@@ -32,7 +32,40 @@ model EvaluatorConfiguration {
 model MetricSummary extends Results {
   type: "metricSummary";
 
-  //Todo
+  @doc("Aggregated summary per evaluator across all rows.")
+    data: Record<{
+    score: string;
+    gpt_score: string;
+    threshold: string;
+    binary_aggregate: string;
+  }>;
+}
+
+@doc("Raw data per row output up to truncation data max size threshold.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model RawData extends Results {
+  type: "rawData";
+
+  data: Array<{
+    label: string;
+    reasoning: string;
+    version: string;
+  }>;
+}
+
+@doc("Currently blob storage only supported for evaluation result/result uploading.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Storage extends Results {
+  type: "storage";
+
+  @doc("Empty if raw data is stored.")
+  evaluationResultAssetId: string;
+
+  storageConnectionId: string;
+
+  dataTableName: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
