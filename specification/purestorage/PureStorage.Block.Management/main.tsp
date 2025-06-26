@@ -1,6 +1,7 @@
 import "./LiftrBase.Storage/main.tsp";
 import "@typespec/openapi";
 
+// TEST COMMENT: Testing release plan creation - safe to ignore this change
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)
