@@ -57,7 +57,7 @@ enum Versions {
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a standard ARM operations list endpoint, not a resource operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
