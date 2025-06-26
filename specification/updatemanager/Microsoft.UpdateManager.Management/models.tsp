@@ -77,6 +77,16 @@ model WindowsParameters {
 
   @doc("Exclude KBs requiring reboot.")
   excludeKbsRequiringReboot?: boolean;
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("This is used to include patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.")
+  @maxItems(100)
+  patchNameMasksToInclude?: string[];
+
+  @added(Versions.v2025_06_01_preview)
+  @doc("This is used to exclude patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.")
+  @maxItems(100)
+  patchNameMasksToExclude?: string[];
 }
 
 @doc("Policies properties.")

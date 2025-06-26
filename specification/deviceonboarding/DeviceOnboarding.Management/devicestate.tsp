@@ -36,6 +36,7 @@ scalar PolicyResourceId
   ]>;
 
 @doc("Representation of a previously allocated endpoint")
+@removed(Versions.v2025_05_01_preview)
 model AllocatedEndpoint {
   @doc("Name of the endpoint.")
   name: string;
@@ -66,6 +67,7 @@ model DeviceStateProperties {
   policyResourceId: PolicyResourceId;
 
   @doc("Array of previously allocated endpoints")
+  @removed(Versions.v2025_05_01_preview)
   @maxItems(1)
   @extension("x-ms-identifiers", #["name"])
   allocatedEndpoints?: Array<AllocatedEndpoint>;
