@@ -56,8 +56,6 @@ interface DedicatedHsms {
   @operationId("DedicatedHsm_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DedicatedHsm,
-    LroHeaders = ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
     Error = DedicatedHsmError
   >;
 
