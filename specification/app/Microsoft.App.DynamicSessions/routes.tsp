@@ -38,10 +38,12 @@ interface CodeExecution {
       @body
       codeExecutionRequest: SessionCodeExecutionRequest;
     },
-    AcceptedResponse &
+    (OkResponse &
+      SessionCodeExecutionResource) |
+    (AcceptedResponse &
       SessionCodeExecutionResource &
       ExecutionOperationIdHeader &
-      Foundations.LongRunningStatusLocation
+      Foundations.LongRunningStatusLocation)
   >;
 
   @doc("Get the code execution result.")
