@@ -1,12 +1,11 @@
-# `oav-runner`
+# `summarize-checks`
 
-This is a simple wrapper script around the `oav` tool. It utilizes shared js code code modules from `.github/shared` to
-determine a list of swagger specs that should be processed, processes them, then outputs necessary detailed run
-information.
+This code base functions as a replacement for `pipelinebot` and is intended to be used with the new actions-only checks
+present in azure-rest-api-specs.
 
 ## Invocation shortcuts
 
 ```
-cd <repo root>
-npm ci && npm exec --no -- oav-runner <targetdir> <"specs"/"examples">
+export GITHUB_TOKEN="blahblah"
+npx summarize-checks --owner scbedd --repo azure-rest-api-specs --pr 1 --sha 826b0b976479e5c1aa5e66e1cf43a3f9e66a2477
 ```

@@ -1,7 +1,11 @@
 name: "[TEST-IGNORE] Summarize Checks"
 
 on:
+  # We care about more labels than those that trigger a workflow run right? As in there are labels added that should update
+  # next steps to merge, but those labels might not trigger one of our status update runs.
+  # So we run this workflow on any label added to a PR.
   workflow_run:
+    # todo, I feel like I'm missing a couple. I recall 6 being necessary/present.
     workflows:
     - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
     - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
@@ -9,6 +13,9 @@ on:
     - "Swagger LintDiff - Set Status"
     - "SDK Validation Status"
     types: [completed]
+  pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
+    types:
+      - labeled
 
 permissions:
   actions:       read   # to inspect workflow_run metadata
@@ -32,10 +39,11 @@ jobs:
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
+      # depending on the triggering event, the PR number and SHA will be in different places
       - name: Summarize Checks
         run: |
           npx summarize-checks \
             --owner ${{ github.repository_owner }} \
             --repo  ${{ github.event.repository.name }} \
-            --pr    ${{ github.event.workflow_run.pull_requests[0].number }} \
-            --sha   ${{ github.event.workflow_run.head_sha }}
+            --pr    ${{ github.event.pull_request.number || github.event.workflow_run.pull_requests[0].number }} \
+            --sha   ${{ github.event.pull_request.head.sha || github.event.workflow_run.head_sha }}

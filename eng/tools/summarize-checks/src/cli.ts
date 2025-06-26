@@ -1,15 +1,18 @@
 #!/usr/bin/env node
-
-      // - name: Summarize Checks
-      //   run: |
-      //     npx summarize-checks \
-      //       --owner ${{ github.repository_owner }} \
-      //       --repo  ${{ github.event.repository.name }} \
-      //       --pr    ${{ github.event.workflow_run.pull_requests[0].number }} \
-      //       --sha   ${{ github.event.workflow_run.head_sha }}
-
-
 import { parseArgs, ParseArgsConfig } from "node:util";
+import { Octokit } from "@octokit/rest";
+import { CheckInspectorOptions, getPrState } from "./main.js";
+
+export function initOctokit(): Octokit {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) {
+    // todo: do we want to TRY to continue unauthenticated or simply crash out here?
+    console.warn("Warning: GITHUB_TOKEN is not set. Continuing unauthenticated — you may hit rate limits or see failures.");
+    return new Octokit();
+  } else {
+    return new Octokit({ auth: token });
+  }
+}
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -31,7 +34,7 @@ export async function main() {
       },
       owner: {
         type: "string",
-        short: "p",
+        short: "o",
         multiple: false,
         default: "Azure"
       },
@@ -40,18 +43,30 @@ export async function main() {
   };
 
   const { values: opts } = parseArgs(config);
-  // this option has a default value of process.cwd(), so we can assume it is always defined
-  // just need to resolve that here to make ts aware of it
-
   const repo = opts.repo as string;
   const sha = opts.sha as string;
   const pr = opts.pr as string;
   const owner = opts.owner as string;
 
   if (!repo || !sha || !pr || !owner) {
-    console.error("Missing required options: --repo, --sha, --pr");
+    console.error("Missing required options: --repo, --owner, --sha, --pr");
     process.exit(1);
   }
+
+  const kit = initOctokit();
+
+  let options: CheckInspectorOptions = {
+    owner,
+    repo,
+    prNumber: parseInt(pr, 10),
+    commitSha: sha,
+  };
+
+  const prState = await getPrState(kit, options);
+
+  console.log("Check runs:", JSON.stringify(prState.runs));
+  console.log("Combined status:", JSON.stringify(prState.status));
+  console.log("Labels on PR:", JSON.stringify(prState.labels));
 
   console.log(`Hello from summarize-checks CLI! You passed in a target repository: ${repo}, commit SHA: ${sha}, and pull request number: ${pr}.`);
   process.exit()
