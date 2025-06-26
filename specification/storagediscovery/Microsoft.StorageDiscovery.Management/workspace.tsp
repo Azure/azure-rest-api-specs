@@ -44,11 +44,20 @@ model StorageDiscoveryWorkspaceProperties {
   @doc("The view level storage discovery data estate")
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageEstateViewLevel")
-  @madeRequired(ApiVersion.v2025_06_01_preview)
+  @removed(ApiVersion.v2025_06_01_preview)
   @typeChangedFrom(
     ApiVersion.v2025_03_01_preview,
     Azure.Core.armResourceIdentifier
   )
+  discoveryScopeLevels: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+      scopes: ["Tenant", "Subscription", "ResourceGroup"];
+    }
+  ]>[];
+
+  @doc("The view level storage discovery data estate")
+  @added(ApiVersion.v2025_06_01_preview)
   workspaceRoots: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -67,7 +76,6 @@ model StorageDiscoveryWorkspaceProperties {
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageCollections")
   @renamedFrom(ApiVersion.v2025_06_01_preview, "discoveryScopes")
-  @madeRequired(ApiVersion.v2025_06_01_preview)
   scopes: StorageDiscoveryScope[];
 
   @doc("The destinations to which the storage workspace sends data")

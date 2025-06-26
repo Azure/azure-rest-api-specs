@@ -30,6 +30,9 @@ directive:
   - suppress: OperationIdNounVerb
     from: storageDiscoveryWorkspace.json
     reason: The Report_Report operation ID is intentionally named this way for consistency with the API design spec from the PM's. This follows the service's naming convention for report operations.
+  - suppress: RequiredPropertiesModified
+    from: storageDiscoveryWorkspace.json
+    reason: Properties are correctly optional in PATCH operations (StorageDiscoveryWorkspacePropertiesUpdate) while being required in PUT operations (StorageDiscoveryWorkspaceProperties). This follows ARM best practices where PATCH operations allow partial updates with optional properties.
 ```
 
 ### Basic Information
