@@ -56,9 +56,6 @@ union ProvisioningState {
   /** The resource is being provisioned */
   Provisioning: "Provisioning",
 
-  /** The resource is updating */
-  Updating: "Updating",
-
   /** The resource is being deleted */
   Deleting: "Deleting",
 
