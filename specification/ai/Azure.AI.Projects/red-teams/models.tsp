@@ -132,8 +132,8 @@ model RedTeam {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Name of the red-team scan.")
-  scanName?: string;
+  @doc("Name of the red-team display name.")
+  displayName?: string;
 
   @doc("Number of simulation rounds.")
   numTurns: int32;
