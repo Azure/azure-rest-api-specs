@@ -6833,24 +6833,6 @@ model VmImagesInEdgeZoneListResult {
 }
 
 /**
- * The List Virtual Machine Images operation response.
- */
-@pagedResult
-model VirtualMachineImagesWithPropertiesListResult {
-  /**
-   * The VirtualMachineImage items on this page
-   */
-  @items
-  value?: VirtualMachineImage[];
-
-  /**
-   * The link to the next page of items
-   */
-  @nextLink
-  nextLink?: ResourceLocation<VirtualMachineImage>;
-}
-
-/**
  * Describes the properties of a Virtual Machine Extension Image.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
