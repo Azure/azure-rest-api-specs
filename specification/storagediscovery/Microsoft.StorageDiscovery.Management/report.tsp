@@ -37,7 +37,7 @@ interface Report {
   get is ArmResourceRead<ReportResource>;
   @autoRoute
   @post
-  generate is ArmResourceActionAsync<
+  report is ArmResourceActionAsync<
     ReportResource,
     GetReportContent,
     GetReportResult
