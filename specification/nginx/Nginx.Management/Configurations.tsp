@@ -45,7 +45,7 @@ model NginxConfigurationFile {
 /**
  * Request model for a protected configuration file.
  */
-model NginxConfigurationProtectedFileRequest {
+model NginxConfigurationProtectedFileContent {
   /**
    * File content in Nginx configuration format, UTF-8 encoded.
    */
@@ -65,7 +65,7 @@ model NginxConfigurationProtectedFileRequest {
 /**
  * Response model for a protected configuration file.
  */
-model NginxConfigurationProtectedFileResponse {
+model NginxConfigurationProtectedFileResult {
   /**
    * Virtual path of the file.
    */
@@ -113,7 +113,7 @@ model NginxConfigurationResponseProperties {
    * List of protected files.
    */
   @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
-  protectedFiles?: NginxConfigurationProtectedFileResponse[];
+  protectedFiles?: NginxConfigurationProtectedFileResult[];
 
   /**
    * Configuration package details.
@@ -146,7 +146,7 @@ model NginxConfigurationRequestProperties {
    * List of protected file requests.
    */
   @OpenAPI.extension("x-ms-identifiers", #["virtualPath"])
-  protectedFiles?: NginxConfigurationProtectedFileRequest[];
+  protectedFiles?: NginxConfigurationProtectedFileContent[];
 
   /**
    * Configuration package data.
@@ -203,7 +203,7 @@ model AnalysisConfig {
    * List of protected files.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  protectedFiles?: NginxConfigurationProtectedFileRequest[];
+  protectedFiles?: NginxConfigurationProtectedFileContent[];
 
   /**
    * Configuration package details.
@@ -223,13 +223,13 @@ model AnalysisResult {
   /**
    * Analysis result data.
    */
-  data?: AnalysisResultData;
+  data?: AnalysisResultContent;
 }
 
 /**
  * Analysis result data containing errors and diagnostics.
  */
-model AnalysisResultData {
+model AnalysisResultContent {
   /**
    * List of errors found during analysis.
    */

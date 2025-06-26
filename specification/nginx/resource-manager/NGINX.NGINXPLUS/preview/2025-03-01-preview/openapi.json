@@ -1691,7 +1691,7 @@
           "type": "array",
           "description": "List of protected files.",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileContent"
           },
           "x-ms-identifiers": []
         },
@@ -1766,7 +1766,7 @@
           "description": "The status of the analysis."
         },
         "data": {
-          "$ref": "#/definitions/AnalysisResultData",
+          "$ref": "#/definitions/AnalysisResultContent",
           "description": "Analysis result data."
         }
       },
@@ -1774,7 +1774,7 @@
         "status"
       ]
     },
-    "AnalysisResultData": {
+    "AnalysisResultContent": {
       "type": "object",
       "description": "Analysis result data containing errors and diagnostics.",
       "properties": {
@@ -2134,7 +2134,7 @@
           "type": "array",
           "description": "List of protected file requests.",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileContent"
           },
           "x-ms-identifiers": [
             "virtualPath"
@@ -2478,7 +2478,7 @@
         }
       }
     },
-    "NginxConfigurationProtectedFileRequest": {
+    "NginxConfigurationProtectedFileContent": {
       "type": "object",
       "description": "Request model for a protected configuration file.",
       "properties": {
@@ -2496,7 +2496,7 @@
         }
       }
     },
-    "NginxConfigurationProtectedFileResponse": {
+    "NginxConfigurationProtectedFileResult": {
       "type": "object",
       "description": "Response model for a protected configuration file.",
       "properties": {
@@ -2548,7 +2548,7 @@
           "type": "array",
           "description": "List of protected file requests.",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileContent"
           },
           "x-ms-identifiers": [
             "virtualPath"
@@ -2587,7 +2587,7 @@
           "type": "array",
           "description": "List of protected files.",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationProtectedFileResponse"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileResult"
           },
           "x-ms-identifiers": [
             "virtualPath"
