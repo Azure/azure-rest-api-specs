@@ -206,6 +206,53 @@ model TargetHarm {
   RiskSubType?: string;
 }
 
+@doc("Red team details.")
+@resource("runs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model RedTeamUpload {
+  @doc("Identifier of the red team.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Name of the red-team scan.")
+  displayName?: string;
+
+  @doc("Number of simulation rounds.")
+  numTurns?: int32;
+
+  @doc("List of attack strategies or nested lists of attack strategies.")
+  attackStrategy?: AttackStrategy[];
+
+  @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
+  simulationOnly?: boolean;
+
+  @doc("List of risk categories to generate attack objectives for.")
+  riskCategories?: RiskCategory[];
+
+  @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
+  applicationScenario?: string;
+
+  @doc("Red team's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  @doc("Status of the red-team. It is set by service and is read-only.")
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }")
+  @visibility(Lifecycle.Read)
+  outputs?: Record<string>;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+}
+
 // Simulation Private Dto
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Attack Objective")

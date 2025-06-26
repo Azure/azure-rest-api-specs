@@ -5222,6 +5222,83 @@
         "outputs"
       ]
     },
+    "RedTeamUpload": {
+      "type": "object",
+      "description": "Red team details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the red team.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Name of the red-team scan."
+        },
+        "numTurns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of simulation rounds."
+        },
+        "attackStrategy": {
+          "type": "array",
+          "description": "List of attack strategies or nested lists of attack strategies.",
+          "items": {
+            "$ref": "#/definitions/AttackStrategy"
+          }
+        },
+        "simulationOnly": {
+          "type": "boolean",
+          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result."
+        },
+        "riskCategories": {
+          "type": "array",
+          "description": "List of risk categories to generate attack objectives for.",
+          "items": {
+            "$ref": "#/definitions/RiskCategory"
+          }
+        },
+        "applicationScenario": {
+          "type": "string",
+          "description": "Application scenario for the red team operation, to generate scenario specific attacks."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Red team's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the red-team. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "ResultType": {
       "type": "string",
       "description": "Type of Evaluation result",
