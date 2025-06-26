@@ -5600,7 +5600,36 @@
           "type": "string",
           "format": "uri",
           "description": "Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        },
+        "keyEncryptionKeyIdentity": {
+          "type": "object",
+          "description": "The managed identity configuration used for key vault access.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/CmkIdentityType",
+              "description": "The type of managed identity to use for key vault access."
+            },
+            "resourceId": {
+              "type": "string",
+              "description": "For system assigned identity, this will be null. For user assigned identity, this should be the resource ID of the identity."
+            }
+          },
+          "required": [
+            "type"
+          ]
         }
+      }
+    },    
+    "CmkIdentityType": {
+      "description": "The type of identity used to access the key vault key.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CmkIdentityType",
+        "modelAsString": true
       }
     },
     "DevboxDisksEncryptionEnableStatus": {
