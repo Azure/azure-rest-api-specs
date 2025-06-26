@@ -65,7 +65,7 @@ interface RedTeams {
 
       @doc("Redteam to upload.")
       @Http.bodyRoot
-      redteam: RedTeamUpload;
+      redteam: RedTeam;
     },
     RedTeam
   >;
@@ -90,7 +90,7 @@ interface RedTeams {
 
       @doc("Redteam upload to update.")
       @Http.bodyRoot
-      redteam: RedTeamUpload;
+      redteam: RedTeam;
     },
     RedTeam
   >;
