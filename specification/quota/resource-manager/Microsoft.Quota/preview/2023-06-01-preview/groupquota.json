@@ -769,8 +769,8 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests/{resourceName}": {
-      "put": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/createLimitRequest": {
+      "post": {
         "tags": [
           "GroupQuotaLimitRequest"
         ],
@@ -798,9 +798,6 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -819,7 +816,7 @@
               "$ref": "#/definitions/SubmittedResourceRequestStatus"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Accepted, Create or Update",
             "headers": {
               "Retry-After": {
@@ -835,9 +832,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -873,9 +867,6 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1211,8 +1202,8 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{resourceName}": {
-      "put": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/createAllocationRequest": {
+      "post": {
         "tags": [
           "SubscriptionQuotaAllocationRequest"
         ],
@@ -1242,9 +1233,6 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1264,7 +1252,7 @@
               "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
-          "201": {
+          "202": {
             "description": "Request Created. Create or Update",
             "headers": {
               "Retry-After": {
@@ -1280,9 +1268,6 @@
                 "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LROResponse"
             }
           },
           "default": {
@@ -1321,9 +1306,6 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1789,6 +1771,10 @@
             "region": {
               "$ref": "#/definitions/RegionScope"
             },
+            "resourceName": {
+              "type": "string",
+              "description": "The resource name, such as SKU name."
+            },
             "comments": {
               "description": "GroupQuota Request comments and details for request. This is optional paramter to provide more details related to the requested resource.",
               "type": "string"
@@ -1831,6 +1817,10 @@
             "region": {
               "type": "string",
               "description": "The location for which the subscription is allocated"
+            },
+            "resourceName": {
+              "type": "string",
+              "description": "The resource name, such as SKU name."
             }
           }
         }
