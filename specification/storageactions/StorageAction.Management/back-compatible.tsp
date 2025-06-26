@@ -4,10 +4,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTaskPreviewAction.properties, "!csharp,!java");
+@@flattenProperty(StorageTaskPreviewAction.properties, "!csharp,!java,!python");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp,!java");
+@@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp,!java,!python");
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
@@ -16,7 +16,7 @@ using Microsoft.StorageActions;
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTask.properties, "!csharp,!java");
+@@flattenProperty(StorageTask.properties, "!csharp,!java,!python");
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
