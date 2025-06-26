@@ -1988,6 +1988,18 @@
           "type": "integer",
           "format": "int32",
           "description": "The default end time of the active hours"
+        },
+        "defaultDaysOfWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DaysOfWeek"
+          },
+          "description": "The days of the week that active hours features will be enabled. This serves as a default that can be updated by each individual user."
+        },
+        "daysOfWeekLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum amount of days per week that a user can enable active hours related features."
         }
       }
     },
@@ -2013,6 +2025,23 @@
       "x-ms-enum": {
         "name": "AutoStartEnableStatus",
         "modelAsString": true
+      }
+    },
+    "DaysOfWeek": {
+      "type": "string",
+      "description": "The days of the week.",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "DaysOfWeek",
+        "modelAsString": false
       }
     }
   },
