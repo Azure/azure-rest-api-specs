@@ -339,7 +339,6 @@ suppressions:
     reason: Existing issue from last version.
   - code: XmsPageableForListCalls
     from: ComputeRP.json
-    where: $..[?(@.operationId == "VirtualMachineImages_ListWithProperties")]
     reason: VirtualMachineImages_ListWithProperties, which derives from VirtualMachineImages_List operation, returns a fixed list and does not support paging as it is a legacy operation. 
 ```
 
