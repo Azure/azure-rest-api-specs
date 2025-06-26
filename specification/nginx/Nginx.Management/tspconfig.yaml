@@ -1,8 +1,7 @@
+output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/nginx"
-  "service-directory-name":
-    default: "nginx"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -29,9 +28,8 @@ options:
     namespace: "com.azure.resourcemanager.nginxplus"
     service-name: "nginx"
   "@azure-tools/typespec-ts":
-    package-dir: "arm-nginxplus"
     experimental-extensible-enums: true
-    service-name: "nginxplus" 
+    package-dir: "arm-nginxplus"
     flavor: azure
     package-details:
       name: "@azure/arm-nginxplus"
