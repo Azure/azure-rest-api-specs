@@ -132,7 +132,7 @@ model RedTeam {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Name of the red-team display name.")
+  @doc("Display name of the red-team scan.")
   displayName?: string;
 
   @doc("Number of simulation rounds.")
@@ -216,7 +216,7 @@ model RedTeamUpload {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Name of the red-team scan.")
+  @doc("Display mame of the red-team scan.")
   displayName?: string;
 
   @doc("Number of simulation rounds.")
