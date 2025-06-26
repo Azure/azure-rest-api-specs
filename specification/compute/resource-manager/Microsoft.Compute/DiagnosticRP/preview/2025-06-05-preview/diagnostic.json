@@ -544,6 +544,10 @@
         ],
         "operationId": "Capacity Blocks_Get",
         "description": "Get available capacity blocks.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -1768,14 +1772,20 @@
       "description": "The quota restrictions on recommended VMSize."
     },
     "CapacityBlocks": {
-      "type": "array",
-      "description": "Capacity blocks.",
-      "items": {
-        "$ref": "#/definitions/CapacityBlock"
-      },
-      "nextLink": {
-        "description": "The URI used to fetch the next page of capacity blocks. When there are no more pages, this is null.",
-        "type": "string"
+      "description": "Lists available Capacity Blocks for a subscription.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapacityBlock"
+          },
+          "description": "The collection of available Capacity Blocks."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
       }
     },
     "CapacityBlock": {
@@ -1783,16 +1793,16 @@
       "description": "Capacity block.",
       "x-ms-azure-resource": true,
       "properties": {
+        "id": {
+          "description": "The id of the capacity block.",
+          "type": "string"
+        },
         "name": {
           "description": "The name of the capacity block.",
           "type": "string"
         },
         "type": {
           "description": "The type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The id of the capacity block.",
           "type": "string"
         },
         "zone": {
