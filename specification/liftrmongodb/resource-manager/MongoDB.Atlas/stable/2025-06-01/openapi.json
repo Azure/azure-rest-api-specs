@@ -490,29 +490,6 @@
       },
       "readOnly": true
     },
-    "BaseResourcePatchProperties": {
-      "type": "object",
-      "description": "Base patch resource properties that can be extended for arm resources.",
-      "properties": {
-        "marketplace": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
-          "description": "Marketplace details of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "user": {
-          "$ref": "#/definitions/UserDetails",
-          "description": "Details of the user."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
-        }
-      }
-    },
     "BaseResourceProperties": {
       "type": "object",
       "description": "Base resource properties that can be extended for arm resources.",
@@ -670,20 +647,6 @@
         "user"
       ]
     },
-    "OrganizationPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties specific to update Organization",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/UserDetailsUpdate",
-          "description": "Details of the user."
-        },
-        "partnerProperties": {
-          "$ref": "#/definitions/PartnerPropertiesUpdate",
-          "description": "MongoDB properties"
-        }
-      }
-    },
     "OrganizationResource": {
       "type": "object",
       "description": "The resource model definition for an Azure Organization",
@@ -726,11 +689,11 @@
     },
     "OrganizationResourceUpdate": {
       "type": "object",
-      "description": "The update request model definition for an Azure Organization",
+      "description": "The type used for update operations of the OrganizationResource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/OrganizationPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         },
         "tags": {
           "type": "object",
@@ -739,9 +702,23 @@
             "type": "string"
           }
         },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
+        "properties": {
+          "$ref": "#/definitions/OrganizationResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "OrganizationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OrganizationResource.",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/UserDetailsUpdate",
+          "description": "Details of the user."
+        },
+        "partnerProperties": {
+          "$ref": "#/definitions/PartnerPropertiesUpdate",
+          "description": "MongoDB properties"
         }
       }
     },
