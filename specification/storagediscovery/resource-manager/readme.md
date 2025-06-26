@@ -25,6 +25,10 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 directive:
   - suppress: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
+    where: $.definitions.StorageDiscoveryWorkspaceProperties.properties.sku
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  - suppress: PatchBodyParametersSchema
+    from: storageDiscoveryWorkspace.json
     where: $.definitions.StorageDiscoveryWorkspacePropertiesUpdate.properties.sku
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
 ```
