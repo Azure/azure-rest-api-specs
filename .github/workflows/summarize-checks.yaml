@@ -1,0 +1,41 @@
+name: "[TEST-IGNORE] Summarize Checks"
+
+on:
+  workflow_run:
+    workflows:
+    - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
+    - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
+    - "\\[TEST-IGNORE\\] Swagger Avocado - Set Status"
+    - "Swagger LintDiff - Set Status"
+    - "SDK Validation Status"
+    types: [completed]
+
+permissions:
+  actions:       read   # to inspect workflow_run metadata
+  contents:      read   # for actions/checkout
+  checks:        read   # for octokit.rest.checks.listForRef
+  statuses:      read   # for octokit.rest.repos.getCombinedStatusForRef
+  issues:        write  # to post comments via the Issues API I'm not certain if I need this one or pull-requests only. we'll find out!
+  pull-requests: write  # to post comments via the Pull Requests API
+
+jobs:
+  run-summarize-checks:
+    name: "[TEST-IGNORE] Summarize Checks"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Summarize Checks
+        run: |
+          npx summarize-checks \
+            --owner ${{ github.repository_owner }} \
+            --repo  ${{ github.event.repository.name }} \
+            --pr    ${{ github.event.workflow_run.pull_requests[0].number }} \
+            --sha   ${{ github.event.workflow_run.head_sha }}
