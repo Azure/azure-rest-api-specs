@@ -1573,6 +1573,10 @@ model ImmutableStorageWithVersioning {
   migrationState?: MigrationState;
 }
 
+@minLength(3)
+@maxLength(23)
+scalar LimitedString extends string;
+
 /**
  * The LegalHold property of a blob container.
  */
@@ -1586,7 +1590,7 @@ model LegalHold {
   /**
    * Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP.
    */
-  tags: string[];
+  tags: LimitedString[];
 
   /**
    * When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.

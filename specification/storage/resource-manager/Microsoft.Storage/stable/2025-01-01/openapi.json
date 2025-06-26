@@ -7417,8 +7417,7 @@
           "description": "The storage account blob inventory policy rules. The rule is applied when it is enabled.",
           "items": {
             "$ref": "#/definitions/BlobInventoryPolicyRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -9829,7 +9828,7 @@
           "type": "array",
           "description": "Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/LimitedString"
           }
         },
         "allowProtectedAppendWritesAll": {
@@ -9863,6 +9862,11 @@
           "description": "Protected append blob writes history."
         }
       }
+    },
+    "LimitedString": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 23
     },
     "ListAccountSasResponse": {
       "type": "object",
@@ -10284,8 +10288,7 @@
           "description": "An array of blob index tag based filters, there can be at most 10 tag filters",
           "items": {
             "$ref": "#/definitions/TagFilter"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -10347,8 +10350,7 @@
           "description": "The Storage Account ManagementPolicies Rules. See more details in: https://learn.microsoft.com/azure/storage/blobs/lifecycle-management-overview.",
           "items": {
             "$ref": "#/definitions/ManagementPolicyRule"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -12217,8 +12219,7 @@
           "items": {
             "$ref": "#/definitions/SKUCapability"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "restrictions": {
           "type": "array",
@@ -13271,8 +13272,7 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "nextLink": {
           "type": "string"
@@ -13930,8 +13930,7 @@
           "description": "Gets or sets the list of Storage Resource Usages.",
           "items": {
             "$ref": "#/definitions/Usage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string"
