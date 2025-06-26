@@ -76,10 +76,11 @@ interface StorageTasks {
   /**
    * Delete the storage task resource.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTask,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
