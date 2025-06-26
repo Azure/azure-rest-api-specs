@@ -1,3 +1,6 @@
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
@@ -47,21 +50,22 @@ interface DryrunResources {
   /**
    * get a dryrun job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_GetDryrun")
   getDryrun is DryrunResourceOps.Read<DryrunResource>;
 
   /**
    * create a dryrun job to do necessary check before actual creation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_CreateDryrun")
   createDryrun is DryrunResourceOps.CreateOrUpdateAsync<DryrunResource>;
 
   /**
    * update a dryrun job to do necessary check before actual creation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Connector_UpdateDryrun")
   updateDryrun is DryrunResourceOps.CustomPatchAsync<
@@ -73,14 +77,14 @@ interface DryrunResources {
   /**
    * delete a dryrun job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_DeleteDryrun")
   deleteDryrun is DryrunResourceOps.DeleteSync<DryrunResource>;
 
   /**
    * list dryrun jobs
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connector_ListDryrun")
   listDryrun is DryrunResourceOps.List<
     DryrunResource,
@@ -94,6 +98,7 @@ interface LinkersOps
       {
         ...ApiVersionParameter,
 
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path(#{ allowReserved: true })
         resourceUri: string,
 
@@ -121,6 +126,7 @@ interface Linkers {
   /**
    * add a dryrun job to do necessary check before actual creation
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   updateDryrun is LinkersOps.CustomPatchAsync<
     DryrunResource,
