@@ -865,20 +865,16 @@
         "tags": [
           "OperationStatus"
         ],
-        "operationId": "FluidRelayServers_OperationStatus",
+        "operationId": "FluidRelayServers_GetOperationStatus",
         "x-ms-examples": {
           "Workspace Operation Status": {
-            "$ref": "./examples/FluidRelayServers_OperationStatus.json"
+            "$ref": "./examples/FluidRelayServers_GetOperationStatus.json"
           }
         },
         "description": "The status of provisioning operation.",
         "parameters": [
           {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region name where the operation status is located."
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/LocationParameter"
           },
           {
             "name": "operationStatusId",
@@ -891,19 +887,19 @@
             "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             },
             "description": "Error in operation.",
             "x-ms-error-response": true
