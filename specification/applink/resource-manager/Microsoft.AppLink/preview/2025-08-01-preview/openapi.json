@@ -79,6 +79,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -121,6 +126,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AppLinkReleaseChannelProfiles_ListByLocation": {
+            "$ref": "./examples/AppLinkReleaseChannelProfiles_ListByLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -156,6 +166,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinks_ListByResourceGroup": {
+            "$ref": "./examples/AppLinks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -201,6 +216,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinks_Get": {
+            "$ref": "./examples/AppLinks_Get.json"
           }
         }
       },
@@ -267,6 +287,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinks_CreateOrUpdate": {
+            "$ref": "./examples/AppLinks_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -336,6 +361,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AppLinks_Update": {
+            "$ref": "./examples/AppLinks_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -391,6 +421,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AppLinks_Delete": {
+            "$ref": "./examples/AppLinks_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -435,6 +470,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinkMembers_ListByAppLink": {
+            "$ref": "./examples/AppLinkMembers_ListByAppLink.json"
           }
         },
         "x-ms-pageable": {
@@ -488,6 +528,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinkMembers_Get": {
+            "$ref": "./examples/AppLinkMembers_Get.json"
           }
         }
       },
@@ -562,6 +607,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinkMembers_CreateOrUpdate": {
+            "$ref": "./examples/AppLinkMembers_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -639,6 +689,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AppLinkMembers_Update": {
+            "$ref": "./examples/AppLinkMembers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -700,6 +755,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "AppLinkMembers_Delete": {
+            "$ref": "./examples/AppLinkMembers_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -886,9 +946,9 @@
       "type": "object",
       "description": "AppLink Member properties",
       "properties": {
-        "type": {
+        "clusterType": {
           "type": "string",
-          "description": "The type of member cluster"
+          "description": "The cluster type of member cluster"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -909,7 +969,7 @@
         }
       },
       "required": [
-        "type",
+        "clusterType",
         "metadata",
         "internalMetadata",
         "upgradeProfile"
@@ -919,9 +979,9 @@
       "type": "object",
       "description": "AppLink Member properties",
       "properties": {
-        "type": {
+        "clusterType": {
           "type": "string",
-          "description": "The type of member cluster"
+          "description": "The cluster type of member cluster"
         },
         "metadata": {
           "$ref": "#/definitions/MetadataUpdate",
