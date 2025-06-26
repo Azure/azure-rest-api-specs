@@ -14,10 +14,10 @@ namespace Microsoft.Elastic;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ElasticVersionsOperationGroup {
   /**
-   * Get a list of available versions for a region.
+   * Retrieve a list of all available Elastic versions for a specified region, helping you choose the best version for your deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get a list of available versions for a region.")
+  @summary("Retrieve a list of all available Elastic versions for a specified region, helping you choose the best version for your deployment.")
   @operationId("ElasticVersions_List")
   @autoRoute
   @get
@@ -39,10 +39,10 @@ interface ElasticVersionsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationsOperationGroup {
   /**
-   * Fetch User API Key from internal database, if it was generated and stored while creating the Elasticsearch Organization.
+   * Fetch the User API Key from the internal database, if it was generated and stored during the creation of the Elasticsearch Organization.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Fetch User API Key from internal database, if it was generated and stored while creating the Elasticsearch Organization.")
+  @summary("Fetch the User API Key from the internal database, if it was generated and stored during the creation of the Elasticsearch Organization.")
   @operationId("Organizations_GetApiKey")
   @autoRoute
   @action("getOrganizationApiKey")
@@ -51,15 +51,16 @@ interface OrganizationsOperationGroup {
     Response = UserApiKeyResponse,
     Scope = SubscriptionActionScope,
     Parameters = {},
-    Error = ResourceProviderDefaultErrorResponse
+    Error = ResourceProviderDefaultErrorResponse,
+    OptionalRequestBody = true
   >;
   /**
   >;
   /**
-   * Get Elastic Organization To Azure Subscription Mapping details for the logged-in user.
+   * Retrieve mapping details between the Elastic Organization and Azure Subscription for the logged-in user.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Get Elastic Organization To Azure Subscription Mapping details for the logged-in user.")
+  @summary("Retrieve mapping details between the Elastic Organization and Azure Subscription for the logged-in user.")
   @operationId("Organizations_GetElasticToAzureSubscriptionMapping")
   @autoRoute
   @action("getElasticOrganizationToAzureSubscriptionMapping")

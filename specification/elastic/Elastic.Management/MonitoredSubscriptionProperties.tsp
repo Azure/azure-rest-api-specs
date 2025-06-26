@@ -25,37 +25,64 @@ model MonitoredSubscriptionProperties
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface MonitoredCreateOrUpdateResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("monitors")
+        @pattern("^.*$")
+        monitorName: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("monitoredSubscriptions")
+        @pattern("^.*$")
+        configurationName: string,
+      }
+    > {}
+
 @armResourceOperations
 interface MonitoredSubscriptions {
   /**
-   * List all the subscriptions currently being monitored by the Elastic monitor resource.
+   * Get detailed information about all subscriptions currently being monitored by the Elastic monitor resource.
    */
   get is ArmResourceRead<MonitoredSubscriptionProperties>;
 
   /**
-   * Add the subscriptions that should be monitored by the Elastic monitor resource.
+   * Add subscriptions to be monitored by the Elastic monitor resource, enabling observability and monitoring.
    */
-  createorUpdate is ArmResourceCreateOrReplaceAsync<
+  createorUpdate is MonitoredCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   /**
-   * Updates the subscriptions that are being monitored by the Elastic monitor resource
+   * Update subscriptions to be monitored by the Elastic monitor resource, ensuring optimal observability and performance.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is MonitoredCreateOrUpdateResourceOps.CustomPatchAsync<
     MonitoredSubscriptionProperties,
-    PatchModel = MonitoredSubscriptionProperties
+    PatchModel = MonitoredSubscriptionProperties,
+    OptionalRequestBody = true
   >;
 
   /**
-   * Updates the subscriptions that are being monitored by the Elastic monitor resource
+   * Delete subscriptions being monitored by the Elastic monitor resource, removing their observability and monitoring capabilities.
    */
   delete is ArmResourceDeleteWithoutOkAsync<MonitoredSubscriptionProperties>;
 
   /**
-   * List all the subscriptions currently being monitored by the Elastic monitor resource.
+   * List all subscriptions currently being monitored by the Elastic monitor resource, helping you manage observability.
    */
   list is ArmResourceListByParent<
     MonitoredSubscriptionProperties,

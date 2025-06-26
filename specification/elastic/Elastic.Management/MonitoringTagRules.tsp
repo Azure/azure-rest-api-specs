@@ -24,11 +24,35 @@ model MonitoringTagRules
     NamePattern = "^.*$"
   >;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface TagRulesCreateOrUpdateResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("monitors")
+        @pattern("^.*$")
+        monitorName: string,
+
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("tagRules")
+        @pattern("^.*$")
+        ruleSetName: string,
+      },
+      ErrorType = ResourceProviderDefaultErrorResponse
+    > {}
 
 @armResourceOperations
 interface TagRules {
   /**
-   * Get a tag rule set for a given monitor resource.
+   * Get detailed information about a tag rule set for a given Elastic monitor resource.
    */
   get is ArmResourceRead<
     MonitoringTagRules,
@@ -36,17 +60,17 @@ interface TagRules {
   >;
 
   /**
-   * Create or update a tag rule set for a given monitor resource.
+   * Create or update a tag rule set for a given Elastic monitor resource, enabling fine-grained control over observability based on resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is TagRulesCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     MonitoringTagRules,
     Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
-   * Delete a tag rule set for a given monitor resource.
+   * Delete a tag rule set for a given Elastic monitor resource, removing fine-grained control over observability based on resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -56,7 +80,7 @@ interface TagRules {
   >;
 
   /**
-   * List the tag rules for a given monitor resource.
+   * List all tag rules for a given Elastic monitor resource, helping you manage fine-grained control over observability based on resource tags.
    */
   list is ArmResourceListByParent<
     MonitoringTagRules,

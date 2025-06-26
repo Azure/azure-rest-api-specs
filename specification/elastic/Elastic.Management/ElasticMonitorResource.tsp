@@ -50,11 +50,47 @@ model ResourceSku {
    */
   name: string;
 }
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface ElasticMonitorCreateOrUpdateResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("monitors")
+        @pattern("^.*$")
+        monitorName: string,
+      },
+      ErrorType = ResourceProviderDefaultErrorResponse
+    > {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface ElasticMonitorUpdateResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        @path
+        @segment("monitors")
+        @pattern("^.*$")
+        monitorName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface ElasticMonitorResources {
   /**
-   * Get the properties of a specific monitor resource.
+   * Get detailed properties of a specific Elastic monitor resource, helping you manage observability and performance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Monitors_Get")
@@ -64,33 +100,34 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Create a monitor resource.
+   * Create a new Elastic monitor resource in your Azure subscription, enabling observability and monitoring of your Azure resources through Elastic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Monitors_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is ElasticMonitorCreateOrUpdateResourceOps.CreateOrUpdateAsync<
     ElasticMonitorResource,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
-   * Update a monitor resource.
+   * Update an existing Elastic monitor resource in your Azure subscription, ensuring optimal observability and performance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Monitors_Update")
-  update is ArmCustomPatchAsync<
+  update is ElasticMonitorUpdateResourceOps.CustomPatchAsync<
     ElasticMonitorResource,
     PatchModel = ElasticMonitorResourceUpdateParameters,
     Response = ArmResponse<ElasticMonitorResource> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: ElasticMonitorResource;
-    })
+    }),
+    OptionalRequestBody = true
   >;
 
   /**
-   * Delete a monitor resource.
+   * Delete an existing Elastic monitor resource from your Azure subscription, removing its observability and monitoring capabilities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -102,7 +139,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List all monitors under the specified resource group.
+   * List all Elastic monitor resources within a specified resource group of the subscription, helping you audit and manage your monitoring setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Monitors_ListByResourceGroup")
@@ -113,7 +150,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List all monitors under the specified subscription.
+   * List all Elastic monitor resources within a specified subscription, helping you audit and manage your monitoring setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Monitors_List")
@@ -124,7 +161,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List the resources currently being monitored by the Elastic monitor resource.
+   * List all resources currently being monitored by the Elastic monitor resource, helping you manage observability.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listMonitoredResources")
@@ -137,7 +174,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor resource.
+   * Fetch detailed information about Elastic cloud deployments corresponding to the Elastic monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listDeploymentInfo")
@@ -150,7 +187,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Create User inside elastic deployment which are used by customers to perform operations on the elastic deployment
+   * Create or update external user configurations for your Elastic monitor resource, enabling access and management by external users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("createOrUpdateExternalUser")
@@ -169,7 +206,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Get marketplace and organization info mapped to the given monitor.
+   * Retrieve marketplace and organization billing information mapped to the given Elastic monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("getBillingInfo")
@@ -182,7 +219,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List of all active deployments that are associated with the marketplace subscription linked to the given monitor.
+   * List all active deployments associated with the marketplace subscription linked to the given Elastic monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listConnectedPartnerResources")
@@ -195,7 +232,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List the vm resources currently being monitored by the Elastic monitor resource.
+   * List all VM resources currently being monitored by the Elastic monitor resource, helping you manage observability.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -209,7 +246,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List the vm ingestion details that will be monitored by the Elastic monitor resource.
+   * List detailed information about VM ingestion that will be monitored by the Elastic monitor resource, ensuring optimal observability and performance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("vmIngestionDetails")
@@ -222,7 +259,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Update the vm details that will be monitored by the Elastic monitor resource.
+   * Update the VM details that will be monitored by the Elastic monitor resource, ensuring optimal observability and performance.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -242,7 +279,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * List of upgradable versions for a given monitor resource.
+   * List all upgradable versions for your Elastic monitor resource, helping you plan and execute upgrades.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listUpgradableVersions")
@@ -255,7 +292,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Upgradable version for a monitor resource.
+   * Upgrade the Elastic monitor resource to a newer version, ensuring optimal observability and performance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Monitor_Upgrade")
@@ -274,7 +311,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Get the list of all traffic filters for the account.
+   * List all traffic filters associated with your Elastic monitor resource, helping you manage network traffic control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listAllTrafficFilters")
@@ -287,7 +324,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Get the list of all associated traffic filters for the given deployment.
+   * List all traffic filters associated with your Elastic monitor resource, helping you manage network traffic control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listAssociatedTrafficFilters")
@@ -300,7 +337,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Create and Associate IP traffic filter for the given deployment.
+   * Create and associate an IP filter with your Elastic monitor resource to control and manage network traffic.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -327,7 +364,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Create and Associate private link traffic filter for the given deployment.
+   * Create and associate a PL filter with your Elastic monitor resource to control and manage network traffic.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -360,7 +397,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Associate traffic filter for the given deployment.
+   * Associate a traffic filter with your Elastic monitor resource to control and manage network traffic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("associateTrafficFilter")
@@ -381,7 +418,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Detach and Delete traffic filter from the given deployment.
+   * Detach and delete an existing traffic filter from your Elastic monitor resource, removing its network traffic control capabilities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("detachAndDeleteTrafficFilter")
@@ -401,7 +438,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Detach traffic filter for the given deployment.
+   * Detach an existing traffic filter from your Elastic monitor resource, removing its network traffic control capabilities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("detachTrafficFilter")
@@ -422,7 +459,7 @@ interface ElasticMonitorResources {
   >;
 
   /**
-   * Delete traffic filter from the account.
+   * Delete an existing traffic filter associated with your Elastic monitor resource, removing its network traffic control capabilities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("deleteTrafficFilter")

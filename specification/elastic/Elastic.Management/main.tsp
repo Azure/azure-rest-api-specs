@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.0
- * Date: 2025-04-29T07:13:57.748Z
+ * Version: 0.11.1
+ * Date: 2025-06-25T08:32:49.215Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -38,11 +38,11 @@ namespace Microsoft.Elastic;
  */
 enum Versions {
   /**
-   * The 2025-01-15-preview API version.
+   * The 2025-06-01 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_01_15_preview: "2025-01-15-preview",
+  v2025_06_01: "2025-06-01",
 }
 
 /**
