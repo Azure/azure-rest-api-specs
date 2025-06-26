@@ -20,14 +20,15 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
 /**
  * DeploymentStacks Client
  */
 @armProviderNamespace
 @service(#{ title: "DeploymentStacksClient" })
-@versioned(Versions)
+@versioned(Microsoft.Resources.DeploymentStacks.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.Resources;
+namespace Microsoft.Resources.DeploymentStacks;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
@@ -39,5 +40,9 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_01: "2024-03-01"
+  v2024_03_01: "2024-03-01",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_07_01: "2025-07-01"
 }
