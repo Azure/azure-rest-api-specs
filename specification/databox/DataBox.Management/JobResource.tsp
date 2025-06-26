@@ -1,0 +1,194 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DataBox;
+/**
+ * Job Resource.
+ */
+model JobResource
+  is Azure.ResourceManager.TrackedResource<JobProperties, false> {
+  ...ResourceNameParameter<
+    Resource = JobResource,
+    KeyName = "jobName",
+    SegmentName = "jobs",
+    NamePattern = "^[-\\w\\.]+$"
+  >;
+}
+
+@armResourceOperations
+interface JobResources {
+  /**
+   * Gets information about the specified job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_Get")
+  get is ArmResourceRead<
+    JobResource,
+    Parameters = {
+      /**
+       * $expand is supported on details parameter for job, which provides details on the job stages.
+       */
+      @query("$expand")
+      $expand?: string;
+    }
+  >;
+
+  /**
+   * Creates a new job with the specified parameters. Existing job cannot be updated with this API and should instead be updated with the Update job API.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Jobs_Create")
+  create is ArmResourceCreateOrReplaceAsync<
+    JobResource,
+    Response = ArmResourceUpdatedResponse<JobResource> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Updates the properties of an existing job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @patch(#{ implicitOptionality: false })
+  @operationId("Jobs_Update")
+  update is ArmCustomPatchAsync<
+    JobResource,
+    PatchModel = JobResourceUpdateParameter,
+    Parameters = {
+      /**
+       * Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
+       */
+      @header
+      `If-Match`?: string;
+    }
+  >;
+
+  /**
+   * Deletes a job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("Jobs_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    JobResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists all the jobs available under the given resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    JobResource,
+    Parameters = {
+      /**
+       * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Response = ArmResponse<JobResourceList>
+  >;
+
+  /**
+   * Lists all the jobs available under the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_List")
+  list is ArmListBySubscription<
+    JobResource,
+    Parameters = {
+      /**
+       * $skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Response = ArmResponse<JobResourceList>
+  >;
+
+  /**
+   * Book shipment pick up.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_BookShipmentPickUp")
+  bookShipmentPickUp is ArmResourceActionSync<
+    JobResource,
+    ShipmentPickUpRequest,
+    ArmResponse<ShipmentPickUpResponse>
+  >;
+
+  /**
+   * CancelJob.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_Cancel")
+  cancel is ArmResourceActionSync<
+    JobResource,
+    CancellationReason,
+    NoContentResponse
+  >;
+
+  /**
+   * This method gets the unencrypted secrets related to the job.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_ListCredentials")
+  listCredentials is ArmResourceActionSync<
+    JobResource,
+    void,
+    ArmResponse<UnencryptedCredentialsList>
+  >;
+
+  /**
+   * Request to mark devices for a given job as shipped
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Jobs_MarkDevicesShipped")
+  markDevicesShipped is ArmResourceActionSync<
+    JobResource,
+    MarkDevicesShippedRequest,
+    NoContentResponse
+  >;
+
+  /**
+   * Request to mitigate for a given job
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Mitigate")
+  mitigate is ArmResourceActionSync<
+    JobResource,
+    MitigateJobRequest,
+    NoContentResponse
+  >;
+}
+
+@@maxLength(JobResource.name, 24);
+@@minLength(JobResource.name, 3);
+@@doc(JobResource.name,
+  "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only"
+);
+@@doc(JobResource.properties, "Properties of a job.");
+@@doc(JobResources.create::parameters.resource,
+  "Job details from request body."
+);
+@@doc(JobResources.update::parameters.properties,
+  "Job update parameters from request body."
+);
+@@doc(JobResources.bookShipmentPickUp::parameters.body,
+  "Details of shipment pick up request."
+);
+@@doc(JobResources.cancel::parameters.body, "Reason for cancellation.");
+@@doc(JobResources.markDevicesShipped::parameters.body,
+  "Mark Devices Shipped Request"
+);
+@@doc(JobResources.mitigate::parameters.body, "Mitigation Request");
