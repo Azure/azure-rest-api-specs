@@ -727,6 +727,9 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
+
+  /** Tool type `mcp` */
+  mcp: "mcp",
 }
 
 /** The function name that will be used, if using the `function` tool */
