@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./applink.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
@@ -19,8 +17,8 @@ model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
 
 @doc("AppLink Member properties")
 model AppLinkMemberProperties {
-  @doc("The type of member cluster")
-  type: string;
+  @doc("The cluster type of member cluster")
+  clusterType: string;
 
   @doc("The metadata for the member cluster")
   metadata: Metadata;
