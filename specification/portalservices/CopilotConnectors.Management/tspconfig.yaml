@@ -8,6 +8,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/copilotConnectors/{version-status}/{version}/copilotConnectors.json"
     omit-unreachable-types: true
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.CopilotConnectors"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
