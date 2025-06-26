@@ -20,6 +20,15 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+### Suppression
+```yaml
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: storageDiscoveryWorkspace.json
+    where: $.definitions.StorageDiscoveryWorkspacePropertiesUpdate.properties.sku
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+```
+
 ### Basic Information
 
 These are the global settings for the storage discovery.
