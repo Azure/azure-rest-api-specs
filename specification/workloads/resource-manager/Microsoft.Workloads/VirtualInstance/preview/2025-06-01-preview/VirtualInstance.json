@@ -1092,6 +1092,16 @@
           "description": "Defines the compliance state of the virtual instance, as per the corresponding workload definition and architecture.",
           "readOnly": true
         },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the virtual instance, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the Virtual Instance resource.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Defines the virtual instance provisioning state.",
@@ -1201,6 +1211,16 @@
           "description": "Defines the compliance state of the workload component, as per the corresponding workload definition and architecture.",
           "readOnly": true
         },
+        "enrollmentState": {
+          "$ref": "#/definitions/WorkloadEnrollmentState",
+          "description": "Defines the enrollment state of the workload component, as per the corresponding workload definition.",
+          "readOnly": true
+        },
+        "enrollmentErrors": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Indicates any enrollment related errors on the workload component resource.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Defines the workload component provisioning state.",
@@ -1216,6 +1236,30 @@
         "componentType",
         "resources"
       ]
+    },
+    "WorkloadEnrollmentState": {
+      "type": "string",
+      "description": "Defines the enrollment state of a Virtual Instance / Component as per the workload definition.",
+      "enum": [
+        "NeedsAttention",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadEnrollmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NeedsAttention",
+            "value": "NeedsAttention",
+            "description": "Indicates the state where the VI / Component isn't fully following the workload definition and thus, enrollment needing attention."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete."
+          }
+        ]
+      }
     },
     "WorkloadInfo": {
       "type": "object",
