@@ -35,7 +35,7 @@ interface JobDefinitions {
   /**
    * Creates or updates a Job Definition resource, which contains configuration for a single unit of managed data transfer.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     JobDefinition,
     Response = ArmResourceUpdatedResponse<JobDefinition>
@@ -53,7 +53,7 @@ interface JobDefinitions {
   /**
    * Deletes a Job Definition resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     JobDefinition,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
