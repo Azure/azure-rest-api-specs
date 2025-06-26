@@ -10,7 +10,7 @@ output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
 
 directive:
-  - rename-model:
-    from: 'AlertsManagementErrorResponse'
-    to: 'AlertsManagementErrorResponse2'
+  - rename-operation:
+      from: 'AlertsManagementErrorResponse'
+      to: 'AlertsManagementErrorResponse2'
 ```
