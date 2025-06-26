@@ -613,6 +613,7 @@ try {
         }
         Log $msg
 
+        $debug = $env:TF_BUILD -ne 'true'
         $deployment = Retry {
             New-AzResourceGroupDeployment `
                     -Name $BaseName `
@@ -620,7 +621,7 @@ try {
                     -TemplateFile $templateFile.jsonFilePath `
                     -TemplateParameterObject $templateFileParameters `
                     -Force:$Force `
-                    -Debug:(!$env:TF_BUILD) `
+                    -Debug:$debug `
                     -Confirm:$false
         }
 
