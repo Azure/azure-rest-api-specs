@@ -42,6 +42,20 @@ union DeploymentSafeguardsLevel {
   string,
 }
 
+@doc("Specifies the Pod Security Standards level")
+union PodSecurityStandardsLevel {
+  @doc("Privileged level is an unrestricted policy, providing the widest possible level of permissions. This policy allows for known privilege escalations.")
+  PodSecurityStandardsPrivileged: "Privileged",
+
+  @doc("Baseline level is a minimally restrictive policy which prevents known privilege escalations. Allows the default (minimally specified) Pod configuration.")
+  PodSecurityStandardsBaseline: "Baseline",
+
+  @doc("Restricted level is a heavily restricted policy, following current Pod hardening best practices.")
+  PodSecurityStandardsRestricted: "Restricted",
+
+  string,
+}
+
 @doc("DeploymentSafeguards Properties")
 model DeploymentSafeguardsProperties {
   @doc("Provisioning State")
@@ -57,6 +71,10 @@ model DeploymentSafeguardsProperties {
   @doc("System defined list of namespaces excluded from Deployment Safeguards. These are determined by the underlying provider (such as AKS), and cannot be changed. Deployments in these namespaces will not be checked")
   @visibility(Lifecycle.Read)
   systemExcludedNamespaces: Array<string>;
+
+  @doc("The pod security standards level")
+  @added(Versions.v2025_05_02_preview)
+  podSecurityStandardsLevel?: PodSecurityStandardsLevel;
 }
 
 @lroStatus
