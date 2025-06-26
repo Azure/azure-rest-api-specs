@@ -27,6 +27,9 @@ directive:
   - suppress: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  - suppress: OperationIdNounVerb
+    from: storageDiscoveryWorkspace.json
+    reason: The Report_Report operation ID is intentionally named this way for consistency with the API design spec from the PM's. This follows the service's naming convention for report operations.
 ```
 
 ### Basic Information
