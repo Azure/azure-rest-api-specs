@@ -5147,7 +5147,10 @@
         "id": {
           "type": "string",
           "description": "Identifier of the red team.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
@@ -5229,7 +5232,11 @@
         "id": {
           "type": "string",
           "description": "Identifier of the red team.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
@@ -5278,16 +5285,14 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of the red-team. It is set by service and is read-only.",
-          "readOnly": true
+          "description": "Status of the red-team. It is set by service and is read-only."
         },
         "outputs": {
           "type": "object",
           "description": "Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }",
           "additionalProperties": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
