@@ -48,10 +48,12 @@ model OnboardingServiceProperties {
   enableCertificateManagement: boolean;
 
   @doc("Allow public network access to private links.")
+  @removed(Versions.v2025_05_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   publicNetworkAccess?: PublicNetworkAccessOptions;
 
   @doc("The private endpoint connections.")
+  @removed(Versions.v2025_05_01_preview)
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: Array<PrivateEndpointConnection>;
 }
@@ -71,6 +73,7 @@ model DeviceEndpoint {
 }
 
 @doc("Options for public network access for private endpoints.")
+@removed(Versions.v2025_05_01_preview)
 union PublicNetworkAccessOptions {
   string,
 
