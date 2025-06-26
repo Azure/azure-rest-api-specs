@@ -536,50 +536,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/capacityblocks": {
-      "get": {
-        "tags": [
-          "capacityBlocks"
-        ],
-        "operationId": "Capacity Blocks_Get",
-        "description": "Get available capacity blocks.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "description": "An OData filter expression that describes a subset of capacity blocks to return. The parameters that can be filtered are sku, capacity, durationhours, start-date-range, end-date-range, zone and location. The supported operator is eq."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CapacityBlocks"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Returns list of capacity block objects.": {
-            "$ref": "./examples/GetCapacityBlocks.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1766,88 +1722,6 @@
         }
       },
       "description": "The quota restrictions on recommended VMSize."
-    },
-    "CapacityBlocks": {
-      "type": "array",
-      "description": "Capacity blocks.",
-      "items": {
-        "$ref": "#/definitions/CapacityBlock"
-      },
-      "nextLink": {
-        "description": "The URI used to fetch the next page of capacity blocks. When there are no more pages, this is null.",
-        "type": "string"
-      }
-    },
-    "CapacityBlock": {
-      "type": "object",
-      "description": "Capacity block.",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "name": {
-          "description": "The name of the capacity block.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The id of the capacity block.",
-          "type": "string"
-        },
-        "zone": {
-          "description": "Logical Zone in which the block needs to be made available",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location.",
-          "type": "string"
-        },
-        "sku": {
-          "description": "SKU for Capacity Block.",
-          "$ref": "#/definitions/Sku"
-        },
-        "schedule": {
-          "description": "Schedule of Capacity Block Reservation.",
-          "$ref": "#/definitions/Schedule"
-        }
-      }
-    },
-    "Sku": {
-      "type": "object",
-      "description": "SKU for Capacity Block.",
-      "properties": {
-        "name": {
-          "description": "Sku name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "capacity": {
-          "description": "Requested Instance count.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        }
-      }
-    },
-    "Schedule": {
-      "type": "object",
-      "description": "Schedule of Capacity Block Reservation.",
-      "properties": {
-        "startTime": {
-          "description": "Start DateTime of Capacity Block reservation.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "End DateTime of Capacity Block Reservation.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
     }
   }
 }
