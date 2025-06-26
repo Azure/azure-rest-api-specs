@@ -36,7 +36,13 @@ model DynamicSchemaProperties {
 @doc("DynamicSchema Resource")
 @parentResource(Schema)
 model DynamicSchema is ProxyResource<DynamicSchemaProperties> {
-  ...ResourceNameParameter<DynamicSchema>;
+  @doc("The name of the DynamicSchema")
+  @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
+  @path
+  @key("dynamicSchemaName")
+  @segment("dynamicSchemas")
+  name: string;
+
   ...EntityTagProperty;
 }
 

@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./DynamicConfiguration.tsp";
-import "../Microsoft.Edge.ConfigurationManager.Management/ProvisioningState.tsp";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -35,7 +35,10 @@ model DynamicConfigurationVersionProperties {
 @resource("versions")
 model DynamicConfigurationVersion
   is ProxyResource<DynamicConfigurationVersionProperties> {
-  ...ResourceNameParameter<DynamicConfigurationVersion>;
+  ...ResourceNameParameter<
+    DynamicConfigurationVersion,
+    NamePattern = "^[a-zA-Z0-9.-]{3,24}$"
+  >;
 }
 
 @armResourceOperations

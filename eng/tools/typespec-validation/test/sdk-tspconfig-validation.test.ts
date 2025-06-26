@@ -7,7 +7,7 @@ import {
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsDpPackageDirectorySubRule,
-  TspConfigTsDpPackageNameMatchPatternSubRule,
+  TspConfigTsRlcDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -30,6 +30,7 @@ import {
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
+  TspConfigTsMlcDpPackageNameMatchPatternSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -81,6 +82,7 @@ function createParameterTestCases(
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [
     {
@@ -89,6 +91,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: validValue }),
       success: true,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with invalid value ${invalidValue}`,
@@ -96,6 +99,7 @@ function createParameterTestCases(
       tspconfigContent: createParameterExample({ key: key, value: invalidValue }),
       success: false,
       subRules,
+      additionalOptions,
     },
     {
       description: `Validate parameter ${key} with undefined value`,
@@ -103,6 +107,7 @@ function createParameterTestCases(
       tspconfigContent: "",
       success: false,
       subRules,
+      additionalOptions,
     },
   ];
   return cases;
@@ -116,6 +121,7 @@ function createEmitterOptionTestCases(
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
   allowUndefined: boolean = false,
+  additionalOptions: Record<string, string | boolean> = {},
 ): Case[] {
   const cases: Case[] = [];
 
@@ -123,7 +129,11 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      { key: key, value: validValue },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: true,
     subRules,
   });
@@ -131,10 +141,14 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, {
-      key: key,
-      value: invalidValue,
-    }),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      {
+        key: key,
+        value: invalidValue,
+      },
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -142,7 +156,10 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with undefined value`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName),
+    tspconfigContent: createEmitterOptionExample(
+      emitterName,
+      ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+    ),
     success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
     subRules,
   });
@@ -151,10 +168,14 @@ function createEmitterOptionTestCases(
     cases.push({
       description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, {
-        key: key.split(".").slice(0, -1).join("."),
-        value: validValue,
-      }),
+      tspconfigContent: createEmitterOptionExample(
+        emitterName,
+        {
+          key: key.split(".").slice(0, -1).join("."),
+          value: validValue,
+        },
+        ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
+      ),
       success: shouldBeTrueOnFailSubRuleValidation(emitterName),
       subRules,
     });
@@ -169,6 +190,7 @@ interface Case {
   tspconfigContent: string;
   success: boolean;
   ignoredKeyPaths?: string[];
+  additionalOptions?: Record<string, string | boolean>;
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -223,7 +245,18 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "package-details.name",
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
-  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+  [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+);
+
+const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-details.name",
+  "@azure/aaa-bbb",
+  "azure/aaa-bbb",
+  [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
+  false,
+  { "is-modular-library": true }, // Additional option added
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -524,6 +557,24 @@ options:
     success: true,
     ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
   },
+  {
+    description: "Suppress option with wildcard at the end",
+    folder: managementTspconfigFolder,
+    subRules: [
+      new TspConfigGoMgmtPackageDirectorySubRule(),
+      new TspConfigGoMgmtModuleEqualStringSubRule(),
+      new TspConfigGoMgmtFixConstStutteringTrueSubRule(),
+    ],
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    package-dir: "wrong/directory"
+    module-name: "invalid-module"
+    generate-consts: false
+`,
+    success: true,
+    ignoredKeyPaths: ["options.@azure-tools/typespec-go.*"],
+  },
 ];
 
 describe("tspconfig", function () {
@@ -549,6 +600,7 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
+    ...tsDpModularPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -597,9 +649,7 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
-    const returnSuccess = true;
-    strictEqual(result.success, returnSuccess);
+    strictEqual(result.success, c.success);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
@@ -651,5 +701,68 @@ describe("tspconfig", function () {
     const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
     strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
+  });
+
+  it("Tests wildcard suppression for multiple AWS connector services", async () => {
+    // List of AWS connector service paths to test
+    const awsServiceFolders = [
+      "awsconnector/AccessAnalyzerAnalyzer.Management",
+      "awsconnector/AcmCertificateSummary.Management",
+      "awsconnector/ApiGatewayRestApi.Management",
+      "awsconnector/ApiGatewayStage.Management",
+      "awsconnector/AppSyncGraphqlApi.Management",
+      "awsconnector/AutoScalingAutoScalingGroup.Management",
+      "awsconnector/Awsconnector.Management"
+    ];
+
+    // Mock suppressions.yaml containing a wildcard path for awsconnector/*/tspconfig.yaml
+    const suppressionsSpy = vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
+      {
+        tool: "TypeSpecValidation",
+        paths: ["awsconnector/*/tspconfig.yaml"],  // Single wildcard pattern to match all paths
+        reason: "AWS Connector services have special requirements",
+        rules: ["SdkTspConfigValidation"],
+        subRules: ["parameters.service-dir.default"],
+      },
+    ]);
+
+    // Test each AWS connector service path
+    for (const awsServiceFolder of awsServiceFolders) {
+      // Reset mocks for each service
+      suppressionsSpy.mockClear();
+      
+      // Mock configuration content
+      const tspconfigContent = `
+parameters:
+  service-dir: "${awsServiceFolder}"
+`;
+      
+      // Setup mocks
+      readTspConfigSpy.mockImplementation(async () => tspconfigContent);
+      fileExistsSpy.mockImplementation(async (file: string) => {
+        return file === join(awsServiceFolder, "tspconfig.yaml");
+      });
+
+      // Create validation rule and execute
+      const rule = new SdkTspConfigValidationRule([new TspConfigCommonAzServiceDirMatchPatternSubRule()]);
+      const result = await rule.execute(awsServiceFolder);
+      
+      // Validate that validation passes for each service
+      strictEqual(result.success, true, `Validation should pass for ${awsServiceFolder}`);
+      strictEqual(
+        result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), 
+        true, 
+        `Output should indicate validation passed for ${awsServiceFolder}`
+      );
+      
+      // Verify suppressions were called with the correct path
+      strictEqual(
+        suppressionsSpy.mock.calls.some(call => 
+          call[0] === join(awsServiceFolder, "tspconfig.yaml")
+        ),
+        true,
+        `getSuppressions should be called with path ${join(awsServiceFolder, "tspconfig.yaml")}`
+      );
+    }
   });
 });

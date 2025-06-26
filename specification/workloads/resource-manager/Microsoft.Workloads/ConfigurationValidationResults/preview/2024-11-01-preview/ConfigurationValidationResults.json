@@ -219,7 +219,7 @@
       "enum": [
         "Yes",
         "No",
-        "Unknown"
+        "EvaluationFailed"
       ],
       "x-ms-enum": {
         "name": "ConfigurationCheckConfigurationDeviation",
@@ -236,9 +236,9 @@
             "description": "No deviation; the actual state matches the recommended/customized state."
           },
           {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The deviation status is unknown as the configuration checks couldn't be evaluated."
+            "name": "EvaluationFailed",
+            "value": "EvaluationFailed",
+            "description": "The deviation status is evaluation failed as the configuration checks couldn't be evaluated."
           }
         ]
       }
@@ -438,6 +438,10 @@
           "type": "string",
           "description": "The name of the component being validated."
         },
+        "componentType": {
+          "type": "string",
+          "description": "The type of the component being validated."
+        },
         "roleName": {
           "type": "string",
           "description": "The name of the role being validated."
@@ -448,6 +452,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "The type of workload being validated, such as 'SAP', 'Kubernetes', 'Oracle' etc."
         },
         "configurationChecksTemplateId": {
           "type": "string",
@@ -488,7 +496,6 @@
       "required": [
         "workloadInstanceArmId",
         "environment",
-        "roleName",
         "resourceArmIds",
         "evaluationType",
         "evaluationTimestamp",
@@ -529,6 +536,10 @@
           "type": "string",
           "description": "The name of the configuration check."
         },
+        "description": {
+          "type": "string",
+          "description": "The description of the configuration check."
+        },
         "executionLayer": {
           "$ref": "#/definitions/ConfigurationCheckExecutionLayer",
           "description": "The execution layer where the configuration check was performed."
@@ -568,6 +579,10 @@
         "impactLevel": {
           "$ref": "#/definitions/ConfigurationCheckImpactLevel",
           "description": "The impact level of the configuration check."
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "The error details to provide additional context in case of evaluation failures during the configuration check execution."
         }
       },
       "required": [

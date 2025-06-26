@@ -45,6 +45,11 @@ union EnvironmentType {
    * Production system.
    */
   Production: "Production",
+
+  /**
+   * Disaster recovery system.
+   */
+  DisasterRecovery: "DisasterRecovery",
 }
 
 /**
@@ -225,6 +230,17 @@ model WorkloadInfo {
 }
 
 /**
+ * Defines the workload information object for update scenarios.
+ */
+@added(Versions.v2025_06_01_preview)
+model UpdateWorkloadInfo {
+  /**
+   * The version selected for the corresponding workload definition.
+   */
+  workloadDefinitionVersion?: string;
+}
+
+/**
  * Defines the linked Resource class.
  */
 @added(Versions.v2025_06_01_preview)
@@ -269,7 +285,7 @@ model UpdateVirtualInstanceProperties {
    * The workload specific information including the workload type, definition ID and version.
    */
   @added(Versions.v2025_06_01_preview)
-  workloadInfo?: WorkloadInfo;
+  workloadInfo?: UpdateWorkloadInfo;
 
   /**
    * The type of environment in which the workload system is deployed - Production / Non Production.

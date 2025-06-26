@@ -42,7 +42,7 @@ model DrillProperties {
 
   @doc("Parent SG resource.")
   @visibility(Lifecycle.Read)
-  sgId: armResourceIdentifier<[
+  sgId?: armResourceIdentifier<[
     {
       type: "Microsoft.Management/serviceGroups";
     }
@@ -59,30 +59,30 @@ model DrillProperties {
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
-  executionState: ExecutionState;
+  executionState?: ExecutionState;
 
   @doc("Readiness state of the Drill.")
   @visibility(Lifecycle.Read)
-  readinessState: ReadinessState;
+  readinessState?: ReadinessState;
 
   @doc("RBAC setup mode.")
-  rbacSetupMode: RBACSetupMode;
+  rbacSetupMode?: RBACSetupMode;
 
   @doc("Attention reason if the ReadinessState is 'NeedsAttention'.")
   @visibility(Lifecycle.Read)
-  attentionReason: AttentionReason;
+  attentionReason?: AttentionReason;
 
   @doc("Internal System Metadata, to be used by internal components only.")
   @visibility(Lifecycle.Read)
-  systemMetadata: SystemMetadata;
+  systemMetadata?: SystemMetadata;
 
   @doc("Last run properties.")
   @visibility(Lifecycle.Read)
-  lastRunProperties: LastRunProperties;
+  lastRunProperties?: LastRunProperties;
 
   @doc("Last sync time.")
   @visibility(Lifecycle.Read)
-  lastSyncTime: utcDateTime;
+  lastSyncTime?: utcDateTime;
 
   @doc("Managed RG v2 properties.")
   @visibility(Lifecycle.Read)
@@ -100,19 +100,19 @@ model DrillProperties {
 model LastRunProperties {
   @doc("Timestamp of the last run of this Drill.")
   @visibility(Lifecycle.Read)
-  lastRunTime: utcDateTime;
+  lastRunTime?: utcDateTime;
 
   @doc("Status of the last run of this Drill.")
   @visibility(Lifecycle.Read)
-  lastRunState: JobStatus;
+  lastRunState?: JobStatus;
 
   @doc("Timespan of the last run of this Drill.")
   @visibility(Lifecycle.Read)
-  lastRunDuration: duration;
+  lastRunDuration?: duration;
 
   @doc("Attestation state of the last run of this Drill.")
   @visibility(Lifecycle.Read)
-  lastRunAttestation: DrillAttestation;
+  lastRunAttestation?: DrillAttestation;
 }
 
 @doc("Definition of Zonal Drill properties.")
@@ -122,7 +122,7 @@ model ZonalDrillProperties extends DrillProperties {
 
   @doc("An indication whether a VM is included in this Zonal Drill. If not, RO is not needed.")
   @visibility(Lifecycle.Read)
-  vmsPresent: VMPresent;
+  vmsPresent?: VMPresent;
 }
 
 /**
@@ -210,7 +210,7 @@ model RoPlanProperties {
 
   @doc("Recovery Orchestration plan associated with this Drill.")
   @visibility(Lifecycle.Read)
-  roPlanId: armResourceIdentifier<[
+  roPlanId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans";
     }
@@ -218,7 +218,7 @@ model RoPlanProperties {
 
   @doc("Identity to use for ROPlan operations.")
   @visibility(Lifecycle.Read)
-  roResourceExcludedCount: int32;
+  roResourceExcludedCount?: int32;
 }
 
 /**
@@ -240,7 +240,7 @@ model ChaosExperimentProperties {
 
   @doc("Chaos Experiment resource created for this Drill")
   @visibility(Lifecycle.Read)
-  chaosExperimentId: armResourceIdentifier<[
+  chaosExperimentId?: armResourceIdentifier<[
     {
       type: "Microsoft.Chaos/experiments";
     }
@@ -306,6 +306,7 @@ model DrillStartRequest {
   @doc("Mode of starting the Drill")
   mode: DrillMode;
 
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
   @doc("Inputs needed for the Recovery Orchestration Plan")
   roInputs: {
     @doc("Direction of the failover")
@@ -326,7 +327,7 @@ model DrillEndRequest {
 model DrillActionResponse {
   @doc("JobId of the Drill")
   @visibility(Lifecycle.Read)
-  jobId: armResourceIdentifier<[
+  jobId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/drills/drillRuns";
     }
@@ -392,11 +393,11 @@ model FailedDrillResource {
 
   @doc("T and C assignment error.")
   @visibility(Lifecycle.Read)
-  tAndcAssignmentError: ErrorDetails;
+  tAndcAssignmentError?: ErrorDetails;
 
   @doc("RBAC assignment error.")
   @visibility(Lifecycle.Read)
-  rbacAssignmentError: ErrorDetails;
+  rbacAssignmentError?: ErrorDetails;
 }
 
 @doc("PATCH properties for Drill.")
@@ -418,7 +419,7 @@ model DrillPatchProperties {
 model ManagedOnBehalfOfConfiguration {
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
-  moboBrokerResources: MoboBrokerResource[];
+  moboBrokerResources?: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
@@ -428,5 +429,5 @@ model MoboBrokerResource {
    * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
    */
   @visibility(Lifecycle.Read)
-  id: string;
+  id?: string;
 }

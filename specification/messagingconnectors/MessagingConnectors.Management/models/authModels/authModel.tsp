@@ -29,5 +29,13 @@ union AuthenticationMode {
   @doc("UsernamePassword model.")
   UsernamePassword: "UsernamePassword",
 
+  @added(Versions.v2025_05_01_preview)
+  @doc("AccessKey model.")
+  AccessKey: "AccessKey",
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("SasToken model.")
+  SasToken: "SasToken",
+
   string,
 }

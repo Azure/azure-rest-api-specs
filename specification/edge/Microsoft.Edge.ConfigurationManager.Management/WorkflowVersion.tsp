@@ -16,18 +16,85 @@ using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.Edge;
 
+@doc("Error Action Mode")
+@added(Versions.v2025_06_01)
+union ErrorActionMode {
+  @doc("Stop on any failure")
+  stopOnAnyFailure: "stopOnAnyFailure",
+
+  @doc("Stop after N cumulative failures")
+  stopOnNFailures: "stopOnNFailures",
+
+  @doc("Continue silently despite errors")
+  silentlyContinue: "silentlyContinue",
+
+  string,
+}
+
+@doc("Error Action Properties")
+@added(Versions.v2025_06_01)
+model ErrorAction {
+  @doc("Error action mode")
+  mode?: ErrorActionMode = ErrorActionMode.stopOnAnyFailure;
+
+  @doc("Max tolerated failures")
+  @minValue(0)
+  maxToleratedFailures?: int32;
+}
+
+@doc("Task Option Properties")
+@added(Versions.v2025_06_01)
+model TaskOption {
+  @doc("Parallel worker numbers of the tasks")
+  @minValue(1)
+  @maxValue(8)
+  concurrency?: int32 = 1;
+
+  @doc("Error action for the tasks")
+  errorAction?: ErrorAction;
+}
+
+@doc("Task Spec")
+@added(Versions.v2025_06_01)
+model TaskSpec {
+  @doc("Name of Task")
+  name: string;
+
+  @doc("Target ARM id")
+  targetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/targets";
+    }
+  ]>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
+  @doc("Task specification")
+  specification: Record<unknown>;
+}
+
 @doc("Stage Properties")
 model StageSpec {
   @doc("Name of Stage")
   name: string;
 
+  @removed(Versions.v2025_06_01)
   @doc("Target ARM id")
   targetId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("Stage specification")
-  specification: Record<unknown>;
+  @madeOptional(Versions.v2025_06_01)
+  specification?: Record<unknown>;
+
+  @added(Versions.v2025_06_01)
+  @doc("List of tasks in the stage")
+  tasks?: TaskSpec[];
+
+  @added(Versions.v2025_06_01)
+  @doc("Task option for the stage")
+  taskOption?: TaskOption;
 }
 
 @doc("Workflow Version Properties")

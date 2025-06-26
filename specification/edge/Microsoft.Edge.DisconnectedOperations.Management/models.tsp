@@ -1,12 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
@@ -139,6 +139,11 @@ model DisconnectedOperationDeploymentManifest {
   @visibility(Lifecycle.Read)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
+
+  @visibility(Lifecycle.Read)
+  @doc("The cloud in which the resource is registered")
+  @added(Microsoft.Edge.Versions.v2025_06_01)
+  cloud?: string;
 }
 
 /**
@@ -192,12 +197,69 @@ model ImageProperties {
 }
 
 @doc("The image download properties")
+@removed(Microsoft.Edge.Versions.v2025_05_01)
 model ImageDownloadResponse {
   ...ImageProperties;
 
   @visibility(Lifecycle.Read)
   @doc("The unique Id of the download")
   transactionId: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download uri")
+  downloadLink: url;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download link expiry time")
+  linkExpiry: utcDateTime;
+}
+
+@doc("The image download properties")
+@renamedFrom(Microsoft.Edge.Versions.v2025_05_01, "ImageDownloadResponse")
+model ImageDownloadResult {
+  ...ImageProperties;
+
+  @visibility(Lifecycle.Read)
+  @doc("The unique Id of the download")
+  transactionId: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download uri")
+  downloadLink: url;
+
+  @visibility(Lifecycle.Read)
+  @doc("The download link expiry time")
+  linkExpiry: utcDateTime;
+}
+
+@doc("The artifact properties")
+@added(Microsoft.Edge.Versions.v2025_05_01)
+model ArtifactProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @visibility(Lifecycle.Read)
+  @doc("The artifact display order")
+  artifactOrder: int32;
+
+  @visibility(Lifecycle.Read)
+  @doc("The artifact title")
+  title: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The artifact description")
+  description: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The artifact size in MB")
+  size?: int64;
+}
+
+@doc("The artifact download properties")
+@added(Microsoft.Edge.Versions.v2025_05_01)
+model ArtifactDownloadResult {
+  ...ArtifactProperties;
 
   @visibility(Lifecycle.Read)
   @doc("The download uri")
