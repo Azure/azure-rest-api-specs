@@ -24,44 +24,17 @@ alias AgentOperations = Azure.Core.ResourceOperations<AgentServiceTraits>;
 @added(Versions.v1)
 interface Agents {
   @doc("Get a deployed agent.")
-  get is DeploymentOperations.ResourceRead<Agent>;
-
-  @doc("List all deployed agents in the project")
-  list is DeploymentOperations.ResourceList<
-    Agent,
-    ListQueryParametersTrait<{
-      @doc("blueprint to filter on")
-      @query("blueprintId")
-      blueprintId?: string;
-    }>
-  >;
-
-  @doc("updates revisions of an agent")
-  @Rest.action("updateRevisions")
-  updateRevisions is Azure.Core.Foundations.ResourceOperation<
-    Agent,
-    {
-      @doc("The updated revision log")
-      @Http.bodyRoot
-      revisionUpdateRequest: AgentRevisionUpdateRequest;
-    },
-    void
-  >;
+  get is AgentOperations.ResourceRead<Agent>;
 
   @doc("get revisions of an agent")
-  @Rest.action("listRevisions")
-  getRevisions is Azure.Core.Foundations.ResourceOperation<
+  @Rest.action("listPreviousVersions")
+  getPreviousVersions is AgentOperations.ResourceList<
     Agent,
-    {},
-    AgentRevisionGetResponse
-  >;
-
-  @doc("Revert latest revision of an agent")
-  @Rest.action("revertLatest")
-  revertLatest is Azure.Core.Foundations.ResourceOperation<
-    Agent,
-    {},
-    void
+    ListQueryParametersTrait<{
+        @doc("The name of the agent to get revisions for")
+        @query
+        name: string;
+    }>
   >;
 
   @doc("Revert latest revision of an agent")
@@ -72,18 +45,6 @@ interface Agents {
       @doc("The deployment request parameters")
       @Http.bodyRoot
       deploymentRequest: AgentDeploymentRequest;
-    },
-    void
-  >;
-
- @doc("Pause or resume an agent instance")
-  @Rest.action("pauseOrResume")
-  pauseOrResumeAgent is Azure.Core.Foundations.ResourceOperation<
-    Agent,
-    {
-      @doc("The pause or resume request parameters")
-      @Http.bodyRoot
-      pauseOrResumeRequest: PauseOrResumeRequest;
     },
     void
   >;

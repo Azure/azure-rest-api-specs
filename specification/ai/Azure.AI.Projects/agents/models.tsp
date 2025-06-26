@@ -37,36 +37,8 @@ model Agent {
     @doc("Parameters for the agent")
     parameters?: Record<BaseParameterValue>;
 
-    @doc("Agent revision history")
-    @visibility(Lifecycle.Read)
-    revisions?: AgentRevision[];
-}
-
-@doc("Agent revision entry")
-model AgentRevision {
-    @doc("Revision identifier")
-    id: string;
-
-    @doc("Revision description")
-    description?: string;
-
-    @doc("Revision creation time")
-    createdAt: utcDateTime;
-
-    @doc("Revision creator")
-    createdBy: string;
-}
-
-@doc("Agent revision update request")
-model AgentRevisionUpdateRequest {
-    @doc("Updated revision log for the agent")
-    revisions: AgentRevision[];
-}
-
-@doc("Agent revision retireval response")
-model AgentRevisionGetResponse {
-    @doc("Revision log for the agent")
-    revisions: AgentRevision[];
+    @doc("state of the agent: paused or active")
+    state: string;
 }
 
 @doc("Agent deployment response")
@@ -80,14 +52,4 @@ model AgentDeploymentRequest {
 
     @doc("deployment configuration")
     parameters: Record<BaseParameterValue>;
-}
-
-@doc("Agent pause or resume request")
-model PauseOrResumeRequest {
-    @doc("pause or resume the agent")
-    action: string;
-}
-
-@doc("Agent pause or resume response")
-model PauseOrResumeResponse {
 }

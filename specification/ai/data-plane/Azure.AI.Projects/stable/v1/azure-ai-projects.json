@@ -83,14 +83,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_ListLatest_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ListLatest_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_ListLatest_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ListLatest_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -132,14 +124,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_ListVersions_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ListVersions_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_ListVersions_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ListVersions_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -184,14 +168,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_GetVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_GetVersion_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_GetVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -254,14 +230,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_CreateOrUpdateVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_CreateOrUpdateVersion_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_CreateOrUpdateVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_CreateOrUpdateVersion_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -301,14 +269,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_DeleteVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_DeleteVersion_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_DeleteVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -364,73 +324,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "AgentBlueprints_ScaffoldAgentblueprint_MaximumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ScaffoldAgentblueprint_MaximumSet_Gen.json"
-          },
-          "AgentBlueprints_ScaffoldAgentblueprint_MinimumSet_Gen": {
-            "$ref": "./examples/AgentBlueprints_ScaffoldAgentblueprint_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/agents": {
-      "get": {
-        "operationId": "Agents_List",
-        "description": "List all deployed agents in the project",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "blueprintId",
-            "in": "query",
-            "description": "blueprint to filter on",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedAgent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Agents_List_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_List_MaximumSet_Gen.json"
-          },
-          "Agents_List_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -479,14 +372,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_Get_MaximumSet_Gen.json"
-          },
-          "Agents_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_Get_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -531,20 +416,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_DeployAgent_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_DeployAgent_MaximumSet_Gen.json"
-          },
-          "Agents_DeployAgent_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_DeployAgent_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/agents/{name}/listRevisions": {
-      "post": {
-        "operationId": "Agents_GetRevisions",
+    "/agents/listPreviousVersions": {
+      "get": {
+        "operationId": "Agents_GetPreviousVersions",
         "description": "get revisions of an agent",
         "parameters": [
           {
@@ -552,17 +429,27 @@
           },
           {
             "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
+            "in": "query",
+            "description": "The name of the agent to get revisions for",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AgentRevisionGetResponse"
+              "$ref": "#/definitions/PagedAgent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -578,160 +465,8 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Agents_GetRevisions_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_GetRevisions_MaximumSet_Gen.json"
-          },
-          "Agents_GetRevisions_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_GetRevisions_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/agents/{name}/pauseOrResume": {
-      "post": {
-        "operationId": "Agents_PauseOrResumeAgent",
-        "description": "Pause or resume an agent instance",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pauseOrResumeRequest",
-            "in": "body",
-            "description": "The pause or resume request parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PauseOrResumeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_PauseOrResumeAgent_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_PauseOrResumeAgent_MaximumSet_Gen.json"
-          },
-          "Agents_PauseOrResumeAgent_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_PauseOrResumeAgent_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/agents/{name}/revertLatest": {
-      "post": {
-        "operationId": "Agents_RevertLatest",
-        "description": "Revert latest revision of an agent",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_RevertLatest_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_RevertLatest_MaximumSet_Gen.json"
-          },
-          "Agents_RevertLatest_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_RevertLatest_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/agents/{name}/updateRevisions": {
-      "post": {
-        "operationId": "Agents_UpdateRevisions",
-        "description": "updates revisions of an agent",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "revisionUpdateRequest",
-            "in": "body",
-            "description": "The updated revision log",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgentRevisionUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_UpdateRevisions_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_UpdateRevisions_MaximumSet_Gen.json"
-          },
-          "Agents_UpdateRevisions_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_UpdateRevisions_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -766,14 +501,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AgentTools_ListLatest_MaximumSet_Gen": {
-            "$ref": "./examples/AgentTools_ListLatest_MaximumSet_Gen.json"
-          },
-          "AgentTools_ListLatest_MinimumSet_Gen": {
-            "$ref": "./examples/AgentTools_ListLatest_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -815,14 +542,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AgentTools_ListVersions_MaximumSet_Gen": {
-            "$ref": "./examples/AgentTools_ListVersions_MaximumSet_Gen.json"
-          },
-          "AgentTools_ListVersions_MinimumSet_Gen": {
-            "$ref": "./examples/AgentTools_ListVersions_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -867,14 +586,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgentTools_GetVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentTools_GetVersion_MaximumSet_Gen.json"
-          },
-          "AgentTools_GetVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentTools_GetVersion_MinimumSet_Gen.json"
           }
         }
       },
@@ -937,14 +648,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "AgentTools_CreateOrUpdateVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentTools_CreateOrUpdateVersion_MaximumSet_Gen.json"
-          },
-          "AgentTools_CreateOrUpdateVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentTools_CreateOrUpdateVersion_MinimumSet_Gen.json"
-          }
         }
       },
       "delete": {
@@ -984,14 +687,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgentTools_DeleteVersion_MaximumSet_Gen": {
-            "$ref": "./examples/AgentTools_DeleteVersion_MaximumSet_Gen.json"
-          },
-          "AgentTools_DeleteVersion_MinimumSet_Gen": {
-            "$ref": "./examples/AgentTools_DeleteVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -2033,18 +1728,15 @@
             "$ref": "#/definitions/BaseParameterValue"
           }
         },
-        "revisions": {
-          "type": "array",
-          "description": "Agent revision history",
-          "items": {
-            "$ref": "#/definitions/AgentRevision"
-          },
-          "readOnly": true
+        "state": {
+          "type": "string",
+          "description": "state of the agent: paused or active"
         }
       },
       "required": [
         "name",
-        "blueprint"
+        "blueprint",
+        "state"
       ]
     },
     "AgentBlueprint": {
@@ -2179,66 +1871,6 @@
       "required": [
         "type",
         "instructions"
-      ]
-    },
-    "AgentRevision": {
-      "type": "object",
-      "description": "Agent revision entry",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Revision identifier"
-        },
-        "description": {
-          "type": "string",
-          "description": "Revision description"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Revision creation time"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Revision creator"
-        }
-      },
-      "required": [
-        "id",
-        "createdAt",
-        "createdBy"
-      ]
-    },
-    "AgentRevisionGetResponse": {
-      "type": "object",
-      "description": "Agent revision retireval response",
-      "properties": {
-        "revisions": {
-          "type": "array",
-          "description": "Revision log for the agent",
-          "items": {
-            "$ref": "#/definitions/AgentRevision"
-          }
-        }
-      },
-      "required": [
-        "revisions"
-      ]
-    },
-    "AgentRevisionUpdateRequest": {
-      "type": "object",
-      "description": "Agent revision update request",
-      "properties": {
-        "revisions": {
-          "type": "array",
-          "description": "Updated revision log for the agent",
-          "items": {
-            "$ref": "#/definitions/AgentRevision"
-          }
-        }
-      },
-      "required": [
-        "revisions"
       ]
     },
     "AgentTool": {
@@ -3468,23 +3100,6 @@
       "required": [
         "value"
       ]
-    },
-    "PauseOrResumeRequest": {
-      "type": "object",
-      "description": "Agent pause or resume request",
-      "properties": {
-        "action": {
-          "type": "string",
-          "description": "pause or resume the agent"
-        }
-      },
-      "required": [
-        "action"
-      ]
-    },
-    "PauseOrResumeResponse": {
-      "type": "object",
-      "description": "Agent pause or resume response"
     },
     "PendingUploadCredentialType": {
       "type": "string",

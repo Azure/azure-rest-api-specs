@@ -1120,66 +1120,6 @@
         "instructions"
       ]
     },
-    "AgentRevision": {
-      "type": "object",
-      "description": "Agent revision entry",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Revision identifier"
-        },
-        "description": {
-          "type": "string",
-          "description": "Revision description"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Revision creation time"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Revision creator"
-        }
-      },
-      "required": [
-        "id",
-        "createdAt",
-        "createdBy"
-      ]
-    },
-    "AgentRevisionGetResponse": {
-      "type": "object",
-      "description": "Agent revision retireval response",
-      "properties": {
-        "revisions": {
-          "type": "array",
-          "description": "Revision log for the agent",
-          "items": {
-            "$ref": "#/definitions/AgentRevision"
-          }
-        }
-      },
-      "required": [
-        "revisions"
-      ]
-    },
-    "AgentRevisionUpdateRequest": {
-      "type": "object",
-      "description": "Agent revision update request",
-      "properties": {
-        "revisions": {
-          "type": "array",
-          "description": "Updated revision log for the agent",
-          "items": {
-            "$ref": "#/definitions/AgentRevision"
-          }
-        }
-      },
-      "required": [
-        "revisions"
-      ]
-    },
     "AgentToolCatalogInformation": {
       "type": "object",
       "description": "Catalog information for the agent tool",
@@ -2266,23 +2206,6 @@
       "required": [
         "value"
       ]
-    },
-    "PauseOrResumeRequest": {
-      "type": "object",
-      "description": "Agent pause or resume request",
-      "properties": {
-        "action": {
-          "type": "string",
-          "description": "pause or resume the agent"
-        }
-      },
-      "required": [
-        "action"
-      ]
-    },
-    "PauseOrResumeResponse": {
-      "type": "object",
-      "description": "Agent pause or resume response"
     },
     "PendingUploadCredentialType": {
       "type": "string",
