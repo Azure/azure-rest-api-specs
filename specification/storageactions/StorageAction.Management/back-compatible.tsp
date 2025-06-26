@@ -7,7 +7,9 @@ using Microsoft.StorageActions;
 @@flattenProperty(StorageTaskPreviewAction.properties, "!csharp,!java,!python");
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp,!java,!python");
+@@flattenProperty(StorageTaskUpdateParameters.properties,
+  "!csharp,!java,!python"
+);
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
