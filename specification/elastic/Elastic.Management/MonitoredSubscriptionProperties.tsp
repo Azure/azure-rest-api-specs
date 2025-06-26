@@ -25,7 +25,7 @@ model MonitoredSubscriptionProperties
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MonitoredCreateOrUpdateResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -35,13 +35,13 @@ interface MonitoredCreateOrUpdateResourceOps
         ...Azure.ResourceManager.Legacy.Provider,
       },
       {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("monitors")
         @pattern("^.*$")
         monitorName: string,
 
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("monitoredSubscriptions")
         @pattern("^.*$")

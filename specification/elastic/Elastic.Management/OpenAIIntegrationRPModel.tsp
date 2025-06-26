@@ -26,7 +26,7 @@ model OpenAIIntegrationRPModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OpenAiCreateOrUpdateResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -36,13 +36,13 @@ interface OpenAiCreateOrUpdateResourceOps
         ...Azure.ResourceManager.Legacy.Provider,
       },
       {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("monitors")
         @pattern("^.*$")
         monitorName: string,
 
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
         @path
         @segment("openAIIntegrations")
         @pattern("^[a-z][a-z0-9]*$")
