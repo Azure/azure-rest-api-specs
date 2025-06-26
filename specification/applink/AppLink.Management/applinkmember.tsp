@@ -23,10 +23,6 @@ model AppLinkMemberProperties {
   @doc("The metadata for the member cluster")
   metadata: Metadata;
 
-  @doc("Internal metadata for AppLink Member")
-  @visibility(Lifecycle.Read)
-  internalMetadata?: AppLinkMemberInternalMetadata;
-
   @doc("Upgrade profile for AppLink Member")
   upgradeProfile: UpgradeProfile;
 
@@ -73,33 +69,6 @@ model UpgradeProfile {
 
   @doc("The upgrade mode for the member")
   mode: UpgradeMode;
-}
-
-@doc("Internal metadata for AppLink Member")
-model AppLinkMemberInternalMetadata {
-  @doc("UMI Resource for AppLink Member Internal Metadata")
-  umiResource: UmiResource;
-
-  @doc("DNS resource details for AppLink Member Internal Metadata")
-  dnsRecordSet: ProvisionResource;
-
-  @doc("Extension resource details for AppLink Member Internal Metadata")
-  extension: ProvisionResource;
-
-  @doc("Underlay metadata for AppLink Member Provisioning")
-  underlay: UnderlayMetadata;
-
-  @doc("MCP name space for AppLink Member Internal Metadata")
-  mcpNameSpace: string;
-}
-
-@doc("UMI Resource for AppLink Member Internal Metadata")
-model UmiResource {
-  @doc("UMI resource")
-  umi: ProvisionResource;
-
-  @doc("Role assignments for UMI resource")
-  roleAssignments: ProvisionResource[];
 }
 
 @armResourceOperations

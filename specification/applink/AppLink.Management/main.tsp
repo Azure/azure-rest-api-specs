@@ -7,10 +7,7 @@ import "./applink.tsp";
 import "./applinkmember.tsp";
 import "./applinkreleasechannelprofile.tsp";
 
-using Http;
-using Rest;
 using Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.AppLink Resource Provider management API. */

@@ -4,9 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./commontypes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
@@ -18,25 +15,9 @@ model AppLink is TrackedResource<AppLinkProperties> {
 
 @doc("AppLink properties")
 model AppLinkProperties {
-  @visibility(Lifecycle.Read)
-  @doc("Internal metadata for AppLink")
-  internalMetadata?: AppLinkInternalMetadata;
-
   @doc("Provisioning state of the AppLink resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-}
-
-@doc("AppLink internal metadata")
-model AppLinkInternalMetadata {
-  @doc("Azure Key Vault resource details")
-  akvResource: ProvisionResource;
-
-  @doc("Root certificate details")
-  rootCert: ProvisionResource;
-
-  @doc("Underlay metadata for AppLink Provisioning")
-  underlay: UnderlayMetadata;
 }
 
 @armResourceOperations

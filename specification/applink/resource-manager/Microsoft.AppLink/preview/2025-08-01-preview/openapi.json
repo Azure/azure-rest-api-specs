@@ -785,47 +785,6 @@
         }
       ]
     },
-    "AppLinkInternalMetadata": {
-      "type": "object",
-      "description": "AppLink internal metadata",
-      "properties": {
-        "akvResource": {
-          "$ref": "#/definitions/ProvisionResource",
-          "description": "Azure Key Vault resource details"
-        },
-        "rootCert": {
-          "$ref": "#/definitions/ProvisionResource",
-          "description": "Root certificate details"
-        },
-        "underlay": {
-          "$ref": "#/definitions/UnderlayMetadata",
-          "description": "Underlay metadata for AppLink Provisioning"
-        }
-      },
-      "required": [
-        "akvResource",
-        "rootCert",
-        "underlay"
-      ]
-    },
-    "AppLinkInternalMetadataUpdate": {
-      "type": "object",
-      "description": "AppLink internal metadata",
-      "properties": {
-        "akvResource": {
-          "$ref": "#/definitions/ProvisionResourceUpdate",
-          "description": "Azure Key Vault resource details"
-        },
-        "rootCert": {
-          "$ref": "#/definitions/ProvisionResourceUpdate",
-          "description": "Root certificate details"
-        },
-        "underlay": {
-          "$ref": "#/definitions/UnderlayMetadataUpdate",
-          "description": "Underlay metadata for AppLink Provisioning"
-        }
-      }
-    },
     "AppLinkListResult": {
       "type": "object",
       "description": "The response of a AppLink list operation.",
@@ -862,65 +821,6 @@
         }
       ]
     },
-    "AppLinkMemberInternalMetadata": {
-      "type": "object",
-      "description": "Internal metadata for AppLink Member",
-      "properties": {
-        "umiResource": {
-          "$ref": "#/definitions/UmiResource",
-          "description": "UMI Resource for AppLink Member Internal Metadata"
-        },
-        "dnsRecordSet": {
-          "$ref": "#/definitions/ProvisionResource",
-          "description": "DNS resource details for AppLink Member Internal Metadata"
-        },
-        "extension": {
-          "$ref": "#/definitions/ProvisionResource",
-          "description": "Extension resource details for AppLink Member Internal Metadata"
-        },
-        "underlay": {
-          "$ref": "#/definitions/UnderlayMetadata",
-          "description": "Underlay metadata for AppLink Member Provisioning"
-        },
-        "mcpNameSpace": {
-          "type": "string",
-          "description": "MCP name space for AppLink Member Internal Metadata"
-        }
-      },
-      "required": [
-        "umiResource",
-        "dnsRecordSet",
-        "extension",
-        "underlay",
-        "mcpNameSpace"
-      ]
-    },
-    "AppLinkMemberInternalMetadataUpdate": {
-      "type": "object",
-      "description": "Internal metadata for AppLink Member",
-      "properties": {
-        "umiResource": {
-          "$ref": "#/definitions/UmiResourceUpdate",
-          "description": "UMI Resource for AppLink Member Internal Metadata"
-        },
-        "dnsRecordSet": {
-          "$ref": "#/definitions/ProvisionResourceUpdate",
-          "description": "DNS resource details for AppLink Member Internal Metadata"
-        },
-        "extension": {
-          "$ref": "#/definitions/ProvisionResourceUpdate",
-          "description": "Extension resource details for AppLink Member Internal Metadata"
-        },
-        "underlay": {
-          "$ref": "#/definitions/UnderlayMetadataUpdate",
-          "description": "Underlay metadata for AppLink Member Provisioning"
-        },
-        "mcpNameSpace": {
-          "type": "string",
-          "description": "MCP name space for AppLink Member Internal Metadata"
-        }
-      }
-    },
     "AppLinkMemberListResult": {
       "type": "object",
       "description": "The response of a AppLinkMember list operation.",
@@ -954,10 +854,6 @@
           "$ref": "#/definitions/Metadata",
           "description": "The metadata for the member cluster"
         },
-        "internalMetadata": {
-          "$ref": "#/definitions/AppLinkMemberInternalMetadata",
-          "description": "Internal metadata for AppLink Member"
-        },
         "upgradeProfile": {
           "$ref": "#/definitions/UpgradeProfile",
           "description": "Upgrade profile for AppLink Member"
@@ -971,7 +867,6 @@
       "required": [
         "clusterType",
         "metadata",
-        "internalMetadata",
         "upgradeProfile"
       ]
     },
@@ -986,10 +881,6 @@
         "metadata": {
           "$ref": "#/definitions/MetadataUpdate",
           "description": "The metadata for the member cluster"
-        },
-        "internalMetadata": {
-          "$ref": "#/definitions/AppLinkMemberInternalMetadataUpdate",
-          "description": "Internal metadata for AppLink Member"
         },
         "upgradeProfile": {
           "$ref": "#/definitions/UpgradeProfileUpdate",
@@ -1016,27 +907,10 @@
       "type": "object",
       "description": "AppLink properties",
       "properties": {
-        "internalMetadata": {
-          "$ref": "#/definitions/AppLinkInternalMetadata",
-          "description": "Internal metadata for AppLink"
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the AppLink resource",
           "readOnly": true
-        }
-      },
-      "required": [
-        "internalMetadata"
-      ]
-    },
-    "AppLinkPropertiesUpdate": {
-      "type": "object",
-      "description": "AppLink properties",
-      "properties": {
-        "internalMetadata": {
-          "$ref": "#/definitions/AppLinkInternalMetadataUpdate",
-          "description": "Internal metadata for AppLink"
         }
       }
     },
@@ -1124,7 +998,7 @@
       "description": "AppLink resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AppLinkPropertiesUpdate",
+          "$ref": "#/definitions/AppLinkProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -1216,47 +1090,6 @@
         }
       }
     },
-    "ProvisionResource": {
-      "type": "object",
-      "description": "Provisioning resource details for Internal Metadata",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the resource"
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID of the resource"
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "resourceId"
-      ]
-    },
-    "ProvisionResourceUpdate": {
-      "type": "object",
-      "description": "Provisioning resource details for Internal Metadata",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of the resource"
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID of the resource"
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state of the resource",
@@ -1311,121 +1144,6 @@
         ]
       },
       "readOnly": true
-    },
-    "UmiResource": {
-      "type": "object",
-      "description": "UMI Resource for AppLink Member Internal Metadata",
-      "properties": {
-        "umi": {
-          "$ref": "#/definitions/ProvisionResource",
-          "description": "UMI resource"
-        },
-        "roleAssignments": {
-          "type": "array",
-          "description": "Role assignments for UMI resource",
-          "items": {
-            "$ref": "#/definitions/ProvisionResource"
-          }
-        }
-      },
-      "required": [
-        "umi",
-        "roleAssignments"
-      ]
-    },
-    "UmiResourceUpdate": {
-      "type": "object",
-      "description": "UMI Resource for AppLink Member Internal Metadata",
-      "properties": {
-        "umi": {
-          "$ref": "#/definitions/ProvisionResourceUpdate",
-          "description": "UMI resource"
-        },
-        "roleAssignments": {
-          "type": "array",
-          "description": "Role assignments for UMI resource",
-          "items": {
-            "$ref": "#/definitions/ProvisionResource"
-          }
-        }
-      }
-    },
-    "UnderlayMetadata": {
-      "type": "object",
-      "description": "UMI resource details for AppLink Member Internal Metadata",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the underlay resource"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of the underlay resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the underlay resource"
-        },
-        "resourceProvisionSubId": {
-          "type": "string",
-          "description": "The subscription ID of the resource provisioning"
-        },
-        "resourceProvisionRg": {
-          "type": "string",
-          "description": "The resource group of the resource provisioning"
-        },
-        "ingressGatewayIp": {
-          "type": "string",
-          "description": "Ingress gateway IP address for the underlay"
-        },
-        "meshManagerAddress": {
-          "type": "string",
-          "description": "Underlay address"
-        }
-      },
-      "required": [
-        "name",
-        "tenantId",
-        "location",
-        "resourceProvisionSubId",
-        "resourceProvisionRg",
-        "ingressGatewayIp",
-        "meshManagerAddress"
-      ]
-    },
-    "UnderlayMetadataUpdate": {
-      "type": "object",
-      "description": "UMI resource details for AppLink Member Internal Metadata",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the underlay resource"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of the underlay resource"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the underlay resource"
-        },
-        "resourceProvisionSubId": {
-          "type": "string",
-          "description": "The subscription ID of the resource provisioning"
-        },
-        "resourceProvisionRg": {
-          "type": "string",
-          "description": "The resource group of the resource provisioning"
-        },
-        "ingressGatewayIp": {
-          "type": "string",
-          "description": "Ingress gateway IP address for the underlay"
-        },
-        "meshManagerAddress": {
-          "type": "string",
-          "description": "Underlay address"
-        }
-      }
     },
     "UpgradeMode": {
       "type": "string",
