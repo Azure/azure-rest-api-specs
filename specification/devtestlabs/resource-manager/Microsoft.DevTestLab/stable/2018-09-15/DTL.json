@@ -11005,9 +11005,12 @@
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -11178,7 +11181,11 @@
           "description": "The Lab items on this page",
           "items": {
             "$ref": "#/definitions/Lab"
-          }
+          },
+          "x-ms-identifiers": [
+            "labName",
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",

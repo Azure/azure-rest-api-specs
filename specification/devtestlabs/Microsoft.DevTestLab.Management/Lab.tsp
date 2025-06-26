@@ -13,12 +13,20 @@ namespace Microsoft.DevTestLab;
 /**
  * A lab.
  */
-model Lab is Azure.ResourceManager.TrackedResource<LabProperties> {
-  ...ResourceNameParameter<
-    Resource = Lab,
-    SegmentName = "labs",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Lab extends Resource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key
+  @segment("labs")
+  labName: string;
+
+  properties: LabProperties;
 }
 
 @armResourceOperations
@@ -231,7 +239,7 @@ interface Labs {
   >;
 }
 
-@@doc(Lab.name, "The name of the lab.");
+@@doc(Lab.labName, "The name of the lab.");
 @@doc(Lab.properties, "The properties of the resource.");
 @@doc(Labs.createOrUpdate::parameters.resource, "A lab.");
 @@doc(Labs.update::parameters.properties, "A lab.");
