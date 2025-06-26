@@ -73,7 +73,11 @@ interface JobDefinitions {
   startJob is ArmResourceActionSync<
     JobDefinition,
     void,
-    ArmResponse<JobRunResourceId>
+    ArmResponse<JobRunResourceId>,
+    Parameters = {
+      @header
+      contentType: "application/json" | "application/x-www-form-urlencoded";
+    }
   >;
 
   /**
