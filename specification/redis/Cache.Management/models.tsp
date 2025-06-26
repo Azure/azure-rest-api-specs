@@ -312,7 +312,6 @@ model RedisCreateParameters {
    * Redis cache properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RedisCreateProperties;
 
   /**
@@ -703,7 +702,6 @@ model RedisUpdateParameters {
    * Redis cache properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RedisUpdateProperties;
 
   /**
@@ -889,7 +887,6 @@ model RedisLinkedServerCreateParameters {
    * Properties required to create a linked server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: RedisLinkedServerCreateProperties;
 }
 
