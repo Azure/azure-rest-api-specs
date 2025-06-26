@@ -19,5 +19,3 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
-
-@@clientName(StorageTasks.storageTaskAssignmentList, "list", "java");
