@@ -6,6 +6,15 @@
     "resourceGroupName": "resourceGroupName",
     "subscriptionId": "{subscriptionId}",
     "virtualNetwork": {
+      "properties": {
+        "allowedSubnets": [
+            {
+              "allowPublicIp": "Allow",
+              "labSubnetName": "{virtualNetworkName}Subnet",
+              "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet"
+            }
+          ]
+      },
       "location": "{location}",
       "tags": {
         "tagName1": "tagValue1"
