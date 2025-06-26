@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Resources;
+namespace Microsoft.Resources.DeploymentStacks;
 
 interface DeploymentStacksOperationGroup {
   /**

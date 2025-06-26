@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Resources;
+namespace Microsoft.Resources.DeploymentStacks;
 
 /**
  * Deployment stack object.

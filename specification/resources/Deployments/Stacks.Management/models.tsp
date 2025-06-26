@@ -2,20 +2,21 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager;
+using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Resources;
+namespace Microsoft.Resources.DeploymentStacks;
 
 /**
  * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
  */
 union DeploymentStacksDeleteDetachEnum {
   string,
+
   /** Delete the specified resources from Azure */
   delete: "delete",
+
   /** Keep the specified resources in Azure */
   detach: "detach",
 }
@@ -47,26 +48,37 @@ union DenySettingsMode {
  */
 union DeploymentStackProvisioningState {
   string,
+
   /** The deployment stack is currently being created */
   Creating: "creating",
+
   /** The deployment stack is currently being validated */
   Validating: "validating",
+
   /** The deployment stack is currently waiting */
   Waiting: "waiting",
+
   /** The deployment stack is currently deploying */
   Deploying: "deploying",
+
   /** The deployment stack is being cancelled */
   Canceling: "canceling",
+
   /** The deployment stack is updating deny assignments */
   UpdatingDenyAssignments: "updatingDenyAssignments",
+
   /** The deployment stack is deleting resources */
   DeletingResources: "deletingResources",
+
   /** The deployment stack completed successfully */
   Succeeded: "succeeded",
+
   /** The deployment stack has failed */
   Failed: "failed",
+
   /** The deployment stack has been cancelled */
   Canceled: "canceled",
+
   /** The deployment stack is being deleted */
   Deleting: "deleting",
 }
@@ -184,6 +196,14 @@ model DeploymentStackProperties extends DeploymentStacksError {
   parameters?: Record<DeploymentParameter>;
 
   /**
+   * The deployment extension configs. Keys of this object are extension aliases as defined in the deployment template.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of the object are determined by the deployment template."
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  extensionConfigs?: Record<DeploymentExtensionConfig>;
+
+  /**
    * The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both.
    */
   parametersLink?: DeploymentStacksParametersLink;
@@ -255,6 +275,13 @@ model DeploymentStackProperties extends DeploymentStacksError {
    */
   @visibility(Lifecycle.Read)
   resources?: ManagedResourceReference[];
+
+  /**
+   * The extensions used during deployment. Contains extension data for all extensible resources managed by the stack.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  deploymentExtensions?: DeploymentExtension[];
 
   /**
    * The resourceId of the deployment resource created by the deployment stack.
@@ -432,10 +459,31 @@ model DenySettings {
  */
 model ResourceReference {
   /**
-   * The resourceId of a resource managed by the deployment stack.
+   * The ARM Resource ID of a resource managed by the deployment stack.
    */
   @visibility(Lifecycle.Read)
   id?: string;
+
+  /**
+   * The extension the resource was deployed with.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  extension?: DeploymentExtension;
+
+  /**
+   * The resource type.
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The API version the resource was deployed with
+   */
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  apiVersion?: string;
 }
 
 /**
@@ -519,6 +567,84 @@ model DeploymentStackTemplateDefinition {
 }
 
 /**
+ * The common properties of extension config items.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExtensionConfigItemBase {
+  /**
+   * The type of the value.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Extension config item with the value.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExtensionConfigValueItem {
+  ...DeploymentExtensionConfigItemBase;
+
+  /**
+   * The value of the config item. The type is determined by the extension config schema.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "TODO make a discriminated type or settle"
+  value: unknown;
+}
+
+/**
+ * Extension config item with a key vault reference.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExtensionConfigKeyVaultItem {
+  ...DeploymentExtensionConfigItemBase;
+
+  /**
+   * The key vault reference of the config item.
+   */
+  keyVaultReference: KeyVaultParameterReference;
+}
+
+/**
+ * The value or how to get a value for an extension config property.
+ */
+alias DeploymentExtensionConfigItem = DeploymentExtensionConfigValueItem | DeploymentExtensionConfigKeyVaultItem;
+
+/**
+ * The configuration of a single deployment extension. The keys of this object are extension aliases as defined in the deployment template.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys are dynamic and based on the deployment template."
+@added(Versions.v2025_07_01)
+model DeploymentExtensionConfig is Record<DeploymentExtensionConfigItem>;
+
+/**
+ * Details about the usage of a deployment extension.
+ */
+@added(Versions.v2025_07_01)
+model DeploymentExtension {
+  /**
+   * The extension name.
+   */
+  name: string;
+
+  /**
+   * The extension version.
+   */
+  version: string;
+
+  /**
+   * The configuration ID of the extension usage. It uniquely identifies a target the extension deploys to.
+   */
+  configId?: string;
+
+  /**
+   * The configuration used for deployment. The keys of this object are config property names.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  config?: Record<DeploymentExtensionConfig>;
+}
+
+/**
  * The Deployment stack validation result.
  */
 model DeploymentStackValidateResult {
@@ -575,4 +701,10 @@ model DeploymentStackValidateProperties {
    * The array of resources that were validated.
    */
   validatedResources?: ResourceReference[];
+
+  /**
+   * The deployment extensions.
+   */
+  @added(Versions.v2025_07_01)
+  deploymentExtensions?: DeploymentExtension[];
 }
