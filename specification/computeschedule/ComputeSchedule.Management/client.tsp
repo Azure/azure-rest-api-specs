@@ -139,3 +139,7 @@ using Microsoft.ComputeSchedule;
   "CreateResourceOperationResult",
   "csharp"
 );
+@@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
+  "V2025-05-01",
+  "javascript"
+);

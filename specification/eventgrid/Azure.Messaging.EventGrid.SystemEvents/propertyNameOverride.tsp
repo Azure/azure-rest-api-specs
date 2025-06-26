@@ -17,168 +17,89 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
+// Renames applying to all languages
 @@clientName(ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
-  "expiresOn",
-  "autorest"
+  "expiresOn"
 );
 @@clientName(ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
-  "expiresOn",
-  "autorest"
+  "expiresOn"
 );
 @@clientName(ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
-  "gateway",
-  "autorest"
+  "gateway"
 );
-@@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo,
-  "token",
-  "autorest"
-);
-@@clientName(ApiManagementGatewayTokenExpiredEventData.gatewayInfo,
-  "gateway",
-  "autorest"
-);
-@@clientName(ApiManagementGatewayTokenExpiredEventData.tokenInfo,
-  "token",
-  "autorest"
-);
-@@clientName(AcsIncomingCallEventData.to,
-  "toCommunicationIdentifier",
-  "autorest"
-);
-@@clientName(AcsIncomingCallEventData.from,
-  "fromCommunicationIdentifier",
-  "autorest"
-);
-@@clientName(AcsRouterWorkerSelector.value, "labelValue", "autorest");
-
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo, "token");
+@@clientName(ApiManagementGatewayTokenExpiredEventData.gatewayInfo, "gateway");
+@@clientName(ApiManagementGatewayTokenExpiredEventData.tokenInfo, "token");
+@@clientName(AcsIncomingCallEventData.to, "toCommunicationIdentifier");
+@@clientName(AcsIncomingCallEventData.from, "fromCommunicationIdentifier");
+@@clientName(AcsRouterWorkerSelector.value, "labelValue");
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
-  "engagement",
-  "autorest"
+  "engagement"
 );
-
-@@clientName(EventHubCaptureFileCreatedEventData.fileUrl,
-  "fileurl",
-  "autorest"
-);
-
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "autorest"
+  "FhirServiceHostName"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
-  "FhirResourceId",
-  "autorest"
+  "FhirResourceId"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "autorest"
+  "FhirResourceVersionId"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
-  "FhirResourceType",
-  "autorest"
+  "FhirResourceType"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "autorest"
+  "FhirServiceHostName"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
-  "FhirResourceId",
-  "autorest"
+  "FhirResourceId"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "autorest"
+  "FhirResourceVersionId"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
-  "FhirResourceType",
-  "autorest"
+  "FhirResourceType"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
-  "FhirServiceHostName",
-  "autorest"
+  "FhirServiceHostName"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
-  "FhirResourceId",
-  "autorest"
+  "FhirResourceId"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
-  "FhirResourceVersionId",
-  "autorest"
+  "FhirResourceVersionId"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
-  "FhirResourceType",
-  "autorest"
+  "FhirResourceType"
 );
-
-@@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
-@@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");
-@@clientName(DeviceTwinProperties.version, "$version", "autorest");
-
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
-  "resourceDetails",
-  "autorest"
+  "resourceDetails"
 );
 @@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
-  "operationalDetails",
-  "autorest"
+  "operationalDetails"
 );
 @@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
-  "resourceDetails",
-  "autorest"
+  "resourceDetails"
 );
 @@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
-  "operationalDetails",
-  "autorest"
+  "operationalDetails"
 );
-
-@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
-  "queuedOn",
-  "autorest"
-);
+@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime, "queuedOn");
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
-  "completedOn",
-  "autorest"
+  "completedOn"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
-  "summaryReportBlobUri",
-  "autorest"
-);
-
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
-  "channelKind",
-  "autorest"
+  "channelKind"
 );
-
-@@clientName(AcsMessageReceivedEventData.channelType,
-  "channelKind",
-  "autorest"
-);
-
-@@clientName(AcsMessageReceivedEventData.media, "mediaContent", "autorest");
-
-@@clientName(AcsMessageReceivedEventData.interactive,
-  "interactiveContent",
-  "autorest"
-);
-
-@@clientName(AcsMessageMediaContent.id, "mediaId", "autorest");
-
-@@clientName(AcsMessageContext.id, "messageId", "autorest");
-
-@@clientName(AcsMessageInteractiveContent.type, "replyKind", "autorest");
-
-@@clientName(AcsMessageInteractiveButtonReplyContent.id,
-  "buttonId",
-  "autorest"
-);
-
-@@clientName(AcsMessageInteractiveListReplyContent.id,
-  "listItemId",
-  "autorest"
-);
-@@clientName(AcsCallEndedByProperties.type, "kind", "autorest");
-
-// Renames applying to all languages
+@@clientName(AcsMessageReceivedEventData.channelType, "channelKind");
+@@clientName(AcsMessageReceivedEventData.media, "mediaContent");
+@@clientName(AcsMessageReceivedEventData.interactive, "interactiveContent");
+@@clientName(AcsMessageMediaContent.id, "mediaId");
+@@clientName(AcsMessageContext.id, "messageId");
+@@clientName(AcsMessageInteractiveContent.type, "replyKind");
+@@clientName(AcsMessageInteractiveButtonReplyContent.id, "buttonId");
+@@clientName(AcsMessageInteractiveListReplyContent.id, "listItemId");
+@@clientName(AcsCallEndedByProperties.type, "kind");
 @@clientName(recordingChannelType, "AcsRecordingChannelType");
 @@clientName(recordingContentType, "AcsRecordingContentType");
 @@clientName(recordingFormatType, "AcsRecordingFormatType");
@@ -202,3 +123,116 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyVaultSecretNearExpiryEventData.EXP, "Exp");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
+
+@@clientName(ApiManagementUserCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+
+@@clientName(ApiManagementUserUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementUserDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementProductDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementApiUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri,
+  "resourceUrl",
+  "!go, !csharp"
+);
+
+@@clientName(ContainerRegistryEventSource.instanceID, "instanceId");
+
+// autorest specific renames
+@@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
+@@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");
+@@clientName(DeviceTwinProperties.version, "$version", "autorest");

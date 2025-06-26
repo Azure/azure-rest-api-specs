@@ -200,64 +200,35 @@ stages:
           ArtifactPath: $(StagedArtifactsFolder)
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
-      - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
+          parameters:
+            BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
+            BaseRepoOwner: azure-sdk
+            CommitMsg: $(GeneratedSDKInformation)
+            TargetRepoOwner: $(SdkRepoOwner)
+            TargetRepoName: $(SdkRepoName)
+            PushArgs: "--force"
+            WorkingDirectory: $(SdkRepoDirectory)
+            ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
         - task: PowerShell@2
-          displayName: Add label to the spec PR
-          condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'add'))
+          displayName: Create pull request
+          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
           inputs:
             pwsh: true
             workingDirectory: $(SdkRepoDirectory)
-            filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
+            filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
             arguments: >
-              -RepoOwner $(SpecRepoOwner)
-              -RepoName $(SpecRepoName)
-              -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-              -Labels $(BreakingChangeLabel)
+              -RepoOwner "$(SdkRepoOwner)"
+              -RepoName "$(SdkRepoName)"
+              -BaseBranch "main"
+              -PROwner "azure-sdk"
+              -PRBranch "$(PrBranch)-$(Build.BuildId)"
               -AuthToken "$(azuresdk-github-pat)"
-
-        - task: PowerShell@2
-          displayName: Remove label from the spec PR
-          condition: and(eq(variables['Build.Reason'], 'PullRequest'), ne(variables['BreakingChangeLabel'], ''), eq(variables['BreakingChangeLabelAction'], 'remove'))
-          inputs:
-            pwsh: true
-            workingDirectory: $(SdkRepoDirectory)
-            filePath: $(SdkRepoDirectory)/eng/common/scripts/Remove-IssueLabel.ps1
-            arguments: >
-              -RepoOwner $(SpecRepoOwner)
-              -RepoName $(SpecRepoName)
-              -IssueNumber "$(System.PullRequest.PullRequestNumber)"
-              -LabelName $(BreakingChangeLabel)
-              -AuthToken "$(azuresdk-github-pat)"
-
-        - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
-          - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
-            parameters:
-              BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
-              BaseRepoOwner: azure-sdk
-              CommitMsg: $(GeneratedSDKInformation)
-              TargetRepoOwner: $(SdkRepoOwner)
-              TargetRepoName: $(SdkRepoName)
-              PushArgs: "--force"
-              WorkingDirectory: $(SdkRepoDirectory)
-              ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-
-          - task: PowerShell@2
-            displayName: Create pull request
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
-            inputs:
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-              arguments: >
-                -RepoOwner "$(SdkRepoOwner)"
-                -RepoName "$(SdkRepoName)"
-                -BaseBranch "main"
-                -PROwner "azure-sdk"
-                -PRBranch "$(PrBranch)-$(Build.BuildId)"
-                -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                -PRBody "$(GeneratedSDKInformation)"
-                -OpenAsDraft $true
+              -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+              -PRBody "$(GeneratedSDKInformation)"
+              -OpenAsDraft $true
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |
