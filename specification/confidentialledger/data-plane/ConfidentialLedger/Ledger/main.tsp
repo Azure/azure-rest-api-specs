@@ -15,11 +15,10 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * The ConfidentialLedgerClient writes and retrieves ledger entries against the
- * Confidential Ledger service.
+ * Write and retrieve ledger entries against the Confidential Ledger service.
  */
 #suppress "@azure-tools/typespec-azure-core/auth-required" "Service has a custom authentication endpoint defined in the Certificate directory"
-@service(#{ title: "ConfidentialLedgerClient" })
+@service(#{ title: "Confidential Ledger" })
 @versioned(Versions)
 @server(
   "{ledgerEndpoint}",
