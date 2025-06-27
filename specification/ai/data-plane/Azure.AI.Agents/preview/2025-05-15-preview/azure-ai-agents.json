@@ -1692,6 +1692,67 @@
         }
       }
     },
+    "/threads/{threadId}/runs/threads/{threadId}/runs/{runId}/submit_tool_approval": {
+      "post": {
+        "operationId": "Runs_SubmitToolApprovals",
+        "description": "Submits approval from client as requested by tool calls in a run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Identifier of the run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tool_approvals": {
+                  "type": "array",
+                  "description": "A list of tool approvals allowing data to be sent to tools.",
+                  "items": {
+                    "$ref": "#/definitions/ToolApproval"
+                  },
+                  "x-ms-client-name": "toolApprovals",
+                  "x-ms-identifiers": []
+                }
+              },
+              "required": [
+                "tool_approvals"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated information about the run.",
+            "schema": {
+              "$ref": "#/definitions/ThreadRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        }
+      }
+    },
     "/threads/runs": {
       "post": {
         "operationId": "CreateThreadAndRun",
@@ -7542,6 +7603,32 @@
           }
         ]
       }
+    },
+    "ToolApproval": {
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        },
+        "approve": {
+          "type": "boolean",
+          "description": "The approval boolean value to be submitted."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Headers to be attached to the approval.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tool_call_id",
+        "approve"
+      ]
     },
     "ToolConnection": {
       "type": "object",

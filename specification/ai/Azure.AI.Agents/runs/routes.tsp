@@ -188,6 +188,37 @@ namespace Azure.AI.Agents {
     >;
 
     /**
+     * Submits approval from client as requested by tool calls in a run.
+     *
+     * @param threadId   The ID of the thread that was run.
+     * @param runId      The ID of the run that requires tool outputs.
+     * @param toolApprovals A list of tool approvals allowing data to be sent to tools.
+     * @returns Updated information about the run.
+     */
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+    @post
+    @route("/threads/{threadId}/runs/{runId}/submit_tool_approval")
+    @added(Versions.v2025_05_15_preview)
+    submitToolApprovals is AgentOperation<
+      {
+        @doc("Identifier of the thread.")
+        @path
+        threadId: string;
+
+        @doc("Identifier of the run.")
+        @path
+        runId: string;
+
+        @doc("A list of tool approvals allowing data to be sent to tools.")
+        @encodedName("application/json", "tool_approvals")
+        toolApprovals: ToolApproval[];
+      },
+      ThreadRun
+    >;
+
+    /**
      * Cancels a run of an in‐progress thread.
      *
      * @param threadId The ID of the thread being run.

@@ -671,6 +671,24 @@ model ToolOutput {
   output?: string;
 }
 
+//
+// Tool approvals -- structured data that allows the client to send data to tool
+//
+
+@doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@added(Versions.v2025_05_15_preview)
+model ToolApproval {
+  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
+  @encodedName("application/json", "tool_call_id")
+  toolCallId: string;
+
+  @doc("The approval boolean value to be submitted.")
+  approve: boolean;
+
+  @doc("Headers to be attached to the approval.")
+  headers?: Record<string>;
+}
+
 /**
  * Controls which (if any) tool is called by the model.
  * - `none` means the model will not call any tools and instead generates a message.
