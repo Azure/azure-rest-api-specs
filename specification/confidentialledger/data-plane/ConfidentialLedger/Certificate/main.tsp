@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
   "{endpoint}",
   "The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate required for connecting to a Confidential Ledger.",
   {
-    endpoint: string,
+    endpoint: url,
   }
 )
 namespace ConfidentialLedger.Certificate;

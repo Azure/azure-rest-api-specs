@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ConfidentialLedgerCertificateClient",
+    "title": "Confidential Ledger Certificate",
     "version": "2024-12-09-preview",
-    "description": "The ConfidentialLedgerCertificateClient is used to retrieve the TLS certificate\nrequired for connecting to a Confidential Ledger.",
+    "description": "The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate\nrequired for connecting to a Confidential Ledger.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -21,7 +21,9 @@
         "name": "endpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },

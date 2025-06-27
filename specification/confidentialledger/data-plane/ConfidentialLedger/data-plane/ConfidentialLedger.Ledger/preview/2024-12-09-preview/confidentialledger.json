@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ConfidentialLedgerClient",
+    "title": "Confidential Ledger",
     "version": "2024-12-09-preview",
-    "description": "The ConfidentialLedgerClient writes and retrieves ledger entries against the\nConfidential Ledger service.",
+    "description": "Write and retrieve ledger entries against the Confidential Ledger service.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -21,7 +21,9 @@
         "name": "ledgerEndpoint",
         "in": "path",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },

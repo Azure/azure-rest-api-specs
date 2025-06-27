@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
   "{ledgerEndpoint}",
   "Write and retrieve ledger entries against the Confidential Ledger service.",
   {
-    ledgerEndpoint: string,
+    ledgerEndpoint: url,
   }
 )
 namespace ConfidentialLedger.Ledger;
