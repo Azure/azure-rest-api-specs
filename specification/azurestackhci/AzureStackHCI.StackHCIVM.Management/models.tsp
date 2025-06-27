@@ -1271,7 +1271,7 @@ model VirtualHardDiskStatus {
   @added(Versions.v2024_05_01_preview)
   @doc("The upload status of the virtual hard disk")
   uploadStatus?: VirtualHardDiskUploadStatus;
-  
+
   @added(Versions.v2025_06_01_preview)
   @doc("ARM IDs of the VMs that are consuming the VHD.")
   managedBy?: string[];
