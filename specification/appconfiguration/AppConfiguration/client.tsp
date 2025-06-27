@@ -24,7 +24,7 @@ namespace SdkCustomizations;
 @@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
 @@clientName(putLock, "CreateReadOnlyLock", "csharp");
 @@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
-// @@access(putKeyValue, Access.internal, "csharp");
+@@access(putKeyValue, Access.internal, "csharp");
 // @@access(deleteKeyValue, Access.internal, "csharp");
 // @@access(getSnapshot, Access.internal, "csharp");
 // @@access(createSnapshot, Access.internal, "csharp");
