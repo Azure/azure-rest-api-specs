@@ -1,26 +1,25 @@
 {
   "parameters": {
-    "accountName": "sto8607",
-    "api-version": "2024-01-01",
-    "monitor": "true",
-    "resourceGroupName": "res4410",
     "subscriptionId": "{subscription-id}",
-    "tableServiceName": "default"
+    "resourceGroupName": "res4410",
+    "accountName": "sto8607",
+    "tableServiceName": "default",
+    "api-version": "2024-01-01",
+    "monitor": "true"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/tableServices/default",
         "name": "default",
         "type": "Microsoft.Storage/storageAccounts/tableServices",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res4410/providers/Microsoft.Storage/storageAccounts/sto8607/tableServices/default",
         "properties": {
           "cors": {
             "corsRules": [
               {
-                "allowedHeaders": [
-                  "x-ms-meta-abc",
-                  "x-ms-meta-data*",
-                  "x-ms-meta-target*"
+                "allowedOrigins": [
+                  "http://www.contoso.com",
+                  "http://www.fabrikam.com"
                 ],
                 "allowedMethods": [
                   "GET",
@@ -30,55 +29,54 @@
                   "MERGE",
                   "PUT"
                 ],
-                "allowedOrigins": [
-                  "http://www.contoso.com",
-                  "http://www.fabrikam.com"
-                ],
+                "maxAgeInSeconds": 100,
                 "exposedHeaders": [
                   "x-ms-meta-*"
                 ],
-                "maxAgeInSeconds": 100
+                "allowedHeaders": [
+                  "x-ms-meta-abc",
+                  "x-ms-meta-data*",
+                  "x-ms-meta-target*"
+                ]
               },
               {
-                "allowedHeaders": [
+                "allowedOrigins": [
                   "*"
                 ],
                 "allowedMethods": [
                   "GET"
                 ],
-                "allowedOrigins": [
-                  "*"
-                ],
+                "maxAgeInSeconds": 2,
                 "exposedHeaders": [
                   "*"
                 ],
-                "maxAgeInSeconds": 2
+                "allowedHeaders": [
+                  "*"
+                ]
               },
               {
-                "allowedHeaders": [
-                  "x-ms-meta-12345675754564*"
+                "allowedOrigins": [
+                  "http://www.abc23.com",
+                  "https://www.fabrikam.com/*"
                 ],
                 "allowedMethods": [
                   "GET",
                   "PUT"
                 ],
-                "allowedOrigins": [
-                  "http://www.abc23.com",
-                  "https://www.fabrikam.com/*"
-                ],
+                "maxAgeInSeconds": 2000,
                 "exposedHeaders": [
                   "x-ms-meta-abc",
                   "x-ms-meta-data*",
                   "x-ms-meta-target*"
                 ],
-                "maxAgeInSeconds": 2000
+                "allowedHeaders": [
+                  "x-ms-meta-12345675754564*"
+                ]
               }
             ]
           }
         }
       }
     }
-  },
-  "operationId": "TableServices_GetServiceProperties",
-  "title": "TableServicesGet"
+  }
 }

@@ -1,27 +1,28 @@
 {
   "parameters": {
-    "accountName": "sto4445",
-    "api-version": "2024-01-01",
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
     "resourceGroupName": "res4228",
+    "accountName": "sto4445",
     "storageTaskAssignmentName": "myassignment1",
-    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616"
+    "api-version": "2024-01-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
         "name": "myassignment1",
         "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
-        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
         "properties": {
-          "description": "My Storage task assignment",
+          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1",
           "enabled": true,
+          "description": "My Storage task assignment",
           "executionContext": {
             "target": {
-              "excludePrefix": [],
               "prefix": [
                 "prefix1",
                 "prefix2"
-              ]
+              ],
+              "excludePrefix": []
             },
             "trigger": {
               "type": "RunOnce",
@@ -30,15 +31,12 @@
               }
             }
           },
-          "provisioningState": "Succeeded",
           "report": {
             "prefix": "container1"
           },
-          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1"
+          "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "StorageTaskAssignments_Get",
-  "title": "GetStorageTaskAssignment"
+  }
 }

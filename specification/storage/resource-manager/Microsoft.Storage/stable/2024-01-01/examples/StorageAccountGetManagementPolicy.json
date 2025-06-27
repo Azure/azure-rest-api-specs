@@ -1,44 +1,26 @@
 {
   "parameters": {
-    "accountName": "sto2527",
-    "api-version": "2024-01-01",
-    "managementPolicyName": "default",
-    "monitor": "true",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "res6977",
-    "subscriptionId": "{subscription-id}"
+    "accountName": "sto2527",
+    "managementPolicyName": "default",
+    "api-version": "2024-01-01",
+    "monitor": "true"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
         "name": "DefaultManagementPolicy",
         "type": "Microsoft.Storage/storageAccounts/managementPolicies",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/res7231/providers/Microsoft.Storage/storageAccounts/sto288/managementPolicies/default",
         "properties": {
-          "lastModifiedTime": "2018-06-08T03:01:55.7168089Z",
           "policy": {
             "rules": [
               {
+                "enabled": true,
                 "name": "olcmtest",
                 "type": "Lifecycle",
                 "definition": {
-                  "actions": {
-                    "baseBlob": {
-                      "delete": {
-                        "daysAfterModificationGreaterThan": 1000
-                      },
-                      "tierToArchive": {
-                        "daysAfterModificationGreaterThan": 90
-                      },
-                      "tierToCool": {
-                        "daysAfterModificationGreaterThan": 30
-                      }
-                    },
-                    "snapshot": {
-                      "delete": {
-                        "daysAfterCreationGreaterThan": 30
-                      }
-                    }
-                  },
                   "filters": {
                     "blobTypes": [
                       "blockBlob"
@@ -46,16 +28,32 @@
                     "prefixMatch": [
                       "olcmtestcontainer"
                     ]
+                  },
+                  "actions": {
+                    "baseBlob": {
+                      "tierToCool": {
+                        "daysAfterModificationGreaterThan": 30
+                      },
+                      "tierToArchive": {
+                        "daysAfterModificationGreaterThan": 90
+                      },
+                      "delete": {
+                        "daysAfterModificationGreaterThan": 1000
+                      }
+                    },
+                    "snapshot": {
+                      "delete": {
+                        "daysAfterCreationGreaterThan": 30
+                      }
+                    }
                   }
-                },
-                "enabled": true
+                }
               }
             ]
-          }
+          },
+          "lastModifiedTime": "2018-06-08T03:01:55.7168089Z"
         }
       }
     }
-  },
-  "operationId": "ManagementPolicies_Get",
-  "title": "StorageAccountGetManagementPolicies"
+  }
 }

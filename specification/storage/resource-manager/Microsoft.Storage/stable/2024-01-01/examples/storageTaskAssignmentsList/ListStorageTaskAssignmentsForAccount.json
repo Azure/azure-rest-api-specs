@@ -1,28 +1,29 @@
 {
   "parameters": {
-    "accountName": "sto4445",
-    "api-version": "2024-01-01",
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616",
     "resourceGroupName": "res4228",
-    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616"
+    "accountName": "sto4445",
+    "api-version": "2024-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
             "name": "myassignment1",
             "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
-            "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
             "properties": {
-              "description": "My Storage task assignment #1",
+              "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1",
               "enabled": true,
+              "description": "My Storage task assignment #1",
               "executionContext": {
                 "target": {
-                  "excludePrefix": [],
                   "prefix": [
                     "prefix1",
                     "prefix2"
-                  ]
+                  ],
+                  "excludePrefix": []
                 },
                 "trigger": {
                   "type": "RunOnce",
@@ -31,27 +32,27 @@
                   }
                 }
               },
-              "provisioningState": "Succeeded",
               "report": {
                 "prefix": "container1"
               },
-              "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1"
+              "provisioningState": "Succeeded"
             }
           },
           {
+            "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment2",
             "name": "myassignment2",
             "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
-            "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment2",
             "properties": {
-              "description": "My Storage task assignment #2",
+              "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask2",
               "enabled": true,
+              "description": "My Storage task assignment #2",
               "executionContext": {
                 "target": {
-                  "excludePrefix": [],
                   "prefix": [
                     "prefix3",
                     "prefix4"
-                  ]
+                  ],
+                  "excludePrefix": []
                 },
                 "trigger": {
                   "type": "RunOnce",
@@ -60,17 +61,14 @@
                   }
                 }
               },
-              "provisioningState": "Succeeded",
               "report": {
                 "prefix": "container2"
               },
-              "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask2"
+              "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "StorageTaskAssignments_List",
-  "title": "ListStorageTaskAssignmentsForAccount"
+  }
 }
