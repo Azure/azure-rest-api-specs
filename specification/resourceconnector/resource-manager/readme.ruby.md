@@ -37,3 +37,13 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: Azure::ExtendedLocation::Mgmt::2022-10-27
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_resource_connector/lib
 ```
+
+### Tag: package-2025-03-01-preview and ruby
+
+These settings apply only when `--tag=package-2025-03-01-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2025-03-01-preview' && $(ruby)
+namespace: Azure::ExtendedLocation::Mgmt::2025-03-01-preview
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_resource_connector/lib
+```
