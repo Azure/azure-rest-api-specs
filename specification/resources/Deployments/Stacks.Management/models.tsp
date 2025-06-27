@@ -567,48 +567,26 @@ model DeploymentStackTemplateDefinition {
 }
 
 /**
- * The common properties of extension config items.
+ * The value or how to get a value for an extension config property.
  */
-@added(Versions.v2025_07_01)
-model DeploymentExtensionConfigItemBase {
+model DeploymentExtensionConfigItem {
   /**
    * The type of the value.
    */
   @visibility(Lifecycle.Read)
   type?: string;
-}
-
-/**
- * Extension config item with the value.
- */
-@added(Versions.v2025_07_01)
-model DeploymentExtensionConfigValueItem {
-  ...DeploymentExtensionConfigItemBase;
 
   /**
    * The value of the config item. The type is determined by the extension config schema.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "TODO make a discriminated type or settle"
-  value: unknown;
-}
-
-/**
- * Extension config item with a key vault reference.
- */
-@added(Versions.v2025_07_01)
-model DeploymentExtensionConfigKeyVaultItem {
-  ...DeploymentExtensionConfigItemBase;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The expected type is determined by the extension config schema."
+  value?: unknown;
 
   /**
    * The key vault reference of the config item.
    */
-  keyVaultReference: KeyVaultParameterReference;
+  keyVaultReference?: KeyVaultParameterReference;
 }
-
-/**
- * The value or how to get a value for an extension config property.
- */
-alias DeploymentExtensionConfigItem = DeploymentExtensionConfigValueItem | DeploymentExtensionConfigKeyVaultItem;
 
 /**
  * The configuration of a single deployment extension. The keys of this object are extension aliases as defined in the deployment template.
@@ -640,7 +618,7 @@ model DeploymentExtension {
   /**
    * The configuration used for deployment. The keys of this object are config property names.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The keys of this object are determined by the extension's config schema."
   config?: Record<DeploymentExtensionConfig>;
 }
 
