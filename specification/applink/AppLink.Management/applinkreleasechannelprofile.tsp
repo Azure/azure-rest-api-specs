@@ -7,6 +7,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
 
+#suppress "@azure-tools/typespec-azure-core/arm-resource-id" ""
 @doc("AppLink Release Channel Profile resource")
 @locationResource
 model AppLinkReleaseChannelProfile
