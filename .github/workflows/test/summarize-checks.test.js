@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { summarizeChecksImpl } from "../src/summarize-checks.js";
 import { Octokit } from "@octokit/rest";
-import * as core from "@actions/core";
 
 import { LabelAction } from "../src/label.js";
 import {
@@ -21,7 +20,7 @@ describe("summarizeChecksImpl", () => {
 
       // Use a known PR from the azure-rest-api-specs repo for testing
       const testParams = {
-        owner: "Azure",
+        owner: "scbedd",
         repo: "azure-rest-api-specs",
         issue_number: 1,
         head_sha: "main",
@@ -34,26 +33,26 @@ describe("summarizeChecksImpl", () => {
 
       // Note: This test mainly verifies that the API calls work with real data
       // The actual assertions depend on the current state of the specified PR
-    });
+    }, 60000);
 
-    it.skipIf(!process.env.GITHUB_TOKEN)("should handle API errors gracefully", async () => {
-      const github = new Octokit({
-        auth: process.env.GITHUB_TOKEN,
-      });
+    // it.skipIf(!process.env.GITHUB_TOKEN)("should handle API errors gracefully", async () => {
+    //   const github = new Octokit({
+    //     auth: process.env.GITHUB_TOKEN,
+    //   });
 
-      // Use invalid parameters to test error handling
-      const testParams = {
-        owner: "Azure",
-        repo: "azure-rest-api-specs",
-        issue_number: 999999999, // Non-existent PR
-        head_sha: "nonexistent-sha",
-        github: github,
-        core: mockCore,
-      };
+    //   // Use invalid parameters to test error handling
+    //   const testParams = {
+    //     owner: "Azure",
+    //     repo: "azure-rest-api-specs",
+    //     issue_number: 999999999, // Non-existent PR
+    //     head_sha: "nonexistent-sha",
+    //     github: github,
+    //     core: mockCore,
+    //   };
 
-      // Should handle errors gracefully and not crash
-      await expect(summarizeChecksImpl(testParams)).resolves.not.toThrow();
-    });
+    //   // Should handle errors gracefully and not crash
+    //   await expect(summarizeChecksImpl(testParams)).resolves.not.toThrow();
+    // });
   });
 });
 

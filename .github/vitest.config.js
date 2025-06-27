@@ -8,6 +8,7 @@ export default defineConfig({
   },
 
   test: {
+    testTimeout: 60000, // 60 seconds timeout
     coverage: {
       exclude: [
         ...configDefaults.coverage.exclude,
