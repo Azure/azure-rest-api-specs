@@ -1,6 +1,9 @@
 # .prettierrc.yaml
 
-# reset to defaults
-# to set options, remove {} and replace with "option: value"
-# example: "singleQuote: true"
-{}
+overrides:
+  - files:
+      - tsconfig.json
+      - tsconfig.*.json
+    options:
+      # tsconfig.json is actually parsed as JSONC
+      parser: jsonc
