@@ -1,0 +1,568 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Control Plane API",
+    "description": "Provides operations for working with Azure Monitor data collection",
+    "version": "2025-06-03-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.monitor/settings/default": {
+      "put": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureMonitorSettingsPublic": {
+      "type": "object",
+      "properties": {
+        "defaultAzureMonitorWorkspace": {
+          "type": "string"
+        }
+      }
+    },
+    "Sku": {
+      "description": "Definition of generic ARM SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU. This is typically a letter + number code, such as A0 or P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of this particular SKU. Typically one of: Free, Basic, Standard, Premium. \r\nThis field is required to be implemented by the RP if the service has more than one tier, but is not required on a PUT.",
+          "type": "string"
+        },
+        "size": {
+          "description": "When the name field is the combination of tier and some other value, this would be the standalone code.",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
+          "type": "integer"
+        }
+      }
+    },
+    "IdentityType": {
+      "enum": [
+        "none",
+        "systemAssigned",
+        "userAssigned",
+        "systemAssigned, UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Principal Id of the User Assigned Identity",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "clientId": {
+          "description": "Client Id of the User Assigned Identity",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "MsiIdentity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of MSI Identity",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
+          ],
+          "allOf": [
+            {
+              "$ref": "#/definitions/IdentityType"
+            }
+          ],
+          "x-ms-enum": {
+            "name": "KnownMsiIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "Principal Id for System Assigned Identity",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "tenantId": {
+          "description": "Tenant Id for System Assigned Identity",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "userAssignedIdentities": {
+          "description": "MSI User Assigned Identities. Key is the resource id of the User Assigned Identity",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ResourceSystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SystemDataIdentityTypes",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedBy": {
+          "description": "Gets or sets the last modification client identity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SystemDataIdentityTypes",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AzureMonitorSettingsPublicResource": {
+      "description": "Definition of ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AzureMonitorSettingsPublic"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "description": "The kind of the resource.",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "type": "string",
+          "example": "Linux",
+          "x-ms-enum": {
+            "name": "KnownResource`1Kind",
+            "modelAsString": true
+          }
+        },
+        "sku": {
+          "description": "The SKU of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            }
+          ]
+        },
+        "identity": {
+          "description": "Managed service identity of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MsiIdentity"
+            }
+          ]
+        },
+        "id": {
+          "description": "Fully qualified ID of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Microsoft.Insights/dataCollectionRules",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "etag": {
+          "description": "Resource entity tag (ETag).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSystemData"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ErrorAdditionalInfo": {
+      "description": "Additional information for common error response.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The additional info type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "info": {
+          "description": "The additional info.",
+          "type": "object",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Common error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code which can be used to programmatically identify the class of error.",
+          "type": "string",
+          "readOnly": true,
+          "example": "BadArgument",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "statusCode": {
+          "format": "int32",
+          "description": "Error status code. It should not be returned to the end user.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "target": {
+          "description": "The target of the particular error (for example, the name of the property in error).",
+          "type": "string",
+          "readOnly": true,
+          "example": "properties.provisioningState",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "details": {
+          "description": "Additional nested error detail objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "additionalInfo": {
+          "description": "Additional error information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Common error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1
+    },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The ID of the target subscription.",
+      "required": true,
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
