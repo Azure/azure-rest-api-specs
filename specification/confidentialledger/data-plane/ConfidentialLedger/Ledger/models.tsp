@@ -342,42 +342,48 @@ model UserDefinedFunctionExecutionProperties {
   /**
    * JS runtime options for user defined endpoints and functions
    */
-  runtimeOptions?: JSRuntimeOptions;
+  runtimeOptions?: JsRuntimeOptions;
 }
 
 /**
  * JS runtime options for user defined endpoints and functions
  */
-model JSRuntimeOptions {
+model JsRuntimeOptions {
   /**
    * Whether to log exception details in the runtime.
    */
-  log_exception_details?: boolean;
+  @encodedName("application/json", "log_exception_details")
+  logExceptionDetails?: boolean;
 
   /**
    * Maximum number of cached interpreters.
    */
-  max_cached_interpreters?: int64;
+  @encodedName("application/json", "max_cached_interpreters")
+  maxCachedInterpreters?: int64;
 
   /**
    * Maximum execution time in milliseconds.
    */
-  max_execution_time_ms?: int64;
+  @encodedName("application/json", "max_execution_time_ms")
+  maxExecutionTimeMs?: int64;
 
   /**
    * Maximum heap size in bytes.
    */
-  max_heap_bytes?: int64;
+  @encodedName("application/json", "max_heap_bytes")
+  maxHeapBytes?: int64;
 
   /**
    * Maximum stack size in bytes.
    */
-  max_stack_bytes?: int64;
+  @encodedName("application/json", "max_stack_bytes")
+  maxStackBytes?: int64;
 
   /**
    * Whether to return exception details in the response.
    */
-  return_exception_details?: boolean;
+  @encodedName("application/json", "return_exception_details")
+  returnExceptionDetails?: boolean;
 }
 
 /**
@@ -719,27 +725,32 @@ model EndpointProperties {
   /**
    * Authentication policies for the endpoint.
    */
-  authn_policies: unknown[];
+  @encodedName("application/json", "authn_policies")
+  authnPolicies: JsonArray;
 
   /**
    * Indicates whether request forwarding is required for this endpoint.
    */
-  forwarding_required: ForwardingRequired;
+  @encodedName("application/json", "forwarding_required")
+  forwardingRequired: ForwardingRequired;
 
   /**
    * Policy for interpreter reuse.
    */
-  interpreter_reuse?: InterpreterReusePolicy;
+  @encodedName("application/json", "interpreter_reuse")
+  interpreterReuse?: InterpreterReusePolicy;
 
   /**
    * The JavaScript function.
    */
-  js_function?: string;
+  @encodedName("application/json", "js_function")
+  jsFunction?: string;
 
   /**
    * The JavaScript module.
    */
-  js_module?: string;
+  @encodedName("application/json", "js_module")
+  jsModule?: string;
 
   /**
    * The operation mode for this endpoint.
@@ -749,17 +760,20 @@ model EndpointProperties {
   /**
    * Anything
    */
-  openapi?: unknown;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service did not define a type for openapi"
+  openapi?: Record<unknown>;
 
   /**
    * Openapi hidden
    */
-  openapi_hidden?: boolean;
+  @encodedName("application/json", "openapi_hidden")
+  openapiHidden?: boolean;
 
   /**
    * Redirection strategy
    */
-  redirection_strategy?: RedirectionStrategy;
+  @encodedName("application/json", "redirection_strategy")
+  redirectionStrategy?: RedirectionStrategy;
 }
 
 /**
@@ -909,4 +923,14 @@ model RoleAssignment {
    * Description of the role.
    */
   description?: string;
+}
+
+/**
+ * Represents a JSON array.
+ */
+model JsonArray {
+  /**
+   * The array of items.
+   */
+  items: Record<unknown>[];
 }

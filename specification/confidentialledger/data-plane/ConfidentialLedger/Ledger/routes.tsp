@@ -343,19 +343,17 @@ interface Operations {
   @summary("Runtime options for user defined endpoints.")
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @get
-  getRuntimeOptions is Azure.Core.Foundations.Operation<{}, JSRuntimeOptions>;
+  getRuntimeOptions is Azure.Core.Foundations.Operation<{}, JsRuntimeOptions>;
 
   /**
    * Updates the runtime options.
    */
-  // FIXME: (name-collision-error) There is a potential collision with Operation, Parameter and Response names.
-  // Problematic names: [JSRuntimeOptions]
   @summary("Runtime options for user defined endpoints.")
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @patch
   updateRuntimeOptions is Azure.Core.Foundations.Operation<
-    JSRuntimeOptions,
-    JSRuntimeOptions
+    JsRuntimeOptions,
+    JsRuntimeOptions
   >;
 
   /**
