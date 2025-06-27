@@ -199,4 +199,3 @@ using Microsoft.EventGrid.SystemEvents;
   "java"
 );
 
-@@clientName(ResourceBaseEventData.resourceUri, "resourceUrl", "java");
