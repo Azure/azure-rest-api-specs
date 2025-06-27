@@ -43,10 +43,6 @@ model CompatibleWith {
   versions: string[];
 }
 
-/** Location operations */
-@armResourceOperations
-interface Locations {}
-
 /** AppLinkReleaseChannelProfiles operations */
 @armResourceOperations
 interface AppLinkReleaseChannelProfiles {
