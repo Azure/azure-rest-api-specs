@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -24,24 +25,37 @@ model DeploymentStack
   >;
 }
 
-// Generic interface for common DeploymentStack operations
-interface DeploymentStackCommonOps<TBaseParams = {}> {
+// Interface for all stack operations with the scoping parameterized.
+// For some reason, the ArmResourceActionAsync type requires the base params extends this reflection model type.
+interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model> {
   /**
    * Gets a Deployment stack with a given name at the specified scope.
    */
   get is ArmResourceRead<DeploymentStack, BaseParameters = TBaseParams>;
 
   /**
+   * Lists Deployment stacks at the specified scope.
+   */
+  list is ArmResourceListByParent<
+    DeploymentStack,
+    BaseParameters = TBaseParams
+  >;
+
+  /**
    * Creates or updates a Deployment stack at the specified scope.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentStack, BaseParameters = TBaseParams>;
-  
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DeploymentStack,
+    BaseParameters = TBaseParams
+  >;
+
   /**
    * Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" ""
   delete is ArmResourceDeleteWithoutOkAsync<
     DeploymentStack,
+    BaseParameters = TBaseParams,
     Parameters = ActionOnUnmanageDeleteParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -53,7 +67,8 @@ interface DeploymentStackCommonOps<TBaseParams = {}> {
   exportTemplate is ArmResourceActionSync<
     DeploymentStack,
     void,
-    ArmResponse<DeploymentStackTemplateDefinition>
+    ArmResponse<DeploymentStackTemplateDefinition>,
+    BaseParameters = TBaseParams
   >;
 
   /**
@@ -63,49 +78,30 @@ interface DeploymentStackCommonOps<TBaseParams = {}> {
   validateStack is ArmResourceActionAsync<
     DeploymentStack,
     DeploymentStack,
-    ArmResponse<DeploymentStackValidateResult>
+    ArmResponse<DeploymentStackValidateResult>,
+    BaseParameters = TBaseParams
   >;
 }
 
 // Resource Group scoped operations
 @armResourceOperations
-interface DeploymentStacksAtResourceGroup
-  extends DeploymentStackCommonOps<Azure.ResourceManager.Foundations.DefaultBaseParameters<DeploymentStack>> {
-  
-  /**
-   * List all deployment stacks in a resource group.
-   */
-  list is ArmResourceListByParent<DeploymentStack>;
-}
+interface DeploymentStacksAtResourceGroup extends DeploymentStackCommonOps<ResourceGroupBaseParameters> {}
 
-/*
-  
-// Subscription scoped operations (with custom routes and base parameters)
+// Subscription scoped operations
 @armResourceOperations
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}")
-interface DeploymentStacksAtSubscription
-  extends DeploymentStackCommonOps<Azure.ResourceManager.Foundations.DefaultBaseParameters<DeploymentStack>> {
-
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStacks")
-  list is ArmResourceListByParent<DeploymentStack>;
-}
-
-
-
-// Management Group scoped operations (with custom routes and base parameters)
-@armResourceOperations
-@route("/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}")
-interface DeploymentStacksAtManagementGroup
-  extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {
-}
-*/
+interface DeploymentStacksAtSubscription extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
 
 /**
- * The static parameters for a subscription based resource
+ * The common base parameters for Management group stacks.
  */
-model ManagementGroupBaseParameters is Azure.ResourceManager.Foundations.TenantBaseParameters {
+model ManagementGroupBaseParameters
+  is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...CommonTypes.ManagementGroupNameParameter;
 }
+@@segment(ManagementGroupBaseParameters.managementGroupName, "providers/Microsoft.Management/managementGroups"); // Not part of the common type.
+
+@armResourceOperations
+interface DeploymentStacksAtManagementGroup extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}
 
 @@maxLength(DeploymentStack.name, 90);
 @@minLength(DeploymentStack.name, 1);
