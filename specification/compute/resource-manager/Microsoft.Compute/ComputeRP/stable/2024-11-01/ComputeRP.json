@@ -12161,20 +12161,7 @@
             "in": "query",
             "description": "The expand expression to apply on the operation.",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Properties"
-            ],
-            "x-ms-enum": {
-              "name": "Expand",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Properties",
-                  "value": "Properties"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "name": "$top",
@@ -12194,7 +12181,10 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineImagesWithPropertiesListResult"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualMachineImage"
+              }
             }
           },
           "default": {
@@ -12211,9 +12201,6 @@
           "VirtualMachineImages_ListWithProperties_MinimumSet": {
             "$ref": "./examples/virtualMachineImageExamples/VirtualMachineImages_ListWithProperties_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -13981,22 +13968,6 @@
           {
             "name": "Canceled",
             "value": "Canceled"
-          }
-        ]
-      }
-    },
-    "Expand": {
-      "type": "string",
-      "enum": [
-        "Properties"
-      ],
-      "x-ms-enum": {
-        "name": "Expand",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Properties",
-            "value": "Properties"
           }
         ]
       }
@@ -18799,24 +18770,6 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
-    },
-    "VirtualMachineImagesWithPropertiesListResult": {
-      "type": "object",
-      "description": "The List Virtual Machine Images operation response.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VirtualMachineImage items on this page",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineImage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      }
     },
     "VirtualMachineInstallPatchesParameters": {
       "type": "object",
