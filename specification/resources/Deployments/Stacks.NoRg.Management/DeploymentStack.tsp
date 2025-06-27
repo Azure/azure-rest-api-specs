@@ -49,22 +49,26 @@ interface DeploymentStacks {
     DeploymentStack,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
+
       /**
        * Flag to indicate delete rather than detach for unmanaged resources.
        */
       @query("unmanageAction.Resources")
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Backwards compat"
       `unmanageAction.Resources`?: UnmanageActionResourceMode;
 
       /**
        * Flag to indicate delete rather than detach for unmanaged resource groups.
        */
       @query("unmanageAction.ResourceGroups")
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Backwards compat"
       `unmanageAction.ResourceGroups`?: UnmanageActionResourceGroupMode;
 
       /**
        * Flag to indicate delete rather than detach for unmanaged management groups.
        */
       @query("unmanageAction.ManagementGroups")
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Backwards compat"
       `unmanageAction.ManagementGroups`?: UnmanageActionManagementGroupMode;
 
       /**
