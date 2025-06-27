@@ -13,3 +13,26 @@ namespace SdkCustomizations;
 @@access(putKeyValue, Access.internal, "python");
 @@access(updateSnapshot, Access.internal, "python");
 @@access(SnapshotUpdateParameters, Access.public, "python");
+
+// .NET specific customizations
+//@@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
+//@@clientName(AzureAppConfiguration, "ConfigurationClient", "csharp");
+@@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
+@@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
+@@clientName(putKeyValue, "SetConfigurationSetting", "csharp");
+@@clientName(deleteKeyValue, "DeleteConfigurationSetting", "csharp");
+@@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
+@@clientName(putLock, "CreateReadOnlyLock", "csharp");
+@@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
+@@access(putKeyValue, Access.internal, "csharp");
+// @@access(deleteKeyValue, Access.internal, "csharp");
+// @@access(getSnapshot, Access.internal, "csharp");
+// @@access(createSnapshot, Access.internal, "csharp");
+// @@access(updateSnapshot, Access.internal, "csharp");
+
+
+@@alternateType(KeyValuesRequestParams.select, string[], "csharp");
+@@alternateType(RevisionsRequestParams.select, string[], "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@alternateType(KeyValueListResult.`@nextLink`, Azure.Core.Legacy.parameterizedNextLink<[KeyValuesRequestParams.syncToken, KeyValuesRequestParams.ifMatch, KeyValuesRequestParams.ifNoneMatch]>, "csharp");
+
