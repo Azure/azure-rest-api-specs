@@ -1319,12 +1319,7 @@
       "description": "Group Quota limit.",
       "properties": {
         "properties": {
-          "description": "Group Quota properties for the specified resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupQuotaDetails"
-            }
-          ]
+          "$ref": "#/definitions/GroupQuotaDetails"
         }
       }
     },
@@ -1394,25 +1389,7 @@
       ],
       "properties": {
         "properties": {
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "$ref": "#/definitions/RequestState"
-            },
-            "value": {
-              "type": "array",
-              "description": "List of Group Quota Limit details.",
-              "items": {
-                "$ref": "#/definitions/GroupQuotaLimit"
-              }
-            },
-            "nextLink": {
-              "description": "The URL to use for getting the next set of results.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/GroupQuotaLimitItem"
         }
       }
     },
@@ -1547,12 +1524,7 @@
       "description": "Quota allocated to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
       "properties": {
         "properties": {
-          "description": "Quota properties for the specified resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SubscriptionQuotaDetails"
-            }
-          ]
+          "$ref": "#/definitions/SubscriptionQuotaDetails"
         }
       }
     },
@@ -1678,25 +1650,28 @@
       ],
       "properties": {
         "properties": {
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "readOnly": true,
-              "$ref": "#/definitions/RequestState"
-            },
-            "value": {
-              "type": "array",
-              "description": "Subscription quota list.",
-              "items": {
-                "$ref": "#/definitions/SubscriptionQuotaAllocations"
-              }
-            },
-            "nextLink": {
-              "description": "The URL to use for getting the next set of results.",
-              "type": "string",
-              "readOnly": true
-            }
+          "$ref": "#/definitions/SubscriptionQuotaAllocationItem"
+        }
+      }
+    },
+    "SubscriptionQuotaAllocationItem": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
+        },
+        "value": {
+          "type": "array",
+          "description": "Subscription quota list.",
+          "items": {
+            "$ref": "#/definitions/SubscriptionQuotaAllocations"
           }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1830,13 +1805,7 @@
       ],
       "properties": {
         "properties": {
-          "title": "Properties",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupQuotasEntityBasePatch"
-            }
-          ]
+          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
         }
       }
     },
@@ -1851,13 +1820,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "title": "Properties",
-              "type": "object",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/GroupQuotasEntityBase"
-                }
-              ]
+              "$ref": "#/definitions/GroupQuotasEntityBase"
             }
           }
         }
@@ -1872,6 +1835,27 @@
           "description": "List of Group Quotas at MG level.",
           "items": {
             "$ref": "#/definitions/GroupQuotasEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupQuotaLimitItem": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/RequestState"
+        },
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit details.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotaLimit"
           }
         },
         "nextLink": {
