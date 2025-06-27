@@ -3,7 +3,7 @@
   "info": {
     "title": "CognitiveServicesManagementClient",
     "description": "Cognitive Services Management Client",
-    "version": "2025-06-01"
+    "version": "2025-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -7489,6 +7489,13 @@
         "deprecation": {
           "$ref": "#/definitions/ModelDeprecationInfo"
         },
+        "replacementConfig": {
+          "$ref": "#/definitions/ReplacementConfig"
+        },
+        "modelCatalogAssetId": {
+          "type": "string",
+          "description": "Asset identifier for the model in the model catalog."
+        },
         "lifecycleStatus": {
           "type": "string",
           "enum": [
@@ -7496,11 +7503,44 @@
             "Preview",
             "GenerallyAvailable",
             "Deprecating",
-            "Deprecated"
+            "Deprecated",
+            "Legacy"
           ],
           "x-ms-enum": {
             "name": "ModelLifecycleStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Stable",
+                "value": "Stable",
+                "description": "Legacy state. Replaced with GenerallyAvailable going forward."
+              },
+              {
+                "name": "Preview",
+                "value": "Preview",
+                "description": "Model is in preview and may be subject to changes."
+              },
+              {
+                "name": "GenerallyAvailable",
+                "value": "GenerallyAvailable",
+                "description": "Model is generally available for production use."
+              },
+              {
+                "name": "Deprecating",
+                "value": "Deprecating",
+                "description": "Model is being deprecated and will be removed in the future. Only customers with existing deployments can create new deployments with this model."
+              },
+              {
+                "name": "Deprecated",
+                "value": "Deprecated",
+                "description": "Model has been deprecated, also known as retired, and is no longer supported. Inference calls to deployments of models in this lifecycle state will return 410 errors."
+              },
+              {
+                "name": "Legacy",
+                "value": "Legacy",
+                "description": "Model is a legacy version that is no longer recommended for use. Customers should migrate to newer models. Check replacementConfig for upgrade information."
+              }
+            ]
           },
           "description": "Model lifecycle status."
         },
@@ -7525,6 +7565,34 @@
         "inference": {
           "type": "string",
           "description": "The datetime of deprecation of the inference Model."
+        },
+        "isDeprecationPlanned": {
+          "type": "boolean",
+          "description": "Indicates whether the deprecation date is a confirmed planned end-of-life date or an estimated deprecation date. When true, the deprecation date represents a confirmed and communicated model end-of-life date. When false, the deprecation date is an estimated timeline that may be subject to change."
+        }
+      }
+    },
+    "ReplacementConfig": {
+      "description": "Configuration for model replacement.",
+      "type": "object",
+      "properties": {
+        "targetModelName": {
+          "type": "string",
+          "description": "The name of the replacement model."
+        },
+        "targetModelVersion": {
+          "type": "string",
+          "description": "The version of the replacement model."
+        },
+        "autoUpgradeStartDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date when automatic upgrade should start. This applies to deployments with the OnceNewDefaultVersionAvailable upgrade option."
+        },
+        "upgradeOnExpiryLeadTimeDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days before deprecation date to trigger upgrade. This applies to deployments with the OnceCurrentVersionExpired upgrade option."
         }
       }
     },
