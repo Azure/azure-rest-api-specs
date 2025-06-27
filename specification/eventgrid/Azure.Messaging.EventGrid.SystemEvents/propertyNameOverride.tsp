@@ -230,11 +230,6 @@ using Azure.ClientGenerator.Core;
   "!go, !csharp"
 );
 
-@@clientName(ResourceBaseEventData.resourceUri,
-  "resourceUrl",
-  "!go, !csharp"
-);
-
 @@clientName(ContainerRegistryEventSource.instanceID, "instanceId");
 
 // autorest specific renames

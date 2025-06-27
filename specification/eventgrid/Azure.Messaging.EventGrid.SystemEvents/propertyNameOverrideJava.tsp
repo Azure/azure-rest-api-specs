@@ -198,3 +198,5 @@ using Microsoft.EventGrid.SystemEvents;
   "callDuration",
   "java"
 );
+
+@@clientName(ResourceBaseEventData.resourceUri, "resourceUrl", "java");
