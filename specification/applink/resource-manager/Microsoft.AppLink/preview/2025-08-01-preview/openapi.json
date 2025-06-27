@@ -89,13 +89,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AppLink/locations/{locationName}/appLinkReleaseChannelProfiles": {
+    "/subscriptions/{subscriptionId}/locations/{location}/providers/Microsoft.AppLink/appLinkReleaseChannelProfiles": {
       "get": {
         "operationId": "AppLinkReleaseChannelProfiles_ListByLocation",
         "tags": [
           "AppLinkReleaseChannelProfiles"
         ],
-        "description": "List AppLinkReleaseChannelProfile resources by Location",
+        "description": "List AppLinkReleaseChannelProfile resources by location",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -104,12 +104,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the Location",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -1047,25 +1042,6 @@
         "name",
         "versions"
       ]
-    },
-    "Location": {
-      "type": "object",
-      "description": "Location resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LocationProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "LocationProperties": {
-      "type": "object",
-      "description": "Location properties"
     },
     "Metadata": {
       "type": "object",

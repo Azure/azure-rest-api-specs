@@ -3,27 +3,18 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 
 namespace Microsoft.AppLink;
 
-@doc("Location resource")
-@subscriptionResource
-model Location is ProxyResource<LocationProperties> {
-  ...ResourceNameParameter<Location>;
-}
-
-@doc("Location properties")
-model LocationProperties {}
-
 @doc("AppLink Release Channel Profile resource")
-@parentResource(Location)
+@locationResource
 model AppLinkReleaseChannelProfile
   is ProxyResource<AppLinkReleaseChannelProfileProperties> {
   ...ResourceNameParameter<AppLinkReleaseChannelProfile>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("AppLink Release Channel Profile properties")
 model AppLinkReleaseChannelProfileProperties {
   @doc("AppLink Release Channels")
