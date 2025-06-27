@@ -57,7 +57,6 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "x-ms-parameter-location": "method",
             "description": "An OData filter expression that describes a subset of capacity blocks to return. The parameters that can be filtered are sku, capacity, durationhours, start-date-range, end-date-range, zone and location. The supported operator is eq."
           }
         ],
@@ -108,20 +107,22 @@
       "properties": {
         "id": {
           "description": "The id of the capacity block.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "The name of the capacity block.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "The type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "zone": {
           "description": "Logical Zone in which the block needs to be made available",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "location": {
           "description": "The location.",
