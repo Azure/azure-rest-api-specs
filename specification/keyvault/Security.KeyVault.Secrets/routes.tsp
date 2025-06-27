@@ -115,8 +115,7 @@ op getSecret is KeyVaultOperation<
     secretVersion: string;
 
     /**
-     * The media type (MIME format) of the certificate content to return. Only PFX to PEM conversion is supported.
-     * If not specified, the certificate is returned in its original format without conversion.
+     * The media type (MIME type) of the certificate. If specified, converts the certificate content to the requested format. Currently, only PFX to PEM conversion is supported. If not specified, the certificate is returned in its original format without conversion.
      */
     @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
     @query("outContentType")
