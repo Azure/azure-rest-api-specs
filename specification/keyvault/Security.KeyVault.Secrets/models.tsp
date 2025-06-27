@@ -177,7 +177,7 @@ model SecretBundle {
   managed?: boolean;
 
   /**
-   * The version of the previous certificate (if applicable).
+   * The version of the previous certificate, if applicable. Applies only to certificates created after June 1, 2025. Certificates created before this date are not retroactively updated.
    */
   @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
   previousVersion?: string;
