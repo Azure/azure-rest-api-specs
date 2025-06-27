@@ -492,7 +492,7 @@ interface ElasticMonitorResources {
       @bodyRoot
       body?: ResubscribeProperties;
     },
-    ArmResponse<ElasticMonitorResource>
+    ElasticMonitorResource
   >;
 }
 
