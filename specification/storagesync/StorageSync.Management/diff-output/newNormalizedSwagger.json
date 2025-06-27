@@ -3,12 +3,7 @@
   "info": {
     "title": "Microsoft Storage Sync",
     "version": "2022-09-01",
-    "description": "Microsoft Storage Sync Service API. This belongs to Microsoft.StorageSync Resource Provider",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Microsoft Storage Sync Service API. This belongs to Microsoft.StorageSync Resource Provider"
   },
   "produces": [
     "application/json"
@@ -292,6 +287,16 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/StorageSyncService"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -341,7 +346,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -403,7 +408,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -454,7 +459,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -491,7 +496,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             },
             "headers": {
               "x-ms-correlation-request-id": {
@@ -595,7 +600,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -638,11 +643,11 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -735,6 +740,9 @@
           "RegisteredServers_ListByStorageSyncService": {
             "$ref": "./examples/RegisteredServers_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1088,6 +1096,9 @@
           "SyncGroups_ListByStorageSyncService": {
             "$ref": "./examples/SyncGroups_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1214,13 +1225,16 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
+          },
+          "204": {
+            "description": "ignore"
           },
           "default": {
             "description": "ignore",
@@ -1281,6 +1295,9 @@
           "CloudEndpoints_ListBySyncGroup": {
             "$ref": "./examples/CloudEndpoints_ListBySyncGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1389,11 +1406,11 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -1452,11 +1469,11 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -1986,6 +2003,9 @@
           "ServerEndpoints_ListBySyncGroup": {
             "$ref": "./examples/ServerEndpoints_ListBySyncGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2366,6 +2386,9 @@
           "Workflows_ListByStorageSyncService": {
             "$ref": "./examples/Workflows_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2548,15 +2571,22 @@
     },
     "CloudEndpointArray": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/CloudEndpoint"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -3255,6 +3285,24 @@
         }
       ]
     },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
     "RecallActionParameters": {
       "type": "object",
       "properties": {
@@ -3282,15 +3330,22 @@
     },
     "RegisteredServerArray": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/RegisteredServer"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -3509,15 +3564,22 @@
     },
     "ServerEndpointArray": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ServerEndpoint"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -4527,15 +4589,22 @@
     },
     "SyncGroupArray": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/SyncGroup"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -4616,15 +4685,22 @@
     },
     "WorkflowArray": {
       "type": "object",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Workflow"
           },
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },

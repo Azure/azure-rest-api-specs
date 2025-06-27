@@ -30,7 +30,19 @@ interface StorageSyncServices {
   /**
    * Get a given StorageSyncService.
    */
-  get is ArmResourceRead<StorageSyncService, Error = StorageSyncError>;
+  get is ArmResourceRead<
+    StorageSyncService,
+    Response = ArmResponse<StorageSyncService> & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
+    Error = StorageSyncError
+  >;
 
   /**
    * Create a new StorageSyncService.
@@ -50,7 +62,7 @@ interface StorageSyncServices {
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id")
+      @doc("Request id")
       requestId?: string;
     }),
     ErrorResponse = StorageSyncError
@@ -64,11 +76,11 @@ interface StorageSyncServices {
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
     Response = (ArmResourceUpdatedResponse<StorageSyncService> & {
-      @header("x-ms-correlation-request-id")
+      @header("x-ms-correlation-request-id.")
       @doc("correlation request id")
       correlationRequestId?: string;
 
-      @header("x-ms-request-id")
+      @header("x-ms-request-id.")
       @doc("request id")
       requestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
@@ -78,7 +90,7 @@ interface StorageSyncServices {
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id")
+      @doc("Request id")
       requestId?: string;
     }),
     Error = StorageSyncError
@@ -104,7 +116,7 @@ interface StorageSyncServices {
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id")
+      @doc("Request id")
       requestId?: string;
     }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError

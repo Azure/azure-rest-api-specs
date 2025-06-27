@@ -44,7 +44,7 @@ interface PrivateEndpointConnections {
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id")
+      @doc("Request id")
       requestId?: string;
     }),
     LroHeaders = ArmLroLocationHeader &
@@ -60,11 +60,11 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("Request id")
       requestId?: string;
     }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError
@@ -76,7 +76,7 @@ interface PrivateEndpointConnections {
   #suppress "deprecated" "For backward compatibility"
   listByStorageSyncService is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5> & {
+    Response = ArmResponse<PrivateEndpointConnectionListResult> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;

@@ -415,9 +415,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/StorageSyncService"
+            },
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
             }
           },
           "default": {
@@ -491,7 +501,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -580,7 +590,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -657,7 +667,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -711,7 +721,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             },
             "headers": {
               "x-ms-correlation-request-id": {
@@ -855,7 +865,7 @@
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "Request id"
               }
             }
           },
@@ -925,11 +935,11 @@
               },
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -1053,6 +1063,9 @@
           "RegisteredServers_ListByStorageSyncService": {
             "$ref": "./examples/RegisteredServers_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1546,6 +1559,9 @@
           "SyncGroups_ListByStorageSyncService": {
             "$ref": "./examples/SyncGroups_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1718,13 +1734,16 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1800,6 +1819,9 @@
           "CloudEndpoints_ListBySyncGroup": {
             "$ref": "./examples/CloudEndpoints_ListBySyncGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1950,11 +1972,11 @@
               },
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -2041,11 +2063,11 @@
               },
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id."
+                "description": "correlation request id"
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id."
+                "description": "Request id"
               }
             }
           },
@@ -2772,6 +2794,9 @@
           "ServerEndpoints_ListBySyncGroup": {
             "$ref": "./examples/ServerEndpoints_ListBySyncGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3297,6 +3322,9 @@
           "Workflows_ListByStorageSyncService": {
             "$ref": "./examples/Workflows_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3541,6 +3569,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -4504,6 +4535,22 @@
         }
       ]
     },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "List of private endpoint connections associated with the specified resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of private endpoint connections associated with the specified resource.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
     "RecallActionParameters": {
       "type": "object",
       "description": "The parameters used when calling recall action on server endpoint.",
@@ -4579,6 +4626,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -4864,6 +4914,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -6127,6 +6180,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -6234,6 +6290,9 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },

@@ -6,28 +6,6 @@
 |------|------------|-------|
 | `info['x-ms-code-generation-settings__deleted']` | deleted | `{"name":"StorageSyncManagementClient"}` |
 
-### Changes for `x-typespec-generated`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `info['x-typespec-generated__added']` | added | `[{"emitter":"@azure-tools/typespec-autorest"}]` |
-
-### Changes for `deprecated`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/Microsoft.StorageSync/operations'].get.deprecated__deleted` | deleted | `false` |
-
-### Changes for `headers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].get.responses.200.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postbackup'].post.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
-
 ### Changes for `required`
 
 | Path | Change Type | Value |
@@ -42,17 +20,15 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
-### Changes for `204`
+### Changes for `headers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].delete.responses.204__deleted` | deleted | `{"description":"ignore"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postbackup'].post.responses.202.headers__deleted` | deleted | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection'].post.responses.200.headers__added` | added | `{"x-ms-correlation-request-id":{"type":"string","description":"correlation request id."},"x-ms-reque...` |
 
 ### Changes for `OperationDisplayResource`
 
@@ -108,25 +84,39 @@
 |------|------------|-------|
 | `definitions.PrivateEndpointConnection__added` | added | `{"type":"object","properties":{"properties":{"$ref":"../../../../../common-types/resource-management...` |
 
-### Changes for `$ref`
+### Changes for `PrivateEndpointConnectionListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerEndpointCreateParametersProperties.properties.serverLocalPath.$ref__deleted` | deleted | `#/definitions/PhysicalPath` |
-| `definitions.ServerEndpointCreateParametersProperties.properties.serverResourceId.$ref__deleted` | deleted | `#/definitions/ResourceId` |
-| `definitions.ServerEndpointProperties.properties.serverLocalPath.$ref__deleted` | deleted | `#/definitions/PhysicalPath` |
-| `definitions.ServerEndpointProperties.properties.serverResourceId.$ref__deleted` | deleted | `#/definitions/ResourceId` |
-| `definitions.SyncGroupCreateParameters.properties.properties.$ref__deleted` | deleted | `#/definitions/SyncGroupCreateParametersProperties` |
+| `definitions.PrivateEndpointConnectionListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `type`
+### Changes for `description`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerEndpointCreateParametersProperties.properties.serverLocalPath.type__added` | added | `string` |
-| `definitions.ServerEndpointCreateParametersProperties.properties.serverResourceId.type__added` | added | `string` |
-| `definitions.ServerEndpointProperties.properties.serverLocalPath.type__added` | added | `string` |
-| `definitions.ServerEndpointProperties.properties.serverResourceId.type__added` | added | `string` |
-| `definitions.SyncGroupCreateParameters.properties.properties.type__added` | added | `object` |
+| `definitions.CloudEndpointArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.CloudEndpointArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.RegisteredServerArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.RegisteredServerArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.ServerEndpointArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.ServerEndpointArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.StorageSyncServiceArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.StorageSyncServiceArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.SyncGroupArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.SyncGroupArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.WorkflowArray.description__added` | added | `[Placeholder] Discription for page model` |
+| `definitions.WorkflowArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.CloudEndpointArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.RegisteredServerArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.ServerEndpointArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.StorageSyncServiceArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.SyncGroupArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.WorkflowArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
 ### Changes for `minimum`
 
@@ -140,18 +130,17 @@
 |------|------------|-------|
 | `definitions.ServerEndpointCreateParametersProperties.properties.tierFilesOlderThanDays.default__deleted` | deleted | `0` |
 
-### Changes for `description`
+### Changes for `$ref`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.StorageSyncServiceArray.description__added` | added | `[Placeholder] Discription for page model` |
-| `definitions.StorageSyncServiceArray.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.SyncGroupCreateParameters.properties.properties.$ref__deleted` | deleted | `#/definitions/SyncGroupCreateParametersProperties` |
 
-### Changes for `nextLink`
+### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.StorageSyncServiceArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+| `definitions.SyncGroupCreateParameters.properties.properties.type__added` | added | `object` |
 
 ### Changes for `additionalProperties`
 
@@ -164,20 +153,9 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.StorageSyncServiceProperties.properties.privateEndpointConnections.items.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].delete.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.200.headers['x-ms-correlation-request-id'].description` | `correlation request id.` | `correlation request id` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.200.headers['x-ms-request-id'].description` | `request id.` | `request id` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].put.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult` | `#/definitions/PrivateEndpointConnectionListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.responses.200.schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.parameters[3].schema.$ref` | `../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection` | `#/definitions/PrivateEndpointConnection` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].delete.responses.200.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}'].delete.responses.200.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].delete.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].delete.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].put.responses.202.headers['x-ms-correlation-request-id'].description` | `correlation request id` | `correlation request id.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}'].put.responses.202.headers['x-ms-request-id'].description` | `Request id` | `request id.` |
 

@@ -69,15 +69,15 @@ interface SyncGroups {
    */
   delete is ArmResourceDeleteSync<
     SyncGroup,
-    Response = ArmDeletedResponse & {
+    Response = (ArmDeletedResponse & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("Request id")
       requestId?: string;
-    },
+    }) | NoContentResponse,
     Error = StorageSyncError
   >;
 

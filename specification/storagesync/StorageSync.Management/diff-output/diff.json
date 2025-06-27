@@ -1,0 +1,468 @@
+{
+  "info": {
+    "x-ms-code-generation-settings__deleted": {
+      "name": "StorageSyncManagementClient"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}": {
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "required__added": true
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "description": {
+                  "__old": "correlation request id.",
+                  "__new": "correlation request id"
+                }
+              },
+              "x-ms-request-id": {
+                "description": {
+                  "__old": "request id.",
+                  "__new": "request id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionListResult",
+                "__new": "#/definitions/PrivateEndpointConnectionListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection",
+                "__new": "#/definitions/PrivateEndpointConnection"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection",
+                  "__new": "#/definitions/PrivateEndpointConnection"
+                }
+              }
+            }
+          ]
+        ]
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "-",
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "privateEndpointConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postbackup": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__deleted": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers__added": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers__added": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers__added": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}": {
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "required__added": true
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OperationDisplayResource__deleted": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "PhysicalPath__deleted": {
+      "type": "string"
+    },
+    "ResourceId__deleted": {
+      "type": "string"
+    },
+    "ResourcesMoveInfo__deleted": {
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          }
+        }
+      }
+    },
+    "SubscriptionState__deleted": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Registered",
+            "Unregistered",
+            "Warned",
+            "Suspended",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          }
+        },
+        "istransitioning": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionStateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SubscriptionStateProperties__deleted": {
+      "type": "object"
+    },
+    "SyncGroupCreateParametersProperties__deleted": {
+      "type": "object",
+      "properties": {}
+    },
+    "TagsObject__deleted": {
+      "type": "object"
+    },
+    "PrivateEndpointConnection__added": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult__added": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "CloudEndpointArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "RegisteredServerArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "ServerEndpointArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "ServerEndpointCreateParametersProperties": {
+      "properties": {
+        "volumeFreeSpacePercent": {
+          "minimum__deleted": 0
+        },
+        "tierFilesOlderThanDays": {
+          "default__deleted": 0
+        }
+      }
+    },
+    "StorageSyncServiceArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "StorageSyncServiceCreateParameters": {
+      "required__deleted": [
+        "location"
+      ]
+    },
+    "StorageSyncServiceProperties": {
+      "properties": {
+        "privateEndpointConnections": {
+          "items": {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection",
+              "__new": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      }
+    },
+    "SyncGroupArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "SyncGroupCreateParameters": {
+      "properties": {
+        "properties": {
+          "$ref__deleted": "#/definitions/SyncGroupCreateParametersProperties",
+          "type__added": "object",
+          "additionalProperties__added": {}
+        }
+      }
+    },
+    "WorkflowArray": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    }
+  }
+}

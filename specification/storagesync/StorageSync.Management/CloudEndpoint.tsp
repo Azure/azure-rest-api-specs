@@ -67,11 +67,11 @@ interface CloudEndpoints {
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("Request id")
       requestId?: string;
     }),
     ErrorResponse = StorageSyncError
@@ -93,11 +93,11 @@ interface CloudEndpoints {
       requestId?: string;
     }) | (ArmDeleteAcceptedLroResponse & {
       @header("x-ms-correlation-request-id")
-      @doc("correlation request id.")
+      @doc("correlation request id")
       correlationRequestId?: string;
 
       @header("x-ms-request-id")
-      @doc("request id.")
+      @doc("Request id")
       requestId?: string;
     }) | ArmDeletedNoContentResponse,
     Error = StorageSyncError

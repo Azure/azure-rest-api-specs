@@ -755,6 +755,9 @@ model SyncGroupArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: SyncGroup[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1064,6 +1067,9 @@ model CloudEndpointArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: CloudEndpoint[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2158,6 +2164,9 @@ model ServerEndpointArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: ServerEndpoint[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2186,6 +2195,9 @@ model RegisteredServerArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: RegisteredServer[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2461,6 +2473,9 @@ model WorkflowArray {
   @items
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: Workflow[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2686,4 +2701,17 @@ model OkResponse {
   @header("x-ms-request-id")
   @doc("request id.")
   requestId?: string;
+}
+
+/**
+ * List of private endpoint connections associated with the specified resource.
+ */
+model PrivateEndpointConnectionListResult {
+  /**
+   * List of private endpoint connections associated with the specified resource.
+   */
+  value?: PrivateEndpointConnection[];
+
+  @nextLink
+  nextLink?: string;
 }
