@@ -19,13 +19,12 @@ describe("summarizeChecksImpl", () => {
         auth: process.env.GITHUB_TOKEN,
       });
 
-
       // Use a known PR from the azure-rest-api-specs repo for testing
       const testParams = {
         owner: "Azure",
         repo: "azure-rest-api-specs",
-        issue_number: 1, // Replace with a real PR number if needed
-        head_sha: "main", // Replace with a real commit SHA if needed
+        issue_number: 1,
+        head_sha: "main",
         github: github,
         core: mockCore,
       };
@@ -42,13 +41,6 @@ describe("summarizeChecksImpl", () => {
         auth: process.env.GITHUB_TOKEN,
       });
 
-      const testCore = {
-        info: (message) => console.log(`INFO: ${message}`),
-        warning: (message) => console.warn(`WARNING: ${message}`),
-        error: (message) => console.error(`ERROR: ${message}`),
-        debug: (message) => console.debug(`DEBUG: ${message}`),
-      };
-
       // Use invalid parameters to test error handling
       const testParams = {
         owner: "Azure",
@@ -56,7 +48,7 @@ describe("summarizeChecksImpl", () => {
         issue_number: 999999999, // Non-existent PR
         head_sha: "nonexistent-sha",
         github: github,
-        core: testCore,
+        core: mockCore,
       };
 
       // Should handle errors gracefully and not crash
