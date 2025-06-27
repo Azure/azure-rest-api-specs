@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
 @@clientName(Microsoft.StorageActions, "StorageActionsMgmtClient", "python");
+@@clientName(Microsoft.StorageActions,
+  "StorageActionsManagementClient",
+  "javascript"
+);
 
 @@clientName(StorageTaskOperation, "StorageTaskOperationInfo", "csharp");
 @@clientName(OnSuccess, "OnSuccessAction", "csharp");
