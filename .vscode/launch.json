@@ -22,6 +22,24 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${file}"
+    },
+    {
+      "name": "Debug Summarize Checks",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/eng/tools/summarize-checks",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "exec",
+        "--",
+        "summarize-checks",
+        "--owner", "scbedd",
+        "--repo", "azure-rest-api-specs",
+        "--pr", "1",
+        "--sha", "826b0b976479e5c1aa5e66e1cf43a3f9e66a2477"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
