@@ -4301,7 +4301,7 @@
           "200": {
             "description": "Function keys returned.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+              "$ref": "#/definitions/FunctionKeys"
             }
           },
           "default": {
@@ -26238,6 +26238,13 @@
         }
       }
     },
+    "FunctionKeys": {
+      "description": "Host level function keys.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "HostKeys": {
       "description": "Functions host level keys.",
       "type": "object",
@@ -26248,10 +26255,7 @@
         },
         "functionKeys": {
           "description": "Host level function keys.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/FunctionKeys"
         },
         "systemKeys": {
           "description": "System keys.",
