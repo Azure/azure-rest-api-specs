@@ -19,11 +19,11 @@ using TypeSpec.Versioning;
  * required for connecting to a Confidential Ledger.
  */
 #suppress "@azure-tools/typespec-azure-core/auth-required" "This is the authentication service endpoint"
-@service(#{ title: "ConfidentialLedgerCertificateClient" })
+@service(#{ title: "Confidential Ledger Certificate" })
 @versioned(Versions)
 @server(
   "{endpoint}",
-  "The ConfidentialLedgerCertificateClient is used to retrieve the TLS certificate required for connecting to a Confidential Ledger.",
+  "The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate required for connecting to a Confidential Ledger.",
   {
     endpoint: string,
   }
