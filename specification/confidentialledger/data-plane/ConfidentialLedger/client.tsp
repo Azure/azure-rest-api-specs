@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
-using ConfidentialLedger.Ledger;
 
 @useDependency(ConfidentialLedger.Ledger.Versions.v2024_12_09_preview)
 @useDependency(ConfidentialLedger.Certificate.Versions.v2024_12_09_preview)
