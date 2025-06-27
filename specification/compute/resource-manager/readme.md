@@ -341,7 +341,7 @@ suppressions:
 
 ### Tag: package-2025-06-05-preview
 
-These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-06-05-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-06-05-preview'
 input-file:
