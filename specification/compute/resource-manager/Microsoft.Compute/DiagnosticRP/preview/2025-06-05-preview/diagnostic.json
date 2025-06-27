@@ -122,7 +122,9 @@
         },
         "zone": {
           "description": "Logical Zone in which the block needs to be made available",
-          "type": "string"
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
         },
         "location": {
           "description": "The location.",
@@ -130,7 +132,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "readOnly": true
         },
         "sku": {
           "description": "SKU for Capacity Block.",
