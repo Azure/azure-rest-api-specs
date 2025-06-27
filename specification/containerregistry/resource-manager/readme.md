@@ -60,6 +60,7 @@ These settings apply only when `--tag=package-2025-06-preview` is specified on t
 ``` yaml $(tag) == 'package-2025-06-preview'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/preview/2025-03-01-preview/containerregistry_build.json
 suppressions:
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: containerregistry.json
