@@ -18,6 +18,26 @@ options:
     generate-test: false
     generate-sample: false
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    api-version: "2025-05-15-preview"
+    package-mode: "dataplane"
+    package-dir: "azure-ai-agents"
+    package-name: "{package-dir}"
+    flavor: azure
+    generate-test: false
+    generate-sample: false
+    examples-dir: "{project-root}/examples"    
+
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/ai/azaiagents"
+    service-dir: "sdk/azaiagents"
+    package-dir: "azaiagents"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure    
   "@azure-tools/typespec-csharp":
     api-version: "2025-05-15-preview"
     package-mode: "dataplane"
