@@ -54,24 +54,51 @@ union ConfidentialLedgerUserRoleName {
   Reader: "Reader",
 }
 
+/**
+ * Indicates whether request forwarding is required for this operation.
+ */
 union ForwardingRequired {
   string,
+
+  /** Forwarding is required sometimes */
   sometimes: "sometimes",
+
+  /** Forwarding is always required */
   always: "always",
+
+  /** Forwarding is never required */
   `never`: "never",
 }
 
+/**
+ * Represents the operation mode of the endpoint.
+ */
 union Mode {
   string,
+
+  /** Read-write mode */
   readwrite: "readwrite",
+
+  /** Read-only mode */
   readonly: "readonly",
+
+  /** Historical mode */
   historical: "historical",
 }
 
+/**
+ * Represents the redirection strategy for the endpoint.
+ */
 union RedirectionStrategy {
   string,
+
+  /** No redirection strategy */
   none: "none",
+
+  /** Redirect to primary */
   to_primary: "to_primary",
+
+  /** Redirect to backup */
   to_backup: "to_backup",
 }
 
@@ -104,6 +131,9 @@ model Constitution {
  */
 @pagedResult
 model Consortium {
+  /**
+   * Members in the consortium.
+   */
   @items
   members: ConsortiumMember[];
 
@@ -174,6 +204,9 @@ model EnclaveQuote {
  */
 @pagedResult
 model PagedCollections {
+  /**
+   * Collection identifiers.
+   */
   @items
   collections: Collection[];
 
@@ -188,6 +221,9 @@ model PagedCollections {
  * Identifier for collections.
  */
 model Collection {
+  /**
+   * Identifier for the collection.
+   */
   collectionId: string;
 }
 
@@ -223,6 +259,9 @@ model LedgerEntry {
    */
   contents: string;
 
+  /**
+   * The collection identifier for this ledger entry.
+   */
   @visibility(Lifecycle.Read)
   collectionId?: string;
 
@@ -286,11 +325,34 @@ model UserDefinedFunctionExecutionProperties {
  * JS runtime options for user defined endpoints and functions
  */
 model JSRuntimeOptions {
+  /**
+   * Whether to log exception details in the runtime.
+   */
   log_exception_details?: boolean;
+
+  /**
+   * Maximum number of cached interpreters.
+   */
   max_cached_interpreters?: int64;
+
+  /**
+   * Maximum execution time in milliseconds.
+   */
   max_execution_time_ms?: int64;
+
+  /**
+   * Maximum heap size in bytes.
+   */
   max_heap_bytes?: int64;
+
+  /**
+   * Maximum stack size in bytes.
+   */
   max_stack_bytes?: int64;
+
+  /**
+   * Whether to return exception details in the response.
+   */
   return_exception_details?: boolean;
 }
 
@@ -298,7 +360,9 @@ model JSRuntimeOptions {
  * Returned as a result of a write to the Confidential Ledger, the transaction id
  * in the response indicates when the write will become durable.
  */
-model LedgerWriteResult {
+model LedgerWriteResult {}
+/**
+   * The collection identifier of the ledger entry
   collectionId: string;
 }
 
@@ -328,6 +392,9 @@ model TransactionReceipt {
    */
   applicationClaims?: ApplicationClaim[];
 
+  /**
+   * The receipt contents for the transaction.
+   */
   receipt?: ReceiptContents;
 
   /**
@@ -404,25 +471,83 @@ model LedgerEntryClaim {
   protocol: ApplicationClaimProtocol;
 }
 
+/**
+ * The contents of a receipt
+ */
 model ReceiptContents {
+  /**
+   * Certificate
+   */
   cert?: string;
+
+  /**
+   * Leaf
+   */
   leaf?: string;
+
+  /**
+   * Leaf components of the receipt
+   */
   leafComponents?: ReceiptLeafComponents;
+
+  /**
+   * Node identifier
+   */
   nodeId: string;
+
+  /**
+   * Proof
+   */
   proof: ReceiptElement[];
+
+  /**
+   * Root
+   */
   root?: string;
+
+  /**
+   * Service endorsements
+   */
   serviceEndorsements?: string[];
+
+  /**
+   * The signature of the receipt
+   */
   signature: string;
 }
 
+/**
+ * Components that make up a receipt leaf node.
+ */
 model ReceiptLeafComponents {
+  /**
+   * Claims digest
+   */
   claimsDigest?: string;
+
+  /**
+   * Commit evidence
+   */
   commitEvidence?: string;
+
+  /**
+   * TWrite set digest
+   */
   writeSetDigest?: string;
 }
 
+/**
+ * Receipt element
+ */
 model ReceiptElement {
+  /**
+   * Left
+   */
   left?: string;
+
+  /**
+   * Right
+   */
   right?: string;
 }
 
@@ -447,6 +572,9 @@ model TransactionStatus {
  */
 @pagedResult
 model PagedUsers {
+  /**
+   * Ledger users.
+   */
   @items
   ledgerUsers?: LedgerUser[];
 
@@ -479,6 +607,9 @@ model LedgerUser {
  */
 @pagedResult
 model PagedLedgerUsers {
+  /**
+   * Ledger users with details.
+   */
   @items
   ledgerUsers?: LedgerUserMultipleRoles[];
 
@@ -510,6 +641,9 @@ model LedgerUserMultipleRoles {
  * bundle for the user defined endpoints
  */
 model Bundle {
+  /**
+   * Metadata information for the bundle.
+   */
   metadata: Metadata;
 
   /**
@@ -518,6 +652,9 @@ model Bundle {
   modules: Record<unknown>;
 }
 
+/**
+ * Metadata for endpoints.
+ */
 model Metadata {
   /**
    * A map of path to method endpoints for the path
@@ -525,19 +662,63 @@ model Metadata {
   endpoints: Record<MethodToEndpointProperties>;
 }
 
+/**
+ * Maps methods to their corresponding endpoint properties.
+ */
 model MethodToEndpointProperties {
+  /**
+   * Properties for GET method endpoint.
+   */
   get?: EndpointProperties;
+
+  /**
+   * Properties for PUT method endpoint.
+   */
   put?: EndpointProperties;
+
+  /**
+   * Properties for PATCH method endpoint.
+   */
   patch?: EndpointProperties;
+
+  /**
+   * Properties for DELETE method endpoint.
+   */
   delete?: EndpointProperties;
 }
 
+/**
+ * Endpoint properties.
+ */
 model EndpointProperties {
+  /**
+   * Authentication policies for the endpoint.
+   */
   authn_policies: unknown[];
+
+  /**
+   * Indicates whether request forwarding is required for this endpoint.
+   */
   forwarding_required: ForwardingRequired;
+
+  /**
+   * Policy for interpreter reuse.
+   */
   interpreter_reuse?: InterpreterReusePolicy;
+
+  /**
+   * The JavaScript function.
+   */
   js_function?: string;
+
+  /**
+   * The JavaScript module.
+   */
   js_module?: string;
+
+  /**
+   * The operation mode for this endpoint.
+   */
   mode?: Mode;
 
   /**
@@ -545,16 +726,39 @@ model EndpointProperties {
    */
   openapi?: unknown;
 
+  /**
+   * Openapi hidden
+   */
   openapi_hidden?: boolean;
+
+  /**
+   * Redirection strategy
+   */
   redirection_strategy?: RedirectionStrategy;
 }
 
+/**
+ * Policy for interpreter reuse.
+ */
 model InterpreterReusePolicy {
+  /**
+   * Key for the interpreter reuse policy.
+   */
   key: string;
 }
 
+/**
+ * Module definition
+ */
 model ModuleDef {
+  /**
+   * Module
+   */
   module: string;
+
+  /**
+   * Name
+   */
   name: string;
 }
 
@@ -563,6 +767,9 @@ model ModuleDef {
  */
 @pagedResult
 model PagedUserDefinedFunctions {
+  /**
+   * User-defined functions.
+   */
   @items
   functions: UserDefinedFunction[];
 
@@ -643,6 +850,9 @@ model Role {
    */
   roleName?: string;
 
+  /**
+   * role actions
+   */
   roleActions?: string[];
 }
 
@@ -650,7 +860,14 @@ model Role {
  * An item in the Merkle proof.
  */
 model MerkleProofElement {
+  /**
+   * The left hash value in the Merkle proof element.
+   */
   left?: string;
+
+  /**
+   * The right hash value in the Merkle proof element.
+   */
   right?: string;
 }
 
