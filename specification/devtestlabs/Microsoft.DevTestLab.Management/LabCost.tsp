@@ -25,7 +25,7 @@ model LabCost extends Resource {
   @path
   @key
   @segment("costs")
-  labCostName: string;
+  name: string;
 
   properties: LabCostProperties;
 }
@@ -57,7 +57,7 @@ interface LabCosts {
   createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
 }
 
-@@doc(LabCost.labCostName, "The name of the cost.");
+@@doc(LabCost.name, "The name of the cost.");
 @@doc(LabCost.properties, "The properties of the resource.");
 @@doc(LabCosts.createOrUpdate::parameters.resource, "A cost item.");
 @@doc(LabCost.tags, "The tags of the resource.");

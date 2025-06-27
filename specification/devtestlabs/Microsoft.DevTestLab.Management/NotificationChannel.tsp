@@ -24,7 +24,7 @@ model NotificationChannel extends Resource {
   @path
   @key
   @segment("notificationchannels")
-  notificationChannelName: string;
+  name: string;
 
   properties: NotificationChannelProperties;
 }
@@ -108,9 +108,7 @@ interface NotificationChannels {
   >;
 }
 
-@@doc(NotificationChannel.notificationChannelName,
-  "The name of the notification channel."
-);
+@@doc(NotificationChannel.name, "The name of the notification channel.");
 @@doc(NotificationChannel.properties, "The properties of the resource.");
 @@doc(NotificationChannel.location, "The location of the resource.");
 @@doc(NotificationChannel.tags, "The tags of the resource.");

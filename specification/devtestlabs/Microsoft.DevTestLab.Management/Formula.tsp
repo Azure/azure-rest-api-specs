@@ -25,7 +25,7 @@ model Formula extends Resource {
   @path
   @key
   @segment("formulas")
-  formulaName: string;
+  name: string;
 
   properties: FormulaProperties;
 }
@@ -100,7 +100,7 @@ interface Formulas {
   >;
 }
 
-@@doc(Formula.formulaName, "The name of the formula.");
+@@doc(Formula.name, "The name of the formula.");
 @@doc(Formula.properties, "The properties of the resource.");
 @@doc(Formulas.createOrUpdate::parameters.resource,
   "A formula for creating a VM, specifying an image base and other parameters"

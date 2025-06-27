@@ -1394,7 +1394,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{labCostName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}": {
       "get": {
         "operationId": "Costs_Get",
         "tags": [
@@ -1419,7 +1419,7 @@
             "type": "string"
           },
           {
-            "name": "labCostName",
+            "name": "name",
             "in": "path",
             "description": "The name of the cost.",
             "required": true,
@@ -1477,7 +1477,7 @@
             "type": "string"
           },
           {
-            "name": "labCostName",
+            "name": "name",
             "in": "path",
             "description": "The name of the cost.",
             "required": true,
@@ -2086,7 +2086,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{formulaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}": {
       "get": {
         "operationId": "Formulas_Get",
         "tags": [
@@ -2111,7 +2111,7 @@
             "type": "string"
           },
           {
-            "name": "formulaName",
+            "name": "name",
             "in": "path",
             "description": "The name of the formula.",
             "required": true,
@@ -2169,7 +2169,7 @@
             "type": "string"
           },
           {
-            "name": "formulaName",
+            "name": "name",
             "in": "path",
             "description": "The name of the formula.",
             "required": true,
@@ -2250,7 +2250,7 @@
             "type": "string"
           },
           {
-            "name": "formulaName",
+            "name": "name",
             "in": "path",
             "description": "The name of the formula.",
             "required": true,
@@ -2310,7 +2310,7 @@
             "type": "string"
           },
           {
-            "name": "formulaName",
+            "name": "name",
             "in": "path",
             "description": "The name of the formula.",
             "required": true,
@@ -2668,7 +2668,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{notificationChannelName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}": {
       "get": {
         "operationId": "NotificationChannels_Get",
         "tags": [
@@ -2693,7 +2693,7 @@
             "type": "string"
           },
           {
-            "name": "notificationChannelName",
+            "name": "name",
             "in": "path",
             "description": "The name of the notification channel.",
             "required": true,
@@ -2751,7 +2751,7 @@
             "type": "string"
           },
           {
-            "name": "notificationChannelName",
+            "name": "name",
             "in": "path",
             "description": "The name of the notification channel.",
             "required": true,
@@ -2817,7 +2817,7 @@
             "type": "string"
           },
           {
-            "name": "notificationChannelName",
+            "name": "name",
             "in": "path",
             "description": "The name of the notification channel.",
             "required": true,
@@ -2877,7 +2877,7 @@
             "type": "string"
           },
           {
-            "name": "notificationChannelName",
+            "name": "name",
             "in": "path",
             "description": "The name of the notification channel.",
             "required": true,
@@ -2905,7 +2905,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{notificationChannelName}/notify": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}/notify": {
       "post": {
         "operationId": "NotificationChannels_Notify",
         "tags": [
@@ -2930,7 +2930,7 @@
             "type": "string"
           },
           {
-            "name": "notificationChannelName",
+            "name": "name",
             "in": "path",
             "description": "The name of the notification channel.",
             "required": true,
@@ -10418,11 +10418,7 @@
           "description": "The Formula items on this page",
           "items": {
             "$ref": "#/definitions/Formula"
-          },
-          "x-ms-identifiers": [
-            "formulaName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -11557,11 +11553,7 @@
           "description": "The LabVirtualMachine items on this page",
           "items": {
             "$ref": "#/definitions/LabVirtualMachine"
-          },
-          "x-ms-identifiers": [
-            "properties/applicableSchedule/properties/labVmsShutdown/scheduleName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -11916,11 +11908,7 @@
           "description": "The NotificationChannel items on this page",
           "items": {
             "$ref": "#/definitions/NotificationChannel"
-          },
-          "x-ms-identifiers": [
-            "notificationChannelName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -12212,11 +12200,7 @@
           "description": "The Policy items on this page",
           "items": {
             "$ref": "#/definitions/Policy"
-          },
-          "x-ms-identifiers": [
-            "policyName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -12556,11 +12540,7 @@
           "description": "The Schedule items on this page",
           "items": {
             "$ref": "#/definitions/Schedule"
-          },
-          "x-ms-identifiers": [
-            "scheduleName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -12739,7 +12719,6 @@
           },
           "x-ms-identifiers": [
             "serviceFabricName",
-            "properties/applicableSchedule/properties/labVmsShutdown/scheduleName",
             "id"
           ]
         },

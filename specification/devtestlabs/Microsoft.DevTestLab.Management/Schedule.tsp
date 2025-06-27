@@ -24,7 +24,7 @@ model Schedule extends Resource {
   @path
   @key
   @segment("schedules")
-  scheduleName: string;
+  name: string;
 
   properties: ScheduleProperties;
 }
@@ -493,7 +493,7 @@ interface VirtualMachineSchedules {
   execute is VirtualMachineScheduleOps.ActionAsync<Schedule, void, OkResponse>;
 }
 
-@@doc(Schedule.scheduleName, "The name of the schedule.");
+@@doc(Schedule.name, "The name of the schedule.");
 @@doc(Schedule.properties, "The properties of the resource.");
 @@doc(Schedule.location, "The location of the resource.");
 @@doc(Schedule.tags, "The tags of the resource.");

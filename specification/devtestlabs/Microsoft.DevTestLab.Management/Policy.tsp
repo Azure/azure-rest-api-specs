@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
@@ -24,7 +23,7 @@ model Policy extends Resource {
   @path
   @key
   @segment("policies")
-  policyName: string;
+  name: string;
 
   properties: PolicyProperties;
 }
@@ -119,7 +118,7 @@ interface Policies {
   >;
 }
 
-@@doc(Policy.policyName, "The name of the policy.");
+@@doc(Policy.name, "The name of the policy.");
 @@doc(Policy.properties, "The properties of the resource.");
 @@doc(Policy.location, "The location of the resource.");
 @@doc(Policy.tags, "The tags of the resource.");
