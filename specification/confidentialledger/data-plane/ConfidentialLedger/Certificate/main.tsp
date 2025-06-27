@@ -15,7 +15,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * The ConfidentialLedgerCertificateClient is used to retrieve the TLS certificate
+ * The Confidential Ledger Certificate endpoint is used to retrieve the TLS certificate
  * required for connecting to a Confidential Ledger.
  */
 #suppress "@azure-tools/typespec-azure-core/auth-required" "This is the authentication service endpoint"
@@ -37,7 +37,7 @@ enum Versions {
   /**
    * The 2024-12-09-preview API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_12_09_preview: "2024-12-09-preview",
 }
 
