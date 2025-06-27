@@ -100,35 +100,6 @@ model Constitution {
 }
 
 /**
- * An error response from Confidential Ledger.
- */
-@error
-model ConfidentialLedgerError {
-  /**
-   * An error response from Confidential Ledger.
-   */
-  @visibility(Lifecycle.Read)
-  error?: ConfidentialLedgerErrorBody;
-}
-
-/**
- * An error response from Confidential Ledger.
- */
-model ConfidentialLedgerErrorBody {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-}
-
-/**
  * List of members in the consortium.
  */
 @pagedResult

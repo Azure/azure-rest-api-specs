@@ -9,6 +9,7 @@ namespace ConfidentialLedger.Common;
 /**
  * An error response from Confidential Ledger.
  */
+@error
 model ConfidentialLedgerError {
   /**
    * An error response from Confidential Ledger.

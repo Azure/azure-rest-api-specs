@@ -58,35 +58,6 @@ model LedgerIdentityInformation {
 }
 
 /**
- * An error response from Confidential Ledger.
- */
-@error
-model ConfidentialLedgerError {
-  /**
-   * An error response from Confidential Ledger.
-   */
-  @visibility(Lifecycle.Read)
-  error?: ConfidentialLedgerErrorBody;
-}
-
-/**
- * An error response from Confidential Ledger.
- */
-model ConfidentialLedgerErrorBody {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-}
-
-/**
  * Gets identity information for a Confidential Ledger instance.
  */
 @summary("Gets identity information for a Confidential Ledger instance.")
