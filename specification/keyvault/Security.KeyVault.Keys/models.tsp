@@ -140,6 +140,39 @@ union JsonWebKeyCurveName {
 }
 
 /**
+ * An algorithm used for key wrapping and unwrapping.
+ */
+@added(KeyVault.Versions.`v7.7_preview.1`)
+union JsonWebKeyWrapAlgorithm {
+  string,
+
+  /** [Not recommended] RSAES-PKCS1-V1_5 key wrap, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
+  RSA1_5: "RSA1_5",
+  /**
+   * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems.
+   */
+  RSA_OAEP: "RSA-OAEP",
+  /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256. */
+  RSA_OAEP256: "RSA-OAEP-256",
+
+  /** [Not recommended] algorithm for wrapping keys. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. */
+  RSA_RAW: "RSA-RAW",
+
+  /** 128-bit AES key wrap. */
+  A128_KW: "A128KW",
+  /** 192-bit AES key wrap. */
+  A192_KW: "A192KW",
+  /** 256-bit AES key wrap. */
+  A256_KW: "A256KW",
+  /** 128-bit AES key wrap with padding. */
+  A256_KWPAD: "A256KWPAD",
+  /** 192-bit AES key wrap with padding. */
+  A128_KWPAD: "A128KWPAD",
+  /** 256-bit AES key wrap with padding. */
+  A192_KWPAD: "A192KWPAD",
+}
+
+/**
  * An algorithm used for encryption and decryption.
  */
 union JsonWebKeyEncryptionAlgorithm {
@@ -430,6 +463,39 @@ model KeyAttestation {
    * The version of the attestation.
    */
   version?: string;
+}
+
+/**
+ * The Secure Key wrap operation result.
+ */
+@added(KeyVault.Versions.`v7.7_preview.1`)
+model SecureKeyOperationCommonParameters {
+  /**
+   * algorithm identifier
+   */
+  @encodedName("application/json", "alg")
+  algorithm: JsonWebKeyWrapAlgorithm;
+}
+
+/**
+ * The Secure Key wrap attributes.
+ */
+@added(KeyVault.Versions.`v7.7_preview.1`)
+model SecureKeyWrapOperationParameters {
+  ...SecureKeyOperationCommonParameters;
+}
+
+/**
+ * The Secure Key unwrap attributes.
+ */
+@added(KeyVault.Versions.`v7.7_preview.1`)
+model SecureKeyUnWrapOperationParameters {
+  ...SecureKeyOperationCommonParameters;
+  /**
+   * The value to operate on.
+   */
+  @encode("base64url")
+  value: bytes;
 }
 
 /**
@@ -813,6 +879,31 @@ model KeyOperationsParameters {
    */
   @encode("base64url")
   tag?: bytes;
+}
+
+/**
+ * The secure key wrap operation result.
+ */
+@added(KeyVault.Versions.`v7.7_preview.1`)
+model SecureKeyOperationResult {
+  /**
+   * Key identifier
+   */
+  @visibility(Lifecycle.Read)
+  kid?: string;
+
+  /**
+   * The algorithm used for the operation.
+   */
+  @encodedName("application/json", "alg")
+  algorithm: JsonWebKeyWrapAlgorithm;
+
+  /**
+   * The result of the operation.
+   */
+  @visibility(Lifecycle.Read)
+  @encode("base64url")
+  value?: bytes;
 }
 
 /**
