@@ -38,8 +38,16 @@ interface CustomCertificates {
    * Create or update a custom certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubCustomCertificates_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<CustomCertificate>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    CustomCertificate,
+    Parameters = {
+      @header
+      contentType: "application/json" | "text/json";
+    }
+  >;
 
   /**
    * Delete a custom certificate.

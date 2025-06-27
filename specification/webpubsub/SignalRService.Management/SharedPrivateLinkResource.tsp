@@ -33,25 +33,38 @@ interface SharedPrivateLinkResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = WebPubSubResource,
-          KeyName = "resourceName",
-          SegmentName = "webPubSub",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = Replica,
-          KeyName = "replicaName",
-          SegmentName = "replicas",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
+
+        /**
+         * The name of the resource.
+         */
+        @path
+        @segment("webPubSub")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        resourceName: string,
+
+        /**
+         * The name of the replica.
+         */
+        @path
+        @segment("replicas")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        replicaName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedPrivateLinkResource,
-        KeyName = "sharedPrivateLinkResourceName",
-        SegmentName = "sharedPrivateLinkResources",
-        NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-      >>
+      {
+        /**
+         * The name of the shared private link resource.
+         */
+        @path
+        @segment("sharedPrivateLinkResources")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        sharedPrivateLinkResourceName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -67,8 +80,16 @@ interface SharedPrivateLinkResources {
    * Create or update a shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate")
-  createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<SharedPrivateLinkResource>;
+  createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<
+    SharedPrivateLinkResource,
+    Parameters = {
+      @header
+      contentType: "application/json" | "text/json";
+    }
+  >;
 
   /**
    * List shared private link resources
@@ -88,19 +109,28 @@ interface WebPubSubSharedPrivateLinkResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = WebPubSubResource,
-          KeyName = "resourceName",
-          SegmentName = "webPubSub",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-        >>,
+
+        /**
+         * The name of the resource.
+         */
+        @path
+        @segment("webPubSub")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedPrivateLinkResource,
-        KeyName = "sharedPrivateLinkResourceName",
-        SegmentName = "sharedPrivateLinkResources",
-        NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
-      >>
+      {
+        /**
+         * The name of the shared private link resource.
+         */
+        @path
+        @segment("sharedPrivateLinkResources")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$")
+        @minLength(3)
+        @maxLength(63)
+        sharedPrivateLinkResourceName: string,
+      }
     > {}
 
 @armResourceOperations

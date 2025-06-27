@@ -56,8 +56,16 @@ interface Replicas {
    * Create or update a replica.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubReplicas_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Replica>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Replica,
+    Parameters = {
+      @header
+      contentType: "application/json" | "text/json";
+    }
+  >;
 
   /**
    * Operation to update an exiting replica.
@@ -65,10 +73,16 @@ interface Replicas {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("WebPubSubReplicas_Update")
   update is ArmCustomPatchAsync<
     Replica,
+    Parameters = {
+      @header
+      contentType: "application/json" | "text/json";
+    },
     PatchModel = Replica,
     Response = Replica | (ArmAcceptedLroResponse & {
       @bodyRoot

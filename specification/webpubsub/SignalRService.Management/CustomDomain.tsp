@@ -39,10 +39,16 @@ interface CustomDomains {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebPubSubCustomDomains_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
+    Parameters = {
+      @header
+      contentType: "application/json" | "text/json";
+    },
     Response = ArmResourceCreatedResponse<
       CustomDomain,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = CustomDomain>

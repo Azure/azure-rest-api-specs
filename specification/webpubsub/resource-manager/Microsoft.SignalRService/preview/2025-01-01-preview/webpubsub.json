@@ -645,6 +645,10 @@
           "CustomCertificates"
         ],
         "description": "Create or update a custom certificate.",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -891,6 +895,10 @@
           "CustomDomains"
         ],
         "description": "Create or update a custom domain.",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1834,6 +1842,10 @@
           "Replicas"
         ],
         "description": "Create or update a replica.",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1921,6 +1933,10 @@
           "Replicas"
         ],
         "description": "Operation to update an exiting replica.",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2154,17 +2170,21 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the Replica",
+            "description": "The name of the replica.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           }
         ],
@@ -2212,25 +2232,31 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the Replica",
+            "description": "The name of the replica.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
+            "description": "The name of the shared private link resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           }
         ],
@@ -2260,6 +2286,10 @@
           "SharedPrivateLinkResources"
         ],
         "description": "Create or update a shared private link resource",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2273,25 +2303,31 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the Replica",
+            "description": "The name of the replica.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
+            "description": "The name of the shared private link resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
@@ -2489,9 +2525,11 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           }
         ],
@@ -2539,17 +2577,21 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
+            "description": "The name of the shared private link resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           }
         ],
@@ -2592,17 +2634,21 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
+            "description": "The name of the shared private link resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
@@ -2675,17 +2721,21 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the WebPubSubResource",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           },
           {
             "name": "sharedPrivateLinkResourceName",
             "in": "path",
-            "description": "The name of the SharedPrivateLinkResource",
+            "description": "The name of the shared private link resource.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$"
           }
         ],
