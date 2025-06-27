@@ -20,14 +20,26 @@ options:
     "flavor": "azure"
     "generate-test": false
     "generate-sample": false
+  "@azure-tools/typespec-csharp":
+    "namespace": "Azure.ConfidentialLedger"
+    "package-dir": "Azure.ConfidentialLedger"
+    "flavor": "azure"
+  "@azure-tools/typespec-java":
+    "package-dir": "azure-confidentialledger"
+    "namespace": "com.azure.confidentialledger"
+    "flavor": "azure"
+  "@azure-tools/typespec-ts":
+    "package-dir": "confidentialledger-rest"
+    "package-details":
+      "name": "@azure-rest/azure-confidentialledger"
+    "flavor": "azure"
+  "@azure-tools/typespec-go":
+    "module": "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    "service-dir": "sdk/confidentialledger"
+    "package-dir": "confidentialledger"
+    "module-version": "0.0.1"
   "@azure-tools/typespec-client-generator-cli":
     "additionalDirectories":
       [
         "specification/confidentialledger/data-plane/ConfidentialLedger/Certificate",
       ]
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  # "@azure-tools/typespec-java": true
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
-  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
