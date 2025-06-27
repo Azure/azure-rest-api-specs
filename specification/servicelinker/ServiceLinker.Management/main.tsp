@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
  * Microsoft.ServiceLinker provider
  */
 @armProviderNamespace
-@service(#{ title: "ServiceLinkerManagementClient" })
+@service(#{ title: "Microsoft.ServiceLinker" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.ServiceLinker;
