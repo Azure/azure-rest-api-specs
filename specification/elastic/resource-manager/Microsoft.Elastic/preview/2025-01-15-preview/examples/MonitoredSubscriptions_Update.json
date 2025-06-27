@@ -1,98 +1,98 @@
 {
   "parameters": {
     "api-version": "2025-01-15-preview",
-    "configurationName": "default",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
+    "configurationName": "default",
     "requestBody": {
       "properties": {
+        "operation": "AddComplete",
         "monitoredSubscriptionList": [
           {
-            "status": "Active",
             "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+            "status": "Active",
             "tagRules": {
               "logRules": {
+                "sendAadLogs": true,
+                "sendSubscriptionLogs": true,
+                "sendActivityLogs": true,
                 "filteringTags": [
                   {
                     "name": "saokgpjvdlorciqbjmjxazpee",
-                    "action": "Include",
-                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb",
+                    "action": "Include"
                   }
-                ],
-                "sendAadLogs": true,
-                "sendActivityLogs": true,
-                "sendSubscriptionLogs": true
+                ]
               }
             }
           },
           {
-            "status": "Failed",
             "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+            "status": "Failed",
             "tagRules": {
               "logRules": {
+                "sendAadLogs": true,
+                "sendSubscriptionLogs": true,
+                "sendActivityLogs": true,
                 "filteringTags": [
                   {
                     "name": "saokgpjvdlorciqbjmjxazpee",
-                    "action": "Include",
-                    "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    "value": "sarxrqsxouhdjwsrqqicbeirdb",
+                    "action": "Include"
                   }
-                ],
-                "sendAadLogs": true,
-                "sendActivityLogs": true,
-                "sendSubscriptionLogs": true
+                ]
               }
             }
           }
-        ],
-        "operation": "AddComplete"
+        ]
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "default",
-        "type": "Microsoft.Elastic/monitors/monitoredSubscriptions",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/monitoredSubscriptions/default",
+        "type": "Microsoft.Elastic/monitors/monitoredSubscriptions",
         "properties": {
           "monitoredSubscriptionList": [
             {
-              "status": "Active",
               "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "status": "Active",
               "tagRules": {
+                "provisioningState": "Accepted",
                 "logRules": {
+                  "sendAadLogs": true,
+                  "sendSubscriptionLogs": true,
+                  "sendActivityLogs": true,
                   "filteringTags": [
                     {
                       "name": "saokgpjvdlorciqbjmjxazpee",
-                      "action": "Include",
-                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb",
+                      "action": "Include"
                     }
-                  ],
-                  "sendAadLogs": true,
-                  "sendActivityLogs": true,
-                  "sendSubscriptionLogs": true
-                },
-                "provisioningState": "Accepted"
+                  ]
+                }
               }
             },
             {
-              "status": "Failed",
               "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "status": "Failed",
               "tagRules": {
+                "provisioningState": "Accepted",
                 "logRules": {
+                  "sendAadLogs": true,
+                  "sendSubscriptionLogs": true,
+                  "sendActivityLogs": true,
                   "filteringTags": [
                     {
                       "name": "saokgpjvdlorciqbjmjxazpee",
-                      "action": "Include",
-                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb",
+                      "action": "Include"
                     }
-                  ],
-                  "sendAadLogs": true,
-                  "sendActivityLogs": true,
-                  "sendSubscriptionLogs": true
-                },
-                "provisioningState": "Accepted"
+                  ]
+                }
               }
             }
           ]
@@ -104,7 +104,5 @@
         "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Elastic/monitors/test?api-version=2025-01-15-preview"
       }
     }
-  },
-  "operationId": "MonitoredSubscriptions_Update",
-  "title": "Monitors_UpdateMonitoredSubscriptions"
+  }
 }
