@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
 /**
  * DeploymentStacks Client
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Resources")
 @service(#{ title: "DeploymentStacksClient" })
 @versioned(Microsoft.Resources.DeploymentStacks.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
