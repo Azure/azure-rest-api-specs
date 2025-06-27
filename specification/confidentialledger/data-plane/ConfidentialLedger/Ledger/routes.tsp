@@ -1,58 +1,60 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/models.tsp";
 
 using TypeSpec.Http;
 
 namespace ConfidentialLedger.Ledger;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "TODO"
 interface Operations {
   /**
    * The constitution is a script that assesses and applies proposals from
    * consortium members.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets the constitution used for governance.")
   @route("/app/governance/constitution")
   @get
-  getConstitution is Azure.Core.Foundations.Operation<{}, Constitution>;
+  getConstitution is Common.LedgerOperation<{}, Constitution>;
 
   /**
    * Consortium members can manage the Confidential Ledger.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Lists the consortium members.")
   @route("/app/governance/members")
   @get
-  listConsortiumMembers is Azure.Core.Foundations.Operation<{}, Consortium>;
+  listConsortiumMembers is Common.LedgerOperation<{}, Consortium>;
 
   /**
    * A quote is an SGX enclave measurement that can be used to verify the validity
    * of a node and its enclave.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets quotes for all nodes of the Confidential Ledger.")
   @route("/app/enclaveQuotes")
   @get
-  getEnclaveQuotes is Azure.Core.Foundations.Operation<
-    {},
-    ConfidentialLedgerEnclaves
-  >;
+  getEnclaveQuotes is Common.LedgerOperation<{}, ConfidentialLedgerEnclaves>;
 
   /**
    * Collection ids are user-created collections of ledger entries
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Retrieves a list of collection ids present in the Confidential Ledger")
   @route("/app/collections")
   @get
-  listCollections is Azure.Core.Foundations.Operation<{}, PagedCollections>;
+  listCollections is Common.LedgerOperation<{}, PagedCollections>;
 
   /**
    * A collection id may optionally be specified. Only entries in the specified (or
    * default) collection will be returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @route("/app/transactions")
   @get
-  listLedgerEntries is Azure.Core.Foundations.Operation<
+  listLedgerEntries is Common.LedgerOperation<
     {
       /**
        * The collection id.
@@ -84,10 +86,11 @@ interface Operations {
   /**
    * A collection id may optionally be specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Writes a ledger entry.")
   @route("/app/transactions")
   @post
-  createLedgerEntry is Azure.Core.Foundations.Operation<
+  createLedgerEntry is Common.LedgerOperation<
     {
       /**
        * The collection id.
@@ -116,6 +119,7 @@ interface Operations {
    * response will indicate whether the entry is ready and part of the response, or
    * if the loading is still ongoing.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("""
     Gets the ledger entry at the specified transaction id. A collection id may
     optionally be specified to indicate the collection from which to fetch the
@@ -123,7 +127,7 @@ interface Operations {
     """)
   @route("/app/transactions/{transactionId}")
   @get
-  getLedgerEntry is Azure.Core.Foundations.Operation<
+  getLedgerEntry is Common.LedgerOperation<
     {
       /**
        * The collection id.
@@ -143,10 +147,11 @@ interface Operations {
   /**
    * Gets a receipt certifying ledger contents at a particular transaction id.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
   @route("/app/transactions/{transactionId}/receipt")
   @get
-  getReceipt is Azure.Core.Foundations.Operation<
+  getReceipt is Common.LedgerOperation<
     {
       /**
        * Identifies a write transaction.
@@ -160,10 +165,11 @@ interface Operations {
   /**
    * Gets the status of an entry identified by a transaction id.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets the status of an entry identified by a transaction id.")
   @route("/app/transactions/{transactionId}/status")
   @get
-  getTransactionStatus is Azure.Core.Foundations.Operation<
+  getTransactionStatus is Common.LedgerOperation<
     {
       /**
        * Identifies a write transaction.
@@ -177,10 +183,11 @@ interface Operations {
   /**
    * A collection id may optionally be specified.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets the current value available in the ledger.")
   @route("/app/transactions/current")
   @get
-  getCurrentLedgerEntry is Azure.Core.Foundations.Operation<
+  getCurrentLedgerEntry is Common.LedgerOperation<
     {
       /**
        * The collection id.
@@ -194,26 +201,29 @@ interface Operations {
   /**
    * All users' object IDs and single role per user will be returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets details on a list of users.")
   @route("/app/users")
   @get
-  listUsers is Azure.Core.Foundations.Operation<{}, PagedUsers>;
+  listUsers is Common.LedgerOperation<{}, PagedUsers>;
 
   /**
    * All users' object IDs and multiple roles will be returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets details on a list of users.")
   @route("/app/ledgerUsers")
   @get
-  listLedgerUsers is Azure.Core.Foundations.Operation<{}, PagedLedgerUsers>;
+  listLedgerUsers is Common.LedgerOperation<{}, PagedLedgerUsers>;
 
   /**
    * Deletes a user from the Confidential Ledger.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Deletes a user from the Confidential Ledger.")
   @route("/app/users/{userId}")
   @delete
-  deleteUser is Azure.Core.Foundations.Operation<
+  deleteUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -227,10 +237,11 @@ interface Operations {
   /**
    * Gets a user.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets a user.")
   @route("/app/users/{userId}")
   @get
-  getUser is Azure.Core.Foundations.Operation<
+  getUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -245,10 +256,11 @@ interface Operations {
    * A JSON merge patch is applied for existing users
    */
   #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Adds a user or updates a user's fields.")
   @route("/app/users/{userId}")
   @patch
-  createOrUpdateUser is Azure.Core.Foundations.Operation<
+  createOrUpdateUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -268,10 +280,11 @@ interface Operations {
   /**
    * Deletes a user with multiple roles from the Confidential Ledger.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Deletes a user with multiple roles from the Confidential Ledger.")
   @route("/app/ledgerUsers/{userId}")
   @delete
-  deleteLedgerUser is Azure.Core.Foundations.Operation<
+  deleteLedgerUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -285,10 +298,11 @@ interface Operations {
   /**
    * Gets a user with multiple roles.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets a user with multiple roles.")
   @route("/app/ledgerUsers/{userId}")
   @get
-  getLedgerUser is Azure.Core.Foundations.Operation<
+  getLedgerUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -303,10 +317,11 @@ interface Operations {
    * A JSON merge patch is applied for existing users
    */
   #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Adds a user or updates a user's fields.")
   @route("/app/ledgerUsers/{userId}")
   @patch
-  createOrUpdateLedgerUser is Azure.Core.Foundations.Operation<
+  createOrUpdateLedgerUser is Common.LedgerOperation<
     {
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
@@ -326,35 +341,39 @@ interface Operations {
   /**
    * Returns the user defined endpoint in the ACL instance
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets a user defined endpoint.")
   @route("/app/userDefinedEndpoints")
   @get
-  getUserDefinedEndpoint is Azure.Core.Foundations.Operation<{}, Bundle>;
+  getUserDefinedEndpoint is Common.LedgerOperation<{}, Bundle>;
 
   /**
    * Creates the user defined endpoint in the ACL instance
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Creates a user defined endpoint.")
   @route("/app/userDefinedEndpoints")
   @put
-  createUserDefinedEndpoint is Azure.Core.Foundations.Operation<Bundle, void>;
+  createUserDefinedEndpoint is Common.LedgerOperation<Bundle, void>;
 
   /**
    * It returns the runtime options
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Runtime options for user defined endpoints.")
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @get
-  getRuntimeOptions is Azure.Core.Foundations.Operation<{}, JsRuntimeOptions>;
+  getRuntimeOptions is Common.LedgerOperation<{}, JsRuntimeOptions>;
 
   /**
    * Updates the runtime options.
    */
   #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Runtime options for user defined endpoints.")
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @patch
-  updateRuntimeOptions is Azure.Core.Foundations.Operation<
+  updateRuntimeOptions is Common.LedgerOperation<
     JsRuntimeOptions,
     JsRuntimeOptions
   >;
@@ -362,10 +381,11 @@ interface Operations {
   /**
    * It gets the module for the user defined endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Module for user defined endpoints.")
   @route("/app/userDefinedEndpoints/modules")
   @get
-  getUserDefinedEndpointsModule is Azure.Core.Foundations.Operation<
+  getUserDefinedEndpointsModule is Common.LedgerOperation<
     {
       /**
        * module name of the user defined endpoint
@@ -379,10 +399,11 @@ interface Operations {
   /**
    * User defined functions stored in the Confidential Ledger
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Retrieves a list of user defined functions present in the Confidential Ledger")
   @route("/app/userDefinedFunctions")
   @get
-  listUserDefinedFunctions is Azure.Core.Foundations.Operation<
+  listUserDefinedFunctions is Common.LedgerOperation<
     {},
     PagedUserDefinedFunctions
   >;
@@ -390,10 +411,11 @@ interface Operations {
   /**
    * Deletes a user defined function from the Confidential Ledger.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Deletes a user defined function from the Confidential Ledger.")
   @route("/app/userDefinedFunctions/{functionId}")
   @delete
-  deleteUserDefinedFunction is Azure.Core.Foundations.Operation<
+  deleteUserDefinedFunction is Common.LedgerOperation<
     {
       /**
        * Identifies a user defined function.
@@ -407,10 +429,11 @@ interface Operations {
   /**
    * Returns the user defined function in the Confidential Ledger
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets a user defined function.")
   @route("/app/userDefinedFunctions/{functionId}")
   @get
-  getUserDefinedFunction is Azure.Core.Foundations.Operation<
+  getUserDefinedFunction is Common.LedgerOperation<
     {
       /**
        * Identifies a user defined function.
@@ -425,10 +448,11 @@ interface Operations {
    * Creates the user defined function in the Confidential Ledger
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Creates a user defined function.")
   @route("/app/userDefinedFunctions/{functionId}")
   @put
-  createUserDefinedFunction is Azure.Core.Foundations.Operation<
+  createUserDefinedFunction is Common.LedgerOperation<
     {
       /**
        * Identifies a user defined function.
@@ -448,10 +472,11 @@ interface Operations {
   /**
    * Executes the user defined function in the Confidential Ledger
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Executes a user defined function.")
   @route("/app/userDefinedFunctions/{functionId}:execute")
   @post
-  executeUserDefinedFunction is Azure.Core.Foundations.Operation<
+  executeUserDefinedFunction is Common.LedgerOperation<
     {
       /**
        * Identifies a user defined function.
@@ -471,10 +496,11 @@ interface Operations {
   /**
    * user defined roles allow users to define and manage app specific AuthZ policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Gets role actions for user defined roles")
   @route("/app/roles")
   @get
-  getUserDefinedRole is Azure.Core.Foundations.Operation<
+  getUserDefinedRole is Common.LedgerOperation<
     {
       /**
        * user defined role name
@@ -488,10 +514,11 @@ interface Operations {
   /**
    * User defined roles allow users to define and manage app specific AuthZ policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Creates new roles and their actions")
   @route("/app/roles")
   @put
-  createUserDefinedRole is Azure.Core.Foundations.Operation<
+  createUserDefinedRole is Common.LedgerOperation<
     {
       /** Request body */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
@@ -505,13 +532,14 @@ interface Operations {
    * User defined roles allow users to define and manage app specific AuthZ policy.
    */
   #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("""
     Patch replaces the allowed action on existing roles,if the desire is to remove
     an existing action, the role must be deleted and recreated.
     """)
   @route("/app/roles")
   @patch
-  updateUserDefinedRole is Azure.Core.Foundations.Operation<
+  updateUserDefinedRole is Common.LedgerOperation<
     {
       /** Request body */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
@@ -525,10 +553,11 @@ interface Operations {
    * A user defined role allows the users to create and manage their own role
    * actions using the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Deletes user defined roles")
   @route("/app/roles")
   @delete
-  deleteUserDefinedRole is Azure.Core.Foundations.Operation<
+  deleteUserDefinedRole is Common.LedgerOperation<
     {
       /**
        * user defined role name

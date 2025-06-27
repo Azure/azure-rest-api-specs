@@ -1,10 +1,15 @@
-import "@typespec/rest";
-import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace ConfidentialLedger.Common;
+
+op LedgerOperation<
+  TParameters extends TypeSpec.Reflection.Model = {},
+  TResult extends TypeSpec.Reflection.Model | void = void,
+  TError = Common.ConfidentialLedgerError
+> is Azure.Core.Foundations.Operation<TParameters, TResult, {}, TError>;
 
 /**
  * An error response from Confidential Ledger.
