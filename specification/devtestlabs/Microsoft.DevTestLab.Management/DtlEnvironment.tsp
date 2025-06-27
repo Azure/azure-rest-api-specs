@@ -25,7 +25,7 @@ model DtlEnvironment extends Resource {
   @path
   @key
   @segment("environments")
-  dtlEnvironmentName: string;
+  name: string;
 
   properties: EnvironmentProperties;
 }
@@ -117,7 +117,7 @@ interface DtlEnvironments {
   >;
 }
 
-@@doc(DtlEnvironment.dtlEnvironmentName, "The name of the environment.");
+@@doc(DtlEnvironment.name, "The name of the environment.");
 @@doc(DtlEnvironment.properties, "The properties of the resource.");
 @@doc(DtlEnvironment.location, "The location of the resource.");
 @@doc(DtlEnvironment.tags, "The tags of the resource.");

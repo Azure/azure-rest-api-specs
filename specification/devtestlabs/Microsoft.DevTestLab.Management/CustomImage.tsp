@@ -25,7 +25,7 @@ model CustomImage extends Resource {
   @path
   @key
   @segment("customimages")
-  customImageName: string;
+  name: string;
 
   properties: CustomImageProperties;
 }
@@ -104,7 +104,7 @@ interface CustomImages {
   >;
 }
 
-@@doc(CustomImage.customImageName, "The name of the custom image.");
+@@doc(CustomImage.name, "The name of the custom image.");
 @@doc(CustomImage.properties, "The properties of the resource.");
 @@doc(CustomImages.createOrUpdate::parameters.resource, "A custom image.");
 @@doc(CustomImages.update::parameters.properties, "A custom image.");

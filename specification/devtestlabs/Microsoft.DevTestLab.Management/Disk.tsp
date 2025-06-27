@@ -25,7 +25,7 @@ model Disk extends Resource {
   @path
   @key
   @segment("disks")
-  diskName: string;
+  name: string;
 
   properties: DiskProperties;
 }
@@ -114,7 +114,7 @@ interface Disks {
   detach is ArmResourceActionAsync<Disk, DetachDiskProperties, OkResponse>;
 }
 
-@@doc(Disk.diskName, "The name of the disk.");
+@@doc(Disk.name, "The name of the disk.");
 @@doc(Disk.properties, "The properties of the resource.");
 @@doc(Disk.location, "The location of the resource.");
 @@doc(Disk.tags, "The tags of the resource.");
