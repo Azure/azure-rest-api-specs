@@ -1,7 +1,5 @@
 // FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
@@ -16,7 +14,8 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ServiceLinker;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface LinkersOperationGroup {  /**
+interface LinkersOperationGroup {
+  /**
    * List the dapr configuration supported by Service Connector.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

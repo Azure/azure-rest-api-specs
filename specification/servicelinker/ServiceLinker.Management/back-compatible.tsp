@@ -31,3 +31,31 @@ using Microsoft.ServiceLinker;
 @@clientName(Linker.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(LinkerResource.properties);
+
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+
+// LinkerResources interface operations with Connector_ prefix
+@@clientLocation(LinkerResources.get, "Connector");
+@@clientLocation(LinkerResources.createOrUpdate, "Connector");
+@@clientLocation(LinkerResources.update, "Connector");
+@@clientLocation(LinkerResources.delete, "Connector");
+@@clientLocation(LinkerResources.list, "Connector");
+@@clientLocation(LinkerResources.validate, "Connector");
+@@clientLocation(LinkerResources.generateConfigurations, "Connector");
+
+// DryrunResources interface operations with Connector_ prefix
+@@clientLocation(DryrunResources.getDryrun, "Connector");
+@@clientLocation(DryrunResources.createDryrun, "Connector");
+@@clientLocation(DryrunResources.updateDryrun, "Connector");
+@@clientLocation(DryrunResources.deleteDryrun, "Connector");
+@@clientLocation(DryrunResources.listDryrun, "Connector");
+
+// Linker interface operations with Linkers_ prefix
+@@clientLocation(Linker.generateConfigurations, Linkers);
+
+// LinkersOperationGroup operations with Linkers_ prefix
+@@clientLocation(LinkersOperationGroup.listDaprConfigurations, Linkers);
+
+// ConfigurationNamesOperationGroup operations with ConfigurationNames_ prefix
+@@clientLocation(ConfigurationNamesOperationGroup.list, "ConfigurationNames");
