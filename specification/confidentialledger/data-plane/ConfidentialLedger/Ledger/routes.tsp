@@ -424,6 +424,7 @@ interface Operations {
   /**
    * Creates the user defined function in the Confidential Ledger
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @summary("Creates a user defined function.")
   @route("/app/userDefinedFunctions/{functionId}")
   @put
