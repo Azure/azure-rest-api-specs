@@ -1056,6 +1056,227 @@
           }
         }
       }
+    },
+    "/models": {
+      "get": {
+        "operationId": "Models_ListLatest",
+        "description": "List the latest version of each ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/models/{name}/versions": {
+      "get": {
+        "operationId": "Models_ListVersions",
+        "description": "List all versions of the given ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/models/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Models_GetVersion",
+        "description": "Get the specific version of the ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the ModelVersion to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Models_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing ModelVersion with the given version id",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the ModelVersion to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modelVersion",
+            "in": "body",
+            "description": "The ModelVersion to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ModelVersion"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Models_DeleteVersion",
+        "description": "Delete the specific version of the ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the ModelVersion to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1598,6 +1819,19 @@
         ]
       }
     },
+    "DerivedModelInformation": {
+      "type": "object",
+      "description": "Derived model information",
+      "properties": {
+        "baseModel": {
+          "type": "string",
+          "description": "Base model"
+        }
+      },
+      "required": [
+        "baseModel"
+      ]
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -1813,6 +2047,24 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "ModelCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the model",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -1864,6 +2116,156 @@
         }
       ],
       "x-ms-discriminator-value": "ModelDeployment"
+    },
+    "ModelLimits": {
+      "type": "object",
+      "description": "Limits of the model",
+      "properties": {
+        "textLimits": {
+          "$ref": "#/definitions/TextLimits",
+          "description": "Text limits"
+        },
+        "otherLimits": {
+          "type": "string",
+          "description": "Other limits"
+        }
+      }
+    },
+    "ModelVersion": {
+      "type": "object",
+      "description": "Model Version Definition",
+      "properties": {
+        "evaluation": {
+          "type": "string",
+          "description": "Evaluation details of the model"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the model"
+        },
+        "trainingDataDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime of training data"
+        },
+        "licenseDescription": {
+          "type": "string",
+          "description": "License description"
+        },
+        "inferenceTasks": {
+          "type": "array",
+          "description": "Inference tasks supported by the model",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fineTuningTasks": {
+          "type": "array",
+          "description": "Fine-tuning tasks supported by the model",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keywords": {
+          "type": "array",
+          "description": "Keywords associated with the model",
+          "items": {
+            "type": "string"
+          }
+        },
+        "playgroundLimits": {
+          "$ref": "#/definitions/PlaygroundLimits",
+          "description": "Playground limits for the model"
+        },
+        "modelCapabilities": {
+          "type": "string",
+          "description": "Capabilities of the model"
+        },
+        "modelLimits": {
+          "$ref": "#/definitions/ModelLimits",
+          "description": "Limits of the model"
+        },
+        "supportedLanguages": {
+          "type": "array",
+          "description": "Supported languages",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedInputModalities": {
+          "type": "array",
+          "description": "Supported input modalities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedOutputModalities": {
+          "type": "array",
+          "description": "Supported output modalities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureOffers": {
+          "type": "array",
+          "description": "Azure offers for the model",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SystemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System related metadata",
+          "readOnly": true
+        },
+        "catalogInfo": {
+          "$ref": "#/definitions/ModelCatalogInformation",
+          "description": "Catalog information for the model"
+        },
+        "derivedModelInformation": {
+          "$ref": "#/definitions/DerivedModelInformation",
+          "description": "Derived model information"
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset ID, a unique identifier for the asset",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the resource",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "catalogInfo",
+        "name",
+        "version"
+      ]
     },
     "NoAuthenticationCredentials": {
       "type": "object",
@@ -1947,6 +2349,27 @@
           "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedModelVersion": {
+      "type": "object",
+      "description": "Paged collection of ModelVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ModelVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ModelVersion"
           }
         },
         "nextLink": {
@@ -2061,6 +2484,19 @@
         ]
       }
     },
+    "PlaygroundLimits": {
+      "type": "object",
+      "description": "Playground limits for the model",
+      "properties": {
+        "rateLimitTier": {
+          "type": "string",
+          "description": "Rate limit tier"
+        }
+      },
+      "required": [
+        "rateLimitTier"
+      ]
+    },
     "SASCredentials": {
       "type": "object",
       "description": "Shared Access Signature (SAS) credential definition",
@@ -2137,6 +2573,46 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified"
+        }
+      }
+    },
+    "TextLimits": {
+      "type": "object",
+      "description": "Text limits",
+      "properties": {
+        "inputContextWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Input context window"
+        },
+        "maxOutputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum output tokens"
+        }
+      },
+      "required": [
+        "inputContextWindow",
+        "maxOutputTokens"
       ]
     }
   },

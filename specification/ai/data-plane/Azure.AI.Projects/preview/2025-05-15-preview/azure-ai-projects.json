@@ -2280,6 +2280,19 @@
         ]
       }
     },
+    "DerivedModelInformation": {
+      "type": "object",
+      "description": "Derived model information",
+      "properties": {
+        "baseModel": {
+          "type": "string",
+          "description": "Base model"
+        }
+      },
+      "required": [
+        "baseModel"
+      ]
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -2608,6 +2621,24 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "ModelCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the model",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2659,6 +2690,20 @@
         }
       ],
       "x-ms-discriminator-value": "ModelDeployment"
+    },
+    "ModelLimits": {
+      "type": "object",
+      "description": "Limits of the model",
+      "properties": {
+        "textLimits": {
+          "$ref": "#/definitions/TextLimits",
+          "description": "Text limits"
+        },
+        "otherLimits": {
+          "type": "string",
+          "description": "Other limits"
+        }
+      }
     },
     "NoAuthenticationCredentials": {
       "type": "object",
@@ -2898,6 +2943,19 @@
         ]
       }
     },
+    "PlaygroundLimits": {
+      "type": "object",
+      "description": "Playground limits for the model",
+      "properties": {
+        "rateLimitTier": {
+          "type": "string",
+          "description": "Rate limit tier"
+        }
+      },
+      "required": [
+        "rateLimitTier"
+      ]
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
@@ -3083,6 +3141,26 @@
         "tier"
       ]
     },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified"
+        }
+      }
+    },
     "TargetConfig": {
       "type": "object",
       "description": "Abstract class for target configuration.",
@@ -3095,6 +3173,26 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "TextLimits": {
+      "type": "object",
+      "description": "Text limits",
+      "properties": {
+        "inputContextWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Input context window"
+        },
+        "maxOutputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum output tokens"
+        }
+      },
+      "required": [
+        "inputContextWindow",
+        "maxOutputTokens"
       ]
     }
   },
