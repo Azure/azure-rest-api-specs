@@ -338,6 +338,15 @@ input-file:
   - Microsoft.Compute/GalleryRP/stable/2024-03-03/communityGallery.json
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
+### Tag: package-2025-06-05-preview
+
+These settings apply only when `--tag=package-2025-06-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-06-05-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2025-06-05-preview/diagnostic.json
+```
+
 
 ### Tag: package-2025-02-01-only
 
