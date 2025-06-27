@@ -175,6 +175,12 @@ model SecretBundle {
    */
   @visibility(Lifecycle.Read)
   managed?: boolean;
+
+  /**
+   * The version of the previous certificate (if applicable).
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  previousVersion?: string;
 }
 
 /**
