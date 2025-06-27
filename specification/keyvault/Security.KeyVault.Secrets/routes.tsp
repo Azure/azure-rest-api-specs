@@ -113,6 +113,14 @@ op getSecret is KeyVaultOperation<
     @path("secret-version")
     @clientName("version", "go")
     secretVersion: string;
+
+    /**
+     * The media type (MIME format) of the certificate content to return. Only PFX to PEM conversion is supported.
+     * If not specified, the certificate is returned in its original format without conversion.
+     */
+    @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+    @query("outContentType")
+    outContentType?: string;
   },
   SecretBundle
 >;
