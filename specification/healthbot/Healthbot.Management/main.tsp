@@ -4,16 +4,16 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.10.14
- * Date: 2025-04-21T01:28:57.032Z
+ * Version: 0.11.2
+ * Date: 2025-06-27T06:14:04.112Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./HealthBot.tsp";
 import "./back-compatible.tsp";
+import "./HealthBot.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -28,6 +28,7 @@ using Azure.ResourceManager.Private;
 @armProviderNamespace
 @service(#{ title: "Azure Health Bot" })
 @versioned(Versions)
+// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.HealthBot;
 
@@ -36,11 +37,11 @@ namespace Microsoft.HealthBot;
  */
 enum Versions {
   /**
-   * The 2024-02-01 API version.
+   * The 2025-05-25 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_02_01: "2024-02-01",
+  v2025_05_25: "2025-05-25",
 }
 
 /**

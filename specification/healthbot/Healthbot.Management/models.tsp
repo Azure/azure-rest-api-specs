@@ -88,7 +88,25 @@ model Identity {
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    *
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: UserAssignedIdentityMap;
+}
+
+/**
+ * The details of the user assigned managed identity used by the Video Analyzer resource.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal ID of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client ID of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
 }
 
 /**
@@ -112,6 +130,12 @@ model HealthBotProperties {
    * KeyVault properties for the resource encryption.
    */
   keyVaultProperties?: KeyVaultProperties;
+
+  /**
+   * The access control method for the Azure Health Bot resource.
+   */
+  @visibility(Lifecycle.Read)
+  accessControlMethod?: string;
 }
 
 /**
@@ -137,6 +161,25 @@ model KeyVaultProperties {
    * The user assigned identity (ARM resource id) that has access to the key.
    */
   userIdentity?: string;
+}
+
+/**
+ * The resource model definition for a ARM tracked top level resource
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model TrackedResource extends Resource {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: string;
 }
 
 /**
@@ -169,6 +212,43 @@ model Resource {
 }
 
 /**
+ * Read only system data
+ */
+model SystemData {
+  /**
+   * The identity that created the resource.
+   */
+  createdBy?: string;
+
+  /**
+   * The type of identity that created the resource
+   */
+  createdByType?: IdentityType;
+
+  /**
+   * The timestamp of resource creation (UTC)
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * The identity that last modified the resource.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * The type of identity that last modified the resource
+   */
+  lastModifiedByType?: IdentityType;
+
+  /**
+   * The timestamp of resource last modification (UTC)
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
+}
+
+/**
  * The resource management error response.
  */
 @error
@@ -176,80 +256,56 @@ model Error {
   /**
    * The error object.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  error?: ErrorDetail;
+  error?: {
+    /**
+     * The error code.
+     */
+    @visibility(Lifecycle.Read)
+    code?: string;
+
+    /**
+     * The error message.
+     */
+    @visibility(Lifecycle.Read)
+    message?: string;
+
+    /**
+     * The error target.
+     */
+    @visibility(Lifecycle.Read)
+    target?: string;
+
+    /**
+     * The error details.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-identifiers", #[])
+    details?: Error[];
+
+    /**
+     * The error additional info.
+     */
+    @visibility(Lifecycle.Read)
+    @OpenAPI.extension("x-ms-identifiers", #[])
+    additionalInfo?: ErrorAdditionalInfo[];
+  };
 }
 
 /**
- * The error object detail.
- */
-model ErrorDetail {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * The error target.
-   */
-  @visibility(Lifecycle.Read)
-  target?: string;
-
-  /**
-   * The error details.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  details?: Error[];
-
-  /**
-   * The error additional info.
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  additionalInfo?: ErrorAdditionalInfo[];
-}
-
-/**
- * Additional information about an error.
+ * The resource management error additional info.
  */
 model ErrorAdditionalInfo {
   /**
-   * The type of the additional error information.
+   * The additional info type.
    */
   @visibility(Lifecycle.Read)
   type?: string;
 
   /**
-   * The additional error information.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  info?: {};
-}
-
-/**
- * Represents a user-assigned identity.
- */
-model UserAssignedIdentity {
-  /**
-   * The principal ID of the user-assigned identity.
+   * The additional info.
    */
   @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client ID of the user-assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
+  info?: Record<unknown>;
 }
 
 /**
@@ -264,7 +320,7 @@ model HealthBotUpdateParameters {
   /**
    * Tags for a Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -278,7 +334,7 @@ model HealthBotUpdateParameters {
    */
   identity?: Identity;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
@@ -367,25 +423,27 @@ model OperationDetail {
 }
 
 /**
- * Localized display information for and operation.
+ * Operation display payload
  */
 model OperationDisplay {
-  /** 
-  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+  /**
+   * Resource provider of the operation
    */
   provider?: string;
 
-  /** 
-    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-     */
+  /**
+   * Resource of the operation
+   */
   resource?: string;
 
-  /** 
-    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-     */
+  /**
+   * Localized friendly name for the operation
+   */
   operation?: string;
 
-  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  /**
+   * Localized friendly description for the operation
+   */
   description?: string;
 }
 
