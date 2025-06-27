@@ -13,7 +13,11 @@ namespace ConfidentialLedger.Ledger;
  */
 union ConfidentialLedgerQueryState {
   string,
+
+  /** The query is still loading */
   Loading: "Loading",
+
+  /** The query is ready */
   Ready: "Ready",
 }
 
@@ -23,6 +27,8 @@ union ConfidentialLedgerQueryState {
  */
 union ApplicationClaimProtocol {
   string,
+
+  /** Ledger Entry V1 protocol */
   LedgerEntryV1: "LedgerEntryV1",
 }
 
@@ -31,7 +37,11 @@ union ApplicationClaimProtocol {
  */
 union ApplicationClaimKind {
   string,
+
+  /** Claim derived from a ledger entry */
   LedgerEntry: "LedgerEntry",
+
+  /** Claim in digested form */
   ClaimDigest: "ClaimDigest",
 }
 
@@ -40,7 +50,11 @@ union ApplicationClaimKind {
  */
 union TransactionState {
   string,
+
+  /** The transaction is committed */
   Committed: "Committed",
+
+  /** The transaction is pending */
   Pending: "Pending",
 }
 
@@ -49,8 +63,14 @@ union TransactionState {
  */
 union ConfidentialLedgerUserRoleName {
   string,
+
+  /** Administrator role */
   Administrator: "Administrator",
+
+  /** Contributor role */
   Contributor: "Contributor",
+
+  /** Reader role */
   Reader: "Reader",
 }
 
@@ -107,7 +127,11 @@ union RedirectionStrategy {
  */
 union UserDefinedFunctionExecutionStatus {
   string,
+
+  /** The function execution completed successfully */
   Succeeded: "Succeeded",
+
+  /** The function execution failed */
   Failed: "Failed",
 }
 
@@ -360,9 +384,10 @@ model JSRuntimeOptions {
  * Returned as a result of a write to the Confidential Ledger, the transaction id
  * in the response indicates when the write will become durable.
  */
-model LedgerWriteResult {}
-/**
-   * The collection identifier of the ledger entry
+model LedgerWriteResult {
+  /**
+   * The collection identifier of the ledger entry.
+   */
   collectionId: string;
 }
 
