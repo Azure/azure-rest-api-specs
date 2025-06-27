@@ -225,7 +225,7 @@ export class TspConfigJavaMgmtPackageDirFormatSubRule extends TspconfigEmitterOp
     super(
       "@azure-tools/typespec-java",
       "package-dir",
-      new RegExp(/^azure-resourcemanager-[^\/]+$/) // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
+      new RegExp(/^azure-resourcemanager-[^\/]+$/), // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
     );
   }
 
@@ -239,7 +239,7 @@ export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOpt
     super(
       "@azure-tools/typespec-java",
       "namespace",
-      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/) // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
+      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/), // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
     );
   }
 
@@ -260,15 +260,11 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
 
 export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-ts",
-      "package-dir",
-      new RegExp(/^arm-[^\/]+$/)
-    );
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm-[^\/]+$/));
   }
 
   protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder); 
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
   }
 }
 
@@ -594,7 +590,9 @@ export class SdkTspConfigValidationRule implements Rule {
         const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
         const emitterName = emitterOptionSubRule.getEmitterName();
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(`Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`);
+          console.warn(
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`,
+          );
           isSubRuleSuccess = true;
         }
       }
@@ -632,14 +630,14 @@ export class SdkTspConfigValidationRule implements Rule {
 
     // Only check for wildcard at the end (format: prefix.*)
     for (const suppressedPath of this.suppressedKeyPaths) {
-      if (suppressedPath.endsWith('.*')) {
+      if (suppressedPath.endsWith(".*")) {
         const prefix = suppressedPath.slice(0, -2); // Remove the '.*' at the end
         if (keyPath.startsWith(prefix)) {
           return true;
         }
       }
     }
-    
+
     return false;
   }
 }
