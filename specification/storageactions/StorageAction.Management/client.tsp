@@ -20,4 +20,4 @@ using Microsoft.StorageActions;
   "csharp"
 );
 
-@@clientName(StorageTasks.storageTaskAssignmentList, "list", "java");
+@@clientName(StorageTasks.storageTaskAssignmentList, "list", "java,javascript");
