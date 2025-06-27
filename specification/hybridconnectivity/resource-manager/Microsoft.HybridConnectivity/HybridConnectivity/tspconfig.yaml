@@ -11,10 +11,11 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    arm-types-dir: "{project-root}/../../../../../../common-types/resource-management"
-    output-file: "stable/{version}/hybridconnectivity.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/hybridconnectivity.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+    azure-resource-provider-folder: "resource-manager"
   "@azure-tools/typespec-csharp":
     flavor: "azure"
     namespace: "Azure.ResourceManager.HybridConnectivity"
