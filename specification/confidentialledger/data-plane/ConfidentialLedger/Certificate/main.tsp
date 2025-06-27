@@ -9,9 +9,8 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
-import "./routes.tsp";
+import "../Common/models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -63,7 +62,7 @@ model LedgerIdentityInformation {
 @summary("Gets identity information for a Confidential Ledger instance.")
 @route("/ledgerIdentity/{ledgerId}")
 @get
-op getLedgerIdentity is Azure.Core.Foundations.Operation<
+op getLedgerIdentity is Common.LedgerOperation<
   {
     /**
      * Id of the Confidential Ledger instance to get information for
