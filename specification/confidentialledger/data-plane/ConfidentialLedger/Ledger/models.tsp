@@ -2,8 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 
 namespace ConfidentialLedger.Ledger;
@@ -680,7 +678,7 @@ model Bundle {
   /**
    * Any object
    */
-  modules: Record<unknown>;
+  modules: ModuleDef[];
 }
 
 /**
@@ -726,7 +724,7 @@ model EndpointProperties {
    * Authentication policies for the endpoint.
    */
   @encodedName("application/json", "authn_policies")
-  authnPolicies: JsonArray;
+  authnPolicies: Record<unknown>[];
 
   /**
    * Indicates whether request forwarding is required for this endpoint.
@@ -923,14 +921,4 @@ model RoleAssignment {
    * Description of the role.
    */
   description?: string;
-}
-
-/**
- * Represents a JSON array.
- */
-model JsonArray {
-  /**
-   * The array of items.
-   */
-  items: Record<unknown>[];
 }

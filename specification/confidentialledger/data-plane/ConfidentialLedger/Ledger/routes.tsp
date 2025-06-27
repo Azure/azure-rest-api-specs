@@ -2,11 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace ConfidentialLedger.Ledger;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "TODO"
 interface Operations {
   /**
    * The constitution is a script that assesses and applies proposals from
@@ -244,6 +244,7 @@ interface Operations {
   /**
    * A JSON merge patch is applied for existing users
    */
+  #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
   @summary("Adds a user or updates a user's fields.")
   @route("/app/users/{userId}")
   @patch
@@ -301,6 +302,7 @@ interface Operations {
   /**
    * A JSON merge patch is applied for existing users
    */
+  #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
   @summary("Adds a user or updates a user's fields.")
   @route("/app/ledgerUsers/{userId}")
   @patch
@@ -348,6 +350,7 @@ interface Operations {
   /**
    * Updates the runtime options.
    */
+  #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
   @summary("Runtime options for user defined endpoints.")
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @patch
@@ -368,7 +371,7 @@ interface Operations {
        * module name of the user defined endpoint
        */
       @query("module_name")
-      module_name: string;
+      moduleName: string;
     },
     ModuleDef
   >;
@@ -489,7 +492,10 @@ interface Operations {
   @put
   createUserDefinedRole is Azure.Core.Foundations.Operation<
     {
-      @bodyRoot body: Role[];
+      /** Request body */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+      @bodyRoot
+      roles: Role[];
     },
     void
   >;
@@ -497,6 +503,7 @@ interface Operations {
   /**
    * User defined roles allow users to define and manage app specific AuthZ policy.
    */
+  #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
   @summary("""
     Patch replaces the allowed action on existing roles,if the desire is to remove
     an existing action, the role must be deleted and recreated.
@@ -505,7 +512,10 @@ interface Operations {
   @patch
   updateUserDefinedRole is Azure.Core.Foundations.Operation<
     {
-      @bodyRoot body: Role[];
+      /** Request body */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+      @bodyRoot
+      roles: Role[];
     },
     void
   >;
