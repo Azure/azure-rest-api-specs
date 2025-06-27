@@ -6492,6 +6492,11 @@
           "$ref": "#/definitions/VirtualHardDiskStatus",
           "description": "The observed state of virtual hard disks",
           "readOnly": true
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
         }
       }
     },
@@ -6518,6 +6523,17 @@
         "uploadStatus": {
           "$ref": "#/definitions/VirtualHardDiskUploadStatus",
           "description": "The upload status of the virtual hard disk"
+        },
+        "managedBy": {
+          "type": "array",
+          "description": "ARM IDs of the VMs that are consuming the VHD.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "Unique Guid identifying the resource."
         }
       }
     },
