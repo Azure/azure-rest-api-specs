@@ -1,0 +1,89 @@
+// import { setEquals } from "../../shared/src/equality.js";
+import { extractInputs } from "./context.js";
+// import { PER_PAGE_MAX } from "./github.js";
+import { LabelAction } from "./label.js";
+
+/**
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @returns {Promise<void>}
+ */
+export default async function summarizeChecks({ github, context, core }) {
+  let owner = process.env.OWNER || "";
+  let repo = process.env.REPO || "";
+  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
+  let head_sha = process.env.HEAD_SHA || "";
+
+  if (!owner || !repo || !issue_number || !head_sha) {
+    let inputs = await extractInputs(github, context, core);
+    owner = owner || inputs.owner;
+    repo = repo || inputs.repo;
+    issue_number = issue_number || inputs.issue_number;
+    head_sha = head_sha || inputs.head_sha;
+  }
+
+  await summarizeChecksImpl({
+    owner,
+    repo,
+    issue_number,
+    head_sha,
+    github,
+    core,
+  });
+}
+
+/**
+ * @param {Object} params
+ * @param {string} params.owner
+ * @param {string} params.repo
+ * @param {number} params.issue_number
+ * @param {string} params.head_sha
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {typeof import("@actions/core")} params.core
+ * @returns {Promise<void>}
+ */
+export async function summarizeChecksImpl({
+  owner,
+  repo,
+  issue_number,
+  head_sha,
+  github,
+  core,
+}) {
+  // fetch all check runs for this SHA
+  const { data: runs } = await github.rest.checks.listForRef({
+    owner,
+    repo,
+    ref: head_sha,
+  });
+
+  // fetch the combined status for this SHA
+  const { data: status } = await github.rest.repos.getCombinedStatusForRef({
+    owner,
+    repo,
+    ref: head_sha,
+  });
+
+  // fetch labels on the pull request
+  let labels = [];
+  try {
+    const { data: labelsData } = await github.rest.issues.listLabelsOnIssue({
+      owner,
+      repo,
+      issue_number,
+    });
+    labels = labelsData.map(label => label.name);
+  } catch (e) {
+    core.warning(`Failed to fetch PR labels: ${e}`);
+  }
+
+  // Log the collected information for debugging
+  core.info(`Found ${runs.check_runs.length} check runs`);
+  core.info(`Combined status: ${status.state}`);
+  core.info(`PR labels: ${labels.join(', ')}`);
+
+  // TODO: Implement the actual logic from pipeline bot
+
+  // TODO: will we want to return the equivalent of label action
+  // and code comment?
+  // Starting off I'm just going to have this thing print the markdown comment.
+}
