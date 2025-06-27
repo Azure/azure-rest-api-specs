@@ -42,23 +42,76 @@ input-file:
 suppressions:
   - code: GetCollectionResponseSchema
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies"]
     reason: This is by design to avoid high bandwidth consumption as agreed with the partner
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
     reason: This is by design. Request contains a customer provided secret that is not returned in the response. 
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
     reason: This is by design. We do not return provided file contents in the response. 
   - code: PutResponseCodes
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
-    reason: This is a synchronous API, hence we're not returning a 200. 
-  - code: AvoidAnonymousTypes
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    reason: This is a synchronous API, hence we're not returning a 201. 
+  - code: PathResourceProviderNamePascalCase
     from: openapi.json
-    reason: User Assigned Managed Identity Type inline definition is automatically added to json.
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/providers/NGINX.NGINXPLUS/operations"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/providers/NGINX.NGINXPLUS/nginxDeployments"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/certificates"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/certificates/{certificateName}"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}/analyze"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/listDefaultWafPolicies"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
+  - code: PathResourceProviderNamePascalCase
+    from: openapi.json
+    reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies/{wafPolicyName}"]
 ```
 
 ### Tag: package-2024-11-01-preview
