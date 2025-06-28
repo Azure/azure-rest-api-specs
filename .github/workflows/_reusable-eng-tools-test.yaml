@@ -15,8 +15,8 @@ on:
         description: Run 'npm run lint' if true
         required: false
         type: boolean
-      prettier:
-        description: Run 'npm run prettier' if true
+      format:
+        description: Run 'npm run format:check' if true
         required: false
         type: boolean
 
@@ -63,8 +63,8 @@ jobs:
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
-      - run: npm run prettier
-        if: inputs.prettier == true
+      - run: npm run format:check
+        if: inputs.format == true
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
