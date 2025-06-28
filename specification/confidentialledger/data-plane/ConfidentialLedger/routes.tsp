@@ -363,7 +363,9 @@ interface Operations {
       @bodyRoot
       bundle: Bundle;
     },
-    {}
+    {
+      @statusCode statusCode: 201;
+    }
   >;
 
   /**
@@ -480,7 +482,9 @@ interface Operations {
       @bodyRoot
       userDefinedFunction: UserDefinedFunction;
     },
-    UserDefinedFunction
+    {
+      @statusCode statusCode: 201;
+    } & UserDefinedFunction
   >;
 
   /**
