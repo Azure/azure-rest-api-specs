@@ -50,20 +50,24 @@ model InputDataset extends InputData {
 @added(Versions.v2025_05_15_preview)
 union EvaluationTargetType {
   @doc("Evaluation target in simple JSON format with query/response/context/ground-truth.")
-  simpleJson: "simpleJson";
-  string;
+  simpleJson: "simpleJson",
+
+  string,
 
   @doc("Evaluation target in AI Foundry agent data format.")
-  foundryAgentData: "foundryAgentData";
-  string;
+  foundryAgentData: "foundryAgentData",
+
+  string,
 
   @doc("Evaluation target in AI Foundry dataset.")
-  foundryDataset: "foundryDataset";
-  string;
+  foundryDataset: "foundryDataset",
+
+  string,
 
   @doc("(Example of targets, not for review) Evaluation AI Foundry agent as a target.")
-  foundryAgent: "foundryAgent";
-  string;
+  foundryAgent: "foundryAgent",
+
+  string,
 }
 
 @doc("Abstract base model for defining evaluation targets.")
@@ -136,6 +140,9 @@ model Evaluation {
   @doc("Deprecated: data for evaluation.")
   data?: InputData;
 
+  @doc("Correlation Id for the evaluation. It is used to correlate the evaluation with other resources, e.g. link DataBricks job Id and run Id with AI Foundry evaluation.")
+  correlationId?: string;
+
   @doc("Specifies the type and configuration of the entity used for this evaluation.")
   target: EvaluationTarget;
 
@@ -193,7 +200,7 @@ model EvaluationConfig {
   disableEvaluationRunPersistence?: boolean;
 
   @doc("Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.")
-  extraEvaluationRunStorageOptions?: Array<unknown>;
+  extraResultStorageOptions?: Array<unknown>;
 }
 
 @doc("Definition for sampling strategy.")
