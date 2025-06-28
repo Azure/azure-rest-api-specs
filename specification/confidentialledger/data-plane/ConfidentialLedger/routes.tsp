@@ -482,7 +482,10 @@ interface Operations {
       @bodyRoot
       userDefinedFunction: UserDefinedFunction;
     },
-    UserDefinedFunction
+    {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API contract"
+      @statusCode statusCode: 200 | 201;
+    } & UserDefinedFunction
   >;
 
   /**
@@ -582,6 +585,6 @@ interface Operations {
       @query("roleName")
       roleName: string;
     },
-    void
+    {}
   >;
 }
