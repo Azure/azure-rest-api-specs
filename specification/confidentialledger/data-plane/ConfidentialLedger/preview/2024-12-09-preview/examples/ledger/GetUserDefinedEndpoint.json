@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-12-09-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The custom endpoint.",
+      "body": {
+        "metadata": {
+          "endpoints": {
+            "/content": {
+              "get": {
+                "authn_policies": [
+                  {}
+                ],
+                "forwarding_required": "always"
+              }
+            }
+          }
+        },
+        "modules": {
+          "name": "test.js",
+          "module": "TESTJS"
+        }
+      }
+    }
+  },
+  "operationId": "Operations_GetUserDefinedEndpoint",
+  "title": "GetUserDefinedEndpoint"
+}
