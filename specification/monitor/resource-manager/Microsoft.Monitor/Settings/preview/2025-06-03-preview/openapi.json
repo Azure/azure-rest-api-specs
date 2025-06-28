@@ -334,9 +334,6 @@
     },
     "AzureMonitorSettingsPublicResource": {
       "description": "Definition of ARM tracked top level resource.",
-      "required": [
-        "location"
-      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -347,14 +344,6 @@
             }
           ],
           "x-ms-client-flatten": true
-        },
-        "location": {
-          "description": "The geo-location where the resource lives.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         },
         "tags": {
           "description": "Resource tags.",
@@ -405,7 +394,7 @@
           "description": "The name of the resource.",
           "type": "string",
           "readOnly": true,
-          "example": "myCollectionRule",
+          "example": "default",
           "x-ms-mutability": [
             "read"
           ]
@@ -414,7 +403,7 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true,
-          "example": "Microsoft.Insights/dataCollectionRules",
+          "example": "Microsoft.Monitor/settings",
           "x-ms-mutability": [
             "read"
           ]
