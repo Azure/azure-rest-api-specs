@@ -377,7 +377,8 @@ interface Operations {
     {
       /** JS Runtime options */
       @bodyRoot
-      jsRuntimeOptions: JsRuntimeOptions},
+      jsRuntimeOptions: JsRuntimeOptions;
+    },
     JsRuntimeOptions
   >;
 
