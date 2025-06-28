@@ -1,0 +1,49 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+parameters:
+  "service-dir":
+    default: "sdk/playwright"
+  "service-name":
+    default: "playwright"
+  "dependencies":
+    default: ""
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwright.json"
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-developer-playwright"
+    namespace: "azure.developer.playwright"
+    generate-test: true
+    generate-sample: true
+    package-mode: azure-dataplane
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "playwright-rest"
+    title: PlaywrightServiceClient
+    description: Microsoft Playwright Service Client
+    generate-metadata: true
+    generate-test: false
+    package-details:
+      name: "@azure-rest/playwright"
+      description: "This package contains Microsoft Playwright Service client library."
+      version: 1.0.0
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Developer.Playwright"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-developer-playwright"
+    namespace: com.azure.developer.playwright
+    partial-update: true
+    generate-tests: false
+    service-name: Microsoft Playwright Service
+    flavor: azure

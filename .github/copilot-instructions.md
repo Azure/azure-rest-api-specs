@@ -156,6 +156,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 
 ### Pre-requisites
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
+- run `npm ci` to install the dependencies
 
 
 ### Basic Rules for SDK Generation from TypeSpec

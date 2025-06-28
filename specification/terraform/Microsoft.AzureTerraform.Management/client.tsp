@@ -12,6 +12,15 @@ using Microsoft.AzureTerraform;
   "csharp"
 );
 @@clientName(BaseExportModel.maskSensitive, "IsMaskSensitiveEnabled", "csharp");
+@@clientName(BaseExportModel.excludeAzureResource,
+  "AzureResourcesToExclude",
+  "csharp"
+);
+@@clientName(BaseExportModel.excludeTerraformResource,
+  "TerraformResourcesToExclude",
+  "csharp"
+);
+
 // Name ending with "Resource" is reserved for ARM resource in .NET SDK
 // Refer to https://github.com/Azure/azure-sdk-for-net/blob/4dacd22df0cf904b11cb3b1389aa566c552fdd0f/common/ManagementTestShared/Redesign/InheritanceCheckTests.cs#L23
 @@clientName(ExportQuery, "ExportQueryTerraform", "csharp");
@@ -29,3 +38,7 @@ using Microsoft.AzureTerraform;
 @@clientName(targetProvider.azurerm, "AzureRM", "csharp");
 @@clientName(Terraform.exportTerraform, "ExportTerraform", "csharp");
 @@clientName(Microsoft.AzureTerraform, "TerraformMgmt", "python");
+@@clientName(authorizationScopeFilter,
+  "TerraformAuthorizationScopeFilter",
+  "csharp"
+);

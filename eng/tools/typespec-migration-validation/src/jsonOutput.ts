@@ -36,5 +36,5 @@ export interface JsonOutput {
 export const jsonOutput: JsonOutput = {
   version: "1.0.0",
   suggestions: [],
-  apiChanges: []
+  apiChanges: [],
 };

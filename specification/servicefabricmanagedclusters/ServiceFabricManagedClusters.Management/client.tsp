@@ -134,6 +134,8 @@ using Microsoft.ServiceFabric;
 /**
  * Dotnet Operation and Model Renaming/Retyping
  */
+@@scope(Operations.list, "!csharp");
+
 @@clientName(ManagedAzResiliencyStatus.get,
   "GetManagedAzResiliencyStatus",
   "csharp"
@@ -240,6 +242,7 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(ServiceEndpoint, "ManagedClusterServiceEndpoint", "csharp");
 @@clientName(NodeType, "ServiceFabricManagedNodeType", "csharp");
+@@clientName(NodeTypeProperties.zoneBalance, "IsZoneBalanceEnabled", "csharp");
 @@clientName(NodeTypeProperties.dataDiskSizeGB, "DataDiskSizeInGB", "csharp");
 @@clientName(NodeTypeProperties.enableAcceleratedNetworking,
   "IsAcceleratedNetworkingEnabled",
@@ -276,6 +279,7 @@ using Microsoft.ServiceFabric;
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
+@@clientName(FaultSimulationContent.force, "IsForced", "csharp");
 @@clientName(ServiceResource, "ServiceFabricManagedService", "csharp");
 @@clientName(ServiceResourceProperties, "ManagedServiceProperties", "csharp");
 @@clientName(ServiceResourcePropertiesBase,
@@ -394,6 +398,11 @@ using Microsoft.ServiceFabric;
 @@clientName(DiskType.StandardSSD_ZRS, "PremiumV2Lrs", "csharp");
 @@clientName(DiskType.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
 @@clientName(DiskType.StandardSSD_ZRS, "PremiumZrs", "csharp");
+
+@@clientName(SecurityEncryptionType,
+  "NodeTypeSecurityEncryptionType",
+  "csharp"
+);
 
 @@alternateType(ManagedClusterVersion.list::parameters.location,
   azureLocation,
