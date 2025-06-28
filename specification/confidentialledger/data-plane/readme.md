@@ -7,7 +7,7 @@ Confidential Ledger provides SDKs for the following languages:
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
 - [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
 
-Please look to the files `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json` and `Microsoft.ConfidentialLedger/preview/2024-12-09-preview/identityservice.json` for the most up-to-date API changes.
+Please look to the files `ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json` for the most up-to-date API changes.
 
 > see https://aka.ms/autorest
 
@@ -171,6 +171,18 @@ These settings apply only when `--tag=package-2024-12-09-preview-ledger` is spec
 ```yaml $(tag) == 'package-2024-12-09-preview-ledger'
 input-file:
   - ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
+### Tag: package-2024-12-09-preview-ledger-old
+
+These settings apply only when `--tag=package-2024-12-09-preview-ledger-old` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-09-preview-ledger-old'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
