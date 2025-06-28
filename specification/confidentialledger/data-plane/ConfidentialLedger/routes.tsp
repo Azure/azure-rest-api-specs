@@ -350,11 +350,12 @@ interface Operations {
   /**
    * Creates the user defined endpoint in the ACL instance
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Creates a user defined endpoint.")
   @route("/app/userDefinedEndpoints")
   @put
-  createUserDefinedEndpoint is Common.LedgerOperation<Bundle, void>;
+  createUserDefinedEndpoint is Common.LedgerOperation<Bundle, {}>;
 
   /**
    * It returns the runtime options
@@ -518,6 +519,7 @@ interface Operations {
   /**
    * User defined roles allow users to define and manage app specific AuthZ policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @summary("Creates new roles and their actions")
   @route("/app/roles")
@@ -529,7 +531,7 @@ interface Operations {
       @bodyRoot
       roles: Role[];
     },
-    void
+    {}
   >;
 
   /**
@@ -550,7 +552,7 @@ interface Operations {
       @bodyRoot
       roles: Role[];
     },
-    void
+    {}
   >;
 
   /**
