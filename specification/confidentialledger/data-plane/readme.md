@@ -170,7 +170,7 @@ These settings apply only when `--tag=package-2024-12-09-preview-ledger` is spec
 
 ```yaml $(tag) == 'package-2024-12-09-preview-ledger'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
+  - ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
