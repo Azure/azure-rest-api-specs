@@ -7934,18 +7934,22 @@
           "description": "System-generated state of localDNS."
         },
         "vnetDNSOverrides": {
-          "type": "object",
           "description": "VnetDNS overrides apply to DNS traffic from pods with dnsPolicy:default or kubelet (referred to as VnetDNS traffic).",
-          "$ref": "#/definitions/LocalDNSOverrides"
+          "$ref": "#/definitions/LocalDNSOverrideMap"
         },
         "kubeDNSOverrides": {
-          "type": "object",
           "description": "KubeDNS overrides apply to DNS traffic from pods with dnsPolicy:ClusterFirst (referred to as KubeDNS traffic).",
-          "$ref": "#/definitions/LocalDNSOverrides"
+          "$ref": "#/definitions/LocalDNSOverrideMap"
         }
       }
     },
-    "LocalDNSOverrides": {
+    "LocalDNSOverrideMap": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LocalDNSOverride"
+      }
+    },
+    "LocalDNSOverride": {
       "type": "object",
       "description": "Overrides for localDNS profile.",
       "properties": {
@@ -8090,7 +8094,7 @@
             ]
           },
           "description": "Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
-          "default": "Verify"
+          "default": "Immediate"
         }
       }
     },
