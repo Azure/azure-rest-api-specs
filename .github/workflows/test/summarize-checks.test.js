@@ -23,7 +23,7 @@ describe("summarizeChecksImpl", () => {
         owner: "scbedd",
         repo: "azure-rest-api-specs",
         issue_number: 1,
-        head_sha: "main",
+        head_sha: "826b0b976479e5c1aa5e66e1cf43a3f9e66a2477",
         github: github,
         core: mockCore,
       };
@@ -33,7 +33,7 @@ describe("summarizeChecksImpl", () => {
 
       // Note: This test mainly verifies that the API calls work with real data
       // The actual assertions depend on the current state of the specified PR
-    }, 60000);
+    }, 600000);
 
     // it.skipIf(!process.env.GITHUB_TOKEN)("should handle API errors gracefully", async () => {
     //   const github = new Octokit({
