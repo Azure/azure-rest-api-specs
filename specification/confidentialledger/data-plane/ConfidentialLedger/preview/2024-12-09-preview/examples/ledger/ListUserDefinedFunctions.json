@@ -1,24 +1,24 @@
 {
+  "title": "List User Defined Functions",
+  "operationId": "Operations_ListUserDefinedFunctions",
   "parameters": {
     "api-version": "2024-12-09-preview"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "<link>",
         "functions": [
           {
-            "code": "export function main() { return true }",
-            "id": "myFunction"
+            "id": "myFunction",
+            "code": "export function main() { return true }"
           },
           {
-            "code": "export function main() { return false }",
-            "id": "myFunction2"
+            "id": "myFunction2",
+            "code": "export function main() { return false }"
           }
-        ],
-        "nextLink": "<link>"
+        ]
       }
     }
-  },
-  "operationId": "Operations_ListUserDefinedFunctions",
-  "title": "GetUserDefinedFunctions"
+  }
 }

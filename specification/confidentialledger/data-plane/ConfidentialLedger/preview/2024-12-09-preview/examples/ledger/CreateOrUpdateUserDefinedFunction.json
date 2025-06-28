@@ -1,4 +1,6 @@
 {
+  "title": "Create Or Update Ledger User Defined Function",
+  "operationId": "Operations_CreateUserDefinedFunction",
   "parameters": {
     "api-version": "2024-12-09-preview",
     "functionId": "myFunction",
@@ -8,24 +10,22 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "code": "export function main() { return true }",
-        "id": "myFunction"
-      },
       "headers": {
         "x-ms-ccf-transaction-id": "2.15"
+      },
+      "body": {
+        "id": "myFunction",
+        "code": "export function main() { return true }"
       }
     },
     "201": {
-      "body": {
-        "code": "export function main() { return true }",
-        "id": "myFunction"
-      },
       "headers": {
         "x-ms-ccf-transaction-id": "2.15"
+      },
+      "body": {
+        "id": "myFunction",
+        "code": "export function main() { return true }"
       }
     }
-  },
-  "operationId": "Operations_CreateUserDefinedFunction",
-  "title": "CreateUserDefinedFunction"
+  }
 }

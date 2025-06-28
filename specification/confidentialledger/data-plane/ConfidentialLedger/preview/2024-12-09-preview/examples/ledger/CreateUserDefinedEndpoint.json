@@ -1,16 +1,18 @@
 {
+  "title": "Create User Defined Endpoint",
+  "operationId": "Operations_CreateUserDefinedEndpoint",
   "parameters": {
-    "description": "User definied endpoint.",
     "api-version": "2024-12-09-preview",
+    "description": "User definied endpoint.",
     "bundle": {
       "metadata": {
         "endpoints": {
           "/content": {
             "get": {
+              "forwarding_required": "always",
               "authn_policies": [
                 {}
-              ],
-              "forwarding_required": "always"
+              ]
             }
           }
         }
@@ -25,7 +27,5 @@
     "201": {
       "description": "The custom endpoint."
     }
-  },
-  "operationId": "Operations_CreateUserDefinedEndpoint",
-  "title": "CreateUserDefinedEndpoint"
+  }
 }

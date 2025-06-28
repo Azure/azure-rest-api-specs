@@ -1,21 +1,21 @@
 {
+  "title": "Get Ledger Entry",
+  "operationId": "Operations_GetLedgerEntry",
   "parameters": {
     "api-version": "2024-12-09-preview",
-    "ledgerUri": "myledger.confidentialledger.azure.com",
-    "transactionId": "2.15"
+    "transactionId": "2.15",
+    "ledgerUri": "myledger.confidentialledger.azure.com"
   },
   "responses": {
     "200": {
       "body": {
+        "state": "Ready",
         "entry": {
-          "collectionId": "subledger:0",
           "contents": "Ledger entry contents at transaction id 2.15.",
+          "collectionId": "subledger:0",
           "transactionId": "2.15"
-        },
-        "state": "Ready"
+        }
       }
     }
-  },
-  "operationId": "Operations_GetLedgerEntry",
-  "title": "GetLedgerEntry"
+  }
 }
