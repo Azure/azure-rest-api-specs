@@ -8,8 +8,8 @@ import {
   ApiVersionLifecycleStage,
   BreakingChangesCheckType,
   Context,
+  logFileName,
 } from "./types/breaking-change.js";
-import { logFileName } from "./utils/breaking-change-config.js";
 import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
 import {
   blobHref,

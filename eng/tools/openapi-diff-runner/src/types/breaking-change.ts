@@ -1,5 +1,11 @@
 import { OadMessageProcessorContext } from "../utils/oad-message-processor.js";
 import { PullRequestProperties } from "../utils/pull-request.js";
+import {
+  VERSIONING_APPROVALS,
+  BREAKING_CHANGE_APPROVALS,
+  REVIEW_REQUIRED_LABELS,
+  BREAKING_CHANGES_CHECK_TYPES,
+} from "@azure-tools/specs-shared/breaking-change";
 
 /**
  * This file contains types used by the OpenAPI specification breaking change checks
@@ -14,41 +20,37 @@ import { PullRequestProperties } from "../utils/pull-request.js";
  *   https://github.com/Azure/azure-sdk-tools/issues/6374
  */
 
-export type BreakingChangesCheckType = "SameVersion" | "CrossVersion";
+// Derive TypeScript types from the JavaScript constants
+export type BreakingChangesCheckType =
+  (typeof BREAKING_CHANGES_CHECK_TYPES)[keyof typeof BREAKING_CHANGES_CHECK_TYPES];
+
+// Export the constant values for use in TypeScript
+export const BreakingChangeReviewRequiredLabel = REVIEW_REQUIRED_LABELS.BREAKING_CHANGE;
+export const VersioningReviewRequiredLabel = REVIEW_REQUIRED_LABELS.VERSIONING;
+
+// Derive types from constants
+export type ReviewRequiredLabel =
+  (typeof REVIEW_REQUIRED_LABELS)[keyof typeof REVIEW_REQUIRED_LABELS];
+export type ValidVersioningApproval =
+  (typeof VERSIONING_APPROVALS)[keyof typeof VERSIONING_APPROVALS];
+export type ValidBreakingChangeApproval =
+  (typeof BREAKING_CHANGE_APPROVALS)[keyof typeof BREAKING_CHANGE_APPROVALS];
+export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChange-Approved-*";
+
 export type SpecsBreakingChangesLabel =
   | ReviewRequiredLabel
   | ReviewApprovalPrefixLabel
   | ValidBreakingChangeApproval
   | ValidVersioningApproval;
 
-export const BreakingChangeReviewRequiredLabel = "BreakingChangeReviewRequired";
-export const VersioningReviewRequiredLabel = "VersioningReviewRequired";
-export type ReviewRequiredLabel =
-  | typeof BreakingChangeReviewRequiredLabel
-  | typeof VersioningReviewRequiredLabel;
-export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChange-Approved-*";
-
-export type ValidVersioningApproval =
-  | "Versioning-Approved-Benign"
-  | "Versioning-Approved-BugFix"
-  | "Versioning-Approved-PrivatePreview"
-  | "Versioning-Approved-BranchPolicyException"
-  | "Versioning-Approved-Previously"
-  | "Versioning-Approved-Retired";
-
-export type ValidBreakingChangeApproval =
-  | "BreakingChange-Approved-Benign"
-  | "BreakingChange-Approved-BugFix"
-  | "BreakingChange-Approved-UserImpact"
-  | "BreakingChange-Approved-BranchPolicyException"
-  | "BreakingChange-Approved-Previously"
-  | "BreakingChange-Approved-Security";
-
 /** Corresponds to specs in "*\preview\*" or "*\stable\*" directories in the specs repos.
  * Scheduled to replace type SwaggerVersionType and type ComparedApiVersion.
  * Read more at https://aka.ms/azsdk/spec-dirs
  */
 export type ApiVersionLifecycleStage = "preview" | "stable";
+
+/** The name of the log file used by the openapi-diff-runner utility. */
+export const logFileName = "openapi-diff-runner.log";
 
 /**
  * Represents the input parameters for runner execution.
