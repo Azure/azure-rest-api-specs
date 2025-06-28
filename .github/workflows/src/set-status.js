@@ -87,10 +87,17 @@ export async function setStatusImpl({
   core.info(`Labels: ${prLabels}`);
 
   // Parse overriding labels (comma-separated string to array)
-  const overridingLabelsArray = overridingLabel ? overridingLabel.split(',').map(label => label.trim()).filter(label => label) : [];
+  const overridingLabelsArray = overridingLabel
+    ? overridingLabel
+        .split(",")
+        .map((label) => label.trim())
+        .filter((label) => label)
+    : [];
 
   // Check if any overriding label is present
-  const foundOverridingLabel = overridingLabelsArray.find(label => prLabels.includes(label));
+  const foundOverridingLabel = overridingLabelsArray.find((label) =>
+    prLabels.includes(label),
+  );
 
   if (foundOverridingLabel) {
     const description = `Found label '${foundOverridingLabel}'`;

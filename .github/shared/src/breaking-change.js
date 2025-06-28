@@ -1,7 +1,7 @@
 /**
  * Breaking change configuration and constants for Azure REST API specs
  * This file contains the single source of truth for all breaking change and versioning approval labels.
- * 
+ *
  * Used across multiple tools in the Azure/azure-rest-api-specs repository.
  */
 
@@ -12,7 +12,7 @@ export const VERSIONING_APPROVALS = {
   PRIVATE_PREVIEW: "Versioning-Approved-PrivatePreview",
   BRANCH_POLICY_EXCEPTION: "Versioning-Approved-BranchPolicyException",
   PREVIOUSLY: "Versioning-Approved-Previously",
-  RETIRED: "Versioning-Approved-Retired"
+  RETIRED: "Versioning-Approved-Retired",
 };
 
 // All breaking change approval labels in one place
@@ -22,18 +22,20 @@ export const BREAKING_CHANGE_APPROVALS = {
   USER_IMPACT: "BreakingChange-Approved-UserImpact",
   BRANCH_POLICY_EXCEPTION: "BreakingChange-Approved-BranchPolicyException",
   PREVIOUSLY: "BreakingChange-Approved-Previously",
-  SECURITY: "BreakingChange-Approved-Security"
+  SECURITY: "BreakingChange-Approved-Security",
 };
 
 // Review required labels
 export const REVIEW_REQUIRED_LABELS = {
   BREAKING_CHANGE: "BreakingChangeReviewRequired",
-  VERSIONING: "VersioningReviewRequired"
+  VERSIONING: "VersioningReviewRequired",
 };
 
 // Extract values as arrays for validation and configuration
 export const versioningApprovalValues = Object.values(VERSIONING_APPROVALS);
-export const breakingChangeApprovalValues = Object.values(BREAKING_CHANGE_APPROVALS);
+export const breakingChangeApprovalValues = Object.values(
+  BREAKING_CHANGE_APPROVALS,
+);
 export const reviewRequiredLabelValues = Object.values(REVIEW_REQUIRED_LABELS);
 
 // Type guard functions for runtime validation
@@ -75,11 +77,11 @@ export const breakingChangesCheckType = {
 // Check types
 export const BREAKING_CHANGES_CHECK_TYPES = {
   SAME_VERSION: "SameVersion",
-  CROSS_VERSION: "CrossVersion"
+  CROSS_VERSION: "CrossVersion",
 };
 
 // API version lifecycle stages
 export const API_VERSION_LIFECYCLE_STAGES = {
   PREVIEW: "preview",
-  STABLE: "stable"
+  STABLE: "stable",
 };
