@@ -482,9 +482,7 @@ interface Operations {
       @bodyRoot
       userDefinedFunction: UserDefinedFunction;
     },
-    {
-      @statusCode statusCode: 201;
-    } & UserDefinedFunction
+    UserDefinedFunction
   >;
 
   /**
