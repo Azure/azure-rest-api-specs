@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-12'
 input-file:
-  - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
+  - stable/2024-12-01/hybridconnectivity.json
 ```
 
 ### Tag: package-2023-03
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-03'
 input-file:
-  - Microsoft.HybridConnectivity/stable/2023-03-15/hybridconnectivity.json
+  - stable/2023-03-15/hybridconnectivity.json
 ```
 ### Tag: package-2021-10-06-preview
 
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2021-10-06-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-10-06-preview'
 input-file:
-  - Microsoft.HybridConnectivity/preview/2021-10-06-preview/hybridconnectivity.json
+  - preview/2021-10-06-preview/hybridconnectivity.json
 ```
 
 ### Tag: package-2022-05-01-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2022-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
-  - Microsoft.HybridConnectivity/preview/2022-05-01-preview/hybridconnectivity.json
+  - preview/2022-05-01-preview/hybridconnectivity.json
 ```
 
 ## Suppression
