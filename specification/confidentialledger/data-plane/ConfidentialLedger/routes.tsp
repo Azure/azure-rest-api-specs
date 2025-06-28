@@ -374,7 +374,10 @@ interface Operations {
   @route("/app/userDefinedEndpoints/runtimeOptions")
   @patch
   updateRuntimeOptions is Common.LedgerOperation<
-    JsRuntimeOptions,
+    {
+      /** JS Runtime options */
+      @bodyRoot
+      jsRuntimeOptions: JsRuntimeOptions},
     JsRuntimeOptions
   >;
 

@@ -310,6 +310,11 @@
               "$ref": "#/definitions/ConfidentialLedger.Common.ConfidentialLedgerError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete Ledger User": {
+            "$ref": "./examples/ledger/DeleteLedgerUser.json"
+          }
         }
       }
     },
@@ -880,8 +885,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "jsRuntimeOptions",
             "in": "body",
+            "description": "JS Runtime options",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JsRuntimeOptions"
