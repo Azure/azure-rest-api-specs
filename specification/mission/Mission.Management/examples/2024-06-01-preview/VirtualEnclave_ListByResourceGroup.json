@@ -1,0 +1,89 @@
+{
+  "title": "VirtualEnclave_ListByResourceGroup",
+  "operationId": "VirtualEnclave_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
+    "resourceGroupName": "rgopenapi"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "1a2e532b-9900-414c-8600-cfc6126628d7",
+              "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+              "userAssignedIdentities": {
+                "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+                  "principalId": "f4aa4954-a564-4933-a7e1-502019d807c2",
+                  "clientId": "b82bf757-ee7f-4632-9df1-5e52a720fdd2"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "enclaveVirtualNetwork": {
+                "networkSize": "small",
+                "customCidrRange": "10.0.0.0/24",
+                "subnetConfigurations": [
+                  {
+                    "name": "test",
+                    "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "networkPrefixSize": 26,
+                    "addressPrefix": "10.0.0.0/26",
+                    "networkSecurityGroupId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "subnetDelegation": null
+                  }
+                ],
+                "allowSubnetCommunication": true,
+                "connectToAzureServices": true
+              },
+              "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
+              "enclaveDefaultSettings": {
+                "keyVaultResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                "storageAccountResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Storage/storageAccounts/TestMyStorageAccount",
+                "logAnalyticsResourceIdCollection": [
+                  "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.OperationalInsights/workspaces/TestMyLogA1",
+                  "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.OperationalInsights/workspaces/TestMyLogA2"
+                ],
+                "diagnosticDestination": "Both"
+              },
+              "resourceCollection": [
+                "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg"
+              ],
+              "maintenanceModeConfiguration": {
+                "mode": "Off",
+                "principals": [
+                  {
+                    "id": "355a6bb0-abc0-4cba-000d-12a345b678c9",
+                    "type": "User"
+                  }
+                ],
+                "justification": "Off"
+              },
+              "bastionEnabled": true
+            },
+            "tags": {
+              "Tag1": "Value1"
+            },
+            "location": "westcentralus",
+            "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/virtualenclaves/TestMyEnclave",
+            "name": "TestMyEnclave",
+            "type": "microsoft.mission/virtualenclaves",
+            "systemData": {
+              "createdBy": "myAlias",
+              "createdByType": "User",
+              "createdAt": "2023-03-17T20:43:17.760Z",
+              "lastModifiedBy": "myAlias",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
