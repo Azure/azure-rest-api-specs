@@ -355,7 +355,16 @@ interface Operations {
   @summary("Creates a user defined endpoint.")
   @route("/app/userDefinedEndpoints")
   @put
-  createUserDefinedEndpoint is Common.LedgerOperation<Bundle, {}>;
+  createUserDefinedEndpoint is Common.LedgerOperation<
+    {
+      /**
+       * Specify a user defined endpoint.
+       */
+      @bodyRoot
+      bundle: Bundle;
+    },
+    {}
+  >;
 
   /**
    * It returns the runtime options
