@@ -11,9 +11,9 @@
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write"
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:debug": "prettier . --ignore-path ../.prettierignore --check --log-level debug"
   },
   "engines": {
     "node": ">= 20.0.0"
