@@ -39,8 +39,9 @@ interface ConfigurationChecksTemplates {
   >;
 }
 
-
-@@doc(ConfigurationChecksTemplate.name, "The name of the configuration check template resource.");
+@@doc(ConfigurationChecksTemplate.name,
+  "The name of the configuration check template resource."
+);
 
 @@doc(ConfigurationChecksTemplates.update::parameters.properties,
   "Request body to update the configuration check template resource."

@@ -284,7 +284,7 @@ model WorkloadComponents {
   @doc("Name of the component.")
   name: string;
 
-    /**
+  /**
    * List of checks to be executed for the role.
    */
   @doc("List of checks to be executed for the role.")
@@ -365,7 +365,7 @@ model ConfigurationChecksTemplateProperties {
   @doc("The timestamp of resource last modification (UTC).")
   lastModifiedAt?: utcDateTime;
 
-    /**
+  /**
    * Represents errors encountered on the configuration checks template resource.
    */
   @visibility(Lifecycle.Read)
@@ -428,7 +428,7 @@ model WorkloadComponentsUpdateRequest {
   @doc("Name of the component.")
   name: string;
 
-    /**
+  /**
    * List of checks to be updated in the configuration checks template.
    */
   @doc("List of checks to be executed for the role.")
