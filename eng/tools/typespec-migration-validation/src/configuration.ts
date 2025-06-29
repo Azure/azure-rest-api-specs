@@ -8,4 +8,4 @@ export const configuration: configuration = {
   ignoreDescription: true,
   enumNameToCamelCase: true,
   ignorePathCase: false, // Normalize the segments before provider
-}
+};
