@@ -405,7 +405,7 @@ model ChecksConfigurationUpdateRequest {
   commonChecks?: CheckConfigurationUpdateRequest[];
 }
 
-@doc("Defines the schema for configuration check update request to allow updatiion of check execution status only.")
+@doc("Defines the schema for configuration check update request to allow update of check execution status only.")
 model CheckConfigurationUpdateRequest {
   /**
    * The unique identifier of the check defined in check definition.
@@ -443,7 +443,7 @@ model WorkloadComponentsUpdateRequest {
   roles: RoleConfigurationUpdateRequest[];
 }
 
-@doc("Defines the schema for role configuration for updation of checks execution.")
+@doc("Defines the schema for role configuration for update of checks execution.")
 model RoleConfigurationUpdateRequest {
   /**
    * Name of the role. This can be updated by Author only. Not allowed for customization.
