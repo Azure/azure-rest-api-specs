@@ -446,10 +446,9 @@ model WorkloadComponentsUpdateRequest {
 @doc("Defines the schema for role configuration for update of checks execution.")
 model RoleConfigurationUpdateRequest {
   /**
-   * Name of the role. This can be updated by Author only. Not allowed for customization.
+   * Name of the role.
    */
   @doc("Name of the role.")
-  @visibility(Lifecycle.Read)
   roleName: string;
 
   /**
