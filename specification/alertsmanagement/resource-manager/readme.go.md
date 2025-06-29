@@ -12,5 +12,5 @@ azure-arm: true
 directive:
   - rename-model:
       from: 'AlertsManagementErrorResponse'
-      to: 'AlertsManagementErrorResponse2'
+      to: 'AlertsManagementErrorResponse3'
 ```
