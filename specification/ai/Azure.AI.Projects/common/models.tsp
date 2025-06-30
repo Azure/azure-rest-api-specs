@@ -119,12 +119,15 @@ model AssetCredentialResponse {
 @doc("System metadata for an asset")
 model SystemData {
   @doc("The creator of the asset")
+  @visibility(Lifecycle.Read)
   createdBy?: string;
-  
+
   @doc("The datetime of when the asset was created")
+  @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
   @doc("The datetime of when the asset was last modified")
+  @visibility(Lifecycle.Read)
   lastModifiedAt?: utcDateTime;
 }
 
@@ -170,8 +173,7 @@ model ConnectionParameterDefinition extends BaseParameterDefinition {
 
 @discriminator("type")
 @doc("base parameter value for an asset's parameter")
-model BaseParameterValue {
-}
+model BaseParameterValue {}
 
 @doc("string parameter value")
 model StringParameterValue extends BaseParameterValue {
@@ -183,7 +185,7 @@ model StringParameterValue extends BaseParameterValue {
 
 @doc("connection parameter value")
 model ConnectionParameterValue extends BaseParameterValue {
-type: "connection";
+  type: "connection";
 
   @doc("value of the parameter")
   connectionName: string;

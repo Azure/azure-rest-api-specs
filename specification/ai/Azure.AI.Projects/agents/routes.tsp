@@ -13,7 +13,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-
 alias AgentServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests;
@@ -26,15 +25,15 @@ interface Agents {
   @doc("Get a deployed agent.")
   get is AgentOperations.ResourceRead<Agent>;
 
+  @doc("Delete a deployed agent")
+  delete is AgentOperations.ResourceDelete<Agent>;
+
   @doc("get revisions of an agent")
   @Rest.action("listPreviousVersions")
-  getPreviousVersions is AgentOperations.ResourceList<
+  getPreviousVersions is Azure.Core.Foundations.ResourceOperation<
     Agent,
-    ListQueryParametersTrait<{
-        @doc("The name of the agent to get revisions for")
-        @query
-        name: string;
-    }>
+    {},
+    Azure.Core.Page<Agent>
   >;
 
   @doc("Revert latest revision of an agent")

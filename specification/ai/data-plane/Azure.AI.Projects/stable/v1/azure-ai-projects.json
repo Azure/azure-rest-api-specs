@@ -275,7 +275,7 @@
     },
     "/agentblueprints/{name}/versions/{version}/scaffold": {
       "post": {
-        "operationId": "AgentBlueprints_ScaffoldAgentblueprint",
+        "operationId": "AgentBlueprints_ScaffoldBlueprint",
         "description": "Start a new or get an existing pending upload of a dataset for a specific version.",
         "parameters": [
           {
@@ -372,13 +372,48 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_Get_MaximumSet_Gen.json"
+        }
+      },
+      "delete": {
+        "operationId": "Agents_Delete",
+        "description": "Delete a deployed agent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          "Agents_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_Get_MinimumSet_Gen.json"
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -424,19 +459,11 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Agents_DeployAgent_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_DeployAgent_MaximumSet_Gen.json"
-          },
-          "Agents_DeployAgent_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_DeployAgent_MinimumSet_Gen.json"
-          }
         }
       }
     },
-    "/agents/listPreviousVersions": {
-      "get": {
+    "/agents/{name}/listPreviousVersions": {
+      "post": {
         "operationId": "Agents_GetPreviousVersions",
         "description": "get revisions of an agent",
         "parameters": [
@@ -445,13 +472,10 @@
           },
           {
             "name": "name",
-            "in": "query",
-            "description": "The name of the agent to get revisions for",
+            "in": "path",
+            "description": "The name of the resource",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -459,13 +483,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedAgent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -483,14 +500,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Agents_GetPreviousVersions_MaximumSet_Gen": {
-            "$ref": "./examples/Agents_GetPreviousVersions_MaximumSet_Gen.json"
-          },
-          "Agents_GetPreviousVersions_MinimumSet_Gen": {
-            "$ref": "./examples/Agents_GetPreviousVersions_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -1726,19 +1735,9 @@
       "type": "object",
       "description": "Agent resource Definition",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Asset ID, a unique identifier for the asset",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "The name of the resource",
-          "readOnly": true
-        },
-        "SystemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System related metadata",
           "readOnly": true
         },
         "blueprint": {
@@ -1801,6 +1800,10 @@
             "create"
           ]
         },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the blueprint"
+        },
         "SystemData": {
           "$ref": "#/definitions/SystemData",
           "description": "System related metadata",
@@ -1832,6 +1835,7 @@
       "required": [
         "name",
         "version",
+        "displayName",
         "catalogInfo",
         "implementation"
       ]
@@ -1874,10 +1878,6 @@
         "blueprint",
         "parameters"
       ]
-    },
-    "AgentDeploymentResponse": {
-      "type": "object",
-      "description": "Agent deployment response"
     },
     "AgentImplementationDetails": {
       "type": "object",
@@ -1935,6 +1935,10 @@
             "create"
           ]
         },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the agent"
+        },
         "SystemData": {
           "$ref": "#/definitions/SystemData",
           "description": "System related metadata",
@@ -1970,6 +1974,7 @@
       "required": [
         "name",
         "version",
+        "displayName",
         "catalogInfo",
         "implementation",
         "protocol"
@@ -2178,16 +2183,11 @@
         "type": {
           "type": "string",
           "description": "type of dependency"
-        },
-        "assetId": {
-          "type": "string",
-          "description": "identifier of the dependency"
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "assetId"
+        "type"
       ]
     },
     "BaseCredentials": {
@@ -2901,6 +2901,10 @@
       "type": "object",
       "description": "Representation of a model dependency for the agent",
       "properties": {
+        "recommendedModel": {
+          "type": "string",
+          "description": "identifier of the recommended model"
+        },
         "parameters": {
           "type": "object",
           "description": "parameters for the model",
@@ -2909,6 +2913,9 @@
           }
         }
       },
+      "required": [
+        "recommendedModel"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseAgentDependency"
@@ -3374,19 +3381,48 @@
       "properties": {
         "createdBy": {
           "type": "string",
-          "description": "The creator of the asset"
+          "description": "The creator of the asset",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime of when the asset was created"
+          "description": "The datetime of when the asset was created",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime of when the asset was last modified"
+          "description": "The datetime of when the asset was last modified",
+          "readOnly": true
         }
       }
+    },
+    "ToolDependency": {
+      "type": "object",
+      "description": "Representation of a tool dependency for the agent",
+      "properties": {
+        "assetId": {
+          "type": "object",
+          "description": "identifier for the tool",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "optional description of how the blueprint will use the tool"
+        }
+      },
+      "required": [
+        "assetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
     }
   },
   "parameters": {

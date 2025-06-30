@@ -1446,10 +1446,6 @@
         "parameters"
       ]
     },
-    "AgentDeploymentResponse": {
-      "type": "object",
-      "description": "Agent deployment response"
-    },
     "AgentEvaluation": {
       "type": "object",
       "description": "Evaluation response for agent evaluation run.",
@@ -2005,16 +2001,11 @@
         "type": {
           "type": "string",
           "description": "type of dependency"
-        },
-        "assetId": {
-          "type": "string",
-          "description": "identifier of the dependency"
         }
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "assetId"
+        "type"
       ]
     },
     "BaseCredentials": {
@@ -2841,6 +2832,10 @@
       "type": "object",
       "description": "Representation of a model dependency for the agent",
       "properties": {
+        "recommendedModel": {
+          "type": "string",
+          "description": "identifier of the recommended model"
+        },
         "parameters": {
           "type": "object",
           "description": "parameters for the model",
@@ -2849,6 +2844,9 @@
           }
         }
       },
+      "required": [
+        "recommendedModel"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseAgentDependency"
@@ -3400,17 +3398,20 @@
       "properties": {
         "createdBy": {
           "type": "string",
-          "description": "The creator of the asset"
+          "description": "The creator of the asset",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime of when the asset was created"
+          "description": "The datetime of when the asset was created",
+          "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The datetime of when the asset was last modified"
+          "description": "The datetime of when the asset was last modified",
+          "readOnly": true
         }
       }
     },
@@ -3427,6 +3428,32 @@
       "required": [
         "type"
       ]
+    },
+    "ToolDependency": {
+      "type": "object",
+      "description": "Representation of a tool dependency for the agent",
+      "properties": {
+        "assetId": {
+          "type": "object",
+          "description": "identifier for the tool",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "optional description of how the blueprint will use the tool"
+        }
+      },
+      "required": [
+        "assetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
     }
   },
   "parameters": {

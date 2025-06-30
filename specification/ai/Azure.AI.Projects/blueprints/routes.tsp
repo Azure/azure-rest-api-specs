@@ -25,7 +25,7 @@ interface AgentBlueprints
     > {
   @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
   @Rest.action("scaffold")
-  scaffoldAgentblueprint is Azure.Core.Foundations.ResourceOperation<
+  scaffoldBlueprint is Azure.Core.Foundations.ResourceOperation<
     AgentBlueprint,
     {
       @doc("The scaffold request parameters")
