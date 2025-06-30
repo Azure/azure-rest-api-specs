@@ -1793,13 +1793,13 @@
       "x-ms-azure-resource": true,
       "properties": {
         "zone": {
-          "description": "Logical Zone in which the block needs to be made available",
+          "description": "Logical Zone of the Capacity Block",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         },
         "location": {
-          "description": "The location.",
+          "description": "Location of the Capacity Block.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -1807,11 +1807,11 @@
           ]
         },
         "sku": {
-          "description": "SKU for Capacity Block.",
+          "description": "SKU of the Capacity Block.",
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
         },
         "scheduleProfile": {
-          "description": "Schedule profile of Capacity Block Reservation.",
+          "description": "Schedule profile of the Capacity Block.",
           "$ref": "#/definitions/ScheduleProfile"
         }
       },
@@ -1820,23 +1820,6 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "Sku": {
-      "type": "object",
-      "description": "SKU for Capacity Block.",
-      "properties": {
-        "name": {
-          "description": "Sku name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "capacity": {
-          "description": "Requested Instance count.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        }
-      }
     },
     "ScheduleProfile": {
       "type": "object",
