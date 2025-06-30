@@ -1792,21 +1792,11 @@
       "description": "Capacity block.",
       "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "The id of the capacity block.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the capacity block.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type.",
-          "type": "string",
-          "readOnly": true
-        },
+        "allOf": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          }
+        ],
         "zone": {
           "description": "Logical Zone in which the block needs to be made available",
           "type": "integer",
@@ -1822,8 +1812,8 @@
           ]
         },
         "sku": {
-          "description": "SKU for Capacity Block.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "description": "The API error details."
         },
         "scheduleProfile": {
           "description": "Schedule profile of Capacity Block Reservation.",
