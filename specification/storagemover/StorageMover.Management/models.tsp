@@ -2,11 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using OpenAPI;
+
 
 namespace Microsoft.StorageMover;
 
@@ -72,6 +75,10 @@ union CreatedByType {
 /**
  * The Agent status.
  */
+@OpenAPI.extension("x-ms-enum", #{
+  name: "AgentStatus",
+  modelAsString: true,
+})
 union AgentStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -114,54 +121,6 @@ union EndpointType {
   SmbMount: "SmbMount",
 }
 
-/**
- * Strategy to use for copy.
- */
-union CopyMode {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Additive: "Additive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Mirror: "Mirror",
-}
-
-/**
- * The current status of the Job Run in a non-terminal state, if exists.
- */
-union JobRunStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Queued: "Queued",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Started: "Started",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  CancelRequested: "CancelRequested",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Canceling: "Canceling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  PausedByBandwidthManagement: "PausedByBandwidthManagement",
-}
-
-/**
- * The status of Agent's scanning of source.
- */
-union JobRunScanStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  NotStarted: "NotStarted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Scanning: "Scanning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Completed: "Completed",
-}
 
 /**
  * The NFS protocol version.
@@ -363,7 +322,17 @@ model AgentProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  errorDetails?: AgentPropertiesErrorDetails;
+  errorDetails?: {
+    /**
+     * Error code reported by Agent
+     */
+    code?: string;
+
+    /**
+     * Expanded description of reported error code
+     */
+    message?: string;
+  };
 
   /**
    * The provisioning state of this resource.
@@ -443,19 +412,6 @@ model UploadLimit {
    */
   @maxValue(2147483647)
   limitInMbps?: int32;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AgentPropertiesErrorDetails {
-  /**
-   * Error code reported by Agent
-   */
-  code?: string;
-
-  /**
-   * Expanded description of reported error code
-   */
-  message?: string;
 }
 
 /**
@@ -602,7 +558,11 @@ model JobDefinitionProperties {
   /**
    * Strategy to use for copy.
    */
-  copyMode: CopyMode;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "CopyMode",
+    modelAsString: true,
+  })
+  copyMode: "Additive" | "Mirror" | string;
 
   /**
    * The name of the source Endpoint.
@@ -656,7 +616,11 @@ model JobDefinitionProperties {
    * The current status of the Job Run in a non-terminal state, if exists.
    */
   @visibility(Lifecycle.Read)
-  latestJobRunStatus?: JobRunStatus;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "JobRunStatus",
+    modelAsString: true,
+  })
+  latestJobRunStatus?: "Queued" | "Started" | "Running" | "CancelRequested" | "Canceling" | "Canceled" | "Failed" | "Succeeded" | "PausedByBandwidthManagement" | string;
 
   /**
    * Name of the Agent to assign for new Job Runs of this Job Definition.
@@ -700,7 +664,11 @@ model JobDefinitionUpdateProperties {
   /**
    * Strategy to use for copy.
    */
-  copyMode?: CopyMode;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "CopyMode",
+    modelAsString: true,
+  })
+  copyMode?: "Additive" | "Mirror" | string;
 
   /**
    * Name of the Agent to assign for new Job Runs of this Job Definition.
@@ -735,13 +703,21 @@ model JobRunProperties {
    * The state of the job execution.
    */
   @visibility(Lifecycle.Read)
-  status?: JobRunStatus;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "JobRunStatus",
+    modelAsString: true,
+  })
+  status?: "Queued" | "Started" | "Running" | "CancelRequested" | "Canceling" | "Canceled" | "Failed" | "Succeeded" | "PausedByBandwidthManagement" | string;
 
   /**
    * The status of Agent's scanning of source.
    */
   @visibility(Lifecycle.Read)
-  scanStatus?: JobRunScanStatus;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "JobRunScanStatus",
+    modelAsString: true,
+  })
+  scanStatus?: "NotStarted" | "Scanning" | "Completed" | string;
 
   /**
    * Name of the Agent assigned to this run.
@@ -976,7 +952,11 @@ model NfsMountEndpointProperties extends EndpointBaseProperties {
    * The NFS protocol version.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  nfsVersion?: NfsVersion;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "NfsVersion",
+    modelAsString: true,
+  })
+  nfsVersion?: "NFSauto" | "NFSv3" | "NFSv4" | string;
 
   /**
    * The directory being exported from the server.

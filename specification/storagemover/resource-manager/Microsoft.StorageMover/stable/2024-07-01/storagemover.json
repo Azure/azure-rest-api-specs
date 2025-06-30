@@ -2003,7 +2003,17 @@
           "description": "The WAN-link upload limit schedule that applies to any Job Run the agent executes. Data plane operations (migrating files) are affected. Control plane operations ensure seamless migration functionality and are not limited by this schedule. The schedule is interpreted with the agent's local time."
         },
         "errorDetails": {
-          "$ref": "#/definitions/AgentPropertiesErrorDetails",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code reported by Agent"
+            },
+            "message": {
+              "type": "string",
+              "description": "Expanded description of reported error code"
+            }
+          },
           "readOnly": true
         },
         "provisioningState": {
@@ -2016,19 +2026,6 @@
         "arcResourceId",
         "arcVmUuid"
       ]
-    },
-    "AgentPropertiesErrorDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code reported by Agent"
-        },
-        "message": {
-          "type": "string",
-          "description": "Expanded description of reported error code"
-        }
-      }
     },
     "AgentStatus": {
       "type": "string",
@@ -2043,33 +2040,7 @@
       ],
       "x-ms-enum": {
         "name": "AgentStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Registering",
-            "value": "Registering"
-          },
-          {
-            "name": "Offline",
-            "value": "Offline"
-          },
-          {
-            "name": "Online",
-            "value": "Online"
-          },
-          {
-            "name": "Executing",
-            "value": "Executing"
-          },
-          {
-            "name": "RequiresAttention",
-            "value": "RequiresAttention"
-          },
-          {
-            "name": "Unregistering",
-            "value": "Unregistering"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "AgentUpdateParameters": {
@@ -2213,28 +2184,6 @@
         }
       ],
       "x-ms-discriminator-value": "AzureStorageSmbFileShare"
-    },
-    "CopyMode": {
-      "type": "string",
-      "description": "Strategy to use for copy.",
-      "enum": [
-        "Additive",
-        "Mirror"
-      ],
-      "x-ms-enum": {
-        "name": "CopyMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Additive",
-            "value": "Additive"
-          },
-          {
-            "name": "Mirror",
-            "value": "Mirror"
-          }
-        ]
-      }
     },
     "CredentialType": {
       "type": "string",
@@ -2469,8 +2418,16 @@
           "description": "A description for the Job Definition."
         },
         "copyMode": {
-          "$ref": "#/definitions/CopyMode",
-          "description": "Strategy to use for copy."
+          "type": "string",
+          "description": "Strategy to use for copy.",
+          "enum": [
+            "Additive",
+            "Mirror"
+          ],
+          "x-ms-enum": {
+            "name": "CopyMode",
+            "modelAsString": true
+          }
         },
         "sourceName": {
           "type": "string",
@@ -2525,8 +2482,23 @@
           "readOnly": true
         },
         "latestJobRunStatus": {
-          "$ref": "#/definitions/JobRunStatus",
+          "type": "string",
           "description": "The current status of the Job Run in a non-terminal state, if exists.",
+          "enum": [
+            "Queued",
+            "Started",
+            "Running",
+            "CancelRequested",
+            "Canceling",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "PausedByBandwidthManagement"
+          ],
+          "x-ms-enum": {
+            "name": "JobRunStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "agentName": {
@@ -2570,8 +2542,16 @@
           "description": "A description for the Job Definition."
         },
         "copyMode": {
-          "$ref": "#/definitions/CopyMode",
-          "description": "Strategy to use for copy."
+          "type": "string",
+          "description": "Strategy to use for copy.",
+          "enum": [
+            "Additive",
+            "Mirror"
+          ],
+          "x-ms-enum": {
+            "name": "CopyMode",
+            "modelAsString": true
+          }
         },
         "agentName": {
           "type": "string",
@@ -2640,13 +2620,37 @@
       "description": "Job run properties.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/JobRunStatus",
+          "type": "string",
           "description": "The state of the job execution.",
+          "enum": [
+            "Queued",
+            "Started",
+            "Running",
+            "CancelRequested",
+            "Canceling",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "PausedByBandwidthManagement"
+          ],
+          "x-ms-enum": {
+            "name": "JobRunStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "scanStatus": {
-          "$ref": "#/definitions/JobRunScanStatus",
+          "type": "string",
           "description": "The status of Agent's scanning of source.",
+          "enum": [
+            "NotStarted",
+            "Scanning",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "JobRunScanStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "agentName": {
@@ -2804,90 +2808,6 @@
         }
       }
     },
-    "JobRunScanStatus": {
-      "type": "string",
-      "description": "The status of Agent's scanning of source.",
-      "enum": [
-        "NotStarted",
-        "Scanning",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "JobRunScanStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted"
-          },
-          {
-            "name": "Scanning",
-            "value": "Scanning"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          }
-        ]
-      }
-    },
-    "JobRunStatus": {
-      "type": "string",
-      "description": "The current status of the Job Run in a non-terminal state, if exists.",
-      "enum": [
-        "Queued",
-        "Started",
-        "Running",
-        "CancelRequested",
-        "Canceling",
-        "Canceled",
-        "Failed",
-        "Succeeded",
-        "PausedByBandwidthManagement"
-      ],
-      "x-ms-enum": {
-        "name": "JobRunStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Queued",
-            "value": "Queued"
-          },
-          {
-            "name": "Started",
-            "value": "Started"
-          },
-          {
-            "name": "Running",
-            "value": "Running"
-          },
-          {
-            "name": "CancelRequested",
-            "value": "CancelRequested"
-          },
-          {
-            "name": "Canceling",
-            "value": "Canceling"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded"
-          },
-          {
-            "name": "PausedByBandwidthManagement",
-            "value": "PausedByBandwidthManagement"
-          }
-        ]
-      }
-    },
     "NfsMountEndpointProperties": {
       "type": "object",
       "description": "The properties of NFS share endpoint.",
@@ -2901,8 +2821,17 @@
           ]
         },
         "nfsVersion": {
-          "$ref": "#/definitions/NfsVersion",
+          "type": "string",
           "description": "The NFS protocol version.",
+          "enum": [
+            "NFSauto",
+            "NFSv3",
+            "NFSv4"
+          ],
+          "x-ms-enum": {
+            "name": "NfsVersion",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2936,33 +2865,6 @@
         }
       ],
       "x-ms-discriminator-value": "NfsMount"
-    },
-    "NfsVersion": {
-      "type": "string",
-      "description": "The NFS protocol version.",
-      "enum": [
-        "NFSauto",
-        "NFSv3",
-        "NFSv4"
-      ],
-      "x-ms-enum": {
-        "name": "NfsVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NFSauto",
-            "value": "NFSauto"
-          },
-          {
-            "name": "NFSv3",
-            "value": "NFSv3"
-          },
-          {
-            "name": "NFSv4",
-            "value": "NFSv4"
-          }
-        ]
-      }
     },
     "Project": {
       "type": "object",
