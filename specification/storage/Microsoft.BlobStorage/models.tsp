@@ -2172,7 +2172,7 @@ alias LeaseDurationResponseHeader = {
 alias LeaseDurationHeaderParameter = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
-  duration?: int32;
+  duration: int32;
 };
 
 /** The container name path parameter */
