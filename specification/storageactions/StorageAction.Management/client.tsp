@@ -26,5 +26,5 @@ using Microsoft.StorageActions;
 
 @@clientName(StorageTasks.storageTaskAssignmentList,
   "list",
-  "java,javascript,python"
+  "java,javascript,python,go"
 );
