@@ -5,7 +5,7 @@ using Microsoft.DBforPostgreSQL;
 
 @@clientName(Clusters.promoteReadReplica::parameters.body, "promoteRequest");
 
-@@clientName(ServerConfigurations.updateOnNode::parameters.resource,
+@@clientName(NodeConfigurations.updateOnNode::parameters.resource,
   "parameters"
 );
 
@@ -38,3 +38,8 @@ using Microsoft.DBforPostgreSQL;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(SimplePrivateEndpointConnection.properties, "go");
+
+@@clientLocation(NodeConfigurations.updateOnNode, Configurations);
+@@clientLocation(NodeConfigurations.getNode, Configurations);
+@@clientLocation(CoordinatorConfigurations.getCoordinator, Configurations);
+@@clientLocation(CoordinatorConfigurations.updateOnCoordinator, Configurations);

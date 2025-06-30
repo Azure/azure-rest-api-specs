@@ -212,6 +212,7 @@ model NameAvailabilityRequest {
 /**
  * Resource type used for name availability verification.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Expect exact one value, as original Swagger defines modelAsString: false"
 enum CheckNameAvailabilityResourceType {
   MICROSOFT_DB_FOR_POSTGRESQL_SERVER_GROUPSV2: "Microsoft.DBforPostgreSQL/serverGroupsv2",
 }
@@ -775,16 +776,6 @@ model ServerConfigurationProperties {
 }
 
 /**
- * A list of firewall rules.
- */
-model FirewallRuleListResult {
-  /**
-   * The list of firewall rules in a cluster.
-   */
-  value?: FirewallRule[];
-}
-
-/**
  * The properties of a cluster firewall rule.
  */
 model FirewallRuleProperties {
@@ -808,26 +799,6 @@ model FirewallRuleProperties {
 }
 
 /**
- * List of private endpoint connections associated with the specified resource.
- */
-model PrivateEndpointConnectionListResult {
-  /**
-   * Array of private endpoint connections.
-   */
-  value?: PrivateEndpointConnection[];
-}
-
-/**
- * A list of private link resources.
- */
-model PrivateLinkResourceListResult {
-  /**
-   * Array of private link resources
-   */
-  value?: PrivateLinkResource[];
-}
-
-/**
  * Request from client to promote geo-redundant replica
  */
 model PromoteRequest {
@@ -835,16 +806,6 @@ model PromoteRequest {
    * Boolean property to enable geo-redundant replica promotion.
    */
   enableGeoBackup?: boolean;
-}
-
-/**
- * A list of roles.
- */
-model RoleListResult {
-  /**
-   * The list of roles in a cluster.
-   */
-  value?: Role[];
 }
 
 /**
@@ -885,16 +846,6 @@ model RolePropertiesExternalIdentity {
    * A type definition that refers the id to an Azure Resource Manager resource.
    */
   tenantId?: Azure.Core.armResourceIdentifier;
-}
-
-/**
- * A list of servers in a cluster.
- */
-model ClusterServerListResult {
-  /**
-   * The list of servers in a cluster.
-   */
-  value?: ClusterServer[];
 }
 
 /**

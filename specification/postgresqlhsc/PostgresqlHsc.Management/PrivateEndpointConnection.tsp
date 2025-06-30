@@ -47,7 +47,7 @@ interface PrivateEndpointConnections {
    */
   listByCluster is ArmResourceListByParent<
     PrivateEndpointConnection,
-    Response = ArmResponse<PrivateEndpointConnectionListResult>
+    Response = ArmResponse<ResourceListResult<PrivateEndpointConnection>>
   >;
 }
 

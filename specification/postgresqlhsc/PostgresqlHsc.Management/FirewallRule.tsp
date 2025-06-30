@@ -47,7 +47,7 @@ interface FirewallRules {
    */
   listByCluster is ArmResourceListByParent<
     FirewallRule,
-    Response = ArmResponse<FirewallRuleListResult>
+    Response = ArmResponse<ResourceListResult<FirewallRule>>
   >;
 }
 

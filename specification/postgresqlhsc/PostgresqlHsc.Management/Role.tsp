@@ -46,7 +46,7 @@ interface Roles {
    */
   listByCluster is ArmResourceListByParent<
     Role,
-    Response = ArmResponse<RoleListResult>
+    Response = ArmResponse<ResourceListResult<Role>>
   >;
 }
 

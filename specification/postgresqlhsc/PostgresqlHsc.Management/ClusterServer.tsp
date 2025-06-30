@@ -7,8 +7,6 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
@@ -37,7 +35,7 @@ interface Servers {
    */
   listByCluster is ArmResourceListByParent<
     ClusterServer,
-    Response = ArmResponse<ClusterServerListResult>
+    Response = ArmResponse<ResourceListResult<ClusterServer>>
   >;
 }
 

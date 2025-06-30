@@ -37,7 +37,7 @@ interface PrivateLinkResources {
    */
   listByCluster is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResourceListResult>
+    Response = ArmResponse<ResourceListResult<PrivateLinkResource>>
   >;
 }
 
