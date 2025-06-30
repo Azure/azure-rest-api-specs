@@ -36,10 +36,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -85,10 +85,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -121,10 +121,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -156,10 +156,10 @@
         "operationId": "AzureMonitorSettings_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -200,10 +200,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ServiceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -249,10 +249,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ServiceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -285,10 +285,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ServiceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -320,10 +320,10 @@
         "operationId": "AzureMonitorSettings_ListByServiceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/ServiceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ServiceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -357,80 +357,6 @@
       "properties": {
         "defaultAzureMonitorWorkspace": {
           "type": "string"
-        }
-      }
-    },
-    "ResourceSystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "The identity that created the resource.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "createdByType": {
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SystemDataIdentityTypes",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "lastModifiedBy": {
-          "description": "Gets or sets the last modification client identity.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SystemDataIdentityTypes",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC).",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       }
     },
@@ -490,122 +416,19 @@
           ]
         },
         "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceSystemData"
-            }
-          ],
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "$ref": "../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
     },
     "ErrorAdditionalInfo": {
-      "description": "Additional information for common error response.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The additional info type.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "info": {
-          "description": "The additional info.",
-          "type": "object",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
+      "$ref": "../../../../common-types/resource-management/v6/types.json#/definitions/ErrorAdditionalInfo"
     },
     "ErrorDetails": {
-      "description": "Common error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code which can be used to programmatically identify the class of error.",
-          "type": "string",
-          "readOnly": true,
-          "example": "BadArgument",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "message": {
-          "description": "Describes the error in detail and provides debugging information.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "statusCode": {
-          "format": "int32",
-          "description": "Error status code. It should not be returned to the end user.",
-          "type": "integer",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "target": {
-          "description": "The target of the particular error (for example, the name of the property in error).",
-          "type": "string",
-          "readOnly": true,
-          "example": "properties.provisioningState",
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "details": {
-          "description": "Additional nested error detail objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "additionalInfo": {
-          "description": "Additional error information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
+      "$ref": "../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
     },
     "ErrorResponse": {
-      "description": "Common error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "Error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          ],
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
+      "$ref": "../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
     },
     "AzureMonitorSettingsPublicResourceListResult": {
       "description": "The response of a list operation.",
@@ -623,33 +446,6 @@
           "readOnly": true
         }
       }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "client"
-    },
-    "SubscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The ID of the target subscription.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "ServiceGroupNameParameter": {
-      "in": "path",
-      "name": "serviceGroupName",
-      "description": "The name of the service group.",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
