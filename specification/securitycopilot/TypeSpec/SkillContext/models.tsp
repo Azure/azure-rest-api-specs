@@ -415,6 +415,36 @@ namespace SkillContext
 
 		@doc("Log message")
 		message?: string;
+
+		@doc("It holds the current state of the evaluation step for step logging")
+		evaluationStepCurrentState?: EvaluationStepCurrentState;
+	}
+
+	@doc("Evaluation Step Current State")
+	model EvaluationStepCurrentState {
+	  @doc("The current evaluation log ID.")
+	  currentEvaluationLogId?: string;
+
+	  @doc("Indicates if the step is running.")
+	  isStepRunning?: boolean;
+
+	  @doc("Parallel evaluation steps keyed by step name.")
+	  parallelEvaluationSteps: Record<EvaluationStepInfo>;
+
+	  @doc("Progress logs keyed by log name.")
+	  progressLogs: Record<string>;
+	}
+
+	@doc("Evaluation Step Info")
+	model EvaluationStepInfo {
+	  @doc("Indicates if the step is running.")
+	  isRunning: boolean;
+
+	  @doc("The evaluation step ID.")
+	  evalutionStepid: string;
+
+	  @doc("The evaluation log ID.")
+	  evaluationLogid: string;
 	}
 
 	@doc("")
