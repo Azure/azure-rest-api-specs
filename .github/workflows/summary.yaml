@@ -53,6 +53,6 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const { default: setStatus } =
+            const { default: summary } =
                 await import('${{ github.workspace }}/.github/workflows/src/summary.js');
             return await summary({ github, context, core });
