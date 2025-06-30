@@ -20,18 +20,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-### Suppression
-
-```yaml
-directive:
-  - suppress: PatchBodyParametersSchema
-    from: storageDiscoveryWorkspace.json
-    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
-  - suppress: RequiredPropertiesModified
-    from: storageDiscoveryWorkspace.json
-    reason: Properties are correctly optional in PATCH operations (StorageDiscoveryWorkspacePropertiesUpdate) while being required in PUT operations (StorageDiscoveryWorkspaceProperties). This follows ARM best practices where PATCH operations allow partial updates with optional properties.
-```
-
 ### Basic Information
 
 These are the global settings for the storage discovery.
@@ -91,6 +79,18 @@ These settings apply only when `--tag=package-2025-06-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
   - Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
+```
+
+## Suppressions
+
+```yaml
+directive:
+  - from: Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
+    where:
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch
+    suppress:
+      - PatchBodyParametersSchema
+    reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
 ```
 
 ---
