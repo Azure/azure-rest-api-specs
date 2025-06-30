@@ -65,11 +65,12 @@ interface StorageTasks {
    * Update storage task properties
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     StorageTask,
     PatchModel = StorageTaskUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
+    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -106,7 +107,6 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  @operationId("StorageTasksReport_List")
   list is ArmResourceActionSync<
     StorageTask,
     void,
@@ -132,7 +132,6 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("storageTaskAssignments")
-  @operationId("StorageTaskAssignment_List")
   storageTaskAssignmentList is ArmResourceActionSync<
     StorageTask,
     void,
