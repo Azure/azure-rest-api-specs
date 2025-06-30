@@ -1,6 +1,9 @@
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -76,10 +79,14 @@ model ApprovalBaseModel {
   provisioningState?: ProvisioningState;
 
   @doc("Parameter for optimizing query results")
-  parent1?: string;
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "parent1")
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string)
+  parentResourceId?: armResourceIdentifier;
 
   @doc("Parameter for optimizing query results")
-  parent2?: string;
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "parent2")
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string)
+  grandparentResourceId?: armResourceIdentifier;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
