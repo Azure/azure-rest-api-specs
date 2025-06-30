@@ -1,7 +1,7 @@
 # OpenAPI Diff Runner
 
 A tool for detecting breaking changes in OpenAPI specifications by comparing different versions and analyzing the
- differences using @azure/oad library.
+differences using @azure/oad library.
 
 ## Overview
 
@@ -41,16 +41,16 @@ npx openapi-diff-runner \
 
 ### Command Line Options
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--srp` | Spec repository path | `../` |
-| `--repo` | GitHub repository | `azure/azure-rest-api-specs` |
-| `--number` | Pull request number | Required |
-| `--bb` | Base branch | `main` |
-| `--rt` | Run type (SameVersion/CrossVersion) | `SameVersion` |
-| `--hc` | Head commit | `HEAD` |
-| `--sb` | Source branch | From PR |
-| `--tb` | Target branch | From PR |
+| Option     | Description                         | Default                      |
+| ---------- | ----------------------------------- | ---------------------------- |
+| `--srp`    | Spec repository path                | `../`                        |
+| `--repo`   | GitHub repository                   | `azure/azure-rest-api-specs` |
+| `--number` | Pull request number                 | Required                     |
+| `--bb`     | Base branch                         | `main`                       |
+| `--rt`     | Run type (SameVersion/CrossVersion) | `SameVersion`                |
+| `--hc`     | Head commit                         | `HEAD`                       |
+| `--sb`     | Source branch                       | From PR                      |
+| `--tb`     | Target branch                       | From PR                      |
 
 ## Breaking Change Types
 
@@ -95,3 +95,4 @@ npm run test:ci
 
 # Lint code
 npm run prettier
+```
