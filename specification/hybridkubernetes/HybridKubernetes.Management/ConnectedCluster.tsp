@@ -52,7 +52,6 @@ interface ConnectedClusters {
    * Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_Get")
   get is ArmResourceRead<
     ConnectedCluster,
     BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
@@ -62,7 +61,6 @@ interface ConnectedClusters {
    * API to register a new Kubernetes cluster and create or replace a connected cluster tracked resource in Azure Resource Manager (ARM).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_CreateOrReplace")
   createOrReplace is ArmResourceCreateOrReplaceAsync<
     ConnectedCluster,
     BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
@@ -73,7 +71,6 @@ interface ConnectedClusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("ConnectedCluster_Update")
   update is ArmCustomPatchSync<
     ConnectedCluster,
     PatchModel = ConnectedClusterPatch,
@@ -85,7 +82,6 @@ interface ConnectedClusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
     BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
@@ -96,7 +92,6 @@ interface ConnectedClusters {
    * API to enumerate registered connected K8s clusters under a Resource Group
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ConnectedCluster,
     Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
@@ -107,7 +102,6 @@ interface ConnectedClusters {
    * API to enumerate registered connected K8s clusters under a Subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ConnectedCluster,
     Response = ArmResponse<ConnectedClusterList>
@@ -117,7 +111,6 @@ interface ConnectedClusters {
    * Gets cluster user credentials of the connected cluster with a specified resource group and name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConnectedCluster_ListClusterUserCredential")
   listClusterUserCredential is ArmResourceActionSync<
     ConnectedCluster,
     ListClusterUserCredentialProperties,

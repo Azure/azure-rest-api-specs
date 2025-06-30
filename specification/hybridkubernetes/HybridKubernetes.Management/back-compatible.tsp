@@ -22,6 +22,7 @@ using Microsoft.Kubernetes;
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(Operations.list, Operations);
+@@clientName(Operations.list, "Get");
 @@clientLocation(ConnectedClusters.get, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.update, "ConnectedCluster");
