@@ -949,19 +949,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Approvals/approvalSettings": {
+    "/providers/Microsoft.Approvals/approvalSettings": {
       "get": {
-        "operationId": "ApprovalSettings_ListBySubscription",
+        "operationId": "ApprovalSettings_ListByTenant",
         "tags": [
           "ApprovalSettings"
         ],
-        "description": "List ApprovalSetting resources by subscription ID",
+        "description": "List ApprovalSetting resources by tenant",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -980,7 +977,7 @@
         },
         "x-ms-examples": {
           "ApprovalSettings_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/ApprovalSettings_ListBySubscription_MaximumSet_Gen.json"
+            "$ref": "./examples/ApprovalSettings_ListByTenant_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -988,7 +985,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Approvals/approvalSettings/default": {
+    "/providers/Microsoft.Approvals/approvalSettings/default": {
       "get": {
         "operationId": "ApprovalSettings_Get",
         "tags": [
@@ -998,9 +995,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1032,9 +1026,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "resource",
@@ -1098,9 +1089,6 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
@@ -1139,9 +1127,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {

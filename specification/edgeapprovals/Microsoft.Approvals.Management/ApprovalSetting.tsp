@@ -8,7 +8,7 @@ namespace Microsoft.Approvals;
 
 @doc("ApprovalSetting singleton resource.")
 @singleton("default")
-@subscriptionResource
+@tenantResource
 model ApprovalSetting is ProxyResource<ApprovalSettingProperties> {
   ...ResourceNameParameter<ApprovalSetting>;
   ...EntityTagProperty;
@@ -102,5 +102,5 @@ interface ApprovalSettings {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ApprovalSetting>;
   update is ArmResourcePatchSync<ApprovalSetting, ApprovalSettingProperties>;
   delete is ArmResourceDeleteSync<ApprovalSetting>;
-  listBySubscription is ArmListBySubscription<ApprovalSetting>;
+  listByTenant is ArmResourceListByParent<ApprovalSetting>;
 }
