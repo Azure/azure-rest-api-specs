@@ -60,7 +60,7 @@ model ApprovalStage {
   approvers: string[];
 
   @doc("The minimal number of approvals required to complete the stage. The default value '1' means at least one approval is needed.")
-  quorum: int32 = 1;
+  minimumApprovalsRequired: int32 = 1;
 }
 
 @armResourceOperations(ApprovalWorkflowDefinition)
