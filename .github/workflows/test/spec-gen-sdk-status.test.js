@@ -22,17 +22,15 @@ describe("spec-gen-sdk-status", () => {
     // Setup specific mocks
     getAzurePipelineArtifactMock = vi
       .spyOn(artifacts, "getAzurePipelineArtifact")
-      .mockImplementation(
-        async ({ ado_build_id, ado_project_url, artifactName }) => {
-          return {
-            artifactData: JSON.stringify({
-              language: "test-language",
-              result: "succeeded",
-              isSpecGenSdkCheckRequired: true,
-            }),
-          };
-        },
-      );
+      .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
+        return {
+          artifactData: JSON.stringify({
+            language: "test-language",
+            result: "succeeded",
+            isSpecGenSdkCheckRequired: true,
+          }),
+        };
+      });
 
     writeToActionsSummaryMock = vi
       .spyOn(github, "writeToActionsSummary")
@@ -41,9 +39,7 @@ describe("spec-gen-sdk-status", () => {
         return;
       });
 
-    appendFileSyncMock = vi
-      .spyOn(fs, "appendFileSync")
-      .mockImplementation(vi.fn());
+    appendFileSyncMock = vi.spyOn(fs, "appendFileSync").mockImplementation(vi.fn());
 
     // Reset mock call counts
     vi.clearAllMocks();
@@ -105,8 +101,7 @@ describe("spec-gen-sdk-status", () => {
             name: "SDK Validation",
             status: "completed",
             conclusion: "success",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=123",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
           },
         ],
       },
@@ -153,43 +148,39 @@ describe("spec-gen-sdk-status", () => {
             name: "SDK Validation",
             status: "completed",
             conclusion: "success",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=123",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
           },
           {
             app: { name: "Azure Pipelines" },
             name: "SDK Validation",
             status: "completed",
             conclusion: "failure",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=456",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=456",
           },
         ],
       },
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(
-      async ({ ado_build_id }) => {
-        if (ado_build_id === "123") {
-          return {
-            artifactData: JSON.stringify({
-              language: "test-language-1",
-              result: "succeeded",
-              isSpecGenSdkCheckRequired: true,
-            }),
-          };
-        } else {
-          return {
-            artifactData: JSON.stringify({
-              language: "test-language-2",
-              result: "failed",
-              isSpecGenSdkCheckRequired: true,
-            }),
-          };
-        }
-      },
-    );
+    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+      if (ado_build_id === "123") {
+        return {
+          artifactData: JSON.stringify({
+            language: "test-language-1",
+            result: "succeeded",
+            isSpecGenSdkCheckRequired: true,
+          }),
+        };
+      } else {
+        return {
+          artifactData: JSON.stringify({
+            language: "test-language-2",
+            result: "failed",
+            isSpecGenSdkCheckRequired: true,
+          }),
+        };
+      }
+    });
 
     // Call the function
     await setSpecGenSdkStatusImpl({
@@ -223,8 +214,7 @@ describe("spec-gen-sdk-status", () => {
             name: "SDK Validation",
             status: "completed",
             conclusion: "success",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=123",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
           },
         ],
       },
@@ -242,9 +232,7 @@ describe("spec-gen-sdk-status", () => {
 
     // Verify summary was written
     expect(writeToActionsSummaryMock).toHaveBeenCalled();
-    expect(writeToActionsSummaryMock.mock.calls[0][0]).toContain(
-      "SDK Validation CI Checks Result",
-    );
+    expect(writeToActionsSummaryMock.mock.calls[0][0]).toContain("SDK Validation CI Checks Result");
   });
 
   it("should handle artifact download failures", async () => {
@@ -257,8 +245,7 @@ describe("spec-gen-sdk-status", () => {
             name: "SDK Validation",
             status: "completed",
             conclusion: "success",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=123",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
           },
         ],
       },
@@ -290,43 +277,39 @@ describe("spec-gen-sdk-status", () => {
             name: "SDK Validation",
             status: "completed",
             conclusion: "success",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=123",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
           },
           {
             app: { name: "Azure Pipelines" },
             name: "SDK Validation",
             status: "completed",
             conclusion: "failure",
-            details_url:
-              "https://dev.azure.com/project/_build/results?buildId=456",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=456",
           },
         ],
       },
     });
 
     // Mock getAzurePipelineArtifact to return mixed results
-    getAzurePipelineArtifactMock.mockImplementation(
-      async ({ ado_build_id }) => {
-        if (ado_build_id === "123") {
-          return {
-            artifactData: JSON.stringify({
-              language: "test-language-1",
-              result: "succeeded",
-              isSpecGenSdkCheckRequired: true,
-            }),
-          };
-        } else {
-          return {
-            artifactData: JSON.stringify({
-              language: "test-language-2",
-              result: "failed",
-              isSpecGenSdkCheckRequired: false, // Not required
-            }),
-          };
-        }
-      },
-    );
+    getAzurePipelineArtifactMock.mockImplementation(async ({ ado_build_id }) => {
+      if (ado_build_id === "123") {
+        return {
+          artifactData: JSON.stringify({
+            language: "test-language-1",
+            result: "succeeded",
+            isSpecGenSdkCheckRequired: true,
+          }),
+        };
+      } else {
+        return {
+          artifactData: JSON.stringify({
+            language: "test-language-2",
+            result: "failed",
+            isSpecGenSdkCheckRequired: false, // Not required
+          }),
+        };
+      }
+    });
 
     // Call the function
     await setSpecGenSdkStatusImpl({
