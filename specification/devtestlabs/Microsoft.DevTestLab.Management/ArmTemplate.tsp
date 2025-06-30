@@ -24,7 +24,7 @@ model ArmTemplate extends Resource {
   @path
   @key
   @segment("armtemplates")
-  armTemplateName: string;
+  name: string;
 
   properties: ArmTemplateProperties;
 }
@@ -79,9 +79,7 @@ interface ArmTemplates {
   >;
 }
 
-@@doc(ArmTemplate.armTemplateName,
-  "The name of the azure resource manager template."
-);
+@@doc(ArmTemplate.name, "The name of the azure resource manager template.");
 @@doc(ArmTemplate.properties, "The properties of the resource.");
 @@doc(ArmTemplate.tags, "The tags of the resource.");
 @@doc(ArmTemplate.location, "The location of the resource.");

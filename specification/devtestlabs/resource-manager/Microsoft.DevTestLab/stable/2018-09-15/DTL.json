@@ -1045,7 +1045,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{armTemplateName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
       "get": {
         "operationId": "ArmTemplates_Get",
         "tags": [
@@ -1077,7 +1077,7 @@
             "type": "string"
           },
           {
-            "name": "armTemplateName",
+            "name": "name",
             "in": "path",
             "description": "The name of the azure resource manager template.",
             "required": true,
@@ -9216,11 +9216,7 @@
           "description": "The ArmTemplate items on this page",
           "items": {
             "$ref": "#/definitions/ArmTemplate"
-          },
-          "x-ms-identifiers": [
-            "armTemplateName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
