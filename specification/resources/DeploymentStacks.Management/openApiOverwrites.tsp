@@ -30,7 +30,6 @@ using Microsoft.Resources.DeploymentStacks;
 @@operationId(DeploymentStacksAtSubscription.delete, "DeploymentStacks_DeleteAtSubscription");
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
 @@operationId(DeploymentStacksAtSubscription.exportTemplate, "DeploymentStacks_ExportTemplateAtSubscription");
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
 @@operationId(DeploymentStacksAtManagementGroup.get, "DeploymentStacks_GetAtManagementGroup");
