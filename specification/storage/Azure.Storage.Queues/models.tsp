@@ -3,10 +3,9 @@ import "@typespec/http";
 import "@typespec/xml";
 import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
 using TypeSpec.Http;
 
-namespace Storage.Queue;
+namespace Storage.Queues;
 
 /// Service Properties
 

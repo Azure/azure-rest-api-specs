@@ -34,7 +34,7 @@ using TypeSpec.Versioning;
   }
 )
 @versioned(Versions)
-namespace Storage.Queue;
+namespace Storage.Queues;
 
 @doc("The Azure.Storage.Queue service versions.")
 enum Versions {
