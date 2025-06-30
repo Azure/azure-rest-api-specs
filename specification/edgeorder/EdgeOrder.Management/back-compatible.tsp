@@ -75,6 +75,7 @@ using Microsoft.EdgeOrder;
 @@clientLocation(OrderItemResources.listBySubscription, "OrderItems");
 @@clientLocation(OrderItemResources.cancel, "OrderItems");
 @@clientLocation(OrderItemResources.returnOrderItem, "OrderItems");
+@@clientName(OrderItemResources.returnOrderItem, "Return");
 
 // OrderResources interface operations
 @@clientLocation(OrderResources.get, "Orders");
