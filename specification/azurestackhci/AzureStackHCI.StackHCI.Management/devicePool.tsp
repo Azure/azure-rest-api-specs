@@ -121,6 +121,11 @@ model DevicePoolProperties {
 
   @doc("Managed resource group name for the pool")
   managedResourceGroup?: string;
+
+  @doc("operation status details for device pool.")
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  operationDetails?: OperationDetail[];
 }
 
 @doc("Properties for patching Device Pool.")
