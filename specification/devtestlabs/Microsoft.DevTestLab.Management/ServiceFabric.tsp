@@ -25,7 +25,7 @@ model ServiceFabric extends Resource {
   @path
   @key
   @segment("servicefabrics")
-  serviceFabricName: string;
+  name: string;
 
   properties: ServiceFabricProperties;
 }
@@ -126,7 +126,7 @@ interface ServiceFabrics {
   stop is ArmResourceActionAsync<ServiceFabric, void, OkResponse>;
 }
 
-@@doc(ServiceFabric.serviceFabricName, "The name of the service fabric.");
+@@doc(ServiceFabric.name, "The name of the service fabric.");
 @@doc(ServiceFabric.properties, "The properties of the resource.");
 @@doc(ServiceFabric.location, "The location of the resource.");
 @@doc(ServiceFabric.tags, "The tags of the resource.");

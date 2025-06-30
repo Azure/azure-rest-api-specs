@@ -1704,7 +1704,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
-  disallowPublicIpAddress?: boolean;
+  disallowPublicIpAddress?: boolean = false;
 
   /**
    * The artifacts to be installed on the virtual machine.
@@ -1736,7 +1736,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * Indicates whether another user can take ownership of the virtual machine
    */
-  allowClaim?: boolean;
+  allowClaim?: boolean = false;
 
   /**
    * Storage type to use for virtual machine (i.e. Standard, Premium).
@@ -2881,7 +2881,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether the virtual machine is to be created without a public IP address.
    */
-  disallowPublicIpAddress?: boolean;
+  disallowPublicIpAddress?: boolean = false;
 
   /**
    * The artifacts to be installed on the virtual machine.
@@ -2931,7 +2931,7 @@ model LabVirtualMachineProperties {
   /**
    * Indicates whether another user can take ownership of the virtual machine
    */
-  allowClaim?: boolean;
+  allowClaim?: boolean = false;
 
   /**
    * Storage type to use for virtual machine (i.e. Standard, Premium).

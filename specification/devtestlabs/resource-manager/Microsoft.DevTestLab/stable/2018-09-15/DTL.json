@@ -5717,7 +5717,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{name}": {
       "get": {
         "operationId": "ServiceFabrics_Get",
         "tags": [
@@ -5749,7 +5749,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -5814,7 +5814,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -5902,7 +5902,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -5969,7 +5969,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -6015,7 +6015,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/listApplicableSchedules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{name}/listApplicableSchedules": {
       "post": {
         "operationId": "ServiceFabrics_ListApplicableSchedules",
         "tags": [
@@ -6047,7 +6047,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -6542,7 +6542,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{name}/start": {
       "post": {
         "operationId": "ServiceFabrics_Start",
         "tags": [
@@ -6574,7 +6574,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -6617,7 +6617,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/servicefabrics/{name}/stop": {
       "post": {
         "operationId": "ServiceFabrics_Stop",
         "tags": [
@@ -6649,7 +6649,7 @@
             "type": "string"
           },
           {
-            "name": "serviceFabricName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service fabric.",
             "required": true,
@@ -11474,7 +11474,8 @@
         },
         "disallowPublicIpAddress": {
           "type": "boolean",
-          "description": "Indicates whether the virtual machine is to be created without a public IP address."
+          "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+          "default": false
         },
         "artifacts": {
           "type": "array",
@@ -11503,7 +11504,8 @@
         },
         "allowClaim": {
           "type": "boolean",
-          "description": "Indicates whether another user can take ownership of the virtual machine"
+          "description": "Indicates whether another user can take ownership of the virtual machine",
+          "default": false
         },
         "storageType": {
           "type": "string",
@@ -11642,7 +11644,8 @@
         },
         "disallowPublicIpAddress": {
           "type": "boolean",
-          "description": "Indicates whether the virtual machine is to be created without a public IP address."
+          "description": "Indicates whether the virtual machine is to be created without a public IP address.",
+          "default": false
         },
         "artifacts": {
           "type": "array",
@@ -11686,7 +11689,8 @@
         },
         "allowClaim": {
           "type": "boolean",
-          "description": "Indicates whether another user can take ownership of the virtual machine"
+          "description": "Indicates whether another user can take ownership of the virtual machine",
+          "default": false
         },
         "storageType": {
           "type": "string",
@@ -12708,11 +12712,7 @@
           "description": "The ServiceFabric items on this page",
           "items": {
             "$ref": "#/definitions/ServiceFabric"
-          },
-          "x-ms-identifiers": [
-            "serviceFabricName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
