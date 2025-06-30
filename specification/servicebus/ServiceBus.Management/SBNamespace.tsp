@@ -112,7 +112,7 @@ interface SBNamespaces {
    * Check the give namespace name availability.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @action("CheckNameAvailability")
+  @action("disasterRecoveryConfigs/CheckNameAvailability")
   @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     SBNamespace,
