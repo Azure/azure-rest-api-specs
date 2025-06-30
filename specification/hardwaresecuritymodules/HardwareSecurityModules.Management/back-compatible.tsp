@@ -47,7 +47,6 @@ using Microsoft.HardwareSecurityModules;
 @@clientLocation(CloudHsmClusters.listByCloudHsmCluster,
   "CloudHsmClusterPrivateLinkResources"
 );
-@@clientName(CloudHsmClusters.listByCloudHsmCluster, "ListByCloudHsmCluster");
 @@clientLocation(CloudHsmClusters.cloudHsmClusterBackupStatusGet,
   "CloudHsmClusterBackupStatus"
 );
@@ -61,32 +60,20 @@ using Microsoft.HardwareSecurityModules;
 @@clientLocation(PrivateEndpointConnections.get,
   "CloudHsmClusterPrivateEndpointConnections"
 );
-@@clientName(PrivateEndpointConnections.get, "Get");
 @@clientLocation(PrivateEndpointConnections.create,
   "CloudHsmClusterPrivateEndpointConnections"
 );
-@@clientName(PrivateEndpointConnections.create, "Create");
 @@clientLocation(PrivateEndpointConnections.delete,
   "CloudHsmClusterPrivateEndpointConnections"
 );
-@@clientName(PrivateEndpointConnections.delete, "Delete");
 
 //DedicatedHsms operations
 @@clientLocation(DedicatedHsms.get, "DedicatedHsm");
-@@clientName(DedicatedHsms.get, "Get");
 @@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm");
-@@clientName(DedicatedHsms.createOrUpdate, "CreateOrUpdate");
 @@clientLocation(DedicatedHsms.update, "DedicatedHsm");
-@@clientName(DedicatedHsms.update, "Update");
 @@clientLocation(DedicatedHsms.delete, "DedicatedHsm");
-@@clientName(DedicatedHsms.delete, "Delete");
 @@clientLocation(DedicatedHsms.listByResourceGroup, "DedicatedHsm");
-@@clientName(DedicatedHsms.listByResourceGroup, "ListByResourceGroup");
 @@clientLocation(DedicatedHsms.listBySubscription, "DedicatedHsm");
-@@clientName(DedicatedHsms.listBySubscription, "ListBySubscription");
 @@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
   "DedicatedHsm"
-);
-@@clientName(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
-  "ListOutboundNetworkDependenciesEndpoints"
 );
