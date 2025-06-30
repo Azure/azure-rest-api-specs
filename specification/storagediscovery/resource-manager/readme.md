@@ -87,7 +87,7 @@ input-file:
 directive:
   - from: Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
     where:
-      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch
+      - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch'
     suppress:
       - PatchBodyParametersSchema
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
