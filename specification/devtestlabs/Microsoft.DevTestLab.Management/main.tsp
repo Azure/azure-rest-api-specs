@@ -38,10 +38,11 @@ using TypeSpec.Versioning;
 /**
  * The DevTest Labs Client.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
+// FIXME: Common type version not set. Set to v3.
 @armProviderNamespace
 @service(#{ title: "DevTestLabsClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.DevTestLab;
 
@@ -57,4 +58,5 @@ enum Versions {
   v2018_09_15: "2018-09-15",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ProviderOperations extends Azure.ResourceManager.Operations {}
