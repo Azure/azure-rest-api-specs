@@ -10,6 +10,7 @@
       }
     ]
   },
+  "x-ms-namespace": "Microsoft.Monitor",
   "host": "management.azure.com",
   "schemes": [
     "https"
@@ -21,7 +22,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.monitor/settings/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/settings/default": {
       "put": {
         "tags": [
           "AzureMonitorSettings"
@@ -50,6 +51,12 @@
         ],
         "responses": {
           "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "201": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
@@ -121,6 +128,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success"
+          },
           "204": {
             "description": "Success"
           },
@@ -145,116 +155,6 @@
       "properties": {
         "defaultAzureMonitorWorkspace": {
           "type": "string"
-        }
-      }
-    },
-    "Sku": {
-      "description": "Definition of generic ARM SKU.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU. This is typically a letter + number code, such as A0 or P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier of this particular SKU. Typically one of: Free, Basic, Standard, Premium. \r\nThis field is required to be implemented by the RP if the service has more than one tier, but is not required on a PUT.",
-          "type": "string"
-        },
-        "size": {
-          "description": "When the name field is the combination of tier and some other value, this would be the standalone code.",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
-          "type": "integer"
-        }
-      }
-    },
-    "IdentityType": {
-      "enum": [
-        "none",
-        "systemAssigned",
-        "userAssigned",
-        "systemAssigned, UserAssigned"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
-      }
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "Principal Id of the User Assigned Identity",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "clientId": {
-          "description": "Client Id of the User Assigned Identity",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "MsiIdentity": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of MSI Identity",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned"
-          ],
-          "allOf": [
-            {
-              "$ref": "#/definitions/IdentityType"
-            }
-          ],
-          "x-ms-enum": {
-            "name": "KnownMsiIdentityType",
-            "modelAsString": true
-          }
-        },
-        "principalId": {
-          "description": "Principal Id for System Assigned Identity",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "tenantId": {
-          "description": "Tenant Id for System Assigned Identity",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "userAssignedIdentities": {
-          "description": "MSI User Assigned Identities. Key is the resource id of the User Assigned Identity",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
         }
       }
     },
@@ -351,35 +251,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "kind": {
-          "description": "The kind of the resource.",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "type": "string",
-          "example": "Linux",
-          "x-ms-enum": {
-            "name": "KnownResource`1Kind",
-            "modelAsString": true
-          }
-        },
-        "sku": {
-          "description": "The SKU of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Sku"
-            }
-          ]
-        },
-        "identity": {
-          "description": "Managed service identity of the resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/MsiIdentity"
-            }
-          ]
         },
         "id": {
           "description": "Fully qualified ID of the resource.",
@@ -542,7 +413,8 @@
       "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "client"
     },
     "SubscriptionIdParameter": {
       "in": "path",
@@ -550,7 +422,8 @@
       "description": "The ID of the target subscription.",
       "required": true,
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
