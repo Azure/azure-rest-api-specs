@@ -185,6 +185,170 @@
           "nextLinkName": null
         }
       }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/settings/default": {
+      "put": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_CreateOrUpdateAtServiceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_CreateOrUpdateAtServiceGroup": {
+            "$ref": "./examples/Settings_CreateOrUpdateAtServiceGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_GetAtServiceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_GetAtServiceGroup": {
+            "$ref": "./examples/Settings_GetAtServiceGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_DeleteAtServiceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_DeleteAtServiceGroup": {
+            "$ref": "./examples/Settings_DeleteAtServiceGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/settings": {
+      "get": {
+        "tags": [
+          "AzureMonitorSettings"
+        ],
+        "operationId": "AzureMonitorSettings_ListByServiceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_ListByServiceGroup": {
+            "$ref": "./examples/Settings_ListByServiceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -479,6 +643,13 @@
       "type": "string",
       "minLength": 1,
       "x-ms-parameter-location": "method"
+    },
+    "ServiceGroupNameParameter": {
+      "in": "path",
+      "name": "serviceGroupName",
+      "description": "The name of the service group.",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
