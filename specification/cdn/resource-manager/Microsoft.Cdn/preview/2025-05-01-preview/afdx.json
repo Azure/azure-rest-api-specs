@@ -3531,7 +3531,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -6248,12 +6248,14 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The timestamp of deployment version creation (UTC)"
         },
         "approvalTime": {
           "type": "string",
           "format": "date-time",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The timestamp of deployment version approval (UTC)"
         },
         "approvalStatus": {
           "type": "string",
