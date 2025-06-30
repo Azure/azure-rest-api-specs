@@ -94,7 +94,6 @@ interface CloudHsmClusters {
    * Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CloudHsmValidateBackupProperties")
   validateBackupProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
@@ -110,7 +109,6 @@ interface CloudHsmClusters {
    * Create a backup of the Cloud HSM Cluster in the specified subscription
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CloudHsmBackup")
   backup is ArmResourceActionAsync<
     CloudHsmCluster,
     BackupRequestProperties,
@@ -126,7 +124,6 @@ interface CloudHsmClusters {
    * Queued validating pre restore operation
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CloudHsmValidateRestoreProperties")
   validateRestoreProperties is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
@@ -142,7 +139,6 @@ interface CloudHsmClusters {
    * Restores all key materials of a specified Cloud HSM Cluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CloudHsmRestore")
   restore is ArmResourceActionAsync<
     CloudHsmCluster,
     RestoreRequestProperties,
@@ -157,10 +153,8 @@ interface CloudHsmClusters {
    * Gets the private link resources supported for the Cloud Hsm Cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("PrivateLinkResources")
   @get
   @action("privateLinkResources")
-  @operationId("CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster")
   listByCloudHsmCluster is ArmResourceActionSync<
     CloudHsmCluster,
     void,
@@ -173,8 +167,6 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CloudHsmClusterBackupStatus_Get")
-  @tag("CloudHsmBackupStatus")
   @get
   cloudHsmClusterBackupStatusGet(
     ...ResourceInstanceParameters<
@@ -205,9 +197,7 @@ interface CloudHsmClusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("CloudHsmRestoreStatus")
   @get
-  @operationId("CloudHsmClusterRestoreStatus_Get")
   cloudHsmClusterRestoreStatusGet(
     ...ResourceInstanceParameters<
       Resource,

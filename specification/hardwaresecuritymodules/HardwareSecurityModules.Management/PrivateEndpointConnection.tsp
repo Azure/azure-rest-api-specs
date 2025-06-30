@@ -36,7 +36,6 @@ interface PrivateEndpointConnections {
    * Gets the private endpoint connection for the Cloud Hsm Cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CloudHsmClusterPrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -44,7 +43,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CloudHsmClusterPrivateEndpointConnections_Create")
   create is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -54,7 +52,6 @@ interface PrivateEndpointConnections {
    * Deletes the private endpoint connection for the Cloud Hsm Cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CloudHsmClusterPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**

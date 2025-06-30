@@ -46,14 +46,12 @@ interface DedicatedHsms {
    * Gets the specified Azure dedicated HSM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DedicatedHsm_Get")
   get is ArmResourceRead<DedicatedHsm, Error = DedicatedHsmError>;
 
   /**
    * Create or Update a dedicated HSM in the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DedicatedHsm_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DedicatedHsm,
     Error = DedicatedHsmError
@@ -64,7 +62,6 @@ interface DedicatedHsms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("DedicatedHsm_Update")
   update is ArmCustomPatchAsync<
     DedicatedHsm,
     PatchModel = DedicatedHsmPatchParameters,
@@ -75,7 +72,6 @@ interface DedicatedHsms {
    * Deletes the specified Azure Dedicated HSM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DedicatedHsm_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DedicatedHsm,
     Error = DedicatedHsmError
@@ -85,7 +81,6 @@ interface DedicatedHsms {
    * The List operation gets information about the dedicated hsms associated with the subscription and within the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DedicatedHsm_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     DedicatedHsm,
     Parameters = {
@@ -102,7 +97,6 @@ interface DedicatedHsms {
    * The List operation gets information about the dedicated HSMs associated with the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DedicatedHsm_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     DedicatedHsm,
     Parameters = {
@@ -121,7 +115,6 @@ interface DedicatedHsms {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("outboundNetworkDependenciesEndpoints")
-  @operationId("DedicatedHsm_ListOutboundNetworkDependenciesEndpoints")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     DedicatedHsm,
     void,
