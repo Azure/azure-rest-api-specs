@@ -16,11 +16,6 @@ on:
         required: false
         default: false
         type: boolean
-      check-formatting:
-        description: Run 'npm run format:check' if true
-        required: false
-        default: true
-        type: boolean
 
 permissions:
   contents: read
@@ -69,7 +64,6 @@ jobs:
 
       - name: Check Formatting
         run: npm run format:check
-        if: inputs.check-formatting == true
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
