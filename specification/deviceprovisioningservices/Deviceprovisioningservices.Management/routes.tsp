@@ -20,7 +20,6 @@ interface IotDpsResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check if a provisioning service name is available.")
-  @operationId("IotDpsResource_CheckProvisioningServiceNameAvailability")
   @autoRoute
   checkProvisioningServiceNameAvailability is ArmProviderActionSync<
     Request = OperationInputs,

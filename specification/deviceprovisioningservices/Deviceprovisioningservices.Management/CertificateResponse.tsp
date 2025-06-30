@@ -38,7 +38,6 @@ interface CertificateResponses {
    * Get the certificate from the provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DpsCertificate_Get")
   get is ArmResourceRead<
     CertificateResponse,
     Parameters = {
@@ -57,7 +56,6 @@ interface CertificateResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DpsCertificate_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateResponse,
     Parameters = {
@@ -76,7 +74,6 @@ interface CertificateResponses {
    * Deletes the specified certificate associated with the Provisioning Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DpsCertificate_Delete")
   delete is ArmResourceDeleteSync<
     CertificateResponse,
     Parameters = {
@@ -150,7 +147,6 @@ interface CertificateResponses {
    * Get all the certificates tied to the provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DpsCertificate_List")
   list is ArmResourceListByParent<
     CertificateResponse,
     Response = ArmResponse<CertificateListDescription>,
@@ -161,7 +157,6 @@ interface CertificateResponses {
    * Generate verification code for Proof of Possession.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DpsCertificate_GenerateVerificationCode")
   generateVerificationCode is ArmResourceActionSync<
     CertificateResponse,
     void,
@@ -238,7 +233,6 @@ interface CertificateResponses {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("verify")
-  @operationId("DpsCertificate_VerifyCertificate")
   verifyCertificate is ArmResourceActionSync<
     CertificateResponse,
     VerificationCodeRequest,

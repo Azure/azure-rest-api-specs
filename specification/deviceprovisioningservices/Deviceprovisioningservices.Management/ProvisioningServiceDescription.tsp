@@ -91,7 +91,6 @@ interface ProvisioningServiceDescriptionOperations {
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_GetOperationResult")
   getOperationResult is ProvisioningServiceDescriptionOperationOps.Read<
     ProvisioningServiceDescription,
     Parameters = {
@@ -111,14 +110,12 @@ interface ProvisioningServiceDescriptions {
    * Get the metadata of the provisioning service without SAS keys.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_Get")
   get is ArmResourceRead<ProvisioningServiceDescription, Error = ErrorDetails>;
 
   /**
    * Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProvisioningServiceDescription,
     LroHeaders = ArmLroLocationHeader &
@@ -131,7 +128,6 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("IotDpsResource_Update")
   update is ArmCustomPatchAsync<
     ProvisioningServiceDescription,
     PatchModel = TagsResource,
@@ -144,7 +140,6 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ProvisioningServiceDescription,
     Response =
@@ -159,7 +154,6 @@ interface ProvisioningServiceDescriptions {
    * Get a list of all provisioning services in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ProvisioningServiceDescription,
     Error = ErrorDetails
@@ -169,7 +163,6 @@ interface ProvisioningServiceDescriptions {
    * List all the provisioning services for a given subscription id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("IotDpsResource_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ProvisioningServiceDescription,
     Error = ErrorDetails
@@ -181,7 +174,6 @@ interface ProvisioningServiceDescriptions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("skus")
-  @operationId("IotDpsResource_listValidSkus")
   listValidSkus is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
@@ -194,7 +186,6 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listkeys")
-  @operationId("IotDpsResource_ListKeys")
   listKeys is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
@@ -207,7 +198,6 @@ interface ProvisioningServiceDescriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listkeys")
-  @operationId("IotDpsResource_ListKeysForKeyName")
   listKeysForKeyName is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
