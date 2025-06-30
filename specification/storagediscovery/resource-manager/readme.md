@@ -26,7 +26,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 directive:
   - suppress: PatchBodyParametersSchema
     from: storageDiscoveryWorkspace.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties.properties.sku
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
 ```
 
