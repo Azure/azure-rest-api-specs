@@ -15,7 +15,7 @@ on:
         description: Run 'npm run lint' if true
         required: false
         type: boolean
-      format:
+      check-formatting:
         description: Run 'npm run format:check' if true
         required: false
         type: boolean
@@ -67,7 +67,7 @@ jobs:
 
       - name: Check Formatting
         run: npm run format:check
-        if: inputs.format == true
+        if: inputs.check-formatting == true
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
