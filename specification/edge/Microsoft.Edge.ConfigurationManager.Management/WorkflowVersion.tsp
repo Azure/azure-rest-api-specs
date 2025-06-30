@@ -17,7 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @doc("Error Action Mode")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2025_06_01)
 union ErrorActionMode {
   @doc("Stop on any failure")
   stopOnAnyFailure: "stopOnAnyFailure",
@@ -32,7 +32,7 @@ union ErrorActionMode {
 }
 
 @doc("Error Action Properties")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2025_06_01)
 model ErrorAction {
   @doc("Error action mode")
   mode?: ErrorActionMode = ErrorActionMode.stopOnAnyFailure;
@@ -43,7 +43,7 @@ model ErrorAction {
 }
 
 @doc("Task Option Properties")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2025_06_01)
 model TaskOption {
   @doc("Parallel worker numbers of the tasks")
   @minValue(1)
@@ -55,7 +55,7 @@ model TaskOption {
 }
 
 @doc("Task Spec")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2025_06_01)
 model TaskSpec {
   @doc("Name of Task")
   name: string;
@@ -78,20 +78,21 @@ model StageSpec {
   @doc("Name of Stage")
   name: string;
 
-  @removed(Versions.v2025_06_01_preview)
+  @removed(Versions.v2025_06_01)
   @doc("Target ARM id")
   targetId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("Stage specification")
-  specification: Record<unknown>;
+  @madeOptional(Versions.v2025_06_01)
+  specification?: Record<unknown>;
 
-  @added(Versions.v2025_06_01_preview)
+  @added(Versions.v2025_06_01)
   @doc("List of tasks in the stage")
-  tasks: TaskSpec[];
+  tasks?: TaskSpec[];
 
-  @added(Versions.v2025_06_01_preview)
+  @added(Versions.v2025_06_01)
   @doc("Task option for the stage")
   taskOption?: TaskOption;
 }

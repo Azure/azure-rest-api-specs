@@ -16,6 +16,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2025_06_01)
 @armResourceOperations
 interface ConnectivityConfigurations {
   get is ArmResourceRead<ConnectivityConfiguration>;
@@ -28,6 +29,7 @@ interface ConnectivityConfigurations {
   listByConfiguration is ArmResourceListByParent<ConnectivityConfiguration>;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("ConnectivityConfiguration Resource")
 @parentResource(Configuration)
 model ConnectivityConfiguration
@@ -38,6 +40,7 @@ model ConnectivityConfiguration
   >;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("ConnectivityConfigurationProperties Properties")
 model ConnectivityConfigurationProperties {
   @doc("Provisioning state of resource")
@@ -54,6 +57,7 @@ model ConnectivityConfigurationProperties {
   proxyConfiguration?: ProxyConfiguration;
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Connectivity Types")
 union ConnectivityType {
   @doc("Connectivity type as Public")
@@ -65,6 +69,7 @@ union ConnectivityType {
   string,
 }
 
+@removed(Versions.v2025_06_01)
 @doc("Proxy Configuration")
 model ProxyConfiguration {
   @doc("Proxy Url")

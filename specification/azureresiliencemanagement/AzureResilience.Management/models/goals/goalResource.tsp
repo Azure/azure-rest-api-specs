@@ -21,16 +21,16 @@ model GoalResourceProperties {
   resourceArmId: armResourceIdentifier;
 
   @doc("Flag which depicts whether the Arm resource is excluded for high availability recommendation.")
-  excludedFromHighAvailabilityGoals: ExclusionState;
+  highAvailabilityGoalParticipation: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for high availability recommendation.")
-  manuallyAttestedForHighAvailability: AttestationState;
+  highAvailabilityAttestationStatus: AttestationState;
 
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
-  excludedFromDisasterRecoveryGoals: ExclusionState;
+  disasterRecoveryGoalParticipation: ExclusionState;
 
   @doc("Flag which depicts whether the Arm resource is manually attested for disaster recovery recommendation.")
-  manuallyAttestedForDisasterRecovery: AttestationState;
+  disasterRecoveryAttestationStatus: AttestationState;
 
   @doc("Reason for exclusion from high availability goals.")
   @visibility(Lifecycle.Read)

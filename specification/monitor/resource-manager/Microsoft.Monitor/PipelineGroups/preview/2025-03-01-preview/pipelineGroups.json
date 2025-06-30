@@ -252,6 +252,9 @@
           "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage filter": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsTransform.json"
+          },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithUdpAndAllowSkipPri.json"
           }
@@ -1037,6 +1040,10 @@
         "batch": {
           "$ref": "#/definitions/BatchProcessor",
           "description": "Batch processor configurations."
+        },
+        "transformLanguage": {
+          "$ref": "#/definitions/TransformLanguageProcessor",
+          "description": "Transform language processor configurations."
         }
       },
       "required": [
@@ -1048,7 +1055,10 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Batch"
+        "Batch",
+        "TransformLanguage",
+        "MicrosoftSyslog",
+        "MicrosoftCommonSecurityLog"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
@@ -1058,6 +1068,21 @@
             "name": "Batch",
             "value": "Batch",
             "description": "Batch processor."
+          },
+          {
+            "name": "TransformLanguage",
+            "value": "TransformLanguage",
+            "description": "Transform language processor."
+          },
+          {
+            "name": "MicrosoftSyslog",
+            "value": "MicrosoftSyslog",
+            "description": "Microsoft Syslog processor."
+          },
+          {
+            "name": "MicrosoftCommonSecurityLog",
+            "value": "MicrosoftCommonSecurityLog",
+            "description": "Microsoft CEF/Common Security Log processor."
           }
         ]
       }
@@ -1385,6 +1410,21 @@
       },
       "required": [
         "url"
+      ]
+    },
+    "TransformLanguageProcessor": {
+      "type": "object",
+      "description": "Transform language processor.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Query to execute on data passing through the processor.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "query"
       ]
     },
     "UdpReceiver": {
