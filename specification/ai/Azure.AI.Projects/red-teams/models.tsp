@@ -216,7 +216,7 @@ model RedTeamUpload {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   id: string;
 
-  @doc("Display mame of the red-team scan.")
+  @doc("Display name of the red-team scan.")
   displayName?: string;
 
   @doc("Number of simulation rounds.")
