@@ -3,11 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.BillingBenefits;
 
-// @@clientLocation decorators for operations with @operationId
+// @@clientLocation and @@clientName decorators for operations that originally had @operationId
+// All @operationId decorators have been removed and replaced with these client customizations
 @@clientLocation(SavingsPlanOperationGroup.listAll, "SavingsPlan");
-@@clientLocation(SavingsPlanOperationGroup.validatePurchase,
-  "ValidatePurchase"
-);
+
 @@clientLocation(DiscountsOperationGroup.scopeList, Discounts);
 @@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");
 @@clientLocation(ReservationOrderAliasResponses.create,

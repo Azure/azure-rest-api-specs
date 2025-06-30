@@ -53,7 +53,6 @@ interface SavingsPlanOrderAliasModels {
    * Get a savings plan.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SavingsPlanOrderAlias_Get")
   get is ArmResourceRead<
     SavingsPlanOrderAliasModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -63,7 +62,6 @@ interface SavingsPlanOrderAliasModels {
    * Create a savings plan. Learn more about permissions needed at https://go.microsoft.com/fwlink/?linkid=2215851
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SavingsPlanOrderAlias_Create")
   @OpenAPI.externalDocs("https://go.microsoft.com/fwlink/?linkid=2215851/")
   create is ArmResourceCreateOrReplaceAsync<
     SavingsPlanOrderAliasModel,

@@ -19,7 +19,6 @@ interface SavingsPlanOperationGroup {
    * List savings plans.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SavingsPlan_ListAll")
   @autoRoute
   @get
   @action("savingsPlans")
@@ -63,19 +62,6 @@ interface SavingsPlanOperationGroup {
       take?: float32;
     }
   >;
-
-  /**
-   * Validate savings plan purchase.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @autoRoute
-  @action("validate")
-  @operationId("ValidatePurchase")
-  validatePurchase is ArmProviderActionSync<
-    Request = SavingsPlanPurchaseValidateRequest,
-    Response = SavingsPlanValidateResponse
-  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -85,7 +71,6 @@ interface DiscountsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Discounts_ScopeList")
   @route("/{scope}/providers/Microsoft.BillingBenefits/applicableDiscounts")
   @get
   scopeList(
@@ -98,3 +83,15 @@ interface DiscountsOperationGroup {
     scope: string,
   ): ArmResponse<DiscountList> | ErrorResponse;
 }
+
+/**
+ * Validate savings plan purchase.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@autoRoute
+@action("validate")
+op validatePurchase is ArmProviderActionSync<
+  Request = SavingsPlanPurchaseValidateRequest,
+  Response = SavingsPlanValidateResponse
+>;
