@@ -209,8 +209,11 @@ model NameAvailabilityRequest {
   type: CheckNameAvailabilityResourceType;
 }
 
+/**
+ * Resource type used for name availability verification.
+ */
 enum CheckNameAvailabilityResourceType {
-  "Microsoft.DBforPostgreSQL/serverGroupsv2",
+  MICROSOFT_DB_FOR_POSTGRESQL_SERVER_GROUPSV2: "Microsoft.DBforPostgreSQL/serverGroupsv2",
 }
 
 /**

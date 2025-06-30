@@ -26,7 +26,7 @@ model ClusterServer
 }
 
 @armResourceOperations
-interface ClusterServers {
+interface Servers {
   /**
    * Gets information about a server in cluster.
    */

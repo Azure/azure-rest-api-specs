@@ -4,32 +4,37 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DBforPostgreSQL;
 
 @@clientName(Clusters.promoteReadReplica::parameters.body, "promoteRequest");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Cluster.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Configuration.properties);
 
 @@clientName(ServerConfigurations.updateOnNode::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServerConfiguration.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FirewallRule.properties);
+@@flattenProperty(Configuration.properties, "go");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+@@flattenProperty(ServerConfiguration.properties, "go");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+@@flattenProperty(FirewallRule.properties, "go");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Role.properties);
+@@flattenProperty(PrivateEndpointConnection.properties, "go");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClusterServer.properties);
+@@flattenProperty(PrivateLinkResource.properties, "go");
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClusterForUpdate.properties);
+@@flattenProperty(Role.properties, "go");
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ClusterServer.properties, "go");
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ClusterForUpdate.properties, "go");
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(RoleProperties.externalIdentity, "go");
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SimplePrivateEndpointConnection.properties, "go");
