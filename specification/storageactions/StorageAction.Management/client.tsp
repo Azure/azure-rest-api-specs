@@ -24,4 +24,7 @@ using Microsoft.StorageActions;
   "csharp"
 );
 
-@@clientName(StorageTasks.storageTaskAssignmentList, "list", "java,javascript,python");
+@@clientName(StorageTasks.storageTaskAssignmentList,
+  "list",
+  "java,javascript,python"
+);
