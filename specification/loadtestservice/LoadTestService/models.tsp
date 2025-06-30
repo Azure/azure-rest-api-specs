@@ -439,8 +439,9 @@ model Test {
   @added(APIVersions.v2024_12_01_preview)
   engineBuiltInIdentityIds?: string[];
 
-  @doc("Estimated virtual user hours for the test.")
   @added(APIVersions.v2025_03_01_preview)
+  @doc("Estimated virtual user hours for the test.")
+  @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
   ...SystemMetaData;
@@ -919,8 +920,9 @@ model TestRun {
   @doc("The URI pointing to the entity that created the test run.")
   createdByUri?: url;
 
-  @doc("Estimated virtual user hours for the test run.")
   @added(APIVersions.v2025_03_01_preview)
+  @doc("Estimated virtual user hours for the test run.")
+  @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
   ...SystemMetaData;
