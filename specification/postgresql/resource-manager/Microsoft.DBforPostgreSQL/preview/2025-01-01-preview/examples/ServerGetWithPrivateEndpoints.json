@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "serverName": "pgtestsvc2",
-    "resourceGroupName": "testrg",
     "api-version": "2025-01-01-preview",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver"
   },
   "responses": {
     "200": {
@@ -13,10 +13,10 @@
           "tier": "GeneralPurpose"
         },
         "properties": {
-          "fullyQualifiedDomainName": "pgtestsvc2.postgres.database.azure.com",
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
           "version": "16",
-          "minorVersion": "6",
-          "administratorLogin": "login",
+          "minorVersion": "8",
+          "administratorLogin": "administratorlogin",
           "state": "Ready",
           "availabilityZone": "1",
           "storage": {
@@ -32,7 +32,7 @@
           "backup": {
             "backupRetentionDays": 7,
             "geoRedundantBackup": "Disabled",
-            "earliestRestoreDate": "2025-02-26T23:07:25.8166567+00:00"
+            "earliestRestoreDate": "2025-01-01T18:35:22.123456Z"
           },
           "network": {
             "publicNetworkAccess": "Enabled"
@@ -51,7 +51,7 @@
             {
               "properties": {
                 "privateEndpoint": {
-                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/pe-test-rg/providers/Microsoft.Network/privateEndpoints/asdfasdfa"
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleprivateendpointresourcegroup/providers/Microsoft.Network/privateEndpoints/exampleprivateendpoint"
                 },
                 "privateLinkServiceConnectionState": {
                   "status": "Approved",
@@ -63,18 +63,15 @@
                 ],
                 "provisioningState": "Succeeded"
               },
-              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc2/privateEndpointConnections/asdfasdfa.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
-              "name": "asdfasdfa.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/exampleprivateendpoint.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
+              "name": "exampleprivateendpoint.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
               "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections"
             }
           ]
         },
         "location": "westus",
-        "tags": {
-          "ElasticServer": "1"
-        },
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc2",
-        "name": "pgtestsvc1",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "name": "exampleserver",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers"
       }
     }

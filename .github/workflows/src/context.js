@@ -4,13 +4,18 @@ import { PER_PAGE_MAX } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
+ * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * @typedef {RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["response"]["data"][number]} PullRequest
+ */
+
+/**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
  *
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }>}
+ * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }>}
  */
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
@@ -24,7 +29,7 @@ export async function extractInputs(github, context, core) {
   // with debug enabled to replay the previous context.
   core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
 
-  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }} */
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, details_url?: string }} */
   let inputs;
 
   // Add support for more event types as needed
@@ -130,26 +135,39 @@ export async function extractInputs(github, context, core) {
         const head_repo = payload.workflow_run.head_repository.name;
         const head_sha = payload.workflow_run.head_sha;
 
-        core.info(
-          `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
-        );
-        const pullRequests = (
-          await github.paginate(
-            github.rest.repos.listPullRequestsAssociatedWithCommit,
-            {
-              owner: head_owner,
-              repo: head_repo,
-              commit_sha: head_sha,
-              per_page: PER_PAGE_MAX,
-            },
-          )
-        ).filter(
-          // Only include PRs to the same repo as the triggering workflow.
-          //
-          // Other unique keys like "full_name" should also work, but "id" is the safest since it's
-          // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
-          (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
-        );
+        /** @type {PullRequest[]} */
+        let pullRequests = [];
+
+        try {
+          core.info(
+            `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
+          );
+          pullRequests = (
+            await github.paginate(
+              github.rest.repos.listPullRequestsAssociatedWithCommit,
+              {
+                owner: head_owner,
+                repo: head_repo,
+                commit_sha: head_sha,
+                per_page: PER_PAGE_MAX,
+              },
+            )
+          ).filter(
+            // Only include PRs to the same repo as the triggering workflow.
+            //
+            // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+            // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+            (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
+          );
+        } catch (error) {
+          // Short message always
+          core.info(
+            `Error: ${error instanceof Error ? error.message : "unknown"}`,
+          );
+
+          // Long message only in debug
+          core.debug(`Error: ${error}`);
+        }
 
         if (pullRequests.length === 0) {
           // There are three cases where the "commits" REST API called above can return
@@ -240,16 +258,6 @@ export async function extractInputs(github, context, core) {
     };
   } else if (context.eventName === "check_run") {
     let checkRun = context.payload.check_run;
-
-    // Extract the ADO build ID and project URL from the check run details URL
-    const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
-    const match = checkRun.details_url.match(buildUrlRegex);
-    if (!match) {
-      throw new Error(
-        `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
-      );
-    }
-
     const payload =
       /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
         context.payload
@@ -259,8 +267,7 @@ export async function extractInputs(github, context, core) {
       owner: repositoryInfo.owner,
       repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
-      ado_build_id: match[2],
-      ado_project_url: match[1],
+      details_url: checkRun.details_url,
       issue_number: NaN,
       run_id: NaN,
     };

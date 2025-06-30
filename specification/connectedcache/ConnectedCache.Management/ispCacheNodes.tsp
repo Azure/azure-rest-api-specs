@@ -6,6 +6,7 @@ import "./ispCustomers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ConnectedCache;
@@ -49,5 +50,19 @@ interface IspCacheNodesOperations {
     IspCacheNodeResource,
     void,
     MccCacheNodeInstallDetails
+  >;
+  @added(Versions.v2024_11_30_preview)
+  @doc("This api gets ispCacheNode resource auto update histrory information")
+  getCacheNodeAutoUpdateHistory is ArmResourceActionSync<
+    IspCacheNodeResource,
+    void,
+    MccCacheNodeAutoUpdateHistory
+  >;
+  @added(Versions.v2024_11_30_preview)
+  @doc("This api gets ispCacheNode resource issues details histrory information")
+  getCacheNodeMccIssueDetailsHistory is ArmResourceActionSync<
+    IspCacheNodeResource,
+    void,
+    MccCacheNodeIssueHistory
   >;
 }

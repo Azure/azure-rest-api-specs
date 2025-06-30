@@ -1,0 +1,24 @@
+{
+  "title": "Get EventHub config",
+  "operationId": "EventHubConfigurationOperations_GetEventHubConfiguration",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2025-05-20",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "isEnabled": true,
+        "eventHubNamespaceHostName": "your-event-hub-namespace.servicebus.windows.net",
+        "eventHubName": "your-event-hub-name",
+        "managedIdentityClientId": "4b9ccd1c-c751-4afa-a430-a49a5471fd68",
+        "enabledEvents": [
+          "TranslationCompletion",
+          "IterationCompletion"
+        ]
+      }
+    }
+  }
+}

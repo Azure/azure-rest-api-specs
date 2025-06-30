@@ -11,12 +11,12 @@ using Microsoft.Chaos;
     name: "ChaosManagementClient",
     service: Microsoft.Chaos,
   },
-  "java,go"
+  "java,go,javascript"
 )
 @useDependency(Microsoft.Chaos.Versions.v2025_01_01)
 namespace Customization;
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Experiments {
   get is Microsoft.Chaos.Experiments.get;
@@ -33,27 +33,27 @@ interface Experiments {
   executionDetails is Microsoft.Chaos.ExperimentExecutions.getExecutionDetails;
 }
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Capabilities extends Microsoft.Chaos.Capabilities {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface CapabilityTypes extends Microsoft.Chaos.CapabilityTypes {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Operations extends Microsoft.Chaos.Operations {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface OperationStatuses extends Microsoft.Chaos.OperationStatuses {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface Targets extends Microsoft.Chaos.Targets {}
 
-@operationGroup("java,go")
+@operationGroup("java,go,javascript")
 @armResourceOperations
 interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 
@@ -115,3 +115,5 @@ interface TargetTypes extends Microsoft.Chaos.TargetTypes {}
 @@flattenProperty(CapabilityType.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ExperimentExecutionDetails.properties);
+
+@@clientName(Microsoft.Chaos.Operations.list, "listAll", "javascript");
