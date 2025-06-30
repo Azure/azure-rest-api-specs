@@ -398,26 +398,6 @@ model PrivateEndpoint {
 }
 
 /**
- * A collection of information about the state of the connection between service consumer and provider.
- */
-model PrivateLinkServiceConnectionState {
-  /**
-   * Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
-   */
-  status?: PrivateEndpointServiceConnectionStatus;
-
-  /**
-   * The reason for approval/rejection of the connection.
-   */
-  description?: string;
-
-  /**
-   * A message indicating if changes on the service provider require any updates on the consumer.
-   */
-  actionsRequired?: string;
-}
-
-/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 model Resource {
@@ -481,40 +461,6 @@ model CloudHsmClusterPatchParameters {
    * Managed service identity (system assigned and/or user assigned identities)
    */
   identity?: CommonTypes.ManagedServiceIdentity;
-}
-
-/**
- * A private link resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PrivateLinkResource extends Resource {
-  /**
-   * Resource properties.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: PrivateLinkResourceProperties;
-}
-
-/**
- * Properties of a private link resource.
- */
-model PrivateLinkResourceProperties {
-  /**
-   * The private link resource group id.
-   */
-  @visibility(Lifecycle.Read)
-  groupId?: string;
-
-  /**
-   * The private link resource required member names.
-   */
-  @visibility(Lifecycle.Read)
-  requiredMembers?: string[];
-
-  /**
-   * The private link resource private link DNS zone name.
-   */
-  requiredZoneNames?: string[];
 }
 
 /**
@@ -808,6 +754,7 @@ model EndpointDetail {
   /**
    * The port an endpoint is connected to.
    */
+  @minValue(0)
   port?: int32;
 
   /**
@@ -818,34 +765,5 @@ model EndpointDetail {
   /**
    * Description of the detail
    */
-  description?: string;
-}
-
-/**
- * Localized display information for this particular operation.
- */
-model OperationDisplay {
-  /**
-   * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-
-  /**
-   * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-
-  /**
-   * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
-   */
-  @visibility(Lifecycle.Read)
   description?: string;
 }

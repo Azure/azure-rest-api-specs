@@ -78,7 +78,7 @@ interface DedicatedHsms {
   >;
 
   /**
-   * The List operation gets information about the dedicated hsms associated with the subscription and within the specified resource group.
+   * The List operation gets information about the dedicated HSMs associated with the subscription and within the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
