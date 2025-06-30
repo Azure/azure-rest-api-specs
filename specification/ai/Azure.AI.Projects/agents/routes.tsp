@@ -38,7 +38,7 @@ interface Agents {
 
   @doc("Revert latest revision of an agent")
   @Rest.action("deploy")
-  deployAgent is Azure.Core.Foundations.ResourceOperation<
+  deploy is Azure.Core.Foundations.ResourceOperation<
     Agent,
     {
       @doc("The deployment request parameters")
