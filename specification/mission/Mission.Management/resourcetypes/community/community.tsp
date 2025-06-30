@@ -8,6 +8,7 @@ import "../shared/maintenancemodeconfiguration.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -134,11 +135,18 @@ model CommunityBaseModel {
 
   @doc("List of resource ids created by communities.")
   @visibility(Lifecycle.Read)
-  resourceCollection?: string[];
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
+  resourceCollection?: armResourceIdentifier[];
 
+  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed resource group configuration.")
   @visibility(Lifecycle.Read)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+
+  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @doc("Managed resource group name.")
+  @visibility(Lifecycle.Read)
+  managedResourceGroupName?: string;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed On Behalf Of Configuration.")
@@ -149,8 +157,8 @@ model CommunityBaseModel {
   governedServiceList?: GovernedServiceItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Allow enclaves to override community policies")
-  allowEnclavePolicyOverride?: boolean;
+  @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
+  policyOverride?: "Enclave" | "None" | string;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
@@ -162,7 +170,7 @@ model CommunityBaseModel {
 }
 
 @doc("Community Resource Properties")
-model CommunityModel is CommunityBaseModel {
+model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval requirements for various actions on the community's resources.")
   approvalSettings?: ApprovalSettings;

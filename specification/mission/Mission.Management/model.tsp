@@ -42,7 +42,7 @@ model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Res
   is ArmResponse<TResource>;
 
 @doc("Community Model Resource")
-model CommunityResource is TrackedResource<CommunityModel> {
+model CommunityResource is TrackedResource<CommunityProperties> {
   @key("communityName")
   @segment("communities")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
@@ -59,7 +59,7 @@ model CommunityResource is TrackedResource<CommunityModel> {
 );
 
 @doc("Virtual Enclave Model Resource")
-model EnclaveResource is TrackedResource<VirtualEnclaveModel> {
+model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @key("virtualEnclaveName")
   @segment("virtualEnclaves")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
@@ -132,7 +132,7 @@ model CommunityEndpointResource
 }
 
 @doc("Approval Model Resource")
-model ApprovalResource is ExtensionResource<ApprovalModel> {
+model ApprovalResource is ExtensionResource<ApprovalProperties> {
   @key("approvalName")
   @segment("approvals")
   @path

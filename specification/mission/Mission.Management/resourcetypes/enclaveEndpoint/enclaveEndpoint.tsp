@@ -5,6 +5,7 @@ import "@typespec/versioning";
 
 using OpenAPI;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -49,7 +50,8 @@ model EnclaveEndpointProperties {
 
   @doc("List of resource ids created by community endpoint.")
   @visibility(Lifecycle.Read)
-  resourceCollection?: string[];
+  @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
+  resourceCollection?: armResourceIdentifier[];
 
   @doc("Provisioning State.")
   @visibility(Lifecycle.Read)

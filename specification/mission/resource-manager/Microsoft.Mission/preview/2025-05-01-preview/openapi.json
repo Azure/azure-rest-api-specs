@@ -3675,7 +3675,7 @@
     }
   },
   "definitions": {
-    "ActionPerformedEnum": {
+    "ActionPerformed": {
       "type": "string",
       "description": "Specifies the action performed by the approver",
       "enum": [
@@ -3683,18 +3683,18 @@
         "Rejected"
       ],
       "x-ms-enum": {
-        "name": "ActionPerformedEnum",
+        "name": "ActionPerformed",
         "modelAsString": true,
         "values": [
           {
             "name": "Approved",
             "value": "Approved",
-            "description": "ActionPerformedEnum Type Approved"
+            "description": "Action was Approved"
           },
           {
             "name": "Rejected",
             "value": "Rejected",
-            "description": "ActionPerformedEnum Type Rejected"
+            "description": "Action was Rejected"
           }
         ]
       }
@@ -3784,56 +3784,6 @@
         "message"
       ]
     },
-    "ApprovalModel": {
-      "type": "object",
-      "description": "Approval Base model.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "parent1": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "parent2": {
-          "type": "string",
-          "description": "Parameter for optimizing query results"
-        },
-        "approvers": {
-          "type": "array",
-          "description": "List of approvers for the approval request",
-          "items": {
-            "$ref": "#/definitions/Approver"
-          },
-          "x-ms-identifiers": [
-            "approverEntraId"
-          ]
-        },
-        "ticketId": {
-          "type": "string",
-          "description": "Ticket ID for the approval request"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Approval request creation time"
-        },
-        "stateChangedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
-        },
-        "requestMetadata": {
-          "$ref": "#/definitions/RequestMetadata",
-          "description": "Request metadata for the approval request."
-        }
-      },
-      "required": [
-        "requestMetadata"
-      ]
-    },
     "ApprovalPatchModel": {
       "type": "object",
       "description": "Approvals patch model.",
@@ -3910,12 +3860,62 @@
         ]
       }
     },
+    "ApprovalProperties": {
+      "type": "object",
+      "description": "Approval Base model.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "parent1": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "parent2": {
+          "type": "string",
+          "description": "Parameter for optimizing query results"
+        },
+        "approvers": {
+          "type": "array",
+          "description": "List of approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/Approver"
+          },
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        },
+        "ticketId": {
+          "type": "string",
+          "description": "Ticket ID for the approval request"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request creation time"
+        },
+        "stateChangedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
+        },
+        "requestMetadata": {
+          "$ref": "#/definitions/RequestMetadata",
+          "description": "Request metadata for the approval request."
+        }
+      },
+      "required": [
+        "requestMetadata"
+      ]
+    },
     "ApprovalResource": {
       "type": "object",
       "description": "Approval Model Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ApprovalModel",
+          "$ref": "#/definitions/ApprovalProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
@@ -4094,7 +4094,7 @@
     },
     "ApprovalStatus": {
       "type": "string",
-      "description": "Approval Status Enum",
+      "description": "Approval Status. It can be Approved, Rejected, Pending, Deleted or Expired.",
       "enum": [
         "Approved",
         "Rejected",
@@ -4140,10 +4140,10 @@
       "properties": {
         "approverEntraId": {
           "type": "string",
-          "description": "EntraId of the approver"
+          "description": "Entra ObjectID of the approver"
         },
         "actionPerformed": {
-          "$ref": "#/definitions/ActionPerformedEnum",
+          "$ref": "#/definitions/ActionPerformed",
           "description": "Action Performed by approver"
         },
         "lastUpdatedAt": {
@@ -4154,13 +4154,8 @@
       },
       "required": [
         "approverEntraId",
-        "actionPerformed",
         "lastUpdatedAt"
       ]
-    },
-    "Azure.Core.azureLocation": {
-      "type": "string",
-      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -4230,7 +4225,7 @@
           "$ref": "#/definitions/TransitHubResourceId",
           "description": "Transit Hub Resource Id."
         },
-        "name": {
+        "endpointRuleName": {
           "type": "string",
           "description": "Endpoint Rule Name."
         },
@@ -4238,7 +4233,7 @@
           "type": "string",
           "description": "Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas."
         },
-        "port": {
+        "ports": {
           "type": "string",
           "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
         }
@@ -4291,7 +4286,9 @@
           "type": "array",
           "description": "List of resource ids created by community endpoint.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         },
@@ -4402,7 +4399,78 @@
         "value"
       ]
     },
-    "CommunityModel": {
+    "CommunityPatchModel": {
+      "type": "object",
+      "description": "Community Patch Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommunityPatchProperties",
+          "description": "Community Patch properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "CommunityPatchProperties": {
+      "type": "object",
+      "description": "Community Resource Properties without default values",
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "List of services governed by a community.",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          }
+        },
+        "policyOverride": {
+          "type": "string",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
+          "enum": [
+            "Enclave",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "communityRoleAssignments": {
+          "type": "array",
+          "description": "Community role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "firewallSku": {
+          "$ref": "#/definitions/FirewallSKU",
+          "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
+        },
+        "approvalSettings": {
+          "$ref": "#/definitions/ApprovalSettingsPatchProperties",
+          "description": "Approval requirements for various actions on the community's resources."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
+          "description": "Maintenance Mode configuration."
+        }
+      }
+    },
+    "CommunityProperties": {
       "type": "object",
       "description": "Community Resource Properties",
       "properties": {
@@ -4430,13 +4498,15 @@
           "type": "array",
           "description": "List of resource ids created by communities.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Managed resource group name.",
           "readOnly": true
         },
         "managedOnBehalfOfConfiguration": {
@@ -4451,9 +4521,16 @@
             "$ref": "#/definitions/GovernedServiceItem"
           }
         },
-        "allowEnclavePolicyOverride": {
-          "type": "boolean",
-          "description": "Allow enclaves to override community policies"
+        "policyOverride": {
+          "type": "string",
+          "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
+          "enum": [
+            "Enclave",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "communityRoleAssignments": {
           "type": "array",
@@ -4503,76 +4580,12 @@
         }
       }
     },
-    "CommunityPatchModel": {
-      "type": "object",
-      "description": "Community Patch Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CommunityPatchProperties",
-          "description": "Community Patch properties"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "CommunityPatchProperties": {
-      "type": "object",
-      "description": "Community Resource Properties without default values",
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "description": "DNS Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "List of services governed by a community.",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "allowEnclavePolicyOverride": {
-          "type": "boolean",
-          "description": "Allow enclaves to override community policies"
-        },
-        "communityRoleAssignments": {
-          "type": "array",
-          "description": "Community role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "firewallSku": {
-          "$ref": "#/definitions/FirewallSKU",
-          "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
-        },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettingsPatchProperties",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
-          "description": "Maintenance Mode configuration."
-        }
-      }
-    },
     "CommunityResource": {
       "type": "object",
       "description": "Community Model Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunityModel",
+          "$ref": "#/definitions/CommunityProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         },
@@ -4771,14 +4784,6 @@
           "type": "string",
           "description": "Source CIDR."
         },
-        "ipGroup": {
-          "$ref": "#/definitions/IPGroupResourceId",
-          "description": "Source IP group Resource Id.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "destinationEndpointId": {
           "$ref": "#/definitions/DestinationEndpointResourceId",
           "description": "Destination Endpoint Resource Id.",
@@ -4796,7 +4801,9 @@
           "type": "array",
           "description": "List of resource ids modified by enclave Connections.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         }
@@ -4989,7 +4996,7 @@
             "$ref": "#/definitions/EnclaveEndpointProtocol"
           }
         },
-        "name": {
+        "endpointRuleName": {
           "type": "string",
           "description": "Endpoint Rule Name."
         },
@@ -4997,7 +5004,7 @@
           "type": "string",
           "description": "Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas."
         },
-        "port": {
+        "ports": {
           "type": "string",
           "description": "Port. Can include multiple ports separated by commas or a range indicated by a hyphen."
         }
@@ -5050,7 +5057,9 @@
           "type": "array",
           "description": "List of resource ids created by community endpoint.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         },
@@ -5154,7 +5163,7 @@
       "description": "Virtual Enclave Model Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEnclaveModel",
+          "$ref": "#/definitions/VirtualEnclaveProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         },
@@ -5194,7 +5203,7 @@
       "type": "object",
       "description": "Enclave Virtual Network Properties",
       "properties": {
-        "name": {
+        "networkName": {
           "type": "string",
           "description": "Network Name."
         },
@@ -5224,15 +5233,6 @@
         "allowSubnetCommunication": {
           "type": "boolean",
           "description": "Allow Subnet Communication.",
-          "default": false,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "connectToAzureServices": {
-          "type": "boolean",
-          "description": "Connect to Azure Services (True or False).",
           "default": false,
           "x-ms-mutability": [
             "read",
@@ -5275,11 +5275,11 @@
       "type": "object",
       "description": "GovernedServiceItem Properties",
       "properties": {
-        "id": {
+        "serviceId": {
           "$ref": "#/definitions/ServiceIdentifier",
           "description": "Service ID"
         },
-        "name": {
+        "serviceName": {
           "type": "string",
           "description": "Service name.",
           "readOnly": true
@@ -5308,9 +5308,17 @@
             "modelAsString": true
           }
         },
-        "auditOnly": {
-          "type": "boolean",
-          "description": "Policies set to auditOnly (True or False)."
+        "policyAction": {
+          "type": "string",
+          "description": "Enforcement mode for policy. AuditOnly, Enforce, or None.",
+          "enum": [
+            "AuditOnly",
+            "Enforce",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "initiatives": {
           "type": "array",
@@ -5322,20 +5330,8 @@
         }
       },
       "required": [
-        "id"
+        "serviceId"
       ]
-    },
-    "IPGroupResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Network/IpGroups"
-          }
-        ]
-      }
     },
     "InitiatorCallbackRequest": {
       "type": "object",
@@ -5478,24 +5474,6 @@
         }
       }
     },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "ManagedResourceGroup related properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of managed resource group"
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "MandatoryApprover": {
       "type": "object",
       "description": "Approver Metadata for approvals request.",
@@ -5555,12 +5533,9 @@
         "Failed",
         "Canceled",
         "Accepted",
-        "Created",
         "Creating",
-        "Deleted",
         "Deleting",
         "NotSpecified",
-        "Ready",
         "Running",
         "Updating"
       ],
@@ -5589,19 +5564,9 @@
             "description": "Provisioning State Type Accepted"
           },
           {
-            "name": "Created",
-            "value": "Created",
-            "description": "Provisioning State Type Created"
-          },
-          {
             "name": "Creating",
             "value": "Creating",
             "description": "Provisioning State Type Creating"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Provisioning State Type Deleted"
           },
           {
             "name": "Deleting",
@@ -5612,11 +5577,6 @@
             "name": "NotSpecified",
             "value": "NotSpecified",
             "description": "Provisioning State Type NotSpecified"
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "Provisioning State Type Ready"
           },
           {
             "name": "Running",
@@ -5722,7 +5682,7 @@
       "type": "object",
       "description": "Role assignment item that indicates which principals should be assigned this role definition",
       "properties": {
-        "id": {
+        "roleDefinitionId": {
           "type": "string",
           "description": "Role definition identifier"
         },
@@ -5735,7 +5695,7 @@
         }
       },
       "required": [
-        "id"
+        "roleDefinitionId"
       ]
     },
     "ServiceIdentifier": {
@@ -5856,13 +5816,13 @@
       "type": "object",
       "description": "Subnet Configuration",
       "properties": {
-        "name": {
+        "subnetName": {
           "type": "string",
           "description": "Subnet name."
         },
-        "id": {
+        "subnetResourceId": {
           "$ref": "#/definitions/SubnetResourceId",
-          "description": "Subnet ID.",
+          "description": "Subnet Resource ID.",
           "readOnly": true
         },
         "networkPrefixSize": {
@@ -5879,14 +5839,14 @@
           "description": "Address prefix.",
           "readOnly": true
         },
-        "networkSecurityGroupId": {
+        "networkSecurityGroupResourceId": {
           "$ref": "#/definitions/NsgResourceId",
           "description": "Network security group ID.",
           "readOnly": true
         }
       },
       "required": [
-        "name",
+        "subnetName",
         "networkPrefixSize"
       ]
     },
@@ -5954,7 +5914,9 @@
           "type": "array",
           "description": "List of resource ids modified by transitHubs.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         }
@@ -6110,92 +6072,6 @@
         ]
       }
     },
-    "VirtualEnclaveModel": {
-      "type": "object",
-      "description": "Virtual Enclave Resource properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
-          "description": "Virtual Network."
-        },
-        "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpacesModel",
-          "description": "Enclave Address Spaces",
-          "readOnly": true
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          },
-          "readOnly": true
-        },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
-          "readOnly": true
-        },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
-          "readOnly": true
-        },
-        "bastionEnabled": {
-          "type": "boolean",
-          "description": "Deploy Bastion service (True or False).",
-          "default": false
-        },
-        "enclaveRoleAssignments": {
-          "type": "array",
-          "description": "Enclave role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "workloadRoleAssignments": {
-          "type": "array",
-          "description": "Workload role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "Enclave specific policies",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
-          "description": "Maintenance Mode configuration."
-        }
-      },
-      "required": [
-        "enclaveVirtualNetwork",
-        "communityResourceId"
-      ]
-    },
     "VirtualEnclavePatchModel": {
       "type": "object",
       "description": "Virtual Enclave Patch Model",
@@ -6259,6 +6135,92 @@
           "description": "Maintenance Mode configuration."
         }
       }
+    },
+    "VirtualEnclaveProperties": {
+      "type": "object",
+      "description": "Virtual Enclave Resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
+          "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpacesModel",
+          "description": "Enclave Address Spaces",
+          "readOnly": true
+        },
+        "communityResourceId": {
+          "$ref": "#/definitions/CommunityResourceId",
+          "description": "Community Resource Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "resourceCollection": {
+          "type": "array",
+          "description": "List of resource ids created by Virtual Enclave.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          },
+          "readOnly": true
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "Managed resource group name.",
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
+        },
+        "bastionEnabled": {
+          "type": "boolean",
+          "description": "Deploy Bastion service (True or False).",
+          "default": false
+        },
+        "enclaveRoleAssignments": {
+          "type": "array",
+          "description": "Enclave role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "workloadRoleAssignments": {
+          "type": "array",
+          "description": "Workload role assignments",
+          "items": {
+            "$ref": "#/definitions/RoleAssignmentItem"
+          }
+        },
+        "governedServiceList": {
+          "type": "array",
+          "description": "Enclave specific policies",
+          "items": {
+            "$ref": "#/definitions/GovernedServiceItem"
+          }
+        },
+        "enclaveDefaultSettings": {
+          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
+          "description": "Enclave default settings."
+        },
+        "maintenanceModeConfiguration": {
+          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
+          "description": "Maintenance Mode configuration."
+        }
+      },
+      "required": [
+        "enclaveVirtualNetwork",
+        "communityResourceId"
+      ]
     },
     "VirtualNetworkResourceId": {
       "type": "string",
