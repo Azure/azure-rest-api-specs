@@ -91,15 +91,15 @@ interface Volumes {
     },
     Response = ArmResponse<VolumeList>
   >;
-
-  /**
-   * Restore Soft Deleted Volumes. The volume name is obtained by using the API to list soft deleted volumes by volume group
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @action("restore")
-  @operationId("RestoreVolume")
-  restoreVolume is ArmResourceActionAsync<Volume, void, Volume>;
 }
+
+/**
+ * Restore Soft Deleted Volumes. The volume name is obtained by using the API to list soft deleted volumes by volume group
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@action("restore")
+@operationId("RestoreVolume")
+op restoreVolume is ArmResourceActionAsync<Volume, void, Volume>;
 
 @@maxLength(Volume.name, 63);
 @@minLength(Volume.name, 3);

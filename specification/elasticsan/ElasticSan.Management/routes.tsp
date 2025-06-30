@@ -20,7 +20,6 @@ interface SkusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List all the available Skus in the region and information related to them")
-  @operationId("Skus_List")
   @autoRoute
   @get
   @action("skus")
