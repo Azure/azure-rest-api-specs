@@ -105,14 +105,14 @@ model ApprovalProperties is ApprovalBaseModel {
 }
 
 @doc("Request Metadata patch properties.")
-model RequestMetadataPatchModel
+model RequestMetadataUpdatableProperties
   is UpdateableProperties<OmitDefaults<RequestMetadata>>;
 
 @doc("Approvals patch properties.")
 model ApprovalPatchProperties
   is UpdateableProperties<OmitDefaults<ApprovalBaseModel>> {
   @doc("Request metadata for the approval request.")
-  requestMetadata: RequestMetadataPatchModel;
+  requestMetadata: RequestMetadataUpdatableProperties;
 }
 
 @doc("Approvals patch model.")
