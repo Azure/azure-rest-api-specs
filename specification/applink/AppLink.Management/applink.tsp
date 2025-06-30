@@ -23,7 +23,7 @@ model AppLinkProperties {
 @armResourceOperations
 interface AppLinks {
   get is ArmResourceRead<AppLink>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLink>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<AppLink>;
   update is ArmResourcePatchAsync<AppLink, AppLinkProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<AppLink>;
   listByResourceGroup is ArmResourceListByParent<AppLink>;

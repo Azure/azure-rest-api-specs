@@ -74,7 +74,7 @@ model UpgradeProfile {
 @armResourceOperations
 interface AppLinkMembers {
   get is ArmResourceRead<AppLinkMember>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<AppLinkMember>;
   update is ArmResourcePatchAsync<AppLinkMember, AppLinkMemberProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<AppLinkMember>;
   listByAppLink is ArmResourceListByParent<AppLinkMember>;
