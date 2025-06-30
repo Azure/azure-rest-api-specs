@@ -763,6 +763,7 @@ union AgentsNamedToolChoiceType {
   connectedAgent: "connected_agent",
 
   /** Tool type `mcp` */
+  @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
 }
 
