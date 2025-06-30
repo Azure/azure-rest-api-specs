@@ -25,7 +25,7 @@ model VirtualNetwork extends Resource {
   @path
   @key
   @segment("virtualnetworks")
-  virtualNetworkName: string;
+  name: string;
 
   properties: VirtualNetworkProperties;
 }
@@ -107,7 +107,7 @@ interface VirtualNetworks {
   >;
 }
 
-@@doc(VirtualNetwork.virtualNetworkName, "The name of the virtual network.");
+@@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "The properties of the resource.");
 @@doc(VirtualNetwork.location, "The location of the resource.");
 @@doc(VirtualNetwork.tags, "The tags of the resource.");

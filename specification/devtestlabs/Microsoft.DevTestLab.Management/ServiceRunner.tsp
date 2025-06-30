@@ -27,7 +27,7 @@ model ServiceRunner extends Resource {
   @path
   @key
   @segment("servicerunners")
-  serviceRunnerName: string;
+  name: string;
 
   /**
    * The identity of the resource.
@@ -54,7 +54,7 @@ interface ServiceRunners {
   delete is ArmResourceDeleteSync<ServiceRunner>;
 }
 
-@@doc(ServiceRunner.serviceRunnerName, "The name of the service runner.");
+@@doc(ServiceRunner.name, "The name of the service runner.");
 @@doc(ServiceRunner.location, "The location of the resource.");
 @@doc(ServiceRunner.tags, "The tags of the resource.");
 @@doc(ServiceRunners.createOrUpdate::parameters.resource,

@@ -234,7 +234,7 @@ interface Labs {
        */
       @path
       @segment("policysets")
-      policySetName: string;
+      name: string;
     }
   >;
 }

@@ -25,7 +25,7 @@ model Secret extends Resource {
   @path
   @key
   @segment("secrets")
-  secretName: string;
+  name: string;
 
   properties: SecretProperties;
 }
@@ -100,7 +100,7 @@ interface Secrets {
   >;
 }
 
-@@doc(Secret.secretName, "The name of the secret.");
+@@doc(Secret.name, "The name of the secret.");
 @@doc(Secret.properties, "The properties of the resource.");
 @@doc(Secret.location, "The location of the resource.");
 @@doc(Secret.tags, "The tags of the resource.");

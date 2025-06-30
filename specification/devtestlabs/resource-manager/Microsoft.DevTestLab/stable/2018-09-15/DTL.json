@@ -2964,7 +2964,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/evaluatePolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
       "post": {
         "operationId": "PolicySets_EvaluatePolicies",
         "tags": [
@@ -2989,7 +2989,7 @@
             "type": "string"
           },
           {
-            "name": "policySetName",
+            "name": "name",
             "in": "path",
             "description": "The name of the policy set.",
             "required": true,
@@ -3815,7 +3815,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{serviceRunnerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{name}": {
       "get": {
         "operationId": "ServiceRunners_Get",
         "tags": [
@@ -3840,7 +3840,7 @@
             "type": "string"
           },
           {
-            "name": "serviceRunnerName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service runner.",
             "required": true,
@@ -3891,7 +3891,7 @@
             "type": "string"
           },
           {
-            "name": "serviceRunnerName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service runner.",
             "required": true,
@@ -3957,7 +3957,7 @@
             "type": "string"
           },
           {
-            "name": "serviceRunnerName",
+            "name": "name",
             "in": "path",
             "description": "The name of the service runner.",
             "required": true,
@@ -5352,7 +5352,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{secretName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}/secrets/{name}": {
       "get": {
         "operationId": "Secrets_Get",
         "tags": [
@@ -5384,7 +5384,7 @@
             "type": "string"
           },
           {
-            "name": "secretName",
+            "name": "name",
             "in": "path",
             "description": "The name of the secret.",
             "required": true,
@@ -5449,7 +5449,7 @@
             "type": "string"
           },
           {
-            "name": "secretName",
+            "name": "name",
             "in": "path",
             "description": "The name of the secret.",
             "required": true,
@@ -5537,7 +5537,7 @@
             "type": "string"
           },
           {
-            "name": "secretName",
+            "name": "name",
             "in": "path",
             "description": "The name of the secret.",
             "required": true,
@@ -5604,7 +5604,7 @@
             "type": "string"
           },
           {
-            "name": "secretName",
+            "name": "name",
             "in": "path",
             "description": "The name of the secret.",
             "required": true,
@@ -8433,7 +8433,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}": {
       "get": {
         "operationId": "VirtualNetworks_Get",
         "tags": [
@@ -8458,7 +8458,7 @@
             "type": "string"
           },
           {
-            "name": "virtualNetworkName",
+            "name": "name",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8516,7 +8516,7 @@
             "type": "string"
           },
           {
-            "name": "virtualNetworkName",
+            "name": "name",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8597,7 +8597,7 @@
             "type": "string"
           },
           {
-            "name": "virtualNetworkName",
+            "name": "name",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -8657,7 +8657,7 @@
             "type": "string"
           },
           {
-            "name": "virtualNetworkName",
+            "name": "name",
             "in": "path",
             "description": "The name of the virtual network.",
             "required": true,
@@ -12639,11 +12639,7 @@
           "description": "The Secret items on this page",
           "items": {
             "$ref": "#/definitions/Secret"
-          },
-          "x-ms-identifiers": [
-            "secretName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -13214,11 +13210,7 @@
           "description": "The VirtualNetwork items on this page",
           "items": {
             "$ref": "#/definitions/VirtualNetwork"
-          },
-          "x-ms-identifiers": [
-            "virtualNetworkName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
