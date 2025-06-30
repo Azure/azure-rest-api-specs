@@ -349,9 +349,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/{resourceUri}/providers/Microsoft.Mission/approvals/{approvalName}/initiatorCallback": {
+    "/{resourceUri}/providers/Microsoft.Mission/approvals/{approvalName}/executeApprovalAction": {
       "post": {
-        "operationId": "Approval_InitiatorCallback",
+        "operationId": "Approval_ExecuteApprovalAction",
         "tags": [
           "Approval"
         ],
@@ -377,7 +377,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackRequest"
+              "$ref": "#/definitions/ApprovalActionRequest"
             }
           }
         ],
@@ -385,7 +385,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -410,8 +410,8 @@
           }
         },
         "x-ms-examples": {
-          "Approval_InitiatorCallback": {
-            "$ref": "./examples/Approvals_InitiatorCallback.json"
+          "Approval_ExecuteApprovalAction": {
+            "$ref": "./examples/Approvals_ExecuteApprovalAction.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1449,9 +1449,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints/{communityEndpointName}/approvalCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints/{communityEndpointName}/notifyOnApprovalCreation": {
       "post": {
-        "operationId": "CommunityEndpoints_ApprovalCallback",
+        "operationId": "CommunityEndpoints_NotifyOnApprovalCreation",
         "tags": [
           "CommunityEndpoints"
         ],
@@ -1496,7 +1496,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -1521,8 +1521,8 @@
           }
         },
         "x-ms-examples": {
-          "CommunityEndpoints_ApprovalCallback": {
-            "$ref": "./examples/CommunityEndpoints_PostApprovalCallback.json"
+          "CommunityEndpoints_NotifyOnApprovalCreation": {
+            "$ref": "./examples/CommunityEndpoints_NotifyOnApprovalCreation.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1531,9 +1531,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints/{communityEndpointName}/approvalDeletionCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/communities/{communityName}/communityEndpoints/{communityEndpointName}/notifyOnApprovalDeletion": {
       "post": {
-        "operationId": "CommunityEndpoints_ApprovalDeletionCallback",
+        "operationId": "CommunityEndpoints_NotifyOnApprovalDeletion",
         "tags": [
           "CommunityEndpoints"
         ],
@@ -1578,7 +1578,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -1603,8 +1603,8 @@
           }
         },
         "x-ms-examples": {
-          "CommunityEndpoints_ApprovalDeletionCallback": {
-            "$ref": "./examples/CommunityEndpoints_ApprovalDeletionCallback.json"
+          "CommunityEndpoints_NotifyOnApprovalDeletion": {
+            "$ref": "./examples/CommunityEndpoints_NotifyOnApprovalDeletion.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2245,9 +2245,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/approvalCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/notifyOnApprovalCreation": {
       "post": {
-        "operationId": "EnclaveConnection_ApprovalCallback",
+        "operationId": "EnclaveConnection_NotifyOnApprovalCreation",
         "tags": [
           "EnclaveConnection"
         ],
@@ -2284,7 +2284,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2309,8 +2309,8 @@
           }
         },
         "x-ms-examples": {
-          "EnclaveConnection_ApprovalCallback": {
-            "$ref": "./examples/EnclaveConnection_PostApprovalCallback.json"
+          "EnclaveConnection_NotifyOnApprovalCreation": {
+            "$ref": "./examples/EnclaveConnection_NotifyOnApprovalCreation.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2319,9 +2319,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/approvalDeletionCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/notifyOnApprovalDeletion": {
       "post": {
-        "operationId": "EnclaveConnection_ApprovalDeletionCallback",
+        "operationId": "EnclaveConnection_NotifyOnApprovalDeletion",
         "tags": [
           "EnclaveConnection"
         ],
@@ -2358,7 +2358,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2383,8 +2383,8 @@
           }
         },
         "x-ms-examples": {
-          "EnclaveConnection_ApprovalDeletionCallback": {
-            "$ref": "./examples/EnclaveConnection_ApprovalDeletionCallback.json"
+          "EnclaveConnection_NotifyOnApprovalDeletion": {
+            "$ref": "./examples/EnclaveConnection_NotifyOnApprovalDeletion.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2681,154 +2681,6 @@
         "x-ms-examples": {
           "VirtualEnclave_Delete": {
             "$ref": "./examples/VirtualEnclave_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/approvalCallback": {
-      "post": {
-        "operationId": "VirtualEnclave_ApprovalCallback",
-        "tags": [
-          "VirtualEnclave"
-        ],
-        "description": "Callback that triggers on approval state change.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApprovalCallbackRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualEnclave_ApprovalCallback": {
-            "$ref": "./examples/VirtualEnclave_PostApprovalCallback.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/approvalDeletionCallback": {
-      "post": {
-        "operationId": "VirtualEnclave_ApprovalDeletionCallback",
-        "tags": [
-          "VirtualEnclave"
-        ],
-        "description": "Callback that triggers on approval deletion state change.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualEnclaveName",
-            "in": "path",
-            "description": "The name of the enclaveResource Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VirtualEnclave_ApprovalDeletionCallback": {
-            "$ref": "./examples/VirtualEnclave_PostApprovalDeletionCallback.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3173,9 +3025,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/enclaveEndpoints/{enclaveEndpointName}/approvalCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/enclaveEndpoints/{enclaveEndpointName}/notifyOnApprovalCreation": {
       "post": {
-        "operationId": "EnclaveEndpoints_ApprovalCallback",
+        "operationId": "EnclaveEndpoints_NotifyOnApprovalCreation",
         "tags": [
           "EnclaveEndpoints"
         ],
@@ -3220,7 +3072,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -3245,8 +3097,8 @@
           }
         },
         "x-ms-examples": {
-          "EnclaveEndpoints_ApprovalCallback": {
-            "$ref": "./examples/EnclaveEndpoints_PostApprovalCallback.json"
+          "EnclaveEndpoints_NotifyOnApprovalCreation": {
+            "$ref": "./examples/EnclaveEndpoints_NotifyOnApprovalCreation.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3255,9 +3107,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/enclaveEndpoints/{enclaveEndpointName}/approvalDeletionCallback": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/enclaveEndpoints/{enclaveEndpointName}/notifyOnApprovalDeletion": {
       "post": {
-        "operationId": "EnclaveEndpoints_ApprovalDeletionCallback",
+        "operationId": "EnclaveEndpoints_NotifyOnApprovalDeletion",
         "tags": [
           "EnclaveEndpoints"
         ],
@@ -3302,7 +3154,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -3327,8 +3179,156 @@
           }
         },
         "x-ms-examples": {
-          "EnclaveEndpoints_ApprovalDeletionCallback": {
-            "$ref": "./examples/EnclaveEndpoints_ApprovalDeletionCallback.json"
+          "EnclaveEndpoints_NotifyOnApprovalDeletion": {
+            "$ref": "./examples/EnclaveEndpoints_NotifyOnApprovalDeletion.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/notifyOnApprovalCreation": {
+      "post": {
+        "operationId": "VirtualEnclave_NotifyOnApprovalCreation",
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "description": "Callback that triggers on approval state change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalCallbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalActionResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_NotifyOnApprovalCreation": {
+            "$ref": "./examples/VirtualEnclave_NotifyOnApprovalCreation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/virtualEnclaves/{virtualEnclaveName}/notifyOnApprovalDeletion": {
+      "post": {
+        "operationId": "VirtualEnclave_NotifyOnApprovalDeletion",
+        "tags": [
+          "VirtualEnclave"
+        ],
+        "description": "Callback that triggers on approval deletion state change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualEnclaveName",
+            "in": "path",
+            "description": "The name of the enclaveResource Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalDeletionCallbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalActionResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualEnclave_NotifyOnApprovalDeletion": {
+            "$ref": "./examples/VirtualEnclave_NotifyOnApprovalDeletion.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3699,6 +3699,39 @@
         ]
       }
     },
+    "ApprovalActionRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "approvalStatus": {
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "approvalStatus"
+      ]
+    },
+    "ApprovalActionResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "ApprovalCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3737,19 +3770,6 @@
         "approvalStatus"
       ]
     },
-    "ApprovalCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
-    },
     "ApprovalDeletionCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3769,19 +3789,6 @@
       },
       "required": [
         "resourceRequestAction"
-      ]
-    },
-    "ApprovalDeletionCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalDeletionCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
       ]
     },
     "ApprovalPatchModel": {
@@ -5331,39 +5338,6 @@
       },
       "required": [
         "serviceId"
-      ]
-    },
-    "InitiatorCallbackRequest": {
-      "type": "object",
-      "description": "Request body for calling post-action",
-      "properties": {
-        "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "approvalStatus"
-      ]
-    },
-    "InitiatorCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
       ]
     },
     "KeyVaultResourceId": {

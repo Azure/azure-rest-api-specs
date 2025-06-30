@@ -377,7 +377,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackRequest"
+              "$ref": "#/definitions/ApprovalActionRequest"
             }
           }
         ],
@@ -385,7 +385,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/InitiatorCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2120,7 +2120,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -2194,7 +2194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApprovalDeletionCallbackResponse"
+              "$ref": "#/definitions/ApprovalActionResponse"
             }
           },
           "202": {
@@ -3199,6 +3199,39 @@
     }
   },
   "definitions": {
+    "ApprovalActionRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "approvalStatus": {
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "approvalStatus"
+      ]
+    },
+    "ApprovalActionResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "ApprovalCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3239,19 +3272,6 @@
         "approvalStatus"
       ]
     },
-    "ApprovalCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
-    },
     "ApprovalDeletionCallbackRequest": {
       "type": "object",
       "description": "Request body for calling post-action",
@@ -3271,19 +3291,6 @@
       },
       "required": [
         "resourceRequestAction"
-      ]
-    },
-    "ApprovalDeletionCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalDeletionCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
       ]
     },
     "ApprovalPatchModel": {
@@ -4493,39 +4500,6 @@
           }
         ]
       }
-    },
-    "InitiatorCallbackRequest": {
-      "type": "object",
-      "description": "Request body for calling post-action",
-      "properties": {
-        "approvalStatus": {
-          "type": "string",
-          "description": "Approval status indicating 'Approved' or 'Rejected'",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "approvalStatus"
-      ]
-    },
-    "InitiatorCallbackResponse": {
-      "type": "object",
-      "description": "Response body after handling of approvalCallbackRequest",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Confirmation message indicating the result of the operation."
-        }
-      },
-      "required": [
-        "message"
-      ]
     },
     "KeyVaultResourceId": {
       "type": "string",
