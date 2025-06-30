@@ -87,4 +87,6 @@ using Microsoft.HardwareSecurityModules;
 @@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
   "DedicatedHsm"
 );
-@@clientName(DedicatedHsms.listOutboundNetworkDependenciesEndpoints, "ListOutboundNetworkDependenciesEndpoints");
+@@clientName(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
+  "ListOutboundNetworkDependenciesEndpoints"
+);
