@@ -62,8 +62,7 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName:
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
         requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact",
@@ -95,8 +94,7 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName:
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
         requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign, BreakingChange-Approved-BugFix , BreakingChange-Approved-UserImpact",
@@ -128,11 +126,9 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName:
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
         requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
-        overridingLabel:
-          "BreakingChange-Approved-Benign,,BreakingChange-Approved-Security,",
+        overridingLabel: "BreakingChange-Approved-Benign,,BreakingChange-Approved-Security,",
       }),
     ).resolves.toBeUndefined();
 
@@ -165,8 +161,7 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName:
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
         requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
         overridingLabel:
           "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact",
@@ -201,8 +196,7 @@ describe("setStatusImpl", () => {
         target_url: "https://test.com/set_status_url",
         github,
         core,
-        monitoredWorkflowName:
-          "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code",
         requiredStatusName: "[TEST-IGNORE] Swagger BreakingChange",
         overridingLabel: "",
       }),

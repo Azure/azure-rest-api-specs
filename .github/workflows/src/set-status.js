@@ -82,13 +82,11 @@ export async function setStatusImpl({
     ? overridingLabel
         .split(",")
         .map((label) => label.trim())
-        .filter((label) => label)
+        .filter((label) => label) // Filter out empty labels
     : [];
 
   // Check if any overriding label is present
-  const foundOverridingLabel = overridingLabelsArray.find((label) =>
-    prLabels.includes(label),
-  );
+  const foundOverridingLabel = overridingLabelsArray.find((label) => prLabels.includes(label));
 
   if (foundOverridingLabel) {
     const description = `Found label '${foundOverridingLabel}'`;

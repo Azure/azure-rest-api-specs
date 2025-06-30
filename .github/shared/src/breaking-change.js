@@ -33,9 +33,7 @@ export const REVIEW_REQUIRED_LABELS = {
 
 // Extract values as arrays for validation and configuration
 export const versioningApprovalValues = Object.values(VERSIONING_APPROVALS);
-export const breakingChangeApprovalValues = Object.values(
-  BREAKING_CHANGE_APPROVALS,
-);
+export const breakingChangeApprovalValues = Object.values(BREAKING_CHANGE_APPROVALS);
 export const reviewRequiredLabelValues = Object.values(REVIEW_REQUIRED_LABELS);
 
 // Type guard functions for runtime validation
