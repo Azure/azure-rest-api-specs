@@ -6,21 +6,13 @@
     "description": "API for Service B data plane operations"
   },
   "host": "service.b",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/": {
       "get": {
-        "tags": [
-          "Status"
-        ],
+        "tags": ["Status"],
         "summary": "Get Service Status",
         "description": "Returns the current status of the service.",
         "operationId": "Service_GetStatus",
@@ -52,9 +44,7 @@
     },
     "/resources": {
       "get": {
-        "tags": [
-          "Resources"
-        ],
+        "tags": ["Resources"],
         "summary": "List Resources",
         "description": "Lists all resources in the service.",
         "operationId": "Resources_List",
@@ -104,9 +94,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Resources"
-        ],
+        "tags": ["Resources"],
         "summary": "Create a Resource",
         "description": "Creates a new resource in the service.",
         "operationId": "Resources_Create",
@@ -147,9 +135,7 @@
     },
     "/resources/{resourceId}": {
       "get": {
-        "tags": [
-          "Resources"
-        ],
+        "tags": ["Resources"],
         "summary": "Get Resource",
         "description": "Gets a specific resource by its ID.",
         "operationId": "Resources_Get",
@@ -192,9 +178,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Resources"
-        ],
+        "tags": ["Resources"],
         "summary": "Delete Resource",
         "description": "Deletes a specific resource by its ID.",
         "operationId": "Resources_Delete",
@@ -243,11 +227,7 @@
         "status": {
           "description": "The status of the service",
           "type": "string",
-          "enum": [
-            "OK",
-            "Degraded",
-            "Unavailable"
-          ],
+          "enum": ["OK", "Degraded", "Unavailable"],
           "x-ms-enum": {
             "name": "ServiceStatusEnum",
             "modelAsString": true
@@ -292,12 +272,7 @@
             "status": {
               "description": "The status of the resource",
               "type": "string",
-              "enum": [
-                "Active",
-                "Inactive",
-                "Provisioning",
-                "Failed"
-              ],
+              "enum": ["Active", "Inactive", "Provisioning", "Failed"],
               "x-ms-enum": {
                 "name": "ResourceStatusEnum",
                 "modelAsString": true
@@ -329,9 +304,7 @@
     "ResourceCreateRequest": {
       "description": "Request body for creating a resource",
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "description": "The name of the resource",

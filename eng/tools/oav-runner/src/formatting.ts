@@ -1,7 +1,4 @@
-import {
-  annotateFileError,
-  setSummary,
-} from "@azure-tools/specs-shared/error-reporting";
+import { annotateFileError, setSummary } from "@azure-tools/specs-shared/error-reporting";
 
 export interface ReportableOavError {
   message: string;
@@ -27,10 +24,7 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]) {
   });
 }
 
-export function outputSuccessSummary(
-  swaggerFiles: string[],
-  reportName: string,
-) {
+export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
   let builtLines: string[] = [];
 
   builtLines.push(`## All specifications passed ${reportName}`);
@@ -49,10 +43,7 @@ export function outputSuccessSummary(
   }
 }
 
-export function outputErrorSummary(
-  errors: ReportableOavError[],
-  reportName: string,
-) {
+export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
   let builtLines: string[] = [];
   let checkName: string = "";
 
@@ -61,20 +52,15 @@ export function outputErrorSummary(
   // just mapping the report names we want to migrate to the old names here, so we don't have to pull it through everywhere when we want to change it
   if (reportName === "Swagger SemanticValidation") {
     checkName = "validate-spec";
-  }
-  else if (reportName === "Swagger ModelValidation") {
+  } else if (reportName === "Swagger ModelValidation") {
     checkName = "validate-example";
   }
 
-  builtLines.push(
-    `⚠️ This check is testing a new version of '${reportName}'. ⚠️`,
-  );
+  builtLines.push(`⚠️ This check is testing a new version of '${reportName}'. ⚠️`);
   builtLines.push(
     "Failures are expected, and should be completely ignored by spec authors and reviewers.",
   );
-  builtLines.push(
-    `Meaningful results for this PR are in required check '${reportName}'.`,
-  );
+  builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`);
   builtLines.push("| File | Line#Column | Code | Message |");
   builtLines.push("| --- | --- | --- | --- |");
 
@@ -88,11 +74,8 @@ export function outputErrorSummary(
   });
 
   errors.forEach((error) => {
-    const fmtLineCol =
-      error.line && error.column ? `${error.line}#${error.column}` : "N/A";
-    builtLines.push(
-      `| ${error.file} | ${fmtLineCol} | ${error.errorCode} | ${error.message} |`,
-    );
+    const fmtLineCol = error.line && error.column ? `${error.line}#${error.column}` : "N/A";
+    builtLines.push(`| ${error.file} | ${fmtLineCol} | ${error.errorCode} | ${error.message} |`);
   });
 
   builtLines.push("\n");
