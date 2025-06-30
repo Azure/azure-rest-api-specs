@@ -4,6 +4,11 @@ import { PER_PAGE_MAX } from "./github.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
+ * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * @typedef {RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["response"]["data"][number]} PullRequest
+ */
+
+/**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
  *
@@ -130,26 +135,39 @@ export async function extractInputs(github, context, core) {
         const head_repo = payload.workflow_run.head_repository.name;
         const head_sha = payload.workflow_run.head_sha;
 
-        core.info(
-          `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
-        );
-        const pullRequests = (
-          await github.paginate(
-            github.rest.repos.listPullRequestsAssociatedWithCommit,
-            {
-              owner: head_owner,
-              repo: head_repo,
-              commit_sha: head_sha,
-              per_page: PER_PAGE_MAX,
-            },
-          )
-        ).filter(
-          // Only include PRs to the same repo as the triggering workflow.
-          //
-          // Other unique keys like "full_name" should also work, but "id" is the safest since it's
-          // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
-          (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
-        );
+        /** @type {PullRequest[]} */
+        let pullRequests = [];
+
+        try {
+          core.info(
+            `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
+          );
+          pullRequests = (
+            await github.paginate(
+              github.rest.repos.listPullRequestsAssociatedWithCommit,
+              {
+                owner: head_owner,
+                repo: head_repo,
+                commit_sha: head_sha,
+                per_page: PER_PAGE_MAX,
+              },
+            )
+          ).filter(
+            // Only include PRs to the same repo as the triggering workflow.
+            //
+            // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+            // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+            (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
+          );
+        } catch (error) {
+          // Short message always
+          core.info(
+            `Error: ${error instanceof Error ? error.message : "unknown"}`,
+          );
+
+          // Long message only in debug
+          core.debug(`Error: ${error}`);
+        }
 
         if (pullRequests.length === 0) {
           // There are three cases where the "commits" REST API called above can return
