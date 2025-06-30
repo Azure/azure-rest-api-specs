@@ -66,7 +66,7 @@ interface VirtualEnclave {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalCallback"
   )
-  subscribeApprovalCreation is ArmResourceActionAsync<
+  handleApprovalCreation is ArmResourceActionAsync<
     EnclaveResource,
     ApprovalCallbackRequest,
     ApprovalActionResponse
@@ -78,7 +78,7 @@ interface VirtualEnclave {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalDeletionCallback"
   )
-  subscribeApprovalDeletion is ArmResourceActionAsync<
+  handleApprovalDeletion is ArmResourceActionAsync<
     EnclaveResource,
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
@@ -165,7 +165,7 @@ interface EnclaveConnection {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalCallback"
   )
-  subscribeApprovalCreation is ArmResourceActionAsync<
+  handleApprovalCreation is ArmResourceActionAsync<
     EnclaveConnectionResource,
     ApprovalCallbackRequest,
     ApprovalActionResponse
@@ -176,7 +176,7 @@ interface EnclaveConnection {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalDeletionCallback"
   )
-  subscribeApprovalDeletion is ArmResourceActionAsync<
+  handleApprovalDeletion is ArmResourceActionAsync<
     EnclaveConnectionResource,
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
@@ -210,7 +210,7 @@ interface EnclaveEndpoints {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalCallback"
   )
-  subscribeApprovalCreation is ArmResourceActionAsync<
+  handleApprovalCreation is ArmResourceActionAsync<
     EnclaveEndpointResource,
     ApprovalCallbackRequest,
     ApprovalActionResponse
@@ -222,7 +222,7 @@ interface EnclaveEndpoints {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalDeletionCallback"
   )
-  subscribeApprovalDeletion is ArmResourceActionAsync<
+  handleApprovalDeletion is ArmResourceActionAsync<
     EnclaveEndpointResource,
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
@@ -256,7 +256,7 @@ interface CommunityEndpoints {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalCallback"
   )
-  subscribeApprovalCreation is ArmResourceActionAsync<
+  handleApprovalCreation is ArmResourceActionAsync<
     CommunityEndpointResource,
     ApprovalCallbackRequest,
     ApprovalActionResponse
@@ -268,7 +268,7 @@ interface CommunityEndpoints {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "approvalDeletionCallback"
   )
-  subscribeApprovalDeletion is ArmResourceActionAsync<
+  handleApprovalDeletion is ArmResourceActionAsync<
     CommunityEndpointResource,
     ApprovalDeletionCallbackRequest,
     ApprovalActionResponse
