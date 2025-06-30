@@ -29,6 +29,14 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
+@@clientName(Azure.AI.Projects.Index, "DatasetIndex", "csharp");
+@@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
+@@clientName(Azure.AI.Projects.SasCredential,
+  "BlobReferenceSasCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Sku, "ModelDeploymentSku", "csharp");
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);

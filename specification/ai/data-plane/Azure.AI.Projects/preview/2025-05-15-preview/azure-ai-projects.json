@@ -456,7 +456,7 @@
             "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatasetVersion"
+              "$ref": "#/definitions/DatasetVersionUpdate"
             }
           }
         ],
@@ -1167,7 +1167,7 @@
             "description": "The Index to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/IndexUpdate"
             }
           }
         ],
@@ -1428,7 +1428,8 @@
           "description": "The agent evaluation result.",
           "items": {
             "$ref": "#/definitions/AgentEvaluationResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1774,7 +1775,8 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1801,7 +1803,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -1846,6 +1848,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/Index"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSearch"
+    },
+    "AzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Azure AI Search Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
         }
       ],
       "x-ms-discriminator-value": "AzureSearch"
@@ -2080,6 +2092,16 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CosmosDBIndexUpdate": {
+      "type": "object",
+      "description": "CosmosDB Vector Store Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -2241,6 +2263,39 @@
         "type",
         "name",
         "version"
+      ]
+    },
+    "DatasetVersionUpdate": {
+      "type": "object",
+      "description": "DatasetVersion Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DatasetType",
+          "description": "Dataset type"
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "Deployment": {
@@ -2464,12 +2519,32 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FileDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
       "allOf": [
         {
           "$ref": "#/definitions/DatasetVersion"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
+    },
+    "FolderDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
@@ -2553,6 +2628,39 @@
         ]
       }
     },
+    "IndexUpdate": {
+      "type": "object",
+      "description": "Index resource Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IndexType",
+          "description": "Type of index"
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -2604,6 +2712,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/Index"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "ManagedAzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Managed Azure AI Search Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
@@ -2721,7 +2839,8 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2742,7 +2861,8 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2784,7 +2904,8 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
