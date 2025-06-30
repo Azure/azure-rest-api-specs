@@ -39,17 +39,6 @@ interface ClusterServers {
     ClusterServer,
     Response = ArmResponse<ClusterServerListResult>
   >;
-
-  /**
-   * List all the configurations of a server in cluster.
-   */
-  @get
-  @action("configurations")
-  listByServer is ArmResourceActionSync<
-    ClusterServer,
-    void,
-    ArmResponse<ResourceListResult<ServerConfiguration>>
-  >;
 }
 
 @@maxLength(ClusterServer.name, 90);

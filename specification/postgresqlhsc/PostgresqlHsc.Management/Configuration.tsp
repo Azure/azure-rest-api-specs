@@ -36,6 +36,17 @@ interface Configurations {
    * List all the configurations of a cluster.
    */
   listByCluster is ArmResourceListByParent<Configuration>;
+
+  /**
+   * List all the configurations of a server in cluster.
+   */
+  @get
+  @action("configurations")
+  listByServer is ArmResourceActionSync<
+    ClusterServer,
+    void,
+    ArmResponse<ResourceListResult<ServerConfiguration>>
+  >;
 }
 
 @@maxLength(Configuration.name, 90);

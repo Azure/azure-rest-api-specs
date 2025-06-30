@@ -30,3 +30,6 @@ using Microsoft.DBforPostgreSQL;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ClusterServer.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(ClusterForUpdate.properties);
