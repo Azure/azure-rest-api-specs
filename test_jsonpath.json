@@ -1,0 +1,39 @@
+{
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}": {
+      "patch": {
+        "operationId": "StorageDiscoveryWorkspaces_Update",
+        "parameters": [
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageDiscoveryWorkspaceUpdate"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "StorageDiscoveryWorkspaceUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDiscoveryWorkspacePropertiesUpdate"
+        }
+      }
+    },
+    "StorageDiscoveryWorkspacePropertiesUpdate": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "default": "Standard",
+          "enum": ["Free", "Standard", "Premium"]
+        }
+      }
+    }
+  }
+}
