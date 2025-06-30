@@ -1792,11 +1792,6 @@
       "description": "Capacity block.",
       "x-ms-azure-resource": true,
       "properties": {
-        "allOf": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-          }
-        ],
         "zone": {
           "description": "Logical Zone in which the block needs to be made available",
           "type": "integer",
@@ -1819,7 +1814,12 @@
           "description": "Schedule profile of Capacity Block Reservation.",
           "$ref": "#/definitions/ScheduleProfile"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Sku": {
       "type": "object",
