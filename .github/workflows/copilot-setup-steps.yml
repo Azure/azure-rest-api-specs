@@ -10,6 +10,7 @@ jobs:
       COPILOT_AGENT_FIREWALL_ALLOW_LIST_ADDITIONS: "https://api.github.com/"
 
     permissions:
+      id-token: write
       contents: read
       checks: read
       statuses: write
@@ -18,6 +19,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
          
+      - name: Authenticate GitHub CLI
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          gh auth status
+          
       - name: Azure Login with Workload Identity Federation
         uses: azure/login@v2
         with:
