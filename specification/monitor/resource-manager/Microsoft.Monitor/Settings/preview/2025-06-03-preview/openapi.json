@@ -166,15 +166,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
-                  }
-                }
-              }
+              "$ref": "#/definitions/AzureMonitorSettingsPublicResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -182,6 +180,9 @@
           "Settings_CreateOrUpdate": {
             "$ref": "./examples/Settings_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
@@ -439,6 +440,23 @@
           "x-ms-mutability": [
             "read"
           ]
+        }
+      }
+    },
+    "AzureMonitorSettingsPublicResourceListResult": {
+      "description": "The response of a list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorSettingsPublicResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results, if any.",
+          "readOnly": true
         }
       }
     }
