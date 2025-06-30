@@ -1,0 +1,28 @@
+{
+  "title": "Approval_NotifyApprovalInitiator",
+  "operationId": "Approval_NotifyApprovalInitiator",
+  "parameters": {
+    "resourceUri": "subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/enclaveconnections/TestMyEnclaveConnection",
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "73CEECEF-2C30-488E-946F-D20F414D99BA",
+    "resourceGroupName": "rgopenapi",
+    "approvalName": "TestApprovals",
+    "body": {
+      "approvalStatus": "Approved"
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "message": "Approved"
+      }
+    },
+    "202": {
+      "description": "Resource operation accepted.",
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  }
+}
