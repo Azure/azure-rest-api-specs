@@ -1,0 +1,136 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ServiceBus;
+/**
+ * Description of a namespace resource.
+ */
+model SBNamespace
+  is Azure.ResourceManager.TrackedResource<SBNamespaceProperties> {
+  ...ResourceNameParameter<
+    Resource = SBNamespace,
+    KeyName = "namespaceName",
+    SegmentName = "namespaces",
+    NamePattern = ""
+  >;
+
+  /**
+   * Properties of SKU
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku?: SBSku;
+
+  /**
+   * Properties of BYOK Identity description
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
+}
+
+@armResourceOperations
+interface SBNamespaces {
+  /**
+   * Gets a description for the specified namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Namespaces_Get")
+  get is ArmResourceRead<SBNamespace>;
+
+  /**
+   * Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Namespaces_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    SBNamespace,
+    Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
+      SBNamespace,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @patch(#{ implicitOptionality: false })
+  @operationId("Namespaces_Update")
+  update is ArmCustomPatchSync<
+    SBNamespace,
+    PatchModel = SBNamespaceUpdateParameters,
+    Response = ArmResponse<SBNamespace> | ArmResourceCreatedSyncResponse<SBNamespace> | AcceptedResponse
+  >;
+
+  /**
+   * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("Namespaces_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    SBNamespace,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets the available namespaces within a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Namespaces_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<SBNamespace>;
+
+  /**
+   * Gets all the available namespaces within the subscription, irrespective of the resource groups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Namespaces_List")
+  list is ArmListBySubscription<SBNamespace>;
+
+  /**
+   * Gets lists of resources that supports Privatelinks.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("privateLinkResources")
+  @operationId("PrivateLinkResources_Get")
+  privateLinkResourcesGet is ArmResourceActionSync<
+    SBNamespace,
+    void,
+    ArmResponse<ResourceListResult<PrivateLinkResource>>
+  >;
+
+  /**
+   * Check the give namespace name availability.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("CheckNameAvailability")
+  @operationId("DisasterRecoveryConfigs_CheckNameAvailability")
+  checkNameAvailability is ArmResourceActionSync<
+    SBNamespace,
+    CheckNameAvailability,
+    ArmResponse<CheckNameAvailabilityResult>
+  >;
+}
+
+@@maxLength(SBNamespace.name, 50);
+@@minLength(SBNamespace.name, 6);
+@@doc(SBNamespace.name, "The namespace name");
+@@doc(SBNamespace.properties, "Properties of the namespace.");
+@@doc(SBNamespaces.createOrUpdate::parameters.resource,
+  "Parameters supplied to create a namespace resource."
+);
+@@doc(SBNamespaces.update::parameters.properties,
+  "Parameters supplied to update a namespace resource."
+);
+@@doc(SBNamespaces.checkNameAvailability::parameters.body,
+  "Parameters to check availability of the given namespace name"
+);
