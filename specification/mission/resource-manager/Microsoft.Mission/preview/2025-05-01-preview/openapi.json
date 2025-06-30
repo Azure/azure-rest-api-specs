@@ -4523,11 +4523,7 @@
         },
         "policyOverride": {
           "type": "string",
-<<<<<<< HEAD
           "description": "Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.",
-=======
-          "description": "Allow enclaves to override community policies",
->>>>>>> a7eeabf54b2bd3b8989d3c736a5001a63b091466
           "enum": [
             "Enclave",
             "None"
@@ -4584,80 +4580,6 @@
         }
       }
     },
-<<<<<<< HEAD
-=======
-    "CommunityPatchModel": {
-      "type": "object",
-      "description": "Community Patch Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CommunityPatchProperties",
-          "description": "Community Patch properties"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "CommunityPatchProperties": {
-      "type": "object",
-      "description": "Community Resource Properties without default values",
-      "properties": {
-        "dnsServers": {
-          "type": "array",
-          "description": "DNS Servers.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "List of services governed by a community.",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "policyOverride": {
-          "type": "string",
-          "description": "Allow enclaves to override community policies",
-          "enum": [
-            "Enclave",
-            "None"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "communityRoleAssignments": {
-          "type": "array",
-          "description": "Community role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "firewallSku": {
-          "$ref": "#/definitions/FirewallSKU",
-          "description": "SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default"
-        },
-        "approvalSettings": {
-          "$ref": "#/definitions/ApprovalSettingsPatchProperties",
-          "description": "Approval requirements for various actions on the community's resources."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
-          "description": "Maintenance Mode configuration."
-        }
-      }
-    },
->>>>>>> a7eeabf54b2bd3b8989d3c736a5001a63b091466
     "CommunityResource": {
       "type": "object",
       "description": "Community Model Resource",
@@ -5355,7 +5277,7 @@
       "properties": {
         "serviceId": {
           "$ref": "#/definitions/ServiceIdentifier",
-          "description": "Service identifier. Acceptable Values: AKS, AppService, ContainerRegistry, CosmosDB, KeyVault, MicrosoftSQL, Monitoring, PostgreSQL, ServiceBus, Storage, AzureFirewalls, Insights, Logic, PrivateDNSZones, DataConnectors"
+          "description": "Service ID"
         },
         "serviceName": {
           "type": "string",
@@ -6150,95 +6072,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-=======
-    "VirtualEnclaveModel": {
-      "type": "object",
-      "description": "Virtual Enclave Resource properties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
-          "description": "Virtual Network."
-        },
-        "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpacesModel",
-          "description": "Enclave Address Spaces",
-          "readOnly": true
-        },
-        "communityResourceId": {
-          "$ref": "#/definitions/CommunityResourceId",
-          "description": "Community Resource Id.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resourceCollection": {
-          "type": "array",
-          "description": "List of resource ids created by Virtual Enclave.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          },
-          "readOnly": true
-        },
-        "managedResourceGroupName": {
-          "type": "string",
-          "description": "Managed resource group name.",
-          "readOnly": true
-        },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
-          "readOnly": true
-        },
-        "bastionEnabled": {
-          "type": "boolean",
-          "description": "Deploy Bastion service (True or False).",
-          "default": false
-        },
-        "enclaveRoleAssignments": {
-          "type": "array",
-          "description": "Enclave role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "workloadRoleAssignments": {
-          "type": "array",
-          "description": "Workload role assignments",
-          "items": {
-            "$ref": "#/definitions/RoleAssignmentItem"
-          }
-        },
-        "governedServiceList": {
-          "type": "array",
-          "description": "Enclave specific policies",
-          "items": {
-            "$ref": "#/definitions/GovernedServiceItem"
-          }
-        },
-        "enclaveDefaultSettings": {
-          "$ref": "#/definitions/EnclaveDefaultSettingsModel",
-          "description": "Enclave default settings."
-        },
-        "maintenanceModeConfiguration": {
-          "$ref": "#/definitions/MaintenanceModeConfigurationModel",
-          "description": "Maintenance Mode configuration."
-        }
-      },
-      "required": [
-        "enclaveVirtualNetwork",
-        "communityResourceId"
-      ]
-    },
->>>>>>> a7eeabf54b2bd3b8989d3c736a5001a63b091466
     "VirtualEnclavePatchModel": {
       "type": "object",
       "description": "Virtual Enclave Patch Model",
