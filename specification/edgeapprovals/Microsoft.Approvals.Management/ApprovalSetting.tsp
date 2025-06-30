@@ -56,8 +56,8 @@ model ApprovalRequestCredentialsSetting {
   @doc("The requested verifiable credentials for devices.")
   device: RequestCredentialSetting;
 
-  @doc("The requested verifiable credentials for the approver management portal.")
-  approverManagementPortal: RequestCredentialSetting;
+  @doc("The requested verifiable credentials for the approver management service.")
+  approverManagementService: RequestCredentialSetting;
 }
 
 @doc("The requested verifiable credentials for a specific type.")
