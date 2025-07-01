@@ -3,7 +3,7 @@ name: After APIView
 on:
   check_run:
     types: [completed]
-    
+
 permissions:
   pull-requests: write
   contents: read
@@ -20,8 +20,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          sparse-checkout: 'eng/common'
-    
+          sparse-checkout: "eng/common"
+
       - name: Create APIView Comment on PR
         run: |
           . "eng/common/scripts/Helpers/ApiView-Helpers.ps1"
