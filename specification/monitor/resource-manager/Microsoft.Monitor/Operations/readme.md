@@ -32,7 +32,7 @@ title: AzureMonitorOperationsClient
 description: Azure Monitor Operations Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-01-preview
+tag: package-2025-06-03-preview
 ```
 
 ### Tag: package-2024-10-01-preview
