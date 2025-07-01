@@ -11395,6 +11395,34 @@
         ]
       }
     },
+    "DnsForwardingRule": {
+      "type": "object",
+      "description": "DNS forwarding rule properties",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "Domain name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "forwardingIpAddress": {
+          "type": "string",
+          "description": "Forwarding ip address",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "domainName",
+        "forwardingIpAddress"
+      ]
+    },
     "DnsPrivateView": {
       "type": "object",
       "description": "DnsPrivateView resource definition",
@@ -13304,6 +13332,59 @@
             "update",
             "create"
           ]
+        },
+        "isOracleToAzureDnsZoneSyncEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether DNS zone sync from OCI to Azure is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isOracleDnsListeningEndpointEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the Oracle DNS listening endpoint is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isOracleDnsForwardingEndpointEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the Oracle DNS forwarding endpoint is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dnsForwardingRules": {
+          "type": "array",
+          "description": "DNS forwarding rules",
+          "items": {
+            "$ref": "#/definitions/DnsForwardingRule"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dnsListeningEndpointIpAddress": {
+          "type": "string",
+          "description": "DNS listening endpoint IP address",
+          "readOnly": true
+        },
+        "dnsForwardingEndpointIpAddress": {
+          "type": "string",
+          "description": "DNS forwarding endpoint IP address",
+          "readOnly": true
         }
       },
       "required": [
@@ -13342,6 +13423,49 @@
         "ociBackupCidrBlock": {
           "type": "string",
           "description": "OCI backup subnet cidr block.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isOracleToAzureDnsZoneSyncEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether DNS zone sync from OCI to Azure is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isOracleDnsListeningEndpointEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the Oracle DNS listening endpoint is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "isOracleDnsForwardingEndpointEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the Oracle DNS forwarding endpoint is enabled",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dnsForwardingRules": {
+          "type": "array",
+          "description": "DNS forwarding rules",
+          "items": {
+            "$ref": "#/definitions/DnsForwardingRule"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
