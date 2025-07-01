@@ -6,7 +6,7 @@ import { getCheckRuns, getCommitStatuses, getWorkflowRuns } from "./github.js";
  * @typedef {RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"]} CommitStatuses
  */
 
-const SUPPORTED_EVENTS = ["workflow_run", "check_run", "check_suite", "status"];
+const SUPPORTED_EVENTS = ["workflow_run", "check_run", "check_suite"];
 
 /* v8 ignore start */
 /**
@@ -27,7 +27,6 @@ export async function verifyRunStatus({ github, context, core }) {
     throw new Error("Neither COMMIT_STATUS nor WORKFLOW_NAME is not set");
   }
 
-  core.info(`Event: ${context.eventName}, context: ${JSON.stringify(context)}`);
   if (!SUPPORTED_EVENTS.some((e) => e === context.eventName)) {
     throw new Error(
       `Unsupported event: ${context.eventName}. Supported events: ${SUPPORTED_EVENTS.join(", ")}`,
