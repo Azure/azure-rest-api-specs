@@ -155,7 +155,7 @@ model MCPToolResource {
 
   @doc("Does MCP server require approval")
   @encodedName("application/json", "require_approval")
-  requireApproval?: "never";
+  requireApproval?: "never" | "always" | string;
 }
 
 /** Available query types for Azure AI Search tool. */

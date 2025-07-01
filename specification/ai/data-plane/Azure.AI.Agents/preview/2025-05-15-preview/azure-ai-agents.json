@@ -4535,10 +4535,11 @@
           "type": "string",
           "description": "Does MCP server require approval",
           "enum": [
-            "never"
+            "never",
+            "always"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-client-name": "requireApproval"
         }
@@ -6671,6 +6672,40 @@
         "name",
         "arguments"
       ]
+    },
+    "RunStepMcpToolCall": {
+      "type": "object",
+      "description": "A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents\nexecuted MCP actions.",
+      "properties": {
+        "arguments": {
+          "type": "string",
+          "description": "Arguments to the MCP tool call, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the function used on the MCP server."
+        },
+        "output": {
+          "type": "string",
+          "description": "Output of the MCP tool call."
+        },
+        "server_label": {
+          "type": "string",
+          "description": "The label for the MCP server",
+          "x-ms-client-name": "serverLabel"
+        }
+      },
+      "required": [
+        "arguments",
+        "name",
+        "output"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "mcp"
     },
     "RunStepMessageCreationDetails": {
       "type": "object",
