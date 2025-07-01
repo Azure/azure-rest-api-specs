@@ -24,9 +24,24 @@ describe("summarizeChecksImpl", () => {
         repo: "azure-rest-api-specs",
         issue_number: 1,
         head_sha: "826b0b976479e5c1aa5e66e1cf43a3f9e66a2477",
+        event_name: "labeled",
         github: github,
         core: mockCore,
+        context: {
+            repo: {
+                owner: "scbedd",
+                repo: "azure-rest-api-specs",
+            },
+            payload: {
+                action: LabelAction.Labeled,
+                label: {
+                name: "test-label", // Example label, adjust as needed
+                },
+            },
+            eventName: "labeled",
+        }
       };
+
 
       // This should not throw and should log information about the PR
       await expect(summarizeChecksImpl(testParams)).resolves.not.toThrow();

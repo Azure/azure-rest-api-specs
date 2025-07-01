@@ -25,8 +25,7 @@ export async function parseExistingComments(comments, commentGroupName) {
     }
 
     return comments.find(comment => {
-        // when we create or update this comment, we will always leave behind
-
+        // When we create or update this comment, we will always leave behind
         // <!-- commentGroupName --> in the body of the comment.
         // This allows us to identify the comment later on.
         return comment.body.includes(commentGroupName);

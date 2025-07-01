@@ -3,6 +3,25 @@ import { extractInputs } from "./context.js";
 // import { PER_PAGE_MAX } from "./github.js";
 
 /**
+ * @typedef {Object} RunInfo
+ * @property {string} status
+ * @property {string} conclusion
+ * @property {string} name
+ * @property {number[]} pullrequests
+ */
+
+
+const TRACKEDCHECKS = [
+  "[TEST-IGNORE] Swagger SemanticValidation",
+  "[TEST-IGNORE] Swagger ModelValidation",
+  "[TEST-IGNORE] Swagger Avocado",
+  "Swagger LintDiff",
+  "SDK Validation Status",
+  "Swagger BreakingChange",
+  "Swagger PrettierCheck"
+]
+
+/**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
@@ -102,19 +121,36 @@ export async function summarizeChecksImpl({
     return;
   }
 
-  // now continue on to the handling of the checks statuses
-  // if they are not all completed, we should bail out early.
-  // Should I look at runs or status?
-  const { data: runs } = await github.rest.checks.listForRef({
+  // Statuses are the old style checks. We are targeting runs here because they are newer and we only need to process
+  // the result of github actions workflows.
+  // it would be much easier to type this right here, but I have been very unlucky in getting the right mapping from the
+  // @octokit/types package. We will just use the raw data for now unless we need deeper typing.
+  const runs = (await github.rest.checks.listForRef({
       owner,
       repo,
       ref: head_sha,
+  })).data.check_runs;
+
+  const applicableRuns = runs.map(run => {
+    return {
+      status: run.status,
+      conclusion: run.conclusion,
+      name: run.name,
+      pullrequests: run.pull_requests.map(pr => pr.number),
+    };
+  }).filter(run => {
+    // Filter out runs that are not applicable to this computation
+    return TRACKEDCHECKS.indexOf(run.name) !== -1;
   });
-  const { data: status } = await github.rest.repos.getCombinedStatusForRef({
-    owner,
-    repo,
-    ref: head_sha,
-  });
+
+  // now we're in a good place to process all the pending checks, then process the next steps to merge comment
+
+  // todo:
+  // - copy the content from private/openapi-kebab/src/bots/pipeline/pipelineEventListener/requiredLabelsRules.ts
+  // - copy the processes from private/openapi-kebab/src/bots/pipeline/pipelineEventListener/renderNextStepsToMerge.ts
+  // - the runs and labels we've pulled down into the necessary inputs for refactor of the above two file contents.
+
+  console.log(applicableRuns);
 }
 
 /**
@@ -188,4 +224,17 @@ export async function handleLabeledEvent({
       // });
     }
   }
+}
+
+
+/**
+ *
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} commentId
+ * @param {string[]} labels
+ * @param {RunInfo[]} runs
+ */
+export async function createNextStepsCommentBody(owner, repo, commentId, labels, runs) {
+
 }
