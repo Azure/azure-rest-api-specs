@@ -46,6 +46,32 @@ model InputDataset extends InputData {
   id: string;
 }
 
+@doc("Simple JSON as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputSimpleJson extends InputData {
+  type: "simpleJson";
+
+  @doc("The LLM query.")
+  query: string;
+
+  @doc("The LLM response.")
+  response: string;
+
+  @doc("The context for the LLM query.")
+  context?: string;
+
+  @doc("The ground truth for the LLM response.")
+  groundTruth?: string;
+}
+
+@doc("Simple JSON as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputFoundryAgentData extends InputData {
+  type: "foundryAgentData";
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -59,6 +85,12 @@ model Evaluation {
 
   @doc("Data for evaluation.")
   data: InputData;
+
+  @doc("Correlation Id for the evaluation. It is used to correlate the evaluation with other resources, e.g. link DataBricks job Id and run Id with AI Foundry evaluation.")
+  correlationId?: string;
+
+  @doc("Configuration for the evaluation.")
+  config?: EvaluationConfig;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
@@ -78,6 +110,37 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+}
+
+@doc("The redaction configuration will allow the user to control what is redacted.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationRedactionConfiguration {
+  @doc("Redact score properties. If not specified, the default is to redact in production.")
+  redactScoreProperties?: boolean;
+}
+
+@doc("Evaluation Configuration Definition")
+@resource("configs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model EvaluationConfiguration {
+  @doc("Identifier of the evaluation configuration.")
+  @key("id")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  id: string;
+
+  @doc("Name of the evaluation configuration.")
+  name: string;
+
+  @doc("Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted.")
+  disableRunPersistence?: boolean;
+
+  @doc("Redaction configuration for the evaluation.")
+  redactionConfig?: EvaluationRedactionConfiguration;
+
+  @doc("Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.")
+  extraResultStorageOptions?: Array<unknown>;
 }
 
 @doc("Definition for sampling strategy.")
