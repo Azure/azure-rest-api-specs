@@ -13,6 +13,19 @@ import { SpecModelError } from "./spec-model-error.js";
  */
 
 /**
+ * @typedef {Object} Operation
+ * @property {string} id - The operation ID
+ * @property {string} path - API path
+ * @property {string} httpMethod - HTTP method (GET, POST, etc.)
+ */
+
+/**
+ * @typedef {Object} SwaggerVersion
+ * @property {string} version
+ * @property {'stable' | 'preview'} kind
+ */
+
+/**
  * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
  */
 const excludeExamples = {
@@ -117,6 +130,25 @@ export class Swagger {
 
     return filtered;
   }
+
+  /**
+   * @returns {Promise<Map<string, Operation>>} Key is Operation.Id
+   */
+  async getOperations() {}
+
+  /**
+   * @returns {SwaggerVersion} Extracts version information from swagger path
+   */
+  get version() {}
+
+  /**
+   * @returns {Promise<{preview?: Swagger, stable?: Swagger}>}
+   */
+  async getPreceedingSwaggers() {
+    this.tag?.readme?.specModel?.getSwaggers();
+  }
+
+  async getLegacyVersionOperations() {}
 
   /**
    * @returns {string} absolute path
