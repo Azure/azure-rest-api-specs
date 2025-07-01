@@ -8,9 +8,11 @@ on:
         description: Name of the check run to verify
         required: true
         type: string
+      commit_status_name:
+        description: Name of the commit status to verify
+        type: string
       workflow_name:
         description: Name of the workflow to verify
-        required: true
         type: string
 
 permissions:
@@ -23,9 +25,11 @@ jobs:
     # happens when a workflow is triggered by a PR submitted by a user who does
     # not have correct permissions.
     if: |
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'action_required') || 
-      (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') || 
-      (github.event_name == 'check_run' && github.event.check_run.name == inputs.check_run_name)
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'action_required' &&
+       (inputs.workflow_name == '' || github.event.workflow_run.name == inputs.workflow_name)) ||
+      (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') ||
+      (github.event_name == 'check_run' && github.event.check_run.name == inputs.check_run_name) ||
+      (github.event_name == 'status' && inputs.commit_status_name != '' && github.event.context == inputs.commit_status_name)
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -41,4 +45,5 @@ jobs:
             return await verifyRunStatus({ github, context, core });
         env:
           CHECK_RUN_NAME: ${{ inputs.check_run_name }}
+          COMMIT_STATUS_NAME: ${{ inputs.commit_status_name }}
           WORKFLOW_NAME: ${{ inputs.workflow_name }}
