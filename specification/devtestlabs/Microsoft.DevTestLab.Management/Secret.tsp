@@ -81,7 +81,7 @@ interface Secrets {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Secret, PatchModel = SecretFragment>;
+  update is SecretOps.CustomPatchSync<Secret, PatchModel = SecretFragment>;
 
   /**
    * Delete secret.

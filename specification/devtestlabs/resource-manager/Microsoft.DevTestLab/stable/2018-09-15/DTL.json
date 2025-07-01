@@ -5524,6 +5524,73 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Secrets_Update",
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Allows modifying tags of secrets. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "The name of the user profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secret",
+            "in": "body",
+            "description": "A secret.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretFragment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Secrets_Update": {
+            "$ref": "./examples/Secrets_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "Secrets_Delete",
         "tags": [
@@ -9063,61 +9130,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/secrets/{name}": {
-      "patch": {
-        "operationId": "Secrets_Update",
-        "tags": [
-          "Secrets"
-        ],
-        "description": "Allows modifying tags of secrets. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the secret.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "secret",
-            "in": "body",
-            "description": "A secret.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecretFragment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Secret"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Secrets_Update": {
-            "$ref": "./examples/Secrets_Update.json"
-          }
-        }
       }
     }
   },
