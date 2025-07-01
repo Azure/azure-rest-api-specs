@@ -59,7 +59,7 @@ interface Operations {
 
     @path
     @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
+    @doc("The provider namespace (this parameter test will not show up in operations).")
     provider: "Microsoft.DesktopVirtualization",
   ): ArmResponse<ResourceProviderOperationListResult> | ErrorResponse;
 }
@@ -74,4 +74,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_08_08_preview: "2024-08-08-preview",
+
+  /**
+   * The 2024-09-08-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_09_08_preview: "2024-09-08-preview",
 }
