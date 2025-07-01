@@ -2530,20 +2530,34 @@
       "type": "object",
       "description": "The properties of the occurrence extension",
       "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the occurrence is scheduled for. This value can be changed by calling the delay API",
-          "readOnly": true
-        },
-        "resultSummary": {
-          "$ref": "#/definitions/OccurrenceResultSummary",
-          "description": "The result for occurrences that achieved a terminal state",
+          "description": "The time the occurrence is scheduled for the resource. Specified in UTC.",
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/OccurrenceState",
-          "description": "The aggregated provisioning state of the occurrence",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The current state of the resource",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details for the resource. Only populated if resource is in failed state.",
           "readOnly": true
         },
         "scheduledActionId": {
@@ -2552,8 +2566,8 @@
         }
       },
       "required": [
+        "resourceId",
         "scheduledTime",
-        "resultSummary",
         "scheduledActionId"
       ]
     },

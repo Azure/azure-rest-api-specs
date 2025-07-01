@@ -110,7 +110,27 @@ scalar ScheduledActionsId
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The properties of the occurrence extension")
 model OccurrenceExtensionProperties {
-  ...OccurrenceProperties;
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+
+  @doc("The time the occurrence is scheduled for the resource. Specified in UTC.")
+  @visibility(Lifecycle.Read)
+  scheduledTime: utcDateTime;
+
+  @doc("The current state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("Error details for the resource. Only populated if resource is in failed state.")
+  @visibility(Lifecycle.Read)
+  errorDetails?: Azure.Core.Foundations.Error;
 
   @doc("The arm identifier of the scheduled action the occurrence belongs to")
   scheduledActionId: ScheduledActionsId;
