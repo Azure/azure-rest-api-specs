@@ -2131,7 +2131,8 @@
         "branchName": {
           "type": "string",
           "description": "Name of the branch",
-          "pattern": "^\\S.{0,126}\\S$|^\\S$"
+          "pattern": "^\\S.{0,126}\\S$|^\\S$",
+          "readOnly": true
         },
         "dataSize": {
           "type": "string",
@@ -2403,15 +2404,18 @@
         "endpointName": {
           "type": "string",
           "description": "Name of the endpoint",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          "pattern": "^\\S.{0,62}\\S$|^\\S$",
+          "readOnly": true
         },
         "currentState": {
           "type": "string",
-          "description": "The current state of the endpoint"
+          "description": "The current state of the endpoint",
+          "readOnly": true
         },
         "lastActive": {
           "type": "string",
-          "description": "The timestamp when the endpoint was last active"
+          "description": "The timestamp when the endpoint was last active",
+          "readOnly": true
         },
         "size": {
           "$ref": "#/definitions/AutoscalingSize",
@@ -2901,7 +2905,8 @@
         "databaseName": {
           "type": "string",
           "description": "Name of the database",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          "pattern": "^\\S.{0,62}\\S$|^\\S$",
+          "readOnly": true
         },
         "lastUpdated": {
           "type": "string",
@@ -2997,7 +3002,8 @@
         "roleName": {
           "type": "string",
           "description": "Name of the role",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          "pattern": "^\\S.{0,62}\\S$|^\\S$",
+          "readOnly": true
         },
         "lastUpdated": {
           "type": "string",
@@ -3006,7 +3012,8 @@
         },
         "owns": {
           "type": "string",
-          "description": "Databases name associated with the role"
+          "description": "Databases name associated with the role",
+          "readOnly": true
         }
       }
     },

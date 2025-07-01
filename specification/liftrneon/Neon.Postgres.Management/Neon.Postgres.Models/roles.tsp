@@ -33,6 +33,7 @@ model NeonRoleProperties {
   isSuperUser?: boolean;
 
   @doc("Name of the role")
+  @visibility(Lifecycle.Read)
   @pattern("^\\S.{0,62}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
   roleName?: string;
@@ -44,5 +45,6 @@ model NeonRoleProperties {
 
   @doc("Databases name associated with the role")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   owns?: string;
 }

@@ -55,6 +55,7 @@ model BranchProperties {
   branchId?: string;
 
   @doc("Name of the branch")
+  @visibility(Lifecycle.Read)
   @pattern("^\\S.{0,126}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
   branchName?: string;

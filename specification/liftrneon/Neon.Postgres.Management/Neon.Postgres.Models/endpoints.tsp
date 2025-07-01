@@ -41,14 +41,17 @@ model EndpointProperties {
   @doc("Name of the endpoint")
   @pattern("^\\S.{0,62}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   endpointName?: string;
 
   @doc("The current state of the endpoint")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   currentState?: string;
 
   @doc("The timestamp when the endpoint was last active")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   lastActive?: string;
 
   @doc("The compute units size range for autoscaling (MinCU-MaxCU)")

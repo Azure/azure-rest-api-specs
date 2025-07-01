@@ -73,8 +73,6 @@
             ],
             "projectId": "project-123",
             "parentId": "main-branch",
-            "roleName": "admin",
-            "databaseName": "postgres",
             "roles": [
               {
                 "entityName": "read_only_role",
@@ -88,9 +86,7 @@
                 "permissions": [
                   "SELECT"
                 ],
-                "isSuperUser": true,
-                "roleName": "reader",
-                "owns": "public.users"
+                "isSuperUser": true
               }
             ],
             "databases": [
@@ -103,8 +99,7 @@
                   }
                 ],
                 "branchId": "branch-123",
-                "ownerName": "postgres",
-                "databaseName": "application"
+                "ownerName": "postgres"
               }
             ],
             "endpoints": [
@@ -119,18 +114,13 @@
                 "projectId": "project-123",
                 "branchId": "branch-123",
                 "endpointType": "read_only",
-                "endpointName": "read-replica",
-                "currentState": "active",
-                "lastActive": "2025-06-30",
                 "size": {
                   "autoscalingLimitMinCu": 14,
                   "autoscalingLimitMaxCu": 3
                 }
               }
             ],
-            "branchName": "feature-branch",
             "dataSize": "10GB",
-            "lastActive": "2025-06-30",
             "computeHours": "120",
             "primaryCompute": "compute-123"
           },
@@ -147,9 +137,7 @@
               "permissions": [
                 "ALL"
               ],
-              "isSuperUser": true,
-              "roleName": "administrator",
-              "owns": "public.all_tables"
+              "isSuperUser": true
             }
           ],
           "databases": [
@@ -162,8 +150,7 @@
                 }
               ],
               "branchId": "branch-123",
-              "ownerName": "postgres",
-              "databaseName": "main"
+              "ownerName": "postgres"
             }
           ],
           "endpoints": [
@@ -178,9 +165,6 @@
               "projectId": "project-123",
               "branchId": "branch-123",
               "endpointType": "read_only",
-              "endpointName": "primary",
-              "currentState": "active",
-              "lastActive": "2025-06-30",
               "size": {
                 "autoscalingLimitMinCu": 14,
                 "autoscalingLimitMaxCu": 3

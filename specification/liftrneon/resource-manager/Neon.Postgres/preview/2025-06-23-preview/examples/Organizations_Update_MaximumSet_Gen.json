@@ -73,8 +73,6 @@
             ],
             "projectId": "project-123",
             "parentId": "main-branch",
-            "roleName": "admin",
-            "databaseName": "postgres",
             "roles": [
               {
                 "entityName": "read_only_role",
@@ -88,9 +86,7 @@
                 "permissions": [
                   "SELECT"
                 ],
-                "isSuperUser": true,
-                "roleName": "reader",
-                "owns": "public.users"
+                "isSuperUser": true
               }
             ],
             "databases": [
@@ -103,8 +99,7 @@
                   }
                 ],
                 "branchId": "branch-123",
-                "ownerName": "postgres",
-                "databaseName": "appdb"
+                "ownerName": "postgres"
               }
             ],
             "endpoints": [
@@ -119,19 +114,12 @@
                 "projectId": "project-123",
                 "branchId": "branch-123",
                 "endpointType": "read_write",
-                "endpointName": "primary",
-                "currentState": "active",
-                "lastActive": "2023-06-15T10:30:00Z",
                 "size": {
                   "autoscalingLimitMinCu": 1,
                   "autoscalingLimitMaxCu": 4
                 }
               }
             ],
-            "branchName": "main",
-            "dataSize": "1.2 GB",
-            "lastActive": "2023-06-15T10:30:00Z",
-            "computeHours": "12.5",
             "primaryCompute": "enabled"
           },
           "roles": [
@@ -147,9 +135,7 @@
               "permissions": [
                 "ALL"
               ],
-              "isSuperUser": true,
-              "roleName": "admin",
-              "owns": "public.accounts"
+              "isSuperUser": true
             }
           ],
           "databases": [
@@ -162,8 +148,7 @@
                 }
               ],
               "branchId": "branch-123",
-              "ownerName": "postgres",
-              "databaseName": "postgres"
+              "ownerName": "postgres"
             }
           ],
           "endpoints": [
@@ -176,11 +161,7 @@
                 }
               ],
               "projectId": "project-123",
-              "branchId": "branch-123",
-              "endpointType": "read_only",
-              "endpointName": "readonly",
-              "currentState": "active",
-              "lastActive": "2023-06-15T10:30:00Z",
+              "branchId": "branch-123",                "endpointType": "read_only",
               "size": {
                 "autoscalingLimitMinCu": 1,
                 "autoscalingLimitMaxCu": 2
@@ -338,10 +319,6 @@
                 }
               ],
               "branchId": "branch-123",
-              "branchName": "main",
-              "dataSize": "1.2 GB",
-              "lastActive": "2023-06-15T10:30:00Z",
-              "computeHours": "12.5",
               "primaryCompute": "enabled"
             },
             "roles": [
