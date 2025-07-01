@@ -54,6 +54,15 @@ input-file:
 - preview\2025-03-01-preview\operations.json
 ```
 
+### Tag: package-2025-06-03-preview
+
+These settings apply only when `--tag=package-2025-06-03-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2025-06-03-preview'
+input-file:
+- preview\2025-06-03-preview\openapi.json
+```
+
 ---
 
 # Code Generation
