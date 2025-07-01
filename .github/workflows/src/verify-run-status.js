@@ -113,32 +113,25 @@ export async function verifyRunStatusImpl({
     // Get the commit status
     let commitStatusContext, commitStatusState, commitStatusTargetUrl;
 
-    if (context.eventName === "status") {
-      // For status events, the payload contains the status data directly
-      commitStatusContext = context.payload.context;
-      commitStatusState = context.payload.state;
-      commitStatusTargetUrl = context.payload.target_url;
-    } else {
-      // Fetch the commit status from the API
-      try {
-        const commitStatuses = await getCommitStatuses(github, context, commitStatusName, head_sha);
+    // Fetch the commit status from the API
+    try {
+      const commitStatuses = await getCommitStatuses(github, context, commitStatusName, head_sha);
+      if (commitStatuses && commitStatuses.length > 0) {
         commitStatusContext = commitStatuses[0].context;
         commitStatusState = commitStatuses[0].state;
         commitStatusTargetUrl = commitStatuses[0].target_url;
-      } catch (error) {
-        core.setFailed(
-          `Failed to fetch commit status: ${error instanceof Error ? error.message : String(error)}`,
-        );
-        return;
       }
+    } catch (error) {
+      core.setFailed(
+        `Failed to fetch commit status: ${error instanceof Error ? error.message : String(error)}`,
+      );
+      return;
     }
 
     core.info(
       `Commit status context: ${commitStatusContext}, state: ${commitStatusState}, URL: ${commitStatusTargetUrl}`,
     );
-    core.debug(
-      `Commit status: ${JSON.stringify({ context: commitStatusContext, state: commitStatusState, target_url: commitStatusTargetUrl })}`,
-    );
+
     if (commitStatusState === "pending") {
       core.notice(
         `Commit status is in pending state. Skipping comparison with check run conclusion.`,
