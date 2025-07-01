@@ -367,16 +367,17 @@
       "type": "object",
       "properties": {
         "defaultAzureMonitorWorkspace": {
-          "type": "string"
+          "type": "string",
+          "description": "The ARM resource ID of the Azure monitor workspace account."
         }
       }
     },
     "AzureMonitorSettingsPublicResource": {
-      "description": "Definition of ARM tracked top level resource.",
+      "description": "Defines the Azure monitor settings resource.",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Resource properties.",
+          "description": "Defines the Azure monitor setting resource properties.",
           "allOf": [
             {
               "$ref": "#/definitions/AzureMonitorSettingsPublic"

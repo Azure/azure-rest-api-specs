@@ -45,4 +45,7 @@ directive:
     reason: Operations API was moved to its own service.
     from: openapi.json
 
+  - suppress: TenantLevelAPIsNotAllowed
+    reason: Default Azure monitor settings scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
+    from: openapi.json
 ```
