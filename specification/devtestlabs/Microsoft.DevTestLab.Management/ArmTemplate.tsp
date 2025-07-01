@@ -16,7 +16,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(ArtifactSource)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ArmTemplate extends Resource {
@@ -30,11 +29,34 @@ model ArmTemplate extends Resource {
 }
 
 @armResourceOperations
+interface ArmTemplatesOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the artifact source. */
+        @path @segment("artifactSource") artifactSourceName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ArmTemplate,
+        KeyName = "name",
+        SegmentName = "armtemplates",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ArmTemplates {
   /**
    * Get azure resource manager template.
    */
-  get is ArmResourceRead<
+  get is ArmTemplatesOps.Read<
     ArmTemplate,
     Parameters = {
       /**
@@ -48,7 +70,7 @@ interface ArmTemplates {
   /**
    * List azure resource manager templates in a given artifact source.
    */
-  list is ArmResourceListByParent<
+  list is ArmTemplatesOps.List<
     ArmTemplate,
     Parameters = {
       /**
@@ -81,5 +103,3 @@ interface ArmTemplates {
 
 @@doc(ArmTemplate.name, "The name of the azure resource manager template.");
 @@doc(ArmTemplate.properties, "The properties of the resource.");
-@@doc(ArmTemplate.tags, "The tags of the resource.");
-@@doc(ArmTemplate.location, "The location of the resource.");

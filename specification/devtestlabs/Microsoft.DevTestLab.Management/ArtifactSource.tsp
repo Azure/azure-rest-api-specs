@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
@@ -25,7 +24,7 @@ model ArtifactSource extends Resource {
   @path
   @key
   @segment("artifactsources")
-  artifactSourceName: string;
+  name: string;
 
   properties: ArtifactSourceProperties;
 }
@@ -100,7 +99,7 @@ interface ArtifactSources {
   >;
 }
 
-@@doc(ArtifactSource.artifactSourceName, "The name of the artifact source.");
+@@doc(ArtifactSource.name, "The name of the artifact source.");
 @@doc(ArtifactSource.properties, "The properties of the resource.");
 @@doc(ArtifactSources.createOrUpdate::parameters.resource,
   "Properties of an artifact source."
@@ -108,5 +107,3 @@ interface ArtifactSources {
 @@doc(ArtifactSources.update::parameters.properties,
   "Properties of an artifact source."
 );
-@@doc(ArtifactSource.tags, "The tags of the resource.");
-@@doc(ArtifactSource.location, "The location of the resource.");

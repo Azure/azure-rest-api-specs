@@ -17,7 +17,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(ArtifactSource)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model Artifact extends Resource {
@@ -31,11 +30,34 @@ model Artifact extends Resource {
 }
 
 @armResourceOperations
+interface ArtifactOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the artifact source. */
+        @path @segment("artifactSource") artifactSourceName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Artifact,
+        KeyName = "name",
+        SegmentName = "artifacts",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Artifacts {
   /**
    * Get artifact.
    */
-  get is ArmResourceRead<
+  get is ArtifactOps.Read<
     Artifact,
     Parameters = {
       /**
@@ -49,7 +71,7 @@ interface Artifacts {
   /**
    * List artifacts in a given artifact source.
    */
-  list is ArmResourceListByParent<
+  list is ArtifactOps.List<
     Artifact,
     Parameters = {
       /**
@@ -82,7 +104,7 @@ interface Artifacts {
   /**
    * Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.
    */
-  generateArmTemplate is ArmResourceActionSync<
+  generateArmTemplate is ArtifactOps.ActionSync<
     Artifact,
     GenerateArmTemplateRequest,
     ArmResponse<ArmTemplateInfo>
@@ -94,5 +116,3 @@ interface Artifacts {
 @@doc(Artifacts.generateArmTemplate::parameters.body,
   "Parameters for generating an ARM template for deploying artifacts."
 );
-@@doc(Artifact.tags, "The tags of the resource.");
-@@doc(Artifact.location, "The location of the resource.");

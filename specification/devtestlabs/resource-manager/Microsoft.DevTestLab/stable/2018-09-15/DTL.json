@@ -645,322 +645,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
-      "get": {
-        "operationId": "ArtifactSources_List",
-        "tags": [
-          "ArtifactSources"
-        ],
-        "description": "List artifact sources in a given lab.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactSourceList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArtifactSources_List": {
-            "$ref": "./examples/ArtifactSources_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}": {
-      "get": {
-        "operationId": "ArtifactSources_Get",
-        "tags": [
-          "ArtifactSources"
-        ],
-        "description": "Get artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactSource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArtifactSources_Get": {
-            "$ref": "./examples/ArtifactSources_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "ArtifactSources_CreateOrUpdate",
-        "tags": [
-          "ArtifactSources"
-        ],
-        "description": "Create or replace an existing artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSource",
-            "in": "body",
-            "description": "Properties of an artifact source.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactSource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'ArtifactSource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ArtifactSource"
-            }
-          },
-          "201": {
-            "description": "Resource 'ArtifactSource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ArtifactSource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArtifactSources_CreateOrUpdate": {
-            "$ref": "./examples/ArtifactSources_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "ArtifactSources_Update",
-        "tags": [
-          "ArtifactSources"
-        ],
-        "description": "Allows modifying tags of artifact sources. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSource",
-            "in": "body",
-            "description": "Properties of an artifact source.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ArtifactSourceFragment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactSource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArtifactSources_Update": {
-            "$ref": "./examples/ArtifactSources_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "ArtifactSources_Delete",
-        "tags": [
-          "ArtifactSources"
-        ],
-        "description": "Delete artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArtifactSources_Delete": {
-            "$ref": "./examples/ArtifactSources_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/armtemplates": {
       "get": {
         "operationId": "ArmTemplates_List",
         "tags": [
@@ -1045,7 +730,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/armtemplates/{name}": {
       "get": {
         "operationId": "ArmTemplates_Get",
         "tags": [
@@ -1079,7 +764,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the azure resource manager template.",
+            "description": "The name of the ArmTemplate",
             "required": true,
             "type": "string"
           },
@@ -1112,7 +797,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts": {
       "get": {
         "operationId": "Artifacts_List",
         "tags": [
@@ -1197,7 +882,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts/{name}": {
       "get": {
         "operationId": "Artifacts_Get",
         "tags": [
@@ -1231,7 +916,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact.",
+            "description": "The name of the Artifact",
             "required": true,
             "type": "string"
           },
@@ -1264,7 +949,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
       "post": {
         "operationId": "Artifacts_GenerateArmTemplate",
         "tags": [
@@ -1298,7 +983,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact.",
+            "description": "The name of the Artifact",
             "required": true,
             "type": "string"
           },
@@ -1329,6 +1014,321 @@
         "x-ms-examples": {
           "Artifacts_GenerateArmTemplate": {
             "$ref": "./examples/Artifacts_GenerateArmTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
+      "get": {
+        "operationId": "ArtifactSources_List",
+        "tags": [
+          "ArtifactSources"
+        ],
+        "description": "List artifact sources in a given lab.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_List": {
+            "$ref": "./examples/ArtifactSources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}": {
+      "get": {
+        "operationId": "ArtifactSources_Get",
+        "tags": [
+          "ArtifactSources"
+        ],
+        "description": "Get artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Get": {
+            "$ref": "./examples/ArtifactSources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ArtifactSources_CreateOrUpdate",
+        "tags": [
+          "ArtifactSources"
+        ],
+        "description": "Create or replace an existing artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSource",
+            "in": "body",
+            "description": "Properties of an artifact source.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ArtifactSource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ArtifactSource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_CreateOrUpdate": {
+            "$ref": "./examples/ArtifactSources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ArtifactSources_Update",
+        "tags": [
+          "ArtifactSources"
+        ],
+        "description": "Allows modifying tags of artifact sources. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSource",
+            "in": "body",
+            "description": "Properties of an artifact source.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactSourceFragment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Update": {
+            "$ref": "./examples/ArtifactSources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ArtifactSources_Delete",
+        "tags": [
+          "ArtifactSources"
+        ],
+        "description": "Delete artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArtifactSources_Delete": {
+            "$ref": "./examples/ArtifactSources_Delete.json"
           }
         }
       }
@@ -9491,11 +9491,7 @@
           "description": "The ArtifactSource items on this page",
           "items": {
             "$ref": "#/definitions/ArtifactSource"
-          },
-          "x-ms-identifiers": [
-            "artifactSourceName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
