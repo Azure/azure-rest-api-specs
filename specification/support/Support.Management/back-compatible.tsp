@@ -21,6 +21,9 @@ using Microsoft.Support;
 @@clientName(SupportTicketsNoSubscription.create::parameters.resource,
   "createSupportTicketParameters"
 );
+@@clientName(SupportTicketsNoSubscription.checkNameAvailability::parameters.body,
+  "checkNameAvailabilityInput"
+);
 @@clientName(SupportTicketsNoSubscription.update::parameters.properties,
   "updateSupportTicket"
 );
