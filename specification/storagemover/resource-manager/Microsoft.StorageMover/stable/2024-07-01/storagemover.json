@@ -1915,7 +1915,6 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Agent items on this page",
           "items": {
             "$ref": "#/definitions/Agent"
           },
@@ -1923,13 +1922,10 @@
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "AgentProperties": {
       "type": "object",
@@ -2320,21 +2316,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Endpoint items on this page",
           "items": {
             "$ref": "#/definitions/Endpoint"
           },
           "readOnly": true
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "EndpointType": {
       "type": "string",
@@ -2393,21 +2383,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The JobDefinition items on this page",
           "items": {
             "$ref": "#/definitions/JobDefinition"
           },
           "readOnly": true
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "JobDefinitionProperties": {
       "type": "object",
@@ -2599,21 +2583,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The JobRun items on this page",
           "items": {
             "$ref": "#/definitions/JobRun"
           },
           "readOnly": true
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "JobRunProperties": {
       "type": "object",
@@ -2764,7 +2742,9 @@
           "readOnly": true
         },
         "sourceProperties": {
+          "type": "object",
           "description": "Copy of source Endpoint resource's properties at time of Job Run creation.",
+          "additionalProperties": {},
           "readOnly": true
         },
         "targetName": {
@@ -2778,11 +2758,15 @@
           "readOnly": true
         },
         "targetProperties": {
+          "type": "object",
           "description": "Copy of Endpoint resource's properties at time of Job Run creation.",
+          "additionalProperties": {},
           "readOnly": true
         },
         "jobDefinitionProperties": {
+          "type": "object",
           "description": "Copy of parent Job Definition's properties at time of Job Run creation.",
+          "additionalProperties": {},
           "readOnly": true
         },
         "error": {
@@ -2888,21 +2872,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Project items on this page",
           "items": {
             "$ref": "#/definitions/Project"
           },
           "readOnly": true
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ProjectProperties": {
       "type": "object",
@@ -3046,21 +3024,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageMover items on this page",
           "items": {
             "$ref": "#/definitions/StorageMover"
           },
           "readOnly": true
         },
         "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "type": "string"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StorageMoverProperties": {
       "type": "object",
@@ -3181,6 +3153,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any running migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.",
+          "minimum": 0,
           "maximum": 2147483647
         }
       },

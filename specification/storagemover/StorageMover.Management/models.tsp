@@ -190,7 +190,14 @@ model OperationDisplay {
 /**
  * List of Storage Movers.
  */
-model StorageMoverList is Azure.Core.Page<StorageMover>;
+@Azure.Core.pagedResult
+model StorageMoverList {
+  @Azure.Core.items
+  value?: StorageMover[];
+
+  @nextLink
+  nextLink?: string;
+}
 
 @@visibility(StorageMoverList.value, Lifecycle.Read);
 
@@ -241,7 +248,18 @@ model StorageMoverUpdateProperties {
 /**
  * List of Agents.
  */
-model AgentList is Azure.Core.Page<Agent>;
+@Azure.Core.pagedResult
+model AgentList {
+  @Azure.Core.items
+  value?: Agent[];
+
+  /**
+   * Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 @@visibility(AgentList.value, Lifecycle.Read);
 
@@ -410,6 +428,7 @@ model UploadLimit {
   /**
    * The WAN-link upload bandwidth (maximum data transfer rate) in megabits per second. Value of 0 indicates no throughput is allowed and any running migration job is effectively paused for the duration of this recurrence. Only data plane operations are governed by this limit. Control plane operations ensure seamless functionality. The agent may exceed this limit with control messages, if necessary.
    */
+  @minValue(0)
   @maxValue(2147483647)
   limitInMbps?: int32;
 }
@@ -440,7 +459,14 @@ model AgentUpdateProperties {
 /**
  * List of Endpoints.
  */
-model EndpointList is Azure.Core.Page<Endpoint>;
+@Azure.Core.pagedResult
+model EndpointList {
+  @Azure.Core.items
+  value?: Endpoint[];
+
+  @nextLink
+  nextLink?: string;
+}
 
 @@visibility(EndpointList.value, Lifecycle.Read);
 
@@ -497,8 +523,14 @@ model EndpointBaseUpdateProperties {
 /**
  * List of Project resources.
  */
-model ProjectList is Azure.Core.Page<Project>;
+@Azure.Core.pagedResult
+model ProjectList {
+  @Azure.Core.items
+  value?: Project[];
 
+  @nextLink
+  nextLink?: string;
+}
 @@visibility(ProjectList.value, Lifecycle.Read);
 
 /**
@@ -542,7 +574,14 @@ model ProjectUpdateProperties {
 /**
  * List of Job Definitions.
  */
-model JobDefinitionList is Azure.Core.Page<JobDefinition>;
+@Azure.Core.pagedResult
+model JobDefinitionList {
+  @Azure.Core.items
+  value?: JobDefinition[];
+
+  @nextLink
+  nextLink?: string;
+}
 
 @@visibility(JobDefinitionList.value, Lifecycle.Read);
 
@@ -691,7 +730,14 @@ model JobRunResourceId {
 /**
  * List of Job Runs.
  */
-model JobRunList is Azure.Core.Page<JobRun>;
+@Azure.Core.pagedResult
+model JobRunList {
+  @Azure.Core.items
+  value?: JobRun[];
+
+  @nextLink
+  nextLink?: string;
+}
 
 @@visibility(JobRunList.value, Lifecycle.Read);
 
@@ -841,7 +887,7 @@ model JobRunProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  sourceProperties?: unknown;
+  sourceProperties?: Record<unknown>;
 
   /**
    * Name of target Endpoint resource. This resource may no longer exist.
@@ -860,14 +906,14 @@ model JobRunProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  targetProperties?: unknown;
+  targetProperties?: Record<unknown>;
 
   /**
    * Copy of parent Job Definition's properties at time of Job Run creation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  jobDefinitionProperties?: unknown;
+  jobDefinitionProperties?: Record<unknown>;
 
   /**
    * Error details.
