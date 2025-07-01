@@ -1,5 +1,8 @@
 emit:
   - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/resourcemanager"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
@@ -7,6 +10,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/ComputeRP/{version-status}/{version}/ComputeRP.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-compute"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.compute"
+    service-name: "Compute"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
