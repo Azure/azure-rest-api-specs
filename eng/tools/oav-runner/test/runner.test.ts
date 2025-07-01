@@ -42,7 +42,7 @@ describe("file processing", () => {
       "specification/serviceB/data-plane/service.B/stable/2025-06-01/examples/CreateResource.json",
     ];
     const expected = [
-      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json"
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
     ];
 
     const result = await processFilesToSpecificationList(ROOT, changedFiles);

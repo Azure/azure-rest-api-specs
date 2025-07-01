@@ -4,6 +4,7 @@
   "type": "module",
   "exports": {
     "./array": "./src/array.js",
+    "./breaking-change": "./src/breaking-change.js",
     "./changed-files": "./src/changed-files.js",
     "./equality": "./src/equality.js",
     "./error-reporting": "./src/error-reporting.js",
@@ -30,7 +31,7 @@
     "@apidevtools/json-schema-ref-parser": "^14.0.1",
     "debug": "^4.4.0",
     "js-yaml": "^4.1.0",
-    "marked": "^15.0.7",
+    "marked": "^16.0.0",
     "simple-git": "^3.27.0"
   },
   "devDependencies": {
@@ -51,9 +52,9 @@
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "eslint",
     "lint:tsc": "tsc && echo 'Type checking completed successfully'",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   }
