@@ -6,28 +6,26 @@ import * as fs from "fs";
 
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { includesFolder } from "@azure-tools/specs-shared/path";
-import {
-  getChangedFiles,
-} from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
+import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
 
-export async function preCheckFiltering(rootDirectory: string, fileList?: string[]): Promise<string[]> {
-  const changedFiles = fileList ?? await getChangedFiles({ cwd: rootDirectory });
+export async function preCheckFiltering(
+  rootDirectory: string,
+  fileList?: string[],
+): Promise<string[]> {
+  const changedFiles = fileList ?? (await getChangedFiles({ cwd: rootDirectory }));
 
-  const swaggerFiles = await processFilesToSpecificationList(
-    rootDirectory,
-    changedFiles,
-  );
+  const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
 
-  console.log('oav-runner is checking the following specification rooted files:');
-  swaggerFiles.forEach(file => console.log(`- ${file}`));
+  console.log("oav-runner is checking the following specification rooted files:");
+  swaggerFiles.forEach((file) => console.log(`- ${file}`));
 
   return swaggerFiles;
 }
 
 export async function checkExamples(
   rootDirectory: string,
-  fileList?: string[]
+  fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
@@ -48,17 +46,13 @@ export async function checkExamples(
       }
     } catch (e) {
       if (e instanceof Error) {
-        console.log(
-          `Error validating examples for ${swaggerFile}: ${e.message}`,
-        );
+        console.log(`Error validating examples for ${swaggerFile}: ${e.message}`);
         errors.push({
           message: e.message,
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        console.log(
-          `Error validating examples for ${swaggerFile}: ${e}`,
-        );
+        console.log(`Error validating examples for ${swaggerFile}: ${e}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${e}`,
           file: swaggerFile,
@@ -75,7 +69,7 @@ export async function checkExamples(
 
 export async function checkSpecs(
   rootDirectory: string,
-  fileList?: string[]
+  fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
@@ -118,15 +112,11 @@ export async function checkSpecs(
   return [0, swaggerFiles, []];
 }
 
-async function getFiles(
-  rootDirectory: string,
-  directory: string,
-): Promise<string[]> {
+async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
   const target = path.join(rootDirectory, directory);
   const items = await fs.promises.readdir(target, {
     withFileTypes: true,
   });
-
 
   return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
@@ -150,7 +140,7 @@ function swagger(file: string): boolean {
     (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
     includesFolder(file, "specification") &&
     !includesFolder(file, "examples")
-  )
+  );
 }
 
 export async function processFilesToSpecificationList(
@@ -185,15 +175,12 @@ export async function processFilesToSpecificationList(
 
       for (const swaggerFile of visibleSwaggerFiles) {
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
-          const swaggerModel = new Swagger(
-            path.join(rootDirectory, swaggerFile),
-          );
+          const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
           try {
             const exampleSwaggers = await swaggerModel.getExamples();
-            const examples = [...exampleSwaggers.keys()]
+            const examples = [...exampleSwaggers.keys()];
             cachedSwaggerSpecs.set(swaggerFile, examples);
-          }
-          catch (e) {
+          } catch (e) {
             console.log(
               `Error getting examples for ${swaggerFile}: ${e instanceof Error ? e.message : String(e)}`,
             );
