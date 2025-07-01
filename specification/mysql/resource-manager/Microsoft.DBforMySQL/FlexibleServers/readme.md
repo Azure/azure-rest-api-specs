@@ -126,7 +126,7 @@ input-file:
 - preview/2022-09-30-preview/FlexibleServers.json
 - preview/2021-12-01-preview/LogFiles.json
 - preview/2022-09-30-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/common-types/v1/common-types.json // todo
+- common-types/v1/common-types.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: common-types.json
@@ -148,7 +148,7 @@ input-file:
 - preview/2023-06-01-preview/FlexibleServers.json
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2023-06-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/common-types/v1/common-types.json //todo
+- common-types/v1/common-types.json //todo
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -173,7 +173,7 @@ input-file:
 - preview/2023-06-01-preview/FlexibleServers.json
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2021-12-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/common-types/v1/common-types.json //todo
+- common-types/v1/common-types.json //todo
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -199,7 +199,7 @@ input-file:
 - stable/2023-06-30/LogFiles.json
 - stable/2023-06-30/ServiceOperations.json
 - preview/2023-10-01-preview/Maintenances.json
-- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- common-types/v1/common-types.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -225,7 +225,7 @@ input-file:
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2023-06-01-preview/ServiceOperations.json
 - preview/2023-10-01-preview/AdvancedThreatProtectionSettings.json
-- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- common-types/v1/common-types.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
@@ -454,7 +454,7 @@ These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatel
 
 ``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
 input-file:
-- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- common-types/v1/common-types.json
 - stable/2023-06-30/PrivateEndpointConnections.json
 - stable/2023-06-30/PrivateLinkResources.json
 suppressions:
