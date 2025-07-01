@@ -1,0 +1,86 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ManagedIdentity;
+/**
+ * Describes an identity resource.
+ */
+model Identity
+  is Azure.ResourceManager.TrackedResource<UserAssignedIdentityProperties> {
+  ...ResourceNameParameter<
+    Resource = Identity,
+    KeyName = "resourceName",
+    SegmentName = "userAssignedIdentities",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface Identities {
+  /**
+   * Gets the identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserAssignedIdentities_Get")
+  get is ArmResourceRead<Identity>;
+
+  /**
+   * Create or update an identity in the specified subscription and resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserAssignedIdentities_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Identity>;
+
+  /**
+   * Update an identity in the specified subscription and resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  // @parameterVisibility
+  @operationId("UserAssignedIdentities_Update")
+  update is ArmCustomPatchSync<Identity, IdentityUpdate>;
+
+  /**
+   * Deletes the identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
+  @operationId("UserAssignedIdentities_Delete")
+  delete is ArmResourceDeleteSync<Identity>;
+
+  /**
+   * Lists all the userAssignedIdentities available under the specified ResourceGroup.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserAssignedIdentities_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    Identity,
+    Response = UserAssignedIdentitiesListResult
+  >;
+
+  /**
+   * Lists all the userAssignedIdentities available under the specified subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UserAssignedIdentities_ListBySubscription")
+  listBySubscription is ArmListBySubscription<
+    Identity,
+    Response = UserAssignedIdentitiesListResult
+  >;
+}
+
+@@doc(Identity.name, "The name of the identity resource.");
+@@doc(Identity.properties, "The properties associated with the identity.");
+@@doc(Identities.createOrUpdate::parameters.resource,
+  "Parameters to create or update the identity"
+);
+@@doc(Identities.update::parameters.properties,
+  "Parameters to update the identity"
+);

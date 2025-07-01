@@ -1,0 +1,551 @@
+{
+  "paths": {
+    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MsiOperationsList": {
+            "$ref": {
+              "__old": "./examples/SystemAssignedIdentityGet.json",
+              "__new": "./examples/SystemAssignedIdentities_GetByScope.json"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedIdentity/operations": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "MsiOperationsList": {
+            "$ref": "./examples/MsiOperationsList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "#/definitions/OperationList"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityListBySubscription": {
+            "$ref": {
+              "__old": "./examples/IdentityListBySubscription.json",
+              "__new": "./examples/UserAssignedIdentities_ListBySubscription.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityListByResourceGroup": {
+            "$ref": {
+              "__old": "./examples/IdentityListByResourceGroup.json",
+              "__new": "./examples/UserAssignedIdentities_ListByResourceGroup.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityGet": {
+            "$ref": {
+              "__old": "./examples/IdentityGet.json",
+              "__new": "./examples/UserAssignedIdentities_Get.json"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "resource"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityCreate": {
+            "$ref": {
+              "__old": "./examples/IdentityCreate.json",
+              "__new": "./examples/UserAssignedIdentities_CreateOrUpdate.json"
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "properties"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityUpdate": {
+            "$ref": {
+              "__old": "./examples/IdentityUpdate.json",
+              "__new": "./examples/UserAssignedIdentities_Update.json"
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IdentityDelete": {
+            "$ref": {
+              "__old": "./examples/IdentityDelete.json",
+              "__new": "./examples/UserAssignedIdentities_Delete.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialList": {
+            "$ref": {
+              "__old": "./examples/FederatedIdentityCredentialList.json",
+              "__new": "./examples/FederatedIdentityCredentials_List.json"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/federatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialGet": {
+            "$ref": {
+              "__old": "./examples/FederatedIdentityCredentialGet.json",
+              "__new": "./examples/FederatedIdentityCredentials_Get.json"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "resource"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialCreate": {
+            "$ref": {
+              "__old": "./examples/FederatedIdentityCredentialCreate.json",
+              "__new": "./examples/FederatedIdentityCredentials_CreateOrUpdate.json"
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/CloudError",
+                "__new": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FederatedIdentityCredentialDelete": {
+            "$ref": {
+              "__old": "./examples/FederatedIdentityCredentialDelete.json",
+              "__new": "./examples/FederatedIdentityCredentials_Delete.json"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError__deleted": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody__deleted": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      },
+      "x-ms-external": true
+    },
+    "Operation__deleted": {
+      "type": "object",
+      "title": "Microsoft.ManagedIdentity Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Operation Name."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "title": "Operation Display."
+        }
+      }
+    },
+    "OperationDisplay__deleted": {
+      "type": "object",
+      "title": "Operation Display.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "title": "Resource Provider Name."
+        },
+        "operation": {
+          "type": "string",
+          "title": "Operation Type."
+        },
+        "resource": {
+          "type": "string",
+          "title": "Resource Type."
+        },
+        "description": {
+          "type": "string",
+          "title": "Operation description"
+        }
+      }
+    },
+    "OperationListResult__deleted": {
+      "type": "object",
+      "title": "Operations List.",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "title": "Operations List.",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "title": "Next Link",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "OperationList__added": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Operation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Resource__added": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "FederatedIdentityCredentialProperties": {
+      "title__deleted": "Federated identity credential properties."
+    },
+    "FederatedIdentityCredentialsListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "x-ms-identifiers__deleted": [
+            "id"
+          ]
+        }
+      }
+    },
+    "Identity": {
+      "properties": {
+        "properties": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "IdentityUpdate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource",
+              "__new": "#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "SystemAssignedIdentity": {
+      "required__deleted": [
+        "location"
+      ],
+      "properties": {
+        "location__deleted": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags__deleted": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "properties": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "SystemAssignedIdentityProperties": {
+      "title__deleted": "System Assigned Identity properties.",
+      "properties": {
+        "tenantId": {
+          "format__deleted": "uuid"
+        },
+        "principalId": {
+          "format__deleted": "uuid"
+        },
+        "clientId": {
+          "format__deleted": "uuid"
+        }
+      }
+    },
+    "UserAssignedIdentitiesListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "UserAssignedIdentityProperties": {
+      "title__deleted": "User Assigned Identity properties.",
+      "properties": {
+        "tenantId": {
+          "format__deleted": "uuid"
+        },
+        "principalId": {
+          "format__deleted": "uuid"
+        },
+        "clientId": {
+          "format__deleted": "uuid"
+        },
+        "isolationScope": {
+          "x-ms-enum": {
+            "modelAsExtensible__deleted": true
+          }
+        }
+      }
+    }
+  }
+}
