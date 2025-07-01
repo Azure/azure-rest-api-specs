@@ -55,7 +55,7 @@ model BranchProperties {
   branchId?: string;
 
   @doc("Name of the branch")
-  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @pattern("^\\S.{0,126}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
   branchName?: string;
 

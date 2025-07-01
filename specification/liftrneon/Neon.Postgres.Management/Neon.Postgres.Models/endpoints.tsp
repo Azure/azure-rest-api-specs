@@ -47,25 +47,13 @@ model EndpointProperties {
   @added(Neon.Postgres.Versions.v3_preview)
   currentState?: string;
 
-  @doc("The pending state of the endpoint")
-  @added(Neon.Postgres.Versions.v3_preview)
-  pendingState?: string;
-
-  @doc("The minimum compute units for autoscaling")
-  @added(Neon.Postgres.Versions.v3_preview)
-  autoscalingLimitMinCu?: int32;
-
-  @doc("The maximum compute units for autoscaling")
-  @added(Neon.Postgres.Versions.v3_preview)
-  autoscalingLimitMaxCu?: int32;
-
   @doc("The timestamp when the endpoint was last active")
   @added(Neon.Postgres.Versions.v3_preview)
   lastActive?: string;
 
   @doc("The compute units size range for autoscaling (MinCU-MaxCU)")
   @added(Neon.Postgres.Versions.v3_preview)
-  size?: string;
+  size?: AutoscalingSize;
 }
 
 @doc("The compute endpoint type. Either read_write or read_only.")
@@ -78,4 +66,14 @@ union EndpointType {
 
   @doc("ReadWrite compute endpoint type")
   ReadWrite: "read_write",
+}
+
+@doc("Represents the compute units size range for autoscaling")
+@added(Neon.Postgres.Versions.v3_preview)
+model AutoscalingSize {
+  @doc("The minimum compute units for autoscaling")
+  autoscalingLimitMinCu: float32;
+
+  @doc("The maximum compute units for autoscaling")
+  autoscalingLimitMaxCu: float32;
 }

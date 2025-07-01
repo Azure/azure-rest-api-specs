@@ -27,7 +27,6 @@ model NeonDatabaseProperties {
   branchId?: string;
 
   @doc("The name of the role that owns the database")
-  @removed(Neon.Postgres.Versions.v3_preview)
   ownerName?: string;
 
   @doc("Name of the database")
