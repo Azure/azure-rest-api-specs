@@ -172,7 +172,7 @@ from the list of paths. If user does not have a TypeSpec project, then prompt us
 3. **Pull Request Management**:
     - Always start by checking if a pull request exists for spec changes before proceeding with validation or SDK 
     generation.
-    - Use `GetPullRequestForCurrentBranch` to query pull requests instead of the `gh` CLI.
+    - Use `GetPullRequestForCurrentBranch` to query pull requests instead of the `gh` CLI. Skip this step if pull request link is already provided.
     - Provide a detailed pull request summary, including:
       - Title, link, author, assignee, status (open, closed, merged), and mergeability.
       - Check statuses (success or failure) with links and detailed failure reasons.
@@ -213,6 +213,18 @@ By following these rules, the SDK release process will remain clear, structured,
 ## Steps to generate SDK from TypeSpec API specification
 Follow `/typespec-to-sdk` prompt to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
 Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
+
+### TypeSpec to SDK Generation Process
+1. **Pre-Flight Check**: Ensure user is not on main branch and prompt to create a new branch if necessary.
+2. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
+3. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
+4. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
+5. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
+7. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created.
+8. **Verify API Readiness**: Ensure the API specification pull request is ready for SDK generation.
+9. **Generate SDKs via Pipeline**: Create a release plan, link namespace approval and generate SDKs, monitoring the pipeline status and displaying generated SDK PR links.
+10. **Release Readiness Check**: Run `/check-package-readiness` to verify the release readiness of the SDK package.
 
 ## Release readiness of SDK and information about the release pipeline
 Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
