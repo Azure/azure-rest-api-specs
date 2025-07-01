@@ -395,6 +395,8 @@ suppressions:
       - $.definitions.NodeTypeProperties.properties.capacities
       - $.definitions.ServiceTypeHealthPolicyMap
       - $.definitions.UserAssignedIdentityMap
+      - $.definitions.VMSSExtensionProperties.properties.settings
+      - $.definitions.VMSSExtensionProperties.properties.protectedSettings
       
   - code: BodyTopLevelProperties
     reason: Backwards compatability with previously approved specs. Model did not change.
