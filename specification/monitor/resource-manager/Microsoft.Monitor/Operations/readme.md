@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2025-06-03-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-06-03-preview'
 input-file:
-- preview\2025-06-03-preview\openapi.json
+- preview\2025-06-03-preview\operations.json
 ```
 
 ---
