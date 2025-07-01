@@ -24,8 +24,8 @@ jobs:
           # step as failed. 
           $ErrorActionPreference = 'Continue'
 
-          # Branches named "release-*" should ignore core files to allow PRs merging from main
-          $ignoreCoreFiles = $Env:GITHUB_BASE_REF -like 'release-*'
+          # Only "main" and "RPSaaSMaster" should validate all specs if core files change
+          $isProduction = @('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:!$isProduction
         shell: pwsh
