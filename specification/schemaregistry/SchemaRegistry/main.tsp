@@ -187,6 +187,10 @@ union SchemaContentTypeValues {
   /** Protobuf encoding. */
   @added(ServiceVersion.V2023_07_01)
   protobuf: "text/vnd.ms.protobuf",
+
+  /** ApplePie encoding. */
+  @added(ServiceVersion.V2023_07_01)
+  applepie: "application/json; serialization=ApplePie",
 }
 
 alias SchemaContentType = {
