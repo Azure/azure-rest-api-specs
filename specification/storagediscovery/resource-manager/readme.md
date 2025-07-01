@@ -86,6 +86,10 @@ suppressions:
     from: storageDiscoveryWorkspace.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}"].patch.parameters[4].schema.properties.properties
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  - code: OperationIdNounVerb
+    from: storageDiscoveryWorkspace.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport"].post.operationId
+    reason: The Report_GenerateReport operation follows established naming conventions for this service as per ARM review.
 ```
 
 ---
