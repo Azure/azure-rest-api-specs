@@ -26,7 +26,7 @@ jobs:
     # not have correct permissions.
     if: |
       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'action_required') || 
-      (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') ||
+      (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') || 
       (github.event_name == 'check_run' && github.event.check_run.name == inputs.check_run_name)
     runs-on: ubuntu-24.04
     steps:
