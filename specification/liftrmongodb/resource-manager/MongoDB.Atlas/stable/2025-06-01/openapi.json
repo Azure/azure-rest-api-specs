@@ -454,25 +454,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -661,20 +642,6 @@
         "user"
       ]
     },
-    "OrganizationPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties specific to Organization",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/UserDetailsUpdate",
-          "description": "Details of the user."
-        },
-        "partnerProperties": {
-          "$ref": "#/definitions/PartnerPropertiesUpdate",
-          "description": "MongoDB properties"
-        }
-      }
-    },
     "OrganizationResource": {
       "type": "object",
       "description": "The resource model definition for an Azure Organization",
@@ -717,22 +684,38 @@
     },
     "OrganizationResourceUpdate": {
       "type": "object",
-      "description": "The resource model definition for an Azure Organization",
+      "description": "The type used for update operations of the OrganizationResource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/OrganizationPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrganizationResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "OrganizationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the OrganizationResource.",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/UserDetailsUpdate",
+          "description": "Details of the user."
+        },
+        "partnerProperties": {
+          "$ref": "#/definitions/PartnerPropertiesUpdate",
+          "description": "MongoDB properties"
         }
-      ]
+      }
     },
     "PartnerProperties": {
       "type": "object",
