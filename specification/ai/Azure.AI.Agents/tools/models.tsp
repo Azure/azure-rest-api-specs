@@ -504,6 +504,29 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
+  A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents
+  executed MCP actions.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepMcpToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("Arguments to the MCP tool call, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("Name of the function used on the MCP server.")
+  name: string;
+
+  @doc("Output of the MCP tool call.")
+  output: string;
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel?: string;
+}
+
+@doc("""
   A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents
   executed SharePoint actions.
   """)
