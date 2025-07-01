@@ -55,14 +55,12 @@ interface BotChannels {
    * Returns a BotService Channel registration specified by the parameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Channels_Get")
   get is ArmResourceRead<BotChannel, Error = Error>;
 
   /**
    * Creates a Channel registration for a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Channels_Create")
   create is ArmResourceCreateOrReplaceSync<BotChannel, Error = Error>;
 
   /**
@@ -70,7 +68,6 @@ interface BotChannels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Channels_Update")
   update is ArmCustomPatchSync<
     BotChannel,
     PatchModel = BotChannel,
@@ -82,14 +79,12 @@ interface BotChannels {
    * Deletes a Channel registration from a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Channels_Delete")
   delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
 
   /**
    * Returns all the Channel registrations of a particular BotService resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Channels_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     BotChannel,
     Response = ArmResponse<ChannelResponseList>,
@@ -101,7 +96,6 @@ interface BotChannels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listChannelWithKeys")
-  @operationId("Channels_ListWithKeys")
   listWithKeys is ArmResourceActionSync<
     BotChannel,
     void,
@@ -114,7 +108,6 @@ interface BotChannels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("regeneratekeys")
-  @operationId("DirectLine_RegenerateKeys")
   regenerateKeys is ArmResourceActionSync<
     BotChannel,
     SiteInfo,

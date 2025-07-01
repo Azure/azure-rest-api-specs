@@ -19,7 +19,6 @@ interface BotsOperationGroup {
    * Check whether a bot name is available.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_GetCheckNameAvailability")
   @autoRoute
   @action("checkNameAvailability")
   getCheckNameAvailability is ArmProviderActionSync<
@@ -35,7 +34,6 @@ interface BotConnectionOperationGroup {
    * Lists the available Service Providers for creating Connection Settings
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_ListServiceProviders")
   @autoRoute
   @action("listAuthServiceProviders")
   listServiceProviders is ArmProviderActionSync<
@@ -53,7 +51,6 @@ interface QnAMakerEndpointKeysOperationGroup {
    * Lists the QnA Maker endpoint keys
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QnAMakerEndpointKeys_Get")
   @autoRoute
   @action("listQnAMakerEndpointKeys")
   get is ArmProviderActionSync<
@@ -71,7 +68,6 @@ interface HostSettingsOperationGroup {
    * Get per subscription settings needed to host bot in compute resource such as Azure App Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HostSettings_Get")
   @autoRoute
   @get
   @action("hostSettings")
@@ -90,7 +86,6 @@ interface OperationResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("OperationResults_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.BotService/operationresults/{operationResultId}")
   @get
   get(

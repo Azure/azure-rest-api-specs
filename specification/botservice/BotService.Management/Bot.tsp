@@ -98,7 +98,6 @@ interface Bots {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("createEmailSignInUrl")
-  @operationId("Email_CreateSignInUrl")
   createSignInUrl is ArmResourceActionSync<
     Bot,
     void,
@@ -112,7 +111,6 @@ interface Bots {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByBotResource")
   listByBotResource is ArmResourceActionSync<
     Bot,
     void,

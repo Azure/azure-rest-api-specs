@@ -69,14 +69,12 @@ interface ConnectionSettings {
    * Get a Connection Setting registration for a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_Get")
   get is ArmResourceRead<ConnectionSetting, Error = Error>;
 
   /**
    * Register a new Auth Connection for a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_Create")
   create is ArmResourceCreateOrReplaceSync<ConnectionSetting, Error = Error>;
 
   /**
@@ -84,7 +82,6 @@ interface ConnectionSettings {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("BotConnection_Update")
   update is ArmCustomPatchSync<
     ConnectionSetting,
     PatchModel = ConnectionSetting,
@@ -96,14 +93,12 @@ interface ConnectionSettings {
    * Deletes a Connection Setting registration for a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_Delete")
   delete is ArmResourceDeleteSync<ConnectionSetting, Error = Error>;
 
   /**
    * Returns all the Connection Settings registered to a particular BotService resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_ListByBotService")
   listByBotService is ArmResourceListByParent<
     ConnectionSetting,
     Response = ArmResponse<ConnectionSettingResponseList>,
@@ -114,7 +109,6 @@ interface ConnectionSettings {
    * Get a Connection Setting registration for a Bot Service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("BotConnection_ListWithSecrets")
   listWithSecrets is ArmResourceActionSync<
     ConnectionSetting,
     void,
