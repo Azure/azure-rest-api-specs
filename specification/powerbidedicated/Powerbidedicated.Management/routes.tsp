@@ -17,7 +17,6 @@ interface CapacitiesOperationGroup {
    * Lists eligible SKUs for PowerBI Dedicated resource provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Capacities_ListSkus")
   @autoRoute
   @get
   @action("skus")
@@ -31,7 +30,6 @@ interface CapacitiesOperationGroup {
    * Check the name availability in the target location.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Capacities_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckCapacityNameAvailabilityParameters,
