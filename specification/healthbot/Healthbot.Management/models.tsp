@@ -256,6 +256,7 @@ model Error {
   /**
    * The error object.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: {
     /**
      * The error code.
@@ -304,8 +305,9 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  info?: Record<unknown>;
+  info?: {};
 }
 
 /**
