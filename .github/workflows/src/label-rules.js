@@ -5,7 +5,7 @@
     2. The target branch of the PR.
 */
 
-import { anyLabelMatches, brchTsg, breakingChangesCheckType, diagramTsg, href,
+import { anyLabelMatches, brchTsg, diagramTsg, href,
   notReadyForArmReviewReason, sdkLabels, wrapInArmReviewMessage } from "./tsgs.js";
 
 /**
@@ -166,6 +166,7 @@ export function anyApprovalLabelPresent(
   approvalType,
   labels
 ) {
+  // todo: confirm property versus map syntax for accessing this.
   const labelsToMatchAgainst = [breakingChangesCheckType[approvalType].approvalPrefixLabel];
   return anyLabelMatches(labelsToMatchAgainst, labels);
 }
@@ -247,4 +248,444 @@ export function isAllPrerequisiteAbsentLabelsNonempty(rule) {
   return rule.allPrerequisiteAbsentLabels !== undefined && rule.allPrerequisiteAbsentLabels.length > 0;
 }
 
+const verRev = breakingChangesCheckType.SameVersion.reviewRequiredLabel;
+const verRevApproval = breakingChangesCheckType.SameVersion.approvalPrefixLabel;
+const brChRev = breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
+const brChRevApproval = breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri0dataPlane = [
+  // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/7648.
+  {
+    precedence: 0,
+    branches: ["azure-rest-api-specs/main", "azure-rest-api-specs-pr/RPSaaSMaster"],
+    anyPrerequisiteLabels: ["data-plane", "resource-manager"],
+    anyRequiredLabels: ["PublishToCustomers"],
+    troubleshootingGuide: `This PR targets either the <code>main</code> branch of the public ` +
+      `specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. These ` +
+      `branches are not intended for iterative development. Therefore, you must acknowledge ` +
+      `you understand that after this PR is merged, the APIs are considered shipped to ` +
+      `Azure customers. Any further attempts at in-place modifications to the APIs will be ` +
+      `subject to Azure's versioning and breaking change policies. <b>Additionally, for control ` +
+      `plane APIs, you must acknowledge that you are following all the best practices ` +
+      `documented by ARM at ` +
+      `${href("aka.ms/armapibestpractices", "https://aka.ms/armapibestpractices")}.</b> ` +
+      `If you do intend to release the APIs to your customers by merging this PR, ` +
+      `add the <code>PublishToCustomers</code> label to your PR in acknowledgement ` +
+      `of the above. ` +
+      `Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> ` +
+      `(see ${href("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}).`
+  },
+  // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/6184
+  // and https://github.com/Azure/azure-sdk-tools/issues/6612
+  // This rule says:
+  //
+  //   IF (the label APIStewardshipBoard-ReviewRequested is present)
+  //   OR (both labels data-plane AND new-api-version are present),
+  //   THEN (require label APIStewardshipBoard-SignedOff)
+  //
+  // TODO: need to implement, in the prSummary.ts, addition of the APIStewardshipBoard-ReviewRequested label
+  // Once done, remove "data-plane" and "new-api-version" from here.
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["APIStewardshipBoard-ReviewRequested"],
+    allPrerequisiteLabels: ["data-plane", "new-api-version"],
+    anyRequiredLabels: ["APIStewardshipBoard-SignedOff"],
+    troubleshootingGuide: `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). `
+    + `Schedule the review by following `
+    + `${href("aka.ms/azsdk/onboarding/restapischedule", "https://aka.ms/azsdk/onboarding/restapischedule")}.`
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri0NotReadyForArmReview = [
+
+  // Note this rule can be circumvented e.g. by adding approval mismatching the actual problem.
+  // E.g. PR may not be ready for ARM review due to pending breaking changes review, but this rule
+  // can be fulfilled by adding RPaaSException instead of breaking change approval.
+  //
+  // This rule provides a message that sets context for why PR is not ready for ARM review.
+  // But the rule doesn't know the exact reason - it is provided by other, more specific rules.
+  // This "general context" rule must be considered fulfilled once all the applicable fine-grained rules
+  // for NotReadyForARMReview are fulfilled. But because this rule doesn't know the exact problem,
+  // it considers itself fulfilled if any one of the fine-grained rules is fulfilled.
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["NotReadyForARMReview"],
+    allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, "RPaaSException"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR is not ready for ARM review (label: <code>NotReadyForARMReview</code>). " +
+        "This PR will not be reviewed by ARM until relevant problems are fixed. " +
+        "Consult the rest of this <code>Next Steps to Merge</code> comment for details.<br/>" +
+        "Once the blocking problems are addressed, add to the PR a comment with contents <code>/azp run</code>. " +
+        "Automation will re-evaluate this PR and if everything looks good, it will add <code>WaitForARMFeedback</code> label " +
+        "which will put this PR on the ARM review queue."
+    )
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-NewRPNamespaceWithoutRPaaS"],
+    anyRequiredLabels: ["RPaaSException"],
+    troubleshootingGuide: notReadyForArmReviewReason("CI-NewRPNamespaceWithoutRPaaS")
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo")
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", verRev],
+    anyRequiredLabels: [verRevApproval],
+    troubleshootingGuide: notReadyForArmReviewReason(verRev)
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
+    anyRequiredLabels: [brChRevApproval],
+    troubleshootingGuide: notReadyForArmReviewReason(brChRev)
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri0ArmRpaas = [
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["CI-NewRPNamespaceWithoutRPaaS"],
+    anyRequiredLabels: ["RPaaSException"],
+    troubleshootingGuide: "This PR has <code>CI-NewRPNamespaceWithoutRPaaS</code> label. " +
+      "This means it is introducing a new RP (Resource Provider) namespace that has not been onboarded with " +
+      `${href("RPaaS", "https://armwiki.azurewebsites.net/rpaas/overview.html")}. ` +
+      "Merging this PR to the <code>main</code> branch is blocked as RPaaS is required for new RPs.<br/>" +
+      `To resolve, ${href(
+        "use RPaaS to onboard the new RP",
+        "https://armwiki.azurewebsites.net/rpaas/gettingstarted.html"
+      )}. ` +
+      `To apply for exception, see ${href("aka.ms/RPaaSException", "https://aka.ms/RPaaSException")}.`
+  },
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
+      "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
+      "without first merging the new RP to the <code>RPSaaSMaster</code> branch. " +
+      "To resolve, first submit and merge a PR with the new RP namespace to the <code>RPSaaSMaster</code>branch." +
+      "This PR will remain blocked until then."
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri0Changes= [
+  {
+    precedence: 0,
+    allPrerequisiteLabels: [verRev],
+    anyRequiredLabels: [verRevApproval],
+    troubleshootingGuide: `This PR has at least one change violating Azure versioning policy (label: <code>${verRev}</code>).<br/>` +
+      `To unblock this PR, either a) introduce a new API version with these changes instead of modifying an existing API version, ` +
+      `or b) ${brchTsg.replace("To unblock this PR, ", "")}`
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: [brChRev],
+    anyRequiredLabels: [brChRevApproval],
+    troubleshootingGuide: `This PR has at least one breaking change (label: <code>${brChRev}</code>).<br/>`
+      + brchTsg
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri0ArmRev = [
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["WaitForARMFeedback"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: wrapInArmReviewMessage(`This PR is awaiting ARM reviewer feedback (label: <code>WaitForARMFeedback</code>).<br/>`
+    + `To learn when this PR will get reviewed, see ARM review queue at `
+    + `${href("aka.ms/azsdk/pr-arm-review","https://aka.ms/azsdk/pr-arm-review")}`)
+  },
+  {
+    precedence: 0,
+    anyPrerequisiteLabels: ["ARMChangesRequested"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "This PR has <code>ARMChangesRequested</code> label. Please address or respond to feedback from the ARM API reviewer. <br/>" +
+        "When you are ready to continue the ARM API review, please remove the <code>ARMChangesRequested</code> label. <br/>" +
+        "Automation should then add <code>WaitForARMFeedback</code> label. <br/>" +
+        "❗If you don't have permissions to remove the label, request <code>write access</code> per " +
+        `${href("aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories","https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories")}` +
+        "."
+    )
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri1ArmRev = [
+  // This rule should never kick-in in normal flow, as there should always be one of rules for the ARM review workflow
+  // labels active, and all of them have higher precedence than this rule.
+  // However, we may still end up in this situation if someone manually tampered with the labels.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["ARMReview"],
+    anyRequiredLabels: ["ARMSignedOff"],
+    troubleshootingGuide: wrapInArmReviewMessage(
+      "❗❗❗ ARM review workflow label is missing! ❗❗❗" +
+        "<strong>TO UNBLOCK THIS PR, add <code>/azp run</code> comment to this PR to allow automation to determine where this PR is in the ARM review workflow.</strong>"
+    )
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri1Suppressions = [
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["SuppressionReviewRequired"],
+    anyRequiredLabels: ["Approved-Suppression"],
+    troubleshootingGuide: `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
+      `or to step 3, depending on the kind of suppression you did.`
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri1ArcReview = [
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["ArcReview"],
+    anyRequiredLabels: ["ArcSignedOff"],
+    troubleshootingGuide: "This PR is labelled with <code>ArcReview</code>. " +
+      "For this PR to be merged, it must pass an ARC review and be labelled <code>ArcSignedOff</code>.<br/>" +
+      "Email the ARC board to request review per " +
+      `${href(
+        "this Contact section",
+        "https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=contact"
+      )}.`
+  },
+];
+
+/**
+ * This collection has "SDK breaking changes" labels rules introduced in February 2024.
+ * For description of the "SDK breaking changes" labels, see:
+ * - https://gist.github.com/raych1/353949d19371b69fb82a10dd70032a51
+ * - https://github.com/Azure/azure-sdk-tools/issues/6374#issuecomment-1897379880
+ */
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri2Sdk = [
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChange!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeApproved!],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Go (label: <code>${sdkLabels["azure-sdk-for-go"]
+      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChange!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeApproved!],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for JavaScript (label: <code>${sdkLabels["azure-sdk-for-js"]
+      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved!],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Python (label: <code>${sdkLabels["azure-sdk-for-python"]
+      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved!],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Python track-2 (label: <code>${sdkLabels[
+      "azure-sdk-for-python-track2"
+    ].breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved!],
+    troubleshootingGuide: `Your PR modified the suppressions for Go SDK breaking changes (label: ${sdkLabels["azure-sdk-for-go"]
+      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved!],
+    troubleshootingGuide: `Your PR modified the suppressions for JavaScript SDK breaking changes (label: ${sdkLabels["azure-sdk-for-js"]
+      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved!],
+    troubleshootingGuide: `Your PR modified the suppressions for Python SDK breaking changes (label: ${sdkLabels["azure-sdk-for-python"]
+      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression!],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved!],
+    troubleshootingGuide: `Your PR modified the suppressions for Python track-2 SDK breaking changes (label: ${sdkLabels[
+      "azure-sdk-for-python-track2"
+    ].breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+  },
+];
+
+/**
+ * This collection has "legacy" rules that are to be removed once migration to new rules is done.
+ * These rules have been marked as "legacy" in February 2024.
+ */
+/** @type {RequiredLabelRule[]} */
+const rulesPri2LegacySdk = [
+  // --------------------
+  // LEGACY / OBSOLETE RULES
+  // To be removed once migration to new rules is done
+  // --------------------
+
+  // CODESYNC These CI-BreakingChange-* rules must be in sync with
+  // \private\azure-rest-api-specs-pipeline\config\production\Azure\azure-rest-api-specs.yml
+  // \private\azure-rest-api-specs-pipeline\config\production\Azure\azure-rest-api-specs-pr.yml
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: ["CI-BreakingChange-Go"],
+    anyRequiredLabels: ["Approved-SdkBreakingChange-Go"],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for go (label: <code>CI-BreakingChange-Go</code>). ` +
+      `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: ["CI-BreakingChange-Python-Track2"],
+    anyRequiredLabels: ["Approved-SdkBreakingChange-Python"],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for python (label: <code>CI-BreakingChange-Python-Track2</code>). ` +
+      `${diagramTsg(3, true)}.`
+  },
+  {
+    precedence: 2,
+    anyPrerequisiteLabels: ["CI-BreakingChange-JavaScript"],
+    anyRequiredLabels: ["Approved-SdkBreakingChange-JavaScript"],
+    troubleshootingGuide: `Your PR has breaking changes in the generated SDK for javascript (label: <code>CI-BreakingChange-JavaScript</code>). ` +
+      `${diagramTsg(3, true)}.`
+  },
+];
+
+/** @type {RequiredLabelRule[]} */
+const rulesPri3Blockers = [
+  {
+    precedence: 3,
+    anyPrerequisiteLabels: ["Approved-OkToMerge"],
+    anyRequiredLabels: [],
+    troubleshootingGuide: "This PR has been approved with <code>Approved-OkToMerge</code> label.<br/>" +
+      "This label should be used only to approve PRs targeting private specs repo <code>main</code> branch.<br/>" +
+      "PRs targeting this branch cannot be merged, as this branch is a mirror of the public specs repo <code>main</code> branch.<br/>" +
+      "If you want to publish changes in this PR to the public repo, see: " +
+      `${href("aka.ms/azsdk/move-pr", "https://aka.ms/azsdk/move-pr")}.<br/>` +
+      "If this label was applied erroneously to a different branch than private specs repo <code>main</code> branch, remove the label."
+  },
+];
+
+export const requiredLabelsRules = rulesPri0dataPlane
+  .concat(rulesPri0NotReadyForArmReview)
+  .concat(rulesPri0ArmRpaas)
+  .concat(rulesPri0Changes)
+  .concat(rulesPri0ArmRev)
+  .concat(rulesPri1ArmRev)
+  .concat(rulesPri1Suppressions)
+  .concat(rulesPri1ArcReview)
+  .concat(rulesPri2Sdk)
+  .concat(rulesPri2LegacySdk)
+  .concat(rulesPri3Blockers)
+
+export async function getPresentBlockingLabelsAndMissingRequiredLabels(
+  logger: Logger,
+  logPrefix: string,
+  context: PipelineContext
+): Promise<{
+  presentBlockingLabels: string[];
+  missingRequiredLabels: string[];
+}> {
+  // assume context.pr != null
+  const labels: string[] = context.pr!.labels ?? [];
+
+  const targetBranch = `${context.pr!.baseInfo.repo}/${context.pr!.baseInfo.ref}`;
+
+  const violatedReqLabelsRules: RequiredLabelRule[] = await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch);
+  const presentBlockingLabels: string[] = getPresentBlockingLabels(violatedReqLabelsRules)
+
+  const missingRequiredLabels: string[] = (await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch))
+    .filter((rule) => rule.anyRequiredLabels.length > 0)
+    // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
+    .map((rule) => rule.anyRequiredLabels[0])
+    // Multiple rules may result in the same label being required, e.g. BreakingChange-Approved-*
+    .reduce(
+      (uniqueRequiredLabels: string[], reqLabel) =>
+        uniqueRequiredLabels.includes(reqLabel) ? uniqueRequiredLabels : [...uniqueRequiredLabels, reqLabel],
+      []
+    );
+
+  return { presentBlockingLabels, missingRequiredLabels };
+}
+
+export async function getViolatedRequiredLabelsRules(
+  logger: Logger,
+  logPrefix: string,
+  labels: string[],
+  targetBranch: string): Promise<RequiredLabelRule[]> {
+
+  const violatedRules: RequiredLabelRule[] = [];
+  for (const rule of requiredLabelsRules) {
+    if (await requiredLabelRuleViolated(logger, logPrefix, labels, targetBranch, rule)) {
+      violatedRules.push(rule);
+    }
+  }
+  return violatedRules;
+}
+
+export async function requiredLabelRuleViolated(
+  logger: Logger,
+  logPrefix: string,
+  presentLabels: string[],
+  targetBranch: string,
+  rule: RequiredLabelRule,
+): Promise<boolean> {
+
+  const branchIsApplicable: boolean = rule.branches === undefined || rule.branches.includes(targetBranch);
+
+  const anyPrerequisiteLabelPresent: boolean =
+    isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels!, presentLabels)
+
+  const allPrerequisiteLabelsPresent: boolean =
+    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels!.every((label) => presentLabels.includes(label));
+
+  const anyPrerequisiteAbsentLabelPresent: boolean =
+    isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels!, presentLabels)
+
+  const ruleIsApplicable = branchIsApplicable && (anyPrerequisiteLabelPresent || allPrerequisiteLabelsPresent) && !anyPrerequisiteAbsentLabelPresent
+
+  const anyRequiredLabelPresent: boolean = anyLabelMatches(rule.anyRequiredLabels, presentLabels);
+
+  const ruleIsViolated = ruleIsApplicable && !anyRequiredLabelPresent;
+
+  // Trace log. Uncomment when needed.
+  await logger.logInfo(logPrefix +
+      `RETURN definition requiredLabelRuleViolated: ` +
+      `presentLabels: ${[...presentLabels].join(", ")}, ` +
+      `targetBranch: ${targetBranch}, ` +
+      `rule.precedence: ${rule.precedence}, ` +
+      `rule.branches: ${[...rule.branches ?? []].join(", ")}, ` +
+      `rule.anyPrerequisiteLabels: ${[...rule.anyPrerequisiteLabels ?? []].join(", ")}, ` +
+      `rule.allPrerequisiteLabels: ${[...rule.allPrerequisiteLabels ?? []].join(", ")}, ` +
+      `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
+      `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
+      `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
+  return ruleIsViolated;
+}
+
+export function getPresentBlockingLabels(violatedReqLabelsRules: RequiredLabelRule[]) {
+  return violatedReqLabelsRules
+    .filter((rule) => rule.anyRequiredLabels.length === 0)
+    // Implicitly assuming here that there is exactly one prerequisite label for the rule.
+    // See comment on RequiredLabelRule for details.
+    .map((rule) => rule.anyPrerequisiteLabels![0]);
+}
