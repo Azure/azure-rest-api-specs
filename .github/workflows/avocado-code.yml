@@ -31,8 +31,8 @@ jobs:
             "/cadl/examples/" \
             '(?=/examples/)(?!(?:/stable/|/preview/))' \
           --includePaths \
-            "data-plane" \
-            "resource-manager"
+            "^${GITHUB_WORKSPACE}/specification/.*/data-plane" \
+            "^${GITHUB_WORKSPACE}/specification/.*/resource-manager"
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
