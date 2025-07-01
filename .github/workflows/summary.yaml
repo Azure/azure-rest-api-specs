@@ -1,0 +1,58 @@
+name: "[TEST-IGNORE] Summary"
+
+on:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
+  pull_request_target:
+    types:
+      # Run workflow on default types, to update status as quickly as possible.
+      - opened
+      - synchronize
+      - reopened
+      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows:
+      [
+        "\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code",
+        "\\[TEST-IGNORE\\] Swagger ModelValidation",
+        "\\[TEST-IGNORE\\] Swagger SemanticValidation",
+      ]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+  pull-requests: read
+  statuses: write
+
+jobs:
+  summary:
+    name: Summary
+    runs-on: ubuntu-24.04
+    steps:
+      # *** IMPORTANT ***
+      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
+      # context of the base of the pull request.  You should make sure that you do not check out,
+      # build, or run untrusted code from the head of the pull request.
+      - uses: actions/checkout@v4
+        with:
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a
+          # separate workflow).
+          #
+          # Uses the .github folder from the PR base branch (pull_request_target trigger),
+          # or the repo default branch (other triggers).
+          sparse-checkout: |
+            .github
+
+      - name: Summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { default: summary } =
+                await import('${{ github.workspace }}/.github/workflows/src/summary.js');
+            return await summary({ github, context, core });
