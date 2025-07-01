@@ -181,44 +181,6 @@ interface Labs {
   listVhds is ArmResourceActionSync<Lab, void, ArmResponse<LabVhdList>>;
 
   /**
-   * List gallery images in a given lab.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @action("galleryimages")
-  @operationId("GalleryImages_List")
-  list is ArmResourceActionSync<
-    Lab,
-    void,
-    ArmResponse<GalleryImageList>,
-    Parameters = {
-      /**
-       * Specify the $expand query. Example: 'properties($select=author)'
-       */
-      @query("$expand")
-      $expand?: string;
-
-      /**
-       * The filter to apply to the operation. Example: '$filter=contains(name,'myName')
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * The maximum number of resources to return from the operation. Example: '$top=10'
-       */
-      @query("$top")
-      $top?: int32;
-
-      /**
-       * The ordering expression for the results, using OData notation. Example: '$orderby=name desc'
-       */
-      @query("$orderby")
-      $orderby?: string;
-    }
-  >;
-
-  /**
    * Evaluates lab policy.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"

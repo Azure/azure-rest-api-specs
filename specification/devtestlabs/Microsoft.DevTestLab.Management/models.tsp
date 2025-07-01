@@ -2074,19 +2074,6 @@ model FormulaFragment extends UpdateResource {}
 model GalleryImageList is Azure.Core.Page<GalleryImage>;
 
 /**
- * A gallery image.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model GalleryImage extends Resource {
-  /**
-   * The properties of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties: GalleryImageProperties;
-}
-
-/**
  * Properties of a gallery image.
  */
 model GalleryImageProperties {

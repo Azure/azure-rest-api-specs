@@ -76,6 +76,9 @@
       "name": "Formulas"
     },
     {
+      "name": "GalleryImages"
+    },
+    {
       "name": "NotificationChannels"
     },
     {
@@ -2353,11 +2356,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/galleryimages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
       "get": {
         "operationId": "GalleryImages_List",
         "tags": [
-          "Labs"
+          "GalleryImages"
         ],
         "description": "List gallery images in a given lab.",
         "parameters": [
@@ -2371,7 +2374,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2380,7 +2383,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=author)'",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
             "required": false,
             "type": "string"
           },
@@ -2965,20 +2968,6 @@
           "200": {
             "description": "The request has succeeded."
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2990,11 +2979,7 @@
           "NotificationChannels_Notify": {
             "$ref": "./examples/NotificationChannels_Notify.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/policysets/{policySetName}/evaluatePolicies": {
@@ -10502,7 +10487,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
-          "description": "The properties of the resource.",
+          "description": "The properties of the gallery image.",
           "x-ms-client-flatten": true
         }
       },

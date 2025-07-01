@@ -120,7 +120,7 @@ interface NotificationChannels {
   /**
    * Send notification to provided channel.
    */
-  notify is NotificationChannelOps.ActionAsync<
+  notify is NotificationChannelOps.ActionSync<
     NotificationChannel,
     NotifyParameters,
     OkResponse

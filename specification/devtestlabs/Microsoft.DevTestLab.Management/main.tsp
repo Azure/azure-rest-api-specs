@@ -21,6 +21,7 @@ import "./Artifact.tsp";
 import "./LabCost.tsp";
 import "./CustomImage.tsp";
 import "./Formula.tsp";
+import "./GalleryImage.tsp";
 import "./NotificationChannel.tsp";
 import "./Policy.tsp";
 import "./ServiceRunner.tsp";
