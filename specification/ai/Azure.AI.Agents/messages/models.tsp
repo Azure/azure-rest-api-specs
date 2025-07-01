@@ -449,7 +449,7 @@ model MessageDelta {
   role: MessageRole;
 
   /** The content of the message as an array of text and/or images. */
-  content: MessageDeltaContent[];
+  // content: MessageDeltaContent[];
 }
 
 /** The abstract base representation of a partial streamed message content payload. */
@@ -465,24 +465,23 @@ model MessageDeltaContent {
 }
 
 /** Represents a streamed image file content part within a streaming message delta chunk. */
-@added(Versions.v2025_05_01)
-model MessageDeltaImageFileContent extends MessageDeltaContent {
-  /** The type of content for this content part, which is always "image_file." */
-  type: "image_file";
+// @added(Versions.v2025_05_01)
+// model MessageDeltaImageFileContent extends MessageDeltaContent {
+//   /** The type of content for this content part, which is always "image_file." */
+//   type: "image_file";
 
-  /** The image_file data. */
-  @encodedName("application/json", "image_file")
-  imageFile?: MessageDeltaImageFileContentObject;
-}
+//   /** The image_file data. */
+//   @encodedName("application/json", "image_file")
+//   imageFile?: MessageDeltaImageFileContentObject;
+// }
 
-/** Represents the 'image_file' payload within streaming image file content. */
-@added(Versions.v2025_05_01)
-model MessageDeltaImageFileContentObject {
-  /** The file ID of the image in the message content. */
-  @encodedName("application/json", "file_id")
-  fileId?: string;
-}
-
+// /** Represents the 'image_file' payload within streaming image file content. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaImageFileContentObject {
+//   /** The file ID of the image in the message content. */
+//   @encodedName("application/json", "file_id")
+//   fileId?: string;
+// }
 /** Represents a streamed text content part within a streaming message delta chunk. */
 @added(Versions.v2025_05_01)
 model MessageDeltaTextContent extends MessageDeltaContent {
