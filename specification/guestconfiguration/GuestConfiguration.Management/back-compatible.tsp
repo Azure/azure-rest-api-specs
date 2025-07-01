@@ -32,10 +32,15 @@ using Microsoft.GuestConfiguration;
 @@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
   "GuestConfigurationAssignmentReports"
 );
+@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+  "List"
+);
 @@clientLocation(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
   "GuestConfigurationAssignmentReports"
 );
-
+@@clientName(GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+  "Get"
+);
 // GuestConfigurationHCRPAssignments interface operations
 @@clientLocation(GuestConfigurationHCRPAssignments.get,
   GuestConfigurationHCRPAssignments
@@ -52,8 +57,14 @@ using Microsoft.GuestConfiguration;
 @@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
   "GuestConfigurationHCRPAssignmentReports"
 );
+@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+  "List"
+);
 @@clientLocation(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
   "GuestConfigurationHCRPAssignmentReports"
+);
+@@clientName(GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+  "Get"
 );
 
 // GuestConfigurationAssignmentsVMSS interface operations
@@ -72,14 +83,26 @@ using Microsoft.GuestConfiguration;
 @@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
   "GuestConfigurationAssignmentReportsVMSS"
 );
+@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSList,
+  "List"
+);
 @@clientLocation(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
   "GuestConfigurationAssignmentReportsVMSS"
+);
+@@clientName(GuestConfigurationAssignmentsVMSS.guestConfigurationAssignmentReportsVMSSGet,
+  "Get"
 );
 
 // GuestConfigurationConnectedVMwarevSphereAssignments interface operations
 @@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
 );
+@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
+  "List"
+);
 @@clientLocation(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "GuestConfigurationConnectedVMwarevSphereAssignmentsReports"
+);
+@@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
+  "Get"
 );
