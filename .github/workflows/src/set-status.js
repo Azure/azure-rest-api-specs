@@ -1,12 +1,7 @@
 // @ts-check
 
 import { extractInputs } from "./context.js";
-import {
-  CheckConclusion,
-  CheckStatus,
-  CommitStatusState,
-  PER_PAGE_MAX,
-} from "./github.js";
+import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -23,11 +18,7 @@ export default async function setStatus(
   requiredStatusName,
   overridingLabel,
 ) {
-  const { owner, repo, head_sha, issue_number } = await extractInputs(
-    github,
-    context,
-    core,
-  );
+  const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
   // Default target is this run itself
   let target_url =
@@ -106,16 +97,13 @@ export async function setStatusImpl({
     return;
   }
 
-  const workflowRuns = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
-    {
-      owner,
-      repo,
-      event: "pull_request",
-      head_sha,
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   core.info("Workflow Runs:");
   workflowRuns.forEach((wf) => {
@@ -125,10 +113,7 @@ export async function setStatusImpl({
   const targetRuns = workflowRuns
     .filter((wf) => wf.name == monitoredWorkflowName)
     // Sort by "updated_at" descending
-    .sort(
-      (a, b) =>
-        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-    );
+    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
 
   // Sorted by "updated_at" descending, so most recent run is at index 0.
   // If "targetRuns.length === 0", run will be "undefined", which the following
@@ -154,18 +139,13 @@ export async function setStatusImpl({
        * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
        */
 
-      const jobs = await github.paginate(
-        github.rest.actions.listJobsForWorkflowRun,
-        {
-          owner,
-          repo,
-          run_id: run.id,
-          per_page: PER_PAGE_MAX,
-        },
-      );
-      const failedJobs = jobs.filter(
-        (job) => job.conclusion === CheckConclusion.FAILURE,
-      );
+      const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+        owner,
+        repo,
+        run_id: run.id,
+        per_page: PER_PAGE_MAX,
+      });
+      const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
       const failedJob = failedJobs[0];
       if (failedJob?.html_url) {
         target_url = `${failedJob.html_url}?pr=${issue_number}`;
