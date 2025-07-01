@@ -5,57 +5,57 @@
     "api-version": "2025-06-23-preview",
     "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
     "resourceGroupName": "rgneon",
-    "organizationName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$",
+    "organizationName": "myOrganization",
     "properties": {
       "properties": {
         "marketplaceDetails": {
-          "subscriptionId": "gnxsxkxxt",
-          "subscriptionStatus": "PendingFulfillmentStart",
+          "subscriptionId": "11111111-2222-3333-4444-555555555555",
+          "subscriptionStatus": "Fulfilled",
           "offerDetails": {
-            "publisherId": "wjlfubcaepxddvghkjvtbh",
-            "offerId": "prgwvptmykcx",
-            "planId": "n",
-            "planName": "bcuqcroufozznnfrlyrmfw",
-            "termUnit": "wf",
-            "termId": "llsxsbnzzyeqbhqfwcw"
+            "publisherId": "neon",
+            "offerId": "neon-postgres",
+            "planId": "standard",
+            "planName": "Standard Plan",
+            "termUnit": "P1M",
+            "termId": "hjk5-pou9-mnb8"
           }
         },
         "userDetails": {
-          "firstName": "scglor",
-          "lastName": "itno",
-          "emailAddress": "Replace this value with a string matching RegExp ^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
-          "upn": "u",
-          "phoneNumber": "mohwnhp"
+          "firstName": "John",
+          "lastName": "Doe",
+          "emailAddress": "john.doe@example.com",
+          "upn": "johndoe",
+          "phoneNumber": "555-123-4567"
         },
         "companyDetails": {
-          "companyName": "qyngwdcaosluxgf",
-          "country": "mlhfqsafj",
-          "officeAddress": "vsutnqbvtiqdirqwnaxacswgxmd",
-          "businessPhone": "dqgpbunwjvxxtegiu",
-          "domain": "ysxipcfkcmdn",
-          "numberOfEmployees": 30
+          "companyName": "Contoso Ltd.",
+          "country": "United States",
+          "officeAddress": "123 Main Street, Seattle, WA 98101",
+          "businessPhone": "555-987-6543",
+          "domain": "contoso.com",
+          "numberOfEmployees": 250
         },
         "partnerOrganizationProperties": {
-          "organizationId": "zcqpwyzskwxqlwr",
-          "organizationName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+          "organizationId": "org-123456",
+          "organizationName": "myOrganization",
           "singleSignOnProperties": {
-            "singleSignOnState": "Initial",
-            "enterpriseAppId": "ggmgrjgedvlvtlsfltkkqhqcqyt",
-            "singleSignOnUrl": "jqhuivzksfztp",
+            "singleSignOnState": "Configured",
+            "enterpriseAppId": "12345678-abcd-1234-efgh-123456789012",
+            "singleSignOnUrl": "https://login.microsoftonline.com/contoso.com",
             "aadDomains": [
-              "qynybhkjlclbpekjsjstsefe"
+              "contoso.com"
             ]
           }
         },
         "projectProperties": {
-          "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+          "entityName": "myProject",
           "attributes": [
             {
-              "name": "on",
-              "value": "qzp"
+              "name": "environment",
+              "value": "development"
             }
           ],
-          "regionId": "lukzufcllwufcyjlmlxamoal",
+          "regionId": "westus",
           "storage": 22,
           "pgVersion": 23,
           "historyRetention": 16,
@@ -64,126 +64,126 @@
             "autoscalingLimitMaxCu": 11
           },
           "branch": {
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "entityName": "main",
             "attributes": [
               {
-                "name": "on",
-                "value": "qzp"
+                "name": "environment",
+                "value": "development"
               }
             ],
-            "projectId": "cxhihpayn",
-            "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-            "roleName": "lwlafskrxvggwnfu",
-            "databaseName": "zxqetv",
+            "projectId": "project-123",
+            "parentId": "main-branch",
+            "roleName": "admin",
+            "databaseName": "postgres",
             "roles": [
               {
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+                "entityName": "read_only_role",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+                "branchId": "branch-123",
                 "permissions": [
-                  "cgubrzxkomlxoqdua"
+                  "SELECT"
                 ],
                 "isSuperUser": true,
-                "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "owns": "ojmudfaymrysbcap"
+                "roleName": "reader",
+                "owns": "public.users"
               }
             ],
             "databases": [
               {
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+                "entityName": "appdb",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "sllrohrmwkgzre",
-                "ownerName": "rjpysakvuicrlwvzcbmp",
-                "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$"
+                "branchId": "branch-123",
+                "ownerName": "postgres",
+                "databaseName": "appdb"
               }
             ],
             "endpoints": [
               {
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+                "entityName": "primary-endpoint",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "projectId": "vwwhykqyr",
-                "branchId": "blclbeuzvywzagbuvdo",
-                "endpointType": "read_only",
-                "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "currentState": "znpmtyhxfcligjiqcfzsn",
-                "lastActive": "cqewwerjsfgp",
+                "projectId": "project-123",
+                "branchId": "branch-123",
+                "endpointType": "read_write",
+                "endpointName": "primary",
+                "currentState": "active",
+                "lastActive": "2023-06-15T10:30:00Z",
                 "size": {
-                  "autoscalingLimitMinCu": 14,
-                  "autoscalingLimitMaxCu": 3
+                  "autoscalingLimitMinCu": 1,
+                  "autoscalingLimitMaxCu": 4
                 }
               }
             ],
-            "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
-            "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
-            "lastActive": "ci",
-            "computeHours": "tqgibzmzdlsmmlawtckpap",
-            "primaryCompute": "twzzbcwz"
+            "branchName": "main",
+            "dataSize": "1.2 GB",
+            "lastActive": "2023-06-15T10:30:00Z",
+            "computeHours": "12.5",
+            "primaryCompute": "enabled"
           },
           "roles": [
             {
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityName": "admin_role",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+              "branchId": "branch-123",
               "permissions": [
-                "cgubrzxkomlxoqdua"
+                "ALL"
               ],
               "isSuperUser": true,
-              "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "owns": "ojmudfaymrysbcap"
+              "roleName": "admin",
+              "owns": "public.accounts"
             }
           ],
           "databases": [
             {
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityName": "postgres",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "branchId": "sllrohrmwkgzre",
-              "ownerName": "rjpysakvuicrlwvzcbmp",
-              "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$"
+              "branchId": "branch-123",
+              "ownerName": "postgres",
+              "databaseName": "postgres"
             }
           ],
           "endpoints": [
             {
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityName": "readonly-endpoint",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "projectId": "vwwhykqyr",
-              "branchId": "blclbeuzvywzagbuvdo",
+              "projectId": "project-123",
+              "branchId": "branch-123",
               "endpointType": "read_only",
-              "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "currentState": "znpmtyhxfcligjiqcfzsn",
-              "lastActive": "cqewwerjsfgp",
+              "endpointName": "readonly",
+              "currentState": "active",
+              "lastActive": "2023-06-15T10:30:00Z",
               "size": {
-                "autoscalingLimitMinCu": 14,
-                "autoscalingLimitMaxCu": 3
+                "autoscalingLimitMinCu": 1,
+                "autoscalingLimitMaxCu": 2
               }
             }
           ]
@@ -213,7 +213,7 @@
           "userDetails": {
             "firstName": "scglor",
             "lastName": "itno",
-            "emailAddress": "Replace this value with a string matching RegExp ^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+            "emailAddress": "john.doe@example.com",
             "upn": "u",
             "phoneNumber": "mohwnhp"
           },
@@ -228,7 +228,7 @@
           "provisioningState": "Succeeded",
           "partnerOrganizationProperties": {
             "organizationId": "zcqpwyzskwxqlwr",
-            "organizationName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "organizationName": "myOrganization",
             "singleSignOnProperties": {
               "singleSignOnState": "Initial",
               "enterpriseAppId": "ggmgrjgedvlvtlsfltkkqhqcqyt",
@@ -239,17 +239,17 @@
             }
           },
           "projectProperties": {
-            "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-            "createdAt": "adtzi",
+            "entityId": "project-123",
+            "entityName": "myProject",
+            "createdAt": "2023-06-15T10:00:00Z",
             "provisioningState": "Succeeded",
             "attributes": [
               {
-                "name": "on",
-                "value": "qzp"
+                "name": "environment",
+                "value": "development"
               }
             ],
-            "regionId": "lukzufcllwufcyjlmlxamoal",
+            "regionId": "westus",
             "storage": 22,
             "pgVersion": 23,
             "historyRetention": 16,
@@ -258,154 +258,154 @@
               "autoscalingLimitMaxCu": 11
             },
             "branch": {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "createdAt": "fredfsy",
+              "entityId": "branch-123",
+              "entityName": "main",
+              "createdAt": "2023-06-15T10:00:00Z",
               "provisioningState": "Succeeded",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "projectId": "cxhihpayn",
-              "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "roleName": "lwlafskrxvggwnfu",
-              "databaseName": "zxqetv",
+              "projectId": "project-123",
+              "parentId": "main-branch",
+              "roleName": "admin",
+              "databaseName": "postgres",
               "roles": [
                 {
-                  "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                  "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
+                  "entityId": "role-123",
+                  "entityName": "read_only_role",
+                  "createdAt": "2023-06-15T10:00:00Z",
                   "provisioningState": "Succeeded",
                   "attributes": [
                     {
-                      "name": "on",
-                      "value": "qzp"
+                      "name": "environment",
+                      "value": "development"
                     }
                   ],
-                  "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+                  "branchId": "branch-123",
                   "permissions": [
-                    "cgubrzxkomlxoqdua"
+                    "SELECT"
                   ],
                   "isSuperUser": true,
-                  "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "lastUpdated": "eruvqn",
-                  "owns": "ojmudfaymrysbcap"
+                  "roleName": "reader",
+                  "lastUpdated": "2023-06-15T10:05:00Z",
+                  "owns": "public.users"
                 }
               ],
               "databases": [
                 {
-                  "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                  "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "createdAt": "kafzh",
+                  "entityId": "db-123",
+                  "entityName": "appdb",
+                  "createdAt": "2023-06-15T10:00:00Z",
                   "provisioningState": "Succeeded",
                   "attributes": [
                     {
-                      "name": "on",
-                      "value": "qzp"
+                      "name": "environment",
+                      "value": "development"
                     }
                   ],
-                  "branchId": "sllrohrmwkgzre",
-                  "ownerName": "rjpysakvuicrlwvzcbmp",
-                  "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "lastUpdated": "ydungfhfqupi"
+                  "branchId": "branch-123",
+                  "ownerName": "postgres",
+                  "databaseName": "appdb",
+                  "lastUpdated": "2023-06-15T10:05:00Z"
                 }
               ],
               "endpoints": [
                 {
-                  "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                  "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "createdAt": "fsjt",
+                  "entityId": "endpoint-123",
+                  "entityName": "primary-endpoint",
+                  "createdAt": "2023-06-15T10:00:00Z",
                   "provisioningState": "Succeeded",
                   "attributes": [
                     {
-                      "name": "on",
-                      "value": "qzp"
+                      "name": "environment",
+                      "value": "development"
                     }
                   ],
-                  "projectId": "vwwhykqyr",
-                  "branchId": "blclbeuzvywzagbuvdo",
-                  "endpointType": "read_only",
-                  "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                  "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                  "currentState": "znpmtyhxfcligjiqcfzsn",
-                  "lastActive": "cqewwerjsfgp",
+                  "projectId": "project-123",
+                  "branchId": "branch-123",
+                  "endpointType": "read_write",
+                  "endpointId": "endpoint-123",
+                  "endpointName": "primary",
+                  "currentState": "active",
+                  "lastActive": "2023-06-15T10:30:00Z",
                   "size": {
-                    "autoscalingLimitMinCu": 14,
-                    "autoscalingLimitMaxCu": 3
+                    "autoscalingLimitMinCu": 1,
+                    "autoscalingLimitMaxCu": 4
                   }
                 }
               ],
-              "branchId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
-              "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
-              "lastActive": "ci",
-              "computeHours": "tqgibzmzdlsmmlawtckpap",
-              "primaryCompute": "twzzbcwz"
+              "branchId": "branch-123",
+              "branchName": "main",
+              "dataSize": "1.2 GB",
+              "lastActive": "2023-06-15T10:30:00Z",
+              "computeHours": "12.5",
+              "primaryCompute": "enabled"
             },
             "roles": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
+                "entityId": "role-456",
+                "entityName": "admin_role",
+                "createdAt": "2023-06-15T10:00:00Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+                "branchId": "branch-123",
                 "permissions": [
-                  "cgubrzxkomlxoqdua"
+                  "ALL"
                 ],
                 "isSuperUser": true,
-                "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "lastUpdated": "eruvqn",
-                "owns": "ojmudfaymrysbcap"
+                "roleName": "admin",
+                "lastUpdated": "2023-06-15T10:05:00Z",
+                "owns": "public.accounts"
               }
             ],
             "databases": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "kafzh",
+                "entityId": "db-456",
+                "entityName": "postgres",
+                "createdAt": "2023-06-15T10:00:00Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "sllrohrmwkgzre",
-                "ownerName": "rjpysakvuicrlwvzcbmp",
-                "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "lastUpdated": "ydungfhfqupi"
+                "branchId": "branch-123",
+                "ownerName": "postgres",
+                "databaseName": "postgres",
+                "lastUpdated": "2023-06-15T10:05:00Z"
               }
             ],
             "endpoints": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "fsjt",
+                "entityId": "endpoint-456",
+                "entityName": "readonly-endpoint",
+                "createdAt": "2023-06-15T10:00:00Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "projectId": "vwwhykqyr",
-                "branchId": "blclbeuzvywzagbuvdo",
+                "projectId": "project-123",
+                "branchId": "branch-123",
                 "endpointType": "read_only",
-                "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "currentState": "znpmtyhxfcligjiqcfzsn",
-                "lastActive": "cqewwerjsfgp",
+                "endpointId": "endpoint-456",
+                "endpointName": "readonly",
+                "currentState": "active",
+                "lastActive": "2023-06-15T10:30:00Z",
                 "size": {
-                  "autoscalingLimitMinCu": 14,
-                  "autoscalingLimitMaxCu": 3
+                  "autoscalingLimitMinCu": 1,
+                  "autoscalingLimitMaxCu": 2
                 }
               }
             ]
@@ -414,17 +414,17 @@
         "tags": {
           "key439": "oelsukziksikdouupyehsqg"
         },
-        "location": "ujwdbzpil",
-        "id": "iumpihtqxpxvfwuykoqggag",
-        "name": "mnsu",
-        "type": "ttlxmkwukcvghfqxsts",
+        "location": "westus",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Microsoft.DBforNeon/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.DBforNeon/organizations",
         "systemData": {
-          "createdBy": "jhxhapdnokzuuahtvhbtykdb",
+          "createdBy": "user@example.com",
           "createdByType": "User",
-          "createdAt": "2025-07-01T09:55:42.307Z",
-          "lastModifiedBy": "wuzhhzvuctzqgmgnbuhglofliifeql",
+          "createdAt": "2023-06-15T10:00:00Z",
+          "lastModifiedBy": "user@example.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-07-01T09:55:42.307Z"
+          "lastModifiedAt": "2023-06-15T10:05:00Z"
         }
       }
     },

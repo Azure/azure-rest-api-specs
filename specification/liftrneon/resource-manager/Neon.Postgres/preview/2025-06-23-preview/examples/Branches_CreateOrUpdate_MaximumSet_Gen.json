@@ -5,12 +5,12 @@
     "api-version": "2025-06-23-preview",
     "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
     "resourceGroupName": "rgneon",
-    "organizationName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$",
-    "projectName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-    "branchName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+    "organizationName": "myOrganization",
+    "projectName": "myProject",
+    "branchName": "feature",
     "resource": {
       "properties": {
-        "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+        "entityName": "FeatureBranch",
         "attributes": [
           {
             "name": "on",
@@ -18,12 +18,12 @@
           }
         ],
         "projectId": "cxhihpayn",
-        "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
+        "parentId": "parent-123abc",
         "roleName": "lwlafskrxvggwnfu",
         "databaseName": "zxqetv",
         "roles": [
           {
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "entityName": "AdminRole",
             "attributes": [
               {
                 "name": "on",
@@ -35,13 +35,13 @@
               "cgubrzxkomlxoqdua"
             ],
             "isSuperUser": true,
-            "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "roleName": "postgres",
             "owns": "ojmudfaymrysbcap"
           }
         ],
         "databases": [
           {
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "entityName": "MainDatabase",
             "attributes": [
               {
                 "name": "on",
@@ -50,12 +50,12 @@
             ],
             "branchId": "sllrohrmwkgzre",
             "ownerName": "rjpysakvuicrlwvzcbmp",
-            "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$"
+            "databaseName": "postgres"
           }
         ],
         "endpoints": [
           {
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "entityName": "PrimaryEndpoint",
             "attributes": [
               {
                 "name": "on",
@@ -65,7 +65,7 @@
             "projectId": "vwwhykqyr",
             "branchId": "blclbeuzvywzagbuvdo",
             "endpointType": "read_only",
-            "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+            "endpointName": "primary-endpoint",
             "currentState": "znpmtyhxfcligjiqcfzsn",
             "lastActive": "cqewwerjsfgp",
             "size": {
@@ -74,7 +74,7 @@
             }
           }
         ],
-        "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
+        "branchName": "feature-branch",
         "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
         "lastActive": "ci",
         "computeHours": "tqgibzmzdlsmmlawtckpap",
@@ -86,8 +86,8 @@
     "200": {
       "body": {
         "properties": {
-          "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-          "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+          "entityId": "branch-1a2b3c4d5e",
+          "entityName": "FeatureBranch",
           "createdAt": "fredfsy",
           "provisioningState": "Succeeded",
           "attributes": [
@@ -97,13 +97,13 @@
             }
           ],
           "projectId": "cxhihpayn",
-          "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
+          "parentId": "parent-123abc",
           "roleName": "lwlafskrxvggwnfu",
           "databaseName": "zxqetv",
           "roles": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "role-abc123def45",
+              "entityName": "PostgresReadOnlyRole",
               "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -117,15 +117,15 @@
                 "cgubrzxkomlxoqdua"
               ],
               "isSuperUser": true,
-              "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "roleName": "read_only_role",
               "lastUpdated": "eruvqn",
               "owns": "ojmudfaymrysbcap"
             }
           ],
           "databases": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "db-456efg789hij",
+              "entityName": "MainDatabase",
               "createdAt": "kafzh",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -136,14 +136,14 @@
               ],
               "branchId": "sllrohrmwkgzre",
               "ownerName": "rjpysakvuicrlwvzcbmp",
-              "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "databaseName": "postgres_main_db",
               "lastUpdated": "ydungfhfqupi"
             }
           ],
           "endpoints": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "endpoint-98765xyz",
+              "entityName": "PrimaryEndpoint",
               "createdAt": "fsjt",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -155,8 +155,8 @@
               "projectId": "vwwhykqyr",
               "branchId": "blclbeuzvywzagbuvdo",
               "endpointType": "read_only",
-              "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "endpointId": "ep-12345abcde",
+              "endpointName": "primary-endpoint",
               "currentState": "znpmtyhxfcligjiqcfzsn",
               "lastActive": "cqewwerjsfgp",
               "size": {
@@ -165,14 +165,14 @@
               }
             }
           ],
-          "branchId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-          "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
+          "branchId": "branch-987654321",
+          "branchName": "feature-branch-dev",
           "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
           "lastActive": "ci",
           "computeHours": "tqgibzmzdlsmmlawtckpap",
           "primaryCompute": "twzzbcwz"
         },
-        "id": "kxtlikipjsqzoojmucnductbiz",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Neon.Postgres/organizations/myOrganization/projects/myProject/branches/feature",
         "name": "szluwwgbunssokjlsmiuiitqoor",
         "type": "zibp",
         "systemData": {
@@ -191,8 +191,8 @@
       },
       "body": {
         "properties": {
-          "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-          "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+          "entityId": "branch-1a2b3c4d5e",
+          "entityName": "FeatureBranch",
           "createdAt": "fredfsy",
           "provisioningState": "Succeeded",
           "attributes": [
@@ -202,13 +202,13 @@
             }
           ],
           "projectId": "cxhihpayn",
-          "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
+          "parentId": "parent-123abc",
           "roleName": "lwlafskrxvggwnfu",
           "databaseName": "zxqetv",
           "roles": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "role-abc123def45",
+              "entityName": "PostgresReadOnlyRole",
               "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -222,15 +222,15 @@
                 "cgubrzxkomlxoqdua"
               ],
               "isSuperUser": true,
-              "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "roleName": "read_only_role",
               "lastUpdated": "eruvqn",
               "owns": "ojmudfaymrysbcap"
             }
           ],
           "databases": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "db-456efg789hij",
+              "entityName": "MainDatabase",
               "createdAt": "kafzh",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -241,14 +241,14 @@
               ],
               "branchId": "sllrohrmwkgzre",
               "ownerName": "rjpysakvuicrlwvzcbmp",
-              "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "databaseName": "postgres_main_db",
               "lastUpdated": "ydungfhfqupi"
             }
           ],
           "endpoints": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "entityId": "endpoint-98765xyz",
+              "entityName": "PrimaryEndpoint",
               "createdAt": "fsjt",
               "provisioningState": "Succeeded",
               "attributes": [
@@ -260,8 +260,8 @@
               "projectId": "vwwhykqyr",
               "branchId": "blclbeuzvywzagbuvdo",
               "endpointType": "read_only",
-              "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
+              "endpointId": "ep-12345abcde",
+              "endpointName": "primary-endpoint",
               "currentState": "znpmtyhxfcligjiqcfzsn",
               "lastActive": "cqewwerjsfgp",
               "size": {
@@ -270,14 +270,14 @@
               }
             }
           ],
-          "branchId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-          "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
+          "branchId": "branch-987654321",
+          "branchName": "feature-branch-dev",
           "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
           "lastActive": "ci",
           "computeHours": "tqgibzmzdlsmmlawtckpap",
           "primaryCompute": "twzzbcwz"
         },
-        "id": "kxtlikipjsqzoojmucnductbiz",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Neon.Postgres/organizations/myOrganization/projects/myProject/branches/feature",
         "name": "szluwwgbunssokjlsmiuiitqoor",
         "type": "zibp",
         "systemData": {

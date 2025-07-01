@@ -5,24 +5,24 @@
     "api-version": "2025-06-23-preview",
     "subscriptionId": "DFF26289-4E9C-46D0-890E-F8BE27BDA8C2",
     "resourceGroupName": "rgneon",
-    "organizationName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$",
-    "projectName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$"
+    "organizationName": "myOrganization",
+    "projectName": "myProject"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-          "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-          "createdAt": "adtzi",
+          "entityId": "project-123",
+          "entityName": "myProject",
+          "createdAt": "2025-06-15T10:30:15Z",
           "provisioningState": "Succeeded",
           "attributes": [
             {
-              "name": "on",
-              "value": "qzp"
+              "name": "environment",
+              "value": "development"
             }
           ],
-          "regionId": "v",
+          "regionId": "westus",
           "storage": 22,
           "pgVersion": 14,
           "historyRetention": 3,
@@ -31,151 +31,151 @@
             "autoscalingLimitMaxCu": 3
           },
           "branch": {
-            "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-            "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-            "createdAt": "fredfsy",
+            "entityId": "branch-123",
+            "entityName": "main",
+            "createdAt": "2025-06-15T10:35:22Z",
             "provisioningState": "Succeeded",
             "attributes": [
               {
-                "name": "on",
-                "value": "qzp"
+                "name": "environment",
+                "value": "development"
               }
             ],
-            "projectId": "cxhihpayn",
-            "parentId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-            "roleName": "lwlafskrxvggwnfu",
-            "databaseName": "zxqetv",
+            "projectId": "project-123",
+            "parentId": "main-branch",
+            "roleName": "admin",
+            "databaseName": "postgres",
             "roles": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
+                "entityId": "role-123",
+                "entityName": "read_only_role",
+                "createdAt": "2025-06-15T10:40:18Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+                "branchId": "branch-123",
                 "permissions": [
-                  "cgubrzxkomlxoqdua"
+                  "SELECT"
                 ],
                 "isSuperUser": true,
-                "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "lastUpdated": "eruvqn",
-                "owns": "ojmudfaymrysbcap"
+                "roleName": "reader",
+                "lastUpdated": "2025-06-30T14:25:10Z",
+                "owns": "public.users"
               }
             ],
             "databases": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "kafzh",
+                "entityId": "db-123",
+                "entityName": "appdb",
+                "createdAt": "2025-06-15T10:42:33Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "branchId": "sllrohrmwkgzre",
-                "ownerName": "rjpysakvuicrlwvzcbmp",
-                "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "lastUpdated": "ydungfhfqupi"
+                "branchId": "branch-123",
+                "ownerName": "postgres",
+                "databaseName": "application",
+                "lastUpdated": "2025-06-30T14:28:45Z"
               }
             ],
             "endpoints": [
               {
-                "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "createdAt": "fsjt",
+                "entityId": "endpoint-123",
+                "entityName": "read-endpoint",
+                "createdAt": "2025-06-15T10:45:12Z",
                 "provisioningState": "Succeeded",
                 "attributes": [
                   {
-                    "name": "on",
-                    "value": "qzp"
+                    "name": "environment",
+                    "value": "development"
                   }
                 ],
-                "projectId": "vwwhykqyr",
-                "branchId": "blclbeuzvywzagbuvdo",
+                "projectId": "project-123",
+                "branchId": "branch-123",
                 "endpointType": "read_only",
-                "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-                "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-                "currentState": "znpmtyhxfcligjiqcfzsn",
-                "lastActive": "cqewwerjsfgp",
+                "endpointId": "endpoint-123",
+                "endpointName": "read-replica",
+                "currentState": "active",
+                "lastActive": "2025-06-30T15:30:22Z",
                 "size": {
                   "autoscalingLimitMinCu": 14,
                   "autoscalingLimitMaxCu": 3
                 }
               }
             ],
-            "branchId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-            "branchName": "Replace this value with a string matching RegExp ^\\S.{0,126}\\S$|^\\S$",
-            "dataSize": "ajluwwsyjddhuplkoeknwvocwvcm",
-            "lastActive": "ci",
-            "computeHours": "tqgibzmzdlsmmlawtckpap",
-            "primaryCompute": "twzzbcwz"
+            "branchId": "branch-123",
+            "branchName": "main",
+            "dataSize": "10GB",
+            "lastActive": "2025-06-30T18:45:10Z",
+            "computeHours": "120",
+            "primaryCompute": "compute-123"
           },
           "roles": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "createdAt": "pgpzfhnbpzcihlnyrdtgbgl",
+              "entityId": "role-456",
+              "entityName": "admin_role",
+              "createdAt": "2025-06-15T10:40:18Z",
               "provisioningState": "Succeeded",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "branchId": "tnmwjbftrvfpepgeytoeqsyhyz",
+              "branchId": "branch-123",
               "permissions": [
-                "cgubrzxkomlxoqdua"
+                "ALL"
               ],
               "isSuperUser": true,
-              "roleName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "lastUpdated": "eruvqn",
-              "owns": "ojmudfaymrysbcap"
+              "roleName": "administrator",
+              "lastUpdated": "2025-06-30T14:25:10Z",
+              "owns": "public.all_tables"
             }
           ],
           "databases": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "createdAt": "kafzh",
+              "entityId": "db-456",
+              "entityName": "maindb",
+              "createdAt": "2025-06-15T10:42:33Z",
               "provisioningState": "Succeeded",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "branchId": "sllrohrmwkgzre",
-              "ownerName": "rjpysakvuicrlwvzcbmp",
-              "databaseName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "lastUpdated": "ydungfhfqupi"
+              "branchId": "branch-123",
+              "ownerName": "postgres",
+              "databaseName": "main",
+              "lastUpdated": "2025-06-30T14:28:45Z"
             }
           ],
           "endpoints": [
             {
-              "entityId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "entityName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "createdAt": "fsjt",
+              "entityId": "endpoint-456",
+              "entityName": "primary-endpoint",
+              "createdAt": "2025-06-15T10:45:12Z",
               "provisioningState": "Succeeded",
               "attributes": [
                 {
-                  "name": "on",
-                  "value": "qzp"
+                  "name": "environment",
+                  "value": "development"
                 }
               ],
-              "projectId": "vwwhykqyr",
-              "branchId": "blclbeuzvywzagbuvdo",
-              "endpointType": "read_only",
-              "endpointId": "Replace this value with a string matching RegExp ^[a-z0-9-]{1,60}$",
-              "endpointName": "Replace this value with a string matching RegExp ^\\S.{0,62}\\S$|^\\S$",
-              "currentState": "znpmtyhxfcligjiqcfzsn",
-              "lastActive": "cqewwerjsfgp",
+              "projectId": "project-123",
+              "branchId": "branch-123",
+              "endpointType": "read_write",
+              "endpointId": "endpoint-456",
+              "endpointName": "primary",
+              "currentState": "active",
+              "lastActive": "2025-06-30T15:30:22Z",
               "size": {
                 "autoscalingLimitMinCu": 14,
                 "autoscalingLimitMaxCu": 3
@@ -183,14 +183,14 @@
             }
           ]
         },
-        "id": "ldrcghcoddiwlmvzkjvro",
-        "name": "szzmenfmjfhtddzhigcppsucpcm",
-        "type": "srbycdfpzvmezkmzm",
+        "id": "/subscriptions/DFF26289-4E9C-46D0-890E-F8BE27BDA8C2/resourceGroups/rgneon/providers/Neon.Postgres/organizations/myOrganization/projects/myProject",
+        "name": "myProject",
+        "type": "Microsoft.Neon.Postgres/organizations/projects",
         "systemData": {
-          "createdBy": "jhxhapdnokzuuahtvhbtykdb",
+          "createdBy": "user@example.com",
           "createdByType": "User",
           "createdAt": "2025-07-01T09:55:42.307Z",
-          "lastModifiedBy": "wuzhhzvuctzqgmgnbuhglofliifeql",
+          "lastModifiedBy": "admin@example.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-07-01T09:55:42.307Z"
         }
