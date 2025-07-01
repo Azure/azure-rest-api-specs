@@ -32,29 +32,19 @@ export default async function updateLabels({ github, context, core }) {
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  */
-export async function updateLabelsImpl({
-  owner,
-  repo,
-  issue_number,
-  run_id,
-  github,
-  core,
-}) {
+export async function updateLabelsImpl({ owner, repo, issue_number, run_id, github, core }) {
   /** @type {string[]} */
   let artifactNames = [];
 
   if (run_id) {
     // List artifacts from a single run_id
     core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-    const artifacts = await github.paginate(
-      github.rest.actions.listWorkflowRunArtifacts,
-      {
-        owner: owner,
-        repo: repo,
-        run_id: run_id,
-        per_page: PER_PAGE_MAX,
-      },
-    );
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner: owner,
+      repo: repo,
+      run_id: run_id,
+      per_page: PER_PAGE_MAX,
+    });
 
     artifactNames = artifacts.map((a) => a.name);
   } else {
@@ -97,10 +87,7 @@ export async function updateLabelsImpl({
   core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
   core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
 
-  if (
-    (labelsToAdd.length > 0 || labelsToRemove.length > 0) &&
-    Number.isNaN(issue_number)
-  ) {
+  if ((labelsToAdd.length > 0 || labelsToRemove.length > 0) && Number.isNaN(issue_number)) {
     throw new Error(
       `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
     );
@@ -129,11 +116,7 @@ export async function updateLabelsImpl({
           name: name,
         });
       } catch (error) {
-        if (
-          error instanceof Error &&
-          "status" in error &&
-          error.status === 404
-        ) {
+        if (error instanceof Error && "status" in error && error.status === 404) {
           core.info(`Ignoring error: ${error.status} - ${error.message}`);
         } else {
           throw error;
