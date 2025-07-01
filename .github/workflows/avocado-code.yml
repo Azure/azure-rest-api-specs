@@ -25,14 +25,15 @@ jobs:
           npm exec --no -- avocado \
           --excludePaths \
             "/common-types/" \
+            "/fixtures/" \
             "/scenarios/" \
             "/package.json" \
             "/package-lock.json" \
             "/cadl/examples/" \
             '(?=/examples/)(?!(?:/stable/|/preview/))' \
           --includePaths \
-            "^${GITHUB_WORKSPACE}/specification/.*/data-plane" \
-            "^${GITHUB_WORKSPACE}/specification/.*/resource-manager"
+            "data-plane" \
+            "resource-manager"
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
