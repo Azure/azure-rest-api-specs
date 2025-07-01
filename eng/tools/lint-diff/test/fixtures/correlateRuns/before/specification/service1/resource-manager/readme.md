@@ -2,6 +2,8 @@
 
 ## Configuration
 
+test diff
+
 Minimal file to test correlateRuns functionality.
 
 ### Basic Information
