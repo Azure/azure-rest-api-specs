@@ -22,3 +22,4 @@ using Microsoft.Network;
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(PrivateZones.recordSetsList, RecordSets);
+@@clientName(PrivateZones.recordSetsList, "List");
