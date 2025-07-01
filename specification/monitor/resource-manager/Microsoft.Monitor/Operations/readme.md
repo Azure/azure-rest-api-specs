@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-- preview\2024-10-01-preview\operations.json
+- preview/2024-10-01-preview/operations.json
 
 ```
 
@@ -51,7 +51,8 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-- preview\2025-03-01-preview\operations.json
+- preview/2025-03-01-preview/operations.json
+
 ```
 
 ### Tag: package-2025-06-03-preview
@@ -60,7 +61,8 @@ These settings apply only when `--tag=package-2025-06-03-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-06-03-preview'
 input-file:
-- preview\2025-06-03-preview\operations.json
+- preview/2025-06-03-preview/operations.json
+
 ```
 
 ---
