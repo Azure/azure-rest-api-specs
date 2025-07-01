@@ -296,25 +296,25 @@ using Azure.AI.Agents;
 @@usage(MessageTextFileCitationAnnotation, Usage.output);
 @@usage(MessageTextFilePathAnnotation, Usage.output);
 
-@@usage(MessageDeltaTextFileCitationAnnotation, Usage.output);
-@@access(MessageDeltaTextFileCitationAnnotation, Access.public);
-@@usage(MessageDeltaTextFileCitationAnnotationObject, Usage.output);
-@@access(MessageDeltaTextFileCitationAnnotationObject, Access.public);
+// @@usage(MessageDeltaTextFileCitationAnnotation, Usage.output);
+// @@access(MessageDeltaTextFileCitationAnnotation, Access.public);
+// @@usage(MessageDeltaTextFileCitationAnnotationObject, Usage.output);
+// @@access(MessageDeltaTextFileCitationAnnotationObject, Access.public);
 
-@@usage(MessageDeltaTextFilePathAnnotation, Usage.output);
-@@access(MessageDeltaTextFilePathAnnotation, Access.public);
-@@usage(MessageDeltaTextFilePathAnnotationObject, Usage.output);
-@@access(MessageDeltaTextFilePathAnnotationObject, Access.public);
+// @@usage(MessageDeltaTextFilePathAnnotation, Usage.output);
+// @@access(MessageDeltaTextFilePathAnnotation, Access.public);
+// @@usage(MessageDeltaTextFilePathAnnotationObject, Usage.output);
+// @@access(MessageDeltaTextFilePathAnnotationObject, Access.public);
 
-@@usage(MessageDeltaImageFileContent, Usage.output);
-@@access(MessageDeltaImageFileContent, Access.public);
-@@usage(MessageDeltaImageFileContentObject, Usage.output);
-@@access(MessageDeltaImageFileContentObject, Access.public);
+// @@usage(MessageDeltaImageFileContent, Usage.output);
+// @@access(MessageDeltaImageFileContent, Access.public);
+// @@usage(MessageDeltaImageFileContentObject, Usage.output);
+// @@access(MessageDeltaImageFileContentObject, Access.public);
 
-@@usage(MessageDeltaTextContent, Usage.output);
-@@access(MessageDeltaTextContent, Access.public);
-@@usage(MessageDeltaTextContentObject, Usage.output);
-@@access(MessageDeltaTextContentObject, Access.public);
+// @@usage(MessageDeltaTextContent, Usage.output);
+// @@access(MessageDeltaTextContent, Access.public);
+// @@usage(MessageDeltaTextContentObject, Usage.output);
+// @@access(MessageDeltaTextContentObject, Access.public);
 
 @@usage(RunStepDeltaMessageCreationObject, Usage.output);
 @@access(RunStepDeltaMessageCreationObject, Access.public);
@@ -329,8 +329,8 @@ using Azure.AI.Agents;
 // @@usage(MessageDeltaChunk, Usage.output | Usage.json);
 // @@access(MessageDeltaChunk, Access.public);
 
-@@usage(MessageDelta, Usage.output);
-@@access(MessageDelta, Access.public);
+// @@usage(MessageDelta, Usage.output);
+// @@access(MessageDelta, Access.public);
 // @@usage(MessageDeltaContent, Usage.output);
 // @@access(MessageDeltaContent, Access.public);
 
@@ -384,19 +384,19 @@ using Azure.AI.Agents;
 @@clientName(FunctionName, "PersistentAgentsFunctionName", "csharp");
 @@clientName(VectorStore, "PersistentAgentsVectorStore", "csharp");
 @@clientName(ThreadMessage, "PersistentThreadMessage", "csharp");
-@@clientName(MessageDeltaTextUrlCitationAnnotation,
-  "MessageDeltaTextUriCitationAnnotation",
-  "csharp"
-);
-@@clientName(MessageDeltaTextUrlCitationAnnotation.urlCitation,
-  "UriCitation",
-  "csharp"
-);
-@@clientName(MessageDeltaTextUrlCitationDetails,
-  "MessageDeltaTextUriCitationDetails",
-  "csharp"
-);
-@@clientName(MessageDeltaTextUrlCitationDetails.url, "Uri", "csharp");
+// @@clientName(MessageDeltaTextUrlCitationAnnotation,
+//   "MessageDeltaTextUriCitationAnnotation",
+//   "csharp"
+// );
+// @@clientName(MessageDeltaTextUrlCitationAnnotation.urlCitation,
+//   "UriCitation",
+//   "csharp"
+// );
+// @@clientName(MessageDeltaTextUrlCitationDetails,
+//   "MessageDeltaTextUriCitationDetails",
+//   "csharp"
+// );
+// @@clientName(MessageDeltaTextUrlCitationDetails.url, "Uri", "csharp");
 
 @@clientName(MessageImageUrlParam, "MessageImageUriParam", "csharp");
 @@clientName(MessageImageUrlParam.url, "Uri", "csharp");

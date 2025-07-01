@@ -430,39 +430,39 @@ union MessageIncompleteDetailsReason {
 //
 
 /** Represents a message delta i.e. any changed fields on a message during streaming. */
-@added(Versions.v2025_05_01)
-model MessageDeltaChunk {
-  /** The identifier of the message, which can be referenced in API endpoints. */
-  id: string;
+// @added(Versions.v2025_05_01)
+// model MessageDeltaChunk {
+//   /** The identifier of the message, which can be referenced in API endpoints. */
+//   id: string;
 
-  /** The object type, which is always `thread.message.delta`. */
-  object: "thread.message.delta";
+//   /** The object type, which is always `thread.message.delta`. */
+//   object: "thread.message.delta";
 
-  /** The delta containing the fields that have changed on the Message. */
-  delta: MessageDelta;
-}
+//   /** The delta containing the fields that have changed on the Message. */
+//   delta: MessageDelta;
+// }
 
-/** Represents the typed 'delta' payload within a streaming message delta chunk. */
-@added(Versions.v2025_05_01)
-model MessageDelta {
-  /** The entity that produced the message. */
-  role: MessageRole;
+// /** Represents the typed 'delta' payload within a streaming message delta chunk. */
+// @added(Versions.v2025_05_01)
+// model MessageDelta {
+//   /** The entity that produced the message. */
+//   role: MessageRole;
 
-  /** The content of the message as an array of text and/or images. */
-  // content: MessageDeltaContent[];
-}
+//   /** The content of the message as an array of text and/or images. */
+//   // content: MessageDeltaContent[];
+// }
 
-/** The abstract base representation of a partial streamed message content payload. */
-@discriminator("type")
-@added(Versions.v2025_05_01)
-model MessageDeltaContent {
-  /** The index of the content part of the message. */
-  index: int32;
+// /** The abstract base representation of a partial streamed message content payload. */
+// @discriminator("type")
+// @added(Versions.v2025_05_01)
+// model MessageDeltaContent {
+//   /** The index of the content part of the message. */
+//   index: int32;
 
-  /** The type of content for this content part. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  type: string;
-}
+//   /** The type of content for this content part. */
+//   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+//   type: string;
+// }
 
 /** Represents a streamed image file content part within a streaming message delta chunk. */
 // @added(Versions.v2025_05_01)
@@ -483,126 +483,126 @@ model MessageDeltaContent {
 //   fileId?: string;
 // }
 /** Represents a streamed text content part within a streaming message delta chunk. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextContent extends MessageDeltaContent {
-  /** The type of content for this content part, which is always "text." */
-  type: "text";
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextContent extends MessageDeltaContent {
+//   /** The type of content for this content part, which is always "text." */
+//   type: "text";
 
-  /** The text content details. */
-  text?: MessageDeltaTextContentObject;
-}
+//   /** The text content details. */
+//   text?: MessageDeltaTextContentObject;
+// }
 
-/** Represents the data of a streamed text content part within a streaming message delta chunk. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextContentObject {
-  /** The data that makes up the text. */
-  value?: string;
+// /** Represents the data of a streamed text content part within a streaming message delta chunk. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextContentObject {
+//   /** The data that makes up the text. */
+//   value?: string;
 
-  /** Annotations for the text. */
-  annotations?: MessageDeltaTextAnnotation[];
-}
+//   /** Annotations for the text. */
+//   annotations?: MessageDeltaTextAnnotation[];
+// }
 
-/** The abstract base representation of a streamed text content part's text annotation. */
-@discriminator("type")
-@added(Versions.v2025_05_01)
-model MessageDeltaTextAnnotation {
-  /** The index of the annotation within a text content part. */
-  index: int32;
+// /** The abstract base representation of a streamed text content part's text annotation. */
+// @discriminator("type")
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextAnnotation {
+//   /** The index of the annotation within a text content part. */
+//   index: int32;
 
-  /** The type of the text content annotation. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  type: string;
-}
+//   /** The type of the text content annotation. */
+//   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+//   type: string;
+// }
 
-@doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
-@added(Versions.v2025_05_01)
-model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
-  @doc("The object type, which is always 'url_citation'.")
-  type: "url_citation";
+// @doc("A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.")
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
+//   @doc("The object type, which is always 'url_citation'.")
+//   type: "url_citation";
 
-  @encodedName("application/json", "url_citation")
-  @doc("The details of the URL citation.")
-  urlCitation: MessageDeltaTextUrlCitationDetails;
+//   @encodedName("application/json", "url_citation")
+//   @doc("The details of the URL citation.")
+//   urlCitation: MessageDeltaTextUrlCitationDetails;
 
-  @encodedName("application/json", "start_index")
-  @doc("The first text index associated with this text annotation.")
-  startIndex?: int32;
+//   @encodedName("application/json", "start_index")
+//   @doc("The first text index associated with this text annotation.")
+//   startIndex?: int32;
 
-  @encodedName("application/json", "end_index")
-  @doc("The last text index associated with this text annotation.")
-  endIndex?: int32;
-}
+//   @encodedName("application/json", "end_index")
+//   @doc("The last text index associated with this text annotation.")
+//   endIndex?: int32;
+// }
 
-@doc("A representation of a URL citation, as used in text thread message content.")
-@added(Versions.v2025_05_01)
-model MessageDeltaTextUrlCitationDetails {
-  @doc("The URL associated with this citation.")
-  url: string;
+// @doc("A representation of a URL citation, as used in text thread message content.")
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextUrlCitationDetails {
+//   @doc("The URL associated with this citation.")
+//   url: string;
 
-  @doc("The title of the URL.")
-  title?: string;
-}
+//   @doc("The title of the URL.")
+//   title?: string;
+// }
 
-/** Represents a streamed file citation applied to a streaming text content part. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextFileCitationAnnotation
-  extends MessageDeltaTextAnnotation {
-  /** The type of the text content annotation, which is always "file_citation." */
-  type: "file_citation";
+// /** Represents a streamed file citation applied to a streaming text content part. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextFileCitationAnnotation
+//   extends MessageDeltaTextAnnotation {
+//   /** The type of the text content annotation, which is always "file_citation." */
+//   type: "file_citation";
 
-  /** The file citation information. */
-  @encodedName("application/json", "file_citation")
-  fileCitation?: MessageDeltaTextFileCitationAnnotationObject;
+//   /** The file citation information. */
+//   @encodedName("application/json", "file_citation")
+//   fileCitation?: MessageDeltaTextFileCitationAnnotationObject;
 
-  /** The text in the message content that needs to be replaced */
-  text?: string;
+//   /** The text in the message content that needs to be replaced */
+//   text?: string;
 
-  /** The start index of this annotation in the content text. */
-  @encodedName("application/json", "start_index")
-  startIndex?: int32;
+//   /** The start index of this annotation in the content text. */
+//   @encodedName("application/json", "start_index")
+//   startIndex?: int32;
 
-  /** The end index of this annotation in the content text. */
-  @encodedName("application/json", "end_index")
-  endIndex?: int32;
-}
+//   /** The end index of this annotation in the content text. */
+//   @encodedName("application/json", "end_index")
+//   endIndex?: int32;
+// }
 
-/** Represents the data of a streamed file citation as applied to a streaming text content part. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextFileCitationAnnotationObject {
-  /** The ID of the specific file the citation is from. */
-  @encodedName("application/json", "file_id")
-  fileId?: string;
+// /** Represents the data of a streamed file citation as applied to a streaming text content part. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextFileCitationAnnotationObject {
+//   /** The ID of the specific file the citation is from. */
+//   @encodedName("application/json", "file_id")
+//   fileId?: string;
 
-  /** The specific quote in the cited file. */
-  quote?: string;
-}
+//   /** The specific quote in the cited file. */
+//   quote?: string;
+// }
 
-/** Represents a streamed file path annotation applied to a streaming text content part. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextFilePathAnnotation extends MessageDeltaTextAnnotation {
-  /** The type of the text content annotation, which is always "file_path." */
-  type: "file_path";
+// /** Represents a streamed file path annotation applied to a streaming text content part. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextFilePathAnnotation extends MessageDeltaTextAnnotation {
+//   /** The type of the text content annotation, which is always "file_path." */
+//   type: "file_path";
 
-  /** The file path information. */
-  @encodedName("application/json", "file_path")
-  filePath?: MessageDeltaTextFilePathAnnotationObject;
+//   /** The file path information. */
+//   @encodedName("application/json", "file_path")
+//   filePath?: MessageDeltaTextFilePathAnnotationObject;
 
-  /** The start index of this annotation in the content text. */
-  @encodedName("application/json", "start_index")
-  startIndex?: int32;
+//   /** The start index of this annotation in the content text. */
+//   @encodedName("application/json", "start_index")
+//   startIndex?: int32;
 
-  /** The end index of this annotation in the content text. */
-  @encodedName("application/json", "end_index")
-  endIndex?: int32;
+//   /** The end index of this annotation in the content text. */
+//   @encodedName("application/json", "end_index")
+//   endIndex?: int32;
 
-  /** The text in the message content that needs to be replaced */
-  text?: string;
-}
+//   /** The text in the message content that needs to be replaced */
+//   text?: string;
+// }
 
-/** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
-@added(Versions.v2025_05_01)
-model MessageDeltaTextFilePathAnnotationObject {
-  /** The file ID for the annotation. */
-  @encodedName("application/json", "file_id")
-  fileId?: string;
-}
+// /** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
+// @added(Versions.v2025_05_01)
+// model MessageDeltaTextFilePathAnnotationObject {
+//   /** The file ID for the annotation. */
+//   @encodedName("application/json", "file_id")
+//   fileId?: string;
+// }
