@@ -9,7 +9,7 @@ import { includesFolder, getVersionFromInputFile, getBaseNameForSwagger } from "
  */
 
 /**
- * @typedef {Object} OperationMeta
+ * @typedef {Object} OperationMetadata
  * @property {string} path - API path
  * @property {string} operationId - The operation ID
  * @property {string} httpMethod - HTTP method (GET, POST, etc.)
@@ -17,7 +17,7 @@ import { includesFolder, getVersionFromInputFile, getBaseNameForSwagger } from "
  */
 
 /**
- * @typedef {Object} SwaggerMetaData
+ * @typedef {Object} SwaggerMetadata
  * @property {string} version - API version
  * @property {ApiVersionLifecycleStage} versionType - Lifecycle stage (stable/preview)
  * @property {string} fileName - Base name of the swagger file
@@ -27,16 +27,17 @@ import { includesFolder, getVersionFromInputFile, getBaseNameForSwagger } from "
 
 /**
  * SwaggerVersionCache - Caches and manages version information for swagger files
- * Replaces the original SwaggerVersionManager.ts with modern Node.js 20+ features
  */
 export class SwaggerVersionCache {
-  // Instance-level caches
-  /** @type {Map<string, SwaggerMetaData[]>} */
+  // map of RP folder paths to their swagger metadata
+  /** @type {Map<string, SwaggerMetadata[]>} */
   #versionsByRp = new Map();
 
-  /** @type {Map<string, OperationMeta[]>} */
+  // map of swagger file paths to their operations
+  /** @type {Map<string, OperationMetadata[]>} */
   #operationsBySwagger = new Map();
 
+  // map of RP folder paths to their swagger file paths
   /** @type {Map<string, string[]>} */
   #swaggersByRp = new Map();
 
@@ -85,7 +86,7 @@ export class SwaggerVersionCache {
   /**
    * Get metadata for all swagger files in RP folder (with caching)
    * @param {string} rpFolderPath - Path to the RP folder
-   * @returns {Promise<SwaggerMetaData[]>} - Array of swagger metadata
+   * @returns {Promise<SwaggerMetadata[]>} - Array of swagger metadata
    */
   async getVersionMapping(rpFolderPath) {
     // Check cache first
@@ -127,7 +128,7 @@ export class SwaggerVersionCache {
   /**
    * Get operations for a specific swagger file (with caching)
    * @param {string} swaggerPath - Path to the swagger file
-   * @returns {Promise<OperationMeta[]>} - Array of operation metadata
+   * @returns {Promise<OperationMetadata[]>} - Array of operation metadata
    */
   async getOperations(swaggerPath) {
     // Check cache first
@@ -220,7 +221,7 @@ export class SwaggerVersionCache {
   // Instance methods that leverage caching internally
 
   /**
-   * Get the most recent preceding version of a specific type (like original getClosestVersion)
+   * Get the most recent preceding version of a specific type
    * @param {string} swaggerFile - Path to the swagger file
    * @param {ApiVersionLifecycleStage} swaggerVersionType - Type of version to find ('stable' | 'preview')
    * @returns {Promise<string | undefined>} - Path to the most recent preceding version file, or undefined
@@ -252,7 +253,7 @@ export class SwaggerVersionCache {
   }
 
   /**
-   * Get preceding preview version for a given swagger file (like original getClosestPreview)
+   * Get preceding preview version for a given swagger file
    * @param {string} swaggerFile - Path to the swagger file
    * @returns {Promise<string | undefined>} - Path to the closest preview version, or undefined
    */
@@ -261,7 +262,7 @@ export class SwaggerVersionCache {
   }
 
   /**
-   * Get preceding stable version for a given swagger file (like original getClosestStable)
+   * Get preceding stable version for a given swagger file
    * @param {string} swaggerFile - Path to the swagger file
    * @returns {Promise<string | undefined>} - Path to the closest stable version, or undefined
    */
@@ -270,12 +271,12 @@ export class SwaggerVersionCache {
   }
 
   /**
-   * Get operations from all previous versions that also exist in current swagger (like original implementation)
+   * Get operations from all previous versions that also exist in current swagger
    * @param {string} swaggerFile - Path to the current swagger file
-   * @returns {Promise<OperationMeta[]>} - Operations that exist in both previous versions and current version
+   * @returns {Promise<OperationMetadata[]>} - Operations that exist in both previous versions and current version
    */
   async getLegacyVersionOperations(swaggerFile) {
-    /** @type {OperationMeta[]} */
+    /** @type {OperationMetadata[]} */
     let result = [];
 
     const rpFolder = SwaggerVersionCache.getRPFolder(swaggerFile);
@@ -333,7 +334,7 @@ export class SwaggerVersionCache {
   }
 
   /**
-   * Get version type from swagger file path (like original implementation)
+   * Get version type from swagger file path
    * @param {string} swaggerPath - Path to swagger file
    * @returns {ApiVersionLifecycleStage} - Version type
    */

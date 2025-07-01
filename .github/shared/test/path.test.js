@@ -44,7 +44,7 @@ describe("Path utilities", () => {
   });
 
   describe("getVersionFromInputFile", () => {
-    describe("resource-manager (non-data-plane) paths", () => {
+    describe("resource-manager paths", () => {
       it("should extract version from standard resource-manager paths", () => {
         assert.equal(
           getVersionFromInputFile(
