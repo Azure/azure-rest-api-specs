@@ -192,46 +192,42 @@ model RunStepError {
 //
 
 /** Represents a run step delta i.e. any changed fields on a run step during streaming. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaChunk {
-  /** The identifier of the run step, which can be referenced in API endpoints. */
-  id: string;
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaChunk {
+//   /** The identifier of the run step, which can be referenced in API endpoints. */
+//   id: string;
 
-  /** The object type, which is always `thread.run.step.delta`. */
-  object: "thread.run.step.delta";
+//   /** The object type, which is always `thread.run.step.delta`. */
+//   object: "thread.run.step.delta";
 
-  /** The delta containing the fields that have changed on the run step. */
-  delta: RunStepDelta;
-}
-
+//   /** The delta containing the fields that have changed on the run step. */
+//   delta: RunStepDelta;
+// }
 /** Represents the delta payload in a streaming run step delta chunk. */
-@added(Versions.v2025_05_01)
-model RunStepDelta {
-  /** The details of the run step. */
-  @encodedName("application/json", "step_details")
-  stepDetails?: RunStepDeltaDetail;
-}
-
+// @added(Versions.v2025_05_01)
+// model RunStepDelta {
+//   /** The details of the run step. */
+//   @encodedName("application/json", "step_details")
+//   // stepDetails?: RunStepDeltaDetail;
+// }
 /** Represents a single run step detail item in a streaming run step's delta payload. */
-@discriminator("type")
-@added(Versions.v2025_05_01)
-model RunStepDeltaDetail {
-  /** The object type for the run step detail object. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  type: string;
-}
-
+// @discriminator("type")
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaDetail {
+//   /** The object type for the run step detail object. */
+//   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+//   type: string;
+// }
 /** Represents a message creation within a streaming run step delta. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
-  /** The object type, which is always "message_creation." */
-  type: "message_creation";
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
+//   /** The object type, which is always "message_creation." */
+//   type: "message_creation";
 
-  /** The message creation data. */
-  @encodedName("application/json", "message_creation")
-  messageCreation?: RunStepDeltaMessageCreationObject;
-}
-
+//   /** The message creation data. */
+//   @encodedName("application/json", "message_creation")
+//   messageCreation?: RunStepDeltaMessageCreationObject;
+// }
 /** Represents the data within a streaming run step message creation response object. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaMessageCreationObject {
@@ -241,16 +237,15 @@ model RunStepDeltaMessageCreationObject {
 }
 
 /** Represents an invocation of tool calls as part of a streaming run step. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
-  /** The object type, which is always "tool_calls." */
-  type: "tool_calls";
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
+//   /** The object type, which is always "tool_calls." */
+//   type: "tool_calls";
 
-  /** The collection of tool calls for the tool call detail item. */
-  @encodedName("application/json", "tool_calls")
-  toolCalls?: RunStepDeltaToolCall[];
-}
-
+//   /** The collection of tool calls for the tool call detail item. */
+//   @encodedName("application/json", "tool_calls")
+//   toolCalls?: RunStepDeltaToolCall[];
+// }
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)

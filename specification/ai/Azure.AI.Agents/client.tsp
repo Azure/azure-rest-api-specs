@@ -324,8 +324,8 @@ using Azure.AI.Agents;
 @@access(RunStepDeltaCodeInterpreterLogOutput, Access.public);
 @@usage(RunStepDeltaCodeInterpreterImageOutputObject, Usage.output);
 @@access(RunStepDeltaCodeInterpreterImageOutputObject, Access.public);
-@@usage(RunStepDeltaChunk, Usage.output);
-@@access(RunStepDeltaChunk, Access.public);
+// @@usage(RunStepDeltaChunk, Usage.output);
+// @@access(RunStepDeltaChunk, Access.public);
 // @@usage(MessageDeltaChunk, Usage.output | Usage.json);
 // @@access(MessageDeltaChunk, Access.public);
 
