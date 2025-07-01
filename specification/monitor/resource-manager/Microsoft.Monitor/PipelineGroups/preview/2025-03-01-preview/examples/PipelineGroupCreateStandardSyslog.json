@@ -42,7 +42,56 @@
                 "stream": "Microsoft-Syslog",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
-                  "recordMap": []
+                  "recordMap": [
+                    {
+                      "from": "time_unix_nano",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "attributes.CollectorHostName",
+                      "to": "CollectorHostName"
+                    },
+                    {
+                      "from": "attributes.Computer",
+                      "to": "Computer"
+                    },
+                    {
+                      "from": "attributes.EventTime",
+                      "to": "EventTime"
+                    },
+                    {
+                      "from": "attributes.Facility",
+                      "to": "Facility"
+                    },
+                    {
+                      "from": "attributes.HostIP",
+                      "to": "HostIP"
+                    },
+                    {
+                      "from": "attributes.HostName",
+                      "to": "HostName"
+                    },
+                    {
+                      "from": "attributes.ProcessID",
+                      "to": "ProcessID"
+                    },
+                    {
+                      "from": "attributes.ProcessName",
+                      "to": "ProcessName"
+                    },
+                    {
+                      "from": "attributes.SeverityLevel",
+                      "to": "SeverityLevel"
+                    },
+                    {
+                      "from": "attributes.SourceSystem",
+                      "to": "SourceSystem"
+                    },
+                    {
+                      "from": "attributes.SyslogMessage",
+                      "to": "SyslogMessage"
+                    }
+                  ]
                 }
               },
               "concurrency": {
