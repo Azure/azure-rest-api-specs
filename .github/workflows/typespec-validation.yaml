@@ -24,5 +24,8 @@ jobs:
           # step as failed. 
           $ErrorActionPreference = 'Continue'
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+          # Branches named "release-*" should ignore core files to allow PRs merging from main
+          $ignoreCoreFiles = $Env:GITHUB_BASE_REF -like 'release-*'
+
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh
