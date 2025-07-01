@@ -22,7 +22,6 @@ interface CheckNameAvailabilityOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckNameAvailability_CheckAvailability")
   checkNameAvailability is ArmProviderActionSync<
     CommonTypes.CheckNameAvailabilityRequest,
     CheckNameAvailabilityResponse,
@@ -37,7 +36,6 @@ interface DiscoverySolutionOperationGroup {
    * Lists the relevant Azure Diagnostics, Solutions and Troubleshooters using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. <br/><br/> Required Input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiscoverySolution_List")
   @autoRoute
   @get
   @action("discoverySolutions")
@@ -66,7 +64,6 @@ interface DiscoverySolutionNLPOperationGroup {
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiscoverySolutionNLP_DiscoverSolutions")
   @autoRoute
   discoverSolutions is ArmProviderActionSync<
     Request = DiscoveryNlpRequest,
@@ -77,7 +74,6 @@ interface DiscoverySolutionNLPOperationGroup {
    * Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary and subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiscoverySolutionNLP_DiscoverSolutionsBySubscription")
   @autoRoute
   @action("discoverSolutions")
   discoverSolutionsBySubscription is ArmProviderActionSync<

@@ -97,6 +97,9 @@ using Microsoft.Help;
 @@clientLocation(CheckNameAvailabilityOperationGroup.checkNameAvailability,
   "CheckNameAvailability"
 );
+@@clientName(CheckNameAvailabilityOperationGroup.checkNameAvailability,
+  "CheckAvailability"
+);
 @@clientLocation(DiscoverySolutionOperationGroup.list, "DiscoverySolution");
 @@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
   "DiscoverySolutionNLP"
