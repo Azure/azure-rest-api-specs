@@ -22,10 +22,7 @@ describe("retry function", () => {
   });
 
   it("should retry when function fails and then succeed", async () => {
-    const mockFn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error("failure"))
-      .mockResolvedValue("success");
+    const mockFn = vi.fn().mockRejectedValueOnce(new Error("failure")).mockResolvedValue("success");
 
     // Use fake timers
     vi.useFakeTimers();

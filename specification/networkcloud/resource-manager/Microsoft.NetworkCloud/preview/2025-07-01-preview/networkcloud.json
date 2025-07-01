@@ -8059,7 +8059,7 @@
             "$ref": "#/definitions/ActionState"
           },
           "x-ms-identifiers": [
-            "type"
+            "actionType"
           ],
           "readOnly": true
         },
@@ -9735,7 +9735,7 @@
             "$ref": "#/definitions/ActionState"
           },
           "x-ms-identifiers": [
-            "type"
+            "actionType"
           ],
           "readOnly": true
         },
@@ -14527,29 +14527,12 @@
       "type": "object",
       "title": "VolumePatchParameters represents the body of the request to patch the volume resource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VolumePatchProperties",
-          "description": "The list of the resource properties.",
-          "x-ms-client-flatten": true
-        },
         "tags": {
           "description": "The Azure resource tags that will replace the existing ones.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "VolumePatchProperties": {
-      "type": "object",
-      "title": "VolumePatchProperties represents the properties to patch for the volume resource.",
-      "properties": {
-        "sizeMiB": {
-          "description": "The size of the allocation for this volume in Mebibytes.",
-          "type": "integer",
-          "format": "int64",
-          "minimum": 1
         }
       }
     },

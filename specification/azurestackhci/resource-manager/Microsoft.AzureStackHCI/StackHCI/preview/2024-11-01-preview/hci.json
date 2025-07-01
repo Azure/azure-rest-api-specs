@@ -1822,6 +1822,15 @@
         "managedResourceGroup": {
           "type": "string",
           "description": "Managed resource group name for the pool"
+        },
+        "operationDetails": {
+          "type": "array",
+          "description": "operation status details for device pool.",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3231,8 +3240,7 @@
       },
       "required": [
         "target",
-        "osProfile",
-        "deviceConfiguration"
+        "osProfile"
       ]
     },
     "ProvisioningState": {
