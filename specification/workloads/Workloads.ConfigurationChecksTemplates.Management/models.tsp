@@ -440,7 +440,7 @@ model WorkloadComponentsUpdateRequest {
    */
   @doc("List of roles to be updated for checks execution.")
   @Azure.ResourceManager.identifiers(#[])
-  roles: RoleConfigurationUpdateRequest[];
+  roles?: RoleConfigurationUpdateRequest[];
 }
 
 @doc("Defines the schema for role configuration for update of checks execution.")
