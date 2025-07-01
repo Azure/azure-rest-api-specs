@@ -25,7 +25,7 @@ jobs:
           $ErrorActionPreference = 'Continue'
 
           # Only "main" and "RPSaaSMaster" should validate all specs if core files change
-          $isProduction = @('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF
+          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:!($isProduction)
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh
