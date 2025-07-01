@@ -17,7 +17,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model Formula extends Resource {
@@ -31,11 +30,31 @@ model Formula extends Resource {
 }
 
 @armResourceOperations
+interface FormulaOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Formula,
+        KeyName = "name",
+        SegmentName = "formulas",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Formulas {
   /**
    * Get formula.
    */
-  get is ArmResourceRead<
+  get is FormulaOps.Read<
     Formula,
     Parameters = {
       /**
@@ -49,7 +68,7 @@ interface Formulas {
   /**
    * Create or replace an existing formula. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is FormulaOps.CreateOrUpdateAsync<
     Formula,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -59,17 +78,17 @@ interface Formulas {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Formula, PatchModel = FormulaFragment>;
+  update is FormulaOps.CustomPatchSync<Formula, PatchModel = FormulaFragment>;
 
   /**
    * Delete formula.
    */
-  delete is ArmResourceDeleteSync<Formula>;
+  delete is FormulaOps.DeleteSync<Formula>;
 
   /**
    * List formulas in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is FormulaOps.List<
     Formula,
     Parameters = {
       /**
@@ -101,13 +120,10 @@ interface Formulas {
 }
 
 @@doc(Formula.name, "The name of the formula.");
-@@doc(Formula.properties, "The properties of the resource.");
+@@doc(Formula.properties, "The properties of the formula.");
 @@doc(Formulas.createOrUpdate::parameters.resource,
   "A formula for creating a VM, specifying an image base and other parameters"
 );
 @@doc(Formulas.update::parameters.properties,
   "A formula for creating a VM, specifying an image base and other parameters"
 );
-
-@@doc(Formula.tags, "The tags of the resource.");
-@@doc(Formula.location, "The location of the resource.");

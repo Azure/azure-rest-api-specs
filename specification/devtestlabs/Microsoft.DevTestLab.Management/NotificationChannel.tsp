@@ -16,7 +16,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model NotificationChannel extends Resource {
@@ -30,11 +29,31 @@ model NotificationChannel extends Resource {
 }
 
 @armResourceOperations
+interface NotificationChannelOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = NotificationChannel,
+        KeyName = "name",
+        SegmentName = "notificationchannels",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface NotificationChannels {
   /**
    * Get notification channel.
    */
-  get is ArmResourceRead<
+  get is NotificationChannelOps.Read<
     NotificationChannel,
     Parameters = {
       /**
@@ -48,14 +67,14 @@ interface NotificationChannels {
   /**
    * Create or replace an existing notification channel.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationChannel>;
+  createOrUpdate is NotificationChannelOps.CreateOrUpdateSync<NotificationChannel>;
 
   /**
    * Allows modifying tags of notification channels. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is NotificationChannelOps.CustomPatchSync<
     NotificationChannel,
     PatchModel = NotificationChannelFragment
   >;
@@ -63,12 +82,12 @@ interface NotificationChannels {
   /**
    * Delete notification channel.
    */
-  delete is ArmResourceDeleteSync<NotificationChannel>;
+  delete is NotificationChannelOps.DeleteSync<NotificationChannel>;
 
   /**
    * List notification channels in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is NotificationChannelOps.List<
     NotificationChannel,
     Parameters = {
       /**
@@ -101,7 +120,7 @@ interface NotificationChannels {
   /**
    * Send notification to provided channel.
    */
-  notify is ArmResourceActionSync<
+  notify is NotificationChannelOps.ActionAsync<
     NotificationChannel,
     NotifyParameters,
     OkResponse
@@ -110,8 +129,6 @@ interface NotificationChannels {
 
 @@doc(NotificationChannel.name, "The name of the notification channel.");
 @@doc(NotificationChannel.properties, "The properties of the resource.");
-@@doc(NotificationChannel.location, "The location of the resource.");
-@@doc(NotificationChannel.tags, "The tags of the resource.");
 @@doc(NotificationChannels.createOrUpdate::parameters.resource,
   "A notification."
 );

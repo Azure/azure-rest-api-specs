@@ -17,7 +17,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(User)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model Secret extends Resource {
@@ -31,11 +30,34 @@ model Secret extends Resource {
 }
 
 @armResourceOperations
+interface SecretOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the user profile. */
+        @path @segment("users") userName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = Secret,
+        KeyName = "name",
+        SegmentName = "secrets",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface Secrets {
   /**
    * Get secret.
    */
-  get is ArmResourceRead<
+  get is SecretOps.Read<
     Secret,
     Parameters = {
       /**
@@ -49,7 +71,7 @@ interface Secrets {
   /**
    * Create or replace an existing secret. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is SecretOps.CreateOrUpdateAsync<
     Secret,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -64,12 +86,12 @@ interface Secrets {
   /**
    * Delete secret.
    */
-  delete is ArmResourceDeleteSync<Secret>;
+  delete is SecretOps.DeleteSync<Secret>;
 
   /**
    * List secrets in a given user profile.
    */
-  list is ArmResourceListByParent<
+  list is SecretOps.List<
     Secret,
     Parameters = {
       /**
@@ -102,7 +124,5 @@ interface Secrets {
 
 @@doc(Secret.name, "The name of the secret.");
 @@doc(Secret.properties, "The properties of the resource.");
-@@doc(Secret.location, "The location of the resource.");
-@@doc(Secret.tags, "The tags of the resource.");
 @@doc(Secrets.createOrUpdate::parameters.resource, "A secret.");
 @@doc(Secrets.update::parameters.properties, "A secret.");

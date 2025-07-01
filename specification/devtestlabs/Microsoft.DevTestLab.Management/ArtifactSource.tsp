@@ -16,7 +16,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ArtifactSource extends Resource {
@@ -30,11 +29,31 @@ model ArtifactSource extends Resource {
 }
 
 @armResourceOperations
+interface ArtifactSourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ArtifactSource,
+        KeyName = "name",
+        SegmentName = "artifactsources",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ArtifactSources {
   /**
    * Get artifact source.
    */
-  get is ArmResourceRead<
+  get is ArtifactSourceOps.Read<
     ArtifactSource,
     Parameters = {
       /**
@@ -48,14 +67,14 @@ interface ArtifactSources {
   /**
    * Create or replace an existing artifact source.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ArtifactSource>;
+  createOrUpdate is ArtifactSourceOps.CreateOrUpdateAsync<ArtifactSource>;
 
   /**
    * Allows modifying tags of artifact sources. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "ArtifactSourceFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArtifactSourceOps.CustomPatchSync<
     ArtifactSource,
     PatchModel = ArtifactSourceFragment
   >;
@@ -63,12 +82,12 @@ interface ArtifactSources {
   /**
    * Delete artifact source.
    */
-  delete is ArmResourceDeleteSync<ArtifactSource>;
+  delete is ArtifactSourceOps.DeleteSync<ArtifactSource>;
 
   /**
    * List artifact sources in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is ArtifactSourceOps.List<
     ArtifactSource,
     Parameters = {
       /**

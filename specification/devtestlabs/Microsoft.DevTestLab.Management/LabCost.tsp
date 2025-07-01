@@ -17,7 +17,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model LabCost extends Resource {
@@ -30,6 +29,26 @@ model LabCost extends Resource {
   properties: LabCostProperties;
 }
 
+@armResourceOperations
+interface LabCostOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = LabCost,
+        KeyName = "name",
+        SegmentName = "costs",
+        NamePattern = ""
+      >>
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface LabCosts {
@@ -38,7 +57,7 @@ interface LabCosts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_Get")
-  get is ArmResourceRead<
+  get is LabCostOps.Read<
     LabCost,
     Parameters = {
       /**
@@ -54,11 +73,9 @@ interface LabCosts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
+  createOrUpdate is LabCostOps.CreateOrUpdateSync<LabCost>;
 }
 
 @@doc(LabCost.name, "The name of the cost.");
 @@doc(LabCost.properties, "The properties of the resource.");
 @@doc(LabCosts.createOrUpdate::parameters.resource, "A cost item.");
-@@doc(LabCost.tags, "The tags of the resource.");
-@@doc(LabCost.location, "The location of the resource.");

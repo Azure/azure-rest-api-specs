@@ -41,7 +41,7 @@ interface ArmTemplatesOps
         @path @segment("labs") labName: string,
 
         /** The name of the artifact source. */
-        @path @segment("artifactSource") artifactSourceName: string,
+        @path @segment("artifactsources") artifactSourceName: string,
       },
       KeysOf<ResourceNameParameter<
         Resource = ArmTemplate,

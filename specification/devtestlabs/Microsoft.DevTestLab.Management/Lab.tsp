@@ -24,7 +24,7 @@ model Lab extends Resource {
   @path
   @key
   @segment("labs")
-  labName: string;
+  name: string;
 
   properties: LabProperties;
 }
@@ -234,12 +234,12 @@ interface Labs {
        */
       @path
       @segment("policysets")
-      name: string;
+      policySetName: string;
     }
   >;
 }
 
-@@doc(Lab.labName, "The name of the lab.");
+@@doc(Lab.name, "The name of the lab.");
 @@doc(Lab.properties, "The properties of the resource.");
 @@doc(Labs.createOrUpdate::parameters.resource, "A lab.");
 @@doc(Labs.update::parameters.properties, "A lab.");

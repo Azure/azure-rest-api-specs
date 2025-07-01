@@ -403,7 +403,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
       "get": {
         "operationId": "Labs_Get",
         "tags": [
@@ -421,7 +421,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -472,7 +472,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -546,7 +546,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -599,7 +599,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -643,379 +643,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/armtemplates": {
-      "get": {
-        "operationId": "ArmTemplates_List",
-        "tags": [
-          "ArmTemplates"
-        ],
-        "description": "List azure resource manager templates in a given artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArmTemplateList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArmTemplates_List": {
-            "$ref": "./examples/ArmTemplates_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/armtemplates/{name}": {
-      "get": {
-        "operationId": "ArmTemplates_Get",
-        "tags": [
-          "ArmTemplates"
-        ],
-        "description": "Get azure resource manager template.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the ArmTemplate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArmTemplate"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ArmTemplates_Get": {
-            "$ref": "./examples/ArmTemplates_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts": {
-      "get": {
-        "operationId": "Artifacts_List",
-        "tags": [
-          "Artifacts"
-        ],
-        "description": "List artifacts in a given artifact source.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=title)'",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArtifactList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Artifacts_List": {
-            "$ref": "./examples/Artifacts_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts/{name}": {
-      "get": {
-        "operationId": "Artifacts_Get",
-        "tags": [
-          "Artifacts"
-        ],
-        "description": "Get artifact.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the Artifact",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Specify the $expand query. Example: 'properties($select=title)'",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Artifact"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Artifacts_Get": {
-            "$ref": "./examples/Artifacts_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactSource/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
-      "post": {
-        "operationId": "Artifacts_GenerateArmTemplate",
-        "tags": [
-          "Artifacts"
-        ],
-        "description": "Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "artifactSourceName",
-            "in": "path",
-            "description": "The name of the artifact source.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the Artifact",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "generateArmTemplateRequest",
-            "in": "body",
-            "description": "Parameters for generating an ARM template for deploying artifacts.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateArmTemplateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ArmTemplateInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Artifacts_GenerateArmTemplate": {
-            "$ref": "./examples/Artifacts_GenerateArmTemplate.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources": {
@@ -1123,7 +750,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact source.",
+            "description": "The name of the ArtifactSource",
             "required": true,
             "type": "string"
           },
@@ -1181,7 +808,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact source.",
+            "description": "The name of the ArtifactSource",
             "required": true,
             "type": "string"
           },
@@ -1206,6 +833,17 @@
             "description": "Resource 'ArtifactSource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ArtifactSource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1219,7 +857,11 @@
           "ArtifactSources_CreateOrUpdate": {
             "$ref": "./examples/ArtifactSources_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ArtifactSources_Update",
@@ -1247,7 +889,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact source.",
+            "description": "The name of the ArtifactSource",
             "required": true,
             "type": "string"
           },
@@ -1307,7 +949,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the artifact source.",
+            "description": "The name of the ArtifactSource",
             "required": true,
             "type": "string"
           }
@@ -1333,7 +975,380 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/claimAnyVm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates": {
+      "get": {
+        "operationId": "ArmTemplates_List",
+        "tags": [
+          "ArmTemplates"
+        ],
+        "description": "List azure resource manager templates in a given artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmTemplateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArmTemplates_List": {
+            "$ref": "./examples/ArmTemplates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/armtemplates/{name}": {
+      "get": {
+        "operationId": "ArmTemplates_Get",
+        "tags": [
+          "ArmTemplates"
+        ],
+        "description": "Get azure resource manager template.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the ArmTemplate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=displayName)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArmTemplates_Get": {
+            "$ref": "./examples/ArmTemplates_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts": {
+      "get": {
+        "operationId": "Artifacts_List",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "List artifacts in a given artifact source.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=title)'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the operation. Example: '$top=10'",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The ordering expression for the results, using OData notation. Example: '$orderby=name desc'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_List": {
+            "$ref": "./examples/Artifacts_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}": {
+      "get": {
+        "operationId": "Artifacts_Get",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Get artifact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Artifact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specify the $expand query. Example: 'properties($select=title)'",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Get": {
+            "$ref": "./examples/Artifacts_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate": {
+      "post": {
+        "operationId": "Artifacts_GenerateArmTemplate",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactSourceName",
+            "in": "path",
+            "description": "The name of the artifact source.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Artifact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "generateArmTemplateRequest",
+            "in": "body",
+            "description": "Parameters for generating an ARM template for deploying artifacts.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateArmTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArmTemplateInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_GenerateArmTemplate": {
+            "$ref": "./examples/Artifacts_GenerateArmTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/claimAnyVm": {
       "post": {
         "operationId": "Labs_ClaimAnyVm",
         "tags": [
@@ -1351,7 +1366,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1421,7 +1436,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the cost.",
+            "description": "The name of the LabCost",
             "required": true,
             "type": "string"
           },
@@ -1479,7 +1494,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the cost.",
+            "description": "The name of the LabCost",
             "required": true,
             "type": "string"
           },
@@ -1520,7 +1535,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/createEnvironment": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment": {
       "post": {
         "operationId": "Labs_CreateEnvironment",
         "tags": [
@@ -1538,7 +1553,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1695,7 +1710,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the custom image.",
+            "description": "The name of the CustomImage",
             "required": true,
             "type": "string"
           },
@@ -1753,7 +1768,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the custom image.",
+            "description": "The name of the CustomImage",
             "required": true,
             "type": "string"
           },
@@ -1834,7 +1849,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the custom image.",
+            "description": "The name of the CustomImage",
             "required": true,
             "type": "string"
           },
@@ -1894,7 +1909,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the custom image.",
+            "description": "The name of the CustomImage",
             "required": true,
             "type": "string"
           }
@@ -1938,7 +1953,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/exportResourceUsage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/exportResourceUsage": {
       "post": {
         "operationId": "Labs_ExportResourceUsage",
         "tags": [
@@ -1956,7 +1971,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2113,7 +2128,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the formula.",
+            "description": "The name of the Formula",
             "required": true,
             "type": "string"
           },
@@ -2171,7 +2186,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the formula.",
+            "description": "The name of the Formula",
             "required": true,
             "type": "string"
           },
@@ -2252,7 +2267,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the formula.",
+            "description": "The name of the Formula",
             "required": true,
             "type": "string"
           },
@@ -2312,7 +2327,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the formula.",
+            "description": "The name of the Formula",
             "required": true,
             "type": "string"
           }
@@ -2338,7 +2353,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/galleryimages": {
       "get": {
         "operationId": "GalleryImages_List",
         "tags": [
@@ -2356,7 +2371,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2416,7 +2431,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/generateUploadUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/generateUploadUri": {
       "post": {
         "operationId": "Labs_GenerateUploadUri",
         "tags": [
@@ -2434,7 +2449,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2471,7 +2486,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/importVirtualMachine": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/importVirtualMachine": {
       "post": {
         "operationId": "Labs_ImportVirtualMachine",
         "tags": [
@@ -2489,7 +2504,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2541,7 +2556,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/listVhds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
       "post": {
         "operationId": "Labs_ListVhds",
         "tags": [
@@ -2559,7 +2574,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2695,7 +2710,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the notification channel.",
+            "description": "The name of the NotificationChannel",
             "required": true,
             "type": "string"
           },
@@ -2753,7 +2768,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the notification channel.",
+            "description": "The name of the NotificationChannel",
             "required": true,
             "type": "string"
           },
@@ -2819,7 +2834,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the notification channel.",
+            "description": "The name of the NotificationChannel",
             "required": true,
             "type": "string"
           },
@@ -2879,7 +2894,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the notification channel.",
+            "description": "The name of the NotificationChannel",
             "required": true,
             "type": "string"
           }
@@ -2932,7 +2947,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the notification channel.",
+            "description": "The name of the NotificationChannel",
             "required": true,
             "type": "string"
           },
@@ -2950,6 +2965,20 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2961,10 +2990,14 @@
           "NotificationChannels_Notify": {
             "$ref": "./examples/NotificationChannels_Notify.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/policysets/{policySetName}/evaluatePolicies": {
       "post": {
         "operationId": "PolicySets_EvaluatePolicies",
         "tags": [
@@ -2982,14 +3015,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "policySetName",
             "in": "path",
             "description": "The name of the policy set.",
             "required": true,
@@ -3842,7 +3875,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service runner.",
+            "description": "The name of the ServiceRunner",
             "required": true,
             "type": "string"
           }
@@ -3893,7 +3926,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service runner.",
+            "description": "The name of the ServiceRunner",
             "required": true,
             "type": "string"
           },
@@ -3959,7 +3992,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service runner.",
+            "description": "The name of the ServiceRunner",
             "required": true,
             "type": "string"
           }
@@ -4063,7 +4096,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/users/{name}": {
       "get": {
         "operationId": "Users_Get",
         "tags": [
@@ -4088,9 +4121,9 @@
             "type": "string"
           },
           {
-            "name": "userName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the user profile.",
+            "description": "The name of the User",
             "required": true,
             "type": "string"
           },
@@ -4146,9 +4179,9 @@
             "type": "string"
           },
           {
-            "name": "userName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the user profile.",
+            "description": "The name of the User",
             "required": true,
             "type": "string"
           },
@@ -4227,9 +4260,9 @@
             "type": "string"
           },
           {
-            "name": "userName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the user profile.",
+            "description": "The name of the User",
             "required": true,
             "type": "string"
           },
@@ -4287,9 +4320,9 @@
             "type": "string"
           },
           {
-            "name": "userName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the user profile.",
+            "description": "The name of the User",
             "required": true,
             "type": "string"
           }
@@ -4452,7 +4485,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           },
@@ -4517,7 +4550,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           },
@@ -4605,7 +4638,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           },
@@ -4672,7 +4705,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           }
@@ -4750,7 +4783,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           },
@@ -4834,7 +4867,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the disk.",
+            "description": "The name of the Disk",
             "required": true,
             "type": "string"
           },
@@ -5003,7 +5036,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "The name of the DtlEnvironment",
             "required": true,
             "type": "string"
           },
@@ -5068,7 +5101,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "The name of the DtlEnvironment",
             "required": true,
             "type": "string"
           },
@@ -5156,7 +5189,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "The name of the DtlEnvironment",
             "required": true,
             "type": "string"
           },
@@ -5223,7 +5256,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "The name of the DtlEnvironment",
             "required": true,
             "type": "string"
           }
@@ -5386,7 +5419,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the secret.",
+            "description": "The name of the Secret",
             "required": true,
             "type": "string"
           },
@@ -5451,7 +5484,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the secret.",
+            "description": "The name of the Secret",
             "required": true,
             "type": "string"
           },
@@ -5506,73 +5539,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "Secrets_Update",
-        "tags": [
-          "Secrets"
-        ],
-        "description": "Allows modifying tags of secrets. All other properties will be ignored.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userName",
-            "in": "path",
-            "description": "The name of the user profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the secret.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "secret",
-            "in": "body",
-            "description": "A secret.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SecretFragment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Secret"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Secrets_Update": {
-            "$ref": "./examples/Secrets_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Secrets_Delete",
         "tags": [
@@ -5606,7 +5572,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the secret.",
+            "description": "The name of the Secret",
             "required": true,
             "type": "string"
           }
@@ -5751,7 +5717,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           },
@@ -5816,7 +5782,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           },
@@ -5904,7 +5870,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           },
@@ -5971,7 +5937,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           }
@@ -6049,7 +6015,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           }
@@ -6576,7 +6542,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           }
@@ -6651,7 +6617,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the service fabric.",
+            "description": "The name of the ServiceFabric",
             "required": true,
             "type": "string"
           }
@@ -6797,7 +6763,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -6855,7 +6821,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -6936,7 +6902,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -6996,7 +6962,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -7067,7 +7033,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -7144,7 +7110,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -7221,7 +7187,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -7289,7 +7255,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -7366,7 +7332,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -7419,7 +7385,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -7472,7 +7438,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -7540,7 +7506,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           },
@@ -7617,7 +7583,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -8110,7 +8076,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -8178,7 +8144,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -8246,7 +8212,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -8314,7 +8280,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual machine.",
+            "description": "The name of the LabVirtualMachine",
             "required": true,
             "type": "string"
           }
@@ -8460,7 +8426,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual network.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           },
@@ -8518,7 +8484,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual network.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           },
@@ -8599,7 +8565,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual network.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           },
@@ -8659,7 +8625,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "The name of the virtual network.",
+            "description": "The name of the VirtualNetwork",
             "required": true,
             "type": "string"
           }
@@ -9112,6 +9078,61 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/secrets/{name}": {
+      "patch": {
+        "operationId": "Secrets_Update",
+        "tags": [
+          "Secrets"
+        ],
+        "description": "Allows modifying tags of secrets. All other properties will be ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the secret.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "secret",
+            "in": "body",
+            "description": "A secret.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretFragment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Secrets_Update": {
+            "$ref": "./examples/Secrets_Update.json"
+          }
+        }
       }
     }
   },
@@ -10020,7 +10041,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DiskProperties",
-          "description": "The properties of the resource.",
+          "description": "The properties of the disk.",
           "x-ms-client-flatten": true
         }
       },
@@ -10124,7 +10145,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnvironmentProperties",
-          "description": "The properties of the resource.",
+          "description": "The properties of the environment.",
           "x-ms-client-flatten": true
         }
       },
@@ -10379,7 +10400,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FormulaProperties",
-          "description": "The properties of the resource.",
+          "description": "The properties of the formula.",
           "x-ms-client-flatten": true
         }
       },
@@ -11153,11 +11174,7 @@
           "description": "The Lab items on this page",
           "items": {
             "$ref": "#/definitions/Lab"
-          },
-          "x-ms-identifiers": [
-            "labName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -13082,11 +13099,7 @@
           "description": "The User items on this page",
           "items": {
             "$ref": "#/definitions/User"
-          },
-          "x-ms-identifiers": [
-            "userName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",

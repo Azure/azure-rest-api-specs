@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
@@ -17,7 +16,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(User)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ServiceFabric extends Resource {
@@ -31,11 +29,34 @@ model ServiceFabric extends Resource {
 }
 
 @armResourceOperations
+interface ServiceFabricOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the user profile. */
+        @path @segment("users") userName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ServiceFabric,
+        KeyName = "name",
+        SegmentName = "servicefabrics",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ServiceFabrics {
   /**
    * Get service fabric.
    */
-  get is ArmResourceRead<
+  get is ServiceFabricOps.Read<
     ServiceFabric,
     Parameters = {
       /**
@@ -49,7 +70,7 @@ interface ServiceFabrics {
   /**
    * Create or replace an existing service fabric. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ServiceFabricOps.CreateOrUpdateAsync<
     ServiceFabric,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -59,7 +80,7 @@ interface ServiceFabrics {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ServiceFabricOps.CustomPatchSync<
     ServiceFabric,
     PatchModel = ServiceFabricFragment
   >;
@@ -68,7 +89,7 @@ interface ServiceFabrics {
    * Delete service fabric. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ServiceFabricOps.DeleteWithoutOkAsync<
     ServiceFabric,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -76,7 +97,7 @@ interface ServiceFabrics {
   /**
    * List service fabrics in a given user profile.
    */
-  list is ArmResourceListByParent<
+  list is ServiceFabricOps.List<
     ServiceFabric,
     Parameters = {
       /**
@@ -109,7 +130,7 @@ interface ServiceFabrics {
   /**
    * Lists the applicable start/stop schedules, if any.
    */
-  listApplicableSchedules is ArmResourceActionSync<
+  listApplicableSchedules is ServiceFabricOps.ActionSync<
     ServiceFabric,
     void,
     ArmResponse<ApplicableSchedule>
@@ -118,17 +139,15 @@ interface ServiceFabrics {
   /**
    * Start a service fabric. This operation can take a while to complete.
    */
-  start is ArmResourceActionAsync<ServiceFabric, void, OkResponse>;
+  start is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
 
   /**
    * Stop a service fabric This operation can take a while to complete.
    */
-  stop is ArmResourceActionAsync<ServiceFabric, void, OkResponse>;
+  stop is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
 }
 
 @@doc(ServiceFabric.name, "The name of the service fabric.");
 @@doc(ServiceFabric.properties, "The properties of the resource.");
-@@doc(ServiceFabric.location, "The location of the resource.");
-@@doc(ServiceFabric.tags, "The tags of the resource.");
 @@doc(ServiceFabrics.createOrUpdate::parameters.resource, "A Service Fabric.");
 @@doc(ServiceFabrics.update::parameters.properties, "A Service Fabric.");

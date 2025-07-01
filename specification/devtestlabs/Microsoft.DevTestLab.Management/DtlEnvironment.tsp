@@ -17,7 +17,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(User)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model DtlEnvironment extends Resource {
@@ -31,13 +30,36 @@ model DtlEnvironment extends Resource {
 }
 
 @armResourceOperations
+interface EnvironmentOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+
+        /** The name of the user profile. */
+        @path @segment("users") userName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = DtlEnvironment,
+        KeyName = "name",
+        SegmentName = "environments",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface DtlEnvironments {
   /**
    * Get environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environments_Get")
-  get is ArmResourceRead<
+  get is EnvironmentOps.Read<
     DtlEnvironment,
     Parameters = {
       /**
@@ -53,7 +75,7 @@ interface DtlEnvironments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environments_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is EnvironmentOps.CreateOrUpdateAsync<
     DtlEnvironment,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -65,7 +87,7 @@ interface DtlEnvironments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
   @operationId("Environments_Update")
-  update is ArmCustomPatchSync<
+  update is EnvironmentOps.CustomPatchSync<
     DtlEnvironment,
     PatchModel = DtlEnvironmentFragment
   >;
@@ -76,7 +98,7 @@ interface DtlEnvironments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Environments_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is EnvironmentOps.DeleteWithoutOkAsync<
     DtlEnvironment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -86,7 +108,7 @@ interface DtlEnvironments {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environments_List")
-  list is ArmResourceListByParent<
+  list is EnvironmentOps.List<
     DtlEnvironment,
     Parameters = {
       /**
@@ -118,9 +140,7 @@ interface DtlEnvironments {
 }
 
 @@doc(DtlEnvironment.name, "The name of the environment.");
-@@doc(DtlEnvironment.properties, "The properties of the resource.");
-@@doc(DtlEnvironment.location, "The location of the resource.");
-@@doc(DtlEnvironment.tags, "The tags of the resource.");
+@@doc(DtlEnvironment.properties, "The properties of the environment.");
 @@doc(DtlEnvironments.createOrUpdate::parameters.resource,
   "An environment, which is essentially an ARM template deployment."
 );

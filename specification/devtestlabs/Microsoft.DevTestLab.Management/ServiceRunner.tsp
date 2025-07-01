@@ -19,7 +19,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ServiceRunner extends Resource {
@@ -37,26 +36,44 @@ model ServiceRunner extends Resource {
 }
 
 @armResourceOperations
+interface ServiceRunnerOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = ServiceRunner,
+        KeyName = "name",
+        SegmentName = "servicerunners",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface ServiceRunners {
   /**
    * Get service runner.
    */
-  get is ArmResourceRead<ServiceRunner>;
+  get is ServiceRunnerOps.Read<ServiceRunner>;
 
   /**
    * Create or replace an existing service runner.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ServiceRunner>;
+  createOrUpdate is ServiceRunnerOps.CreateOrUpdateSync<ServiceRunner>;
 
   /**
    * Delete service runner.
    */
-  delete is ArmResourceDeleteSync<ServiceRunner>;
+  delete is ServiceRunnerOps.DeleteSync<ServiceRunner>;
 }
 
 @@doc(ServiceRunner.name, "The name of the service runner.");
-@@doc(ServiceRunner.location, "The location of the resource.");
-@@doc(ServiceRunner.tags, "The tags of the resource.");
 @@doc(ServiceRunners.createOrUpdate::parameters.resource,
   "A container for a managed identity to execute DevTest lab services."
 );

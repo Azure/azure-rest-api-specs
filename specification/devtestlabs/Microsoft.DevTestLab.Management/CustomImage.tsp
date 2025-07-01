@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
@@ -17,7 +16,6 @@ namespace Microsoft.DevTestLab;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@parentResource(Lab)
 @Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model CustomImage extends Resource {
@@ -31,11 +29,31 @@ model CustomImage extends Resource {
 }
 
 @armResourceOperations
+interface CustomImageOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the lab. */
+        @path @segment("labs") labName: string,
+      },
+      KeysOf<ResourceNameParameter<
+        Resource = CustomImage,
+        KeyName = "name",
+        SegmentName = "customimages",
+        NamePattern = ""
+      >>
+    > {}
+
+@armResourceOperations
 interface CustomImages {
   /**
    * Get custom image.
    */
-  get is ArmResourceRead<
+  get is CustomImageOps.Read<
     CustomImage,
     Parameters = {
       /**
@@ -49,7 +67,7 @@ interface CustomImages {
   /**
    * Create or replace an existing custom image. This operation can take a while to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is CustomImageOps.CreateOrUpdateAsync<
     CustomImage,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -59,13 +77,16 @@ interface CustomImages {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "CustomImageFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<CustomImage, PatchModel = CustomImageFragment>;
+  update is CustomImageOps.CustomPatchSync<
+    CustomImage,
+    PatchModel = CustomImageFragment
+  >;
 
   /**
    * Delete custom image. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is CustomImageOps.DeleteWithoutOkAsync<
     CustomImage,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -73,7 +94,7 @@ interface CustomImages {
   /**
    * List custom images in a given lab.
    */
-  list is ArmResourceListByParent<
+  list is CustomImageOps.List<
     CustomImage,
     Parameters = {
       /**
@@ -108,5 +129,3 @@ interface CustomImages {
 @@doc(CustomImage.properties, "The properties of the resource.");
 @@doc(CustomImages.createOrUpdate::parameters.resource, "A custom image.");
 @@doc(CustomImages.update::parameters.properties, "A custom image.");
-@@doc(CustomImage.tags, "The tags of the resource.");
-@@doc(CustomImage.location, "The location of the resource.");
