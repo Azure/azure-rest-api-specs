@@ -32,7 +32,11 @@ interface Agents {
   @Rest.action("listPreviousVersions")
   getPreviousVersions is Azure.Core.Foundations.ResourceOperation<
     Agent,
-    {},
+    {
+      @doc("Continuation token for pagination")
+      @query
+      continuationToken?: string;
+    },
     Azure.Core.Page<Agent>
   >;
 

@@ -12,7 +12,11 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ListAgentToolVersionsParameters = {};
+alias ListAgentToolVersionsParameters = {
+  @doc("Continuation token for pagination")
+  @query
+  continuationToken?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v1)
