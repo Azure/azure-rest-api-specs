@@ -20,13 +20,11 @@ describe("writeToActionsSummary function", () => {
   it("should handle exception", async () => {
     // Create a mock with a write method that throws an error
     const mockCoreWithError = createMockCore();
-    mockCoreWithError.summary.write.mockRejectedValue(
-      new Error("Mock write error"),
-    );
+    mockCoreWithError.summary.write.mockRejectedValue(new Error("Mock write error"));
 
     // Call function and validate it throws
-    await expect(
-      writeToActionsSummary("Test content", mockCoreWithError),
-    ).rejects.toThrow("Failed to write to the GitHub Actions summary");
+    await expect(writeToActionsSummary("Test content", mockCoreWithError)).rejects.toThrow(
+      "Failed to write to the GitHub Actions summary",
+    );
   });
 });
