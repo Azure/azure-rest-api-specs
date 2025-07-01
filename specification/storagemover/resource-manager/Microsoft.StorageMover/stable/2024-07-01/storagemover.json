@@ -1956,8 +1956,20 @@
           ]
         },
         "agentStatus": {
-          "$ref": "#/definitions/AgentStatus",
+          "type": "string",
           "description": "The Agent status.",
+          "enum": [
+            "Registering",
+            "Offline",
+            "Online",
+            "Executing",
+            "RequiresAttention",
+            "Unregistering"
+          ],
+          "x-ms-enum": {
+            "name": "AgentStatus",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "lastStatusUpdate": {
@@ -2022,22 +2034,6 @@
         "arcResourceId",
         "arcVmUuid"
       ]
-    },
-    "AgentStatus": {
-      "type": "string",
-      "description": "The Agent status.",
-      "enum": [
-        "Registering",
-        "Offline",
-        "Online",
-        "Executing",
-        "RequiresAttention",
-        "Unregistering"
-      ],
-      "x-ms-enum": {
-        "name": "AgentStatus",
-        "modelAsString": true
-      }
     },
     "AgentUpdateParameters": {
       "type": "object",

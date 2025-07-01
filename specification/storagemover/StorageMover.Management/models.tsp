@@ -72,28 +72,6 @@ union CreatedByType {
   Key: "Key",
 }
 
-/**
- * The Agent status.
- */
-@OpenAPI.extension("x-ms-enum", #{
-  name: "AgentStatus",
-  modelAsString: true,
-})
-union AgentStatus {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Registering: "Registering",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Executing: "Executing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  RequiresAttention: "RequiresAttention",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Unregistering: "Unregistering",
-}
 
 /**
  * The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.
@@ -292,7 +270,11 @@ model AgentProperties {
    * The Agent status.
    */
   @visibility(Lifecycle.Read)
-  agentStatus?: AgentStatus;
+  @OpenAPI.extension("x-ms-enum", #{
+    name: "AgentStatus",
+    modelAsString: true,
+  })
+  agentStatus?: "Registering" | "Offline" | "Online" | "Executing" | "RequiresAttention" | "Unregistering";
 
   /**
    * The last updated time of the Agent status.
