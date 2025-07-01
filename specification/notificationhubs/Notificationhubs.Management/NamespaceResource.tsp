@@ -45,14 +45,12 @@ interface NamespaceResources {
    * Returns the given namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_Get")
   get is ArmResourceRead<NamespaceResource>;
 
   /**
    * Creates / Updates a Notification Hub namespace. This operation is idempotent.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NamespaceResource>;
 
   /**
@@ -60,7 +58,6 @@ interface NamespaceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Namespaces_Update")
   update is ArmCustomPatchSync<
     NamespaceResource,
     PatchModel = NamespacePatchParameters
@@ -70,14 +67,12 @@ interface NamespaceResources {
    * Deletes an existing namespace. This operation also removes all associated notificationHubs under the namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_Delete")
   delete is ArmResourceDeleteSync<NamespaceResource>;
 
   /**
    * Lists the available namespaces within a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_List")
   list is ArmResourceListByParent<
     NamespaceResource,
     Parameters = {
@@ -100,7 +95,6 @@ interface NamespaceResources {
    * Lists all the available namespaces within the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Namespaces_ListAll")
   listAll is ArmListBySubscription<
     NamespaceResource,
     Parameters = {
@@ -123,7 +117,6 @@ interface NamespaceResources {
    * Checks the availability of the given notificationHub in a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NotificationHubs_CheckNotificationHubAvailability")
   checkNotificationHubAvailability is ArmResourceActionSync<
     NamespaceResource,
     CheckAvailabilityParameters,
@@ -135,7 +128,6 @@ interface NamespaceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("pnsCredentials")
-  @operationId("Namespaces_GetPnsCredentials")
   getPnsCredentials is ArmResourceActionSync<
     NamespaceResource,
     void,

@@ -37,14 +37,12 @@ interface NotificationHubResources {
    * Gets the notification hub.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NotificationHubs_Get")
   get is ArmResourceRead<NotificationHubResource>;
 
   /**
    * Creates/Update a NotificationHub in a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NotificationHubs_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationHubResource>;
 
   /**
@@ -52,7 +50,6 @@ interface NotificationHubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("NotificationHubs_Update")
   update is ArmCustomPatchSync<
     NotificationHubResource,
     PatchModel = NotificationHubPatchParameters
@@ -62,14 +59,12 @@ interface NotificationHubResources {
    * Deletes a notification hub associated with a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NotificationHubs_Delete")
   delete is ArmResourceDeleteSync<NotificationHubResource>;
 
   /**
    * Lists the notification hubs associated with a namespace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NotificationHubs_List")
   list is ArmResourceListByParent<
     NotificationHubResource,
     Parameters = {
@@ -93,7 +88,6 @@ interface NotificationHubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("debugsend")
-  @operationId("NotificationHubs_DebugSend")
   debugSend is ArmResourceActionSync<
     NotificationHubResource,
     void,
@@ -105,7 +99,6 @@ interface NotificationHubResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("pnsCredentials")
-  @operationId("NotificationHubs_GetPnsCredentials")
   getPnsCredentials is ArmResourceActionSync<
     NotificationHubResource,
     void,

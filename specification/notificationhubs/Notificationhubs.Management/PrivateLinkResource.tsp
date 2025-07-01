@@ -32,7 +32,6 @@ interface PrivateLinkResources {
    * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_GetGroupId")
   getGroupId is ArmResourceRead<PrivateLinkResource>;
 
   /**
@@ -40,7 +39,6 @@ interface PrivateLinkResources {
    * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_ListGroupIds")
   listGroupIds is ArmResourceListByParent<PrivateLinkResource>;
 }
 

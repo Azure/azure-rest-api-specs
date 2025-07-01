@@ -32,7 +32,6 @@ interface PrivateEndpointConnectionResources {
    * This is a public API that can be called directly by Notification Hubs users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
 
   /**
@@ -40,7 +39,6 @@ interface PrivateEndpointConnectionResources {
    * This is a public API that can be called directly by Notification Hubs users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_Update")
   update is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnectionResource>;
 
   /**
@@ -48,7 +46,6 @@ interface PrivateEndpointConnectionResources {
    * This is a public API that can be called directly by Notification Hubs users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
 
   /**
@@ -56,7 +53,6 @@ interface PrivateEndpointConnectionResources {
    * This is a public API that can be called directly by Notification Hubs users.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnections_List")
   list is ArmResourceListByParent<PrivateEndpointConnectionResource>;
 }
 
