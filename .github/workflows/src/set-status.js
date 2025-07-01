@@ -73,12 +73,23 @@ export async function setStatusImpl({
     issue_number: issue_number,
     per_page: PER_PAGE_MAX,
   });
-  const overridingLabels = labels.map((label) => label.name);
+  const prLabels = labels.map((label) => label.name);
 
-  core.info(`Labels: ${overridingLabels}`);
+  core.info(`Labels: ${prLabels}`);
 
-  if (overridingLabels.includes(overridingLabel)) {
-    const description = `Found label '${overridingLabel}'`;
+  // Parse overriding labels (comma-separated string to array)
+  const overridingLabelsArray = overridingLabel
+    ? overridingLabel
+        .split(",")
+        .map((label) => label.trim())
+        .filter((label) => label) // Filter out empty labels
+    : [];
+
+  // Check if any overriding label is present
+  const foundOverridingLabel = overridingLabelsArray.find((label) => prLabels.includes(label));
+
+  if (foundOverridingLabel) {
+    const description = `Found label '${foundOverridingLabel}'`;
     core.info(description);
 
     const state = CheckConclusion.SUCCESS;
