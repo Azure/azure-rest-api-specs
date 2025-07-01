@@ -44,6 +44,21 @@ input-file:
   - Microsoft.KeyVault/stable/2024-11-01/secrets.json
 ```
 
+### Tag: package-2024-11-01-python-for-cli
+
+These settings apply only when `--tag=package-2024-11-01-python-for-cli` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01-python-for-cli'
+input-file:
+  - Microsoft.KeyVault/stable/2024-11-01/common.json
+  - Microsoft.KeyVault/stable/2024-11-01/keys.json
+  - Microsoft.KeyVault/stable/2024-11-01/keysManagedHsm.json
+  - Microsoft.KeyVault/stable/2023-02-01/keyvault.json
+  - Microsoft.KeyVault/stable/2024-11-01/managedHsm.json
+  - Microsoft.KeyVault/stable/2024-11-01/providers.json
+  - Microsoft.KeyVault/stable/2024-11-01/secrets.json
+```
+
 ### Tag: package-preview-2024-12
 
 These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
