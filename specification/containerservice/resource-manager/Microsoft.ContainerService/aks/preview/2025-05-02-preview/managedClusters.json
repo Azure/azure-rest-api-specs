@@ -8220,20 +8220,21 @@
         "vnetDNSOverrides": {
           "type": "object",
           "description": "VnetDNS overrides apply to DNS traffic from pods with dnsPolicy:default or kubelet (referred to as VnetDNS traffic).",
-          "$ref": "#/definitions/LocalDNSOverrideMap"
+          "$ref": "#/definitions/LocalDNSOverrides"
         },
         "kubeDNSOverrides": {
           "type": "object",
           "description": "KubeDNS overrides apply to DNS traffic from pods with dnsPolicy:ClusterFirst (referred to as KubeDNS traffic).",
-          "$ref": "#/definitions/LocalDNSOverrideMap"
+          "$ref": "#/definitions/LocalDNSOverrides"
         }
       }
     },
-    "LocalDNSOverrideMap": {
+    "LocalDNSOverrides": {
       "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/LocalDNSOverride"
-      }
+      },
+      "description": "LocalDNSOverrides is a map of zone names for Vnet and Kube dnsoverrides. The key is zone name, and value is override for that zone."
     },
     "LocalDNSOverride": {
       "type": "object",
