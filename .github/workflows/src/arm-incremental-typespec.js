@@ -108,9 +108,7 @@ export default async function incrementalTypeSpec({ core }) {
 
   const changedSpecDirs = new Set([
     ...changedRmFiles.filter(swagger).map((f) => dirname(dirname(dirname(f)))),
-    ...changedRmFiles
-      .filter(example)
-      .map((f) => dirname(dirname(dirname(dirname(f))))),
+    ...changedRmFiles.filter(example).map((f) => dirname(dirname(dirname(dirname(f))))),
     // Readme input files should use the same path format as changed swagger files
     ...[...changedReadmeInputFiles].map((f) => dirname(dirname(dirname(f)))),
   ]);
@@ -164,8 +162,6 @@ export default async function incrementalTypeSpec({ core }) {
     }
   }
 
-  core.info(
-    "Appears to contain only incremental changes to existing TypeSpec RP(s)",
-  );
+  core.info("Appears to contain only incremental changes to existing TypeSpec RP(s)");
   return true;
 }

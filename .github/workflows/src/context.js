@@ -21,9 +21,7 @@ export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
   core.info(`  payload.action: ${context.eventName}`);
-  core.info(
-    `  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`,
-  );
+  core.info(`  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
@@ -45,10 +43,9 @@ export async function extractInputs(github, context, core) {
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target
 
-    const payload =
-      /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+      context.payload
+    );
 
     inputs = {
       owner: payload.repository.owner.login,
@@ -57,14 +54,10 @@ export async function extractInputs(github, context, core) {
       issue_number: payload.pull_request.number,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "issue_comment" &&
-    context.payload.action === "edited"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "issue_comment" && context.payload.action === "edited") {
+    const payload = /** @type {import("@octokit/webhooks-types").IssueCommentEditedEvent} */ (
+      context.payload
+    );
 
     const owner = payload.repository.owner.login;
     const repo = payload.repository.name;
@@ -84,10 +77,9 @@ export async function extractInputs(github, context, core) {
       run_id: NaN,
     };
   } else if (context.eventName === "workflow_dispatch") {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
+      context.payload
+    );
     inputs = {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
@@ -95,14 +87,10 @@ export async function extractInputs(github, context, core) {
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "workflow_run" &&
-    context.payload.action === "completed"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "workflow_run" && context.payload.action === "completed") {
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunCompletedEvent} */ (
+      context.payload
+    );
 
     let issue_number = NaN;
 
@@ -143,15 +131,12 @@ export async function extractInputs(github, context, core) {
             `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
           );
           pullRequests = (
-            await github.paginate(
-              github.rest.repos.listPullRequestsAssociatedWithCommit,
-              {
-                owner: head_owner,
-                repo: head_repo,
-                commit_sha: head_sha,
-                per_page: PER_PAGE_MAX,
-              },
-            )
+            await github.paginate(github.rest.repos.listPullRequestsAssociatedWithCommit, {
+              owner: head_owner,
+              repo: head_repo,
+              commit_sha: head_sha,
+              per_page: PER_PAGE_MAX,
+            })
           ).filter(
             // Only include PRs to the same repo as the triggering workflow.
             //
@@ -161,9 +146,7 @@ export async function extractInputs(github, context, core) {
           );
         } catch (error) {
           // Short message always
-          core.info(
-            `Error: ${error instanceof Error ? error.message : "unknown"}`,
-          );
+          core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
 
           // Long message only in debug
           core.debug(`Error: ${error}`);
@@ -180,8 +163,7 @@ export async function extractInputs(github, context, core) {
           //
           // In any case, the solution is to fall back to the (lower-rate-limit) search API.
           // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
-          issue_number = (await getIssueNumber({ head_sha, github, core }))
-            .issueNumber;
+          issue_number = (await getIssueNumber({ head_sha, github, core })).issueNumber;
         } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
@@ -202,15 +184,12 @@ export async function extractInputs(github, context, core) {
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
-      const artifacts = await github.paginate(
-        github.rest.actions.listWorkflowRunArtifacts,
-        {
-          owner: payload.workflow_run.repository.owner.login,
-          repo: payload.workflow_run.repository.name,
-          run_id: payload.workflow_run.id,
-          per_page: PER_PAGE_MAX,
-        },
-      );
+      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner: payload.workflow_run.repository.owner.login,
+        repo: payload.workflow_run.repository.name,
+        run_id: payload.workflow_run.id,
+        per_page: PER_PAGE_MAX,
+      });
 
       const artifactNames = artifacts.map((a) => a.name);
 
@@ -231,9 +210,7 @@ export async function extractInputs(github, context, core) {
               issue_number = parsedValue;
               continue;
             } else {
-              throw new Error(
-                `Invalid issue-number: '${value}' parsed to '${parsedValue}'`,
-              );
+              throw new Error(`Invalid issue-number: '${value}' parsed to '${parsedValue}'`);
             }
           }
         }
@@ -258,10 +235,9 @@ export async function extractInputs(github, context, core) {
     };
   } else if (context.eventName === "check_run") {
     let checkRun = context.payload.check_run;
-    const payload =
-      /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
-        context.payload
-      );
+    const payload = /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+      context.payload
+    );
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
       owner: repositoryInfo.owner,
@@ -271,14 +247,10 @@ export async function extractInputs(github, context, core) {
       issue_number: NaN,
       run_id: NaN,
     };
-  } else if (
-    context.eventName === "check_suite" &&
-    context.payload.action === "completed"
-  ) {
-    const payload =
-      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
-        context.payload
-      );
+  } else if (context.eventName === "check_suite" && context.payload.action === "completed") {
+    const payload = /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
+      context.payload
+    );
 
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
@@ -306,12 +278,7 @@ export async function extractInputs(github, context, core) {
  * @returns {{ owner: string, repo: string }}
  */
 function getRepositoryInfo(repository) {
-  if (
-    !repository ||
-    !repository.owner ||
-    !repository.owner.login ||
-    !repository.name
-  ) {
+  if (!repository || !repository.owner || !repository.owner.login || !repository.name) {
     throw new Error(
       `Could not extract repository owner or name from context payload: ${JSON.stringify(repository)}`,
     );

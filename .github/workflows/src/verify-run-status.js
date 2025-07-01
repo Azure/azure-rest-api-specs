@@ -33,10 +33,7 @@ export async function verifyRunStatus({ github, context, core }) {
     );
   }
 
-  if (
-    context.eventName === "check_suite" &&
-    context.payload.check_suite.status !== "completed"
-  ) {
+  if (context.eventName === "check_suite" && context.payload.check_suite.status !== "completed") {
     core.setFailed(
       `Check suite ${context.payload.check_suite.app.name} is not completed. Cannot evaluate incomplete check suite.`,
     );
@@ -61,13 +58,7 @@ export async function verifyRunStatus({ github, context, core }) {
  * @param {string} params.checkRunName
  * @param {string} params.workflowName
  */
-export async function verifyRunStatusImpl({
-  github,
-  context,
-  core,
-  checkRunName,
-  workflowName,
-}) {
+export async function verifyRunStatusImpl({ github, context, core, checkRunName, workflowName }) {
   if (context.eventName == "check_run") {
     const contextRunName = context.payload.check_run.name;
     if (contextRunName !== checkRunName) {
@@ -84,12 +75,7 @@ export async function verifyRunStatusImpl({
   if (context.eventName == "check_run") {
     checkRun = context.payload.check_run;
   } else {
-    const checkRuns = await getCheckRuns(
-      github,
-      context,
-      checkRunName,
-      head_sha,
-    );
+    const checkRuns = await getCheckRuns(github, context, checkRunName, head_sha);
     if (checkRuns.length === 0) {
       if (context.eventName === "check_suite") {
         const message = `Could not locate check run ${checkRunName} in check suite ${context.payload.check_suite.app.name}. Ensure job is filtering by github.event.check_suite.app.name.`;
@@ -116,12 +102,7 @@ export async function verifyRunStatusImpl({
   if (context.eventName == "workflow_run") {
     workflowRun = context.payload.workflow_run;
   } else {
-    const workflowRuns = await getWorkflowRuns(
-      github,
-      context,
-      workflowName,
-      head_sha,
-    );
+    const workflowRuns = await getWorkflowRuns(github, context, workflowName, head_sha);
     if (workflowRuns.length === 0) {
       core.notice(
         `No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`,
@@ -145,9 +126,7 @@ export async function verifyRunStatusImpl({
     return;
   }
 
-  core.notice(
-    `Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`,
-  );
+  core.notice(`Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`);
 }
 
 /**
@@ -169,9 +148,7 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
 
   // a and b will never be null because status is "completed"
   /* v8 ignore next */
-  return result.sort((a, b) =>
-    compareDatesDescending(a.completed_at || "", b.completed_at || ""),
-  );
+  return result.sort((a, b) => compareDatesDescending(a.completed_at || "", b.completed_at || ""));
 }
 
 /**
@@ -183,15 +160,12 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
  * @returns {Promise<WorkflowRuns>}
  */
 export async function getWorkflowRuns(github, context, workflowName, ref) {
-  const result = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
-    {
-      ...context.repo,
-      head_sha: ref,
-      status: "completed",
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const result = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    ...context.repo,
+    head_sha: ref,
+    status: "completed",
+    per_page: PER_PAGE_MAX,
+  });
 
   return result
     .filter((run) => run.name === workflowName)
