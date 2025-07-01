@@ -15,9 +15,7 @@ describe("SpecModel", () => {
     const specModel = new SpecModel("foo");
     expect(specModel.folder).toBe(resolve("foo"));
 
-    await expect(specModel.getReadmes()).rejects.toThrowError(
-      /no such file or directory/i,
-    );
+    await expect(specModel.getReadmes()).rejects.toThrowError(/no such file or directory/i);
   });
 
   it("returns spec model", async () => {
@@ -58,10 +56,7 @@ describe("SpecModel", () => {
     expect(inputFiles0.length).toBe(1);
     expect(inputFiles0[0].toString()).toContain("Swagger");
     expect(inputFiles0[0].path).toBe(
-      resolve(
-        folder,
-        "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json",
-      ),
+      resolve(folder, "Microsoft.Contoso/preview/2021-10-01-preview/contoso.json"),
     );
     expect(inputFiles0[0].tag).toBe(tags[0]);
 
@@ -98,16 +93,11 @@ describe("SpecModel", () => {
     });
     const readmePathRelative = jsonRefsRelative.readmes[0].path;
     expect(isAbsolute(readmePathRelative)).toBe(false);
-    expect(
-      jsonRefsRelative.readmes[0].tags[0].inputFiles[0].refs,
-    ).toBeDefined();
+    expect(jsonRefsRelative.readmes[0].tags[0].inputFiles[0].refs).toBeDefined();
   });
 
   it("uses strings for tag names and doesn't parse Date object", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/getSpecModel/specification/yaml-date-parsing",
-    );
+    const folder = resolve(__dirname, "fixtures/getSpecModel/specification/yaml-date-parsing");
 
     const specModel = new SpecModel(folder, options);
 
@@ -154,8 +144,7 @@ describe("SpecModel", () => {
         "resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
       );
 
-      const affectedReadmeTags =
-        await specModel.getAffectedReadmeTags(swaggerPath);
+      const affectedReadmeTags = await specModel.getAffectedReadmeTags(swaggerPath);
 
       expect(affectedReadmeTags.size).toBe(1);
 
@@ -169,17 +158,13 @@ describe("SpecModel", () => {
     });
 
     it("returns affected readme tags for multiple tags", async () => {
-      const folder = resolve(
-        __dirname,
-        "fixtures/getAffectedSwaggers/specification/1",
-      );
+      const folder = resolve(__dirname, "fixtures/getAffectedSwaggers/specification/1");
 
       const specModel = new SpecModel(folder, options);
 
       const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
 
-      const affectedReadmeTags =
-        await specModel.getAffectedReadmeTags(swaggerPath);
+      const affectedReadmeTags = await specModel.getAffectedReadmeTags(swaggerPath);
 
       expect(affectedReadmeTags.size).toBe(1);
 
@@ -219,23 +204,16 @@ describe("SpecModel", () => {
   });
 
   describe("getAffectedSwaggers", async () => {
-    const folder = resolve(
-      __dirname,
-      "fixtures/getAffectedSwaggers/specification/1",
-    );
+    const folder = resolve(__dirname, "fixtures/getAffectedSwaggers/specification/1");
 
     const specModel = new SpecModel(folder, options);
 
     it("returns directly referenced swagger", async () => {
       const swaggerPath = resolve(folder, "data-plane/a.json");
 
-      const actual = [
-        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
-      ].sort();
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath)).keys()].sort();
 
-      const expected = ["data-plane/a.json"]
-        .map((p) => resolve(folder, p))
-        .sort();
+      const expected = ["data-plane/a.json"].map((p) => resolve(folder, p)).sort();
 
       expect(actual).toEqual(expected);
     });
@@ -243,17 +221,15 @@ describe("SpecModel", () => {
     it("throws when swagger file is not found", async () => {
       const swaggerPath = resolve(folder, "data-plane/not-found.json");
 
-      await expect(
-        specModel.getAffectedSwaggers(swaggerPath),
-      ).rejects.toThrowError(/no affected swaggers/i);
+      await expect(specModel.getAffectedSwaggers(swaggerPath)).rejects.toThrowError(
+        /no affected swaggers/i,
+      );
     });
 
     it("returns correct swaggers for one layer of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/nesting/b.json");
 
-      const actual = [
-        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
-      ].sort();
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath)).keys()].sort();
 
       const expected = ["data-plane/a.json", "data-plane/nesting/b.json"]
         .map((p) => resolve(folder, p))
@@ -265,15 +241,9 @@ describe("SpecModel", () => {
     it("returns correct swaggers for two layers of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/c.json");
 
-      const actual = [
-        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
-      ].sort();
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath)).keys()].sort();
 
-      const expected = [
-        "data-plane/a.json",
-        "data-plane/nesting/b.json",
-        "data-plane/c.json",
-      ]
+      const expected = ["data-plane/a.json", "data-plane/nesting/b.json", "data-plane/c.json"]
         .map((p) => resolve(folder, p))
         .sort();
 
@@ -283,9 +253,7 @@ describe("SpecModel", () => {
     it("returns correct swaggers for three layers of dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/d.json");
 
-      const actual = [
-        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
-      ].sort();
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath)).keys()].sort();
 
       const expected = [
         "data-plane/a.json",
@@ -302,9 +270,7 @@ describe("SpecModel", () => {
     it("returns correctly for multiple shared dependencies", async () => {
       const swaggerPath = resolve(folder, "data-plane/shared/shared.json");
 
-      const actual = [
-        ...(await specModel.getAffectedSwaggers(swaggerPath)).keys(),
-      ].sort();
+      const actual = [...(await specModel.getAffectedSwaggers(swaggerPath)).keys()].sort();
 
       const expected = [
         "data-plane/a.json",

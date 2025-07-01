@@ -1,11 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { setStatusImpl } from "../src/set-status.js";
 
-import {
-  CheckConclusion,
-  CheckStatus,
-  CommitStatusState,
-} from "../src/github.js";
+import { CheckConclusion, CheckStatus, CommitStatusState } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
@@ -72,60 +68,57 @@ describe("setStatusImpl", () => {
       "https://test.com/workflow_run_html_url",
     ],
     [null, null, CommitStatusState.PENDING, "https://test.com/set_status_url"],
-  ])(
-    "(%s, %s, %s) => %s",
-    async (checkStatus, checkConclusion, commitStatusState, targetUrl) => {
-      if (checkStatus) {
-        github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+  ])("(%s, %s, %s) => %s", async (checkStatus, checkConclusion, commitStatusState, targetUrl) => {
+    if (checkStatus) {
+      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+        data: [
+          {
+            name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+            status: checkStatus,
+            conclusion: checkConclusion,
+            updated_at: "2025-01-01",
+            html_url: "https://test.com/workflow_run_html_url",
+          },
+        ],
+      });
+
+      if (
+        checkConclusion === CheckConclusion.SUCCESS ||
+        checkConclusion === CheckConclusion.FAILURE
+      ) {
+        github.rest.actions.listJobsForWorkflowRun.mockResolvedValue({
           data: [
             {
-              name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-              status: checkStatus,
               conclusion: checkConclusion,
-              updated_at: "2025-01-01",
-              html_url: "https://test.com/workflow_run_html_url",
+              html_url: "https://test.com/job_html_url",
             },
           ],
         });
-
-        if (
-          checkConclusion === CheckConclusion.SUCCESS ||
-          checkConclusion === CheckConclusion.FAILURE
-        ) {
-          github.rest.actions.listJobsForWorkflowRun.mockResolvedValue({
-            data: [
-              {
-                conclusion: checkConclusion,
-                html_url: "https://test.com/job_html_url",
-              },
-            ],
-          });
-        }
       }
+    }
 
-      await expect(
-        setStatusImpl({
-          owner: "test-owner",
-          repo: "test-repo",
-          head_sha: "test-head-sha",
-          issue_number: 123,
-          target_url: "https://test.com/set_status_url",
-          github,
-          core,
-          monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-          requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
-          overridingLabel: "Approved-Avocado",
-        }),
-      ).resolves.toBeUndefined();
-
-      expect(github.rest.repos.createCommitStatus).toBeCalledWith({
+    await expect(
+      setStatusImpl({
         owner: "test-owner",
         repo: "test-repo",
-        sha: "test-head-sha",
-        state: commitStatusState,
-        context: "[TEST-IGNORE] Swagger Avocado",
-        target_url: targetUrl,
-      });
-    },
-  );
+        head_sha: "test-head-sha",
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
+        requiredStatusName: "[TEST-IGNORE] Swagger Avocado",
+        overridingLabel: "Approved-Avocado",
+      }),
+    ).resolves.toBeUndefined();
+
+    expect(github.rest.repos.createCommitStatus).toBeCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: "test-head-sha",
+      state: commitStatusState,
+      context: "[TEST-IGNORE] Swagger Avocado",
+      target_url: targetUrl,
+    });
+  });
 });

@@ -51,9 +51,9 @@
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "eslint",
     "lint:tsc": "tsc && echo 'Type checking completed successfully'",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   }
