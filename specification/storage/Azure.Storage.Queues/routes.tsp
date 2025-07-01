@@ -155,14 +155,14 @@ namespace Storage.Queues {
     }
   >;
 
-  /** The List Queues Segment operation returns a list of the queues under the specified account */
+  /** returns a list of the queues under the specified account */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @list
   @route("?comp=list")
-  op listQueuesSegment is StorageOperation<
+  op getQueues is StorageOperation<
     {
       /** Filters the results to return only queues whose name begins with the specified prefix. */
       @query prefix?: string;
@@ -180,9 +180,9 @@ namespace Storage.Queues {
       ...TimeoutParameter;
 
       /** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
-      @query include?: "metadata"[]; // TODO: Double check this type
+      @query include?: Array<ListQueuesIncludeType>;
     },
-    ListQueuesSegmentResponse
+    ListQueuesResponse
   >;
 
   @route("/{queueName}")
@@ -294,7 +294,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @route("/messages")
-    op dequeue is StorageOperation<
+    op receiveMessages is StorageOperation<
       {
         ...QueueNamePathParameter;
 
@@ -311,7 +311,7 @@ namespace Storage.Queues {
         ...VisibilityTimeoutParameter;
         ...TimeoutParameter;
       },
-      ListOfDequeuedMessage
+      ListOfReceivedMessage
     >;
 
     /**
@@ -343,7 +343,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
     @post
     @route("/messages")
-    op enqueue is StorageOperation<
+    op sendMessage is StorageOperation<
       {
         ...QueueNamePathParameter;
         ...VisibilityTimeoutParameter;
@@ -365,7 +365,7 @@ namespace Storage.Queues {
         @body
         queueMessage: QueueMessage;
       },
-      ListOfEnqueuedMessage
+      ListOfSentMessage
     >;
 
     /**
@@ -377,7 +377,7 @@ namespace Storage.Queues {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
     @get
     @route("/messages?peekonly=true")
-    op peek is StorageOperation<
+    op peekMessages is StorageOperation<
       {
         ...QueueNamePathParameter;
 

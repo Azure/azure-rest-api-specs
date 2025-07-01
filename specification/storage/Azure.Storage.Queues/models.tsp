@@ -7,7 +7,12 @@ using TypeSpec.Http;
 
 namespace Storage.Queues;
 
-/// Service Properties
+/** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum ListQueuesIncludeType {
+  /** Include metadata */
+  metadata: "metadata",
+}
 
 /** The service properties. */
 model StorageServiceProperties {
@@ -155,7 +160,7 @@ union GeoReplicationStatusType {
 
 /** The list queue segment response */
 @Xml.name("EnumerationResults")
-model ListQueuesSegmentResponse {
+model ListQueuesResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -206,12 +211,12 @@ model SignedIdentifier {
 model AccessPolicy {
   /** The date-time the policy is active. */
   @Xml.name("Start")
-  @encode("rfc7231")
+  @encode("rfc3339")
   start: utcDateTime;
 
   /** The date-time the policy expires. */
   @Xml.name("Expiry")
-  @encode("rfc7231")
+  @encode("rfc3339")
   expiry: utcDateTime;
 
   /** The permissions for acl the policy. */
@@ -222,7 +227,7 @@ model AccessPolicy {
  * The object returned in the QueueMessageList array when calling Get Messages on
  * a Queue.
  */
-model DequeuedMessage {
+model ReceivedMessage {
   /**
    * The Id of the Message.
    */
@@ -282,26 +287,26 @@ model ListOfSignedIdentifier {
  * List wrapper for DequeuedMessageItem array
  */
 @Xml.name("QueueMessagesList")
-model ListOfDequeuedMessage {
+model ListOfReceivedMessage {
   /**
    * The list of dequeued messages.
    */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
-  items: Array<DequeuedMessage>;
+  items: Array<ReceivedMessage>;
 }
 
 /**
  * List wrapper for EnqueuedMessage array
  */
 @Xml.name("QueueMessagesList")
-model ListOfEnqueuedMessage {
+model ListOfSentMessage {
   /**
    * The list of enqueued messages.
    */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
-  items: Array<EnqueuedMessage>;
+  items: Array<SentMessage>;
 }
 
 /**
@@ -331,7 +336,7 @@ model QueueMessage {
  * The object returned in the QueueMessageList array when calling Put Message on a
  * Queue
  */
-model EnqueuedMessage {
+model SentMessage {
   /**
    * The Id of the Message.
    */
