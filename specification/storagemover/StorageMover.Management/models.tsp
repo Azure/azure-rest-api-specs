@@ -641,7 +641,7 @@ model JobDefinitionProperties {
     name: "JobRunStatus",
     modelAsString: true,
   })
-  latestJobRunStatus?: "Queued" | "Started" | "Running" | "CancelRequested" | "Canceling" | "Canceled" | "Failed" | "Succeeded" | "PausedByBandwidthManagement" | string;
+  latestJobRunStatus?: "Queued" | "Started" | "Running" | "CancelRequested" | "Canceling" | "Canceled" | "Failed" | "Succeeded" |  string;
 
   /**
    * Name of the Agent to assign for new Job Runs of this Job Definition.
