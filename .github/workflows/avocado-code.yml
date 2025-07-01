@@ -25,12 +25,15 @@ jobs:
           npm exec --no -- avocado \
           --excludePaths \
             "/common-types/" \
-            "/fixtures/" \
             "/scenarios/" \
             "/package.json" \
             "/package-lock.json" \
             "/cadl/examples/" \
+            # Ignore TSP "examples" folder in structure v2
             '(?=/examples/)(?!(?:/stable/|/preview/))' \
+            # May contain test specs
+            "/.github/" \
+            "/eng/" \
           --includePaths \
             "data-plane" \
             "resource-manager"
