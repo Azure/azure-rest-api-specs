@@ -29,8 +29,10 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(Azure.AI.Projects.Index, "DatasetIndex", "csharp");
+// Less generic names for C# SDK
 @@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
+@@clientName(Azure.AI.Projects.Deployment, "AIDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Index, "DatasetIndex", "csharp");
 @@clientName(Azure.AI.Projects.SasCredential,
   "BlobReferenceSasCredential",
   "csharp"
