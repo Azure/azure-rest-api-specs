@@ -45,7 +45,9 @@ export class FlavorAzureRule implements Rule {
 
   requiresAzureFlavor(name: string): boolean {
     if (name === "@typespec/http-client-csharp") {
-      return false; // C# HTTP client does not require flavor:azure
+      // C# HTTP client does not require flavor:azure. Instead, there
+      // is a separate emitter for Azure - @azure-typespec/http-client-csharp
+      return false;
     }
     const regex = new RegExp(
       "^(@azure-tools/typespec-(csharp|java|python|ts)|@typespec/http-client-.+)$",
