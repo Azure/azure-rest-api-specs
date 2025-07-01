@@ -45,7 +45,7 @@ export class FlavorAzureRule implements Rule {
 
   requiresAzureFlavor(name: string): boolean {
     if (name === "@typespec/http-client-csharp") {
-      // C# HTTP client does not require flavor:azure. Instead, there
+      // C# emitters do not require flavor:azure. Instead, there
       // is a separate emitter for Azure - @azure-typespec/http-client-csharp
       return false;
     }
