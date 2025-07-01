@@ -71,7 +71,6 @@ interface SqlVirtualMachineGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("sqlVirtualMachines")
-  @operationId("SqlVirtualMachines_ListBySqlVmGroup")
   listBySqlVmGroup is ArmResourceActionSync<
     SqlVirtualMachineGroup,
     void,
