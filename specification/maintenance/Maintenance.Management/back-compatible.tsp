@@ -72,6 +72,9 @@ using Microsoft.Maintenance;
 @@clientLocation(MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList,
   MaintenanceConfigurations
 );
+@@clientName(MaintenanceConfigurationOperationGroup.maintenanceConfigurationsList,
+  "List"
+);
 @@clientLocation(ApplyUpdateOperationGroup.get, ApplyUpdates);
 @@clientLocation(ApplyUpdateOperationGroup.createOrUpdateOrCancel,
   ApplyUpdates

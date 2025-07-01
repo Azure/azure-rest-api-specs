@@ -116,21 +116,18 @@ interface ApplyUpdateOperationGroup {
    * Track maintenance updates to resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplyUpdates_Get")
   get is ApplyUpdateOperationGroupOps.Read<ApplyUpdate>;
 
   /**
    * Apply maintenance updates to resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplyUpdates_CreateOrUpdateOrCancel")
   createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<ApplyUpdate>;
 
   /**
    * Get Configuration records within a subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplyUpdates_List")
   list is ApplyUpdateOperationGroupOps.ResourceListByParent<
     ApplyUpdate,
     Response = ArmResponse<ListApplyUpdate>
