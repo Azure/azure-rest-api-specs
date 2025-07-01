@@ -42,10 +42,10 @@ input-file:
   - Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
-    from: vdi.json
+    from: Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json#L242
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
   - code: PatchBodyParametersSchema
-    from: devcenter.json
+    from: Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json#L524
     reason: Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
