@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./routeTypes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -35,8 +36,9 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
   validateStack is ArmResourceActionAsync<
     DeploymentStack,
     DeploymentStack,
-    ArmResponse<DeploymentStackValidateResult>,
-    BaseParameters = TBaseParams
+    Response = ArmResponse<DeploymentStackValidateResult>,
+    BaseParameters = TBaseParams,
+    Error = ErrorResponse | ValidationBadRequestResponse<DeploymentStackValidateResult>
   >;
 
   /**
@@ -75,14 +77,6 @@ interface DeploymentStacksAtResourceGroup extends DeploymentStackCommonOps<Resou
 
 @armResourceOperations
 interface DeploymentStacksAtSubscription extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
-
-/**
- * The common base parameters for Management group stacks.
- */
-model ManagementGroupBaseParameters is Azure.ResourceManager.Foundations.TenantBaseParameters {
-  ...CommonTypes.ManagementGroupNameParameter;
-}
-@@segment(ManagementGroupBaseParameters.managementGroupName, "providers/Microsoft.Management/managementGroups"); // Not part of the common type.
 
 @armResourceOperations
 interface DeploymentStacksAtManagementGroup extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}
