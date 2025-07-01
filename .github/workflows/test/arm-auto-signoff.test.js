@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getLabelActionImpl } from "../src/arm-auto-signoff.js";
 import { LabelAction } from "../src/label.js";
-import {
-  createMockCore,
-  createMockGithub as createMockGithubBase,
-} from "./mocks.js";
+import { createMockCore, createMockGithub as createMockGithubBase } from "./mocks.js";
 
 const core = createMockCore();
 
