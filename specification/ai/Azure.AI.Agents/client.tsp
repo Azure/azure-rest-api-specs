@@ -331,8 +331,8 @@ using Azure.AI.Agents;
 
 @@usage(MessageDelta, Usage.output);
 @@access(MessageDelta, Access.public);
-@@usage(MessageDeltaContent, Usage.output);
-@@access(MessageDeltaContent, Access.public);
+// @@usage(MessageDeltaContent, Usage.output);
+// @@access(MessageDeltaContent, Access.public);
 
 @@usage(RunStepStreamEvent, Usage.output);
 @@access(RunStepStreamEvent, Access.public);
