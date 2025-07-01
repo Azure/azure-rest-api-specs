@@ -24,10 +24,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ```yaml
 directive:
-  - from: Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
-    suppress:
-      - PatchBodyParametersSchema
+  - suppress: PatchBodyParametersSchema
+    from: storageDiscoveryWorkspace.json
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
+  - suppress: RequiredPropertiesModified
+    from: storageDiscoveryWorkspace.json
+    reason: Properties are correctly optional in PATCH operations (StorageDiscoveryWorkspacePropertiesUpdate) while being required in PUT operations (StorageDiscoveryWorkspaceProperties). This follows ARM best practices where PATCH operations allow partial updates with optional properties.
 ```
 
 ### Basic Information
