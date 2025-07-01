@@ -11,8 +11,14 @@ using Microsoft.Confluent;
 @@clientLocation(OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "Organization"
 );
+@@clientName(OrganizationResourceAPIKeyActions.getClusterAPIKey,
+  "GetClusterAPIKey"
+);
 @@clientLocation(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "Organization"
+);
+@@clientName(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
+  "DeleteClusterAPIKey"
 );
 
 // OrganizationResourceRoleBindingIdActions interface
@@ -64,6 +70,7 @@ using Microsoft.Confluent;
 @@clientLocation(SCClusterRecords.delete, "Cluster");
 @@clientLocation(SCClusterRecords.listClusters, "Organization");
 @@clientLocation(SCClusterRecords.createAPIKey, "Organization");
+@@clientName(SCClusterRecords.createAPIKey, "CreateApiKey");
 
 // SCEnvironmentRecords interface
 @@clientLocation(SCEnvironmentRecords.getEnvironmentById, "Organization");

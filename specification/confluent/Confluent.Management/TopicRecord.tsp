@@ -71,7 +71,6 @@ interface TopicRecords {
    * Get confluent topic by Name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Topics_Get")
   get is ArmResourceRead<
     TopicRecord,
     Error = ResourceProviderDefaultErrorResponse
@@ -81,7 +80,6 @@ interface TopicRecords {
    * Create confluent topics by Name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Topics_Create")
   create is TopicRecordsOps.CreateOrUpdateSync<
     TopicRecord,
     OptionalRequestBody = true
@@ -91,14 +89,12 @@ interface TopicRecords {
    * Delete confluent topic by name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Topics_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<TopicRecord>;
 
   /**
    * Lists of all the topics in a clusters
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Topics_List")
   list is ArmResourceListByParent<
     TopicRecord,
     Parameters = {

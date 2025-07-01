@@ -83,7 +83,6 @@ interface SCClusterRecords {
    * Get cluster by Id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Organization_GetClusterById")
   getClusterById is ArmResourceRead<
     SCClusterRecord,
     Error = ResourceProviderDefaultErrorResponse
@@ -93,7 +92,6 @@ interface SCClusterRecords {
    * Create confluent clusters
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Cluster_CreateOrUpdate")
   createOrUpdate is SCClusterRecordsOps.CreateOrUpdateSync<
     SCClusterRecord,
     OptionalRequestBody = true
@@ -103,7 +101,6 @@ interface SCClusterRecords {
    * Delete confluent cluster by id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Cluster_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     SCClusterRecord,
     Error = ErrorResponse
@@ -113,7 +110,6 @@ interface SCClusterRecords {
    * Lists of all the clusters in a environment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Organization_ListClusters")
   listClusters is ArmResourceListByParent<
     SCClusterRecord,
     Parameters = {
@@ -138,7 +134,6 @@ interface SCClusterRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Organization_CreateAPIKey")
   createAPIKey is ArmResourceActionSync<
     SCClusterRecord,
     CreateAPIKeyModel,

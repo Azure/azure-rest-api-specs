@@ -76,7 +76,6 @@ interface SCEnvironmentRecords {
    * Get Environment details by environment Id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Organization_GetEnvironmentById")
   getEnvironmentById is ArmResourceRead<
     SCEnvironmentRecord,
     Error = ResourceProviderDefaultErrorResponse
@@ -86,7 +85,6 @@ interface SCEnvironmentRecords {
    * Create confluent environment
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Environment_CreateOrUpdate")
   createOrUpdate is SCEnvironmentRecordsOps.CreateOrUpdateSync<
     SCEnvironmentRecord,
     OptionalRequestBody = true
@@ -96,14 +94,12 @@ interface SCEnvironmentRecords {
    * Delete confluent environment by id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Environment_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<SCEnvironmentRecord>;
 
   /**
    * Lists of all the environments in a organization
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Organization_ListEnvironments")
   listEnvironments is ArmResourceListByParent<
     SCEnvironmentRecord,
     Parameters = {
@@ -129,7 +125,6 @@ interface SCEnvironmentRecords {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("schemaRegistryClusters")
-  @operationId("Organization_ListSchemaRegistryClusters")
   listSchemaRegistryClusters is ArmResourceActionSync<
     SCEnvironmentRecord,
     void,
@@ -188,7 +183,6 @@ interface SCEnvironmentRecordCluster {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("Organization_GetSchemaRegistryClusterById")
   getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.Read<
     SCEnvironmentRecord,
     {},

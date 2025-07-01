@@ -1037,7 +1037,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/apiKeys/{apiKeyId}": {
       "get": {
-        "operationId": "Organization_GetClusterAPIKey",
+        "operationId": "Organization_GetClusterApiKey",
         "description": "Get API key details of a kafka or schema registry cluster",
         "parameters": [
           {
@@ -1077,15 +1077,10 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Organization_GetClusterAPIKey": {
-            "$ref": "./examples/Organization_GetClusterAPIKey.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Organization_DeleteClusterAPIKey",
+        "operationId": "Organization_DeleteClusterApiKey",
         "description": "Deletes API key of a kafka or schema registry cluster",
         "parameters": [
           {
@@ -1124,11 +1119,6 @@
             "schema": {
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_DeleteClusterAPIKey": {
-            "$ref": "./examples/Organization_DeleteClusterAPIKey.json"
           }
         }
       }
@@ -1966,7 +1956,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}/createAPIKey": {
       "post": {
-        "operationId": "Organization_CreateAPIKey",
+        "operationId": "Organization_CreateApiKey",
         "tags": [
           "SCClusterRecords"
         ],
@@ -2024,11 +2014,6 @@
             "schema": {
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Organization_CreateClusterAPIKey": {
-            "$ref": "./examples/Organization_CreateClusterAPIKey.json"
           }
         }
       }

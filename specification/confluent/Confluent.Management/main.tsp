@@ -56,7 +56,6 @@ interface Operations {
   @Azure.ResourceManager.Private.armUpdateProviderNamespace
   @doc("List the operations for the provider")
   @segment("operations")
-  @operationId("OrganizationOperations_List")
   @get
   list(
     ...ApiVersionParameter,

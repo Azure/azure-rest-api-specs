@@ -18,7 +18,6 @@ interface MarketplaceAgreementsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List Confluent marketplace agreements in the subscription.")
-  @operationId("MarketplaceAgreements_List")
   @autoRoute
   @get
   @action("agreements")
@@ -33,7 +32,6 @@ interface MarketplaceAgreementsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create Confluent Marketplace agreement in the subscription.")
-  @operationId("MarketplaceAgreements_Create")
   @autoRoute
   @put
   @action("agreements/default")
@@ -55,7 +53,6 @@ interface ValidationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Organization Validate proxy resource")
-  @operationId("Validations_ValidateOrganization")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidate")
   @post
   validateOrganization(
@@ -82,7 +79,6 @@ interface ValidationsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Organization Validate proxy resource")
-  @operationId("Validations_ValidateOrganizationV2")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/validations/{organizationName}/orgvalidateV2")
   @post
   validateOrganizationV2(

@@ -72,7 +72,6 @@ interface ConnectorResources {
    * Get confluent connector by Name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connector_Get")
   get is ArmResourceRead<
     ConnectorResource,
     Error = ResourceProviderDefaultErrorResponse
@@ -82,7 +81,6 @@ interface ConnectorResources {
    * Create confluent connector by Name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connector_CreateOrUpdate")
   createOrUpdate is ConnectorResourcesOps.CreateOrUpdateSync<
     ConnectorResource,
     OptionalRequestBody = true
@@ -92,7 +90,6 @@ interface ConnectorResources {
    * Delete confluent connector by name
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connector_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectorResource,
     Error = ErrorResponse
@@ -102,7 +99,6 @@ interface ConnectorResources {
    * Lists all the connectors in a cluster
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Connector_List")
   list is ArmResourceListByParent<
     ConnectorResource,
     Parameters = {
