@@ -1,14 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import {
-  createMockGithub,
-  createMockContext,
-  createMockCore,
-} from "./mocks.js";
-import {
-  getCheckRuns,
-  getWorkflowRuns,
-  verifyRunStatusImpl,
-} from "../src/verify-run-status.js";
+import { createMockGithub, createMockContext, createMockCore } from "./mocks.js";
+import { getCheckRuns, getWorkflowRuns, verifyRunStatusImpl } from "../src/verify-run-status.js";
 
 vi.mock("../src/context.js", () => {
   return {
@@ -58,12 +50,7 @@ describe("getCheckRuns", () => {
       },
     });
 
-    const actual = await getCheckRuns(
-      githubMock,
-      createMockContext(),
-      "checkRunName",
-      "head_sha",
-    );
+    const actual = await getCheckRuns(githubMock, createMockContext(), "checkRunName", "head_sha");
 
     expect(actual).toEqual([]);
   });
@@ -118,19 +105,17 @@ describe("getCheckRuns", () => {
 describe("getWorkflowRuns", () => {
   it("returns matching workflow_run", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi
-      .fn()
-      .mockResolvedValue({
-        data: {
-          workflow_runs: [
-            {
-              name: "workflowName",
-              status: "completed",
-              conclusion: "success",
-            },
-          ],
-        },
-      });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "workflowName",
+            status: "completed",
+            conclusion: "success",
+          },
+        ],
+      },
+    });
 
     const actual = await getWorkflowRuns(
       githubMock,
@@ -150,17 +135,15 @@ describe("getWorkflowRuns", () => {
 
   it("returns null when no workflow matches", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi
-      .fn()
-      .mockResolvedValue({
-        data: {
-          workflow_runs: [
-            {
-              name: "otherWorkflowName",
-            },
-          ],
-        },
-      });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "otherWorkflowName",
+          },
+        ],
+      },
+    });
 
     const actual = await getWorkflowRuns(
       githubMock,
@@ -176,26 +159,24 @@ describe("getWorkflowRuns", () => {
     const githubMock = createMockGithub();
     const earlyDate = "2025-04-01T00:00:00Z";
     const laterDate = "2025-04-02T00:00:00Z";
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi
-      .fn()
-      .mockResolvedValue({
-        data: {
-          workflow_runs: [
-            {
-              name: "workflowName",
-              status: "completed",
-              conclusion: "success",
-              updated_at: earlyDate,
-            },
-            {
-              name: "workflowName",
-              status: "completed",
-              conclusion: "success",
-              updated_at: laterDate,
-            },
-          ],
-        },
-      });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "workflowName",
+            status: "completed",
+            conclusion: "success",
+            updated_at: earlyDate,
+          },
+          {
+            name: "workflowName",
+            status: "completed",
+            conclusion: "success",
+            updated_at: laterDate,
+          },
+        ],
+      },
+    });
 
     const actual = await getWorkflowRuns(
       githubMock,

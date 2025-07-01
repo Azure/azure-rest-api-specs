@@ -15,23 +15,14 @@ debug.enable("simple-git");
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const {
-    baseCommitish = "HEAD^",
-    cwd,
-    headCommitish = "HEAD",
-    logger,
-  } = options;
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
 
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff([
-    "--name-only",
-    baseCommitish,
-    headCommitish,
-  ]);
+  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
 
   const files = result.trim().split("\n");
 
@@ -53,18 +44,9 @@ export async function getChangedFiles(options = {}) {
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
 export async function getChangedFilesStatuses(options = {}) {
-  const {
-    baseCommitish = "HEAD^",
-    cwd,
-    headCommitish = "HEAD",
-    logger,
-  } = options;
+  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger } = options;
   try {
-    const result = await simpleGit(cwd).diff([
-      "--name-status",
-      baseCommitish,
-      headCommitish,
-    ]);
+    const result = await simpleGit(cwd).diff(["--name-status", baseCommitish, headCommitish]);
 
     const categorizedFiles = {
       additions: /** @type {string[]} */ ([]),
@@ -124,9 +106,7 @@ export async function getChangedFilesStatuses(options = {}) {
       }
 
       if (categorizedFiles.modifications.length > 0) {
-        logger.info(
-          `  Modifications (${categorizedFiles.modifications.length}):`,
-        );
+        logger.info(`  Modifications (${categorizedFiles.modifications.length}):`);
         for (const file of categorizedFiles.modifications) {
           logger.info(`    M ${file}`);
         }
@@ -198,11 +178,7 @@ export function specification(file) {
  */
 export function dataPlane(file) {
   // Folder name "data-plane" should match case for consistency across specs
-  return (
-    typeof file === "string" &&
-    specification(file) &&
-    file.includes("/data-plane/")
-  );
+  return typeof file === "string" && specification(file) && file.includes("/data-plane/");
 }
 
 /**
@@ -211,11 +187,7 @@ export function dataPlane(file) {
  */
 export function resourceManager(file) {
   // Folder name "resource-manager" should match case for consistency across specs
-  return (
-    typeof file === "string" &&
-    specification(file) &&
-    file.includes("/resource-manager/")
-  );
+  return typeof file === "string" && specification(file) && file.includes("/resource-manager/");
 }
 
 /**
@@ -225,10 +197,7 @@ export function resourceManager(file) {
 export function example(file) {
   // Folder name "examples" should match case for consistency across specs
   return (
-    typeof file === "string" &&
-    json(file) &&
-    specification(file) &&
-    file.includes("/examples/")
+    typeof file === "string" && json(file) && specification(file) && file.includes("/examples/")
   );
 }
 
@@ -252,9 +221,6 @@ export function swagger(file) {
  */
 export function scenario(file) {
   return (
-    typeof file === "string" &&
-    json(file) &&
-    specification(file) &&
-    file.includes("/scenarios/")
+    typeof file === "string" && json(file) && specification(file) && file.includes("/scenarios/")
   );
 }

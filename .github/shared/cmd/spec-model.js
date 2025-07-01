@@ -36,10 +36,4 @@ const specModel = new SpecModel(specPath, {
   logger: new ConsoleLogger(debug),
 });
 
-console.log(
-  JSON.stringify(
-    await specModel.toJSONAsync({ includeRefs, relativePaths }),
-    null,
-    2,
-  ),
-);
+console.log(JSON.stringify(await specModel.toJSONAsync({ includeRefs, relativePaths }), null, 2));
