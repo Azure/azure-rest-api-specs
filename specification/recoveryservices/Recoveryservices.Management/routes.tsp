@@ -27,7 +27,6 @@ interface RecoveryServicesOperationGroup {
     A name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type
     or if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago
     """)
-  @operationId("RecoveryServices_CheckNameAvailability")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability")
   @post
   checkNameAvailability(
@@ -48,7 +47,6 @@ interface RecoveryServicesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("API to get details about capabilities provided by Microsoft.RecoveryServices RP")
-  @operationId("RecoveryServices_Capabilities")
   @autoRoute
   capabilities is ArmProviderActionSync<
     Request = ResourceCapabilities,

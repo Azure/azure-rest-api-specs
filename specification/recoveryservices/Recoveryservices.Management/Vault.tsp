@@ -258,7 +258,6 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  @operationId("VaultCertificates_Create")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
   create is Azure.ResourceManager.Legacy.UpdateOperation<
     {
@@ -290,7 +289,6 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @operationId("RegisteredIdentities_Delete")
   registeredIdentitiesDelete is VaultDeleteOps.DeleteSync<
     Vault,
     {},
@@ -303,19 +301,7 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("replicationUsages")
-  @operationId("ReplicationUsages_List")
   list is VaultOps.ActionSync<Vault, void, ArmResponse<ReplicationUsageList>>;
-
-  /**
-   * Gets the operation status for a resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @get
-  @operationId("GetOperationStatus")
-  getOperationStatus is VaultStatusOps.Read<
-    Vault,
-    Response = ArmResponse<OperationResource>
-  >;
 
   /**
    * Fetches the usages of the vault.
@@ -323,7 +309,6 @@ interface Vaults {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("usages")
-  @operationId("Usages_ListByVaults")
   listByVaults is VaultOps.ActionSync<Vault, void, ArmResponse<VaultUsageList>>;
 }
 @armResourceOperations
@@ -353,27 +338,35 @@ interface GetOperationResultOps
 @armResourceOperations
 interface GetOperationResult {
   /**
-   * Gets the operation result for a resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GetOperationResult")
-  getOperationResult is GetOperationResultOps.Read<
-    Vault,
-    Response = ArmResponse<Vault> | AcceptedResponse
-  >;
-
-  /**
    * Retrieve a list of Vaults.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Vaults_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     Vault,
     Response = ArmResponse<VaultList>,
     Error = CloudError
   >;
 }
+
+/**
+ * Gets the operation status for a resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@get
+op getOperationStatus is VaultStatusOps.Read<
+  Vault,
+  Response = ArmResponse<OperationResource>
+>;
+
+/**
+ * Gets the operation result for a resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op getOperationResult is GetOperationResultOps.Read<
+  Vault,
+  Response = ArmResponse<Vault> | AcceptedResponse
+>;
 
 @@doc(Vault.name, "The name of the recovery services vault.");
 @@doc(Vault.properties, "Properties of the vault.");

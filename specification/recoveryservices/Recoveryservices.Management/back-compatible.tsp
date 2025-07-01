@@ -42,12 +42,11 @@ using Microsoft.RecoveryServices;
 // Vaults operations
 @@clientLocation(Vaults.create, "VaultCertificates");
 @@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
+@@clientName(Vaults.registeredIdentitiesDelete, "Delete");
 @@clientLocation(Vaults.list, "ReplicationUsages");
-@@clientLocation(Vaults.getOperationStatus, "GetOperationStatus");
 @@clientLocation(Vaults.listByVaults, "Usages");
 
 // GetOperationResult operations
-@@clientLocation(GetOperationResult.getOperationResult, GetOperationResult);
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
 // VaultExtendedInfoResources operations

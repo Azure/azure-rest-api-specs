@@ -31,14 +31,12 @@ interface PrivateLinkResourceOperationGroup {
    * Returns a specified private link resource that need to be created for Backup and SiteRecovery
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkResources_Get")
   get is ArmResourceRead<PrivateLinkResource, Error = CloudError>;
 
   /**
    * Returns the list of private link resources that need to be created for Backup and SiteRecovery
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkResources_List")
   list is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<PrivateLinkResources>,
