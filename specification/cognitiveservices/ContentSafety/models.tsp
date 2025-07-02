@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -517,7 +518,7 @@ union IncidentOperationStatus {
 @resource("text/incidents")
 model TextIncident {
   @doc("The name of the incident.")
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @maxLength(64)
   @key("incidentName")
@@ -527,11 +528,11 @@ model TextIncident {
   incidentDefinition?: string;
 
   @doc("The created time of this incident.")
-  @visibility("read", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Query)
   created: utcDateTime;
 
   @doc("The latest updated time of this incident.")
-  @visibility("read", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Query)
   lastUpdated: utcDateTime;
 }
 
@@ -541,7 +542,7 @@ model TextIncident {
 @parentResource(TextIncident)
 model TextIncidentSample {
   @doc("The name of this incident sample.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @key("incidentSampleId")
   incidentSampleId: string;
@@ -600,18 +601,18 @@ model DetectIncidentsResult {
 @resource("image/incidents")
 model ImageIncident {
   @doc("The name of the incident.")
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @maxLength(64)
   @key("incidentName")
   incidentName: string;
 
   @doc("The created time of this incident.")
-  @visibility("read", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Query)
   created: utcDateTime;
 
   @doc("The latest updated time of this incident.")
-  @visibility("read", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Query)
   lastUpdated: utcDateTime;
 }
 
@@ -621,7 +622,7 @@ model ImageIncident {
 @parentResource(ImageIncident)
 model ImageIncidentSample {
   @doc("The name of this incident sample.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   @key("incidentSampleId")
   incidentSampleId: string;
@@ -644,7 +645,7 @@ model AddImageIncidentSamplesOptions {
 model ListImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   incidentSampleId: string;
 }
 
@@ -669,7 +670,7 @@ model ImageDataResult {
 model ImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -699,11 +700,11 @@ model AnalyzeImageDetectIncidentsOptions {
 model TextIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   id: string;
 
   @doc("The status of this operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: IncidentOperationStatus;
 
   @doc("The error details when this operation failed.")
@@ -716,11 +717,11 @@ model TextIncidentOperationResult {
 model ImageIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   id: string;
 
   @doc("The status of this operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: IncidentOperationStatus;
 
   @doc("The error details when this operation failed.")
@@ -752,38 +753,38 @@ model IncidentLongRunningOperationStatusResult {
 @doc("Definition of a Customer Category version.")
 model TextCustomCategoryVersion {
   @doc("The name of this Custom Category")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @maxLength(64)
   @key
   categoryName: string;
 
   @doc("The definition or description of this Custom Category version.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   definition: string;
 
   @doc("The blob URL which should be a jsonl that contains the samples. Read & write access to the upper layer virtual directory is required.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   sampleBlobUrl: string;
 
   @doc("The blob URL that contains a snapshot of sampleBlobUrl.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sampleBlobSnapshotUrl: string;
 
   @doc("The version of Custom Category.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version: int32;
 
   @doc("The creation time of this Custom Category version. The time is in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTime: utcDateTime;
 
   @doc("The status of this Custom Category version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: CustomCategoryStatus;
 
   @doc("The error details of this Custom Category version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 }
 
@@ -835,13 +836,13 @@ union CustomCategoryOperationStatus {
 @resource("text/categories/operations")
 model CustomCategoryOperationDetail {
   @doc("The id of this operation.")
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   @maxLength(64)
   @key("operationId")
   id: string;
 
   @doc("The status of this operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: CustomCategoryOperationStatus;
 
   @doc("The error details when this operation failed.")
