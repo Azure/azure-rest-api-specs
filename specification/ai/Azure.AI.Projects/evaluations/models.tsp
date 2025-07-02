@@ -12,6 +12,64 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+
+@doc("Labeled results per row.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model LabeledRows {
+  @doc("The label associated with the evaluation.")
+  label: string;
+
+  @doc("Detailed reasoning or explanation for the evaluation.")
+  reasoning: string;
+
+  @doc("The version identifier for the evaluation model.")
+  version: string;
+}
+
+@doc("Summary across rows for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model MetricSummary extends Results {
+  type: "metricSummary";
+
+  @doc("Aggregated summary per evaluator across all rows.")
+    data: Record<{
+    score?: string;
+    gpt_score?: string;
+    threshold: string;
+    defect_rate?: string;
+    passing_rate?: string;
+    binary_aggregate: string;
+  }>;
+}
+
+@doc("Stored result details and storage location. Currently only blob storage support for evaluation result/result uploading.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Storage extends Results {
+  type: "storage";
+
+  @doc("AssetId reference for the stored evaluationResult.")
+  evaluationResultAssetId: string;
+
+  @doc("The connection ID to the storage account where the evaluation results are stored.")
+  storageConnectionId: string;
+
+  @doc("Data table name for the data.")
+  dataTableName: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
+@doc("Abstract result class.")
+@discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model Results {
+  @doc("Type of the evaluation result")
+  type: string;
+}
+
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -120,6 +178,9 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Output Results.")
+  outputs: Array<Results>;
 }
 
 @doc("The redaction configuration will allow the user to control what is redacted.")

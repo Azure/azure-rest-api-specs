@@ -456,7 +456,7 @@
             "description": "The DatasetVersion to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatasetVersion"
+              "$ref": "#/definitions/DatasetVersionUpdate"
             }
           }
         ],
@@ -793,6 +793,71 @@
           "Deployments_Get_MaximumSet": {
             "$ref": "./examples/Deployments_Get_MaximumSet_Gen.json"
           }
+        }
+      }
+    },
+    "/evaluations/evaluations/{evaluatorId}/results ": {
+      "get": {
+        "operationId": "Evaluations_ListRowResultsByEvaluatorId",
+        "description": "List evaluation run row results for a specific evaluatorId",
+        "parameters": [
+          {
+            "name": "startIndex",
+            "in": "query",
+            "description": "The index of the first item to return. Used for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of items to return in the result set. Used for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "evaluatorId",
+            "in": "path",
+            "description": "Specifies the unique identifier of the evaluator resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The number of items to skip before starting to collect the result set. Used for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of items to return in the result set. Used for pagination.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "The API version to use for the request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedLabeledRows"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1167,7 +1232,7 @@
             "description": "The Index to create or update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/IndexUpdate"
             }
           }
         ],
@@ -1428,7 +1493,8 @@
           "description": "The agent evaluation result.",
           "items": {
             "$ref": "#/definitions/AgentEvaluationResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1774,7 +1840,8 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1801,7 +1868,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
       "properties": {
         "code": {
           "type": "string",
@@ -1846,6 +1913,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/Index"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSearch"
+    },
+    "AzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Azure AI Search Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
         }
       ],
       "x-ms-discriminator-value": "AzureSearch"
@@ -2080,6 +2157,16 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CosmosDBIndexUpdate": {
+      "type": "object",
+      "description": "CosmosDB Vector Store Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -2243,6 +2330,39 @@
         "version"
       ]
     },
+    "DatasetVersionUpdate": {
+      "type": "object",
+      "description": "DatasetVersion Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DatasetType",
+          "description": "Dataset type"
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "Deployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -2328,6 +2448,14 @@
           "$ref": "#/definitions/InputData",
           "description": "Data for evaluation."
         },
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation Id for the evaluation. It is used to correlate the evaluation with other resources, e.g. link DataBricks job Id and run Id with AI Foundry evaluation."
+        },
+        "config": {
+          "$ref": "#/definitions/EvaluationConfiguration",
+          "description": "Configuration for the evaluation."
+        },
         "displayName": {
           "type": "string",
           "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
@@ -2361,13 +2489,68 @@
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Output Results.",
+          "items": {
+            "$ref": "#/definitions/Results"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
         "id",
         "data",
-        "evaluators"
+        "evaluators",
+        "outputs"
       ]
+    },
+    "EvaluationConfiguration": {
+      "type": "object",
+      "description": "Evaluation Configuration Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evaluation configuration."
+        },
+        "disableRunPersistence": {
+          "type": "boolean",
+          "description": "Allow the user to opt-out of evaluation runs being persisted in the AI Foundry. The default value is false. If it's false, the evaluation runs will not be persisted."
+        },
+        "redactionConfig": {
+          "$ref": "#/definitions/EvaluationRedactionConfiguration",
+          "description": "Redaction configuration for the evaluation."
+        },
+        "extraResultStorageOptions": {
+          "type": "array",
+          "description": "Extra storage options for evaluation runs, the options includes Kusto, Blob storage, App Insights, etc.",
+          "items": {}
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "EvaluationRedactionConfiguration": {
+      "type": "object",
+      "description": "The redaction configuration will allow the user to control what is redacted.",
+      "properties": {
+        "redactScoreProperties": {
+          "type": "boolean",
+          "description": "Redact score properties. If not specified, the default is to redact in production."
+        }
+      }
     },
     "EvaluatorConfiguration": {
       "type": "object",
@@ -2464,12 +2647,32 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FileDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
       "allOf": [
         {
           "$ref": "#/definitions/DatasetVersion"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
+    },
+    "FolderDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
@@ -2553,6 +2756,52 @@
         ]
       }
     },
+    "IndexUpdate": {
+      "type": "object",
+      "description": "Index resource Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IndexType",
+          "description": "Type of index"
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InputCustomJson": {
+      "type": "object",
+      "description": "A JSON with custom fields as source for evaluation.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "customJson"
+    },
     "InputData": {
       "type": "object",
       "description": "Abstract data class.",
@@ -2586,6 +2835,71 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "InputFoundryAgentData": {
+      "type": "object",
+      "description": "Simple JSON as source for evaluation.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryAgentData"
+    },
+    "InputSimpleJson": {
+      "type": "object",
+      "description": "Simple JSON as source for evaluation.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The LLM query."
+        },
+        "response": {
+          "type": "string",
+          "description": "The LLM response."
+        },
+        "context": {
+          "type": "string",
+          "description": "The context for the LLM query."
+        },
+        "groundTruth": {
+          "type": "string",
+          "description": "The ground truth for the LLM response."
+        }
+      },
+      "required": [
+        "query",
+        "response"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "simpleJson"
+    },
+    "LabeledRows": {
+      "type": "object",
+      "description": "Labeled results per row.",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The label associated with the evaluation."
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "Detailed reasoning or explanation for the evaluation."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version identifier for the evaluation model."
+        }
+      },
+      "required": [
+        "label",
+        "reasoning",
+        "version"
+      ]
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -2607,6 +2921,62 @@
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "ManagedAzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Managed Azure AI Search Index Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "MetricSummary": {
+      "type": "object",
+      "description": "Summary across rows for evaluation.",
+      "properties": {
+        "data": {
+          "type": "object",
+          "description": "Aggregated summary per evaluator across all rows.",
+          "additionalProperties": {
+            "properties": {
+              "score": {
+                "type": "string"
+              },
+              "gpt_score": {
+                "type": "string"
+              },
+              "threshold": {
+                "type": "string"
+              },
+              "defect_rate": {
+                "type": "string"
+              },
+              "passing_rate": {
+                "type": "string"
+              },
+              "binary_aggregate": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "threshold",
+              "binary_aggregate"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Results"
+        }
+      ],
+      "x-ms-discriminator-value": "metricSummary"
     },
     "ModelDeployment": {
       "type": "object",
@@ -2721,7 +3091,8 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2742,7 +3113,8 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2775,6 +3147,28 @@
         "value"
       ]
     },
+    "PagedLabeledRows": {
+      "type": "object",
+      "description": "Paged collection of LabeledRows items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabeledRows items on this page",
+          "items": {
+            "$ref": "#/definitions/LabeledRows"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedRedTeam": {
       "type": "object",
       "description": "Paged collection of RedTeam items",
@@ -2784,7 +3178,8 @@
           "description": "The RedTeam items on this page",
           "items": {
             "$ref": "#/definitions/RedTeam"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -2969,6 +3364,20 @@
         "target"
       ]
     },
+    "Results": {
+      "type": "object",
+      "description": "Abstract result class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the evaluation result"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "RiskCategory": {
       "type": "string",
       "description": "Risk category for the attack objective.",
@@ -3082,6 +3491,35 @@
         "size",
         "tier"
       ]
+    },
+    "Storage": {
+      "type": "object",
+      "description": "Stored result details and storage location. Currently only blob storage support for evaluation result/result uploading.",
+      "properties": {
+        "evaluationResultAssetId": {
+          "type": "string",
+          "description": "AssetId reference for the stored evaluationResult."
+        },
+        "storageConnectionId": {
+          "type": "string",
+          "description": "The connection ID to the storage account where the evaluation results are stored."
+        },
+        "dataTableName": {
+          "type": "string",
+          "description": "Data table name for the data."
+        }
+      },
+      "required": [
+        "evaluationResultAssetId",
+        "storageConnectionId",
+        "dataTableName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Results"
+        }
+      ],
+      "x-ms-discriminator-value": "storage"
     },
     "TargetConfig": {
       "type": "object",

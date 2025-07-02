@@ -26,6 +26,43 @@ interface Evaluations {
   @doc("List evaluation runs")
   list is EvaluationsOperations.ResourceList<Evaluation>;
 
+  @doc("List evaluation run row results for a specific evaluatorId")
+  @route("evaluations/{evaluatorId}/results ")
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v1)
+  @get
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  listRowResultsByEvaluatorId(
+    @doc("""
+    The index of the first item to return. Used for pagination.
+    """)
+    @query startIndex?: int32,
+
+    @doc("""
+    The number of items to return in the result set. Used for pagination.
+    """)
+    @query pageSize?: int32,
+    @doc("""
+    Specifies the unique identifier of the evaluator resource.
+    """)
+    @path evaluatorId: string,
+
+    @doc("""
+    The number of items to skip before starting to collect the result set. Used for pagination.
+    """)
+    @query skip?: int32,
+
+    @doc("""
+    The maximum number of items to return in the result set. Used for pagination.
+    """)
+    @query top?: int32,
+
+    @doc("""
+    The API version to use for the request.
+    """)
+    @query apiVersion: string
+  ): Azure.Core.Page<LabeledRows>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run.")
   @route("runs:run")
