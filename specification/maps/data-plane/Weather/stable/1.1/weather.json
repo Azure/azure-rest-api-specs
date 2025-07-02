@@ -1026,7 +1026,7 @@
           },
           {
             "name": "duration",
-            "description": "specifies the number of hours for which air quality forecasts are requested. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
+            "description": "Defines the duration, in hours, for the air quality forecast. Available values are 1, 12, 24, 48, 72, and 96. The default value is 1 hour.",
             "default": 1,
             "in": "query",
             "type": "integer",
@@ -1266,7 +1266,7 @@
     "IconCode": {
       "type": "integer",
       "format": "int32",
-      "description": "NNumeric value representing an image that corresponds to the current weather condition described by the `Phrase` property. For more information, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.",
+      "description": "Numeric value representing an image that corresponds to the current weather condition described by the `Phrase` property. For more information, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.",
       "enum": [
         1,
         2,
@@ -1783,7 +1783,7 @@
     "HazardIndex": {
       "type": "integer",
       "format": "int32",
-      "description": "The aggregated severity/hazard index for each waypoint can be utilized to color-code segments of a route, indicating the safety level for drivers.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
+      "description": "The aggregated severity/hazard index for each waypoint, which can be used to color-code route segments to indicate driver safety.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
       "enum": [
         0,
         1,
@@ -2039,15 +2039,15 @@
         },
         "threshold": {
           "type": "string",
-          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dbz is zero, not present in the response."
+          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dBZ is zero, not present in the response."
         },
         "color": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dbz is zero, color is not present in the response."
+          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dBZ is zero, color is not present in the response."
         },
         "simplifiedColor": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The band color that maps to the precipitation type and threshold. If dbz is zero, not present in the response."
+          "description": "The band color that maps to the precipitation type and threshold. If dBZ is zero, not present in the response."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType"
