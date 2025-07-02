@@ -360,6 +360,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_Reconcile",
+        "description": "Reconcile Arc Settings with information related to all nodes.",
+        "x-ms-examples": {
+          "Reconcile Arc Settings": {
+            "$ref": "./examples/reconcileArcSettings.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "clusterNodes",
+            "in": "body",
+            "description": "List of cluster Nodes",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterNodes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions": {
       "post": {
         "tags": [
@@ -456,6 +517,13 @@
     }
   },
   "definitions": {
+    "ClusterNodes" : {
+      "description": "List of Nodes of HCI cluster.",
+      "type": "array",
+      "items": {
+         "type": "string"
+      }
+    },
     "ArcSettingList": {
       "description": "List of ArcSetting proxy resources for the HCI cluster.",
       "type": "object",
