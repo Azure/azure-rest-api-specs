@@ -178,42 +178,16 @@ namespace Azure.AI.Agents {
 
         @doc("A list of tools for which the outputs are being submitted")
         @encodedName("application/json", "tool_outputs")
-        toolOutputs: ToolOutput[];
+        toolOutputs?: ToolOutput[];
+
+        @doc("A list of tool approvals allowing data to be sent to tools.")
+        @encodedName("application/json", "tool_approvals")
+        @added(Versions.v2025_05_15_preview)
+        toolApprovals?: ToolApproval[];
 
         #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability"
         @doc("If true, returns a stream of events that happen during the Run as SSE, terminating at `[DONE]`.")
         stream?: boolean | null;
-      },
-      ThreadRun
-    >;
-
-    /**
-     * Submits approval from client as requested by tool calls in a run.
-     *
-     * @param threadId   The ID of the thread that was run.
-     * @param runId      The ID of the run that requires tool outputs.
-     * @param toolApprovals A list of tool approvals allowing data to be sent to tools.
-     * @returns Updated information about the run.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-    @post
-    @route("/threads/{threadId}/runs/{runId}/submit_tool_approval")
-    @added(Versions.v2025_05_15_preview)
-    submitToolApprovals is AgentOperation<
-      {
-        @doc("Identifier of the thread.")
-        @path
-        threadId: string;
-
-        @doc("Identifier of the run.")
-        @path
-        runId: string;
-
-        @doc("A list of tool approvals allowing data to be sent to tools.")
-        @encodedName("application/json", "tool_approvals")
-        toolApprovals: ToolApproval[];
       },
       ThreadRun
     >;
