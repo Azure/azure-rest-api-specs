@@ -393,12 +393,12 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "clusterNodes",
+            "name": "reconcileArcSettingsRequest",
             "in": "body",
-            "description": "List of cluster Nodes",
+            "description": "Request for reconciling Arc Settings.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterNodes"
+              "$ref": "#/definitions/ReconcileArcSettingsRequest"
             }
           }
         ],
@@ -415,7 +415,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -517,11 +517,26 @@
     }
   },
   "definitions": {
-    "ClusterNodes" : {
-      "description": "List of Nodes of HCI cluster.",
-      "type": "array",
-      "items": {
-         "type": "string"
+    "ReconcileArcSettingsRequest": {
+      "description": "Request for reconciling Arc Settings.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReconcileArcSettingsRequestProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReconcileArcSettingsRequestProperties": {
+      "description": "List of Arc Nodes in the cluster",
+      "type": "object",
+      "properties": {
+        "clusterNodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "ArcSettingList": {
