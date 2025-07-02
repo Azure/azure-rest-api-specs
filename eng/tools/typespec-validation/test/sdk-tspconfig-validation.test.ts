@@ -431,24 +431,6 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const pythonMgmtPackageGenerateTestTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-python",
-  "",
-  "generate-test",
-  true,
-  false,
-  [new TspConfigPythonMgmtPackageGenerateTestTrueSubRule()],
-);
-
-const pythonMgmtPackageGenerateSampleTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-python",
-  "",
-  "generate-sample",
-  true,
-  false,
-  [new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule()],
-);
-
 const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
@@ -623,8 +605,6 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
-    ...pythonMgmtPackageGenerateTestTestCases,
-    ...pythonMgmtPackageGenerateSampleTestCases,
     // csharp
     ...csharpAzPackageDirTestCases,
     ...csharpAzNamespaceTestCases,
