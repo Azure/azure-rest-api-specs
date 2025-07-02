@@ -15,13 +15,18 @@ namespace Microsoft.Resources.DeploymentStacks;
  * Deployment stack object.
  */
 model DeploymentStack
-  is Azure.ResourceManager.TrackedResource<DeploymentStackProperties> {
+  is Azure.ResourceManager.ProxyResource<DeploymentStackProperties> {
   ...ResourceNameParameter<
     Resource = DeploymentStack,
     KeyName = "deploymentStackName",
     SegmentName = "deploymentStacks",
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
+
+  /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Typespec Azure lib doesn't provide a base type for location mapped proxy resources"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 }
 
 @@maxLength(DeploymentStack.name, 90);
