@@ -1,0 +1,563 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PortalServices",
+    "version": "2025-05-15-preview",
+    "description": "Microsoft.PortalServices Resource Provider Copilot Connector management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CopilotConnectors"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PortalServices/copilotConnectors": {
+      "get": {
+        "operationId": "CopilotConnectors_ListBySubscription",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "List CopilotConnectorResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_ListBySubscription": {
+            "$ref": "./examples/CopilotConnectors_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/copilotConnectors": {
+      "get": {
+        "operationId": "CopilotConnectors_ListByResourceGroup",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "List CopilotConnectorResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_ListByResourceGroup": {
+            "$ref": "./examples/CopilotConnectors_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/copilotConnectors/{name}": {
+      "get": {
+        "operationId": "CopilotConnectors_Get",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "Get a CopilotConnectorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the copilot connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_Get": {
+            "$ref": "./examples/CopilotConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CopilotConnectors_CreateOrUpdate",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "Create a CopilotConnectorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the copilot connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CopilotConnectorResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'CopilotConnectorResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_CreateOrUpdate": {
+            "$ref": "./examples/CopilotConnectors_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CopilotConnectors_Update",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "Update a CopilotConnectorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the copilot connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableCopilotConnectorProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CopilotConnectorResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_Update": {
+            "$ref": "./examples/CopilotConnectors_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CopilotConnectors_Delete",
+        "tags": [
+          "CopilotConnectors"
+        ],
+        "description": "Delete a CopilotConnectorResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the copilot connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CopilotConnectors_Delete": {
+            "$ref": "./examples/CopilotConnectors_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiKeyAuthenticationSettings": {
+      "type": "object",
+      "description": "Authentication settings",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Used to store api key for CopilotConnector endpoint"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AuthenticationSettings": {
+      "type": "object",
+      "description": "Authentication settings",
+      "properties": {
+        "apiKey": {
+          "$ref": "#/definitions/ApiKeyAuthenticationSettings",
+          "description": "Used to store api key authentication settings for CopilotConnector endpoint"
+        }
+      },
+      "required": [
+        "apiKey"
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ConnectionInfo": {
+      "type": "object",
+      "description": "Used to store connection information for MCP Server",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "The connector server endpoint"
+        },
+        "authenticationSettings": {
+          "$ref": "#/definitions/AuthenticationSettings",
+          "description": "Used to store authentication settings for MCP server endpoint"
+        }
+      },
+      "required": [
+        "endpoint",
+        "authenticationSettings"
+      ]
+    },
+    "CopilotConnectorProperties": {
+      "type": "object",
+      "description": "The Copilot Connector resource",
+      "properties": {
+        "connectorType": {
+          "$ref": "#/definitions/CopilotConnectorType",
+          "description": "Type of Copilot Connector."
+        },
+        "description": {
+          "type": "string",
+          "description": "String describing this Copilot Connector"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Boolean indicating if Copilot Connector is enabled"
+        },
+        "connectionInfo": {
+          "$ref": "#/definitions/ConnectionInfo",
+          "description": "Used to store connection information for CopilotConnector",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectorType",
+        "description",
+        "enabled"
+      ]
+    },
+    "CopilotConnectorResource": {
+      "type": "object",
+      "description": "The copilot connector tracked resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CopilotConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CopilotConnectorResourceListResult": {
+      "type": "object",
+      "description": "The response of a CopilotConnectorResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CopilotConnectorResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CopilotConnectorResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CopilotConnectorType": {
+      "type": "string",
+      "description": "Type of Copilot Connector.",
+      "enum": [
+        "MCP"
+      ],
+      "x-ms-enum": {
+        "name": "CopilotConnectorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MCP",
+            "value": "MCP",
+            "description": "MCP server connector"
+          }
+        ]
+      }
+    },
+    "PatchableCopilotConnectorProperties": {
+      "type": "object",
+      "description": "The Copilot Connector Patch resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
