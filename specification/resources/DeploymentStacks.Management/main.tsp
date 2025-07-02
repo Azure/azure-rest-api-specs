@@ -17,9 +17,7 @@ import "./openApiOverwrites.tsp";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-/**
- * DeploymentStacks Client
- */
+/** The APIs listed in this specification can be used to manage Deployment stack resources through the Azure Resource Manager. */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API defined separately - namespace is shared between multiple services."
 @armProviderNamespace("Microsoft.Resources")
 @service(#{ title: "DeploymentStacksClient" })
@@ -27,20 +25,14 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Resources.DeploymentStacks;
 
-/**
- * The available API versions.
- */
+/** The available API versions. */
 enum Versions {
-  /**
-   * The 2022-08-01-preview API version.
-   */
+  /** The 2022-08-01-preview API version. */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_08_01_preview: "2022-08-01-preview",
     
-  /**
-   * The 2024-03-01 API version.
-   */
+  /** The 2024-03-01 API version. */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01: "2024-03-01"

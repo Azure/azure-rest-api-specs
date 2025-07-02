@@ -11,9 +11,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
-/**
- * Deployment stack object.
- */
+/** Deployment stack object. */
 model DeploymentStack
   is Azure.ResourceManager.ProxyResource<DeploymentStackProperties> {
   ...ResourceNameParameter<
@@ -23,10 +21,14 @@ model DeploymentStack
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
-  /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Typespec Azure lib doesn't provide a base type for location mapped proxy resources"
+  /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. The location is inherited from the resource group for resource group scoped stacks. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
+  /** Resource tags. */
+  tags?: Record<string>;
 }
 
 @@maxLength(DeploymentStack.name, 90);
@@ -134,7 +136,7 @@ union ResourceStatusMode {
    * No management state.
    */
   @removed(Versions.v2024_03_01)
-  none: "none"
+  none: "none",
 }
 
 /**
@@ -278,6 +280,7 @@ model DeploymentStackProperties extends DeploymentStacksError {
    */
   @added(Versions.v2024_03_01)
   @visibility(Lifecycle.Read)
+  @example("01234567-89ab-cdef-0000-000000000000")
   correlationId?: string;
 
   /**
@@ -483,7 +486,7 @@ model ResourceReference {
    * The ARM Resource ID of a resource managed by the deployment stack.
    */
   @visibility(Lifecycle.Read)
-  id: string;
+  id?: string;
 }
 
 /**
@@ -565,7 +568,6 @@ model DeploymentStackTemplateDefinition {
    */
   templateLink?: DeploymentStacksTemplateLink;
 }
-
 
 /**
  * The Deployment stack validation result.
