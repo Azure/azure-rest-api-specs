@@ -152,7 +152,7 @@ export function getSuppressionsFromYaml(
     throw fromError(err);
   }
 
-  // Make "require" available inside sandbox for imports
+  // Make "require" available inside sandbox for CJS imports
   const sandbox = { ...context, require: createRequire(import.meta.url) };
 
   return (
