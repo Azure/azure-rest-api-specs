@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [int]$Shard = 0,
   [int]$TotalShards = 1,
@@ -20,7 +21,8 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 $typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -HeadCommitish:$HeadCommitish `
-  -CheckAll:$CheckAll
+  -CheckAll:$CheckAll `
+  -IgnoreCoreFiles:$IgnoreCoreFiles
 
 if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) { 
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
