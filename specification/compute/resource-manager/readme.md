@@ -359,7 +359,7 @@ These settings apply only when `--tag=package-2025-06-05-only` is specified on t
 
 ``` yaml $(tag) == "package-2025-06-05-only"
 input-file:
-  - Microsoft.Compute/common-types/v5/common.json
+  - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/DiagnosticRP/stable/2025-06-05/diagnostic.json
 ```
 
