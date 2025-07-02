@@ -278,12 +278,18 @@ test("suppression with rules", () => {
 });
 
 test.each([
-  { context: { foo: false, bar: false }, expected: ["no-if"] },
-  { context: { foo: true, bar: false }, expected: ["no-if", "if-foo", "if-foo-or-bar"] },
-  { context: { foo: false, bar: true }, expected: ["no-if", "if-bar", "if-foo-or-bar"] },
+  { context: { foo: false, bar: false }, expected: ["no-if", "process-version"] },
+  {
+    context: { foo: true, bar: false },
+    expected: ["no-if", "if-foo", "if-foo-or-bar", "process-version"],
+  },
+  {
+    context: { foo: false, bar: true },
+    expected: ["no-if", "if-bar", "if-foo-or-bar", "process-version"],
+  },
   {
     context: { foo: true, bar: true },
-    expected: ["no-if", "if-foo", "if-bar", "if-foo-or-bar", "if-foo-and-bar"],
+    expected: ["no-if", "if-foo", "if-bar", "if-foo-or-bar", "if-foo-and-bar", "process-version"],
   },
 ])("if($context)", ({ context, expected }) => {
   const suppressionYaml = `
@@ -306,6 +312,10 @@ test.each([
   path: "**"
   if: foo && bar
   reason: if-foo-and-bar
+- tool: TestTool
+  path: "**"
+  if: require("process").version.startsWith("v")
+  reason: process-version
 `;
 
   let suppressions: Suppression[] = getSuppressionsFromYaml(

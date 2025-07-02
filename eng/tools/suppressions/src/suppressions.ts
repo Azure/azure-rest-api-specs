@@ -151,6 +151,9 @@ export function getSuppressionsFromYaml(
     throw fromError(err);
   }
 
+  // Make "require" available inside sandbox for imports
+  const sandbox = { ...context, require };
+
   return (
     suppressions
       // Tool name
@@ -168,7 +171,7 @@ export function getSuppressionsFromYaml(
         });
       })
       // If
-      .filter((s) => s.if === undefined || vm.runInNewContext(s.if, context))
+      .filter((s) => s.if === undefined || vm.runInNewContext(s.if, sandbox))
   );
 }
 
