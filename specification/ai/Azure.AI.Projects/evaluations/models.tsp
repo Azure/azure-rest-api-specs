@@ -65,6 +65,16 @@ model InputSimpleJson extends InputData {
   groundTruth?: string;
 }
 
+@doc("A JSON with custom fields as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model InputCustomJson extends InputData {
+  type: "customJson";
+
+  // The arbitrary JSON data for evaluation.
+  ...Record<string>;
+}
+
 @doc("Simple JSON as source for evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
@@ -90,7 +100,7 @@ model Evaluation {
   correlationId?: string;
 
   @doc("Configuration for the evaluation.")
-  config?: EvaluationConfig;
+  config?: EvaluationConfiguration;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;
