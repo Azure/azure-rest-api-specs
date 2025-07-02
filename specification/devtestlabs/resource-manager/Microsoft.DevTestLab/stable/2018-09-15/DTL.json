@@ -839,17 +839,6 @@
             "description": "Resource 'ArtifactSource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ArtifactSource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -863,11 +852,7 @@
           "ArtifactSources_CreateOrUpdate": {
             "$ref": "./examples/ArtifactSources_CreateOrUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "operationId": "ArtifactSources_Update",

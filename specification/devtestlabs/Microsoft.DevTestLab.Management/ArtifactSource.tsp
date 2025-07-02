@@ -67,7 +67,7 @@ interface ArtifactSources {
   /**
    * Create or replace an existing artifact source.
    */
-  createOrUpdate is ArtifactSourceOps.CreateOrUpdateAsync<ArtifactSource>;
+  createOrUpdate is ArtifactSourceOps.CreateOrUpdateSync<ArtifactSource>;
 
   /**
    * Allows modifying tags of artifact sources. All other properties will be ignored.
