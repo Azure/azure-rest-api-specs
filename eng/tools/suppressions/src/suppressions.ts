@@ -1,6 +1,7 @@
 import { Stats } from "fs";
 import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
+import { createRequire } from "module";
 import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
 import vm from "vm";
@@ -152,7 +153,7 @@ export function getSuppressionsFromYaml(
   }
 
   // Make "require" available inside sandbox for imports
-  const sandbox = { ...context, require };
+  const sandbox = { ...context, require: createRequire(import.meta.url) };
 
   return (
     suppressions
