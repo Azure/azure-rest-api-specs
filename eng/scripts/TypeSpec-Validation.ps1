@@ -49,14 +49,16 @@ if ($typespecFolders) {
       }
     }
 
-    LogInfo "npm exec --no -- tsv $typespecFolder { checkAll: $CheckAll }"
+    $context = '{"checkAll": ' + $CheckAll + '}'
+
+    LogInfo "npm exec --no -- tsv $typespecFolder '$context'"
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder { checkAll: $CheckAll } 2>&1 | Write-Host
+    npm exec --no -- tsv $typespecFolder '{ "checkAll": $CheckAll }' 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
