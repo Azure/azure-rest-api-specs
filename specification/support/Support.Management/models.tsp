@@ -185,6 +185,11 @@ model OperationDisplay {
 @pagedResult
 model ServicesListResult {
   /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+  /**
    * List of Service resources.
    */
   @items
@@ -212,6 +217,11 @@ model ServiceProperties {
  */
 @pagedResult
 model ProblemClassificationsListResult {
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
   /**
    * List of ProblemClassification resources.
    */

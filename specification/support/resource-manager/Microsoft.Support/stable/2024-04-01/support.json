@@ -469,6 +469,9 @@
           "Gets list of services for which a support ticket can be created": {
             "$ref": "./examples/ListServices.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -549,6 +552,9 @@
           "Gets list of problemClassifications for a service for which a support ticket can be created": {
             "$ref": "./examples/ListProblemClassifications.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2637,6 +2643,10 @@
       "type": "object",
       "description": "Collection of ProblemClassification resources.",
       "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        },
         "value": {
           "type": "array",
           "description": "List of ProblemClassification resources.",
@@ -2773,6 +2783,10 @@
       "type": "object",
       "description": "Collection of Service resources.",
       "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        },
         "value": {
           "type": "array",
           "description": "List of Service resources.",
