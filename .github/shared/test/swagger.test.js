@@ -1,12 +1,21 @@
 // @ts-check
 
-import { dirname, resolve } from "path";
-import { describe, expect, it } from "vitest";
-import { Swagger } from "../src/swagger.js";
+import { dirname, resolve, join } from "path";
+import { describe, expect, it, beforeEach } from "vitest";
+import {
+  Swagger,
+  getVersionFromInputFile,
+  getPrecedingSwaggers,
+  getLegacyVersionOperations,
+} from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
 import { Readme } from "../src/readme.js";
 import { Tag } from "../src/tag.js";
+import { API_VERSION_LIFECYCLE_STAGES } from "../src/breaking-change.js";
+import { SpecModel } from "../src/spec-model.js";
+import { ConsoleLogger } from "../src/logger.js";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe("Swagger", () => {
@@ -29,12 +38,12 @@ describe("Swagger", () => {
   // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
-    const swagger = new Swagger(resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"));
+    const swagger = new Swagger(resolve(__dirname, "fixtures/swagger/ignoreExamples/swagger.json"));
     const refs = await swagger.getRefs();
 
     const expectedIncludedPath = resolve(
       __dirname,
-      "fixtures/Swagger/ignoreExamples/included.json",
+      "fixtures/swagger/ignoreExamples/included.json",
     );
     expect(refs).toMatchObject(
       new Map([
@@ -46,5 +55,543 @@ describe("Swagger", () => {
         ],
       ]),
     );
+  });
+
+  describe("getVersionFromInputFile", () => {
+    describe("resource-manager paths", () => {
+      it("should extract version from standard resource-manager paths", () => {
+        const testCases = [
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01/network.json",
+            expected: "2023-01-01",
+          },
+          {
+            path: "specification/storage/resource-manager/Microsoft.Storage/stable/2024-04-01/storage.json",
+            expected: "2024-04-01",
+          },
+        ];
+
+        testCases.forEach(({ path, expected }) => {
+          expect(getVersionFromInputFile(path)).toBe(expected);
+        });
+      });
+
+      it("should extract preview versions from resource-manager paths", () => {
+        const testCases = [
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/preview/2023-01-01-preview/network.json",
+            expected: "2023-01-01",
+          },
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/preview/2024-04-01-preview/network.json",
+            expected: "2024-04-01",
+            withPreview: false,
+          },
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/preview/2024-04-01-preview/network.json",
+            expected: "2024-04-01-preview",
+            withPreview: true,
+          },
+        ];
+
+        testCases.forEach(({ path, expected, withPreview = false }) => {
+          expect(getVersionFromInputFile(path, withPreview)).toBe(expected);
+        });
+      });
+
+      it("should handle other preview types in resource-manager paths", () => {
+        const testCases = [
+          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-alpha/network.json",
+          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-beta/network.json",
+          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-rc/network.json",
+        ];
+
+        testCases.forEach((path) => {
+          expect(getVersionFromInputFile(path)).toBe("2023-01-01");
+        });
+      });
+    });
+
+    describe("data-plane paths", () => {
+      it("should extract version from data-plane stable paths", () => {
+        const testCases = [
+          {
+            path: "specification/textanalytics/data-plane/TextAnalytics/stable/v3.1/textanalytics.json",
+            expected: "v3.1",
+          },
+          {
+            path: "specification/cognitiveservices/data-plane/Face/stable/v1.0/face.json",
+            expected: "v1.0",
+          },
+        ];
+
+        testCases.forEach(({ path, expected }) => {
+          expect(getVersionFromInputFile(path)).toBe(expected);
+        });
+      });
+
+      it("should extract version from data-plane preview paths", () => {
+        const testCases = [
+          {
+            path: "specification/textanalytics/data-plane/TextAnalytics/preview/v3.2-preview.1/textanalytics.json",
+            expected: "v3.2-preview.1",
+          },
+          {
+            path: "specification/cognitiveservices/data-plane/Face/preview/v1.1-preview.1/face.json",
+            expected: "v1.1-preview.1",
+          },
+        ];
+
+        testCases.forEach(({ path, expected }) => {
+          expect(getVersionFromInputFile(path)).toBe(expected);
+        });
+      });
+
+      it("should handle standard date versions in data-plane paths", () => {
+        const path =
+          "specification/textanalytics/data-plane/TextAnalytics/stable/2023-04-01/textanalytics.json";
+        expect(getVersionFromInputFile(path)).toBe("2023-04-01");
+      });
+    });
+
+    describe("edge cases and invalid inputs", () => {
+      it("should return undefined for paths without valid version patterns", () => {
+        const testCases = [
+          "specification/network/resource-manager/Microsoft.Network/unknown/test.json",
+          "specification/network/resource-manager/Microsoft.Network/stable/invalid-version/test.json",
+          "invalid/path/structure.json",
+        ];
+
+        testCases.forEach((path) => {
+          expect(getVersionFromInputFile(path)).toBeUndefined();
+        });
+      });
+
+      it("should return undefined for empty or malformed paths", () => {
+        const testCases = ["", "/", "test.json"];
+
+        testCases.forEach((path) => {
+          expect(getVersionFromInputFile(path)).toBeUndefined();
+        });
+      });
+    });
+  });
+
+  describe("Helper functions for version analysis", () => {
+    let mockSwaggers;
+    let testFixturePath;
+
+    beforeEach(() => {
+      testFixturePath = join(__dirname, "fixtures", "swagger", "specification");
+
+      // Create mock Swagger objects based on test fixtures
+      mockSwaggers = [
+        {
+          path: join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+          ),
+          version: "2022-05-01",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
+          fileName: "servicelinker.json",
+          getOperations: async () => [
+            {
+              id: "Linker_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers",
+            },
+            {
+              id: "Linker_Get",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+          ),
+          version: "2024-04-01",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
+          fileName: "servicelinker.json",
+          getOperations: async () => [
+            {
+              id: "Linker_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers",
+            },
+            {
+              id: "Linker_Get",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}",
+            },
+            {
+              id: "Linker_Create",
+              httpMethod: "PUT",
+              path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+          ),
+          version: "2023-04-01",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
+          fileName: "servicelinker.json",
+          getOperations: async () => [
+            {
+              id: "Linker_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers",
+            },
+            {
+              id: "Linker_Preview",
+              httpMethod: "POST",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers/preview",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+          ),
+          version: "2024-07-01",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
+          fileName: "servicelinker.json",
+          getOperations: async () => [
+            {
+              id: "Linker_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers",
+            },
+            {
+              id: "Linker_Preview",
+              httpMethod: "POST",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers/preview",
+            },
+            {
+              id: "Linker_Advanced",
+              httpMethod: "POST",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceLinker/linkers/advanced",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/stable/2020-07-02/a.json",
+          ),
+          version: "2020-07-02",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
+          fileName: "a.json",
+          getOperations: async () => [
+            {
+              id: "VirtualNetworks_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/stable/2020-08-04/a.json",
+          ),
+          version: "2020-08-04",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
+          fileName: "a.json",
+          getOperations: async () => [
+            {
+              id: "VirtualNetworks_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks",
+            },
+            {
+              id: "VirtualNetworks_Create",
+              httpMethod: "PUT",
+              path: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/preview/2020-07-02/a.json",
+          ),
+          version: "2020-07-02",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
+          fileName: "a.json",
+          getOperations: async () => [
+            {
+              id: "VirtualNetworks_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks",
+            },
+          ],
+        },
+        {
+          path: join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/preview/2020-08-04-preview/a.json",
+          ),
+          version: "2020-08-04",
+          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
+          fileName: "a.json",
+          getOperations: async () => [
+            {
+              id: "VirtualNetworks_List",
+              httpMethod: "GET",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks",
+            },
+            {
+              id: "VirtualNetworks_Preview",
+              httpMethod: "POST",
+              path: "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks/preview",
+            },
+          ],
+        },
+      ];
+    });
+
+    describe("getPrecedingSwaggers", () => {
+      it("should find preceding preview and stable versions", () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+        );
+        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+
+        expect(result.stable).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+          ),
+        );
+        // Should find the preview version <= current version (2023-04-01, not 2024-07-01)
+        expect(result.preview).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+          ),
+        );
+      });
+
+      it("should find preceding preview version for preview files", () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+        );
+        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+
+        expect(result.preview).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+          ),
+        );
+        expect(result.stable).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+          ),
+        );
+      });
+
+      it("should return undefined when no preceding stable versions exist", () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+        );
+        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+
+        expect(result.stable).toBeUndefined();
+        // Should find no preview version <= 2022-05-01 (all previews are newer)
+        expect(result.preview).toBeUndefined();
+      });
+
+      it("should handle non-existent target swagger", () => {
+        const targetPath = "/non/existent/swagger.json";
+        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+
+        expect(result.preview).toBeUndefined();
+        expect(result.stable).toBeUndefined();
+      });
+
+      it("should work with network API fixtures", () => {
+        const targetPath = join(
+          testFixturePath,
+          "network/resource-manager/Microsoft.Network/stable/2020-08-04/a.json",
+        );
+        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+
+        expect(result.stable).toBe(
+          join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/stable/2020-07-02/a.json",
+          ),
+        );
+        expect(result.preview).toBe(
+          join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/preview/2020-08-04-preview/a.json",
+          ),
+        );
+      });
+    });
+
+    describe("getLegacyVersionOperations", () => {
+      it("should find operations that exist in both previous and current versions", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+        );
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        expect(result.length).toBeGreaterThan(0);
+
+        // Should find common operations from 2022-05-01 version
+        const linkerListOp = result.find((op) => op.id === "Linker_List");
+        expect(linkerListOp).toBeDefined();
+        expect(linkerListOp?.swagger).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+          ),
+        );
+
+        const linkerGetOp = result.find((op) => op.id === "Linker_Get");
+        expect(linkerGetOp).toBeDefined();
+        expect(linkerGetOp?.swagger).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+          ),
+        );
+
+        // Should not find operations that only exist in current version
+        const linkerCreateOp = result.find((op) => op.id === "Linker_Create");
+        expect(linkerCreateOp).toBeUndefined();
+      });
+
+      it("should find operations from multiple previous versions", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
+        );
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        expect(result.length).toBeGreaterThan(0);
+
+        // Should find operations from 2023-04-01-preview version
+        const linkerPreviewOp = result.find((op) => op.id === "Linker_Preview");
+        expect(linkerPreviewOp).toBeDefined();
+        expect(linkerPreviewOp?.swagger).toBe(
+          join(
+            testFixturePath,
+            "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
+          ),
+        );
+      });
+
+      it("should return empty array for oldest version with no previous versions", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
+        );
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        expect(result).toEqual([]);
+      });
+
+      it("should handle non-existent target swagger", async () => {
+        const targetPath = "/non/existent/swagger.json";
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        expect(result).toEqual([]);
+      });
+
+      it("should only include operations that exist in current version", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "network/resource-manager/Microsoft.Network/stable/2020-08-04/a.json",
+        );
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        // Should find VirtualNetworks_List from both 2020-07-02 stable and 2020-07-02 preview
+        expect(result.length).toBe(2);
+
+        const vnListOps = result.filter((op) => op.id === "VirtualNetworks_List");
+        expect(vnListOps.length).toBe(2); // Found from both previous versions
+
+        // Verify the swagger sources are different
+        const swaggerSources = vnListOps.map((op) => op.swagger);
+        expect(swaggerSources).toContain(
+          join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/stable/2020-07-02/a.json",
+          ),
+        );
+        expect(swaggerSources).toContain(
+          join(
+            testFixturePath,
+            "network/resource-manager/Microsoft.Network/preview/2020-07-02/a.json",
+          ),
+        );
+      });
+
+      it("should preserve operation structure with correct property mapping", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
+        );
+        const result = await getLegacyVersionOperations(targetPath, mockSwaggers);
+
+        const operation = result[0];
+        expect(operation).toHaveProperty("id");
+        expect(operation).toHaveProperty("httpMethod");
+        expect(operation).toHaveProperty("path");
+        expect(operation).toHaveProperty("swagger");
+
+        expect(typeof operation.id).toBe("string");
+        expect(typeof operation.httpMethod).toBe("string");
+        expect(typeof operation.path).toBe("string");
+        expect(typeof operation.swagger).toBe("string");
+      });
+    });
+
+    describe("getOperations", () => {
+      it("should return normal operations", async () => {
+        const targetPath = join(
+          testFixturePath,
+          "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/test.json",
+        );
+        const specModel = new SpecModel(testFixturePath, {
+          logger: new ConsoleLogger(/*debug*/ true),
+        });
+        const result = await specModel.getSwaggers();
+        const swagger = result.find((s) => s.path === targetPath);
+
+        if (!swagger) throw new Error("Swagger not found for the given path");
+        const operations = await swagger.getOperations();
+        expect(operations.length).toBe(3);
+        let expectedApiPath =
+          "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns/{dryrunName}";
+        expect(operations[0].id).toBe("Connector_CreateDryrun");
+        expect(operations[0].httpMethod).toBe("PUT");
+        expect(operations[0].path).toBe(expectedApiPath);
+        expect(operations[1].id).toBe("Connector_GetDryrun");
+        expect(operations[1].httpMethod).toBe("GET");
+        expect(operations[1].path).toBe(expectedApiPath);
+        expectedApiPath =
+          "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns";
+        expect(operations[2].id).toBe("Connector_ListDryrun");
+        expect(operations[2].httpMethod).toBe("GET");
+        expect(operations[2].path).toBe(expectedApiPath);
+      });
+    });
   });
 });
