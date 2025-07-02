@@ -373,6 +373,14 @@ model SubmitToolApprovalAction extends RequiredAction {
   submitToolApproval: RequiredToolCall[];
 }
 
+@doc("The details describing tools that should be approved.")
+@added(Versions.v2025_05_15_preview)
+model SubmitToolApprovalDetails {
+  @encodedName("application/json", "tool_calls")
+  @doc("The list of tool calls that must be approved for the agent thread run to continue.")
+  toolCalls: RequiredToolCall[];
+}
+
 @doc("The details used when creating and immediately running a new agent thread.")
 @added(Versions.v2025_05_01)
 model CreateAndRunThreadOptions {
