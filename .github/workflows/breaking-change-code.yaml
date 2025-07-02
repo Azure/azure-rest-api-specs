@@ -18,13 +18,11 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
-        with:
-          node-version: '20.x'
 
       - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: "6.0.x"
 
       - name: Swagger Breaking Change - Analyze Code
         id: swagger-breaking-change-analyze-code
@@ -44,7 +42,7 @@ jobs:
         name: Upload artifact with BreakingChangeReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"          
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
 
       # Upload artifact for 'VersioningReviewRequired' label
