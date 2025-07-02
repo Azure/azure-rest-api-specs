@@ -122,10 +122,7 @@ export class SpecModel {
             const refRefToSwaggerPath = refRefs.get(swaggerPathResolved);
             if (refRefToSwaggerPath) {
               // Add the Swagger object for swaggerPath
-              affectedSwaggers.set(
-                refRefToSwaggerPath.path,
-                refRefToSwaggerPath,
-              );
+              affectedSwaggers.set(refRefToSwaggerPath.path, refRefToSwaggerPath);
 
               // Add the Swagger object that references swaggerPath
               //
@@ -150,9 +147,7 @@ export class SpecModel {
 
     // The swagger file supplied does not exist in the given specModel
     if (affectedSwaggers.size === 0) {
-      throw new Error(
-        `No affected swaggers found in specModel for ${swaggerPath}`,
-      );
+      throw new Error(`No affected swaggers found in specModel for ${swaggerPath}`);
     }
 
     return affectedSwaggers;
@@ -194,9 +189,7 @@ export class SpecModel {
    */
   async toJSONAsync(options) {
     const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) =>
-        a.path.localeCompare(b.path),
-      ),
+      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
       async (r) => await r.toJSONAsync(options),
     );
 
