@@ -22,7 +22,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Resources")
 @service(#{ title: "DeploymentStacksClient" })
 @versioned(Microsoft.Resources.DeploymentStacks.Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Resources.DeploymentStacks;
 
 /** The available API versions. */
