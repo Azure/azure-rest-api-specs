@@ -11,7 +11,8 @@ import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
-export var context: Record<string, any>;
+// Context argument may add new properties or override checkingAllSpecs
+export var context: Record<string, any> = { checkingAllSpecs: false };
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -27,7 +28,10 @@ export async function main() {
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
-  context = JSON.parse(parsedArgs.positionals[1]);
+
+  if (parsedArgs.positionals[1]) {
+    context = { ...context, ...JSON.parse(parsedArgs.positionals[1]) };
+  }
 
   const absolutePath = normalizePath(folder);
 
