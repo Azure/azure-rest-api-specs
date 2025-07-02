@@ -441,6 +441,9 @@ export class TspConfigPythonMgmtPackageGenerateTestTrueSubRule extends Tspconfig
   constructor() {
     super("@azure-tools/typespec-python", "generate-test", true);
   }
+protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
 }
 
 export class TspConfigPythonMgmtPackageGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
