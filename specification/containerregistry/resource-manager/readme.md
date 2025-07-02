@@ -28,6 +28,11 @@ These are the global settings for the ContainerRegistry API.
 
 These settings apply only when `--tag=package-2025-06-preview-only` is specified on the command line.
 
+``` yaml
+openapi-type: arm
+tag: package-2025-06-preview
+```
+
 ``` yaml $(tag) == 'package-2025-06-preview-only'
 input-file:
   - Microsoft.ContainerRegistry/preview/2025-06-01-preview/containerregistry.json
@@ -72,8 +77,6 @@ suppressions:
     from: containerregistry.json
     reason: Existing service contract needs to be backward compatible
 ```
-
-
 
 ``` yaml
 openapi-type: arm
