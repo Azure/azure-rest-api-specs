@@ -76,15 +76,12 @@ export class Swagger {
         });
       } catch (error) {
         if (error instanceof ResolverError) {
-          throw new SpecModelError(
-            `Failed to resolve file for swagger: ${this.#path}`,
-            {
-              cause: error,
-              source: error.source,
-              tag: this.#tag?.name,
-              readme: this.#tag?.readme?.path,
-            },
-          );
+          throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
+            cause: error,
+            source: error.source,
+            tag: this.#tag?.name,
+            readme: this.#tag?.readme?.path,
+          });
         }
 
         throw error;
@@ -147,9 +144,7 @@ export class Swagger {
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
-            [...(await this.getRefs()).values()].sort((a, b) =>
-              a.path.localeCompare(b.path),
-            ),
+            [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
             async (s) =>
               // Do not include swagger refs transitively, otherwise we could get in infinite loop
               await s.toJSONAsync({ ...options, includeRefs: false }),
@@ -171,9 +166,7 @@ export class Swagger {
  */
 function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return (
-    typeof file === "string" && json(file) && includesFolder(file, "examples")
-  );
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
 }
 
 /**

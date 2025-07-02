@@ -48,11 +48,13 @@ model PolicyProperties {
   bootstrapAuthentication: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
+  @removed(Versions.v2025_05_01_preview)
   @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
   @doc("Just-in-time rule to create the device resource.")
+  @removed(Versions.v2025_05_01_preview)
   jit?: JitRule;
 
   @doc("Further details about the policy resource")
@@ -105,10 +107,12 @@ union OnboardingResourceType {
   string,
 
   @doc("Azure device registry device. Microsoft.DeviceRegistry/devices")
+  @removed(Versions.v2025_05_01_preview)
   DeviceRegistryDevice: "Microsoft.DeviceRegistry/devices",
 
   @doc("Azure device registry namespace device. Microsoft.DeviceRegistry/namespaces/devices")
   @added(Versions.v2024_12_01_preview)
+  @removed(Versions.v2025_05_01_preview)
   DeviceRegistryNamespaceDevice: "Microsoft.DeviceRegistry/namespaces/devices",
 
   @doc("Arc enabled device. Microsoft.HybridCompute/machines")
@@ -123,6 +127,7 @@ model PolicyResourceDetails {
 }
 
 @doc("Details of the OnboardingService Device Registry Policy.")
+@removed(Versions.v2025_05_01_preview)
 model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
   @doc("The policy resource type for device registry devices.")
   type: OnboardingResourceType.DeviceRegistryDevice;
@@ -140,6 +145,7 @@ model DeviceRegistryPolicyResourceDetails extends PolicyResourceDetails {
 
 @doc("Details of the OnboardingService Device Registry Namespace Policy.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 model DeviceRegistryNamespacePolicyResourceDetails
   extends PolicyResourceDetails {
   @doc("The policy resource type for device registry namespace devices.")
@@ -157,12 +163,14 @@ model DeviceRegistryNamespacePolicyResourceDetails
 
 @doc("The just-in-time connection properties for device registry namespace devices.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 model DeviceRegistryNamespaceDeviceJitProperties {
   @doc("Resource id of the device registry namespace, required for device type Microsoft.DeviceRegistry/namespaces/devices")
   namespaceResourceId: DeviceRegistryNamespaceResourceId;
 }
 
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 scalar DeviceRegistryNamespaceResourceId
   extends armResourceIdentifier<[
     {
@@ -182,6 +190,7 @@ union BootstrapAuthenticationType {
   string,
 
   @doc("The X509 authentication type.")
+  @removed(Versions.v2025_05_01_preview)
   X509: "X509",
 
   @added(Versions.v2024_11_01_preview)
@@ -201,6 +210,12 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   type: BootstrapAuthenticationType.FDO;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_05_01_preview)
+  @renamedFrom(Versions.v2025_05_01_preview, "publicKeys")
+  @doc("Per policy public key(s) to extend ownership voucher to the customer.")
+  publicKeysold?: FdoPublicKeys;
+
+  @added(Versions.v2025_05_01_preview)
   @doc("Per policy public key(s) to extend ownership voucher to the customer.")
   publicKeys?: FdoPublicKeys;
 
@@ -216,9 +231,17 @@ model FdoBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 model FdoPublicKeys {
   @doc("Public key as x5C with encryption type SECP256R1.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_05_01_preview)
+  @renamedFrom(Versions.v2025_05_01_preview, "secp256R1")
+  secp256R1old?: FdoPublicKey;
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Public key as x5C with encryption type SECP256R1.")
   secp256R1?: FdoPublicKey;
 
-  // SECP384R1 // TODO: SECP384R1 is not supported by some hardwares, we may need to add support for SECP256R1
+  @added(Versions.v2025_05_01_preview)
+  @doc("Public key as x5C with encryption type SECP384R1.")
+  secp384R1?: FdoPublicKey;
 }
 
 @doc("Owner public key model")
@@ -227,7 +250,24 @@ model FdoPublicKey {
   @doc("x5Chain representation of the public key.")
   @visibility(Lifecycle.Read)
   default?: bytes[];
+
   // status: boolean; // To be added later.
+
+  @added(Versions.v2025_05_01_preview)
+  @doc("Status of the public key.")
+  status?: PublicKeyStatus;
+}
+
+@added(Versions.v2025_05_01_preview)
+@doc("Status of public key.")
+union PublicKeyStatus {
+  string,
+
+  @doc("Key is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Key is disabled.")
+  Disabled: "Disabled",
 }
 
 @doc("Generic Ownership Voucher Storage type.")
@@ -276,6 +316,7 @@ model BootstrapAuthenticationRule {
 }
 
 @doc("X509 Certificate.")
+@removed(Versions.v2025_05_01_preview)
 model X509Certificate {
   @doc("The certificate.")
   certificate: bytes;
@@ -290,6 +331,7 @@ model X509Certificate {
 }
 
 @doc("The x509-based authentication rule for bootstrapping.")
+@removed(Versions.v2025_05_01_preview)
 model X509BootstrapAuthenticationRule extends BootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
   type: BootstrapAuthenticationType.X509;
@@ -312,6 +354,7 @@ model DiscoveryBootstrapAuthenticationRule extends BootstrapAuthenticationRule {
 }
 
 @doc("The rule for Just-in-time connection.")
+@removed(Versions.v2025_05_01_preview)
 model JitRule {
   @doc("The priority of the policy. Should be greater than 0.")
   @minValue(1)
@@ -335,6 +378,7 @@ model JitRule {
 }
 
 @doc("Type of the endpoint.")
+@removed(Versions.v2025_05_01_preview)
 union EndpointType {
   string,
 
@@ -346,6 +390,7 @@ union EndpointType {
 }
 
 @doc("Type of allocation rule.")
+@removed(Versions.v2025_05_01_preview)
 union AllocationType {
   string,
 
@@ -360,6 +405,7 @@ union AllocationType {
 }
 
 @doc("The allocation rule.")
+@removed(Versions.v2025_05_01_preview)
 @discriminator("type")
 model AllocationRule {
   @doc("Name of the allocation rule.")
@@ -373,6 +419,7 @@ model AllocationRule {
 }
 
 @doc("Allocation endpoint.")
+@removed(Versions.v2025_05_01_preview)
 model AllocationEndpoint {
   @doc("Resource id of the endpoint.")
   resourceId: AllocationEndpointResourceId;
@@ -381,6 +428,7 @@ model AllocationEndpoint {
   hostName: string;
 }
 
+@removed(Versions.v2025_05_01_preview)
 scalar AllocationEndpointResourceId
   extends armResourceIdentifier<[
     {
@@ -426,6 +474,7 @@ scalar AllocationEndpointResourceId
 //}
 
 @doc("The allocation rule for evenly distributed allocation type.")
+@removed(Versions.v2025_05_01_preview)
 model EvenlyDistributedAllocationRule extends AllocationRule {
   @doc("Evenly distributed allocation type.")
   type: AllocationType.EvenlyDistributed;
@@ -462,6 +511,7 @@ model EvenlyDistributedAllocationRule extends AllocationRule {
 // }
 
 @doc("Supported key types.")
+@removed(Versions.v2025_05_01_preview)
 union SupportedKeyType {
   string,
 
@@ -473,6 +523,7 @@ union SupportedKeyType {
 }
 
 @doc("Supported issuing authority.")
+@removed(Versions.v2025_05_01_preview)
 union SupportedIssuingAuthority {
   string,
 
@@ -482,6 +533,7 @@ union SupportedIssuingAuthority {
 }
 
 @doc("The configuration for setting up a CA.")
+@removed(Versions.v2025_05_01_preview)
 model CaConfig {
   @doc("System-generated value for referencing the CA.")
   @visibility(Lifecycle.Read)
@@ -492,6 +544,7 @@ model CaConfig {
 }
 
 @doc("Certificate properties.")
+@removed(Versions.v2025_05_01_preview)
 model CertificateProperties {
   @doc("Crypto type: RSA or EC.")
   keyType: SupportedKeyType;
@@ -516,6 +569,7 @@ model CertificateProperties {
 }
 
 @doc("The configuration for setting up a policy.")
+@removed(Versions.v2025_05_01_preview)
 model CertPolicyConfig {
   @doc("The validity period in days.")
   @minValue(1)
@@ -523,6 +577,7 @@ model CertPolicyConfig {
 }
 
 @doc("Certificate issuance configurations.")
+@removed(Versions.v2025_05_01_preview)
 model CertificateIssuanceRule {
   @doc("The type of authority for cert issuance.")
   issuingAuthority: SupportedIssuingAuthority; //enum, FirstParty, BYO
@@ -539,6 +594,7 @@ model CertificateIssuanceRule {
 }
 
 @doc("The information related to device identity.")
+@removed(Versions.v2025_05_01_preview)
 model IdentityInfo {
   @doc("Certificate issuance settings.")
   certificateIssuance?: CertificateIssuanceRule; // For PKI
@@ -563,6 +619,7 @@ model IdentityInfo {
 }
 
 @doc("Resource metadata")
+@removed(Versions.v2025_05_01_preview)
 model ResourceMetadata {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is arbitrary JSON to provide custom attributes"
@@ -613,11 +670,13 @@ model PolicyPatchProperties {
   bootstrapAuthentication?: PatchBootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
+  @removed(Versions.v2025_05_01_preview)
   @extension("x-ms-identifiers", #["name"])
   @maxItems(1)
   allocations?: Array<AllocationRulePatch>;
 
   @doc("Just-in-time rule to create the device resource.")
+  @removed(Versions.v2025_05_01_preview)
   jit?: JitRulePatchUpdate;
 
   @doc("Further details about the policy resource")
@@ -635,6 +694,7 @@ model PatchBootstrapAuthenticationRule {
 }
 
 @doc("The x509-based authentication rule for bootstrapping.")
+@removed(Versions.v2025_05_01_preview)
 model PatchX509BootstrapAuthenticationRule
   extends PatchBootstrapAuthenticationRule {
   @doc("The type of authentication rule.")
@@ -650,6 +710,7 @@ model PatchX509BootstrapAuthenticationRule
 }
 
 @doc("X509 Certificate.")
+@removed(Versions.v2025_05_01_preview)
 model PatchX509Certificate {
   @doc("The certificate.")
   certificate?: bytes;
@@ -689,6 +750,12 @@ model PatchFdoBootstrapAuthenticationRule
   type: BootstrapAuthenticationType.FDO;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_05_01_preview)
+  @renamedFrom(Versions.v2025_05_01_preview, "publicKeys")
+  @doc("Per policy public keys to represent this policy")
+  publicKeysold?: FdoPublicKeys;
+
+  @added(Versions.v2025_05_01_preview)
   @doc("Per policy public keys to represent this policy")
   publicKeys?: FdoPublicKeys;
 
@@ -722,6 +789,7 @@ model PatchStorageAccountOwnershipVoucherStorage
 }
 
 @doc("The rule for Just-in-time connection.")
+@removed(Versions.v2025_05_01_preview)
 model JitRulePatchUpdate {
   @doc("The priority of the policy. Should be greater than 0.")
   @minValue(1)
@@ -748,6 +816,7 @@ model PolicyPatchResourceDetails {
 }
 
 @doc("Details of the OnboardingService Device Registry Policy.")
+@removed(Versions.v2025_05_01_preview)
 model PatchDeviceRegistryPolicyResourceDetails
   extends PolicyPatchResourceDetails {
   @doc("The policy resource type for device registry devices.")
@@ -762,6 +831,7 @@ model PatchDeviceRegistryPolicyResourceDetails
 
 @doc("Details of the OnboardingService Device Registry Namespace Policy.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 model PatchDeviceRegistryNamespacePolicyResourceDetails
   extends PolicyPatchResourceDetails {
   @doc("The policy resource type for device registry namespace devices.")
@@ -789,6 +859,7 @@ model PatchHybridComputePolicyResourceDetails
 }
 
 @doc("The allocation rule patch model.")
+@removed(Versions.v2025_05_01_preview)
 @discriminator("type")
 model AllocationRulePatch {
   @doc("Name of the allocation rule.")
@@ -802,6 +873,7 @@ model AllocationRulePatch {
 }
 
 @doc("The allocation rule for evenly distributed allocation type.")
+@removed(Versions.v2025_05_01_preview)
 model PatchEvenlyDistributedAllocationRule extends AllocationRulePatch {
   @doc("Evenly distributed allocation type.")
   type: AllocationType.EvenlyDistributed;
@@ -814,6 +886,7 @@ model PatchEvenlyDistributedAllocationRule extends AllocationRulePatch {
 }
 
 @doc("Allocation endpoint.")
+@removed(Versions.v2025_05_01_preview)
 model PatchAllocationEndpoint {
   @doc("Resource id of the endpoint.")
   resourceId?: AllocationEndpointResourceId;

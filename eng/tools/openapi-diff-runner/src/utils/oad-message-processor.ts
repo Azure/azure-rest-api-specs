@@ -3,7 +3,7 @@ import fs from "fs";
 import { OadMessage } from "../types/oad-types.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
-import { logFileName } from "./breaking-change-config.js";
+import { logFileName } from "../types/breaking-change.js";
 import { defaultBreakingChangeBaseBranch as defaultBaseBranch } from "../command-helpers.js";
 import { logMessage } from "../log.js";
 

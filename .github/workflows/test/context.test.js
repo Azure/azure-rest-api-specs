@@ -12,9 +12,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).rejects.toThrow();
+    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
   });
 
   it("pull_request", async () => {
@@ -36,9 +34,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -75,35 +71,23 @@ describe("extractInputs", () => {
       run_id: NaN,
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual(expected);
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "unlabeled";
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual(expected);
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "opened";
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual(expected);
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "synchronize";
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual(expected);
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
 
     context.payload.action = "reopened";
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual(expected);
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual(expected);
 
     // Action not yet supported
     context.payload.action = "assigned";
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).rejects.toThrow();
+    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
   });
 
   it("issue_comment:edited", async () => {
@@ -128,9 +112,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -158,9 +140,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "",
@@ -177,9 +157,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).rejects.toThrow();
+    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
   });
 
   it("workflow_run:completed:pull_request (same repo)", async () => {
@@ -202,9 +180,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(null, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -243,44 +219,40 @@ describe("extractInputs", () => {
       };
 
       const github = createMockGithub();
-      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(
-        async (args) => {
-          console.log(JSON.stringify(args));
-          return {
-            data: [
-              {
-                base: {
-                  repo: { id: 1234 },
-                },
-                number: 123,
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(async (args) => {
+        console.log(JSON.stringify(args));
+        return {
+          data: [
+            {
+              base: {
+                repo: { id: 1234 },
               },
-              // Ensure PRs to other repos are excluded
-              {
-                base: {
-                  repo: { id: 4567 },
-                },
-                number: 1,
+              number: 123,
+            },
+            // Ensure PRs to other repos are excluded
+            {
+              base: {
+                repo: { id: 4567 },
               },
-              // Multiple PRs to triggering repo still causes an error (TODO: #33418)
-              {
-                base: {
-                  repo: { id: 1234 },
-                },
-                number: 124,
+              number: 1,
+            },
+            // Multiple PRs to triggering repo still causes an error (TODO: #33418)
+            {
+              base: {
+                repo: { id: 1234 },
               },
-            ].slice(0, numPullRequests),
-          };
-        },
-      );
+              number: 124,
+            },
+          ].slice(0, numPullRequests),
+        };
+      });
 
       if (numPullRequests === 0) {
         github.rest.search.issuesAndPullRequests.mockResolvedValue({
           data: { total_count: 0, items: [] },
         });
 
-        await expect(
-          extractInputs(github, context, createMockCore()),
-        ).resolves.toEqual({
+        await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
           repo: "TestRepoName",
           head_sha: "abc123",
@@ -292,9 +264,7 @@ describe("extractInputs", () => {
           data: { total_count: 1, items: [{ number: 789 }] },
         });
 
-        await expect(
-          extractInputs(github, context, createMockCore()),
-        ).resolves.toEqual({
+        await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
           repo: "TestRepoName",
           head_sha: "abc123",
@@ -305,9 +275,7 @@ describe("extractInputs", () => {
         expect(github.rest.search.issuesAndPullRequests).toHaveBeenCalled();
       } else if (numPullRequests === 1 || numPullRequests === 2) {
         // Second PR is to a different repo, so expect same behavior with or without it
-        await expect(
-          extractInputs(github, context, createMockCore()),
-        ).resolves.toEqual({
+        await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
           repo: "TestRepoName",
           head_sha: "abc123",
@@ -316,14 +284,12 @@ describe("extractInputs", () => {
         });
       } else {
         // Multiple PRs to triggering repo still causes an error (TODO: #33418)
-        await expect(
-          extractInputs(github, context, createMockCore()),
-        ).rejects.toThrow("Unexpected number of pull requests");
+        await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+          "Unexpected number of pull requests",
+        );
       }
 
-      expect(
-        github.rest.repos.listPullRequestsAssociatedWithCommit,
-      ).toHaveBeenCalledWith({
+      expect(github.rest.repos.listPullRequestsAssociatedWithCommit).toHaveBeenCalledWith({
         owner: "TestRepoOwnerLoginFork",
         repo: "TestRepoName",
         commit_sha: "abc123",
@@ -356,9 +322,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -369,16 +333,14 @@ describe("extractInputs", () => {
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [{ name: "issue-number=not-a-number" }] },
     });
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).rejects.toThrow(/invalid issue-number/i);
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      /invalid issue-number/i,
+    );
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
     });
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -398,9 +360,7 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(null, context, createMockCore()),
-    ).rejects.toThrow();
+    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
   });
 
   it("workflow_run:completed:check_run", async () => {
@@ -430,9 +390,7 @@ describe("extractInputs", () => {
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
     });
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       head_sha: "abc123",
@@ -448,8 +406,7 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         check_run: {
-          details_url:
-            "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
+          details_url: "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
           head_sha: "abc123",
         },
         repository: {
@@ -461,16 +418,13 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       issue_number: NaN,
       head_sha: "abc123",
       run_id: NaN,
-      details_url:
-        "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
+      details_url: "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
     });
   });
 
@@ -481,8 +435,7 @@ describe("extractInputs", () => {
       payload: {
         action: "completed",
         check_run: {
-          details_url:
-            "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
+          details_url: "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
           head_sha: "abc123",
         },
         repository: {
@@ -493,9 +446,9 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(
-      extractInputs(github, context, createMockCore()),
-    ).rejects.toThrow("from context payload");
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "from context payload",
+    );
   });
 });
 
@@ -516,9 +469,7 @@ it("check_run:completed", async () => {
     },
   };
 
-  await expect(
-    extractInputs(createMockGithub(), context, createMockCore()),
-  ).resolves.toEqual({
+  await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
     owner: "TestRepoOwnerLogin",
     repo: "TestRepoName",
     head_sha: "head_sha",
