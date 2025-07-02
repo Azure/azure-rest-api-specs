@@ -18,7 +18,7 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 . $PSScriptRoot/Suppressions-Functions.ps1
 . $PSScriptRoot/Array-Functions.ps1
 
-$typespecFolders, $checkedAll = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+$typespecFolders, $checkingAllSpecs = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -HeadCommitish:$HeadCommitish `
   -CheckAll:$CheckAll `
@@ -39,7 +39,7 @@ if ($typespecFolders) {
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
 
-    if ($checkedAll) {
+    if ($checkingAllSpecs) {
       $suppression = Get-Suppression "TypeSpecValidationAll" $typespecFolder
       if ($suppression) {
         $reason = $suppression["reason"] ?? "<no reason specified>"
@@ -49,7 +49,7 @@ if ($typespecFolders) {
       }
     }
 
-    $context = @{ checkAll = $checkedAll } | ConvertTo-Json -Compress
+    $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
     LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
 
