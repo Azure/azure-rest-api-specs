@@ -796,10 +796,10 @@
         }
       }
     },
-    "/evaluations/evaluations/{evaluatorId}/results ": {
+    "/evaluations/evaluations/{evaluationId}/results ": {
       "get": {
-        "operationId": "Evaluations_ListRowResultsByEvaluatorId",
-        "description": "List evaluation run row results for a specific evaluatorId",
+        "operationId": "Evaluations_ListRowResults",
+        "description": "List evaluation run row results.",
         "parameters": [
           {
             "name": "startIndex",
@@ -818,9 +818,9 @@
             "format": "int32"
           },
           {
-            "name": "evaluatorId",
+            "name": "evaluationId",
             "in": "path",
-            "description": "Specifies the unique identifier of the evaluator resource.",
+            "description": "Specifies the unique identifier of the evaluation resource.",
             "required": true,
             "type": "string"
           },
@@ -1984,6 +1984,30 @@
         "credential"
       ]
     },
+    "BlobStorageResults": {
+      "type": "object",
+      "description": "Stored result details and storage location. Currently only blob storage support for evaluation result/result uploading.",
+      "properties": {
+        "evaluationResultAssetId": {
+          "type": "string",
+          "description": "AssetId reference for the stored evaluationResult."
+        },
+        "storageConnectionId": {
+          "type": "string",
+          "description": "The connection ID to the storage account where the evaluation results are stored."
+        }
+      },
+      "required": [
+        "evaluationResultAssetId",
+        "storageConnectionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Results"
+        }
+      ],
+      "x-ms-discriminator-value": "storage"
+    },
     "Connection": {
       "type": "object",
       "description": "Response from the list and get connections operations",
@@ -2492,18 +2516,21 @@
         },
         "outputs": {
           "type": "array",
-          "description": "Output Results.",
+          "description": "Evaluation stored output results.",
           "items": {
             "$ref": "#/definitions/Results"
           },
           "x-ms-identifiers": []
+        },
+        "outputSummary": {
+          "$ref": "#/definitions/MetricSummary",
+          "description": "Evaluation results metric Summary."
         }
       },
       "required": [
         "id",
         "data",
-        "evaluators",
-        "outputs"
+        "evaluators"
       ]
     },
     "EvaluationConfiguration": {
@@ -2879,26 +2906,10 @@
     },
     "LabeledRows": {
       "type": "object",
-      "description": "Labeled results per row.",
-      "properties": {
-        "label": {
-          "type": "string",
-          "description": "The label associated with the evaluation."
-        },
-        "reasoning": {
-          "type": "string",
-          "description": "Detailed reasoning or explanation for the evaluation."
-        },
-        "version": {
-          "type": "string",
-          "description": "The version identifier for the evaluation model."
-        }
-      },
-      "required": [
-        "label",
-        "reasoning",
-        "version"
-      ]
+      "description": "Labeled results across evaluators per data row.",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "ManagedAzureAISearchIndex": {
       "type": "object",
@@ -2970,13 +2981,7 @@
       },
       "required": [
         "data"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Results"
-        }
-      ],
-      "x-ms-discriminator-value": "metricSummary"
+      ]
     },
     "ModelDeployment": {
       "type": "object",
@@ -3491,35 +3496,6 @@
         "size",
         "tier"
       ]
-    },
-    "Storage": {
-      "type": "object",
-      "description": "Stored result details and storage location. Currently only blob storage support for evaluation result/result uploading.",
-      "properties": {
-        "evaluationResultAssetId": {
-          "type": "string",
-          "description": "AssetId reference for the stored evaluationResult."
-        },
-        "storageConnectionId": {
-          "type": "string",
-          "description": "The connection ID to the storage account where the evaluation results are stored."
-        },
-        "dataTableName": {
-          "type": "string",
-          "description": "Data table name for the data."
-        }
-      },
-      "required": [
-        "evaluationResultAssetId",
-        "storageConnectionId",
-        "dataTableName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Results"
-        }
-      ],
-      "x-ms-discriminator-value": "storage"
     },
     "TargetConfig": {
       "type": "object",

@@ -13,25 +13,18 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 
-@doc("Labeled results per row.")
+@doc("Labeled results across evaluators per data row.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model LabeledRows {
-  @doc("The label associated with the evaluation.")
-  label: string;
-
-  @doc("Detailed reasoning or explanation for the evaluation.")
-  reasoning: string;
-
-  @doc("The version identifier for the evaluation model.")
-  version: string;
+  // The arbitrary JSON data for evaluator metrics.
+  ...Record<string>;
 }
 
 @doc("Summary across rows for evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model MetricSummary extends Results {
-  type: "metricSummary";
+model MetricSummary {
 
   @doc("Aggregated summary per evaluator across all rows.")
     data: Record<{
@@ -47,7 +40,7 @@ model MetricSummary extends Results {
 @doc("Stored result details and storage location. Currently only blob storage support for evaluation result/result uploading.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model Storage extends Results {
+model BlobStorageResults extends Results {
   type: "storage";
 
   @doc("AssetId reference for the stored evaluationResult.")
@@ -55,9 +48,6 @@ model Storage extends Results {
 
   @doc("The connection ID to the storage account where the evaluation results are stored.")
   storageConnectionId: string;
-
-  @doc("Data table name for the data.")
-  dataTableName: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
@@ -179,8 +169,11 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
-  @doc("Output Results.")
-  outputs: Array<Results>;
+  @doc("Evaluation stored output results.")
+  outputs?: Array<Results>;
+
+  @doc("Evaluation results metric Summary.")
+  outputSummary?: MetricSummary;
 }
 
 @doc("The redaction configuration will allow the user to control what is redacted.")

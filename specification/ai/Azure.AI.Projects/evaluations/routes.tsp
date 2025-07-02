@@ -26,13 +26,13 @@ interface Evaluations {
   @doc("List evaluation runs")
   list is EvaluationsOperations.ResourceList<Evaluation>;
 
-  @doc("List evaluation run row results for a specific evaluatorId")
-  @route("evaluations/{evaluatorId}/results ")
+  @doc("List evaluation run row results.")
+  @route("evaluations/{evaluationId}/results ")
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v1)
   @get
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  listRowResultsByEvaluatorId(
+  listRowResults(
     @doc("""
     The index of the first item to return. Used for pagination.
     """)
@@ -41,11 +41,11 @@ interface Evaluations {
     @doc("""
     The number of items to return in the result set. Used for pagination.
     """)
-    @query pageSize?: int32,
+    @query pageSize?: int32 = 5,
     @doc("""
-    Specifies the unique identifier of the evaluator resource.
+    Specifies the unique identifier of the evaluation resource.
     """)
-    @path evaluatorId: string,
+    @path evaluationId: string,
 
     @doc("""
     The number of items to skip before starting to collect the result set. Used for pagination.
