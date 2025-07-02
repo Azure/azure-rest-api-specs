@@ -475,61 +475,61 @@ const rulesPri1ArcReview = [
 const rulesPri2Sdk = [
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChange!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChange],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeApproved],
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Go (label: <code>${sdkLabels["azure-sdk-for-go"]
-      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+      .breakingChange}</code>). ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChange!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChange],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeApproved],
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for JavaScript (label: <code>${sdkLabels["azure-sdk-for-js"]
-      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+      .breakingChange}</code>). ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved],
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Python (label: <code>${sdkLabels["azure-sdk-for-python"]
-      .breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+      .breakingChange}</code>). ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
     troubleshootingGuide: `Your PR has breaking changes in the generated SDK for Python track-2 (label: <code>${sdkLabels[
       "azure-sdk-for-python-track2"
-    ].breakingChange!}</code>). ` + `${diagramTsg(3, true)}.`
+    ].breakingChange}</code>). ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
     troubleshootingGuide: `Your PR modified the suppressions for Go SDK breaking changes (label: ${sdkLabels["azure-sdk-for-go"]
-      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+      .breakingChangeSuppression}).  ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved],
     troubleshootingGuide: `Your PR modified the suppressions for JavaScript SDK breaking changes (label: ${sdkLabels["azure-sdk-for-js"]
-      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+      .breakingChangeSuppression}).  ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved],
     troubleshootingGuide: `Your PR modified the suppressions for Python SDK breaking changes (label: ${sdkLabels["azure-sdk-for-python"]
-      .breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+      .breakingChangeSuppression}).  ` + `${diagramTsg(3, true)}.`
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression!],
-    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved!],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
     troubleshootingGuide: `Your PR modified the suppressions for Python track-2 SDK breaking changes (label: ${sdkLabels[
       "azure-sdk-for-python-track2"
-    ].breakingChangeSuppression!}).  ` + `${diagramTsg(3, true)}.`
+    ].breakingChangeSuppression}).  ` + `${diagramTsg(3, true)}.`
   },
 ];
 
@@ -597,29 +597,30 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers)
 
+/**
+ * @param {import("@actions/github").context} context
+ * @param {PipelineContext} pipelineContext
+ * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
+ */
 export async function getPresentBlockingLabelsAndMissingRequiredLabels(
-  logger: Logger,
-  logPrefix: string,
-  context: PipelineContext
-): Promise<{
-  presentBlockingLabels: string[];
-  missingRequiredLabels: string[];
-}> {
-  // assume context.pr != null
-  const labels: string[] = context.pr!.labels ?? [];
+  context,
+  pipelineContext
+) {
+  // assume pipelineContext.pr != null
+  const labels = pipelineContext.pr.labels ?? [];
 
-  const targetBranch = `${context.pr!.baseInfo.repo}/${context.pr!.baseInfo.ref}`;
+  const targetBranch = `${pipelineContext.pr.baseInfo.repo}/${pipelineContext.pr.baseInfo.ref}`;
 
-  const violatedReqLabelsRules: RequiredLabelRule[] = await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch);
-  const presentBlockingLabels: string[] = getPresentBlockingLabels(violatedReqLabelsRules)
+  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(context, labels, targetBranch);
+  const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules)
 
-  const missingRequiredLabels: string[] = (await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch))
+  const missingRequiredLabels = (await getViolatedRequiredLabelsRules(context, labels, targetBranch))
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
     .map((rule) => rule.anyRequiredLabels[0])
     // Multiple rules may result in the same label being required, e.g. BreakingChange-Approved-*
     .reduce(
-      (uniqueRequiredLabels: string[], reqLabel) =>
+      (uniqueRequiredLabels, reqLabel) =>
         uniqueRequiredLabels.includes(reqLabel) ? uniqueRequiredLabels : [...uniqueRequiredLabels, reqLabel],
       []
     );
@@ -627,65 +628,81 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   return { presentBlockingLabels, missingRequiredLabels };
 }
 
+/**
+ * @param {import("@actions/github").context} context
+ * @param {string[]} labels
+ * @param {string} targetBranch
+ * @returns {Promise<RequiredLabelRule[]>}
+ */
 export async function getViolatedRequiredLabelsRules(
-  logger: Logger,
-  logPrefix: string,
-  labels: string[],
-  targetBranch: string): Promise<RequiredLabelRule[]> {
+  context,
+  labels,
+  targetBranch
+) {
 
-  const violatedRules: RequiredLabelRule[] = [];
+  const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated(logger, logPrefix, labels, targetBranch, rule)) {
+    if (await requiredLabelRuleViolated(context, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
   return violatedRules;
 }
 
+/**
+ * @param {typeof import("@actions/core")} core
+ * @param {string[]} presentLabels
+ * @param {string} targetBranch
+ * @param {RequiredLabelRule} rule
+ * @returns {Promise<boolean>}
+ */
 export async function requiredLabelRuleViolated(
-  logger: Logger,
-  logPrefix: string,
-  presentLabels: string[],
-  targetBranch: string,
-  rule: RequiredLabelRule,
-): Promise<boolean> {
+  core,
+  presentLabels,
+  targetBranch,
+  rule,
+) {
 
-  const branchIsApplicable: boolean = rule.branches === undefined || rule.branches.includes(targetBranch);
+  const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
-  const anyPrerequisiteLabelPresent: boolean =
-    isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels!, presentLabels)
+  const anyPrerequisiteLabelPresent =
+    isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels, presentLabels)
 
-  const allPrerequisiteLabelsPresent: boolean =
-    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels!.every((label) => presentLabels.includes(label));
+  const allPrerequisiteLabelsPresent =
+    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels.every((label) => presentLabels.includes(label));
 
-  const anyPrerequisiteAbsentLabelPresent: boolean =
-    isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels!, presentLabels)
+  const anyPrerequisiteAbsentLabelPresent =
+    isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels, presentLabels)
 
   const ruleIsApplicable = branchIsApplicable && (anyPrerequisiteLabelPresent || allPrerequisiteLabelsPresent) && !anyPrerequisiteAbsentLabelPresent
 
-  const anyRequiredLabelPresent: boolean = anyLabelMatches(rule.anyRequiredLabels, presentLabels);
+  const anyRequiredLabelPresent = anyLabelMatches(rule.anyRequiredLabels, presentLabels);
 
   const ruleIsViolated = ruleIsApplicable && !anyRequiredLabelPresent;
 
   // Trace log. Uncomment when needed.
-  await logger.logInfo(logPrefix +
-      `RETURN definition requiredLabelRuleViolated: ` +
-      `presentLabels: ${[...presentLabels].join(", ")}, ` +
-      `targetBranch: ${targetBranch}, ` +
-      `rule.precedence: ${rule.precedence}, ` +
-      `rule.branches: ${[...rule.branches ?? []].join(", ")}, ` +
-      `rule.anyPrerequisiteLabels: ${[...rule.anyPrerequisiteLabels ?? []].join(", ")}, ` +
-      `rule.allPrerequisiteLabels: ${[...rule.allPrerequisiteLabels ?? []].join(", ")}, ` +
-      `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
-      `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
-      `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
+  // core.info(
+  //     `RETURN definition requiredLabelRuleViolated: ` +
+  //     `presentLabels: ${[...presentLabels].join(", ")}, ` +
+  //     `targetBranch: ${targetBranch}, ` +
+  //     `rule.precedence: ${rule.precedence}, ` +
+  //     `rule.branches: ${[...rule.branches ?? []].join(", ")}, ` +
+  //     `rule.anyPrerequisiteLabels: ${[...rule.anyPrerequisiteLabels ?? []].join(", ")}, ` +
+  //     `rule.allPrerequisiteLabels: ${[...rule.allPrerequisiteLabels ?? []].join(", ")}, ` +
+  //     `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
+  //     `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
+  //     `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
   return ruleIsViolated;
 }
 
-export function getPresentBlockingLabels(violatedReqLabelsRules: RequiredLabelRule[]) {
+/**
+ * @param {RequiredLabelRule[]} violatedReqLabelsRules
+ * @returns {string[]}
+ */
+export function getPresentBlockingLabels(violatedReqLabelsRules) {
   return violatedReqLabelsRules
     .filter((rule) => rule.anyRequiredLabels.length === 0)
     // Implicitly assuming here that there is exactly one prerequisite label for the rule.
     // See comment on RequiredLabelRule for details.
-    .map((rule) => rule.anyPrerequisiteLabels![0]);
+    .map((rule) => rule.anyPrerequisiteLabels[0]);
 }
