@@ -12,8 +12,8 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/workloadorchestration"
-    package-dir: "armworkloadorchestration"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armplaceholder" 
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -21,21 +21,21 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-workloadorchestration"
-    namespace: "azure.mgmt.workloadorchestration"
-    generate-test: true
-    generate-sample: true
-    flavor: "azure"
+    emitter-output-dir: "{service-dir}/azure-mgmt-placeholder" 
+    namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-test: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    generate-sample: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
     service-dir: "sdk/workloadorchestration"
     flavor: azure
-    package-dir: azure-resourcemanager-workloadorchestration
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-workloadorchestration" 
     namespace: com.azure.resourcemanager.workloadorchestration
     service-name: Workload Orchestration
     api-version: "2025-06-01"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-workloadorchestration"
+    emitter-output-dir: "{service-dir}/arm-workloadorchestration" 
     flavor: azure
     package-details:
       name: "@azure/arm-workloadorchestration"
