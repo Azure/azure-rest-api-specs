@@ -22,8 +22,8 @@ import {
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
-  TspConfigPythonAzGenerateTestTrueSubRule,
-  TspConfigPythonAzGenerateSampleTrueSubRule,
+  TspConfigPythonMgmtPackageGenerateSampleTrueSubRule,
+  TspConfigPythonMgmtPackageGenerateTestTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
@@ -410,7 +410,7 @@ const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
   "generate-test",
   true,
   false,
-  [new TspConfigPythonAzGenerateTestTrueSubRule()],
+  [new TspConfigPythonMgmtPackageGenerateTestTrueSubRule()],
 );
 
 const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
@@ -419,7 +419,7 @@ const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
   "generate-sample",
   true,
   false,
-  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
+  [new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule()],
 );
 
 const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
@@ -431,22 +431,22 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
+const pythonMgmtPackageGenerateTestTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "generate-test",
   true,
   false,
-  [new TspConfigPythonAzGenerateTestTrueSubRule()],
+  [new TspConfigPythonMgmtPackageGenerateTestTrueSubRule()],
 );
 
-const pythonAzGenerateSampleTestCases = createEmitterOptionTestCases(
+const pythonMgmtPackageGenerateSampleTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "generate-sample",
   true,
   false,
-  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
+  [new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule()],
 );
 
 const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
@@ -623,8 +623,8 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
-    ...pythonAzGenerateTestTestCases,
-    ...pythonAzGenerateSampleTestCases,
+    ...pythonMgmtPackageGenerateTestTestCases,
+    ...pythonMgmtPackageGenerateSampleTestCases,
     // csharp
     ...csharpAzPackageDirTestCases,
     ...csharpAzNamespaceTestCases,
