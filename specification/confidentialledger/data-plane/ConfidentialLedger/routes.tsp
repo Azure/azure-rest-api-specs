@@ -262,6 +262,10 @@ interface Operations {
   @patch
   createOrUpdateUser is Common.LedgerOperation<
     {
+      /** application/merge-patch+json content-type */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
        */
@@ -323,6 +327,10 @@ interface Operations {
   @patch
   createOrUpdateLedgerUser is Common.LedgerOperation<
     {
+      /** application/merge-patch+json content-type */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
       /**
        * The user id, either an AAD object ID or certificate fingerprint.
        */
