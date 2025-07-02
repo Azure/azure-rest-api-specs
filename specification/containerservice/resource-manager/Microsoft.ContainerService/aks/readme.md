@@ -1357,4 +1357,8 @@ directive:
     from: managedClusters.json
     where: $.definitions.MachineKubernetesProfile.properties.nodeLabels
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.LocalDNSOverrides
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```

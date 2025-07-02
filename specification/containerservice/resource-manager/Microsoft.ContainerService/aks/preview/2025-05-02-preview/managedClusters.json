@@ -8231,6 +8231,13 @@
     },
     "LocalDNSOverrides": {
       "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LocalDNSOverride"
+      },
+      "description": "LocalDNSOverrides is a map of zone names for Vnet and Kube DNS overrides."
+    },
+    "LocalDNSOverride": {
+      "type": "object",
       "description": "Overrides for localDNS profile.",
       "properties": {
         "queryLogging": {
@@ -8374,7 +8381,7 @@
             ]
           },
           "description": "Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
-          "default": "Verify"
+          "default": "Immediate"
         }
       }
     },
