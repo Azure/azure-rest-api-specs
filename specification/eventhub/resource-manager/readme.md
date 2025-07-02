@@ -26,7 +26,7 @@ These are the global settings for the EventHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2024-05-preview
 ```
 
 ### Tag: package-2017-04
@@ -313,6 +313,9 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: namespaces.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
@@ -344,6 +347,22 @@ directive:
   - suppress: ResourceNameRestriction
     from: Clusters-preview.json
     reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: namespaces.json
+    reason: can't add ResourceNameRestriction at this time, as the current API version is old and introducing it could cause breaking changes.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: namespaces.json
+    reason: Breaking Change.
+  - suppress: TrackedResourcePatchOperation
+    from: namespaces.json
+    reason: Breaking change.
+  - suppress: TrackedResourcesMustHavePut
+    from: namespaces.json
+    reason: Breaking change.
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
@@ -482,7 +501,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

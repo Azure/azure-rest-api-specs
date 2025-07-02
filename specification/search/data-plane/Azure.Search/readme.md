@@ -26,7 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
-tag: package-2024-11-01-preview
+tag: package-2025-05-01-preview
 
 directive:
   - where:
@@ -167,7 +167,73 @@ directive:
       - RequiredReadOnlyProperties
 ```
 
-### Tag: package-2024-09-01-preview
+### Tag: package-2025-05-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+- preview/2025-05-01-preview/knowledgeagent.json
+- preview/2025-05-01-preview/searchservice.json
+- preview/2025-05-01-preview/searchindex.json
+```
+
+### Tag: package-2025-05-knowledgeagent-preview
+
+These settings apply only when `--tag=package-2025-05-knowledgeagent-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-knowledgeagent-preview'
+input-file:
+- preview/2025-05-01-preview/knowledgeagent.json
+```
+
+### Tag: package-2025-05-searchservice-preview
+
+These settings apply only when `--tag=package-2025-05-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-searchservice-preview'
+input-file:
+- preview/2025-05-01-preview/searchservice.json
+```
+
+### Tag: package-2025-05-searchindex-preview
+
+These settings apply only when `--tag=package-2025-05-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-searchindex-preview'
+input-file:
+- preview/2025-05-01-preview/searchindex.json
+```
+
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+- preview/2025-03-01-preview/searchservice.json
+- preview/2025-03-01-preview/searchindex.json
+```
+
+### Tag: package-2025-03-searchservice-preview
+
+These settings apply only when `--tag=package-2025-03-searchservice-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-searchservice-preview'
+input-file:
+- preview/2025-03-01-preview/searchservice.json
+```
+
+### Tag: package-2025-03-searchindex-preview
+
+These settings apply only when `--tag=package-2025-03-searchindex-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-searchindex-preview'
+input-file:
+- preview/2025-03-01-preview/searchindex.json
+```
+
+### Tag: package-2024-11-01-preview
 
 These settings apply only when `--tag=package-2024-11-01-preview` is specified on the command line.
 
@@ -1033,5 +1099,5 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```

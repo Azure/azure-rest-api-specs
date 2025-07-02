@@ -26,9 +26,27 @@ These are the global settings for the RedisEnterprise API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-10
+tag: package-preview-2025-05-01
 ```
 
+
+### Tag: package-preview-2025-05-01
+
+These settings apply only when `--tag=package-preview-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-01'
+input-file:
+  - Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
+  - Microsoft.Cache/stable/2025-04-01/redisenterprise.json
+```
 
 ### Tag: package-2024-10
 
@@ -193,7 +211,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

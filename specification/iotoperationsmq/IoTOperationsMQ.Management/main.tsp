@@ -18,9 +18,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
-@service({
-  title: "Microsoft.IoTOperationsMQ management service",
-})
+@service(#{ title: "Microsoft.IoTOperationsMQ management service" })
 @versioned(Versions)
 @doc("Microsoft.IoTOperationsMQ Resource Provider management API.")
 namespace Microsoft.IoTOperationsMQ;
