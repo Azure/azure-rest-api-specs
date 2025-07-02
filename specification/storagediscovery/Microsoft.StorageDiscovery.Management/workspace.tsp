@@ -72,10 +72,15 @@ model StorageDiscoveryWorkspaceProperties {
   oldScopes: StorageDiscoveryScopeV1[];
 
   @doc("The storage discovery resource collections.")
+  @removed(ApiVersion.v2025_06_01_preview)
   @identifiers(#["displayName"])
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageCollections")
-  @renamedFrom(ApiVersion.v2025_06_01_preview, "discoveryScopes")
+  discoveryScopes: StorageDiscoveryScopeV2[];
+
+  @doc("The scopes of the storage discovery workspace.")
+  @identifiers(#["displayName"])
+  @added(ApiVersion.v2025_06_01_preview)
   scopes: StorageDiscoveryScope[];
 
   @doc("The destinations to which the storage workspace sends data")
@@ -142,15 +147,12 @@ union StorageDiscoverySku {
 }
 
 /**
- * Storage Discovery Scope
+ * Storage Discovery Scope V1
  */
 @removed(ApiVersion.v2025_01_01_preview)
 @renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryScope")
 model StorageDiscoveryScopeV1 {
   @doc("Display name of the scope")
-  @pattern("^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$")
-  @minLength(4)
-  @maxLength(64)
   displayName: string;
 
   @doc("Resource types for the scope")
@@ -166,23 +168,29 @@ model StorageDiscoveryScopeV1 {
   @doc("Storage resource filters for the scope")
   storageAccountFilters: StorageDiscoveryResourceFilter;
 }
-
 /**
- * Storage resource filters for the scope
+ * Storage Discovery Scope V2
  */
-@removed(ApiVersion.v2025_01_01_preview)
-model StorageDiscoveryResourceFilter {
-  @doc("The storage account locations to filter")
-  locations: string[];
+@added(ApiVersion.v2025_01_01_preview)
+@renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryCollection")
+@renamedFrom(ApiVersion.v2025_06_01_preview, "StorageDiscoveryScope")
+model StorageDiscoveryScopeV2 {
+  @doc("Display name of the collection")
+  displayName: string;
+
+  @doc("Resource types for the collection")
+  resourceTypes: StorageDiscoveryResourceType[];
+
+  @doc("The storage account tags keys to filter")
+  tagKeysOnly?: string[];
 
   ...ArmTagsProperty;
 }
 
 /**
- * Storage Discovery Collection
+ * Storage Discovery Scope. This had added validations
  */
-@added(ApiVersion.v2025_01_01_preview)
-@renamedFrom(ApiVersion.v2025_03_01_preview, "StorageDiscoveryCollection")
+@added(ApiVersion.v2025_06_01_preview)
 model StorageDiscoveryScope {
   @doc("Display name of the collection")
   @pattern("^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$")
@@ -195,6 +203,17 @@ model StorageDiscoveryScope {
 
   @doc("The storage account tags keys to filter")
   tagKeysOnly?: string[];
+
+  ...ArmTagsProperty;
+}
+
+/**
+ * Storage resource filters for the scope
+ */
+@removed(ApiVersion.v2025_01_01_preview)
+model StorageDiscoveryResourceFilter {
+  @doc("The storage account locations to filter")
+  locations: string[];
 
   ...ArmTagsProperty;
 }
