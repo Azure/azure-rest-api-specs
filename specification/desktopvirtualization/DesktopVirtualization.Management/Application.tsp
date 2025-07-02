@@ -89,7 +89,6 @@ interface Applications {
 @@doc(Application.name,
   "The name of the application within the specified application group"
 );
-@@doc(Application.properties, "Detailed properties for Application");
 @@doc(Applications.createOrUpdate::parameters.resource,
   "Object containing Application definitions."
 );
