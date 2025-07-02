@@ -506,7 +506,7 @@ namespace Agents.Persistent {
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup("java")
   @route("/files")
-  interface Files {
+  interface PersistentAgentsFiles {
     @access(Access.internal)
     listFilesInternal is Azure.AI.Agents.Files.listFiles;
     #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
@@ -521,7 +521,7 @@ namespace Agents.Persistent {
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup("java")
   @route("/threads/{threadId}/messages")
-  interface Messages {
+  interface ThreadMessages {
     createMessage is Azure.AI.Agents.Messages.createMessage;
     listMessages is Azure.AI.Agents.Messages.listMessages;
     getMessage is Azure.AI.Agents.Messages.getMessage;
@@ -532,7 +532,7 @@ namespace Agents.Persistent {
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup("java")
   @route("/threads/{threadId}/runs")
-  interface Runs {
+  interface ThreadRuns {
     createRun is Azure.AI.Agents.Runs.createRun;
     listRuns is Azure.AI.Agents.Runs.listRuns;
     getRun is Azure.AI.Agents.Runs.getRun;
