@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HardwareSecurityModules;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupResult.properties);
+@@flattenProperty(BackupResult.properties, "!python");
 
 @@clientName(Error.innererror, "innerError");
 
