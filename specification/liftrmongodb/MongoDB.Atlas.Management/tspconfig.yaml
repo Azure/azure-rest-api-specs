@@ -11,19 +11,19 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.MongoDBAtlas"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.MongoDBAtlas"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.MongoDBAtlas"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-mongodbatlas"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-mongodbatlas"
     namespace: "com.azure.resourcemanager.mongodbatlas"
     flavor: "azure"
     service-name: "Mongo DB Atlas"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mongodbatlas"
-    package-dir: "armmongodbatlas"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armmongodbatlas"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -32,12 +32,12 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-mongodbatlas"
+    emitter-output-dir: "{service-dir}/arm-mongodbatlas"
     flavor: "azure"
     package-details:
       name: "@azure/arm-mongodbatlas"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-mongodbatlas"
+    emitter-output-dir: "{service-dir}/azure-mgmt-mongodbatlas"
     namespace: "azure.mgmt.mongodbatlas"
     flavor: "azure"
     generate-test: true

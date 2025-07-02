@@ -12,8 +12,8 @@ options:
   "@azure-tools/typespec-python":
     api-version: "2025-05-15-preview"
     package-mode: "dataplane"
-    package-dir: "azure-ai-agents"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{service-dir}/azure-ai-agents"
+    package-name: "azure-ai-agents"
     flavor: azure
     generate-test: false
     generate-sample: false
@@ -21,9 +21,9 @@ options:
   "@azure-tools/typespec-csharp":
     api-version: "2025-05-15-preview"
     package-mode: "dataplane"
-    package-dir: "Azure.AI.Agents.Persistent"
-    namespace: "{package-dir}"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.AI.Agents.Persistent"
+    namespace: "Azure.AI.Agents.Persistent"
+    package-name: "Azure.AI.Agents.Persistent"
     model-namespace: false
     flavor: azure
     generate-test: false

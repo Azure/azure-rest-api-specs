@@ -14,31 +14,31 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.DependencyMap"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.DependencyMap"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DependencyMap"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dependencymap"
+    emitter-output-dir: "{service-dir}/azure-mgmt-dependencymap"
     namespace: "azure.mgmt.dependencymap"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dependencymap"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-dependencymap"
     namespace: "com.azure.resourcemanager.dependencymap"
     service-name: "Dependency Map"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-dependencymap"
+    emitter-output-dir: "{service-dir}/arm-dependencymap"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-dependencymap"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dependencymap"
-    package-dir: "armdependencymap"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armdependencymap"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     examples-directory: "{project-root}/examples"
     fix-const-stuttering: true
     flavor: "azure"
@@ -49,7 +49,7 @@ options:
     remove-unreferenced-types: true
   "@azure-tools/typespec-powershell":
     service-dir: "src"
-    package-dir: "DependencyMap/DependencyMap.Autorest"
+    emitter-output-dir: "{service-dir}/DependencyMap/DependencyMap.Autorest"
     clear-output-folder: true
     debug: true
     azure: true

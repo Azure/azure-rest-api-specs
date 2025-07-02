@@ -19,31 +19,31 @@ options:
     # omit the enum type Versions from being added to versioned swagger
     omit-unreachable-types: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-standbypool"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-standbypool"
     namespace: "com.azure.resourcemanager.standbypool"
     flavor: "azure"
     service-name: "Standby Pool"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.StandbyPool"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.StandbyPool"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StandbyPool"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-standbypool"
+    emitter-output-dir: "{service-dir}/arm-standbypool"
     flavor: azure
     package-details:
       name: "@azure/arm-standbypool"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-standbypool"
+    emitter-output-dir: "{service-dir}/azure-mgmt-standbypool"
     namespace: "azure.mgmt.standbypool"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/standbypool"
-    package-dir: "armstandbypool"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armstandbypool"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

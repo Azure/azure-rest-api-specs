@@ -27,7 +27,7 @@ options:
     "package-dir": "azure-keyvault-keys"
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: "azure-security-keyvault-keys"
+    emitter-output-dir: "{service-dir}/azure-security-keyvault-keys"
     namespace: "com.azure.security.keyvault.keys"
     models-subpackage: "implementation.models"
     custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult"
@@ -40,7 +40,7 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
-    package-dir: "keyvault-keys"
+    emitter-output-dir: "{service-dir}/keyvault-keys"
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true
@@ -51,7 +51,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/security/keyvault"
-    package-dir: "azkeys"
+    emitter-output-dir: "{service-dir}/azkeys"
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     module-version: "0.0.1"
     emitter-output-dir: "{project-root}"

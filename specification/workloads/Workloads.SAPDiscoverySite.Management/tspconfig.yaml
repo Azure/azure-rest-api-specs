@@ -14,12 +14,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/SAPDiscoverySites/{version-status}/{version}/SAPDiscoverySites.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-migrationdiscoverysap"
+    emitter-output-dir: "{service-dir}/arm-migrationdiscoverysap"
     flavor: azure
     package-details:
       name: "@azure/arm-migrationdiscoverysap"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-migrationdiscoverysap"
+    emitter-output-dir: "{service-dir}/azure-mgmt-migrationdiscoverysap"
     namespace: "azure.mgmt.migrationdiscoverysap"
     flavor: "azure"
     generate-test: true

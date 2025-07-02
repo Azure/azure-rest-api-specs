@@ -16,30 +16,30 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/widgetanalytics.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-widget-analytics"
+    emitter-output-dir: "{service-dir}/azure-widget-analytics"
     namespace: "azure.widget.analytics"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.WidgetAnalytics"
+    emitter-output-dir: "{service-dir}/Azure.WidgetAnalytics"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.WidgetAnalytics"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "widget-analytics-rest"
+    emitter-output-dir: "{service-dir}/widget-analytics-rest"
     package-details:
       name: "@azure-rest/azure-widget-analytics"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-widget-analytics"
+    emitter-output-dir: "{service-dir}/azure-widget-analytics"
     namespace: com.azure.widget.analytics
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     service-dir: "sdk/widget-analytics"
-    package-dir: "azmanager"
+    emitter-output-dir: "{service-dir}/azmanager"
     module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true

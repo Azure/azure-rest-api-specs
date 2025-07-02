@@ -13,7 +13,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/cts.json"
   "@azure-tools/typespec-python":
     flavor: azure
-    package-dir: "azure-codetransparency"
+    emitter-output-dir: "{service-dir}/azure-codetransparency"
     namespace: "azure.codetransparency"
     package-mode: "dataplane"
     package-pprint-name: "Code Transparency Service"
@@ -22,8 +22,8 @@ options:
     generate-sample: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.Security.CodeTransparency"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.Security.CodeTransparency"
+    namespace: "Azure.Security.CodeTransparency"
     clear-output-folder: true
     model-namespace: false
   "@azure-typespec/http-client-csharp":
@@ -31,13 +31,13 @@ options:
     model-namespace: false
   "@azure-tools/typespec-ts":
     flavor: azure
-    package-dir: "codetransparency-rest"
+    emitter-output-dir: "{service-dir}/codetransparency-rest"
     package-details:
       name: "@azure-rest/codetransparency"
       description: "Code Transparency Service"
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: "azure-security-codetransparency"
+    emitter-output-dir: "{service-dir}/azure-security-codetransparency"
     namespace: com.azure.security.codetransparency
 linter:
   extends:

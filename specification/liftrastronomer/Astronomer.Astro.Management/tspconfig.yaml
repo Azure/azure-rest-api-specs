@@ -19,12 +19,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/astronomer.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-astro"
+    emitter-output-dir: "{service-dir}/arm-astro"
     flavor: azure
     package-details:
       name: "@azure/arm-astro"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-astro"
+    emitter-output-dir: "{service-dir}/azure-mgmt-astro"
     namespace: "azure.mgmt.astro"
     flavor: "azure"
     generate-test: true

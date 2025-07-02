@@ -13,21 +13,21 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.RecoveryServicesDataReplication"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.RecoveryServicesDataReplication"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.RecoveryServicesDataReplication"
     service-dir: "sdk/recoveryservices-datareplication"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-recoveryservicesdatareplication"
+    emitter-output-dir: "{service-dir}/azure-mgmt-recoveryservicesdatareplication"
     namespace: "azure.mgmt.recoveryservicesdatareplication"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservicesdatareplication"
-    package-dir: "armrecoveryservicesdatareplication"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armrecoveryservicesdatareplication"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -35,7 +35,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-recoveryservicesdatareplication"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-recoveryservicesdatareplication"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
     service-name: "Recovery Services Data Replication"
@@ -48,7 +48,7 @@ options:
     typespec-title-map:
       DataReplicationClient: AzureSiteRecoveryManagementServiceAPI
     experimental-extensible-enums: true
-    package-dir: "arm-recoveryservicesdatareplication"
+    emitter-output-dir: "{service-dir}/arm-recoveryservicesdatareplication"
     flavor: "azure"
     package-details:
       name: "@azure/arm-recoveryservicesdatareplication"

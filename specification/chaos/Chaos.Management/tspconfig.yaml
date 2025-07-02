@@ -15,26 +15,26 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-chaos"
+    emitter-output-dir: "{service-dir}/arm-chaos"
     flavor: azure
     package-details:
       name: "@azure/arm-chaos"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-chaos"
+    emitter-output-dir: "{service-dir}/azure-mgmt-chaos"
     namespace: "azure.mgmt.chaos"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Chaos"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Chaos"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Chaos"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/chaos"
-    package-dir: "armchaos"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armchaos"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -42,7 +42,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-chaos"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-chaos"
     namespace: "com.azure.resourcemanager.chaos"
     service-name: "Chaos"
     flavor: "azure"

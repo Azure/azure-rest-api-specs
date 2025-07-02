@@ -18,7 +18,7 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid"'
     package-version: 4.20.0
-    package-dir: "azure-eventgrid"
+    emitter-output-dir: "{service-dir}/azure-eventgrid"
     namespace: "azure.eventgrid"
     flavor: azure
     generate-test: true
@@ -48,16 +48,16 @@ options:
       loglevel: info
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "eventgrid-namespaces"
+    emitter-output-dir: "{service-dir}/eventgrid-namespaces"
     package-details:
       name: "@azure/eventgrid-namespaces"
     flavor: azure
     experimental-extensible-enums: true
     is-modular-library: true
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     service-dir: "sdk/messaging/eventgrid"
-    package-dir: "aznamespaces"
+    emitter-output-dir: "{service-dir}/aznamespaces"
     module-version: "0.0.1"
     emitter-output-dir: "{project-root}"
     slice-elements-byval: true

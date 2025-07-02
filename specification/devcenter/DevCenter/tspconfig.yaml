@@ -13,8 +13,8 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.DevCenter/{version-status}/{version}/devcenter.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Developer.DevCenter"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.Developer.DevCenter"
+    namespace: "Azure.Developer.DevCenter"
     clear-output-folder: true
     flavor: azure
     api-version: "2023-04-01"
@@ -22,7 +22,7 @@ options:
     namespace: Azure.Developer.DevCenter
     api-version: "2023-04-01"
   "@azure-tools/typespec-python":
-    package-dir: "azure-developer-devcenter"
+    emitter-output-dir: "{service-dir}/azure-developer-devcenter"
     namespace: "azure.developer.devcenter"
     package-version: 1.0.0
     flavor: azure
@@ -31,7 +31,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-ts":
     title: "Azure Developer DevCenter"
-    package-dir: "developer-devcenter-rest"
+    emitter-output-dir: "{service-dir}/developer-devcenter-rest"
     generate-metadata: true
     package-details:
       name: "@azure-rest/developer-devcenter"
@@ -40,7 +40,7 @@ options:
     flavor: azure
     api-version: "2023-04-01"
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-devcenter"
+    emitter-output-dir: "{service-dir}/azure-developer-devcenter"
     namespace: com.azure.developer.devcenter
     partial-update: true
     use-object-for-unknown: true

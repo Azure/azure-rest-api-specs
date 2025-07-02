@@ -17,7 +17,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ContentUnderstanding.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.ContentUnderstanding"
+    emitter-output-dir: "{service-dir}/Azure.AI.ContentUnderstanding"
     namespace: "Azure.AI.ContentUnderstanding"
     model-namespace: false
     flavor: azure
@@ -26,8 +26,8 @@ options:
     model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: "Azure AI Content Understanding"
-    package-dir: "azure-ai-contentunderstanding"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{service-dir}/azure-ai-contentunderstanding"
+    package-name: "azure-ai-contentunderstanding"
     package-version: 1.0.0
     flavor: azure
     generate-test: true

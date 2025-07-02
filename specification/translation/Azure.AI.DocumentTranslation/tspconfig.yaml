@@ -16,7 +16,7 @@ options:
     output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.AI.Translation.Document"
+    emitter-output-dir: "{service-dir}/Azure.AI.Translation.Document"
     namespace: Azure.AI.Translation.Document
     clear-output-folder: true
     model-namespace: false
@@ -26,7 +26,7 @@ options:
     model-namespace: false
   "@azure-tools/typespec-python":
     flavor: azure
-    package-dir: "azure-ai-translation-document"
+    emitter-output-dir: "{service-dir}/azure-ai-translation-document"
     namespace: "azure.ai.translation.document"
     package-mode: dataplane
     package-version: "1.1.0b1"
@@ -34,7 +34,7 @@ options:
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-translation-document"
+    emitter-output-dir: "{service-dir}/azure-ai-translation-document"
     namespace: com.azure.ai.translation.document
     partial-update: true
     generate-tests: false
@@ -43,7 +43,7 @@ options:
     flavor: azure
     api-version: "2024-05-01"
   "@azure-tools/typespec-ts":
-    package-dir: "ai-translation-document-rest"
+    emitter-output-dir: "{service-dir}/ai-translation-document-rest"
     generate-metadata: true
     package-details:
       name: "@azure-rest/ai-translation-document"

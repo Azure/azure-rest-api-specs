@@ -11,23 +11,23 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.PlanetaryComputer"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.PlanetaryComputer"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.PlanetaryComputer"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-planetarycomputer"
+    emitter-output-dir: "{service-dir}/azure-mgmt-planetarycomputer"
     namespace: "azure.mgmt.planetarycomputer"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-planetarycomputer"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-planetarycomputer"
     namespace: "com.azure.resourcemanager.planetarycomputer"
     service-name: "Planetary Computer"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-planetarycomputer"
+    emitter-output-dir: "{service-dir}/arm-planetarycomputer"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-planetarycomputer"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/planetarycomputer"
-    package-dir: "armplanetarycomputer"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armplanetarycomputer"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

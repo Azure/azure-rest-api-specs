@@ -13,23 +13,23 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.HardwareSecurityModules"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Hardwaresecuritymodules"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Hardwaresecuritymodules"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-hardwaresecuritymodules"
+    emitter-output-dir: "{service-dir}/azure-mgmt-hardwaresecuritymodules"
     namespace: "azure.mgmt.hardwaresecuritymodules"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-hardwaresecuritymodules"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-hardwaresecuritymodules"
     namespace: "com.azure.resourcemanager.hardwaresecuritymodules"
     service-name: "Hardware Security Modules" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-hardwaresecuritymodules"
+    emitter-output-dir: "{service-dir}/arm-hardwaresecuritymodules"
     typespec-title-map:
       HardwareSecurityModulesClient: AzureDedicatedHSMResourceProvider
     flavor: "azure"
@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-hardwaresecuritymodules"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/hardwaresecuritymodules"
-    package-dir: "armhardwaresecuritymodules"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armhardwaresecuritymodules"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

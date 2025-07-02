@@ -32,7 +32,7 @@ options:
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.Messages
-    package-dir: "Azure.Communication.Messages"
+    emitter-output-dir: "{service-dir}/Azure.Communication.Messages"
     save-inputs: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
@@ -40,14 +40,14 @@ options:
     model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: '"Communication Messages"'
-    package-dir: "azure-communication-messages"
+    emitter-output-dir: "{service-dir}/azure-communication-messages"
     namespace: "azure.communication.messages"
     package-version: 1.0.0
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-communication-messages"
+    emitter-output-dir: "{service-dir}/azure-communication-messages"
     namespace: com.azure.communication.messages
     partial-update: true
     service-name: Messages
@@ -57,7 +57,7 @@ options:
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "communication-messages-rest"
+    emitter-output-dir: "{service-dir}/communication-messages-rest"
     package-details:
       name: "@azure-rest/communication-messages"
       description: "Azure client library for Azure Communication Messages services"

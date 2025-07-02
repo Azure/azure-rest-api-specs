@@ -15,12 +15,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/scvmm.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-scvmm"
+    emitter-output-dir: "{service-dir}/arm-scvmm"
     flavor: azure
     package-details:
       name: "@azure/arm-scvmm"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-scvmm"
+    emitter-output-dir: "{service-dir}/azure-mgmt-scvmm"
     namespace: "azure.mgmt.scvmm"
     flavor: "azure"
     generate-test: true

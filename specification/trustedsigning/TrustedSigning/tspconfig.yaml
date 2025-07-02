@@ -14,28 +14,28 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/Azure.Developer.TrustedSigning/{version-status}/{version}/azure.developer.trustedsigning.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-developer-trustedsigning"
+    emitter-output-dir: "{service-dir}/azure-developer-trustedsigning"
     namespace: "azure.developer.trustedsigning"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
-    package-dir: "Azure.Developer.TrustedSigning"
+    emitter-output-dir: "{service-dir}/Azure.Developer.TrustedSigning"
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.Developer.TrustedSigning"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: Azure.Developer.TrustedSigning
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "developer-trustedsigning-rest"
+    emitter-output-dir: "{service-dir}/developer-trustedsigning-rest"
     generate-metadata: true
     package-details:
       name: "@azure-rest/developer-trustedsigning"
       description: "Azure trusted signing service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-trustedsigning"
+    emitter-output-dir: "{service-dir}/azure-developer-trustedsigning"
     namespace: "com.azure.developer.trustedsigning"
     flavor: azure

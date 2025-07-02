@@ -11,31 +11,31 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.PineconeVectorDB"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.PineconeVectorDB"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.PineconeVectorDB"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-pineconevectordb"
+    emitter-output-dir: "{service-dir}/arm-pineconevectordb"
     package-details:
       name: "@azure/arm-pineconevectordb"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-pineconevectordb"
+    emitter-output-dir: "{service-dir}/azure-mgmt-pineconevectordb"
     namespace: "azure.mgmt.pineconevectordb"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-pineconevectordb"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-pineconevectordb"
     namespace: "com.azure.resourcemanager.pineconevectordb"
     flavor: "azure"
     service-name: "Pinecone Vector Db"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/pineconevectordb"
-    package-dir: "armpineconevectordb"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armpineconevectordb"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

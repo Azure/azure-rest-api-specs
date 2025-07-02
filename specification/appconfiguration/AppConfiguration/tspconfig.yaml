@@ -12,7 +12,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.AppConfiguration/{version-status}/{version}/appconfiguration.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-appconfiguration"
+    emitter-output-dir: "{service-dir}/azure-appconfiguration"
     namespace: "azure.appconfiguration"
     package-pprint-name: "App Configuration Data"
     package-mode: dataplane
@@ -20,8 +20,8 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Data.AppConfiguration"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.Data.AppConfiguration"
+    namespace: "Azure.Data.AppConfiguration"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -29,14 +29,14 @@ options:
     namespace: Azure.Data.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-appconfiguration-rest"
+    emitter-output-dir: "{service-dir}/azure-appconfiguration-rest"
     generate-metadata: true
     package-details:
       name: "@azure-rest/azure-appconfiguration"
       description: "Azure App Configuration"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-data-appconfiguration"
+    emitter-output-dir: "{service-dir}/azure-data-appconfiguration"
     namespace: com.azure.data.appconfiguration
     flavor: azure
 linter:

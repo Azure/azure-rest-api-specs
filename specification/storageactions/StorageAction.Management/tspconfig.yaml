@@ -13,23 +13,23 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.StorageActions"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.StorageActions"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StorageActions"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-storageactions"
+    emitter-output-dir: "{service-dir}/azure-mgmt-storageactions"
     namespace: "azure.mgmt.storageactions"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-storageactions"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-storageactions"
     namespace: "com.azure.resourcemanager.storageactions"
     service-name: "StorageActions" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-storageactions"
+    emitter-output-dir: "{service-dir}/arm-storageactions"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -37,8 +37,8 @@ options:
       name: "@azure/arm-storageactions"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storageactions"
-    package-dir: "armstorageactions"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armstorageactions"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
