@@ -268,10 +268,52 @@ test("suppression with rules", () => {
   expect(suppressions).toStrictEqual([
     {
       tool: "TestTool",
+      if: undefined,
       paths: ["foo"],
       rules: ["my-rule"],
       subRules: ["my.option.a", "my.option.b"],
       reason: "test",
     },
   ]);
+});
+
+test.each([
+  { context: { foo: false, bar: false }, expected: ["no-if"] },
+  { context: { foo: true, bar: false }, expected: ["no-if", "if-foo", "if-foo-or-bar"] },
+  { context: { foo: false, bar: true }, expected: ["no-if", "if-bar", "if-foo-or-bar"] },
+  {
+    context: { foo: true, bar: true },
+    expected: ["no-if", "if-foo", "if-bar", "if-foo-or-bar", "if-foo-and-bar"],
+  },
+])("if($context)", ({ context, expected }) => {
+  const suppressionYaml = `
+- tool: TestTool
+  path: "**"
+  reason: no-if
+- tool: TestTool
+  path: "**"
+  if: foo
+  reason: if-foo
+- tool: TestTool
+  path: "**"
+  if: bar
+  reason: if-bar
+- tool: TestTool
+  path: "**"
+  if: foo || bar
+  reason: if-foo-or-bar
+- tool: TestTool
+  path: "**"
+  if: foo && bar
+  reason: if-foo-and-bar
+`;
+
+  let suppressions: Suppression[] = getSuppressionsFromYaml(
+    "TestTool",
+    "test-path",
+    "suppressions.yaml",
+    suppressionYaml,
+    context,
+  );
+  expect(suppressions.map((s) => s.reason).sort()).toEqual(expected.sort());
 });
