@@ -6,6 +6,7 @@ import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
+import { existsSync, readFileSync } from "fs";
 
 /**
  * @typedef {import('./spec-model.js').Tag} Tag
@@ -55,6 +56,11 @@ export class Swagger {
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
 
+  /** @type {Operation[]} map of the operations in this swagger*/
+  #operations;
+
+  /** @type {string}  */
+
   /**
    * @param {string} path
    * @param {Object} [options]
@@ -64,6 +70,7 @@ export class Swagger {
   constructor(path, options) {
     const rootDir = dirname(options?.tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
+    this.#operations = [];
     this.#logger = options?.logger;
     this.#tag = options?.tag;
   }
@@ -132,14 +139,55 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Map<string, Operation>>} Key is Operation.Id
+   * @returns {Promise<Operation[]>}
    */
-  async getOperations() {}
+  async getOperations() {
+    if (this.#operations.length === 0) {
+      try {
+        const content = await readFile(this.#path, "utf8");
+        const swagger = JSON.parse(content);
+        // Process regular paths
+        if (swagger.paths) {
+          for (const [path, pathItem] of Object.entries(swagger.paths)) {
+            for (const [method, operation] of Object.entries(pathItem)) {
+              if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+                this.#operations.push({
+                  id: operation.operationId,
+                  httpMethod: method.toUpperCase(),
+                  path: path,
+                });
+              }
+            }
+          }
+        }
+
+        // Process x-ms-paths (Azure extension)
+        if (swagger["x-ms-paths"]) {
+          for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
+            for (const [method, operation] of Object.entries(pathItem)) {
+              if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+                this.#operations.push({
+                  id: operation.operationId,
+                  httpMethod: method.toUpperCase(),
+                  path: path,
+                });
+              }
+            }
+          }
+        }
+      } catch {
+        throw new SpecModelError(`Failed to read operations from swagger: ${this.#path}`);
+      }
+    }
+    return this.#operations;
+  }
 
   /**
    * @returns {SwaggerVersion} Extracts version information from swagger path
    */
-  get version() {}
+  getVersion() {
+
+  }
 
   /**
    * @returns {Promise<{preview?: Swagger, stable?: Swagger}>}
@@ -208,4 +256,55 @@ function example(file) {
 function json(file) {
   // Extension "json" with any case is a valid JSON file
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
+}
+
+/**
+ * Extract version string from input file path (matches original TypeScript implementation)
+ * @param {string} filePath - Path to the input file
+ * @param {boolean} [withPreview=false] - Whether to include preview suffix
+ * @returns {string | undefined} - Version string extracted from path
+ */
+function getVersionFromInputFile(filePath, withPreview = false) {
+  const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
+  const segments = filePath.split("/");
+
+  if (filePath.indexOf("data-plane") !== -1) {
+    if (segments && segments.length > 1) {
+      for (const s of segments.entries()) {
+        if (["stable", "preview"].some((v) => v === s[1])) {
+          const version = segments[s[0] + 1];
+          if (version) {
+            return apiVersionRegex.test(version) && !withPreview ? version.substr(0, 10) : version;
+          }
+        }
+      }
+    }
+  } else {
+    if (segments && segments.length > 1) {
+      for (const s of segments) {
+        if (apiVersionRegex.test(s)) {
+          return withPreview ? s : s.substr(0, 10);
+        }
+      }
+    }
+  }
+
+  if (existsSync(filePath)) {
+    try {
+      return JSON.parse(readFileSync(filePath).toString())?.info?.version;
+    } catch {
+      console.warn(`Failed to parse version from file: ${filePath}`);
+    }
+  }
+
+  return undefined;
+}
+
+/**
+ * Get version type from swagger file path
+ * @param {string} swaggerPath - Path to swagger file
+ * @returns {ApiVersionLifecycleStage} - Version type
+ */
+function getVersionType(swaggerPath) {
+  return dirname(swaggerPath).includes("/preview/") ? "preview" : "stable";
 }
