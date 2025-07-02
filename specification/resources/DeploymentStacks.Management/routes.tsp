@@ -15,22 +15,16 @@ namespace Microsoft.Resources.DeploymentStacks;
 // Interface for all stack operations with the scoping parameterized.
 // For some reason, the ArmResourceActionAsync type requires the base params extends this reflection model type.
 interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model> {
-  /**
-   * Gets the Deployment stack with the given name.
-   */
+  /** Gets the Deployment stack with the given name. */
   get is ArmResourceRead<DeploymentStack, BaseParameters = TBaseParams>;
 
-  /**
-   * Lists Deployment stacks at the specified scope.
-   */
+  /** Lists Deployment stacks at the specified scope. */
   list is ArmResourceListByParent<
     DeploymentStack,
     BaseParameters = TBaseParams
   >;
 
-  /**
-   * Runs preflight validation on the Deployment stack template at the specified scope to verify its acceptance to Azure Resource Manager.
-   */
+  /** Runs preflight validation on the Deployment stack template at the specified scope to verify its acceptance to Azure Resource Manager. */
   @added(Versions.v2024_03_01)
   @action("validate")
   validateStack is ArmResourceActionAsync<
@@ -41,17 +35,13 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
     Error = ErrorResponse | ValidationBadRequestResponse<DeploymentStackValidateResult>
   >;
 
-  /**
-   * Creates or updates a Deployment stack at the specified scope.
-   */
+  /** Creates or updates a Deployment stack at the specified scope. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DeploymentStack,
     BaseParameters = TBaseParams
   >;
 
-  /**
-   * Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content.
-   */
+  /** Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" ""
   delete is ArmResourceDeleteWithoutOkAsync<
     DeploymentStack,
@@ -60,9 +50,7 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
-  /**
-   * Exports the template used to create the Deployment stack at the specified scope.
-   */
+  /** Exports the template used to create the Deployment stack at the specified scope. */
   @action("exportTemplate")
   exportTemplate is ArmResourceActionSync<
     DeploymentStack,

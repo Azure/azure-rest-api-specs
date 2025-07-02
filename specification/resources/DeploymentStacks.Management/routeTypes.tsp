@@ -11,9 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Resources.DeploymentStacks;
 
-/**
- * The common base parameters for Management group stacks.
- */
+/** The common base parameters for Management group stacks. */
 model ManagementGroupBaseParameters
   is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...CommonTypes.ManagementGroupNameParameter;
