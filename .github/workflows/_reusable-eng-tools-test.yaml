@@ -15,10 +15,6 @@ on:
         description: Run 'npm run lint' if true
         required: false
         type: boolean
-      prettier:
-        description: Run 'npm run prettier' if true
-        required: false
-        type: boolean
 
 permissions:
   contents: read
@@ -54,21 +50,24 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}.x
 
-      - run: npm run build
+      - name: Build
+        run: npm run build
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
-      - run: npm run lint
+      - name: Lint
+        run: npm run lint
         if: inputs.lint == true
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
-      - run: npm run prettier
-        if: inputs.prettier == true
+      - name: Check Formatting
+        run: npm run format:check:ci
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
-      - run: npm run test:ci
+      - name: Test
+        run: npm run test:ci
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
