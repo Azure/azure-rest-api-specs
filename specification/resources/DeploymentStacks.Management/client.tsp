@@ -6,7 +6,12 @@ using Microsoft.Resources.DeploymentStacks;
 
 #suppress "deprecated" "Backwards compat with old swagger"
 @@flattenProperty(DeploymentStack.properties);
-@@clientName(Microsoft.Resources.DeploymentStacks, "DeploymentStacksMgmtClient", "python");
+@@clientName(Microsoft.Resources.DeploymentStacks,
+  "DeploymentStacksMgmtClient",
+  "python"
+);
 
 @@clientName(DeploymentParameter, "DeploymentParameterContent"); // .NET SDK validation: cannot end in "Parameter"
-@@clientName(DeploymentStackTemplateDefinition, "DeploymentStackTemplateExportResult"); // .NET SDK validation: cannot end in "Definition"
+@@clientName(DeploymentStackTemplateDefinition,
+  "DeploymentStackTemplateExportResult"
+); // .NET SDK validation: cannot end in "Definition"

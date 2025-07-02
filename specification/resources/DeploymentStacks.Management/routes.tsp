@@ -24,8 +24,8 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
     BaseParameters = TBaseParams
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "There's a 400 response for validation failures."
   /** Runs preflight validation on the Deployment stack template at the specified scope to verify its acceptance to Azure Resource Manager. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "There's a 400 response for validation failures."
   @added(Versions.v2024_03_01)
   @action("validate")
   validateStack is ArmResourceActionAsync<
@@ -62,10 +62,13 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
 }
 
 @armResourceOperations
-interface DeploymentStacksAtResourceGroup extends DeploymentStackCommonOps<ResourceGroupBaseParameters> {}
+interface DeploymentStacksAtResourceGroup
+  extends DeploymentStackCommonOps<ResourceGroupBaseParameters> {}
 
 @armResourceOperations
-interface DeploymentStacksAtSubscription extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
+interface DeploymentStacksAtSubscription
+  extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
 
 @armResourceOperations
-interface DeploymentStacksAtManagementGroup extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}
+interface DeploymentStacksAtManagementGroup
+  extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}

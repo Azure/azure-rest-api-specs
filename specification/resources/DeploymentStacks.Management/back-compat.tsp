@@ -6,40 +6,76 @@ using Microsoft.Resources.DeploymentStacks;
 
 // Operation IDs. These overwrites are to preserve the operation IDs before TypeSpec migration.
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.get, "DeploymentStacks_GetAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.get,
+  "DeploymentStacks_GetAtResourceGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.list, "DeploymentStacks_ListAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.list,
+  "DeploymentStacks_ListAtResourceGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.validateStack, "DeploymentStacks_ValidateStackAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.validateStack,
+  "DeploymentStacks_ValidateStackAtResourceGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.createOrUpdate, "DeploymentStacks_CreateOrUpdateAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.createOrUpdate,
+  "DeploymentStacks_CreateOrUpdateAtResourceGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.delete, "DeploymentStacks_DeleteAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.delete,
+  "DeploymentStacks_DeleteAtResourceGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtResourceGroup.exportTemplate, "DeploymentStacks_ExportTemplateAtResourceGroup");
+@@operationId(DeploymentStacksAtResourceGroup.exportTemplate,
+  "DeploymentStacks_ExportTemplateAtResourceGroup"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.get, "DeploymentStacks_GetAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.get,
+  "DeploymentStacks_GetAtSubscription"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.list, "DeploymentStacks_ListAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.list,
+  "DeploymentStacks_ListAtSubscription"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.validateStack, "DeploymentStacks_ValidateStackAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.validateStack,
+  "DeploymentStacks_ValidateStackAtSubscription"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.createOrUpdate, "DeploymentStacks_CreateOrUpdateAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.createOrUpdate,
+  "DeploymentStacks_CreateOrUpdateAtSubscription"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.delete, "DeploymentStacks_DeleteAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.delete,
+  "DeploymentStacks_DeleteAtSubscription"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtSubscription.exportTemplate, "DeploymentStacks_ExportTemplateAtSubscription");
+@@operationId(DeploymentStacksAtSubscription.exportTemplate,
+  "DeploymentStacks_ExportTemplateAtSubscription"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.get, "DeploymentStacks_GetAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.get,
+  "DeploymentStacks_GetAtManagementGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.list, "DeploymentStacks_ListAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.list,
+  "DeploymentStacks_ListAtManagementGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.validateStack, "DeploymentStacks_ValidateStackAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.validateStack,
+  "DeploymentStacks_ValidateStackAtManagementGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.createOrUpdate, "DeploymentStacks_CreateOrUpdateAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.createOrUpdate,
+  "DeploymentStacks_CreateOrUpdateAtManagementGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.delete, "DeploymentStacks_DeleteAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.delete,
+  "DeploymentStacks_DeleteAtManagementGroup"
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"
-@@operationId(DeploymentStacksAtManagementGroup.exportTemplate, "DeploymentStacks_ExportTemplateAtManagementGroup");
+@@operationId(DeploymentStacksAtManagementGroup.exportTemplate,
+  "DeploymentStacks_ExportTemplateAtManagementGroup"
+);
