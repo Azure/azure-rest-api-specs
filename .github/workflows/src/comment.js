@@ -17,19 +17,29 @@
  * @param {string} commentGroupName - The name of the comment group to search for in the comments. This is merely a "category" that
  *  will allow the comment to be identified and updated later in a context where there are MULTIPLE github comments being left by token.
  *  This is a bit more future proofed than merely assuming the first comment by the GITHUB_TOKEN user is the one we want to update.
- * @returns {Promise<string || undefined>} Resolves when the comment is created or updated.
+ * @returns {Promise<[string || undefined>, string || undefined]} Resolves when the comment is created or updated.
  */
 export async function parseExistingComments(comments, commentGroupName) {
-    if (!comments) {
-        return undefined;
+    /** @type {string} */
+    let commentId = undefined;
+    /** @type {string} */
+    let commentBody = undefined;
+
+    if (comments) {
+        comments.map(comment => {
+            // When we create or update this comment, we will always leave behind
+            // <!-- commentGroupName --> in the body of the comment.
+            // This allows us to identify the comment later on. We need to return the body
+            // so we can know if we need to update it or not. If it's the same body content
+            // we will no-op on the update.
+            if (comment.body.includes(commentGroupName)) {
+                commentId = comment.id;
+                commentBody = comment.body;
+            };
+        })
     }
 
-    return comments.find(comment => {
-        // When we create or update this comment, we will always leave behind
-        // <!-- commentGroupName --> in the body of the comment.
-        // This allows us to identify the comment later on.
-        return comment.body.includes(commentGroupName);
-    })
+    return [commentId, commentBody];
 }
 
 /**
@@ -51,31 +61,34 @@ export async function commentOrUpdate({
     // Get the authenticated user to know who we are
     const { data: user } = await github.rest.users.getAuthenticated();
     const authenticatedUsername = user.login;
+    const computedBody = body + `\n<!-- ${commentGroupName} -->`;
 
-
-    // Find the first comment by the authenticated user
+    // only examine the comments from user in our current GITHUB_TOKEN context
     const existingComments = comments.filter(comment =>
       comment.user.login === authenticatedUsername
     );
 
-    const commentId = parseExistingComments(existingComments, commentGroupName);
+    const [commentId, commentBody] = parseExistingComments(existingComments, commentGroupName);
 
     if (commentId) {
-      // Update the existing comment
+      if (commentBody === computedBody) {
+        core.info(`No update needed for comment ${commentId} by ${authenticatedUsername}`);
+        return; // No-op if the body is the same
+      }
       await github.rest.issues.updateComment({
         owner,
         repo,
         comment_id: commentId,
-        body
+        body: computedBody
       });
-      core.info(`Updated existing comment #${existingComment.id} by ${authenticatedUsername}`);
+      core.info(`Updated existing comment ${commentId} by ${authenticatedUsername}`);
     } else {
       // Create a new comment
       const { data: newComment } = await github.rest.issues.createComment({
         owner,
         repo,
         issue_number,
-        body // body should have <!-- commentGroupName --> at the end so we can easily find it later
+        body: computedBody
       });
       core.info(`Created new comment #${newComment.id}`);
     }

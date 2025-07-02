@@ -137,24 +137,25 @@ export async function summarizeChecksImpl({
     return;
   }
 
-  const checkRunTuple = await getCheckRunTuple(github, core, owner, repo, head_sha, issue_number, [])
+  // I very very heartily doubt that automatedMergingRequirementsMetCheckRun will stick around
+  // but I'm just doing a straight conversion before refactoring it away
+  const [
+    requiredCheckRuns,
+    fyiCheckRuns,
+    automatedMergingRequirementsMetCheckRun
+  ] = await getCheckRunTuple(
+    github,
+    core,
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    []
+  );
 
-  // topics to examine:
-    // private/openapi-kebab/src/bots/pipeline/pipelineEventListener/renderAutomatedMergingRequirementsMetCheck.ts
-    // applyRenderAutomatedMergingRequirementsMetCheck (this is what updates the 'Automated Merge Requirements Met' check)
-    // I doubt we will keep that around, as the REquired vs NonRequired should really be the method that we go with
-    // I'm only keeping this around until I can understand the need of it
-
-  // when processing the nextstepstomerge comment, we actually are checking a couple situations:
-  // 1. We process the required labeling rules from the ARM team. This code used to be in openapi-kebab
-  //    private/openapi-kebab/src/bots/pipeline/pipelineEventListener/requiredLabelsRules.ts. We need to pull these across
-  //    and refactor them to work with the runs and labels we have pulled down.
-
-  // 2. We process the checks that are failed
-
-  // 3. generate markdown from the above outputs and output in a comment on the PR.
-
-  console.log(checkRunTuple);
+  console.log(requiredCheckRuns);
+  console.log(fyiCheckRuns);
+  console.log(automatedMergingRequirementsMetCheckRun);
 }
 
 /**
@@ -345,15 +346,10 @@ export async function getCheckRunTuple(
   let fyiCheckRuns = []
   let automatedMergingRequirementsMetCheckRun = undefined
   try {
-
-    // Use GitHub GraphQL API
     const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
-    // Added on 8/13/2023 to monitor if the just-added reliance on obtaining check run statues from GitHub GraphQL API directly
-    // will cause problems with reaching rate limits.
-    core.info(`Graph QL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`, );
+    core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`, );
 
     [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun] = extractRunsFromGraphQLResponse(response);
-
   } catch (error) {
     core.error(`Failed to obtain check runs from GraphQL. prNumber: ${prNumber}, headOid: ${head_sha}, error: '${error}'. `);
   }
@@ -394,7 +390,7 @@ function extractRunsFromGraphQLResponse(response) {
   let automatedMergingRequirementsMetCheckRun = undefined
 
   // Define the automated merging requirements check name
-  const automatedMergingRequirementsMetCheckName = "Automated Merging Requirements Met";
+  const automatedMergingRequirementsMetCheckName = "Automated merging requirements met";
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(

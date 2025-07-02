@@ -20,16 +20,16 @@ describe("summarizeChecksImpl", () => {
 
       // Use a known PR from the azure-rest-api-specs repo for testing
       const testParams = {
-        owner: "scbedd",
+        owner: "Azure",
         repo: "azure-rest-api-specs",
-        issue_number: 1,
-        head_sha: "826b0b976479e5c1aa5e66e1cf43a3f9e66a2477",
+        issue_number: 35629,
+        head_sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
         event_name: "labeled",
         github: github,
         core: mockCore,
         context: {
             repo: {
-                owner: "scbedd",
+                owner: "Azure",
                 repo: "azure-rest-api-specs",
             },
             payload: {
@@ -41,6 +41,29 @@ describe("summarizeChecksImpl", () => {
             eventName: "labeled",
         }
       };
+    //     const testParams = {
+    //     owner: "scbedd",
+    //     repo: "azure-rest-api-specs",
+    //     issue_number: 1,
+    //     head_sha: "826b0b976479e5c1aa5e66e1cf43a3f9e66a2477",
+    //     event_name: "labeled",
+    //     github: github,
+    //     core: mockCore,
+    //     context: {
+    //         repo: {
+    //             owner: "scbedd",
+    //             repo: "azure-rest-api-specs",
+    //         },
+    //         payload: {
+    //             action: LabelAction.Labeled,
+    //             label: {
+    //             name: "test-label", // Example label, adjust as needed
+    //             },
+    //         },
+    //         eventName: "labeled",
+    //     }
+    //   };
+
 
 
       // This should not throw and should log information about the PR
