@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -25,6 +26,23 @@ model SupportTicketDetails
     SegmentName = "supportTickets",
     NamePattern = ""
   >;
+}
+
+/**
+ * [Placeholder] Discription for page model
+ */
+@pagedResult
+model SupportTicketsListResult {
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  value: SupportTicketDetails[];
 }
 
 @armResourceOperations
@@ -85,7 +103,8 @@ interface SupportTickets {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = SupportTicketsListResult
   >;
 
   /**
@@ -157,7 +176,8 @@ interface SupportTicketsNoSubscription {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = SupportTicketsListResult
   >;
 
   /**

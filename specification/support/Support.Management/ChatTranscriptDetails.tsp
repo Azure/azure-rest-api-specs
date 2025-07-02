@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./SupportTicketDetails.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -23,6 +24,23 @@ model ChatTranscriptDetails
     SegmentName = "chatTranscripts",
     NamePattern = ""
   >;
+}
+
+/**
+ * [Placeholder] Discription for page model
+ */
+@pagedResult
+model ChatTranscriptsListResult {
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  value: ChatTranscriptDetails[];
 }
 
 @armResourceOperations
@@ -57,7 +75,7 @@ interface ChatTranscripts {
   /**
    * Lists all chat transcripts for a support ticket under subscription
    */
-  list is ChatTranscriptOps.List<ChatTranscriptDetails>;
+  list is ChatTranscriptOps.List<ChatTranscriptDetails, Response = ChatTranscriptsListResult>;
 }
 @armResourceOperations
 interface ChatTranscriptsNoSubscriptionOps
@@ -90,7 +108,7 @@ interface ChatTranscriptsNoSubscription {
   /**
    * Lists all chat transcripts for a support ticket
    */
-  list is ChatTranscriptsNoSubscriptionOps.List<ChatTranscriptDetails>;
+  list is ChatTranscriptsNoSubscriptionOps.List<ChatTranscriptDetails, Response = ChatTranscriptsListResult>;
 }
 
 @@doc(ChatTranscriptDetails.name, "ChatTranscript name.");

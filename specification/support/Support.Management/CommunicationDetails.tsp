@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./SupportTicketDetails.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -26,6 +27,23 @@ model CommunicationDetails
     SegmentName = "communications",
     NamePattern = ""
   >;
+}
+
+/**
+ * [Placeholder] Discription for page model
+ */
+@pagedResult
+model CommunicationsListResult {
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  value: CommunicationDetails[];
 }
 
 @armResourceOperations
@@ -83,7 +101,8 @@ interface Communications {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = CommunicationsListResult
   >;
 }
 @armResourceOperations
@@ -141,7 +160,8 @@ interface CommunicationsNoSubscription {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = CommunicationsListResult
   >;
 }
 

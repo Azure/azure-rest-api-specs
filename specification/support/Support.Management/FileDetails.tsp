@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./FileWorkspaceDetails.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -23,6 +24,22 @@ model FileDetails
     SegmentName = "files",
     NamePattern = ""
   >;
+}
+/**
+ * [Placeholder] Discription for page model
+ */
+@pagedResult
+model FilesListResult {
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+  /**
+   * [Placeholder] Discription for value property
+   */
+  @items
+  value: FileDetails[];
 }
 
 @armResourceOperations
@@ -66,7 +83,7 @@ interface Files {
   /**
    * Lists all the Files information under a workspace for an Azure subscription.
    */
-  list is FileOps.List<FileDetails>;
+  list is FileOps.List<FileDetails, Response = FilesListResult>;
 
   /**
    * This API allows you to upload content to a file
@@ -114,7 +131,7 @@ interface FilesNoSubscription {
   /**
    * Lists all the Files information under a workspace for an Azure subscription.
    */
-  list is FilesNoSubscriptionOps.List<FileDetails>;
+  list is FilesNoSubscriptionOps.List<FileDetails, Response = FilesListResult>;
 
   /**
    * This API allows you to upload content to a file

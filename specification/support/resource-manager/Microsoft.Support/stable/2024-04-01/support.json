@@ -227,9 +227,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FileDetailsListResult"
+              "$ref": "#/definitions/FilesListResult"
             }
           },
           "default": {
@@ -634,9 +634,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportTicketDetailsListResult"
+              "$ref": "#/definitions/SupportTicketsListResult"
             }
           },
           "default": {
@@ -862,9 +862,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ChatTranscriptDetailsListResult"
+              "$ref": "#/definitions/ChatTranscriptsListResult"
             }
           },
           "default": {
@@ -1016,9 +1016,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CommunicationDetailsListResult"
+              "$ref": "#/definitions/CommunicationsListResult"
             }
           },
           "default": {
@@ -1322,9 +1322,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FileDetailsListResult"
+              "$ref": "#/definitions/FilesListResult"
             }
           },
           "default": {
@@ -1539,9 +1539,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportTicketDetailsListResult"
+              "$ref": "#/definitions/SupportTicketsListResult"
             }
           },
           "default": {
@@ -1821,9 +1821,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ChatTranscriptDetailsListResult"
+              "$ref": "#/definitions/ChatTranscriptsListResult"
             }
           },
           "default": {
@@ -1984,9 +1984,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CommunicationDetailsListResult"
+              "$ref": "#/definitions/CommunicationsListResult"
             }
           },
           "default": {
@@ -2155,27 +2155,6 @@
         }
       ]
     },
-    "ChatTranscriptDetailsListResult": {
-      "type": "object",
-      "description": "The response of a ChatTranscriptDetails list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ChatTranscriptDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/ChatTranscriptDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ChatTranscriptDetailsProperties": {
       "type": "object",
       "description": "Describes the properties of a Chat Transcript Details resource.",
@@ -2195,6 +2174,26 @@
           "readOnly": true
         }
       }
+    },
+    "ChatTranscriptsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ChatTranscriptDetails"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "CheckNameAvailabilityInput": {
       "type": "object",
@@ -2252,27 +2251,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "CommunicationDetailsListResult": {
-      "type": "object",
-      "description": "The response of a CommunicationDetails list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CommunicationDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/CommunicationDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "CommunicationDetailsProperties": {
@@ -2356,6 +2334,26 @@
           }
         ]
       }
+    },
+    "CommunicationsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/CommunicationDetails"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Consent": {
       "type": "string",
@@ -2449,27 +2447,6 @@
         }
       ]
     },
-    "FileDetailsListResult": {
-      "type": "object",
-      "description": "The response of a FileDetails list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FileDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/FileDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "FileDetailsProperties": {
       "type": "object",
       "description": "Describes the properties of a file.",
@@ -2530,6 +2507,26 @@
           "readOnly": true
         }
       }
+    },
+    "FilesListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/FileDetails"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "IsTemporaryTicket": {
       "type": "string",
@@ -2880,27 +2877,6 @@
         }
       ]
     },
-    "SupportTicketDetailsListResult": {
-      "type": "object",
-      "description": "The response of a SupportTicketDetails list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SupportTicketDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/SupportTicketDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "SupportTicketDetailsProperties": {
       "type": "object",
       "description": "Describes the properties of a support ticket.",
@@ -3037,6 +3013,26 @@
         "contactDetails",
         "title",
         "serviceId"
+      ]
+    },
+    "SupportTicketsListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/SupportTicketDetails"
+          }
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "TechnicalTicketDetails": {
