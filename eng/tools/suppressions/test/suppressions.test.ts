@@ -328,3 +328,17 @@ test.each([
 
   expect(suppressions.map((s) => s.reason).sort()).toEqual(expected.sort());
 });
+
+test.each([
+  ["invalid javascript", "Unexpected identifier 'javascript'"],
+  ["1(1)", "1 is not a function"],
+])("if: %s", (ifExpression, expectedException) => {
+  expect(() =>
+    getSuppressionsFromYaml(
+      "TestTool",
+      "test-path",
+      "suppressions.yaml",
+      `- tool: TestTool\n  if: "${ifExpression}"\n  path: "**"\n  reason: test`,
+    ),
+  ).throws(expectedException);
+});
