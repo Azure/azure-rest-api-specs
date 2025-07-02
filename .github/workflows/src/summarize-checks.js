@@ -25,24 +25,26 @@ import { extractInputs } from "./context.js";
  * @property {number[]} pullrequests
  */
 
-// pipeline bot infra would pull the statuses back over graphql, then
-// examine each check. If it was marked as required it would care about it,
-// otherwise it would still _track_ it.
+/**
+ * @typedef {Object} CheckRunData
+ * @property {string} name
+ * @property {string} status
+ * @property {string} conclusion
+ */
 
-// I don't believe that we actually care about the "required" status of the checks,
-// we just care about the conclusion of the check and whether it is a tracked check or not.
-// We will just track the checks that we care about and summarize them in the comment.
-
-// I haven't yet found a situation where this would bite us, but that may still pop up.
-const TRACKEDCHECKS = [
-  "[TEST-IGNORE] Swagger SemanticValidation",
-  "[TEST-IGNORE] Swagger ModelValidation",
-  "[TEST-IGNORE] Swagger Avocado",
+// Placing these configuration items here until we decide another way to pull them in.
+const FYI_CHECK_NAMES = [
   "Swagger LintDiff",
   "SDK Validation Status",
   "Swagger BreakingChange",
   "Swagger PrettierCheck"
-]
+];
+
+// during renderAutomatedMergingRequirementsMetCheck we resolve the result of
+// automated merge requirements met by from the result of and(requiredChecks).
+// if any are pending, automated merging requirements is pending. This is ripe for complete removal
+// in favor of just honoring the `required` checks results directly.
+const EXCLUDED_CHECK_NAMES = []
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -135,36 +137,13 @@ export async function summarizeChecksImpl({
     return;
   }
 
-  // Statuses are the old style checks. We are targeting runs here because they are newer and we only need to process
-  // the result of github actions workflows.
-  // it would be much easier to type this right here, but I have been very unlucky in getting the right mapping from the
-  // @octokit/types package. We will just use the raw data for now unless we need deeper typing.
-  // const runs = (await github.rest.checks.listForRef({
-  //     owner,
-  //     repo,
-  //     ref: head_sha,
-  // })).data.check_runs;
+  const checkRunTuple = await getCheckRunTuple(github, core, owner, repo, head_sha, issue_number, [])
 
-  // // github
-
-  // const applicableRuns = runs.map(run => {
-  //   return {
-  //     status: run.status,
-  //     conclusion: run.conclusion,
-  //     name: run.name,
-  //     pullrequests: run.pull_requests.map(pr => pr.number),
-  //   };
-  // }).filter(run => {
-  //   // Filter out runs that are not applicable to this computation
-  //   return TRACKEDCHECKS.indexOf(run.name) !== -1;
-  // });
-  const data = await github.graphql(getGraphQLQuery(owner, repo, head_sha, issue_number));
-
-
-
-  // todo:
-  // - copy the processes from private/openapi-kebab/src/bots/pipeline/pipelineEventListener/renderNextStepsToMerge.ts
-  // - the runs and labels we've pulled down into the necessary inputs for refactor of the above two file contents.
+  // topics to examine:
+    // private/openapi-kebab/src/bots/pipeline/pipelineEventListener/renderAutomatedMergingRequirementsMetCheck.ts
+    // applyRenderAutomatedMergingRequirementsMetCheck (this is what updates the 'Automated Merge Requirements Met' check)
+    // I doubt we will keep that around, as the REquired vs NonRequired should really be the method that we go with
+    // I'm only keeping this around until I can understand the need of it
 
   // when processing the nextstepstomerge comment, we actually are checking a couple situations:
   // 1. We process the required labeling rules from the ARM team. This code used to be in openapi-kebab
@@ -175,7 +154,7 @@ export async function summarizeChecksImpl({
 
   // 3. generate markdown from the above outputs and output in a comment on the PR.
 
-  console.log(data);
+  console.log(checkRunTuple);
 }
 
 /**
@@ -340,70 +319,73 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 }
 
 /**
- * @param {Object} github - GitHub API client
- * @param {import("@actions/github").context} context
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {typeof import("@actions/core")} core
+ * @param {string} owner - The repository owner.
+ * @param {string} repo - The repository name.
+ * @param {string} head_sha - The commit SHA to check.
+ * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
  * @returns {Promise<[CheckRunData[], CheckRunData[], CheckRunData | undefined]>}
  */
-export async function getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(
+// this used to be getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
+export async function getCheckRunTuple(
   github,
-  context,
+  core,
+  owner,
+  repo,
+  head_sha,
+  prNumber,
   excludedCheckNames
 ) {
 
-  const logPrefix = `getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns: `
-
-  const owner = context.repo.owner
-  const repo = context.repo.repo
-  const prNumber = context.payload.pull_request?.number
-  const headOid = context.payload.pull_request?.head?.sha
-
+  /** @type {CheckRunData[]} */
   let reqCheckRuns = []
+  /** @type {CheckRunData[]} */
   let fyiCheckRuns = []
   let automatedMergingRequirementsMetCheckRun = undefined
   try {
 
     // Use GitHub GraphQL API
-    const response = await github.graphql(getGraphQLQuery(owner, repo, headOid, prNumber));
+    const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
     // Added on 8/13/2023 to monitor if the just-added reliance on obtaining check run statues from GitHub GraphQL API directly
     // will cause problems with reaching rate limits.
-    console.log(`Rate limit info:`, response.rateLimit);
-    [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun] = extractRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(response);
+    core.info(`Graph QL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`, );
+
+    [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun] = extractRunsFromGraphQLResponse(response);
 
   } catch (error) {
-    console.warn(
-      logPrefix +
-        `Failed to obtain check runs from GraphQL. prNumber: ${prNumber}, headOid: ${headOid}, error: '${error}'. `
-    );
+    core.error(`Failed to obtain check runs from GraphQL. prNumber: ${prNumber}, headOid: ${head_sha}, error: '${error}'. `);
   }
 
-  console.log(logPrefix
-    + `requiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, `
+  core.info(`requiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, `
     + `fyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, `
     + `automatedMergingRequirementsMetCheckRun: `
     + `${automatedMergingRequirementsMetCheckRun != undefined ? JSON.stringify(automatedMergingRequirementsMetCheckRun) : undefined}`);
 
-  const filteredReqCheckRuns = reqCheckRuns.filter(checkRun => !excludedCheckNames.includes(checkRun.name))
-  const filteredFyiCheckRuns = fyiCheckRuns.filter(checkRun => !excludedCheckNames.includes(checkRun.name))
+  const filteredReqCheckRuns = reqCheckRuns.filter(
+    /**
+     * @param {CheckRunData} checkRun
+     */
+    (checkRun) => !excludedCheckNames.includes(checkRun.name)
+  );
+  const filteredFyiCheckRuns = fyiCheckRuns.filter(
+    /**
+     * @param {CheckRunData} checkRun
+     */
+    (checkRun) => !excludedCheckNames.includes(checkRun.name)
+  );
 
-  warnOnMissingPrWorkflowInfo(logPrefix, filteredReqCheckRuns);
+  warnOnMissingPrWorkflowInfo(filteredReqCheckRuns);
 
   return [filteredReqCheckRuns, filteredFyiCheckRuns, automatedMergingRequirementsMetCheckRun]
 }
 
-
 /**
- * @typedef {Object} CheckRunData
- * @property {string} name
- * @property {string} status
- * @property {string} conclusion
- */
-
-/**
- * @param {Object} response - GraphQL response data
+ * @param {any} response - GraphQL response data
  * @returns {[CheckRunData[], CheckRunData[], CheckRunData | undefined]}
  */
-function extractRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(response) {
+function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = []
   /** @type {CheckRunData[]} */
@@ -411,19 +393,13 @@ function extractRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(respon
   /** @type {CheckRunData | undefined} */
   let automatedMergingRequirementsMetCheckRun = undefined
 
-  // Define fyiCheckNames locally for now - this would normally come from an import
-  const fyiCheckNames = [
-    "Swagger LintDiff",
-    "SDK Validation Status",
-    "Swagger BreakingChange",
-    "Swagger PrettierCheck"
-  ];
-
   // Define the automated merging requirements check name
   const automatedMergingRequirementsMetCheckName = "Automated Merging Requirements Met";
 
   if (response.resource?.checkSuites?.nodes) {
-    response.resource.checkSuites.nodes.forEach((checkSuiteNode) => {
+    response.resource.checkSuites.nodes.forEach(
+      /** @param {{ checkRuns?: { nodes?: any[] } }} checkSuiteNode */
+      (checkSuiteNode) => {
       if (checkSuiteNode.checkRuns?.nodes) {
         checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
           if (checkRunNode.isRequired) {
@@ -437,8 +413,8 @@ function extractRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(respon
           // A GH check will be bucketed into "failing FYI check run" if:
           // - It is failing
           // - AND is is NOT marked as 'required' in GitHub branch policy
-          // - AND it is marked as 'FYI' in openapi-alps checksWorkflowInfo.ts / fyiCheckNames.
-          else if (fyiCheckNames.includes(checkRunNode.name)) {
+          // - AND it is marked as 'FYI' in this file's FYI_CHECK_NAMES array
+          else if (FYI_CHECK_NAMES.includes(checkRunNode.name)) {
             fyiCheckRuns.push({
               name: checkRunNode.name,
               status: checkRunNode.status,
@@ -463,24 +439,10 @@ function extractRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(respon
 }
 
 /**
- * @param {string} logPrefix
  * @param {CheckRunData[]} filteredCheckRuns
  */
-function warnOnMissingPrWorkflowInfo(logPrefix, filteredCheckRuns) {
+function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
   // For now, just log the check runs without workflow info validation
   // This would normally reference checksWorkflowInfo which needs to be imported
-  console.log(logPrefix + `Check runs found: ${filteredCheckRuns.map(cr => cr.name).join(", ")}`);
-
-  // TODO: Implement proper workflow info validation when checksWorkflowInfo is available
-  // const checkRunsWithMissingWorkflowInfo = filteredCheckRuns.filter(
-  //   (checkRun) => !checksWorkflowInfo.some((checkInfo) => checkInfo.name == checkRun.name)
-  // );
-  // if (checkRunsWithMissingWorkflowInfo.length > 0) {
-  //   console.warn(
-  //     logPrefix +
-  //       `There are required check runs without corresponding PR workflow info. Names: ${checkRunsWithMissingWorkflowInfo
-  //         .map((checkInfo) => checkInfo.name)
-  //         .join(", ")}`
-  //   );
-  // }
+  console.log(`Check runs found: ${filteredCheckRuns.map(cr => cr.name).join(", ")}`);
 }
