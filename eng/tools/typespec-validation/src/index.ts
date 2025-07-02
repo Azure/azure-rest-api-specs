@@ -11,6 +11,8 @@ import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
+export var context: Record<string, any>;
+
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
@@ -25,7 +27,7 @@ export async function main() {
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
-  const context = JSON.parse(parsedArgs.positionals[1]);
+  context = JSON.parse(parsedArgs.positionals[1]);
 
   const absolutePath = normalizePath(folder);
 
@@ -39,7 +41,7 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions(absolutePath, context);
+  const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
   // Suppressions for the whole tool must have no rules or sub-rules
   const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);

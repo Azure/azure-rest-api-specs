@@ -40,11 +40,8 @@ export async function readTspConfig(folder: string) {
   return readFile(join(folder, "tspconfig.yaml"), "utf-8");
 }
 
-export async function getSuppressions(
-  path: string,
-  context: Record<string, any>,
-): Promise<Suppression[]> {
-  return getSuppressionsImpl("TypeSpecValidation", path /*, context*/);
+export async function getSuppressions(path: string): Promise<Suppression[]> {
+  return getSuppressionsImpl("TypeSpecValidation", path /*, index.context*/);
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
