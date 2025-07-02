@@ -1,5 +1,5 @@
-import { ParseArgsConfig, parseArgs } from "node:util";
 import { stat } from "node:fs/promises";
+import { ParseArgsConfig, parseArgs } from "node:util";
 import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
@@ -18,9 +18,15 @@ export async function main() {
       type: "string",
       short: "f",
     },
+    context: {
+      type: "string",
+      short: "c",
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
   const folder = parsedArgs.positionals[0];
+  const context = JSON.parse(parsedArgs.positionals[1]);
+
   const absolutePath = normalizePath(folder);
 
   if (!(await fileExists(absolutePath))) {
@@ -33,7 +39,7 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions(absolutePath);
+  const suppressions: Suppression[] = await getSuppressions(absolutePath, context);
 
   // Suppressions for the whole tool must have no rules or sub-rules
   const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);

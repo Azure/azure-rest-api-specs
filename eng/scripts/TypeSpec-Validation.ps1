@@ -35,7 +35,7 @@ foreach ($typespecFolder in $typespecFolders) {
 
 $typespecFoldersWithFailures = @()
 if ($typespecFolders) {
-  $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
+  $typespecFolders = $typespecFolders.Split('', [System.StringSplitOptions]::RemoveEmptyEntries)
   foreach ($typespecFolder in $typespecFolders) {
     LogGroupStart "Validating $typespecFolder"
 
@@ -49,14 +49,14 @@ if ($typespecFolders) {
       }
     }
 
-    LogInfo "npm exec --no -- tsv $typespecFolder"
+    LogInfo "npm exec --no -- tsv $typespecFolder { checkAll: $CheckAll }"
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder 2>&1 | Write-Host
+    npm exec --no -- tsv $typespecFolder { checkAll: $CheckAll } 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
@@ -71,7 +71,8 @@ if ($typespecFolders) {
     }
     LogGroupEnd
   }
-} else {
+}
+else {
   if ($CheckAll) {
     LogError "TypeSpec Validation - All did not validate any specs"
     LogJobFailure
