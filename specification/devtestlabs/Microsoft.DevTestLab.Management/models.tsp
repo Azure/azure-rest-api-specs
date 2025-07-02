@@ -512,7 +512,7 @@ model LabProperties {
   /**
    * Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.
    */
-  labStorageType?: StorageType;
+  labStorageType?: StorageType = StorageType.Premium;
 
   /**
    * The ordered list of artifact resource IDs that should be applied on all Linux VM creations by default, prior to the artifacts specified by the user.
@@ -738,7 +738,7 @@ model ScheduleProperties {
   /**
    * The status of the schedule (i.e. Enabled, Disabled)
    */
-  status?: EnableStatus;
+  status?: EnableStatus = EnableStatus.Disabled;
 
   /**
    * The task type of the schedule (e.g. LabVmsShutdownTask, LabVmAutoStart).
@@ -838,7 +838,7 @@ model NotificationSettings {
   /**
    * If notifications are enabled for this schedule (i.e. Enabled, Disabled).
    */
-  status?: EnableStatus;
+  status?: EnableStatus = EnableStatus.Disabled;
 
   /**
    * Time in minutes before event at which notification will be sent.
@@ -2013,7 +2013,7 @@ model ScheduleCreationParameterProperties {
   /**
    * The status of the schedule (i.e. Enabled, Disabled)
    */
-  status?: EnableStatus;
+  status?: EnableStatus = EnableStatus.Disabled;
 
   /**
    * The task type of the schedule (e.g. LabVmsShutdownTask, LabVmAutoStart).

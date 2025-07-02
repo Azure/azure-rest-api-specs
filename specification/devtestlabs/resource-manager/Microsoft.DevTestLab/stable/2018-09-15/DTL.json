@@ -11216,8 +11216,32 @@
           "readOnly": true
         },
         "labStorageType": {
-          "$ref": "#/definitions/StorageType",
-          "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium."
+          "type": "string",
+          "description": "Type of storage used by the lab. It can be either Premium or Standard. Default is Premium.",
+          "default": "Premium",
+          "enum": [
+            "Standard",
+            "Premium",
+            "StandardSSD"
+          ],
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Standard",
+                "value": "Standard"
+              },
+              {
+                "name": "Premium",
+                "value": "Premium"
+              },
+              {
+                "name": "StandardSSD",
+                "value": "StandardSSD"
+              }
+            ]
+          }
         },
         "mandatoryArtifactsResourceIdsLinux": {
           "type": "array",
@@ -11984,8 +12008,27 @@
       "description": "Notification settings for a schedule.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/EnableStatus",
-          "description": "If notifications are enabled for this schedule (i.e. Enabled, Disabled)."
+          "type": "string",
+          "description": "If notifications are enabled for this schedule (i.e. Enabled, Disabled).",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "timeInMinutes": {
           "type": "integer",
@@ -12502,8 +12545,27 @@
       "description": "Properties for schedule creation.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/EnableStatus",
-          "description": "The status of the schedule (i.e. Enabled, Disabled)"
+          "type": "string",
+          "description": "The status of the schedule (i.e. Enabled, Disabled)",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "taskType": {
           "type": "string",
@@ -12570,8 +12632,27 @@
       "description": "Properties of a schedule.",
       "properties": {
         "status": {
-          "$ref": "#/definitions/EnableStatus",
-          "description": "The status of the schedule (i.e. Enabled, Disabled)"
+          "type": "string",
+          "description": "The status of the schedule (i.e. Enabled, Disabled)",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnableStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "taskType": {
           "type": "string",
