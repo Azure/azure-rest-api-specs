@@ -35,7 +35,14 @@ input-file:
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-07-01-preview
+tag: package-2025-07
+```
+### Tag: package-2025-07
+These settings apply only when `--tag=package-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07'
+input-file:
+  - Microsoft.ElasticSan/stable/2025-07-01/elasticsan.json
 ```
 
 ### Tag: package-2024-07-01-preview

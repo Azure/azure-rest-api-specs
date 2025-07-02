@@ -1570,6 +1570,138 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/preBackup": {
+      "post": {
+        "tags": [
+          "VolumesBackupValidation"
+        ],
+        "description": "Validate whether a disk snapshot backup can be taken for list of volumes.",
+        "operationId": "VolumeGroups_PreBackup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VolumeNameList"
+            },
+            "description": "Volume Name List"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200" : {
+            "description": "Resource backup Validation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreValidationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Resource backup Validation request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Pre_Backup_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_PreBackup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/preRestore": {
+      "post": {
+        "tags": [
+          "VolumesRestoreValidation"
+        ],
+        "description": "Validate whether a list of backed up disk snapshots can be restored into ElasticSan volumes.",
+        "operationId": "VolumeGroups_PreRestore",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ElasticSanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskSnapshotList"
+            },
+            "description": "Disk Snapshot List"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource Restore Validation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreValidationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Resource Restore Validation request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error from the ElasticSan Resource Provider.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VolumeGroups_Pre_Restore_MaximumSet_Gen": {
+            "$ref": "./examples/VolumeGroups_PreRestore_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -2749,6 +2881,45 @@
         "sourceId": {
           "type": "string",
           "description": "Fully qualified resource ID of the volume. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}\""
+        }
+      }
+    },
+    "VolumeNameList": {
+      "type": "object",
+      "description": "object to hold array of volume names",
+      "properties": {
+        "volumeNames": {
+          "type": "array",
+          "description": "array of volume names",
+          "items": {
+            "type": "string",
+            "description": "volume name"
+          }
+        }
+      }
+    },
+    "DiskSnapshotList": {
+      "type": "object",
+      "description": "object to hold array of Disk Snapshot ARM IDs",
+      "properties": {
+        "diskSnapshotIds": {
+          "type": "array",
+          "description": "array of DiskSnapshot ARM IDs",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "Fully qualified ARM Resource ID of Disk Snapshot"
+          }
+        }
+      },
+      "PreValidationResponse": {
+        "type": "object",
+        "description": "response object for pre validation api",
+        "properties": {
+          "validationStatus": {
+            "type": "string",
+            "description": "a status value indicating success or failure of validation"
+          }
         }
       }
     }
