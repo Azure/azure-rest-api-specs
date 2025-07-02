@@ -73,6 +73,49 @@ input-file:
   - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerConfigurations.json
   - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerGroups.json
   - Microsoft.SecurityInsights/preview/2025-07-01-preview/WorkspaceManagerMembers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: Entities.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueries.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: EntityQueryTemplates.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Recommendations.json
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAnonymousTypes
+    from: Recommendations.json
+    reason: These properties are unknown (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
+  - code: AvoidAdditionalProperties
+    from: ThreatIntelligenceQuery.json
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: Entities.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: EntityQueries.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: DeleteResponseCodes
+    from: FileImports.json
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
 ### Tag: package-2025-06-01
