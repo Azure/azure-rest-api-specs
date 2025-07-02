@@ -395,9 +395,9 @@ const MicrosoftCommunicationRouterJobUnassignedExample: AcsRouterJobUnassignedEv
 
 // const MicrosoftCommunicationRouterJobWorkerSelectorsExpiredExample: AcsRouterJobWorkerSelectorsExpiredEventData = #{jobId: "7f1df17b-570b-4ae5-9cf5-fe6ff64cc712", channelReference: "test-abc", channelId: "FooVoiceChannelId", queueId: "625fec06-ab81-4e60-b780-f364ed96ade1", labels: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, tags: #{locale: "en-us", segment: "Enterprise", token: "FooToken"}, expiredRequestedWorkerSelectors: #[#{key: "string", labelOperator: "equal", value: 5, ttlSeconds: "30"}], attachedWorkerSelectorsExpired: #[#{key: "string", labelOperator: "equal", value: 5, ttlSeconds: "35"}]};
 
-const MicrosoftCommunicationRouterWorkerDeletedExample: AcsRouterWorkerDeletedEventData = #{
-  workerId: "worker3",
-};
+// const MicrosoftCommunicationRouterWorkerDeletedExample: AcsRouterWorkerDeletedEventData = #{
+//   workerId: "worker3",
+// };
 
 const MicrosoftCommunicationRouterWorkerDeregisteredExample: AcsRouterWorkerDeregisteredEventData = #{
   workerId: "worker3",
@@ -603,3 +603,154 @@ const MicrosoftCommunicationAdvancedMessageReceivedExample: AcsMessageReceivedEv
 //   threadId: "19:9e8eefe67b3c470a8187b4c2b00240bc@thread.v2",
 //   transactionId: "GBE9MB2a40KEWzexIg0D3A.1.1.1.1.856359041.1"
 // };
+
+const AcsCallEndedExample: AcsCallEndedEventData = #{
+  reason: #{ code: 1, subCode: 1, phrase: "ReasonCode" },
+
+  // callDurationInSeconds: 10,
+  endedBy: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    type: "TestCallEndedBy",
+    name: "TestCallEndedBy",
+  },
+
+  startedBy: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  serverCallId: "Y3NVcmw",
+  group: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  isTwoParty: false,
+  correlationId: "CallIdGuid",
+  isRoomsCall: false,
+};
+
+const AcsCallParticipantAddedExample: AcsCallParticipantAddedEventData = #{
+  user: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  displayName: "displayName1",
+  participantId: "participant1",
+  userAgent: "endpointType",
+  startedBy: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  serverCallId: "Y3NVcmw",
+  group: #{ id: "6d16b954-0531-4262-9cdd-c4b85da5c5d8" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  isTwoParty: false,
+  correlationId: "CallIdGuid",
+  isRoomsCall: false,
+};
+
+const AcsCallParticipantRemovedExample: AcsCallParticipantRemovedEventData = #{
+  user: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  displayName: "displayName1",
+  participantId: "participant1",
+  userAgent: "endpointType",
+  startedBy: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  serverCallId: "Y3NVcmw",
+  group: #{ id: "51422183-029d-4750-9db5-c8e5a578f469" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  isTwoParty: false,
+  correlationId: "CallIdGuid",
+  isRoomsCall: false,
+};
+
+const AcsCallStartedExample: AcsCallStartedEventData = #{
+  startedBy: #{
+    communicationIdentifier: #{
+      kind: "communicationUser",
+      rawId: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      communicationUser: #{
+        id: "8:acs:d9ff4983-39e7-4420-8d54-f6354ed06ccd_7a668e62-08f4-4ac1-b29e-f01010f57475",
+      },
+    },
+    role: "UserRole",
+  },
+  serverCallId: "Y3NVcmw",
+  group: #{ id: "aca7bf5b-ff44-4f47-8385-cfd4e0232a6e" },
+  room: #{ id: "055d13d6-8161-43c8-af88-2110373e1e4a" },
+  isTwoParty: false,
+  correlationId: "CallIdGuid",
+  isRoomsCall: false,
+};
+
+const AcsChatAzureBotCommandReceivedInThreadExample: AcsChatAzureBotCommandReceivedInThreadEventData = #{
+  messageBody: "Welcome to Azure Communication Services",
+  messageId: "1613694358927",
+  senderCommunicationIdentifier: #{
+    rawId: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    communicationUser: #{
+      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    },
+  },
+  senderDisplayName: "John",
+  composeTime: utcDateTime.fromISO("2021-02-19T00:25:58.927Z"),
+  type: "Text",
+  version: 1613694358927,
+  transactionId: "oh+LGB2dUUadMcTAdRWQxQ.1.1.1.1.1827536918.1.7",
+  threadId: "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2",
+};
+
+const AcsChatTypingIndicatorReceivedInThreadExample: AcsChatTypingIndicatorReceivedInThreadEventData = #{
+  messageBody: "Welcome to Azure Communication Services",
+  messageId: "1613694358927",
+  senderCommunicationIdentifier: #{
+    rawId: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    communicationUser: #{
+      id: "8:acs:109f0644-b956-4cd9-87b1-71024f6e2f44_00000008-578d-7caf-07fd-084822001724",
+    },
+  },
+  composeTime: utcDateTime.fromISO("2021-02-19T00:25:58.927Z"),
+  senderDisplayName: "John",
+  transactionId: "oh+LGB2dUUadMcTAdRWQxQ.1.1.1.1.1827536918.1.7",
+  threadId: "19:6e5d6ca1d75044a49a36a7965ec4a906@thread.v2",
+  type: "Text",
+  version: 1613694358927,
+};

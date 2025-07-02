@@ -1,4 +1,6 @@
 import "./ApiManagementExample.tsp";
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -198,18 +200,20 @@ model ApiManagementGatewayTokenExpiredEventData {
 model ApiManagementCircuitBreakerProperties {
   /** Overview of all configured rules and respective details. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is Object in swagger, we cannot define full schema given customer owns the rule names"
-  rules: Record<{}>;
+  rules: Record<Record<unknown>>;
 }
 
 /** Information related to a gateway token that has expired for a self-hosted gateway deployment. */
 model ApiManagementExpiredGatewayTokenProperties {
   /** Timestamp when the gateway token has expired. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   expiredAtUtc: utcDateTime;
 }
 
 /** Information related to a gateway token that is near expiry for a self-hosted gateway deployment. */
 model ApiManagementNearExpiryGatewayTokenProperties {
   /** Timestamp when the gateway token will expire. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   expiredAtUtc: utcDateTime;
 }
 
