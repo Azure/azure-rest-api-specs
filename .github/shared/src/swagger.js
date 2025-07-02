@@ -1,12 +1,14 @@
 // @ts-check
 
-import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { relative, resolve } from "path";
-import { mapAsync } from "./array.js";
+import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
+import { dirname, relative, resolve } from "path";
+import { mapAsync } from "./array.js";
+import { includesFolder } from "./path.js";
+import { SpecModelError } from "./spec-model-error.js";
 
 /**
- * @typedef {import('./spec-model.js').SpecModel} SpecModel
+ * @typedef {import('./spec-model.js').Tag} Tag
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
@@ -37,34 +39,56 @@ export class Swagger {
   /** @type {Map<string, Swagger> | undefined} */
   #refs;
 
-  /** @type {SpecModel | undefined} backpointer to owning SpecModel */
-  #specModel;
+  /** @type {Tag | undefined} Tag that contains this Swagger */
+  #tag;
 
   /**
    * @param {string} path
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
-   * @param {SpecModel} [options.specModel]
+   * @param {Tag} [options.tag]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    const rootDir = dirname(options?.tag?.readme?.path ?? "");
+    this.#path = resolve(rootDir, path);
     this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#tag = options?.tag;
   }
 
   /**
    * @returns {Promise<Map<string, Swagger>>}
    */
   async getRefs() {
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
+
+    return filtered;
+  }
+
+  async #getRefs() {
     if (!this.#refs) {
-      const schema = await $RefParser.resolve(this.#path, {
-        resolve: { file: excludeExamples, http: false },
-      });
+      let schema;
+      try {
+        schema = await $RefParser.resolve(this.#path, {
+          resolve: { file: excludeExamples, http: false },
+        });
+      } catch (error) {
+        if (error instanceof ResolverError) {
+          throw new SpecModelError(`Failed to resolve file for swagger: ${this.#path}`, {
+            cause: error,
+            source: error.source,
+            tag: this.#tag?.name,
+            readme: this.#tag?.readme?.path,
+          });
+        }
+
+        throw error;
+      }
 
       const refPaths = schema
         .paths("file")
-        // Exclude examples
-        .filter((p) => !example(p))
         // Exclude ourself
         .filter((p) => resolve(p) !== resolve(this.#path));
 
@@ -72,7 +96,7 @@ export class Swagger {
         refPaths.map((p) => {
           const swagger = new Swagger(p, {
             logger: this.#logger,
-            specModel: this.#specModel,
+            tag: this.#tag,
           });
           return [swagger.path, swagger];
         }),
@@ -83,10 +107,29 @@ export class Swagger {
   }
 
   /**
+   * @returns {Promise<Map<string, Swagger>>}
+   */
+  async getExamples() {
+    const allRefs = await this.#getRefs();
+
+    // filter out any paths that are examples
+    const filtered = new Map([...allRefs].filter(([path]) => example(path)));
+
+    return filtered;
+  }
+
+  /**
    * @returns {string} absolute path
    */
   get path() {
     return this.#path;
+  }
+
+  /**
+   * @returns {Tag | undefined} Tag that contains this Swagger
+   */
+  get tag() {
+    return this.#tag;
   }
 
   /**
@@ -96,14 +139,12 @@ export class Swagger {
   async toJSONAsync(options) {
     return {
       path:
-        options?.relativePaths && this.#specModel
-          ? relative(this.#specModel.folder, this.#path)
+        options?.relativePaths && this.#tag?.readme?.specModel
+          ? relative(this.#tag?.readme?.specModel.folder, this.#path)
           : this.#path,
       refs: options?.includeRefs
         ? await mapAsync(
-            [...(await this.getRefs()).values()].sort((a, b) =>
-              a.path.localeCompare(b.path),
-            ),
+            [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
             async (s) =>
               // Do not include swagger refs transitively, otherwise we could get in infinite loop
               await s.toJSONAsync({ ...options, includeRefs: false }),
@@ -125,7 +166,7 @@ export class Swagger {
  */
 function example(file) {
   // Folder name "examples" should match case for consistency across specs
-  return typeof file === "string" && json(file) && file.includes("/examples/");
+  return typeof file === "string" && json(file) && includesFolder(file, "examples");
 }
 
 /**

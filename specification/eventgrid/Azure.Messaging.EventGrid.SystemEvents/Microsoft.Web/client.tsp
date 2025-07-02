@@ -101,3 +101,44 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AppServicePlanAction, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AsyncStatus, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AsyncStatus, Access.public);
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebAppServicePlanUpdatedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebBackupOperationCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebBackupOperationFailedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebBackupOperationStartedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebRestoreOperationCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebRestoreOperationFailedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebRestoreOperationStartedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebSlotSwapCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebSlotSwapFailedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebSlotSwapStartedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewCancelledEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewStartedEventData,
+  "csharp"
+);

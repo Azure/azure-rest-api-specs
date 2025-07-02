@@ -9,6 +9,7 @@ using Azure.ClientGenerator.Core;
 namespace ClientCustomizations;
 
 //Java customizations
+@@clientName(KeyVault, "KeyVaultAdministration", "java");
 @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "java");
 @@clientName(KeyVault.RoleDefinitionType, "KeyVaultRoleDefinitionType", "java");
 @@clientName(KeyVault.RoleType, "KeyVaultRoleType", "java");
@@ -101,6 +102,8 @@ interface KeyVaultClient {
 @@clientName(KeyVault.Setting.type, "SettingType", "csharp");
 @@clientName(KeyVault.Setting.value, "Content", "csharp");
 @@access(KeyVault, Access.internal, "csharp");
+
+@@usage(KeyVault.RoleDefinition, Usage.input | Usage.output, "csharp");
 
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,

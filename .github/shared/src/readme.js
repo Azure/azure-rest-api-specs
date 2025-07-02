@@ -5,13 +5,17 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
-import { Swagger } from "./swagger.js";
 import { Tag } from "./tag.js";
 
 /**
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
+
+/**
+ * Regex to match tag names in readme.md yaml code blocks
+ */
+export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
 
 export class Readme {
   /**
@@ -36,20 +40,21 @@ export class Readme {
   #path;
 
   /**
-   * backpointer to owning SpecModel
+   * SpecModel that contains this Readme
    * @type {SpecModel | undefined}
    */
   #specModel;
 
   /**
-   * @param {string} path
+   * @param {string} path Used for content, unless options.content is specified
    * @param {Object} [options]
-   * @param {string} [options.content]
+   * @param {string} [options.content] If specified, is used instead of reading path from disk
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
   constructor(path, options) {
-    this.#path = resolve(path);
+    this.#path = resolve(options?.specModel?.folder ?? "", path);
+
     this.#content = options?.content;
     this.#logger = options?.logger;
     this.#specModel = options?.specModel;
@@ -101,38 +106,27 @@ export class Readme {
         // Include default block and tagged blocks (```yaml $(tag) == 'package-2021-11-01')
         .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
 
-      const globalConfigYamlBlocks = yamlBlocks.filter(
-        (token) => token.lang === "yaml",
-      );
+      const globalConfigYamlBlocks = yamlBlocks.filter((token) => token.lang === "yaml");
 
       const globalConfig = globalConfigYamlBlocks.reduce(
-        (obj, token) =>
-          Object.assign(
-            obj,
-            yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA }),
-          ),
+        (obj, token) => Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
         {},
       );
 
       /** @type {Map<string, Tag>} */
       const tags = new Map();
       for (const block of yamlBlocks) {
-        const tagName =
-          block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
+        const tagName = block.lang?.match(TagMatchRegex)?.[2] || "default";
 
         if (tagName === "default" || tagName === "all-api-versions") {
           // Skip yaml blocks where this is no tag or tag is all-api-versions
           continue;
         }
 
-        const obj = /** @type {any} */ (
-          yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA })
-        );
+        const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
         if (!obj) {
-          this.#logger?.debug(
-            `No yaml object found for tag ${tagName} in ${this.#path}`,
-          );
+          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
           continue;
         }
 
@@ -154,28 +148,19 @@ export class Readme {
           throw new Error(message);
         }
 
-        /** @type {Map<string, Swagger>} */
-        const inputFiles = new Map();
-
         // It's possible for input-file to be a string or an array
         const inputFilePaths = Array.isArray(obj["input-file"])
           ? obj["input-file"]
           : [obj["input-file"]];
-        for (const swaggerPath of inputFilePaths) {
-          const swaggerPathNormalized =
-            Readme.#normalizeSwaggerPath(swaggerPath);
-          const swaggerPathResolved = resolve(
-            dirname(this.#path),
-            swaggerPathNormalized,
-          );
-          const swagger = new Swagger(swaggerPathResolved, {
-            logger: this.#logger,
-            specModel: this.#specModel,
-          });
-          inputFiles.set(swagger.path, swagger);
-        }
 
-        const tag = new Tag(tagName, inputFiles, { logger: this.#logger });
+        const swaggerPathsResolved = inputFilePaths
+          .map((p) => Readme.#normalizeSwaggerPath(p))
+          .map((p) => resolve(dirname(this.#path), p));
+
+        const tag = new Tag(tagName, swaggerPathsResolved, {
+          logger: this.#logger,
+          readme: this,
+        });
 
         tags.set(tag.name, tag);
       }
@@ -211,14 +196,19 @@ export class Readme {
   }
 
   /**
+   * @returns {SpecModel | undefined} SpecModel that contains this Readme
+   */
+  get specModel() {
+    return this.#specModel;
+  }
+
+  /**
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
     const tags = await mapAsync(
-      [...(await this.getTags()).values()].sort((a, b) =>
-        a.name.localeCompare(b.name),
-      ),
+      [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
       async (t) => await t.toJSONAsync(options),
     );
 
