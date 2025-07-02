@@ -49,6 +49,7 @@ if ($typespecFolders) {
       }
     }
 
+    # Example: '{"checkingAllSpecs"=true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
     LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
