@@ -24,48 +24,15 @@ See Text Analytics [Quickstart guide](https://learn.microsoft.com/azure/cognitiv
 
 > see https://aka.ms/autorest
 
-The current release is `release_2_1`.
-A preview release `release_2_1_preview` is also available.
+The current release is `release_3_0`.
 
 ``` yaml
-tag: release_2_1
+tag: release_3_0
 add-credentials: true
 
 directive:
   - suppress: LongRunningResponseStatusCode
     reason: The validation tools do not properly recognize 202 as a supported response code.
-```
-
-### Release 2.0
-
-These settings apply only when `--tag=release_2_0` is specified on the command line.
-
-``` yaml $(tag) == 'release_2_0'
-input-file: stable/v2.0/TextAnalytics.json
-```
-
-### Release 2.1
-
-These settings apply only when `--tag=release_2_1` is specified on the command line.
-
-``` yaml $(tag) == 'release_2_1'
-input-file: stable/v2.1/TextAnalytics.json
-```
-
-### Release 2.1-Preview
-
-These settings apply only when `--tag=release_2_1_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2_1_preview'
-input-file: preview/v2.1/TextAnalytics.json
-```
-
-### Release 3.0-Preview.1
-
-These settings apply only when `--tag=release_3_0_preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_0_preview.1'
-input-file: preview/v3.0-preview.1/TextAnalytics.json
 ```
 
 ### Release 3.0
@@ -76,68 +43,12 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 input-file: stable/v3.0/TextAnalytics.json
 ```
 
-### Release 3.1-Preview.1
-
-These settings apply only when `--tag=release_3_1_preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_1_preview.1'
-input-file: preview/v3.1-preview.1/TextAnalytics.json
-```
-
-### Release 3.1-Preview.2
-
-These settings apply only when `--tag=release_3_1_preview.2` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_1_preview.2'
-input-file: preview/v3.1-preview.2/TextAnalytics.json
-```
-
-### Release 3.1-Preview.3
-
-These settings apply only when `--tag=release_3_1_preview.3` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_1_preview.3'
-input-file: preview/v3.1-preview.3/TextAnalytics.json
-```
-
-### Release 3.1-Preview.4
-
-These settings apply only when `--tag=release_3_1_preview.4` is specified on the command line.
-
-```yaml $(tag) == 'release_3_1_preview.4'
-input-file: preview/v3.1-preview.4/TextAnalytics.json
-```
-
-### Release 3.1-Preview.5
-
-These settings apply only when `--tag=release_3_1_preview.5` is specified on the command line.
-
-```yaml $(tag) == 'release_3_1_preview.5'
-input-file: preview/v3.1-preview.5/TextAnalytics.json
-```
-
 ### Release 3.1
 
 These settings apply only when `--tag=release_3_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_1'
 input-file: stable/v3.1/TextAnalytics.json
-```
-
-### Release 3.2-preview.1
-
-These settings apply only when `--tag=release_3_2_preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_2_preview.1'
-input-file: preview/v3.2-preview.1/TextAnalytics.json
-```
-
-### Release 3.2-preview.2
-
-These settings apply only when `--tag=release_3_2_preview.2` is specified on the command line.
-
-``` yaml $(tag) == 'release_3_2_preview.2'
-input-file: preview/v3.2-preview.2/TextAnalytics.json
 ```
 
 ## Swagger to SDK
