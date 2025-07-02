@@ -69,10 +69,3 @@ interface DeploymentStacksAtSubscription extends DeploymentStackCommonOps<Subscr
 
 @armResourceOperations
 interface DeploymentStacksAtManagementGroup extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}
-
-@@doc(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
-  "Deployment stack supplied to the operation."
-);
-@@doc(DeploymentStacksAtResourceGroup.validateStack::parameters.body,
-  "Deployment stack to validate."
-);
