@@ -12,27 +12,27 @@ options:
     emit-common-types-schema: never
     arm-resource-flattening: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-programmableconnectivity"
+    emitter-output-dir: "{service-dir}/azure-mgmt-programmableconnectivity"
     namespace: "azure.mgmt.programmableconnectivity"
     flavor: "azure"
     generate-test: true
     generate-sample: true
     package-name: "azure-mgmt-programmableconnectivity"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-programmableconnectivity"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-programmableconnectivity"
     namespace: "com.azure.resourcemanager.programmableconnectivity"
     flavor: "azure"
     service-name: "Programmable Connectivity"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ProgrammableConnectivity"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.ProgrammableConnectivity"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ProgrammableConnectivity"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-programmableconnectivity"
+    emitter-output-dir: "{service-dir}/arm-programmableconnectivity"
     package-details:
       name: "@azure/arm-programmableconnectivity"
 linter:

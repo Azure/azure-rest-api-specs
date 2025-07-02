@@ -20,20 +20,20 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-servicenetworking"
+    emitter-output-dir: "{service-dir}/arm-servicenetworking"
     flavor: azure
     package-details:
       name: "@azure/arm-servicenetworking"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-servicenetworking"
+    emitter-output-dir: "{service-dir}/azure-mgmt-servicenetworking"
     namespace: "azure.mgmt.servicenetworking"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicenetworking"
-    package-dir: "armservicenetworking"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armservicenetworking"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -41,12 +41,12 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicenetworking"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-servicenetworking"
     namespace: "com.azure.resourcemanager.servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ServiceNetworking"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.ServiceNetworking"
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ServiceNetworking"

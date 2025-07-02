@@ -24,30 +24,30 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-loadtesting"
+    emitter-output-dir: "{service-dir}/arm-loadtesting"
     flavor: azure
     package-details:
       name: "@azure/arm-loadtesting"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-loadtesting"
+    emitter-output-dir: "{service-dir}/azure-mgmt-loadtesting"
     namespace: "azure.mgmt.loadtesting"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.LoadTesting"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.LoadTesting"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.LoadTesting"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-loadtesting"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-loadtesting"
     namespace: "com.azure.resourcemanager.loadtesting"
     flavor: azure
     service-name: Load Test
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/loadtesting"
-    package-dir: "armloadtesting"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armloadtesting"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true

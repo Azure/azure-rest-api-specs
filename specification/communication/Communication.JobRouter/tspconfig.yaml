@@ -32,14 +32,13 @@ options:
     model-namespace: false
     emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.JobRouter
-    package-dir: "Azure.Communication.JobRouter"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     namespace: Azure.Communication.JobRouter
     model-namespace: false
   "@azure-tools/typespec-python":
     package-pprint-name: '"Communication JobRouter"'
-    package-dir: "azure-communication-jobrouter"
+    emitter-output-dir: "{service-dir}/azure-communication-jobrouter"
     namespace: "azure.communication.jobrouter"
     package-version: 1.1.0b1
     flavor: azure
@@ -47,7 +46,6 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-jobrouter"
-    package-dir: "azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
     partial-update: true
     service-name: JobRouter
@@ -59,7 +57,6 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
-    package-dir: "communication-job-router-rest"
     package-details:
       name: "@azure-rest/communication-job-router"
       description: "Azure client library for Azure Communication Job Router services"

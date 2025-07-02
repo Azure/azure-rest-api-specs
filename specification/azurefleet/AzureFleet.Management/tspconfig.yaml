@@ -19,27 +19,27 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azurefleet.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ComputeFleet"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.ComputeFleet"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ComputeFleet"
     # Added to support generic model conversion from compute VM types
     use-model-reader-writer: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computefleet"
+    emitter-output-dir: "{service-dir}/azure-mgmt-computefleet"
     namespace: "azure.mgmt.computefleet"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computefleet"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-computefleet"
     namespace: com.azure.resourcemanager.computefleet
     service-name: Compute Fleet
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computefleet"
-    package-dir: "armcomputefleet"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armcomputefleet"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -48,7 +48,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-computefleet"
+    emitter-output-dir: "{service-dir}/arm-computefleet"
     flavor: azure
     package-details:
       name: "@azure/arm-computefleet"

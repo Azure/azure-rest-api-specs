@@ -12,25 +12,25 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Grafana"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Grafana"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Grafana"
     service-dir: "sdk/grafana"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dashboard"
+    emitter-output-dir: "{service-dir}/azure-mgmt-dashboard"
     namespace: "azure.mgmt.dashboard"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dashboard"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-dashboard"
     namespace: "com.azure.resourcemanager.dashboard"
     service-name: "Dashboard" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/dashboard
-    package-dir: "arm-dashboard"
+    emitter-output-dir: "{service-dir}/arm-dashboard"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -38,8 +38,8 @@ options:
       name: "@azure/arm-dashboard"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dashboard"
-    package-dir: "armdashboard"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armdashboard"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

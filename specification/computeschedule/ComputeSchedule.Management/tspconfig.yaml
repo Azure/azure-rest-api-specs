@@ -9,7 +9,7 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/computeschedule.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computeschedule"
+    emitter-output-dir: "{service-dir}/azure-mgmt-computeschedule"
     namespace: "azure.mgmt.computeschedule"
     flavor: "azure"
     generate-test: true
@@ -18,24 +18,24 @@ options:
     # TODO: remove this once issue resolved: https://github.com/Azure/autorest.typescript/issues/3228
     generate-sample: false
     experimental-extensible-enums: true
-    package-dir: "arm-computeschedule"
+    emitter-output-dir: "{service-dir}/arm-computeschedule"
     flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ComputeSchedule"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.ComputeSchedule"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ComputeSchedule"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computeschedule"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-computeschedule"
     namespace: "com.azure.resourcemanager.computeschedule"
     flavor: "azure"
     service-name: "Compute Schedule"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/computeschedule"
-    package-dir: "armcomputeschedule"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armcomputeschedule"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

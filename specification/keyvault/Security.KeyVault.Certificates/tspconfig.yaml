@@ -27,7 +27,7 @@ options:
     "package-dir": "azure-keyvault-certificates"
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: "azure-security-keyvault-certificates"
+    emitter-output-dir: "{service-dir}/azure-security-keyvault-certificates"
     namespace: "com.azure.security.keyvault.certificates"
     models-subpackage: "implementation.models"
     custom-types: "AdministratorContact,CertificateContact,CertificateKeyCurveName,CertificateKeyType,CertificateKeyUsage,SubjectAlternativeNames"
@@ -40,7 +40,7 @@ options:
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   "@azure-tools/typespec-ts":
-    package-dir: "keyvault-certificates"
+    emitter-output-dir: "{service-dir}/keyvault-certificates"
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true
@@ -51,7 +51,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/security/keyvault"
-    package-dir: "azcertificates"
+    emitter-output-dir: "{service-dir}/azcertificates"
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
     module-version: "0.0.1"
     emitter-output-dir: "{project-root}"

@@ -31,30 +31,30 @@ options:
   #     code-kind: model
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-playwright"
+    emitter-output-dir: "{service-dir}/arm-playwright"
     flavor: "azure"
     package-details:
       name: "@azure/arm-playwright"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-playwright"
+    emitter-output-dir: "{service-dir}/azure-mgmt-playwright"
     namespace: "azure.mgmt.playwright"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Playwright"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Playwright"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Playwright"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-playwright"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-playwright"
     namespace: "com.azure.resourcemanager.playwright"
     flavor: azure
     service-name: Playwright
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/playwright"
-    package-dir: "armplaywright"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armplaywright"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true

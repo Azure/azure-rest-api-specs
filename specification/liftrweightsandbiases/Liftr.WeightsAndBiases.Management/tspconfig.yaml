@@ -11,22 +11,22 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.WeightsAndBiases"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.WeightsAndBiases"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.WeightsAndBiases"
     service-dir: "sdk/weightsandbiases"
   "@azure-tools/typespec-python":
     service-dir: "sdk/weightsandbiases"
-    package-dir: "azure-mgmt-weightsandbiases"
+    emitter-output-dir: "{service-dir}/azure-mgmt-weightsandbiases"
     namespace: "azure.mgmt.weightsandbiases"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/weightsandbiases"
-    package-dir: "armweightsandbiases"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armweightsandbiases"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -37,12 +37,12 @@ options:
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-weightsandbiases"
+    emitter-output-dir: "{service-dir}/arm-weightsandbiases"
     package-details:
       name: "@azure/arm-weightsandbiases"
   "@azure-tools/typespec-java":
     service-dir: "sdk/weightsandbiases"
-    package-dir: "azure-resourcemanager-weightsandbiases"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-weightsandbiases"
     namespace: "com.azure.resourcemanager.weightsandbiases"
     service-name: "Weights And Biases"
     flavor: "azure"

@@ -12,15 +12,15 @@ options:
     output-file: "{project-root}/../data-plane/{service-name}/{version-status}/{version}/{service-name}.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-health-deidentification"
+    emitter-output-dir: "{service-dir}/azure-health-deidentification"
     namespace: "azure.health.deidentification"
     package-mode: dataplane
     flavor: azure
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Health.Deidentification"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.Health.Deidentification"
+    namespace: "Azure.Health.Deidentification"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -28,7 +28,7 @@ options:
     namespace: Azure.Health.Deidentification
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-health-deidentification"
+    emitter-output-dir: "{service-dir}/azure-health-deidentification"
     title: DeidentificationClient
     generate-metadata: true
     package-details:
@@ -36,7 +36,7 @@ options:
       description: "Health Deidentification Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-health-deidentification"
+    emitter-output-dir: "{service-dir}/azure-health-deidentification"
     namespace: "com.azure.health.deidentification"
     service-name: Deidentification
     flavor: azure

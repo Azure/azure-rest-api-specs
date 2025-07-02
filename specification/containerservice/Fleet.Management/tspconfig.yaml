@@ -20,13 +20,13 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-containerservicefleet"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-containerservicefleet"
     namespace: "com.azure.resourcemanager.containerservicefleet"
     service-name: "Container Service Fleet"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservicefleet"
-    package-dir: "armcontainerservicefleet"
+    emitter-output-dir: "{service-dir}/armcontainerservicefleet"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
@@ -38,6 +38,6 @@ options:
     service-dir: "sdk/containerservice"
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-containerservicefleet"
+    emitter-output-dir: "{service-dir}/arm-containerservicefleet"
     package-details:
       name: "@azure/arm-containerservicefleet"

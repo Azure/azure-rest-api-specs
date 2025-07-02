@@ -15,18 +15,18 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Qumulo.Storage.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-qumulo"
+    emitter-output-dir: "{service-dir}/arm-qumulo"
     flavor: azure
     package-details:
       name: "@azure/arm-qumulo"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Qumulo"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Qumulo"
     service-dir: "sdk/qumulo"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Qumulo"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-qumulo"
+    emitter-output-dir: "{service-dir}/azure-mgmt-qumulo"
     namespace: "azure.mgmt.qumulo"
     flavor: "azure"
     generate-test: true

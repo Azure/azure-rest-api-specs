@@ -11,14 +11,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure-ai-assets.json"
   "@azure-tools/typespec-python":
     package-mode: "dataplane"
-    package-dir: "azure-ai-resources-autogen"
+    emitter-output-dir: "{service-dir}/azure-ai-resources-autogen"
     namespace: "azure.ai.resources.autogen"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     generate-metadata: true
-    package-dir: "ai-resources-autogen-rest"
+    emitter-output-dir: "{service-dir}/ai-resources-autogen-rest"
     package-details:
       name: "@azure-rest/ai-resources-autogen"
     flavor: azure

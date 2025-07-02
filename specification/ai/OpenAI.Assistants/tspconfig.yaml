@@ -22,7 +22,7 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/OpenApiV3/{version}/assistants_generated.yaml"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.OpenAI.Assistants"
+    emitter-output-dir: "{service-dir}/Azure.AI.OpenAI.Assistants"
     namespace: "Azure.AI.OpenAI.Assistants"
     clear-output-folder: true
     model-namespace: false
@@ -33,7 +33,7 @@ options:
     model-namespace: false
     generate-protocol-methods: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai-assistants"
+    emitter-output-dir: "{service-dir}/azure-ai-openai-assistants"
     namespace: "com.azure.ai.openai.assistants"
     partial-update: true
     enable-sync-stack: true
@@ -43,7 +43,7 @@ options:
     custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun,OpenAIPageableListOfVectorStore,OpenAIPageableListOfVectorStoreFile,UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "openai"
+    emitter-output-dir: "{service-dir}/openai"
     generate-metadata: false
     is-modular-library: true
     package-details:

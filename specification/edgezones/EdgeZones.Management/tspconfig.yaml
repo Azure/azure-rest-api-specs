@@ -16,20 +16,20 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/edgezones.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-edgezones"
+    emitter-output-dir: "{service-dir}/azure-mgmt-edgezones"
     namespace: "azure.mgmt.edgezones"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-edgezones"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-edgezones"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.edgezones"
     service-name: "Edge Zones"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/edgezones"
-    package-dir: "armedgezones"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armedgezones"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -38,7 +38,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-edgezones"
+    emitter-output-dir: "{service-dir}/arm-edgezones"
     flavor: azure
     package-details:
       name: "@azure/arm-edgezones"

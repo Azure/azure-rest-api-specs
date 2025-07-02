@@ -15,27 +15,27 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Dell.Storage.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Dell.Storage"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Dell.Storage"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Dell.Storage"
     flavor: azure
     service-dir: "sdk/dellstorage"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dellstorage"
+    emitter-output-dir: "{service-dir}/azure-mgmt-dellstorage"
     namespace: "azure.mgmt.dellstorage"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dell-storage"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-dell-storage"
     namespace: com.azure.resourcemanager.dell.storage
     service-name: "Dell Storage"
     flavor: "azure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dell"
-    package-dir: "armdellstorage"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armdellstorage"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -44,7 +44,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-dell-storage"
+    emitter-output-dir: "{service-dir}/arm-dell-storage"
     flavor: "azure"
     package-details:
       name: "@azure/arm-dell-storage"

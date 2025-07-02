@@ -14,29 +14,29 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/fabric.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Fabric"
+    emitter-output-dir: "{service-dir}/Azure.ResourceManager.Fabric"
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Fabric"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-fabric"
+    emitter-output-dir: "{service-dir}/azure-mgmt-fabric"
     flavor: "azure"
     namespace: "azure.mgmt.fabric"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-fabric"
+    emitter-output-dir: "{service-dir}/arm-fabric"
     flavor: azure
     package-details:
       name: "@azure/arm-fabric"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-fabric"
+    emitter-output-dir: "{service-dir}/azure-resourcemanager-fabric"
     flavor: azure
     namespace: "com.azure.resourcemanager.fabric"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/fabric"
-    package-dir: "armfabric"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{service-dir}/armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

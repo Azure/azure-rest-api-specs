@@ -12,7 +12,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Compute.Batch"
+    emitter-output-dir: "{service-dir}/Azure.Compute.Batch"
     clear-output-folder: true
     model-namespace: false
     head-as-boolean: false
@@ -28,13 +28,13 @@ options:
     inject-spans: true
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azbatch"
     module-version: "0.1.0"
-    package-dir: "azbatch"
+    emitter-output-dir: "{service-dir}/azbatch"
     service-dir: "sdk/batch"
     single-client: true
     slice-elements-byval: true
   "@azure-tools/typespec-java":
     namespace: "com.azure.compute.batch"
-    package-dir: "azure-compute-batch"
+    emitter-output-dir: "{service-dir}/azure-compute-batch"
     partial-update: true
     skip-special-headers:
       - "ocp-date"
@@ -43,13 +43,13 @@ options:
     generate-samples: false
     use-default-http-status-code-to-exception-type-mapping: false
   "@azure-tools/typespec-python":
-    package-dir: "azure-batch"
+    emitter-output-dir: "{service-dir}/azure-batch"
     namespace: "azure.batch"
     flavor: azure
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-ts":
-    package-dir: "batch-rest"
+    emitter-output-dir: "{service-dir}/batch-rest"
     package-details:
       name: "@azure-rest/batch"
       description: "Batch Service Rest Level Client"

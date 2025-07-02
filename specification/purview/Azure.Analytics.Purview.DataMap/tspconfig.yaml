@@ -13,15 +13,15 @@ options:
     output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.DataMap/{version-status}/{version}/purviewdatamap.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-purview-datamap"
+    emitter-output-dir: "{service-dir}/azure-purview-datamap"
     namespace: "azure.purview.datamap"
     package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Analytics.Purview.DataMap"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{service-dir}/Azure.Analytics.Purview.DataMap"
+    namespace: "Azure.Analytics.Purview.DataMap"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -29,14 +29,14 @@ options:
     namespace: Azure.Analytics.Purview.DataMap
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "purview-datamap-rest"
+    emitter-output-dir: "{service-dir}/purview-datamap-rest"
     generate-metadata: true
     package-details:
       name: "@azure-rest/purview-datamap"
       description: Purview DataMap Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-purview-datamap"
+    emitter-output-dir: "{service-dir}/azure-analytics-purview-datamap"
     namespace: com.azure.analytics.purview.datamap
     flavor: azure
 linter:
