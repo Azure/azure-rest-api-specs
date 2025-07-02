@@ -85,6 +85,9 @@
       "name": "Policies"
     },
     {
+      "name": "PolicySets"
+    },
+    {
       "name": "ServiceRunners"
     },
     {
@@ -2982,11 +2985,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/policysets/{policySetName}/evaluatePolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies": {
       "post": {
         "operationId": "PolicySets_EvaluatePolicies",
         "tags": [
-          "Labs"
+          "PolicySets"
         ],
         "description": "Evaluates lab policy.",
         "parameters": [
@@ -3000,16 +3003,16 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "labName",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "policySetName",
+            "name": "name",
             "in": "path",
-            "description": "The name of the policy set.",
+            "description": "The name of the PolicySet",
             "required": true,
             "type": "string"
           },

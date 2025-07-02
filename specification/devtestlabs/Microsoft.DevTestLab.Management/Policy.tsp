@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
@@ -29,7 +30,7 @@ model Policy extends Resource {
 }
 
 @armResourceOperations
-interface PolicySetsOps
+interface PolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -56,7 +57,7 @@ interface Policies {
   /**
    * Get policy.
    */
-  get is PolicySetsOps.Read<
+  get is PolicyOps.Read<
     Policy,
     Parameters = {
       /**
@@ -70,24 +71,24 @@ interface Policies {
   /**
    * Create or replace an existing policy.
    */
-  createOrUpdate is PolicySetsOps.CreateOrUpdateSync<Policy>;
+  createOrUpdate is PolicyOps.CreateOrUpdateSync<Policy>;
 
   /**
    * Allows modifying tags of policies. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is PolicySetsOps.CustomPatchSync<Policy, PatchModel = PolicyFragment>;
+  update is PolicyOps.CustomPatchSync<Policy, PatchModel = PolicyFragment>;
 
   /**
    * Delete policy.
    */
-  delete is PolicySetsOps.DeleteSync<Policy>;
+  delete is PolicyOps.DeleteSync<Policy>;
 
   /**
    * List policies in a given policy set.
    */
-  list is PolicySetsOps.List<
+  list is PolicyOps.List<
     Policy,
     Parameters = {
       /**

@@ -29,7 +29,9 @@ using Microsoft.DevTestLab;
 @@clientName(Labs.importVirtualMachine::parameters.body,
   "importLabVirtualMachineRequest"
 );
-@@clientName(Labs.evaluatePolicies::parameters.body, "evaluatePoliciesRequest");
+@@clientName(PolicySets.evaluatePolicies::parameters.body,
+  "evaluatePoliciesRequest"
+);
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Lab.properties);
 

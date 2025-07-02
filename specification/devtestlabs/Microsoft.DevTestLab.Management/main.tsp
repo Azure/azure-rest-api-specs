@@ -24,6 +24,7 @@ import "./Formula.tsp";
 import "./GalleryImage.tsp";
 import "./NotificationChannel.tsp";
 import "./Policy.tsp";
+import "./PolicySet.tsp";
 import "./ServiceRunner.tsp";
 import "./User.tsp";
 import "./Disk.tsp";
