@@ -18,7 +18,7 @@ check if they want to link a different namespace approval issue to the release p
 ## Step 2: Gather Namespace Approval Information
 **Goal**: Link namespace approval issue to the release plan.
 **Actions**:
-1. Collect GitHub issue created in Azure/azure-sdk repo for namespace approval.
+1. Collect GitHub issue created in Azure/azure-sdk repo for namespace approval. Do not use any other repo name.
 2. Run `LinkNameSpaceApprovalIssue` to link the issue to the release plan work item id.
 3. Confirm successful linking of the namespace approval issue to the release plan.
 **Success Criteria**: Namespace approval issue linked to the release plan or confirmed as already linked.
