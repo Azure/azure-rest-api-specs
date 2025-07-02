@@ -208,8 +208,8 @@ Do not skip the step that choose SDK generation method to ensure the user select
 2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
 3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
 4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
-5. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
-6. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created.
+5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
 7. **Generate SDKs via Pipeline**:  Generate SDKs using `/run-sdk-gen-pipeline` prompt, monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
 9. **Create a release plan**: Create a release plan for the generated SDKs using spec pull request.
