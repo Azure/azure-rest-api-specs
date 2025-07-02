@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2025_04_01_preview)
 @resource("gates")
 @parentResource(Fleet)
-model Gate is TrackedResource<GateProperties> {
+model Gate is ProxyResource<GateProperties> {
   @doc("The name of the Gate resource, a GUID.")
   @pattern("^[0-9a-f]{8}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{4}[-][0-9a-f]{12}$")
   @minLength(36)
@@ -171,8 +171,6 @@ model GatePatch {
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
-
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("Properties of a Gate that can be patched.")
   properties: GatePatchProperties;
