@@ -325,5 +325,6 @@ test.each([
     suppressionYaml,
     context,
   );
+
   expect(suppressions.map((s) => s.reason).sort()).toEqual(expected.sort());
 });
