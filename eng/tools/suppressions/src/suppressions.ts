@@ -11,7 +11,7 @@ import { fromError } from "zod-validation-error";
 
 export interface Suppression {
   tool: string;
-  // String of JavaScript code, executed in a prepared context, that determines if a suppression should be included
+  // String of JavaScript CJS code, executed in a prepared context, that determines if a suppression should be included
   if?: string;
   // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
   paths: string[];
