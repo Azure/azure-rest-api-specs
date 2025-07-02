@@ -34,7 +34,7 @@ using MongoDB.Atlas;
   "csharp"
 );
 
-@@clientName OrganizationResourceUpdateProperties,
+@@clientName(OrganizationResourceUpdateProperties,
   "MongoDBAtlasOrganizationUpdateProperties",
   "csharp"
 );
