@@ -33,3 +33,8 @@ using MongoDB.Atlas;
   "MongoDBAtlasResourceProvisioningState",
   "csharp"
 );
+
+@@clientName OrganizationResourceUpdateProperties,
+  "MongoDBAtlasOrganizationUpdateProperties",
+  "csharp"
+);
