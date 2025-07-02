@@ -65,12 +65,11 @@ interface StorageTasks {
    * Update storage task properties
    */
   @patch(#{ implicitOptionality: false })
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     StorageTask,
     PatchModel = StorageTaskUpdateParameters,
-    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    Response = ArmResourceUpdatedResponse<StorageTask> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
+      ArmLroLocationHeader<FinalResult = StorageTask> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
