@@ -49,10 +49,10 @@
       "name": "Configurations"
     },
     {
-      "name": "ServerConfigurations"
+      "name": "NodeConfigurations"
     },
     {
-      "name": "ServerConfigurationOperationGroup"
+      "name": "CoordinatorConfigurations"
     },
     {
       "name": "FirewallRules"
@@ -67,7 +67,7 @@
       "name": "Roles"
     },
     {
-      "name": "ClusterServers"
+      "name": "Servers"
     }
   ],
   "paths": {
@@ -647,9 +647,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/coordinatorConfigurations/{configurationName}": {
       "get": {
-        "operationId": "ServerConfigurations_GetCoordinator",
+        "operationId": "Configurations_GetCoordinator",
         "tags": [
-          "ServerConfigurationOperationGroup"
+          "CoordinatorConfigurations"
         ],
         "description": "Gets information of a configuration for coordinator.",
         "parameters": [
@@ -692,12 +692,17 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get configuration details for coordinator.": {
+            "$ref": "./examples/ConfigurationGetCoordinator.json"
+          }
         }
       },
       "put": {
-        "operationId": "ServerConfigurations_UpdateOnCoordinator",
+        "operationId": "Configurations_UpdateOnCoordinator",
         "tags": [
-          "ServerConfigurationOperationGroup"
+          "CoordinatorConfigurations"
         ],
         "description": "Updates configuration of coordinator in a cluster",
         "parameters": [
@@ -767,6 +772,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update single configuration of coordinator": {
+            "$ref": "./examples/ConfigurationUpdateCoordinator.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -819,6 +829,9 @@
           "List firewall rules of the cluster": {
             "$ref": "./examples/FirewallRuleListByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1038,7 +1051,7 @@
       "get": {
         "operationId": "Configurations_GetNode",
         "tags": [
-          "ServerConfigurations"
+          "NodeConfigurations"
         ],
         "description": "Gets information of a configuration for worker nodes.",
         "parameters": [
@@ -1091,7 +1104,7 @@
       "put": {
         "operationId": "Configurations_UpdateOnNode",
         "tags": [
-          "ServerConfigurations"
+          "NodeConfigurations"
         ],
         "description": "Updates configuration of worker nodes in a cluster",
         "parameters": [
@@ -1137,6 +1150,23 @@
               "$ref": "#/definitions/ServerConfiguration"
             }
           },
+          "201": {
+            "description": "Resource 'ServerConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1148,7 +1178,11 @@
           "Update single configuration of nodes": {
             "$ref": "./examples/ConfigurationUpdateNode.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/privateEndpointConnections": {
@@ -1197,6 +1231,9 @@
           "Gets list of private endpoint connections on a cluster.": {
             "$ref": "./examples/PrivateEndpointConnectionsListByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1458,6 +1495,9 @@
           "Gets the private link resources for cluster.": {
             "$ref": "./examples/PrivateLinkResourceListByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1695,6 +1735,9 @@
           "RoleList": {
             "$ref": "./examples/RoleListByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1912,9 +1955,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers": {
       "get": {
-        "operationId": "ClusterServers_ListByCluster",
+        "operationId": "Servers_ListByCluster",
         "tags": [
-          "ClusterServers"
+          "Servers"
         ],
         "description": "Lists servers of a cluster.",
         "parameters": [
@@ -1951,14 +1994,22 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List servers of the cluster": {
+            "$ref": "./examples/ServerListByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers/{serverName}": {
       "get": {
-        "operationId": "ClusterServers_Get",
+        "operationId": "Servers_Get",
         "tags": [
-          "ClusterServers"
+          "Servers"
         ],
         "description": "Gets information about a server in cluster.",
         "parameters": [
@@ -2004,6 +2055,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the server of cluster": {
+            "$ref": "./examples/ServerGet.json"
           }
         }
       }
@@ -2058,6 +2114,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List configurations of the server that in the cluster": {
+            "$ref": "./examples/ConfigurationListByServer.json"
           }
         },
         "x-ms-pageable": {
@@ -2248,6 +2309,23 @@
         "passwordAuth": {
           "$ref": "#/definitions/PasswordAuth"
         }
+      }
+    },
+    "CheckNameAvailabilityResourceType": {
+      "type": "string",
+      "description": "Resource type used for name availability verification.",
+      "enum": [
+        "Microsoft.DBforPostgreSQL/serverGroupsv2"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityResourceType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "MICROSOFT_DB_FOR_POSTGRESQL_SERVER_GROUPSV2",
+            "value": "Microsoft.DBforPostgreSQL/serverGroupsv2"
+          }
+        ]
       }
     },
     "Cluster": {
@@ -2580,16 +2658,24 @@
     },
     "ClusterServerListResult": {
       "type": "object",
-      "description": "A list of servers in a cluster.",
+      "description": "The response of a ClusterServer list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of servers in a cluster.",
+          "description": "The ClusterServer items on this page",
           "items": {
             "$ref": "#/definitions/ClusterServer"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ClusterServerProperties": {
       "type": "object",
@@ -2802,16 +2888,24 @@
     },
     "FirewallRuleListResult": {
       "type": "object",
-      "description": "A list of firewall rules.",
+      "description": "The response of a FirewallRule list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of firewall rules in a cluster.",
+          "description": "The FirewallRule items on this page",
           "items": {
             "$ref": "#/definitions/FirewallRule"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "FirewallRuleProperties": {
       "type": "object",
@@ -2931,14 +3025,8 @@
           "description": "Cluster name to verify."
         },
         "type": {
-          "type": "string",
-          "description": "Resource type used for verification.",
-          "enum": [
-            "Microsoft.DBforPostgreSQL/serverGroupsv2"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/CheckNameAvailabilityResourceType",
+          "description": "Resource type used for verification."
         }
       },
       "required": [
@@ -3033,16 +3121,24 @@
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "List of private endpoint connections associated with the specified resource.",
+      "description": "The response of a PrivateEndpointConnection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private endpoint connections.",
+          "description": "The PrivateEndpointConnection items on this page",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PrivateEndpointConnectionSimpleProperties": {
       "type": "object",
@@ -3093,16 +3189,24 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "A list of private link resources.",
+      "description": "The response of a PrivateLinkResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private link resources",
+          "description": "The PrivateLinkResource items on this page",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PromoteRequest": {
       "type": "object",
@@ -3167,16 +3271,24 @@
     },
     "RoleListResult": {
       "type": "object",
-      "description": "A list of roles.",
+      "description": "The response of a Role list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of roles in a cluster.",
+          "description": "The Role items on this page",
           "items": {
             "$ref": "#/definitions/Role"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "RoleProperties": {
       "type": "object",
