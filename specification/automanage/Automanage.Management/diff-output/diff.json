@@ -1,0 +1,2002 @@
+{
+  "produces__added": [
+    "application/json"
+  ],
+  "consumes__added": [
+    "application/json"
+  ],
+  "info": {
+    "description__added": "Automanage Client",
+    "title": {
+      "__old": "Automanage",
+      "__new": "AutomanageClient"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions__deleted": {
+      "get": {
+        "operationId": "BestPracticesVersions_ListByTenant",
+        "parameters": [
+          {
+            "name": "bestPracticeName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BestPracticeList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automanage best practices versions ": {
+            "$ref": "./examples/listBestPracticesVersionsByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfiles__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by subscription": {
+            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfilesVersions_ListChildResources",
+        "parameters": [
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile versions by configuration profile": {
+            "$ref": "./examples/listConfigurationProfileVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByClusterName",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and cluster": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileHCIAssignments_Get",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HCI configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCIAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HCI configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCIAssignments_Delete",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCI configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCIAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__deleted": {
+      "get": {
+        "operationId": "HCIReports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by HCI configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHci/clusters/{clusterName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__deleted": {
+      "get": {
+        "operationId": "HCIReports_Get",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCI configuration profile assignment": {
+            "$ref": "./examples/getHCIReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByVirtualMachines",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and virtual machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_Get",
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileAssignments_Delete",
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__deleted": {
+      "get": {
+        "operationId": "reports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__deleted": {
+      "get": {
+        "operationId": "reports_Get",
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a configuration profile assignment": {
+            "$ref": "./examples/getReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByMachineName",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}__deleted": {
+      "get": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Get",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HCRP configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCRPAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update HCRP configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Delete",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCRP configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__deleted": {
+      "get": {
+        "operationId": "HCRPReports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by HCRP configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__deleted": {
+      "get": {
+        "operationId": "HCRPReports_Get",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCRP configuration profile assignment": {
+            "$ref": "./examples/getHCRPReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/clusters/{clusterName}/configurationProfileAssignments__added": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByClusterName",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and cluster": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByClusterName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/clusters/{clusterName}/configurationProfileAssignments/{configurationProfileAssignmentName}__added": {
+      "get": {
+        "operationId": "ConfigurationProfileHCIAssignments_Get",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HCI configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCIAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a HCI configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCIAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCIAssignments_Delete",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCI configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCIAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/clusters/{clusterName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__added": {
+      "get": {
+        "operationId": "HCIReports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by HCI configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCIAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/clusters/{clusterName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__added": {
+      "get": {
+        "operationId": "HCIReports_Get",
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCI configuration profile assignment": {
+            "$ref": "./examples/getHCIReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/configurationProfiles__added": {
+      "get": {
+        "operationId": "ConfigurationProfiles_ListByResourceGroup",
+        "parameters": [
+          {
+            "name": "configurationProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by resource group": {
+            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/machines/{machineName}/configurationProfileAssignments__added": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByMachineName",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByMachineName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/machines/{machineName}/configurationProfileAssignments/{configurationProfileAssignmentName}__added": {
+      "get": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Get",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a HCRP configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileHCRPAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update HCRP configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileHCRPAssignments_Delete",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HCRP configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileHCRPAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/machines/{machineName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__added": {
+      "get": {
+        "operationId": "HCRPReports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by HCRP configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileHCRPAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/machines/{machineName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__added": {
+      "get": {
+        "operationId": "HCRPReports_Get",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a HCRP configuration profile assignment": {
+            "$ref": "./examples/getHCRPReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/virtualMachines/{vmName}/configurationProfileAssignments__added": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_ListByVirtualMachines",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profile assignments by resourceGroup and virtual machine": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsByVirtualMachines.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/virtualMachines/{vmName}/configurationProfileAssignments/{configurationProfileAssignmentName}__added": {
+      "get": {
+        "operationId": "ConfigurationProfileAssignments_Get",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConfigurationProfileAssignments_Delete",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/virtualMachines/{vmName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports__added": {
+      "get": {
+        "operationId": "reports_ListByConfigurationProfileAssignments",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ReportList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List reports by configuration profiles assignment": {
+            "$ref": "./examples/listReportsByconfigurationProfileAssignment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/virtualMachines/{vmName}/configurationProfileAssignments/{configurationProfileAssignmentName}/reports/{reportName}__added": {
+      "get": {
+        "operationId": "reports_Get",
+        "parameters": [
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a report for a configuration profile assignment": {
+            "$ref": "./examples/getReport.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Automanage/bestPractices": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Automanage/bestPractices/{bestPracticeName}/versions/{versionName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Automanage/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/servicePrincipals/default": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": {
+          "__old": "ConfigurationProfiles_ListByResourceGroup",
+          "__new": "ConfigurationProfiles_ListBySubscription"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration profiles by resource group__deleted": {
+            "$ref": "./examples/listConfigurationProfilesByResourceGroup.json"
+          },
+          "List configuration profiles by subscription__added": {
+            "$ref": "./examples/listConfigurationProfilesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfiles/{configurationProfileName}/versions/{versionName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConfigurationDictionary__deleted": {
+      "type": "object",
+      "example": {
+        "Antimalware/Enable": true
+      }
+    },
+    "ManagedBy__deleted": {
+      "type": "string"
+    },
+    "AssignmentReportProperties": {
+      "properties": {
+        "error": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+            "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "BestPractice": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "title__deleted": "Properties",
+          "x-ms-client-flatten__added": true
+        }
+      }
+    },
+    "ConfigurationProfile": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__added": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource",
+              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ConfigurationProfileAssignment": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten__added": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ConfigurationProfileProperties": {
+      "properties": {
+        "configuration": {
+          "$ref__deleted": "#/definitions/ConfigurationDictionary",
+          "title__deleted": "configuration",
+          "type__added": "object",
+          "additionalProperties__added": {}
+        }
+      }
+    },
+    "Report": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "title__deleted": "Properties",
+          "x-ms-client-flatten__added": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ReportResource": {
+      "properties": {
+        "error": {
+          "$ref": {
+            "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail",
+            "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "ServicePrincipal": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "properties": {
+          "title__deleted": "Properties",
+          "x-ms-client-flatten__added": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}
