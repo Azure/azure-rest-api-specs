@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-06-05-preview",
+    "labName": "{devtestlabName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{serviceRunnerName}",
+            "type": "Microsoft.DevTestLab/labs/serviceRunners",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/servicerunners/{serviceRunnerName}",
+            "identity": {
+              "type": "{identityType}",
+              "clientSecretUrl": "{identityClientSecretUrl}",
+              "principalId": "{identityPrincipalId}",
+              "tenantId": "{identityTenantId}"
+            },
+            "location": "{location}",
+            "properties": {
+              "identityUsageType": "environment"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceRunners_List",
+  "title": "ServiceRunners_List"
+}
