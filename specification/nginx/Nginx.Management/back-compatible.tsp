@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Nginx.NginxPlus;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use." "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(NginxDeploymentScalingProperties.autoScaleSettings);
 
 @@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.properties,

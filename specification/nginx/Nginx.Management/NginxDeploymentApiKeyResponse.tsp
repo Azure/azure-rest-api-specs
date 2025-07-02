@@ -28,7 +28,7 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Get the specified API Key of the given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApiKeys_Get")
   get is ArmResourceRead<NginxDeploymentApiKeyResponse>;
 
@@ -38,8 +38,8 @@ interface NginxDeploymentApiKeyResponses {
   /**
    * Delete API key for Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApiKeys_CreateOrUpdate")
   @armResourceCreateOrUpdate(NginxDeploymentApiKeyResponse)
   createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
@@ -53,14 +53,14 @@ interface NginxDeploymentApiKeyResponses {
     OptionalRequestBody = true
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApiKeys_Delete")
   delete is ArmResourceDeleteSync<NginxDeploymentApiKeyResponse>;
 
   /**
    * List all API Keys of the given Nginx deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApiKeys_List")
   list is ArmResourceListByParent<
     NginxDeploymentApiKeyResponse,

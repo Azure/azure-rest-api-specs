@@ -19,15 +19,15 @@ model NginxDeployment
     SegmentName = "nginxDeployments",
     NamePattern = "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
   >;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ResourceSku;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NginxDeploymentsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -53,14 +53,14 @@ interface NginxDeployments {
   /**
    * Get the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Deployments_Get")
   get is ArmResourceRead<NginxDeployment>;
 
   /**
    * Create or update the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Deployments_CreateOrUpdate")
   createOrUpdate is NginxDeploymentsOps.CreateOrUpdateAsync<
     NginxDeployment,
@@ -70,7 +70,7 @@ interface NginxDeployments {
   /**
    * Update the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Deployments_Update")
   update is NginxDeploymentsOps.CustomPatchAsync<
@@ -84,8 +84,8 @@ interface NginxDeployments {
   /**
    * Delete the NGINX deployment resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Deployments_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     NginxDeployment,
@@ -95,7 +95,7 @@ interface NginxDeployments {
   /**
    * List all NGINX deployments under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Deployments_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     NginxDeployment,
@@ -105,7 +105,7 @@ interface NginxDeployments {
   /**
    * List the NGINX deployments resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Deployments_List")
   list is ArmListBySubscription<
     NginxDeployment,

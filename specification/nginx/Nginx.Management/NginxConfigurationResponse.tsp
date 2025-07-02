@@ -28,14 +28,14 @@ interface NginxConfigurationResponses {
   /**
    * Get the NGINX configuration of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Configurations_Get")
   get is ArmResourceRead<NginxConfigurationResponse>;
 
   /**
    * Create or update the NGINX configuration for given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Configurations_CreateOrUpdate")
   @put
   createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
@@ -54,8 +54,8 @@ interface NginxConfigurationResponses {
   /**
    * Reset the NGINX configuration of given NGINX deployment to default
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Configurations_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     NginxConfigurationResponse,
@@ -65,7 +65,7 @@ interface NginxConfigurationResponses {
   /**
    * List the NGINX configuration of given NGINX deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Configurations_List")
   list is ArmResourceListByParent<
     NginxConfigurationResponse,
@@ -75,7 +75,7 @@ interface NginxConfigurationResponses {
   /**
    * Analyze an NGINX configuration without applying it to the NGINXaaS deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("analyze")
   @operationId("Configurations_Analysis")
   analysis is ArmResourceActionSync<

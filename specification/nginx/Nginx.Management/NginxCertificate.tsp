@@ -21,12 +21,12 @@ model NginxCertificate
     SegmentName = "certificates",
     NamePattern = ""
   >;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NginxCertificatesOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -59,14 +59,14 @@ interface NginxCertificates {
   /**
    * Get a certificate of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Certificates_Get")
   get is ArmResourceRead<NginxCertificate>;
 
   /**
    * Create or update the NGINX certificates for given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Certificates_CreateOrUpdate")
   createOrUpdate is NginxCertificatesOps.CreateOrUpdateAsync<
     NginxCertificate,
@@ -76,8 +76,8 @@ interface NginxCertificates {
   /**
    * Deletes a certificate from the NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Certificates_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     NginxCertificate,
@@ -87,7 +87,7 @@ interface NginxCertificates {
   /**
    * List all certificates of given NGINX deployment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Certificates_List")
   list is ArmResourceListByParent<
     NginxCertificate,
