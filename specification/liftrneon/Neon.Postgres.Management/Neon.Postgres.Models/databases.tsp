@@ -30,7 +30,6 @@ model NeonDatabaseProperties {
   ownerName?: string;
 
   @doc("Name of the database")
-  @visibility(Lifecycle.Read)
   @pattern("^\\S.{0,62}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
   databaseName?: string;

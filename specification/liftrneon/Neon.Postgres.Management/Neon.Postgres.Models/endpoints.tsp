@@ -32,24 +32,23 @@ model EndpointProperties {
   @doc("The type of the endpoint")
   endpointType?: EndpointType;
 
-  @doc("Unique identifier for the endpoint")
+  @doc("Unique identifier for the compute endpoint")
   @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9-]{1,60}$")
   @added(Neon.Postgres.Versions.v3_preview)
   endpointId?: string;
 
-  @doc("Name of the endpoint")
+  @doc("Name of the compute endpoint")
   @pattern("^\\S.{0,62}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
-  @visibility(Lifecycle.Read)
-  endpointName?: string;
+  computeName?: string;
 
-  @doc("The current state of the endpoint")
+  @doc("The current status of the compute endpoint")
   @added(Neon.Postgres.Versions.v3_preview)
   @visibility(Lifecycle.Read)
-  currentState?: string;
+  status?: string;
 
-  @doc("The timestamp when the endpoint was last active")
+  @doc("The timestamp when the compute endpoint was last active")
   @added(Neon.Postgres.Versions.v3_preview)
   @visibility(Lifecycle.Read)
   lastActive?: string;

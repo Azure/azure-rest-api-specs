@@ -2128,11 +2128,10 @@
           "pattern": "^[a-z0-9-]{1,60}$",
           "readOnly": true
         },
-        "branchName": {
+        "branch": {
           "type": "string",
           "description": "Name of the branch",
-          "pattern": "^\\S.{0,126}\\S$|^\\S$",
-          "readOnly": true
+          "pattern": "^\\S.{0,126}\\S$|^\\S$"
         },
         "dataSize": {
           "type": "string",
@@ -2145,10 +2144,6 @@
         "computeHours": {
           "type": "string",
           "description": "Compute hours for the branch"
-        },
-        "primaryCompute": {
-          "type": "string",
-          "description": "Primary compute for the branch"
         }
       }
     },
@@ -2397,24 +2392,23 @@
         },
         "endpointId": {
           "type": "string",
-          "description": "Unique identifier for the endpoint",
+          "description": "Unique identifier for the compute endpoint",
           "pattern": "^[a-z0-9-]{1,60}$",
           "readOnly": true
         },
-        "endpointName": {
+        "computeName": {
           "type": "string",
-          "description": "Name of the endpoint",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$",
-          "readOnly": true
+          "description": "Name of the compute endpoint",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
         },
-        "currentState": {
+        "status": {
           "type": "string",
-          "description": "The current state of the endpoint",
+          "description": "The current status of the compute endpoint",
           "readOnly": true
         },
         "lastActive": {
           "type": "string",
-          "description": "The timestamp when the endpoint was last active",
+          "description": "The timestamp when the compute endpoint was last active",
           "readOnly": true
         },
         "size": {
@@ -2905,8 +2899,7 @@
         "databaseName": {
           "type": "string",
           "description": "Name of the database",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$",
-          "readOnly": true
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
         },
         "lastUpdated": {
           "type": "string",
@@ -3002,8 +2995,7 @@
         "roleName": {
           "type": "string",
           "description": "Name of the role",
-          "pattern": "^\\S.{0,62}\\S$|^\\S$",
-          "readOnly": true
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
         },
         "lastUpdated": {
           "type": "string",

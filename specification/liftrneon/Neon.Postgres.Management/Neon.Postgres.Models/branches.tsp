@@ -55,10 +55,9 @@ model BranchProperties {
   branchId?: string;
 
   @doc("Name of the branch")
-  @visibility(Lifecycle.Read)
   @pattern("^\\S.{0,126}\\S$|^\\S$")
   @added(Neon.Postgres.Versions.v3_preview)
-  branchName?: string;
+  branch?: string;
 
   @doc("Total data size")
   @added(Neon.Postgres.Versions.v3_preview)
@@ -71,8 +70,4 @@ model BranchProperties {
   @doc("Compute hours for the branch")
   @added(Neon.Postgres.Versions.v3_preview)
   computeHours?: string;
-
-  @doc("Primary compute for the branch")
-  @added(Neon.Postgres.Versions.v3_preview)
-  primaryCompute?: string;
 }
