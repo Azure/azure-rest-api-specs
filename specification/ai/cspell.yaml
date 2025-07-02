@@ -1,0 +1,87 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - acrad
+  - agatston
+  - apim
+  - ascvd
+  - birads
+  - ceus
+  - cusick
+  - dicom
+  - fhir
+  - findsimilars
+  - frax
+  - hnpcc
+  - interventional
+  - kellgren
+  - loinc
+  - mednax
+  - onco
+  - oncophenotype
+  - openai
+  - presentationml
+  - reslution
+  - rrggbb
+  - snomed
+  - spreadsheetml
+  - supress
+  - tcgc
+  - telehealth
+  - tonnis
+  - tyrer
+  - ubinary
+  - umls
+  - unversioned
+  - upca
+  - upce
+  - wordprocessingml
+  - azureai
+  - atbash
+  - onedp
+  - ansii
+  - upia
+  - aoai
+  - azaiprojects
+overrides:
+  - filename: >-
+      **/specification/ai/data-plane/DocumentIntelligence/**/DocumentIntelligence.json
+    words:
+      - barcodes
+      - codabar
+      - documentintelligence
+      - heif
+      - presentationml
+      - rrggbb
+      - spreadsheetml
+      - upca
+      - upce
+  - filename: '**/specification/ai/data-plane/Face/**/*.json'
+    words:
+      - headwear
+      - realface
+      - spoofface
+  - filename: '**/specification/ai/data-plane/HealthInsights/stable/**/openapi.json'
+    words:
+      - acrad
+      - agatston
+      - ascvd
+      - birads
+      - ceus
+      - cusick
+      - extracolonic
+      - frax
+      - hnpcc
+      - kellgren
+      - mednax
+      - tonnis
+      - tyrer
+  - filename: '**/specification/ai/data-plane/ModelInference/**/*.*'
+    words:
+      - ubinary

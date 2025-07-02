@@ -3,17 +3,21 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@types/node": "^18.19.31",
-    "execa": "^9.3.0",
-    "typescript": "~5.6.2",
-    "vitest": "^2.0.4"
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@types/node": "^20.0.0",
+    "prettier": "~3.5.3",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
   },
   "scripts": {
     "build": "tsc --build",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },
   "engines": {
-    "node": ">= 18.0.0"
+    "node": ">=20.0.0"
   }
 }

@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
@@ -8,6 +9,7 @@ using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentIntelligence;
 
@@ -112,6 +114,7 @@ model DocumentClassifierAnalyzeRequestParams {
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with existing clients"
   @doc("Input content type.")
   @header
   contentType:
@@ -260,7 +263,8 @@ interface DocumentModels {
 
       @doc("Analyze request parameters.")
       @bodyRoot
-      analyzeRequest?: AnalyzeDocumentRequest;
+      @clientName("body", "python")
+      analyzeRequest: AnalyzeDocumentRequest;
     },
     AnalyzeOperation
   >;
@@ -299,7 +303,8 @@ interface DocumentModels {
 
       @doc("Analyze batch request parameters.")
       @body
-      analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
+      @clientName("body", "python")
+      analyzeBatchRequest: AnalyzeBatchDocumentsRequest;
     },
     AnalyzeBatchOperation
   >;
@@ -350,6 +355,7 @@ interface DocumentModels {
     {
       @doc("Build request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       buildRequest: BuildDocumentModelRequest;
     },
     DocumentModelBuildOperationDetails
@@ -364,6 +370,7 @@ interface DocumentModels {
     {
       @doc("Compose request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       composeRequest: ComposeDocumentModelRequest;
     },
     DocumentModelComposeOperationDetails
@@ -380,6 +387,7 @@ interface DocumentModels {
     {
       @doc("Authorize copy request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
     ModelCopyAuthorization
@@ -400,6 +408,7 @@ interface DocumentModels {
 
       @doc("Copy to request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       copyToRequest: ModelCopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
@@ -461,6 +470,7 @@ interface DocumentClassifiers {
     {
       @doc("Build request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       buildRequest: BuildDocumentClassifierRequest;
     },
     DocumentClassifierBuildOperationDetails
@@ -506,6 +516,7 @@ interface DocumentClassifiers {
 
       @doc("Classify request parameters.")
       @bodyRoot
+      @clientName("body", "python")
       classifyRequest: ClassifyDocumentRequest;
     },
     AnalyzeOperation
@@ -541,6 +552,7 @@ interface DocumentClassifiers {
     {
       @doc("Authorize copy request parameters.")
       @body
+      @clientName("body", "python")
       authorizeCopyRequest: AuthorizeClassifierCopyRequest;
     },
     ClassifierCopyAuthorization
@@ -563,6 +575,7 @@ interface DocumentClassifiers {
 
       @doc("Copy to request parameters.")
       @body
+      @clientName("body", "python")
       copyToRequest: ClassifierCopyAuthorization;
     },
     DocumentClassifierCopyToOperationDetails

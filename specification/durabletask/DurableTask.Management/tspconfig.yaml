@@ -11,14 +11,14 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/durabletask.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-durabletask"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.durabletask"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-durabletask"
     namespace: "com.azure.resourcemanager.durabletask"
-    service-name: "durabletask"
+    service-name: "Durable Task"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/durabletask"
@@ -26,11 +26,10 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    remove-unreferenced-types: true
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.ResourceManager.DurableTask"
     flavor: azure
@@ -38,15 +37,10 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    flavor: azure
+    experimental-extensible-enums: true
     package-dir: "arm-durabletask"
-    flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-durabletask"
 linter:
   extends:

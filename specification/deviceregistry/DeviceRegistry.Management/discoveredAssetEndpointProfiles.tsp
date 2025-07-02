@@ -32,7 +32,7 @@ model DiscoveredAssetEndpointProfile
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("The extended location.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -47,7 +47,6 @@ model DiscoveredAssetEndpointProfileProperties {
   additionalConfiguration?: string;
 
   @doc("List of supported authentication methods supported by the target server.")
-  @extension("x-ms-identifiers", [])
   supportedAuthenticationMethods?: AuthenticationMethod[];
 
   @doc("Defines the configuration for the connector type that is being used with the endpoint profile.")
@@ -60,7 +59,7 @@ model DiscoveredAssetEndpointProfileProperties {
   version: int64;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
