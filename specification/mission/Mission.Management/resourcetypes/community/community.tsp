@@ -157,7 +157,7 @@ model CommunityBaseModel {
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @doc("List of services governed by a community.")
-  @OpenAPI.extension("x-ms-identifiers", #["serviceId"])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   governedServiceList?: GovernedServiceItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
@@ -166,7 +166,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
-  @OpenAPI.extension("x-ms-identifiers", #["roleDefinitionId"])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   communityRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)

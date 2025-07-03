@@ -18,7 +18,6 @@ model WorkloadProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
   @doc("List of resource group ids.")
   resourceGroupCollection?: string[];
 

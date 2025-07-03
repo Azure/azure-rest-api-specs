@@ -72,7 +72,6 @@ model CommunityEndpointDestinationRule {
 
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @extension("x-ms-identifiers", #[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];

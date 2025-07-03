@@ -43,7 +43,6 @@ model EnclaveEndpointDestinationRule {
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Adding required property is a breaking change."
   @extension("x-ms-identifiers", #[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];

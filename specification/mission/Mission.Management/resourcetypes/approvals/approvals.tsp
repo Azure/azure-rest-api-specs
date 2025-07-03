@@ -8,7 +8,6 @@ using Azure.Core;
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
-#suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
 @doc("Approval Status. It can be Approved, Rejected, Pending, Deleted or Expired.")
 union ApprovalStatus {
   string,
