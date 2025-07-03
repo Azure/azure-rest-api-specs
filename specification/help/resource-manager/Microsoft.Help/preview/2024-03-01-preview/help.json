@@ -858,7 +858,7 @@
     },
     "/providers/Microsoft.Help/discoverSolutions": {
       "post": {
-        "operationId": "DiscoverySolutionNlp_DiscoverSolutions",
+        "operationId": "DiscoverySolutionNLP_DiscoverSolutions",
         "description": "Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary.",
         "parameters": [
           {
@@ -886,6 +886,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtTenantScope.json"
           }
         }
       }
@@ -1017,7 +1022,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Help/discoverSolutions": {
       "post": {
-        "operationId": "DiscoverySolutionNlp_DiscoverSolutionsBySubscription",
+        "operationId": "DiscoverySolutionNLP_DiscoverSolutionsBySubscription",
         "description": "Search for relevant Azure Diagnostics, Solutions and Troubleshooters using a natural language issue summary and subscription.",
         "parameters": [
           {
@@ -1048,6 +1053,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtSubscriptionScope.json"
           }
         }
       }
