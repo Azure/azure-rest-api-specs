@@ -30,15 +30,6 @@ openapi-subtype: rpaas
 tag: 2025-06-23-preview
 ```
 
-### Tag: package-2025-03-01
-
-These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-03-01'
-input-file:
-  - Neon.Postgres/stable/2025-03-01/neon.json
-```
-
 ### Tag: package-2025-06-23-preview
 
 These settings apply only when `--tag=package-2025-06-23-preview` is specified on the command line.
@@ -46,6 +37,15 @@ These settings apply only when `--tag=package-2025-06-23-preview` is specified o
 ```yaml $(tag) == 'package-2025-06-23-preview'
 input-file:
   - Neon.Postgres/preview/2025-06-23-preview/neon.json
+```
+
+### Tag: package-2025-03-01
+
+These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01'
+input-file:
+  - Neon.Postgres/stable/2025-03-01/neon.json
 ```
 
 ### Tag: package-2025-03-01-preview
