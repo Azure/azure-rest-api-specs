@@ -18,7 +18,6 @@
 // #region imports/constants
 
 import { extractInputs } from "./context.js";
-
 import { commentOrUpdate } from "./comment.js";
 
 import {
@@ -29,6 +28,7 @@ import {
 
 import {
   brchTsg,
+  diagramTsg,
   checkAndDiagramTsg,
   defaultTsg,
   reqMetCheckTsg,
@@ -52,6 +52,10 @@ import {
  * @property {CheckMetadata} checkInfo
  */
 
+/**
+ * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
+ */
+
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
   "Swagger LintDiff",
@@ -60,8 +64,7 @@ const FYI_CHECK_NAMES = [
   "Swagger PrettierCheck"
 ];
 
-
-const automatedMergingRequirementsMetCheckName = "Automated merging requirements met";
+const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 
 /** type {CheckMetadata[]} */
 const CHECK_METADATA = [
@@ -187,7 +190,7 @@ const CHECK_METADATA = [
   },
   {
     precedence: 10,
-    name: automatedMergingRequirementsMetCheckName,
+    name: AUTOMATED_CHECK_NAME,
     suppressionLabels: [],
     troubleshootingGuide: reqMetCheckTsg,
   },
@@ -217,6 +220,7 @@ export default async function summarizeChecks({ github, context, core }) {
   const { data: user } = await github.rest.users.getAuthenticated();
   console.log(`Authenticated as: ${user.login}`);
 
+  // TODO: replace entirely in favor of
   if (!owner || !repo || !issue_number || !head_sha) {
     let inputs = await extractInputs(github, context, core);
     owner = owner || inputs.owner;
@@ -231,52 +235,60 @@ export default async function summarizeChecks({ github, context, core }) {
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
-  await summarizeChecksImpl({
+  await summarizeChecksImpl(
+    {
+      github,
+      context,
+      core
+    },
     owner,
     repo,
     issue_number,
     head_sha,
-    github,
-    core,
     event_name,
-    context
-  });
+    targetBranch
+  );
 }
 
 /**
- * @param {Object} params
- * @param {string} params.owner
- * @param {string} params.repo
- * @param {number} params.issue_number
- * @param {string} params.head_sha
- * @param {string} params.event_name
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
- * @param {import("@actions/github").context} params.context
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @param {string} head_sha
+ * @param {string} event_name
+ * @param {string} targetBranch
  * @returns {Promise<void>}
  */
-export async function summarizeChecksImpl({
+export async function summarizeChecksImpl(
+  {
+    github,
+    core,
+    context
+  },
   owner,
   repo,
   issue_number,
   head_sha,
   event_name,
-  github,
-  core,
-  context
-}) {
-  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}`);
-
+  targetBranch
+) {
+  core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`);
 
   // no matter what, we will need the labels for the PR, so let's fetch them first
-  const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+  const resp = await github.rest.issues.listLabelsOnIssue({
     owner,
     repo,
     issue_number,
   });
-  const labelNames = labels.map(label => label.name);
+  /** @type {{ name: string }[]} */
+  const labels = resp.data;
+  /** @type {string[]} */
+  const labelNames = labels.map((label) => label.name);
 
   // handle our label trigger first, we may bail out early if it's a label action we're reacting to
+  // this also implies that if a label action is performed before any workflows complete, we shouldn't
+  // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
   if (event_name in ["labeled", "unlabeled"]) {
     handleLabeledEvent({
       owner,
@@ -307,6 +319,29 @@ export async function summarizeChecksImpl({
     issue_number,
     []
   );
+
+  const commentBody = await createNextStepsComment(
+    { github, context, core },
+    owner,
+    repo,
+    labelNames,
+    issue_number,
+    targetBranch,
+    requiredCheckRuns,
+    fyiCheckRuns,
+    automatedMergingRequirementsMetCheckRun
+  );
+
+  await core.info(`Updating comment '${commentName}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+  // this will remain commented until we're comfortable with the change.
+  // await commentOrUpdate(
+  //   { github, context, core },
+  //   owner,
+  //   repo,
+  //   issue_number,
+  //   commentName,
+  //   commentBody
+  // );
 
   console.log(requiredCheckRuns);
   console.log(fyiCheckRuns);
@@ -593,7 +628,7 @@ function extractRunsFromGraphQLResponse(response) {
           // Note we return automatedMergingRequirementsMetCheck separately, because we must return it even if it is not marked as 'required'.
           // This case may happen when a PR is targeting a branch which has no checks marked as 'required', e.g. a user dev branch.
           // We obtain reference to this check, even if not 'required', to update the "Next steps to merge" comment.
-          if (checkRunNode.name == automatedMergingRequirementsMetCheckName) {
+          if (checkRunNode.name == AUTOMATED_CHECK_NAME) {
             automatedMergingRequirementsMetCheckRun = {
               name: checkRunNode.name,
               status: checkRunNode.status,
@@ -628,11 +663,11 @@ function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
+ * @param {CheckRunData | undefined} automatedMergingRequirementsMetCheckRun
+ * @returns {Promise<string>}
  */
-export async function updateNextStepsToMergeComment({github, context, core}, owner, repo, labels, issue_number, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
-  const commentName = "NextStepsToMerge"
-
+export async function createNextStepsComment({github, context, core}, owner, repo, labels, issue_number, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
+  // select just the metadata that we need about the runs.
   const requiredCheckInfos = requiredRuns
     .filter(run => checkRunIsSuccessful(run) === false)
     .map(run => run.checkInfo)
@@ -642,17 +677,8 @@ export async function updateNextStepsToMergeComment({github, context, core}, own
 
   const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos, automatedMergingRequirementsMetCheckRun);
 
-  await core.info(`Updating comment '${commentName}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+  return commentBody;
 
-  // this will remain commented until we're comfortable with the change.
-  // await commentOrUpdate(
-  //   { github, context, core },
-  //   owner,
-  //   repo,
-  //   issue_number,
-  //   commentName,
-  //   commentBody
-  // );
 }
 
 /**
@@ -661,7 +687,7 @@ export async function updateNextStepsToMergeComment({github, context, core}, own
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
+ * @param {CheckRunData | undefined} automatedMergingRequirementsMetCheckRun
  * @returns {Promise<string>}
  */
 async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun) {
@@ -683,9 +709,14 @@ async function buildNextStepsToMergeCommentBody({ github, context, core }, label
   // the new world we will simply pull all the required checks and if any are failing then we are blocked.
   // addendum: pending does not mean failing. We should simply not mention that any pending runs in the next steps to merge comment.
   // if we have any pending runs, we will simply not mention them in the next steps.
+
+  // I am wondering if there is an edge case with this where I am somehow triggered and there are _no_ check
+  // runs at all. I don't want the comment to flip to "all requirements met" and then immediately jump to
+  // "requirements not met" when the next check run comes in.
+  // todo: double check if the comment update waits until there are NO pending jobs to update the comment
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
-  const requirementsMet = anyBlockerPresent;
+  const requirementsMet = !anyBlockerPresent;
 
   // Compose the body based on the current state
   const bodyProper = getBodyProper(
@@ -700,59 +731,25 @@ async function buildNextStepsToMergeCommentBody({ github, context, core }, label
   return commentTitle + bodyProper;
 }
 
-// this entire code section was replaced by populating the ChecksInfo array with the check runs
-// we simply filter the result and grab the CheckInfo object.
-// async function getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
-//   logger: Logger,
-//   logPrefix: string,
-//   context: PipelineContext,
-// ): Promise<[CheckWorkflowInfo[], CheckWorkflowInfo[], CheckRunData]> {
-
-//   let [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun]
-//     = await getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(logger, logPrefix, context, []);
-
-//   const failingReqCheckRuns = reqCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
-//   const failingFyiCheckRuns = fyiCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
-
-//   if (automatedMergingRequirementsMetCheckRun == undefined) {
-//     await logger.logWarning(logPrefix
-//       + `ASSERTION VIOLATION: Could not find '${automatedMergingRequirementsMetCheckName}' check run. `
-//       + `This should not happen! Defaulting to a check run in a queued state.`)
-//     automatedMergingRequirementsMetCheckRun
-//       = { name: automatedMergingRequirementsMetCheckName, status: "queued", conclusion: undefined }
-//   }
-
-//   const failingReqChecksInfo = failingReqCheckRuns.map(checkRun => {
-//     return (
-//       checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
-//       || createCheckInfo(0, checkRun.name)
-//     );
-//   });
-//   const failingFyiChecksInfo = failingFyiCheckRuns.map(checkRun => {
-//     return (
-//       checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
-//       || createCheckInfo(0, checkRun.name)
-//     );
-//   });
-
-//   await logger.logInfo(logPrefix + `getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo: `
-//     + `failingReqCheckRuns: ${checkRunsLogString(failingReqCheckRuns)}, `
-//     + `failingFyiCheckRuns: ${checkRunsLogString(failingFyiCheckRuns)}, `
-//     + `failingReqCheckRunsInfo: ${checksInfoLogString(failingReqChecksInfo)}, `
-//     + `failingFyiCheckRunsInfo: ${checksInfoLogString(failingFyiChecksInfo)}`)
-
-//   return [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
-// }
-
+/**
+ * Gets the proper body content based on requirements status
+ * @param {boolean} requirementsMet - Whether all requirements are met
+ * @param {boolean} anyBlockerPresent - Whether any blockers are present
+ * @param {boolean} anyFyiPresent - Whether any FYI issues are present
+ * @param {CheckMetadata[]} failingReqChecksInfo - Failing required checks info
+ * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
+ * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
+ * @returns {string} The body content HTML
+ */
 function getBodyProper(
-  requirementsMet: boolean,
-  anyBlockerPresent: boolean,
-  anyFyiPresent: boolean,
-  failingReqChecksInfo: CheckWorkflowInfo[],
-  failingFyiChecksInfo: CheckWorkflowInfo[],
-  violatedRequiredLabelsRules: RequiredLabelRule[],
+  requirementsMet,
+  anyBlockerPresent,
+  anyFyiPresent,
+  failingReqChecksInfo,
+  failingFyiChecksInfo,
+  violatedRequiredLabelsRules,
 ) {
-  let bodyProper: string = "";
+  let bodyProper = "";
 
   if (anyBlockerPresent || anyFyiPresent) {
     // assert: !requirementsMet
