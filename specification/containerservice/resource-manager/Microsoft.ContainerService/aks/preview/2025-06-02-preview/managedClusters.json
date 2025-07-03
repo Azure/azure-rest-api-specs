@@ -4417,6 +4417,235 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/identityBindings": {
+      "get": {
+        "tags": [
+          "IdentityBindings"
+        ],
+        "operationId": "IdentityBindings_ListByManagedCluster",
+        "summary": "Gets a list of identity bindings in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IdentityBindingListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Identity Bindings by Managed Cluster": {
+            "$ref": "./examples/IdentityBindings_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/identityBindings/{identityBindingName}": {
+      "get": {
+        "tags": [
+          "IdentityBindings"
+        ],
+        "operationId": "IdentityBindings_Get",
+        "summary": "Gets the specified Identity Binding.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IdentityBinding"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Identity Binding": {
+            "$ref": "./examples/IdentityBindings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IdentityBindings"
+        ],
+        "operationId": "IdentityBindings_CreateOrUpdate",
+        "summary": "Creates or updates an identity binding in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityBindingNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IdentityBinding"
+            },
+            "description": "The identity binding to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing identity binding has been successfully updated",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/IdentityBinding"
+            }
+          },
+          "201": {
+            "description": "The new identity binding has been successfully created",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/IdentityBinding"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update Identity Binding": {
+            "$ref": "./examples/IdentityBindings_Create_Or_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IdentityBindings"
+        ],
+        "operationId": "IdentityBindings_Delete",
+        "summary": "Deletes an identity binding in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IdentityBindingNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Identity Binding": {
+            "$ref": "./examples/IdentityBindings_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -11465,6 +11694,176 @@
           }
         }
       }
+    },
+    "IdentityBinding": {
+      "type": "object",
+      "description": "The IdentityBinding resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IdentityBindingProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal etag convention.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IdentityBindingListResult": {
+      "type": "object",
+      "description": "The response of a IdentityBinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IdentityBinding items on this page",
+          "items": {
+            "$ref": "#/definitions/IdentityBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IdentityBindingManagedIdentityProfile": {
+      "type": "object",
+      "description": "Managed identity profile for the identity binding.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource ID of the managed identity.",
+          "pattern": "^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the managed identity.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "IdentityBindingOidcIssuerProfile": {
+      "type": "object",
+      "description": "IdentityBinding OIDC issuer profile.",
+      "properties": {
+        "oidcIssuerUrl": {
+          "type": "string",
+          "description": "The OIDC issuer URL of the IdentityBinding.",
+          "readOnly": true
+        }
+      }
+    },
+    "IdentityBindingProperties": {
+      "type": "object",
+      "description": "IdentityBinding properties.",
+      "properties": {
+        "managedIdentity": {
+          "$ref": "#/definitions/IdentityBindingManagedIdentityProfile",
+          "description": "Managed identity profile for the identity binding.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "oidcIssuer": {
+          "$ref": "#/definitions/IdentityBindingOidcIssuerProfile",
+          "description": "The OIDC issuer URL of the IdentityBinding.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/IdentityBindingProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedIdentity"
+      ]
+    },
+    "IdentityBindingProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the last accepted operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityBindingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The identity binding is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The identity binding is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The identity binding is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {
@@ -11601,6 +12000,17 @@
       "minLength": 1,
       "maxLength": 24,
       "description": "Safeguards version",
+      "x-ms-parameter-location": "method"
+    },
+    "IdentityBindingNameParameter": {
+      "name": "identityBindingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]{0,63}$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "The name of the identity binding.",
       "x-ms-parameter-location": "method"
     }
   }
