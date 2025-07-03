@@ -779,34 +779,49 @@ function getBodyProper(
   return bodyProper;
 }
 
-function getBlockerPresentBody(
-  failingRequiredChecks: CheckWorkflowInfo[],
-  violatedRequiredLabelsRules: RequiredLabelRule[]) {
+/**
+ * Gets the body content when blockers are present
+ * @param {CheckMetadata[]} failingRequiredChecks - Failing required checks
+ * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
+ * @returns {string} The blocker present body HTML
+ */
+function getBlockerPresentBody(failingRequiredChecks, violatedRequiredLabelsRules) {
 
   const failingRequiredChecksNextStepsText = buildFailingChecksNextStepsText(failingRequiredChecks, "required");
-  const violatedReqLabelsRulesNextStepsText: string = buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules);
+  const violatedReqLabelsRulesNextStepsText = buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules);
   return "Next steps that must be taken to merge this PR: <br/>"
   + "<ul>" + violatedReqLabelsRulesNextStepsText + failingRequiredChecksNextStepsText + "</ul>"
 }
 
-function getFyiPresentBody(failingFyiChecksInfo: CheckWorkflowInfo[]) {
+/**
+ * Gets the body content when FYI issues are present
+ * @param {CheckMetadata[]} failingFyiChecksInfo - Failing FYI checks info
+ * @returns {string} The FYI present body HTML
+ */
+function getFyiPresentBody(failingFyiChecksInfo) {
   return "Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>"
   + "Addressing the following failures is highly recommended:<br/>"
   + "<ul>" + buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI") +  "</ul>"
 }
 
-function buildFailingChecksNextStepsText(failingChecks: CheckWorkflowInfo[], checkKind: "required" | "FYI") {
+/**
+ * Builds next steps text for failing checks
+ * @param {CheckMetadata[]} failingChecks - Array of failing checks
+ * @param {"required" | "FYI"} checkKind - Kind of check (required or FYI)
+ * @returns {string} The failing checks next steps HTML
+ */
+function buildFailingChecksNextStepsText(failingChecks, checkKind) {
 
-  let failingChecksNextStepsText: string = "";
+  let failingChecksNextStepsText = "";
   if (failingChecks.length > 0) {
 
-    const minPrecedence: number = Math.min(...failingChecks.map(check => check.precedence));
-    const checksToDisplay: CheckWorkflowInfo[] = failingChecks.filter(check => check.precedence == minPrecedence);
+    const minPrecedence = Math.min(...failingChecks.map(check => check.precedence));
+    const checksToDisplay = failingChecks.filter(check => check.precedence === minPrecedence);
 
     // assert: checksToDisplay.length > 0
     failingChecksNextStepsText =
       checksToDisplay.map(check =>
-        (checkKind == "required")
+        (checkKind === "required")
           ? `<li>❌ The required check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`
           : `<li>⚠️ The check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`
         ).join("")

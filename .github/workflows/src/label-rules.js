@@ -188,7 +188,7 @@ export function anyApprovalLabelPresent(
  *   the same precedence, and one of them should be displayed,
  *   then all of them should be displayed.
  *
- *   Note this independent of the CheckWorkflowInfo.precedence. That is,
+ *   Note this independent of the CheckMetadata.precedence. That is,
  *   if there are failing checks, and failing required label rules,
  *   both of them will be shown, both taking appropriate lowest precedence.
  * @property {string[]} [branches] - Branches, in format "repo/branch", e.g. "azure-rest-api-specs/main",
