@@ -15,3 +15,11 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SignalRServiceClientConnectionConnectedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SignalRServiceClientConnectionDisconnectedEventData,
+  "csharp"
+);

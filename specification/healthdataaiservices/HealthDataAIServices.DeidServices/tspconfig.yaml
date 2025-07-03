@@ -16,19 +16,21 @@ options:
     namespace: "azure.health.deidentification"
     package-mode: dataplane
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Health.Deidentification"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Health.Deidentification
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "azure-health-deidentification"
     title: DeidentificationClient
     generate-metadata: true
-    generate-test: true
     package-details:
       name: "@azure-rest/health-deidentification"
       description: "Health Deidentification Service"
