@@ -42,7 +42,7 @@ interface DnssecConfigs {
   /**
    * Creates or updates the DNSSEC configuration on a DNS zone.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is Azure.ResourceManager.CustomLegacy.CreateOrUpdateWithoutBodyAsync<
     DnssecConfig,
     Parameters = {
       /**
