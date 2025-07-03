@@ -54,17 +54,17 @@ jobs:
             Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId) 
             PR: $(System.PullRequest.SourceRepositoryURI)/pull/$(System.PullRequest.PullRequestId)
       
-      - task: AzureCLI@2
-        displayName: Start and wait for docs build
-        inputs:
-          azureSubscription: msdocs-apidrop-connection
-          scriptType: bash
-          scriptLocation: inlineScript
-          inlineScript: >-
-            az pipelines build queue 
-              --organization "https://dev.azure.com/apidrop/" 
-              --project "Content CI" 
-              --definition-id "8120" 
-              --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-01"}, "source_of_truth": "code"}'
+      # - task: AzureCLI@2
+      #   displayName: Start and wait for docs build
+      #   inputs:
+      #     azureSubscription: msdocs-apidrop-connection
+      #     scriptType: bash
+      #     scriptLocation: inlineScript
+      #     inlineScript: >-
+      #       az pipelines build queue 
+      #         --organization "https://dev.azure.com/apidrop/" 
+      #         --project "Content CI" 
+      #         --definition-id "8120" 
+      #         --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-01"}, "source_of_truth": "code"}'
 
       - script: echo "interpret results..."
