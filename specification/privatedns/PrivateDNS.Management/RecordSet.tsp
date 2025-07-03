@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./PrivateZone.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -15,8 +14,8 @@ namespace Microsoft.Network;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type) in a Private DNS zone.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(PrivateZone)
 @Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
@@ -31,24 +30,24 @@ model RecordSet extends Foundations.ProxyResource {
   /**
    * The ETag of the record set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The properties of the record set.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RecordSetProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecordSetOperationOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * The name of the DNS zone (without a terminating dot).
@@ -67,13 +66,14 @@ interface RecordSetOperationOps
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecordSetOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         /**
          * The name of the DNS zone (without a terminating dot).
@@ -92,36 +92,36 @@ interface RecordSetOps
         /**
          * The name of the record set, relative to the name of the zone.
          */
-        @path
+        @path(#{ allowReserved: true })
         relativeRecordSetName: string,
       },
       CloudError
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RecordSets {
   /**
    * Gets a record set.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   get is RecordSetOps.Read<RecordSet>;
 
   /**
    * Creates or updates a record set within a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   createOrUpdate is RecordSetOps.CreateOrUpdateSync<
     RecordSet,
     Parameters = {
       /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       IfMatch?: string;
 
       /**
        * Set to '*' to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-None-Match")
       IfNoneMatch?: string;
     }
@@ -130,7 +130,6 @@ interface RecordSets {
   /**
    * Updates a record set within a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   @patch(#{ implicitOptionality: false })
   update is RecordSetOps.CustomPatchAsync<
     RecordSet,
@@ -139,6 +138,7 @@ interface RecordSets {
       /**
        * The ETag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       IfMatch?: string;
     },
@@ -148,13 +148,13 @@ interface RecordSets {
   /**
    * Deletes a record set from a Private DNS zone. This operation cannot be undone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}/{+relativeRecordSetName}")
   delete is RecordSetOps.DeleteSync<
     RecordSet,
     Parameters = {
       /**
        * The ETag of the record set. Omit this value to always delete the current record set. Specify the last-seen ETag value to prevent accidentally deleting any concurrent changes.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       IfMatch?: string;
     }
@@ -163,7 +163,6 @@ interface RecordSets {
   /**
    * Lists the record sets of a specified type in a Private DNS zone.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateDnsZones/{privateZoneName}/{recordType}")
   listByType is RecordSetOperationOps.Read<
     RecordSet,
     Parameters = {

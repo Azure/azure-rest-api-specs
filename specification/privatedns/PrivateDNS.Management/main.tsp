@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
 /**
  * The Private DNS Management Client.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "PrivateDnsManagementClient" })
 @versioned(Versions)

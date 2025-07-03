@@ -26,7 +26,24 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-7.6-preview.2
+tag: package-7.6
+```
+
+### Tag: package-7.6
+
+These settings apply only when `--tag=package-7.6` is specified on the command line.
+
+```yaml $(tag) == 'package-7.6'
+input-file:
+  - Microsoft.KeyVault/stable/7.6/backuprestore.json
+  - Microsoft.KeyVault/stable/7.6/certificates.json
+  - Microsoft.KeyVault/stable/7.6/common.json
+  - Microsoft.KeyVault/stable/7.6/keys.json
+  - Microsoft.KeyVault/stable/7.6/rbac.json
+  - Microsoft.KeyVault/stable/7.6/secrets.json
+  - Microsoft.KeyVault/stable/7.6/securitydomain.json
+  - Microsoft.KeyVault/stable/7.6/settings.json
+  - Microsoft.KeyVault/stable/7.6/storage.json
 ```
 
 ### Tag: package-preview-7.6-preview.2
@@ -360,7 +377,7 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
