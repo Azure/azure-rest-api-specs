@@ -41,10 +41,10 @@ input-file:
   - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json
 directives:
-  - code: PatchBodyParametersSchema
+  - suppress: PatchBodyParametersSchema
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.PoolUpdate
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
-  - code: PatchBodyParametersSchema
+  - suppress: PatchBodyParametersSchema
     from:  $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}"].patch.EncryptionSetUpdate
     reason: Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
