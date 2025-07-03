@@ -211,12 +211,12 @@ model ActionOnUnmanageDeleteParameters {
 /**
  * Deployment stack properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility. TSP doc instructs this for 'allOf' for OpenAPI"
 model DeploymentStackProperties extends DeploymentStacksError {
   /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Template is a complex object"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   template?: Record<unknown>;
 
@@ -229,7 +229,7 @@ model DeploymentStackProperties extends DeploymentStacksError {
   /**
    * Name and value pairs that define the deployment parameters for the template. Use this element when providing the parameter values directly in the request, rather than linking to an existing parameter file. Use either the parametersLink property or the parameters property, but not both.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this object are determined by the template"
   parameters?: Record<DeploymentParameter>;
 
   /**
@@ -317,7 +317,7 @@ model DeploymentStackProperties extends DeploymentStacksError {
   /**
    * The outputs of the deployment resource created by the deployment stack.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of this object are determined by the template"
   @visibility(Lifecycle.Read)
   outputs?: Record<unknown>;
 
@@ -365,7 +365,7 @@ model DeploymentParameter {
   /**
    * Input value to the parameter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Value type is determined by the template. Discriminated model not made for back compat."
   value?: unknown;
 
   /**
@@ -561,7 +561,7 @@ model DeploymentStackTemplateDefinition {
   /**
    * The template content. Use this element to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Template is a complex object"
   template?: Record<unknown>;
 
   /**
@@ -617,7 +617,7 @@ model DeploymentStackValidateProperties {
   /**
    * Deployment parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys of the object are determined by the deployment template."
   parameters?: Record<DeploymentParameter>;
 
   /**
