@@ -11,7 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/mongoCluster.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-mongocluster"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.mongocluster"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -26,7 +26,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
@@ -36,15 +36,10 @@ options:
     clear-output-folder: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-mongocluster"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-mongocluster"
 linter:
   extends:

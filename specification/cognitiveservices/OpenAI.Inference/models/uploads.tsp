@@ -18,6 +18,7 @@ model CreateUploadRequest {
    *
    * Use 'assistants' for Assistants and Message files, 'vision' for Assistants image file inputs, 'batch' for Batch API, and 'fine-tune' for Fine-tuning.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   purpose: string | "assistants" | "batch" | "fine-tune" | "vision";
 
   /** The number of bytes in the file you are uploading. */
@@ -36,7 +37,7 @@ model CreateUploadRequest {
 @added(ServiceApiVersions.v2024_08_01_Preview)
 model AddUploadPartRequest {
   /** The chunk of bytes for this Part. */
-  data: bytes;
+  data: Http.HttpPart<bytes>;
 }
 
 /** The request body of an upload completion request. */
@@ -70,6 +71,7 @@ model Upload {
 
   // Reference: https://platform.openai.com/docs/api-reference/files/object#files/object-purpose
   /** The intended purpose of the file. */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   purpose:
     | string
     | "batch"
@@ -81,6 +83,7 @@ model Upload {
     | "vision";
 
   /** The status of the Upload. */
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
   status: string | "pending" | "completed" | "cancelled" | "expired";
 
   // Tool customization: 'created' and fields ending in '_at' are Unix encoded utcDateTime

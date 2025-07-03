@@ -18,7 +18,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
+/** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
@@ -29,9 +29,7 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service({
-  title: "Microsoft Cognitive Language Service - Text Analysis",
-})
+@service(#{ title: "Microsoft Cognitive Language Service - Text Analysis" })
 @server(
   "{Endpoint}/language",
   "Single server endpoint",
@@ -60,6 +58,10 @@ enum Versions {
   /** Version 2024-11-15-preview */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15_preview: "2024-11-15-preview",
+
+  /** Version 2025-05-15-preview */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_05_15_preview: "2025-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &

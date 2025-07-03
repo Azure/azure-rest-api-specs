@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2024-10
+tag: package-2025-02-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -37,11 +37,11 @@ license-header: MICROSOFT_MIT
 ```
 
 ```yaml $(package-passivestamp)
-tag: package-2024-10
+tag: package-passivestamp-2023-01-15
 ```
 
 ```yaml $(package-activestamp)
-tag: package-2024-10
+tag: package-2025-02-01
 ```
 
 ### Validations
@@ -53,6 +53,42 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+### Tag: package-preview-2025-02-28-preview
+
+These settings apply only when `--tag=package-preview-2025-02-28-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02-28-preview'
+input-file:
+  - Microsoft.RecoveryServices/preview/2025-02-28-preview/bms.json
+```
+
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-02-01/bms.json
+```
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-01-01/bms.json
+```
+
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-11-01-preview/bms.json
 ```
 
 ### Tag: package-2024-10
@@ -463,7 +499,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -504,7 +540,7 @@ directive:
     reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
   - suppress: LroErrorContent
     from: bms.json
-    reason: The azure backup service's API infra handles the conversation from execptions to custom error CloudError. Changing this would be breaking change for our service.
+    reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.
   - suppress: ConsistentPatchProperties  
     from: bms.json
     where: 

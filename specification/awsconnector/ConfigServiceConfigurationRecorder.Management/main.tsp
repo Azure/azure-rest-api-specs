@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -63,7 +61,7 @@ model ConfigServiceConfigurationRecorder
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConfigServiceConfigurationRecorder")
 model ConfigServiceConfigurationRecorderProperties {
   @doc("AWS Properties")
@@ -75,7 +73,7 @@ model ConfigServiceConfigurationRecorderProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsConfigServiceConfigurationRecorder")
 model AwsConfigServiceConfigurationRecorderProperties {
   @doc("<p>The name of the configuration recorder. Config automatically assigns the name of 'default' when creating the configuration recorder.</p> <note> <p>You cannot change the name of the configuration recorder after it has been created. To change the configuration recorder name, you must delete it and create a new configuration recorder with a new name. </p> </note>")
@@ -94,7 +92,7 @@ model AwsConfigServiceConfigurationRecorderProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingGroup")
 model RecordingGroup {
   @doc("<p>Specifies whether Config records configuration changes for all supported resource types, excluding the global IAM resource types.</p> <p>If you set this field to <code>true</code>, when Config adds support for a new resource type, Config starts recording resources of that type automatically.</p> <p>If you set this field to <code>true</code>, you cannot enumerate specific resource types to record in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>, or to exclude in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> <note> <p> <b>Region availability</b> </p> <p>Check <a href='https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html'>Resource Coverage by Region Availability</a> to see if a resource type is supported in the Amazon Web Services Region where you set up Config.</p> </note>")
@@ -110,7 +108,6 @@ model RecordingGroup {
   recordingStrategy?: RecordingStrategy;
 
   @doc("<p>A comma-separated list that specifies which resource types Config records.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>Resource Type Value</b> column in <a href='https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources'>Supported Amazon Web Services resource Types</a> in the <i>Config developer guide</i>.</p> <note> <p> <b>Required and optional fields</b> </p> <p>Optionally, you can set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>.</p> <p>To record all configuration changes, set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>, and either omit this field or don't specify any resource types in this field. If you set the <code>allSupported</code> field to <code>false</code> and specify values for <code>resourceTypes</code>, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> </note> <note> <p> <b>Region availability</b> </p> <p>Before specifying a resource type for Config to track, check <a href='https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html'>Resource Coverage by Region Availability</a> to see if the resource type is supported in the Amazon Web Services Region where you set up Config. If a resource type is supported by Config in at least one Region, you can enable the recording of that resource type in all Regions supported by Config, even if the specified resource type is not supported in the Amazon Web Services Region where you set up Config.</p> </note>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 
@@ -1343,7 +1340,7 @@ union ResourceType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceTypeEnumValue")
 model ResourceTypeEnumValue {
   @doc("Property value")
@@ -1353,14 +1350,14 @@ model ResourceTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingMode")
 model RecordingMode {
   @doc("<p>The default recording frequency that Config uses to record configuration changes.</p> <important> <p>Daily recording is not supported for the following resource types:</p> <ul> <li> <p> <code>AWS::Config::ResourceCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConformancePackCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConfigurationRecorder</code> </p> </li> </ul> <p>For the <b>allSupported</b> (<code>ALL_SUPPORTED_RESOURCE_TYPES</code>) recording strategy, these resource types will be set to Continuous recording.</p> </important>")
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>An array of <code>recordingModeOverride</code> objects for you to specify your overrides for the recording mode. The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   recordingModeOverrides?: RecordingModeOverride[];
 }
 
@@ -1378,7 +1375,7 @@ union RecordingFrequency {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingFrequencyEnumValue")
 model RecordingFrequencyEnumValue {
   @doc("Property value")
@@ -1388,18 +1385,17 @@ model RecordingFrequencyEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ExclusionByResourceTypes")
 model ExclusionByResourceTypes {
   @doc("<p>A comma-separated list of resource types to exclude from recording by the configuration recorder.</p>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingStrategy")
 model RecordingStrategy {
   @doc("<p>The recording strategy for the configuration recorder.</p> <ul> <li> <p>If you set this option to <code>ALL_SUPPORTED_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, excluding the global IAM resource types. You also must set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>. When Config adds support for a new resource type, Config automatically starts recording resources of that type. For a list of supported resource types, see <a href='https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources'>Supported Resource Types</a> in the <i>Config developer guide</i>.</p> </li> <li> <p>If you set this option to <code>INCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for only the resource types that you specify in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> </li> <li> <p>If you set this option to <code>EXCLUSION_BY_RESOURCE_TYPES</code>, Config records configuration changes for all supported resource types, except the resource types that you specify to exclude from being recorded in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </li> </ul> <note> <p> <b>Required and optional fields</b> </p> <p>The <code>recordingStrategy</code> field is optional when you set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>.</p> <p>The <code>recordingStrategy</code> field is optional when you list resource types in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a>.</p> <p>The <code>recordingStrategy</code> field is required if you list resource types to exclude from recording in the <code>resourceTypes</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_ExclusionByResourceTypes.html'>ExclusionByResourceTypes</a>.</p> </note> <note> <p> <b>Overriding fields</b> </p> <p>If you choose <code>EXCLUSION_BY_RESOURCE_TYPES</code> for the recording strategy, the <code>exclusionByResourceTypes</code> field will override other properties in the request.</p> <p>For example, even if you set <code>includeGlobalResourceTypes</code> to false, global IAM resource types will still be automatically recorded in this option unless those resource types are specifically listed as exclusions in the <code>resourceTypes</code> field of <code>exclusionByResourceTypes</code>.</p> </note> <note> <p> <b>Global resource types and the exclusion recording strategy</b> </p> <p>By default, if you choose the <code>EXCLUSION_BY_RESOURCE_TYPES</code> recording strategy, when Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types, Config starts recording resources of that type automatically.</p> <p>Unless specifically listed as exclusions, <code>AWS::RDS::GlobalCluster</code> will be recorded automatically in all supported Config Regions were the configuration recorder is enabled.</p> <p>IAM users, groups, roles, and customer managed policies will be recorded in the Region where you set up the configuration recorder if that is a Region where Config was available before February 2022. You cannot be record the global IAM resouce types in Regions supported by Config after February 2022. This list where you cannot record the global IAM resource types includes the following Regions:</p> <ul> <li> <p>Asia Pacific (Hyderabad)</p> </li> <li> <p>Asia Pacific (Melbourne)</p> </li> <li> <p>Canada West (Calgary)</p> </li> <li> <p>Europe (Spain)</p> </li> <li> <p>Europe (Zurich)</p> </li> <li> <p>Israel (Tel Aviv)</p> </li> <li> <p>Middle East (UAE)</p> </li> </ul> </note>")
@@ -1423,7 +1419,7 @@ union RecordingStrategyType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingStrategyTypeEnumValue")
 model RecordingStrategyTypeEnumValue {
   @doc("Property value")
@@ -1433,7 +1429,7 @@ model RecordingStrategyTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RecordingModeOverride")
 model RecordingModeOverride {
   @doc("<p>A description that you provide for the override.</p>")
@@ -1443,7 +1439,6 @@ model RecordingModeOverride {
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>A comma-separated list that specifies which resource types Config includes in the override.</p> <important> <p>Daily recording is not supported for the following resource types:</p> <ul> <li> <p> <code>AWS::Config::ResourceCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConformancePackCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConfigurationRecorder</code> </p> </li> </ul> </important>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "parameters": {
+      "properties": {
+        "groupId": "sites",
+        "privateLinkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp",
+        "requestMessage": "Please approve"
+      }
+    },
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySignalRService",
+    "replicaName": "mySignalRService-eastus",
+    "sharedPrivateLinkResourceName": "upstream"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "groupId": "sites",
+          "privateLinkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp",
+          "provisioningState": "Succeeded",
+          "requestMessage": "Please approve",
+          "status": "Approved"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/upstream",
+        "name": "upstream",
+        "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "groupId": "sites",
+          "privateLinkResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp",
+          "provisioningState": "Succeeded",
+          "requestMessage": "Please approve",
+          "status": "Approved"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/upstream",
+        "name": "upstream",
+        "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+      }
+    }
+  }
+}

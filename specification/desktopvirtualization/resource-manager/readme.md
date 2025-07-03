@@ -24,11 +24,39 @@ To see additional help and options, run:
 
 These are the global settings for the DesktopVirtualizationClient API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-preview-2024-08
+tag: package-preview-2025-03-01-preview
 ```
 
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2025-03-01-preview/desktopvirtualization.json
+suppressions:
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: Our service design forces this behavior -> The response in this new API aligns with an existing API (/sessionHostManagements/default/sessionHostUpdateStatuses/default). Those 2 APIs are tightly related and will be in the same public version, so we would want to make sure they share a similar pattern.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+```
+
+### Tag: package-preview-2024-11-01-preview
+
+These settings apply only when `--tag=package-preview-2024-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11-01-preview'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2024-11-01-preview/desktopvirtualization.json
+```
 
 ### Tag: package-preview-2024-08
 
@@ -49,21 +77,21 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: desktopvirtualization.json
-    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
+    reason: False positive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
   - code: XmsPageableForListCalls
     from: desktopvirtualization.json
-    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default'].*
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default'].*
   - code: EvenSegmentedPathForPutOperation
     from: desktopvirtualization.json
-    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    reason: False positive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
     where:
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default']
-        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default']
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default']
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default']
 ```
 
 ### Tag: package-2024-04
@@ -74,11 +102,12 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 input-file:
   - Microsoft.DesktopVirtualization/stable/2024-04-03/desktopvirtualization.json
 ```
+
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2024-03'
+```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-03-06-preview/desktopvirtualization.json
 suppressions:
@@ -91,7 +120,7 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2024-01'
+```yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-01-16-preview/desktopvirtualization.json
 suppressions:
@@ -104,7 +133,7 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-11'
+```yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2023-11-01-preview/desktopvirtualization.json
 suppressions:
@@ -117,7 +146,7 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-10'
+```yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2023-10-04-preview/desktopvirtualization.json
 suppressions:
@@ -129,32 +158,16 @@ suppressions:
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-09'
+```yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2023-09-05/desktopvirtualization.json
-```
-
-### Tag: package-preview-2023-07
-
-These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-07'
-input-file:
-  - Microsoft.DesktopVirtualization/preview/2023-07-07-preview/desktopvirtualization.json
-
-suppressions:
-  - code: ResourceNameRestriction
-    reason: ScalingPlan was already implemented in previous versions of the API and
-      we cannot change naming pattern now.
-  - code: PatchIdentityProperty
-    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
 ```
 
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-10'
+```yaml $(tag) == 'package-preview-2022-10'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2022-10-14-preview/desktopvirtualization.json
 ```
@@ -163,7 +176,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09'
+```yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2022-09-09/desktopvirtualization.json
 ```
@@ -172,7 +185,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-04'
+```yaml $(tag) == 'package-preview-2022-04'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2022-04-01-preview/desktopvirtualization.json
 ```
@@ -181,7 +194,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-02'
+```yaml $(tag) == 'package-preview-2022-02'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2022-02-10-preview/desktopvirtualization.json
 ```
@@ -190,7 +203,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-09'
+```yaml $(tag) == 'package-preview-2021-09'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2021-09-03-preview/desktopvirtualization.json
 ```
@@ -199,7 +212,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07'
+```yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.DesktopVirtualization/stable/2021-07-12/desktopvirtualization.json
 ```
@@ -208,89 +221,89 @@ input-file:
 
 These settings apply only when `--tag=package-2019-01-23-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-01-23-preview'
+```yaml $(tag) == 'package-2019-01-23-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2019-01-23-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2019-01-23-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2019-09-24-preview
 
 These settings apply only when `--tag=package-2019-09-24-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-09-24-preview'
+```yaml $(tag) == 'package-2019-09-24-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2019-09-24-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2019-09-24-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2019-12-10-preview
 
 These settings apply only when `--tag=package-2019-12-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-12-10-preview'
+```yaml $(tag) == 'package-2019-12-10-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2019-12-10-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2019-12-10-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2020-09-21-preview
 
 These settings apply only when `--tag=package-2020-09-21-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-09-21-preview'
+```yaml $(tag) == 'package-2020-09-21-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2020-09-21-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2020-10-19-preview
 
 These settings apply only when `--tag=package-2020-10-19-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-19-preview'
+```yaml $(tag) == 'package-2020-10-19-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2020-10-19-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2020-10-19-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2020-11-02-preview
 
 These settings apply only when `--tag=package-2020-11-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-11-02-preview'
+```yaml $(tag) == 'package-2020-11-02-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2020-11-02-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2020-11-02-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2020-11-10-preview
 
-``` yaml $(tag) == 'package-2020-11-10-preview'
+```yaml $(tag) == 'package-2020-11-10-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2020-11-10-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2020-11-10-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2021-01-14-preview
 
-``` yaml $(tag) == 'package-2021-01-14-preview'
+```yaml $(tag) == 'package-2021-01-14-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2021-02-01-preview
 
-``` yaml $(tag) == 'package-2021-02-01-preview'
+```yaml $(tag) == 'package-2021-02-01-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2021-03-09-preview
 
-``` yaml $(tag) == 'package-2021-03-09-preview'
+```yaml $(tag) == 'package-2021-03-09-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2021-03-09-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2021-03-09-preview/desktopvirtualization.json
 ```
 
 ### Tag: package-2021-04-01-preview
 
-``` yaml $(tag) == 'package-2021-04-01-preview'
+```yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-- Microsoft.DesktopVirtualization/preview/2021-04-01-preview/desktopvirtualization.json
+  - Microsoft.DesktopVirtualization/preview/2021-04-01-preview/desktopvirtualization.json
 ```
 
 ---
@@ -302,9 +315,9 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
