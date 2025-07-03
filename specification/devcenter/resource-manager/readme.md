@@ -40,13 +40,13 @@ input-file:
   - Microsoft.DevCenter/preview/2025-07-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json
-suppressions:
+directives:
   - code: PatchBodyParametersSchema
-    from: vdi.json
-    reason: Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json#L242. Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.PoolUpdate
+    reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
   - code: PatchBodyParametersSchema
-    from: devcenter.json
-    reason: Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json#L524. Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
+    from:  $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}"].patch.EncryptionSetUpdate
+    reason: Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
 ### Tag: package-preview-2025-04-01-preview
