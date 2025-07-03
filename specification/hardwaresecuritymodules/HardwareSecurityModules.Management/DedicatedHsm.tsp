@@ -23,7 +23,6 @@ model DedicatedHsm extends Foundations.TrackedResource {
     KeyName = "name",
     SegmentName = "dedicatedHSMs"
   >;
-
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
