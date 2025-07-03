@@ -950,3 +950,13 @@ model AnalyzeImageWithTextResult {
   @doc("The individual analysis result for each harm category.")
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Request parameters for getting a specific or latest version of a Custom Category.")
+model TextCustomCategoryGetRequest {
+  @doc("Name of the Custom Category.")
+  categoryName: string;
+
+  @doc("If not provided, it will return the latest version.")
+  version?: int32;
+}

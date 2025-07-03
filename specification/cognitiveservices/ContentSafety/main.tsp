@@ -5,9 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 @service(#{ title: "ContentSafety Service" })
 @versioned(ContentSafety.Versions)

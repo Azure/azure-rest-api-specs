@@ -5,7 +5,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -424,7 +423,7 @@ interface TextCustomizedCategoryOperations {
 
   @summary("Custom Category - Create")
   @doc("Create a new Custom Category or a new version of an existing Custom Category. This will submit a long running operation.")
-  createTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
+  createOrReplaceTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Custom Category - Get")
@@ -432,15 +431,7 @@ interface TextCustomizedCategoryOperations {
   @get
   @route("/text/categories/{categoryName}")
   getCustomizedCategory is Azure.Core.Foundations.Operation<
-    {
-      @path
-      @doc("Name of the Custom Category.")
-      categoryName: string;
-
-      @query
-      @doc("If not provided, it will return the latest version.")
-      version?: int32;
-    },
+    TextCustomCategoryGetRequest,
     TextCustomCategoryVersionList
   >;
 

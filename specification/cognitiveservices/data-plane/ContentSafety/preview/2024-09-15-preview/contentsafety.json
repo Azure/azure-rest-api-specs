@@ -1328,19 +1328,22 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "categoryName",
-            "in": "path",
-            "description": "Name of the Custom Category.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/TextCustomCategoryGetRequest.categoryName"
           },
           {
-            "name": "version",
-            "in": "query",
-            "description": "If not provided, it will return the latest version.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "If not provided, it will return the latest version."
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -1365,7 +1368,7 @@
         }
       },
       "put": {
-        "operationId": "TextCustomizedCategoryOperations_CreateTextCustomCategoryVersion",
+        "operationId": "TextCustomizedCategoryOperations_CreateOrReplaceTextCustomCategoryVersion",
         "summary": "Custom Category - Create",
         "description": "Create a new Custom Category or a new version of an existing Custom Category. This will submit a long running operation.",
         "parameters": [
@@ -4334,6 +4337,14 @@
       "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "operationId"
+    },
+    "TextCustomCategoryGetRequest.categoryName": {
+      "name": "categoryName",
+      "in": "path",
+      "description": "Name of the Custom Category.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
