@@ -365,10 +365,21 @@
   "definitions": {
     "AzureMonitorSettingsPublic": {
       "type": "object",
+      "required": [
+        "defaultAzureMonitorWorkspace"
+      ],
       "properties": {
         "defaultAzureMonitorWorkspace": {
           "type": "string",
           "description": "The ARM resource ID of the Azure monitor workspace account."
+        },
+        "defaultManagedIdentity": {
+          "type": "string",
+          "description": "The ARM resource ID of the default user managed identity."
+        },
+        "defaultActionGroup": {
+          "type": "string",
+          "description": "The ARM resource ID of the default action group."
         }
       }
     },
