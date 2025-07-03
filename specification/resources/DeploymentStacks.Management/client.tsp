@@ -11,7 +11,8 @@ using Microsoft.Resources.DeploymentStacks;
   "python"
 );
 
-@@clientName(DeploymentParameter, "DeploymentParameterContent"); // .NET SDK validation: cannot end in "Parameter"
+@@clientName(DeploymentParameter, "DeploymentParameterItem", "csharp"); // .NET SDK validation: cannot end in "Parameter"
 @@clientName(DeploymentStackTemplateDefinition,
-  "DeploymentStackTemplateExportResult"
+  "DeploymentStackTemplateExportResult",
+  "csharp"
 ); // .NET SDK validation: cannot end in "Definition"
