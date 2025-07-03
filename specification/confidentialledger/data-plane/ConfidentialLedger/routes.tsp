@@ -110,7 +110,7 @@ interface Operations {
       @bodyRoot
       entry: LedgerEntry;
     },
-    LedgerWriteResult
+    LedgerWriteResult & TransactionIdHeader
   >;
 
   /**
@@ -493,6 +493,7 @@ interface Operations {
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API contract"
       @statusCode statusCode: 200 | 201;
+      ...TransactionIdHeader;
     } & UserDefinedFunction
   >;
 

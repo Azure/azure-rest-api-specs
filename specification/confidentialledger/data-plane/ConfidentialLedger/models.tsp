@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
+using TypeSpec.Http;
 using Azure.Core;
 
 namespace ConfidentialLedger.Ledger;
@@ -922,3 +923,11 @@ model RoleAssignment {
    */
   description?: string;
 }
+
+alias TransactionIdHeader = {
+  /**
+   * The CCF transaction id.
+   */
+  @header("x-ms-ccf-transaction-id")
+  transactionId?: string;
+};
