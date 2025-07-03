@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai": {}
+              }
+            },
+            "kind": "AzurePowerShell",
+            "location": "westus",
+            "properties": {
+              "arguments": "-Location 'westus' -Name \"*rg2\"",
+              "azPowerShellVersion": "1.7.0",
+              "cleanupPreference": "Always",
+              "outputs": {
+                "output1": "value1"
+              },
+              "provisioningState": "Succeeded",
+              "retentionInterval": "PT7D",
+              "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
+              "status": {
+                "containerInstanceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.ContainerInstance/containerGroups/scriptContainer",
+                "endTime": "2018-11-13T15:19:45-08:00",
+                "expirationTime": "2018-11-13T15:19:45-08:00",
+                "startTime": "2018-11-13T15:19:45-08:00",
+                "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scriptRG/providers/Microsoft.Storage/storageAccounts/scriptStorage"
+              },
+              "timeout": "PT1H"
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DeploymentScripts_ListBySubscription",
+  "title": "DeploymentScriptsListBySubscription"
+}

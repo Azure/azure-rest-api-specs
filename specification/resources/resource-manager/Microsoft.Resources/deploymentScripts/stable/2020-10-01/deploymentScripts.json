@@ -2,17 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "DeploymentScriptsClient",
-    "description": "The APIs listed in this specification can be used to manage Deployment Scripts resource through the Azure Resource Manager.",
-    "version": "2020-10-01"
+    "version": "2020-10-01",
+    "description": "DeploymentScripts Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,23 +30,130 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "DeploymentScripts"
+    },
+    {
+      "name": "ScriptLogs"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/providers/DeploymentScriptsClient/deploymentScripts/{scriptName}": {
+      "get": {
+        "operationId": "DeploymentScripts_Get",
         "tags": [
           "DeploymentScripts"
         ],
+        "description": "Gets a deployment script with a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentScript"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentScriptsGet": {
+            "$ref": "./examples/DeploymentScripts_Get.json"
+          }
+        }
+      },
+      "put": {
         "operationId": "DeploymentScripts_Create",
-        "x-ms-long-running-operation": true,
+        "tags": [
+          "DeploymentScripts"
+        ],
         "description": "Creates a deployment script.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Deployment script supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentScript"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeploymentScript' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentScript"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeploymentScript' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentScript"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
           "DeploymentScriptsCreate": {
             "$ref": "./examples/DeploymentScripts_Create.json"
@@ -59,490 +171,223 @@
             "$ref": "./examples/DeploymentScripts_Create_Using_Existing_StorageAccount.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeploymentScripts_Update",
+        "tags": [
+          "DeploymentScripts"
+        ],
+        "description": "Updates deployment script tags with specified values.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScriptNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "deploymentScript",
-            "in": "body",
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
             "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Deployment script resource with the tags to be updated.",
+            "required": false,
             "schema": {
-              "$ref": "#/definitions/DeploymentScript"
-            },
-            "description": "Deployment script supplied to the operation."
+              "$ref": "#/definitions/DeploymentScriptUpdateParameter"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Deployment script is updated.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScript"
-            }
-          },
-          "201": {
-            "description": "Created -- Deployment script created.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DeploymentScript"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      },
-      "patch": {
-        "tags": [
-          "DeploymentScripts"
-        ],
-        "operationId": "DeploymentScripts_Update",
-        "description": "Updates deployment script tags with specified values.",
+        },
         "x-ms-examples": {
           "DeploymentScriptsUpdate": {
             "$ref": "./examples/DeploymentScripts_Update.json"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScriptNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "deploymentScript",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptUpdateParameter"
-            },
-            "description": "Deployment script resource with the tags to be updated."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Deployment script tags are updated.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScript"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "DeploymentScripts"
-        ],
-        "operationId": "DeploymentScripts_Get",
-        "description": "Gets a deployment script with a given name.",
-        "x-ms-examples": {
-          "DeploymentScriptsGet": {
-            "$ref": "./examples/DeploymentScripts_Get.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScriptNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returns information about the deployment script.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScript"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
-            }
-          }
         }
       },
       "delete": {
+        "operationId": "DeploymentScripts_Delete",
         "tags": [
           "DeploymentScripts"
         ],
-        "operationId": "DeploymentScripts_Delete",
         "description": "Deletes a deployment script. When operation completes, status code 200 returned without content.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
           "DeploymentScriptsDelete": {
             "$ref": "./examples/DeploymentScripts_Delete.json"
           }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ScriptNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Deployment script deleted."
-          },
-          "204": {
-            "description": "Deployment script does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
-            }
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentScripts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/DeploymentScriptsClient/deploymentScripts/{scriptName}/logs": {
       "get": {
+        "operationId": "ScriptLogs_GetLogs",
         "tags": [
-          "DeploymentScripts"
+          "ScriptLogs"
         ],
-        "operationId": "DeploymentScripts_ListBySubscription",
-        "description": "Lists all deployment scripts for a given subscription.",
-        "x-ms-examples": {
-          "DeploymentScriptsListBySubscription": {
-            "$ref": "./examples/DeploymentScripts_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returns a list of deployment scripts.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs": {
-      "get": {
-        "tags": [
-          "DeploymentScripts"
-        ],
-        "operationId": "DeploymentScripts_GetLogs",
         "description": "Gets deployment script logs for a given deployment script name.",
-        "x-ms-examples": {
-          "DeploymentScriptsGetLogs": {
-            "$ref": "./examples/DeploymentScripts_GetLogs.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScriptNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns deployment script logs if available.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ScriptLogsList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/DeploymentScriptsClient/deploymentScripts/{scriptName}/logs/default": {
       "get": {
+        "operationId": "ScriptLogs_GetLogsDefault",
         "tags": [
-          "DeploymentScripts"
+          "ScriptLogs"
         ],
-        "operationId": "DeploymentScripts_GetLogsDefault",
         "description": "Gets deployment script logs for a given deployment script name.",
-        "x-ms-examples": {
-          "DeploymentScriptsGetLogs": {
-            "$ref": "./examples/DeploymentScripts_GetLogsDefault.json"
-          },
-          "DeploymentScriptsGetLogsWithTail": {
-            "$ref": "./examples/DeploymentScripts_GetLogsDefaultWithTail.json"
-          }
-        },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ScriptNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "scriptName",
+            "in": "path",
+            "description": "Name of the deployment script.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "tail",
             "in": "query",
             "description": "The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.",
-            "type": "integer"
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returns deployment script logs if available.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ScriptLog"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts": {
-      "get": {
-        "tags": [
-          "DeploymentScripts"
-        ],
-        "operationId": "DeploymentScripts_ListByResourceGroup",
-        "description": "Lists deployments scripts.",
-        "x-ms-examples": {
-          "DeploymentScriptsList": {
-            "$ref": "./examples/DeploymentScripts_ListByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Returns a list of deployment scripts.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DeploymentScriptsError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "DeploymentScript": {
-      "required": [
-        "location",
-        "kind"
-      ],
-      "type": "object",
-      "description": "Deployment script object.",
-      "discriminator": "kind",
-      "properties": {
-        "identity": {
-          "description": "Optional property. Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported.",
-          "$ref": "#/definitions/ManagedServiceIdentity"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The location of the ACI and the storage account for the deployment script."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Type of the script.",
-          "enum": [
-            "AzurePowerShell",
-            "AzureCLI"
-          ],
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          }
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata related to this resource.",
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceBase"
-        }
-      ]
-    },
-    "DeploymentScriptUpdateParameter": {
-      "type": "object",
-      "description": "Deployment script parameters to be updated. ",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags to be updated.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceBase"
-        }
-      ]
-    },
-    "AzurePowerShellScript": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "AzurePowerShell",
-      "description": "Object model for the Azure PowerShell script.",
-      "properties": {
-        "properties": {
-          "description": "Properties of the Azure PowerShell script object.",
-          "$ref": "#/definitions/AzurePowerShellScriptProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentScript"
-        }
-      ]
-    },
-    "AzurePowerShellScriptProperties": {
-      "required": [
-        "azPowerShellVersion"
-      ],
-      "type": "object",
-      "description": "Properties of the Azure PowerShell script object.",
-      "properties": {
-        "azPowerShellVersion": {
-          "type": "string",
-          "description": "Azure PowerShell module version to be used."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentScriptPropertiesBase"
-        },
-        {
-          "$ref": "#/definitions/ScriptConfigurationBase"
-        }
-      ]
-    },
     "AzureCliScript": {
-      "required": [
-        "properties"
-      ],
       "type": "object",
-      "x-ms-discriminator-value": "AzureCLI",
       "description": "Object model for the Azure CLI script.",
       "properties": {
         "properties": {
-          "description": "Properties of the Azure CLI script object.",
           "$ref": "#/definitions/AzureCliScriptProperties",
-          "x-ms-client-flatten": true
+          "description": "Properties of the Azure CLI script object."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeploymentScript"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AzureCLI"
     },
     "AzureCliScriptProperties": {
-      "required": [
-        "azCliVersion"
-      ],
       "type": "object",
       "description": "Properties of the Azure CLI script object.",
       "properties": {
@@ -551,22 +396,115 @@
           "description": "Azure CLI module version to be used."
         }
       },
+      "required": [
+        "azCliVersion"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeploymentScriptPropertiesBase"
-        },
-        {
-          "$ref": "#/definitions/ScriptConfigurationBase"
         }
       ]
     },
-    "ScriptConfigurationBase": {
-      "required": [
-        "retentionInterval"
-      ],
+    "AzurePowerShellScript": {
       "type": "object",
-      "x-ms-external": true,
-      "description": "Common configuration settings for both Azure PowerShell and Azure CLI scripts.",
+      "description": "Object model for the Azure PowerShell script.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzurePowerShellScriptProperties",
+          "description": "Properties of the Azure PowerShell script object."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentScript"
+        }
+      ],
+      "x-ms-discriminator-value": "AzurePowerShell"
+    },
+    "AzurePowerShellScriptProperties": {
+      "type": "object",
+      "description": "Properties of the Azure PowerShell script object.",
+      "properties": {
+        "azPowerShellVersion": {
+          "type": "string",
+          "description": "Azure PowerShell module version to be used."
+        }
+      },
+      "required": [
+        "azPowerShellVersion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentScriptPropertiesBase"
+        }
+      ]
+    },
+    "AzureResourceBase": {
+      "type": "object",
+      "description": "Common properties for all Azure resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "String Id used to locate any resource on Azure.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerConfiguration": {
+      "type": "object",
+      "description": "Settings to customize ACI container instance.",
+      "properties": {
+        "containerGroupName": {
+          "type": "string",
+          "description": "Container group name, if not specified then the name will get auto-generated. Not specifying a 'containerGroupName' indicates the system to generate a unique name which might end up flagging an Azure Policy as non-compliant. Use 'containerGroupName' when you have an Azure Policy that expects a specific naming convention or when you want to fully control the name. 'containerGroupName' property must be between 1 and 63 characters long, must contain only lowercase letters, numbers, and dashes and it cannot start or end with a dash and consecutive dashes are not allowed. To specify a 'containerGroupName', add the following object to properties: { \"containerSettings\": { \"containerGroupName\": \"contoso-container\" } }. If you do not want to specify a 'containerGroupName' then do not add 'containerSettings' property.",
+          "minLength": 1,
+          "maxLength": 63
+        }
+      }
+    },
+    "DeploymentScript": {
+      "type": "object",
+      "description": "Deployment script object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentScriptPropertiesBase",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Optional property. Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported."
+        },
+        "kind": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "Type of the script."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeploymentScriptPropertiesBase": {
+      "type": "object",
+      "description": "Common properties for the deployment script.",
       "properties": {
         "primaryScriptUri": {
           "type": "string",
@@ -576,8 +514,7 @@
           "type": "array",
           "description": "Supporting files for the external script.",
           "items": {
-            "type": "string",
-            "description": "Supporting file Uri."
+            "type": "string"
           }
         },
         "scriptContent": {
@@ -586,11 +523,11 @@
         },
         "arguments": {
           "type": "string",
-          "description": "Command line arguments to pass to the script. Arguments are separated by spaces. ex: -Name blue* -Location 'West US 2' "
+          "description": "Command line arguments to pass to the script. Arguments are separated by spaces. ex: -Name blue* -Location 'West US 2'"
         },
         "environmentVariables": {
-          "description": "The environment variables to pass over to the script.",
           "type": "array",
+          "description": "The environment variables to pass over to the script.",
           "items": {
             "$ref": "#/definitions/EnvironmentVariable"
           },
@@ -610,84 +547,297 @@
         "timeout": {
           "type": "string",
           "format": "duration",
-          "default": "P1D",
           "description": "Maximum allowed script execution time specified in ISO 8601 format. Default value is P1D"
-        }
-      }
-    },
-    "DeploymentScriptPropertiesBase": {
-      "type": "object",
-      "x-ms-external": true,
-      "description": "Common properties for the deployment script.",
-      "properties": {
+        },
         "containerSettings": {
-          "type": "object",
-          "description": "Container settings.",
-          "$ref": "#/definitions/ContainerConfiguration"
+          "$ref": "#/definitions/ContainerConfiguration",
+          "description": "Container settings."
         },
         "storageAccountSettings": {
-          "type": "object",
-          "description": "Storage Account settings.",
-          "$ref": "#/definitions/StorageAccountConfiguration"
+          "$ref": "#/definitions/StorageAccountConfiguration",
+          "description": "Storage Account settings."
         },
         "cleanupPreference": {
           "type": "string",
           "description": "The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.",
+          "default": "Always",
           "enum": [
             "Always",
             "OnSuccess",
             "OnExpiration"
           ],
-          "default": "Always",
           "x-ms-enum": {
-            "name": "cleanupOptions",
-            "modelAsString": true
+            "name": "CleanupOptions",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Always",
+                "value": "Always",
+                "description": "Always clean up the resources created by the script execution."
+              },
+              {
+                "name": "OnSuccess",
+                "value": "OnSuccess",
+                "description": "Clean up the resources created by the script execution only if the script execution is successful."
+              },
+              {
+                "name": "OnExpiration",
+                "value": "OnExpiration",
+                "description": "Clean up the resources created by the script execution only on expiration."
+              }
+            ]
           }
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
+          "$ref": "#/definitions/ScriptProvisioningState",
           "description": "State of the script execution. This only appears in the response.",
-          "enum": [
-            "Creating",
-            "ProvisioningResources",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "ScriptProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "status": {
-          "type": "object",
-          "readOnly": true,
+          "$ref": "#/definitions/ScriptStatus",
           "description": "Contains the results of script execution.",
-          "$ref": "#/definitions/ScriptStatus"
+          "readOnly": true
         },
         "outputs": {
-          "description": "List of script outputs.",
           "type": "object",
-          "readOnly": true,
+          "description": "List of script outputs.",
           "additionalProperties": {
-            "type": "object",
-            "description": "Script output in <name, value> pair."
+            "additionalProperties": {},
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "retentionInterval"
+      ]
+    },
+    "DeploymentScriptUpdateParameter": {
+      "type": "object",
+      "description": "Deployment script parameters to be updated.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags to be updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
+      ]
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "The environment variable to pass to the script in the container instance.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the environment variable."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the environment variable."
+        },
+        "secureValue": {
+          "type": "string",
+          "description": "The value of the secure environment variable."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "LogProperties": {
+      "type": "object",
+      "description": "Script log properties.",
+      "properties": {
+        "log": {
+          "type": "string",
+          "description": "Script execution logs in text format.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Describes the managed identities for an Azure resource.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "Type of the managed identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the managed identity.",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
       }
     },
-    "ContainerConfiguration": {
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of the managed identity.",
+      "enum": [
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity."
+          }
+        ]
+      }
+    },
+    "ScriptLog": {
       "type": "object",
-      "description": "Settings to customize ACI container instance.",
+      "description": "Script execution log object.",
       "properties": {
-        "containerGroupName": {
-          "type": "string",
-          "description": "Container group name, if not specified then the name will get auto-generated. Not specifying a 'containerGroupName' indicates the system to generate a unique name which might end up flagging an Azure Policy as non-compliant. Use 'containerGroupName' when you have an Azure Policy that expects a specific naming convention or when you want to fully control the name. 'containerGroupName' property must be between 1 and 63 characters long, must contain only lowercase letters, numbers, and dashes and it cannot start or end with a dash and consecutive dashes are not allowed. To specify a 'containerGroupName', add the following object to properties: { \"containerSettings\": { \"containerGroupName\": \"contoso-container\" } }. If you do not want to specify a 'containerGroupName' then do not add 'containerSettings' property.",
-          "minLength": 1,
-          "maxLength": 63
+        "properties": {
+          "$ref": "#/definitions/LogProperties",
+          "description": "Script log properties."
         }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScriptLogsList": {
+      "type": "object",
+      "description": "Deployment script execution logs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Deployment scripts logs.",
+          "items": {
+            "$ref": "#/definitions/ScriptLog"
+          }
+        }
+      }
+    },
+    "ScriptProvisioningState": {
+      "type": "string",
+      "description": "State of the script execution. This only appears in the response.",
+      "enum": [
+        "Creating",
+        "ProvisioningResources",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The script is being created."
+          },
+          {
+            "name": "ProvisioningResources",
+            "value": "ProvisioningResources",
+            "description": "The script is provisioning resources."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The script is running."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The script execution is succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The script execution has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The script was canceled."
+          }
+        ]
+      }
+    },
+    "ScriptStatus": {
+      "type": "object",
+      "description": "Generic object modeling results of script execution.",
+      "properties": {
+        "containerInstanceId": {
+          "type": "string",
+          "description": "ACI resource Id.",
+          "readOnly": true
+        },
+        "storageAccountId": {
+          "type": "string",
+          "description": "Storage account resource Id.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the script execution.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the script execution.",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the deployment script resource will expire.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "description": "Error that is relayed from the script execution."
+        }
+      }
+    },
+    "ScriptType": {
+      "type": "string",
+      "description": "Type of the script.",
+      "enum": [
+        "AzurePowerShell",
+        "AzureCLI"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzurePowerShell",
+            "value": "AzurePowerShell",
+            "description": "Azure PowerShell script."
+          },
+          {
+            "name": "AzureCLI",
+            "value": "AzureCLI",
+            "description": "Azure CLI script."
+          }
+        ]
       }
     },
     "StorageAccountConfiguration": {
@@ -700,76 +850,7 @@
         },
         "storageAccountKey": {
           "type": "string",
-          "description": "The storage account access key.",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "ScriptStatus": {
-      "type": "object",
-      "description": "Generic object modeling results of script execution.",
-      "properties": {
-        "containerInstanceId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ACI resource Id."
-        },
-        "storageAccountId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Storage account resource Id."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Start time of the script execution."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "End time of the script execution."
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Time the deployment script resource will expire."
-        },
-        "error": {
-          "description": "Error that is relayed from the script execution.",
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Managed identity generic object.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the managed identity.",
-          "enum": [
-            "UserAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ManagedServiceIdentityType",
-            "modelAsString": true
-          }
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "ID of the Azure Active Directory."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user-assigned managed identities associated with the resource. Key is the Azure resource Id of the managed identity.",
-          "additionalProperties": {
-            "description": "User-assigned managed identity.",
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
+          "description": "The storage account access key."
         }
       }
     },
@@ -778,161 +859,17 @@
       "description": "User-assigned managed identity.",
       "properties": {
         "principalId": {
-          "readOnly": true,
           "type": "string",
-          "description": "Azure Active Directory principal ID associated with this identity."
+          "description": "Azure Active Directory principal ID associated with this identity.",
+          "readOnly": true
         },
         "clientId": {
-          "readOnly": true,
           "type": "string",
-          "description": "Client App Id associated with this identity."
+          "description": "Client App Id associated with this identity.",
+          "readOnly": true
         }
       }
-    },
-    "EnvironmentVariable": {
-      "description": "The environment variable to pass to the script in the container instance.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the environment variable."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the environment variable."
-        },
-        "secureValue": {
-          "type": "string",
-          "description": "The value of the secure environment variable.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "DeploymentScriptListResult": {
-      "description": "List of deployment scripts.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentScript"
-          },
-          "description": "An array of deployment scripts."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      }
-    },
-    "ScriptLogsList": {
-      "description": "Deployment script execution logs.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ScriptLog"
-          },
-          "description": "Deployment scripts logs."
-        }
-      }
-    },
-    "ScriptLog": {
-      "type": "object",
-      "description": "Script execution log object.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LogProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceBase"
-        }
-      ]
-    },
-    "LogProperties": {
-      "type": "object",
-      "description": "Script log properties.",
-      "properties": {
-        "log": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Script execution logs in text format."
-        }
-      }
-    },
-    "AzureResourceBase": {
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "description": "Common properties for all Azure resources.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "String Id used to locate any resource on Azure."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of this resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Type of this resource."
-        }
-      }
-    },
-    "DeploymentScriptsError": {
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "Deployment scripts error response."
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client",
-      "description": "Subscription Id which forms part of the URI for every service call."
-    },
-    "ScriptNameParameter": {
-      "name": "scriptName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the deployment script.",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group. The name is case insensitive.",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client",
-      "description": "Client Api version."
-    }
-  }
+  "parameters": {}
 }
