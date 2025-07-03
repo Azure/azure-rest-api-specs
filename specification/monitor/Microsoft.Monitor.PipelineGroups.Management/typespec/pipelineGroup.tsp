@@ -274,7 +274,7 @@ interface PipelineGroups {
 
   @doc("This method is used to execute a transform configuration to be used in a pipeline group.")
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-  transform is ArmResourceActionSync<
+  executeTransform is ArmResourceActionSync<
     PipelineGroup,
     TransformRequest,
     TransformResponse
