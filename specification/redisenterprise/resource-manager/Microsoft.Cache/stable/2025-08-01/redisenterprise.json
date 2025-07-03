@@ -2099,8 +2099,23 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this Redis Enterprise cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "publicNetworkAccess"
+      ]
     },
     "ClusterList": {
       "type": "object",
@@ -2309,23 +2324,8 @@
             "name": "accessKeysAuthentication",
             "modelAsString": true
           }
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether or not public endpoint access is allowed for this Redis Enterprise database.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          }
         }
-      },
-      "required": [
-        "publicNetworkAccess"
-      ]
+      }
     },
     "DatabaseList": {
       "type": "object",
