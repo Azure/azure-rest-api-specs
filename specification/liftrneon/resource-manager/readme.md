@@ -27,7 +27,7 @@ These are the global settings for the neon service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-01
+tag: 2025-06-23-preview
 ```
 
 ### Tag: package-2025-03-01
