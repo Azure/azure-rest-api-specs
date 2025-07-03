@@ -256,6 +256,45 @@ op isEcsFlightEnabled(
 @body flightEnabledRequest : FlightEnabledRequest,
 ): boolean;
 
+@post
+@route("/skillContext/setEvaluateAsAgent")
+@doc("")
+op setEvaluateAsAgent(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): NoContentResponse;
+
+@post
+@route("/skillContext/updateAgentConversation")
+@doc("")
+op updateAgentConversation(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body conversation: string,
+): NoContentResponse;
+
+@post
+@route("/skillContext/updateAgentResponse")
+@doc("")
+op updateAgentResponse(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body response: string,
+): NoContentResponse;
+
+@post
+@route("/skillContext/enqueueChildPrompt")
+@doc("")
+op enqueueChildPrompt(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body childEvaluationRequest: ChildEvaluationRequest,
+): string;
+
+@get
+@route("/skillContext/yieldForChildren")
+@doc("")
+op yieldForChildren(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+): boolean;
+
+
 //TODO: move this to a different file
 // Dynamic Prompts API
 @post

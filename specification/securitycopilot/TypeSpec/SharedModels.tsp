@@ -282,6 +282,9 @@ model SkillDescriptor {
 
     @doc("EnableVariableSubstitutionInCompose")
     enableVariableSubstitutionInCompose: boolean;
+
+    @doc("Description for use with LLM to decide on skill selection, etc.  Not for end-user consumption.")
+    descriptionForModel: string;
 }
 
 @doc("The descriptor of a skill dependency")

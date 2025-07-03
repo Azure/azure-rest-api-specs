@@ -883,6 +883,27 @@ namespace SkillContext
 		Episodic: "Episodic",
 	}
 
+	@doc("")
+	model ChildEvaluationRequest {
+		promptId: string;
+		promptType: PromptType;
+		evaluationType: EvaluationType;
+		skillsetName: string;
+		skillName: string;
+		hideNode: boolean;
+		content: string;
+		inputs: SkillVariableCollection;
+		parallelExecutionIndex: int32;
+		afterPromptId: string;
+	}
+
+	@doc("")
+	enum EvaluationType {
+		unknown,
+		normal,
+		waitForInput,
+	}
+
 	@doc("PromptBuilder")
 	model PromptBuilder {
 		@doc("SkillName")
