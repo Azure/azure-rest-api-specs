@@ -1,5 +1,21 @@
-import { OpenAPI2Document, OpenAPI2PathItem, HttpMethod, OpenAPI2Operation, OpenAPI2Schema, OpenAPI2Parameter, Ref, Refable, OpenAPI2Response, OpenAPI2SchemaProperty, OpenAPI2SchemaRefProperty } from "@azure-tools/typespec-autorest";
-import { isApiVersionParameter, isResourceGroupNameParameter, isSubscriptionIdParameter } from "./parameter.js";
+import {
+  OpenAPI2Document,
+  OpenAPI2PathItem,
+  HttpMethod,
+  OpenAPI2Operation,
+  OpenAPI2Schema,
+  OpenAPI2Parameter,
+  Ref,
+  Refable,
+  OpenAPI2Response,
+  OpenAPI2SchemaProperty,
+  OpenAPI2SchemaRefProperty,
+} from "@azure-tools/typespec-autorest";
+import {
+  isApiVersionParameter,
+  isResourceGroupNameParameter,
+  isSubscriptionIdParameter,
+} from "./parameter.js";
 import { configuration } from "./configuration.js";
 
 let originalDocument: OpenAPI2Document | undefined = undefined;
@@ -31,11 +47,12 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
     const path = document.paths[route] as OpenAPI2PathItem;
     const processedPath = processPath(path);
     if (configuration.ignorePathCase) {
-      const normalizedRoute = route.replace(/\/resourcegroups\//i, '/resourceGroups/').replace(/\/subscriptions\//i, '/subscriptions/');
-      delete newDocument.paths[route];  
+      const normalizedRoute = route
+        .replace(/\/resourcegroups\//i, "/resourceGroups/")
+        .replace(/\/subscriptions\//i, "/subscriptions/");
+      delete newDocument.paths[route];
       newDocument.paths[normalizedRoute] = processedPath;
-    }
-    else {
+    } else {
       newDocument.paths[route] = processedPath;
     }
   }
@@ -57,7 +74,16 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
 
 function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
   function isHttpMethod(key: string): key is HttpMethod {
-    const httpMethods: HttpMethod[] = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
+    const httpMethods: HttpMethod[] = [
+      "get",
+      "put",
+      "post",
+      "delete",
+      "options",
+      "head",
+      "patch",
+      "trace",
+    ];
     return httpMethods.includes(key as HttpMethod);
   }
 
@@ -75,19 +101,19 @@ function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
 
 function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   const newOperation = deepCopy(operation);
-  let index = newOperation.parameters.findIndex(p => isApiVersionParameter(p));
+  let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
   }
-  index = newOperation.parameters.findIndex(p => isSubscriptionIdParameter(p));
+  index = newOperation.parameters.findIndex((p) => isSubscriptionIdParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
   }
-  index = newOperation.parameters.findIndex(p => isResourceGroupNameParameter(p));
+  index = newOperation.parameters.findIndex((p) => isResourceGroupNameParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
   }
-  newOperation.parameters = newOperation.parameters.map(p => processParameter(p));
+  newOperation.parameters = newOperation.parameters.map((p) => processParameter(p));
 
   for (const response in operation.responses) {
     const responseObject = operation.responses[response] as OpenAPI2Response;
@@ -99,7 +125,10 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   if (newOperation["x-ms-long-running-operation"] === false) {
     delete newOperation["x-ms-long-running-operation"];
   }
-  if (newOperation["x-ms-long-running-operation-options"] && newOperation["x-ms-long-running-operation-options"]["final-state-via"] === "location") {
+  if (
+    newOperation["x-ms-long-running-operation-options"] &&
+    newOperation["x-ms-long-running-operation-options"]["final-state-via"] === "location"
+  ) {
     delete newOperation["x-ms-long-running-operation-options"];
   }
 
@@ -110,10 +139,18 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
     delete newOperation["x-ms-pageable"]["itemName"];
   }
 
-  if (newOperation.produces && (newOperation.produces.length === 1 && newOperation.produces[0] === "application/json" || newOperation.produces.length === 0)) {
+  if (
+    newOperation.produces &&
+    ((newOperation.produces.length === 1 && newOperation.produces[0] === "application/json") ||
+      newOperation.produces.length === 0)
+  ) {
     delete newOperation.produces;
   }
-  if (newOperation.consumes && (newOperation.consumes.length === 1 && newOperation.consumes[0] === "application/json" || newOperation.consumes.length === 0)) {
+  if (
+    newOperation.consumes &&
+    ((newOperation.consumes.length === 1 && newOperation.consumes[0] === "application/json") ||
+      newOperation.consumes.length === 0)
+  ) {
     delete newOperation.consumes;
   }
 
@@ -131,7 +168,6 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   }
   return newOperation;
 }
-
 
 function processResponse(response: OpenAPI2Response): OpenAPI2Response {
   const newResponse: OpenAPI2Response = deepCopy(response);
@@ -160,8 +196,7 @@ function processParameter(parameter: Refable<OpenAPI2Parameter>): Refable<OpenAP
         return processParameter(originalParameter);
       }
     }
-  }
-  else {
+  } else {
     const inlineParameter = parameter as OpenAPI2Parameter;
     if ((parameter as any).enum && (newParameter as any)["x-ms-enum"]?.["values"]) {
       delete (newParameter as any)["x-ms-enum"]["values"];
@@ -203,7 +238,10 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
     delete newDefinition.additionalProperties;
   }
 
-  if ((newDefinition.properties || newDefinition.additionalProperties) && newDefinition.type === undefined) {
+  if (
+    (newDefinition.properties || newDefinition.additionalProperties) &&
+    newDefinition.type === undefined
+  ) {
     newDefinition.type = "object";
   }
 
@@ -211,8 +249,14 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
     newDefinition.allOf = newDefinition.allOf.map((item) => {
       if ((item as Ref<OpenAPI2Schema>).$ref) {
         const refPath = (item as Ref<OpenAPI2Schema>).$ref;
-        if (refPath === "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource") {
-          return { ...item, "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource" };
+        if (
+          refPath ===
+          "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        ) {
+          return {
+            ...item,
+            $ref: "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          };
         }
       }
       return item;
@@ -237,7 +281,9 @@ function processDefinition(definition: OpenAPI2Schema): OpenAPI2Schema {
 }
 
 function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProperty {
-  function isOpenAPI2SchemaRefProperty(prop: OpenAPI2SchemaProperty): prop is OpenAPI2SchemaRefProperty {
+  function isOpenAPI2SchemaRefProperty(
+    prop: OpenAPI2SchemaProperty,
+  ): prop is OpenAPI2SchemaRefProperty {
     return (prop as OpenAPI2SchemaRefProperty).$ref !== undefined;
   }
 
@@ -254,8 +300,10 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
           (newProperty as any)[key] = (processedDefinition as any)[key as string];
         }
         delete (newProperty as any).$ref;
-      }
-      else if (originalDefinition?.type && ["boolean", "integer", "number", "string"].includes(originalDefinition.type)) {
+      } else if (
+        originalDefinition?.type &&
+        ["boolean", "integer", "number", "string"].includes(originalDefinition.type)
+      ) {
         delete (newProperty as any).$ref;
         for (const key in originalDefinition) {
           (newProperty as any)[key] = (originalDefinition as any)[key];
@@ -277,14 +325,16 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
             delete (newProperty.items as any).$ref;
           }
         }
-      }
-      else {
+      } else {
         processEnumInplace(newProperty.items as OpenAPI2Schema);
       }
     }
 
     processEnumInplace(newProperty);
-    if ((newProperty.properties || newProperty.additionalProperties) && newProperty.type === undefined) {
+    if (
+      (newProperty.properties || newProperty.additionalProperties) &&
+      newProperty.type === undefined
+    ) {
       newProperty.type = "object";
     }
   }
@@ -297,9 +347,11 @@ function processProperty(property: OpenAPI2SchemaProperty): OpenAPI2SchemaProper
     delete (newProperty as OpenAPI2Schema).uniqueItems;
   }
   if (newProperty["x-ms-mutability"]) {
-    newProperty["x-ms-mutability"] = newProperty["x-ms-mutability"].sort((a, b) => a.localeCompare(b));
+    newProperty["x-ms-mutability"] = newProperty["x-ms-mutability"].sort((a, b) =>
+      a.localeCompare(b),
+    );
   }
-  if ((newProperty as any)["uniqueItems"]  === false) {
+  if ((newProperty as any)["uniqueItems"] === false) {
     delete (newProperty as any)["uniqueItems"];
   }
 
@@ -345,7 +397,8 @@ function processPageModel(definition: OpenAPI2Schema): OpenAPI2Schema {
 
   newDefinition.description = "[Placeholder] Discription for page model";
   newDefinition.properties!["value"]!.description = "[Placeholder] Discription for value property";
-  newDefinition.properties!["nextLink"]!.description = "[Placeholder] Discription for nextLink property";
+  newDefinition.properties!["nextLink"]!.description =
+    "[Placeholder] Discription for nextLink property";
   (newDefinition.properties!["nextLink"] as any)["format"] = "uri";
   if (newDefinition.properties!["nextLink"]?.readOnly) {
     delete newDefinition.properties!["nextLink"]?.readOnly;
@@ -359,7 +412,7 @@ function deepCopy<T>(value: T): T {
     return value;
   }
 
-  if (typeof value !== 'object') {
+  if (typeof value !== "object") {
     return value;
   }
 
@@ -368,7 +421,7 @@ function deepCopy<T>(value: T): T {
   }
 
   if (Array.isArray(value)) {
-    return value.map(item => deepCopy(item)) as unknown as T;
+    return value.map((item) => deepCopy(item)) as unknown as T;
   }
 
   const result: Record<string, any> = {};
