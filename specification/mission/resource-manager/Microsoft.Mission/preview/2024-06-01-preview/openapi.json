@@ -3703,7 +3703,10 @@
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "serviceId"
+          ]
         }
       }
     },
@@ -3739,17 +3742,15 @@
           },
           "readOnly": true
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
-          "readOnly": true
-        },
         "governedServiceList": {
           "type": "array",
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "serviceId"
+          ]
         }
       }
     },
@@ -4413,7 +4414,10 @@
           "description": "Subnet Configurations.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "subnetResourceId"
+          ]
         },
         "allowSubnetCommunication": {
           "type": "boolean",
@@ -5243,7 +5247,7 @@
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
+          "description": "Managed resource group name.",
           "readOnly": true
         },
         "bastionEnabled": {

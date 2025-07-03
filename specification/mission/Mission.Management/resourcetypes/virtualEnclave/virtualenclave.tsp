@@ -30,20 +30,11 @@ union DiagnosticDestination {
 
 @doc("Subnet Configuration")
 model SubnetConfiguration {
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Subnet name.")
-  name: string;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "name")
   @doc("Subnet name.")
   subnetName: string;
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Subnet Resource ID.")
-  @visibility(Lifecycle.Read)
-  id?: SubnetResourceId;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "id")
   @doc("Subnet Resource ID.")
   @visibility(Lifecycle.Read)
   subnetResourceId?: SubnetResourceId;
@@ -58,12 +49,10 @@ model SubnetConfiguration {
   @visibility(Lifecycle.Read)
   addressPrefix?: string;
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Network security group ID.")
-  @visibility(Lifecycle.Read)
-  networkSecurityGroupId?: NsgResourceId;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    "networkSecurityGroupId"
+  )
   @doc("Network security group ID.")
   @visibility(Lifecycle.Read)
   networkSecurityGroupResourceId?: NsgResourceId;
@@ -71,11 +60,7 @@ model SubnetConfiguration {
 
 @doc("Enclave Virtual Network Properties")
 model EnclaveVirtualNetworkModel {
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Network Name.")
-  name?: string;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "name")
   @doc("Network Name.")
   networkName?: string;
 
@@ -88,6 +73,7 @@ model EnclaveVirtualNetworkModel {
   customCidrRange?: string;
 
   @doc("Subnet Configurations.")
+  @OpenAPI.extension("x-ms-identifiers", #["subnetResourceId"])
   subnetConfigurations?: SubnetConfiguration[];
 
   @doc("Allow Subnet Communication.")
@@ -152,12 +138,14 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read)
   resourceCollection?: armResourceIdentifier[];
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Managed resource group configuration.")
-  @visibility(Lifecycle.Read)
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    "managedResourceGroupConfiguration"
+  )
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    ManagedResourceGroupConfiguration
+  )
   @doc("Managed resource group name.")
   @visibility(Lifecycle.Read)
   managedResourceGroupName?: string;
@@ -172,14 +160,17 @@ model VirtualEnclaveBaseModel {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Enclave role assignments")
+  @OpenAPI.extension("x-ms-identifiers", #["roleDefinitionId"])
   enclaveRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Workload role assignments")
+  @OpenAPI.extension("x-ms-identifiers", #["roleDefinitionId"])
   workloadRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Enclave specific policies")
+  @OpenAPI.extension("x-ms-identifiers", #["serviceId"])
   governedServiceList?: GovernedServiceItem[];
 }
 

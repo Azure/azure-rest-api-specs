@@ -4445,14 +4445,20 @@
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "serviceId"
+          ]
         },
         "communityRoleAssignments": {
           "type": "array",
           "description": "Community role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettingsPatchProperties",
@@ -4496,24 +4502,25 @@
           },
           "readOnly": true
         },
-        "managedResourceGroupConfiguration": {
-          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
-          "readOnly": true
-        },
         "governedServiceList": {
           "type": "array",
           "description": "List of services governed by a community.",
           "items": {
             "$ref": "#/definitions/GovernedServiceItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "serviceId"
+          ]
         },
         "communityRoleAssignments": {
           "type": "array",
           "description": "Community role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "approvalSettings": {
           "$ref": "#/definitions/ApprovalSettings",
@@ -5177,7 +5184,10 @@
           "description": "Subnet Configurations.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
-          }
+          },
+          "x-ms-identifiers": [
+            "subnetResourceId"
+          ]
         },
         "allowSubnetCommunication": {
           "type": "boolean",
@@ -6025,14 +6035,20 @@
           "description": "Enclave role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "workloadRoleAssignments": {
           "type": "array",
           "description": "Workload role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "enclaveDefaultSettings": {
           "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",
@@ -6082,7 +6098,7 @@
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
-          "description": "Managed resource group configuration.",
+          "description": "Managed resource group name.",
           "readOnly": true
         },
         "bastionEnabled": {
@@ -6095,14 +6111,20 @@
           "description": "Enclave role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "workloadRoleAssignments": {
           "type": "array",
           "description": "Workload role assignments",
           "items": {
             "$ref": "#/definitions/RoleAssignmentItem"
-          }
+          },
+          "x-ms-identifiers": [
+            "roleDefinitionId"
+          ]
         },
         "enclaveDefaultSettings": {
           "$ref": "#/definitions/EnclaveDefaultSettingsModel",

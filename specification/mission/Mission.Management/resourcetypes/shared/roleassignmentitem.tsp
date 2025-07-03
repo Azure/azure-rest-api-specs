@@ -7,11 +7,7 @@ namespace Microsoft.Mission;
 
 @doc("Role assignment item that indicates which principals should be assigned this role definition")
 model RoleAssignmentItem {
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Role definition identifier")
-  id: string;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "id")
   @doc("Role definition identifier")
   roleDefinitionId: string;
 

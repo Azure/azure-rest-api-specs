@@ -138,14 +138,17 @@ model CommunityBaseModel {
   @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
   resourceCollection?: armResourceIdentifier[];
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Managed resource group configuration.")
-  @visibility(Lifecycle.Read)
-  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed resource group name.")
   @visibility(Lifecycle.Read)
+  @renamedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    "managedResourceGroupConfiguration"
+  )
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2025_05_01_preview,
+    ManagedResourceGroupConfiguration
+  )
   managedResourceGroupName?: string;
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
@@ -154,6 +157,7 @@ model CommunityBaseModel {
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @doc("List of services governed by a community.")
+  @OpenAPI.extension("x-ms-identifiers", #["serviceId"])
   governedServiceList?: GovernedServiceItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
@@ -162,6 +166,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
+  @OpenAPI.extension("x-ms-identifiers", #["roleDefinitionId"])
   communityRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)

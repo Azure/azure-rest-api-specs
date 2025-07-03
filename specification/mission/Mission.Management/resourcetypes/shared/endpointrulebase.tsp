@@ -15,11 +15,7 @@ model EndpointRuleBase {
   @doc("Destination address. Can include multiple CIDR/IP Addresses or fqdn tags or fqdns (for community endpoint) separated by commas.")
   destination?: string;
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
-  port?: string;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "port")
   @doc("Port. Can include multiple ports separated by commas or a range indicated by a hyphen.")
   ports?: string;
 }

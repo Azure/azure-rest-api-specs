@@ -61,20 +61,11 @@ union ServiceIdentifier {
 
 @doc("GovernedServiceItem Properties")
 model GovernedServiceItem {
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Service ID")
-  id: ServiceIdentifier;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "id")
   @doc("Service ID")
   serviceId: ServiceIdentifier;
 
-  @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
-  @doc("Service name.")
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "name")
   @doc("Service name.")
   @visibility(Lifecycle.Read)
   serviceName?: string;
