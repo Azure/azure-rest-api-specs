@@ -292,7 +292,7 @@ model DeploymentScriptPropertiesBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  outputs?: Record<Record<unknown>>;
+  outputs?: Record<unknown>;
 }
 
 /**
