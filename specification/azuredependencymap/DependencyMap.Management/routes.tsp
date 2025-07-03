@@ -50,7 +50,7 @@ interface Maps {
   >;
   @doc("Get dependencies for all machines")
   @action("GetDependencyViewForAllMachines")
-  @added(Versions.v2025_06_31_preview)
+  @added(Versions.v2025_07_01_preview)
   getDependencyViewForAllMachines is ArmResourceActionAsync<
     MapsResource,
     GetDependencyViewForAllMachinesRequest,
