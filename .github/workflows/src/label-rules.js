@@ -99,6 +99,7 @@ export const sdkLabels ={
   },
 };
 
+
 /**
  * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
  * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
@@ -248,10 +249,10 @@ export function isAllPrerequisiteAbsentLabelsNonempty(rule) {
   return rule.allPrerequisiteAbsentLabels !== undefined && rule.allPrerequisiteAbsentLabels.length > 0;
 }
 
-const verRev = breakingChangesCheckType.SameVersion.reviewRequiredLabel;
-const verRevApproval = breakingChangesCheckType.SameVersion.approvalPrefixLabel;
-const brChRev = breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
-const brChRevApproval = breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
+export const verRev = breakingChangesCheckType.SameVersion.reviewRequiredLabel;
+export const verRevApproval = breakingChangesCheckType.SameVersion.approvalPrefixLabel;
+export const brChRev = breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
+export const brChRevApproval = breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
 
 /** @type {RequiredLabelRule[]} */
 const rulesPri0dataPlane = [
@@ -598,23 +599,22 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri3Blockers)
 
 /**
- * @param {import("@actions/github").context} context
- * @param {PipelineContext} pipelineContext
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} repo
+ * @param {string} owner
+ * @param {string[]} existingLabels
+ * @param {string} targetBranch
+ *
  * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
  */
-export async function getPresentBlockingLabelsAndMissingRequiredLabels(
-  context,
-  pipelineContext
-) {
-  // assume pipelineContext.pr != null
-  const labels = pipelineContext.pr.labels ?? [];
+export async function getPresentBlockingLabelsAndMissingRequiredLabels({ github, context, core }, repo, owner, existingLabels, targetBranch) {
+  // this is a little bit of a strange looking branch format, but not going to touch this for now.
+  const repoTargetBranch = `${repo}/${targetBranch}`;
 
-  const targetBranch = `${pipelineContext.pr.baseInfo.repo}/${pipelineContext.pr.baseInfo.ref}`;
-
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(context, labels, targetBranch);
+  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules({ github, context, core }, existingLabels, repoTargetBranch);
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules)
 
-  const missingRequiredLabels = (await getViolatedRequiredLabelsRules(context, labels, targetBranch))
+  const missingRequiredLabels = (await getViolatedRequiredLabelsRules({ github, context, core }, existingLabels, repoTargetBranch))
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
     .map((rule) => rule.anyRequiredLabels[0])
@@ -629,13 +629,13 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
 }
 
 /**
- * @param {import("@actions/github").context} context
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} labels
  * @param {string} targetBranch
  * @returns {Promise<RequiredLabelRule[]>}
  */
 export async function getViolatedRequiredLabelsRules(
-  context,
+  { github, context, core },
   labels,
   targetBranch
 ) {
@@ -650,26 +650,25 @@ export async function getViolatedRequiredLabelsRules(
 }
 
 /**
- * @param {typeof import("@actions/core")} core
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule
  * @returns {Promise<boolean>}
  */
 export async function requiredLabelRuleViolated(
-  core,
+  { github, context, core },
   presentLabels,
   targetBranch,
   rule,
 ) {
-
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =
     isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels, presentLabels)
 
   const allPrerequisiteLabelsPresent =
-    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels.every((label) => presentLabels.includes(label));
+    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels?.every((label) => presentLabels.includes(label));
 
   const anyPrerequisiteAbsentLabelPresent =
     isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels, presentLabels)
@@ -680,18 +679,17 @@ export async function requiredLabelRuleViolated(
 
   const ruleIsViolated = ruleIsApplicable && !anyRequiredLabelPresent;
 
-  // Trace log. Uncomment when needed.
-  // core.info(
-  //     `RETURN definition requiredLabelRuleViolated: ` +
-  //     `presentLabels: ${[...presentLabels].join(", ")}, ` +
-  //     `targetBranch: ${targetBranch}, ` +
-  //     `rule.precedence: ${rule.precedence}, ` +
-  //     `rule.branches: ${[...rule.branches ?? []].join(", ")}, ` +
-  //     `rule.anyPrerequisiteLabels: ${[...rule.anyPrerequisiteLabels ?? []].join(", ")}, ` +
-  //     `rule.allPrerequisiteLabels: ${[...rule.allPrerequisiteLabels ?? []].join(", ")}, ` +
-  //     `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
-  //     `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
-  //     `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
+  core.debug(
+      `RETURN definition requiredLabelRuleViolated: ` +
+      `presentLabels: ${[...presentLabels].join(", ")}, ` +
+      `targetBranch: ${targetBranch}, ` +
+      `rule.precedence: ${rule.precedence}, ` +
+      `rule.branches: ${[...rule.branches ?? []].join(", ")}, ` +
+      `rule.anyPrerequisiteLabels: ${[...rule.anyPrerequisiteLabels ?? []].join(", ")}, ` +
+      `rule.allPrerequisiteLabels: ${[...rule.allPrerequisiteLabels ?? []].join(", ")}, ` +
+      `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
+      `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
+      `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
   return ruleIsViolated;
 }
 

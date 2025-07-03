@@ -15,7 +15,23 @@
   This script is a replacement for the old pipelinebot infrastructure from open-api-alps repository.
 */
 
+// #region imports/constants
+
 import { extractInputs } from "./context.js";
+
+import {
+  verRevApproval,
+  brChRevApproval
+} from "./label-rules.js"
+
+import {
+  brchTsg,
+  checkAndDiagramTsg,
+  defaultTsg,
+  reqMetCheckTsg,
+  typeSpecRequirementArmTsg,
+  typeSpecRequirementDataPlaneTsg,
+} from "./tsgs.js";
 
 /**
  * @typedef {Object} RunInfo
@@ -26,10 +42,19 @@ import { extractInputs } from "./context.js";
  */
 
 /**
+ * @typedef {Object} CheckMetadata
+ * @property {number} precedence
+ * @property {string} name
+ * @property {string[]} suppressionLabels
+ * @property {string} troubleshootingGuide
+ */
+
+/**
  * @typedef {Object} CheckRunData
  * @property {string} name
  * @property {string} status
  * @property {string} conclusion
+ * @property {CheckMetadata} checkInfo
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -40,12 +65,147 @@ const FYI_CHECK_NAMES = [
   "Swagger PrettierCheck"
 ];
 
+
+const automatedMergingRequirementsMetCheckName = "Automated merging requirements met";
+
+/** type {CheckMetadata[]} */
+const CHECK_METADATA = [
+  {
+    precedence: 0,
+    name: "TypeSpec Requirement (resource-manager)",
+    suppressionLabels: [],
+    troubleshootingGuide: typeSpecRequirementArmTsg,
+  },
+  {
+    precedence: 0,
+    name: "TypeSpec Requirement (data-plane)",
+    suppressionLabels: [],
+    troubleshootingGuide: typeSpecRequirementDataPlaneTsg,
+  },
+  {
+    precedence: 0,
+    name: "TypeSpec Validation",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 0,
+    name: "license/cla",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 1,
+    name: "Swagger Avocado",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 1,
+    name: "Swagger SpellCheck",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 1,
+    name: "Swagger PrettierCheck",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 2,
+    name: "Swagger SemanticValidation",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 3,
+    name: "Swagger ModelValidation",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 4,
+    name: "Swagger BreakingChange",
+    suppressionLabels: [verRevApproval, brChRevApproval],
+    troubleshootingGuide: brchTsg,
+  },
+  {
+    precedence: 4,
+    name: "Breaking Change(Cross-Version)",
+    suppressionLabels: [verRevApproval, brChRevApproval],
+    troubleshootingGuide: brchTsg,
+  },
+  {
+    precedence: 5,
+    name: "Swagger LintDiff",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 5,
+    name: "Swagger Lint(RPaaS)",
+    suppressionLabels: [],
+    troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-net",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-net-track2",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-go",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-java",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-js",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-python",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 6,
+    name: "SDK azure-sdk-for-python-track2",
+    suppressionLabels: [],
+    troubleshootingGuide: checkAndDiagramTsg(3),
+  },
+  {
+    precedence: 10,
+    name: automatedMergingRequirementsMetCheckName,
+    suppressionLabels: [],
+    troubleshootingGuide: reqMetCheckTsg,
+  },
+];
+
 // during renderAutomatedMergingRequirementsMetCheck we resolve the result of
 // automated merge requirements met by from the result of and(requiredChecks).
 // if any are pending, automated merging requirements is pending. This is ripe for complete removal
 // in favor of just honoring the `required` checks results directly.
 const EXCLUDED_CHECK_NAMES = []
 
+// #endregion
+// #region core
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
@@ -159,91 +319,6 @@ export async function summarizeChecksImpl({
 }
 
 /**
- * @param {Object} params
- * @param {string} params.owner
- * @param {string} params.repo
- * @param {number} params.issue_number
- * @param {string} params.event_name
- * @param {string[]} params.known_labels
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
- * @param {import("@actions/github").context} params.context
- * @returns {Promise<void>}
- */
-export async function handleLabeledEvent({
-  owner,
-  repo,
-  issue_number,
-  event_name,
-  known_labels,
-  github, // this will be utilized as soon as we cut over to actually attempting to remove the label
-  core,
-  context
-}) {
-
-  // logic for this event is based on code directly ripped from pipelinebot:
-  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  const changedLabel = context.payload.label?.name;
-  const labelsToAdd = new Set();
-  const labelsToRemove = new Set();
-
-  if (event_name === "labeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-    }
-    if (changedLabel == "ARMSignedOff") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-        labelsToRemove.add("ARMChangesRequested");
-      }
-    }
-
-    for (const label of labelsToRemove) {
-      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.removeLabel({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   name: label,
-      // });
-    }
-  }
-  else if (event_name === "unlabeled") {
-      if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToAdd.add("WaitForARMFeedback");
-      }
-    }
-
-    if (labelsToAdd.size > 0) {
-      core.info(`Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.addLabels({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   labels: Array.from(labelsToAdd),
-      // });
-    }
-  }
-}
-
-/**
- *
- * @param {string} owner
- * @param {string} repo
- * @param {string} commentId
- * @param {string[]} labels
- * @param {RunInfo[]} runs
- */
-export async function createNextStepsCommentBody(owner, repo, commentId, labels, runs) {
-
-}
-
-/**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
@@ -319,6 +394,84 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
   `;
 }
 
+// #endregion
+// #region labeling
+/**
+ * @param {Object} params
+ * @param {string} params.owner
+ * @param {string} params.repo
+ * @param {number} params.issue_number
+ * @param {string} params.event_name
+ * @param {string[]} params.known_labels
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {typeof import("@actions/core")} params.core
+ * @param {import("@actions/github").context} params.context
+ * @returns {Promise<void>}
+ */
+export async function handleLabeledEvent({
+  owner,
+  repo,
+  issue_number,
+  event_name,
+  known_labels,
+  github, // this will be utilized as soon as we cut over to actually attempting to remove the label
+  core,
+  context
+}) {
+
+  // logic for this event is based on code directly ripped from pipelinebot:
+  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  const changedLabel = context.payload.label?.name;
+  const labelsToAdd = new Set();
+  const labelsToRemove = new Set();
+
+  if (event_name === "labeled") {
+    if (changedLabel == "ARMChangesRequested") {
+      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+        labelsToRemove.add("WaitForARMFeedback");
+      }
+    }
+    if (changedLabel == "ARMSignedOff") {
+      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+        labelsToRemove.add("WaitForARMFeedback");
+      }
+      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
+        labelsToRemove.add("ARMChangesRequested");
+      }
+    }
+
+    for (const label of labelsToRemove) {
+      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+      // await github.rest.issues.removeLabel({
+      //   owner: owner,
+      //   repo: repo,
+      //   issue_number: issue_number,
+      //   name: label,
+      // });
+    }
+  }
+  else if (event_name === "unlabeled") {
+      if (changedLabel == "ARMChangesRequested") {
+      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+        labelsToAdd.add("WaitForARMFeedback");
+      }
+    }
+
+    if (labelsToAdd.size > 0) {
+      core.info(`Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`);
+      // await github.rest.issues.addLabels({
+      //   owner: owner,
+      //   repo: repo,
+      //   issue_number: issue_number,
+      //   labels: Array.from(labelsToAdd),
+      // });
+    }
+  }
+}
+
+// #endregion
+// #region checks
+
 /**
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
  * @param {typeof import("@actions/core")} core
@@ -390,7 +543,6 @@ function extractRunsFromGraphQLResponse(response) {
   let automatedMergingRequirementsMetCheckRun = undefined
 
   // Define the automated merging requirements check name
-  const automatedMergingRequirementsMetCheckName = "Automated merging requirements met";
 
   if (response.resource?.checkSuites?.nodes) {
     response.resource.checkSuites.nodes.forEach(
@@ -398,11 +550,13 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
       if (checkSuiteNode.checkRuns?.nodes) {
         checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
+          // map the checkinfo here if present.
           if (checkRunNode.isRequired) {
             reqCheckRuns.push({
               name: checkRunNode.name,
               status: checkRunNode.status,
               conclusion: checkRunNode.conclusion,
+              checkInfo: undefined
             });
           }
           // Note the "else" here. It means that:
@@ -415,6 +569,7 @@ function extractRunsFromGraphQLResponse(response) {
               name: checkRunNode.name,
               status: checkRunNode.status,
               conclusion: checkRunNode.conclusion,
+              checkInfo: undefined
             });
           }
           // Note we return automatedMergingRequirementsMetCheck separately, because we must return it even if it is not marked as 'required'.
@@ -442,3 +597,256 @@ function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
   // This would normally reference checksWorkflowInfo which needs to be imported
   console.log(`Check runs found: ${filteredCheckRuns.map(cr => cr.name).join(", ")}`);
 }
+// #endregion
+// #region next steps
+/**
+ *
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} owner
+ * @param {string} repo
+ * @param {string} commentId
+ * @param {string[]} labels
+ * @param {RunInfo[]} runs
+ */
+export async function createNextStepsCommentBody({github, context, core}, owner, repo, commentId, labels, runs) {
+  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, nextStepsToMergeCommentGroup);
+}
+
+/**
+ * Renders the "next steps to merge" comment group for a pull request
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} owner - The repository owner.
+ * @param {string} repo - The repository name.
+ * @param {number} issue_number - The issue or pull request number.
+ */
+export async function renderNextStepsToMergeCommentGroup({ github, context, core }, owner, repo, issue_number) {
+  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, nextStepsToMergeCommentGroup);
+}
+
+/**
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {object} commentGroup - The comment group definition.
+ * @param {string} commentGroup.name
+ * @param {string} commentGroup.title
+ * @returns {Promise<string>}
+ */
+async function buildNextStepsToMergeCommentBody({ github, context, core }, commentGroup) {
+  // Build the comment header
+  const commentTitle = `<h2>${commentGroup.title}</h2>`;
+
+  // Gather current PR labels
+  const labels = context.payload.pull_request?.labels?.map(l => l.name) ?? [];
+
+  // Fetch failing required/FYI checks and the automated merging requirements check
+  const [
+    failingReqChecksInfo,
+    failingFyiChecksInfo,
+    automatedMergingRequirementsMetCheckRun
+  ] = await getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
+    core,              // using core as the logger
+    '',                // empty logPrefix
+    { github, context, core }
+  );
+
+  // Determine any violated label rules
+  const base = context.payload.pull_request.base;
+  const targetBranch = `${base.repo.full_name}/${base.ref}`;
+  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
+    core,
+    '',
+    labels,
+    targetBranch
+  );
+
+  // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
+  // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
+  // the new world we will simply pull all the required checks and if any are failing then we are blocked.
+  // addendum: pending does not mean failing. We should simply not mention that any pending runs in the next steps to merge comment.
+  // if we have any pending runs, we will simply not mention them in the next steps.
+  const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
+  const anyFyiPresent = failingFyiChecksInfo.length > 0;
+  const requirementsMet = anyBlockerPresent;
+
+  // Compose the body based on the current state
+  const bodyProper = getBodyProper(
+    requirementsMet,
+    anyBlockerPresent,
+    anyFyiPresent,
+    failingReqChecksInfo,
+    failingFyiChecksInfo,
+    violatedReqLabelsRules
+  );
+
+  return commentTitle + bodyProper;
+}
+
+async function buildNextStepsToMergeCommentBody(): Promise<string> {
+
+  const commentTitle = ""
+
+  const labels: string[] = context.pr!.labels ?? [];
+
+  const [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
+    = await getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(logger, logPrefix, context);
+
+  const targetBranch = `${context.pr!.baseInfo.repo}/${context.pr!.baseInfo.ref}`;
+
+  await logger.logInfo(logPrefix + `getViolatedRequiredLabelsRules(labels); labels: [${[...labels].join(", ")}]`)
+  const violatedReqLabelsRules: RequiredLabelRule[] = await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch)
+
+  const anyBlockerPresent = (failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0)
+  const anyFyiPresent = failingFyiChecksInfo.length > 0
+  const requirementsMet = checkRunIsSuccessful(automatedMergingRequirementsMetCheckRun) === true;
+
+  if (anyBlockerPresent && requirementsMet) {
+    await core.error(logPrefix
+      + `ASSERTION VIOLATION! There are blockers present, yet '${automatedMergingRequirementsMetCheckName}' is successful. `
+      + `This should not be possible!`)
+  }
+
+  let bodyProper: string = getBodyProper(
+    requirementsMet,
+    anyBlockerPresent,
+    anyFyiPresent,
+    failingReqChecksInfo,
+    failingFyiChecksInfo,
+    violatedReqLabelsRules,
+  );
+
+  const body = `<h2>${commentGroup.title}</h2>` + bodyProper;
+
+  await logger.logInfo(logPrefix + `RETURN definition buildNextStepsToMergeCommentBody: `
+      + `commentGroup.name: ${commentGroup.name}, commentGroup.title: '${commentGroup.title}', `
+      + `requirementsMet: ${requirementsMet}, anyBlockerPresent: ${anyBlockerPresent} anyFyiPresent: ${anyFyiPresent}`);
+  return body;
+}
+
+async function getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
+  logger: Logger,
+  logPrefix: string,
+  context: PipelineContext,
+): Promise<[CheckWorkflowInfo[], CheckWorkflowInfo[], CheckRunData]> {
+
+  let [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun]
+    = await getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(logger, logPrefix, context, []);
+
+  const failingReqCheckRuns = reqCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
+  const failingFyiCheckRuns = fyiCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
+
+  if (automatedMergingRequirementsMetCheckRun == undefined) {
+    await logger.logWarning(logPrefix
+      + `ASSERTION VIOLATION: Could not find '${automatedMergingRequirementsMetCheckName}' check run. `
+      + `This should not happen! Defaulting to a check run in a queued state.`)
+    automatedMergingRequirementsMetCheckRun
+      = { name: automatedMergingRequirementsMetCheckName, status: "queued", conclusion: undefined }
+  }
+
+  const failingReqChecksInfo = failingReqCheckRuns.map(checkRun => {
+    return (
+      checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
+      || createCheckInfo(0, checkRun.name)
+    );
+  });
+  const failingFyiChecksInfo = failingFyiCheckRuns.map(checkRun => {
+    return (
+      checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
+      || createCheckInfo(0, checkRun.name)
+    );
+  });
+
+  await logger.logInfo(logPrefix + `getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo: `
+    + `failingReqCheckRuns: ${checkRunsLogString(failingReqCheckRuns)}, `
+    + `failingFyiCheckRuns: ${checkRunsLogString(failingFyiCheckRuns)}, `
+    + `failingReqCheckRunsInfo: ${checksInfoLogString(failingReqChecksInfo)}, `
+    + `failingFyiCheckRunsInfo: ${checksInfoLogString(failingFyiChecksInfo)}`)
+
+  return [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
+}
+
+function getBodyProper(
+  requirementsMet: boolean,
+  anyBlockerPresent: boolean,
+  anyFyiPresent: boolean,
+  failingReqChecksInfo: CheckWorkflowInfo[],
+  failingFyiChecksInfo: CheckWorkflowInfo[],
+  violatedRequiredLabelsRules: RequiredLabelRule[],
+) {
+  let bodyProper: string = "";
+
+  if (anyBlockerPresent || anyFyiPresent) {
+    // assert: !requirementsMet
+
+    if (anyBlockerPresent) {
+      bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
+    }
+
+    if (anyBlockerPresent && anyFyiPresent) {
+      bodyProper += "<br/>"
+    }
+
+    if (anyFyiPresent) {
+      bodyProper += getFyiPresentBody(failingFyiChecksInfo);
+      if (!anyBlockerPresent) {
+        bodyProper +=
+          `If you still want to proceed merging this PR without addressing the above failures, ${diagramTsg(4, false)}.`
+      }
+    }
+
+  } else if (requirementsMet) {
+    bodyProper = `✅ All automated merging requirements have been met! `
+      + `To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`;
+  } else {
+    bodyProper = "⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+  }
+  return bodyProper;
+}
+
+function getBlockerPresentBody(
+  failingRequiredChecks: CheckWorkflowInfo[],
+  violatedRequiredLabelsRules: RequiredLabelRule[]) {
+
+  const failingRequiredChecksNextStepsText = buildFailingChecksNextStepsText(failingRequiredChecks, "required");
+  const violatedReqLabelsRulesNextStepsText: string = buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules);
+  return "Next steps that must be taken to merge this PR: <br/>"
+  + "<ul>" + violatedReqLabelsRulesNextStepsText + failingRequiredChecksNextStepsText + "</ul>"
+}
+
+function getFyiPresentBody(failingFyiChecksInfo: CheckWorkflowInfo[]) {
+  return "Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>"
+  + "Addressing the following failures is highly recommended:<br/>"
+  + "<ul>" + buildFailingChecksNextStepsText(failingFyiChecksInfo, "FYI") +  "</ul>"
+}
+
+function buildFailingChecksNextStepsText(failingChecks: CheckWorkflowInfo[], checkKind: "required" | "FYI") {
+
+  let failingChecksNextStepsText: string = "";
+  if (failingChecks.length > 0) {
+
+    const minPrecedence: number = Math.min(...failingChecks.map(check => check.precedence));
+    const checksToDisplay: CheckWorkflowInfo[] = failingChecks.filter(check => check.precedence == minPrecedence);
+
+    // assert: checksToDisplay.length > 0
+    failingChecksNextStepsText =
+      checksToDisplay.map(check =>
+        (checkKind == "required")
+          ? `<li>❌ The required check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`
+          : `<li>⚠️ The check named <code>${check.name}</code> has failed. ${check.troubleshootingGuide}</li>`
+        ).join("")
+  }
+  return failingChecksNextStepsText
+}
+
+function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules: RequiredLabelRule[]) {
+  let violatedReqLabelsNextStepsText: string = "";
+  if (violatedRequiredLabelsRules.length > 0) {
+
+    const minPrecedence: number = Math.min(...violatedRequiredLabelsRules.map(rule => rule.precedence));
+    const rulesToDisplay: RequiredLabelRule[] = violatedRequiredLabelsRules.filter(rule => rule.precedence == minPrecedence);
+    // assert: rulesToDisplay.length > 0
+    violatedReqLabelsNextStepsText =
+      rulesToDisplay.map(rule => `<li>❌ ${rule.troubleshootingGuide}</li>`).join("")
+  }
+  return violatedReqLabelsNextStepsText;
+}
+
+// #endregion
