@@ -306,7 +306,7 @@ op physicalIndexExists(
 ): PhysicalIndexExistsResponse;
 
 @post
-@route("/skillContext/dynamicPrompts/suggestedprompts")
+@route("/dynamicPrompts/suggestedprompts")
 @doc("Gets the suggested prompts based on the provided suggested prompts request.")
 op getSuggestedPrompts(
     @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
