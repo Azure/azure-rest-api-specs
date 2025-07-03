@@ -42,10 +42,10 @@ input-file:
   - Microsoft.DevCenter/preview/2025-07-01-preview/vdi.json
 directives:
   - suppress: R2016
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters.properties.devBoxDefinition.sku.name
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
   - suppress: R2016
-    from:  $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}"].patch
+    from:  $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}"].patch.parameters.properties.identity.type
     reason: Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
