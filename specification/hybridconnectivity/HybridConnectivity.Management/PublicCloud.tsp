@@ -23,6 +23,7 @@ model GenerateAwsTemplateRequest {
   connectorId: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @identifiers(#[])
   @doc("The list of solution types and their settings")
   solutionTypes?: Array<SolutionTypeSettings>;
 }
@@ -264,6 +265,7 @@ model SolutionTypeProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Array of solution settings and its description.")
+  @identifiers(#[])
   solutionSettings?: SolutionTypeSettingsProperties[];
 }
 
@@ -357,8 +359,14 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse> | ErrorResponse;
 }
+
+/**
+ * The HybridConnectivity post operation response
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+model GenerateAwsTemplateResponse {}
 
 @armResourceOperations
 interface PublicCloudConnectors {
