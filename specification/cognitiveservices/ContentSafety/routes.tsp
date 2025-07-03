@@ -427,8 +427,8 @@ interface TextCustomizedCategoryOperations {
 
   @summary("Custom Category - Get")
   @doc("Get the specified or latest version of the given Custom Category.")
-  @get
   @route("/text/categories/{categoryName}")
+  @get
   getCustomizedCategory is Azure.Core.Foundations.Operation<
     TextCustomCategoryGetRequest,
     TextCustomCategoryVersionList
