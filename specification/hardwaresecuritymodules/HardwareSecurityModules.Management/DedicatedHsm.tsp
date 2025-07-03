@@ -24,12 +24,6 @@ model DedicatedHsm extends Foundations.TrackedResource {
     SegmentName = "dedicatedHSMs"
   >;
 
-  /**
-   * SKU details
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sku: Sku;
-
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
@@ -38,6 +32,12 @@ model DedicatedHsm extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
   properties: DedicatedHsmProperties;
+
+  /**
+   * SKU details
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sku: Sku;
 }
 
 @armResourceOperations
