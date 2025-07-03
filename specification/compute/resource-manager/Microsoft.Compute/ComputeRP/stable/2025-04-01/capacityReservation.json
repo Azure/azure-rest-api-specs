@@ -802,6 +802,13 @@
         "sharingProfile": {
           "$ref": "#/definitions/ResourceSharingProfile",
           "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. Pls. keep in mind the capacity reservation group resource generally can be shared across subscriptions belonging to a single azure AAD tenant or cross AAD tenant if there is a trust relationship established between the AAD tenants. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
+        },
+        "reservationType": {
+          "type": "string",
+          "enum": [
+            "Block"
+          ],
+          "description": "To create a block capacity reservation, set this property to 'Block'. Currently, only 'Block' is supported."
         }
       },
       "description": "capacity reservation group Properties."
@@ -960,6 +967,22 @@
           "type": "string",
           "format": "date-time",
           "description": "Specifies the time at which the Capacity Reservation resource was created. Minimum api-version: 2021-11-01."
+        },
+        "scheduleProfile": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The start date of the schedule in ISO 8601 format (DateTimeOffset). Only the date part is allowed; the time part will be defaulted to 12:00 PM UTC. Example: 2025-06-27."
+            },
+            "end": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The end date of the schedule in ISO 8601 format (DateTimeOffset). Only the date part is allowed; the time part will be defaulted to 11:30 AM UTC. Example: 2025-06-28."
+            }
+          },
+          "description": "Specifies the schedule for the block capacity reservation with start and end as DateTimeOffset."
         }
       },
       "description": "Properties of the Capacity reservation."

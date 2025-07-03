@@ -304,11 +304,11 @@ suppressions:
     reason: Existing issue from last version. 
 ```
 
-### Tag: package-2025-04-01
+### Tag: package-2025-04-01-only
 
-These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2025-04-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-04-01'
+``` yaml $(tag) == 'package-2025-04-01-only'
 input-file:
   - Microsoft.Compute/common-types/v1/common.json
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/computeRPCommon.json
@@ -324,7 +324,8 @@ input-file:
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/restorePoint.json
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/capacityReservation.json
   - Microsoft.Compute/ComputeRP/stable/2025-04-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2025-04-01/runCommand.json 
+  - Microsoft.Compute/ComputeRP/stable/2025-04-01/runCommand.json
+input-file: 
   - Microsoft.Compute/DiskRP/stable/2024-03-02/diskRPCommon.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/disk.json
   - Microsoft.Compute/DiskRP/stable/2024-03-02/diskAccess.json
