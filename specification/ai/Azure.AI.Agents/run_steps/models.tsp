@@ -192,46 +192,42 @@ model RunStepError {
 //
 
 /** Represents a run step delta i.e. any changed fields on a run step during streaming. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaChunk {
-  /** The identifier of the run step, which can be referenced in API endpoints. */
-  id: string;
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaChunk {
+//   /** The identifier of the run step, which can be referenced in API endpoints. */
+//   id: string;
 
-  /** The object type, which is always `thread.run.step.delta`. */
-  object: "thread.run.step.delta";
+//   /** The object type, which is always `thread.run.step.delta`. */
+//   object: "thread.run.step.delta";
 
-  /** The delta containing the fields that have changed on the run step. */
-  delta: RunStepDelta;
-}
-
+//   /** The delta containing the fields that have changed on the run step. */
+//   delta: RunStepDelta;
+// }
 /** Represents the delta payload in a streaming run step delta chunk. */
-@added(Versions.v2025_05_01)
-model RunStepDelta {
-  /** The details of the run step. */
-  @encodedName("application/json", "step_details")
-  stepDetails?: RunStepDeltaDetail;
-}
-
+// @added(Versions.v2025_05_01)
+// model RunStepDelta {
+//   /** The details of the run step. */
+//   @encodedName("application/json", "step_details")
+//   // stepDetails?: RunStepDeltaDetail;
+// }
 /** Represents a single run step detail item in a streaming run step's delta payload. */
-@discriminator("type")
-@added(Versions.v2025_05_01)
-model RunStepDeltaDetail {
-  /** The object type for the run step detail object. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  type: string;
-}
-
+// @discriminator("type")
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaDetail {
+//   /** The object type for the run step detail object. */
+//   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+//   type: string;
+// }
 /** Represents a message creation within a streaming run step delta. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
-  /** The object type, which is always "message_creation." */
-  type: "message_creation";
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
+//   /** The object type, which is always "message_creation." */
+//   type: "message_creation";
 
-  /** The message creation data. */
-  @encodedName("application/json", "message_creation")
-  messageCreation?: RunStepDeltaMessageCreationObject;
-}
-
+//   /** The message creation data. */
+//   @encodedName("application/json", "message_creation")
+//   messageCreation?: RunStepDeltaMessageCreationObject;
+// }
 /** Represents the data within a streaming run step message creation response object. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaMessageCreationObject {
@@ -241,16 +237,15 @@ model RunStepDeltaMessageCreationObject {
 }
 
 /** Represents an invocation of tool calls as part of a streaming run step. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
-  /** The object type, which is always "tool_calls." */
-  type: "tool_calls";
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
+//   /** The object type, which is always "tool_calls." */
+//   type: "tool_calls";
 
-  /** The collection of tool calls for the tool call detail item. */
-  @encodedName("application/json", "tool_calls")
-  toolCalls?: RunStepDeltaToolCall[];
-}
-
+//   /** The collection of tool calls for the tool call detail item. */
+//   @encodedName("application/json", "tool_calls")
+//   toolCalls?: RunStepDeltaToolCall[];
+// }
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
@@ -288,16 +283,15 @@ model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
-  /** The object type, which is always "code_interpreter." */
-  type: "code_interpreter";
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
+//   /** The object type, which is always "code_interpreter." */
+//   type: "code_interpreter";
 
-  /** The Code Interpreter data for the tool call. */
-  @encodedName("application/json", "code_interpreter")
-  codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
-}
-
+//   /** The Code Interpreter data for the tool call. */
+//   @encodedName("application/json", "code_interpreter")
+//   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
+// }
 /** Represents the function data in a streaming run step delta's function tool call. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaFunction {
@@ -313,53 +307,51 @@ model RunStepDeltaFunction {
 }
 
 /** Represents the Code Interpreter tool call data in a streaming run step's tool calls. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaCodeInterpreterDetailItemObject {
-  /** The input into the Code Interpreter tool call. */
-  input?: string;
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaCodeInterpreterDetailItemObject {
+//   /** The input into the Code Interpreter tool call. */
+//   input?: string;
 
-  /**
-   * The outputs from the Code Interpreter tool call. Code Interpreter can output one or more
-   * items, including text (`logs`) or images (`image`). Each of these are represented by a
-   * different object type.
-   */
-  outputs?: RunStepDeltaCodeInterpreterOutput[];
-}
-
+//   /**
+//    * The outputs from the Code Interpreter tool call. Code Interpreter can output one or more
+//    * items, including text (`logs`) or images (`image`). Each of these are represented by a
+//    * different object type.
+//    */
+//   outputs?: RunStepDeltaCodeInterpreterOutput[];
+// }
 /** The abstract base representation of a streaming run step tool call's Code Interpreter tool output. */
-@discriminator("type")
-@added(Versions.v2025_05_01)
-model RunStepDeltaCodeInterpreterOutput {
-  /** The index of the output in the streaming run step tool call's Code Interpreter outputs array. */
-  index: int32;
+// @discriminator("type")
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaCodeInterpreterOutput {
+//   /** The index of the output in the streaming run step tool call's Code Interpreter outputs array. */
+//   index: int32;
 
-  /** The type of the streaming run step tool call's Code Interpreter output. */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
-  type: string;
-}
+//   /** The type of the streaming run step tool call's Code Interpreter output. */
+//   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+//   type: string;
+// }
 
-/** Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaCodeInterpreterLogOutput
-  extends RunStepDeltaCodeInterpreterOutput {
-  /** The type of the object, which is always "logs." */
-  type: "logs";
+// /** Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaCodeInterpreterLogOutput
+//   extends RunStepDeltaCodeInterpreterOutput {
+//   /** The type of the object, which is always "logs." */
+//   type: "logs";
 
-  /** The text output from the Code Interpreter tool call. */
-  logs?: string;
-}
+//   /** The text output from the Code Interpreter tool call. */
+//   logs?: string;
+// }
 
-/** Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection. */
-@added(Versions.v2025_05_01)
-model RunStepDeltaCodeInterpreterImageOutput
-  extends RunStepDeltaCodeInterpreterOutput {
-  /** The object type, which is always "image." */
-  type: "image";
+// /** Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+// @added(Versions.v2025_05_01)
+// model RunStepDeltaCodeInterpreterImageOutput
+//   extends RunStepDeltaCodeInterpreterOutput {
+//   /** The object type, which is always "image." */
+//   type: "image";
 
-  /** The image data for the Code Interpreter tool call output. */
-  image?: RunStepDeltaCodeInterpreterImageOutputObject;
-}
-
+//   /** The image data for the Code Interpreter tool call output. */
+//   image?: RunStepDeltaCodeInterpreterImageOutputObject;
+// }
 /** Represents the data for a streaming run step's Code Interpreter tool call image output. */
 @added(Versions.v2025_05_01)
 model RunStepDeltaCodeInterpreterImageOutputObject {
