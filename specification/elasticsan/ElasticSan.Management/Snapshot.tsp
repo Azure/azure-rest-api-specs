@@ -37,7 +37,8 @@ interface Snapshots {
    */
   create is ArmResourceCreateOrReplaceAsync<
     Snapshot,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

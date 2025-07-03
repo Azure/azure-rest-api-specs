@@ -949,7 +949,7 @@ model PrivateLinkResourceListResult {
    */
   @items
   value: PrivateLinkResource[];
- 
+
   /**
    * URI to fetch the next section of the paginated response.
    */
