@@ -2,12 +2,12 @@ import { describe, test, expect } from "vitest";
 import { searchSharedLibrary } from "../../src/utils.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { typespecProjectSharedLibraryRegex } from "../../src/change-files.js";
+import { typespecProjectSharedLibraryRegex } from "../../src/spec-helpers.js";
 
 describe("searchSharedLibrary", () => {
   // Get the absolute path to the repo root
   const currentFilePath = fileURLToPath(import.meta.url);
-  const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+  const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
   test("identifies shared library files", () => {
     const files = [
