@@ -28,25 +28,21 @@ interface RedisFirewallRules {
   /**
    * Gets a single firewall rule in a specified redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<RedisFirewallRule>;
 
   /**
    * Create or update a redis cache firewall rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<RedisFirewallRule>;
 
   /**
    * Deletes a single firewall rule in a specified redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<RedisFirewallRule>;
 
   /**
    * Gets all firewall rules in the specified redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<RedisFirewallRule>;
 }
 

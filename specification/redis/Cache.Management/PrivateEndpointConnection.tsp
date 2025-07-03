@@ -50,7 +50,6 @@ interface PrivateEndpointConnections {
   /**
    * List all the private endpoint connections associated with the redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<ResourceListResult<PrivateEndpointConnection>>

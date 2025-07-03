@@ -62,25 +62,21 @@ interface RedisPatchSchedules {
   /**
    * Gets the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is RedisPatchSchedulesOps.Read<RedisPatchSchedule>;
 
   /**
    * Create or replace the patching schedule for Redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is RedisPatchSchedulesOps.CreateOrUpdateSync<RedisPatchSchedule>;
 
   /**
    * Deletes the patching schedule of a redis cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is RedisPatchSchedulesOps.DeleteSync<RedisPatchSchedule>;
 
   /**
    * Gets all patch schedules in the specified redis cache (there is only one).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByRedisResource is ArmResourceListByParent<RedisPatchSchedule>;
 }
 

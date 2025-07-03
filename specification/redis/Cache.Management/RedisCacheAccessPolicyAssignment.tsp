@@ -29,13 +29,11 @@ interface RedisCacheAccessPolicyAssignments {
   /**
    * Gets the list of assignments for an access policy of a redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<RedisCacheAccessPolicyAssignment>;
 
   /**
    * Adds the access policy assignment to the specified users
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdate is ArmResourceCreateOrReplaceAsync<
     RedisCacheAccessPolicyAssignment,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -44,7 +42,6 @@ interface RedisCacheAccessPolicyAssignments {
   /**
    * Deletes the access policy assignment from a redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RedisCacheAccessPolicyAssignment,
@@ -54,7 +51,6 @@ interface RedisCacheAccessPolicyAssignments {
   /**
    * Gets the list of access policy assignments associated with this redis cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     RedisCacheAccessPolicyAssignment,
     Response = ArmResponse<RedisCacheAccessPolicyAssignmentList>
