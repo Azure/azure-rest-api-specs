@@ -1,7 +1,6 @@
 /**
  * @typedef {Object} CommentOrUpdateOptions
- * @property {import('@actions/github').GitHub} github - GitHub client instance from @actions/github.
- * @property {import('@actions/core').Core} core - Core toolkit instance from @actions/core.
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @property {string} owner - The repository owner.
  * @property {string} repo - The repository name.
  * @property {number} issue_number - The issue or pull request number.
@@ -17,12 +16,12 @@
  * @param {string} commentGroupName - The name of the comment group to search for in the comments. This is merely a "category" that
  *  will allow the comment to be identified and updated later in a context where there are MULTIPLE github comments being left by token.
  *  This is a bit more future proofed than merely assuming the first comment by the GITHUB_TOKEN user is the one we want to update.
- * @returns {Promise<[string || undefined>, string || undefined]} Resolves when the comment is created or updated.
+ * @returns {[number | undefined, string | undefined]} Resolves when the comment is created or updated.
  */
-export async function parseExistingComments(comments, commentGroupName) {
-    /** @type {string} */
+export function parseExistingComments(comments, commentGroupName) {
+    /** @type {number | undefined} */
     let commentId = undefined;
-    /** @type {string} */
+    /** @type {string | undefined} */
     let commentBody = undefined;
 
     if (comments) {
@@ -32,7 +31,7 @@ export async function parseExistingComments(comments, commentGroupName) {
             // This allows us to identify the comment later on. We need to return the body
             // so we can know if we need to update it or not. If it's the same body content
             // we will no-op on the update.
-            if (comment.body.includes(commentGroupName)) {
+            if (comment.body?.includes(commentGroupName)) {
                 commentId = comment.id;
                 commentBody = comment.body;
             };
@@ -45,30 +44,45 @@ export async function parseExistingComments(comments, commentGroupName) {
 /**
  * Creates a new issue comment or updates an existing one.
  *
- * @param {CommentOrUpdateOptions} options - Parameters for the comment operation.
+ *
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} owner - The repository owner.
+ * @param {string} repo - The repository name.
+ * @param {number} issue_number - The issue or pull request number.
+ * @param {string} body - The markdown content of the comment.
+ * @param {string} commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
  * @returns {Promise<void>} Resolves when the comment is created or updated.
  */
-export async function commentOrUpdate({
-  github,
-  core,
+export async function commentOrUpdate(
+  { github, context, core },
   owner,
   repo,
   issue_number,
   body,
-  commentGroupName
-}) {
+  commentIdentifier
+) {
   try {
     // Get the authenticated user to know who we are
     const { data: user } = await github.rest.users.getAuthenticated();
     const authenticatedUsername = user.login;
-    const computedBody = body + `\n<!-- ${commentGroupName} -->`;
+    const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
+
+    /** @type {import("@octokit/openapi-types").components["schemas"]["issue-comment"][]} */
+    const comments = await github.paginate(
+        github.rest.issues.listComments,
+        {
+            owner,
+            repo,
+            issue_number,
+        }
+    );
 
     // only examine the comments from user in our current GITHUB_TOKEN context
     const existingComments = comments.filter(comment =>
-      comment.user.login === authenticatedUsername
+      comment.user?.login === authenticatedUsername
     );
 
-    const [commentId, commentBody] = parseExistingComments(existingComments, commentGroupName);
+    const [commentId, commentBody] = parseExistingComments(existingComments, commentIdentifier);
 
     if (commentId) {
       if (commentBody === computedBody) {

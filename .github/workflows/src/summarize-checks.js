@@ -19,6 +19,8 @@
 
 import { extractInputs } from "./context.js";
 
+import { commentOrUpdate } from "./comment.js";
+
 import {
   verRevApproval,
   brChRevApproval,
@@ -47,7 +49,7 @@ import {
  * @property {string} name
  * @property {string} status
  * @property {string} conclusion
- * @property {CheckMetadata | undefined} checkInfo
+ * @property {CheckMetadata} checkInfo
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -622,37 +624,56 @@ function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
  * @param {string} owner
  * @param {string} repo
  * @param {string[]} labels
+ * @param {number} issue_number
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
  * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
  */
-export async function updateNextStepsToMergeComment({github, context, core}, owner, repo, labels, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
+export async function updateNextStepsToMergeComment({github, context, core}, owner, repo, labels, issue_number, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
   const commentName = "NextStepsToMerge"
 
-  const requiredCheckInfos;
-  const fyiCheckInfos;
+  const requiredCheckInfos = requiredRuns
+    .filter(run => checkRunIsSuccessful(run) === false)
+    .map(run => run.checkInfo)
+  const fyiCheckInfos = fyiRuns
+    .filter(run => checkRunIsSuccessful(run) === false)
+    .map(run => run.checkInfo)
 
   const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos, automatedMergingRequirementsMetCheckRun);
+
+  await core.info(`Updating comment '${commentName}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+
+  // this will remain commented until we're comfortable with the change.
+  // await commentOrUpdate(
+  //   { github, context, core },
+  //   owner,
+  //   repo,
+  //   issue_number,
+  //   commentName,
+  //   commentBody
+  // );
 }
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
- * @param {CheckRunData[]} failingRequiredChecks
- * @param {CheckRunData[]} failingFyiChecks
+ * @param {CheckMetadata[]} failingReqChecksInfo
+ * @param {CheckMetadata[]} failingFyiChecksInfo
  * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
  * @returns {Promise<string>}
  */
-async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingRequiredChecks, failingFyiChecks, automatedMergingRequirementsMetCheckRun) {
+async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
-
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
-    core,
-    '',
+    {
+      github,
+      context,
+      core
+    },
     labels,
     targetBranch
   );
@@ -679,47 +700,49 @@ async function buildNextStepsToMergeCommentBody({ github, context, core }, label
   return commentTitle + bodyProper;
 }
 
-async function getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
-  logger: Logger,
-  logPrefix: string,
-  context: PipelineContext,
-): Promise<[CheckWorkflowInfo[], CheckWorkflowInfo[], CheckRunData]> {
+// this entire code section was replaced by populating the ChecksInfo array with the check runs
+// we simply filter the result and grab the CheckInfo object.
+// async function getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
+//   logger: Logger,
+//   logPrefix: string,
+//   context: PipelineContext,
+// ): Promise<[CheckWorkflowInfo[], CheckWorkflowInfo[], CheckRunData]> {
 
-  let [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun]
-    = await getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(logger, logPrefix, context, []);
+//   let [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun]
+//     = await getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns(logger, logPrefix, context, []);
 
-  const failingReqCheckRuns = reqCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
-  const failingFyiCheckRuns = fyiCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
+//   const failingReqCheckRuns = reqCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
+//   const failingFyiCheckRuns = fyiCheckRuns.filter(checkRun => checkRunIsSuccessful(checkRun) == false)
 
-  if (automatedMergingRequirementsMetCheckRun == undefined) {
-    await logger.logWarning(logPrefix
-      + `ASSERTION VIOLATION: Could not find '${automatedMergingRequirementsMetCheckName}' check run. `
-      + `This should not happen! Defaulting to a check run in a queued state.`)
-    automatedMergingRequirementsMetCheckRun
-      = { name: automatedMergingRequirementsMetCheckName, status: "queued", conclusion: undefined }
-  }
+//   if (automatedMergingRequirementsMetCheckRun == undefined) {
+//     await logger.logWarning(logPrefix
+//       + `ASSERTION VIOLATION: Could not find '${automatedMergingRequirementsMetCheckName}' check run. `
+//       + `This should not happen! Defaulting to a check run in a queued state.`)
+//     automatedMergingRequirementsMetCheckRun
+//       = { name: automatedMergingRequirementsMetCheckName, status: "queued", conclusion: undefined }
+//   }
 
-  const failingReqChecksInfo = failingReqCheckRuns.map(checkRun => {
-    return (
-      checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
-      || createCheckInfo(0, checkRun.name)
-    );
-  });
-  const failingFyiChecksInfo = failingFyiCheckRuns.map(checkRun => {
-    return (
-      checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
-      || createCheckInfo(0, checkRun.name)
-    );
-  });
+//   const failingReqChecksInfo = failingReqCheckRuns.map(checkRun => {
+//     return (
+//       checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
+//       || createCheckInfo(0, checkRun.name)
+//     );
+//   });
+//   const failingFyiChecksInfo = failingFyiCheckRuns.map(checkRun => {
+//     return (
+//       checksWorkflowInfo.find(checkInfo => checkInfo.name == checkRun.name)
+//       || createCheckInfo(0, checkRun.name)
+//     );
+//   });
 
-  await logger.logInfo(logPrefix + `getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo: `
-    + `failingReqCheckRuns: ${checkRunsLogString(failingReqCheckRuns)}, `
-    + `failingFyiCheckRuns: ${checkRunsLogString(failingFyiCheckRuns)}, `
-    + `failingReqCheckRunsInfo: ${checksInfoLogString(failingReqChecksInfo)}, `
-    + `failingFyiCheckRunsInfo: ${checksInfoLogString(failingFyiChecksInfo)}`)
+//   await logger.logInfo(logPrefix + `getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo: `
+//     + `failingReqCheckRuns: ${checkRunsLogString(failingReqCheckRuns)}, `
+//     + `failingFyiCheckRuns: ${checkRunsLogString(failingFyiCheckRuns)}, `
+//     + `failingReqCheckRunsInfo: ${checksInfoLogString(failingReqChecksInfo)}, `
+//     + `failingFyiCheckRunsInfo: ${checksInfoLogString(failingFyiChecksInfo)}`)
 
-  return [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
-}
+//   return [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
+// }
 
 function getBodyProper(
   requirementsMet: boolean,
