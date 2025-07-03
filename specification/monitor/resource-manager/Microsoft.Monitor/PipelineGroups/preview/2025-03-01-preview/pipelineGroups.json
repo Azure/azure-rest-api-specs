@@ -440,7 +440,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransformRequest"
+              "$ref": "#/definitions/ExecuteTransformRequest"
             }
           }
         ],
@@ -448,7 +448,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TransformResponse"
+              "$ref": "#/definitions/ExecuteTransformResponse"
             }
           },
           "default": {
@@ -635,6 +635,48 @@
           "default": 100
         }
       }
+    },
+    "ExecuteTransformRequest": {
+      "type": "object",
+      "description": "Request to execute a transform.",
+      "properties": {
+        "transformStatement": {
+          "type": "string",
+          "description": "Transform statement to execute.",
+          "minLength": 1,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "transformStatement"
+      ]
+    },
+    "ExecuteTransformResponse": {
+      "type": "object",
+      "description": "Response for the execute transform request.",
+      "properties": {
+        "validation": {
+          "$ref": "#/definitions/ExecuteTransformResponseValidation",
+          "description": "Validation information for the execute transform response."
+        }
+      },
+      "required": [
+        "validation"
+      ]
+    },
+    "ExecuteTransformResponseValidation": {
+      "type": "object",
+      "description": "Validation information for the execute transform response.",
+      "properties": {
+        "duration": {
+          "type": "number",
+          "format": "float",
+          "description": "Duration of validation portion of the transform execution in seconds."
+        }
+      },
+      "required": [
+        "duration"
+      ]
     },
     "Exporter": {
       "type": "object",
@@ -1493,48 +1535,6 @@
       },
       "required": [
         "transformStatement"
-      ]
-    },
-    "TransformRequest": {
-      "type": "object",
-      "description": "Request to execute a transform.",
-      "properties": {
-        "transformStatement": {
-          "type": "string",
-          "description": "Transform statement to execute.",
-          "minLength": 1,
-          "maxLength": 10000
-        }
-      },
-      "required": [
-        "transformStatement"
-      ]
-    },
-    "TransformResponse": {
-      "type": "object",
-      "description": "Response for the transform request.",
-      "properties": {
-        "validation": {
-          "$ref": "#/definitions/TransfromResponseValidation",
-          "description": "Validation information for the transform request."
-        }
-      },
-      "required": [
-        "validation"
-      ]
-    },
-    "TransfromResponseValidation": {
-      "type": "object",
-      "description": "Validation information for the transform request.",
-      "properties": {
-        "duration": {
-          "type": "number",
-          "format": "float",
-          "description": "Duration of validation portion of transform request in seconds."
-        }
-      },
-      "required": [
-        "duration"
       ]
     },
     "UdpReceiver": {

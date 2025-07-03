@@ -11,7 +11,7 @@ import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
-import "./actions/transform.tsp";
+import "./actions/executeTransform.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -276,7 +276,7 @@ interface PipelineGroups {
   @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   executeTransform is ArmResourceActionSync<
     PipelineGroup,
-    TransformRequest,
-    TransformResponse
+    ExecuteTransformRequest,
+    ExecuteTransformResponse
   >;
 }
