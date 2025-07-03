@@ -57,7 +57,6 @@ interface Operations {
   @tag("Operations")
   @autoRoute
   @doc("List the operations for the provider")
-  @operationId("Operations_List")
   @segment("operations")
   @get
   list(

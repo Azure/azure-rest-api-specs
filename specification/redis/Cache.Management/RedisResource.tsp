@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cache;
 /**
@@ -53,14 +52,12 @@ interface RedisResources {
    * Gets a Redis cache (resource description).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_Get")
   get is RedisResourcesOps.Read<RedisResource>;
 
   /**
    * Create or replace (overwrite/recreate, with potential downtime) an existing Redis cache.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_Create")
   @put
   create is Azure.ResourceManager.Legacy.UpdateOperation<
     {
@@ -88,7 +85,6 @@ interface RedisResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Redis_Update")
   update is RedisResourcesOps.CustomPatchAsync<
     RedisResource,
     PatchModel = RedisUpdateParameters,
@@ -103,7 +99,6 @@ interface RedisResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_Delete")
   delete is RedisResourcesOps.DeleteWithoutOkAsync<
     RedisResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -113,7 +108,6 @@ interface RedisResources {
    * Lists all Redis caches in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     RedisResource,
     Response = ArmResponse<RedisListResult>
@@ -123,7 +117,6 @@ interface RedisResources {
    * Gets all Redis caches in the specified subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     RedisResource,
     Response = ArmResponse<RedisListResult>
@@ -134,7 +127,6 @@ interface RedisResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  @operationId("Redis_ListUpgradeNotifications")
   listUpgradeNotifications is RedisResourcesOps.ActionSync<
     RedisResource,
     void,
@@ -152,7 +144,6 @@ interface RedisResources {
    * Retrieve a Redis cache's access keys. This operation requires write permission to the cache resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_ListKeys")
   listKeys is RedisResourcesOps.ActionSync<
     RedisResource,
     void,
@@ -163,7 +154,6 @@ interface RedisResources {
    * Regenerate Redis cache's access keys. This operation requires write permission to the cache resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_RegenerateKey")
   regenerateKey is RedisResourcesOps.ActionSync<
     RedisResource,
     RedisRegenerateKeyParameters,
@@ -174,7 +164,6 @@ interface RedisResources {
    * Reboot specified Redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Redis_ForceReboot")
   forceReboot is RedisResourcesOps.ActionSync<
     RedisResource,
     RedisRebootParameters,
@@ -187,7 +176,6 @@ interface RedisResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("import")
-  @operationId("Redis_ImportData")
   importData is RedisResourcesOps.ActionAsync<
     RedisResource,
     ImportRDBParameters,
@@ -201,7 +189,6 @@ interface RedisResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("export")
-  @operationId("Redis_ExportData")
   exportData is RedisResourcesOps.ActionAsync<
     RedisResource,
     ExportRDBParameters,
@@ -214,7 +201,6 @@ interface RedisResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("flush")
-  @operationId("Redis_FlushCache")
   flushCache is ArmResourceActionAsync<
     RedisResource,
     void,
@@ -227,7 +213,6 @@ interface RedisResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByRedisCache")
   listByRedisCache is ArmResourceActionSync<
     RedisResource,
     void,
