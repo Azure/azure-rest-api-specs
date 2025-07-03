@@ -90,3 +90,16 @@ using Microsoft.IoTOperations;
   "javascript"
 );
 @@clientName(Versions.`2025-04-01`, "V20250401", "javascript");
+
+@@clientName(AkriConnectorTemplateHelmDeleteConfiguration.wait,
+  "waitForResources",
+  "java"
+);
+@@clientName(AkriConnectorTemplateHelmInstallConfiguration.wait,
+  "waitForResources",
+  "java"
+);
+@@clientName(AkriConnectorTemplateHelmUpgradeConfiguration.wait,
+  "waitForResources",
+  "java"
+);
