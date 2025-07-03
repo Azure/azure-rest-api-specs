@@ -46,13 +46,11 @@ interface MaintenanceConfigurations {
   /**
    * Get Public Maintenance Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is MaintenanceConfigurationOps.Read<MaintenanceConfiguration>;
 
   /**
    * Get Public Maintenance Configuration records
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("publicMaintenanceConfigurations")
   list is MaintenanceConfigurationOps.List<
     MaintenanceConfiguration,
@@ -82,19 +80,16 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is MaintenanceConfigurationOperationGroupOps.Read<MaintenanceConfiguration>;
 
   /**
    * Create or Update configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<MaintenanceConfiguration>;
 
   /**
    * Patch configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is MaintenanceConfigurationOperationGroupOps.CustomPatchSync<
     MaintenanceConfiguration,
@@ -104,7 +99,6 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Delete Configuration record
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
     Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse
@@ -113,7 +107,6 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("maintenanceConfigurations")
   list is MaintenanceConfigurationOperationGroupOps.List<
     MaintenanceConfiguration,
@@ -123,7 +116,6 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration records within a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @segment("maintenanceConfigurations")
   maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ResourceListByParent<
     MaintenanceConfiguration,

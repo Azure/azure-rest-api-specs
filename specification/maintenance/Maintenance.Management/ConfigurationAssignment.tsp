@@ -152,19 +152,16 @@ interface ConfigurationAssignmentOperationGroup {
   /**
    * Get configuration assignment for resource..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ConfigurationAssignmentOperationGroupOps.Read<ConfigurationAssignment>;
 
   /**
    * Register configuration for resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
 
   /**
    * Unregister configuration for resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
     Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
@@ -219,7 +216,6 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * [UNSUPPORTED] Get configuration assignment within a subscription. This API is not implemented yet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ConfigurationAssignmentsForSubscriptionOps.List<
     ConfigurationAssignment,
     Response = ArmResponse<ListConfigurationAssignmentsResult>

@@ -18,7 +18,6 @@ interface ScheduledEventOperationGroup {
   /**
    * Post Scheduled Event Acknowledgement
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Post Scheduled Event Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
@@ -54,7 +53,6 @@ interface ApplyUpdatesOperationGroup {
   /**
    * Apply maintenance updates to resource with parent
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Apply Updates to resource with parent")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default")
   @put
@@ -97,7 +95,6 @@ interface ApplyUpdatesOperationGroup {
   /**
    * Apply maintenance updates to resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Apply Updates to resource")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default")
   @put
@@ -131,7 +128,6 @@ interface ApplyUpdateForResourceGroupOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Configuration records within a subscription and resource group")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates")
@@ -149,7 +145,6 @@ interface ConfigurationAssignmentForResourceGroupOperationGroup {
   /**
    * Get Configuration records within a subscription and resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Configuration records within a subscription and resource group")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments")
   @get
@@ -184,7 +179,6 @@ interface UpdatesOperationGroup {
   /**
    * Get updates to resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Updates to resource")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates")
   @get
@@ -227,7 +221,6 @@ interface UpdatesOperationGroup {
   /**
    * Get updates to resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get Updates to resource")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates")
   @get
