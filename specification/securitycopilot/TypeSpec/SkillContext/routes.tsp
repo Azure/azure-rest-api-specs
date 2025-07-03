@@ -211,7 +211,7 @@ op removeMemory(
 
 @post
 @route("/skillContext/searchMemories")
-@op searchMemories(
+op searchMemories(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 @body request : SearchMemoriesRequest
 ): MemoryDtoResponsePage;
