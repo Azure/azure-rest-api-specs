@@ -829,17 +829,21 @@ function buildFailingChecksNextStepsText(failingChecks, checkKind) {
   return failingChecksNextStepsText
 }
 
-function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules: RequiredLabelRule[]) {
-  let violatedReqLabelsNextStepsText: string = "";
+/**
+ * Builds next steps text for violated required label rules
+ * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Array of violated required label rules
+ * @returns {string} The violated label rules next steps HTML
+ */
+function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
+  let violatedReqLabelsNextStepsText = "";
   if (violatedRequiredLabelsRules.length > 0) {
 
-    const minPrecedence: number = Math.min(...violatedRequiredLabelsRules.map(rule => rule.precedence));
-    const rulesToDisplay: RequiredLabelRule[] = violatedRequiredLabelsRules.filter(rule => rule.precedence == minPrecedence);
+    const minPrecedence = Math.min(...violatedRequiredLabelsRules.map(rule => rule.precedence));
+    const rulesToDisplay = violatedRequiredLabelsRules.filter(rule => rule.precedence == minPrecedence);
     // assert: rulesToDisplay.length > 0
     violatedReqLabelsNextStepsText =
       rulesToDisplay.map(rule => `<li>❌ ${rule.troubleshootingGuide}</li>`).join("")
   }
   return violatedReqLabelsNextStepsText;
 }
-
 // #endregion
