@@ -243,6 +243,9 @@
         "operationId": "Operations_CreateOrUpdateLedgerUser",
         "summary": "Adds a user or updates a user's fields.",
         "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -567,6 +570,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LedgerWriteResult"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The CCF transaction id."
+              }
             }
           },
           "default": {
@@ -1018,12 +1027,24 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The CCF transaction id."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/UserDefinedFunction"
+            },
+            "headers": {
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "The CCF transaction id."
+              }
             }
           },
           "default": {
@@ -1196,6 +1217,9 @@
         "operationId": "Operations_CreateOrUpdateUser",
         "summary": "Adds a user or updates a user's fields.",
         "description": "A JSON merge patch is applied for existing users",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
