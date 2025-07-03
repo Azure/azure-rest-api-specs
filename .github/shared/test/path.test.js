@@ -1,11 +1,11 @@
 // @ts-check
 
 import { describe, it, beforeEach, afterEach } from "vitest";
-import { includesFolder, getVersionFromInputFile, getBaseNameForSwagger } from "../src/path.js";
+import { includesFolder } from "../src/path.js";
 import { strict as assert } from "assert";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { writeFileSync, mkdirSync, rmSync, existsSync } from "fs";
+import { mkdirSync, rmSync, existsSync } from "fs";
 
 // Get the directory of this test file
 const __filename = fileURLToPath(import.meta.url);
