@@ -960,3 +960,11 @@ model TextCustomCategoryGetRequest {
   @doc("If not provided, it will return the latest version.")
   version?: int32;
 }
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to delete a Custom Category version.")
+model TextCustomCategoryDeleteRequest {
+  @query
+  @doc("If not provided, it will delete ALL versions.")
+  version?: int32;
+}

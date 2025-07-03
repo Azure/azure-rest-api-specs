@@ -425,7 +425,6 @@ interface TextCustomizedCategoryOperations {
   @doc("Create a new Custom Category or a new version of an existing Custom Category. This will submit a long running operation.")
   createOrReplaceTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Custom Category - Get")
   @doc("Get the specified or latest version of the given Custom Category.")
   @get
@@ -446,10 +445,6 @@ interface TextCustomizedCategoryOperations {
   @doc("Delete the specified or ALL versions of the given Custom Category.")
   deleteCustomizedCategory is TextCustomizedCategoryOps.ResourceDelete<
     TextCustomCategoryVersion,
-    QueryParametersTrait<{
-      @query
-      @doc("If not provided, it will delete ALL versions.")
-      version?: int32;
-    }>
+    QueryParametersTrait<TextCustomCategoryDeleteRequest>
   >;
 }

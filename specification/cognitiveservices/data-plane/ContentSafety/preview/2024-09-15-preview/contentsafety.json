@@ -1439,12 +1439,7 @@
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
-            "name": "version",
-            "in": "query",
-            "description": "If not provided, it will delete ALL versions.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/TextCustomCategoryDeleteRequest"
           }
         ],
         "responses": {
@@ -4337,6 +4332,15 @@
       "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "operationId"
+    },
+    "TextCustomCategoryDeleteRequest": {
+      "name": "version",
+      "in": "query",
+      "description": "If not provided, it will delete ALL versions.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     },
     "TextCustomCategoryGetRequest.categoryName": {
       "name": "categoryName",
