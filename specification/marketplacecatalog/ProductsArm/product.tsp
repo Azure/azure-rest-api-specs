@@ -3,9 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Rest;
 using Http;
-using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Marketplace;
@@ -17,6 +15,10 @@ model Product is TrackedResource<ProductSummary> {
 
 @doc("Returns a subset of Product attributes")
 model ProductSummary {
+  @visibility(Lifecycle.Read)
+  @doc("Testing")
+  provisioningState?: ResourceProvisioningState;
+
   @doc("Product display name")
   displayName?: string;
 
@@ -73,8 +75,8 @@ model ProductSummary {
   @doc("Product summary")
   summary?: string;
 
-  @doc("Linked add-in types")
-  linkedAddInsTypes?: Record<string>;
+  //  @doc("Linked add-in types")
+  //  linkedAddInsTypes?: Record<string>;
 
   @doc("URI to the small product icon")
   smallIconUri?: string;
@@ -101,6 +103,7 @@ model ProductSummary {
   startingPrice?: MarketStartPrice;
 
   @doc("Full set of plan/SKU attributes")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   plans?: PlanSummary[];
 
   @doc("Maps to the list of compatible products")
@@ -131,9 +134,9 @@ model ProductSummary {
   hasMarketplaceFootprint?: boolean;
 
   @doc("Set of products attributes")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   attributes?: Attribute[];
 }
-
 
 @doc("Eligibility for Azure consumption commitment benefit. For more details see: https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit")
 union AzureBenefit {
@@ -397,114 +400,6 @@ union StopSellReason {
   string,
 }
 
-@doc("Summary description of the SKU")
-@resource("skus")
-model SkuSummary {
-  @key
-  @visibility(Lifecycle.Read)
-  @doc("The unique id of the product")
-  productId: string;
-
-  @doc("Product display name")
-  productDisplayName?: string;
-
-  @doc("The product description text")
-  productDescription?: string;
-
-  @doc("The service family of the product, such as 'Compute'")
-  serviceFamily?: string;
-
-  @doc("The service name of the product, such as 'Virtual Machines'")
-  service?: string;
-
-  @doc("Publisher id")
-  publisherId?: string;
-
-  @doc("Publisher type")
-  publisherType?: PublisherType;
-
-  @doc("The delivery method or deployment model")
-  productType?: ProductType;
-
-  @doc("Product sub type")
-  productSubType?: string;
-
-  @doc("Product summary")
-  summary?: string;
-
-  @doc("The product attributes")
-  productAttributes?: Attribute[];
-
-  @doc("Sku name")
-  skuName?: string;
-
-  @doc("Sku id")
-  skuId?: string;
-
-  @doc("Sku type")
-  skuType?: string;
-
-  @doc("Language")
-  language?: string;
-
-  @doc("Sku description localized")
-  skuDescription?: string;
-
-  @doc("Sku title localized")
-  skuTitle?: string;
-
-  @doc("Latest update date of the SKU")
-  lastModifiedDateTime?: string;
-
-  @doc("Location (region)")
-  location?: string;
-
-  @doc("The Arm region name")
-  armRegionName?: string;
-
-  @doc("The cloud, such as 'Global'")
-  cloud?: string;
-
-  @doc("The location type, such as 'Region'")
-  locationType?: string;
-
-  @doc("The region")
-  region?: string;
-
-  @doc("The sku group id")
-  skuGroupId?: string;
-
-  @doc("The zone, such as 'Zone 1'")
-  zone?: string;
-
-  @doc("The feature")
-  feature?: string;
-
-  @doc("The service type")
-  serviceType?: string;
-
-  @doc("Min quantity")
-  minQuantity?: int32;
-
-  @doc("Max quantity")
-  maxQuantity?: int32;
-
-  @doc("CSP state")
-  cspState?: CspState;
-
-  @doc("Indication whether the SKU supports reservations")
-  hasRi?: boolean;
-
-  @doc("The SKU attributes")
-  skuAttributes?: Attribute[];
-
-  @doc("The sku properties")
-  skuProperties?: SkuProperties;
-
-  @doc("SKU price related properties")
-  offeringProperties?: OfferingProperties[];
-}
-
 @doc("The SKU properties, contains some of the attributes for faster OData filter")
 model SkuProperties {
   @doc("The sku category")
@@ -587,9 +482,11 @@ model MarketStartPrice {
 @doc("Summary description of the product")
 model ProductDetails extends ProductSummary {
   @doc("List of product videos")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   videos?: ProductVideo[];
 
   @doc("List of Images")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   images?: ImageGroup[];
 
   @doc("List of linked Add Ins provided for the item")
@@ -598,8 +495,8 @@ model ProductDetails extends ProductSummary {
   @doc("List of Links provided for the item")
   links?: LinkProperties[];
 
-  @doc("Dictionary of additional properties provided for the item")
-  additionalProductProperties?: Record<string>;
+  //  @doc("Dictionary of additional properties provided for the item")
+  //  additionalProductProperties?: Record<string>;
 
   @doc("The product language")
   language?: string;
@@ -685,9 +582,6 @@ model PlanMetadata {
 
   @doc("Pointing to a planId which holds the alternative stack reference")
   altStackReference?: string;
-
-  @doc("Pointing to a planId of plans that are related to this plan")
-  relatedSkus?: PlanSkuRelation[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
@@ -727,9 +621,11 @@ model PlanDetails extends PlanSummary {
   isQuantifiable: boolean;
 
   @doc("Billing components")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   billingComponents?: BillingComponent[];
 
   @doc("List of purchase duration discounts")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   purchaseDurationDiscounts?: PurchaseDurationDiscount[];
 
   @doc("A value indicating whether the plan is used as hidden private offer requiring a quote")
@@ -778,12 +674,14 @@ model PlanDetails extends PlanSummary {
   serviceType?: string;
 
   @doc("Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   skuAttributes?: Attribute[];
 
   @doc("The sku properties")
   skuProperties?: SkuProperties;
 
   @doc("SKU price related properties.")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   offeringProperties?: OfferingProperties[];
 }
 
@@ -934,6 +832,7 @@ model Meter {
   type?: string;
 
   @doc("Included quantity properties")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   includedQuantityProperties?: IncludedQuantityProperty[];
 }
 
@@ -972,13 +871,14 @@ model BillingComponent {
   @doc("Billing Tag")
   billingTag?: string;
 
-  @doc("Custom Meter Ids")
-  customMeterIds?: Record<int32[]>;
+  //  @doc("Custom Meter Ids")
+  //  customMeterIds?: Record<int32[]>;
 }
 
 @doc("Applicable term")
 model Term {
   @doc("Term description parameters")
+  @OpenAPI.extension("x-ms-identifiers", #["parameter", "value"])
   termDescriptionParameters?: TermDescriptionParameter[];
 
   @doc("Term id")
@@ -1027,6 +927,7 @@ model Availability {
   pricingAudience: PricingAudience;
 
   @doc("List of applicable terms")
+  @OpenAPI.extension("x-ms-identifiers", #[])
   terms?: Term[];
 
   @doc("A value indicating whether it has free trials")
@@ -1217,7 +1118,7 @@ model OdataOrderByParameter {
 }
 
 @armResourceOperations
-interface Product {
+interface Products {
   get is ArmResourceRead<Product>;
   listBySubscription is ArmListBySubscription<Product>;
 }
