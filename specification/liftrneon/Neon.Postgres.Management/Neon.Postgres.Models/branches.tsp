@@ -61,13 +61,26 @@ model BranchProperties {
 
   @doc("Total data size")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   dataSize?: string;
 
   @doc("Last active compute for the branch")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   lastActive?: string;
 
   @doc("Compute hours for the branch")
   @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
   computeHours?: string;
+
+  @doc("Branch protected status")
+  @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
+  protected?: boolean;
+
+  @doc("Branch default status")
+  @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
+  isDefault?: boolean;
 }
