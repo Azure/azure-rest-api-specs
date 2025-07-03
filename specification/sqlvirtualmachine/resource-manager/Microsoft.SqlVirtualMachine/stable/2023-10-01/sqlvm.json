@@ -1091,7 +1091,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/{sqlVirtualMachineName}/fetchDCAssessment": {
       "post": {
-        "operationId": "SqlVirtualMachines_FetchDcAssessment",
+        "operationId": "SqlVirtualMachines_FetchDCAssessment",
         "tags": [
           "SqlVirtualMachines"
         ],
@@ -1146,6 +1146,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine": {
+            "$ref": "./examples/StartDiskConfigAssessmentOnSqlVirtualMachine.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2090,8 +2095,7 @@
           "additionalProperties": {
             "type": "object"
           },
-          "readOnly": true,
-          "x-ms-client-flatten": false
+          "readOnly": true
         }
       }
     },
