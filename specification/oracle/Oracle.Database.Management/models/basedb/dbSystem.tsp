@@ -258,7 +258,7 @@ union StorageVolumePerformanceMode {
   @doc("With this option, you are purchasing 10 VPUs per GB/month. For more information, including specific throughput and IOPS performance numbers for various volume sizes.")
   Balanced: "Balanced",
 
- @doc("With this option, you are purchasing 20 VPUs per GB/month. For more information, including specific throughput and IOPS performance numbers for various volume sizes.")
+  @doc("With this option, you are purchasing 20 VPUs per GB/month. For more information, including specific throughput and IOPS performance numbers for various volume sizes.")
   HighPerformance: "HighPerformance",
 
   string,

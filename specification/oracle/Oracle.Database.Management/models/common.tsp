@@ -88,7 +88,6 @@ scalar Ocid extends string;
 @maxLength(1024)
 scalar SshPublicKey extends string;
 
-
 @doc("LicenseModel enum")
 union LicenseModel {
   @doc("License included")
@@ -296,7 +295,6 @@ union BaseDbSystemShapes {
   VMStandardX86: "VM.Standard.x86",
 
   string,
-
 }
 
 @added(Versions.v20250701_preview)
@@ -304,7 +302,7 @@ union BaseDbSystemShapes {
 union StorageManagementType {
   @doc("Logical Volume management")
   LVM: "LVM",
-  
+
   string,
 }
 
@@ -324,5 +322,4 @@ union ShapeFamilyType {
   VirtualMachine: "VIRTUALMACHINE",
 
   string,
-
 }
