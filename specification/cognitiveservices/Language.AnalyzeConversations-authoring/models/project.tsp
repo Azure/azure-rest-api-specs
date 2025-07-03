@@ -74,13 +74,8 @@ model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * The storage container name in case of conversation summarization.
    */
-<<<<<<< HEAD:specification/cognitiveservices/Language.AnalyzeConversations-authoring/models.tsp
-  @visibility("create", "read")
-  @added(Versions.v2024_11_15_preview)
-=======
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @added(Versions.v2023_04_15_preview)
->>>>>>> main:specification/cognitiveservices/Language.AnalyzeConversations-authoring/models/project.tsp
+  @added(Versions.v2024_11_15_preview)
   storageInputContainerName?: string;
 
   /**
@@ -197,7 +192,7 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
 /**
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringCopyAuthorizationDetails", "csharp")
 model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
@@ -219,7 +214,7 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringCopyProjectDetails", "csharp")
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
@@ -347,7 +342,7 @@ model AnalyzeConversationAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringCopyProjectState", "csharp")
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
@@ -462,7 +457,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
@@ -501,7 +496,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
 
@@ -1060,7 +1055,7 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringAssignedDeploymentResources", "csharp")
 model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
@@ -1077,7 +1072,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringAssignedDeploymentResource", "csharp")
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
@@ -1099,7 +1094,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringAssignDeploymentResourcesDetails", "csharp")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
@@ -1133,7 +1128,7 @@ model AnalyzeConversationAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringUnassignDeploymentResourcesDetails", "csharp")
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
@@ -1145,7 +1140,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
@@ -1266,7 +1261,7 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName(
   "ConversationAuthoringAssignedResourceDeploymentsMetadata",
   "csharp"
@@ -1286,7 +1281,7 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringAssignedProjectDeploymentsMetadata", "csharp")
 @resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
@@ -1306,7 +1301,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 @clientName("ConversationAuthoringAssignedProjectDeploymentMetadata", "csharp")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**

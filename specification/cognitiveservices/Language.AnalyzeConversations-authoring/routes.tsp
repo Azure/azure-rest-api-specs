@@ -60,7 +60,7 @@ op conversationAuthoringListSupportedLanguages is languageOperations.ResourceLis
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listAssignedResourceDeployments", "csharp")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -71,7 +71,7 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @clientName("listDeploymentResources", "csharp")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2024_11_15_preview)
 op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -207,7 +207,7 @@ interface ConversationAuthoringDeployment {
   @pollingOperation(
     ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -238,7 +238,7 @@ interface ConversationAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -257,7 +257,7 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getAssignDeploymentResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -288,7 +288,7 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
   )
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -313,7 +313,7 @@ interface ConversationAuthoringProject {
   /**
    * Gets the status of an existing assign deployment resources job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
 
   /**
@@ -322,7 +322,7 @@ interface ConversationAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
@@ -538,7 +538,7 @@ interface ConversationAuthoringProject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   @actionSeparator("/:")
   @action("authorize-copy")
   @clientName("AuthorizeProjectCopy", "csharp")
@@ -555,7 +555,7 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/:copy")
   @post
   @pollingOperation(ConversationAuthoringProject.getCopyProjectStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -580,7 +580,7 @@ interface ConversationAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
 
   /**
@@ -738,7 +738,7 @@ interface ConversationAuthoringTrainedModel {
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getEvaluationStatus)
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -795,7 +795,7 @@ interface ConversationAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2024_11_15_preview)
   getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
