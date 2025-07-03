@@ -138,7 +138,6 @@ model CommunityBaseModel {
   @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
   resourceCollection?: armResourceIdentifier[];
 
-  @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Managed resource group name.")
   @visibility(Lifecycle.Read)
   @renamedFrom(
