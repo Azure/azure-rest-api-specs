@@ -120,6 +120,8 @@ export async function verifyRunStatusImpl({
         commitStatusContext = commitStatuses[0].context;
         commitStatusState = commitStatuses[0].state;
         commitStatusTargetUrl = commitStatuses[0].target_url;
+      } else {
+        core.setFailed(`Failed to fetch commit status which doesn't exist.`);
       }
     } catch (error) {
       core.setFailed(
