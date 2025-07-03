@@ -1,18 +1,20 @@
-const apiVersionAlias: string[] = [
-  "api-version",
-  "apiVersion",
-  "apiVersionParameter",
-];
+const apiVersionAlias: string[] = ["api-version", "apiVersion", "apiVersionParameter"];
 
 export function isApiVersionParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types.json#\/parameters\/ApiVersionParameter$/;
+    const commonTypePattern =
+      /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types.json#\/parameters\/ApiVersionParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
-    if (apiVersionAlias.map(a => `#/parameters/${a}`.toLowerCase()).filter(a => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0) return true;
-  }
-  else if (obj["name"] !== undefined) {
-    if (apiVersionAlias.map(a => a.toLowerCase()).includes(obj["name"].toLowerCase())) return true;
+    if (
+      apiVersionAlias
+        .map((a) => `#/parameters/${a}`.toLowerCase())
+        .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
+    )
+      return true;
+  } else if (obj["name"] !== undefined) {
+    if (apiVersionAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
+      return true;
   }
 
   return false;
@@ -26,13 +28,19 @@ const subscriptionIdAlias: string[] = [
 
 export function isSubscriptionIdParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/SubscriptionIdParameter$/;
+    const commonTypePattern =
+      /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/SubscriptionIdParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
-    if (subscriptionIdAlias.map(a => `#/parameters/${a}`.toLowerCase()).filter(a => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0) return true;
-  }
-  else if (obj["name"] !== undefined) {
-    if (subscriptionIdAlias.map(a => a.toLowerCase()).includes(obj["name"].toLowerCase())) return true;
+    if (
+      subscriptionIdAlias
+        .map((a) => `#/parameters/${a}`.toLowerCase())
+        .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
+    )
+      return true;
+  } else if (obj["name"] !== undefined) {
+    if (subscriptionIdAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
+      return true;
   }
 
   return false;
@@ -49,15 +57,20 @@ const resourceGroupNameAlias: string[] = [
 
 export function isResourceGroupNameParameter(obj: Record<string, any>) {
   if (obj["$ref"] !== undefined) {
-    const commonTypePattern = /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/ResourceGroupNameParameter$/;
+    const commonTypePattern =
+      /^\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/common-types\/resource-management\/v[1-6]\/types\.json#\/parameters\/ResourceGroupNameParameter$/;
     if (commonTypePattern.test(obj["$ref"])) return true;
 
-    if (resourceGroupNameAlias.map(a => `#/parameters/${a}`.toLowerCase()).filter(a => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0) return true;
-  }
-  else if (obj["name"] !== undefined) {
-    if (resourceGroupNameAlias.map(a => a.toLowerCase()).includes(obj["name"].toLowerCase())) return true;
+    if (
+      resourceGroupNameAlias
+        .map((a) => `#/parameters/${a}`.toLowerCase())
+        .filter((a) => (obj["$ref"] as string).toLowerCase().includes(a)).length > 0
+    )
+      return true;
+  } else if (obj["name"] !== undefined) {
+    if (resourceGroupNameAlias.map((a) => a.toLowerCase()).includes(obj["name"].toLowerCase()))
+      return true;
   }
 
   return false;
 }
-
