@@ -437,6 +437,24 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigPythonMgmtPackageGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "generate-test", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigPythonMgmtPackageGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "generate-sample", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
@@ -453,19 +471,6 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
-  }
-}
-
-// ----- Python azure sub rules -----
-export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "generate-test", true);
-  }
-}
-
-export class TspConfigPythonAzGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "generate-sample", true);
   }
 }
 
@@ -545,8 +550,8 @@ export const defaultRules = [
   new TspConfigPythonMgmtPackageDirectorySubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzGenerateTestTrueSubRule(),
-  new TspConfigPythonAzGenerateSampleTrueSubRule(),
+  new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
+  new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
