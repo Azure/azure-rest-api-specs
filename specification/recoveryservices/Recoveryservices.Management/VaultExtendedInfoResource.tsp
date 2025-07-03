@@ -38,13 +38,11 @@ interface VaultExtendedInfoResources {
   /**
    * Get the vault extended info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<VaultExtendedInfoResource, Error = CloudError>;
 
   /**
    * Create vault extended info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     VaultExtendedInfoResource,
@@ -55,7 +53,6 @@ interface VaultExtendedInfoResources {
   /**
    * Update vault extended info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     VaultExtendedInfoResource,

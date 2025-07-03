@@ -255,7 +255,6 @@ interface Vaults {
   /**
    * Uploads a certificate for a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}")
@@ -287,7 +286,6 @@ interface Vaults {
    * Unregisters the given container from your Recovery Services vault.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   registeredIdentitiesDelete is VaultDeleteOps.DeleteSync<
     Vault,
@@ -298,7 +296,6 @@ interface Vaults {
   /**
    * Fetches the replication usages of the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("replicationUsages")
   list is VaultOps.ActionSync<Vault, void, ArmResponse<ReplicationUsageList>>;
@@ -306,7 +303,6 @@ interface Vaults {
   /**
    * Fetches the usages of the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("usages")
   listByVaults is VaultOps.ActionSync<Vault, void, ArmResponse<VaultUsageList>>;
@@ -340,7 +336,6 @@ interface GetOperationResult {
   /**
    * Retrieve a list of Vaults.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
     Vault,
     Response = ArmResponse<VaultList>,
