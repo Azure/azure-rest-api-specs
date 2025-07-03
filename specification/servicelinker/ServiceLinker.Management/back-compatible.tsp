@@ -69,7 +69,9 @@ using Microsoft.ServiceLinker;
 
 // LinkersOperationGroup operations with Linkers_ prefix
 @@clientLocation(LinkersOperationGroup.listDaprConfigurations, Linkers);
-@@clientName(LinkersOperationGroup.listDaprConfigurations, "ListDaprConfigurations");
+@@clientName(LinkersOperationGroup.listDaprConfigurations,
+  "ListDaprConfigurations"
+);
 
 // ConfigurationNamesOperationGroup operations with ConfigurationNames_ prefix
 @@clientLocation(ConfigurationNamesOperationGroup.list, "ConfigurationNames");
