@@ -650,7 +650,7 @@ namespace SkillContext
 	}
 
 	@doc("SearchMemoriesRequest")
-	model SearchMemoriesRequest {
+	model SearchMemoriesRequest extends BaseMemoryRequest {
 		query: string;
 		type?: MemoryType;
 		name: string;
