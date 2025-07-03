@@ -61,13 +61,11 @@ interface DatadogMonitorResources {
   /**
    * Get the properties of a specific monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<DatadogMonitorResource>;
 
   /**
    * Create a monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is DatadogMonitorResourcesOps.CreateOrUpdateAsync<
     DatadogMonitorResource,
     OptionalRequestBody = true
@@ -76,7 +74,6 @@ interface DatadogMonitorResources {
   /**
    * Update a monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is DatadogMonitorResourcesOps.CustomPatchAsync<
     DatadogMonitorResource,
@@ -89,7 +86,6 @@ interface DatadogMonitorResources {
   /**
    * Delete a monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DatadogMonitorResource,
@@ -99,7 +95,6 @@ interface DatadogMonitorResources {
   /**
    * List all monitors under the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
     DatadogMonitorResource,
     Response = ArmResponse<DatadogMonitorResourceListResponse>
@@ -108,7 +103,6 @@ interface DatadogMonitorResources {
   /**
    * List all monitors under the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmListBySubscription<
     DatadogMonitorResource,
     Response = ArmResponse<DatadogMonitorResourceListResponse>
@@ -117,7 +111,6 @@ interface DatadogMonitorResources {
   /**
    * List the api keys for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listApiKeys is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -127,7 +120,6 @@ interface DatadogMonitorResources {
   /**
    * Get the default api key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getDefaultKey is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -137,7 +129,6 @@ interface DatadogMonitorResources {
   /**
    * Set the default api key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   setDefaultKey is ArmResourceActionSync<
     DatadogMonitorResource,
     {
@@ -150,7 +141,6 @@ interface DatadogMonitorResources {
   /**
    * List the hosts for a given monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listHosts is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -160,7 +150,6 @@ interface DatadogMonitorResources {
   /**
    * List all Azure resources associated to the same Datadog organization as the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listLinkedResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -170,7 +159,6 @@ interface DatadogMonitorResources {
   /**
    * List the resources currently being monitored by the Datadog monitor resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listMonitoredResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -180,7 +168,6 @@ interface DatadogMonitorResources {
   /**
    * Refresh the set password link and return a latest one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   refreshSetPasswordLink is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -190,7 +177,6 @@ interface DatadogMonitorResources {
   /**
    * Get marketplace and organization info mapped to the given monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("getBillingInfo")
   billingInfoGet is ArmResourceActionSync<
     DatadogMonitorResource,
