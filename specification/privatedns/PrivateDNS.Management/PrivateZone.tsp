@@ -157,7 +157,6 @@ interface PrivateZones {
   /**
    * Lists all record sets in a Private DNS zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("ALL")
   recordSetsList is ArmResourceActionSync<
