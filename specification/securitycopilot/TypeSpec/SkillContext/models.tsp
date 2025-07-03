@@ -899,7 +899,7 @@ namespace SkillContext
 
 	@doc("")
 	enum EvaluationType {
-		unknown,
+		`unknown`,
 		normal,
 		waitForInput,
 	}
