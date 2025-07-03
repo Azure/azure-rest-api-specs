@@ -106,3 +106,8 @@ using Microsoft.GuestConfiguration;
 @@clientName(GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet,
   "Get"
 );
+/*
+@@clientName(GuestConfigurationAssignments.get::parameters.name,
+  "guestConfigurationAssignmentName"
+);
+*/
