@@ -211,12 +211,12 @@ model ActionOnUnmanageDeleteParameters {
 /**
  * Deployment stack properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility. TSP doc instructs this for 'allOf' for OpenAPI"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Back compat. TSP doc instructs this for 'allOf' for OpenAPI"
 model DeploymentStackProperties extends DeploymentStacksError {
   /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Template is a complex object"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Back compat. Template is a complex object"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   template?: Record<unknown>;
 
@@ -561,7 +561,7 @@ model DeploymentStackTemplateDefinition {
   /**
    * The template content. Use this element to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Template is a complex object"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Back compat. Template is a complex object"
   template?: Record<unknown>;
 
   /**

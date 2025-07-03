@@ -25,7 +25,7 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
   >;
 
   /** Runs preflight validation on the Deployment stack template at the specified scope to verify its acceptance to Azure Resource Manager. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "There's a 400 response for validation failures."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Back compat. There's a 400 response for validation failures."
   @added(Versions.v2024_03_01)
   @action("validate")
   validateStack is ArmResourceActionAsync<
@@ -43,7 +43,7 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
   >;
 
   /** Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Synchronous deletes are possible."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Back compat. Synchronous deletes are possible."
   delete is ArmResourceDeleteWithoutOkAsync<
     DeploymentStack,
     BaseParameters = TBaseParams,
