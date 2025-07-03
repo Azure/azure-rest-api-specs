@@ -464,7 +464,7 @@ model X509CertificateProperties {
 }
 
 /**
- * The subject alternate names of a X509 object.
+ * The Subject Alternative Names of a X509 object.
  */
 model SubjectAlternativeNames {
   /**
@@ -473,15 +473,27 @@ model SubjectAlternativeNames {
   emails?: string[];
 
   /**
-   * Domain names.
+   * Domain Names.
    */
   @encodedName("application/json", "dns_names")
   dnsNames?: string[];
 
   /**
-   * User principal names.
+   * User Principal Names.
    */
   upns?: string[];
+
+  /**
+   * Uniform Resource Identifiers.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  uris?: string[];
+
+  /**
+   * IP addresses; supports IPv4 and IPv6.
+   */
+  @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+  ipAddresses?: string[];
 }
 
 /**
