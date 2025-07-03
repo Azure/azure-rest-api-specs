@@ -19,12 +19,12 @@ describe("summarizeChecksImpl", () => {
       });
 
       // Use a known PR from the azure-rest-api-specs repo for testing
-      const testParams = {
+    const testParams = {
         owner: "Azure",
         repo: "azure-rest-api-specs",
         issue_number: 35629,
         head_sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
-        event_name: "labeled",
+        event_name: "pull_request",
         github: github,
         core: mockCore,
         context: {
@@ -33,14 +33,17 @@ describe("summarizeChecksImpl", () => {
                 repo: "azure-rest-api-specs",
             },
             payload: {
-                action: LabelAction.Labeled,
-                label: {
-                name: "test-label", // Example label, adjust as needed
+                action: "opened",
+                pull_request: {
+                    number: 35629,
+                    head: {
+                        sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
+                    },
                 },
             },
-            eventName: "labeled",
-        }
-      };
+            eventName: "pull_request",
+        },
+    };
     //     const testParams = {
     //     owner: "scbedd",
     //     repo: "azure-rest-api-specs",

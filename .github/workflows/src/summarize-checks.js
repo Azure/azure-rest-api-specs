@@ -66,6 +66,8 @@ const FYI_CHECK_NAMES = [
 
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 
+const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge"
+
 /** type {CheckMetadata[]} */
 const CHECK_METADATA = [
   {
@@ -230,7 +232,6 @@ export default async function summarizeChecks({ github, context, core }) {
     event_name = event_name || context.event_name;
   }
 
-
   // Get the target branch of the PR
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
@@ -332,7 +333,7 @@ export async function summarizeChecksImpl(
     automatedMergingRequirementsMetCheckRun
   );
 
-  await core.info(`Updating comment '${commentName}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+  await core.info(`Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
   // this will remain commented until we're comfortable with the change.
   // await commentOrUpdate(
   //   { github, context, core },
@@ -342,10 +343,6 @@ export async function summarizeChecksImpl(
   //   commentName,
   //   commentBody
   // );
-
-  console.log(requiredCheckRuns);
-  console.log(fyiCheckRuns);
-  console.log(automatedMergingRequirementsMetCheckRun);
 }
 
 /**

@@ -5,8 +5,8 @@
     2. The target branch of the PR.
 */
 
-import { anyLabelMatches, brchTsg, diagramTsg, href,
-  notReadyForArmReviewReason, sdkLabels, wrapInArmReviewMessage } from "./tsgs.js";
+import { brchTsg, diagramTsg, href,
+  notReadyForArmReviewReason, wrapInArmReviewMessage } from "./tsgs.js";
 
 /**
  * This file is the single source of truth for the labels used by the SDK generation tooling
@@ -703,4 +703,45 @@ export function getPresentBlockingLabels(violatedReqLabelsRules) {
     // Implicitly assuming here that there is exactly one prerequisite label for the rule.
     // See comment on RequiredLabelRule for details.
     .map((rule) => rule.anyPrerequisiteLabels[0]);
+}
+
+/**
+ * Checks if any label in labelsToMatchAgainst matches any label in inputLabels
+ * @param {string[]} labelsToMatchAgainst - Labels to match against (can include prefix patterns ending with *)
+ * @param {string[]} inputLabels - Input labels to check
+ * @returns {boolean} True if any match is found
+ */
+export function anyLabelMatches(
+  labelsToMatchAgainst,
+  inputLabels
+) {
+  return getMatchingLabelIfAny(labelsToMatchAgainst, inputLabels) !== undefined;
+}
+
+/**
+ * Gets the first matching label from labelsToMatchAgainst that matches any label in inputLabels
+ * @param {string[]} labelsToMatchAgainst - Labels to match against (can include prefix patterns ending with *)
+ * @param {string[]} inputLabels - Input labels to check
+ * @returns {string | undefined} The first matching label or undefined if no match
+ */
+export function getMatchingLabelIfAny(
+  labelsToMatchAgainst,
+  inputLabels
+) {
+  const matchingLabel = labelsToMatchAgainst.find((labelToMatchAgainstStr) => {
+    return inputLabels.some((inputLabel) => isEqualToOrPrefixOf(labelToMatchAgainstStr, inputLabel));
+  });
+
+  return matchingLabel;
+}
+/**
+ *
+ * @param {string} inputstring
+ * @param {string} label
+ * @returns {boolean}
+ */
+export function isEqualToOrPrefixOf(inputstring, label) {
+  return inputstring.endsWith("*")
+    ? label.startsWith(inputstring.slice(0, -1))
+    : inputstring === label;
 }
