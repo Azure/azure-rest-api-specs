@@ -121,7 +121,7 @@ interface TextOperations {
   @post
   detectGroundednessOptions is Azure.Core.RpcOperation<
     {
-      @body
+      @bodyRoot
       @doc("The request body to be detected.")
       @clientName("options", "csharp")
       @clientName("options", "python")
@@ -193,7 +193,7 @@ interface ImageWithTextOperations {
   analyzeImageWithText is Azure.Core.RpcOperation<
     {
       @doc("The request body of image-with-text analysis.")
-      @body
+      @bodyRoot
       body: AnalyzeImageWithTextOptions;
     },
     AnalyzeImageWithTextResult
