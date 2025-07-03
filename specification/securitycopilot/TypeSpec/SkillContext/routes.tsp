@@ -199,6 +199,23 @@ op queryMemories(
 @body request : QueryMemoriesRequest,
 ): MemoryDtoResponsePage;
 
+@delete
+@route("/skillcontext/removeMemoryAsync")
+op removeMemory(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@query memoryId : string,
+@query subScopeId? : string,
+@query scope? : MemoryScope,
+@query softDelete? : boolean = true,
+): MemoryDtoResponse;
+
+@post
+@route("/skillContext/searchMemories")
+@op searchMemories(
+@header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+@body request : SearchMemoriesRequest
+): MemoryDtoResponsePage;
+
 @post
 @route("/medeinaOpenAI/createChatCompletion")
 @doc("Executes an Open AI Chat completion request")

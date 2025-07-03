@@ -649,6 +649,16 @@ namespace SkillContext
 		limit: int32;
 	}
 
+	@doc("SearchMemoriesRequest")
+	model SearchMemoriesRequest {
+		query: string;
+		type?: MemoryType;
+		name: string;
+		category: string;
+		tags: string[];
+		includeOnlyActive: boolean;
+	}
+
 	@doc("MemoryState")
 	enum MemoryState {
 		@doc("Unknown")
