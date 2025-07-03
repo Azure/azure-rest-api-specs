@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
-import "./models.tsp";
 import "./models/text.tsp";
 import "./models/image.tsp";
 import "./models/text_blocklist.tsp";
