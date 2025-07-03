@@ -14,6 +14,7 @@ namespace Microsoft.Confluent;
 /**
  * Details of cluster record
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(SCEnvironmentRecord)
@@ -36,6 +37,33 @@ model SCClusterRecord extends Foundations.ProxyResource {
   properties?: ClusterProperties;
 }
 
+interface SCClusterRecordOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path @segment("environments") environmentId: string,
+      },
+      {
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path @segment("clusters") clusterId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface SCClusterRecords {
   /**
@@ -53,9 +81,9 @@ interface SCClusterRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cluster_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is SCClusterRecordOps.CreateOrUpdateSync<
     SCClusterRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -63,10 +91,7 @@ interface SCClusterRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Cluster_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SCClusterRecord,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SCClusterRecord>;
 
   /**
    * Lists of all the clusters in a environment

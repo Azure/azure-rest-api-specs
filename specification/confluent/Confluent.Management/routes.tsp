@@ -44,6 +44,7 @@ interface MarketplaceAgreementsOperationGroup {
     Response = ConfluentAgreementResource,
     Scope = SubscriptionActionScope,
     Parameters = {},
+    OptionalRequestBody = true,
     Error = ResourceProviderDefaultErrorResponse
   >;
 }

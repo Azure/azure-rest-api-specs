@@ -24,6 +24,38 @@ model TopicRecord is Azure.ResourceManager.ProxyResource<TopicProperties> {
   >;
 }
 
+interface TopicRecordOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path @segment("environments") environmentId: string,
+
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path @segment("clusters") clusterId: string,
+      },
+      {
+        /**
+         * Confluent kafka or schema registry topic name
+         */
+        @path @segment("topics") topicName: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface TopicRecords {
   /**
@@ -41,9 +73,9 @@ interface TopicRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Create")
-  create is ArmResourceCreateOrReplaceSync<
+  create is TopicRecordOps.CreateOrUpdateSync<
     TopicRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**

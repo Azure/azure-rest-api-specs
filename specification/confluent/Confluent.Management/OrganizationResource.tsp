@@ -59,7 +59,8 @@ interface OrganizationResourceAPIKeyActions {
   getClusterAPIKey is OrganizationResourceAPIKeyOps.ActionSync<
     OrganizationResource,
     void,
-    ArmResponse<APIKeyRecord>
+    ArmResponse<APIKeyRecord>,
+    OverrideRouteOptions = #{ useStaticRoute: true }
   >;
 
   /**
@@ -72,7 +73,8 @@ interface OrganizationResourceAPIKeyActions {
   deleteClusterAPIKey is OrganizationResourceAPIKeyOps.ActionSync<
     OrganizationResource,
     void,
-    OkResponse | NoContentResponse
+    OkResponse | NoContentResponse,
+    OverrideRouteOptions = #{ useStaticRoute: true }
   >;
 }
 
@@ -108,9 +110,27 @@ interface OrganizationResourceRoleBindingIdActions {
   deleteRoleBinding is OrganizationResourceRoleBindingIdOps.ActionSync<
     OrganizationResource,
     void,
-    OkResponse | NoContentResponse
+    OkResponse | NoContentResponse,
+    OverrideRouteOptions = #{ useStaticRoute: true }
   >;
 }
+
+interface OrganizationResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
 
 @armResourceOperations
 interface OrganizationResources {
@@ -129,9 +149,9 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Organization_Create")
-  create is ArmResourceCreateOrReplaceAsync<
+  create is OrganizationResourceOps.CreateOrUpdateAsync<
     OrganizationResource,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -140,10 +160,10 @@ interface OrganizationResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Organization_Update")
-  update is ArmCustomPatchSync<
+  update is OrganizationResourceOps.CustomPatchSync<
     OrganizationResource,
     PatchModel = OrganizationResourceUpdate,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**

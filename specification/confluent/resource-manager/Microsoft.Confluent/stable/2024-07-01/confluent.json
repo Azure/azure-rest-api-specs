@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ConfluentManagementClient",
+    "title": "Microsoft.Confluent",
     "version": "2024-07-01",
     "description": "// (missing-service-description) Add service description",
     "x-typespec-generated": [
@@ -148,7 +148,7 @@
             "name": "body",
             "in": "body",
             "description": "The request body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ConfluentAgreementResource"
             }
@@ -328,7 +328,7 @@
             "name": "body",
             "in": "body",
             "description": "Organization resource model",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/OrganizationResource"
             }
@@ -402,7 +402,7 @@
             "name": "body",
             "in": "body",
             "description": "Updated Organization resource",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/OrganizationResourceUpdate"
             }
@@ -1284,7 +1284,7 @@
             "name": "body",
             "in": "body",
             "description": "Confluent Environment resource model",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SCEnvironmentRecord"
             }
@@ -1554,7 +1554,7 @@
             "name": "body",
             "in": "body",
             "description": "Confluent Cluster resource model",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SCClusterRecord"
             }
@@ -1645,7 +1645,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1852,7 +1852,7 @@
             "name": "body",
             "in": "body",
             "description": "Confluent Connector resource model",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ConnectorResource"
             }
@@ -1950,7 +1950,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2226,7 +2226,7 @@
             "name": "body",
             "in": "body",
             "description": "Confluent Topics resource model",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/TopicRecord"
             }
@@ -4306,8 +4306,7 @@
           "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -5060,8 +5059,7 @@
           "description": "Input Config Specification of the topic",
           "items": {
             "$ref": "#/definitions/TopicsInputConfig"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "partitionsReassignments": {
           "$ref": "#/definitions/TopicsRelatedLink",

@@ -20,7 +20,6 @@ import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
 import "./TopicRecord.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -33,7 +32,7 @@ using TypeSpec.OpenAPI;
  * // (missing-service-description) Add service description
  */
 @armProviderNamespace
-@service(#{ title: "ConfluentManagementClient" })
+@service(#{ title: "Microsoft.Confluent" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Confluent;

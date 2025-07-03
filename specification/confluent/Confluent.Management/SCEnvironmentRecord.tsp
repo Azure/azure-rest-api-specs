@@ -14,6 +14,7 @@ namespace Microsoft.Confluent;
 /**
  * Details about environment name, metadata and environment id of an environment
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(OrganizationResource)
@@ -36,6 +37,28 @@ model SCEnvironmentRecord extends Foundations.ProxyResource {
   properties?: EnvironmentProperties;
 }
 
+interface SCEnvironmentRecordOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+      },
+      {
+        /**
+         * Confluent environment id
+         */
+        @path @segment("environments") environmentId: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
+
 @armResourceOperations
 interface SCEnvironmentRecords {
   /**
@@ -53,9 +76,9 @@ interface SCEnvironmentRecords {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Environment_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is SCEnvironmentRecordOps.CreateOrUpdateSync<
     SCEnvironmentRecord,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -155,7 +178,8 @@ interface SCEnvironmentRecordCluster {
   getSchemaRegistryClusterById is SCEnvironmentRecordClusterOps.ActionSync<
     SCEnvironmentRecord,
     void,
-    ArmResponse<SchemaRegistryClusterRecord>
+    ArmResponse<SchemaRegistryClusterRecord>,
+    OverrideRouteOptions = #{ useStaticRoute: true }
   >;
 }
 

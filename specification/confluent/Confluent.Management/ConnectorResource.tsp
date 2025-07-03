@@ -24,6 +24,37 @@ model ConnectorResource
     NamePattern = ""
   >;
 }
+interface ConnectorResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * Organization resource name
+         */
+        @path @segment("organizations") organizationName: string,
+
+        /**
+         * Confluent environment id
+         */
+        @path @segment("environments") environmentId: string,
+
+        /**
+         * Confluent kafka or schema registry cluster id
+         */
+        @path @segment("clusters") clusterId: string,
+      },
+      {
+        /**
+         * Confluent connector name
+         */
+        @path @segment("connectors") connectorName: string,
+      },
+      ResourceProviderDefaultErrorResponse
+    > {}
 
 @armResourceOperations
 interface ConnectorResources {
@@ -42,9 +73,9 @@ interface ConnectorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connector_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is ConnectorResourceOps.CreateOrUpdateSync<
     ConnectorResource,
-    Error = ResourceProviderDefaultErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
@@ -52,10 +83,7 @@ interface ConnectorResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connector_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ConnectorResource,
-    Error = ResourceProviderDefaultErrorResponse
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<ConnectorResource>;
 
   /**
    * Lists all the connectors in a cluster
