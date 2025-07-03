@@ -9589,12 +9589,43 @@
     "ManagedClusterIngressProfile": {
       "type": "object",
       "properties": {
+        "gatewayAPI": {
+          "$ref": "#/definitions/ManagedClusterIngressProfileGatewayConfiguration",
+          "description": "Settings for the managed Gateway API installation"
+        },
         "webAppRouting": {
           "$ref": "#/definitions/ManagedClusterIngressProfileWebAppRouting",
           "description": "Web App Routing settings for the ingress profile."
         }
       },
       "description": "Ingress profile for the container service cluster."
+    },
+    "ManagedClusterIngressProfileGatewayConfiguration": {
+      "type": "object",
+      "properties": {
+        "installation": {
+          "type": "string",
+          "description": "Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details.",
+          "enum": [
+            "Disabled",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedGatewayType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Gateway API CRDs will not be reconciled on your cluster."
+              },
+              {
+                "value": "Standard",
+                "description": "The latest Gateway CRD bundle from the standard channel that is compatible with your Kubernetes version will be reconciled onto your cluster. See https://gateway-api.sigs.k8s.io/concepts/versioning/ for more details."
+              }
+            ]
+          }
+        }
+      }
     },
     "ManagedClusterIngressProfileWebAppRouting": {
       "type": "object",
