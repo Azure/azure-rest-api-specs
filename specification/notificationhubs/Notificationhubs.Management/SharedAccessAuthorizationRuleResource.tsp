@@ -40,25 +40,38 @@ interface SharedAccessAuthorizationRuleResourceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = NamespaceResource,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]*$"
-        >>,
-        ...KeysOf<ResourceNameParameter<
-          Resource = NotificationHubResource,
-          KeyName = "notificationHubName",
-          SegmentName = "notificationHubs",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-./_]*$"
-        >>,
+
+        /**
+         * Namespace name
+         */
+        @path
+        @segment("namespaces")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]*$")
+        @minLength(1)
+        @maxLength(50)
+        namespaceName: string,
+
+        /**
+         * Notification Hub name
+         */
+        @path
+        @segment("notificationHubs")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-./_]*$")
+        @minLength(1)
+        @maxLength(265)
+        notificationHubName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedAccessAuthorizationRuleResource,
-        KeyName = "authorizationRuleName",
-        SegmentName = "authorizationRules",
-        NamePattern = "^[a-zA-Z0-9!()*-._]+$"
-      >>
+      {
+        /**
+         * Authorization Rule Name
+         */
+        @path
+        @segment("authorizationRules")
+        @pattern("^[a-zA-Z0-9!()*-._]+$")
+        @minLength(1)
+        @maxLength(256)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
@@ -112,19 +125,28 @@ interface NamespaceOps
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
         ...Azure.ResourceManager.Legacy.Provider,
-        ...KeysOf<ResourceNameParameter<
-          Resource = NamespaceResource,
-          KeyName = "namespaceName",
-          SegmentName = "namespaces",
-          NamePattern = "^[a-zA-Z][a-zA-Z0-9-]*$"
-        >>,
+
+        /**
+         * Namespace name
+         */
+        @path
+        @segment("namespaces")
+        @pattern("^[a-zA-Z][a-zA-Z0-9-]*$")
+        @minLength(1)
+        @maxLength(50)
+        namespaceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = SharedAccessAuthorizationRuleResource,
-        KeyName = "authorizationRuleName",
-        SegmentName = "authorizationRules",
-        NamePattern = "^[a-zA-Z0-9!()*-._]+$"
-      >>
+      {
+        /**
+         * Authorization Rule Name
+         */
+        @path
+        @segment("authorizationRules")
+        @pattern("^[a-zA-Z0-9!()*-._]+$")
+        @minLength(1)
+        @maxLength(256)
+        authorizationRuleName: string,
+      }
     > {}
 
 @armResourceOperations
