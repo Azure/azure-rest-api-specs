@@ -30,16 +30,12 @@ interface PrivateEndpointConnections {
   /**
    * Get the specified private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubPrivateEndpointConnections_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Update the state of specified private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubPrivateEndpointConnections_Update")
   update is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -48,9 +44,7 @@ interface PrivateEndpointConnections {
   /**
    * Delete the specified private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubPrivateEndpointConnections_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response =
@@ -63,8 +57,6 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubPrivateEndpointConnections_List")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>

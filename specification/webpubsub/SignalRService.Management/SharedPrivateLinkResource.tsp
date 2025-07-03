@@ -72,17 +72,13 @@ interface SharedPrivateLinkResources {
   /**
    * Get the specified shared private link resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicaSharedPrivateLinkResources_Get")
   get is SharedPrivateLinkResourceOps.Read<SharedPrivateLinkResource>;
 
   /**
    * Create or update a shared private link resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate")
   createOrUpdate is SharedPrivateLinkResourceOps.CreateOrUpdateAsync<
     SharedPrivateLinkResource,
     Parameters = {
@@ -94,8 +90,6 @@ interface SharedPrivateLinkResources {
   /**
    * List shared private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicaSharedPrivateLinkResources_List")
   list is SharedPrivateLinkResourceOps.List<
     SharedPrivateLinkResource,
     Response = ArmResponse<SharedPrivateLinkResourceList>
@@ -149,8 +143,6 @@ interface WebPubSubSharedPrivateLinkResources {
    * Delete the specified shared private link resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubSharedPrivateLinkResources_Delete")
   delete is WebPubSubSharedPrivateLinkResourceOps.DeleteSync<
     SharedPrivateLinkResource,
     Response =

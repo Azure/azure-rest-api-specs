@@ -30,18 +30,14 @@ interface CustomDomains {
   /**
    * Get a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomDomains_Get")
   get is ArmResourceRead<CustomDomain>;
 
   /**
    * Create or update a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomDomains_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
@@ -58,9 +54,7 @@ interface CustomDomains {
   /**
    * Delete a custom domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomDomains_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomDomain,
     Response =
@@ -73,8 +67,6 @@ interface CustomDomains {
   /**
    * List all custom domains.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomDomains_List")
   list is ArmResourceListByParent<
     CustomDomain,
     Response = ArmResponse<CustomDomainList>

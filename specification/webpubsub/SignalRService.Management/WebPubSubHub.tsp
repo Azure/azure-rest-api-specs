@@ -41,8 +41,6 @@ interface WebPubSubHubs {
    * Delete a hub setting.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubHubs_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     WebPubSubHub,
     Response =

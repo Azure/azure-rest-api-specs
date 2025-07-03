@@ -18,8 +18,6 @@ interface WebPubSubOperationGroup {
   /**
    * Checks that the resource name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSub_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = NameAvailabilityParameters,
@@ -34,8 +32,6 @@ interface UsagesOperationGroup {
   /**
    * List resource usage quotas by location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Usages_List")
   @autoRoute
   @get
   @action("usages")

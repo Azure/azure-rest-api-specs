@@ -8,7 +8,6 @@ import "./WebPubSubResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.SignalRService;
 /**
@@ -48,17 +47,13 @@ interface Replicas {
   /**
    * Get the replica and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicas_Get")
   get is ArmResourceRead<Replica>;
 
   /**
    * Create or update a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicas_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Replica,
     Parameters = {
@@ -70,13 +65,11 @@ interface Replicas {
   /**
    * Operation to update an exiting replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("WebPubSubReplicas_Update")
   update is ArmCustomPatchAsync<
     Replica,
     Parameters = {
@@ -93,32 +86,24 @@ interface Replicas {
   /**
    * Operation to delete a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicas_Delete")
   delete is ArmResourceDeleteSync<Replica>;
 
   /**
    * List all replicas belong to this resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicas_List")
   list is ArmResourceListByParent<Replica, Response = ArmResponse<ReplicaList>>;
 
   /**
    * List all available skus of the replica resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("skus")
-  @operationId("WebPubSub_ListReplicaSkus")
   listReplicaSkus is ArmResourceActionSync<Replica, void, ArmResponse<SkuList>>;
 
   /**
    * Operation to restart a replica.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubReplicas_Restart")
   restart is ArmResourceActionAsync<Replica, void, void>;
 }
 

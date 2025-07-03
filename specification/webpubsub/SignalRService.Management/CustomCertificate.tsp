@@ -30,17 +30,13 @@ interface CustomCertificates {
   /**
    * Get a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomCertificates_Get")
   get is ArmResourceRead<CustomCertificate>;
 
   /**
    * Create or update a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomCertificates_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomCertificate,
     Parameters = {
@@ -52,15 +48,11 @@ interface CustomCertificates {
   /**
    * Delete a custom certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomCertificates_Delete")
   delete is ArmResourceDeleteSync<CustomCertificate>;
 
   /**
    * List all custom certificates.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("WebPubSubCustomCertificates_List")
   list is ArmResourceListByParent<
     CustomCertificate,
     Response = ArmResponse<CustomCertificateList>
