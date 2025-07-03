@@ -19,23 +19,19 @@ jobs:
     steps:
       # TODO: Use sparse checkout instead
       - checkout: self
+        # Fetch depth required to get list of changed files
         fetchDepth: 2
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           SkipCheckoutNone: true
           TokenToUseForAuth: $(azuresdk-github-pat)
-          Paths: 
-            - repo.json
-            - mapping.json
-            - index.md
+          # Path does not need to be set because sparse-checkout.yml already
+          # checks out files in the repo root
           Repositories:
             - Name: MicrosoftDocs/AzureRestPreview
               Commitish: refs/heads/doc-preview-migration-test
               WorkingDirectory: AzureRestPreview
-
-      - pwsh: Get-ChildItem * | Select-Object -Property FullName
-        workingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
 
@@ -45,12 +41,6 @@ jobs:
         displayName: 'Generate Swagger API documentation preview'
         workingDirectory: .github/shared
 
-      - script: |
-          pwd
-          ls -lh
-          git diff --name-only
-        workingDirectory: AzureRestPreview
-
       - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
         parameters:
           WorkingDirectory: AzureRestPreview
@@ -59,7 +49,22 @@ jobs:
           TargetRepoName: AzureRestPreview
           # TODO: Determine this value at runtime
           BaseRepoBranch: doc-preview-migration-test-01
+          CommitMsg: |
+            Update API Doc Preview
+            Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId) 
+            PR: $(System.PullRequest.SourceRepositoryURI)/pull/$(System.PullRequest.PullRequestId)
       
-      - script: echo "launch pipeline, await pipeline, download artifact from pipeline..."
+      - task: AzureCLI@2
+        displayName: Start and wait for docs build
+        inputs:
+          azureSubscription: msdocs-apidrop-connection
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: >-
+            az pipelines build queue 
+              --organization "https://dev.azure.com/apidrop/" 
+              --project "Content CI" 
+              --definition-id "8120" 
+              --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-01"}, "source_of_truth": "code"}'
 
       - script: echo "interpret results..."
