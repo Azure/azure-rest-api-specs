@@ -665,13 +665,13 @@ export async function requiredLabelRuleViolated(
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =
-    isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels, presentLabels)
+    isAnyPrerequisiteLabelsNonempty(rule) && anyLabelMatches(rule.anyPrerequisiteLabels || [], presentLabels)
 
   const allPrerequisiteLabelsPresent =
-    isAllPrerequisiteLabelsNonempty(rule) && rule.allPrerequisiteLabels?.every((label) => presentLabels.includes(label));
+    isAllPrerequisiteLabelsNonempty(rule) && (rule.allPrerequisiteLabels || []).every((label) => presentLabels.includes(label));
 
   const anyPrerequisiteAbsentLabelPresent =
-    isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels, presentLabels)
+    isAllPrerequisiteAbsentLabelsNonempty(rule) && anyLabelMatches(rule.allPrerequisiteAbsentLabels || [], presentLabels)
 
   const ruleIsApplicable = branchIsApplicable && (anyPrerequisiteLabelPresent || allPrerequisiteLabelsPresent) && !anyPrerequisiteAbsentLabelPresent
 
@@ -690,6 +690,7 @@ export async function requiredLabelRuleViolated(
       `rule.allPrerequisiteAbsentLabels: ${[...rule.allPrerequisiteAbsentLabels ?? []].join(", ")}: ` +
       `ruleIsViolated: ${ruleIsViolated}, branchIsApplicable: ${branchIsApplicable}, ` +
       `ruleIsApplicable: ${ruleIsApplicable}, anyRequiredLabelPresent: ${anyRequiredLabelPresent}`);
+
   return ruleIsViolated;
 }
 
@@ -700,9 +701,7 @@ export async function requiredLabelRuleViolated(
 export function getPresentBlockingLabels(violatedReqLabelsRules) {
   return violatedReqLabelsRules
     .filter((rule) => rule.anyRequiredLabels.length === 0)
-    // Implicitly assuming here that there is exactly one prerequisite label for the rule.
-    // See comment on RequiredLabelRule for details.
-    .map((rule) => rule.anyPrerequisiteLabels[0]);
+    .flatMap((rule) => rule.anyPrerequisiteLabels || []);
 }
 
 /**
