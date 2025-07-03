@@ -57,14 +57,12 @@ interface DatadogSingleSignOnResources {
    * Gets the datadog single sign-on resource for the given Monitor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SingleSignOnConfigurations_Get")
   get is ArmResourceRead<DatadogSingleSignOnResource>;
 
   /**
    * Configures single-sign-on for this resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SingleSignOnConfigurations_CreateOrUpdate")
   createOrUpdate is DatadogSingleSignOnResourcesOps.CreateOrUpdateAsync<
     DatadogSingleSignOnResource,
     OptionalRequestBody = true
@@ -74,7 +72,6 @@ interface DatadogSingleSignOnResources {
    * List the single sign-on configurations for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SingleSignOnConfigurations_List")
   list is ArmResourceListByParent<
     DatadogSingleSignOnResource,
     Response = ArmResponse<DatadogSingleSignOnResourceListResponse>

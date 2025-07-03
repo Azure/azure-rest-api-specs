@@ -18,7 +18,6 @@ interface MarketplaceAgreementsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("List Datadog marketplace agreements in the subscription.")
-  @operationId("MarketplaceAgreements_List")
   @autoRoute
   @get
   @action("agreements")
@@ -32,7 +31,6 @@ interface MarketplaceAgreementsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create Datadog marketplace agreement in the subscription.")
-  @operationId("MarketplaceAgreements_CreateOrUpdate")
   @autoRoute
   @put
   @action("agreements/default")
@@ -52,7 +50,6 @@ interface CreationSupportedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Datadog organization.")
-  @operationId("CreationSupported_List")
   @autoRoute
   @get
   @action("subscriptionStatuses")
@@ -72,7 +69,6 @@ interface CreationSupportedOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Informs if the current subscription is being already monitored for selected Datadog organization.")
-  @operationId("CreationSupported_Get")
   @autoRoute
   @get
   @action("subscriptionStatuses/default")
