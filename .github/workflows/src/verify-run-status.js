@@ -121,7 +121,11 @@ export async function verifyRunStatusImpl({
         commitStatusState = commitStatuses[0].state;
         commitStatusTargetUrl = commitStatuses[0].target_url;
       } else {
-        core.setFailed(`Failed to fetch commit status which doesn't exist.`);
+        // Count the commit status as pending if not found and return with no-op
+        core.notice(
+          `Commit status is in pending state. Skipping comparison with check run conclusion.`,
+        );
+        return;
       }
     } catch (error) {
       core.setFailed(
