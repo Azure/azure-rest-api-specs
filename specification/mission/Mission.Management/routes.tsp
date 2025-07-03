@@ -283,7 +283,7 @@ interface Approval {
     Microsoft.Mission.Versions.v2025_05_01_preview,
     "initiatorCallback"
   )
-  notifyApprovalInitiator is ArmResourceActionAsync<
+  notifyInitiator is ArmResourceActionAsync<
     ApprovalResource,
     ApprovalActionRequest,
     ApprovalActionResponse
