@@ -374,14 +374,14 @@
           }
         },
         "maxRouteCount": {
-          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nDefault: \"maxRouteCount\":1\n\nMinimum: \"maxRouteCount\":1\n\nMaximum: \"maxRouteCount\":3",
+          "description": "The maximum number of routes to return. Available for the driving and truck travel modes.\n\nDefault: \"maxRouteCount\":1",
           "type": "integer",
           "format": "int64",
           "minimum": 1,
           "maximum": 6
         },
         "heading": {
-          "description": "The initial directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+          "description": "The initial directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees.",
           "type": "integer",
           "format": "int64",
           "minimum": 0,
@@ -785,11 +785,6 @@
       "description": "Information about a section of a route between two waypoints. More information about the fields contained in a route Leg:",
       "type": "object",
       "properties": {
-        "description": {
-          "description": "A short description of the route.",
-          "type": "string",
-          "readOnly": true
-        },
         "routePathRange": {
           "$ref": "#/definitions/RoutePathRange"
         },
