@@ -940,7 +940,22 @@ model VolumeUpdateProperties {
  */
 model VolumeList is Azure.Core.Page<Volume>;
 
-model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
+/**
+ * A list of private link resources
+ */
+model PrivateLinkResourceListResult {
+  /**
+   * Array of private link resources
+   */
+  @items
+  value: PrivateLinkResource[];
+ 
+  /**
+   * URI to fetch the next section of the paginated response.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * A private link resource

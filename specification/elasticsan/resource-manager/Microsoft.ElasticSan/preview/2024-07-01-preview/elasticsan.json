@@ -837,9 +837,6 @@
           "PrivateLinkResources_ListByElasticSan_MinimumSet_Gen": {
             "$ref": "./examples/PrivateLinkResources_ListByElasticSan_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3021,19 +3018,19 @@
     },
     "PrivateLinkResourceListResult": {
       "type": "object",
-      "description": "Paged collection of PrivateLinkResource items",
+      "description": "A list of private link resources",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResource items on this page",
+          "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "URI to fetch the next section of the paginated response.",
+          "readOnly": true
         }
       },
       "required": [

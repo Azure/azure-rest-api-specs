@@ -73,7 +73,6 @@ interface ElasticSans {
   /**
    * Gets the private link resources that need to be created for a elastic San.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
   listByElasticSan is ArmResourceActionSync<
