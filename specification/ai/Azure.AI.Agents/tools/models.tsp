@@ -144,6 +144,25 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   connectedAgent: ConnectedAgentDetails;
 }
 
+@doc("The input definition information for a MCP tool which defines a MCP server endpoint")
+@added(Versions.v2025_05_15_preview)
+model MCPToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The endpoint for the MCP server")
+  @encodedName("application/json", "server_url")
+  serverUrl: string;
+
+  @doc("List of allowed tools for MCP server")
+  @encodedName("application/json", "allowed_tools")
+  allowedTools?: string[];
+}
+
 // Definition details: File Search
 
 /**
@@ -350,6 +369,22 @@ model RequiredFunctionToolCallDetails {
   arguments: string;
 }
 
+@doc("A representation of a requested call to a MCP tool, needed by the model to continue evaluation of a run.")
+@added(Versions.v2025_05_15_preview)
+model RequiredMcpToolCall extends RequiredToolCall {
+  @doc("The object type of the required tool call. Always 'mcp' for MCP tools.")
+  type: "mcp";
+
+  @doc("The arguments to use when invoking the mcp tool, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("The name of the function used on the MCP server.")
+  name: string;
+
+  @doc("The label of the MCP server.")
+  server_label: string;
+}
+
 //
 // Tool calls -- present in run steps and provide information about tool execution
 //
@@ -466,6 +501,29 @@ model RunStepAzureAISearchToolCall extends RunStepToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "azure_ai_search")
   azureAISearch: Record<string>;
+}
+
+@doc("""
+  A record of a call to a MCP tool, issued by the model in evaluation of a defined tool, that represents
+  executed MCP actions.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepMcpToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'mcp'.")
+  type: "mcp";
+
+  @doc("Arguments to the MCP tool call, as provided by the model. Arguments are presented as a JSON document that should be validated and parsed for evaluation.")
+  arguments: string;
+
+  @doc("Name of the function used on the MCP server.")
+  name: string;
+
+  @doc("Output of the MCP tool call.")
+  output: string;
+
+  @doc("The label for the MCP server")
+  @encodedName("application/json", "server_label")
+  serverLabel?: string;
 }
 
 @doc("""
@@ -636,6 +694,24 @@ model ToolOutput {
   output?: string;
 }
 
+//
+// Tool approvals -- structured data that allows the client to send data to tool
+//
+
+@doc("The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.")
+@added(Versions.v2025_05_15_preview)
+model ToolApproval {
+  @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
+  @encodedName("application/json", "tool_call_id")
+  toolCallId: string;
+
+  @doc("The approval boolean value to be submitted.")
+  approve: boolean;
+
+  @doc("Headers to be attached to the approval.")
+  headers?: Record<string>;
+}
+
 /**
  * Controls which (if any) tool is called by the model.
  * - `none` means the model will not call any tools and instead generates a message.
@@ -708,6 +784,10 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
+
+  /** Tool type `mcp` */
+  @added(Versions.v2025_05_15_preview)
+  mcp: "mcp",
 }
 
 /** The function name that will be used, if using the `function` tool */
