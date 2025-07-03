@@ -769,7 +769,7 @@ model BatchApplicationListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Contains information about an application in an Azure Batch Account.")
@@ -788,7 +788,7 @@ model BatchApplication {
 @error
 model BatchError {
   @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
-  code: string;
+  code?: string;
 
   @doc("A message describing the error, intended to be suitable for display in a user interface.")
   message?: BatchErrorMessage;
@@ -825,7 +825,7 @@ model BatchPoolListUsageMetricsResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
@@ -856,7 +856,7 @@ model BatchAccountListSupportedImagesResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
@@ -927,7 +927,7 @@ model BatchPoolNodeCountsListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("The number of Compute Nodes in each state for a Pool.")
@@ -1224,7 +1224,7 @@ model BatchCertificateListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
@@ -1240,7 +1240,7 @@ model BatchNodeFileListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Information about a file or directory on a Compute Node.")
@@ -1398,13 +1398,13 @@ model BatchJobScheduleConfiguration {
 @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
 model SecurityProfile {
   @doc("This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. For more information on encryption at host requirements, please refer to https://learn.microsoft.com/azure/virtual-machines/disk-encryption#supported-vm-sizes.")
-  encryptionAtHost: boolean;
+  encryptionAtHost?: boolean;
 
   @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
-  securityType: SecurityTypes;
+  securityType?: SecurityTypes;
 
   @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
-  uefiSettings: BatchUefiSettings;
+  uefiSettings?: BatchUefiSettings;
 }
 
 @doc("""
@@ -1474,7 +1474,7 @@ model BatchJobNetworkConfiguration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
   @clientName("skipWithdrawFromVnet")
-  skipWithdrawFromVNet: boolean;
+  skipWithdrawFromVNet?: boolean;
 }
 
 @doc("The execution constraints for a Job.")
@@ -2226,7 +2226,7 @@ model BatchPublicIpAddressConfiguration {
   provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
-  ipAddressIds?: ipV4Address[];
+  ipAddressIds?: Azure.Core.armResourceIdentifier[];
 }
 
 @doc("""
@@ -2536,7 +2536,7 @@ model BatchJobScheduleListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("An Azure Batch Job.")
@@ -2781,7 +2781,7 @@ model BatchJobListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("""
@@ -2797,7 +2797,7 @@ model BatchJobPreparationAndReleaseTaskStatusListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("The status of the Job Preparation and Job Release Tasks on a Compute Node.")
@@ -3353,7 +3353,7 @@ model BatchPoolListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Parameters for enabling automatic scaling on an Azure Batch Pool.")
@@ -3804,7 +3804,7 @@ model BatchTaskListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("A collection of Azure Batch Tasks to add.")
@@ -3852,7 +3852,7 @@ model BatchTaskListSubtasksResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 @doc("Information about an Azure Batch subtask.")
@@ -4238,7 +4238,7 @@ model BatchNodeListResult {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -4295,5 +4295,5 @@ model BatchNodeVMExtensionListResult {
 
   @doc("The URL to get the next set of results.")
   @nextLink
-  `odata.nextLink`?: string;
+  `odata.nextLink`?: url;
 }
