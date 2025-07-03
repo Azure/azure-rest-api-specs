@@ -72,7 +72,6 @@ export async function getPathToDependency(dependency: string): Promise<string> {
  * @param from A directory name to treat as the root (e.g. /specification/)
  */
 export function relativizePath(path: string, from: string = `/specification/`): string {
-  console.log(`Relativizing path: ${path}`);
   const indexOfBy = path.lastIndexOf(from);
   if (indexOfBy === -1) {
     return path;
