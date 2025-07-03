@@ -132,7 +132,7 @@ model TranslateTarget {
     in the translation scope. It's possible to translate to multiple languages simultaneously by including 
     multiple string values in the targetsLanguage array.
     """)
-  language: string[];
+  language: string;
 
   @doc("""
     Specifies the script of the translated text.
