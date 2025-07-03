@@ -49,7 +49,6 @@ interface GroupIdInformations {
   /**
    * Get the specified private link resource for the given provisioning service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getPrivateLinkResources is GroupIdInformationsOps.Read<
     GroupIdInformation,
     Parameters = {
@@ -66,7 +65,6 @@ interface GroupIdInformations {
   /**
    * List private link resources for the given provisioning service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listPrivateLinkResources is GroupIdInformationsOps.List<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResources>

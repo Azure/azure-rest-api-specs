@@ -37,7 +37,6 @@ interface CertificateResponses {
   /**
    * Get the certificate from the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     CertificateResponse,
     Parameters = {
@@ -54,7 +53,6 @@ interface CertificateResponses {
   /**
    * Add new certificate or update an existing certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CertificateResponse,
@@ -73,7 +71,6 @@ interface CertificateResponses {
   /**
    * Deletes the specified certificate associated with the Provisioning Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<
     CertificateResponse,
     Parameters = {
@@ -146,7 +143,6 @@ interface CertificateResponses {
   /**
    * Get all the certificates tied to the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     CertificateResponse,
     Response = ArmResponse<CertificateListDescription>,
@@ -156,7 +152,6 @@ interface CertificateResponses {
   /**
    * Generate verification code for Proof of Possession.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   generateVerificationCode is ArmResourceActionSync<
     CertificateResponse,
     void,
@@ -231,7 +226,6 @@ interface CertificateResponses {
   /**
    * Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("verify")
   verifyCertificate is ArmResourceActionSync<
     CertificateResponse,
@@ -313,4 +307,3 @@ interface CertificateResponses {
 @@doc(CertificateResponses.verifyCertificate::parameters.body,
   "The name of the certificate"
 );
-@@maxLength(CertificateResponse.name, 256);

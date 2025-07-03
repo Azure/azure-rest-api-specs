@@ -52,7 +52,6 @@ interface PrivateEndpointConnections {
   /**
    * Get private endpoint connection properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getPrivateEndpointConnection is PrivateEndpointConnectionsOps.Read<
     PrivateEndpointConnection,
     Parameters = {
@@ -69,7 +68,6 @@ interface PrivateEndpointConnections {
   /**
    * Create or update the status of a private endpoint connection with the specified name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdatePrivateEndpointConnection is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
     Parameters = {
@@ -87,7 +85,6 @@ interface PrivateEndpointConnections {
    * Delete private endpoint connection with the specified name
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
@@ -108,7 +105,6 @@ interface PrivateEndpointConnections {
   /**
    * List private endpoint connection properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listPrivateEndpointConnections is PrivateEndpointConnectionsOps.List<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionsList>

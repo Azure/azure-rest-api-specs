@@ -90,7 +90,6 @@ interface ProvisioningServiceDescriptionOperations {
   /**
    * Gets the status of a long running operation, such as create, update or delete a provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getOperationResult is ProvisioningServiceDescriptionOperationOps.Read<
     ProvisioningServiceDescription,
     Parameters = {
@@ -109,13 +108,11 @@ interface ProvisioningServiceDescriptions {
   /**
    * Get the metadata of the provisioning service without SAS keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<ProvisioningServiceDescription, Error = ErrorDetails>;
 
   /**
    * Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProvisioningServiceDescription,
     LroHeaders = ArmLroLocationHeader &
@@ -126,7 +123,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ProvisioningServiceDescription,
@@ -138,7 +134,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * Deletes the Provisioning Service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ProvisioningServiceDescription,
@@ -153,7 +148,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * Get a list of all provisioning services in the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
     ProvisioningServiceDescription,
     Error = ErrorDetails
@@ -162,7 +156,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * List all the provisioning services for a given subscription id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listBySubscription is ArmListBySubscription<
     ProvisioningServiceDescription,
     Error = ErrorDetails
@@ -174,6 +167,7 @@ interface ProvisioningServiceDescriptions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("skus")
+  @operationId("IotDpsResource_listValidSkus")
   listValidSkus is ArmResourceActionSync<
     ProvisioningServiceDescription,
     void,
@@ -184,7 +178,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * List the primary and secondary keys for a provisioning service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listkeys")
   listKeys is ArmResourceActionSync<
     ProvisioningServiceDescription,
@@ -196,7 +189,6 @@ interface ProvisioningServiceDescriptions {
   /**
    * List primary and secondary keys for a specific key name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listkeys")
   listKeysForKeyName is ArmResourceActionSync<
     ProvisioningServiceDescription,
