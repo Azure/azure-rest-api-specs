@@ -128,7 +128,6 @@ interface Computes {
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonDatabases {
   list is ArmResourceListByParent<NeonDatabase>;
-
   @added(Neon.Postgres.Versions.v3_preview)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonDatabase>;
   @added(Neon.Postgres.Versions.v3_preview)
@@ -139,7 +138,6 @@ interface NeonDatabases {
 @added(Neon.Postgres.Versions.v2_preview)
 interface NeonRoles {
   list is ArmResourceListByParent<NeonRole>;
-
   @added(Neon.Postgres.Versions.v3_preview)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NeonRole>;
   @added(Neon.Postgres.Versions.v3_preview)
@@ -150,7 +148,6 @@ interface NeonRoles {
 @added(Neon.Postgres.Versions.v2_preview)
 interface Endpoints {
   list is ArmResourceListByParent<Endpoint>;
-
   @added(Neon.Postgres.Versions.v3_preview)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
   @added(Neon.Postgres.Versions.v3_preview)
