@@ -631,7 +631,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels({ github,
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} labels
- * @param {string} targetBranch
+ * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
  * @returns {Promise<RequiredLabelRule[]>}
  */
 export async function getViolatedRequiredLabelsRules(

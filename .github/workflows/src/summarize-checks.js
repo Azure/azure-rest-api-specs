@@ -21,7 +21,8 @@ import { extractInputs } from "./context.js";
 
 import {
   verRevApproval,
-  brChRevApproval
+  brChRevApproval,
+  getViolatedRequiredLabelsRules
 } from "./label-rules.js"
 
 import {
@@ -32,14 +33,6 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.js";
-
-/**
- * @typedef {Object} RunInfo
- * @property {string} status
- * @property {string} conclusion
- * @property {string} name
- * @property {number[]} pullrequests
- */
 
 /**
  * @typedef {Object} CheckMetadata
@@ -54,7 +47,7 @@ import {
  * @property {string} name
  * @property {string} status
  * @property {string} conclusion
- * @property {CheckMetadata} checkInfo
+ * @property {CheckMetadata | undefined} checkInfo
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
@@ -531,6 +524,27 @@ export async function getCheckRunTuple(
 }
 
 /**
+ * @param {CheckRunData} checkRun
+ * @returns {boolean | undefined}
+ */
+export function checkRunIsSuccessful(checkRun) {
+  // If the check is still queued or in progress, return undefined
+  const status = checkRun.status.toLowerCase();
+  if (status === "queued" || status === "in_progress") {
+    return undefined;
+  }
+
+  // At this point we expect a completed run, so conclusion should be defined
+  const conclusion = checkRun.conclusion?.toLowerCase();
+  if (conclusion == null) {
+    return undefined;
+  }
+
+  // Return true for success or neutral, false for any other conclusion
+  return conclusion === "success" || conclusion === "neutral";
+}
+
+/**
  * @param {any} response - GraphQL response data
  * @returns {[CheckRunData[], CheckRunData[], CheckRunData | undefined]}
  */
@@ -550,13 +564,15 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
       if (checkSuiteNode.checkRuns?.nodes) {
         checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-          // map the checkinfo here if present.
+          // Find check metadata for this check by name
+          const checkInfo = CHECK_METADATA.find(metadata => metadata.name === checkRunNode.name);
+
           if (checkRunNode.isRequired) {
             reqCheckRuns.push({
               name: checkRunNode.name,
               status: checkRunNode.status,
               conclusion: checkRunNode.conclusion,
-              checkInfo: undefined
+              checkInfo: checkInfo
             });
           }
           // Note the "else" here. It means that:
@@ -569,7 +585,7 @@ function extractRunsFromGraphQLResponse(response) {
               name: checkRunNode.name,
               status: checkRunNode.status,
               conclusion: checkRunNode.conclusion,
-              checkInfo: undefined
+              checkInfo: checkInfo
             });
           }
           // Note we return automatedMergingRequirementsMetCheck separately, because we must return it even if it is not marked as 'required'.
@@ -580,6 +596,7 @@ function extractRunsFromGraphQLResponse(response) {
               name: checkRunNode.name,
               status: checkRunNode.status,
               conclusion: checkRunNode.conclusion,
+              checkInfo: checkInfo
             }
           }
         });
@@ -604,53 +621,35 @@ function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} owner
  * @param {string} repo
- * @param {string} commentId
  * @param {string[]} labels
- * @param {RunInfo[]} runs
+ * @param {string} targetBranch
+ * @param {CheckRunData[]} requiredRuns
+ * @param {CheckRunData[]} fyiRuns
+ * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
  */
-export async function createNextStepsCommentBody({github, context, core}, owner, repo, commentId, labels, runs) {
-  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, nextStepsToMergeCommentGroup);
-}
+export async function updateNextStepsToMergeComment({github, context, core}, owner, repo, labels, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
+  const commentName = "NextStepsToMerge"
 
-/**
- * Renders the "next steps to merge" comment group for a pull request
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @param {string} owner - The repository owner.
- * @param {string} repo - The repository name.
- * @param {number} issue_number - The issue or pull request number.
- */
-export async function renderNextStepsToMergeCommentGroup({ github, context, core }, owner, repo, issue_number) {
-  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, nextStepsToMergeCommentGroup);
+  const requiredCheckInfos;
+  const fyiCheckInfos;
+
+  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos, automatedMergingRequirementsMetCheckRun);
 }
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @param {object} commentGroup - The comment group definition.
- * @param {string} commentGroup.name
- * @param {string} commentGroup.title
+ * @param {string[]} labels
+ * @param {string} targetBranch // this is in the format of "repo/branch"
+ * @param {CheckRunData[]} failingRequiredChecks
+ * @param {CheckRunData[]} failingFyiChecks
+ * @param {CheckRunData} automatedMergingRequirementsMetCheckRun
  * @returns {Promise<string>}
  */
-async function buildNextStepsToMergeCommentBody({ github, context, core }, commentGroup) {
+async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingRequiredChecks, failingFyiChecks, automatedMergingRequirementsMetCheckRun) {
   // Build the comment header
-  const commentTitle = `<h2>${commentGroup.title}</h2>`;
+  const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
-  // Gather current PR labels
-  const labels = context.payload.pull_request?.labels?.map(l => l.name) ?? [];
 
-  // Fetch failing required/FYI checks and the automated merging requirements check
-  const [
-    failingReqChecksInfo,
-    failingFyiChecksInfo,
-    automatedMergingRequirementsMetCheckRun
-  ] = await getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
-    core,              // using core as the logger
-    '',                // empty logPrefix
-    { github, context, core }
-  );
-
-  // Determine any violated label rules
-  const base = context.payload.pull_request.base;
-  const targetBranch = `${base.repo.full_name}/${base.ref}`;
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
     core,
     '',
@@ -678,47 +677,6 @@ async function buildNextStepsToMergeCommentBody({ github, context, core }, comme
   );
 
   return commentTitle + bodyProper;
-}
-
-async function buildNextStepsToMergeCommentBody(): Promise<string> {
-
-  const commentTitle = ""
-
-  const labels: string[] = context.pr!.labels ?? [];
-
-  const [failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun]
-    = await getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(logger, logPrefix, context);
-
-  const targetBranch = `${context.pr!.baseInfo.repo}/${context.pr!.baseInfo.ref}`;
-
-  await logger.logInfo(logPrefix + `getViolatedRequiredLabelsRules(labels); labels: [${[...labels].join(", ")}]`)
-  const violatedReqLabelsRules: RequiredLabelRule[] = await getViolatedRequiredLabelsRules(logger, logPrefix, labels, targetBranch)
-
-  const anyBlockerPresent = (failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0)
-  const anyFyiPresent = failingFyiChecksInfo.length > 0
-  const requirementsMet = checkRunIsSuccessful(automatedMergingRequirementsMetCheckRun) === true;
-
-  if (anyBlockerPresent && requirementsMet) {
-    await core.error(logPrefix
-      + `ASSERTION VIOLATION! There are blockers present, yet '${automatedMergingRequirementsMetCheckName}' is successful. `
-      + `This should not be possible!`)
-  }
-
-  let bodyProper: string = getBodyProper(
-    requirementsMet,
-    anyBlockerPresent,
-    anyFyiPresent,
-    failingReqChecksInfo,
-    failingFyiChecksInfo,
-    violatedReqLabelsRules,
-  );
-
-  const body = `<h2>${commentGroup.title}</h2>` + bodyProper;
-
-  await logger.logInfo(logPrefix + `RETURN definition buildNextStepsToMergeCommentBody: `
-      + `commentGroup.name: ${commentGroup.name}, commentGroup.title: '${commentGroup.title}', `
-      + `requirementsMet: ${requirementsMet}, anyBlockerPresent: ${anyBlockerPresent} anyFyiPresent: ${anyFyiPresent}`);
-  return body;
 }
 
 async function getFailingReqAndFyiAndAutomatedMergingRequirementsMetChecksInfo(
