@@ -31,14 +31,12 @@ interface PrivateLinkResources {
    * Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
    * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getGroupId is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Even though this namespace requires subscription id, resource group and namespace name, it returns a constant payload (for a given namespacE) every time it's called.
    * That's why we don't send it to the sibling RP, but process it directly in the scale unit that received the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listGroupIds is ArmResourceListByParent<PrivateLinkResource>;
 }
 

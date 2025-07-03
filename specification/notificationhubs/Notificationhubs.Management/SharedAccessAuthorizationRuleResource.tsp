@@ -66,25 +66,21 @@ interface SharedAccessAuthorizationRuleResources {
   /**
    * Gets an authorization rule for a NotificationHub by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getAuthorizationRule is SharedAccessAuthorizationRuleResourceOps.Read<SharedAccessAuthorizationRuleResource>;
 
   /**
    * Creates/Updates an authorization rule for a NotificationHub
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateAuthorizationRule is SharedAccessAuthorizationRuleResourceOps.CreateOrUpdateSync<SharedAccessAuthorizationRuleResource>;
 
   /**
    * Deletes a notificationHub authorization rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteAuthorizationRule is SharedAccessAuthorizationRuleResourceOps.DeleteSync<SharedAccessAuthorizationRuleResource>;
 
   /**
    * Gets the authorization rules for a NotificationHub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listAuthorizationRules is SharedAccessAuthorizationRuleResourceOps.List<
     SharedAccessAuthorizationRuleResource,
     Response = SharedAccessAuthorizationRuleListResult
@@ -93,7 +89,6 @@ interface SharedAccessAuthorizationRuleResources {
   /**
    * Gets the Primary and Secondary ConnectionStrings to the NotificationHub
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listKeys is SharedAccessAuthorizationRuleResourceOps.ActionSync<
     SharedAccessAuthorizationRuleResource,
     void,
@@ -103,7 +98,6 @@ interface SharedAccessAuthorizationRuleResources {
   /**
    * Regenerates the Primary/Secondary Keys to the NotificationHub Authorization Rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   regenerateKeys is SharedAccessAuthorizationRuleResourceOps.ActionSync<
     SharedAccessAuthorizationRuleResource,
     PolicyKeyResource,

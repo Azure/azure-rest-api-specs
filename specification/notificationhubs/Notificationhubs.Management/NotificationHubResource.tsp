@@ -36,19 +36,16 @@ interface NotificationHubResources {
   /**
    * Gets the notification hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<NotificationHubResource>;
 
   /**
    * Creates/Update a NotificationHub in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationHubResource>;
 
   /**
    * Patch a NotificationHub in a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     NotificationHubResource,
@@ -58,13 +55,11 @@ interface NotificationHubResources {
   /**
    * Deletes a notification hub associated with a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<NotificationHubResource>;
 
   /**
    * Lists the notification hubs associated with a namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     NotificationHubResource,
     Parameters = {
@@ -86,7 +81,6 @@ interface NotificationHubResources {
   /**
    * Test send a push notification.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("debugsend")
   debugSend is ArmResourceActionSync<
     NotificationHubResource,
@@ -97,7 +91,6 @@ interface NotificationHubResources {
   /**
    * Lists the PNS Credentials associated with a notification hub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("pnsCredentials")
   getPnsCredentials is ArmResourceActionSync<
     NotificationHubResource,
