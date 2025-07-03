@@ -1,0 +1,38 @@
+{
+  "title": "Analyze Image With Text",
+  "operationId": "ImageWithTextOperations_AnalyzeImageWithText",
+  "parameters": {
+    "api-version": "2024-09-15-preview",
+    "body": {
+      "text": "the text to be combined with image to be analyzed",
+      "image": {
+        "content": "YSBiYXNlNjQgZW5jb2RlZCBpbWFnZQ=="
+      },
+      "enableOcr": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "categoriesAnalysis": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    }
+  }
+}
