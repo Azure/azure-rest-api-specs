@@ -37,25 +37,40 @@ using Microsoft.ServiceLinker;
 
 // LinkerResources interface operations with Connector_ prefix
 @@clientLocation(LinkerResources.get, "Connector");
+@@clientName(LinkerResources.get, "Get");
 @@clientLocation(LinkerResources.createOrUpdate, "Connector");
+@@clientName(LinkerResources.createOrUpdate, "CreateOrUpdate");
 @@clientLocation(LinkerResources.update, "Connector");
+@@clientName(LinkerResources.update, "Update");
 @@clientLocation(LinkerResources.delete, "Connector");
+@@clientName(LinkerResources.delete, "Delete");
 @@clientLocation(LinkerResources.list, "Connector");
+@@clientName(LinkerResources.list, "List");
 @@clientLocation(LinkerResources.validate, "Connector");
+@@clientName(LinkerResources.validate, "Validate");
 @@clientLocation(LinkerResources.generateConfigurations, "Connector");
+@@clientName(LinkerResources.generateConfigurations, "GenerateConfigurations");
 
 // DryrunResources interface operations with Connector_ prefix
 @@clientLocation(DryrunResources.getDryrun, "Connector");
+@@clientName(DryrunResources.getDryrun, "GetDryrun");
 @@clientLocation(DryrunResources.createDryrun, "Connector");
+@@clientName(DryrunResources.createDryrun, "CreateDryrun");
 @@clientLocation(DryrunResources.updateDryrun, "Connector");
+@@clientName(DryrunResources.updateDryrun, "UpdateDryrun");
 @@clientLocation(DryrunResources.deleteDryrun, "Connector");
+@@clientName(DryrunResources.deleteDryrun, "DeleteDryrun");
 @@clientLocation(DryrunResources.listDryrun, "Connector");
+@@clientName(DryrunResources.listDryrun, "ListDryrun");
 
 // Linker interface operations with Linkers_ prefix
 @@clientLocation(Linker.generateConfigurations, Linkers);
+@@clientName(Linker.generateConfigurations, "GenerateConfigurations");
 
 // LinkersOperationGroup operations with Linkers_ prefix
 @@clientLocation(LinkersOperationGroup.listDaprConfigurations, Linkers);
+@@clientName(LinkersOperationGroup.listDaprConfigurations, "ListDaprConfigurations");
 
 // ConfigurationNamesOperationGroup operations with ConfigurationNames_ prefix
 @@clientLocation(ConfigurationNamesOperationGroup.list, "ConfigurationNames");
+@@clientName(ConfigurationNamesOperationGroup.list, "List");
