@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage filter",
+  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -28,47 +28,68 @@
         ],
         "processors": [
           {
-            "type": "Batch",
-            "name": "batch-processor1"
-          },
-          {
-            "type": "MicrosoftSyslog",
+            "type": "Microsoft-Syslog",
             "name": "microsoft-syslog-transform1"
-          },
-          {
-            "type": "TransformLanguage",
-            "name": "filter-syslog-post-transform1",
-            "transformLanguage": {
-              "query": "source | where Facility == 'daemon'"
-            }
           }
         ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
-            "name": "my-workspace-logs-exporter1",
+            "name": "standard-syslog-exporter1",
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-MyTableRawData_CL",
+                "stream": "Microsoft-Syslog",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
+                    {
+                      "from": "time_unix_nano",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "attributes.CollectorHostName",
+                      "to": "CollectorHostName"
+                    },
+                    {
+                      "from": "attributes.Computer",
+                      "to": "Computer"
+                    },
+                    {
+                      "from": "attributes.EventTime",
+                      "to": "EventTime"
+                    },
                     {
                       "from": "attributes.Facility",
                       "to": "Facility"
                     },
                     {
-                      "from": "attributes.Severity",
-                      "to": "Severity"
+                      "from": "attributes.HostIP",
+                      "to": "HostIP"
                     },
                     {
-                      "from": "body",
-                      "to": "Body"
+                      "from": "attributes.HostName",
+                      "to": "HostName"
                     },
                     {
-                      "from": "time_unix_nano",
-                      "to": "TimeGenerated"
+                      "from": "attributes.ProcessID",
+                      "to": "ProcessID"
+                    },
+                    {
+                      "from": "attributes.ProcessName",
+                      "to": "ProcessName"
+                    },
+                    {
+                      "from": "attributes.SeverityLevel",
+                      "to": "SeverityLevel"
+                    },
+                    {
+                      "from": "attributes.SourceSystem",
+                      "to": "SourceSystem"
+                    },
+                    {
+                      "from": "attributes.SyslogMessage",
+                      "to": "SyslogMessage"
                     }
                   ]
                 }
@@ -89,12 +110,10 @@
                 "syslog-receiver1"
               ],
               "processors": [
-                "batch-processor1",
-                "microsoft-syslog-transform1",
-                "filter-syslog-post-transform1"
+                "microsoft-syslog-transform1"
               ],
               "exporters": [
-                "my-workspace-logs-exporter1"
+                "standard-syslog-exporter1"
               ]
             }
           ]
@@ -130,49 +149,21 @@
           ],
           "processors": [
             {
-              "type": "Batch",
-              "name": "batch-processor1"
-            },
-            {
               "type": "MicrosoftSyslog",
               "name": "microsoft-syslog-transform1"
-            },
-            {
-              "type": "TransformLanguage",
-              "name": "filter-syslog-post-transform1",
-              "transformLanguage": {
-                "query": "source | where Facility == 'daemon'"
-              }
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "my-workspace-logs-exporter1",
+              "name": "standard-syslog-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData_CL",
+                  "stream": "Microsoft-Syslog",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
-                    "recordMap": [
-                      {
-                        "from": "attributes.Facility",
-                        "to": "Facility"
-                      },
-                      {
-                        "from": "attributes.Severity",
-                        "to": "Severity"
-                      },
-                      {
-                        "from": "body",
-                        "to": "Body"
-                      },
-                      {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
-                      }
-                    ]
+                    "recordMap": []
                   }
                 },
                 "concurrency": {
@@ -191,12 +182,10 @@
                   "syslog-receiver1"
                 ],
                 "processors": [
-                  "batch-processor1",
-                  "microsoft-syslog-transform1",
-                  "filter-syslog-post-transform1"
+                  "microsoft-syslog-transform1"
                 ],
                 "exporters": [
-                  "my-workspace-logs-exporter1"
+                  "standard-syslog-exporter1"
                 ]
               }
             ]
@@ -239,49 +228,21 @@
           ],
           "processors": [
             {
-              "type": "Batch",
-              "name": "batch-processor1"
-            },
-            {
               "type": "MicrosoftSyslog",
               "name": "microsoft-syslog-transform1"
-            },
-            {
-              "type": "TransformLanguage",
-              "name": "filter-syslog-post-transform1",
-              "transformLanguage": {
-                "query": "source | where Facility == 'daemon'"
-              }
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "my-workspace-logs-exporter1",
+              "name": "standard-syslog-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-MyTableRawData_CL",
+                  "stream": "Microsoft-Syslog",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
-                    "recordMap": [
-                      {
-                        "from": "attributes.Facility",
-                        "to": "Facility"
-                      },
-                      {
-                        "from": "attributes.Severity",
-                        "to": "Severity"
-                      },
-                      {
-                        "from": "body",
-                        "to": "Body"
-                      },
-                      {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
-                      }
-                    ]
+                    "recordMap": []
                   }
                 },
                 "concurrency": {
@@ -300,12 +261,10 @@
                   "syslog-receiver1"
                 ],
                 "processors": [
-                  "batch-processor1",
-                  "microsoft-syslog-transform1",
-                  "filter-syslog-post-transform1"
+                  "microsoft-syslog-transform1"
                 ],
                 "exporters": [
-                  "my-workspace-logs-exporter1"
+                  "standard-syslog-exporter1"
                 ]
               }
             ]
