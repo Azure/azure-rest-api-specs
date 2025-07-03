@@ -82,7 +82,7 @@ union ProcessNameFilterOperator {
 }
 
 @doc("DependencyProcessFilter model")
-@added(Versions.v2025_06_31_preview)
+@added(Versions.v2025_07_01_preview)
 model DependencyProcessFilter {
   @doc("Process name filter")
   processNameFilter?: ProcessNameFilter;
@@ -134,7 +134,7 @@ model ExportDependenciesRequest {
   applianceNameList?: string[];
 }
 
-@added(Versions.v2025_06_31_preview)
+@added(Versions.v2025_07_01_preview)
 @doc("GetDependencyViewForAllMachines request model")
 model GetDependencyViewForAllMachinesRequest {
   @doc("Filters for GetDependencyViewForAllMachines")
@@ -142,7 +142,7 @@ model GetDependencyViewForAllMachinesRequest {
 }
 
 @doc("Model representing the result of the export dependencies asynchronous operation.")
-@added(Versions.v2025_06_31_preview)
+@added(Versions.v2025_07_01_preview)
 model GetDependencyViewForAllMachinesOperationResult {
   @doc("The status URL of the asynchronous operation.")
   id?: string;
@@ -167,7 +167,7 @@ model GetDependencyViewForAllMachinesOperationResult {
 }
 
 @doc("Model representing properties returned upon successful completion of the export dependencies asynchronous operation.")
-@added(Versions.v2025_06_31_preview)
+@added(Versions.v2025_07_01_preview)
 model GetDependencyViewForAllMachinesResultProperties {
   @doc("The SAS URI of the blob containing the layout file for the multi-server view.")
   layoutFileSasUrl: string;
