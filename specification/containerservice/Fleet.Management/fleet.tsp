@@ -30,6 +30,7 @@ model Fleet is TrackedResource<FleetProperties> {
 
   ...EntityTagProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
@@ -160,6 +161,7 @@ model FleetPatch {
   // ...EtagResponseEnvelope;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
