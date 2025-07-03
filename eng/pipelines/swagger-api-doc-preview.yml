@@ -62,9 +62,9 @@ jobs:
           scriptLocation: inlineScript
           inlineScript: >-
             az pipelines build queue 
-              --organization "https://dev.azure.com/apidrop/" 
-              --project "Content CI" 
-              --definition-id "8120" 
-              --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-02"}, "source_of_truth": "code"}'
+            --organization "https://dev.azure.com/apidrop/" 
+            --project "Content CI" 
+            --definition-id "8120" 
+            --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-02"}, "source_of_truth": "code"}'
 
       - script: echo "interpret results..."
