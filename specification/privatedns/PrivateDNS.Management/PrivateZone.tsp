@@ -67,7 +67,8 @@ interface PrivateZones {
     },
     Response = ArmResourceUpdatedResponse<PrivateZone> | ArmResourceCreatedResponse<
       PrivateZone,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = PrivateZone> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmAcceptedLroResponse,
     Error = CloudError
   >;
