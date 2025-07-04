@@ -5,14 +5,14 @@ on: pull_request
 permissions:
   contents: read
 
-env:
-  AVOCADO_OUTPUT_FILE: ${{ runner.temp }}/avocado.ndjson
-
 jobs:
   avocado-code:
     name: "Swagger Avocado - Analyze Code"
 
     runs-on: ubuntu-24.04
+
+    env:
+      AVOCADO_OUTPUT_FILE: ${{ runner.temp }}/avocado.ndjson
 
     steps:
       - uses: actions/checkout@v4
