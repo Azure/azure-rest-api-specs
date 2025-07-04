@@ -20,11 +20,7 @@
 import { extractInputs } from "./context.js";
 import { commentOrUpdate } from "./comment.js";
 
-import {
-  verRevApproval,
-  brChRevApproval,
-  getViolatedRequiredLabelsRules,
-} from "./label-rules.js";
+import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
 
 import {
   brchTsg,
@@ -213,11 +209,7 @@ const EXCLUDED_CHECK_NAMES = [];
  */
 export default async function summarizeChecks({ github, context, core }) {
   logGitHubRateLimitInfo({ github, context, core });
-  let { owner, repo, issue_number, head_sha } = await extractInputs(
-    github,
-    context,
-    core,
-  );
+  let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -363,9 +355,7 @@ export async function logGitHubRateLimitInfo({ github, context, core }) {
   try {
     const rateLimit = await github.rateLimit.get();
     const { data: user } = await github.rest.users.getAuthenticated();
-    core.info(
-      `GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`,
-    );
+    core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
   } catch (e) {
     core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
   }
@@ -475,9 +465,7 @@ export async function handleLabeledEvent(
     }
 
     for (const label of labelsToRemove) {
-      core.info(
-        `Removing label: ${label} from ${owner}/${repo}#${issue_number}.`,
-      );
+      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
       // await github.rest.issues.removeLabel({
       //   owner: owner,
       //   repo: repo,
@@ -534,12 +522,8 @@ export async function getCheckRunTuple(
   /** @type {CheckRunData[]} */
   let fyiCheckRuns = [];
 
-  const response = await github.graphql(
-    getGraphQLQuery(owner, repo, head_sha, prNumber),
-  );
-  core.info(
-    `GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`,
-  );
+  const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
+  core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`);
 
   [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
 
@@ -604,9 +588,7 @@ function extractRunsFromGraphQLResponse(response) {
           checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
             // We have some specific guidance for some of the required checks.
             const checkInfo =
-              CHECK_METADATA.find(
-                (metadata) => metadata.name === checkRunNode.name,
-              ) ||
+              CHECK_METADATA.find((metadata) => metadata.name === checkRunNode.name) ||
               /** @type {CheckMetadata} */ ({
                 precedence: 1000,
                 name: checkRunNode.name,
@@ -723,8 +705,7 @@ async function buildNextStepsToMergeCommentBody(
   // runs at all. I don't want the comment to flip to "all requirements met" and then immediately jump to
   // "requirements not met" when the next check run comes in.
   // todo: double check if the comment update waits until there are NO pending jobs to update the comment
-  const anyBlockerPresent =
-    failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
+  const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
   const requirementsMet = !anyBlockerPresent;
 
@@ -765,10 +746,7 @@ function getBodyProper(
     // assert: !requirementsMet
 
     if (anyBlockerPresent) {
-      bodyProper += getBlockerPresentBody(
-        failingReqChecksInfo,
-        violatedRequiredLabelsRules,
-      );
+      bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
     }
 
     if (anyBlockerPresent && anyFyiPresent) {
@@ -798,16 +776,14 @@ function getBodyProper(
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
  * @returns {string} The blocker present body HTML
  */
-function getBlockerPresentBody(
-  failingRequiredChecks,
-  violatedRequiredLabelsRules,
-) {
+function getBlockerPresentBody(failingRequiredChecks, violatedRequiredLabelsRules) {
   const failingRequiredChecksNextStepsText = buildFailingChecksNextStepsText(
     failingRequiredChecks,
     "required",
   );
-  const violatedReqLabelsRulesNextStepsText =
-    buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules);
+  const violatedReqLabelsRulesNextStepsText = buildViolatedLabelRulesNextStepsText(
+    violatedRequiredLabelsRules,
+  );
   return (
     "Next steps that must be taken to merge this PR: <br/>" +
     "<ul>" +
@@ -841,12 +817,8 @@ function getFyiPresentBody(failingFyiChecksInfo) {
 function buildFailingChecksNextStepsText(failingChecks, checkKind) {
   let failingChecksNextStepsText = "";
   if (failingChecks.length > 0) {
-    const minPrecedence = Math.min(
-      ...failingChecks.map((check) => check.precedence),
-    );
-    const checksToDisplay = failingChecks.filter(
-      (check) => check.precedence === minPrecedence,
-    );
+    const minPrecedence = Math.min(...failingChecks.map((check) => check.precedence));
+    const checksToDisplay = failingChecks.filter((check) => check.precedence === minPrecedence);
 
     // assert: checksToDisplay.length > 0
     failingChecksNextStepsText = checksToDisplay
@@ -868,9 +840,7 @@ function buildFailingChecksNextStepsText(failingChecks, checkKind) {
 function buildViolatedLabelRulesNextStepsText(violatedRequiredLabelsRules) {
   let violatedReqLabelsNextStepsText = "";
   if (violatedRequiredLabelsRules.length > 0) {
-    const minPrecedence = Math.min(
-      ...violatedRequiredLabelsRules.map((rule) => rule.precedence),
-    );
+    const minPrecedence = Math.min(...violatedRequiredLabelsRules.map((rule) => rule.precedence));
     const rulesToDisplay = violatedRequiredLabelsRules.filter(
       (rule) => rule.precedence == minPrecedence,
     );

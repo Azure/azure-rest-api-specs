@@ -79,16 +79,11 @@ export async function commentOrUpdate(
       (comment) => comment.user?.login === authenticatedUsername,
     );
 
-    const [commentId, commentBody] = parseExistingComments(
-      existingComments,
-      commentIdentifier,
-    );
+    const [commentId, commentBody] = parseExistingComments(existingComments, commentIdentifier);
 
     if (commentId) {
       if (commentBody === computedBody) {
-        core.info(
-          `No update needed for comment ${commentId} by ${authenticatedUsername}`,
-        );
+        core.info(`No update needed for comment ${commentId} by ${authenticatedUsername}`);
         return; // No-op if the body is the same
       }
       await github.rest.issues.updateComment({
@@ -97,9 +92,7 @@ export async function commentOrUpdate(
         comment_id: commentId,
         body: computedBody,
       });
-      core.info(
-        `Updated existing comment ${commentId} by ${authenticatedUsername}`,
-      );
+      core.info(`Updated existing comment ${commentId} by ${authenticatedUsername}`);
     } else {
       // Create a new comment
       const { data: newComment } = await github.rest.issues.createComment({

@@ -44,8 +44,7 @@ export const sdkLabels = {
     breakingChange: "BreakingChange-Go-Sdk",
     breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
-    breakingChangeSuppressionApproved:
-      "BreakingChange-Go-Sdk-Suppression-Approved",
+    breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-Go",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Go",
   },
@@ -53,8 +52,7 @@ export const sdkLabels = {
     breakingChange: "BreakingChange-Java-Sdk",
     breakingChangeApproved: "BreakingChange-Java-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Java-Sdk-Suppression",
-    breakingChangeSuppressionApproved:
-      "BreakingChange-Java-Sdk-Suppression-Approved",
+    breakingChangeSuppressionApproved: "BreakingChange-Java-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-Java",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Java",
   },
@@ -62,8 +60,7 @@ export const sdkLabels = {
     breakingChange: "BreakingChange-JavaScript-Sdk",
     breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
-    breakingChangeSuppressionApproved:
-      "BreakingChange-JavaScript-Sdk-Suppression-Approved",
+    breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-JavaScript",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-JavaScript",
   },
@@ -79,8 +76,7 @@ export const sdkLabels = {
     breakingChange: "BreakingChange-Python-Sdk",
     breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved:
-      "BreakingChange-Python-Sdk-Suppression-Approved",
+    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-Python",
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
   },
@@ -88,8 +84,7 @@ export const sdkLabels = {
     breakingChange: "BreakingChange-Python-Track2-Sdk",
     breakingChangeApproved: "BreakingChange-Python-Track2-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved:
-      "BreakingChange-Python-Sdk-Suppression-Approved",
+    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
     deprecatedBreakingChange: "CI-BreakingChange-Python-Track2",
     // Note that deprecatedBreakingChangeApproved is the same for python and python-track2
     deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
@@ -170,9 +165,7 @@ export const breakingChangesCheckType = {
  */
 export function anyApprovalLabelPresent(approvalType, labels) {
   // todo: confirm property versus map syntax for accessing this.
-  const labelsToMatchAgainst = [
-    breakingChangesCheckType[approvalType].approvalPrefixLabel,
-  ];
+  const labelsToMatchAgainst = [breakingChangesCheckType[approvalType].approvalPrefixLabel];
   return anyLabelMatches(labelsToMatchAgainst, labels);
 }
 
@@ -234,10 +227,7 @@ export function anyApprovalLabelPresent(approvalType, labels) {
  * @returns {boolean}
  */
 export function isAnyPrerequisiteLabelsNonempty(rule) {
-  return (
-    rule.anyPrerequisiteLabels !== undefined &&
-    rule.anyPrerequisiteLabels.length > 0
-  );
+  return rule.anyPrerequisiteLabels !== undefined && rule.anyPrerequisiteLabels.length > 0;
 }
 
 /**
@@ -245,10 +235,7 @@ export function isAnyPrerequisiteLabelsNonempty(rule) {
  * @returns {boolean}
  */
 export function isAllPrerequisiteLabelsNonempty(rule) {
-  return (
-    rule.allPrerequisiteLabels !== undefined &&
-    rule.allPrerequisiteLabels.length > 0
-  );
+  return rule.allPrerequisiteLabels !== undefined && rule.allPrerequisiteLabels.length > 0;
 }
 
 /**
@@ -257,28 +244,21 @@ export function isAllPrerequisiteLabelsNonempty(rule) {
  */
 export function isAllPrerequisiteAbsentLabelsNonempty(rule) {
   return (
-    rule.allPrerequisiteAbsentLabels !== undefined &&
-    rule.allPrerequisiteAbsentLabels.length > 0
+    rule.allPrerequisiteAbsentLabels !== undefined && rule.allPrerequisiteAbsentLabels.length > 0
   );
 }
 
 export const verRev = breakingChangesCheckType.SameVersion.reviewRequiredLabel;
-export const verRevApproval =
-  breakingChangesCheckType.SameVersion.approvalPrefixLabel;
-export const brChRev =
-  breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
-export const brChRevApproval =
-  breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
+export const verRevApproval = breakingChangesCheckType.SameVersion.approvalPrefixLabel;
+export const brChRev = breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
+export const brChRevApproval = breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
 
 /** @type {RequiredLabelRule[]} */
 const rulesPri0dataPlane = [
   // For context on this rule see https://github.com/Azure/azure-sdk-tools/issues/7648.
   {
     precedence: 0,
-    branches: [
-      "azure-rest-api-specs/main",
-      "azure-rest-api-specs-pr/RPSaaSMaster",
-    ],
+    branches: ["azure-rest-api-specs/main", "azure-rest-api-specs-pr/RPSaaSMaster"],
     anyPrerequisiteLabels: ["data-plane", "resource-manager"],
     anyRequiredLabels: ["PublishToCustomers"],
     troubleshootingGuide:
@@ -333,11 +313,7 @@ const rulesPri0NotReadyForArmReview = [
   {
     precedence: 0,
     anyPrerequisiteLabels: ["NotReadyForARMReview"],
-    allPrerequisiteAbsentLabels: [
-      verRevApproval,
-      brChRevApproval,
-      "RPaaSException",
-    ],
+    allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, "RPaaSException"],
     anyRequiredLabels: ["ARMSignedOff"],
     troubleshootingGuide: wrapInArmReviewMessage(
       "This PR is not ready for ARM review (label: <code>NotReadyForARMReview</code>). " +
@@ -350,25 +326,15 @@ const rulesPri0NotReadyForArmReview = [
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: [
-      "NotReadyForARMReview",
-      "CI-NewRPNamespaceWithoutRPaaS",
-    ],
+    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-NewRPNamespaceWithoutRPaaS"],
     anyRequiredLabels: ["RPaaSException"],
-    troubleshootingGuide: notReadyForArmReviewReason(
-      "CI-NewRPNamespaceWithoutRPaaS",
-    ),
+    troubleshootingGuide: notReadyForArmReviewReason("CI-NewRPNamespaceWithoutRPaaS"),
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: [
-      "NotReadyForARMReview",
-      "CI-RpaaSRPNotInPrivateRepo",
-    ],
+    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
     anyRequiredLabels: ["ARMSignedOff"],
-    troubleshootingGuide: notReadyForArmReviewReason(
-      "CI-RpaaSRPNotInPrivateRepo",
-    ),
+    troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
     precedence: 0,
@@ -430,8 +396,7 @@ const rulesPri0Changes = [
     allPrerequisiteLabels: [brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide:
-      `This PR has at least one breaking change (label: <code>${brChRev}</code>).<br/>` +
-      brchTsg,
+      `This PR has at least one breaking change (label: <code>${brChRev}</code>).<br/>` + brchTsg,
   },
 ];
 
@@ -537,9 +502,7 @@ const rulesPri2Sdk = [
   {
     precedence: 2,
     anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChange],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-python"].breakingChangeApproved,
-    ],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeApproved],
     troubleshootingGuide:
       `Your PR has breaking changes in the generated SDK for Python (label: <code>${
         sdkLabels["azure-sdk-for-python"].breakingChange
@@ -547,12 +510,8 @@ const rulesPri2Sdk = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [
-      sdkLabels["azure-sdk-for-python-track2"].breakingChange,
-    ],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved,
-    ],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChange],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeApproved],
     troubleshootingGuide:
       `Your PR has breaking changes in the generated SDK for Python track-2 (label: <code>${
         sdkLabels["azure-sdk-for-python-track2"].breakingChange
@@ -560,12 +519,8 @@ const rulesPri2Sdk = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [
-      sdkLabels["azure-sdk-for-go"].breakingChangeSuppression,
-    ],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved,
-    ],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-go"].breakingChangeSuppressionApproved],
     troubleshootingGuide:
       `Your PR modified the suppressions for Go SDK breaking changes (label: ${
         sdkLabels["azure-sdk-for-go"].breakingChangeSuppression
@@ -573,12 +528,8 @@ const rulesPri2Sdk = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [
-      sdkLabels["azure-sdk-for-js"].breakingChangeSuppression,
-    ],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved,
-    ],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-js"].breakingChangeSuppressionApproved],
     troubleshootingGuide:
       `Your PR modified the suppressions for JavaScript SDK breaking changes (label: ${
         sdkLabels["azure-sdk-for-js"].breakingChangeSuppression
@@ -586,12 +537,8 @@ const rulesPri2Sdk = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [
-      sdkLabels["azure-sdk-for-python"].breakingChangeSuppression,
-    ],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved,
-    ],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python"].breakingChangeSuppressionApproved],
     troubleshootingGuide:
       `Your PR modified the suppressions for Python SDK breaking changes (label: ${
         sdkLabels["azure-sdk-for-python"].breakingChangeSuppression
@@ -599,13 +546,8 @@ const rulesPri2Sdk = [
   },
   {
     precedence: 2,
-    anyPrerequisiteLabels: [
-      sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression,
-    ],
-    anyRequiredLabels: [
-      sdkLabels["azure-sdk-for-python-track2"]
-        .breakingChangeSuppressionApproved,
-    ],
+    anyPrerequisiteLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression],
+    anyRequiredLabels: [sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppressionApproved],
     troubleshootingGuide:
       `Your PR modified the suppressions for Python track-2 SDK breaking changes (label: ${
         sdkLabels["azure-sdk-for-python-track2"].breakingChangeSuppression
@@ -705,9 +647,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
     existingLabels,
     repoTargetBranch,
   );
-  const presentBlockingLabels = getPresentBlockingLabels(
-    violatedReqLabelsRules,
-  );
+  const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
   const missingRequiredLabels = (
     await getViolatedRequiredLabelsRules(
@@ -744,14 +684,7 @@ export async function getViolatedRequiredLabelsRules(
 ) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (
-      await requiredLabelRuleViolated(
-        { github, context, core },
-        labels,
-        targetBranch,
-        rule,
-      )
-    ) {
+    if (await requiredLabelRuleViolated({ github, context, core }, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
@@ -771,8 +704,7 @@ export async function requiredLabelRuleViolated(
   targetBranch,
   rule,
 ) {
-  const branchIsApplicable =
-    rule.branches === undefined || rule.branches.includes(targetBranch);
+  const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =
     isAnyPrerequisiteLabelsNonempty(rule) &&
@@ -780,9 +712,7 @@ export async function requiredLabelRuleViolated(
 
   const allPrerequisiteLabelsPresent =
     isAllPrerequisiteLabelsNonempty(rule) &&
-    (rule.allPrerequisiteLabels || []).every((label) =>
-      presentLabels.includes(label),
-    );
+    (rule.allPrerequisiteLabels || []).every((label) => presentLabels.includes(label));
 
   const anyPrerequisiteAbsentLabelPresent =
     isAllPrerequisiteAbsentLabelsNonempty(rule) &&
@@ -793,10 +723,7 @@ export async function requiredLabelRuleViolated(
     (anyPrerequisiteLabelPresent || allPrerequisiteLabelsPresent) &&
     !anyPrerequisiteAbsentLabelPresent;
 
-  const anyRequiredLabelPresent = anyLabelMatches(
-    rule.anyRequiredLabels,
-    presentLabels,
-  );
+  const anyRequiredLabelPresent = anyLabelMatches(rule.anyRequiredLabels, presentLabels);
 
   const ruleIsViolated = ruleIsApplicable && !anyRequiredLabelPresent;
 
