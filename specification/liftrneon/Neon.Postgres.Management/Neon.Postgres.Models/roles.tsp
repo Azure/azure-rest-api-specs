@@ -31,4 +31,19 @@ model NeonRoleProperties {
 
   @doc("Indicates whether the role has superuser privileges")
   isSuperUser?: boolean;
+
+  @doc("Name of the role")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  roleName?: string;
+
+  @doc("Timestamp indicating when the role was last updated")
+  @visibility(Lifecycle.Read)
+  @added(Neon.Postgres.Versions.v3_preview)
+  lastUpdated?: string;
+
+  @doc("Databases name associated with the role")
+  @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
+  owns?: string;
 }
