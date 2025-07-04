@@ -5,7 +5,7 @@ import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
-import { SpecModel } from "../src/spec-model.js";
+import { SpecModel, getPrecedingSwaggers, getExistedVersionOperations } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -454,5 +454,286 @@ describe("getSwaggers", () => {
     expect(await swaggers[0].getVersion()).toBe("2022-05-01");
     expect(swaggers[0].versionKind).toBe("stable");
     expect(await swaggers[0].getFileName()).toBe("servicelinker.json");
+  });
+});
+
+describe("Helper functions for version analysis", () => {
+  describe("getPrecedingSwaggers", () => {
+    it("should find preceding stable and preview versions", async () => {
+      // Mock swagger objects for different versions
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/preview/2020-07-02/a.json",
+          versionKind: "preview",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/preview/2020-08-04-preview/a.json",
+          versionKind: "preview",
+          getVersion: async () => "2020-08-04-preview",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBe("/test/stable/2020-07-02/a.json");
+      // Since version comparison is string-based, preview version should be the highest preceding version
+      expect(result.preview).toBe("/test/preview/2020-07-02/a.json");
+    });
+
+    it("should return undefined when no preceding versions exist", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-07-02/a.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBeUndefined();
+      expect(result.preview).toBeUndefined();
+    });
+
+    it("should return undefined when target swagger is not found", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/nonexistent/path.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBeUndefined();
+      expect(result.preview).toBeUndefined();
+    });
+  });
+
+  describe("getExistedVersionOperations", () => {
+    it("should find operations that exist in both previous and current versions", async () => {
+      const mockOperations1 = new Map([
+        [
+          "Operation_Test1",
+          {
+            id: "Operation_Test1",
+            path: "/test/path1",
+            httpMethod: "GET",
+          },
+        ],
+        [
+          "Operation_Test2",
+          {
+            id: "Operation_Test2",
+            path: "/test/path2",
+            httpMethod: "POST",
+          },
+        ],
+      ]);
+
+      const mockOperations2 = new Map([
+        [
+          "Operation_Test1",
+          {
+            id: "Operation_Test1",
+            path: "/test/path1",
+            httpMethod: "GET",
+          },
+        ],
+        [
+          "Operation_Test3",
+          {
+            id: "Operation_Test3",
+            path: "/test/path3",
+            httpMethod: "DELETE",
+          },
+        ],
+      ]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/b.json", // Different filename
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "b.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations2,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.has(targetPath)).toBe(true);
+
+      const operations = result.get(targetPath);
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(1);
+
+        const operation = operations[0];
+        expect(operation).toHaveProperty("id", "Operation_Test1");
+        expect(operation).toHaveProperty("path", "/test/path1");
+        expect(operation).toHaveProperty("httpMethod", "GET");
+        expect(operation).toHaveProperty("swagger", "/test/stable/2020-07-02/b.json");
+      }
+    });
+
+    it("should return empty result when no matching operations exist", async () => {
+      const mockOperations1 = new Map([
+        [
+          "Operation_Old",
+          {
+            id: "Operation_Old",
+            path: "/test/old",
+            httpMethod: "GET",
+          },
+        ],
+      ]);
+
+      const mockOperations2 = new Map([
+        [
+          "Operation_New",
+          {
+            id: "Operation_New",
+            path: "/test/new",
+            httpMethod: "POST",
+          },
+        ],
+      ]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations2,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.has(targetPath)).toBe(true);
+
+      const operations = result.get(targetPath);
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(0);
+      }
+    });
+
+    it("should return empty map when target swagger is not found", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+          getOperations: async () => new Map(),
+        },
+      ];
+
+      const targetPath = "/nonexistent/path.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.size).toBe(0);
+    });
+
+    it("should handle multiple previous versions correctly", async () => {
+      const sharedOperation = {
+        id: "SharedOperation",
+        path: "/shared/path",
+        httpMethod: "GET",
+      };
+
+      const mockOperations1 = new Map([["SharedOperation", sharedOperation]]);
+      const mockOperations2 = new Map([["SharedOperation", sharedOperation]]);
+      const mockOperations3 = new Map([["SharedOperation", sharedOperation]]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-05-01/b.json", // Different filename
+          getVersion: async () => "2020-05-01",
+          getFileName: async () => "b.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-07-02/c.json", // Different filename
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "c.json",
+          getOperations: async () => mockOperations2,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations3,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.has(targetPath)).toBe(true);
+
+      const operations = result.get(targetPath);
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(2); // Should find the operation in both previous versions
+
+        // Check that both previous versions are represented
+        const swaggerPaths = operations.map((op) => op.swagger);
+        expect(swaggerPaths).toContain("/test/stable/2020-05-01/b.json");
+        expect(swaggerPaths).toContain("/test/stable/2020-07-02/c.json");
+      }
+    });
   });
 });
