@@ -5,6 +5,9 @@ on: pull_request
 permissions:
   contents: read
 
+env:
+  AVOCADO_OUTPUT_FILE: $RUNNER_TEMP/avocado.ndjson
+
 jobs:
   avocado-code:
     name: "Swagger Avocado - Analyze Code"
@@ -35,7 +38,16 @@ jobs:
           --includePaths \
             "data-plane" \
             "resource-manager"
+          --file \
+            $AVOCADO_OUTPUT_FILE
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
+
+      - name: Generate Job Summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { generateJobSummary } = await import('${{ github.workspace }}/.github/workflows/src/avocado.js');
+            return await generateJobSummary({ core });
