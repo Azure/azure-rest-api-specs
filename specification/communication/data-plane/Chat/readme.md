@@ -216,13 +216,13 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-2025-05-15-preview
+### Tag: package-2025-11-15-preview
 
-These settings apply only when `--tag=package-2025-05-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-11-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-05-15-preview'
+``` yaml $(tag) == 'package-2025-11-15-preview'
 input-file:
-  - preview/2025-05-15-preview/communicationserviceschat.json
+  - preview/2025-11-15-preview/communicationserviceschat.json
 title:
   Azure Communication Services
 ```
