@@ -1,0 +1,875 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceNodeCustomizationClient",
+    "version": "2025-06-02-preview",
+    "description": "Azure Kubernetes Node Customization api client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NodeCustomizations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/nodeCustomizations": {
+      "get": {
+        "operationId": "NodeCustomizations_ListBySubscription",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "List NodeCustomization resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomizationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_ListBySubscription": {
+            "$ref": "./examples/NodeCustomizations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations": {
+      "get": {
+        "operationId": "NodeCustomizations_ListByResourceGroup",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "List NodeCustomization resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomizationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_ListByResourceGroup": {
+            "$ref": "./examples/NodeCustomizations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}": {
+      "get": {
+        "operationId": "NodeCustomizations_Get",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "Get a NodeCustomization",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomization"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_Get": {
+            "$ref": "./examples/NodeCustomizations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NodeCustomizations_Create",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "Create a NodeCustomization",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag does not match the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeCustomization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NodeCustomization' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomization"
+            }
+          },
+          "201": {
+            "description": "Resource 'NodeCustomization' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomization"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_Create": {
+            "$ref": "./examples/NodeCustomizations_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NodeCustomizations_UpdateAsync",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "Update a NodeCustomization",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeCustomizationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomization"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_UpdateAsync": {
+            "$ref": "./examples/NodeCustomizations_UpdateAsync.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NodeCustomizations_Delete",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "Delete a NodeCustomization",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_Delete": {
+            "$ref": "./examples/NodeCustomizations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}/versions": {
+      "get": {
+        "operationId": "NodeCustomizations_ListVersions",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "List NodeCustomizationVersion resources by NodeCustomization",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomizationVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_ListVersions": {
+            "$ref": "./examples/NodeCustomizations_ListVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/nodeCustomizations/{nodeCustomizationName}/versions/{version}": {
+      "get": {
+        "operationId": "NodeCustomizations_GetVersion",
+        "tags": [
+          "NodeCustomizations"
+        ],
+        "description": "Get a NodeCustomizationVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodeCustomizationName",
+            "in": "path",
+            "description": "The name of the Node Customization resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the Node Customization.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w\\-\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodeCustomizationVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodeCustomizations_GetVersion": {
+            "$ref": "./examples/NodeCustomizations_GetVersion.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExecutionPoint": {
+      "type": "string",
+      "description": "The execution point for the script.",
+      "enum": [
+        "NodeImageBuildTime",
+        "NodeProvisionTime"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "nodeImageBuildTime",
+            "value": "NodeImageBuildTime",
+            "description": "Execute during node image build time."
+          },
+          {
+            "name": "nodeProvisionTime",
+            "value": "NodeProvisionTime",
+            "description": "Execute during node provisioning time."
+          }
+        ]
+      }
+    },
+    "NodeCustomization": {
+      "type": "object",
+      "description": "The Node Customization resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodeCustomizationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NodeCustomizationListResult": {
+      "type": "object",
+      "description": "The response of a NodeCustomization list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NodeCustomization items on this page",
+          "items": {
+            "$ref": "#/definitions/NodeCustomization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NodeCustomizationProperties": {
+      "type": "object",
+      "description": "The properties of the Node Customization resource.",
+      "properties": {
+        "osSku": {
+          "type": "string",
+          "description": "The OS SKU of the image.",
+          "readOnly": true
+        },
+        "osDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The disk size of the image in GB."
+        },
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container image versions to cache on nodes using this image.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture. Only one script may be specified for each execution point.",
+          "items": {
+            "$ref": "#/definitions/NodeCustomizationScript"
+          },
+          "x-ms-identifiers": []
+        },
+        "identityProfile": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+          "description": "The user identity that should be assigned to the node when container images are being cached and node customization script is run."
+        },
+        "version": {
+          "type": "string",
+          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
+          "pattern": "^[\\w\\-\\.]+$",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the node customization.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "osSku",
+        "osDiskSizeGB",
+        "containerImages"
+      ]
+    },
+    "NodeCustomizationScript": {
+      "type": "object",
+      "description": "Node customization script",
+      "properties": {
+        "executionPoint": {
+          "$ref": "#/definitions/ExecutionPoint",
+          "description": "The stage at which the script is executed."
+        },
+        "scriptType": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "The environment for the script to be executed in."
+        },
+        "script": {
+          "type": "string",
+          "description": "The script content."
+        }
+      },
+      "required": [
+        "executionPoint",
+        "scriptType",
+        "script"
+      ]
+    },
+    "NodeCustomizationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the NodeCustomization.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NodeCustomizationUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "NodeCustomizationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NodeCustomization.",
+      "properties": {
+        "osDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The disk size of the image in GB."
+        },
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container image versions to cache on nodes using this image.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture. Only one script may be specified for each execution point.",
+          "items": {
+            "$ref": "#/definitions/NodeCustomizationScript"
+          },
+          "x-ms-identifiers": []
+        },
+        "identityProfile": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+          "description": "The user identity that should be assigned to the node when container images are being cached and node customization script is run."
+        }
+      }
+    },
+    "NodeCustomizationVersion": {
+      "type": "object",
+      "description": "A version of the Node Customization resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodeCustomizationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NodeCustomizationVersionListResult": {
+      "type": "object",
+      "description": "The response of a NodeCustomizationVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NodeCustomizationVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/NodeCustomizationVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the image customization.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning the resource is in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The change request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ScriptType": {
+      "type": "string",
+      "description": "The script type.",
+      "enum": [
+        "Bash",
+        "PowerShell"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "bash",
+            "value": "Bash",
+            "description": "Bash script."
+          },
+          {
+            "name": "powerShell",
+            "value": "PowerShell",
+            "description": "PowerShell script."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
