@@ -434,7 +434,7 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 }
 
 // #endregion
-// #region labeling
+// #region label update
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} owner
