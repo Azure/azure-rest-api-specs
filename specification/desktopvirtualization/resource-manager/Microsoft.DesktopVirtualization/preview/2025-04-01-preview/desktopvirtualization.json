@@ -6891,7 +6891,7 @@
     },
     "CanaryPolicy": {
       "type": "string",
-      "description": "Policy on whether a Canary VM should be provisioned during a session host provisioning operation.",
+      "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.",
       "enum": [
         "Auto",
         "Never",
@@ -7163,7 +7163,7 @@
     },
     "DiffDiskProperties": {
       "type": "object",
-      "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
+      "description": "Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.",
       "properties": {
         "option": {
           "$ref": "#/definitions/DiffDiskOption",
@@ -7215,7 +7215,7 @@
         },
         "diffDiskSettings": {
           "$ref": "#/definitions/DiffDiskProperties",
-          "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
+          "description": "Specifies the ephemeral disk settings for the operating system disk used by the virtual machine."
         }
       }
     },
@@ -9326,7 +9326,7 @@
           {
             "name": "CreateDeletePowerManage",
             "value": "CreateDeletePowerManage",
-            "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+            "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
           }
         ]
       }
@@ -10130,7 +10130,7 @@
               {
                 "name": "CreateDeletePowerManage",
                 "value": "CreateDeletePowerManage",
-                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
               }
             ]
           }
@@ -10328,7 +10328,7 @@
               {
                 "name": "CreateDeletePowerManage",
                 "value": "CreateDeletePowerManage",
-                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property."
               }
             ]
           }
@@ -11402,7 +11402,7 @@
         },
         "canaryPolicy": {
           "$ref": "#/definitions/CanaryPolicy",
-          "description": "Policy on whether a Canary VM should be provisioned during a session host provisioning operation."
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },

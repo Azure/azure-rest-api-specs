@@ -1145,7 +1145,7 @@ union ScalingMethodType {
   PowerManage: "PowerManage",
 
   /**
-   * Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property.
+   * Scaling will manage hosts in the host pool by power managing the hosts, as well as creating and deleting hosts that will change the host pool size. This requires the createDelete property to be set, and the assigned hostpool to have a session host config property.
    */
   CreateDeletePowerManage: "CreateDeletePowerManage",
 }
@@ -1168,7 +1168,7 @@ union ScalingMethodPatchType {
 }
 
 /**
- * Policy on whether a Canary VM should be provisioned during a session host provisioning operation.
+ * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
  */
 union CanaryPolicy {
   string,
@@ -1621,7 +1621,7 @@ model DiskInfoProperties {
   managedDisk?: ManagedDiskProperties;
 
   /**
-   * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
+   * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
    */
   @added(Versions.v2025_04_01_preview)
   diffDiskSettings?: DiffDiskProperties;
@@ -1638,7 +1638,7 @@ model ManagedDiskProperties {
 }
 
 /**
- * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
+ * Specifies the ephemeral disk settings for the operating system disk used by the virtual machine.
  */
 model DiffDiskProperties {
   /**
@@ -2141,7 +2141,7 @@ model SessionHostProvisioningConfigurationProperties {
   instanceCount?: int32;
 
   /**
-   * Policy on whether a Canary VM should be provisioned during a session host provisioning operation.
+   * Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation.
    */
   canaryPolicy?: CanaryPolicy;
 }
