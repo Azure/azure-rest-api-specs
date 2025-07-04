@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "continuationToken": null,
+    "parentProviderNamespace": "Microsoft.Compute",
+    "parentResourceName": "exampleVM",
+    "parentResourceType": "virtualMachines",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets?continuationToken=&api-version=2024-11-01-preview",
+        "value": [
+          {
+            "name": "Microsoft-Agent",
+            "type": "Microsoft.Chaos/targets",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM/providers/Microsoft.Chaos/targets/Microsoft-Agent",
+            "location": "centraluseuap",
+            "properties": {
+              "agentProfileId": "ac4e8251-fdc9-4277-8e87-dc57fe5794cf",
+              "identities": [
+                {
+                  "type": "CertificateSubjectIssuer",
+                  "subject": "CN=example.subject"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-07-01T00:00:00.0Z",
+              "lastModifiedAt": "2021-07-01T00:00:00.0Z"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Targets_List",
+  "title": "List all Targets that extend a virtual machine resource."
+}

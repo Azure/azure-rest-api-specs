@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Document Analysis",
     "version": "2024-11-15-preview",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.\nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.\nFurther documentation can be found in <a href=\\\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.\nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.\nFurther documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -35,6 +35,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -42,6 +47,15 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -221,7 +235,7 @@
       "description": "An object representing the results for an Abstractive Summarization task.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/AbstractiveSummarizationResult",
+          "$ref": "#/definitions/AnalyzeDocumentsResult",
           "description": "Results of the task."
         }
       },
@@ -253,39 +267,6 @@
         }
       ],
       "x-ms-discriminator-value": "AbstractiveSummarization"
-    },
-    "AbstractiveSummarizationResult": {
-      "type": "object",
-      "description": "An object representing the pre-built Abstractive Summarization results of each document.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
     },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
@@ -347,66 +328,6 @@
         }
       }
     },
-    "AbstractiveSummary": {
-      "type": "object",
-      "description": "An object representing a single summary with context for given document.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text of the summary."
-        },
-        "contexts": {
-          "type": "array",
-          "description": "The context list of the summary.",
-          "items": {
-            "$ref": "#/definitions/SummaryContext"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "An object representing the Abstractive Summarization result of a single document with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "summaries": {
-          "type": "array",
-          "description": "A list of abstractive summaries.",
-          "items": {
-            "$ref": "#/definitions/AbstractiveSummary"
-          },
-          "x-ms-identifiers": []
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "summaries"
-      ]
-    },
     "AnalyzeDocumentJobsInput": {
       "type": "object",
       "description": "The input object for the analyze documents LRO.",
@@ -424,8 +345,7 @@
           "description": "List of tasks to be performed as part of the LRO.",
           "items": {
             "$ref": "#/definitions/AnalyzeDocumentsLROTask"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultLanguage": {
           "type": "string",
@@ -492,8 +412,7 @@
           "description": "errors",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -807,38 +726,6 @@
       ],
       "x-ms-discriminator-value": "characterMask"
     },
-    "DetectedLanguage": {
-      "type": "object",
-      "description": "Contains the details of the detected language for the text.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Long name of a detected language (e.g. English, French)."
-        },
-        "iso6391Name": {
-          "type": "string",
-          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
-        },
-        "script": {
-          "$ref": "#/definitions/ScriptKind",
-          "description": "Identifies the script of the input document."
-        },
-        "scriptCode": {
-          "$ref": "#/definitions/ScriptCode",
-          "description": "Identifies the script of the input document."
-        }
-      },
-      "required": [
-        "name",
-        "iso6391Name",
-        "confidenceScore"
-      ]
-    },
     "DocumentAnalysisDocumentResult": {
       "type": "object",
       "description": "Contains the result object for the processed document.",
@@ -852,8 +739,7 @@
           "description": "Warnings encountered while processing document.",
           "items": {
             "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "statistics": {
           "$ref": "#/definitions/DocumentStatistics",
@@ -868,8 +754,7 @@
           "description": "Array of document results generated after the analysis.",
           "items": {
             "$ref": "#/definitions/DocumentLocation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -877,24 +762,6 @@
         "warnings",
         "source",
         "target"
-      ]
-    },
-    "DocumentError": {
-      "type": "object",
-      "description": "Contains details of errors encountered during a job execution.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the input document."
-        },
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error encountered."
-        }
-      },
-      "required": [
-        "id",
-        "error"
       ]
     },
     "DocumentLocation": {
@@ -1002,8 +869,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -3723,378 +3589,6 @@
         "transactionsCount"
       ]
     },
-    "ScriptCode": {
-      "type": "string",
-      "description": "Identifies the script of the input document. Maps to the ISO 15924 standard script code.",
-      "enum": [
-        "Arab",
-        "Armn",
-        "Beng",
-        "Cans",
-        "Cyrl",
-        "Deva",
-        "Ethi",
-        "Geor",
-        "Grek",
-        "Gujr",
-        "Guru",
-        "Hang",
-        "Hans",
-        "Hant",
-        "Hebr",
-        "Jpan",
-        "Khmr",
-        "Knda",
-        "Laoo",
-        "Latn",
-        "Mlym",
-        "Mymr",
-        "Orya",
-        "Sinh",
-        "Taml",
-        "Telu",
-        "Thaa",
-        "Thai",
-        "Tibt"
-      ],
-      "x-ms-enum": {
-        "name": "ScriptCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Arab",
-            "value": "Arab",
-            "description": "Script code for the Arabic script."
-          },
-          {
-            "name": "Armn",
-            "value": "Armn",
-            "description": "Script code for the Armenian script."
-          },
-          {
-            "name": "Beng",
-            "value": "Beng",
-            "description": "Script code for the Bangla script."
-          },
-          {
-            "name": "Cans",
-            "value": "Cans",
-            "description": "Script code for the UnifiedCanadianAboriginalSyllabics script."
-          },
-          {
-            "name": "Cyrl",
-            "value": "Cyrl",
-            "description": "Script code for the Cyrillic script."
-          },
-          {
-            "name": "Deva",
-            "value": "Deva",
-            "description": "Script code for the Devanagari script."
-          },
-          {
-            "name": "Ethi",
-            "value": "Ethi",
-            "description": "Script code for the Ethiopic script."
-          },
-          {
-            "name": "Geor",
-            "value": "Geor",
-            "description": "Script code for the Georgian script."
-          },
-          {
-            "name": "Grek",
-            "value": "Grek",
-            "description": "Script code for the Greek script."
-          },
-          {
-            "name": "Gujr",
-            "value": "Gujr",
-            "description": "Script code for the Gujarati script."
-          },
-          {
-            "name": "Guru",
-            "value": "Guru",
-            "description": "Script code for the Gurmukhi script."
-          },
-          {
-            "name": "Hang",
-            "value": "Hang",
-            "description": "Script code for the Hangul script."
-          },
-          {
-            "name": "Hans",
-            "value": "Hans",
-            "description": "Script code for the HanSimplified script."
-          },
-          {
-            "name": "Hant",
-            "value": "Hant",
-            "description": "Script code for the HanTraditional script."
-          },
-          {
-            "name": "Hebr",
-            "value": "Hebr",
-            "description": "Script code for the Hebrew script."
-          },
-          {
-            "name": "Jpan",
-            "value": "Jpan",
-            "description": "Script code for the Japanese script."
-          },
-          {
-            "name": "Khmr",
-            "value": "Khmr",
-            "description": "Script code for the Khmer script."
-          },
-          {
-            "name": "Knda",
-            "value": "Knda",
-            "description": "Script code for the Kannada script."
-          },
-          {
-            "name": "Laoo",
-            "value": "Laoo",
-            "description": "Script code for the Lao script."
-          },
-          {
-            "name": "Latn",
-            "value": "Latn",
-            "description": "Script code for the Latin script."
-          },
-          {
-            "name": "Mlym",
-            "value": "Mlym",
-            "description": "Script code for the Malayalam script."
-          },
-          {
-            "name": "Mymr",
-            "value": "Mymr",
-            "description": "Script code for the Myanmar script."
-          },
-          {
-            "name": "Orya",
-            "value": "Orya",
-            "description": "Script code for the Odia script."
-          },
-          {
-            "name": "Sinh",
-            "value": "Sinh",
-            "description": "Script code for the Sinhala script."
-          },
-          {
-            "name": "Taml",
-            "value": "Taml",
-            "description": "Script code for the Tamil script."
-          },
-          {
-            "name": "Telu",
-            "value": "Telu",
-            "description": "Script code for the Telugu script."
-          },
-          {
-            "name": "Thaa",
-            "value": "Thaa",
-            "description": "Script code for the Thaana script."
-          },
-          {
-            "name": "Thai",
-            "value": "Thai",
-            "description": "Script code for the Thai script."
-          },
-          {
-            "name": "Tibt",
-            "value": "Tibt",
-            "description": "Script code for the Tibetan script."
-          }
-        ]
-      }
-    },
-    "ScriptKind": {
-      "type": "string",
-      "description": "The script of the text.",
-      "enum": [
-        "Arabic",
-        "Armenian",
-        "Bangla",
-        "UnifiedCanadianAboriginalSyllabics",
-        "Cyrillic",
-        "Devanagari",
-        "Ethiopic",
-        "Georgian",
-        "Greek",
-        "Gujarati",
-        "Gurmukhi",
-        "Hangul",
-        "HanSimplified",
-        "HanTraditional",
-        "Hebrew",
-        "Japanese",
-        "Khmer",
-        "Kannada",
-        "Lao",
-        "Latin",
-        "Malayalam",
-        "Myanmar",
-        "Odia",
-        "Sinhala",
-        "Tamil",
-        "Telugu",
-        "Thaana",
-        "Thai",
-        "Tibetan"
-      ],
-      "x-ms-enum": {
-        "name": "ScriptKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Arabic",
-            "value": "Arabic",
-            "description": "Script name for the Arabic script."
-          },
-          {
-            "name": "Armenian",
-            "value": "Armenian",
-            "description": "Script name for the Armenian script."
-          },
-          {
-            "name": "Bangla",
-            "value": "Bangla",
-            "description": "Script name for the Bangla script."
-          },
-          {
-            "name": "UnifiedCanadianAboriginalSyllabics",
-            "value": "UnifiedCanadianAboriginalSyllabics",
-            "description": "Script name for the UnifiedCanadianAboriginalSyllabics script."
-          },
-          {
-            "name": "Cyrillic",
-            "value": "Cyrillic",
-            "description": "Script name for the Cyrillic script."
-          },
-          {
-            "name": "Devanagari",
-            "value": "Devanagari",
-            "description": "Script name for the Devanagari script."
-          },
-          {
-            "name": "Ethiopic",
-            "value": "Ethiopic",
-            "description": "Script name for the Ethiopic script."
-          },
-          {
-            "name": "Georgian",
-            "value": "Georgian",
-            "description": "Script name for the Georgian script."
-          },
-          {
-            "name": "Greek",
-            "value": "Greek",
-            "description": "Script name for the Greek script."
-          },
-          {
-            "name": "Gujarati",
-            "value": "Gujarati",
-            "description": "Script name for the Gujarati script."
-          },
-          {
-            "name": "Gurmukhi",
-            "value": "Gurmukhi",
-            "description": "Script name for the Gurmukhi script."
-          },
-          {
-            "name": "Hangul",
-            "value": "Hangul",
-            "description": "Script name for the Hangul script."
-          },
-          {
-            "name": "HanSimplified",
-            "value": "HanSimplified",
-            "description": "Script name for the HanSimplified script."
-          },
-          {
-            "name": "HanTraditional",
-            "value": "HanTraditional",
-            "description": "Script name for the HanTraditional script."
-          },
-          {
-            "name": "Hebrew",
-            "value": "Hebrew",
-            "description": "Script name for the Hebrew script."
-          },
-          {
-            "name": "Japanese",
-            "value": "Japanese",
-            "description": "Script name for the Japanese script."
-          },
-          {
-            "name": "Khmer",
-            "value": "Khmer",
-            "description": "Script name for the Khmer script."
-          },
-          {
-            "name": "Kannada",
-            "value": "Kannada",
-            "description": "Script name for the Kannada script."
-          },
-          {
-            "name": "Lao",
-            "value": "Lao",
-            "description": "Script name for the Lao script."
-          },
-          {
-            "name": "Latin",
-            "value": "Latin",
-            "description": "Script name for the Latin script."
-          },
-          {
-            "name": "Malayalam",
-            "value": "Malayalam",
-            "description": "Script name for the Malayalam script."
-          },
-          {
-            "name": "Myanmar",
-            "value": "Myanmar",
-            "description": "Script name for the Myanmar script."
-          },
-          {
-            "name": "Odia",
-            "value": "Odia",
-            "description": "Script name for the Odia script."
-          },
-          {
-            "name": "Sinhala",
-            "value": "Sinhala",
-            "description": "Script name for the Sinhala script."
-          },
-          {
-            "name": "Tamil",
-            "value": "Tamil",
-            "description": "Script name for the Tamil script."
-          },
-          {
-            "name": "Telugu",
-            "value": "Telugu",
-            "description": "Script name for the Telugu script."
-          },
-          {
-            "name": "Thaana",
-            "value": "Thaana",
-            "description": "Script name for the Thaana script."
-          },
-          {
-            "name": "Thai",
-            "value": "Thai",
-            "description": "Script name for the Thai script."
-          },
-          {
-            "name": "Tibetan",
-            "value": "Tibetan",
-            "description": "Script name for the Tibetan script."
-          }
-        ]
-      }
-    },
     "State": {
       "type": "string",
       "description": "The status of the task at the mentioned last update time.",
@@ -4148,26 +3642,6 @@
           }
         ]
       }
-    },
-    "SummaryContext": {
-      "type": "object",
-      "description": "The context of the summary.",
-      "properties": {
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the context. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
-        }
-      },
-      "required": [
-        "offset",
-        "length"
-      ]
     },
     "SummaryLengthBucket": {
       "type": "string",
@@ -4228,8 +3702,7 @@
           "description": "Enumerable of Analyze documents job results.",
           "items": {
             "$ref": "#/definitions/AnalyzeDocumentsLROResult"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [

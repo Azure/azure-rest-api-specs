@@ -111,7 +111,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -483,6 +483,9 @@
       "get": {
         "operationId": "GetFileContent",
         "description": "Returns information about a specific file. Does not retrieve file content.",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "name": "fileId",
@@ -496,8 +499,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           }
         },
@@ -686,7 +688,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -928,7 +930,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1212,7 +1214,7 @@
           {
             "name": "before",
             "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
             "required": false,
             "type": "string"
           }
@@ -1348,8 +1350,7 @@
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
-                  "x-ms-client-name": "toolOutputs",
-                  "x-ms-identifiers": []
+                  "x-ms-client-name": "toolOutputs"
                 },
                 "stream": {
                   "type": "boolean",
@@ -1459,8 +1460,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -1512,8 +1512,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",
@@ -1650,8 +1649,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "stream": {
           "type": "boolean",
@@ -1701,8 +1699,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "stream": {
           "type": "boolean",
@@ -2085,8 +2082,7 @@
           "description": "A list of annotations associated with this text.",
           "items": {
             "$ref": "#/definitions/MessageTextAnnotation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2462,14 +2458,9 @@
           "x-ms-client-name": "stepDetails"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepError",
           "description": "If applicable, information about the last error encountered by this run step.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "created_at": {
@@ -2507,14 +2498,9 @@
           "x-ms-client-name": "failedAt"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunStepCompletionUsage",
           "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -2628,8 +2614,7 @@
           "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
             "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3021,14 +3006,9 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "type": "object",
+          "$ref": "#/definitions/MessageIncompleteDetails",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MessageIncompleteDetails"
-            }
-          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -3054,8 +3034,7 @@
           "description": "The list of content items associated with the assistant thread message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "assistant_id": {
           "type": "string",
@@ -3153,25 +3132,15 @@
           "description": "The status of the assistant thread run."
         },
         "required_action": {
-          "type": "object",
+          "$ref": "#/definitions/RequiredAction",
           "description": "The details of the action required for the assistant thread run to continue.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RequiredAction"
-            }
-          ],
           "x-ms-client-name": "requiredAction"
         },
         "last_error": {
-          "type": "object",
+          "$ref": "#/definitions/RunError",
           "description": "The last error, if any, encountered by this assistant thread run.",
           "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunError"
-            }
-          ],
           "x-ms-client-name": "lastError"
         },
         "model": {
@@ -3188,8 +3157,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "created_at": {
           "type": "integer",
@@ -3239,14 +3207,9 @@
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
-          "type": "object",
+          "$ref": "#/definitions/RunCompletionUsage",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunCompletionUsage"
-            }
-          ]
+          "x-nullable": true
         },
         "metadata": {
           "type": "object",
@@ -3336,8 +3299,7 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "metadata": {
           "type": "object",

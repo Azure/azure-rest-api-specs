@@ -11,18 +11,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @doc("The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.")
 @armProviderNamespace
-@service({
-  title: "AzureTerraformResourceProviderClient",
-})
+@service(#{ title: "AzureTerraformResourceProviderClient" })
 @versioned(Versions)
 namespace Microsoft.AzureTerraform;
 
@@ -33,4 +27,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_07_01_preview: "2023-07-01-preview",
+
+  @doc("The 2025-06-01-preview API version.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_06_01_preview: "2025-06-01-preview",
 }

@@ -319,4 +319,4 @@ scenarios:
 
 ### ARM Template Deployment Script 
 
-ARM Template Deployment Script is supported in API Scenario, so that some complex operations with Azure PowerShell or CLI script can be performed in a single step. Refer to [ARM Template Deployment Script documentation](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
+ARM Template Deployment Script is supported in API Scenario, so that some complex operations with Azure PowerShell or CLI script can be performed in a single step. Refer to [ARM Template Deployment Script documentation](https://learn.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template).
