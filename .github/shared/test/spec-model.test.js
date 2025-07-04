@@ -5,7 +5,7 @@ import { dirname, isAbsolute, join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { mapAsync } from "../src/array.js";
 import { ConsoleLogger } from "../src/logger.js";
-import { SpecModel } from "../src/spec-model.js";
+import { SpecModel, getPrecedingSwaggers, getExistedVersionOperations } from "../src/spec-model.js";
 import { repoRoot } from "./repo.js";
 
 const options = { logger: new ConsoleLogger(/*debug*/ true) };
@@ -353,4 +353,395 @@ describe.skip("Parse readmes", () => {
       }
     },
   );
+});
+
+describe("getSwaggers", () => {
+  it("should return all swagger files from tags", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+
+    expect(swaggers.length).toBeGreaterThan(0);
+
+    // Verify that all returned items are Swagger instances
+    expect(swaggers.every((s) => s.constructor.name === "Swagger")).toBe(true);
+
+    // Verify that swagger files have the expected properties
+    const swagger = swaggers[0];
+    expect(swagger.path).toBeDefined();
+    expect(await swagger.getVersion()).toBeDefined();
+    expect(swagger.versionKind).toBeDefined();
+    expect(await swagger.getFileName()).toBeDefined();
+  });
+
+  it("should return swaggers from multiple readmes and tags", async () => {
+    // Using a fixture that has multiple readme files
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+    const specModel = new SpecModel(folder, options);
+
+    const swaggers = await specModel.getSwaggers();
+
+    // Should find swaggers from all readmes
+    expect(swaggers.length).toBeGreaterThan(0);
+
+    // Each swagger should have a valid path
+    swaggers.forEach((swagger) => {
+      expect(swagger.path).toBeDefined();
+      expect(typeof swagger.path).toBe("string");
+      expect(swagger.path.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("should handle empty directories gracefully", async () => {
+    // Test with a minimal or empty spec model
+    const tempFolder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+    const specModel = new SpecModel(tempFolder, options);
+
+    const swaggers = await specModel.getSwaggers();
+
+    // Should return an array even if empty
+    expect(Array.isArray(swaggers)).toBe(true);
+  });
+
+  it("should preserve tag relationships", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+
+    // Each swagger should have a tag reference
+    swaggers.forEach((swagger) => {
+      expect(swagger.tag).toBeDefined();
+      if (swagger.tag) {
+        expect(swagger.tag.name).toBeDefined();
+        expect(typeof swagger.tag.name).toBe("string");
+      }
+    });
+  });
+
+  it("should work with swagger fixtures", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/swagger/specification/servicelinker/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+    // Should return an array (may be empty if no valid readmes in this fixture)
+    expect(swaggers.length).toBe(5);
+
+    // If swaggers are found, they should have the expected structure
+    for (const swagger of swaggers) {
+      expect(swagger.path).toBeDefined();
+      expect(await swagger.getVersion()).toBeDefined();
+      expect(swagger.versionKind).toBeDefined();
+      expect(await swagger.getFileName()).toBeDefined();
+    }
+    expect(swaggers[0].path).contains(folder);
+    expect(await swaggers[0].getVersion()).toBe("2022-05-01");
+    expect(swaggers[0].versionKind).toBe("stable");
+    expect(await swaggers[0].getFileName()).toBe("servicelinker.json");
+  });
+});
+
+describe("Helper functions for version analysis", () => {
+  describe("getPrecedingSwaggers", () => {
+    it("should find preceding stable and preview versions", async () => {
+      // Mock swagger objects for different versions
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/preview/2020-07-02/a.json",
+          versionKind: "preview",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+        {
+          path: "/test/preview/2020-08-04-preview/a.json",
+          versionKind: "preview",
+          getVersion: async () => "2020-08-04-preview",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBe("/test/stable/2020-07-02/a.json");
+      // Since version comparison is string-based, preview version should be the highest preceding version
+      expect(result.preview).toBe("/test/preview/2020-07-02/a.json");
+    });
+
+    it("should return undefined when no preceding versions exist", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-07-02/a.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBeUndefined();
+      expect(result.preview).toBeUndefined();
+    });
+
+    it("should return undefined when target swagger is not found", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          versionKind: "stable",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+        },
+      ];
+
+      const targetPath = "/nonexistent/path.json";
+      const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
+
+      expect(result).toHaveProperty("stable");
+      expect(result).toHaveProperty("preview");
+      expect(result.stable).toBeUndefined();
+      expect(result.preview).toBeUndefined();
+    });
+  });
+
+  describe("getExistedVersionOperations", () => {
+    it("should find operations that exist in both previous and current versions", async () => {
+      const mockOperations1 = new Map([
+        [
+          "Operation_Test1",
+          {
+            id: "Operation_Test1",
+            path: "/test/path1",
+            httpMethod: "GET",
+          },
+        ],
+        [
+          "Operation_Test2",
+          {
+            id: "Operation_Test2",
+            path: "/test/path2",
+            httpMethod: "POST",
+          },
+        ],
+      ]);
+
+      const mockOperations2 = new Map([
+        [
+          "Operation_Test1",
+          {
+            id: "Operation_Test1",
+            path: "/test/path1",
+            httpMethod: "GET",
+          },
+        ],
+        [
+          "Operation_Test3",
+          {
+            id: "Operation_Test3",
+            path: "/test/path3",
+            httpMethod: "DELETE",
+          },
+        ],
+      ]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/b.json", // Different filename
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "b.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations2,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      // The result should contain the previous swagger path as key, not the target path
+      expect(result.has("/test/stable/2020-07-02/b.json")).toBe(true);
+
+      const operations = result.get("/test/stable/2020-07-02/b.json");
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(1);
+
+        const operation = operations[0];
+        expect(operation).toHaveProperty("id", "Operation_Test1");
+        expect(operation).toHaveProperty("path", "/test/path1");
+        expect(operation).toHaveProperty("httpMethod", "GET");
+      }
+    });
+
+    it("should return empty result when no matching operations exist", async () => {
+      const mockOperations1 = new Map([
+        [
+          "Operation_Old",
+          {
+            id: "Operation_Old",
+            path: "/test/old",
+            httpMethod: "GET",
+          },
+        ],
+      ]);
+
+      const mockOperations2 = new Map([
+        [
+          "Operation_New",
+          {
+            id: "Operation_New",
+            path: "/test/new",
+            httpMethod: "POST",
+          },
+        ],
+      ]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/b.json", // Different filename
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "b.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations2,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      // Should contain the previous swagger path with empty operations
+      expect(result.has("/test/stable/2020-07-02/b.json")).toBe(true);
+
+      const operations = result.get("/test/stable/2020-07-02/b.json");
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(0);
+      }
+    });
+
+    it("should return empty map when target swagger is not found", async () => {
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-07-02/a.json",
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "a.json",
+          getOperations: async () => new Map(),
+        },
+      ];
+
+      const targetPath = "/nonexistent/path.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.size).toBe(0);
+    });
+
+    it("should handle multiple previous versions correctly", async () => {
+      const sharedOperation = {
+        id: "SharedOperation",
+        path: "/shared/path",
+        httpMethod: "GET",
+      };
+
+      const mockOperations1 = new Map([["SharedOperation", sharedOperation]]);
+      const mockOperations2 = new Map([["SharedOperation", sharedOperation]]);
+      const mockOperations3 = new Map([["SharedOperation", sharedOperation]]);
+
+      /** @type {any[]} */
+      const mockSwaggers = [
+        {
+          path: "/test/stable/2020-05-01/b.json", // Different filename
+          getVersion: async () => "2020-05-01",
+          getFileName: async () => "b.json",
+          getOperations: async () => mockOperations1,
+        },
+        {
+          path: "/test/stable/2020-07-02/c.json", // Different filename
+          getVersion: async () => "2020-07-02",
+          getFileName: async () => "c.json",
+          getOperations: async () => mockOperations2,
+        },
+        {
+          path: "/test/stable/2020-08-04/a.json",
+          getVersion: async () => "2020-08-04",
+          getFileName: async () => "a.json",
+          getOperations: async () => mockOperations3,
+        },
+      ];
+
+      const targetPath = "/test/stable/2020-08-04/a.json";
+      const result = await getExistedVersionOperations(targetPath, mockSwaggers);
+
+      expect(result).toBeInstanceOf(Map);
+      // Should contain both previous swagger paths as keys
+      expect(result.has("/test/stable/2020-05-01/b.json")).toBe(true);
+      expect(result.has("/test/stable/2020-07-02/c.json")).toBe(true);
+
+      // Check operations from first previous version
+      const operations1 = result.get("/test/stable/2020-05-01/b.json");
+      expect(operations1).toBeDefined();
+      if (operations1) {
+        expect(operations1).toHaveLength(1);
+        expect(operations1[0]).toHaveProperty("id", "SharedOperation");
+      }
+
+      // Check operations from second previous version
+      const operations2 = result.get("/test/stable/2020-07-02/c.json");
+      expect(operations2).toBeDefined();
+      if (operations2) {
+        expect(operations2).toHaveLength(1);
+        expect(operations2[0]).toHaveProperty("id", "SharedOperation");
+      }
+    });
+  });
 });
