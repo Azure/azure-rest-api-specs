@@ -33,7 +33,6 @@ model EndpointProperties {
   endpointType?: EndpointType;
 
   @doc("Unique identifier for the compute endpoint")
-  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9-]{1,60}$")
   @added(Neon.Postgres.Versions.v3_preview)
   endpointId?: string;

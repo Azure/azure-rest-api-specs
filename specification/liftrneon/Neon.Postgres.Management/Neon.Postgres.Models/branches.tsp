@@ -49,7 +49,6 @@ model BranchProperties {
   endpoints?: EndpointProperties[];
 
   @doc("Unique identifier for the branch")
-  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9-]{1,60}$")
   @added(Neon.Postgres.Versions.v3_preview)
   branchId?: string;
