@@ -27,14 +27,19 @@ using Azure.Core;
 @@clientName(VirtualNetworkRule, "ElasticSanVirtualNetworkRule", "csharp");
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
 @@clientName(EncryptionIdentity, "ElasticSanEncryptionIdentity", "csharp");
-@@alternateType(EncryptionIdentity.userAssignedIdentity, armResourceIdentifier, "csharp");
+@@alternateType(EncryptionIdentity.userAssignedIdentity,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(NetworkRuleSet, "ElasticSanNetworkRuleSet", "csharp");
 @@clientName(ScaleUpProperties, "ElasticSanScaleUpProperties", "csharp");
-@@clientName(DeleteRetentionPolicy, "ElasticSanDeleteRetentionPolicy", "csharp");
+@@clientName(DeleteRetentionPolicy,
+  "ElasticSanDeleteRetentionPolicy",
+  "csharp"
+);
 @@clientName(Action, "ElasticSanVirtualNetworkRuleAction", "csharp");
 @@clientName(OperationalStatus, "ResourceOperationalStatus", "csharp");
 @@clientName(ProvisioningStates, "ElasticSanProvisioningState", "csharp");
-// @@clientName(State, "ElasticSanVirtualNetworkRuleState", "csharp");
 @@clientName(SKUCapability, "ElasticSanSkuCapability", "csharp");
 @@clientName(SourceCreationData, "ElasticSanVolumeDataSourceInfo", "csharp");
 @@alternateType(SourceCreationData.sourceId, armResourceIdentifier, "csharp");
@@ -44,11 +49,20 @@ using Azure.Core;
 @@clientName(PolicyState, "ElasticSanDeleteRetentionPolicyState", "csharp");
 @@clientName(PreValidationResponse, "ElasticSanPreValidationResult", "csharp");
 @@clientName(VolumeNameList, "ElasticSanVolumeNameListContent", "csharp");
-@@clientName(`x-ms-delete-snapshots`, "ElasticSanDeleteSnapshotsUnderVolume", "csharp");
-@@clientName(`x-ms-access-soft-deleted-resources`, "ElasticSanAccessSoftDeletedVolume", "csharp");
+@@clientName(`x-ms-delete-snapshots`,
+  "ElasticSanDeleteSnapshotsUnderVolume",
+  "csharp"
+);
+@@clientName(`x-ms-access-soft-deleted-resources`,
+  "ElasticSanAccessSoftDeletedVolume",
+  "csharp"
+);
 @@clientName(`x-ms-force-delete`, "ElasticSanForceDeleteVolume", "csharp");
 @@clientName(ElasticSanProperties.totalMBps, "totalMbps", "csharp");
-@@clientName(Microsoft.ElasticSan.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+@@clientName(Microsoft.ElasticSan.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@alternateType(ManagedByInfo.resourceId, armResourceIdentifier, "csharp");
 @@clientName(PrivateLinkResource, "ElasticSanPrivateLinkResource", "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
