@@ -90,10 +90,10 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationStrategy: Strategy;
 
   @doc("Stage of Migration Entity.")
-  migrationStage: MigrationEntityMigrationStage;
+  migrationStage: MigrationEntityStage;
 
   @doc("Status of Migration Entity.")
-  migrationStatus: MigrationEntityMigrationStatus;
+  migrationStatus: MigrationEntityStatus;
 
   @doc("Planning Status of Migration Entity.")
   planningStatus: MigrationEntityPlanningStatus;

@@ -37,42 +37,59 @@ union ServerMigrationPath {
   string,
 }
 
+
+@doc("Wave execution readiness options.")
+union MigrationEntityExecutionReadiness {
+  @doc("Not Available. Indicates the MigrationEntity execution readiness is not available.")
+  NotAvailable: "NotAvailable",
+
+  @doc("Ready. Indicates that MigrationEntity is ready for execution")
+  Ready: "Ready",
+
+  @doc("Not Ready. Indicates that MigrationEntity is not ready for execution")
+  NotReady: "NotReady",
+
+  string,
+}
+
 @doc("Preset stage of the wave.")
 union WaveStage {
-  @doc("Planning in progress")
-  PlanningInProgress: "PlanningInProgress",
+  @doc("Creation. Indicates the wave is being created.")
+  Creation: "Creation",
 
-  @doc("Ready for migration")
-  ReadyForMigration: "ReadyForMigration",
+  @doc("Configuration. Indicates the wave is in configuration.")
+  Configuration: "Configuration",
 
-  @doc("Migration in progress")
-  MigrationInProgress: "MigrationInProgress",
+  @doc("Ready for Execution. Indicates the wave is ready for execution.")
+  ReadyForExecution: "ReadyForExecution",
 
-  @doc("Migration completed")
-  MigrationCompleted: "MigrationCompleted",
+  @doc("Execution in Progress. Indicates the wave is currently being executed.")
+  ExecutionInProgress: "ExecutionInProgress",
+
+  @doc("Completed. Indicates the wave is completed.")
+  ExecutionCompleted : "ExecutionCompleted",
 
   string,
 }
 
 @doc("The status of the wave.")
 union WaveStatus {
-  @doc("New. Indicates the wave is new and has not been started. This is the default value.")
-  New: "New",
 
-  @doc("On Track. Indicates the wave is on Track.")
+
+  @doc("Not Started. Indicates the wave is not started.")
+  NotStarted: "NotStarted",
+
+  @doc("On Track. Indicates the wave is on track.")
   OnTrack: "OnTrack",
+
+  @doc("Off Track. Indicates the wave is off track.")
+  OffTrack: "OffTrack",
 
   @doc("At Risk. Indicates the wave is at risk.")
   AtRisk: "AtRisk",
 
-  @doc("On Hold. Indicates the wave is on hold.")
-  OnHold: "OnHold",
-
   @doc("Completed. Indicates the wave is completed.")
   Completed: "Completed",
-
-  @doc("Blocked. Indicates the wave is blocked.")
-  Blocked: "Blocked",
 
   string,
 }
@@ -109,9 +126,7 @@ union MigrationEntityTarget {
 }
 
 @doc("Migration Entity Migration Status.")
-union MigrationEntityMigrationStatus {
-  @doc("New migration entity status. This indicates that the migration process for the entity has not yet started and is in the initial planning phase.")
-  New: "New",
+union MigrationEntityStatus {
 
   @doc("In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   InProgress: "InProgress",
@@ -161,15 +176,13 @@ union MigrationEntityPlanningStatus {
 }
 
 @doc("Migration Entity Migration Stage.")
-union MigrationEntityMigrationStage {
-  @doc("New migration entity migration stage. This indicates that the migration process for the entity has not yet started and is in the initial planning phase.")
-  New: "New",
+union MigrationEntityStage {
 
   @doc("Preparation migration entity migration stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration.")
   Preparation: "Preparation",
 
-  @doc("Test Migration migration entity migration stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented.")
-  TestMigration: "TestMigration",
+  @doc("Testing migration entity migration stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented.")
+  Testing: "Testing",
 
   @doc("Migration migration entity migration stage. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   Migration: "Migration",
@@ -178,7 +191,7 @@ union MigrationEntityMigrationStage {
 }
 
 @doc("Migration Entity Group Migration Status.")
-union MigrationEntityGroupMigrationStatus {
+union MigrationEntityGroupStatus {
   @doc("New migration entity group migration status.  This indicates that the migration process for the group has not yet started and is in the initial planning phase.")
   New: "New",
 
@@ -203,19 +216,20 @@ union MigrationEntityGroupMigrationStatus {
   string,
 }
 
-@doc("Pre Migration, Post Migration, Planning.")
-union StepStage {
-  @doc("Pre Migration. This stage involves all the preparatory tasks that need to be completed before the actual migration begins.")
-  PreMigration: "Pre Migration",
+@doc("TaskScope can be either 'Wave' or 'MigrationEntity' or 'MigrationEntityGroup'")
+union TaskScope {
+  @doc("Wave task - typically related to a specific wave of migration")
+  Wave: "Wave",
 
-  @doc("Post Migration. This stage involves all the tasks that need to be completed after the actual migration has finished.")
-  PostMigration: "Post  Migration",
+  @doc("Migration Entity task - typically related to a specific migration entity")
+  MigrationEntity: "MigrationEntity",
 
-  @doc("Planning. This stage involves all the tasks that need to be completed during the planning phase of the migration.")
-  Planning: "Planning",
+  @doc("Migration Entity Group task - typically related to a specific migration entity group")
+  MigrationEntityGroup: "MigrationEntityGroup",
 
   string,
 }
+
 
 @doc("TaskType can be either 'User' or 'System'")
 union TaskType {
@@ -224,26 +238,6 @@ union TaskType {
 
   @doc("System task - typically initiated by the system")
   System: "System",
-
-  string,
-}
-
-@doc("Category defines the type of task")
-union Category {
-  @doc("Tooling setup task - involves setting up the necessary tools and configurations for migration.")
-  ToolingSetup: "TOOLINGSETUP",
-
-  @doc("Environment preparation task - involves preparing the environment for migration.")
-  EnvironmentPrep: "ENVIRONMENTPREP",
-
-  @doc("Security task - involves ensuring the security of the migration process.")
-  Security: "SECURITY",
-
-  @doc("Networking task - involves setting up the necessary networking configurations for migration.")
-  Networking: "NETWORKING",
-
-  @doc("Workload agent installation task - involves installing the necessary agents for migration.")
-  WorkloadAgentInstall: "WORKLOADAGENTINSTALL",
 
   string,
 }
@@ -270,6 +264,8 @@ union TaskStatus {
 
   string,
 }
+
+
 
 @doc("Migration Specific Properties Instance Types.")
 union MigrationSpecificPropertiesInstanceType {

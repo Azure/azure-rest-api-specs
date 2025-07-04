@@ -36,40 +36,44 @@ model WaveProperties is AzureResourceProperties {
   displayName: string;
 
   @doc("ARG query and other details to create workloads within a wave")
-  argquery: string;
+  arg: Arg;
 
   @doc("The status of the wave.")
   status?: WaveStatus;
 
-  @doc("Planned start time of the wave.")
-  plannedStartTime: utcDateTime;
+  @doc("Planned start date of the wave.")
+  plannedStartDate: utcDateTime;
 
-  @doc("Planned completion time of the wave.")
-  plannedCompletionTime?: utcDateTime;
+  @doc("Planned completion date of the wave.")
+  plannedCompletionDate?: utcDateTime;
 
-  @doc("Actual start time of the wave.")
+  @doc("Actual start date of the wave.")
   @visibility(Lifecycle.Read)
-  migrationStartTime?: utcDateTime;
-
-  @doc("Actual completion time of the wave.")
-  @visibility(Lifecycle.Read)
-  migrationCompletionTime?: utcDateTime;
-
-  @doc("Actual start time of the wave.")
-  @visibility(Lifecycle.Read)
-  planningStartTime?: utcDateTime;
-
-  @doc("Actual completion time of the wave.")
-  @visibility(Lifecycle.Read)
-  planningCompletionTime?: utcDateTime;
-
-  @visibility(Lifecycle.Read)
-  @doc("Last modified time of a wave.")
-  lastModifiedTime?: utcDateTime;
+  actualStartDate?: utcDateTime;
 
   @doc("The current stage of the wave.")
-  currentStage?: WaveStage;
+  stage?: WaveStage;
+}
 
-  @doc("The target strategy of the wave.")
-  compositeMigrationStrategy: Strategy[];
+
+@doc("ARG query and other details to create workloads within a wave.")
+model Arg {
+  @doc("The query to create workloads within the wave.")
+  query: string;
+
+  @doc("The list of discovery site ids which will correspond to the resources returned by the ARG query.")
+  discoverySiteIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/VMwareSites";
+    },
+    {
+      type: "Microsoft.OffAzure/HyperVSites";
+    },
+    {
+      type: "Microsoft.OffAzure/serversites";
+    },
+    {
+      type: "Microsoft.OffAzure/MasterSites";
+    }
+  ]>[];
 }

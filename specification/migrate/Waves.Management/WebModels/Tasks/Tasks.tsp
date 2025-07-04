@@ -4,6 +4,7 @@ import "../../Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Rest.Resource;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -12,12 +13,12 @@ using OpenAPI;
 namespace Microsoft.Migrate;
 
 @added(ApiVersions.v2025_03_30_preview)
-@doc("Steps resource.")
+@doc("Tasks resource.")
 @parentResource(MigrateProject)
-model MigrationStep is ProxyResource<MigrationStepProperties> {
-  @doc("Migration Step ARM name")
-  @key("stepName")
-  @segment("steps")
+model Task is ProxyResource<TaskProperties> {
+  @doc("Task ARM name")
+  @key("taskName")
+  @segment("tasks")
   @path
   // "^[^<>&:\\?\/#\x00-\x1F\x7F]{1,260}$"
   @pattern("^[^<>&:\\?/#]{1,260}$")
@@ -26,8 +27,8 @@ model MigrationStep is ProxyResource<MigrationStepProperties> {
   ...EntityTagProperty;
 }
 
-@doc("Migration Step Properties class.")
-model MigrationStepProperties is AzureResourceProperties {
+@doc("Task Properties class.")
+model TaskProperties is AzureResourceProperties {
   @doc("associated Wave Id")
   associatedWaveId?: armResourceIdentifier<[
     {
@@ -42,22 +43,32 @@ model MigrationStepProperties is AzureResourceProperties {
     }
   ]>;
 
-  @doc("MIgration Entity Group Id")
+  @doc("Migration Entity Group Id")
   associatedMigrationEntityGroupId?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/migrateProjects/migrationEntityGroups";
     }
   ]>;
 
-  @doc("Step Stage")
-  stage: StepStage;
+  @doc("Task Stage")
+  stage: string;
 
   @doc("Task Type")
-  taskType: TaskType;
+  type: TaskType;
 
-  @doc("Category")
-  category: Category;
+  @doc("Indicates whether the task is editable.")
+  @visibility(Lifecycle.Read)
+  isEditable: boolean;
 
   @doc("Task Status")
   status: TaskStatus;
+
+  @doc("Task Scope")
+  scope: TaskScope;
+
+  @doc("Task Description")
+  description: string;
+
+  @doc("Task Name")
+  name: string;
 }

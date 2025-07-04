@@ -5,7 +5,7 @@ import "./ApiVersions.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
-import "./WebModels/Steps/MigrationSteps.tsp";
+import "./WebModels/Tasks/Tasks.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -62,16 +62,16 @@ interface MigrationEntityGroups {
 }
 
 @armResourceOperations
-interface MigrationSteps {
+interface Tasks {
   @added(ApiVersions.v2025_03_30_preview)
-  create is ArmResourceCreateOrUpdateAsync<MigrationStep>;
+  create is ArmResourceCreateOrUpdateAsync<Task>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  get is ArmResourceRead<MigrationStep>;
+  get is ArmResourceRead<Task>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  listByParent is ArmResourceListByParent<MigrationStep>;
+  listByParent is ArmResourceListByParent<Task>;
 
   @added(ApiVersions.v2025_03_30_preview)
-  delete is ArmResourceDeleteWithoutOkAsync<MigrationStep>;
+  delete is ArmResourceDeleteWithoutOkAsync<Task>;
 }
