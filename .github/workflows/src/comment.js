@@ -54,7 +54,7 @@ export function parseExistingComments(comments, commentGroupName) {
  * @returns {Promise<void>} Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
-  { github, context, core },
+  { github, core },
   owner,
   repo,
   issue_number,
