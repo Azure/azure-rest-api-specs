@@ -43,12 +43,8 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[0].schema.properties.devBoxDefinition.sku.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[7].schema.properties.devBoxDefinition.sku.
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
-  - code: PatchBodyParametersSchema
-    from: devcenter.json
-    where:  $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}"].patch.parameters[5].schema.properties.identity
-    reason: Patch Body comes from common-types managedidentity object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
 ### Tag: package-preview-2025-04-01-preview
