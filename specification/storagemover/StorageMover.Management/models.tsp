@@ -378,12 +378,12 @@ model Recurrence {
   /**
    * The start time of the schedule recurrence. Full hour and 30-minute intervals are supported.
    */
-  startTime?: Time;
+  startTime: Time;
 
   /**
    * The end time of the schedule recurrence. Full hour and 30-minute intervals are supported.
    */
-  endTime?: Time;
+  endTime: Time;
 }
 
 /**
