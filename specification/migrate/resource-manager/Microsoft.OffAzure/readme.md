@@ -26,7 +26,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-2024-12-01-preview
 ```
 
 ### Tag: package-preview-2023-10
@@ -63,6 +63,15 @@ These settings apply only when `--tag=package-2020-07` is specified on the comma
 ``` yaml $(tag) == 'package-2020-07'
 input-file:
 - stable/2020-07-07/migrate.json
+```
+
+### Tag: package-2024-12-01-preview
+
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-12-01-preview'
+input-file:
+- preview/2024-12-01-preview/migrate.json
 ```
 
 # Code Generation
