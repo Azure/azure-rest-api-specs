@@ -699,7 +699,7 @@ export async function getViolatedRequiredLabelsRules(
  * @returns {Promise<boolean>}
  */
 export async function requiredLabelRuleViolated(
-  { github, context, core },
+  { core },
   presentLabels,
   targetBranch,
   rule,

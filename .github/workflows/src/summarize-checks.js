@@ -18,8 +18,8 @@
 
 // #region imports/constants
 import { extractInputs } from "./context.js";
+// eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "./comment.js";
-
 import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
 
 import {
@@ -351,7 +351,7 @@ export async function summarizeChecksImpl(
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
-export async function logGitHubRateLimitInfo({ github, context, core }) {
+export async function logGitHubRateLimitInfo({ github, core }) {
   try {
     const rateLimit = await github.rateLimit.get();
     const { data: user } = await github.rest.users.getAuthenticated();
@@ -435,7 +435,7 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
  * @returns {Promise<[string[], string[]]>}
  */
 export async function handleLabeledEvent(
-  { github, context, core },
+  { context, core },
   owner,
   repo,
   issue_number,
@@ -508,7 +508,7 @@ export async function handleLabeledEvent(
  * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
  */
 export async function getCheckRunTuple(
-  { github, context, core },
+  { github, core },
   owner,
   repo,
   head_sha,
