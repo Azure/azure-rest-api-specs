@@ -117,19 +117,19 @@ model AvsNodeSummary {
   @doc("Represents errors which might have occurred while calculating AVS Node Summary")
   @visibility(Lifecycle.Read)
   @extension("x-ms-identifiers", #[])
-  errors?: ErrorDetail[];
+  errors?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
-@doc("Error Details")
-model ErrorDetail {
-  @doc("Error Code")
-  @visibility(Lifecycle.Read)
-  code: string;
+// @doc("Error Details")
+// model ErrorDetail {
+//   @doc("Error Code")
+//   @visibility(Lifecycle.Read)
+//   code: string;
 
-  @doc("Description of the error occurred")
-  @visibility(Lifecycle.Read)
-  message: string;
-}
+//   @doc("Description of the error occurred")
+//   @visibility(Lifecycle.Read)
+//   message: string;
+// }
 
 @doc("Estimated network")
 model EstimatedNetwork {
