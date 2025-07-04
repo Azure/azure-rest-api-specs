@@ -1,0 +1,63 @@
+name: "Swagger Avocado - Analyze Code"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  avocado-code:
+    name: "Swagger Avocado - Analyze Code"
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Must include all branches, for git branch logic in Avocado to work correctly
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Run Avocado
+        id: run-avocado
+        run: |
+          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
+
+          # Create empty output file, since avocado only creates file if errors
+          touch $AVOCADO_OUTPUT_FILE
+
+
+          echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
+
+          npm exec --no -- avocado \
+            --excludePaths \
+              "/common-types/" \
+              "/scenarios/" \
+              "/package.json" \
+              "/package-lock.json" \
+              "/cadl/examples/" \
+              '(?=/examples/)(?!(?:/stable/|/preview/))' \
+              "/\\.github/" \
+              "/eng/" \
+            --includePaths \
+              "data-plane" \
+              "resource-manager" \
+            --file \
+              $AVOCADO_OUTPUT_FILE
+        env:
+          # Tells Avocado to analyze the files changed between the PR head (default checkout)
+          # and the PR base branch.
+          SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
+
+      - name: Generate Job Summary
+        if: ${{ !cancelled() }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { default: generateJobSummary } =
+              await import('${{ github.workspace }}/.github/workflows/src/avocado.js');
+            return await generateJobSummary({ core });
+        env:
+          AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
