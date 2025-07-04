@@ -2,8 +2,6 @@
 
 import { readFile } from "fs/promises";
 
-// TODO: Add tests
-/* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
