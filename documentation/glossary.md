@@ -12,7 +12,7 @@ within a `grouping directory` can version independently of each other.
 
 A `grouping directory` can be seen as a more free-form equivalent of the ARM `service group`, but for data-plane services.
 
-Specifically, all services grouped in given `groping directory` do not share any ARM **Resource Provider (RP) namespace**
+Specifically, all services grouped in given `grouping directory` do not share any ARM **Resource Provider (RP) namespace**
 and are not related to ARM in any way.
 
 ## Resource type
