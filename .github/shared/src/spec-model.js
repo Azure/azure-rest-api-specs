@@ -19,8 +19,6 @@ import { API_VERSION_LIFECYCLE_STAGES } from "./swagger.js";
  * @property {string} path - API path
  * @property {string} httpMethod - HTTP method (GET, POST, etc.)
  *
- * @typedef {Operation & {swagger: string}} ExistedVersionOperation
- * @property {string} swagger - Path to the swagger file containing this operation
  */
 
 export class SpecModel {
@@ -286,10 +284,10 @@ async function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, v
  * Get operations from all previous versions that also exist in current swagger
  * @param {string} targetSwaggerPath - Path to the current swagger file
  * @param {Swagger[]} availableSwaggers - Array of swagger objects to search within
- * @returns {Promise<Map<string, ExistedVersionOperation[]>>} - Operations that exist in previous or current versions(but not same swagger)
+ * @returns {Promise<Map<string, Operation[]>>} - Operations that exist in previous or current versions(but not same swagger)
  */
 export async function getExistedVersionOperations(targetSwaggerPath, availableSwaggers) {
-  /** @type {Map<string, ExistedVersionOperation[]>} */
+  /** @type {Map<string, Operation[]>} */
   let result = new Map();
 
   const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
@@ -313,13 +311,12 @@ export async function getExistedVersionOperations(targetSwaggerPath, availableSw
     })),
   );
 
-  // Get all previous versions of the same file name including stable and preview
+  // Get all current and previous versions of the swaggers with different fileNames
   const previousVersionSwaggers = swaggersWithVersions
     .filter((item) => item.fileName !== fileName && item.version <= currentVersion)
     .sort((a, b) => a.version.localeCompare(b.version))
     .map((item) => item.swagger);
 
-  let existedVersionOperations = [];
   // Collect operations from all previous versions that also exist in current version
   for (const previousSwagger of previousVersionSwaggers) {
     try {
@@ -327,26 +324,19 @@ export async function getExistedVersionOperations(targetSwaggerPath, availableSw
       const previousOperations = Array.from(previousOperationsMap.values());
 
       // Find operations that exist in both this previous version AND current version
-      const matchingOperations = previousOperations
-        .filter((operation) => {
-          return currentOperations.some(
-            (currentOp) =>
-              currentOp.path === operation.path &&
-              currentOp.id === operation.id &&
-              currentOp.httpMethod === operation.httpMethod,
-          );
-        })
-        .map((o) => {
-          // Add swagger file reference to track which existed version contained this operation
-          return { ...o, swagger: previousSwagger.path };
-        });
-      existedVersionOperations.push(...matchingOperations);
+      const matchingOperations = previousOperations.filter((operation) => {
+        return currentOperations.some(
+          (currentOp) =>
+            currentOp.path === operation.path &&
+            currentOp.id === operation.id &&
+            currentOp.httpMethod === operation.httpMethod,
+        );
+      });
+      result.set(previousSwagger.path, matchingOperations);
     } catch {
       // Skip versions that can't be processed
     }
   }
-
-  result.set(targetSwaggerPath, existedVersionOperations);
 
   return result;
 }

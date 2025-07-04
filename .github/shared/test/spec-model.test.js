@@ -600,9 +600,10 @@ describe("Helper functions for version analysis", () => {
       const result = await getExistedVersionOperations(targetPath, mockSwaggers);
 
       expect(result).toBeInstanceOf(Map);
-      expect(result.has(targetPath)).toBe(true);
+      // The result should contain the previous swagger path as key, not the target path
+      expect(result.has("/test/stable/2020-07-02/b.json")).toBe(true);
 
-      const operations = result.get(targetPath);
+      const operations = result.get("/test/stable/2020-07-02/b.json");
       expect(operations).toBeDefined();
       if (operations) {
         expect(operations).toHaveLength(1);
@@ -611,7 +612,6 @@ describe("Helper functions for version analysis", () => {
         expect(operation).toHaveProperty("id", "Operation_Test1");
         expect(operation).toHaveProperty("path", "/test/path1");
         expect(operation).toHaveProperty("httpMethod", "GET");
-        expect(operation).toHaveProperty("swagger", "/test/stable/2020-07-02/b.json");
       }
     });
 
@@ -641,9 +641,9 @@ describe("Helper functions for version analysis", () => {
       /** @type {any[]} */
       const mockSwaggers = [
         {
-          path: "/test/stable/2020-07-02/a.json",
+          path: "/test/stable/2020-07-02/b.json", // Different filename
           getVersion: async () => "2020-07-02",
-          getFileName: async () => "a.json",
+          getFileName: async () => "b.json",
           getOperations: async () => mockOperations1,
         },
         {
@@ -658,9 +658,10 @@ describe("Helper functions for version analysis", () => {
       const result = await getExistedVersionOperations(targetPath, mockSwaggers);
 
       expect(result).toBeInstanceOf(Map);
-      expect(result.has(targetPath)).toBe(true);
+      // Should contain the previous swagger path with empty operations
+      expect(result.has("/test/stable/2020-07-02/b.json")).toBe(true);
 
-      const operations = result.get(targetPath);
+      const operations = result.get("/test/stable/2020-07-02/b.json");
       expect(operations).toBeDefined();
       if (operations) {
         expect(operations).toHaveLength(0);
@@ -722,17 +723,24 @@ describe("Helper functions for version analysis", () => {
       const result = await getExistedVersionOperations(targetPath, mockSwaggers);
 
       expect(result).toBeInstanceOf(Map);
-      expect(result.has(targetPath)).toBe(true);
+      // Should contain both previous swagger paths as keys
+      expect(result.has("/test/stable/2020-05-01/b.json")).toBe(true);
+      expect(result.has("/test/stable/2020-07-02/c.json")).toBe(true);
 
-      const operations = result.get(targetPath);
-      expect(operations).toBeDefined();
-      if (operations) {
-        expect(operations).toHaveLength(2); // Should find the operation in both previous versions
+      // Check operations from first previous version
+      const operations1 = result.get("/test/stable/2020-05-01/b.json");
+      expect(operations1).toBeDefined();
+      if (operations1) {
+        expect(operations1).toHaveLength(1);
+        expect(operations1[0]).toHaveProperty("id", "SharedOperation");
+      }
 
-        // Check that both previous versions are represented
-        const swaggerPaths = operations.map((op) => op.swagger);
-        expect(swaggerPaths).toContain("/test/stable/2020-05-01/b.json");
-        expect(swaggerPaths).toContain("/test/stable/2020-07-02/c.json");
+      // Check operations from second previous version
+      const operations2 = result.get("/test/stable/2020-07-02/c.json");
+      expect(operations2).toBeDefined();
+      if (operations2) {
+        expect(operations2).toHaveLength(1);
+        expect(operations2[0]).toHaveProperty("id", "SharedOperation");
       }
     });
   });
