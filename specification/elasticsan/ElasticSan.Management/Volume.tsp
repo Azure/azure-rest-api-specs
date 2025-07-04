@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -8,7 +9,7 @@ import "./VolumeGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ElasticSan;
 /**
@@ -58,6 +59,7 @@ interface Volumes {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
+      @clientName("deleteSnapshots", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-delete-snapshots`?: `x-ms-delete-snapshots`;
 
       /**
@@ -65,6 +67,7 @@ interface Volumes {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
+      @clientName("forceDelete", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-force-delete`?: `x-ms-force-delete`;
 
       /**
@@ -87,6 +90,7 @@ interface Volumes {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
+      @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
     },
     Response = ArmResponse<VolumeList>

@@ -65,9 +65,6 @@ using Microsoft.ElasticSan;
   "CurrentVersionedKeyExpirationTimestamp"
 );
 @@clientName(ManagedByInfo.resourceId, "ResourceId");
-@@clientName(SnapshotCreationData, "SnapshotCreationContent", "csharp");
-@@clientName(PreValidationResponse, "PreValidationResult", "csharp");
-@@clientName(SourceCreationData, "SourceCreationContent", "csharp");
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
@@ -79,10 +76,11 @@ using Microsoft.ElasticSan;
 @@clientLocation(SkusOperationGroup.list, "Skus");
 
 // Snapshots interface operations
-@@clientLocation(Snapshots.get, "VolumeSnapshots");
-@@clientLocation(Snapshots.create, "VolumeSnapshots");
-@@clientLocation(Snapshots.delete, "VolumeSnapshots");
-@@clientLocation(Snapshots.listByVolumeGroup, "VolumeSnapshots");
+// this clientLocation setting will jeopardize the logic in C# generator of detecting resource, making this no longer a resource. Therefore adding this !csharp scope to avoid that (temporarily)
+@@clientLocation(Snapshots.get, "VolumeSnapshots", "!csharp");
+@@clientLocation(Snapshots.create, "VolumeSnapshots", "!csharp");
+@@clientLocation(Snapshots.delete, "VolumeSnapshots", "!csharp");
+@@clientLocation(Snapshots.listByVolumeGroup, "VolumeSnapshots", "!csharp");
 
 // VolumeGroups interface operations
 @@clientLocation(VolumeGroups.preBackup, Volumes);
