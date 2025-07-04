@@ -28,7 +28,7 @@ interface JobResources {
   /**
    * Gets information about the specified job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Get")
   get is ArmResourceRead<
     JobResource,
@@ -38,25 +38,29 @@ interface JobResources {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Error = ApiError
   >;
 
   /**
    * Creates a new job with the specified parameters. Existing job cannot be updated with this API and should instead be updated with the Update job API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Create")
   create is ArmResourceCreateOrReplaceAsync<
     JobResource,
     Response = ArmResourceUpdatedResponse<JobResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ApiError
   >;
 
   /**
    * Updates the properties of an existing job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @operationId("Jobs_Update")
   update is ArmCustomPatchAsync<
@@ -66,26 +70,29 @@ interface JobResources {
       /**
        * Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Error = ApiError
   >;
 
   /**
    * Deletes a job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     JobResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ApiError
   >;
 
   /**
    * Lists all the jobs available under the given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     JobResource,
@@ -96,13 +103,14 @@ interface JobResources {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<JobResourceList>
+    Response = ArmResponse<JobResourceList>,
+    Error = ApiError
   >;
 
   /**
    * Lists all the jobs available under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_List")
   list is ArmListBySubscription<
     JobResource,
@@ -113,62 +121,68 @@ interface JobResources {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<JobResourceList>
+    Response = ArmResponse<JobResourceList>,
+    Error = ApiError
   >;
 
   /**
    * Book shipment pick up.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_BookShipmentPickUp")
   bookShipmentPickUp is ArmResourceActionSync<
     JobResource,
     ShipmentPickUpRequest,
-    ArmResponse<ShipmentPickUpResponse>
+    ArmResponse<ShipmentPickUpResponse>,
+    Error = ApiError
   >;
 
   /**
    * CancelJob.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_Cancel")
   cancel is ArmResourceActionSync<
     JobResource,
     CancellationReason,
-    NoContentResponse
+    NoContentResponse,
+    Error = ApiError
   >;
 
   /**
    * This method gets the unencrypted secrets related to the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_ListCredentials")
   listCredentials is ArmResourceActionSync<
     JobResource,
     void,
-    ArmResponse<UnencryptedCredentialsList>
+    ArmResponse<UnencryptedCredentialsList>,
+    Error = ApiError
   >;
 
   /**
    * Request to mark devices for a given job as shipped
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Jobs_MarkDevicesShipped")
   markDevicesShipped is ArmResourceActionSync<
     JobResource,
     MarkDevicesShippedRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = ApiError
   >;
 
   /**
    * Request to mitigate for a given job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Mitigate")
   mitigate is ArmResourceActionSync<
     JobResource,
     MitigateJobRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = ApiError
   >;
 }
 

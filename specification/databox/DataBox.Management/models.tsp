@@ -218,142 +218,142 @@ union NotificationStageName {
  */
 union DataCenterCode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BY2: "BY2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BY1: "BY1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ORK70: "ORK70",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AM2: "AM2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AMS20: "AMS20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BY21: "BY21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BY24: "BY24",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MWH01: "MWH01",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AMS06: "AMS06",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SSE90: "SSE90",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SYD03: "SYD03",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SYD23: "SYD23",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CBR20: "CBR20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   YTO20: "YTO20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CWL20: "CWL20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   LON24: "LON24",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BOM01: "BOM01",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BL20: "BL20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BL7: "BL7",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SEL20: "SEL20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TYO01: "TYO01",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BN1: "BN1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SN5: "SN5",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CYS04: "CYS04",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TYO22: "TYO22",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   YTO21: "YTO21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   YQB20: "YQB20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FRA22: "FRA22",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MAA01: "MAA01",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CPQ02: "CPQ02",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CPQ20: "CPQ20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SIN20: "SIN20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HKG20: "HKG20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SG2: "SG2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MEL23: "MEL23",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SEL21: "SEL21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OSA20: "OSA20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SHA03: "SHA03",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BJB: "BJB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   JNB22: "JNB22",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   JNB21: "JNB21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MNZ21: "MNZ21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SN8: "SN8",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AUH20: "AUH20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ZRH20: "ZRH20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PUS20: "PUS20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AdHoc: "AdHoc",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CH1: "CH1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DSM05: "DSM05",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DUB07: "DUB07",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PNQ01: "PNQ01",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SVG20: "SVG20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OSA02: "OSA02",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OSA22: "OSA22",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PAR22: "PAR22",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BN7: "BN7",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SN6: "SN6",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BJS20: "BJS20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BL24: "BL24",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IDC5: "IDC5",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TYO23: "TYO23",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  CPQ21: "CPQ21",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NTG20: "NTG20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DXB23: "DXB23",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DSM11: "DSM11",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  OSA23: "OSA23",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AMS25: "AMS25",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  CPQ21: "CPQ21",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  OSA23: "OSA23",
 }
 
 /**
@@ -456,7 +456,7 @@ union CopyStatus {
 /**
  * Type of the transfer.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TransferType {
   /**
    * Import data to azure.
@@ -472,7 +472,7 @@ enum TransferType {
 /**
  * The Editable status for Reverse Shipping Address and Contact Info
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ReverseShippingDetailsEditStatus {
   /**
    * Reverse shipping details can be edited.
@@ -493,7 +493,7 @@ enum ReverseShippingDetailsEditStatus {
 /**
  * The Editable status for Reverse Transport preferences
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ReverseTransportPreferenceEditStatus {
   /**
    * Reverse Transport Preferences can be edited.
@@ -514,7 +514,7 @@ enum ReverseTransportPreferenceEditStatus {
 /**
  * Holds the device erasure completion status
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum StageStatus {
   /**
    * No status available yet.
@@ -585,7 +585,7 @@ enum StageStatus {
 /**
  * Type of address.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AddressType {
   /**
    * Address type not known.
@@ -606,7 +606,7 @@ enum AddressType {
 /**
  * Type of the account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DataAccountType {
   /**
    * Storage Accounts .
@@ -622,7 +622,7 @@ enum DataAccountType {
 /**
  * Level of the logs to be collected.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum LogCollectionLevel {
   /**
    * Only Errors will be collected in the logs.
@@ -638,7 +638,7 @@ enum LogCollectionLevel {
 /**
  * Type of the configuration for transfer.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TransferConfigurationType {
   /**
    * Transfer all the data.
@@ -654,7 +654,7 @@ enum TransferConfigurationType {
 /**
  * Type of the filter file.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FilterFileType {
   /**
    * Filter file is of the type AzureBlob.
@@ -670,7 +670,7 @@ enum FilterFileType {
 /**
  * Indicates the type of job details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ClassDiscriminator {
   /**
    * Data Box orders.
@@ -696,7 +696,7 @@ enum ClassDiscriminator {
 /**
  * Transport Shipment Type supported for given region.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TransportShipmentTypes {
   /**
    * Shipment Logistics is handled by the customer.
@@ -712,7 +712,7 @@ enum TransportShipmentTypes {
 /**
  * Defines secondary layer of software-based encryption enablement.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DoubleEncryption {
   /**
    * Software-based encryption is enabled.
@@ -728,7 +728,7 @@ enum DoubleEncryption {
 /**
  * Hardware encryption support for a given sku for a given region.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum HardwareEncryption {
   /**
    * Hardware-based encryption is enabled.
@@ -744,7 +744,7 @@ enum HardwareEncryption {
 /**
  * Type of encryption key used for key encryption.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KekType {
   /**
    * Key encryption key is managed by Microsoft.
@@ -757,8 +757,8 @@ enum KekType {
   CustomerManaged,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CustomerResolutionCode {
   /**
    * No Resolution Yet
@@ -789,7 +789,7 @@ enum CustomerResolutionCode {
 /**
  * Data center address type
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DatacenterAddressType {
   /**
    * Data center address location.
@@ -805,7 +805,7 @@ enum DatacenterAddressType {
 /**
  * Delivery type of Job.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum JobDeliveryType {
   /**
    * Non Scheduled job.
@@ -818,8 +818,8 @@ enum JobDeliveryType {
   Scheduled,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuName {
   /**
    * Data Box.
@@ -845,7 +845,7 @@ enum SkuName {
 /**
  * The customer friendly name of the combination of version and capacity of the device. This field is necessary only at the time of ordering the newer generation device i.e. AzureDataBox120 and AzureDataBox525 as of Feb/2025
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ModelName {
   /**
    * Data Box.
@@ -881,7 +881,7 @@ enum ModelName {
 /**
  * Identifies the type of validation request.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ValidationInputDiscriminator {
   /**
    * Identify request and response of address validation.
@@ -917,7 +917,7 @@ enum ValidationInputDiscriminator {
 /**
  * The address validation status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AddressValidationStatus {
   /**
    * Address provided is valid.
@@ -938,7 +938,7 @@ enum AddressValidationStatus {
 /**
  * Overall validation status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum OverallValidationStatus {
   /**
    * Every input request is valid.
@@ -959,7 +959,7 @@ enum OverallValidationStatus {
 /**
  * Reason why the Sku is disabled.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SkuDisabledReason {
   /**
    * SKU is not disabled.
@@ -995,7 +995,7 @@ enum SkuDisabledReason {
 /**
  * Type of the share.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ShareDestinationFormatType {
   /**
    * Unknown format.
@@ -1028,8 +1028,8 @@ enum ShareDestinationFormatType {
   ManagedDisk,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessProtocol {
   /**
    * Server Message Block protocol(SMB).
@@ -1045,7 +1045,7 @@ enum AccessProtocol {
 /**
  * Create order limit validation status.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ValidationStatus {
   /**
    * Validation is successful
@@ -1071,7 +1071,7 @@ model JobResourceList is Azure.Core.Page<JobResource>;
 /**
  * Job Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobProperties {
   /**
    * Type of the data transfer.
@@ -1180,6 +1180,7 @@ model CloudError {
   /**
    * Gets or sets additional error info.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalInfo?: AdditionalErrorInfo[];
 
@@ -1191,6 +1192,7 @@ model CloudError {
   /**
    * Gets or sets details for the error.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   details?: CloudError[];
 
@@ -1212,7 +1214,7 @@ model AdditionalErrorInfo {
   /**
    * Additional information of the type of error.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<unknown>;
 
   /**
@@ -1229,6 +1231,7 @@ model JobDetails {
   /**
    * List of stages that run in the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   jobStages?: JobStages[];
 
@@ -1257,16 +1260,19 @@ model JobDetails {
   /**
    * Details of the data to be imported into azure.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataImportDetails?: DataImportDetails[];
 
   /**
    * Details of the data to be exported from azure.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataExportDetails?: DataExportDetails[];
 
   /**
    * Indicates the type of job details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobDetailsType: ClassDiscriminator;
 
   /**
@@ -1282,6 +1288,7 @@ model JobDetails {
   /**
    * List of copy log details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   copyLogDetails?: CopyLogDetails[];
 
@@ -1370,7 +1377,7 @@ model JobStages {
   /**
    * Job Stage Details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   jobStageDetails?: Record<unknown>;
 
@@ -1451,6 +1458,7 @@ model ContactDetails {
   /**
    * Notification preference for a job stage.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   notificationPreference?: NotificationPreference[];
 }
 
@@ -1580,10 +1588,12 @@ model DataAccountDetails {
   /**
    * Account Type of the data to be transferred.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataAccountType: DataAccountType;
 
   @doc("Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+")
   @visibility(Lifecycle.Create)
+  @secret
   sharePassword?: string;
 }
 
@@ -1659,6 +1669,7 @@ model TransferFilterDetails {
   /**
    * Details of the filter files to be used for data transfer.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   filterFileDetails?: FilterFileDetails[];
 }
 
@@ -1774,7 +1785,18 @@ model Preferences {
   /**
    * Preferences related to the Access Tier of storage accounts.
    */
-  storageAccountAccessTierPreferences?: "Archive"[];
+  storageAccountAccessTierPreferences?: StorageAccountAccessTier[];
+}
+
+/**
+ * Storage account access tier.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum StorageAccountAccessTier {
+  /**
+   * Archive access tier.
+   */
+  Archive: "Archive",
 }
 
 /**
@@ -1865,6 +1887,7 @@ model CopyLogDetails {
   /**
    * Indicates the type of job details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   copyLogDetailsType: ClassDiscriminator;
 }
 
@@ -1907,6 +1930,7 @@ model KeyEncryptionKey {
   /**
    * Kek vault resource id. It is required in case of Customer managed KekType.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kekVaultResourceID?: string;
 }
 
@@ -1965,6 +1989,7 @@ model DatacenterAddressResponse {
   /**
    * Data center address type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   datacenterAddressType: DatacenterAddressType;
 
   /**
@@ -2020,7 +2045,7 @@ model Resource {
   systemData?: SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ApiError {
   /**
@@ -2067,6 +2092,7 @@ model ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skuName: SkuName;
 
   /**
@@ -2177,6 +2203,7 @@ model TransportAvailabilityResponse {
   /**
    * List of transport availability details for given region
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   transportAvailabilityDetails?: TransportAvailabilityDetails[];
 }
@@ -2242,7 +2269,7 @@ model ValidateAddress extends ValidationInputRequest {
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidateAddress";
+  validationType: ValidationInputDiscriminator.ValidateAddress;
 }
 
 /**
@@ -2253,6 +2280,7 @@ model ValidationInputRequest {
   /**
    * Identifies the type of validation request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationType: ValidationInputDiscriminator;
 }
 
@@ -2263,7 +2291,7 @@ model AddressValidationOutput {
   /**
    * The address validation properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AddressValidationProperties;
@@ -2282,13 +2310,14 @@ model AddressValidationProperties extends ValidationInputResponse {
   /**
    * List of alternate addresses.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   alternateAddresses?: ShippingAddress[];
 
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidateAddress";
+  validationType: ValidationInputDiscriminator.ValidateAddress;
 }
 
 /**
@@ -2299,6 +2328,7 @@ model ValidationInputResponse {
   /**
    * Identifies the type of validation response.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationType: ValidationInputDiscriminator;
 
   /**
@@ -2306,6 +2336,14 @@ model ValidationInputResponse {
    */
   @visibility(Lifecycle.Read)
   error?: CloudError;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ValidationCategory {
+  /**
+   * Identify request of pre-job creation validations.
+   */
+  JobCreationValidation,
 }
 
 /**
@@ -2316,11 +2354,13 @@ model ValidationRequest {
   /**
    * Identify the nature of validation.
    */
-  validationCategory: "JobCreationValidation";
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  validationCategory: ValidationCategory;
 
   /**
    * List of request details contain validationType and its request as key and value respectively.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   individualRequestDetails: ValidationInputRequest[];
 }
 
@@ -2331,7 +2371,7 @@ model ValidationResponse {
   /**
    * Properties of pre job creation validation response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ValidationResponseProperties;
@@ -2350,6 +2390,7 @@ model ValidationResponseProperties {
   /**
    * List of response details contain validationType and its response as key and value respectively.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   individualResponseDetails?: ValidationInputResponse[];
 }
@@ -2361,14 +2402,14 @@ model JobResourceUpdateParameter {
   /**
    * Properties of a job to be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UpdateJobProperties;
 
   /**
    * The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -2429,6 +2470,7 @@ model PackageCarrierDetails {
   /**
    * Carrier Account Number of customer for customer disk.
    */
+  @secret
   carrierAccountNumber?: string;
 
   /**
@@ -2466,7 +2508,7 @@ model ResourceIdentity {
   /**
    * User Assigned Identities
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -2550,6 +2592,7 @@ model JobSecrets {
   /**
    * Used to indicate what type of job secrets object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   jobSecretsType: ClassDiscriminator;
 
   /**
@@ -2572,11 +2615,13 @@ model DcAccessSecurityCode {
   /**
    * Reverse Dc access security code.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reverseDCAccessCode?: string;
 
   /**
    * Forward Dc access security code.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   forwardDCAccessCode?: string;
 }
 
@@ -2617,7 +2662,7 @@ model MitigateJobRequest {
   /**
    * Serial number and the customer resolution code corresponding to each serial number
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serialNumberCustomerResolutionMap?: Record<CustomerResolutionCode>;
 }
 
@@ -2649,7 +2694,21 @@ model AvailableSkuRequest {
 /**
  * The available skus operation response.
  */
-model AvailableSkusResult is Azure.Core.Page<SkuInformation>;
+@Azure.Core.pagedResult
+model AvailableSkusResult {
+  /**
+   * [Placeholder] Discription for page model
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  value: SkuInformation[];
+
+  /**
+   * [Placeholder] Discription for nextLink property
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Information of the sku.
@@ -2670,7 +2729,7 @@ model SkuInformation {
   /**
    * Properties of the sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SkuProperties;
@@ -2708,6 +2767,7 @@ model SkuProperties {
   /**
    * The map of data location to service location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   dataLocationToServiceLocationMap?: DataLocationToServiceLocationMap[];
 
@@ -2720,6 +2780,7 @@ model SkuProperties {
   /**
    * Cost of the Sku.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   costs?: SkuCost[];
 
@@ -2842,6 +2903,7 @@ model AccountCredentialDetails {
   /**
    * Per share level unencrypted access credentials.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   shareCredentialDetails?: ShareCredentialDetails[];
 }
@@ -3013,7 +3075,7 @@ model CreateJobValidations extends ValidationRequest {
   /**
    * Identify the nature of validation.
    */
-  validationCategory: "JobCreationValidation";
+  validationCategory: ValidationCategory.JobCreationValidation;
 }
 
 /**
@@ -3034,7 +3096,7 @@ model CreateOrderLimitForSubscriptionValidationRequest
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidateCreateOrderLimit";
+  validationType: ValidationInputDiscriminator.ValidateCreateOrderLimit;
 }
 
 /**
@@ -3051,7 +3113,7 @@ model CreateOrderLimitForSubscriptionValidationResponseProperties
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidateCreateOrderLimit";
+  validationType: ValidationInputDiscriminator.ValidateCreateOrderLimit;
 }
 
 /**
@@ -3061,6 +3123,7 @@ model CustomerDiskJobSecrets extends JobSecrets {
   /**
    * Contains the list of secrets object for that device.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   diskSecrets?: DiskSecret[];
 
@@ -3068,12 +3131,13 @@ model CustomerDiskJobSecrets extends JobSecrets {
    * Carrier Account Number of the customer
    */
   @visibility(Lifecycle.Read)
+  @secret
   carrierAccountNumber?: string;
 
   /**
    * Used to indicate what type of job secrets object.
    */
-  jobSecretsType: "DataBoxCustomerDisk";
+  jobSecretsType: ClassDiscriminator.DataBoxCustomerDisk;
 }
 
 /**
@@ -3118,7 +3182,7 @@ model DataBoxAccountCopyLogDetails extends CopyLogDetails {
   /**
    * Indicates the type of job details.
    */
-  copyLogDetailsType: "DataBox";
+  copyLogDetailsType: ClassDiscriminator.DataBox;
 }
 
 /**
@@ -3146,13 +3210,13 @@ model DataBoxCustomerDiskCopyLogDetails extends CopyLogDetails {
   /**
    * Indicates the type of job details.
    */
-  copyLogDetailsType: "DataBoxCustomerDisk";
+  copyLogDetailsType: ClassDiscriminator.DataBoxCustomerDisk;
 }
 
 /**
  * DataBox CustomerDisk Copy Progress
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataBoxCustomerDiskCopyProgress extends CopyProgress {
   /**
    * Disk Serial Number.
@@ -3174,19 +3238,20 @@ model DataBoxCustomerDiskJobDetails extends JobDetails {
   /**
    * Contains the map of disk serial number to the disk details for import jobs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   importDiskDetailsCollection?: Record<ImportDiskDetails>;
 
   /**
    * Contains the map of disk serial number to the disk details for export jobs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   exportDiskDetailsCollection?: Record<ExportDiskDetails>;
 
   /**
    * Copy progress per disk.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   copyProgress?: DataBoxCustomerDiskCopyProgress[];
 
@@ -3209,7 +3274,7 @@ model DataBoxCustomerDiskJobDetails extends JobDetails {
   /**
    * Indicates the type of job details.
    */
-  jobDetailsType: "DataBoxCustomerDisk";
+  jobDetailsType: ClassDiscriminator.DataBoxCustomerDisk;
 }
 
 /**
@@ -3229,6 +3294,7 @@ model ImportDiskDetails {
   /**
    * BitLocker key used to encrypt the disk.
    */
+  @secret
   bitLockerKey: string;
 
   /**
@@ -3286,7 +3352,7 @@ model DataBoxDiskCopyLogDetails extends CopyLogDetails {
   /**
    * Indicates the type of job details.
    */
-  copyLogDetailsType: "DataBoxDisk";
+  copyLogDetailsType: ClassDiscriminator.DataBoxDisk;
 }
 
 /**
@@ -3361,7 +3427,7 @@ model DataBoxDiskGranularCopyLogDetails extends GranularCopyLogDetails {
   /**
    * Indicates the type of job details.
    */
-  copyLogDetailsType: "DataBoxCustomerDisk";
+  copyLogDetailsType: ClassDiscriminator.DataBoxCustomerDisk;
 }
 
 /**
@@ -3372,13 +3438,14 @@ model GranularCopyLogDetails {
   /**
    * Indicates the type of job details.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   copyLogDetailsType: ClassDiscriminator;
 }
 
 /**
  * DataBox Disk Granular Copy Progress
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataBoxDiskGranularCopyProgress extends GranularCopyProgress {
   /**
    * Disk Serial Number.
@@ -3508,12 +3575,13 @@ model DataBoxDiskJobDetails extends JobDetails {
   /**
    * User preference on what size disks are needed for the job. The map is from the disk size in TB to the count. Eg. {2,5} means 5 disks of 2 TB size. Key is string but will be checked against an int.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredDisks?: Record<int32>;
 
   /**
    * Copy progress per disk.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   copyProgress?: DataBoxDiskCopyProgress[];
 
@@ -3534,7 +3602,7 @@ model DataBoxDiskJobDetails extends JobDetails {
   /**
    * Contains the map of disk serial number to the disk size being used for the job. Is returned only after the disks are shipped to the customer.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   disksAndSizeDetails?: Record<int32>;
 
@@ -3546,7 +3614,7 @@ model DataBoxDiskJobDetails extends JobDetails {
   /**
    * Indicates the type of job details.
    */
-  jobDetailsType: "DataBoxDisk";
+  jobDetailsType: ClassDiscriminator.DataBoxDisk;
 }
 
 /**
@@ -3556,6 +3624,7 @@ model DataBoxDiskJobSecrets extends JobSecrets {
   /**
    * Contains the list of secrets object for that device.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   diskSecrets?: DiskSecret[];
 
@@ -3574,7 +3643,7 @@ model DataBoxDiskJobSecrets extends JobSecrets {
   /**
    * Used to indicate what type of job secrets object.
    */
-  jobSecretsType: "DataBoxDisk";
+  jobSecretsType: ClassDiscriminator.DataBoxDisk;
 }
 
 /**
@@ -3602,7 +3671,7 @@ model DataBoxHeavyAccountCopyLogDetails extends CopyLogDetails {
   /**
    * Indicates the type of job details.
    */
-  copyLogDetailsType: "DataBoxHeavy";
+  copyLogDetailsType: ClassDiscriminator.DataBoxHeavy;
 }
 
 /**
@@ -3612,6 +3681,7 @@ model DataBoxHeavyJobDetails extends JobDetails {
   /**
    * Copy progress per account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   copyProgress?: CopyProgress[];
 
@@ -3621,7 +3691,7 @@ model DataBoxHeavyJobDetails extends JobDetails {
   /**
    * Indicates the type of job details.
    */
-  jobDetailsType: "DataBoxHeavy";
+  jobDetailsType: ClassDiscriminator.DataBoxHeavy;
 }
 
 /**
@@ -3631,13 +3701,14 @@ model DataBoxHeavyJobSecrets extends JobSecrets {
   /**
    * Contains the list of secret objects for a databox heavy job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   cabinetPodSecrets?: DataBoxHeavySecret[];
 
   /**
    * Used to indicate what type of job secrets object.
    */
-  jobSecretsType: "DataBoxHeavy";
+  jobSecretsType: ClassDiscriminator.DataBoxHeavy;
 }
 
 /**
@@ -3671,6 +3742,7 @@ model DataBoxHeavySecret {
   /**
    * Per account level access credentials.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountCredentialDetails?: AccountCredentialDetails[];
 }
@@ -3682,6 +3754,7 @@ model DataBoxJobDetails extends JobDetails {
   /**
    * Copy progress per storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   copyProgress?: CopyProgress[];
 
@@ -3691,7 +3764,7 @@ model DataBoxJobDetails extends JobDetails {
   /**
    * Indicates the type of job details.
    */
-  jobDetailsType: "DataBox";
+  jobDetailsType: ClassDiscriminator.DataBox;
 }
 
 /**
@@ -3701,7 +3774,7 @@ model DataBoxScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
    */
-  skuName: "DataBox";
+  skuName: SkuName.DataBox;
 }
 
 /**
@@ -3735,6 +3808,7 @@ model DataBoxSecret {
   /**
    * Per account level access credentials.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountCredentialDetails?: AccountCredentialDetails[];
 }
@@ -3746,11 +3820,13 @@ model DataTransferDetailsValidationRequest extends ValidationInputRequest {
   /**
    * List of DataTransfer details to be used to export data from azure.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataExportDetails?: DataExportDetails[];
 
   /**
    * List of DataTransfer details to be used to import data to azure.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataImportDetails?: DataImportDetails[];
 
   /**
@@ -3771,7 +3847,7 @@ model DataTransferDetailsValidationRequest extends ValidationInputRequest {
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidateDataTransferDetails";
+  validationType: ValidationInputDiscriminator.ValidateDataTransferDetails;
 }
 
 /**
@@ -3788,7 +3864,7 @@ model DataTransferDetailsValidationResponseProperties
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidateDataTransferDetails";
+  validationType: ValidationInputDiscriminator.ValidateDataTransferDetails;
 }
 
 /**
@@ -3798,12 +3874,13 @@ model DataboxJobSecrets extends JobSecrets {
   /**
    * Contains the list of secret objects for a job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   podSecrets?: DataBoxSecret[];
 
   /**
    * Used to indicate what type of job secrets object.
    */
-  jobSecretsType: "DataBox";
+  jobSecretsType: ClassDiscriminator.DataBox;
 }
 
 /**
@@ -3819,7 +3896,7 @@ model DatacenterAddressInstructionResponse extends DatacenterAddressResponse {
   /**
    * Data center address type
    */
-  datacenterAddressType: "DatacenterAddressInstruction";
+  datacenterAddressType: DatacenterAddressType.DatacenterAddressInstruction;
 }
 
 /**
@@ -3907,7 +3984,7 @@ model DatacenterAddressLocationResponse extends DatacenterAddressResponse {
   /**
    * Data center address type
    */
-  datacenterAddressType: "DatacenterAddressLocation";
+  datacenterAddressType: DatacenterAddressType.DatacenterAddressLocation;
 }
 
 /**
@@ -3922,7 +3999,7 @@ model DiskScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
    */
-  skuName: "DataBoxDisk";
+  skuName: SkuName.DataBoxDisk;
 }
 
 /**
@@ -3932,7 +4009,7 @@ model HeavyScheduleAvailabilityRequest extends ScheduleAvailabilityRequest {
   /**
    * Sku Name for which the order is to be scheduled.
    */
-  skuName: "DataBoxHeavy";
+  skuName: SkuName.DataBoxHeavy;
 }
 
 /**
@@ -3952,7 +4029,7 @@ model ManagedDiskDetails extends DataAccountDetails {
   /**
    * Account Type of the data to be transferred.
    */
-  dataAccountType: "ManagedDisk";
+  dataAccountType: DataAccountType.ManagedDisk;
 }
 
 /**
@@ -3977,7 +4054,7 @@ model PreferencesValidationRequest extends ValidationInputRequest {
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidatePreferences";
+  validationType: ValidationInputDiscriminator.ValidatePreferences;
 }
 
 /**
@@ -3993,7 +4070,7 @@ model PreferencesValidationResponseProperties extends ValidationInputResponse {
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidatePreferences";
+  validationType: ValidationInputDiscriminator.ValidatePreferences;
 }
 
 /**
@@ -4028,7 +4105,7 @@ model SkuAvailabilityValidationRequest extends ValidationInputRequest {
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidateSkuAvailability";
+  validationType: ValidationInputDiscriminator.ValidateSkuAvailability;
 }
 
 /**
@@ -4045,7 +4122,7 @@ model SkuAvailabilityValidationResponseProperties
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidateSkuAvailability";
+  validationType: ValidationInputDiscriminator.ValidateSkuAvailability;
 }
 
 /**
@@ -4060,7 +4137,7 @@ model StorageAccountDetails extends DataAccountDetails {
   /**
    * Account Type of the data to be transferred.
    */
-  dataAccountType: "StorageAccount";
+  dataAccountType: DataAccountType.StorageAccount;
 }
 
 /**
@@ -4071,7 +4148,7 @@ model SubscriptionIsAllowedToCreateJobValidationRequest
   /**
    * Identifies the type of validation request.
    */
-  validationType: "ValidateSubscriptionIsAllowedToCreateJob";
+  validationType: ValidationInputDiscriminator.ValidateSubscriptionIsAllowedToCreateJob;
 }
 
 /**
@@ -4088,5 +4165,24 @@ model SubscriptionIsAllowedToCreateJobValidationResponseProperties
   /**
    * Identifies the type of validation response.
    */
-  validationType: "ValidateSubscriptionIsAllowedToCreateJob";
+  validationType: ValidationInputDiscriminator.ValidateSubscriptionIsAllowedToCreateJob;
+}
+
+/**
+ * The paginated list of connected cluster API operations.
+ */
+@Azure.Core.pagedResult
+model OperationList {
+  /**
+   * The list of connected cluster API operations.
+   */
+  @Azure.Core.items
+  @visibility(Lifecycle.Read)
+  value?: Operation[];
+
+  /**
+   * The link to fetch the next page of connected cluster API operations.
+   */
+  @nextLink
+  nextLink?: string;
 }

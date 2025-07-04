@@ -63,13 +63,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -144,7 +144,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "regionConfigurationRequest",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -163,7 +163,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -189,7 +189,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "validateAddress",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -208,10 +208,11 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "ValidateAddressPost": {
             "$ref": "./examples/ValidateAddressPost.json"
@@ -234,7 +235,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "validationRequest",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -253,7 +254,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -299,7 +300,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -358,7 +359,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -440,7 +441,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -493,12 +494,11 @@
             "pattern": "^[-\\w\\.]+$"
           },
           {
-            "name": "if-match",
+            "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.",
             "required": false,
-            "type": "string",
-            "x-ms-client-name": "If-Match"
+            "type": "string"
           },
           {
             "name": "jobResourceUpdateParameter",
@@ -534,7 +534,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -605,7 +605,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -667,7 +667,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -722,7 +722,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -771,7 +771,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -829,7 +829,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -884,7 +884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -932,7 +932,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -983,7 +983,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -1031,7 +1031,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -1182,7 +1182,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error detail."
         }
       },
       "required": [
@@ -1241,15 +1242,15 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SkuInformation items on this page",
+          "description": "[Placeholder] Discription for page model",
           "items": {
             "$ref": "#/definitions/SkuInformation"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
       },
       "required": [
@@ -1764,8 +1765,10 @@
         },
         "carrierAccountNumber": {
           "type": "string",
+          "format": "password",
           "description": "Carrier Account Number of the customer",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -1826,10 +1829,12 @@
         },
         "sharePassword": {
           "type": "string",
+          "format": "password",
           "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       },
       "discriminator": "dataAccountType",
@@ -2448,12 +2453,12 @@
         "BL24",
         "IDC5",
         "TYO23",
-        "CPQ21",
         "NTG20",
         "DXB23",
         "DSM11",
-        "OSA23",
-        "AMS25"
+        "AMS25",
+        "CPQ21",
+        "OSA23"
       ],
       "x-ms-enum": {
         "name": "DataCenterCode",
@@ -2708,10 +2713,6 @@
             "value": "TYO23"
           },
           {
-            "name": "CPQ21",
-            "value": "CPQ21"
-          },
-          {
             "name": "NTG20",
             "value": "NTG20"
           },
@@ -2724,12 +2725,16 @@
             "value": "DSM11"
           },
           {
-            "name": "OSA23",
-            "value": "OSA23"
-          },
-          {
             "name": "AMS25",
             "value": "AMS25"
+          },
+          {
+            "name": "CPQ21",
+            "value": "CPQ21"
+          },
+          {
+            "name": "OSA23",
+            "value": "OSA23"
           }
         ]
       }
@@ -3442,7 +3447,9 @@
         },
         "bitLockerKey": {
           "type": "string",
-          "description": "BitLocker key used to encrypt the disk."
+          "format": "password",
+          "description": "BitLocker key used to encrypt the disk.",
+          "x-ms-secret": true
         },
         "backupManifestCloudPath": {
           "type": "string",
@@ -4128,6 +4135,24 @@
         ]
       }
     },
+    "OperationList": {
+      "type": "object",
+      "description": "The paginated list of connected cluster API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of connected cluster API operations.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to fetch the next page of connected cluster API operations."
+        }
+      }
+    },
     "OverallValidationStatus": {
       "type": "string",
       "description": "Overall validation status.",
@@ -4164,7 +4189,9 @@
       "properties": {
         "carrierAccountNumber": {
           "type": "string",
-          "description": "Carrier Account Number of customer for customer disk."
+          "format": "password",
+          "description": "Carrier Account Number of customer for customer disk.",
+          "x-ms-secret": true
         },
         "carrierName": {
           "type": "string",
@@ -4274,13 +4301,7 @@
           "type": "array",
           "description": "Preferences related to the Access Tier of storage accounts.",
           "items": {
-            "type": "string",
-            "enum": [
-              "Archive"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/StorageAccountAccessTier"
           }
         }
       }
@@ -5250,6 +5271,24 @@
       },
       "readOnly": true
     },
+    "StorageAccountAccessTier": {
+      "type": "string",
+      "description": "Storage account access tier.",
+      "enum": [
+        "Archive"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountAccessTier",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Archive",
+            "value": "Archive",
+            "description": "Archive access tier."
+          }
+        ]
+      }
+    },
     "StorageAccountDetails": {
       "type": "object",
       "description": "Details for the storage account.",
@@ -5634,6 +5673,23 @@
       ],
       "x-ms-discriminator-value": "ValidateAddress"
     },
+    "ValidationCategory": {
+      "type": "string",
+      "enum": [
+        "JobCreationValidation"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationCategory",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "JobCreationValidation",
+            "value": "JobCreationValidation",
+            "description": "Identify request of pre-job creation validations."
+          }
+        ]
+      }
+    },
     "ValidationInputDiscriminator": {
       "type": "string",
       "description": "Identifies the type of validation request.",
@@ -5720,14 +5776,8 @@
       "description": "Minimum request requirement of any validation category.",
       "properties": {
         "validationCategory": {
-          "type": "string",
-          "description": "Identify the nature of validation.",
-          "enum": [
-            "JobCreationValidation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ValidationCategory",
+          "description": "Identify the nature of validation."
         },
         "individualRequestDetails": {
           "type": "array",
