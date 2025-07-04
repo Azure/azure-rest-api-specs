@@ -25,7 +25,7 @@ model BackupVaultResource
 
 @armResourceOperations
 interface BackupVaultResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -94,9 +94,11 @@ interface BackupVaultResources {
   /**
    * Returns resource collection belonging to a subscription.
    */
+  // /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults
+  // /subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupVaults_GetInSubscription")
-  getInSubscription is BackupVaultResourceOps.ListBySubscription<
+  getInSubscription is ArmListBySubscription<
     BackupVaultResource,
     Response = ArmResponse<BackupVaultResourceList>
   >;
@@ -106,14 +108,13 @@ interface BackupVaultResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{operationId}")
   @operationId("OperationStatusBackupVaultContext_Get")
-  operationStatusBackupVaultContextGet is BackupVaultResourceOps.ActionSync<
+  operationStatusBackupVaultContextGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
-    void,
-    ArmResponse<OperationResource>,
+    Response = ArmResponse<OperationResource>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @segment("operationStatus")
       @path
       operationId: string;
     }
@@ -147,24 +148,23 @@ interface BackupVaultResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @action("{operationId}")
   @operationId("ExportJobsOperationResult_Get")
-  exportJobsOperationResultGet is BackupVaultResourceOps.ActionSync<
+  exportJobsOperationResultGet is BackupVaultResourceOps.Read<
     BackupVaultResource,
-    void,
-    ArmResponse<ExportJobsResult> | AcceptedResponse,
+    Response = ArmResponse<ExportJobsResult> | AcceptedResponse,
     Parameters = {
       /**
        * OperationID which represents the export job.
        */
       @path
+      @segment("backupJobs/operations")
       operationId: string;
     }
   >;
 }
 @armResourceOperations
 interface BackupVaultOperationResultOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -197,7 +197,7 @@ interface BackupVaultOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupVaults_GetInResourceGroup")
-  getInResourceGroup is BackupVaultOperationResultOps.List<
+  getInResourceGroup is ArmResourceListByParent<
     BackupVaultResource,
     Response = ArmResponse<BackupVaultResourceList>
   >;

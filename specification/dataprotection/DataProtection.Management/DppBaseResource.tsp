@@ -20,14 +20,13 @@ model DppBaseResource is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = DppBaseResource,
     KeyName = "requestName",
-    SegmentName = "disableSoftDeleteRequests",
     NamePattern = ""
   >;
 }
 
 @armResourceOperations
 interface DppBaseResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -49,27 +48,8 @@ interface DppBaseResourceOps
     > {}
 
 @armResourceOperations
-interface DppBaseResources {
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultDisableSoftDeleteRequestsObject")
-  getDefaultDisableSoftDeleteRequestsObject is DppBaseResourceOps.Read<DppBaseResource>;
-
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDisableSoftDeleteRequestsObjects")
-  getDisableSoftDeleteRequestsObjects is DppBaseResourceOps.List<
-    DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
-  >;
-}
-@armResourceOperations
 interface ResourceGuardOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -100,14 +80,15 @@ interface ResourceGuards {
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
+  @action("deleteResourceGuardProxyRequests")
   getDeleteResourceGuardProxyRequestsObjects is ResourceGuardOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>
   >;
 }
 @armResourceOperations
-interface DppBaseResourceOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+interface DppBaseResourceGetBackupSecurityPINOperationGroupOps
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -129,27 +110,8 @@ interface DppBaseResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface DppBaseResourceOperationGroup {
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultBackupSecurityPINRequestsObject")
-  getDefaultBackupSecurityPINRequestsObject is DppBaseResourceOperationGroupOps.Read<DppBaseResource>;
-
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
-  getBackupSecurityPINRequestsObjects is DppBaseResourceOperationGroupOps.List<
-    DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
-  >;
-}
-@armResourceOperations
-interface DppBaseResourceOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+interface DppBaseResourceDeleteProtectedItemOperationGroupOps
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -171,27 +133,8 @@ interface DppBaseResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface DppBaseResourceOperationGroup {
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultDeleteProtectedItemRequestsObject")
-  getDefaultDeleteProtectedItemRequestsObject is DppBaseResourceOperationGroupOps.Read<DppBaseResource>;
-
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDeleteProtectedItemRequestsObjects")
-  getDeleteProtectedItemRequestsObjects is DppBaseResourceOperationGroupOps.List<
-    DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
-  >;
-}
-@armResourceOperations
-interface DppBaseResourceOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+interface DppBaseResourceUpdateProtectionPolicyOperationGroupOps
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -213,27 +156,8 @@ interface DppBaseResourceOperationGroupOps
     > {}
 
 @armResourceOperations
-interface DppBaseResourceOperationGroup {
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultUpdateProtectionPolicyRequestsObject")
-  getDefaultUpdateProtectionPolicyRequestsObject is DppBaseResourceOperationGroupOps.Read<DppBaseResource>;
-
-  /**
-   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetUpdateProtectionPolicyRequestsObjects")
-  getUpdateProtectionPolicyRequestsObjects is DppBaseResourceOperationGroupOps.List<
-    DppBaseResource,
-    Response = ArmResponse<DppBaseResourceList>
-  >;
-}
-@armResourceOperations
-interface DppBaseResourceOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+interface DppBaseResourceUpdateProtectedItemOperationGroupOps
+  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -260,15 +184,87 @@ interface DppBaseResourceOperationGroup {
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuards_GetDefaultUpdateProtectedItemRequestsObject")
-  getDefaultUpdateProtectedItemRequestsObject is DppBaseResourceOperationGroupOps.Read<DppBaseResource>;
+  @operationId("ResourceGuards_GetDefaultDisableSoftDeleteRequestsObject")
+  getDefaultDisableSoftDeleteRequestsObject is DppBaseResourceOps.Read<DppBaseResource>;
 
   /**
    * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDisableSoftDeleteRequestsObjects")
+  @action("disableSoftDeleteRequests")
+  getDisableSoftDeleteRequestsObjects is DppBaseResourceOps.List<
+    DppBaseResource,
+    Response = ArmResponse<DppBaseResourceList>
+  >;
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDefaultUpdateProtectedItemRequestsObject")
+  getDefaultUpdateProtectedItemRequestsObject is DppBaseResourceUpdateProtectedItemOperationGroupOps.Read<DppBaseResource>;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("updateProtectedItemRequests")
   @operationId("ResourceGuards_GetUpdateProtectedItemRequestsObjects")
-  getUpdateProtectedItemRequestsObjects is DppBaseResourceOperationGroupOps.List<
+  getUpdateProtectedItemRequestsObjects is DppBaseResourceUpdateProtectedItemOperationGroupOps.List<
+    DppBaseResource,
+    Response = ArmResponse<DppBaseResourceList>
+  >;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDefaultUpdateProtectionPolicyRequestsObject")
+  getDefaultUpdateProtectionPolicyRequestsObject is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.Read<DppBaseResource>;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("updateProtectionPolicyRequests")
+  @operationId("ResourceGuards_GetUpdateProtectionPolicyRequestsObjects")
+  getUpdateProtectionPolicyRequestsObjects is DppBaseResourceUpdateProtectionPolicyOperationGroupOps.List<
+    DppBaseResource,
+    Response = ArmResponse<DppBaseResourceList>
+  >;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDefaultDeleteProtectedItemRequestsObject")
+  getDefaultDeleteProtectedItemRequestsObject is DppBaseResourceDeleteProtectedItemOperationGroupOps.Read<DppBaseResource>;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDeleteProtectedItemRequestsObjects")
+  @action("deleteProtectedItemRequests")
+  getDeleteProtectedItemRequestsObjects is DppBaseResourceDeleteProtectedItemOperationGroupOps.List<
+    DppBaseResource,
+    Response = ArmResponse<DppBaseResourceList>
+  >;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ResourceGuards_GetDefaultBackupSecurityPINRequestsObject")
+  getDefaultBackupSecurityPINRequestsObject is DppBaseResourceGetBackupSecurityPINOperationGroupOps.Read<DppBaseResource>;
+
+  /**
+   * Returns collection of operation request objects for a critical operation protected by the given ResourceGuard resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("getBackupSecurityPINRequests")
+  @operationId("ResourceGuards_GetBackupSecurityPINRequestsObjects")
+  getBackupSecurityPINRequestsObjects is DppBaseResourceGetBackupSecurityPINOperationGroupOps.List<
     DppBaseResource,
     Response = ArmResponse<DppBaseResourceList>
   >;
