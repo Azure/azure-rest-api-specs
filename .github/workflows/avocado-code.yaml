@@ -11,9 +11,6 @@ jobs:
 
     runs-on: ubuntu-24.04
 
-    env:
-      AVOCADO_OUTPUT_FILE: ${{ runner.temp }}/avocado.ndjson
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,7 +21,10 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Run Avocado
+        id: run-avocado
         run: |
+          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
+
           # Create empty output file, since avocado only creates file if errors
           touch $AVOCADO_OUTPUT_FILE
 
@@ -43,6 +43,8 @@ jobs:
             "resource-manager" \
           --file \
             $AVOCADO_OUTPUT_FILE
+
+            echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
@@ -56,3 +58,5 @@ jobs:
             const { default: generateJobSummary } =
               await import('${{ github.workspace }}/.github/workflows/src/avocado.js');
             return await generateJobSummary({ core });
+        env:
+          AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
