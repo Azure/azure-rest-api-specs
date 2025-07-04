@@ -887,6 +887,7 @@ model AdvisorScoreEntityProperties {
    * The historic Advisor score data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.extension("x-ms-identifiers", #[])
   timeSeries?: TimeSeriesEntity[];
 }
 

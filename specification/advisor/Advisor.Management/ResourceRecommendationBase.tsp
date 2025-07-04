@@ -84,6 +84,37 @@ interface ResourceRecommendationBases {
     },
     Error = ArmDefaultErrorResponse
   >;
+
+  /**
+   * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Recommendations_ListByTenant")
+  listByTenant is ArmResourceListByParent<
+    ResourceRecommendationBase,
+    BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
+    Parameters = {
+      /**
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of recommendations per page if a paged version of this API is being used.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The page-continuation token to use with a paged version of this API.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Error = ArmDefaultErrorResponse
+  >;
 }
 
 @@doc(ResourceRecommendationBase.name, "The recommendation ID.");

@@ -30,7 +30,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * REST APIs for Azure Advisor
+ * REST APIs for Azure Advisor Resiliency Reviews.
  */
 @armProviderNamespace
 @service(#{ title: "AdvisorManagementClient" })
@@ -43,11 +43,11 @@ namespace Microsoft.Advisor;
  */
 enum Versions {
   /**
-   * The 2024-11-18-preview API version.
+   * The 2025-05-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_11_18_preview: "2024-11-18-preview",
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations {
