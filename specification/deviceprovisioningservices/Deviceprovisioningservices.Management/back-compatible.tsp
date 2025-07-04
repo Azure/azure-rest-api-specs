@@ -89,7 +89,12 @@ using Microsoft.Devices;
   "IotDpsResource"
 );
 
-@@clientName(Microsoft.Devices.CertificateResponsesDeleteParameters.`certificate.name`,
+@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+  "certificate_name1",
+  "python"
+);
+
+@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificate_name1",
   "python"
 );
