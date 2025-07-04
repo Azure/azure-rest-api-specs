@@ -59,6 +59,7 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
+  @operationId("Organization_GetClusterAPIKey")
   getClusterAPIKey is OrganizationResourceAPIKeyOps.Read<
     OrganizationResource,
     {},
@@ -71,6 +72,7 @@ interface OrganizationResourceAPIKeyActions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
+  @operationId("Organization_DeleteClusterAPIKey")
   deleteClusterAPIKey is OrganizationResourceAPIKeyOps.DeleteSync<
     OrganizationResource,
     {},
