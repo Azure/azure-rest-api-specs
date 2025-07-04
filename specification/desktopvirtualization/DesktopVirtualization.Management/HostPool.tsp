@@ -38,6 +38,9 @@ interface AppAttachPackageInfo {
   `import` is ArmResourceActionSync<
     HostPool,
     Request = {
+      /**
+       * Information to import app attach package
+       */
       @bodyRoot importPackageInfoRequest: ImportPackageInfoRequest;
     },
     Response = AppAttachPackageList
@@ -56,6 +59,9 @@ interface MSIXImages {
   expand is ArmResourceActionSync<
     HostPool,
     Request = {
+      /**
+       * Represents URI referring to MSIX Image
+       */
       @bodyRoot msixImageURI: MSIXImageURI;
     },
     Response = ExpandMsixImageList
@@ -220,7 +226,7 @@ interface HostPools {
   >;
 
   /**
-   * Operation to list the RegistrationTokens associated with the HostPool
+   * Operation to list the RegistrationTokens associated with the HostPool.
    */
   listRegistrationTokens is ArmResourceActionSync<
     HostPool,
