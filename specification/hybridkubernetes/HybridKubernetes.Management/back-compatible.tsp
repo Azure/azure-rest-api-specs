@@ -24,11 +24,21 @@ using Microsoft.Kubernetes;
 @@clientLocation(Operations.list, Operations);
 @@clientName(Operations.list, "Get");
 @@clientLocation(ConnectedClusters.get, "ConnectedCluster", "!csharp");
-@@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.createOrReplace,
+  "ConnectedCluster",
+  "!csharp"
+);
 @@clientLocation(ConnectedClusters.update, "ConnectedCluster", "!csharp");
 @@clientLocation(ConnectedClusters.delete, "ConnectedCluster", "!csharp");
-@@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster", "!csharp");
-@@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.listByResourceGroup,
+  "ConnectedCluster",
+  "!csharp"
+);
+@@clientLocation(ConnectedClusters.listBySubscription,
+  "ConnectedCluster",
+  "!csharp"
+);
 @@clientLocation(ConnectedClusters.listClusterUserCredential,
-  "ConnectedCluster", "!csharp"
+  "ConnectedCluster",
+  "!csharp"
 );
