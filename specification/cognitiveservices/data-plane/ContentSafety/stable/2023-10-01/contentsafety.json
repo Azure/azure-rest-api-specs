@@ -59,47 +59,6 @@
   },
   "tags": [],
   "paths": {
-    "/agent:analyzeTaskAdherence": {
-      "post": {
-        "operationId": "ThreadOperations_AnalyzeAgentTaskAdherence",
-        "summary": "Analyze AgentTaskAdherence",
-        "description": "A synchronous API for analyzing agent task adherence in a conversation. It supports detecting harmful agentic behavior such as deviation from task and inappropriate tool calls.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body for analyzing agent task adherence.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalyzeTaskAdherenceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeTaskAdherenceResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/image:analyze": {
       "post": {
         "operationId": "ImageOperations_AnalyzeImage",
@@ -687,42 +646,6 @@
       },
       "required": [
         "categoriesAnalysis"
-      ]
-    },
-    "AnalyzeTaskAdherenceRequest": {
-      "type": "object",
-      "description": "The request to analyze a thread for task adherence.",
-      "properties": {
-        "tools": {
-          "type": "array",
-          "description": "All tool definitions relevant",
-          "items": {}
-        },
-        "messages": {
-          "type": "array",
-          "description": "The thread to analyze for task adherence.",
-          "items": {}
-        }
-      },
-      "required": [
-        "messages"
-      ]
-    },
-    "AnalyzeTaskAdherenceResult": {
-      "type": "object",
-      "description": "Type of AnalyzeTaskAdherence result.",
-      "properties": {
-        "taskRiskDetected": {
-          "type": "boolean",
-          "description": "Indicates whether a risk is detected in the thread."
-        },
-        "details": {
-          "type": "string",
-          "description": "Reason for the risk detection."
-        }
-      },
-      "required": [
-        "taskRiskDetected"
       ]
     },
     "AnalyzeTextOptions": {

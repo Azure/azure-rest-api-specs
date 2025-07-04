@@ -18,6 +18,7 @@ using Azure.ClientGenerator.Core;
 namespace ContentSafety;
 
 interface ThreadOperations {
+  @added(ContentSafety.Versions.v2024_12_15_preview)
   @summary("Analyze AgentTaskAdherence")
   @doc("A synchronous API for analyzing agent task adherence in a conversation. It supports detecting harmful agentic behavior such as deviation from task and inappropriate tool calls.")
   @route("/agent:analyzeTaskAdherence")
