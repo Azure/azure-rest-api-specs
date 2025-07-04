@@ -1,11 +1,12 @@
 /*
-  This file is intended to be used within a github script action. It is intended to replace older probot
-  automation bots that were used to summarize the status of checks on a PR.
+  This file is a github script. It will be called directly from a github-script action. This code is a simplified
+  amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
+  Both from openapi-alps repo.
 
   It will trigger on:
 
-  - PR label addition / removal
-  - when one of a set of workflows completes:
+  - label addition / removal to a PR
+  - when one of a set of required workflows configured in .github/workflows/summarize-checks.yaml completes
 
   While handling the incoming trigger, it will:
 
@@ -16,7 +17,6 @@
 */
 
 // #region imports/constants
-
 import { extractInputs } from "./context.js";
 import { commentOrUpdate } from "./comment.js";
 
@@ -68,7 +68,7 @@ const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge"
 
-/** type {CheckMetadata[]} */
+/** @type {CheckMetadata[]} */
 const CHECK_METADATA = [
   {
     precedence: 0,
@@ -202,6 +202,7 @@ const CHECK_METADATA = [
 // automated merge requirements met by from the result of and(requiredChecks).
 // if any are pending, automated merging requirements is pending. This is ripe for complete removal
 // in favor of just honoring the `required` checks results directly.
+/** @type {string[]} */
 const EXCLUDED_CHECK_NAMES = []
 
 // #endregion
@@ -211,28 +212,8 @@ const EXCLUDED_CHECK_NAMES = []
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  let owner = process.env.OWNER || "";
-  let repo = process.env.REPO || "";
-  let issue_number = parseInt(process.env.ISSUE_NUMBER || "");
-  let head_sha = process.env.HEAD_SHA || "";
-  let event_name = process.env.TRIGGER_EVENT || "";
-
   logGitHubRateLimitInfo({ github, context, core });
-
-  const { data: user } = await github.rest.users.getAuthenticated();
-  console.log(`Authenticated as: ${user.login}`);
-
-  // TODO: replace entirely in favor of
-  if (!owner || !repo || !issue_number || !head_sha) {
-    let inputs = await extractInputs(github, context, core);
-    owner = owner || inputs.owner;
-    repo = repo || inputs.repo;
-    issue_number = issue_number || inputs.issue_number;
-    head_sha = head_sha || inputs.head_sha;
-    event_name = event_name || context.event_name;
-  }
-
-  // Get the target branch of the PR
+  let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
@@ -246,7 +227,7 @@ export default async function summarizeChecks({ github, context, core }) {
     repo,
     issue_number,
     head_sha,
-    event_name,
+    context.event_name,
     targetBranch
   );
 }
@@ -274,23 +255,37 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch
 ) {
+  /** @type {string[]} */
+  let labelNames = [];
+  /** @type {CheckRunData[]} */
+  let requiredCheckRuns = [];
+  /** @type {CheckRunData[]} */
+  let fyiCheckRuns = [];
+
+
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`);
 
   // no matter what, we will need the labels for the PR, so let's fetch them first
-  const resp = await github.rest.issues.listLabelsOnIssue({
-    owner,
-    repo,
-    issue_number,
-  });
-  /** @type {{ name: string }[]} */
-  const labels = resp.data;
-  /** @type {string[]} */
-  const labelNames = labels.map((label) => label.name);
+  try {
+    const resp = await github.rest.issues.listLabelsOnIssue({
+      owner,
+      repo,
+      issue_number,
+    });
+    /** @type {{ name: string }[]} */
+    const labels = resp.data;
+    /** @type {string[]} */
+    labelNames = labels.map((label) => label.name);
+  } catch (error) {
+    core.error(`Failed to obtain labels from GitHub API. prNumber: ${issue_number}, headOid: ${head_sha}, error: '${error}'. `);
+    process.exit(1);
+  }
 
   // handle our label trigger first, we may bail out early if it's a label action we're reacting to
   // this also implies that if a label action is performed before any workflows complete, we shouldn't
   // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
   if (event_name in ["labeled", "unlabeled"]) {
+    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent error handling.
     handleLabeledEvent({
       owner,
       repo,
@@ -307,19 +302,21 @@ export async function summarizeChecksImpl(
 
   // I very very heartily doubt that automatedMergingRequirementsMetCheckRun will stick around
   // but I'm just doing a straight conversion before refactoring it away
-  const [
-    requiredCheckRuns,
-    fyiCheckRuns,
-    automatedMergingRequirementsMetCheckRun
-  ] = await getCheckRunTuple(
-    github,
-    core,
-    owner,
-    repo,
-    head_sha,
-    issue_number,
-    []
-  );
+
+  try {
+    [ requiredCheckRuns, fyiCheckRuns ] = await getCheckRunTuple(
+      github,
+      core,
+      owner,
+      repo,
+      head_sha,
+      issue_number,
+      EXCLUDED_CHECK_NAMES
+    );
+  } catch (error) {
+    core.error(`Failed to obtain checkruns from GitHub GraphQL API. prNumber: ${issue_number}, headOid: ${head_sha}, error: '${error}'. `);
+    process.exit(1);
+  }
 
   const commentBody = await createNextStepsComment(
     { github, context, core },
@@ -329,20 +326,24 @@ export async function summarizeChecksImpl(
     issue_number,
     targetBranch,
     requiredCheckRuns,
-    fyiCheckRuns,
-    automatedMergingRequirementsMetCheckRun
+    fyiCheckRuns
   );
 
-  await core.info(`Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
-  // this will remain commented until we're comfortable with the change.
-  // await commentOrUpdate(
-  //   { github, context, core },
-  //   owner,
-  //   repo,
-  //   issue_number,
-  //   commentName,
-  //   commentBody
-  // );
+  try {
+    core.info(`Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+    // this will remain commented until we're comfortable with the change.
+    // await commentOrUpdate(
+    //   { github, context, core },
+    //   owner,
+    //   repo,
+    //   issue_number,
+    //   commentName,
+    //   commentBody
+    // )
+  } catch (error) {
+    core.error(`Failed to update comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number}. Error: ${error}`);
+    process.exit(1);
+  }
 }
 
 /**
@@ -352,10 +353,10 @@ export async function summarizeChecksImpl(
 export async function logGitHubRateLimitInfo({ github, context, core }) {
   try {
     const rateLimit = await github.rateLimit.get();
-
-    await core.info(`GitHub RateLimit Info: ${JSON.stringify(rateLimit)}`);
+    const { data: user } = await github.rest.users.getAuthenticated();
+    core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
   } catch (e) {
-    await core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
+    core.error(`GitHub RateLimit Info: error emitting. Exception: ${e}`);
   }
 }
 
@@ -433,7 +434,7 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
  * @param {import("@actions/github").context} params.context
- * @returns {Promise<void>}
+ * @returns {Promise<[string[], string[]]>}
  */
 export async function handleLabeledEvent({
   owner,
@@ -448,6 +449,7 @@ export async function handleLabeledEvent({
 
   // logic for this event is based on code directly ripped from pipelinebot:
   // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  // todo: further enhance with labelling actions from `PR Summary` check.
   const changedLabel = context.payload.label?.name;
   const labelsToAdd = new Set();
   const labelsToRemove = new Set();
@@ -494,11 +496,12 @@ export async function handleLabeledEvent({
       // });
     }
   }
+
+  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
 }
 
 // #endregion
 // #region checks
-
 /**
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
  * @param {typeof import("@actions/core")} core
@@ -507,9 +510,8 @@ export async function handleLabeledEvent({
  * @param {string} head_sha - The commit SHA to check.
  * @param {number} prNumber - The pull request number.
  * @param {string[]} excludedCheckNames
- * @returns {Promise<[CheckRunData[], CheckRunData[], CheckRunData | undefined]>}
+ * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
  */
-// this used to be getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
 export async function getCheckRunTuple(
   github,
   core,
@@ -519,26 +521,21 @@ export async function getCheckRunTuple(
   prNumber,
   excludedCheckNames
 ) {
-
+  // This function was originally a version of getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
+  // but has been simplified for clarity and purpose.
   /** @type {CheckRunData[]} */
   let reqCheckRuns = []
   /** @type {CheckRunData[]} */
   let fyiCheckRuns = []
-  let automatedMergingRequirementsMetCheckRun = undefined
-  try {
-    const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
-    core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`, );
 
-    [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun] = extractRunsFromGraphQLResponse(response);
-  } catch (error) {
-    core.error(`Failed to obtain check runs from GraphQL. prNumber: ${prNumber}, headOid: ${head_sha}, error: '${error}'. `);
-  }
+  const response = await github.graphql(getGraphQLQuery(owner, repo, head_sha, prNumber));
+  core.info(`GraphQL Rate Limit Information: ${JSON.stringify(response.rateLimit)}`, );
 
-  core.info(`requiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, `
-    + `fyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}, `
-    + `automatedMergingRequirementsMetCheckRun: `
-    + `${automatedMergingRequirementsMetCheckRun != undefined ? JSON.stringify(automatedMergingRequirementsMetCheckRun) : undefined}`);
+  [reqCheckRuns, fyiCheckRuns] = extractRunsFromGraphQLResponse(response);
 
+
+  core.info(`RequiredCheckRuns: ${JSON.stringify(reqCheckRuns)}, `
+    + `FyiCheckRuns: ${JSON.stringify(fyiCheckRuns)}`);
   const filteredReqCheckRuns = reqCheckRuns.filter(
     /**
      * @param {CheckRunData} checkRun
@@ -552,9 +549,7 @@ export async function getCheckRunTuple(
     (checkRun) => !excludedCheckNames.includes(checkRun.name)
   );
 
-  warnOnMissingPrWorkflowInfo(filteredReqCheckRuns);
-
-  return [filteredReqCheckRuns, filteredFyiCheckRuns, automatedMergingRequirementsMetCheckRun]
+  return [filteredReqCheckRuns, filteredFyiCheckRuns]
 }
 
 /**
@@ -580,15 +575,13 @@ export function checkRunIsSuccessful(checkRun) {
 
 /**
  * @param {any} response - GraphQL response data
- * @returns {[CheckRunData[], CheckRunData[], CheckRunData | undefined]}
+ * @returns {[CheckRunData[], CheckRunData[]]}
  */
 function extractRunsFromGraphQLResponse(response) {
   /** @type {CheckRunData[]} */
   const reqCheckRuns = []
   /** @type {CheckRunData[]} */
   const fyiCheckRuns = []
-  /** @type {CheckRunData | undefined} */
-  let automatedMergingRequirementsMetCheckRun = undefined
 
   // Define the automated merging requirements check name
 
@@ -598,8 +591,14 @@ function extractRunsFromGraphQLResponse(response) {
       (checkSuiteNode) => {
       if (checkSuiteNode.checkRuns?.nodes) {
         checkSuiteNode.checkRuns.nodes.forEach((checkRunNode) => {
-          // Find check metadata for this check by name
-          const checkInfo = CHECK_METADATA.find(metadata => metadata.name === checkRunNode.name);
+          // We have some specific guidance for some of the required checks.
+          const checkInfo = CHECK_METADATA.find(metadata => metadata.name === checkRunNode.name) ||
+          /** @type {CheckMetadata} */ ({
+            precedence: 1000,
+            name: checkRunNode.name,
+            suppressionLabels: [],
+            troubleshootingGuide: defaultTsg
+          });
 
           if (checkRunNode.isRequired) {
             reqCheckRuns.push({
@@ -622,31 +621,11 @@ function extractRunsFromGraphQLResponse(response) {
               checkInfo: checkInfo
             });
           }
-          // Note we return automatedMergingRequirementsMetCheck separately, because we must return it even if it is not marked as 'required'.
-          // This case may happen when a PR is targeting a branch which has no checks marked as 'required', e.g. a user dev branch.
-          // We obtain reference to this check, even if not 'required', to update the "Next steps to merge" comment.
-          if (checkRunNode.name == AUTOMATED_CHECK_NAME) {
-            automatedMergingRequirementsMetCheckRun = {
-              name: checkRunNode.name,
-              status: checkRunNode.status,
-              conclusion: checkRunNode.conclusion,
-              checkInfo: checkInfo
-            }
-          }
         });
       }
     });
   }
-  return [reqCheckRuns, fyiCheckRuns, automatedMergingRequirementsMetCheckRun]
-}
-
-/**
- * @param {CheckRunData[]} filteredCheckRuns
- */
-function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
-  // For now, just log the check runs without workflow info validation
-  // This would normally reference checksWorkflowInfo which needs to be imported
-  console.log(`Check runs found: ${filteredCheckRuns.map(cr => cr.name).join(", ")}`);
+  return [reqCheckRuns, fyiCheckRuns]
 }
 // #endregion
 // #region next steps
@@ -660,10 +639,9 @@ function warnOnMissingPrWorkflowInfo(filteredCheckRuns) {
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
- * @param {CheckRunData | undefined} automatedMergingRequirementsMetCheckRun
  * @returns {Promise<string>}
  */
-export async function createNextStepsComment({github, context, core}, owner, repo, labels, issue_number, targetBranch, requiredRuns, fyiRuns, automatedMergingRequirementsMetCheckRun) {
+export async function createNextStepsComment({github, context, core}, owner, repo, labels, issue_number, targetBranch, requiredRuns, fyiRuns) {
   // select just the metadata that we need about the runs.
   const requiredCheckInfos = requiredRuns
     .filter(run => checkRunIsSuccessful(run) === false)
@@ -672,7 +650,7 @@ export async function createNextStepsComment({github, context, core}, owner, rep
     .filter(run => checkRunIsSuccessful(run) === false)
     .map(run => run.checkInfo)
 
-  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos, automatedMergingRequirementsMetCheckRun);
+  const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos);
 
   return commentBody;
 }
@@ -683,10 +661,9 @@ export async function createNextStepsComment({github, context, core}, owner, rep
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
- * @param {CheckRunData | undefined} automatedMergingRequirementsMetCheckRun
  * @returns {Promise<string>}
  */
-async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingReqChecksInfo, failingFyiChecksInfo, automatedMergingRequirementsMetCheckRun) {
+async function buildNextStepsToMergeCommentBody({ github, context, core }, labels, targetBranch, failingReqChecksInfo, failingFyiChecksInfo) {
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
