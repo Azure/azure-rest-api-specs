@@ -2,6 +2,9 @@ name: TypeSpec Validation
 
 on: pull_request
 
+permissions:
+  contents: read
+
 jobs:
   typespec-validation:
     name: TypeSpec Validation
@@ -12,8 +15,8 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Setup Node and run `npm ci`
-        uses: ./.github/actions/setup-node-npm-ci
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate Impacted Specs
         run: |
@@ -21,5 +24,8 @@ jobs:
           # step as failed. 
           $ErrorActionPreference = 'Continue'
 
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+          # Only "main" and "RPSaaSMaster" should validate all specs if core files change
+          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
+
+          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh

@@ -20,19 +20,14 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-fabric"
     flavor: "azure"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.fabric"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-fabric"
-    flavor: "azure"
-    packageDetails:
+    flavor: azure
+    package-details:
       name: "@azure/arm-fabric"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-fabric"
@@ -44,7 +39,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true

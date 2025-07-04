@@ -1,0 +1,28 @@
+{
+  "title": "Volumes_PreBackup_MaximumSet",
+  "operationId": "Volumes_PreBackup",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
+    "parameters": {
+      "volumeNames": [
+        "volumename"
+      ]
+    },
+    "api-version": "2024-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validationStatus": "success"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

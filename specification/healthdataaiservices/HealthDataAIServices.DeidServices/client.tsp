@@ -1,7 +1,4 @@
 import "./main.tsp";
-import "./models.tsp";
-import "./models_document_flow.tsp";
-import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -14,4 +11,8 @@ namespace HealthDataAIServices.DeidServices {
   @@access(listJobDocuments, Access.internal, "csharp,python");
   @@access(listJobs, Access.internal, "csharp,python");
   @@clientName(DeidentifyTextRequest.body, "content", "csharp");
+  @@clientName(Azure.Core.Foundations.OperationState,
+    "operationStatus",
+    "csharp,java,python"
+  );
 }

@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/oracledatabase"
   "dependencies":
-    "additionalDirectories":
-      - "specification/oracle/models"
     default: ""
 
 emit:
@@ -20,16 +18,41 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
+    experimental-extensible-enums: true
     package-dir: "arm-oracledatabase"
-    packageDetails:
+    package-details:
       name: "@azure/arm-oracledatabase"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/oracle/Oracle.Database.Management/models"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-oracledatabase"
+    namespace: "com.azure.resourcemanager.oracledatabase"
+    service-name: "Oracle Database"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/oracledatabase"
+    package-dir: "armoracledatabase"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-oracledatabase"
+    namespace: azure.mgmt.oracledatabase
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.OracleDatabase"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    flavor: azure
+    service-dir: "sdk/oracle"
 
 linter:
   extends:

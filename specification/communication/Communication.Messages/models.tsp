@@ -42,6 +42,60 @@ union CommunicationMessageKind {
 
   @doc("Template message type.")
   template: "template",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Sticker message type.")
+  sticker: "sticker",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Reaction message type.")
+  reaction: "reaction",
+
+  @added(Versions.c2025_01_15_Preview)
+  @doc("Interactive Actionable message type.")
+  interactive: "interactive",
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Kind of interactive message channel action binding like WhatsAppListAction.")
+union MessageActionBindingKind {
+  string,
+
+  @doc("The WhatsApp List action binding kind.")
+  whatsAppListAction: "whatsAppListAction",
+
+  @doc("The WhatsApp Button action binding kind.")
+  whatsAppButtonAction: "whatsAppButtonAction",
+
+  @doc("The WhatsApp Url action binding kind.")
+  whatsAppUrlAction: "whatsAppUrlAction",
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The kind of Interactive message content.")
+union MessageContentKind {
+  string,
+
+  @doc("The text content type.")
+  text: "text",
+
+  @doc("The image content type.")
+  image: "image",
+
+  @doc("The video content type.")
+  video: "video",
+
+  @doc("The document content type.")
+  document: "document",
+
+  @doc("The ActionSet content type.")
+  group: "group",
+
+  @doc("The ButtonSet content type.")
+  buttonSet: "buttonSet",
+
+  @doc("The Url content type.")
+  url: "url",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -120,7 +174,7 @@ model NotificationContent {
   @doc("The native external platform user identifiers of the recipient.")
   to: string[];
 
-  @doc("The type discriminator describing a notification type.")
+  @doc("The type discriminator describing a message type.")
   kind: CommunicationMessageKind;
 }
 
@@ -172,7 +226,7 @@ model ImageNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a document notification.")
 model DocumentNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is document.")
   kind: CommunicationMessageKind.document;
 
   @doc("Optional text content.")
@@ -187,7 +241,7 @@ model DocumentNotificationContent extends NotificationContent {
 @added(Versions.c2024_08_30)
 @doc("A request to send a video notification.")
 model VideoNotificationContent extends NotificationContent {
-  @doc("Message notification type is image.")
+  @doc("Message notification type is video.")
   kind: CommunicationMessageKind.video;
 
   @doc("Optional text content.")
@@ -203,6 +257,213 @@ model AudioNotificationContent extends NotificationContent {
   kind: CommunicationMessageKind.audio;
 
   ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send a Reaction notification.")
+model ReactionNotificationContent extends NotificationContent {
+  @doc("Message notification type is reaction.")
+  kind: CommunicationMessageKind.reaction;
+
+  @doc("emoji content like \\uD83D\\uDE00.")
+  emoji: string;
+
+  @doc("ID of the previous message you want to reply to.")
+  messageId: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send a Sticker notification.")
+model StickerNotificationContent extends NotificationContent {
+  @doc("Message notification type is sticker.")
+  kind: CommunicationMessageKind.sticker;
+
+  ...MediaNotificationContentBase;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("A request to send an Interactive message notification.")
+model InteractiveNotificationContent extends NotificationContent {
+  @doc("Message notification type is Interactive.")
+  kind: CommunicationMessageKind.interactive;
+
+  @doc("The interactive message content.")
+  interactiveMessage: InteractiveMessage;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Interactive message content to which user can read and respond.")
+model InteractiveMessage {
+  @doc("Gets or Sets Header content. Supports the following types:text, images etc.")
+  header?: MessageContent;
+
+  @doc("Gets or Sets Message body content. Emojis, markdown, and links are supported.")
+  body: TextMessageContent;
+
+  @doc("Gets or Sets Message footer content. Emojis, markdown, and links are supported.")
+  footer?: TextMessageContent;
+
+  @doc("The binding object to get or set Action which describes options user have to respond to message.")
+  action: ActionBindings;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@discriminator("kind")
+@doc("The message content object used to create interactive messages components.")
+model MessageContent {
+  @doc("Kind of MessageContent.")
+  kind: MessageContentKind;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type text information.")
+model TextMessageContent extends MessageContent {
+  @doc("Message content kind is text.")
+  kind: MessageContentKind.text;
+
+  @doc("The text value.")
+  text: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type document information.")
+model DocumentMessageContent extends MessageContent {
+  @doc("Message content kind is document.")
+  kind: MessageContentKind.document;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type image information.")
+model ImageMessageContent extends MessageContent {
+  @doc("Message content kind is image.")
+  kind: MessageContentKind.image;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type video information.")
+model VideoMessageContent extends MessageContent {
+  @doc("Message content kind is video.")
+  kind: MessageContentKind.video;
+
+  ...MediaMessageContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type Button information.")
+model ButtonContent {
+  @doc("Unique Id of the button content.")
+  id: string;
+
+  @doc("Title of the button content.")
+  title: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type ButtonSet/ List of buttons information.")
+model ButtonSetContent extends MessageContent {
+  @doc("Message content kind is Button.")
+  kind: MessageContentKind.buttonSet;
+
+  @doc("Unique Id of the button content.")
+  buttons: ButtonContent[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The message content of type Url information.")
+model LinkContent extends MessageContent {
+  @doc("Message content kind is url.")
+  kind: MessageContentKind.url;
+
+  @doc("Title of the url content.")
+  title: string;
+
+  @doc("The url in the content.")
+  url: url;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The action content of type ActionGroup.")
+model ActionGroupContent extends MessageContent {
+  @doc("Message content kind is actionGroup.")
+  kind: MessageContentKind.group;
+
+  @doc("Title of the actionGroup content.")
+  title: string;
+
+  @doc("Set or group of actions.")
+  groups: ActionGroup[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Action Group content.")
+model ActionGroup {
+  @doc("Title of the ActionGroup.")
+  title: string;
+
+  @doc("Array of items in ActionGroup.")
+  items: ActionGroupItem[];
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The Action group item in the content.")
+model ActionGroupItem {
+  @doc("Id of the Item.")
+  id: string;
+
+  @doc("Title of the Item.")
+  title: string;
+
+  @doc("Description of the Item.")
+  description: string;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("The media content.")
+model MediaMessageContent {
+  @doc("MediaUri of the media content.")
+  mediaUri: url;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@discriminator("kind")
+@doc("Binding actions to the interactive message.")
+model ActionBindings {
+  @doc("Kind of the MessageActionBinding.")
+  kind: MessageActionBindingKind;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp List Binding actions to the interactive message.")
+model WhatsAppListActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppListAction.")
+  kind: MessageActionBindingKind.whatsAppListAction;
+
+  @doc("Action content of Interactive message.")
+  content: ActionGroupContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppButtonActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppButtonAction.")
+  kind: MessageActionBindingKind.whatsAppButtonAction;
+
+  @doc("Action content of Interactive message.")
+  content: ButtonSetContent;
+}
+
+@added(Versions.c2025_01_15_Preview)
+@doc("WhatsApp Binding actions to the interactive message.")
+model WhatsAppUrlActionBindings extends ActionBindings {
+  @doc("Message action binding type is WhatsAppUrlAction.")
+  kind: MessageActionBindingKind.whatsAppUrlAction;
+
+  @doc("Action content of Interactive message.")
+  content: LinkContent;
 }
 
 @doc("A request to send a template notification.")
@@ -385,7 +646,7 @@ model WhatsAppMessageTemplateItem extends MessageTemplateItem {
 @doc("A notification.")
 model Notifications {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The notification ID.")
   id: string;
 }
@@ -394,7 +655,7 @@ model Notifications {
 @doc("A communication channel.")
 model CommunicationChannel {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The registration ID of the channel.")
   channelId: uuid;
 }
@@ -403,7 +664,8 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("none") // this model is only used as a parameter
+  @path
+  @invisible(Lifecycle) // The stream ID is only used as a parameter.
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
@@ -423,7 +685,7 @@ model MessageDataStream {
 @doc("The message template as returned from the service.")
 model MessageTemplateItem {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The template's name.")
   name: string;
 
@@ -437,10 +699,35 @@ model MessageTemplateItem {
   kind: CommunicationMessagesChannel;
 }
 
-alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
-  maxpagesize?: int32;
+  @renamedFrom(Versions.c2025_04_01_Preview, "maxpagesize")
+  maxPageSize?: int32;
+};
+
+alias ListTemplatesQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+}>;
+
+alias ListConversationsQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+
+  @query
+  @doc("The participant user ID")
+  participantId?: string;
+
+  @query
+  @doc("The id of channel")
+  channelId?: uuid;
+}>;
+
+alias ListConversationThreadQueryParams = ListQueryParametersTrait<{
+  ...CommonListParams;
+
+  @query
+  @doc("The participant user ID")
+  participantId?: string;
 }>;
 
 @doc("Notification messages send request body.")
@@ -448,6 +735,334 @@ model NotificationMessagesSendRequestBody {
   @doc("Details of the message to send.")
   @bodyRoot
   body: NotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.")
+union OutboundDeliveryStrategyKind {
+  string,
+
+  @doc("Delivery strategy for internal only.")
+  internalOnly: "internalOnly",
+
+  @doc("Delivery strategy for all participants.")
+  allParticipants: "allParticipants",
+}
+
+@clientName("ConversationMessage", "csharp")
+@added(Versions.c2025_04_01_Preview)
+@doc("Details of a message.")
+model Message {
+  @doc("Content of the message.")
+  content: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@discriminator("kind")
+@resource("participants") // participants add/remove
+@parentResource(Conversation)
+@doc("Advanced Messaging conversation participant.")
+model ConversationParticipant {
+  @key("participantId")
+  @visibility(Lifecycle.Read)
+  @doc("Participant Identifier.")
+  id: string; // 8:acs:xxx
+
+  @doc("Participant display name.")
+  displayName?: string;
+
+  @doc("The type discriminator describing a participant type.")
+  kind: ParticipantKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Internal conversation participant.")
+model InternalConversationParticipant extends ConversationParticipant {
+  @doc("Participant type is internal.")
+  kind: ParticipantKind.internal;
+
+  @doc("The internal platform identifiers for the participant.")
+  contact: Contact;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("External conversation participant.")
+model ExternalConversationParticipant extends ConversationParticipant {
+  @doc("Participant type is external.")
+  kind: ParticipantKind.external;
+
+  @doc("List of external platform identifiers for the participant.")
+  contacts: Contact[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("The type of a participant in a threaded conversation.")
+union ParticipantKind {
+  string,
+
+  @doc("A participant internal to Azure Communication Services.")
+  internal: "internal",
+
+  @doc("A participant on other platforms")
+  external: "external",
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for sending a conversation message.")
+model SendConversationMessageOptions {
+  @doc("Details of a send conversation message request.")
+  request: ConversationMessageContent;
+
+  @doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.\r\nSupports internalOnly, allChannels.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Result of the send conversation message operation.")
+model SendConversationMessageResult {
+  @doc("A server-generated Advanced Messaging conversation message id.")
+  messageId: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages/conversations")
+@doc("Request payload for creating a conversation.")
+model CreateConversationRequest {
+  @key
+  @visibility(Lifecycle.Create)
+  @doc("The conversation details.")
+  conversation: Conversation;
+
+  @doc("An initial message within the conversation.")
+  initialMessage?: Message;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the create conversation operation.")
+model CreateConversationResult {
+  @doc("Server-generated conversation ID.")
+  id: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages/conversations")
+@doc("A conversation.")
+@clientName("CommunicationConversation")
+model Conversation {
+  @key("conversationId")
+  @visibility(Lifecycle.Read) // this model is only used as a parameter
+  @doc("The conversation ID.")
+  id: string;
+
+  @doc("The conversation topic.")
+  topic?: string;
+
+  @doc("List of delivery channel IDs.")
+  deliveryChannelIds?: string[];
+
+  @added(Versions.c2025_04_01_Preview)
+  @doc("Outbound delivery strategy for the conversation.")
+  outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
+
+  @added(Versions.c2025_04_01_Preview)
+  @doc("List of participants involved in the conversation.")
+  participants?: ConversationParticipant[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Conversation message send request body.")
+model ConversationThreadSendRequestBody {
+  @doc("Details of the conversation message to send.")
+  @bodyRoot
+  options: SendConversationMessageOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Add participants to a conversation request body.")
+model AddParticipantsRequestBody {
+  @doc("Details of the payload for adding participants to a conversation.")
+  @bodyRoot
+  options: AddParticipantsOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Remove participants request body.")
+model RemoveParticipantsRequestBody {
+  @doc("Details of the request body for removing participants from a conversation.")
+  @bodyRoot
+  options: RemoveParticipantsOptions;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the add participants operation.")
+model AddParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: UpdateParticipantsResult[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the remove participants operation.")
+model RemoveParticipantsResult {
+  @doc("List of Ids with Errors if failed to be added")
+  invalidParticipants: UpdateParticipantsResult[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Response for the remove participants operation.")
+model UpdateParticipantsResult {
+  @doc("Participant User Id.")
+  id: string;
+
+  @doc("Error of the participant operation.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@resource("messages")
+@parentResource(Conversation)
+@doc("The conversation message as returned from the service.")
+model ConversationMessageItem {
+  @key("messageId")
+  @visibility(Lifecycle.Read)
+  @doc("Message ID.")
+  id: string;
+
+  @doc("Message sequence ID.")
+  sequenceId?: int64;
+
+  @doc("Payload of a threaded conversation message.")
+  message: ConversationMessageContent;
+
+  @doc("The display name of the message sender.")
+  senderDisplayName?: string;
+
+  @doc("The communication identifier of the message sender.")
+  senderCommunicationIdentifier: string;
+
+  @doc("Timestamp when the message is sent.")
+  createdOn: utcDateTime;
+}
+
+@clientName("ConversationContact", "csharp")
+@discriminator("kind")
+@added(Versions.c2025_04_01_Preview)
+@doc("Details of an external platform contact.")
+model Contact {
+  @doc("External platform identifier.")
+  id: string;
+
+  @doc("Type of message platform (e.g., WhatsApp).")
+  kind: MessagePlatformKind;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Communication Contact.")
+model CommunicationContact extends Contact {
+  @doc("Contact type is communication.")
+  kind: MessagePlatformKind.communication;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Bot Contact.")
+model BotContact extends Contact {
+  @doc("Contact type is bot.")
+  kind: MessagePlatformKind.bot;
+
+  @doc("Bot App Id of the Bot Contact.")
+  botAppId: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("WhatsApp Contact.")
+model WhatsAppContact extends Contact {
+  @doc("Contact type is whatsApp.")
+  kind: MessagePlatformKind.whatsApp;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Defines the type of message platform.")
+union MessagePlatformKind {
+  string,
+
+  @doc("Azure Communication platform.")
+  communication: "communication",
+
+  @doc("Bot platform.")
+  bot: "bot",
+
+  @doc("WhatsApp platform.")
+  whatsApp: "whatsApp",
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for adding participants to a conversation.")
+model AddParticipantsOptions {
+  @doc("List of participants to add.")
+  participants: ConversationParticipant[];
+}
+
+@added(Versions.c2025_04_01_Preview)
+@doc("Request payload for removing participants from a conversation.")
+model RemoveParticipantsOptions {
+  @doc("The participant IDs to remove.")
+  participantIds: string[];
+}
+
+@doc("Result of the get conversation messages AI Analysis operation.")
+model GetConversationThreadAnalysisResult {
+  @doc("The AI summary of the conversation messages.")
+  summary: string;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@discriminator("kind")
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("Details of the conversation message content.")
+model ConversationMessageContent {
+  #suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" ""
+  ...NotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a text conversation message.")
+model TextConversationMessageContent extends ConversationMessageContent {
+  ...TextNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send an image conversation message.")
+model ImageConversationMessageContent extends ConversationMessageContent {
+  ...ImageNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a document conversation message.")
+model DocumentConversationMessageContent extends ConversationMessageContent {
+  ...DocumentNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a video conversation message.")
+model VideoConversationMessageContent extends ConversationMessageContent {
+  ...VideoNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send an audio conversation message.")
+model AudioConversationMessageContent extends ConversationMessageContent {
+  ...AudioNotificationContent;
+}
+
+@added(Versions.c2025_04_01_Preview)
+@withoutOmittedProperties("to" | "channelRegistrationId")
+@doc("A request to send a template conversation message.")
+model TemplateConversationMessageContent extends ConversationMessageContent {
+  ...TemplateNotificationContent;
 }
 
 @doc("Azure Communication Messages Versions")
@@ -459,4 +1074,12 @@ enum Versions {
   @doc("Azure Communication Messages 2024-08-30 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_08_30: "2024-08-30",
+
+  @doc("Azure Communication Messages 2025-01-15-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_01_15_Preview: "2025-01-15-preview",
+
+  @doc("Azure Communication Messages 2025-04-01-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2025_04_01_Preview: "2025-04-01-preview",
 }

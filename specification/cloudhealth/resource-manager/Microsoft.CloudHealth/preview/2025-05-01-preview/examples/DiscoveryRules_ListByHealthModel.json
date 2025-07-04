@@ -1,0 +1,42 @@
+{
+  "title": "DiscoveryRules_ListByHealthModel",
+  "operationId": "DiscoveryRules_ListByHealthModel",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "healthModelName": "my-health-model"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "authenticationSetting": "authSetting1",
+              "provisioningState": "Succeeded",
+              "displayName": "myDisplayName",
+              "discoverRelationships": "Enabled",
+              "addRecommendedSignals": "Enabled",
+              "numberOfDiscoveredEntities": 5,
+              "resourceGraphQuery": "resources | where subscriptionId == '7ddfffd7-9b32-40df-1234-828cbd55d6f4' | where resourceGroup == 'my-rg'",
+              "entityName": "f1f0ef5e-a5b5-4d02-b69c-7145f4658829"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthModels/myHealthModel/discoveryRules/myDiscoveryRule",
+            "name": "myDiscoveryRule",
+            "type": "Microsoft.CloudHealth/healthModels/discoveryRules",
+            "systemData": {
+              "createdBy": "myCreatedBy",
+              "createdByType": "User",
+              "createdAt": "2023-09-18T14:04:09.327Z",
+              "lastModifiedBy": "myLastModifiedBy",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/ahgxpg"
+      }
+    }
+  }
+}

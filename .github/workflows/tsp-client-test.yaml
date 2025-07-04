@@ -16,9 +16,12 @@ on:
       - eng/tools/package.json
       - eng/tools/tsconfig.json
       - eng/tools/tsp-client-tests/**
-      - specification/common-types
-      - specification/contosowidgetmanager
+      - specification/common-types/**
+      - specification/contosowidgetmanager/**
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   tsp-client:

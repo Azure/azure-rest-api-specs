@@ -1,0 +1,28 @@
+{
+  "title": "Volumes_PreRestore_MaximumSet",
+  "operationId": "Volumes_PreRestore",
+  "parameters": {
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
+    "parameters": {
+      "diskSnapshotIds": [
+        "/subscriptions/{subscriptionid}/resourceGroups/{resourcegroupname}/providers/Microsoft.Compute/snapshots/disksnapshot1"
+      ]
+    },
+    "api-version": "2024-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validationStatus": "success"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
