@@ -23,12 +23,12 @@ using Microsoft.Kubernetes;
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(Operations.list, Operations);
 @@clientName(Operations.list, "Get");
-@@clientLocation(ConnectedClusters.get, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.update, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.delete, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster");
+@@clientLocation(ConnectedClusters.get, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.update, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.delete, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster", "!csharp");
+@@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster", "!csharp");
 @@clientLocation(ConnectedClusters.listClusterUserCredential,
-  "ConnectedCluster"
+  "ConnectedCluster", "!csharp"
 );
