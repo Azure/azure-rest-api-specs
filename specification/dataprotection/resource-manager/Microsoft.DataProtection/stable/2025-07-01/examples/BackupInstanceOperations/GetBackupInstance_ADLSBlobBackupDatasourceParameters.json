@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "54707983-993e-43de-8d94-074451394eda",
+    "resourceGroupName": "adlsrg",
+    "vaultName": "adlsvault",
+    "api-version": "2025-07-01",
+    "backupInstanceName": "adlsbackupinstance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.DataProtection/backupVaults/adlsvault/backupInstances/adlsbackupinstance",
+        "name": "adlsbackupinstance",
+        "type": "Microsoft.DataProtection/backupVaults/backupInstances",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "friendlyName": "adlsbackupinstance",
+          "dataSourceInfo": {
+            "resourceID": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.Storage/storageAccounts/adlsstorageaccount",
+            "resourceUri": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.Storage/storageAccounts/adlsstorageaccount",
+            "datasourceType": "Microsoft.Storage/storageAccounts/adlsBlobServices",
+            "resourceName": "adls5blbcentraluseuap2",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "resourceLocation": "centraluseuap",
+            "objectType": "Datasource"
+          },
+          "dataSourceSetInfo": {
+            "resourceID": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.Storage/storageAccounts/adlsstorageaccount",
+            "resourceUri": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.Storage/storageAccounts/adlsstorageaccount",
+            "datasourceType": "Microsoft.Storage/storageAccounts/adlsBlobServices",
+            "resourceName": "adls5blbcentraluseuap2",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "resourceLocation": "centraluseuap",
+            "objectType": "DatasourceSet"
+          },
+          "policyInfo": {
+            "policyId": "/subscriptions/54707983-993e-43de-8d94-074451394eda/resourceGroups/adlsrg/providers/Microsoft.DataProtection/backupVaults/adlsvault/backupPolicies/adlspolicy",
+            "policyParameters": {
+              "backupDatasourceParametersList": [
+                {
+                  "containersList": [
+                    "container1",
+                    "container2"
+                  ],
+                  "objectType": "AdlsBlobBackupDatasourceParameters"
+                }
+              ]
+            }
+          },
+          "protectionStatus": {
+            "status": "ProtectionConfigured"
+          },
+          "currentProtectionState": "ProtectionConfigured",
+          "provisioningState": "Succeeded",
+          "objectType": "BackupInstance"
+        }
+      }
+    }
+  }
+}
