@@ -163,8 +163,11 @@ namespace SkillContext
 	}
 
 	@doc("A collection of skill variables")
-	model SkillVariableCollection extends Record<SkillVariable>{
-	}
+	alias SkillVariableCollection = Record<SkillVariable>;
+
+	// @doc("A collection of skill variables")
+	// model SkillVariableCollection extends Record<SkillVariable>{
+	// }
 
 	@doc("An invocation of a skill")
 	model SkillInvocation {
