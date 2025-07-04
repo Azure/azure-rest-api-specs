@@ -88,3 +88,8 @@ using Microsoft.Devices;
 @@clientLocation(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "IotDpsResource"
 );
+
+@@clientName(Microsoft.Devices.CertificateResponsesDeleteParameters.`certificate.name`,
+  "certificate_name1",
+  "python"
+);
