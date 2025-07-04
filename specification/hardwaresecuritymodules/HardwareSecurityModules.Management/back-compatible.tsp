@@ -4,7 +4,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HardwareSecurityModules;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupResult.properties, "!python,!csharp");
+@@flattenProperty(BackupResult.properties, "!python,!java,!csharp");
+
 
 @@clientName(Error.innererror, "innerError");
 
@@ -14,18 +15,19 @@ using Microsoft.HardwareSecurityModules;
   "restoreRequestProperties"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(CloudHsmCluster.properties, "!python,!csharp");
+@@flattenProperty(CloudHsmCluster.properties, "!python,!java,!csharp");
 
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties, "!python,!csharp");
+@@flattenProperty(PrivateEndpointConnection.properties, "!python,!java,!csharp");
 
 @@clientName(DedicatedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DedicatedHsms.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(DedicatedHsm.properties, "!python,!csharp");
+@@flattenProperty(DedicatedHsm.properties, "!python,!java,!csharp");
+
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
   "backupRequestProperties"
 );
