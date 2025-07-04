@@ -32,7 +32,11 @@ using Azure.ClientGenerator.Core;
   "createApiKey",
   "java"
 );
-@@clientLocation(Microsoft.Confluent.OrganizationResourceAPIKeyActions,
+@@clientLocation(Microsoft.Confluent.OrganizationResourceAPIKeyActions.getClusterAPIKey,
+  "OrganizationResourceApiKeyActions",
+  "java"
+);
+@@clientLocation(Microsoft.Confluent.OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "OrganizationResourceApiKeyActions",
   "java"
 );
