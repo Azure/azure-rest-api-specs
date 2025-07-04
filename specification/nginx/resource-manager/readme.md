@@ -47,7 +47,6 @@ suppressions:
   - code: PutRequestResponseSchemeArm
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
-    reason: This is by design. Request contains a customer provided secret that is not returned in the response. 
   - code: PutRequestResponseSchemeArm
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
@@ -55,7 +54,7 @@ suppressions:
   - code: PutResponseCodes
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
-    reason: This is a synchronous API, hence we're not returning a 201. 
+    reason: This is a synchronous API returns a 200 as agreed with the partner. 
   - code: PathResourceProviderNamePascalCase
     from: openapi.json
     reason: Changing the casing of the provider Namespace would trigger rules needing us to rewrite all our previous versions
