@@ -37,21 +37,6 @@ union ServerMigrationPath {
   string,
 }
 
-
-@doc("Wave execution readiness options.")
-union MigrationEntityExecutionReadiness {
-  @doc("Not Available. Indicates the MigrationEntity execution readiness is not available.")
-  NotAvailable: "NotAvailable",
-
-  @doc("Ready. Indicates that MigrationEntity is ready for execution")
-  Ready: "Ready",
-
-  @doc("Not Ready. Indicates that MigrationEntity is not ready for execution")
-  NotReady: "NotReady",
-
-  string,
-}
-
 @doc("Preset stage of the wave.")
 union WaveStage {
   @doc("Creation. Indicates the wave is being created.")
@@ -94,20 +79,6 @@ union WaveStatus {
   string,
 }
 
-@doc("Readiness of the Migration Entity.")
-union MigrationEntityReadiness {
-  @doc("Ready. Indicates the Migration Entity is ready.")
-  Ready: "Ready",
-
-  @doc("Not Ready. Indicates the Migration Entity is not ready.")
-  NotReady: "NotReady",
-
-  @doc("Unknown. Indicates the Migration Entity readiness is unknown.")
-  Unknown: "Unknown",
-
-  string,
-}
-
 @doc("The target of the Migration Entity.")
 union MigrationEntityTarget {
   @doc("AzureVM. Indicates the Migration Entity target is Azure VM.")
@@ -125,93 +96,89 @@ union MigrationEntityTarget {
   string,
 }
 
-@doc("Migration Entity Migration Status.")
-union MigrationEntityStatus {
+
+@doc("Wave execution readiness options.")
+union MigrationEntityExecutionReadiness {
+  @doc("Not Available. Indicates the MigrationEntity execution readiness is not available.")
+  NotAvailable: "NotAvailable",
+
+  @doc("Ready. Indicates that MigrationEntity is ready for execution")
+  Ready: "Ready",
+
+  @doc("Not Ready. Indicates that MigrationEntity is not ready for execution")
+  NotReady: "NotReady",
+
+  string,
+}
+
+@doc("Migration Entity Migration Tools.")
+union MigrationEntityMigrationTools {
+
+  @doc("Server Migration Agentless. Indicates that the migration tool is using the server migration agentless approach.")
+  ServerMigrationAgentless: "Server Migration Agentless",
+
+  @doc("Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach.") 
+  ServerMigrationAgentBased: "Server Migration Agent Based",
+
+  string,
+}
+
+
+
+@doc("Migration Entity Execution Status.")
+union MigrationEntityExecutionStatus {
+
+  @doc("Not Started migration entity status. This indicates that the migration process for the entity has not yet begun.")
+  NotStarted: "NotStarted",
 
   @doc("In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   InProgress: "InProgress",
 
-  @doc("At Risk migration entity status. This indicates that the migration process for the entity is facing challenges that could potentially delay or complicate the migration.")
-  AtRisk: "AtRisk",
+  @doc("Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed.")
+  ActionPending: "ActionPending",
 
-  @doc("Failed migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully.")
-  Failed: "Failed",
-
-  @doc("Cancelled migration entity status.  This indicates that the migration process for the entity has been intentionally stopped before completion.")
-  Cancelled: "Cancelled",
+  @doc("In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully.")
+  InError: "InError",
 
   @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
 
-  @doc("None migration entity status. This indicates that the migration entity has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update.")
-  None: "None",
-
   string,
 }
 
-@doc("Migration Entity Planning Status.")
-union MigrationEntityPlanningStatus {
-  @doc("New migration entity planning status.")
-  New: "New",
+@doc("Migration Entity Execution Stage.")
+union MigrationEntityExecutionStage {
 
-  @doc("In progress migration entity planning status. This indicates that the migration entity planning is currently underway and tasks are being executed to prepare for the migration.")
-  InProgress: "InProgress",
-
-  @doc("At Risk migration entity planning status. This indicates that the migration entity planning is facing challenges that could potentially delay or complicate the planning process.")
-  AtRisk: "AtRisk",
-
-  @doc("Failed migration entity planning status. This indicates that the migration entity planning has encountered issues and could not be completed successfully.")
-  Failed: "Failed",
-
-  @doc("Cancelled migration entity planning status. This indicates that the migration entity planning has been intentionally stopped before completion.")
-  Cancelled: "Cancelled",
-
-  @doc("Completed migration entity planning status.   This indicates that the migration entity has been successfully planned and all necessary preparations have been completed.")
-  Completed: "Completed",
-
-  @doc("None migration entity planning status.  This indicates that the migration entity has not been assigned a specific planning status, possibly because it is not yet started or is in a state that does not require a status update.")
-  None: "None",
-
-  string,
-}
-
-@doc("Migration Entity Migration Stage.")
-union MigrationEntityStage {
-
-  @doc("Preparation migration entity migration stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration.")
+  @doc("Preparation migration entity execution stage. This indicates that the migration process for the entity is in the preparation phase, where initial tasks are being executed to set up the environment and resources needed for migration.")
   Preparation: "Preparation",
 
-  @doc("Testing migration entity migration stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented.")
+  @doc("Testing migration entity execution stage.  This indicates that the migration process for the entity is in the testing phase, where tasks are being executed to validate the migration before it is fully implemented.")
   Testing: "Testing",
 
-  @doc("Migration migration entity migration stage. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
-  Migration: "Migration",
+  @doc("Completion migration entity execution stage. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
+  Completion: "Completion",
 
   string,
 }
 
-@doc("Migration Entity Group Migration Status.")
-union MigrationEntityGroupStatus {
-  @doc("New migration entity group migration status.  This indicates that the migration process for the group has not yet started and is in the initial planning phase.")
-  New: "New",
 
-  @doc("In progress migration entity group migration status. This indicates that the migration process for the group is currently underway and tasks are being executed to move the entities to their target environment.")
+@doc("Migration Entity Group Migration Status.")
+union MigrationEntityGroupExecutionStatus {
+
+  @doc("Not Started migration entity status. This indicates that the migration process for the entity has not yet begun.")
+  NotStarted: "NotStarted",
+
+  @doc("In progress migration entity status. This indicates that the migration process for the entity is currently underway and tasks are being executed to move the entity to its target environment.")
   InProgress: "InProgress",
 
-  @doc("At Risk migration entity group migration status. This indicates that the migration process for the group is facing challenges that could potentially delay or complicate the migration.")
-  AtRisk: "AtRisk",
+  @doc("Action Pending migration entity status. This indicates that the migration process for the entity is waiting for some action to be taken before it can proceed.")
+  ActionPending: "ActionPending",
 
-  @doc("Failed migration entity group migration status. This indicates that the migration process for the group has encountered issues and could not be completed successfully.")
-  Failed: "Failed",
+  @doc("In error migration entity status. This indicates that the migration process for the entity has encountered issues and could not be completed successfully.")
+  InError: "InError",
 
-  @doc("Cancelled migration entity group migration status. This indicates that the migration process for the group has been intentionally stopped before completion.")
-  Cancelled: "Cancelled",
-
-  @doc("Completed migration entity group migration status. This indicates that the migration process for the group has been successfully finished.")
+  @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
-
-  @doc("None migration entity group migration status. This indicates that the migration group has not been assigned a specific status, possibly because it is not yet started or is in a state that does not require a status update.")
-  None: "None",
 
   string,
 }

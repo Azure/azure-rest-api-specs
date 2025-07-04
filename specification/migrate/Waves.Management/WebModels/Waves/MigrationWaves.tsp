@@ -7,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -39,6 +38,7 @@ model WaveProperties is AzureResourceProperties {
   arg: Arg;
 
   @doc("The status of the wave.")
+  @visibility(Lifecycle.Read)
   status?: WaveStatus;
 
   @doc("Planned start date of the wave.")
@@ -52,6 +52,7 @@ model WaveProperties is AzureResourceProperties {
   actualStartDate?: utcDateTime;
 
   @doc("The current stage of the wave.")
+  @visibility(Lifecycle.Read)
   stage?: WaveStage;
 }
 
@@ -74,6 +75,13 @@ model Arg {
     },
     {
       type: "Microsoft.OffAzure/MasterSites";
+    }
+  ]>[];
+
+  @doc("The list of application ids which will correspond to the resources returned by the ARG query.")
+  applicationIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.ApplicationMigration/discoveryHubs/applications";
     }
   ]>[];
 }

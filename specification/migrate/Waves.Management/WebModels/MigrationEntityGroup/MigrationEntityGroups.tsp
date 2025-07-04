@@ -39,11 +39,11 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   applicationDisplayName: string;
 
   @doc("Associated Assessment Id")
-  associatedAssessmentIds?: Array<armResourceIdentifier<[
+  associatedAssessmentIds?: armResourceIdentifier<[
     {
       type: "Microsoft.Migrate/assessmentProjects";
     }
-  ]>>;
+  ]>;
 
   @doc("associated Wave Id")
   associatedWaveIds?: Array<armResourceIdentifier<[
@@ -53,5 +53,9 @@ model MigrationEntityGroupProperties is AzureResourceProperties {
   ]>>;
 
   @doc("Migration Entity Group Status")
-  migrationStatus: MigrationEntityGroupStatus;
+  executionStatus: MigrationEntityGroupExecutionStatus;
+
+  @doc("Execution Start Date")
+  executionStartDate: string;
+
 }

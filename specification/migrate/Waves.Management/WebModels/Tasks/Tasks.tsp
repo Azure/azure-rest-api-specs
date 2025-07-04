@@ -54,7 +54,7 @@ model TaskProperties is AzureResourceProperties {
   stage: string;
 
   @doc("Task Type")
-  type: TaskType;
+  taskType: TaskType;
 
   @doc("Indicates whether the task is editable.")
   @visibility(Lifecycle.Read)
@@ -69,6 +69,5 @@ model TaskProperties is AzureResourceProperties {
   @doc("Task Description")
   description: string;
 
-  @doc("Task Name")
-  name: string;
+
 }
