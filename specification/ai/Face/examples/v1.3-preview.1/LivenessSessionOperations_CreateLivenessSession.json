@@ -4,13 +4,14 @@
   "parameters": {
     "apiVersion": "v1.3-preview.1",
     "body": {
-      "livenessOperationMode": "Passive",
+      "livenessOperationMode": "PassiveActive",
       "deviceCorrelationIdSetInClient": false,
       "deviceCorrelationId": "your_device_correlation_id",
       "userCorrelationIdSetInClient": false,
       "userCorrelationId": "your_user_correlation_id",
       "authTokenTimeToLiveInSeconds": 60,
-      "numberOfClientAttemptsAllowed": 1
+      "numberOfClientAttemptsAllowed": 1,
+      "expectedClientIpAddress": "1.2.3.4"
     }
   },
   "responses": {
