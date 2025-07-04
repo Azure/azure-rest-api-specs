@@ -28,23 +28,24 @@ jobs:
           # Create empty output file, since avocado only creates file if errors
           touch $AVOCADO_OUTPUT_FILE
 
-          npm exec --no -- avocado \
-          --excludePaths \
-            "/common-types/" \
-            "/scenarios/" \
-            "/package.json" \
-            "/package-lock.json" \
-            "/cadl/examples/" \
-            '(?=/examples/)(?!(?:/stable/|/preview/))' \
-            "/\\.github/" \
-            "/eng/" \
-          --includePaths \
-            "data-plane" \
-            "resource-manager" \
-          --file \
-            $AVOCADO_OUTPUT_FILE
 
-            echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
+          echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
+
+          npm exec --no -- avocado \
+            --excludePaths \
+              "/common-types/" \
+              "/scenarios/" \
+              "/package.json" \
+              "/package-lock.json" \
+              "/cadl/examples/" \
+              '(?=/examples/)(?!(?:/stable/|/preview/))' \
+              "/\\.github/" \
+              "/eng/" \
+            --includePaths \
+              "data-plane" \
+              "resource-manager" \
+            --file \
+              $AVOCADO_OUTPUT_FILE
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
