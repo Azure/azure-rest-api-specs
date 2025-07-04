@@ -5,10 +5,7 @@ using Microsoft.HardwareSecurityModules;
 
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupResult.properties, "!python,!java,!csharp");
-
-
 @@clientName(Error.innererror, "innerError");
-
 @@clientName(CloudHsmClusters.createOrUpdate::parameters.resource, "body");
 @@clientName(CloudHsmClusters.update::parameters.properties, "body");
 @@clientName(CloudHsmClusters.restore::parameters.body,
@@ -16,18 +13,17 @@ using Microsoft.HardwareSecurityModules;
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CloudHsmCluster.properties, "!python,!java,!csharp");
-
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties, "!python,!java,!csharp");
-
+@@flattenProperty(PrivateEndpointConnection.properties,
+  "!python,!java,!csharp"
+);
 @@clientName(DedicatedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DedicatedHsms.update::parameters.properties, "parameters");
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DedicatedHsm.properties, "!python,!java,!csharp");
-
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
   "backupRequestProperties"
 );
@@ -37,11 +33,9 @@ using Microsoft.HardwareSecurityModules;
 @@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
   "restoreRequestProperties"
 );
-
 //@@clientLocation and @@clientName decorators for operations that had custom @operationId
 //These ensure consistent operationId generation and client method naming in the output
 //All @operationId decorators have been removed after adding these client customizations
-
 //CloudHsmClusters operations
 @@clientLocation(CloudHsmClusters.listByCloudHsmCluster,
   "CloudHsmClusterPrivateLinkResources"
@@ -54,7 +48,6 @@ using Microsoft.HardwareSecurityModules;
   "CloudHsmClusterRestoreStatus"
 );
 @@clientName(CloudHsmClusters.cloudHsmClusterRestoreStatusGet, "Get");
-
 //PrivateEndpointConnections operations
 @@clientLocation(PrivateEndpointConnections.get,
   "CloudHsmClusterPrivateEndpointConnections"
@@ -65,7 +58,6 @@ using Microsoft.HardwareSecurityModules;
 @@clientLocation(PrivateEndpointConnections.delete,
   "CloudHsmClusterPrivateEndpointConnections"
 );
-
 //DedicatedHsms operations
 @@clientLocation(DedicatedHsms.get, "DedicatedHsm");
 @@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm");
