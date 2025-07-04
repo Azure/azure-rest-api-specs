@@ -188,8 +188,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -235,8 +234,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "maxLength": 64
           },
           {
             "name": "dashboard",
@@ -298,8 +296,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "maxLength": 64
           },
           {
             "name": "dashboard",
@@ -355,8 +352,7 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "maxLength": 64
           }
         ],
         "responses": {
@@ -479,15 +475,7 @@
     "DashboardPartMetadata": {
       "type": "object",
       "description": "A dashboard part metadata.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DashboardPartMetadataType"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
+      "additionalProperties": true
     },
     "DashboardPartMetadataType": {
       "type": "string",
