@@ -25,6 +25,13 @@ jobs:
 
       - name: Run Avocado
         run: |
+          echo $RUNNER_TEMP
+          dir $RUNNER_TEMP || true
+
+          mkdir -p $RUNNER_TEMP
+
+          dir $RUNNER_TEMP || true
+
           # Create empty output file, since avocado only creates file if errors
           touch $AVOCADO_OUTPUT_FILE
 
