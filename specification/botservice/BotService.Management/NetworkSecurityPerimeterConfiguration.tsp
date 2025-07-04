@@ -47,8 +47,7 @@ interface NetworkSecurityPerimeterConfigurations {
   reconcile is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    NetworkSecurityPerimeterConfiguration,
-    Error = Error
+    NetworkSecurityPerimeterConfiguration
   >;
 }
 

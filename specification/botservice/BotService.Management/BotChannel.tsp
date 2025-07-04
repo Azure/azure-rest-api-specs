@@ -46,6 +46,66 @@ model BotChannel is Azure.ResourceManager.TrackedResource<Channel> {
 }
 
 @armResourceOperations
+interface BotChannelOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the Bot resource.
+         */
+        @path
+        @segment("botServices")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @maxLength(64)
+        @minLength(2)
+        resourceName: string,
+      },
+      {
+        /**
+         * The name of the Channel resource.
+         */
+        @path
+        @segment("channels")
+        channelName: ChannelName,
+      },
+      ErrorType = Error
+    > {}
+
+@armResourceOperations
+interface BotChannelRegenerateKeysOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /**
+         * The name of the Bot resource.
+         */
+        @path
+        @segment("botServices")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @maxLength(64)
+        @minLength(2)
+        resourceName: string,
+      },
+      {
+        /**
+         * The name of the Channel resource for which keys are to be regenerated.
+         */
+        @path
+        @segment("channels")
+        channelName: RegenerateKeysChannelName,
+      },
+      ErrorType = Error
+    > {}
+
+@armResourceOperations
 interface BotChannels {
   /**
    * Returns a BotService Channel registration specified by the parameters.
@@ -59,7 +119,7 @@ interface BotChannels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Channels_Create")
-  create is ArmResourceCreateOrReplaceSync<BotChannel, Error = Error>;
+  create is BotChannelOps.CreateOrUpdateSync<BotChannel>;
 
   /**
    * Updates a Channel registration for a Bot Service
@@ -67,11 +127,10 @@ interface BotChannels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   @operationId("Channels_Update")
-  update is ArmCustomPatchSync<
+  update is BotChannelOps.CustomPatchSync<
     BotChannel,
     PatchModel = BotChannel,
-    Response = ArmResponse<BotChannel> | ArmResourceCreatedSyncResponse<BotChannel>,
-    Error = Error
+    Response = ArmResponse<BotChannel> | ArmResourceCreatedSyncResponse<BotChannel>
   >;
 
   /**
@@ -98,11 +157,10 @@ interface BotChannels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("listChannelWithKeys")
   @operationId("Channels_ListWithKeys")
-  listWithKeys is ArmResourceActionSync<
+  listWithKeys is BotChannelOps.ActionSync<
     BotChannel,
     void,
-    ArmResponse<ListChannelWithKeysResponse>,
-    Error = Error
+    ArmResponse<ListChannelWithKeysResponse>
   >;
 
   /**
@@ -111,11 +169,10 @@ interface BotChannels {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("regeneratekeys")
   @operationId("DirectLine_RegenerateKeys")
-  regenerateKeys is ArmResourceActionSync<
+  regenerateKeys is BotChannelRegenerateKeysOps.ActionSync<
     BotChannel,
     SiteInfo,
-    ArmResponse<BotChannel>,
-    Error = Error
+    ArmResponse<BotChannel>
   >;
 }
 
@@ -124,9 +181,6 @@ interface BotChannels {
 @@doc(BotChannel.name, "The name of the Bot resource.");
 @@doc(BotChannel.properties,
   "The set of properties specific to bot channel resource"
-);
-@@doc(BotChannels.create::parameters.resource,
-  "The parameters to provide for the created bot."
 );
 @@doc(BotChannels.update::parameters.properties,
   "The parameters to provide for the created bot."
