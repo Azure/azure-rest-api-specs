@@ -285,28 +285,28 @@ export async function summarizeChecksImpl(
   // this also implies that if a label action is performed before any workflows complete, we shouldn't
   // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
   if (event_name in ["labeled", "unlabeled"]) {
-    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent error handling.
-    handleLabeledEvent({
+    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
+    const [ labelsToAdd, labelsToRemove ] = await handleLabeledEvent(
+      { github, context, core },
       owner,
       repo,
       issue_number,
       event_name,
-      known_labels: labelNames,
-      github,
-      core,
-      context
-    });
+      labelNames,
+    );
 
-    return;
+    // adjust labelNames based on labelsToAdd/labelsToRemove
+    labelNames = labelNames.filter(name => !labelsToRemove.includes(name));
+    for (const label of labelsToAdd) {
+      if (!labelNames.includes(label)) {
+        labelNames.push(label);
+      }
+    }
   }
-
-  // I very very heartily doubt that automatedMergingRequirementsMetCheckRun will stick around
-  // but I'm just doing a straight conversion before refactoring it away
 
   try {
     [ requiredCheckRuns, fyiCheckRuns ] = await getCheckRunTuple(
-      github,
-      core,
+      { github, context, core },
       owner,
       repo,
       head_sha,
@@ -330,7 +330,7 @@ export async function summarizeChecksImpl(
   );
 
   try {
-    core.info(`Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${context.issue.number} with body: ${commentBody}`);
+    core.info(`Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`);
     // this will remain commented until we're comfortable with the change.
     // await commentOrUpdate(
     //   { github, context, core },
@@ -425,27 +425,21 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 // #endregion
 // #region labeling
 /**
- * @param {Object} params
- * @param {string} params.owner
- * @param {string} params.repo
- * @param {number} params.issue_number
- * @param {string} params.event_name
- * @param {string[]} params.known_labels
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
- * @param {typeof import("@actions/core")} params.core
- * @param {import("@actions/github").context} params.context
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} owner
+ * @param {string} repo
+ * @param {number} issue_number
+ * @param {string} event_name
+ * @param {string[]} known_labels
  * @returns {Promise<[string[], string[]]>}
  */
-export async function handleLabeledEvent({
+export async function handleLabeledEvent(
+  { github, context, core },
   owner,
   repo,
   issue_number,
   event_name,
-  known_labels,
-  github, // this will be utilized as soon as we cut over to actually attempting to remove the label
-  core,
-  context
-}) {
+  known_labels) {
 
   // logic for this event is based on code directly ripped from pipelinebot:
   // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -503,8 +497,7 @@ export async function handleLabeledEvent({
 // #endregion
 // #region checks
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
- * @param {typeof import("@actions/core")} core
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
  * @param {string} head_sha - The commit SHA to check.
@@ -513,8 +506,7 @@ export async function handleLabeledEvent({
  * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
  */
 export async function getCheckRunTuple(
-  github,
-  core,
+  { github, context, core },
   owner,
   repo,
   head_sha,
