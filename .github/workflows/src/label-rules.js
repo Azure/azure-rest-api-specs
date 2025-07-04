@@ -131,6 +131,7 @@ export const sdkLabels ={
 /**
  * @type {Record<BreakingChangesCheckType, BreakingChangesCheckConfig>}
  */
+// todo: pull this from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
 export const breakingChangesCheckType = {
   SameVersion: {
     reviewRequiredLabel: "VersioningReviewRequired",
@@ -642,7 +643,7 @@ export async function getViolatedRequiredLabelsRules(
 
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated(context, labels, targetBranch, rule)) {
+    if (await requiredLabelRuleViolated({github, context, core}, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }

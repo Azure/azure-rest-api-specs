@@ -18,32 +18,30 @@ describe("summarizeChecksImpl", () => {
         auth: process.env.GITHUB_TOKEN,
       });
 
-      // Use a known PR from the azure-rest-api-specs repo for testing
-    const testParams = {
-        owner: "Azure",
-        repo: "azure-rest-api-specs",
-        issue_number: 35629,
-        head_sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
-        event_name: "pull_request",
-        github: github,
-        core: mockCore,
-        context: {
-            repo: {
-                owner: "Azure",
-                repo: "azure-rest-api-specs",
-            },
-            payload: {
-                action: "opened",
-                pull_request: {
-                    number: 35629,
-                    head: {
-                        sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
-                    },
+    const mockContext = {
+        repo: {
+            owner: "Azure",
+            repo: "azure-rest-api-specs",
+        },
+        payload: {
+            action: "opened",
+            pull_request: {
+                number: 35629,
+                head: {
+                    sha: "c12f0191c34212c4e6be88121d132ccb0a7f560c",
                 },
             },
-            eventName: "pull_request",
         },
-    };
+        eventName: "pull_request",
+    }
+
+      // Use a known PR from the azure-rest-api-specs repo for testing
+
+    const owner = "Azure"
+    const repo = "azure-rest-api-specs"
+    const issue_number = 35629
+    const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c"
+    const event_name = "pull_request"
     //     const testParams = {
     //     owner: "scbedd",
     //     repo: "azure-rest-api-specs",
@@ -70,7 +68,7 @@ describe("summarizeChecksImpl", () => {
 
 
       // This should not throw and should log information about the PR
-      await expect(summarizeChecksImpl(testParams)).resolves.not.toThrow();
+      await expect(summarizeChecksImpl({github, context: mockContext, core: mockCore}, owner, repo, issue_number, head_sha, event_name, "main")).resolves.not.toThrow();
 
       // Note: This test mainly verifies that the API calls work with real data
       // The actual assertions depend on the current state of the specified PR

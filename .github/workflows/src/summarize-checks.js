@@ -264,8 +264,8 @@ export default async function summarizeChecks({ github, context, core }) {
 export async function summarizeChecksImpl(
   {
     github,
-    core,
-    context
+    context,
+    core
   },
   owner,
   repo,
@@ -675,7 +675,6 @@ export async function createNextStepsComment({github, context, core}, owner, rep
   const commentBody = await buildNextStepsToMergeCommentBody({ github, context, core }, labels, `${repo}/${targetBranch}`, requiredCheckInfos, fyiCheckInfos, automatedMergingRequirementsMetCheckRun);
 
   return commentBody;
-
 }
 
 /**
