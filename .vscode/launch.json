@@ -5,15 +5,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach by Process ID",
-      "processId": "${command:PickProcess}",
-      "request": "attach",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "node"
-    },
-    {
       "type": "node",
       "request": "launch",
       "name": "Mocha Tests",
@@ -31,53 +22,6 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${file}"
-    },
-    {
-      "name": "Debug Summarize Checks Test",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}/.github/node_modules/.bin/vitest",
-      "args": [
-        "run",
-        ".github/workflows/test/summarize-checks.test.js"
-      ],
-      "env": {
-        "NODE_OPTIONS": "--enable-source-maps"
-      },
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"]
-    },
-    {
-      "name": "Debug Vitest (single-thread)",
-      "type": "node",                       // <-- use the built-in Node debugger
-      "request": "launch",
-      "runtimeExecutable": "node",          // launch Node itself
-      "runtimeArgs": [
-        "--inspect-brk"                     // pause on first line
-      ],
-      "args": [
-        "${workspaceFolder}/.github/node_modules/vitest/vitest.mjs", // the ESM entrypoint
-        "run",
-        "--poolOptions.forks.singleFork",
-        "--watch", "false",                 // don’t respawn on changes
-        "testTimeout=999999",          // increase timeout
-        "${workspaceFolder}/.github/workflows/test/summarize-checks.test.js"      // your test file
-      ],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "skipFiles": ["<node_internals>/**"]
-    },
-    {
-      "name": "Attach to Vitest",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "localhost",
-      "restart": true,
-      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }
