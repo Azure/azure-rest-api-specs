@@ -162,7 +162,6 @@ namespace SkillContext
 		outputType: SkillOutputType;
 	}
 
-	@doc("A collection of skill variables")
 	alias SkillVariableCollection = Record<SkillVariable>;
 
 	// @doc("A collection of skill variables")
