@@ -13,8 +13,11 @@ export default async function generateJobSummary({ core }) {
     throw new Error("Env var AVOCADO_OUTPUT_FILE must be set");
   }
 
-  const avocadoOutput = await readFile(avocadoOutputPath, { encoding: "utf-8" });
-
-  core.summary.addCodeBlock(avocadoOutput);
-  core.summary.write();
+  try {
+    const avocadoOutput = (await readFile(avocadoOutputPath, { encoding: "utf-8" })) || "success";
+    core.summary.addCodeBlock(avocadoOutput);
+    core.summary.write();
+  } catch (error) {
+    core.summary.addCodeBlock(JSON.stringify(error));
+  }
 }

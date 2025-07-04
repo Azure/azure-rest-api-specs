@@ -25,6 +25,9 @@ jobs:
 
       - name: Run Avocado
         run: |
+          # Create empty output file, since avocado only creates file if errors
+          touch $AVOCADO_OUTPUT_FILE
+
           npm exec --no -- avocado \
           --excludePaths \
             "/common-types/" \
@@ -46,6 +49,7 @@ jobs:
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
 
       - name: Generate Job Summary
+        if: ${{ !cancelled() }}
         uses: actions/github-script@v7
         with:
           script: |
