@@ -490,8 +490,8 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
 
     if (option === undefined)
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}".`,
       );
 
     const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
