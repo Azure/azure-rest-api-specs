@@ -19,26 +19,26 @@
  * @returns {[number | undefined, string | undefined]} Resolves when the comment is created or updated.
  */
 export function parseExistingComments(comments, commentGroupName) {
-    /** @type {number | undefined} */
-    let commentId = undefined;
-    /** @type {string | undefined} */
-    let commentBody = undefined;
+  /** @type {number | undefined} */
+  let commentId = undefined;
+  /** @type {string | undefined} */
+  let commentBody = undefined;
 
-    if (comments) {
-        comments.map(comment => {
-            // When we create or update this comment, we will always leave behind
-            // <!-- commentGroupName --> in the body of the comment.
-            // This allows us to identify the comment later on. We need to return the body
-            // so we can know if we need to update it or not. If it's the same body content
-            // we will no-op on the update.
-            if (comment.body?.includes(commentGroupName)) {
-                commentId = comment.id;
-                commentBody = comment.body;
-            };
-        })
-    }
+  if (comments) {
+    comments.map((comment) => {
+      // When we create or update this comment, we will always leave behind
+      // <!-- commentGroupName --> in the body of the comment.
+      // This allows us to identify the comment later on. We need to return the body
+      // so we can know if we need to update it or not. If it's the same body content
+      // we will no-op on the update.
+      if (comment.body?.includes(commentGroupName)) {
+        commentId = comment.id;
+        commentBody = comment.body;
+      }
+    });
+  }
 
-    return [commentId, commentBody];
+  return [commentId, commentBody];
 }
 
 /**
@@ -59,7 +59,7 @@ export async function commentOrUpdate(
   repo,
   issue_number,
   body,
-  commentIdentifier
+  commentIdentifier,
 ) {
   try {
     // Get the authenticated user to know who we are
@@ -68,41 +68,45 @@ export async function commentOrUpdate(
     const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
     /** @type {import("@octokit/openapi-types").components["schemas"]["issue-comment"][]} */
-    const comments = await github.paginate(
-        github.rest.issues.listComments,
-        {
-            owner,
-            repo,
-            issue_number,
-        }
-    );
+    const comments = await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+    });
 
     // only examine the comments from user in our current GITHUB_TOKEN context
-    const existingComments = comments.filter(comment =>
-      comment.user?.login === authenticatedUsername
+    const existingComments = comments.filter(
+      (comment) => comment.user?.login === authenticatedUsername,
     );
 
-    const [commentId, commentBody] = parseExistingComments(existingComments, commentIdentifier);
+    const [commentId, commentBody] = parseExistingComments(
+      existingComments,
+      commentIdentifier,
+    );
 
     if (commentId) {
       if (commentBody === computedBody) {
-        core.info(`No update needed for comment ${commentId} by ${authenticatedUsername}`);
+        core.info(
+          `No update needed for comment ${commentId} by ${authenticatedUsername}`,
+        );
         return; // No-op if the body is the same
       }
       await github.rest.issues.updateComment({
         owner,
         repo,
         comment_id: commentId,
-        body: computedBody
+        body: computedBody,
       });
-      core.info(`Updated existing comment ${commentId} by ${authenticatedUsername}`);
+      core.info(
+        `Updated existing comment ${commentId} by ${authenticatedUsername}`,
+      );
     } else {
       // Create a new comment
       const { data: newComment } = await github.rest.issues.createComment({
         owner,
         repo,
         issue_number,
-        body: computedBody
+        body: computedBody,
       });
       core.info(`Created new comment #${newComment.id}`);
     }
