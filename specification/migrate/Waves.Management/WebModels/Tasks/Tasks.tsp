@@ -4,11 +4,9 @@ import "../../Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Rest.Resource;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -56,6 +54,9 @@ model TaskProperties is AzureResourceProperties {
   @doc("Task Type")
   taskType: TaskType;
 
+  @doc("Task Name ")
+  taskName: string;
+
   @doc("Indicates whether the task is editable.")
   @visibility(Lifecycle.Read)
   isEditable: boolean;
@@ -68,6 +69,5 @@ model TaskProperties is AzureResourceProperties {
 
   @doc("Task Description")
   description: string;
-
 
 }
