@@ -55,7 +55,7 @@ export default async function setStatus(
  * @param {string} params.monitoredWorkflowName
  * @param {string} params.requiredStatusName
  * @param {string} params.overridingLabel
- * @param {"run"|"job"} params.failureTarget
+ * @param {"job"|"run"} [params.failureTarget] "job" or "run".  default: "job".
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -69,7 +69,7 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
-  failureTarget,
+  failureTarget = "job",
 }) {
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
