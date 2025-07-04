@@ -7,12 +7,12 @@ import {
   getVersionFromInputFile,
   getPrecedingSwaggers,
   getLegacyVersionOperations,
+  API_VERSION_LIFECYCLE_STAGES,
 } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
 import { Readme } from "../src/readme.js";
 import { Tag } from "../src/tag.js";
-import { API_VERSION_LIFECYCLE_STAGES } from "../src/breaking-change.js";
 import { SpecModel } from "../src/spec-model.js";
 import { ConsoleLogger } from "../src/logger.js";
 
@@ -59,7 +59,7 @@ describe("Swagger", () => {
 
   describe("getVersionFromInputFile", () => {
     describe("resource-manager paths", () => {
-      it("should extract version from standard resource-manager paths", () => {
+      it("should extract version from standard resource-manager paths", async () => {
         const testCases = [
           {
             path: "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01/network.json",
@@ -71,12 +71,12 @@ describe("Swagger", () => {
           },
         ];
 
-        testCases.forEach(({ path, expected }) => {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        });
+        for (const { path, expected } of testCases) {
+          expect(await getVersionFromInputFile(path)).toBe(expected);
+        }
       });
 
-      it("should extract preview versions from resource-manager paths", () => {
+      it("should extract preview versions from resource-manager paths", async () => {
         const testCases = [
           {
             path: "specification/network/resource-manager/Microsoft.Network/preview/2023-01-01-preview/network.json",
@@ -94,26 +94,26 @@ describe("Swagger", () => {
           },
         ];
 
-        testCases.forEach(({ path, expected, withPreview = false }) => {
-          expect(getVersionFromInputFile(path, withPreview)).toBe(expected);
-        });
+        for (const { path, expected, withPreview = false } of testCases) {
+          expect(await getVersionFromInputFile(path, withPreview)).toBe(expected);
+        }
       });
 
-      it("should handle other preview types in resource-manager paths", () => {
+      it("should handle other preview types in resource-manager paths", async () => {
         const testCases = [
           "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-alpha/network.json",
           "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-beta/network.json",
           "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-rc/network.json",
         ];
 
-        testCases.forEach((path) => {
-          expect(getVersionFromInputFile(path)).toBe("2023-01-01");
-        });
+        for (const path of testCases) {
+          expect(await getVersionFromInputFile(path)).toBe("2023-01-01");
+        }
       });
     });
 
     describe("data-plane paths", () => {
-      it("should extract version from data-plane stable paths", () => {
+      it("should extract version from data-plane stable paths", async () => {
         const testCases = [
           {
             path: "specification/textanalytics/data-plane/TextAnalytics/stable/v3.1/textanalytics.json",
@@ -125,12 +125,12 @@ describe("Swagger", () => {
           },
         ];
 
-        testCases.forEach(({ path, expected }) => {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        });
+        for (const { path, expected } of testCases) {
+          expect(await getVersionFromInputFile(path)).toBe(expected);
+        }
       });
 
-      it("should extract version from data-plane preview paths", () => {
+      it("should extract version from data-plane preview paths", async () => {
         const testCases = [
           {
             path: "specification/textanalytics/data-plane/TextAnalytics/preview/v3.2-preview.1/textanalytics.json",
@@ -142,37 +142,37 @@ describe("Swagger", () => {
           },
         ];
 
-        testCases.forEach(({ path, expected }) => {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        });
+        for (const { path, expected } of testCases) {
+          expect(await getVersionFromInputFile(path)).toBe(expected);
+        }
       });
 
-      it("should handle standard date versions in data-plane paths", () => {
+      it("should handle standard date versions in data-plane paths", async () => {
         const path =
           "specification/textanalytics/data-plane/TextAnalytics/stable/2023-04-01/textanalytics.json";
-        expect(getVersionFromInputFile(path)).toBe("2023-04-01");
+        expect(await getVersionFromInputFile(path)).toBe("2023-04-01");
       });
     });
 
     describe("edge cases and invalid inputs", () => {
-      it("should return undefined for paths without valid version patterns", () => {
+      it("should return undefined for paths without valid version patterns", async () => {
         const testCases = [
           "specification/network/resource-manager/Microsoft.Network/unknown/test.json",
           "specification/network/resource-manager/Microsoft.Network/stable/invalid-version/test.json",
           "invalid/path/structure.json",
         ];
 
-        testCases.forEach((path) => {
-          expect(getVersionFromInputFile(path)).toBeUndefined();
-        });
+        for (const path of testCases) {
+          expect(await getVersionFromInputFile(path)).toBeUndefined();
+        }
       });
 
-      it("should return undefined for empty or malformed paths", () => {
+      it("should return undefined for empty or malformed paths", async () => {
         const testCases = ["", "/", "test.json"];
 
-        testCases.forEach((path) => {
-          expect(getVersionFromInputFile(path)).toBeUndefined();
-        });
+        for (const path of testCases) {
+          expect(await getVersionFromInputFile(path)).toBeUndefined();
+        }
       });
     });
   });
@@ -191,9 +191,11 @@ describe("Swagger", () => {
             testFixturePath,
             "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
           ),
-          version: "2022-05-01",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
-          fileName: "servicelinker.json",
+          getVersion: async () => "2022-05-01",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.STABLE;
+          },
+          getFileName: async () => "servicelinker.json",
           getOperations: async () => [
             {
               id: "Linker_List",
@@ -212,9 +214,11 @@ describe("Swagger", () => {
             testFixturePath,
             "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
           ),
-          version: "2024-04-01",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
-          fileName: "servicelinker.json",
+          getVersion: async () => "2024-04-01",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.STABLE;
+          },
+          getFileName: async () => "servicelinker.json",
           getOperations: async () => [
             {
               id: "Linker_List",
@@ -238,9 +242,11 @@ describe("Swagger", () => {
             testFixturePath,
             "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2023-04-01-preview/servicelinker.json",
           ),
-          version: "2023-04-01",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
-          fileName: "servicelinker.json",
+          getVersion: async () => "2023-04-01",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.PREVIEW;
+          },
+          getFileName: async () => "servicelinker.json",
           getOperations: async () => [
             {
               id: "Linker_List",
@@ -259,9 +265,11 @@ describe("Swagger", () => {
             testFixturePath,
             "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
           ),
-          version: "2024-07-01",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
-          fileName: "servicelinker.json",
+          getVersion: async () => "2024-07-01",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.PREVIEW;
+          },
+          getFileName: async () => "servicelinker.json",
           getOperations: async () => [
             {
               id: "Linker_List",
@@ -285,9 +293,11 @@ describe("Swagger", () => {
             testFixturePath,
             "network/resource-manager/Microsoft.Network/stable/2020-07-02/a.json",
           ),
-          version: "2020-07-02",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
-          fileName: "a.json",
+          getVersion: async () => "2020-07-02",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.STABLE;
+          },
+          getFileName: async () => "a.json",
           getOperations: async () => [
             {
               id: "VirtualNetworks_List",
@@ -301,9 +311,11 @@ describe("Swagger", () => {
             testFixturePath,
             "network/resource-manager/Microsoft.Network/stable/2020-08-04/a.json",
           ),
-          version: "2020-08-04",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.STABLE,
-          fileName: "a.json",
+          getVersion: async () => "2020-08-04",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.STABLE;
+          },
+          getFileName: async () => "a.json",
           getOperations: async () => [
             {
               id: "VirtualNetworks_List",
@@ -322,9 +334,11 @@ describe("Swagger", () => {
             testFixturePath,
             "network/resource-manager/Microsoft.Network/preview/2020-07-02/a.json",
           ),
-          version: "2020-07-02",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
-          fileName: "a.json",
+          getVersion: async () => "2020-07-02",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.PREVIEW;
+          },
+          getFileName: async () => "a.json",
           getOperations: async () => [
             {
               id: "VirtualNetworks_List",
@@ -338,9 +352,11 @@ describe("Swagger", () => {
             testFixturePath,
             "network/resource-manager/Microsoft.Network/preview/2020-08-04-preview/a.json",
           ),
-          version: "2020-08-04",
-          versionKind: API_VERSION_LIFECYCLE_STAGES.PREVIEW,
-          fileName: "a.json",
+          getVersion: async () => "2020-08-04",
+          get versionKind() {
+            return API_VERSION_LIFECYCLE_STAGES.PREVIEW;
+          },
+          getFileName: async () => "a.json",
           getOperations: async () => [
             {
               id: "VirtualNetworks_List",
@@ -358,12 +374,12 @@ describe("Swagger", () => {
     });
 
     describe("getPrecedingSwaggers", () => {
-      it("should find preceding preview and stable versions", () => {
+      it("should find preceding preview and stable versions", async () => {
         const targetPath = join(
           testFixturePath,
           "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json",
         );
-        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+        const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
 
         expect(result.stable).toBe(
           join(
@@ -380,12 +396,12 @@ describe("Swagger", () => {
         );
       });
 
-      it("should find preceding preview version for preview files", () => {
+      it("should find preceding preview version for preview files", async () => {
         const targetPath = join(
           testFixturePath,
           "servicelinker/resource-manager/Microsoft.ServiceLinker/preview/2024-07-01-preview/servicelinker.json",
         );
-        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+        const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
 
         expect(result.preview).toBe(
           join(
@@ -401,32 +417,32 @@ describe("Swagger", () => {
         );
       });
 
-      it("should return undefined when no preceding stable versions exist", () => {
+      it("should return undefined when no preceding stable versions exist", async () => {
         const targetPath = join(
           testFixturePath,
           "servicelinker/resource-manager/Microsoft.ServiceLinker/stable/2022-05-01/servicelinker.json",
         );
-        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+        const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
 
         expect(result.stable).toBeUndefined();
         // Should find no preview version <= 2022-05-01 (all previews are newer)
         expect(result.preview).toBeUndefined();
       });
 
-      it("should handle non-existent target swagger", () => {
+      it("should handle non-existent target swagger", async () => {
         const targetPath = "/non/existent/swagger.json";
-        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+        const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
 
         expect(result.preview).toBeUndefined();
         expect(result.stable).toBeUndefined();
       });
 
-      it("should work with network API fixtures", () => {
+      it("should work with network API fixtures", async () => {
         const targetPath = join(
           testFixturePath,
           "network/resource-manager/Microsoft.Network/stable/2020-08-04/a.json",
         );
-        const result = getPrecedingSwaggers(targetPath, mockSwaggers);
+        const result = await getPrecedingSwaggers(targetPath, mockSwaggers);
 
         expect(result.stable).toBe(
           join(
@@ -576,21 +592,39 @@ describe("Swagger", () => {
         const swagger = result.find((s) => s.path === targetPath);
 
         if (!swagger) throw new Error("Swagger not found for the given path");
-        const operations = await swagger.getOperations();
-        expect(operations.length).toBe(3);
+        const operationsMap = await swagger.getOperations();
+        expect(operationsMap.size).toBe(3);
+
         let expectedApiPath =
           "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns/{dryrunName}";
-        expect(operations[0].id).toBe("Connector_CreateDryrun");
-        expect(operations[0].httpMethod).toBe("PUT");
-        expect(operations[0].path).toBe(expectedApiPath);
-        expect(operations[1].id).toBe("Connector_GetDryrun");
-        expect(operations[1].httpMethod).toBe("GET");
-        expect(operations[1].path).toBe(expectedApiPath);
+
+        // Test specific operations by ID
+        const createDryrun = operationsMap.get("Connector_CreateDryrun");
+        const getDryrun = operationsMap.get("Connector_GetDryrun");
+        const listDryruns = operationsMap.get("Connector_ListDryrun");
+
+        expect(createDryrun).toBeDefined();
+        if (createDryrun) {
+          expect(createDryrun.id).toBe("Connector_CreateDryrun");
+          expect(createDryrun.httpMethod).toBe("PUT");
+          expect(createDryrun.path).toBe(expectedApiPath);
+        }
+
+        expect(getDryrun).toBeDefined();
+        if (getDryrun) {
+          expect(getDryrun.id).toBe("Connector_GetDryrun");
+          expect(getDryrun.httpMethod).toBe("GET");
+          expect(getDryrun.path).toBe(expectedApiPath);
+        }
+
         expectedApiPath =
           "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceLinker/locations/{location}/dryruns";
-        expect(operations[2].id).toBe("Connector_ListDryrun");
-        expect(operations[2].httpMethod).toBe("GET");
-        expect(operations[2].path).toBe(expectedApiPath);
+        expect(listDryruns).toBeDefined();
+        if (listDryruns) {
+          expect(listDryruns.id).toBe("Connector_ListDryrun");
+          expect(listDryruns.httpMethod).toBe("GET");
+          expect(listDryruns.path).toBe(expectedApiPath);
+        }
       });
     });
   });

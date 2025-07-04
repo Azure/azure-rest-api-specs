@@ -373,9 +373,9 @@ describe("getSwaggers", () => {
     // Verify that swagger files have the expected properties
     const swagger = swaggers[0];
     expect(swagger.path).toBeDefined();
-    expect(swagger.version).toBeDefined();
+    expect(await swagger.getVersion()).toBeDefined();
     expect(swagger.versionKind).toBeDefined();
-    expect(swagger.fileName).toBeDefined();
+    expect(await swagger.getFileName()).toBeDefined();
   });
 
   it("should return swaggers from multiple readmes and tags", async () => {
@@ -444,15 +444,15 @@ describe("getSwaggers", () => {
     expect(swaggers.length).toBe(5);
 
     // If swaggers are found, they should have the expected structure
-    swaggers.forEach((swagger) => {
+    for (const swagger of swaggers) {
       expect(swagger.path).toBeDefined();
-      expect(swagger.version).toBeDefined();
+      expect(await swagger.getVersion()).toBeDefined();
       expect(swagger.versionKind).toBeDefined();
-      expect(swagger.fileName).toBeDefined();
-    });
+      expect(await swagger.getFileName()).toBeDefined();
+    }
     expect(swaggers[0].path).contains(folder);
-    expect(swaggers[0].version).toBe("2022-05-01");
+    expect(await swaggers[0].getVersion()).toBe("2022-05-01");
     expect(swaggers[0].versionKind).toBe("stable");
-    expect(swaggers[0].fileName).toBe("servicelinker.json");
+    expect(await swaggers[0].getFileName()).toBe("servicelinker.json");
   });
 });

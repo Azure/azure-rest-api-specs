@@ -1,13 +1,11 @@
 // @ts-check
 
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
-import { readFile } from "fs/promises";
+import { readFile, access } from "fs/promises";
 import { basename, dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
-import { existsSync, readFileSync } from "fs";
-import { API_VERSION_LIFECYCLE_STAGES } from "./breaking-change.js";
 
 /**
  * @typedef {import('./spec-model.js').Tag} Tag
@@ -56,17 +54,8 @@ export class Swagger {
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
 
-  /** @type {Operation[]} map of the operations in this swagger*/
+  /** @type {Map<string, Operation> | undefined} map of the operations in this swagger with key as 'operation_id*/
   #operations;
-
-  /** @type {string}  swagger version*/
-  #version;
-
-  /** @type {string} version kind*/
-  #versionKind;
-
-  /** * @type {string} file name of the swagger file, e.g. "LongRunningBackend.json" */
-  #fileName;
 
   /**
    * @param {string} path
@@ -77,12 +66,7 @@ export class Swagger {
   constructor(path, options) {
     const rootDir = dirname(options?.tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
-    this.#operations = [];
-    this.#version = getVersionFromInputFile(this.#path) || "";
-    this.#versionKind = dirname(this.#path).includes("/preview/")
-      ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
-      : API_VERSION_LIFECYCLE_STAGES.STABLE;
-    this.#fileName = getBaseNameForSwagger(this.#path, this.#version);
+    this.#operations = undefined; // Will be initialized as Map when loaded
     this.#logger = options?.logger;
     this.#tag = options?.tag;
   }
@@ -151,58 +135,53 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<Operation[]>}
+   * @returns {Promise<Map<string, Operation>>}
    */
   async getOperations() {
-    if (this.#operations.length === 0) {
-      try {
-        const content = await readFile(this.#path, "utf8");
-        const swagger = JSON.parse(content);
-        // Process regular paths
-        if (swagger.paths) {
-          for (const [path, pathItem] of Object.entries(swagger.paths)) {
-            for (const [method, operation] of Object.entries(pathItem)) {
-              if (
-                typeof operation === "object" &&
-                operation.operationId &&
-                method !== "parameters"
-              ) {
-                this.#operations.push({
-                  id: operation.operationId,
-                  httpMethod: method.toUpperCase(),
-                  path: path,
-                });
-              }
+    if (!this.#operations) {
+      this.#operations = new Map();
+      const content = await readFile(this.#path, "utf8");
+      const swagger = JSON.parse(content);
+      // Process regular paths
+      if (swagger.paths) {
+        for (const [path, pathItem] of Object.entries(swagger.paths)) {
+          for (const [method, operation] of Object.entries(pathItem)) {
+            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+              const operationObj = {
+                id: operation.operationId,
+                httpMethod: method.toUpperCase(),
+                path: path,
+              };
+              this.#operations.set(operation.operationId, operationObj);
             }
           }
         }
+      }
 
-        // Process x-ms-paths (Azure extension)
-        if (swagger["x-ms-paths"]) {
-          for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
-            for (const [method, operation] of Object.entries(pathItem)) {
-              if (
-                typeof operation === "object" &&
-                operation.operationId &&
-                method !== "parameters"
-              ) {
-                this.#operations.push({
-                  id: operation.operationId,
-                  httpMethod: method.toUpperCase(),
-                  path: path,
-                });
-              }
+      // Process x-ms-paths (Azure extension)
+      if (swagger["x-ms-paths"]) {
+        for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
+          for (const [method, operation] of Object.entries(pathItem)) {
+            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+              const operationObj = {
+                id: operation.operationId,
+                httpMethod: method.toUpperCase(),
+                path: path,
+              };
+              this.#operations.set(operation.operationId, operationObj);
             }
           }
         }
-
-        // Sort operations by id and store in instance variable
-        this.#operations.sort((a, b) => a.id.localeCompare(b.id));
-      } catch {
-        throw new SpecModelError(`Failed to read operations from swagger: ${this.#path}`);
       }
     }
     return this.#operations;
+  }
+
+  /**
+   * @returns {Promise<string>} swagger version
+   */
+  async getVersion() {
+    return (await getVersionFromInputFile(this.#path)) || "";
   }
 
   /**
@@ -220,24 +199,20 @@ export class Swagger {
   }
 
   /**
-   * @returns {string} swagger version
-   */
-  get version() {
-    return this.#version;
-  }
-
-  /**
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return this.#versionKind;
+    return dirname(this.#path).includes("/preview/")
+      ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
+      : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
 
   /**
-   * @returns {string} file name of the swagger file
+   * @returns {Promise<string>} file name of the swagger file
    */
-  get fileName() {
-    return this.#fileName;
+  async getFileName() {
+    const version = await this.getVersion();
+    return getBaseNameForSwagger(this.#path, version);
   }
 
   /**
@@ -265,6 +240,12 @@ export class Swagger {
     return `Swagger(${this.#path}, {logger: ${this.#logger}})`;
   }
 }
+
+// API version lifecycle stages
+export const API_VERSION_LIFECYCLE_STAGES = {
+  PREVIEW: "preview",
+  STABLE: "stable",
+};
 
 // TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
 
@@ -307,9 +288,9 @@ function getBaseNameForSwagger(filePath, version = "") {
  * Extract version string from input file path
  * @param {string} filePath - Path to the input file
  * @param {boolean} [withPreview=false] - Whether to include preview suffix
- * @returns {string | undefined} - Version string extracted from path
+ * @returns {Promise<string | undefined>} - Version string extracted from path
  */
-export function getVersionFromInputFile(filePath, withPreview = false) {
+export async function getVersionFromInputFile(filePath, withPreview = false) {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
   const segments = filePath.split("/");
 
@@ -336,12 +317,14 @@ export function getVersionFromInputFile(filePath, withPreview = false) {
     }
   }
 
-  if (existsSync(filePath)) {
-    try {
-      return JSON.parse(readFileSync(filePath).toString())?.info?.version;
-    } catch {
-      console.warn(`Failed to parse version from file: ${filePath}`);
-    }
+  try {
+    // Check if file exists using access()
+    await access(filePath);
+    const content = await readFile(filePath, "utf8");
+    return JSON.parse(content)?.info?.version;
+  } catch {
+    // File doesn't exist or can't be read/parsed
+    // This is expected for non-existent files, so we don't log a warning
   }
 
   return undefined;
@@ -352,31 +335,41 @@ export function getVersionFromInputFile(filePath, withPreview = false) {
  * @param {string} targetSwaggerPath - Path to the swagger file to find predecessors for
  * @param {Swagger[]} availableSwaggers - Array of swagger objects to search within
  * @param {string} versionKind - Version lifecycle stage (PREVIEW or STABLE)
- * @returns {string | undefined} - Path to preceding version or undefined if not found
+ * @returns {Promise<string | undefined>} - Path to preceding version or undefined if not found
  */
-function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, versionKind) {
+async function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, versionKind) {
   const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
   if (!targetSwagger) {
     return undefined;
   }
 
-  const currentVersion = targetSwagger.version;
-  const fileName = targetSwagger.fileName;
+  const currentVersion = await targetSwagger.getVersion();
+  const fileName = await targetSwagger.getFileName();
 
   try {
-    const versionsOfType = availableSwaggers.filter(
-      (swagger) =>
-        swagger.fileName === fileName &&
-        swagger.versionKind === versionKind &&
-        swagger.version <= currentVersion &&
-        swagger.path !== targetSwaggerPath,
+    // Load version info for all swaggers to enable filtering
+    const swaggersWithVersions = await Promise.all(
+      availableSwaggers.map(async (swagger) => ({
+        swagger,
+        version: await swagger.getVersion(),
+        fileName: await swagger.getFileName(),
+        versionKind: swagger.versionKind,
+      })),
+    );
+
+    const versionsOfType = swaggersWithVersions.filter(
+      (item) =>
+        item.fileName === fileName &&
+        item.versionKind === versionKind &&
+        item.version <= currentVersion &&
+        item.swagger.path !== targetSwaggerPath,
     );
 
     if (versionsOfType.length > 0) {
       const mostRecent = versionsOfType.reduce((previous, current) =>
         previous.version > current.version ? previous : current,
       );
-      return mostRecent.path;
+      return mostRecent.swagger.path;
     }
   } catch {
     // Version not found or error occurred
@@ -386,16 +379,10 @@ function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, version
 }
 
 /**
- * Get preceding swagger versions for a given swagger file
- * @param {string} targetSwaggerPath - Path to the swagger file to find predecessors for
- * @param {Swagger[]} availableSwaggers - Array of swagger objects to search within
- * @returns {{preview?: string, stable?: string}} - Paths to preceding versions
- */
-/**
  * Get operations from all previous versions that also exist in current swagger
  * @param {string} targetSwaggerPath - Path to the current swagger file
  * @param {Swagger[]} availableSwaggers - Array of swagger objects to search within
- * @returns {Promise<LegacyOperation[]>} - Operations that exist in both previous versions and current version
+ * @returns {Promise<LegacyOperation[]>} - Operations that exist in previous versions which exist in current version too
  */
 export async function getLegacyVersionOperations(targetSwaggerPath, availableSwaggers) {
   /** @type {LegacyOperation[]} */
@@ -406,26 +393,38 @@ export async function getLegacyVersionOperations(targetSwaggerPath, availableSwa
     return result;
   }
 
-  const fileName = targetSwagger.fileName;
-  const currentVersion = targetSwagger.version;
+  const fileName = await targetSwagger.getFileName();
+  const currentVersion = await targetSwagger.getVersion();
 
   // Get operations from current swagger file
-  const currentOperations = await targetSwagger.getOperations();
+  const currentOperationsMap = await targetSwagger.getOperations();
+  const currentOperations = Array.from(currentOperationsMap.values());
+
+  // Load version info for all swaggers to enable filtering
+  const swaggersWithVersions = await Promise.all(
+    availableSwaggers.map(async (swagger) => ({
+      swagger,
+      version: await swagger.getVersion(),
+      fileName: await swagger.getFileName(),
+    })),
+  );
 
   // Get all previous versions of the same file name including stable and preview
-  const previousVersionSwaggers = availableSwaggers
+  const previousVersionSwaggers = swaggersWithVersions
     .filter(
-      (swagger) =>
-        swagger.fileName === fileName &&
-        swagger.version < currentVersion &&
-        swagger.path !== targetSwaggerPath,
+      (item) =>
+        item.fileName === fileName &&
+        item.version < currentVersion &&
+        item.swagger.path !== targetSwaggerPath,
     )
-    .sort((a, b) => a.version.localeCompare(b.version));
+    .sort((a, b) => a.version.localeCompare(b.version))
+    .map((item) => item.swagger);
 
   // Collect operations from all previous versions that also exist in current version
   for (const previousSwagger of previousVersionSwaggers) {
     try {
-      const previousOperations = await previousSwagger.getOperations();
+      const previousOperationsMap = await previousSwagger.getOperations();
+      const previousOperations = Array.from(previousOperationsMap.values());
 
       // Find operations that exist in both this previous version AND current version
       const matchingOperations = previousOperations
@@ -455,16 +454,16 @@ export async function getLegacyVersionOperations(targetSwaggerPath, availableSwa
  * Get preceding swagger versions for a given swagger file
  * @param {string} targetSwaggerPath - Path to the swagger file to find predecessors for
  * @param {Swagger[]} availableSwaggers - Array of swagger objects to search within
- * @returns {{preview?: string, stable?: string}} - Paths to preceding versions
+ * @returns {Promise<{preview?: string, stable?: string}>} - Paths to preceding versions
  */
-export function getPrecedingSwaggers(targetSwaggerPath, availableSwaggers) {
+export async function getPrecedingSwaggers(targetSwaggerPath, availableSwaggers) {
   return {
-    preview: getPrecedingSwaggerByType(
+    preview: await getPrecedingSwaggerByType(
       targetSwaggerPath,
       availableSwaggers,
       API_VERSION_LIFECYCLE_STAGES.PREVIEW,
     ),
-    stable: getPrecedingSwaggerByType(
+    stable: await getPrecedingSwaggerByType(
       targetSwaggerPath,
       availableSwaggers,
       API_VERSION_LIFECYCLE_STAGES.STABLE,
