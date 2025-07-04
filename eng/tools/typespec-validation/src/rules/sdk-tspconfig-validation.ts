@@ -85,8 +85,8 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
     const parameter = config?.parameters?.[this.keyToValidate]?.default;
     if (parameter === undefined)
       return this.createFailedResult(
-        `Failed to find "parameters.${this.keyToValidate}.default"`,
-        `Please add "parameters.${this.keyToValidate}.default"`,
+        `Failed to find "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}"`,
+        `Please add "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}".`,
       );
 
     if (!this.validateValue(parameter, this.expectedValue))
@@ -129,8 +129,8 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
       );
 
     const actualValue = option as unknown as undefined | string | boolean;
@@ -225,7 +225,7 @@ export class TspConfigJavaMgmtPackageDirFormatSubRule extends TspconfigEmitterOp
     super(
       "@azure-tools/typespec-java",
       "package-dir",
-      new RegExp(/^azure-resourcemanager-[^\/]+$/) // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
+      new RegExp(/^azure-resourcemanager-[^\/]+$/), // Matches "azure-resourcemanager-<service-name>" with no restriction on characters after the hyphen
     );
   }
 
@@ -239,7 +239,7 @@ export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOpt
     super(
       "@azure-tools/typespec-java",
       "namespace",
-      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/) // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
+      new RegExp(/^com\.azure\.resourcemanager\.[^\.]+$/), // Matches "com.azure.resourcemanager.<service-name>" with no restriction on characters after the last dot
     );
   }
 
@@ -260,15 +260,11 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
 
 export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-ts",
-      "package-dir",
-      new RegExp(/^arm-[^\/]+$/)
-    );
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm-[^\/]+$/));
   }
 
   protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder); 
+    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
   }
 }
 
@@ -441,6 +437,24 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigPythonMgmtPackageGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "generate-test", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigPythonMgmtPackageGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "generate-sample", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
@@ -460,19 +474,6 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-// ----- Python azure sub rules -----
-export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "generate-test", true);
-  }
-}
-
-export class TspConfigPythonAzGenerateSampleTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "generate-sample", true);
-  }
-}
-
 // ----- CSharp sub rules -----
 export class TspConfigCsharpAzPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -489,8 +490,8 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
 
     if (option === undefined)
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}".`,
       );
 
     const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
@@ -549,8 +550,8 @@ export const defaultRules = [
   new TspConfigPythonMgmtPackageDirectorySubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzGenerateTestTrueSubRule(),
-  new TspConfigPythonAzGenerateSampleTrueSubRule(),
+  new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
+  new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
@@ -594,7 +595,9 @@ export class SdkTspConfigValidationRule implements Rule {
         const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
         const emitterName = emitterOptionSubRule.getEmitterName();
         if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(`Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`);
+          console.warn(
+            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed.`,
+          );
           isSubRuleSuccess = true;
         }
       }
@@ -604,7 +607,7 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const stdOutputFailedResults =
       failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation.`
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation`
         : "";
 
     return {
@@ -632,14 +635,14 @@ export class SdkTspConfigValidationRule implements Rule {
 
     // Only check for wildcard at the end (format: prefix.*)
     for (const suppressedPath of this.suppressedKeyPaths) {
-      if (suppressedPath.endsWith('.*')) {
+      if (suppressedPath.endsWith(".*")) {
         const prefix = suppressedPath.slice(0, -2); // Remove the '.*' at the end
         if (keyPath.startsWith(prefix)) {
           return true;
         }
       }
     }
-    
+
     return false;
   }
 }
