@@ -20,7 +20,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @armProviderNamespace
-@service(#{ title: "Azure Migrate Assessment Service" })
+@service(#{ title: "Azure Migrate Assessment Service test" })
 @versioned(HaApiVersions)
 @doc("Azure Migrate Resource Provider management API.")
 namespace Microsoft.Migrate;
