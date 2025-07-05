@@ -9,6 +9,9 @@ import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
 import "./red-teams/routes.tsp";
+import "./agents/routes.tsp";
+import "./blueprints/routes.tsp";
+import "./tools/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
