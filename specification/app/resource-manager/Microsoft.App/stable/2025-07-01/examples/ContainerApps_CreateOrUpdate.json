@@ -95,7 +95,14 @@
             "httpReadBufferSize": 30,
             "httpMaxRequestSize": 10,
             "logLevel": "debug",
-            "enableApiLogging": true
+            "enableApiLogging": true,
+            "appHealth": {
+              "enabled": true,
+              "path": "/health",
+              "probeIntervalSeconds": 3,
+              "probeTimeoutMilliseconds": 1000,
+              "threshold": 3
+            }
           },
           "maxInactiveRevisions": 10,
           "service": {
@@ -307,7 +314,14 @@
               "enabled": true,
               "appPort": 3000,
               "appProtocol": "http",
-              "httpReadBufferSize": 30
+              "httpReadBufferSize": 30,
+              "appHealth": {
+                "enabled": true,
+                "path": "/health",
+                "probeIntervalSeconds": 3,
+                "probeTimeoutMilliseconds": 1000,
+                "threshold": 3
+              }
             },
             "runtime": {
               "java": {
@@ -481,7 +495,14 @@
               "enabled": true,
               "appPort": 3000,
               "appProtocol": "http",
-              "httpReadBufferSize": 30
+              "httpReadBufferSize": 30,
+              "appHealth": {
+                "enabled": true,
+                "path": "/health",
+                "probeIntervalSeconds": 3,
+                "probeTimeoutMilliseconds": 1000,
+                "threshold": 3
+              }
             },
             "runtime": {
               "java": {
