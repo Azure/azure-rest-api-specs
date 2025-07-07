@@ -2,7 +2,7 @@
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
-import { readFile } from "fs";
+import { readFile } from "fs/promises";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -38,10 +38,25 @@ export async function main() {
 
   let resultArtifactData, resultArtifactRaw;
   try {
-    resultArtifactRaw = await readFile(resultArtifactPath, "utf8");
-    resultArtifactData = JSON.parse(resultArtifactRaw);
+    // TODO: CLEANUP
+    resultArtifactRaw = await readFile(resultArtifactPath, { encoding: "utf8" });
+    if (!resultArtifactRaw.trim()) {
+      throw new Error(`File "${resultArtifactPath}" is empty or contains only whitespace.`);
+    }
+    try {
+      resultArtifactData = JSON.parse(resultArtifactRaw);
+    } catch (parseError) {
+      console.error(`Failed to parse JSON in file "${resultArtifactPath}": ${parseError.message}`);
+      console.error("Raw file content:");
+      console.error(resultArtifactRaw);
+      console.error("Stack trace:");
+      console.error(parseError.stack);
+      usage();
+      process.exitCode = 1;
+      return;
+    }
   } catch (error) {
-    console.error(`Failed to read or parse input file "${resultArtifactPath}": ${error.message}`);
+    console.error(`Failed to read input file "${resultArtifactPath}": ${error.message}`);
     usage();
     process.exitCode = 1;
     return;
@@ -52,7 +67,7 @@ export async function main() {
     console.log(`Raw output:\n${resultArtifactRaw}`);
     
     // Read build ID from build start file to provide a link to build details
-    const buildStartData = JSON.parse(await readFile(buildStartPath, "utf8"));
+    const buildStartData = JSON.parse(await readFile(buildStartPath, { encoding: "utf8" }));
     const buildId = buildStartData.id;
     const buildLink = `https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=${buildId}`;
     console.error(`See build details at: ${buildLink}`);
