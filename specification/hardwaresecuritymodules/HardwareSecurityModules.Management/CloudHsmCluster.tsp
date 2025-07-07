@@ -189,8 +189,11 @@ interface CloudHsmClusters {
     @segment("backupOperationStatus")
     jobId: string,
   ): (BackupResult &
-    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader &
-    Azure.Core.RequestIdResponseHeader> | ErrorResponse;
+    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
+    @header("Location")
+    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+    location?: string;
+  } & Azure.Core.RequestIdResponseHeader> | ErrorResponse;
   /**
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
@@ -221,8 +224,11 @@ interface CloudHsmClusters {
     @segment("restoreOperationStatus")
     jobId: string,
   ): (RestoreResult &
-    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader &
-    Azure.Core.RequestIdResponseHeader> | ErrorResponse;
+    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
+    @header("Location")
+    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+    location?: string;
+  } & Azure.Core.RequestIdResponseHeader> | ErrorResponse;
 }
 
 @@maxLength(CloudHsmCluster.name, 23);
