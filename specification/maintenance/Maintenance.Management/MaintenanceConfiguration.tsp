@@ -13,7 +13,6 @@ namespace Microsoft.Maintenance;
 /**
  * Maintenance configuration record type
  */
-@subscriptionResource
 model MaintenanceConfiguration
   is Azure.ResourceManager.TrackedResource<MaintenanceConfigurationProperties> {
   ...ResourceNameParameter<
@@ -26,19 +25,24 @@ model MaintenanceConfiguration
 
 @armResourceOperations
 interface MaintenanceConfigurationOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = MaintenanceConfiguration,
-        KeyName = "resourceName",
-        SegmentName = "publicMaintenanceConfigurations",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<MaintenanceConfiguration>,
+        ...ParentKeysOf<MaintenanceConfiguration>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<MaintenanceConfiguration>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = MaintenanceConfiguration,
+          KeyName = "resourceName",
+          SegmentName = "publicMaintenanceConfigurations",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -46,33 +50,42 @@ interface MaintenanceConfigurations {
   /**
    * Get Public Maintenance Configuration record
    */
-  get is MaintenanceConfigurationOps.Read<MaintenanceConfiguration>;
+  get is MaintenanceConfigurationOps.Read<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Get Public Maintenance Configuration records
    */
-  @segment("publicMaintenanceConfigurations")
-  list is MaintenanceConfigurationOps.List<
+  list is Extension.ListByTarget<
+    Extension.Subscription,
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    Error = MaintenanceError
   >;
 }
 @armResourceOperations
 interface MaintenanceConfigurationOperationGroupOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = MaintenanceConfiguration,
-        KeyName = "resourceName",
-        SegmentName = "maintenanceConfigurations",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<MaintenanceConfiguration>,
+        ...ParentKeysOf<MaintenanceConfiguration>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<MaintenanceConfiguration>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = MaintenanceConfiguration,
+          KeyName = "resourceName",
+          SegmentName = "maintenanceConfigurations",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -80,12 +93,18 @@ interface MaintenanceConfigurationOperationGroup {
   /**
    * Get Configuration record
    */
-  get is MaintenanceConfigurationOperationGroupOps.Read<MaintenanceConfiguration>;
+  get is MaintenanceConfigurationOperationGroupOps.Read<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Create or Update configuration record
    */
-  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<MaintenanceConfiguration>;
+  createOrUpdate is MaintenanceConfigurationOperationGroupOps.CreateOrUpdateSync<
+    MaintenanceConfiguration,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Patch configuration record
@@ -93,7 +112,8 @@ interface MaintenanceConfigurationOperationGroup {
   @patch(#{ implicitOptionality: false })
   update is MaintenanceConfigurationOperationGroupOps.CustomPatchSync<
     MaintenanceConfiguration,
-    PatchModel = MaintenanceConfiguration
+    PatchModel = MaintenanceConfiguration,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -101,25 +121,30 @@ interface MaintenanceConfigurationOperationGroup {
    */
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
-    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse
+    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
    * Get Configuration records within a subscription and resource group
    */
   @segment("maintenanceConfigurations")
-  list is MaintenanceConfigurationOperationGroupOps.List<
+  list is Extension.ListByTarget<
+    Extension.ResourceGroup,
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    Error = MaintenanceError
   >;
 
   /**
    * Get Configuration records within a subscription
    */
   @segment("maintenanceConfigurations")
-  maintenanceConfigurationsList is MaintenanceConfigurationOperationGroupOps.ResourceListByParent<
+  maintenanceConfigurationsList is Extension.ListByTarget<
+    Extension.Subscription,
     MaintenanceConfiguration,
-    Response = ArmResponse<ListMaintenanceConfigurationsResult>
+    Response = ArmResponse<ListMaintenanceConfigurationsResult>,
+    Error = MaintenanceError
   >;
 }
 

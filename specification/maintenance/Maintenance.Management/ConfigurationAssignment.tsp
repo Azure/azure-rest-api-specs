@@ -43,7 +43,7 @@ model ConfigurationAssignment extends Foundations.ProxyResource {
 
 @armResourceOperations
 interface ConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -52,37 +52,44 @@ interface ConfigurationAssignmentOps
         /**
          * Resource provider name
          */
-        @path @segment("providers") providerName: string,
+        @path
+        @key
+        @segment("providers")
+        providerName: string,
 
         /**
          * Resource parent type
          */
-        @path resourceParentType: string,
+        @path @key resourceParentType: string,
 
         /**
          * Resource parent name
          */
-        @path resourceParentName: string,
+        @path @key resourceParentName: string,
 
         /**
          * Resource type
          */
-        @path resourceType: string,
+        @path @key resourceType: string,
 
         /**
          * Resource name
          */
-        @path resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        @path @key resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ConfigurationAssignment,
-        KeyName = "configurationAssignmentName",
-        SegmentName = "configurationAssignments",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...ParentKeysOf<ConfigurationAssignment>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ConfigurationAssignment,
+          KeyName = "configurationAssignmentName",
+          SegmentName = "configurationAssignments",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -90,19 +97,26 @@ interface ConfigurationAssignments {
   /**
    * Get configuration assignment for resource..
    */
-  getParent is ConfigurationAssignmentOps.Read<ConfigurationAssignment>;
+  getParent is ConfigurationAssignmentOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdateParent is ConfigurationAssignmentOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Unregister configuration for resource.
    */
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -110,12 +124,14 @@ interface ConfigurationAssignments {
    */
   listParent is ConfigurationAssignmentOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>
+    Response = ArmResponse<ListConfigurationAssignmentsResult>,
+    ErrorType = MaintenanceError
   >;
 }
+
 @armResourceOperations
 interface ConfigurationAssignmentOperationGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -124,27 +140,34 @@ interface ConfigurationAssignmentOperationGroupOps
         /**
          * Resource provider name
          */
-        @path @segment("providers") providerName: string,
+        @path
+        @key
+        @segment("providers")
+        providerName: string,
 
         /**
          * Resource parent type
          */
-        @path resourceType: string,
+        @path @key resourceType: string,
 
         /**
          * Resource parent name
          */
-        @path resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        @path @key resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ConfigurationAssignment,
-        KeyName = "configurationAssignmentName",
-        SegmentName = "configurationAssignments",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...ParentKeysOf<ConfigurationAssignment>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ConfigurationAssignment,
+          KeyName = "configurationAssignmentName",
+          SegmentName = "configurationAssignments",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -152,36 +175,49 @@ interface ConfigurationAssignmentOperationGroup {
   /**
    * Get configuration assignment for resource..
    */
-  get is ConfigurationAssignmentOperationGroupOps.Read<ConfigurationAssignment>;
+  get is ConfigurationAssignmentOperationGroupOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdate is ConfigurationAssignmentOperationGroupOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Unregister configuration for resource.
    */
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 }
+
 @armResourceOperations
 interface ConfigurationAssignmentsForSubscriptionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ConfigurationAssignment,
-        KeyName = "configurationAssignmentName",
-        SegmentName = "configurationAssignments",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...ParentKeysOf<ConfigurationAssignment>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ConfigurationAssignment,
+          KeyName = "configurationAssignmentName",
+          SegmentName = "configurationAssignments",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -189,12 +225,18 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * Get configuration assignment for resource.
    */
-  get is ConfigurationAssignmentsForSubscriptionOps.Read<ConfigurationAssignment>;
+  get is ConfigurationAssignmentsForSubscriptionOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdate is ConfigurationAssignmentsForSubscriptionOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
@@ -202,7 +244,8 @@ interface ConfigurationAssignmentsForSubscriptions {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForSubscriptionOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment
+    PatchModel = ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -210,7 +253,8 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -218,25 +262,31 @@ interface ConfigurationAssignmentsForSubscriptions {
    */
   list is ConfigurationAssignmentsForSubscriptionOps.List<
     ConfigurationAssignment,
-    Response = ArmResponse<ListConfigurationAssignmentsResult>
+    Response = ArmResponse<ListConfigurationAssignmentsResult>,
+    ErrorType = MaintenanceError
   >;
 }
 @armResourceOperations
 interface ConfigurationAssignmentsForResourceGroupOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ConfigurationAssignment,
-        KeyName = "configurationAssignmentName",
-        SegmentName = "configurationAssignments",
-        NamePattern = "^.+$"
-      >>,
-      MaintenanceError
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...ParentKeysOf<ConfigurationAssignment>,
+      },
+      {
+        ...Extension.ExtensionProviderNamespace<ConfigurationAssignment>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ConfigurationAssignment,
+          KeyName = "configurationAssignmentName",
+          SegmentName = "configurationAssignments",
+          NamePattern = "^.+$"
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -244,12 +294,18 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Get configuration assignment for resource..
    */
-  get is ConfigurationAssignmentsForResourceGroupOps.Read<ConfigurationAssignment>;
+  get is ConfigurationAssignmentsForResourceGroupOps.Read<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
    */
-  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<ConfigurationAssignment>;
+  createOrUpdate is ConfigurationAssignmentsForResourceGroupOps.CreateOrUpdateSync<
+    ConfigurationAssignment,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Register configuration for resource.
@@ -257,7 +313,8 @@ interface ConfigurationAssignmentsForResourceGroup {
   @patch(#{ implicitOptionality: false })
   update is ConfigurationAssignmentsForResourceGroupOps.CustomPatchSync<
     ConfigurationAssignment,
-    PatchModel = ConfigurationAssignment
+    PatchModel = ConfigurationAssignment,
+    ErrorType = MaintenanceError
   >;
 
   /**
@@ -265,7 +322,8 @@ interface ConfigurationAssignmentsForResourceGroup {
    */
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
-    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse
+    Response = ArmResponse<ConfigurationAssignment> | ArmDeletedNoContentResponse,
+    ErrorType = MaintenanceError
   >;
 }
 

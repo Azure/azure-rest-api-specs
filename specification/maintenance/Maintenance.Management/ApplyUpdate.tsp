@@ -13,7 +13,6 @@ namespace Microsoft.Maintenance;
 /**
  * Apply Update request
  */
-@subscriptionResource
 model ApplyUpdate
   is Azure.ResourceManager.ProxyResource<ApplyUpdateProperties> {
   ...ResourceNameParameter<
@@ -26,7 +25,7 @@ model ApplyUpdate
 
 @armResourceOperations
 interface ApplyUpdateOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -35,37 +34,41 @@ interface ApplyUpdateOps
         /**
          * Resource provider name
          */
-        @path @segment("providers") providerName: string,
+        @path
+        @key
+        @segment("providers")
+        providerName: string,
 
         /**
          * Resource parent type
          */
-        @path resourceParentType: string,
+        @path @key resourceParentType: string,
 
         /**
          * Resource parent name
          */
-        @path resourceParentName: string,
+        @path @key resourceParentName: string,
 
         /**
          * Resource type
          */
-        @path resourceType: string,
+        @path @key resourceType: string,
 
         /**
          * Resource name
          */
-        @path resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        @path @key resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ApplyUpdate,
-        KeyName = "applyUpdateName",
-        SegmentName = "applyUpdates",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {},
+      {
+        ...Extension.ExtensionProviderNamespace<ApplyUpdate>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApplyUpdate,
+          KeyName = "applyUpdateName",
+          SegmentName = "applyUpdates",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 @armResourceOperations
@@ -73,11 +76,12 @@ interface ApplyUpdates {
   /**
    * Track maintenance updates to resource with parent
    */
-  getParent is ApplyUpdateOps.Read<ApplyUpdate>;
+  getParent is ApplyUpdateOps.Read<ApplyUpdate, ErrorType = MaintenanceError>;
 }
+
 @armResourceOperations
 interface ApplyUpdateOperationGroupOps
-  extends Azure.ResourceManager.Legacy.CustomLegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -86,27 +90,31 @@ interface ApplyUpdateOperationGroupOps
         /**
          * Resource provider name
          */
-        @path @segment("providers") providerName: string,
+        @path
+        @key
+        @segment("providers")
+        providerName: string,
 
         /**
          * Resource parent type
          */
-        @path resourceType: string,
+        @path @key resourceType: string,
 
         /**
          * Resource parent name
          */
-        @path resourceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        @path @key resourceName: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = ApplyUpdate,
-        KeyName = "applyUpdateName",
-        SegmentName = "applyUpdates",
-        NamePattern = ""
-      >>,
-      MaintenanceError
+      {},
+      {
+        ...Extension.ExtensionProviderNamespace<ApplyUpdate>,
+        ...KeysOf<ResourceNameParameter<
+          Resource = ApplyUpdate,
+          KeyName = "applyUpdateName",
+          SegmentName = "applyUpdates",
+          NamePattern = ""
+        >>,
+      }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -115,19 +123,27 @@ interface ApplyUpdateOperationGroup {
   /**
    * Track maintenance updates to resource
    */
-  get is ApplyUpdateOperationGroupOps.Read<ApplyUpdate>;
+  get is ApplyUpdateOperationGroupOps.Read<
+    ApplyUpdate,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Apply maintenance updates to resource
    */
-  createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<ApplyUpdate>;
+  createOrUpdateOrCancel is ApplyUpdateOperationGroupOps.CreateOrUpdateSync<
+    ApplyUpdate,
+    ErrorType = MaintenanceError
+  >;
 
   /**
    * Get Configuration records within a subscription
    */
-  list is ApplyUpdateOperationGroupOps.ResourceListByParent<
+  list is Extension.ListByTarget<
+    Extension.Subscription,
     ApplyUpdate,
-    Response = ArmResponse<ListApplyUpdate>
+    Response = ArmResponse<ListApplyUpdate>,
+    Error = MaintenanceError
   >;
 }
 

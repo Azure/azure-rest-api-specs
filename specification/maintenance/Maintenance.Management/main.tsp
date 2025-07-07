@@ -16,7 +16,6 @@ import "./MaintenanceConfiguration.tsp";
 import "./ApplyUpdate.tsp";
 import "./ConfigurationAssignment.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
@@ -46,24 +45,10 @@ enum Versions {
   v2023_10_01_preview: "2023-10-01-preview",
 }
 
-interface Operations {
-  /**
-   * List the available operations supported by the Microsoft.Maintenance resource provider
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationsListResult> | MaintenanceError;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      Response = ArmResponse<OperationsListResult>,
+      Error = MaintenanceError
+    > {}
 
 @@summary(Operations.list, "List available operations");
