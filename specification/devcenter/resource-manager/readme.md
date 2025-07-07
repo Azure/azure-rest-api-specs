@@ -43,7 +43,6 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}"].patch.parameters[5].schema.properties.devBoxDefinition.sku
     reason: Patch Body comes from common-types v5 Sku object. Keeping here for consistency with existing parts of API to avoid breaking customers.
 ```
 
