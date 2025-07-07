@@ -239,7 +239,7 @@ model CheckConfiguration {
    */
   @doc("List of output parameters to be used in the check.")
   @Azure.ResourceManager.identifiers(#[])
-  outputParameters: OutputParameters[];
+  outputParameters?: OutputParameters[];
 }
 
 @doc("The status of the check execution.")
@@ -262,10 +262,9 @@ union CheckExecutionStatus {
 @doc("Schema for role configuration including checks and resources.")
 model RoleConfiguration {
   /**
-   * Name of the role. This can be updated by Author only. Not allowed for customization.
+   * Name of the role. This can be updated by Author only.
    */
   @doc("Name of the role.")
-  @visibility(Lifecycle.Read)
   roleName: string;
 
   /**
