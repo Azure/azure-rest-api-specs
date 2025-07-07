@@ -75,7 +75,7 @@ alias GetSessionImageDescription = "Get session image stored during the liveness
 alias GetLivenessSessionSettingDescription = "Get the liveness sessions setting object.";
 alias PatchLivenessSessionSettingDescription = "Update the liveness setting object.";
 alias SuccessfullyDeletedSession = "Successfully deleted session and all correlated data.";
-alias GetClientAssetsAccessTokenDescription = "Get client assets access token to compile the client application.";
+alias GetClientAssetsAccessTokenDescription = "Get access token to get access to client AI model assets.";
 
 @get
 @action("audit")
