@@ -73,6 +73,9 @@
       "name": "CertificateObjectGlobalRulestack"
     },
     {
+      "name": "MetricsObjectFirewall"
+    },
+    {
       "name": "Operations"
     }
   ],
@@ -2649,6 +2652,163 @@
           },
           "Firewalls_getSupportInfo_MinimumSet_Gen": {
             "$ref": "./examples/Firewalls_getSupportInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/metrics/default": {
+      "get": {
+        "tags": [
+          "MetricsObjectFirewall"
+        ],
+        "operationId": "MetricsObjectFirewall_Get",
+        "description": "Get a MetricsObjectFirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsObjectFirewallResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MetricsObjectFirewall_Get_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_Get_MaximumSet_Gen.json"
+          },
+          "MetricsObjectFirewall_Get_MinimumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MetricsObjectFirewall"
+        ],
+        "operationId": "MetricsObjectFirewall_CreateOrUpdate",
+        "description": "Create a MetricsObjectFirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/MetricsObjectFirewallResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsObjectFirewallResource"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricsObjectFirewallResource"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MetricsObjectFirewall_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "MetricsObjectFirewall_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MetricsObjectFirewall"
+        ],
+        "operationId": "MetricsObjectFirewall_Delete",
+        "description": "Delete a MetricsObjectFirewallResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MetricsObjectFirewall_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_Delete_MaximumSet_Gen.json"
+          },
+          "MetricsObjectFirewall_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/MetricsObjectFirewall_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -6217,6 +6377,61 @@
         "name": "MarketplaceSubscriptionStatus",
         "modelAsString": true
       }
+    },
+    "MetricsObject": {
+      "type": "object",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "description": "Resource Id of application insights resource"
+        },
+        "applicationInsightsConnectionString": {
+          "type": "string",
+          "description": "Connection string of application insights resource"
+        },
+        "panEtag": {
+          "type": "string",
+          "description": "read only string representing last create or update"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Config for Metrics for firewall metrics",
+      "required": [
+        "applicationInsightsResourceId",
+        "applicationInsightsConnectionString"
+      ]
+    },
+    "MetricsObjectFirewallResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetricsObject",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "System metadata for this resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Firewall Metrics Object",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "MonitorLog": {
       "type": "object",
