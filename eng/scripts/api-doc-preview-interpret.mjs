@@ -40,6 +40,10 @@ export async function main() {
   try {
     // TODO: CLEANUP
     resultArtifactRaw = await readFile(resultArtifactPath, { encoding: "utf8" });
+    // Strip BOM if present
+    if (resultArtifactRaw.charCodeAt(0) === 0xFEFF) {
+      resultArtifactRaw = resultArtifactRaw.slice(1);
+    }
     if (!resultArtifactRaw.trim()) {
       throw new Error(`File "${resultArtifactPath}" is empty or contains only whitespace.`);
     }
