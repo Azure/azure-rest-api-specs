@@ -27,7 +27,7 @@ interface AgentBlueprints
       ListAgentBlueprintVersionsParameters,
       ListAgentBlueprintVersionsParameters
     > {
-  @doc("Generate a fillable conflig file for the blueprint that can be used to create an agent instance.")
+  @doc("Generate a fillable config file for the blueprint that can be used to create an agent instance.")
   @Rest.action("scaffold")
   scaffoldBlueprint is Azure.Core.Foundations.ResourceOperation<
     AgentBlueprint,

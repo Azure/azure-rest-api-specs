@@ -35,7 +35,7 @@ model AgentBlueprint {
   @doc("Dependencies that need to be specified to create an agent instance from this blueprint")
   dependencies?: Record<BaseAgentDependency>;
 
-  @doc("Definitions of parameters to be specifed when creating an agent instance from this blueprint")
+  @doc("Definitions of parameters to be specified when creating an agent instance from this blueprint")
   parameters?: Record<BaseParameterDefinition>;
 }
 
