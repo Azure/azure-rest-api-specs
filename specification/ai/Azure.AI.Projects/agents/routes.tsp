@@ -42,7 +42,7 @@ interface Agents {
 
   @doc("Create an agent instance")
   @Rest.action("create")
-  deploy is Azure.Core.Foundations.ResourceOperation<
+  create is Azure.Core.Foundations.ResourceOperation<
     Agent,
     {
       @doc("The deployment request parameters")
