@@ -69,8 +69,7 @@ jobs:
             --project "Content CI"
             --definition-id "8120"
             --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
-            > buildstart.json
-
+            | tee buildstart.json
       - pwsh: Get-Location | Write-Host; Get-ChildItem eng/ -Recurse | Select-Object FullName
 
       - task: AzureCLI@2
