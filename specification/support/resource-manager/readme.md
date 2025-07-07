@@ -26,9 +26,22 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-06
+tag: package-preview-2025-06-01-preview
 ```
 
+
+### Tag: package-preview-2025-06-01-preview
+
+These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - Microsoft.Support/preview/2025-06-01-preview/support.json
+
+suppressions:
+  - code: ConsistentPatchProperties
+    reason: "Rule: The property 'azureEEStatus' in the request body either not apppear in the resource model or has the wrong level. Justification: This rule is being suppressed because all other properties associated with the same request are also suppressed. We are unable to update the public API to a different definition, as doing so would deviate from the expected behavior."
+```
 
 ### Tag: package-2024-04
 
