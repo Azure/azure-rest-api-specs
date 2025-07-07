@@ -402,7 +402,7 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.storage2024"
+      value: "com.azure.resourcemanager.storage2024",
     }),
     success: true,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
@@ -412,7 +412,7 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.storage_v2"
+      value: "com.azure.resourcemanager.storage_v2",
     }),
     success: true,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
@@ -422,7 +422,7 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.storage.blob"
+      value: "com.azure.resourcemanager.storage.blob",
     }),
     success: true,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
@@ -432,17 +432,18 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.network.security.rules"
+      value: "com.azure.resourcemanager.network.security.rules",
     }),
     success: true,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
   },
   {
-    description: "Validate Java management namespace with numbers and underscores in multiple segments",
+    description:
+      "Validate Java management namespace with numbers and underscores in multiple segments",
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.storage_v2.blob_2024"
+      value: "com.azure.resourcemanager.storage_v2.blob_2024",
     }),
     success: true,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
@@ -452,7 +453,7 @@ const javaMgmtNamespaceExtendedTestCases: Case[] = [
     folder: managementTspconfigFolder,
     tspconfigContent: createEmitterOptionExample("@azure-tools/typespec-java", {
       key: "namespace",
-      value: "com.azure.resourcemanager.storage@blob"
+      value: "com.azure.resourcemanager.storage@blob",
     }),
     success: false,
     subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
