@@ -115,7 +115,7 @@ interface ProvisioningServiceDescriptions {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProvisioningServiceDescription,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = ProvisioningServiceDescription> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorDetails
   >;
@@ -128,7 +128,7 @@ interface ProvisioningServiceDescriptions {
     ProvisioningServiceDescription,
     PatchModel = TagsResource,
     Response = ArmResponse<ProvisioningServiceDescription> &
-      ArmLroLocationHeader
+      ArmLroLocationHeader<FinalResult = ProvisioningServiceDescription>
   >;
 
   /**

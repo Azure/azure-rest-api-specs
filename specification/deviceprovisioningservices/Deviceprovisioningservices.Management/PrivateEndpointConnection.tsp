@@ -78,7 +78,8 @@ interface PrivateEndpointConnections {
       @segment("privateEndpointConnections")
       privateEndpointConnectionName: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -96,7 +97,8 @@ interface PrivateEndpointConnections {
       @segment("privateEndpointConnections")
       privateEndpointConnectionName: string;
     },
-    Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PrivateEndpointConnection;
     }) | ArmDeletedNoContentResponse
