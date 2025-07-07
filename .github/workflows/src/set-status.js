@@ -143,6 +143,9 @@ export async function setStatusImpl({
      */
     target_url = run.html_url;
 
+    // TODO: Only update target if run has marker artifact indicating it set status
+    core.info(`run: ${JSON.stringify(run, null, 2)}`);
+
     if (run.conclusion === CheckConclusion.FAILURE) {
       /**
        * Update target to point directly to the first failed job
