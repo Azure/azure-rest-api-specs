@@ -1,0 +1,69 @@
+name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  validateBreakingChange:
+    name: "[TEST-IGNORE] Swagger BreakingChange - Analyze Code"
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Setup .NET 6 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Swagger Breaking Change - Analyze Code
+        id: swagger-breaking-change-analyze-code
+        run: |
+          npm exec --no -- openapi-diff-runner \
+            --srp "${{ github.workspace }}" \
+            --number "${{ github.event.pull_request.number }}" \
+            --sb "${{ github.event.pull_request.head.ref }}" \
+            --tb "${{ github.event.pull_request.base.ref }}" \
+            --hc "${{ github.event.pull_request.head.sha }}" \
+            --repo "${{ github.repository }}"
+
+      # Upload artifact for 'BreakingChangeReviewRequired' label
+      - if: |
+          always() && 
+          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
+        name: Upload artifact with BreakingChangeReviewRequiredLabel label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
+
+      # Upload artifact for 'VersioningReviewRequired' label
+      - if: |
+          always() && 
+          (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
+        name: Upload artifact with VersioningReviewRequiredLabel label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
+          # Convert "add/remove" to "true/false"
+          value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+
+      # Upload artifact with issue number if labels are present and PR number is valid
+      - if: |
+          always() &&
+          (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
+          steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '') &&
+          github.event.pull_request.number > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ github.event.pull_request.number }}"
