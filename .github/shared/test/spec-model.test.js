@@ -538,6 +538,35 @@ describe("Helper functions for version analysis", () => {
       expect(result.stable).toBeUndefined();
       expect(result.preview).toBeUndefined();
     });
+
+    it("should handle null or undefined availableSwaggers array", async () => {
+      const targetPath = "/test/stable/2020-08-04/a.json";
+
+      // Test with null
+      /** @type {any} */
+      const nullSwaggers = null;
+      const resultNull = await getPrecedingSwaggers(targetPath, nullSwaggers);
+      expect(resultNull).toHaveProperty("stable");
+      expect(resultNull).toHaveProperty("preview");
+      expect(resultNull.stable).toBeUndefined();
+      expect(resultNull.preview).toBeUndefined();
+
+      // Test with undefined
+      /** @type {any} */
+      const undefinedSwaggers = undefined;
+      const resultUndefined = await getPrecedingSwaggers(targetPath, undefinedSwaggers);
+      expect(resultUndefined).toHaveProperty("stable");
+      expect(resultUndefined).toHaveProperty("preview");
+      expect(resultUndefined.stable).toBeUndefined();
+      expect(resultUndefined.preview).toBeUndefined();
+
+      // Test with empty array
+      const resultEmpty = await getPrecedingSwaggers(targetPath, []);
+      expect(resultEmpty).toHaveProperty("stable");
+      expect(resultEmpty).toHaveProperty("preview");
+      expect(resultEmpty.stable).toBeUndefined();
+      expect(resultEmpty.preview).toBeUndefined();
+    });
   });
 
   describe("getExistedVersionOperations", () => {
@@ -742,6 +771,29 @@ describe("Helper functions for version analysis", () => {
         expect(operations2).toHaveLength(1);
         expect(operations2[0]).toHaveProperty("id", "SharedOperation");
       }
+    });
+
+    it("should handle null or undefined availableSwaggers array", async () => {
+      const targetPath = "/test/stable/2020-08-04/a.json";
+
+      // Test with null
+      /** @type {any} */
+      const nullSwaggers = null;
+      const resultNull = await getExistedVersionOperations(targetPath, nullSwaggers);
+      expect(resultNull).toBeInstanceOf(Map);
+      expect(resultNull.size).toBe(0);
+
+      // Test with undefined
+      /** @type {any} */
+      const undefinedSwaggers = undefined;
+      const resultUndefined = await getExistedVersionOperations(targetPath, undefinedSwaggers);
+      expect(resultUndefined).toBeInstanceOf(Map);
+      expect(resultUndefined.size).toBe(0);
+
+      // Test with empty array
+      const resultEmpty = await getExistedVersionOperations(targetPath, []);
+      expect(resultEmpty).toBeInstanceOf(Map);
+      expect(resultEmpty.size).toBe(0);
     });
   });
 });

@@ -240,6 +240,10 @@ function readme(file) {
  * @returns {Promise<string | undefined>} - Path to preceding version or undefined if not found
  */
 async function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, versionKind) {
+  if (!availableSwaggers || !Array.isArray(availableSwaggers)) {
+    return undefined;
+  }
+
   const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
   if (!targetSwagger) {
     return undefined;
@@ -289,6 +293,10 @@ async function getPrecedingSwaggerByType(targetSwaggerPath, availableSwaggers, v
 export async function getExistedVersionOperations(targetSwaggerPath, availableSwaggers) {
   /** @type {Map<string, Operation[]>} */
   let result = new Map();
+
+  if (!availableSwaggers || !Array.isArray(availableSwaggers)) {
+    return result;
+  }
 
   const targetSwagger = availableSwaggers.find((s) => s.path === targetSwaggerPath);
   if (!targetSwagger) {
