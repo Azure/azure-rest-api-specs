@@ -29,7 +29,7 @@
   "paths": {
     "/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
-        "operationId": "Alerts_GetAll_Global",
+        "operationId": "Alerts_GetAll",
         "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
         "parameters": [
           {
@@ -116,7 +116,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}": {
       "get": {
-        "operationId": "Alerts_GetById_Global",
+        "operationId": "Alerts_GetById",
         "summary": "Get a specific alert.",
         "description": "Get information related to a specific alert.",
         "produces": [
@@ -153,7 +153,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
-        "operationId": "Alerts_GetHistory_Global",
+        "operationId": "Alerts_GetHistory",
         "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert.",
         "parameters": [
           {
@@ -186,7 +186,7 @@
     },
     "/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
-        "operationId": "Alerts_ChangeState_Global",
+        "operationId": "Alerts_ChangeState",
         "description": "Change the state of an alert.",
         "parameters": [
           {
