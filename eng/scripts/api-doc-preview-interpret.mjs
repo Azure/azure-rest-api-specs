@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { readFile } from "fs/promises";
 
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function usage() {
@@ -82,7 +83,7 @@ export async function main() {
   }
 
   console.log(`Build completed successfully.`);
-  const docsPreviewUrl = `https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=${urlencode(resultArtifactData.branch)}&view=azure-rest-preview`
+  const docsPreviewUrl = `https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=${encodeURIComponent(resultArtifactData.branch)}&view=azure-rest-preview`
   // Log a warning to generate some output in the PR check
   console.log(`##[task.logissue type=warning]Docs build completed successfully. See preview docs at: ${docsPreviewUrl}`)
 }
