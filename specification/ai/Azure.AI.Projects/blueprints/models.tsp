@@ -26,16 +26,16 @@ model AgentBlueprint {
   @visibility(Lifecycle.Read)
   SystemData?: SystemData;
 
-  @doc("Catalog information for the agent")
+  @doc("Catalog information for the blueprint")
   catalogInfo: AgentBlueprintCatalogInformation;
 
-  @doc("Instructions for deploying the agent")
+  @doc("Instructions for deploying an agent using this blueprint")
   implementation: AgentImplementationDetails;
 
-  @doc("Dependencies for the agent")
+  @doc("Dependencies that need to be specified to create an agent instance from this blueprint")
   dependencies?: Record<BaseAgentDependency>;
 
-  @doc("Parameters for the agent")
+  @doc("Definitions of parameters to be specifed when creating an agent instance from this blueprint")
   parameters?: Record<BaseParameterDefinition>;
 }
 

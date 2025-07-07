@@ -40,8 +40,8 @@ interface Agents {
     Azure.Core.Page<Agent>
   >;
 
-  @doc("Revert latest revision of an agent")
-  @Rest.action("deploy")
+  @doc("Create an agent instance")
+  @Rest.action("create")
   deploy is Azure.Core.Foundations.ResourceOperation<
     Agent,
     {

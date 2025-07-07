@@ -19,7 +19,7 @@ namespace Azure.AI.Projects;
 model AgentTool {
   ...AssetBase;
 
-  @doc("display name of the agent")
+  @doc("display name of the tool")
   displayName: string;
 
   @doc("System related metadata")

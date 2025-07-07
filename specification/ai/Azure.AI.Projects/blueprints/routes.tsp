@@ -27,7 +27,7 @@ interface AgentBlueprints
       ListAgentBlueprintVersionsParameters,
       ListAgentBlueprintVersionsParameters
     > {
-  @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
+  @doc("Generate a fillable conflig file for the blueprint that can be used to create an agent instance.")
   @Rest.action("scaffold")
   scaffoldBlueprint is Azure.Core.Foundations.ResourceOperation<
     AgentBlueprint,

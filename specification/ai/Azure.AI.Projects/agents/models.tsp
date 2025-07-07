@@ -17,7 +17,7 @@ namespace Azure.AI.Projects;
 @Rest.resource("agents")
 @added(Versions.v1)
 model Agent {
-  @doc("The name of the resource")
+  @doc("The name of the created agent")
   @visibility(Lifecycle.Read)
   @key
   name: string;
@@ -29,7 +29,7 @@ model Agent {
   parameters?: Record<BaseParameterValue>;
 
   @doc("state of the agent: paused or active")
-  state: string;
+  state: State;
 }
 
 @doc("Agent deployment request")
@@ -39,4 +39,15 @@ model AgentDeploymentRequest {
 
   @doc("deployment configuration")
   parameters: Record<BaseParameterValue>;
+}
+
+@doc("Enum to determine the state of the agent.")
+union State {
+  string,
+
+  @doc("active state.")
+  active: "active",
+
+  @doc("paused state.")
+  paused: "paused",
 }
