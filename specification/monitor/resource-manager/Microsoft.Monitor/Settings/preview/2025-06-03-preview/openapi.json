@@ -68,7 +68,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
         "description": "Gets the Default Settings resource for the Service Group.",
         "parameters": [
           {
-            "$ref": "#/parameters/Settings.Management.ServiceGroupParameters.serviceGroupName"
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -104,7 +104,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "default": {
@@ -128,7 +128,7 @@
         "description": "Creates or updates the Default Settings resource for the Service Group.",
         "parameters": [
           {
-            "$ref": "#/parameters/Settings.Management.ServiceGroupParameters.serviceGroupName"
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -139,21 +139,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AzureMonitorSettingsPublicResource' update operation succeeded",
+            "description": "Resource 'AzureMonitorSettingsResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "201": {
-            "description": "Resource 'AzureMonitorSettingsPublicResource' create operation succeeded",
+            "description": "Resource 'AzureMonitorSettingsResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "default": {
@@ -177,7 +177,7 @@
         "description": "Deletes the Default Settings resource for the Service Group.",
         "parameters": [
           {
-            "$ref": "#/parameters/Settings.Management.ServiceGroupParameters.serviceGroupName"
+            "$ref": "#/parameters/ServiceGroupParameters.serviceGroupName"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -223,7 +223,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureMonitorSettingsPublicResourceListResult"
+              "$ref": "#/definitions/AzureMonitorSettingsResourceListResult"
             }
           },
           "default": {
@@ -262,7 +262,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "default": {
@@ -297,21 +297,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'AzureMonitorSettingsPublicResource' update operation succeeded",
+            "description": "Resource 'AzureMonitorSettingsResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "201": {
-            "description": "Resource 'AzureMonitorSettingsPublicResource' create operation succeeded",
+            "description": "Resource 'AzureMonitorSettingsResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
+              "$ref": "#/definitions/AzureMonitorSettingsResource"
             }
           },
           "default": {
@@ -398,41 +398,23 @@
       },
       "readOnly": true
     },
-    "AzureMonitorSettingsPublicResourceListResult": {
-      "type": "object",
-      "description": "The response of a AzureMonitorSettingsPublicResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AzureMonitorSettingsPublicResource items on this page",
-          "items": {
-            "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublicResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "Settings.Management.AzureMonitorSettingsPublic": {
+    "AzureMonitorSettings": {
       "type": "object",
       "description": "The properties for Azure Monitor Settings.",
       "properties": {
         "defaultAzureMonitorWorkspace": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the default Azure monitor workspace account."
         },
         "defaultManagedIdentity": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the default Managed identity."
         },
         "defaultActionGroup": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the default Action group."
         },
         "provisioningState": {
@@ -445,12 +427,12 @@
         "defaultAzureMonitorWorkspace"
       ]
     },
-    "Settings.Management.AzureMonitorSettingsPublicResource": {
+    "AzureMonitorSettingsResource": {
       "type": "object",
       "description": "The resource for Azure Monitor Settings, including system data and tags.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Settings.Management.AzureMonitorSettingsPublic",
+          "$ref": "#/definitions/AzureMonitorSettings",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -458,6 +440,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "AzureMonitorSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a AzureMonitorSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureMonitorSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     }
   },
@@ -471,7 +474,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
-    "Settings.Management.ServiceGroupParameters.serviceGroupName": {
+    "ServiceGroupParameters.serviceGroupName": {
       "name": "serviceGroupName",
       "in": "path",
       "description": "The name of the service group.",

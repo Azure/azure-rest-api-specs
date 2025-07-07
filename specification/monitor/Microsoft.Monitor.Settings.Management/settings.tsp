@@ -7,15 +7,16 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.Core;
 
-namespace Microsoft.Monitor.Settings.Management;
+namespace Microsoft.Monitor;
 
 /**
  * The resource for Azure Monitor Settings, including system data and tags.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton resource must use a constant name 'default', pattern is not applicable."
-model AzureMonitorSettingsPublicResource
-  is ExtensionResource<AzureMonitorSettingsPublic> {
+model AzureMonitorSettingsResource
+  is ExtensionResource<AzureMonitorSettings> {
   /**
    * The name of the Azure Monitor Settings resource. Must always be 'default'.
    */
@@ -29,17 +30,17 @@ model AzureMonitorSettingsPublicResource
  * The properties for Azure Monitor Settings.
  */
 @doc("The properties for Azure Monitor Settings.")
-model AzureMonitorSettingsPublic {
+model AzureMonitorSettings {
   @doc("The ARM resource ID of the default Azure monitor workspace account.")
-  defaultAzureMonitorWorkspace: string;
+  defaultAzureMonitorWorkspace: armResourceIdentifier;
 
   @doc("The ARM resource ID of the default Managed identity.")
-  defaultManagedIdentity?: string;
+  defaultManagedIdentity?: armResourceIdentifier;
 
   @doc("The ARM resource ID of the default Action group.")
-  defaultActionGroup?: string;
+  defaultActionGroup?: armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "@visibility(Lifecycle.Read) causes errors in this TypeSpec environment."
+  // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "@visibility(Lifecycle.Read) causes errors in this TypeSpec environment."
   ...DefaultProvisioningStateProperty;
 }
 
@@ -54,57 +55,57 @@ model ServiceGroupParameters {
 }
 
 @doc("Defines operations for managing Settings resources.")
-@armResourceOperations(AzureMonitorSettingsPublicResource)
+@armResourceOperations(AzureMonitorSettingsResource)
 @route("/providers/Microsoft.Management/serviceGroups")
 interface SettingsByServiceGroup {
   @doc("Gets the Default Settings resource for the Service Group.")
   get is ArmResourceRead<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     ServiceGroupParameters
   >;
 
   @doc("Creates or updates the Default Settings resource for the Service Group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     ServiceGroupParameters
   >;
 
   @doc("Deletes the Default Settings resource for the Service Group.")
   delete is ArmResourceDeleteSync<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     ServiceGroupParameters
   >;
 }
 
 alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 @doc("Defines operations for managing Settings resources.")
-@armResourceOperations(AzureMonitorSettingsPublicResource)
+@armResourceOperations(AzureMonitorSettingsResource)
 interface SettingsBySubscription {
   @doc("Gets the Default Settings resource for the Subscription.")
   get is ArmResourceRead<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     SubscriptionParameters
   >;
 
   @doc("Creates or updates the Default Settings resource for the Subscription.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     SubscriptionParameters
   >;
 
   @doc("Deletes the Default Settings resource for the Subscription.")
   delete is ArmResourceDeleteSync<
-    AzureMonitorSettingsPublicResource,
+    AzureMonitorSettingsResource,
     SubscriptionParameters
   >;
 
   @doc("Lists all settings resources for the Subscription.")
-  listBySubscription is ArmListBySubscription<AzureMonitorSettingsPublicResource>;
+  listBySubscription is ArmListBySubscription<AzureMonitorSettingsResource>;
 }
 
 @doc("Defines operations for managing Settings resources.")
-@armResourceOperations(AzureMonitorSettingsPublicResource)
+@armResourceOperations(AzureMonitorSettingsResource)
 interface SettingsByResourceOperations {
   @doc("Gets the Default Settings resource for the Resource.")
-  get is ArmResourceRead<AzureMonitorSettingsPublicResource>;
+  get is ArmResourceRead<AzureMonitorSettingsResource>;
 }
