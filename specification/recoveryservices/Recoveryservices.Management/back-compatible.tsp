@@ -11,10 +11,20 @@ using Microsoft.RecoveryServices;
 @@clientName(Vaults.create::parameters.properties, "certificateRequest");
 
 @@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
-  "resourceResourceExtendedInfoDetails"
+  "resourceResourceExtendedInfoDetails",
+  "!python"
+);
+@@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+  "resourceExtendedInfoDetails",
+  "python"
 );
 @@clientName(VaultExtendedInfoResources.update::parameters.properties,
-  "resourceResourceExtendedInfoDetails"
+  "resourceResourceExtendedInfoDetails",
+  "!python"
+);
+@@clientName(VaultExtendedInfoResources.update::parameters.properties,
+  "resourceExtendedInfoDetails",
+  "python"
 );
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VaultExtendedInfoResource.properties);
