@@ -71,6 +71,8 @@ jobs:
             --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
             > buildstart.json
 
+      - pwsh: Get-Location | Write-Host; Get-ChildItem eng/ -Recurse | Select-Object FullName
+
       - task: AzureCLI@2
         displayName: Wait for docs build to finish
         # Retry on failure to handle transient issues or builds that run longer
