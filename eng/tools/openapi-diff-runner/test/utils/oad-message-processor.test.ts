@@ -28,7 +28,7 @@ vi.mock("../../src/utils/common-utils.js", () => ({
       `https://github.com/owner/repo/blob/${branch}/${location}`,
   ),
 }));
-vi.mock("../../src/utils/breaking-change-config.js", () => ({
+vi.mock("../../src/types/breaking-change.js", () => ({
   logFileName: "breaking-change.log",
 }));
 vi.mock("../../src/command-helpers.js", () => ({
