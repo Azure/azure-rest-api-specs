@@ -100,8 +100,6 @@ alias OptionalNullableMetadata = {
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 union AgentsResponseFormatOption {
-  string,
-
   /** The model will handle the return format. */
   AgentsResponseFormatMode,
 
