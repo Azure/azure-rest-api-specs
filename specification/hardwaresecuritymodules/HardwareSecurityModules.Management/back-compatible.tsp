@@ -50,21 +50,25 @@ using Microsoft.HardwareSecurityModules;
 @@clientName(CloudHsmClusters.cloudHsmClusterRestoreStatusGet, "Get");
 //PrivateEndpointConnections operations
 @@clientLocation(PrivateEndpointConnections.get,
-  "CloudHsmClusterPrivateEndpointConnections"
+  "CloudHsmClusterPrivateEndpointConnections",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.create,
-  "CloudHsmClusterPrivateEndpointConnections"
+  "CloudHsmClusterPrivateEndpointConnections",
+  "!csharp"
 );
 @@clientLocation(PrivateEndpointConnections.delete,
-  "CloudHsmClusterPrivateEndpointConnections"
+  "CloudHsmClusterPrivateEndpointConnections",
+  "!csharp"
 );
 //DedicatedHsms operations
-@@clientLocation(DedicatedHsms.get, "DedicatedHsm");
-@@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm");
-@@clientLocation(DedicatedHsms.update, "DedicatedHsm");
-@@clientLocation(DedicatedHsms.delete, "DedicatedHsm");
-@@clientLocation(DedicatedHsms.listByResourceGroup, "DedicatedHsm");
-@@clientLocation(DedicatedHsms.listBySubscription, "DedicatedHsm");
+@@clientLocation(DedicatedHsms.get, "DedicatedHsm", "!csharp");
+@@clientLocation(DedicatedHsms.createOrUpdate, "DedicatedHsm", "!csharp");
+@@clientLocation(DedicatedHsms.update, "DedicatedHsm", "!csharp");
+@@clientLocation(DedicatedHsms.delete, "DedicatedHsm", "!csharp");
+@@clientLocation(DedicatedHsms.listByResourceGroup, "DedicatedHsm", "!csharp");
+@@clientLocation(DedicatedHsms.listBySubscription, "DedicatedHsm", "!csharp");
 @@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
-  "DedicatedHsm"
+  "DedicatedHsm",
+  "!csharp"
 );
