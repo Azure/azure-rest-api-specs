@@ -31,6 +31,7 @@ interface SBTopics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx")
   get is ArmResourceRead<SBTopic>;
 
   /**
@@ -39,6 +40,7 @@ interface SBTopics {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Topics_CreateOrUpdate")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBTopic,
     Response = ArmResourceUpdatedResponse<SBTopic>
@@ -49,6 +51,7 @@ interface SBTopics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_Delete")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx")
   delete is ArmResourceDeleteSync<SBTopic>;
 
   /**
@@ -56,6 +59,7 @@ interface SBTopics {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Topics_ListByNamespace")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx")
   listByNamespace is ArmResourceListByParent<
     SBTopic,
     Parameters = {

@@ -32,6 +32,7 @@ interface SBSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscriptions_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx")
   get is ArmResourceRead<SBSubscription>;
 
   /**
@@ -40,6 +41,7 @@ interface SBSubscriptions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Subscriptions_CreateOrUpdate")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBSubscription,
     Response = ArmResourceUpdatedResponse<SBSubscription>
@@ -50,6 +52,7 @@ interface SBSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscriptions_Delete")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx")
   delete is ArmResourceDeleteSync<SBSubscription>;
 
   /**
@@ -57,6 +60,7 @@ interface SBSubscriptions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Subscriptions_ListByTopic")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx")
   listByTopic is ArmResourceListByParent<
     SBSubscription,
     Parameters = {

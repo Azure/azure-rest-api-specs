@@ -42,6 +42,7 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   get is ArmResourceRead<SBNamespace>;
 
   /**
@@ -50,6 +51,7 @@ interface SBNamespaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Namespaces_CreateOrUpdate")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SBNamespace,
     Response = ArmResourceUpdatedResponse<SBNamespace> | ArmResourceCreatedResponse<
@@ -76,6 +78,7 @@ interface SBNamespaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Namespaces_Delete")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx")
   delete is ArmResourceDeleteWithoutOkAsync<
     SBNamespace,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -86,6 +89,7 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_ListByResourceGroup")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
   listByResourceGroup is ArmResourceListByParent<SBNamespace>;
 
   /**
@@ -93,6 +97,7 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Namespaces_List")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx")
   list is ArmListBySubscription<SBNamespace>;
 
   /**
@@ -102,6 +107,7 @@ interface SBNamespaces {
   @get
   @action("privateLinkResources")
   @operationId("PrivateLinkResources_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
   privateLinkResourcesGet is ArmResourceActionSync<
     SBNamespace,
     void,

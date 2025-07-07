@@ -31,6 +31,7 @@ interface SBQueues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queues_Get")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx")
   get is ArmResourceRead<SBQueue>;
 
   /**
@@ -39,6 +40,7 @@ interface SBQueues {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Queues_CreateOrUpdate")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     SBQueue,
     Response = ArmResourceUpdatedResponse<SBQueue>
@@ -49,6 +51,7 @@ interface SBQueues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queues_Delete")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx")
   delete is ArmResourceDeleteSync<SBQueue>;
 
   /**
@@ -56,6 +59,7 @@ interface SBQueues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queues_ListByNamespace")
+  @externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx")
   listByNamespace is ArmResourceListByParent<
     SBQueue,
     Parameters = {
