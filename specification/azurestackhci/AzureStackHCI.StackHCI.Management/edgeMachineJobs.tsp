@@ -203,7 +203,7 @@ model ProvisioningRequest {
   onboardingConfiguration?: OnboardingConfiguration;
 
   @doc("Device configuration.")
-  deviceConfiguration: DeviceConfiguration;
+  deviceConfiguration?: DeviceConfiguration;
 
   @doc("Base64 encoded custom configuration for CAPI to use")
   customConfiguration?: string;

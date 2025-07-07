@@ -13,7 +13,7 @@ on:
         required: true
         type: string
       overriding_label:
-        description: Name of the label that, when set, causes the check to always pass
+        description: Comma-separated list of labels that, when any is set, causes the check to always pass
         required: true
         type: string
 
@@ -35,7 +35,7 @@ jobs:
          github.event.action == 'synchronize' ||
          github.event.action == 'reopened') ||
         ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
-         (github.event.label.name == inputs.overriding_label))))
+         inputs.overriding_label && contains(inputs.overriding_label, github.event.label.name))))
 
     runs-on: ubuntu-24.04
 

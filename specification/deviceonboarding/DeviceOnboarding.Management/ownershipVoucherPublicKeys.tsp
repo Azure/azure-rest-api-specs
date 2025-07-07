@@ -20,6 +20,7 @@ namespace Microsoft.DeviceOnboarding;
 // TODO: does this cause issues with CMK
 @doc("Ownership voucher public key resource.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 @parentResource(DiscoveryService)
 model OwnershipVoucherPublicKey
   is Azure.ResourceManager.TrackedResource<OwnershipVoucherPublicKeyProperties> {
@@ -34,6 +35,7 @@ model OwnershipVoucherPublicKey
 
 @doc("Details of the Allowed Ownership Voucher Public Key resource")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 model OwnershipVoucherPublicKeyProperties {
   @doc("Public key.")
   publicKeyDetails: PublicKeyDetails;
@@ -45,6 +47,7 @@ model OwnershipVoucherPublicKeyProperties {
 
 @doc("Details of public key type")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 @discriminator("publicKeyType")
 model PublicKeyDetails {
   publicKeyType: PublicKeyType;
@@ -52,6 +55,7 @@ model PublicKeyDetails {
 
 @doc("Options of public key types to validate ownership vouchers.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 union PublicKeyType {
   string,
 
@@ -61,6 +65,7 @@ union PublicKeyType {
 
 @doc("X5Chain Public Key Details.")
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 model X5ChainPublicKeyDetails extends PublicKeyDetails {
   @doc("X5Chain type public key details")
   publicKeyType: PublicKeyType.X5Chain;
@@ -71,6 +76,7 @@ model X5ChainPublicKeyDetails extends PublicKeyDetails {
 
 @armResourceOperations
 @added(Versions.v2024_12_01_preview)
+@removed(Versions.v2025_05_01_preview)
 interface OwnershipVoucherPublicKeys {
   get is ArmResourceRead<OwnershipVoucherPublicKey>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OwnershipVoucherPublicKey>;

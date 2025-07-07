@@ -88,7 +88,7 @@ const config = tseslint.config(
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-export-from.md
       "unicorn/prefer-export-from": ["error", { ignoreUsedVariables: true }],
     },
-  }
+  },
 );
 
 export default config;

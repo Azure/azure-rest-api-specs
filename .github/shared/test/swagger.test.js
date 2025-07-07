@@ -15,9 +15,7 @@ describe("Swagger", () => {
     expect(swagger.path).toBe(resolve("bar"));
     expect(swagger.tag).toBeUndefined();
 
-    await expect(swagger.getRefs()).rejects.toThrowError(
-      /Failed to resolve file for swagger/i,
-    );
+    await expect(swagger.getRefs()).rejects.toThrowError(/Failed to resolve file for swagger/i);
   });
 
   it("resolves path against Tag.readme", async () => {
@@ -31,9 +29,7 @@ describe("Swagger", () => {
   // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
-    const swagger = new Swagger(
-      resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"),
-    );
+    const swagger = new Swagger(resolve(__dirname, "fixtures/Swagger/ignoreExamples/swagger.json"));
     const refs = await swagger.getRefs();
 
     const expectedIncludedPath = resolve(
