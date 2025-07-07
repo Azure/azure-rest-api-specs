@@ -81,8 +81,8 @@ jobs:
         inputs:
           azureSubscription: msdocs-apidrop-connection
           scriptType: bash
-          scriptLocation: scriptPath
-          scriptPath: eng/scripts/api-doc-preview-wait.mjs
+          scriptLocation: inlineScript
+          inlineScript: eng/scripts/api-doc-preview-wait.mjs
 
       - script: eng/scripts/api-doc-preview-interpret.mjs
         displayName: Output results
