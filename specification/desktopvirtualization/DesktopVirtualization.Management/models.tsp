@@ -1174,7 +1174,7 @@ union CanaryPolicy {
   string,
 
   /**
-   * Auto provision Canary VM.
+   * Decided by service whether to provision Canary VM.
    */
   Auto: "Auto",
 
