@@ -1,5 +1,14 @@
 // @ts-check
 
+/**
+ * @readonly
+ * @enum {"job" | "run"}
+ */
+export const FailureTarget = Object.freeze({
+  Job: "job",
+  Run: "run",
+});
+
 import { extractInputs } from "./context.js";
 import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from "./github.js";
 
@@ -10,7 +19,7 @@ import { CheckConclusion, CheckStatus, CommitStatusState, PER_PAGE_MAX } from ".
  * @param {string} monitoredWorkflowName
  * @param {string} requiredStatusName
  * @param {string} overridingLabel
- * @param {"run"|"job"} failureTarget
+ * @param {FailureTarget} [failureTarget] default: FailureTarget.Job
  * @returns {Promise<void>}
  */
 export default async function setStatus(
@@ -18,7 +27,7 @@ export default async function setStatus(
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
-  failureTarget,
+  failureTarget = FailureTarget.Job,
 ) {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
@@ -55,7 +64,7 @@ export default async function setStatus(
  * @param {string} params.monitoredWorkflowName
  * @param {string} params.requiredStatusName
  * @param {string} params.overridingLabel
- * @param {"run"|"job"} params.failureTarget
+ * @param {FailureTarget} [params.failureTarget] default: FailureTarget.Job
  * @returns {Promise<void>}
  */
 export async function setStatusImpl({
@@ -69,7 +78,7 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
-  failureTarget,
+  failureTarget = FailureTarget.Job,
 }) {
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
@@ -144,15 +153,15 @@ export async function setStatusImpl({
     /**
      * Update target to the "Analyze Code" run, which contains the meaningful output.
      *
-     * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
+     * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569
      */
     target_url = run.html_url;
 
-    if (run.conclusion === CheckConclusion.FAILURE && failureTarget === "job") {
+    if (run.conclusion === CheckConclusion.FAILURE && failureTarget === FailureTarget.Job) {
       /**
        * Update target to point directly to the first failed job
        *
-       * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+       * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
        */
 
       const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
