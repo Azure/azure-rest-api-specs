@@ -6,24 +6,30 @@ import * as fs from "fs";
 
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { includesFolder } from "@azure-tools/specs-shared/path";
-import {
-  getChangedFiles,
-} from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
+import { getChangedFiles } from "@azure-tools/specs-shared/changed-files"; //getChangedFiles,
 import { ReportableOavError } from "./formatting.js";
+
+export async function preCheckFiltering(
+  rootDirectory: string,
+  fileList?: string[],
+): Promise<string[]> {
+  const changedFiles = fileList ?? (await getChangedFiles({ cwd: rootDirectory }));
+
+  const swaggerFiles = await processFilesToSpecificationList(rootDirectory, changedFiles);
+
+  console.log("oav-runner is checking the following specification rooted files:");
+  swaggerFiles.forEach((file) => console.log(`- ${file}`));
+
+  return swaggerFiles;
+}
 
 export async function checkExamples(
   rootDirectory: string,
+  fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
-  const changedFiles = await getChangedFiles({
-    cwd: rootDirectory,
-  });
-
-  const swaggerFiles = await processFilesToSpecificationList(
-    rootDirectory,
-    changedFiles,
-  );
+  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -40,17 +46,13 @@ export async function checkExamples(
       }
     } catch (e) {
       if (e instanceof Error) {
-        console.log(
-          `Error validating examples for ${swaggerFile}: ${e.message}`,
-        );
+        console.log(`Error validating examples for ${swaggerFile}: ${e.message}`);
         errors.push({
           message: e.message,
           file: swaggerFile,
         } as ReportableOavError);
       } else {
-        console.log(
-          `Error validating examples for ${swaggerFile}: ${e}`,
-        );
+        console.log(`Error validating examples for ${swaggerFile}: ${e}`);
         errors.push({
           message: `Unhandled error validating ${swaggerFile}: ${e}`,
           file: swaggerFile,
@@ -67,17 +69,11 @@ export async function checkExamples(
 
 export async function checkSpecs(
   rootDirectory: string,
+  fileList?: string[],
 ): Promise<[number, string[], ReportableOavError[]]> {
   let errors: ReportableOavError[] = [];
 
-  const changedFiles = await getChangedFiles({
-    cwd: rootDirectory,
-  });
-
-  const swaggerFiles = await processFilesToSpecificationList(
-    rootDirectory,
-    changedFiles,
-  );
+  const swaggerFiles = await preCheckFiltering(rootDirectory, fileList);
 
   for (const swaggerFile of swaggerFiles) {
     try {
@@ -116,15 +112,11 @@ export async function checkSpecs(
   return [0, swaggerFiles, []];
 }
 
-async function getFiles(
-  rootDirectory: string,
-  directory: string,
-): Promise<string[]> {
+async function getFiles(rootDirectory: string, directory: string): Promise<string[]> {
   const target = path.join(rootDirectory, directory);
   const items = await fs.promises.readdir(target, {
     withFileTypes: true,
   });
-
 
   return items
     .filter((d) => d.isFile() && d.name.endsWith(".json"))
@@ -148,7 +140,7 @@ function swagger(file: string): boolean {
     (includesFolder(file, "data-plane") || includesFolder(file, "resource-manager")) &&
     includesFolder(file, "specification") &&
     !includesFolder(file, "examples")
-  )
+  );
 }
 
 export async function processFilesToSpecificationList(
@@ -162,6 +154,10 @@ export async function processFilesToSpecificationList(
   // files from get-changed-files are relative to the root of the repo,
   // though that context is passed into this from cli arguments.
   for (const file of files) {
+    if (!file.startsWith("specification/")) {
+      continue;
+    }
+
     const absoluteFilePath = path.join(rootDirectory, file);
 
     // if the file is an example, we need to find the swagger file that references it
@@ -179,12 +175,18 @@ export async function processFilesToSpecificationList(
 
       for (const swaggerFile of visibleSwaggerFiles) {
         if (!cachedSwaggerSpecs.has(swaggerFile)) {
-          const swaggerModel = new Swagger(
-            path.join(rootDirectory, swaggerFile),
-          );
-          const exampleSwaggers = await swaggerModel.getExamples();
-          const examples = [...exampleSwaggers].map((e) => e[1].path);
-          cachedSwaggerSpecs.set(swaggerFile, examples);
+          const swaggerModel = new Swagger(path.join(rootDirectory, swaggerFile));
+          try {
+            const exampleSwaggers = await swaggerModel.getExamples();
+            const examples = [...exampleSwaggers.keys()];
+            cachedSwaggerSpecs.set(swaggerFile, examples);
+          } catch (e) {
+            console.log(
+              `Error getting examples for ${swaggerFile}: ${e instanceof Error ? e.message : String(e)}`,
+            );
+            // if we can't get the examples, we just skip this file
+            continue;
+          }
         }
         const referencedExamples = cachedSwaggerSpecs.get(swaggerFile);
 

@@ -12,6 +12,11 @@ import { Tag } from "./tag.js";
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
  */
 
+/**
+ * Regex to match tag names in readme.md yaml code blocks
+ */
+export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
+
 export class Readme {
   /**
    * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
@@ -101,38 +106,27 @@ export class Readme {
         // Include default block and tagged blocks (```yaml $(tag) == 'package-2021-11-01')
         .filter((token) => token.lang?.toLowerCase().startsWith("yaml"));
 
-      const globalConfigYamlBlocks = yamlBlocks.filter(
-        (token) => token.lang === "yaml",
-      );
+      const globalConfigYamlBlocks = yamlBlocks.filter((token) => token.lang === "yaml");
 
       const globalConfig = globalConfigYamlBlocks.reduce(
-        (obj, token) =>
-          Object.assign(
-            obj,
-            yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA }),
-          ),
+        (obj, token) => Object.assign(obj, yaml.load(token.text, { schema: yaml.FAILSAFE_SCHEMA })),
         {},
       );
 
       /** @type {Map<string, Tag>} */
       const tags = new Map();
       for (const block of yamlBlocks) {
-        const tagName =
-          block.lang?.match(/yaml.*\$\(tag\) ?== ?'([^']*)'/)?.[1] || "default";
+        const tagName = block.lang?.match(TagMatchRegex)?.[2] || "default";
 
         if (tagName === "default" || tagName === "all-api-versions") {
           // Skip yaml blocks where this is no tag or tag is all-api-versions
           continue;
         }
 
-        const obj = /** @type {any} */ (
-          yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA })
-        );
+        const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
         if (!obj) {
-          this.#logger?.debug(
-            `No yaml object found for tag ${tagName} in ${this.#path}`,
-          );
+          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
           continue;
         }
 
@@ -214,9 +208,7 @@ export class Readme {
    */
   async toJSONAsync(options) {
     const tags = await mapAsync(
-      [...(await this.getTags()).values()].sort((a, b) =>
-        a.name.localeCompare(b.name),
-      ),
+      [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
       async (t) => await t.toJSONAsync(options),
     );
 

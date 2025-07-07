@@ -107,7 +107,7 @@ export async function buildState(
         readme: (await specModel.getReadmes()).get(readmePath)!,
         changedTags: new Set(),
       };
-      for (const [tagName,] of tags) {
+      for (const [tagName] of tags) {
         affectedTags.changedTags.add(tagName);
       }
       readmeTags.set(readmePath, affectedTags);
@@ -118,11 +118,11 @@ export async function buildState(
   const changedFileAndTagsMap = new Map<string, ReadmeAffectedTags>();
   for (const [readmeFile, tags] of readmeTags.entries()) {
     const tagMap = await tags.readme.getTags();
-    const tagsAndInputFiles = [...tags.changedTags].map(changedTag => {
-      return { 
+    const tagsAndInputFiles = [...tags.changedTags].map((changedTag) => {
+      return {
         tagName: changedTag,
         inputFiles: [...tagMap.get(changedTag)!.inputFiles.keys()],
-      }
+      };
     });
 
     const dedupedTags = deduplicateTags(tagsAndInputFiles);
@@ -135,9 +135,18 @@ export async function buildState(
   // For readme files that have changed but there are no affected swaggers,
   // add them to the map with no tags
   for (const changedReadme of existingChangedFiles.filter(readme)) {
+    const readmePath = resolve(rootPath, changedReadme);
+
+    // Skip readme.md files that don't have "input-file:" as autorest cannot
+    // scan them.
+    const readmeContent = await readFile(readmePath, { encoding: "utf-8" });
+    if (!readmeContent.includes("input-file:")) {
+      continue;
+    }
+
     const service = specModels.get(getService(changedReadme))!;
     const readmes = await service.getReadmes();
-    const readmeObject = readmes.get(resolve(rootPath, changedReadme))!;
+    const readmeObject = readmes.get(readmePath)!;
 
     if (!changedFileAndTagsMap.has(changedReadme)) {
       changedFileAndTagsMap.set(changedReadme, {

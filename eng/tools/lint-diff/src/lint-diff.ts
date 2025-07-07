@@ -43,6 +43,11 @@ export async function main() {
         short: "m",
         default: "main",
       },
+      "github-repo-path": {
+        type: "string",
+        short: "r",
+        default: process.env.GITHUB_REPOSITORY || "Azure/azure-rest-api-specs",
+      },
     },
     strict: true,
   };
@@ -55,6 +60,7 @@ export async function main() {
       "out-file": outFile,
       "base-branch": baseBranch,
       "compare-sha": compareSha,
+      "github-repo-path": githubRepoPath,
     },
   } = parseArgs(config);
 
@@ -92,6 +98,7 @@ export async function main() {
     outFile as string,
     baseBranch as string,
     compareSha as string,
+    githubRepoPath as string,
   );
 }
 
@@ -102,6 +109,7 @@ async function runLintDiff(
   outFile: string,
   baseBranch: string,
   compareSha: string,
+  githubRepoPath: string,
 ) {
   let beforeList, afterList, affectedSwaggers;
   try {
@@ -111,7 +119,7 @@ async function runLintDiff(
       changedFilesPath,
     );
   } catch (error) {
-    if (error instanceof SpecModelError) { 
+    if (error instanceof SpecModelError) {
       console.log("\n\n");
       console.log("❌ Error building Spec Model from changed file list:");
       console.log(`${error}`);
@@ -130,7 +138,7 @@ async function runLintDiff(
     return;
   }
 
-  if (afterList.size === 0) { 
+  if (afterList.size === 0) {
     await writeFile(outFile, "No applicable files found in after. Exiting.");
     console.log("No applicable files found in after. Exiting.");
     return;
@@ -140,7 +148,6 @@ async function runLintDiff(
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
-
 
   // If afterChecks has AutoRest errors, fail the run.
   const autoRestErrors = afterChecks
@@ -165,6 +172,7 @@ async function runLintDiff(
     outFile,
     baseBranch,
     compareSha,
+    githubRepoPath,
   );
 
   if (!pass) {
