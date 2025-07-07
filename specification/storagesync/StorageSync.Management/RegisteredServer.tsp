@@ -155,7 +155,15 @@ interface RegisteredServers {
   triggerRollover is ArmResourceActionSync<
     RegisteredServer,
     TriggerRolloverRequest,
-    Response = OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Response = (OkResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")

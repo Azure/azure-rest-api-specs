@@ -1286,6 +1286,7 @@ model ServerEndpointCreateParametersProperties {
   /**
    * Level of free space to be maintained by Cloud Tiering if it is enabled.
    */
+  @minValue(0)
   @maxValue(100)
   volumeFreeSpacePercent?: int32 = 20;
 
@@ -1294,7 +1295,7 @@ model ServerEndpointCreateParametersProperties {
    */
   @minValue(0)
   @maxValue(2147483647)
-  tierFilesOlderThanDays?: int32;
+  tierFilesOlderThanDays?: int32 = 0;
 
   /**
    * Friendly Name
@@ -2689,7 +2690,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 /**
  * Standard OK response with Azure request tracking headers.
  */
-model OkResponse {
+model CustomOkResponse {
   @doc("HTTP 200 OK status code")
   @statusCode
   _: 200;
@@ -2706,6 +2707,7 @@ model OkResponse {
 /**
  * List of private endpoint connections associated with the specified resource.
  */
+@pagedResult
 model PrivateEndpointConnectionListResult {
   /**
    * List of private endpoint connections associated with the specified resource.

@@ -127,7 +127,15 @@ interface CloudEndpoints {
   preBackup is ArmResourceActionSync<
     CloudEndpoint,
     BackupRequest,
-    Response = OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Response = (OkResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
@@ -144,10 +152,10 @@ interface CloudEndpoints {
    * Post Backup a given CloudEndpoint.
    */
   @action("postbackup")
-  postBackup is ArmResourceActionAsync<
+  postBackup is ArmResourceActionSync<
     CloudEndpoint,
     BackupRequest,
-    PostBackupResponse & {
+    (PostBackupResponse & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
       correlationRequestId?: string;
@@ -155,7 +163,15 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    },
+    }) | (ArmAcceptedLroResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }),
     Error = StorageSyncError
   >;
 
@@ -187,7 +203,15 @@ interface CloudEndpoints {
   restoreheartbeat is ArmResourceActionSync<
     CloudEndpoint,
     void,
-    OkResponse,
+    OkResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 

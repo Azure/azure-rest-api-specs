@@ -391,11 +391,11 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id"
+                "description": "correlation request id."
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "request id."
               }
             }
           },
@@ -520,6 +520,9 @@
           "PrivateEndpointConnections_ListByStorageSyncService": {
             "$ref": "./examples/PrivateEndpointConnections_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1598,7 +1601,17 @@
             }
           },
           "202": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
+              }
+            }
           },
           "default": {
             "description": "ignore",
@@ -1648,17 +1661,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "ignore"
           },
           "202": {
             "description": "ignore",
@@ -1794,17 +1797,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "ignore"
           },
           "202": {
             "description": "ignore",
@@ -1918,17 +1911,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "ignore"
           },
           "202": {
             "description": "ignore",
@@ -3708,11 +3691,13 @@
           "type": "integer",
           "format": "int32",
           "default": 20,
+          "minimum": 0,
           "maximum": 100
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "minimum": 0,
           "maximum": 2147483647
         },

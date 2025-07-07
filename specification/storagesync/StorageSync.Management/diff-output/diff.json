@@ -17,32 +17,11 @@
               "required__added": true
             }
           ]
-        ],
-        "responses": {
-          "200": {
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "description": {
-                  "__old": "correlation request id.",
-                  "__new": "correlation request id"
-                }
-              },
-              "x-ms-request-id": {
-                "description": {
-                  "__old": "request id.",
-                  "__new": "request id"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "schema": {
@@ -142,78 +121,6 @@
             }
           ]
         ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postbackup": {
-      "post": {
-        "responses": {
-          "202": {
-            "headers__deleted": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore": {
-      "post": {
-        "responses": {
-          "200": {
-            "headers__added": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore": {
-      "post": {
-        "responses": {
-          "200": {
-            "headers__added": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection": {
-      "post": {
-        "responses": {
-          "200": {
-            "headers__added": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}": {
@@ -386,16 +293,6 @@
         },
         "value": {
           "description__added": "[Placeholder] Discription for value property"
-        }
-      }
-    },
-    "ServerEndpointCreateParametersProperties": {
-      "properties": {
-        "volumeFreeSpacePercent": {
-          "minimum__deleted": 0
-        },
-        "tierFilesOlderThanDays": {
-          "default__deleted": 0
         }
       }
     },

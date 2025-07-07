@@ -66,7 +66,15 @@ interface Workflows {
   abort is ArmResourceActionSync<
     Workflow,
     void,
-    OkResponse,
+    OkResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    },
     Error = StorageSyncError
   >;
 }

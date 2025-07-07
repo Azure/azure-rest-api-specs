@@ -156,7 +156,15 @@ interface ServerEndpoints {
   recallAction is ArmResourceActionSync<
     ServerEndpoint,
     RecallActionParameters,
-    OkResponse | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    (OkResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
+      correlationRequestId?: string;
+
+      @header("x-ms-request-id")
+      @doc("request id.")
+      requestId?: string;
+    }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")

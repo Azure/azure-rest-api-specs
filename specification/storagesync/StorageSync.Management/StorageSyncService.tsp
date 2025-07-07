@@ -72,16 +72,16 @@ interface StorageSyncServices {
    * Patch a given StorageSyncService.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is Legacy.CustomPatchSync<
     StorageSyncService,
     PatchModel = StorageSyncServiceUpdateParameters,
     Response = (ArmResourceUpdatedResponse<StorageSyncService> & {
-      @header("x-ms-correlation-request-id.")
-      @doc("correlation request id")
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id.")
       correlationRequestId?: string;
 
-      @header("x-ms-request-id.")
-      @doc("request id")
+      @header("x-ms-request-id")
+      @doc("request id.")
       requestId?: string;
     }) | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> & {
@@ -93,7 +93,8 @@ interface StorageSyncServices {
       @doc("Request id")
       requestId?: string;
     }),
-    Error = StorageSyncError
+    Error = StorageSyncError,
+    OptionalRequestBody = false
   >;
 
   /**

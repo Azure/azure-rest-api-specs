@@ -564,11 +564,11 @@
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
-                "description": "correlation request id"
+                "description": "correlation request id."
               },
               "x-ms-request-id": {
                 "type": "string",
-                "description": "request id"
+                "description": "request id."
               }
             }
           },
@@ -745,6 +745,9 @@
           "PrivateEndpointConnections_ListByStorageSyncService": {
             "$ref": "./examples/PrivateEndpointConnections_ListByStorageSyncService.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1454,7 +1457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
@@ -2228,7 +2231,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2238,6 +2241,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-correlation-request-id": {
+                "type": "string",
+                "description": "correlation request id."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "request id."
               }
             }
           },
@@ -2309,17 +2320,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Azure operation completed successfully.",
@@ -2411,7 +2412,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
@@ -2513,17 +2514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Azure operation completed successfully.",
@@ -2606,7 +2597,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
@@ -2682,17 +2673,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string",
-                "description": "correlation request id."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "description": "request id."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "202": {
             "description": "Azure operation completed successfully.",
@@ -3217,7 +3198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
@@ -3425,7 +3406,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Standard OK response with Azure request tracking headers.",
+            "description": "Azure operation completed successfully.",
             "headers": {
               "x-ms-correlation-request-id": {
                 "type": "string",
@@ -5051,12 +5032,14 @@
           "format": "int32",
           "description": "Level of free space to be maintained by Cloud Tiering if it is enabled.",
           "default": 20,
+          "minimum": 0,
           "maximum": 100
         },
         "tierFilesOlderThanDays": {
           "type": "integer",
           "format": "int32",
           "description": "Tier files older than days.",
+          "default": 0,
           "minimum": 0,
           "maximum": 2147483647
         },
