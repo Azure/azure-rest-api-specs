@@ -25,30 +25,15 @@ model SolutionResource
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SolutionResourcesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
-
-        /**
-         * The fully qualified Azure Resource manager identifier of the resource.
-         */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path(#{ allowReserved: true })
-        scope: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Extension.ScopeParameter,
       },
+      {},
       {
-        /**
-         * Solution resource Name.
-         */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("solutions")
-        @minLength(1)
-        @maxLength(100)
-        @pattern("^[A-Za-z0-9-+@()_]+$")
-        solutionResourceName: string,
+        ...Extension.ExtensionProviderNamespace<SolutionResource>,
+        ...KeysOf<SolutionResource>,
       }
     > {}
 
@@ -58,7 +43,7 @@ interface SolutionResources {
   /**
    * Get the solution using the applicable solutionResourceName while creating the solution.
    */
-  get is ArmResourceRead<SolutionResource>;
+  get is Extension.Read<Extension.ScopeParameter, SolutionResource>;
 
   /**
    * Creates a solution for the specific Azure resource or subscription using the inputs ‘solutionId and requiredInputs’ from discovery solutions. <br/> Azure solutions comprise a comprehensive library of self-help resources that have been thoughtfully curated by Azure engineers to aid customers in resolving typical troubleshooting issues. These solutions encompass: <br/> (1.) Dynamic and context-aware diagnostics, guided troubleshooting wizards, and data visualizations. <br/> (2.) Rich instructional video tutorials and illustrative diagrams and images. <br/> (3.) Thoughtfully assembled textual troubleshooting instructions. <br/> All these components are seamlessly converged into unified solutions tailored to address a specific support problem area.
@@ -88,7 +73,7 @@ interface SolutionResources {
    * Warm up the solution resource by preloading asynchronous diagnostics results into cache
    */
   @action("warmup")
-  warmUp is ArmResourceActionSync<
+  warmUp is SolutionResourcesOps.ActionSync<
     SolutionResource,
     SolutionWarmUpRequestBody,
     NoContentResponse,

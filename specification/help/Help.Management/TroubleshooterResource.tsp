@@ -25,30 +25,15 @@ model TroubleshooterResource
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface TroubleshooterResourcesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
         ...ApiVersionParameter,
-
-        /**
-         * The fully qualified Azure Resource manager identifier of the resource.
-         */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path(#{ allowReserved: true })
-        scope: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Extension.ScopeParameter,
       },
+      {},
       {
-        /**
-         * Troubleshooter resource Name.
-         */
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("troubleshooters")
-        @minLength(1)
-        @maxLength(100)
-        @pattern("([A-Za-z0-9]+(-[A-Za-z0-9]+)+)")
-        troubleshooterName: string,
+        ...Extension.ExtensionProviderNamespace<TroubleshooterResource>,
+        ...KeysOf<TroubleshooterResource>,
       }
     > {}
 
@@ -58,7 +43,7 @@ interface TroubleshooterResources {
   /**
    * Gets troubleshooter instance result which includes the step status/result of the troubleshooter resource name that is being executed.<br/> Get API is used to retrieve the result of a Troubleshooter instance, which includes the status and result of each step in the Troubleshooter workflow. This API requires the Troubleshooter resource name that was created using the Create API.
    */
-  get is ArmResourceRead<TroubleshooterResource>;
+  get is Extension.Read<Extension.ScopeParameter, TroubleshooterResource>;
 
   /**
    * Creates the specific troubleshooter action under a resource or subscription using the ‘solutionId’ and  ‘properties.parameters’ as the trigger. <br/> Azure Troubleshooters help with hard to classify issues, reducing the gap between customer observed problems and solutions by guiding the user effortlessly through the troubleshooting process. Each Troubleshooter flow represents a problem area within Azure and has a complex tree-like structure that addresses many root causes. These flows are prepared with the help of Subject Matter experts and customer support engineers by carefully considering previous support requests raised by customers. Troubleshooters terminate at a well curated solution based off of resource backend signals and customer manual selections.
@@ -71,7 +56,8 @@ interface TroubleshooterResources {
   /**
    * Uses ‘stepId’ and ‘responses’ as the trigger to continue the troubleshooting steps for the respective troubleshooter resource name. <br/>Continue API is used to provide inputs that are required for the specific troubleshooter to progress into the next step in the process. This API is used after the Troubleshooter has been created using the Create API.
    */
-  continue is ArmResourceActionSync<
+  continue is Extension.ActionSync<
+    Extension.ScopeParameter,
     TroubleshooterResource,
     ContinueRequestBody,
     NoContentResponse,
@@ -81,12 +67,18 @@ interface TroubleshooterResources {
   /**
    * Ends the troubleshooter action
    */
-  end is ArmResourceActionSync<TroubleshooterResource, void, NoContentResponse>;
+  end is Extension.ActionSync<
+    Extension.ScopeParameter,
+    TroubleshooterResource,
+    void,
+    NoContentResponse
+  >;
 
   /**
    * Restarts the troubleshooter API using applicable troubleshooter resource name as the input.<br/> It returns new resource name which should be used in subsequent request. The old resource name is obsolete after this API is invoked.
    */
-  restart is ArmResourceActionSync<
+  restart is Extension.ActionSync<
+    Extension.ScopeParameter,
     TroubleshooterResource,
     void,
     ArmResponse<RestartTroubleshooterResponse>
