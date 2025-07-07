@@ -284,24 +284,6 @@
         "outputParameters"
       ]
     },
-    "CheckConfigurationUpdateRequest": {
-      "type": "object",
-      "description": "Defines the schema for configuration check update request to allow update of check execution status only.",
-      "properties": {
-        "checkId": {
-          "type": "string",
-          "description": "The unique identifier of the check defined in check definition."
-        },
-        "status": {
-          "$ref": "#/definitions/CheckExecutionStatus",
-          "description": "The status of the check execution."
-        }
-      },
-      "required": [
-        "checkId",
-        "status"
-      ]
-    },
     "CheckEvaluationCondition": {
       "type": "string",
       "description": "Condition to be used to evaluate the output and customize the check.",
@@ -442,7 +424,7 @@
           "type": "array",
           "description": "List of components managed at the workload level.",
           "items": {
-            "$ref": "#/definitions/WorkloadComponentsUpdateRequest"
+            "$ref": "#/definitions/WorkloadComponents"
           },
           "x-ms-identifiers": []
         },
@@ -450,7 +432,7 @@
           "type": "array",
           "description": "List of common checks to be executed for all the components (or) at parent resource level.",
           "items": {
-            "$ref": "#/definitions/CheckConfigurationUpdateRequest"
+            "$ref": "#/definitions/CheckConfiguration"
           },
           "x-ms-identifiers": [
             "checkId"
@@ -762,30 +744,6 @@
         "checks"
       ]
     },
-    "RoleConfigurationUpdateRequest": {
-      "type": "object",
-      "description": "Defines the schema for role configuration for update of checks execution.",
-      "properties": {
-        "roleName": {
-          "type": "string",
-          "description": "Name of the role."
-        },
-        "checks": {
-          "type": "array",
-          "description": "List of checks to be executed for the role.",
-          "items": {
-            "$ref": "#/definitions/CheckConfigurationUpdateRequest"
-          },
-          "x-ms-identifiers": [
-            "checkId"
-          ]
-        }
-      },
-      "required": [
-        "roleName",
-        "checks"
-      ]
-    },
     "SharedParameters": {
       "type": "object",
       "description": "Schema for shared parameters to use in 1P resources checks configuration.",
@@ -847,37 +805,6 @@
       "required": [
         "name",
         "roles"
-      ]
-    },
-    "WorkloadComponentsUpdateRequest": {
-      "type": "object",
-      "description": "Defines the components that are being updated for checks execution at the workload level.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the component."
-        },
-        "checks": {
-          "type": "array",
-          "description": "List of checks to be executed for the role.",
-          "items": {
-            "$ref": "#/definitions/CheckConfigurationUpdateRequest"
-          },
-          "x-ms-identifiers": [
-            "checkId"
-          ]
-        },
-        "roles": {
-          "type": "array",
-          "description": "List of roles to be updated for checks execution.",
-          "items": {
-            "$ref": "#/definitions/RoleConfigurationUpdateRequest"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "name"
       ]
     }
   },

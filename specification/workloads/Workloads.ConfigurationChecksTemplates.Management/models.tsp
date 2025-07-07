@@ -395,66 +395,12 @@ model ChecksConfigurationUpdateRequest {
    */
   @doc("List of components managed at the workload level.")
   @Azure.ResourceManager.identifiers(#[])
-  components?: WorkloadComponentsUpdateRequest[];
+  components?: WorkloadComponents[];
 
   /**
    * List of common checks to be executed for all the components (or) at parent resource level.
    */
   @doc("List of common checks to be executed for all the components (or) at parent resource level.")
   @Azure.ResourceManager.identifiers(#["checkId"])
-  commonChecks?: CheckConfigurationUpdateRequest[];
-}
-
-@doc("Defines the schema for configuration check update request to allow update of check execution status only.")
-model CheckConfigurationUpdateRequest {
-  /**
-   * The unique identifier of the check defined in check definition.
-   */
-  @doc("The unique identifier of the check defined in check definition.")
-  checkId: string;
-
-  /**
-   * The flag that indicates whether the check is enabled or disabled for execution.
-   */
-  @doc("The status of the check execution.")
-  status: CheckExecutionStatus;
-}
-
-@doc("Defines the components that are being updated for checks execution at the workload level.")
-model WorkloadComponentsUpdateRequest {
-  /**
-   * Name of the component. Not allowed for customization.
-   */
-  @doc("Name of the component.")
-  name: string;
-
-  /**
-   * List of checks to be updated in the configuration checks template.
-   */
-  @doc("List of checks to be executed for the role.")
-  @Azure.ResourceManager.identifiers(#["checkId"])
-  checks?: CheckConfigurationUpdateRequest[];
-
-  /**
-   * List of roles managed at the component level.
-   */
-  @doc("List of roles to be updated for checks execution.")
-  @Azure.ResourceManager.identifiers(#[])
-  roles?: RoleConfigurationUpdateRequest[];
-}
-
-@doc("Defines the schema for role configuration for update of checks execution.")
-model RoleConfigurationUpdateRequest {
-  /**
-   * Name of the role.
-   */
-  @doc("Name of the role.")
-  roleName: string;
-
-  /**
-   * List of checks to be executed for the role.
-   */
-  @doc("List of checks to be executed for the role.")
-  @Azure.ResourceManager.identifiers(#["checkId"])
-  checks: CheckConfigurationUpdateRequest[];
+  commonChecks?: CheckConfiguration[];
 }
