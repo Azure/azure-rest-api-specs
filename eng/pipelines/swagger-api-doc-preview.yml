@@ -16,7 +16,7 @@ jobs:
       - template: /eng/pipelines/templates/variables/globals.yml
       - template: /eng/pipelines/templates/variables/image.yml
       - name: BranchName
-        value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestId)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
+        value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
 
     steps:
       # TODO: Use sparse checkout instead
