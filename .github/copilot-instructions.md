@@ -219,3 +219,6 @@ Do not skip the step that choose SDK generation method to ensure the user select
 
 ## Release readiness of SDK and information about the release pipeline
 Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## Addressing API Review Comments
+Run `/address-api-review-comments` prompt to address API review comments by updating the TypeSpec API specification. This prompt will request a markdown file of comments, make the necessary changes, and create a pull request.
