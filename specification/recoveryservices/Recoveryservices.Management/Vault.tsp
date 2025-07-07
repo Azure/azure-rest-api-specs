@@ -217,7 +217,8 @@ interface Vaults {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Vault> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
