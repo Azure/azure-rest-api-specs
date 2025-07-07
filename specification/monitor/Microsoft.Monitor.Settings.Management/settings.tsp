@@ -15,8 +15,7 @@ namespace Microsoft.Monitor;
  * The resource for Azure Monitor Settings, including system data and tags.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton resource must use a constant name 'default', pattern is not applicable."
-model AzureMonitorSettingsResource
-  is ExtensionResource<AzureMonitorSettings> {
+model AzureMonitorSettingsResource is ExtensionResource<AzureMonitorSettings> {
   /**
    * The name of the Azure Monitor Settings resource. Must always be 'default'.
    */
@@ -59,10 +58,7 @@ model ServiceGroupParameters {
 @route("/providers/Microsoft.Management/serviceGroups")
 interface SettingsByServiceGroup {
   @doc("Gets the Default Settings resource for the Service Group.")
-  get is ArmResourceRead<
-    AzureMonitorSettingsResource,
-    ServiceGroupParameters
-  >;
+  get is ArmResourceRead<AzureMonitorSettingsResource, ServiceGroupParameters>;
 
   @doc("Creates or updates the Default Settings resource for the Service Group.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -82,10 +78,7 @@ alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBas
 @armResourceOperations(AzureMonitorSettingsResource)
 interface SettingsBySubscription {
   @doc("Gets the Default Settings resource for the Subscription.")
-  get is ArmResourceRead<
-    AzureMonitorSettingsResource,
-    SubscriptionParameters
-  >;
+  get is ArmResourceRead<AzureMonitorSettingsResource, SubscriptionParameters>;
 
   @doc("Creates or updates the Default Settings resource for the Subscription.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
