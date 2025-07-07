@@ -63,3 +63,10 @@ jobs:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
           NODE_OPTIONS: "--max-old-space-size=8192"
+
+      # Used by set-status.js to set failure targetUrl to job summary
+      - name: Set job-summary=true
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "job-summary"
+          value: "true"
