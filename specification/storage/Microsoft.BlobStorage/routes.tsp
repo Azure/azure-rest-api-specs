@@ -1549,7 +1549,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1576,7 +1576,11 @@ namespace Storage.Blob {
             ...ContentMd5Parameter;
             ...ContentCrc64Parameter;
             ...TimeoutParameter;
-            ...RangeParameter;
+
+            /** Bytes of data in the specified range. */
+            @header("Range")
+            range: string;
+
             ...LeaseIdOptionalParameter;
             ...EncryptionKeyParameter;
             ...EncryptionKeySha256Parameter;
@@ -1601,7 +1605,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -1621,9 +1625,17 @@ namespace Storage.Blob {
           {
             ...ContainerNamePathParameter;
             ...BlobPathParameter;
-            ...ContentLengthParameter;
+
+            /** value must be 0 when x-ms-page-write is clear */
+            @header("Content-Length")
+            contentLength: 0;
+
             ...TimeoutParameter;
-            ...RangeParameter;
+
+            /** Bytes of data in the specified range. */
+            @header("Range")
+            range: string;
+
             ...LeaseIdOptionalParameter;
             ...EncryptionKeyParameter;
             ...EncryptionKeySha256Parameter;
@@ -1646,7 +1658,7 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
           }
         >;
 
@@ -1806,7 +1818,7 @@ namespace Storage.Blob {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
             ...BlobSequenceNumberResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
           }
         >;
 
@@ -1917,7 +1929,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...RequestServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
