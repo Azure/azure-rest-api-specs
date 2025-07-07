@@ -26,21 +26,25 @@ model BotChannel is Azure.ResourceManager.TrackedResource<Channel> {
   /**
    * Gets or sets the SKU of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Required. Gets or sets the Kind of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: Kind;
 
   /**
    * Entity Tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Entity zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
@@ -110,23 +114,19 @@ interface BotChannels {
   /**
    * Returns a BotService Channel registration specified by the parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Channels_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<BotChannel, Error = Error>;
 
   /**
    * Creates a Channel registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Channels_Create")
   create is BotChannelOps.CreateOrUpdateSync<BotChannel>;
 
   /**
    * Updates a Channel registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Channels_Update")
   update is BotChannelOps.CustomPatchSync<
     BotChannel,
     PatchModel = BotChannel,
@@ -136,15 +136,13 @@ interface BotChannels {
   /**
    * Deletes a Channel registration from a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Channels_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<BotChannel, Error = Error>;
 
   /**
    * Returns all the Channel registrations of a particular BotService resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Channels_ListByResourceGroup")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
     BotChannel,
     Response = ArmResponse<ChannelResponseList>,
@@ -154,9 +152,8 @@ interface BotChannels {
   /**
    * Lists a Channel registration for a Bot Service including secrets
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listChannelWithKeys")
-  @operationId("Channels_ListWithKeys")
   listWithKeys is BotChannelOps.ActionSync<
     BotChannel,
     void,
@@ -166,9 +163,8 @@ interface BotChannels {
   /**
    * Regenerates secret keys and returns them for the DirectLine Channel of a particular BotService resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("regeneratekeys")
-  @operationId("DirectLine_RegenerateKeys")
   regenerateKeys is BotChannelRegenerateKeysOps.ActionSync<
     BotChannel,
     SiteInfo,

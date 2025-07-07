@@ -16,7 +16,7 @@ namespace Microsoft.BotService;
  */
 @parentResource(Bot)
 model ConnectionSetting
-  is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
+  is Azure.ResourceManager.ProxyResource<ConnectionSettingProperties> {
   ...ResourceNameParameter<
     Resource = ConnectionSetting,
     KeyName = "connectionName",
@@ -25,23 +25,40 @@ model ConnectionSetting
   >;
 
   /**
+   * Specifies the location of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /**
+   * Contains resource tags defined as key/value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
    * Gets or sets the SKU of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Required. Gets or sets the Kind of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: Kind;
 
   /**
    * Entity Tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Entity zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
@@ -51,23 +68,20 @@ interface ConnectionSettings {
   /**
    * Get a Connection Setting registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BotConnection_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<ConnectionSetting, Error = Error>;
 
   /**
    * Register a new Auth Connection for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BotConnection_Create")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceSync<ConnectionSetting, Error = Error>;
 
   /**
    * Updates a Connection Setting registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("BotConnection_Update")
   update is ArmCustomPatchSync<
     ConnectionSetting,
     PatchModel = ConnectionSetting,
@@ -78,15 +92,13 @@ interface ConnectionSettings {
   /**
    * Deletes a Connection Setting registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BotConnection_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<ConnectionSetting, Error = Error>;
 
   /**
    * Returns all the Connection Settings registered to a particular BotService resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BotConnection_ListByBotService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByBotService is ArmResourceListByParent<
     ConnectionSetting,
     Response = ArmResponse<ConnectionSettingResponseList>,
@@ -96,8 +108,7 @@ interface ConnectionSettings {
   /**
    * Get a Connection Setting registration for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BotConnection_ListWithSecrets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listWithSecrets is ArmResourceActionSync<
     ConnectionSetting,
     void,

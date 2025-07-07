@@ -24,13 +24,12 @@ namespace Azure.AI.Agents;
   """)
 union AgentStreamEvent {
   string,
-
-    | ThreadStreamEvent
-    | RunStreamEvent
-    | RunStepStreamEvent
-    | MessageStreamEvent
-    | ErrorEvent
-    | DoneEvent,
+  ThreadStreamEvent,
+  RunStreamEvent,
+  RunStepStreamEvent,
+  MessageStreamEvent,
+  ErrorEvent,
+  DoneEvent,
 }
 
 /** Thread operation related streaming events */

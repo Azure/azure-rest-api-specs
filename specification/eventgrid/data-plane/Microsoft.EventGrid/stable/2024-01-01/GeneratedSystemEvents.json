@@ -129,11 +129,11 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallParticipantEventProperties"
+          "$ref": "#/definitions/AcsCallParticipantEventData"
         }
       ]
     },
-    "AcsCallParticipantEventProperties": {
+    "AcsCallParticipantEventData": {
       "type": "object",
       "description": "Schema of common properties of all participant events",
       "properties": {
@@ -160,32 +160,9 @@
         }
       ]
     },
-    "AcsCallParticipantProperties": {
-      "type": "object",
-      "description": "Schema of common properties of all participant event user",
-      "properties": {
-        "communicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the participant user"
-        },
-        "role": {
-          "$ref": "#/definitions/AcsCallParticipantRoleKind",
-          "description": "The role of the participant"
-        }
-      }
-    },
-    "AcsCallParticipantRemovedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AcsCallParticipantEventProperties"
-        }
-      ]
-    },
-    "AcsCallParticipantRoleKind": {
+    "AcsCallParticipantKind": {
       "type": "string",
-      "description": "Call participant role kind.",
+      "description": "Call participant kind.",
       "enum": [
         "Attendee",
         "Presenter",
@@ -194,7 +171,7 @@
         "Collaborator"
       ],
       "x-ms-enum": {
-        "name": "AcsCallParticipantRoleKind",
+        "name": "AcsCallParticipantKind",
         "modelAsString": true,
         "values": [
           {
@@ -224,6 +201,29 @@
           }
         ]
       }
+    },
+    "AcsCallParticipantProperties": {
+      "type": "object",
+      "description": "Schema of common properties of all participant event user",
+      "properties": {
+        "communicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the participant user"
+        },
+        "role": {
+          "$ref": "#/definitions/AcsCallParticipantKind",
+          "description": "The role of the participant"
+        }
+      }
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ]
     },
     "AcsCallRoomProperties": {
       "type": "object",
@@ -737,8 +737,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -778,8 +777,7 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1580,6 +1578,30 @@
         }
       ]
     },
+    "AcsRecordingChannelType": {
+      "type": "string",
+      "description": "Recording channel type",
+      "enum": [
+        "Mixed",
+        "Unmixed"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingChannelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mixed",
+            "value": "Mixed",
+            "description": "Mixed channel type"
+          },
+          {
+            "name": "Unmixed",
+            "value": "Unmixed",
+            "description": "Unmixed channel type"
+          }
+        ]
+      }
+    },
     "AcsRecordingChunkInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of  Recording Chunk Information.",
@@ -1611,6 +1633,30 @@
         }
       }
     },
+    "AcsRecordingContentType": {
+      "type": "string",
+      "description": "Recording content type",
+      "enum": [
+        "AudioVideo",
+        "Audio"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingContentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AudioVideo",
+            "value": "AudioVideo",
+            "description": "AudioVideo content type"
+          },
+          {
+            "name": "Audio",
+            "value": "Audio",
+            "description": "Audio content type"
+          }
+        ]
+      }
+    },
     "AcsRecordingFileStatusUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
@@ -1630,15 +1676,15 @@
           "description": "The recording duration in milliseconds"
         },
         "recordingContentType": {
-          "$ref": "#/definitions/recordingContentType",
+          "$ref": "#/definitions/AcsRecordingContentType",
           "description": "The recording content type- AudioVideo, or Audio"
         },
         "recordingChannelType": {
-          "$ref": "#/definitions/recordingChannelType",
+          "$ref": "#/definitions/AcsRecordingChannelType",
           "description": "The recording  channel type - Mixed, Unmixed"
         },
         "recordingFormatType": {
-          "$ref": "#/definitions/recordingFormatType",
+          "$ref": "#/definitions/AcsRecordingFormatType",
           "description": "The recording format type - Mp4, Mp3, Wav"
         },
         "sessionEndReason": {
@@ -1654,6 +1700,36 @@
         "recordingFormatType"
       ]
     },
+    "AcsRecordingFormatType": {
+      "type": "string",
+      "description": "Recording format type",
+      "enum": [
+        "Wav",
+        "Mp3",
+        "Mp4"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRecordingFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wav",
+            "value": "Wav",
+            "description": "WAV format"
+          },
+          {
+            "name": "Mp3",
+            "value": "Mp3",
+            "description": "MP3 format"
+          },
+          {
+            "name": "Mp4",
+            "value": "Mp4",
+            "description": "MP4 format"
+          }
+        ]
+      }
+    },
     "AcsRecordingStorageInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of Recording Storage Information.",
@@ -1664,8 +1740,7 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1718,8 +1793,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1781,8 +1855,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1817,8 +1890,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1949,8 +2021,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "requestedWorkerSelectors": {
           "type": "array",
@@ -1958,8 +2029,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -1996,8 +2066,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -2036,8 +2105,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2045,8 +2113,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -2188,8 +2255,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2197,8 +2263,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "scheduledOn": {
           "type": "string",
@@ -2233,8 +2298,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "expiredAttachedWorkerSelectors": {
           "type": "array",
@@ -2242,8 +2306,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       },
       "required": [
@@ -2621,8 +2684,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "totalCapacity": {
           "type": "integer",
@@ -2736,8 +2798,7 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "totalCapacity": {
           "type": "integer",
@@ -2819,8 +2880,7 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "receivedTimestamp": {
           "type": "string",
@@ -2999,7 +3059,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3009,7 +3070,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3019,7 +3081,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3029,7 +3092,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3039,7 +3103,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3049,7 +3114,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3127,7 +3193,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3137,7 +3204,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3147,7 +3215,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3157,7 +3226,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3167,7 +3237,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3177,7 +3248,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3187,7 +3259,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3197,7 +3270,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3207,7 +3281,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3217,7 +3292,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3285,7 +3361,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3310,7 +3387,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3320,7 +3398,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3330,7 +3409,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3340,7 +3420,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3350,7 +3431,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3360,7 +3442,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3370,7 +3453,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3380,7 +3464,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3390,7 +3475,8 @@
       "properties": {
         "resourceUri": {
           "type": "string",
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
+          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`",
+          "x-ms-client-name": "resourceUrl"
         }
       }
     },
@@ -3548,10 +3634,7 @@
           "$ref": "#/definitions/AppAction",
           "description": "Type of action of the operation."
         }
-      },
-      "required": [
-        "action"
-      ]
+      }
     },
     "AppServicePlanAction": {
       "type": "string",
@@ -3587,12 +3670,7 @@
           "$ref": "#/definitions/AsyncStatus",
           "description": "Asynchronous operation status of the operation on the app service plan."
         }
-      },
-      "required": [
-        "stampKind",
-        "action",
-        "status"
-      ]
+      }
     },
     "AsyncStatus": {
       "type": "string",
@@ -3909,7 +3987,8 @@
         "unknown",
         "communicationUser",
         "phoneNumber",
-        "microsoftTeamsUser"
+        "microsoftTeamsUser",
+        "microsoftTeamsApp"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierModelKind",
@@ -3934,6 +4013,11 @@
             "name": "microsoftTeamsUser",
             "value": "microsoftTeamsUser",
             "description": "Microsoft Teams User"
+          },
+          {
+            "name": "microsoftTeamsApp",
+            "value": "microsoftTeamsApp",
+            "description": "Microsoft Teams App"
           }
         ]
       }
@@ -4160,7 +4244,8 @@
         },
         "instanceID": {
           "type": "string",
-          "description": "The running instance of an application. Changes after each restart."
+          "description": "The running instance of an application. Changes after each restart.",
+          "x-ms-client-name": "instanceId"
         }
       }
     },
@@ -4839,7 +4924,6 @@
       },
       "required": [
         "clientAuthenticationName",
-        "clientName",
         "namespaceName"
       ]
     },
@@ -4926,8 +5010,7 @@
       "properties": {
         "fileUrl": {
           "type": "string",
-          "description": "The path to the capture file.",
-          "x-ms-client-name": "fileurl"
+          "description": "The path to the capture file."
         },
         "fileType": {
           "type": "string",
@@ -6246,12 +6329,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6291,12 +6376,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6336,12 +6423,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6381,12 +6470,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6426,12 +6517,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6471,12 +6564,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6516,12 +6611,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6561,12 +6658,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6606,12 +6705,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6651,12 +6752,14 @@
         "NBF": {
           "type": "number",
           "format": "float",
-          "description": "Not before date of the object that triggered this event"
+          "description": "Not before date of the object that triggered this event",
+          "x-ms-client-name": "Nbf"
         },
         "EXP": {
           "type": "number",
           "format": "float",
-          "description": "The expiration date of the object that triggered this event"
+          "description": "The expiration date of the object that triggered this event",
+          "x-ms-client-name": "Exp"
         }
       },
       "required": [
@@ -6891,8 +6994,7 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",
@@ -7255,7 +7357,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7313,7 +7416,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7371,7 +7475,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7453,7 +7558,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7511,7 +7617,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7569,7 +7676,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7815,7 +7923,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7873,7 +7982,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -7931,7 +8041,8 @@
         },
         "resourceUri": {
           "type": "string",
-          "description": "The URI of the resource in the operation."
+          "description": "The URI of the resource in the operation.",
+          "x-ms-client-name": "resourceUrl"
         },
         "operationName": {
           "type": "string",
@@ -8817,8 +8928,7 @@
         "summaryReportBlobUrl": {
           "type": "string",
           "format": "uri",
-          "description": "The summary report blob url for a storage task",
-          "x-ms-client-name": "summaryReportBlobUri"
+          "description": "The summary report blob url for a storage task"
         }
       },
       "required": [
@@ -9025,11 +9135,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appServicePlanEventTypeDetail",
-        "sku"
-      ]
+      }
     },
     "WebAppServicePlanUpdatedEventDataSku": {
       "type": "object",
@@ -9089,10 +9195,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationCompletedEventData": {
       "type": "object",
@@ -9126,10 +9229,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationFailedEventData": {
       "type": "object",
@@ -9163,10 +9263,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebBackupOperationStartedEventData": {
       "type": "object",
@@ -9200,10 +9297,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationCompletedEventData": {
       "type": "object",
@@ -9237,10 +9331,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationFailedEventData": {
       "type": "object",
@@ -9274,10 +9365,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebRestoreOperationStartedEventData": {
       "type": "object",
@@ -9311,10 +9399,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapCompletedEventData": {
       "type": "object",
@@ -9348,10 +9433,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapFailedEventData": {
       "type": "object",
@@ -9385,10 +9467,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapStartedEventData": {
       "type": "object",
@@ -9422,10 +9501,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapWithPreviewCancelledEventData": {
       "type": "object",
@@ -9459,10 +9535,7 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
+      }
     },
     "WebSlotSwapWithPreviewStartedEventData": {
       "type": "object",
@@ -9496,87 +9569,6 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      },
-      "required": [
-        "appEventTypeDetail"
-      ]
-    },
-    "recordingChannelType": {
-      "type": "string",
-      "description": "Recording channel type",
-      "enum": [
-        "Mixed",
-        "Unmixed"
-      ],
-      "x-ms-enum": {
-        "name": "recordingChannelType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Mixed",
-            "value": "Mixed",
-            "description": "Mixed channel type"
-          },
-          {
-            "name": "Unmixed",
-            "value": "Unmixed",
-            "description": "Unmixed channel type"
-          }
-        ]
-      }
-    },
-    "recordingContentType": {
-      "type": "string",
-      "description": "Recording content type",
-      "enum": [
-        "AudioVideo",
-        "Audio"
-      ],
-      "x-ms-enum": {
-        "name": "recordingContentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AudioVideo",
-            "value": "AudioVideo",
-            "description": "AudioVideo content type"
-          },
-          {
-            "name": "Audio",
-            "value": "Audio",
-            "description": "Audio content type"
-          }
-        ]
-      }
-    },
-    "recordingFormatType": {
-      "type": "string",
-      "description": "Recording format type",
-      "enum": [
-        "Wav",
-        "Mp3",
-        "Mp4"
-      ],
-      "x-ms-enum": {
-        "name": "recordingFormatType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Wav",
-            "value": "Wav",
-            "description": "WAV format"
-          },
-          {
-            "name": "Mp3",
-            "value": "Mp3",
-            "description": "MP3 format"
-          },
-          {
-            "name": "Mp4",
-            "value": "Mp4",
-            "description": "MP4 format"
-          }
-        ]
       }
     }
   },

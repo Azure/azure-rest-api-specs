@@ -24,21 +24,25 @@ model Bot is Azure.ResourceManager.TrackedResource<BotProperties> {
   /**
    * Gets or sets the SKU of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 
   /**
    * Required. Gets or sets the Kind of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: Kind;
 
   /**
    * Entity Tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Entity zones
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   zones?: string[];
 }
@@ -92,9 +96,8 @@ interface Bots {
   /**
    * Creates an email channel sign in url for a Bot Service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("createEmailSignInUrl")
-  @operationId("Email_CreateSignInUrl")
   createSignInUrl is ArmResourceActionSync<
     Bot,
     void,
@@ -105,10 +108,9 @@ interface Bots {
   /**
    * Gets the private link resources that need to be created for a Bot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
-  @operationId("PrivateLinkResources_ListByBotResource")
   listByBotResource is ArmResourceActionSync<
     Bot,
     void,

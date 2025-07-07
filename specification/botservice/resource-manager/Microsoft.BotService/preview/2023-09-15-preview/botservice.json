@@ -2569,6 +2569,17 @@
           "$ref": "#/definitions/ConnectionSettingProperties",
           "description": "The set of properties specific to bot channel resource"
         },
+        "location": {
+          "type": "string",
+          "description": "Specifies the location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Contains resource tags defined as key/value pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Gets or sets the SKU of the resource."
@@ -2592,7 +2603,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
