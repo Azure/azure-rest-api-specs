@@ -221,4 +221,9 @@ Do not skip the step that choose SDK generation method to ensure the user select
 Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
 ## Addressing API Review Comments
-Run `/address-api-review-comments` prompt to address API review comments by updating the TypeSpec API specification. This prompt will request a markdown file of comments, make the necessary changes, and create a pull request.
+Run `/address-api-review-comments` prompt to address API review comments by updating the TypeSpec API specification. 
+
+The prompt follows the step-by-step process defined in the separate file:
+`.github/prompts/address-api-review-comments.prompt.md`
+
+The prompt will request a markdown file containing API review comments, analyze the required changes to TypeSpec files, and guide you through implementing those changes to address the feedback.
