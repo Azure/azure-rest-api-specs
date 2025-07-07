@@ -1,10 +1,8 @@
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Agents;
 
@@ -102,7 +100,6 @@ alias OptionalNullableMetadata = {
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @doc("Response format options for agent interactions")
-@clientName("AgentsResponseFormatOption", "python")
 union AgentsResponseFormatOption {
   /** Default value. Let the model handle the return format. */
   "auto",

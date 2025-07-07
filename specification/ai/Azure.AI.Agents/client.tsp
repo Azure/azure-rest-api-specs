@@ -162,6 +162,7 @@ using Azure.AI.Agents;
 @@clientName(Agent, "PersistentAgent", "csharp,java");
 
 @@access(AgentsResponseFormat, Access.internal, "csharp");
+@@access(AgentsResponseFormatOption, Access.public, "python");
 @@clientName(AgentsResponseFormat,
   "InternalPersistentAgentsResponseFormat",
   "csharp,java"
