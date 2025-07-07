@@ -1,6 +1,6 @@
 trigger: none
 pr:
-  paths: 
+  paths:
     include:
       - specification/**
 
@@ -11,11 +11,13 @@ jobs:
       name: $(LINUXPOOL)
       vmImage: $(LINUXVMIMAGE)
       os: linux
-      
+
     variables:
       - template: /eng/pipelines/templates/variables/globals.yml
       - template: /eng/pipelines/templates/variables/image.yml
-    
+      - name: BranchName
+        value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestId)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
+
     steps:
       # TODO: Use sparse checkout instead
       - checkout: self
@@ -30,6 +32,7 @@ jobs:
           # checks out files in the repo root
           Repositories:
             - Name: MicrosoftDocs/AzureRestPreview
+              # TODO: use main
               Commitish: refs/heads/doc-preview-migration-test
               WorkingDirectory: AzureRestPreview
 
@@ -48,23 +51,36 @@ jobs:
           TargetRepoOwner: MicrosoftDocs
           TargetRepoName: AzureRestPreview
           # TODO: Determine this value at runtime
-          BaseRepoBranch: doc-preview-migration-test-02
+          BaseRepoBranch: $(BranchName)
           CommitMsg: |
             Update API Doc Preview
-            Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId) 
+            Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
             PR: $(System.PullRequest.SourceRepositoryURI)/pull/$(System.PullRequest.PullRequestId)
-      
+
       - task: AzureCLI@2
-        displayName: Start and wait for docs build
+        displayName: Start docs build
         inputs:
           azureSubscription: msdocs-apidrop-connection
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: >-
-            az pipelines build queue 
-            --organization "https://dev.azure.com/apidrop/" 
-            --project "Content CI" 
-            --definition-id "8120" 
-            --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"doc-preview-migration-test-02"}, "source_of_truth": "code"}'
+            az pipelines build queue
+            --organization "https://dev.azure.com/apidrop/"
+            --project "Content CI"
+            --definition-id "8120"
+            --variables 'params={"target_repo":{"url":"https://github.com/MicrosoftDocs/AzureRestPreview","branch":"$(BranchName)"}, "source_of_truth": "code"}'
+            > buildstart.json
 
-      - script: echo "interpret results..."
+      - task: AzureCLI@2
+        displayName: Wait for docs build to finish
+        # Retry on failure to handle transient issues or builds that run longer
+        # than the token used by az CLI is valid
+        retryCountOnTaskFailure: 3
+        inputs:
+          azureSubscription: msdocs-apidrop-connection
+          scriptType: bash
+          scriptLocation: scriptPath
+          scriptPath: eng/scripts/api-doc-preview-wait.mjs
+
+      - script: eng/scripts/api-doc-preview-interpret.mjs
+        displayName: Output results
