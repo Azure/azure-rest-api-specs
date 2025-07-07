@@ -139,7 +139,7 @@ export async function setStatusImpl({
     /**
      * Update target to the "Analyze Code" run, which contains the meaningful output.
      *
-     * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
+     * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569
      */
     target_url = run.html_url;
 
@@ -147,7 +147,7 @@ export async function setStatusImpl({
       /**
        * Update target to point directly to the first failed job
        *
-       * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+       * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
        */
 
       const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
