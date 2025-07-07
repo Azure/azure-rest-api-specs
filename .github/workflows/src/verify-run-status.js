@@ -120,6 +120,12 @@ export async function verifyRunStatusImpl({
         commitStatusContext = commitStatuses[0].context;
         commitStatusState = commitStatuses[0].state;
         commitStatusTargetUrl = commitStatuses[0].target_url;
+      } else {
+        // Count the commit status as pending if not found and return with no-op
+        core.notice(
+          `Commit status is in pending state. Skipping comparison with check run conclusion.`,
+        );
+        return;
       }
     } catch (error) {
       core.setFailed(
