@@ -138,6 +138,8 @@ interface CommunicationsNoSubscription {
    * Adds a new customer communication to an Azure support ticket.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is CommunicationsNoSubscriptionOps.CreateOrUpdateAsync<
     CommunicationDetails,
     Response = ArmResourceUpdatedResponse<CommunicationDetails> | ArmAcceptedLroResponse
