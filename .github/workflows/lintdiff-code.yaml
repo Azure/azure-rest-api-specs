@@ -66,6 +66,7 @@ jobs:
 
       # Used by set-status.js to set failure targetUrl to job summary
       - name: Set job-summary=true
+        if: ${{ !cancelled() }}
         uses: ./.github/actions/add-empty-artifact
         with:
           name: "job-summary"
