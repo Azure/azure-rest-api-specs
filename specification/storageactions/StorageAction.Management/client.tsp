@@ -23,3 +23,12 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
+@@clientName(StorageTasksOperationGroup.previewActions,
+  "PreviewActions",
+  "csharp"
+);
+
+@@clientName(StorageTasks.storageTaskAssignmentList,
+  "list",
+  "java,javascript,python,go"
+);
