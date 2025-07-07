@@ -56,11 +56,11 @@ enum PromptType
     Prompt,
 
     @doc("Skill type Skill")
-    Skill
+    Skill,
 
     @doc("SkillDirect")
-    SkillDirect
+    SkillDirect,
 
     @doc("Feedback")
-    Feedback
+    Feedback,
 }
