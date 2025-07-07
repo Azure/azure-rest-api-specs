@@ -6,15 +6,6 @@
 |------|------------|-------|
 | `info['x-ms-code-generation-settings__deleted']` | deleted | `{"name":"StorageSyncManagementClient"}` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationEntityListResult.required__added` | added | `["value"]` |
-| `definitions.StorageSyncServiceCreateParameters.required__deleted` | deleted | `["location"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}'].patch.parameters[1].required__added` | added | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}'].patch.parameters[3].required__added` | added | `true` |
-
 ### Changes for `OperationDisplayResource`
 
 | Path | Change Type | Value |
@@ -102,6 +93,13 @@
 | `definitions.StorageSyncServiceArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 | `definitions.SyncGroupArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 | `definitions.WorkflowArray.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+
+### Changes for `required`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.OperationEntityListResult.required__added` | added | `["value"]` |
+| `definitions.StorageSyncServiceCreateParameters.required__deleted` | deleted | `["location"]` |
 
 ### Changes for `$ref`
 

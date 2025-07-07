@@ -94,7 +94,7 @@ interface StorageSyncServices {
       requestId?: string;
     }),
     Error = StorageSyncError,
-    OptionalRequestBody = false
+    OptionalRequestBody = true
   >;
 
   /**

@@ -81,7 +81,7 @@ interface ServerEndpoints {
    * Patch a given ServerEndpoint.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is Legacy.CustomPatchAsync<
     ServerEndpoint,
     PatchModel = ServerEndpointUpdateParameters,
     Response = (ArmResponse<ServerEndpoint> & {
@@ -102,7 +102,8 @@ interface ServerEndpoints {
       @doc("request id.")
       requestId?: string;
     }),
-    Error = StorageSyncError
+    Error = StorageSyncError,
+    OptionalRequestBody = true
   >;
 
   /**
