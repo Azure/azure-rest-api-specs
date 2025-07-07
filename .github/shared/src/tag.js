@@ -73,9 +73,7 @@ export class Tag {
     return {
       name: this.#name,
       inputFiles: await mapAsync(
-        [...this.#inputFiles.values()].sort((a, b) =>
-          a.path.localeCompare(b.path),
-        ),
+        [...this.#inputFiles.values()].sort((a, b) => a.path.localeCompare(b.path)),
         async (s) => await s.toJSONAsync(options),
       ),
     };
