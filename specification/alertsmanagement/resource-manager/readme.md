@@ -57,7 +57,7 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-preview-2025-05-25-preview
+tag: package-2023-03
 ```
 
 =======
@@ -84,7 +84,7 @@ input-file:
    - POST /providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate
 
    These endpoints provide the same functionality as their scoped counterparts but without requiring the scope parameter.
-   The operations are available through new operationIds with "_Global" suffix (e.g., Alerts_GetAll_Global, Alerts_GetById_Global).
+   The operations are available through new operationIds with "Global" suffix (e.g., Alerts_GetAllGlobal, Alerts_GetByIdGlobal, Alerts_GetHistoryGlobal, Alerts_ChangeStateGlobal).
 
 ### Tag: package-preview-2025-05-01-preview
 
