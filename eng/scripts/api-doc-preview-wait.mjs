@@ -3,7 +3,7 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { execFile } from "../../.github/shared/src/exec.js";
-import { readFile } from "fs";
+import { readFile } from "fs/promises";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -33,7 +33,7 @@ export async function main() {
 
   let buildStartData, buildId;
   try { 
-    buildStartData = JSON.parse(await readFile(buildStartPath, "utf8"));
+    buildStartData = JSON.parse(await readFile(buildStartPath, { encoding: "utf8" }));
     buildId = buildStartData.id;
   } catch (error) { 
     console.error(`Failed to read or parse input file "${buildStartPath}": ${error.message}`);
@@ -42,28 +42,30 @@ export async function main() {
     return;
   }
 
-  const buildIdentifiers = [ 
+  const devOpsIdentifiers = [ 
     "--organization", "https://dev.azure.com/apidrop/",
     "--project", "Content CI",
-    "--id", buildId,
   ];
-  let status = null;
 
-  while (status !== "completed") {
+  while (true) {
     try {
       // TODO: Query?
       const { stdout, } = await execFile(
         "az", 
         [
           "pipelines", "runs", "show",
-          ...buildIdentifiers,
+          ...devOpsIdentifiers,
+          "--id", buildId,
         ],
       );
 
       const run = JSON.parse(stdout);
-      status = run.status;
+      const status = run.status;
 
       console.log(`Build ${buildId} status: ${status}`);
+      if (status === "completed") { 
+        break;
+      }
 
       // Sleep 10 seconds to avoid calling the API too frequently
       await new Promise(resolve => setTimeout(resolve, 10_000));
@@ -86,7 +88,8 @@ export async function main() {
       "az",
       [
         "pipelines", "runs", "artifact", "download",
-        ...buildIdentifiers,
+        ...devOpsIdentifiers,
+        "--run-id", buildId,
         "--artifact-name", "report",
         "--path", resolve(__dirname, "../../"),
       ],
@@ -102,8 +105,6 @@ export async function main() {
     process.exitCode = 1;
     return;
   }
-
-  console.log("##vso[task.setvariable variable=DocsBuildFinished;]true");
 }
 
 await main();
