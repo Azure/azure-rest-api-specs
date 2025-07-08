@@ -25,10 +25,6 @@ jobs:
         run: |
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
-          # Create empty output file, since avocado only creates file if errors
-          touch $AVOCADO_OUTPUT_FILE
-
-
           echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
 
           npm exec --no -- avocado \
@@ -52,7 +48,7 @@ jobs:
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
 
       - name: Generate Job Summary
-        if: ${{ !cancelled() }}
+        if: ${{ always() && steps.run-avocado.outputs.output-file }}
         uses: actions/github-script@v7
         with:
           script: |
