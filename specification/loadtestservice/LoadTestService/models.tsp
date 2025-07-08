@@ -1347,7 +1347,7 @@ model ListTestRunQueryParams {
   @added(APIVersions.v2024_07_01_preview)
   createdByTypes?: string[];
 
-  @doc("Comma separated set of test IDs.")
+  @doc("Comma-separated list of test IDs. If you are using testIds, do not send a value for testId.")
   @query(#{ explode: false })
   @added(APIVersions.v2025_03_01_preview)
   testIds?: string[];
