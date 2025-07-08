@@ -6,10 +6,16 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Clusters.promoteReadReplica::parameters.body, "promoteRequest");
 @@clientName(Clusters.create::parameters.resource, "parameters");
 @@clientName(Clusters.update::parameters.properties, "parameters");
-@@clientName(ClustersOperationGroup.checkNameAvailability::parameters.body, "nameAvailabilityRequest");
+@@clientName(ClustersOperationGroup.checkNameAvailability::parameters.body,
+  "nameAvailabilityRequest"
+);
 @@clientName(FirewallRules.createOrUpdate::parameters.resource, "parameters");
-@@clientName(CoordinatorConfigurations.updateOnCoordinator::parameters.resource, "parameters");
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource, "parameters");
+@@clientName(CoordinatorConfigurations.updateOnCoordinator::parameters.resource,
+  "parameters"
+);
+@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "parameters"
+);
 @@clientName(Roles.create::parameters.resource, "parameters");
 
 @@clientName(NodeConfigurations.updateOnNode::parameters.resource,
