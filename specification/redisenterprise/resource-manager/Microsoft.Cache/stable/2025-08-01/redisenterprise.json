@@ -1929,7 +1929,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterProperties",
+          "$ref": "#/definitions/ClusterCreateProperties",
           "description": "Other properties of the cluster."
         }
       },
@@ -1952,7 +1952,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterProperties",
+          "$ref": "#/definitions/ClusterUpdateProperties",
           "description": "Other properties of the cluster."
         },
         "identity": {
@@ -1973,7 +1973,7 @@
         }
       }
     },
-    "ClusterProperties": {
+    "ClusterCommonProperties": {
       "title": "Redis Enterprise cluster properties",
       "description": "Properties of Redis Enterprise clusters, as opposed to general resource properties like location, tags",
       "type": "object",
@@ -2099,7 +2099,19 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
-        },
+        }
+      }
+    },
+    "ClusterCreateProperties": {
+      "title": "Redis Enterprise cluster properties for create operations",
+      "description": "Properties of Redis Enterprise clusters for create operations",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterCommonProperties"
+        }
+      ],
+      "properties": {
         "publicNetworkAccess": {
           "type": "string",
           "description": "Whether or not public endpoint access is allowed for this Redis Enterprise cluster.",
@@ -2116,6 +2128,30 @@
       "required": [
         "publicNetworkAccess"
       ]
+    },
+    "ClusterUpdateProperties": {
+      "title": "Redis Enterprise cluster properties for update operations",
+      "description": "Properties of Redis Enterprise clusters for update operations",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterCommonProperties"
+        }
+      ],
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this Redis Enterprise cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ClusterList": {
       "type": "object",
@@ -2141,7 +2177,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseProperties",
+          "$ref": "#/definitions/DatabaseCreateProperties",
           "description": "Other properties of the database."
         }
       },
@@ -2157,12 +2193,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseProperties",
+          "$ref": "#/definitions/DatabaseUpdateProperties",
           "description": "Properties of the database."
         }
       }
     },
-    "DatabaseProperties": {
+    "DatabaseCommonProperties": {
       "title": "Redis Enterprise database properties",
       "description": "Properties of Redis Enterprise databases, as opposed to general resource properties like location, tags",
       "type": "object",
@@ -2311,7 +2347,19 @@
             "name": "DeferUpgradeSetting",
             "modelAsString": true
           }
-        },
+        }
+      }
+    },
+    "DatabaseCreateProperties": {
+      "title": "Redis Enterprise database create properties",
+      "description": "Properties for creating Redis Enterprise databases",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseCommonProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
         "accessKeysAuthentication": {
           "type": "string",
           "description": "This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.",
@@ -2320,6 +2368,30 @@
             "Enabled"
           ],
           "default": "Disabled",
+          "x-ms-enum": {
+            "name": "accessKeysAuthentication",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DatabaseUpdateProperties": {
+      "title": "Redis Enterprise database update properties",
+      "description": "Properties for updating Redis Enterprise databases",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseCommonProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "accessKeysAuthentication": {
+          "type": "string",
+          "description": "This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
           "x-ms-enum": {
             "name": "accessKeysAuthentication",
             "modelAsString": true
