@@ -26,6 +26,9 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.Template.Contoso
+    model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "contoso-widgetmanager-rest"
     package-details:
@@ -44,6 +47,7 @@ options:
     inject-spans: true
     single-client: true
     slice-elements-byval: true
+    flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"

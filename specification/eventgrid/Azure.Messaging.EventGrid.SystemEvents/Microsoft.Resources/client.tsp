@@ -61,3 +61,32 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceAuthorization, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.ResourceAuthorization, Access.public);
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceActionFailureEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessEventData,
+  "csharp"
+);
