@@ -652,6 +652,7 @@ export async function createNextStepsComment(
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
+  const requiredCheckInfosPresent = requiredRuns.length > 0;
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
@@ -660,6 +661,7 @@ export async function createNextStepsComment(
     { github, context, core },
     labels,
     `${repo}/${targetBranch}`,
+    requiredCheckInfosPresent,
     requiredCheckInfos,
     fyiCheckInfos,
   );
@@ -671,6 +673,7 @@ export async function createNextStepsComment(
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
+ * @param {boolean} requiredCheckInfosPresent
  * @param {CheckMetadata[]} failingReqChecksInfo
  * @param {CheckMetadata[]} failingFyiChecksInfo
  * @returns {Promise<string>}
@@ -679,6 +682,7 @@ async function buildNextStepsToMergeCommentBody(
   { github, context, core },
   labels,
   targetBranch,
+  requiredCheckInfosPresent,
   failingReqChecksInfo,
   failingFyiChecksInfo,
 ) {
@@ -697,20 +701,16 @@ async function buildNextStepsToMergeCommentBody(
 
   // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
   // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
-  // the new world we will simply pull all the required checks and if any are failing then we are blocked.
-  // addendum: pending does not mean failing. We should simply not mention that any pending runs in the next steps to merge comment.
-  // if we have any pending runs, we will simply not mention them in the next steps.
-
-  // I am wondering if there is an edge case with this where I am somehow triggered and there are _no_ check
-  // runs at all. I don't want the comment to flip to "all requirements met" and then immediately jump to
-  // "requirements not met" when the next check run comes in.
-  // todo: double check if the comment update waits until there are NO pending jobs to update the comment
+  // The new world we will simply pull all the required checks and if any are failing then we are blocked. If there are
+  // no failed checks we can't yet say that everything is met, because a check MIGHT run in the future. To prevent
+  // this "no checks run" accidentally evaluating as success, we need to ensure that we have at least one failing check
+  // in the required checks to consider the requirements met
   const anyBlockerPresent = failingReqChecksInfo.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecksInfo.length > 0;
-  const requirementsMet = !anyBlockerPresent;
+  const requirementsMet = !anyBlockerPresent && requiredCheckInfosPresent;
 
   // Compose the body based on the current state
-  const bodyProper = getBodyProper(
+  const commentBody = getCommentBody(
     requirementsMet,
     anyBlockerPresent,
     anyFyiPresent,
@@ -719,7 +719,7 @@ async function buildNextStepsToMergeCommentBody(
     violatedReqLabelsRules,
   );
 
-  return commentTitle + bodyProper;
+  return commentTitle + commentBody;
 }
 
 /**
@@ -732,7 +732,7 @@ async function buildNextStepsToMergeCommentBody(
  * @param {RequiredLabelRule[]} violatedRequiredLabelsRules - Violated required label rules
  * @returns {string} The body content HTML
  */
-function getBodyProper(
+function getCommentBody(
   requirementsMet,
   anyBlockerPresent,
   anyFyiPresent,
