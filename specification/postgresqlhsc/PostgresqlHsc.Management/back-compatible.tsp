@@ -28,6 +28,9 @@ using Microsoft.DBforPostgreSQL;
 @@flattenProperty(Role.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Cluster.properties);
+
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ClusterServer.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
@@ -43,3 +46,4 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(NodeConfigurations.getNode, Configurations);
 @@clientLocation(CoordinatorConfigurations.getCoordinator, Configurations);
 @@clientLocation(CoordinatorConfigurations.updateOnCoordinator, Configurations);
+@@clientLocation(ClustersOperationGroup.checkNameAvailability, Clusters);
