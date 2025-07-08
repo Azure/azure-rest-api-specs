@@ -125,6 +125,7 @@ interface Branches {
   @post
   preflight(
     ...ResourceInstanceParameters<Branch>,
+
     @doc("Parameters for preflight checks.")
     @body
     parameters: PreflightCheckParameters,
