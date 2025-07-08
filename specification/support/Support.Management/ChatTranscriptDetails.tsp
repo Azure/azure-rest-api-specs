@@ -27,17 +27,18 @@ model ChatTranscriptDetails
 }
 
 /**
- * [Placeholder] Discription for page model
+ * [Placeholder] Description for page model
  */
 @pagedResult
 model ChatTranscriptsListResult {
   /**
-   * [Placeholder] Discription for nextLink property
+   * [Placeholder] Description for nextLink property
    */
   @nextLink
   nextLink?: string;
+
   /**
-   * [Placeholder] Discription for value property
+   * [Placeholder] Description for value property
    */
   @items
   value: ChatTranscriptDetails[];
@@ -75,7 +76,10 @@ interface ChatTranscripts {
   /**
    * Lists all chat transcripts for a support ticket under subscription
    */
-  list is ChatTranscriptOps.List<ChatTranscriptDetails, Response = ChatTranscriptsListResult>;
+  list is ChatTranscriptOps.List<
+    ChatTranscriptDetails,
+    Response = ChatTranscriptsListResult
+  >;
 }
 @armResourceOperations
 interface ChatTranscriptsNoSubscriptionOps
@@ -108,7 +112,10 @@ interface ChatTranscriptsNoSubscription {
   /**
    * Lists all chat transcripts for a support ticket
    */
-  list is ChatTranscriptsNoSubscriptionOps.List<ChatTranscriptDetails, Response = ChatTranscriptsListResult>;
+  list is ChatTranscriptsNoSubscriptionOps.List<
+    ChatTranscriptDetails,
+    Response = ChatTranscriptsListResult
+  >;
 }
 
 @@doc(ChatTranscriptDetails.name, "ChatTranscript name.");

@@ -26,17 +26,18 @@ model FileDetails
   >;
 }
 /**
- * [Placeholder] Discription for page model
+ * [Placeholder] Description for page model
  */
 @pagedResult
 model FilesListResult {
   /**
-   * [Placeholder] Discription for nextLink property
+   * [Placeholder] Description for nextLink property
    */
   @nextLink
   nextLink?: string;
+
   /**
-   * [Placeholder] Discription for value property
+   * [Placeholder] Description for value property
    */
   @items
   value: FileDetails[];
