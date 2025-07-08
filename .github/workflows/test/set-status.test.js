@@ -214,6 +214,7 @@ describe("setStatusImpl", () => {
     });
   });
 
+  // TODO: Add tests for "job-summary" artifact
   it.each([
     [
       CheckStatus.COMPLETED,
