@@ -3,29 +3,9 @@ import "@typespec/openapi";
 import "./routes.tsp";
 
 using Azure.ClientGenerator.Core;
-using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Rest;
 
 namespace Microsoft.Resources.DeploymentStacks;
-
-/**
- * The management group name path parameter.
- */
-model ManagementGroupIdParameter {
-  /** The name of the management group. The name is case insensitive. */
-  @path
-  @minLength(1)
-  @maxLength(90)
-  @segment("providers/Microsoft.Management/managementGroups")
-  managementGroupId: string;
-}
-
-model ManagementGroupBaseParameters
-  is Azure.ResourceManager.Foundations.TenantBaseParameters {
-  ...ManagementGroupIdParameter
-}
 
 #suppress "deprecated" "Backwards compat with old swagger"
 @@flattenProperty(DeploymentStack.properties);

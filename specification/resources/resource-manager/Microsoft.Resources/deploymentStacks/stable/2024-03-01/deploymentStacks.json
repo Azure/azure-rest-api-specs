@@ -50,7 +50,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Resources/deploymentStacks": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStacks": {
       "get": {
         "operationId": "DeploymentStacks_ListAtManagementGroup",
         "tags": [
@@ -62,7 +62,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           }
         ],
         "responses": {
@@ -89,7 +89,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}": {
       "get": {
         "operationId": "DeploymentStacks_GetAtManagementGroup",
         "tags": [
@@ -101,7 +101,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "name": "deploymentStackName",
@@ -145,7 +145,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "name": "deploymentStackName",
@@ -219,7 +219,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "name": "deploymentStackName",
@@ -283,7 +283,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/exportTemplate": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/exportTemplate": {
       "post": {
         "operationId": "DeploymentStacks_ExportTemplateAtManagementGroup",
         "tags": [
@@ -295,7 +295,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "name": "deploymentStackName",
@@ -329,7 +329,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/validate": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStacks/{deploymentStackName}/validate": {
       "post": {
         "operationId": "DeploymentStacks_ValidateStackAtManagementGroup",
         "tags": [
@@ -341,7 +341,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
+            "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
             "name": "deploymentStackName",
@@ -1948,6 +1948,16 @@
       },
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "unmanageActionResources"
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "description": "The name of the management group. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
     }
   }
 }

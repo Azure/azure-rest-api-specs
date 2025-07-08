@@ -71,4 +71,4 @@ interface DeploymentStacksAtSubscription
 
 @armResourceOperations
 interface DeploymentStacksAtManagementGroup
-  extends DeploymentStackCommonOps<ManagementGroupBaseParameters> {}
+  extends DeploymentStackCommonOps<ManagementGroupIdBaseParameters> {}
