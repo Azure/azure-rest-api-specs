@@ -47,6 +47,8 @@ export async function main() {
     "--project", "Content CI",
   ];
 
+  // Test timeout in 3 minutes
+  const start = (new Date()).getTime();
   while (true) {
     try {
       // TODO: Query?
@@ -67,6 +69,10 @@ export async function main() {
         break;
       }
 
+      if (Date.now() - start < 1_000 * 60 * 3) {
+        throw new Error("Test timeout");
+      }
+
       // Sleep 10 seconds to avoid calling the API too frequently
       await new Promise(resolve => setTimeout(resolve, 10_000));
 
@@ -78,6 +84,8 @@ export async function main() {
       if (error.stderr) {
         console.error(`Command error output:\n${error.stderr}`);
       }
+
+      throw error;
     }
   }
   console.log(`Build ${buildId} completed.`);
