@@ -17,6 +17,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
+    service-dir: "sdk/recoveryservices-datareplication"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-recoveryservicesdatareplication"
     namespace: "azure.mgmt.recoveryservicesdatareplication"
@@ -38,6 +39,11 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
     service-name: "Recovery Services Data Replication"
+    rename-model:
+      PrivateEndpointConnectionProxyListResult: "PrivEdpConnProxyListResult"
+      PrivateEndpointConnectionListResult: "PrivEdpConnListResult"
+      ReplicationExtensionModelListResult: "RepExtModelListResult"
+      JobModelCustomPropertiesAffectedObjectDetailsType: "AffectedObjectDetailsType"
   "@azure-tools/typespec-ts":
     typespec-title-map:
       DataReplicationClient: AzureSiteRecoveryManagementServiceAPI
