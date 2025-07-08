@@ -5,6 +5,31 @@
     "managementGroupName": "myManagementGroup",
     "stageMapName": "sampleStageMap",
     "api-version": "2025-03-01-preview",
+    "properties": {
+      "stages": [
+        {
+          "name": "stage1",
+          "sequence": 1,
+          "parameterValues": {
+            "param1": "updatedValue1"
+          }
+        },
+        {
+          "name": "stage2",
+          "sequence": 2,
+          "parameterValues": {
+            "param1": "updatedValue2"
+          }
+        },
+        {
+          "name": "stage3",
+          "sequence": 3,
+          "parameterValues": {
+            "param1": "value3"
+          }
+        }
+      ]
+    },
     "parameters": {
       "properties": {
         "stages": [
@@ -46,28 +71,52 @@
               "name": "stage1",
               "sequence": 1,
               "parameterValues": {
-                "param1": "updatedValue1"
+                "param1": {
+                  "value": "updatedValue1",
+                  "allowedValues": [
+                    "updatedValue1",
+                    "default"
+                  ]
+                }
               }
             },
             {
               "name": "stage2",
               "sequence": 2,
               "parameterValues": {
-                "param1": "updatedValue2"
+                "param1": {
+                  "value": "updatedValue2",
+                  "allowedValues": [
+                    "updatedValue2",
+                    "default"
+                  ]
+                }
               }
             },
             {
               "name": "stage3",
               "sequence": 3,
               "parameterValues": {
-                "param1": "value3"
+                "param1": {
+                  "value": "value3",
+                  "allowedValues": [
+                    "value3",
+                    "default"
+                  ]
+                }
               }
             }
           ],
           "parameters": {
             "param1": {
               "type": "string",
-              "defaultValue": "default"
+              "defaultValue": "default",
+              "allowedValues": [
+                "updatedValue1",
+                "updatedValue2",
+                "value3",
+                "default"
+              ]
             }
           }
         }

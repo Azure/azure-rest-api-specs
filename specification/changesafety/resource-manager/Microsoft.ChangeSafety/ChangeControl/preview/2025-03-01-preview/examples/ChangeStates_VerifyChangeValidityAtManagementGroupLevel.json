@@ -1,30 +1,35 @@
 {
-  "title": "ChangeStates_VerifyChangeValidityAtManagementGroupLevel_MaximumSet",
+  "title": "ChangeStates_VerifyChangeValidityAtManagementGroupLevel",
   "operationId": "ChangeStates_VerifyChangeValidityAtManagementGroupLevel",
   "parameters": {
     "managementGroupName": "myManagementGroup",
-    "changeStateName": "testChangeState",
     "api-version": "2025-03-01-preview",
-    "parameters": {
-      "operation": {
-        "uri": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Storage/storageAccounts/storageaccount1?api-version=2022-09-01",
-        "httpMethod": "PUT",
-        "content": {
-          "name": "storageaccount1",
-          "location": "eastus",
-          "properties": {}
+    "body": {
+      "properties": {
+        "changeType": "Normal",
+        "description": "Test change description",
+        "stageMapResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+        "changeArtifact": {
+          "name": "ArmTemplateDeployment",
+          "artifactType": "InlineArmTemplate",
+          "artifactPayload": {
+            "inlineScript": "{\"$schema\":\"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\"contentVersion\":\"1.0.0.0\",\"resources\":[]}"
+          }
         }
-      },
-      "stageProgressionResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/stage1",
-      "context": {}
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "outcome": "Succeeded",
-        "message": "The operation is valid",
-        "validUntil": "2023-12-31T23:59:59Z"
+        "validationResults": [
+          {
+            "code": "ValidationSuccess",
+            "message": "Change is valid",
+            "operation": "VerifyChangeValidity",
+            "details": "All validation checks passed"
+          }
+        ]
       }
     }
   }

@@ -6,6 +6,17 @@
     "changeStateName": "testChangeState",
     "stageProgressionName": "stage1",
     "api-version": "2025-03-01-preview",
+    "resource": {
+      "properties": {
+        "stageReference": "Stage1",
+        "state": "InProgress",
+        "parameterValues": {
+          "param1": "value1",
+          "param2": 42
+        },
+        "comments": "Starting stage execution"
+      }
+    },
     "parameters": {
       "properties": {
         "stageReference": "Stage1",
@@ -30,8 +41,21 @@
           "state": "InProgress",
           "sequence": 1,
           "parameterValues": {
-            "param1": "value1",
-            "param2": 42
+            "param1": {
+              "value": "value1",
+              "allowedValues": [
+                "value1",
+                "value2"
+              ]
+            },
+            "param2": {
+              "value": 42,
+              "allowedValues": [
+                41,
+                42,
+                43
+              ]
+            }
           },
           "comments": "Starting stage execution"
         }
@@ -48,8 +72,21 @@
           "state": "InProgress",
           "sequence": 1,
           "parameterValues": {
-            "param1": "value1",
-            "param2": 42
+            "param1": {
+              "value": "value1",
+              "allowedValues": [
+                "value1",
+                "value2"
+              ]
+            },
+            "param2": {
+              "value": 42,
+              "allowedValues": [
+                41,
+                42,
+                43
+              ]
+            }
           },
           "comments": "Starting stage execution"
         }

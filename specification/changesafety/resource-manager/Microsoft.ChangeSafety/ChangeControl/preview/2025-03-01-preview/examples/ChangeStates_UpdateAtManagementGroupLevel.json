@@ -5,6 +5,11 @@
     "managementGroupName": "myManagementGroup",
     "changeStateName": "testChangeState",
     "api-version": "2025-03-01-preview",
+    "properties": {
+      "description": "Updated change description",
+      "state": "InProgress",
+      "comments": "Updated state to in progress"
+    },
     "parameters": {
       "properties": {
         "description": "Updated change description",
@@ -39,7 +44,12 @@
           "stageParameters": {
             "param1": {
               "type": "string",
-              "defaultValue": "default"
+              "defaultValue": "default",
+              "allowedValues": [
+                "value1",
+                "value2",
+                "default"
+              ]
             }
           }
         }

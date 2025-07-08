@@ -20,14 +20,24 @@
                   "name": "stage1",
                   "sequence": 1,
                   "parameterValues": {
-                    "param1": "value1"
+                    "param1": {
+                      "value": "value1",
+                      "allowedValues": [
+                        "value1",
+                        "default"
+                      ]
+                    }
                   }
                 }
               ],
               "parameters": {
                 "param1": {
                   "type": "string",
-                  "defaultValue": "default"
+                  "defaultValue": "default",
+                  "allowedValues": [
+                    "value1",
+                    "default"
+                  ]
                 }
               }
             }
@@ -43,21 +53,40 @@
                   "name": "stage1",
                   "sequence": 1,
                   "parameterValues": {
-                    "param1": "value1"
+                    "param1": {
+                      "value": "value1",
+                      "allowedValues": [
+                        "value1",
+                        "value2",
+                        "default"
+                      ]
+                    }
                   }
                 },
                 {
                   "name": "stage2",
                   "sequence": 2,
                   "parameterValues": {
-                    "param1": "value2"
+                    "param1": {
+                      "value": "value2",
+                      "allowedValues": [
+                        "value1",
+                        "value2",
+                        "default"
+                      ]
+                    }
                   }
                 }
               ],
               "parameters": {
                 "param1": {
                   "type": "string",
-                  "defaultValue": "default"
+                  "defaultValue": "default",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
                 }
               }
             }
