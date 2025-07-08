@@ -19,7 +19,6 @@ interface SupportTicketsOperationGroup {
    * Check the availability of a resource name. This API should be used to check the uniqueness of the name for support ticket creation for the selected subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SupportTickets_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityInput,

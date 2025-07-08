@@ -59,3 +59,9 @@ using Microsoft.Support;
 @@clientName(FilesNoSubscription.upload::parameters.body, "uploadFile");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileDetails.properties);
+
+// @@clientLocation decorators for operations with custom @operationId
+// These ensure consistent operationId generation in the output
+@@clientLocation(SupportTicketsOperationGroup.checkNameAvailability,
+  "SupportTickets"
+);
