@@ -19,6 +19,11 @@ jobs:
         value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
 
     steps:
+      - pwsh: gh auth status --show-token
+        displayName: Show token scope
+        env:
+          GH_TOKEN: $(azuresdk-github-pat)
+
       # TODO: Use sparse checkout instead
       - checkout: self
         # Fetch depth required to get list of changed files
