@@ -23,6 +23,8 @@ jobs:
       - name: Run Avocado
         id: run-avocado
         run: |
+          set -o pipefail
+
           AVOCADO_LOG_FILE=$RUNNER_TEMP/avocado.log
           AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
