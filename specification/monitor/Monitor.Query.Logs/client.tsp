@@ -4,7 +4,20 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using MonitorQueryLogs;
 
-@@access(QueryOperationGroup.get, Access.internal);
-@@access(QueryOperationGroup.getWithResourceId, Access.internal);
-@@access(MetadataOperationGroup.get, Access.internal);
-@@access(MetadataOperationGroup.post, Access.internal);
+@TypeSpec.Versioning.useDependency(Versions.v2022_10_27)
+namespace ClientCustomizations;
+
+@client({
+  name: "MonitorQueryLogsClient",
+  service: MonitorQueryLogs,
+})
+interface MonitorQueryLogsClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  execute is QueryOperationGroup.execute;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  executeWithResourceId is QueryOperationGroup.executeWithResourceId;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  batch is QueryOperationGroup.batch;
+}
