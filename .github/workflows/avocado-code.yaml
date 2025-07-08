@@ -28,8 +28,8 @@ jobs:
           AVOCADO_LOG=$RUNNER_TEMP/avocado.log
           AVOCADO_OUTPUT=$RUNNER_TEMP/avocado.ndjson
 
-          echo "log=$AVOCADO_LOG"> $GITHUB_OUTPUT
-          echo "output=$AVOCADO_OUTPUT"> $GITHUB_OUTPUT
+          echo "log=$AVOCADO_LOG" >> $GITHUB_OUTPUT
+          echo "output=$AVOCADO_OUTPUT" >> $GITHUB_OUTPUT
 
           npm exec --no -- avocado \
             --excludePaths \
