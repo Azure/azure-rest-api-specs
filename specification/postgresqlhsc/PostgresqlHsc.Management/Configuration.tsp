@@ -36,7 +36,10 @@ interface Configurations {
   /**
    * List all the configurations of a cluster.
    */
-  listByCluster is ArmResourceListByParent<Configuration, Response = ClusterConfigurationListResult>;
+  listByCluster is ArmResourceListByParent<
+    Configuration,
+    Response = ClusterConfigurationListResult
+  >;
 
   /**
    * List all the configurations of a server in cluster.

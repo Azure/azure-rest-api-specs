@@ -326,7 +326,7 @@ model ClusterProperties {
   /**
    * The vCores count of a server (max: 96). Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information.
    */
-  # suppress "@azure-tools/typespec-azure-core/casing-style" "coordinatorVCores is the original name in the API"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "coordinatorVCores is the original name in the API"
   coordinatorVCores?: int32;
 
   /**
@@ -352,7 +352,7 @@ model ClusterProperties {
   /**
    * The compute in vCores on each worker node (max: 104). See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information.
    */
-  # suppress "@azure-tools/typespec-azure-core/casing-style" "nodeVCores is the original name in the API"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "nodeVCores is the original name in the API"
   nodeVCores?: int32;
 
   /**
@@ -387,7 +387,7 @@ model ClusterProperties {
    * Date and time in UTC (ISO8601 format) for cluster restore.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  # suppress "@azure-tools/typespec-azure-core/casing-style" "pointInTimeUTC is the original name in the API"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "pointInTimeUTC is the original name in the API"
   pointInTimeUTC?: utcDateTime;
 
   /**
@@ -620,7 +620,7 @@ model ClusterPropertiesForUpdate {
   /**
    * The vCores count of the coordinator (max: 96).
    */
-  # suppress "@azure-tools/typespec-azure-core/casing-style" "coordinatorVCores is the original name in the API"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "coordinatorVCores is the original name in the API"
   coordinatorVCores?: int32;
 
   /**
@@ -646,7 +646,7 @@ model ClusterPropertiesForUpdate {
   /**
    * The compute in vCores on each worker node (max: 104).
    */
-  # suppress "@azure-tools/typespec-azure-core/casing-style" "nodeVCores is the original name in the API"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "nodeVCores is the original name in the API"
   nodeVCores?: int32;
 
   /**

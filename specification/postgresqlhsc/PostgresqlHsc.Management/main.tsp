@@ -32,7 +32,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Cosmos DB for PostgreSQL database service resource provider REST APIs
  */
-# suppress "@azure-tools/typespec-azure-core/casing-style" "for the namespace"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "for the namespace"
 @armProviderNamespace
 @service(#{ title: "Cosmos DB for PostgreSQL" })
 @versioned(Versions)
