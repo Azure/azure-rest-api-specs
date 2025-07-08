@@ -318,6 +318,35 @@ export class TspConfigTsMlcDpPackageNameMatchPatternSubRule extends TspconfigEmi
     return skipForRestLevelClientOrManagementPlaneInTsEmitter(config, folder);
   }
 }
+
+export class TspConfigTsDpIsModularLibraryRequiredSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "is-modular-library", new RegExp(/^(true|false)$/));
+  }
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined) {
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}" for data plane TypeScript SDK`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with value "true" or "false"`,
+      );
+    }
+
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (typeof actualValue !== "boolean") {
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a boolean value`,
+        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be "true" or "false"`,
+      );
+    }
+
+    return { success: true };
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
 // ----- Go data plane sub rules -----
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -536,6 +565,7 @@ export const defaultRules = [
   new TspConfigTsDpPackageDirectorySubRule(),
   new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
   new TspConfigTsMlcDpPackageNameMatchPatternSubRule(),
+  new TspConfigTsDpIsModularLibraryRequiredSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
