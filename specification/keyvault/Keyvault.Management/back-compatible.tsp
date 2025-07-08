@@ -69,3 +69,6 @@ using Azure.Core;
 @@clientName(MhsmPrivateLinkResourceProperties,
   "MHSMPrivateLinkResourceProperties"
 );
+#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(Operation.properties);
+@@clientName(Operation.properties, "OperationProperties");

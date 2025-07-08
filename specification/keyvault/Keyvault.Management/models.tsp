@@ -1087,6 +1087,14 @@ model Resource {
 }
 
 /**
+ * The type of resource, Microsoft.KeyVault/vaults
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Type {
+  `Microsoft.KeyVault/vaults`,
+}
+
+/**
  * The parameters used to check the availability of the vault name.
  */
 model VaultCheckNameAvailabilityParameters {
@@ -1098,7 +1106,7 @@ model VaultCheckNameAvailabilityParameters {
   /**
    * The type of resource, Microsoft.KeyVault/vaults
    */
-  type: "Microsoft.KeyVault/vaults";
+  type: Type;
 }
 
 /**
@@ -1960,6 +1968,35 @@ model ProxyResourceWithoutSystemData {
   tags?: Record<string>;
 }
 
+/**
+ * Key Vault REST API operation definition.
+ */
+model Operation {
+  /**
+   * Operation name: {provider}/{resource}/{operation}
+   */
+  name?: string;
+
+  /**
+   * Display metadata associated with the operation.
+   */
+  display?: OperationDisplay;
+
+  /**
+   * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+   */
+  origin?: string;
+
+  /**
+   * Properties of operation, include metric specifications.
+   */
+  properties?: OperationProperties;
+
+  /**
+   * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane operations.
+   */
+  isDataAction?: boolean;
+}
 /**
  * Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.
  */
