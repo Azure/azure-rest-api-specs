@@ -160,3 +160,10 @@ using Microsoft.DevTestLab;
 @@clientName(VirtualNetworks.update::parameters.properties, "virtualNetwork");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualNetwork.properties);
+
+@@clientName(LabCosts, "Costs", "python");
+@@clientName(DtlEnvironments, "Environments", "python");
+@@clientName(Schedules, "GlobalSchedules", "python");
+@@clientName(ScheduleOperationGroup, "Schedules", "python");
+@@clientName(OperationsOperationGroup, "Operations", "python");
+@@clientName(LabVirtualMachines, "VirtualMachines", "python");
