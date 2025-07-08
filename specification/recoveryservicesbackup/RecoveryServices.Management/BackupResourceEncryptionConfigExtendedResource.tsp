@@ -37,22 +37,18 @@ model BackupResourceEncryptionConfigResource
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
-interface BackupResourceEncryptionConfigExtendedResources {
+interface BackupResourceEncryptionConfigs {
   /**
    * Fetches Vault Encryption config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupResourceEncryptionConfigs_Get")
   get is ArmResourceRead<BackupResourceEncryptionConfigExtendedResource>;
 
   /**
    * Updates Vault encryption config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("BackupResourceEncryptionConfigs_Update")
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceEncryptionConfigResource,
     Response = OkResponse
@@ -63,7 +59,7 @@ interface BackupResourceEncryptionConfigExtendedResources {
 @@doc(BackupResourceEncryptionConfigExtendedResource.properties,
   "BackupResourceEncryptionConfigExtendedResource properties"
 );
-@@doc(BackupResourceEncryptionConfigExtendedResources.update::parameters.resource,
+@@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
 );
 

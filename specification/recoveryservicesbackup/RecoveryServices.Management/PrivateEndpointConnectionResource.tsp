@@ -29,15 +29,11 @@ interface PrivateEndpointConnectionResources {
   /**
    * Get Private Endpoint Connection. This call is made by Backup Admin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_Get")
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
 
   /**
    * Approve or Reject Private Endpoint requests. This call is made by Backup Admin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_Put")
   put is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnectionResource,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -46,9 +42,7 @@ interface PrivateEndpointConnectionResources {
   /**
    * Delete Private Endpoint requests. This call is made by Backup Admin.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnectionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -87,10 +81,8 @@ interface PrivateEndpointOperationStatuses {
   /**
    * Gets the operation status for a private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @operationId("PrivateEndpoint_GetOperationStatus")
-  get is PrivateEndpointOperationStatusOps.Read<
+  getOperationStatus is PrivateEndpointOperationStatusOps.Read<
     PrivateEndpointConnectionResource,
     Response = ArmResponse<OperationStatus>
   >;

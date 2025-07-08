@@ -25,12 +25,10 @@ model ProtectionContainerResource
 }
 
 @armResourceOperations
-interface ProtectionContainerResources {
+interface ProtectionContainers {
   /**
    * Gets details of the specific container registered to your Recovery Services Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectionContainers_Get")
   get is ArmResourceRead<ProtectionContainerResource>;
 
   /**
@@ -38,9 +36,7 @@ interface ProtectionContainerResources {
    * This is an asynchronous operation. To track the operation status, use location header to call get latest status of
    * the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectionContainers_Register")
   register is ArmResourceCreateOrUpdateAsync<
     ProtectionContainerResource,
     Response = ArmResourceUpdatedResponse<ProtectionContainerResource> | ArmAcceptedLroResponse,
@@ -51,10 +47,8 @@ interface ProtectionContainerResources {
    * Unregisters the given container from your Recovery Services Vault. This is an asynchronous operation. To determine
    * whether the backend service has finished processing the request, call Get Container Operation Result API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectionContainers_Unregister")
   unregister is ArmResourceDeleteSync<
     ProtectionContainerResource,
     Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
@@ -63,10 +57,8 @@ interface ProtectionContainerResources {
   /**
    * This is an async operation and the results should be tracked using location header or Azure-async-url.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectionContainers_Inquire")
   inquire is ArmResourceActionSync<
     ProtectionContainerResource,
     void,
@@ -79,15 +71,16 @@ interface ProtectionContainerResources {
       $filter?: string;
     }
   >;
+}
 
+@armResourceOperations
+interface BackupWorkloadItems {
   /**
    * Provides a pageable list of workload item of a specific container according to the query filter and the pagination
    * parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   @action("items")
-  @operationId("BackupWorkloadItems_List")
   list is ArmResourceActionSync<
     ProtectionContainerResource,
     void,
@@ -156,6 +149,6 @@ interface ProtectionContainerOperationResults {
 @@doc(ProtectionContainerResource.properties,
   "ProtectionContainerResource properties"
 );
-@@doc(ProtectionContainerResources.register::parameters.resource,
+@@doc(ProtectionContainers.register::parameters.resource,
   "Request body for operation"
 );

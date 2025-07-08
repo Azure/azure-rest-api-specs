@@ -21,14 +21,12 @@ interface ProtectionIntentOperationGroup {
    * 2. VM is already protected
    * 3. Any VM related configuration passed in properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("""
     It will validate followings
     1. Vault capacity
     2. VM is already protected
     3. Any VM related configuration passed in properties.
     """)
-  @operationId("ProtectionIntent_Validate")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection")
   @post
   validate(
@@ -51,13 +49,11 @@ interface ProtectionIntentOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupStatusOperationGroup {
+interface BackupStatus {
   /**
    * Get the container backup status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get the container backup status")
-  @operationId("BackupStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupStatus")
   @post
   get(
@@ -80,13 +76,11 @@ interface BackupStatusOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface FeatureSupportOperationGroup {
+interface FeatureSupport {
   /**
    * It will validate if given feature with resource properties is supported in service
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("It will validate if given feature with resource properties is supported in service")
-  @operationId("FeatureSupport_Validate")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupValidateFeatures")
   @post
   validate(
@@ -109,12 +103,10 @@ interface FeatureSupportOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupProtectionIntentOperationGroup {
+interface BackupProtectionIntent {
   /**
    * Provides a pageable list of all intents that are present within a vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupProtectionIntent_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents")
   @get
   list(
@@ -144,12 +136,10 @@ interface BackupProtectionIntentOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupUsageSummariesOperationGroup {
+interface BackupUsageSummaries {
   /**
    * Fetches the backup management usage summaries of the vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupUsageSummaries_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries")
   @get
   list(
@@ -179,13 +169,11 @@ interface BackupUsageSummariesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface JobsOperationGroup {
+interface Jobs {
   /**
    * Triggers export of jobs specified by filters and returns an OperationID to track.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Jobs_Export")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport")
   @post
   export(
@@ -209,12 +197,10 @@ interface JobsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupProtectedItemsOperationGroup {
+interface BackupProtectedItems {
   /**
    * Provides a pageable list of all items that are backed up within a vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupProtectedItems_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems")
   @get
   list(
@@ -248,8 +234,6 @@ interface OperationOperationGroup {
   /**
    * Validate operation for specified backed up item. This is a synchronous operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Operation_Validate")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation")
   @post
   validate(
@@ -273,12 +257,10 @@ interface OperationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ValidateOperationOperationGroup {
+interface ValidateOperation {
   /**
    * Validate operation for specified backed up item in the form of an asynchronous operation. Returns tracking headers which can be tracked using GetValidateOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ValidateOperation_Trigger")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTriggerValidateOperation")
   @post
   trigger(
@@ -305,13 +287,11 @@ interface ValidateOperationOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ValidateOperationResultsOperationGroup {
+interface ValidateOperationResults {
   /**
    * Fetches the result of a triggered validate operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ValidateOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}")
   @get
   get(
@@ -335,14 +315,12 @@ interface ValidateOperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ValidateOperationStatusesOperationGroup {
+interface ValidateOperationStatuses {
   /**
    * Fetches the status of a triggered validate operation. The status can be in progress, completed
    * or failed. You can refer to the OperationStatus enum for all the possible states of the operation.
    * If operation has completed, this method returns the list of errors obtained while validating the operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ValidateOperationStatuses_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationsStatuses/{operationId}")
   @get
   get(
@@ -366,13 +344,11 @@ interface ValidateOperationStatusesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ProtectionContainerRefreshOperationResultsOperationGroup {
+interface ProtectionContainerRefreshOperationResults {
   /**
    * Provides the result of the refresh operation triggered by the BeginRefresh operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectionContainerRefreshOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}")
   @get
   get(
@@ -402,12 +378,10 @@ interface ProtectionContainerRefreshOperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ProtectableContainersOperationGroup {
+interface ProtectableContainers {
   /**
    * Lists the containers that can be registered to Recovery Services Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectableContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers")
   @get
   list(
@@ -440,9 +414,7 @@ interface ProtectionContainersOperationGroup {
    * Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an
    * asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectionContainers_Refresh")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers")
   @post
   refresh(
@@ -472,17 +444,15 @@ interface ProtectionContainersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupOperationResultsOperationGroup {
+interface BackupOperationResults {
   /**
    * Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the
    * status code in the response would be Accepted. It will continue to be in this state till it reaches completion. On
    * successful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is
    * part of the Location header of the operation response.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("BackupOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}")
   @get
   get(
@@ -506,14 +476,12 @@ interface BackupOperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupOperationStatusesOperationGroup {
+interface BackupOperationStatuses {
   /**
    * Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed
    * or failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations
    * create jobs. This method returns the list of jobs when the operation is complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupOperationStatuses_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}")
   @get
   get(
@@ -537,13 +505,11 @@ interface BackupOperationStatusesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupProtectableItemsOperationGroup {
+interface BackupProtectableItems {
   /**
    * Provides a pageable list of protectable objects within your subscription according to the query filter and the
    * pagination parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupProtectableItems_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems")
   @get
   list(
@@ -573,12 +539,10 @@ interface BackupProtectableItemsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface BackupProtectionContainersOperationGroup {
+interface BackupProtectionContainers {
   /**
    * Lists the containers registered to Recovery Services Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupProtectionContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers")
   @get
   list(
@@ -602,12 +566,10 @@ interface BackupProtectionContainersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface DeletedProtectionContainersOperationGroup {
+interface DeletedProtectionContainers {
   /**
    * Lists the soft deleted containers registered to Recovery Services Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedProtectionContainers_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDeletedProtectionContainers")
   @get
   list(
@@ -631,7 +593,7 @@ interface DeletedProtectionContainersOperationGroup {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-interface SecurityPINsOperationGroup {
+interface SecurityPINs {
   /**
    * Get the security PIN.
    */
@@ -665,13 +627,11 @@ interface SecurityPINsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface FetchTieringCostOperationGroup {
+interface FetchTieringCost {
   /**
    * Provides the details of the tiering related sizes and cost.
    * Status of the operation can be fetched using GetTieringCostOperationStatus API and result using GetTieringCostOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FetchTieringCost_Post")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/fetchTieringCost")
   @post
   post(
@@ -705,12 +665,10 @@ interface FetchTieringCostOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface GetTieringCostOperationResultOperationGroup {
+interface GetTieringCostOperationResult {
   /**
    * Gets the result of async operation for tiering cost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GetTieringCostOperationResult_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationResults/{operationId}")
   @get
   get(
@@ -734,12 +692,10 @@ interface GetTieringCostOperationResultOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface TieringCostOperationStatusOperationGroup {
+interface TieringCostOperationStatus {
   /**
    * Gets the status of async operations of tiering cost
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TieringCostOperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationsStatus/{operationId}")
   @get
   get(

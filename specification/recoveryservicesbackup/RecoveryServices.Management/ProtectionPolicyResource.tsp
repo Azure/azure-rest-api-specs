@@ -25,23 +25,19 @@ model ProtectionPolicyResource
 }
 
 @armResourceOperations
-interface ProtectionPolicyResources {
+interface ProtectionPolicies {
   /**
    * Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous
    * operation. Status of the operation can be fetched using GetPolicyOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectionPolicies_Get")
   get is ArmResourceRead<ProtectionPolicyResource>;
 
   /**
    * Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched
    * using GetPolicyOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectionPolicies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProtectionPolicyResource,
     Parameters = {
@@ -57,21 +53,20 @@ interface ProtectionPolicyResources {
    * Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the
    * operation can be fetched using GetProtectionPolicyOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectionPolicies_Delete")
   delete is ArmResourceDeleteAsyncBase<
     ProtectionPolicyResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
+}
 
+@armResourceOperations
+interface BackupPolicies {
   /**
    * Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch
    * scoped results.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupPolicies_List")
   list is ArmResourceListByParent<
     ProtectionPolicyResource,
     Parameters = {
@@ -154,7 +149,6 @@ interface ProtectionPolicyOperationStatuses {
    * or failed. You can refer to the Operation Status enum for all the possible states of an operation. Some operations
    * create jobs. This method returns the list of jobs associated with operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
   get is ProtectionPolicyOperationStatusOps.Read<OperationStatus>;
 }
@@ -165,6 +159,6 @@ interface ProtectionPolicyOperationStatuses {
 @@doc(ProtectionPolicyResource.properties,
   "ProtectionPolicyResource properties"
 );
-@@doc(ProtectionPolicyResources.createOrUpdate::parameters.resource,
+@@doc(ProtectionPolicies.createOrUpdate::parameters.resource,
   "resource backup policy"
 );

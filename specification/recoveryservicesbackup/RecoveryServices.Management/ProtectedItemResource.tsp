@@ -27,13 +27,11 @@ model ProtectedItemResource
 }
 
 @armResourceOperations
-interface ProtectedItemResources {
+interface ProtectedItems {
   /**
    * Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation,
    * call the GetItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectedItems_Get")
   get is ArmResourceRead<
     ProtectedItemResource,
     Parameters = {
@@ -49,10 +47,8 @@ interface ProtectedItemResources {
    * Enables backup of an item or to modifies the backup policy information of an already backed up item. This is an
    * asynchronous operation. To know the status of the operation, call the GetItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectedItems_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProtectedItemResource,
     Parameters = {
@@ -68,36 +64,36 @@ interface ProtectedItemResources {
    * Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the
    * request, call the GetItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("ProtectedItems_Delete")
   delete is ArmResourceDeleteSync<
     ProtectedItemResource,
     Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
   >;
+}
 
+@armResourceOperations
+interface Backups {
   /**
    * Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the
    * operation, call GetProtectedItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("backup")
-  @operationId("Backups_Trigger")
   trigger is ArmResourceActionSync<
     ProtectedItemResource,
     BackupRequestResource,
     AcceptedResponse
   >;
+}
 
+@armResourceOperations
+interface RecoveryPointsRecommendedForMove {
   /**
    * Lists the recovery points recommended for move to another tier
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("recoveryPointsRecommendedForMove")
-  @operationId("RecoveryPointsRecommendedForMove_List")
   list is ArmResourceActionSync<
     ProtectedItemResource,
     ListRecoveryPointsRecommendedForMoveRequest,
@@ -206,12 +202,10 @@ interface ProtectedItemOperationResults {
   "Backed up item name whose details are to be fetched."
 );
 @@doc(ProtectedItemResource.properties, "ProtectedItemResource properties");
-@@doc(ProtectedItemResources.createOrUpdate::parameters.resource,
+@@doc(ProtectedItems.createOrUpdate::parameters.resource,
   "resource backed up item"
 );
-@@doc(ProtectedItemResources.trigger::parameters.body,
-  "resource backup request"
-);
-@@doc(ProtectedItemResources.list::parameters.body,
+@@doc(Backups.trigger::parameters.body, "resource backup request");
+@@doc(RecoveryPointsRecommendedForMove.list::parameters.body,
   "List Recovery points Recommended for Move Request"
 );

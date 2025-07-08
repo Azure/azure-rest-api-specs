@@ -30,16 +30,12 @@ interface ProtectionIntentResources {
    * Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,
    * call the GetItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectionIntent_Get")
   get is ArmResourceRead<ProtectionIntentResource>;
 
   /**
    * Create Intent for Enabling backup of an item. This is a synchronous operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectionIntent_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProtectionIntentResource,
     Response = ArmResourceUpdatedResponse<ProtectionIntentResource>
@@ -48,9 +44,7 @@ interface ProtectionIntentResources {
   /**
    * Used to remove intent from an item
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectionIntent_Delete")
   delete is ArmResourceDeleteSync<
     ProtectionIntentResource,
     Response = ArmDeletedNoContentResponse

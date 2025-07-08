@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "BackupResourceConfigResources"
+      "name": "BackupResourceStorageConfigsNonCRR"
     },
     {
-      "name": "BackupResourceConfigOperationResults"
+      "name": "BMSPrepareDataMoveOperationResult"
     },
     {
       "name": "BackupResourceConfigOperationStatuses"
@@ -55,10 +55,10 @@
       "name": "ProtectionIntentResources"
     },
     {
-      "name": "BackupResourceVaultConfigResources"
+      "name": "BackupResourceVaultConfigs"
     },
     {
-      "name": "BackupResourceEncryptionConfigExtendedResources"
+      "name": "BackupResourceEncryptionConfigs"
     },
     {
       "name": "PrivateEndpointConnectionResources"
@@ -67,7 +67,13 @@
       "name": "PrivateEndpointOperationStatuses"
     },
     {
-      "name": "ProtectedItemResources"
+      "name": "ProtectedItems"
+    },
+    {
+      "name": "Backups"
+    },
+    {
+      "name": "RecoveryPointsRecommendedForMove"
     },
     {
       "name": "ProtectedItemOperationStatuses"
@@ -76,16 +82,28 @@
       "name": "ProtectedItemOperationResults"
     },
     {
-      "name": "ProtectionContainerResources"
+      "name": "ProtectionContainers"
+    },
+    {
+      "name": "BackupWorkloadItems"
     },
     {
       "name": "ProtectionContainerOperationResults"
     },
     {
-      "name": "RecoveryPointResources"
+      "name": "RecoveryPoints"
     },
     {
-      "name": "ProtectionPolicyResources"
+      "name": "Restores"
+    },
+    {
+      "name": "ItemLevelRecoveryConnections"
+    },
+    {
+      "name": "ProtectionPolicies"
+    },
+    {
+      "name": "BackupPolicies"
     },
     {
       "name": "ProtectionPolicyOperationResults"
@@ -94,7 +112,13 @@
       "name": "ProtectionPolicyOperationStatuses"
     },
     {
-      "name": "JobResources"
+      "name": "JobDetails"
+    },
+    {
+      "name": "BackupJobs"
+    },
+    {
+      "name": "JobCancellations"
     },
     {
       "name": "JobOperationResults"
@@ -103,10 +127,13 @@
       "name": "ExportJobsOperationResults"
     },
     {
-      "name": "BackupEngineBaseResources"
+      "name": "BackupEngines"
     },
     {
-      "name": "ResourceGuardProxyBaseResources"
+      "name": "ResourceGuardProxy"
+    },
+    {
+      "name": "ResourceGuardProxies"
     }
   ],
   "paths": {
@@ -353,7 +380,7 @@
       "get": {
         "operationId": "BackupResourceEncryptionConfigs_Get",
         "tags": [
-          "BackupResourceEncryptionConfigExtendedResources"
+          "BackupResourceEncryptionConfigs"
         ],
         "description": "Fetches Vault Encryption config.",
         "parameters": [
@@ -397,7 +424,7 @@
       "put": {
         "operationId": "BackupResourceEncryptionConfigs_Update",
         "tags": [
-          "BackupResourceEncryptionConfigExtendedResources"
+          "BackupResourceEncryptionConfigs"
         ],
         "description": "Updates Vault encryption config.",
         "parameters": [
@@ -449,7 +476,7 @@
       "get": {
         "operationId": "BackupEngines_List",
         "tags": [
-          "BackupEngineBaseResources"
+          "BackupEngines"
         ],
         "description": "Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.",
         "parameters": [
@@ -512,7 +539,7 @@
       "get": {
         "operationId": "BackupEngines_Get",
         "tags": [
-          "BackupEngineBaseResources"
+          "BackupEngines"
         ],
         "description": "Returns backup management server registered to Recovery Services Vault.",
         "parameters": [
@@ -884,7 +911,7 @@
       "get": {
         "operationId": "ProtectionContainers_Get",
         "tags": [
-          "ProtectionContainerResources"
+          "ProtectionContainers"
         ],
         "description": "Gets details of the specific container registered to your Recovery Services Vault.",
         "parameters": [
@@ -942,7 +969,7 @@
       "put": {
         "operationId": "ProtectionContainers_Register",
         "tags": [
-          "ProtectionContainerResources"
+          "ProtectionContainers"
         ],
         "description": "Registers the container with Recovery Services vault.\nThis is an asynchronous operation. To track the operation status, use location header to call get latest status of\nthe operation.",
         "parameters": [
@@ -1027,7 +1054,7 @@
       "delete": {
         "operationId": "ProtectionContainers_Unregister",
         "tags": [
-          "ProtectionContainerResources"
+          "ProtectionContainers"
         ],
         "description": "Unregisters the given container from your Recovery Services Vault. This is an asynchronous operation. To determine\nwhether the backend service has finished processing the request, call Get Container Operation Result API.",
         "parameters": [
@@ -1090,7 +1117,7 @@
       "post": {
         "operationId": "ProtectionContainers_Inquire",
         "tags": [
-          "ProtectionContainerResources"
+          "ProtectionContainers"
         ],
         "description": "This is an async operation and the results should be tracked using location header or Azure-async-url.",
         "parameters": [
@@ -1154,7 +1181,7 @@
       "get": {
         "operationId": "BackupWorkloadItems_List",
         "tags": [
-          "ProtectionContainerResources"
+          "BackupWorkloadItems"
         ],
         "description": "Provides a pageable list of workload item of a specific container according to the query filter and the pagination\nparameters.",
         "parameters": [
@@ -1304,7 +1331,7 @@
       "get": {
         "operationId": "ProtectedItems_Get",
         "tags": [
-          "ProtectedItemResources"
+          "ProtectedItems"
         ],
         "description": "Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation,\ncall the GetItemOperationResult API.",
         "parameters": [
@@ -1379,7 +1406,7 @@
       "put": {
         "operationId": "ProtectedItems_CreateOrUpdate",
         "tags": [
-          "ProtectedItemResources"
+          "ProtectedItems"
         ],
         "description": "Enables backup of an item or to modifies the backup policy information of an already backed up item. This is an\nasynchronous operation. To know the status of the operation, call the GetItemOperationResult API.",
         "parameters": [
@@ -1465,7 +1492,7 @@
       "delete": {
         "operationId": "ProtectedItems_Delete",
         "tags": [
-          "ProtectedItemResources"
+          "ProtectedItems"
         ],
         "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the\nrequest, call the GetItemOperationResult API.",
         "parameters": [
@@ -1535,7 +1562,7 @@
       "post": {
         "operationId": "Backups_Trigger",
         "tags": [
-          "ProtectedItemResources"
+          "Backups"
         ],
         "description": "Triggers backup for specified backed up item. This is an asynchronous operation. To know the status of the\noperation, call GetProtectedItemOperationResult API.",
         "parameters": [
@@ -1762,7 +1789,7 @@
       "get": {
         "operationId": "RecoveryPoints_List",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints"
         ],
         "description": "Lists the backup copies for the backed up item.",
         "parameters": [
@@ -1839,7 +1866,7 @@
       "get": {
         "operationId": "RecoveryPoints_Get",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints"
         ],
         "description": "Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation.\nTo know the status of the operation, call the GetProtectedItemOperationResult API.",
         "parameters": [
@@ -1913,7 +1940,7 @@
       "post": {
         "operationId": "MoveRecoveryPoint",
         "tags": [
-          "RecoveryPointResources"
+          "RecoveryPoints"
         ],
         "description": "Move recovery point from one datastore to another store.",
         "parameters": [
@@ -2008,7 +2035,7 @@
       "post": {
         "operationId": "ItemLevelRecoveryConnections_Provision",
         "tags": [
-          "RecoveryPointResources"
+          "ItemLevelRecoveryConnections"
         ],
         "description": "Provisions a script which invokes an iSCSI connection to the backup data. Executing this script opens a file\nexplorer displaying all the recoverable files and folders. This is an asynchronous operation. To know the status of\nprovisioning, call GetProtectedItemOperationResult API.",
         "parameters": [
@@ -2088,7 +2115,7 @@
       "post": {
         "operationId": "Restores_Trigger",
         "tags": [
-          "RecoveryPointResources"
+          "Restores"
         ],
         "description": "Restores the specified backed up data. This is an asynchronous operation. To know the status of this API call, use\nGetProtectedItemOperationResult API.",
         "parameters": [
@@ -2207,7 +2234,7 @@
       "post": {
         "operationId": "ItemLevelRecoveryConnections_Revoke",
         "tags": [
-          "RecoveryPointResources"
+          "ItemLevelRecoveryConnections"
         ],
         "description": "Revokes an iSCSI connection which can be used to download a script. Executing this script opens a file explorer\ndisplaying all recoverable files and folders. This is an asynchronous operation.",
         "parameters": [
@@ -2278,7 +2305,7 @@
       "post": {
         "operationId": "RecoveryPointsRecommendedForMove_List",
         "tags": [
-          "ProtectedItemResources"
+          "RecoveryPointsRecommendedForMove"
         ],
         "description": "Lists the recovery points recommended for move to another tier",
         "parameters": [
@@ -2418,7 +2445,7 @@
       "get": {
         "operationId": "BackupJobs_List",
         "tags": [
-          "JobResources"
+          "BackupJobs"
         ],
         "description": "Provides a pageable list of jobs.",
         "parameters": [
@@ -2487,7 +2514,7 @@
       "get": {
         "operationId": "JobDetails_Get",
         "tags": [
-          "JobResources"
+          "JobDetails"
         ],
         "description": "Gets extended information associated with the job.",
         "parameters": [
@@ -2540,7 +2567,7 @@
       "post": {
         "operationId": "JobCancellations_Trigger",
         "tags": [
-          "JobResources"
+          "JobCancellations"
         ],
         "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call\nGetCancelOperationResult API.",
         "parameters": [
@@ -2876,7 +2903,7 @@
       "get": {
         "operationId": "BackupPolicies_List",
         "tags": [
-          "ProtectionPolicyResources"
+          "BackupPolicies"
         ],
         "description": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch\nscoped results.",
         "parameters": [
@@ -2938,7 +2965,7 @@
       "get": {
         "operationId": "ProtectionPolicies_Get",
         "tags": [
-          "ProtectionPolicyResources"
+          "ProtectionPolicies"
         ],
         "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\noperation. Status of the operation can be fetched using GetPolicyOperationResult API.",
         "parameters": [
@@ -2992,7 +3019,7 @@
       "put": {
         "operationId": "ProtectionPolicies_CreateOrUpdate",
         "tags": [
-          "ProtectionPolicyResources"
+          "ProtectionPolicies"
         ],
         "description": "Creates or modifies a backup policy. This is an asynchronous operation. Status of the operation can be fetched\nusing GetPolicyOperationResult API.",
         "parameters": [
@@ -3082,7 +3109,7 @@
       "delete": {
         "operationId": "ProtectionPolicies_Delete",
         "tags": [
-          "ProtectionPolicyResources"
+          "ProtectionPolicies"
         ],
         "description": "Deletes specified backup policy from your Recovery Services Vault. This is an asynchronous operation. Status of the\noperation can be fetched using GetProtectionPolicyOperationResult API.",
         "parameters": [
@@ -3506,7 +3533,7 @@
       "get": {
         "operationId": "ResourceGuardProxies_Get",
         "tags": [
-          "ResourceGuardProxyBaseResources"
+          "ResourceGuardProxies"
         ],
         "description": "List the ResourceGuardProxies under vault",
         "parameters": [
@@ -3555,7 +3582,7 @@
       "get": {
         "operationId": "ResourceGuardProxy_Get",
         "tags": [
-          "ResourceGuardProxyBaseResources"
+          "ResourceGuardProxy"
         ],
         "description": "Returns ResourceGuardProxy under vault and with the name referenced in request",
         "parameters": [
@@ -3606,7 +3633,7 @@
       "put": {
         "operationId": "ResourceGuardProxy_Put",
         "tags": [
-          "ResourceGuardProxyBaseResources"
+          "ResourceGuardProxy"
         ],
         "description": "Add or Update ResourceGuardProxy under vault\nSecures vault critical operations",
         "parameters": [
@@ -3666,7 +3693,7 @@
       "delete": {
         "operationId": "ResourceGuardProxy_Delete",
         "tags": [
-          "ResourceGuardProxyBaseResources"
+          "ResourceGuardProxy"
         ],
         "description": "Delete ResourceGuardProxy under vault",
         "parameters": [
@@ -3719,7 +3746,7 @@
       "post": {
         "operationId": "ResourceGuardProxy_UnlockDelete",
         "tags": [
-          "ResourceGuardProxyBaseResources"
+          "ResourceGuardProxy"
         ],
         "description": "Secures delete ResourceGuardProxy operations.",
         "parameters": [
@@ -4317,7 +4344,7 @@
       "get": {
         "operationId": "BackupResourceVaultConfigs_Get",
         "tags": [
-          "BackupResourceVaultConfigResources"
+          "BackupResourceVaultConfigs"
         ],
         "description": "Fetches resource vault config.",
         "parameters": [
@@ -4361,7 +4388,7 @@
       "put": {
         "operationId": "BackupResourceVaultConfigs_Put",
         "tags": [
-          "BackupResourceVaultConfigResources"
+          "BackupResourceVaultConfigs"
         ],
         "description": "Updates vault security config.",
         "parameters": [
@@ -4420,7 +4447,7 @@
       "patch": {
         "operationId": "BackupResourceVaultConfigs_Update",
         "tags": [
-          "BackupResourceVaultConfigResources"
+          "BackupResourceVaultConfigs"
         ],
         "description": "Updates vault security config.",
         "parameters": [
@@ -4481,7 +4508,7 @@
       "get": {
         "operationId": "BackupResourceStorageConfigsNonCRR_Get",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Fetches resource storage config.",
         "parameters": [
@@ -4525,7 +4552,7 @@
       "put": {
         "operationId": "BackupResourceStorageConfigsNonCRR_Update",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Updates vault storage model type.",
         "parameters": [
@@ -4578,7 +4605,7 @@
       "patch": {
         "operationId": "BackupResourceStorageConfigsNonCRR_patch",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Updates vault storage model type.",
         "parameters": [
@@ -4630,7 +4657,7 @@
       "get": {
         "operationId": "BMSPrepareDataMoveOperationResult_Get",
         "tags": [
-          "BackupResourceConfigOperationResults"
+          "BMSPrepareDataMoveOperationResult"
         ],
         "description": "Fetches operation status for data move operation on vault",
         "parameters": [
@@ -4739,7 +4766,7 @@
       "post": {
         "operationId": "BMSPrepareDataMove",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Prepares source vault for Data Move operation",
         "parameters": [
@@ -4809,7 +4836,7 @@
       "post": {
         "operationId": "BMSTriggerDataMove",
         "tags": [
-          "BackupResourceConfigResources"
+          "BackupResourceStorageConfigsNonCRR"
         ],
         "description": "Triggers Data Move Operation on target vault",
         "parameters": [

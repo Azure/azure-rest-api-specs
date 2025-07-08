@@ -2834,8 +2834,8 @@ model ILRRequestResource extends Resource {
 /**
  * Parameters to Provision ILR API.
  */
-@discriminator("objectType")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+@discriminator("objectType")
 model ILRRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.

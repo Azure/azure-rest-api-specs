@@ -24,19 +24,18 @@ model JobResource is Azure.ResourceManager.TrackedResource<Job> {
 }
 
 @armResourceOperations
-interface JobResources {
+interface JobDetails {
   /**
    * Gets extended information associated with the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobDetails_Get")
   get is ArmResourceRead<JobResource>;
+}
 
+@armResourceOperations
+interface BackupJobs {
   /**
    * Provides a pageable list of jobs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupJobs_List")
   list is ArmResourceListByParent<
     JobResource,
     Parameters = {
@@ -54,16 +53,17 @@ interface JobResources {
     },
     Response = ArmResponse<JobResourceList>
   >;
+}
 
+@armResourceOperations
+interface JobCancellations {
   /**
    * Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call
    * GetCancelOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("cancel")
-  @operationId("JobCancellations_Trigger")
   trigger is ArmResourceActionSync<JobResource, void, AcceptedResponse>;
 }
 

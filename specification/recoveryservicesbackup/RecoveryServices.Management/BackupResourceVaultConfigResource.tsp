@@ -27,20 +27,16 @@ model BackupResourceVaultConfigResource
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
-interface BackupResourceVaultConfigResources {
+interface BackupResourceVaultConfigs {
   /**
    * Fetches resource vault config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupResourceVaultConfigs_Get")
   get is ArmResourceRead<BackupResourceVaultConfigResource>;
 
   /**
    * Updates vault security config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("BackupResourceVaultConfigs_Put")
   put is ArmResourceCreateOrReplaceSync<
     BackupResourceVaultConfigResource,
     Parameters = {
@@ -55,9 +51,7 @@ interface BackupResourceVaultConfigResources {
   /**
    * Updates vault security config.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("BackupResourceVaultConfigs_Update")
   update is ArmCustomPatchSync<
     BackupResourceVaultConfigResource,
     PatchModel = BackupResourceVaultConfigResource,
@@ -74,9 +68,9 @@ interface BackupResourceVaultConfigResources {
 @@doc(BackupResourceVaultConfigResource.properties,
   "BackupResourceVaultConfigResource properties"
 );
-@@doc(BackupResourceVaultConfigResources.put::parameters.resource,
+@@doc(BackupResourceVaultConfigs.put::parameters.resource,
   "resource config request"
 );
-@@doc(BackupResourceVaultConfigResources.update::parameters.properties,
+@@doc(BackupResourceVaultConfigs.update::parameters.properties,
   "resource config request"
 );

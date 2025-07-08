@@ -23,21 +23,17 @@ model ResourceGuardProxyBaseResource
 }
 
 @armResourceOperations
-interface ResourceGuardProxyBaseResources {
+interface ResourceGuardProxy {
   /**
    * Returns ResourceGuardProxy under vault and with the name referenced in request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuardProxy_Get")
   get is ArmResourceRead<ResourceGuardProxyBaseResource>;
 
   /**
    * Add or Update ResourceGuardProxy under vault
    * Secures vault critical operations
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ResourceGuardProxy_Put")
   put is ArmResourceCreateOrReplaceSync<
     ResourceGuardProxyBaseResource,
     Response = ArmResourceUpdatedResponse<ResourceGuardProxyBaseResource>
@@ -46,25 +42,11 @@ interface ResourceGuardProxyBaseResources {
   /**
    * Delete ResourceGuardProxy under vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuardProxy_Delete")
   delete is ArmResourceDeleteSync<ResourceGuardProxyBaseResource>;
-
-  /**
-   * List the ResourceGuardProxies under vault
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuardProxies_Get")
-  resourceGuardProxiesGet is ArmResourceListByParent<
-    ResourceGuardProxyBaseResource,
-    Response = ArmResponse<ResourceGuardProxyBaseResourceList>
-  >;
 
   /**
    * Secures delete ResourceGuardProxy operations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ResourceGuardProxy_UnlockDelete")
   unlockDelete is ArmResourceActionSync<
     ResourceGuardProxyBaseResource,
     UnlockDeleteRequest,
@@ -72,13 +54,24 @@ interface ResourceGuardProxyBaseResources {
   >;
 }
 
+@armResourceOperations
+interface ResourceGuardProxies {
+  /**
+   * List the ResourceGuardProxies under vault
+   */
+  get is ArmResourceListByParent<
+    ResourceGuardProxyBaseResource,
+    Response = ArmResponse<ResourceGuardProxyBaseResourceList>
+  >;
+}
+
 @@doc(ResourceGuardProxyBaseResource.name, "");
 @@doc(ResourceGuardProxyBaseResource.properties,
   "ResourceGuardProxyBaseResource properties"
 );
-@@doc(ResourceGuardProxyBaseResources.put::parameters.resource,
+@@doc(ResourceGuardProxy.put::parameters.resource,
   "Request body for operation"
 );
-@@doc(ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
+@@doc(ResourceGuardProxy.unlockDelete::parameters.body,
   "Request body for operation"
 );

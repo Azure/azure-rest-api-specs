@@ -25,12 +25,10 @@ model BackupEngineBaseResource
 }
 
 @armResourceOperations
-interface BackupEngineBaseResources {
+interface BackupEngines {
   /**
    * Returns backup management server registered to Recovery Services Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupEngines_Get")
   get is ArmResourceRead<
     BackupEngineBaseResource,
     Parameters = {
@@ -51,8 +49,6 @@ interface BackupEngineBaseResources {
   /**
    * Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupEngines_List")
   list is ArmResourceListByParent<
     BackupEngineBaseResource,
     Parameters = {

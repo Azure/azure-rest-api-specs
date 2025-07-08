@@ -25,8 +25,9 @@ model BackupResourceConfigResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
-interface BackupResourceConfigResources {
+interface BackupResourceStorageConfigsNonCRR {
   /**
    * Fetches resource storage config.
    */
@@ -109,8 +110,9 @@ interface BackupResourceConfigOperationResultOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
-interface BackupResourceConfigOperationResults {
+interface BMSPrepareDataMoveOperationResult {
   /**
    * Fetches operation status for data move operation on vault
    */
@@ -154,10 +156,8 @@ interface BackupResourceConfigOperationStatuses {
   /**
    * Fetches Operation Result for Prepare Data Move
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @get
-  @operationId("GetOperationStatus")
-  get is BackupResourceConfigOperationStatusOps.Read<
+  getOperationStatus is BackupResourceConfigOperationStatusOps.Read<
     BackupResourceConfigResource,
     Response = ArmResponse<OperationStatus>
   >;
@@ -167,15 +167,15 @@ interface BackupResourceConfigOperationStatuses {
 @@doc(BackupResourceConfigResource.properties,
   "BackupResourceConfigResource properties"
 );
-@@doc(BackupResourceConfigResources.update::parameters.resource,
+@@doc(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "Vault storage config request"
 );
-@@doc(BackupResourceConfigResources.patch::parameters.properties,
+@@doc(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "Vault storage config request"
 );
-@@doc(BackupResourceConfigResources.bMSPrepareDataMove::parameters.body,
+@@doc(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove::parameters.body,
   "Prepare data move request"
 );
-@@doc(BackupResourceConfigResources.bMSTriggerDataMove::parameters.body,
+@@doc(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove::parameters.body,
   "Trigger data move request"
 );

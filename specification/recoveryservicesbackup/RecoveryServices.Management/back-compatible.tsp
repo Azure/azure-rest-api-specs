@@ -3,16 +3,16 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
-@@clientName(BackupResourceConfigResources.update::parameters.resource,
+@@clientName(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "parameters"
 );
-@@clientName(BackupResourceConfigResources.patch::parameters.properties,
+@@clientName(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "parameters"
 );
-@@clientName(BackupResourceConfigResources.bMSPrepareDataMove::parameters.body,
+@@clientName(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove::parameters.body,
   "parameters"
 );
-@@clientName(BackupResourceConfigResources.bMSTriggerDataMove::parameters.body,
+@@clientName(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove::parameters.body,
   "parameters"
 );
 
@@ -20,14 +20,12 @@ using Microsoft.RecoveryServices;
   "parameters"
 );
 
-@@clientName(BackupResourceVaultConfigResources.put::parameters.resource,
-  "parameters"
-);
-@@clientName(BackupResourceVaultConfigResources.update::parameters.properties,
+@@clientName(BackupResourceVaultConfigs.put::parameters.resource, "parameters");
+@@clientName(BackupResourceVaultConfigs.update::parameters.properties,
   "parameters"
 );
 
-@@clientName(BackupResourceEncryptionConfigExtendedResources.update::parameters.resource,
+@@clientName(BackupResourceEncryptionConfigs.update::parameters.resource,
   "parameters"
 );
 
@@ -35,29 +33,58 @@ using Microsoft.RecoveryServices;
   "parameters"
 );
 
-@@clientName(ProtectedItemResources.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(ProtectedItemResources.trigger::parameters.body, "parameters");
-@@clientName(ProtectedItemResources.list::parameters.body, "parameters");
-
-@@clientName(RecoveryPointResources.moveRecoveryPoint::parameters.body,
-  "parameters"
-);
-@@clientName(RecoveryPointResources.trigger::parameters.body, "parameters");
-@@clientName(RecoveryPointResources.provision::parameters.body, "parameters");
-
-@@clientName(ProtectionPolicyResources.createOrUpdate::parameters.resource,
+@@clientName(ProtectedItems.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Backups.trigger::parameters.body, "parameters");
+@@clientName(RecoveryPointsRecommendedForMove.list::parameters.body,
   "parameters"
 );
 
-@@clientName(ProtectionContainerResources.register::parameters.resource,
+@@clientName(RecoveryPoints.moveRecoveryPoint::parameters.body, "parameters");
+@@clientName(Restores.trigger::parameters.body, "parameters");
+@@clientName(ItemLevelRecoveryConnections.provision::parameters.body, "parameters");
+
+@@clientName(ProtectionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 
-@@clientName(ResourceGuardProxyBaseResources.put::parameters.resource,
-  "parameters"
+@@clientName(ProtectionContainers.register::parameters.resource, "parameters");
+
+@@clientName(ResourceGuardProxy.put::parameters.resource, "parameters");
+@@clientName(ResourceGuardProxy.unlockDelete::parameters.body, "parameters");
+
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSPrepareDataMove,
+  Microsoft.RecoveryServices
 );
-@@clientName(ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
-  "parameters"
+@@clientLocation(BackupResourceStorageConfigsNonCRR.bMSTriggerDataMove,
+  Microsoft.RecoveryServices
+);
+@@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
+  Microsoft.RecoveryServices
+);
+
+@@clientLocation(PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnection"
+);
+@@clientLocation(PrivateEndpointConnectionResources.put,
+  "PrivateEndpointConnection"
+);
+@@clientLocation(PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnection"
+);
+@@clientLocation(PrivateEndpointOperationStatuses.getOperationStatus,
+  "PrivateEndpoint"
+);
+
+@@clientLocation(ProtectionIntentResources.get, "ProtectionIntent");
+@@clientLocation(ProtectionIntentResources.createOrUpdate, "ProtectionIntent");
+@@clientLocation(ProtectionIntentResources.delete, "ProtectionIntent");
+
+@@clientLocation(RecoveryPoints.moveRecoveryPoint, Microsoft.RecoveryServices);
+
+@@clientLocation(ProtectionContainersOperationGroup.refresh, ProtectionContainers);
+
+@@clientLocation(ProtectionIntentOperationGroup.validate, "ProtectionIntent");
+
+@@clientLocation(OperationOperationGroup.validate,
+  "Operation"
 );
