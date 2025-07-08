@@ -56,6 +56,18 @@ directive:
     from: AlertsManagement.json
     where:
      - $.definitions.customProperties
+  - suppress: ParametersInPost
+    reason: The newState parameter is required.
+    from: AlertsManagement.json
+    where:
+     - $.paths['/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
+     - $.paths['/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate'].post.parameters
+  - suppress: XmsPageableForListCalls
+    reason: List operations follow existing AlertsManagement pagination patterns.
+    from: AlertsManagement.json
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    reason: Response models maintain compatibility with existing AlertsManagement response structures.
+    from: AlertsManagement.json
 ```
 
 ``` yaml
