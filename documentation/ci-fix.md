@@ -15,7 +15,8 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
-  - [`spec-gen-sdk *` checks, like `spec-gen-sdk - go - pullrequest`](#spec-gen-sdk--checks-like-spec-gen-sdk---go---pullrequest)
+  - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
+  - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
@@ -50,34 +51,52 @@ This check is owned by One Engineering System. See [1ES CredScan] for help.
 
 This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 
-## `spec-gen-sdk *` checks, like `spec-gen-sdk - go - pullrequest`
+## `SDK Validation *` checks, like `SDK Validation - Go`
 
 > [!IMPORTANT]
 >
-> - The `spec-gen-sdk *` checks are owned by the Shanghai division of the Azure SDK team,
+> - The `SDK Validation Status` check is a meta check that aggregates the results of all `SDK Validation - {Language}`
+    checks and reports a unified status. Re-run any individual `SDK Validation - {Language}` checks will automatically
+    trigger a re-run of this meta check.
+> - The `SDK Validation *` checks are owned by the Shanghai division of the Azure SDK team,
     not the core Redmond Azure SDK team.
-> - Only `spec-gen-sdk - go` check failure will block a specs PR, because this check serves as a canary for the
-    entire `spec-gen-sdk *` group of checks.
-> - For more information, refer to [spec-gen-sdk FAQ](https://aka.ms/azsdk/sdk-automation-faq).
+> - For more information, refer to [SDK Validation FAQ](https://aka.ms/azsdk/sdk-automation-faq).
 
 If you have an issue or with any of checks listed in the first column of the table below:
 
 | Check name                        | Owner          | GitHub login                                                  |
 |-----------------------------------|----------------| ------------------------------------------------------------- |
-| `spec-gen-sdk - go`            | Chenjie Shi    | [tadelesh](https://github.com/tadelesh)                       |
-| `spec-gen-sdk - java`          | Weidong Xu     | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `spec-gen-sdk - js`            | Qiaoqiao Zhang | [qiaozha](https://github.com/qiaozha)                         |
-| `spec-gen-sdk - net`           | Wei Hu         | [live1206](https://github.com/live1206)                       |
-| `spec-gen-sdk - python`        | Yuchao Yan     | [msyyc](https://github.com/msyyc)                             |
+| `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
+| `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
+| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
+| `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 Do the following:
 
 1. Attempt to diagnose the issue yourself:
     1. Look at the affected PR's `checks` tab for the failing check.
     2. Click on the `View more details on Azure Pipelines.` link from that tab and inspect the devOps logs.
-       For example, for `spec-gen-sdk go` check look into the `Azure Pipelines/spec-gen-sdk - go - pullrequest (SDK Generation Job)` job, `SDK Generation` stage logs.
+       For example, for `SDK Validation - Go` check look into the `Azure Pipelines/SDK Validation - Go` pipeline run logs.
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
+
+## `SDK Breaking Change Review`
+
+> [!IMPORTANT]
+>
+> - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
+     changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
+     in PR review workflow, i.e. REST API breaking change review and ARM review.
+> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+
+If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
+
+| Language        | Reviewer        | GitHub login                                                  |
+|-----------------|-----------------| ------------------------------------------------------------- |
+| `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
+| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
 

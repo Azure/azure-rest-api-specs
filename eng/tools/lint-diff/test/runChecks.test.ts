@@ -16,7 +16,7 @@ vi.mock(import("../src/util.js"), async (importOriginal) => {
   };
 });
 
-vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => { 
+vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
@@ -27,55 +27,61 @@ vi.mock(import("../src/markdown-utils.js"), async (importOriginal) => {
 import { runChecks, getAutorestErrors } from "../src/runChecks.js";
 import { AutorestRunResult } from "../src/lintdiff-types.js";
 import { execNpmExec } from "@azure-tools/specs-shared/exec";
+import { ReadmeAffectedTags } from "../src/lintdiff-types.js";
+import { Readme } from "@azure-tools/specs-shared/readme";
 
 describe("runChecks", () => {
-  beforeEach(() => { 
-    vi.clearAllMocks(); 
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
   test("sets outputs properly on tag", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "out", stderr: "err" });
-    const runList = new Map([["readme.md", ["tag1"]]]);
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1"]) }],
+    ]);
 
     const actual = await runChecks("root", runList);
     expect(actual).toHaveLength(1);
     expect(actual[0].error).toBeNull();
     expect(actual[0].stdout).toBe("out");
     expect(actual[0].stderr).toBe("err");
-    
+
     expect(execNpmExec).toHaveBeenCalledWith(
-      expect.arrayContaining([
-        expect.stringContaining("--tag=tag1"),
-      ]),
-      expect.anything()
+      expect.arrayContaining([expect.stringContaining("--tag=tag1")]),
+      expect.anything(),
     );
   });
 
   test("coalesces null tag when no tags specified", async () => {
     (execNpmExec as Mock).mockResolvedValue({ stdout: "", stderr: "" });
-    const runList = new Map([["readme.md", []]]);
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>() }],
+    ]);
 
     const actual = await runChecks("root", runList);
     expect(actual).toHaveLength(1);
     expect(execNpmExec).toHaveBeenCalledWith(
-      expect.not.arrayContaining([expect.stringContaining("--tag")]), 
-      expect.anything()
+      expect.not.arrayContaining([expect.stringContaining("--tag")]),
+      expect.anything(),
     );
   });
 
   test("error path populates error, stdout, stderr", async () => {
     // Consturct an error object that will return true when passed to isExecError
-    const err = new Error(); 
-    (err as any).stdout = "s"; 
+    const err = new Error();
+    (err as any).stdout = "s";
     (err as any).stderr = "e";
     (err as any).code = 1;
-    
+
     (execNpmExec as Mock).mockRejectedValue(err);
-    const runList = new Map([["readme.md", ["tag1", "tag2"]]]);
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
+    ]);
 
     const actual = await runChecks("root", runList);
     expect(actual).toHaveLength(2);
-    actual.forEach(r => {
+    actual.forEach((r) => {
       expect(r.error).toBe(err);
       expect(r.stdout).toBe("s");
       expect(r.stderr).toBe("e");
@@ -83,17 +89,19 @@ describe("runChecks", () => {
   });
 
   test("error path throws an error that isn't an ExecError", async () => {
-    (execNpmExec as Mock).mockRejectedValue({ 
-      message: "some error for which isExecError returns false" 
+    (execNpmExec as Mock).mockRejectedValue({
+      message: "some error for which isExecError returns false",
     });
-    const runList = new Map([["readme.md", ["tag1", "tag2"]]]);
+    const runList = new Map<string, ReadmeAffectedTags>([
+      ["readme.md", { readme: new Readme(""), changedTags: new Set<string>(["tag1", "tag2"]) }],
+    ]);
     expect(runChecks("root", runList)).rejects.toThrow();
   });
 });
 
 describe("getAutorestErrors", () => {
-   test("filters only error and fatal levels", () => {
-     const lines =`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"warning","message":"Use the latest version v6 of types.json.","code":"LatestVersionOfCommonTypesMustBeUsed","details":{"jsonpath":["definitions","SettingsResourceUpdate","allOf","0","$ref"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":444,"column":18},"end":{"line":444,"column":111}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs-pr/specification/portalservices/resource-manager/Microsoft.PortalServices/settings/preview/2025-04-01-preview/settings.json","position":{"line":444,"column":11}}]}
+  test("filters only error and fatal levels", () => {
+    const lines = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"warning","message":"Use the latest version v6 of types.json.","code":"LatestVersionOfCommonTypesMustBeUsed","details":{"jsonpath":["definitions","SettingsResourceUpdate","allOf","0","$ref"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":444,"column":18},"end":{"line":444,"column":111}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs-pr/specification/portalservices/resource-manager/Microsoft.PortalServices/settings/preview/2025-04-01-preview/settings.json","position":{"line":444,"column":11}}]}
 {"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Return"}
 {"level":"fatal","message":"Process() cancelled due to failure "}
 {"level":"error","message":"!Error: There are multiple operations defined for \\n  'get: /providers/Microsoft.PortalServices/operations'.\\n\\n  You are probably trying to use an input with multiple API versions with an autorest V2 generator, and that will not work. "}
@@ -103,20 +111,22 @@ describe("getAutorestErrors", () => {
     const runResult = { stdout: lines, stderr: "" } as any;
 
     const errors = getAutorestErrors(runResult);
-     expect(errors).toEqual(expect.arrayContaining([
-      expect.objectContaining({ level: "fatal", message: "Process() cancelled due to failure " }),
-      expect.objectContaining({ level: "error", }),
-    ]));
+    expect(errors).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ level: "fatal", message: "Process() cancelled due to failure " }),
+        expect.objectContaining({ level: "error" }),
+      ]),
+    );
 
-    expect(errors).not.toEqual(expect.arrayContaining([
-      expect.objectContaining({ level: "information" }),
-    ]));
-    expect(errors).not.toEqual(expect.arrayContaining([
-      expect.objectContaining({ level: "warning" }),
-    ]));
-   });
+    expect(errors).not.toEqual(
+      expect.arrayContaining([expect.objectContaining({ level: "information" })]),
+    );
+    expect(errors).not.toEqual(
+      expect.arrayContaining([expect.objectContaining({ level: "warning" })]),
+    );
+  });
 
-   test("returns empty when none", () => {
+  test("returns empty when none", () => {
     expect(getAutorestErrors({ stdout: "", stderr: "" } as AutorestRunResult)).toEqual([]);
-   });
+  });
 });
