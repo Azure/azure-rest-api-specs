@@ -66,7 +66,7 @@ describe("Swagger", () => {
         ];
 
         for (const { path, expected } of testCases) {
-          expect(await getVersionFromInputFile(path)).toBe(expected);
+          expect(getVersionFromInputFile(path)).toBe(expected);
         }
       });
 
@@ -89,7 +89,7 @@ describe("Swagger", () => {
         ];
 
         for (const { path, expected, withPreview = false } of testCases) {
-          expect(await getVersionFromInputFile(path, withPreview)).toBe(expected);
+          expect(getVersionFromInputFile(path, withPreview)).toBe(expected);
         }
       });
 
@@ -101,7 +101,7 @@ describe("Swagger", () => {
         ];
 
         for (const path of testCases) {
-          expect(await getVersionFromInputFile(path)).toBe("2023-01-01");
+          expect(getVersionFromInputFile(path)).toBe("2023-01-01");
         }
       });
     });
@@ -120,7 +120,7 @@ describe("Swagger", () => {
         ];
 
         for (const { path, expected } of testCases) {
-          expect(await getVersionFromInputFile(path)).toBe(expected);
+          expect(getVersionFromInputFile(path)).toBe(expected);
         }
       });
 
@@ -137,35 +137,44 @@ describe("Swagger", () => {
         ];
 
         for (const { path, expected } of testCases) {
-          expect(await getVersionFromInputFile(path)).toBe(expected);
+          expect(getVersionFromInputFile(path)).toBe(expected);
         }
       });
 
       it("should handle standard date versions in data-plane paths", async () => {
         const path =
           "specification/textanalytics/data-plane/TextAnalytics/stable/2023-04-01/textanalytics.json";
-        expect(await getVersionFromInputFile(path)).toBe("2023-04-01");
+        expect(getVersionFromInputFile(path)).toBe("2023-04-01");
       });
     });
 
     describe("edge cases and invalid inputs", () => {
-      it("should return undefined for paths without valid version patterns", async () => {
+      it("should return folder name for paths without valid version patterns", async () => {
         const testCases = [
-          "specification/network/resource-manager/Microsoft.Network/unknown/test.json",
-          "specification/network/resource-manager/Microsoft.Network/stable/invalid-version/test.json",
-          "invalid/path/structure.json",
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/unknown/test.json",
+            expected: "unknown",
+          },
+          {
+            path: "specification/network/resource-manager/Microsoft.Network/stable/invalid-version/test.json",
+            expected: "invalid-version",
+          },
+          {
+            path: "invalid/path/structure.json",
+            expected: "path",
+          },
         ];
 
-        for (const path of testCases) {
-          expect(await getVersionFromInputFile(path)).toBeUndefined();
+        for (const { path, expected } of testCases) {
+          expect(getVersionFromInputFile(path)).toBe(expected);
         }
       });
 
-      it("should return undefined for empty or malformed paths", async () => {
+      it("should return empty string for empty or malformed paths", async () => {
         const testCases = ["", "/", "test.json"];
 
         for (const path of testCases) {
-          expect(await getVersionFromInputFile(path)).toBeUndefined();
+          expect(getVersionFromInputFile(path)).toBe("");
         }
       });
     });

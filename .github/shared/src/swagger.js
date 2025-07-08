@@ -1,7 +1,7 @@
 // @ts-check
 
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
-import { readFile, access } from "fs/promises";
+import { readFile } from "fs/promises";
 import { basename, dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { includesFolder } from "./path.js";
@@ -176,7 +176,7 @@ export class Swagger {
    * @returns {Promise<string>} swagger version
    */
   async getVersion() {
-    return (await getVersionFromInputFile(this.#path)) || "";
+    return getVersionFromInputFile(this.#path);
   }
 
   /**
@@ -283,9 +283,9 @@ function getBaseNameForSwagger(filePath, version = "") {
  * Extract version string from input file path
  * @param {string} filePath - Path to the input file
  * @param {boolean} [withPreview=false] - Whether to include preview suffix
- * @returns {Promise<string | undefined>} - Version string extracted from path
+ * @returns {string} - Version string extracted from path, or empty string if not found
  */
-export async function getVersionFromInputFile(filePath, withPreview = false) {
+export function getVersionFromInputFile(filePath, withPreview = false) {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
   const segments = filePath.split("/");
 
@@ -312,15 +312,14 @@ export async function getVersionFromInputFile(filePath, withPreview = false) {
     }
   }
 
-  try {
-    // Check if file exists using access()
-    await access(filePath);
-    const content = await readFile(filePath, "utf8");
-    return JSON.parse(content)?.info?.version;
-  } catch {
-    // File doesn't exist or can't be read/parsed
-    // This is expected for non-existent files, so we don't log a warning
+  // If no regex match found, return the immediate folder name (parent directory of the file)
+  if (segments && segments.length > 1) {
+    // Get the folder name that contains the file (last segment before filename)
+    const folderName = segments[segments.length - 2];
+    if (folderName) {
+      return folderName;
+    }
   }
 
-  return undefined;
+  return "";
 }
