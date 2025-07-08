@@ -6,6 +6,4 @@ using LogsIngestion;
 
 namespace ClientCustomizations;
 
-@@access(upload, Access.internal, "python");
-
-@@access(LogsIngestion, Access.internal, "java");
+@@access(upload, Access.internal, "java");
