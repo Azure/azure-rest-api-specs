@@ -1,0 +1,50 @@
+{
+  "title": "StageProgressions_ListByParentAtManagementGroupLevel_MaximumSet",
+  "operationId": "StageProgressions_ListByParentAtManagementGroupLevel",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "changeStateName": "testChangeState",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/stage1",
+            "name": "stage1",
+            "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stageReference": "Stage1",
+              "state": "Completed",
+              "sequence": 1,
+              "parameterValues": {
+                "param1": "value1",
+                "param2": 42
+              },
+              "comments": "Stage completed successfully"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/stage2",
+            "name": "stage2",
+            "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stageReference": "Stage2",
+              "state": "InProgress",
+              "sequence": 2,
+              "parameterValues": {
+                "param1": "value2",
+                "param2": 43
+              },
+              "comments": "Stage in progress"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions?api-version=2025-03-01-preview&$skiptoken=nextPage"
+      }
+    }
+  }
+}

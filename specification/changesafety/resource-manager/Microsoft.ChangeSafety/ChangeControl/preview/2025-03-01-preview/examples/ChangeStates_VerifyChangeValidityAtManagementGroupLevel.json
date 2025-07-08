@@ -1,0 +1,31 @@
+{
+  "title": "ChangeStates_VerifyChangeValidityAtManagementGroupLevel_MaximumSet",
+  "operationId": "ChangeStates_VerifyChangeValidityAtManagementGroupLevel",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "changeStateName": "testChangeState",
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Storage/storageAccounts/storageaccount1?api-version=2022-09-01",
+        "httpMethod": "PUT",
+        "content": {
+          "name": "storageaccount1",
+          "location": "eastus",
+          "properties": {}
+        }
+      },
+      "stageProgressionResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState/stageProgressions/stage1",
+      "context": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "The operation is valid",
+        "validUntil": "2023-12-31T23:59:59Z"
+      }
+    }
+  }
+}
