@@ -1623,61 +1623,6 @@
         "instructions"
       ]
     },
-    "AgentToolCatalogInformation": {
-      "type": "object",
-      "description": "Catalog information for the agent tool",
-      "properties": {
-        "publisherId": {
-          "type": "string",
-          "description": "The id of the publisher of the asset"
-        },
-        "license": {
-          "type": "string",
-          "description": "The license the asset is under"
-        }
-      },
-      "required": [
-        "publisherId",
-        "license"
-      ]
-    },
-    "AgentToolImplementationDetails": {
-      "type": "object",
-      "description": "Implementation details for the agent tool",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of agent tool"
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AgentToolProtocolDetails": {
-      "type": "object",
-      "description": "instructions for how to deploy the tool",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "type of protocol"
-        },
-        "auth": {
-          "$ref": "#/definitions/AuthorizationDetails",
-          "description": "authorization details"
-        },
-        "spec": {
-          "type": "object",
-          "description": "spec for the tool that contains {{mustache}} string which are replaced from parameters",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "type",
-        "auth",
-        "spec"
-      ]
-    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1864,19 +1809,6 @@
           }
         ]
       }
-    },
-    "AuthorizationDetails": {
-      "type": "object",
-      "description": "Authorization specification for a tool protocol",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of authorization"
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
