@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace LogsIngestion;
 
@@ -23,9 +21,8 @@ op upload is Azure.Core.Foundations.Operation<
     ruleId: string;
 
     @doc("The streamDeclaration name as defined in the Data Collection Rule.")
-    @clientName("streamName")
-    @path
-    stream: string;
+    @path("stream")
+    streamName: string;
 
     @doc("The content encoding of the request body which is always 'gzip'.")
     @header("Content-Encoding")
