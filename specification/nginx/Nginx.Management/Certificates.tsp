@@ -25,7 +25,7 @@ model NginxCertificateProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The virtual path to the key file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/mykey.key.
+   * The virtual path to the key file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/key.key.
    */
   keyVirtualPath?: string;
 
