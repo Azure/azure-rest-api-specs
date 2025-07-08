@@ -42,6 +42,7 @@ interface NodeConfigurations {
   updateOnNode is NodeConfigurationOps.CreateOrUpdateAsync<ServerConfiguration>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface CoordinatorConfigurations {
   /**
