@@ -76,6 +76,8 @@ jobs:
         # Retry on failure to handle transient issues or builds that run longer
         # than the token used by az CLI is valid
         retryCountOnTaskFailure: 3
+        # Test timeout
+        timeoutInMinutes: 3
         inputs:
           azureSubscription: msdocs-apidrop-connection
           scriptType: bash
