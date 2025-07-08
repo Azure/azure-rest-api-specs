@@ -2986,6 +2986,29 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM Pool should be created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity"
+        },
         "etag": {
           "type": "string",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
@@ -2993,7 +3016,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
