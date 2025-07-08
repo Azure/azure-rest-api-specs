@@ -470,6 +470,87 @@ describe("summarizeChecksImpl", () => {
       expect(output).toEqual(expectedOutput);
     });
 
+    it("should generate pending summary when checks are in progress", async () => {
+      const mockGithub = createMockGithub();
+      const owner = "Azure";
+      const repo = "azure-rest-api-specs";
+      const issue_number = 35629;
+      const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
+      const event_name = "pull_request";
+      const mockContext = {
+        repo: {
+          owner: owner,
+          repo: repo,
+        },
+        payload: {
+          action: "opened",
+          pull_request: {
+            number: issue_number,
+            head: {
+              sha: head_sha,
+            },
+          },
+        },
+        eventName: event_name,
+      };
+      const targetBranch = "main";
+      const labelNames = [];
+      const fyiCheckRuns = [];
+      const expectedOutput = "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+
+      const requiredCheckRuns = [
+        {
+          name: "TypeSpec Validation",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: {
+            precedence: 0,
+            name: "TypeSpec Validation",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+        {
+          name: "Swagger Avocado",
+          status: "QUEUED",
+          conclusion: null,
+          checkInfo: {
+            precedence: 1,
+            name: "Swagger Avocado",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+        {
+          name: "license/cla",
+          status: "IN_PROGRESS",
+          conclusion: null,
+          checkInfo: {
+            precedence: 0,
+            name: "license/cla",
+            suppressionLabels: [],
+            troubleshootingGuide:
+              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
+          },
+        },
+      ];
+
+      const output = await createNextStepsComment(
+        { github: mockGithub, context: mockContext, core: mockCore },
+        owner,
+        repo,
+        labelNames,
+        issue_number,
+        targetBranch,
+        requiredCheckRuns,
+        fyiCheckRuns,
+      );
+
+      expect(output).toEqual(expectedOutput);
+    });
+
     it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real PR data when GITHUB_TOKEN is available and when integration testing is enabled.",
       async () => {

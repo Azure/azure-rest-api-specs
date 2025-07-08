@@ -652,7 +652,10 @@ export async function createNextStepsComment(
   const requiredCheckInfos = requiredRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
-  const requiredCheckInfosPresent = requiredRuns.length > 0;
+  const requiredCheckInfosPresent = requiredRuns.some((run) => {
+    const status = run.status.toLowerCase();
+    return status !== "queued" && status !== "in_progress";
+  });
   const fyiCheckInfos = fyiRuns
     .filter((run) => checkRunIsSuccessful(run) === false)
     .map((run) => run.checkInfo);
@@ -743,7 +746,6 @@ function getCommentBody(
   let bodyProper = "";
 
   if (anyBlockerPresent || anyFyiPresent) {
-    // assert: !requirementsMet
 
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
