@@ -1896,20 +1896,6 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
-    "ModelLimits": {
-      "type": "object",
-      "description": "Limits of the model",
-      "properties": {
-        "textLimits": {
-          "$ref": "#/definitions/TextLimits",
-          "description": "Text limits"
-        },
-        "otherLimits": {
-          "type": "string",
-          "description": "Other limits"
-        }
-      }
-    },
     "NoAuthenticationCredentials": {
       "type": "object",
       "description": "Credentials that do not require authentication",
@@ -2106,19 +2092,6 @@
         ]
       }
     },
-    "PlaygroundLimits": {
-      "type": "object",
-      "description": "Playground limits for the model",
-      "properties": {
-        "rateLimitTier": {
-          "type": "string",
-          "description": "Rate limit tier"
-        }
-      },
-      "required": [
-        "rateLimitTier"
-      ]
-    },
     "SASCredentials": {
       "type": "object",
       "description": "Shared Access Signature (SAS) credential definition",
@@ -2216,26 +2189,6 @@
           "description": "The datetime of when the asset was last modified"
         }
       }
-    },
-    "TextLimits": {
-      "type": "object",
-      "description": "Text limits",
-      "properties": {
-        "inputContextWindow": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Input context window"
-        },
-        "maxOutputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum output tokens"
-        }
-      },
-      "required": [
-        "inputContextWindow",
-        "maxOutputTokens"
-      ]
     }
   },
   "parameters": {

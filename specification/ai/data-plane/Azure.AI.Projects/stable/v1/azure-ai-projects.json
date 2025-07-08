@@ -2117,102 +2117,10 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
-    "ModelLimits": {
-      "type": "object",
-      "description": "Limits of the model",
-      "properties": {
-        "textLimits": {
-          "$ref": "#/definitions/TextLimits",
-          "description": "Text limits"
-        },
-        "otherLimits": {
-          "type": "string",
-          "description": "Other limits"
-        }
-      }
-    },
     "ModelVersion": {
       "type": "object",
       "description": "Model Version Definition",
       "properties": {
-        "evaluation": {
-          "type": "string",
-          "description": "Evaluation details of the model"
-        },
-        "notes": {
-          "type": "string",
-          "description": "Notes about the model"
-        },
-        "trainingDataDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Datetime of training data"
-        },
-        "licenseDescription": {
-          "type": "string",
-          "description": "License description"
-        },
-        "inferenceTasks": {
-          "type": "array",
-          "description": "Inference tasks supported by the model",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fineTuningTasks": {
-          "type": "array",
-          "description": "Fine-tuning tasks supported by the model",
-          "items": {
-            "type": "string"
-          }
-        },
-        "keywords": {
-          "type": "array",
-          "description": "Keywords associated with the model",
-          "items": {
-            "type": "string"
-          }
-        },
-        "playgroundLimits": {
-          "$ref": "#/definitions/PlaygroundLimits",
-          "description": "Playground limits for the model"
-        },
-        "modelCapabilities": {
-          "type": "string",
-          "description": "Capabilities of the model"
-        },
-        "modelLimits": {
-          "$ref": "#/definitions/ModelLimits",
-          "description": "Limits of the model"
-        },
-        "supportedLanguages": {
-          "type": "array",
-          "description": "Supported languages",
-          "items": {
-            "type": "string"
-          }
-        },
-        "supportedInputModalities": {
-          "type": "array",
-          "description": "Supported input modalities",
-          "items": {
-            "type": "string"
-          }
-        },
-        "supportedOutputModalities": {
-          "type": "array",
-          "description": "Supported output modalities",
-          "items": {
-            "type": "string"
-          }
-        },
-        "azureOffers": {
-          "type": "array",
-          "description": "Azure offers for the model",
-          "items": {
-            "type": "string"
-          }
-        },
         "SystemData": {
           "$ref": "#/definitions/SystemData",
           "description": "System related metadata",
@@ -2484,19 +2392,6 @@
         ]
       }
     },
-    "PlaygroundLimits": {
-      "type": "object",
-      "description": "Playground limits for the model",
-      "properties": {
-        "rateLimitTier": {
-          "type": "string",
-          "description": "Rate limit tier"
-        }
-      },
-      "required": [
-        "rateLimitTier"
-      ]
-    },
     "SASCredentials": {
       "type": "object",
       "description": "Shared Access Signature (SAS) credential definition",
@@ -2594,26 +2489,6 @@
           "description": "The datetime of when the asset was last modified"
         }
       }
-    },
-    "TextLimits": {
-      "type": "object",
-      "description": "Text limits",
-      "properties": {
-        "inputContextWindow": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Input context window"
-        },
-        "maxOutputTokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum output tokens"
-        }
-      },
-      "required": [
-        "inputContextWindow",
-        "maxOutputTokens"
-      ]
     }
   },
   "parameters": {
