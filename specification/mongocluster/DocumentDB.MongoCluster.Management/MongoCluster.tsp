@@ -198,6 +198,11 @@ model MongoClusterProperties {
   /** The authentication configuration for the cluster. */
   @added(Versions.v2025_04_01_preview)
   authConfig?: AuthConfigProperties;
+
+  /** The encryption configuration for the cluster. Depends on identity being configured. */
+  @added(Versions.v2025_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  encryption?: EncryptionProperties;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -552,4 +557,70 @@ union AuthenticationMode {
 
   /** Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
   "MicrosoftEntraID",
+}
+
+/** Managed service identity (user assigned identities only for this version) */
+@added(Versions.v2025_05_01_preview)
+model ManagedServiceIdentity {
+  /** Type of managed service identity. 'UserAssigned' or 'None' are supported. */
+  type: ManagedServiceIdentityType;
+  /**
+   * The set of user assigned identities associated with the resource.
+   * If type is 'None', this property must not be present.
+   * This is a dictionary where each key is a resourceId and value is a UserAssignedIdentity.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM identity dictionaries require dynamic keys."
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/** User assigned identity request/response (with principalId and clientId). */
+@added(Versions.v2025_05_01_preview)
+model UserAssignedIdentity {
+  /** The principal ID of the user assigned identity. */
+  principalId?: string;
+  /** The client ID of the user assigned identity. */
+  clientId?: string;
+}
+
+/** Type of managed service identity. 'UserAssigned' or 'None' are supported. */
+@added(Versions.v2025_05_01_preview)
+union ManagedServiceIdentityType {
+  string,
+  /** No managed identity. */
+  None: "None",
+  /** User assigned managed identity. */
+  UserAssigned: "UserAssigned",
+}
+
+/** The type of identity for key encryption key. */
+@added(Versions.v2025_05_01_preview)
+union KeyEncryptionKeyIdentityType {
+  string,
+  /** User assigned identity. */
+  UserAssignedIdentity: "UserAssignedIdentity",
+}
+
+/** The encryption configuration for the mongo cluster. */
+@added(Versions.v2025_05_01_preview)
+model EncryptionProperties {
+  /** Customer managed key encryption settings. */
+  customerManagedKeyEncryption?: CustomerManagedKeyEncryptionProperties;
+}
+
+/** Customer managed key encryption settings. */
+@added(Versions.v2025_05_01_preview)
+model CustomerManagedKeyEncryptionProperties {
+  /** The identity used to access the key encryption key. */
+  keyEncryptionKeyIdentity: KeyEncryptionKeyIdentity;
+  /** The URI of the key vault key used for encryption. */
+  keyEncryptionKeyUrl: string;
+}
+
+/** The identity used for key encryption key. */
+@added(Versions.v2025_05_01_preview)
+model KeyEncryptionKeyIdentity {
+  /** The type of identity. Only 'UserAssignedIdentity' is supported. */
+  identityType: KeyEncryptionKeyIdentityType;
+  /** The user assigned identity resource id. */
+  userAssignedIdentityResourceId: string;
 }
