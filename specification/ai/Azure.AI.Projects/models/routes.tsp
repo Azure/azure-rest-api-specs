@@ -17,9 +17,7 @@ alias ListModelVersionsParameters = {};
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v1)
 interface Models
-  extends VersionedOperations<
+  extends WritableVersionedOperations<
       ModelVersion,
-      InputParameters<ModelVersion, "modelVersion">,
-      ListModelVersionsParameters,
-      ListModelVersionsParameters
+      InputParameters<ModelVersion, "modelVersion">
     > {}
