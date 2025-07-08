@@ -119,7 +119,7 @@ async function runLintDiff(
       changedFilesPath,
     );
   } catch (error) {
-    if (error instanceof SpecModelError) { 
+    if (error instanceof SpecModelError) {
       console.log("\n\n");
       console.log("❌ Error building Spec Model from changed file list:");
       console.log(`${error}`);
@@ -138,7 +138,7 @@ async function runLintDiff(
     return;
   }
 
-  if (afterList.size === 0) { 
+  if (afterList.size === 0) {
     await writeFile(outFile, "No applicable files found in after. Exiting.");
     console.log("No applicable files found in after. Exiting.");
     return;
@@ -148,7 +148,6 @@ async function runLintDiff(
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
-
 
   // If afterChecks has AutoRest errors, fail the run.
   const autoRestErrors = afterChecks
