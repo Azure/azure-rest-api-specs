@@ -1,8 +1,54 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "./routes.tsp";
 
+using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Resources.DeploymentStacks;
+using TypeSpec.Rest;
+
+namespace Microsoft.Resources.DeploymentStacks;
+
+/**
+ * The management group name path parameter.
+ */
+model ManagementGroupIdParameter {
+  /** The name of the management group. The name is case insensitive. */
+  @path
+  @minLength(1)
+  @maxLength(90)
+  @segment("providers/Microsoft.Management/managementGroups")
+  managementGroupId: string;
+}
+
+model ManagementGroupBaseParameters
+  is Azure.ResourceManager.Foundations.TenantBaseParameters {
+  ...ManagementGroupIdParameter
+}
+
+#suppress "deprecated" "Backwards compat with old swagger"
+@@flattenProperty(DeploymentStack.properties);
+
+@@clientName(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
+  "deploymentStack"
+);
+@@clientName(DeploymentStacksAtSubscription.createOrUpdate::parameters.resource,
+  "deploymentStack"
+);
+@@clientName(DeploymentStacksAtManagementGroup.createOrUpdate::parameters.resource,
+  "deploymentStack"
+);
+
+@@clientName(DeploymentStacksAtResourceGroup.validateStack::parameters.body,
+  "deploymentStack"
+);
+@@clientName(DeploymentStacksAtSubscription.validateStack::parameters.body,
+  "deploymentStack"
+);
+@@clientName(DeploymentStacksAtManagementGroup.validateStack::parameters.body,
+  "deploymentStack"
+);
 
 // Operation IDs. These overwrites are to preserve the operation IDs before TypeSpec migration.
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "backward compatability"

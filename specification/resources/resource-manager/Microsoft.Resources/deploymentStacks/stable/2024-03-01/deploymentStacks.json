@@ -158,7 +158,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "resource",
+            "name": "deploymentStack",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -354,7 +354,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "body",
+            "name": "deploymentStack",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -516,7 +516,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "resource",
+            "name": "deploymentStack",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -712,7 +712,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "body",
+            "name": "deploymentStack",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -883,7 +883,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "resource",
+            "name": "deploymentStack",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -1088,7 +1088,7 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "body",
+            "name": "deploymentStack",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
@@ -1262,7 +1262,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentStackProperties",
-          "description": "Deployment stack properties."
+          "description": "Deployment stack properties.",
+          "x-ms-client-flatten": true
         },
         "location": {
           "type": "string",
