@@ -23,13 +23,9 @@ jobs:
       - name: Run Avocado
         id: run-avocado
         run: |
-          set -o pipefail
+          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
 
-          AVOCADO_LOG=$RUNNER_TEMP/avocado.log
-          AVOCADO_OUTPUT=$RUNNER_TEMP/avocado.ndjson
-
-          echo "log=$AVOCADO_LOG" >> $GITHUB_OUTPUT
-          echo "output=$AVOCADO_OUTPUT" >> $GITHUB_OUTPUT
+          echo "output-file=$AVOCADO_OUTPUT_FILE" >> $GITHUB_OUTPUT
 
           npm exec --no -- avocado \
             --excludePaths \
@@ -45,15 +41,20 @@ jobs:
               "data-plane" \
               "resource-manager" \
             --file \
-              $AVOCADO_OUTPUT \
-            | tee $AVOCADO_LOG
+              $AVOCADO_OUTPUT_FILE
+
+          TIME=$(node -p 'JSON.stringify(new Date())')
+
+          # Avocado doesn't write any output if it was successful, so we add some to simplify later processing
+          [[ -e $AVOCADO_OUTPUT_FILE ]] \
+            || echo '{"type":"Raw","level":"Info","message":"success","time":$TIME}' > $AVOCADO_OUTPUT_FILE
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
 
       - name: Generate Job Summary
-        if: ${{ always() && (steps.run-avocado.outputs.log || steps.run-avocado.outputs.output) }}
+        if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         id: generate-job-summary
         uses: actions/github-script@v7
         with:
@@ -62,8 +63,7 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
             return await generateJobSummary({ core });
         env:
-          AVOCADO_LOG: ${{ steps.run-avocado.outputs.log}}
-          AVOCADO_OUTPUT: ${{ steps.run-avocado.outputs.output }}
+          AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact
