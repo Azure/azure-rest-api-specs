@@ -331,6 +331,17 @@ model VerifyChangeValidityRequest {
   @doc("The stage progression Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageProgressionId?: armResourceIdentifier;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The stage progression resource Id.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  stageProgressionResourceId?: armResourceIdentifier;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The context of the verify change validity request.")
+  @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  context?: {};
 }
 
 @added(Versions.v2025_03_01_preview)
@@ -442,12 +453,30 @@ interface ChangeStates {
     }
   >;
 
+  @added(Versions.v2025_03_01_preview)
+  getAtManagementGroupLevel is ArmResourceRead<
+    ChangeState,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
+
   createOrUpdate is ArmResourceCreateOrReplaceSync<ChangeState>;
   createOrUpdateAtSubscriptionLevel is ArmResourceCreateOrReplaceSync<
     ChangeState,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
+    }
+  >;
+
+  @added(Versions.v2025_03_01_preview)
+  createOrUpdateAtManagementGroupLevel is ArmResourceCreateOrReplaceSync<
+    ChangeState,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 
@@ -461,6 +490,16 @@ interface ChangeStates {
     }
   >;
 
+  @added(Versions.v2025_03_01_preview)
+  updateAtManagementGroupLevel is ArmResourcePatchSync<
+    ChangeState,
+    ChangeStateProperties,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
+
   delete is ArmResourceDeleteWithoutOkAsync<ChangeState>;
   deleteAtSubscriptionLevel is ArmResourceDeleteWithoutOkAsync<
     ChangeState,
@@ -470,8 +509,26 @@ interface ChangeStates {
     }
   >;
 
+  @added(Versions.v2025_03_01_preview)
+  deleteAtManagementGroupLevel is ArmResourceDeleteWithoutOkAsync<
+    ChangeState,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
+
   list is ArmResourceListAtScope<ChangeState>;
   listBySubscription is ArmListBySubscription<ChangeState>;
+
+  @added(Versions.v2025_03_01_preview)
+  listByManagementGroup is ArmResourceListByParent<
+    ChangeState,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
 
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
   @action("retrieveNextStages")
@@ -490,6 +547,19 @@ interface ChangeStates {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
+    }
+  >;
+
+  @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource at management group level.")
+  @action("retrieveNextStages")
+  @added(Versions.v2025_03_01_preview)
+  retrieveNextStagesAtManagementGroupLevel is ArmResourceActionSync<
+    ChangeState,
+    void,
+    RetrieveNextStagesResponse,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 
@@ -512,6 +582,19 @@ interface ChangeStates {
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
+    }
+  >;
+
+  @doc("Verify the change validity at management group level.")
+  @action("verifyChangeValidity")
+  @added(Versions.v2025_03_01_preview)
+  verifyChangeValidityAtManagementGroupLevel is ArmResourceActionSync<
+    ChangeState,
+    VerifyChangeValidityRequest,
+    VerifyChangeValidityResponse,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 }

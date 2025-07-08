@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ChangeSafety;
 
@@ -96,12 +97,30 @@ interface StageProgressions {
     }
   >;
 
+  @added(Versions.v2025_03_01_preview)
+  createOrUpdateAtManagementGroupLevel is ArmResourceCreateOrReplaceSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
+
   delete is ArmResourceDeleteSync<StageProgression>;
   deleteAtSubscriptionLevel is ArmResourceDeleteSync<
     StageProgression,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
+    }
+  >;
+
+  @added(Versions.v2025_03_01_preview)
+  deleteAtManagementGroupLevel is ArmResourceDeleteSync<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 
@@ -115,12 +134,31 @@ interface StageProgressions {
     }
   >;
 
+  @added(Versions.v2025_03_01_preview)
+  updateAtManagementGroupLevel is ArmResourcePatchSync<
+    StageProgression,
+    StageProgressionProperties,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
+    }
+  >;
+
   listByParent is ArmResourceListByParent<StageProgression>;
   listByParentAtSubscriptionLevel is ArmResourceListByParent<
     StageProgression,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
+    }
+  >;
+
+  @added(Versions.v2025_03_01_preview)
+  listByParentAtManagementGroupLevel is ArmResourceListByParent<
+    StageProgression,
+    {
+      ...ApiVersionParameter;
+      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 }
