@@ -172,13 +172,6 @@ export class Swagger {
   }
 
   /**
-   * @returns {string} swagger version
-   */
-  get version() {
-    return getVersionFromInputFile(this.#path);
-  }
-
-  /**
    * @returns {string} absolute path
    */
   get path() {
@@ -252,51 +245,3 @@ export const API_VERSION_LIFECYCLE_STAGES = Object.freeze({
   PREVIEW: "preview",
   STABLE: "stable",
 });
-
-/**
- * Extract version string from input file path
- * @param {string} filePath - Path to the input file
- * @param {boolean} [withPreview=false] - Whether to include preview suffix
- * @returns {string} - Version string extracted from path, or empty string if not found
- */
-export function getVersionFromInputFile(filePath, withPreview = false) {
-  const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
-
-  // Normalize path separators to forward slashes for consistent processing
-  const normalizedPath = filePath.replace(/\\/g, "/");
-  const segments = normalizedPath.split("/");
-
-  if (normalizedPath.indexOf("data-plane") !== -1) {
-    if (segments && segments.length > 1) {
-      for (const s of segments.entries()) {
-        if (["stable", "preview"].some((v) => v === s[1])) {
-          const version = segments[s[0] + 1];
-          if (version) {
-            return apiVersionRegex.test(version) && !withPreview
-              ? version.substring(0, 10)
-              : version;
-          }
-        }
-      }
-    }
-  } else {
-    if (segments && segments.length > 1) {
-      for (const s of segments) {
-        if (apiVersionRegex.test(s)) {
-          return withPreview ? s : s.substring(0, 10);
-        }
-      }
-    }
-  }
-
-  // If no regex match found, return the immediate folder name (parent directory of the file)
-  if (segments && segments.length > 1) {
-    // Get the folder name that contains the file (last segment before filename)
-    const folderName = segments[segments.length - 2];
-    if (folderName) {
-      return folderName;
-    }
-  }
-
-  return "";
-}

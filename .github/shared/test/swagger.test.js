@@ -2,7 +2,7 @@
 
 import { dirname, resolve, join } from "path";
 import { describe, expect, it } from "vitest";
-import { Swagger, getVersionFromInputFile } from "../src/swagger.js";
+import { Swagger } from "../src/swagger.js";
 
 import { fileURLToPath } from "url";
 import { Readme } from "../src/readme.js";
@@ -49,135 +49,6 @@ describe("Swagger", () => {
         ],
       ]),
     );
-  });
-
-  describe("getVersionFromInputFile", () => {
-    describe("resource-manager paths", () => {
-      it("should extract version from standard resource-manager paths", async () => {
-        const testCases = [
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01/network.json",
-            expected: "2023-01-01",
-          },
-          {
-            path: "specification/storage/resource-manager/Microsoft.Storage/stable/2024-04-01/storage.json",
-            expected: "2024-04-01",
-          },
-        ];
-
-        for (const { path, expected } of testCases) {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        }
-      });
-
-      it("should extract preview versions from resource-manager paths", async () => {
-        const testCases = [
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/preview/2023-01-01-preview/network.json",
-            expected: "2023-01-01",
-          },
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/preview/2024-04-01-preview/network.json",
-            expected: "2024-04-01",
-            withPreview: false,
-          },
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/preview/2024-04-01-preview/network.json",
-            expected: "2024-04-01-preview",
-            withPreview: true,
-          },
-        ];
-
-        for (const { path, expected, withPreview = false } of testCases) {
-          expect(getVersionFromInputFile(path, withPreview)).toBe(expected);
-        }
-      });
-
-      it("should handle other preview types in resource-manager paths", async () => {
-        const testCases = [
-          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-alpha/network.json",
-          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-beta/network.json",
-          "specification/network/resource-manager/Microsoft.Network/stable/2023-01-01-rc/network.json",
-        ];
-
-        for (const path of testCases) {
-          expect(getVersionFromInputFile(path)).toBe("2023-01-01");
-        }
-      });
-    });
-
-    describe("data-plane paths", () => {
-      it("should extract version from data-plane stable paths", async () => {
-        const testCases = [
-          {
-            path: "specification/textanalytics/data-plane/TextAnalytics/stable/v3.1/textanalytics.json",
-            expected: "v3.1",
-          },
-          {
-            path: "specification/cognitiveservices/data-plane/Face/stable/v1.0/face.json",
-            expected: "v1.0",
-          },
-        ];
-
-        for (const { path, expected } of testCases) {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        }
-      });
-
-      it("should extract version from data-plane preview paths", async () => {
-        const testCases = [
-          {
-            path: "specification/textanalytics/data-plane/TextAnalytics/preview/v3.2-preview.1/textanalytics.json",
-            expected: "v3.2-preview.1",
-          },
-          {
-            path: "specification/cognitiveservices/data-plane/Face/preview/v1.1-preview.1/face.json",
-            expected: "v1.1-preview.1",
-          },
-        ];
-
-        for (const { path, expected } of testCases) {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        }
-      });
-
-      it("should handle standard date versions in data-plane paths", async () => {
-        const path =
-          "specification/textanalytics/data-plane/TextAnalytics/stable/2023-04-01/textanalytics.json";
-        expect(getVersionFromInputFile(path)).toBe("2023-04-01");
-      });
-    });
-
-    describe("edge cases and invalid inputs", () => {
-      it("should return folder name for paths without valid version patterns", async () => {
-        const testCases = [
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/unknown/test.json",
-            expected: "unknown",
-          },
-          {
-            path: "specification/network/resource-manager/Microsoft.Network/stable/invalid-version/test.json",
-            expected: "invalid-version",
-          },
-          {
-            path: "invalid/path/structure.json",
-            expected: "path",
-          },
-        ];
-
-        for (const { path, expected } of testCases) {
-          expect(getVersionFromInputFile(path)).toBe(expected);
-        }
-      });
-
-      it("should return empty string for empty or malformed paths", async () => {
-        const testCases = ["", "/", "test.json"];
-
-        for (const path of testCases) {
-          expect(getVersionFromInputFile(path)).toBe("");
-        }
-      });
-    });
   });
 
   describe("getOperations", () => {
