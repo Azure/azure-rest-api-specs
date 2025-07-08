@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
+    "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "cloudServicesNetworkName": "cloudServicesNetworkName",
@@ -26,7 +26,12 @@
             ]
           }
         ],
-        "enableDefaultEgressEndpoints": "False"
+        "enableDefaultEgressEndpoints": "False",
+        "storageOptions": {
+          "mode": "Standard",
+          "sizeMiB": 1048576,
+          "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+        }
       }
     }
   },
@@ -66,6 +71,11 @@
             }
           ],
           "enableDefaultEgressEndpoints": "False",
+          "storageOptions": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+          },
           "provisioningState": "Succeeded",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
@@ -84,7 +94,14 @@
             }
           ],
           "detailedStatus": "Available",
-          "detailedStatusMessage": "Cloud services network is up"
+          "detailedStatusMessage": "Cloud services network is up",
+          "storageStatus": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "status": "Available",
+            "statusMessage": "Storage is available",
+            "volumeId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/Volumes/volumeName"
+          }
         }
       }
     },
@@ -123,6 +140,11 @@
             }
           ],
           "enableDefaultEgressEndpoints": "False",
+          "storageOptions": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+          },
           "provisioningState": "Succeeded",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
@@ -141,11 +163,18 @@
             }
           ],
           "detailedStatus": "Available",
-          "detailedStatusMessage": "Cloud services network is up"
+          "detailedStatusMessage": "Cloud services network is up",
+          "storageStatus": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "status": "Available",
+            "statusMessage": "Storage is available",
+            "volumeId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/Volumes/volumeName"
+          }
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-02-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-07-01-preview"
       }
     }
   }

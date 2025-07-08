@@ -3,9 +3,26 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "kubernetesClusterName": "kubernetesClusterName",
-    "kubernetesClusterRestartNodeParameters": {
-      "nodeName": "nodeName"
+    "bareMetalMachineName": "bareMetalMachineName",
+    "bareMetalMachineRunReadCommandsParameters": {
+      "commands": [
+        {
+          "command": "kubectl get",
+          "arguments": [
+            "pods",
+            "-A"
+          ]
+        },
+        {
+          "command": "ping",
+          "arguments": [
+            "192.168.0.99",
+            "-c",
+            "3"
+          ]
+        }
+      ],
+      "limitTimeSeconds": 60
     }
   },
   "responses": {

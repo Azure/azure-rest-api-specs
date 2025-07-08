@@ -3,9 +3,17 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "kubernetesClusterName": "kubernetesClusterName",
-    "kubernetesClusterRestartNodeParameters": {
-      "nodeName": "nodeName"
+    "bareMetalMachineName": "bareMetalMachineName",
+    "bareMetalMachineRunDataExtractsRestrictedParameters": {
+      "commands": [
+        {
+          "command": "cluster-cve-report",
+          "arguments": [
+            "--min-severity=8"
+          ]
+        }
+      ],
+      "limitTimeSeconds": 60
     }
   },
   "responses": {

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
+    "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "clusterName": "clusterName"
@@ -136,17 +136,22 @@
             "name": "my-managed-rg",
             "location": "East US"
           },
-          "clusterServicePrincipal": {
-            "tenantId": "80000000-4000-4000-4000-120000000000",
-            "principalId": "00000008-0004-0004-0004-000000000012",
-            "applicationId": "12345678-1234-1234-1234-123456789012"
-          },
           "commandOutputSettings": {
             "containerUrl": "https://myaccount.blob.core.windows.net/mycontainer?restype=container",
             "associatedIdentity": {
               "identityType": "UserAssignedIdentity",
               "userAssignedIdentityResourceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1"
-            }
+            },
+            "overrides": [
+              {
+                "associatedIdentity": {
+                  "identityType": "UserAssignedIdentity",
+                  "userAssignedIdentityResourceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity2"
+                },
+                "commandOutputType": "StorageRunReadCommands",
+                "containerUrl": "https://myaccount.blob.core.windows.net/myContainer2?restype=container"
+              }
+            ]
           },
           "computeDeploymentThreshold": {
             "type": "PercentSuccess",
@@ -174,6 +179,25 @@
             "containerScan": "Enabled"
           },
           "provisioningState": "Succeeded",
+          "actionStates": [
+            {
+              "actionType": "Microsoft.NetworkCloud/clusters/ScanRuntime/action",
+              "correlationId": "a45a00bb-3b02-42d5-baaf-033497574e97",
+              "endTime": "2023-04-29T12:00:00Z",
+              "message": "Action completed successfully",
+              "startTime": "2023-04-29T11:00:00Z",
+              "status": "Completed",
+              "stepStates": [
+                {
+                  "endTime": "2023-04-29T11:30:00Z",
+                  "message": "Request to scan runtime was successfully distributed to the cluster",
+                  "startTime": "2023-04-29T11:00:00Z",
+                  "stepName": "DistributeRequest",
+                  "status": "Completed"
+                }
+              ]
+            }
+          ],
           "clusterExtendedLocation": {
             "type": "CustomLocation",
             "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"

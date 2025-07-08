@@ -3,9 +3,19 @@
     "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
-    "kubernetesClusterName": "kubernetesClusterName",
-    "kubernetesClusterRestartNodeParameters": {
-      "nodeName": "nodeName"
+    "storageApplianceName": "storageApplianceName",
+    "storageApplianceRunReadCommandsParameters": {
+      "commands": [
+        {
+          "command": "purealert",
+          "arguments": [
+            "list",
+            "--filter",
+            "state='open'"
+          ]
+        }
+      ],
+      "limitTimeSeconds": 60
     }
   },
   "responses": {

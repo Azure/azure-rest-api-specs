@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
+    "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "bareMetalMachineName": "bareMetalMachineName"
@@ -42,7 +42,37 @@
           "machineDetails": "User-provided machine details.",
           "serialNumber": "BM1219XXX",
           "provisioningState": "Succeeded",
+          "actionStates": [
+            {
+              "actionType": "Microsoft.NetworkCloud/BareMetalMachines/reimage/action",
+              "correlationId": "a45a00bb-3b02-42d5-baaf-033497574e97",
+              "endTime": "2023-04-29T12:00:00Z",
+              "message": "Action completed successfully",
+              "startTime": "2023-04-29T11:00:00Z",
+              "status": "Completed",
+              "stepStates": [
+                {
+                  "endTime": "2023-04-29T11:30:00Z",
+                  "message": "BareMetalMachine was validated as ready for reimage",
+                  "startTime": "2023-04-29T11:00:00Z",
+                  "stepName": "ValidateImageState",
+                  "status": "Completed"
+                },
+                {
+                  "endTime": "2023-04-29T11:45:00Z",
+                  "message": "BareMetalMachine was reimaged successfully",
+                  "startTime": "2023-04-29T11:30:00Z",
+                  "stepName": "Reimage",
+                  "status": "Completed"
+                }
+              ]
+            }
+          ],
           "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "caCertificate": {
+            "value": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAL4a5b1d8f2wM...A0GCSqGSIb3DQEBCwUAMEUxCzAJB==\n-----END CERTIFICATE-----",
+            "hash": "dea698309efd2830a1d440a807650d9aa6d954b3243ab8cb556ac98c1f3faa60"
+          },
           "readyState": "True",
           "cordonStatus": "Uncordoned",
           "powerState": "On",

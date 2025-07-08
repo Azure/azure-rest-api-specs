@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
+    "api-version": "2025-07-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "virtualMachineName": "virtualMachineName",
@@ -13,6 +13,12 @@
       "extendedLocation": {
         "type": "CustomLocation",
         "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+        }
       },
       "properties": {
         "vmImage": "myacr.azurecr.io/foobar:latest",
@@ -56,8 +62,8 @@
             "scope": ""
           }
         ],
-        "userData": "dXNlckRhdGVTYW1wbGU=",
-        "networkData": "bmV0d29ya0RhdGVTYW1wbGU=",
+        "userDataContent": "dXNlckRhdGVTYW1wbGU=",
+        "networkDataContent": "bmV0d29ya0RhdGVTYW1wbGU=",
         "bootMethod": "UEFI",
         "adminUsername": "username",
         "sshPublicKeys": [
@@ -90,6 +96,12 @@
         "extendedLocation": {
           "type": "CustomLocation",
           "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+          }
         },
         "properties": {
           "vmImage": "myacr.azurecr.io/foobar:latest",
@@ -133,8 +145,6 @@
               "scope": ""
             }
           ],
-          "userData": "dXNlckRhdGVTYW1wbGU=",
-          "networkData": "bmV0d29ya0RhdGVTYW1wbGU=",
           "bootMethod": "UEFI",
           "adminUsername": "username",
           "sshPublicKeys": [
@@ -181,6 +191,12 @@
           "type": "CustomLocation",
           "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
         },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+          }
+        },
         "properties": {
           "vmImage": "myacr.azurecr.io/foobar:latest",
           "vmImageRepositoryCredentials": {
@@ -223,8 +239,6 @@
               "scope": ""
             }
           ],
-          "userData": "dXNlckRhdGVTYW1wbGU=",
-          "networkData": "bmV0d29ya0RhdGVTYW1wbGU=",
           "bootMethod": "UEFI",
           "adminUsername": "username",
           "sshPublicKeys": [
@@ -249,7 +263,7 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-02-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2025-07-01-preview"
       }
     }
   }
