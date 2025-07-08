@@ -2214,7 +2214,7 @@
         },
         "dataSize": {
           "type": "string",
-          "description": "Total data size",
+          "description": "Total data size in MB for the branch",
           "readOnly": true
         },
         "lastActive": {
@@ -2493,7 +2493,7 @@
           "pattern": "^\\S.{0,62}\\S$|^\\S$"
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/EndpointStatus",
           "description": "The current status of the compute endpoint",
           "readOnly": true
         },
@@ -2506,6 +2506,36 @@
           "$ref": "#/definitions/AutoscalingSize",
           "description": "The compute units size range for autoscaling (MinCU-MaxCU)"
         }
+      }
+    },
+    "EndpointStatus": {
+      "type": "string",
+      "description": "The current status of the compute endpoint.",
+      "enum": [
+        "init",
+        "active",
+        "idle"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Init",
+            "value": "init",
+            "description": "The compute endpoint is currently initializing"
+          },
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The compute endpoint is currently active"
+          },
+          {
+            "name": "Idle",
+            "value": "idle",
+            "description": "The compute endpoint is currently idle"
+          }
+        ]
       }
     },
     "EndpointType": {

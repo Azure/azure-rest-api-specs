@@ -45,7 +45,7 @@ model EndpointProperties {
   @doc("The current status of the compute endpoint")
   @added(Neon.Postgres.Versions.v3_preview)
   @visibility(Lifecycle.Read)
-  status?: string;
+  status?: EndpointStatus;
 
   @doc("The timestamp when the compute endpoint was last active")
   @added(Neon.Postgres.Versions.v3_preview)
@@ -67,6 +67,21 @@ union EndpointType {
 
   @doc("ReadWrite compute endpoint type")
   ReadWrite: "read_write",
+}
+
+@doc("The current status of the compute endpoint.")
+@added(Neon.Postgres.Versions.v3_preview)
+union EndpointStatus {
+  string,
+
+  @doc("The compute endpoint is currently initializing")
+  Init: "init",
+
+  @doc("The compute endpoint is currently active")
+  Active: "active",
+
+  @doc("The compute endpoint is currently idle")
+  Idle: "idle",
 }
 
 @doc("Represents the compute units size range for autoscaling")

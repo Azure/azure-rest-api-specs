@@ -58,7 +58,7 @@ model BranchProperties {
   @added(Neon.Postgres.Versions.v3_preview)
   branch?: string;
 
-  @doc("Total data size")
+  @doc("Total data size in MB for the branch")
   @added(Neon.Postgres.Versions.v3_preview)
   @visibility(Lifecycle.Read)
   dataSize?: string;
