@@ -2,7 +2,7 @@
 
 import $RefParser, { ResolverError } from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
-import { basename, dirname, relative, resolve } from "path";
+import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
