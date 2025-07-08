@@ -2230,6 +2230,133 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "teamsPhoneCallDetails": {
+          "$ref":"#/definitions/TeamsPhoneCallDetails",
+          "description": "Custom calling context for Teams Phone Call Details"
+        }
+      }
+    },
+    "TeamsPhoneCallDetails": {
+      "description": "The call details which will be sent to the target",
+      "type": "object",
+      "properties": {
+        "teamsPhoneCallerDetails": {
+          "description": "Container for details relating to the original caller of the call.",
+          "$ref": "#/definitions/TeamsPhoneCallerDetails"
+        },
+        "teamsPhoneSourceDetails": {
+          "description": "Container for details relating to the entity responsible for the creation of these call details.",
+          "$ref": "#/definitions/TeamsPhoneSourceDetails"
+        },
+        "sessionId": {
+          "description": "Id to exclusively identify this call session. IVR will use this for their telemetry/reporting.",
+          "type": "string"
+        },
+        "intent": {
+          "description": "The intent of the call",
+          "type": "string"
+        },
+        "callTopic": {
+          "description": "A very short description (max 48 chars) of the reason for the call. To be displayed in Teams CallNotification. ",
+          "type": "string"
+        },
+        "callContext": {
+          "description": "A summary of the call thus far. It will be displayed on a side panel in the Teams UI.",
+          "type": "string"
+        },
+        "transcriptUrl": {
+          "description": "Url for fetching the transcript of the call.",
+          "type": "string"
+        },
+        "callSentiment": {
+          "description": "Sentiment of the call thus far.",
+          "type": "string"
+        },
+        "suggestedActions": {
+          "description": "Recommendations for resolving the issue based on the customer’s intent and interaction history.",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsPhoneCallerDetails": {
+      "description": "Container for details relating to the original caller of the call.",
+      "type": "object",
+      "properties": {
+        "caller": {
+          "description": "Caller’s ID (MRI – can be phone number), Caller’s Display Name",
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "recordId": {
+          "description": "Caller’s record ID (ex in CRM). ",
+          "type": "string"
+        },
+        "screenPopUrl": {
+          "description": "Caller’s screen pop url. ",
+          "type": "string"
+        },
+        "isAuthenticated": {
+          "description": "Indicating whether the caller was authenticated.",
+          "type": "boolean"
+        },
+        "additionalCallerInformation ": {
+          "description": "A set of key value pairs (max 10, any additional entries would be ignored) which a bot author wants to pass to the Teams Client for display to the agent. ",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TeamsPhoneParticipantProperties"
+          }
+        }
+      }
+    },
+    "TeamsPhoneSourceDetails": {
+      "description": "Container for details relating to the entity responsible for the creation of these call details.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "ID of the source entity passing along the call details (MRI ex. Application Instance ID of - CQ/AA).",
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "language": {
+          "description": "Language of the source entity passing along the call details, passed in the ISO-639 standard.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "status": {
+          "description": "Status of the source entity passing along the call details.",
+          "type": "string"
+        },
+        "intendedTargets": {
+          "description": "Intended targets of the source entity passing along the call details.",
+          "type": "object",
+          "$ref": "#/definitions/TeamsPhoneIntendedTargets"
+        }
+      }
+    },
+    "TeamsPhoneParticipantProperties": {
+      "description": "Properties of a participant",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Key of the property",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the property",
+          "type": "string"
+        }
+      }
+    },
+    "TeamsPhoneIntendedTargets": {
+      "description": "Intended targets of the source entity passing along the call details.",
+      "type": "object",
+      "properties": {
+        "target": {
+          "description": "Target of the source entity passing along the call details.",
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        },
+        "status": {
+          "description": "Status of the target of the source entity passing along the call details.",
+          "type": "string"
         }
       }
     },
