@@ -470,7 +470,7 @@ describe("summarizeChecksImpl", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it.skipIf(!process.env.GITHUB_TOKEN && !process.env.INTEGRATION_TEST)(
+    it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
       "Should fetch real PR data when GITHUB_TOKEN is available and when integration testing is enabled.",
       async () => {
         const github = new Octokit({
