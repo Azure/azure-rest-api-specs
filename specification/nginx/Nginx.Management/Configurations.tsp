@@ -160,21 +160,6 @@ model NginxConfigurationRequestProperties {
 }
 
 /**
- * Response model for listing Nginx configurations.
- */
-model NginxConfigurationListResponse {
-  /**
-   * List of configurations.
-   */
-  value: Configuration[];
-
-  /**
-   * URL to fetch the next page of configurations.
-   */
-  nextLink?: string;
-}
-
-/**
  * The request body for creating an analysis for an NGINX configuration.
  */
 model AnalysisCreate {
