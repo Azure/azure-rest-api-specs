@@ -97,15 +97,6 @@ interface StageProgressions {
     }
   >;
 
-  @added(Versions.v2025_03_01_preview)
-  createOrUpdateAtManagementGroupLevel is ArmResourceCreateOrReplaceSync<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
-  >;
-
   delete is ArmResourceDeleteSync<StageProgression>;
   deleteAtSubscriptionLevel is ArmResourceDeleteSync<
     StageProgression,
@@ -134,31 +125,12 @@ interface StageProgressions {
     }
   >;
 
-  @added(Versions.v2025_03_01_preview)
-  updateAtManagementGroupLevel is ArmResourcePatchSync<
-    StageProgression,
-    StageProgressionProperties,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
-  >;
-
   listByParent is ArmResourceListByParent<StageProgression>;
   listByParentAtSubscriptionLevel is ArmResourceListByParent<
     StageProgression,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
-    }
-  >;
-
-  @added(Versions.v2025_03_01_preview)
-  listByParentAtManagementGroupLevel is ArmResourceListByParent<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
     }
   >;
 }
