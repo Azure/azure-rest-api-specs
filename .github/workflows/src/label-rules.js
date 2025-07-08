@@ -649,7 +649,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   );
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
-  const missingRequiredLabels = (
+  const requiredLabelsFromRules = (
     await getViolatedRequiredLabelsRules(
       { github, context, core },
       existingLabels,
@@ -658,15 +658,11 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   )
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
-    .map((rule) => rule.anyRequiredLabels[0])
-    // Multiple rules may result in the same label being required, e.g. BreakingChange-Approved-*
-    .reduce(
-      (uniqueRequiredLabels, reqLabel) =>
-        uniqueRequiredLabels.includes(reqLabel)
-          ? uniqueRequiredLabels
-          : [...uniqueRequiredLabels, reqLabel],
-      [],
-    );
+    .map((rule) => rule.anyRequiredLabels[0]);
+
+  // Multiple rules may result in the same label being required, e.g. BreakingChange-Approved-*
+  // Deduplicate the array
+  const missingRequiredLabels = [...new Set(requiredLabelsFromRules)];
 
   return { presentBlockingLabels, missingRequiredLabels };
 }

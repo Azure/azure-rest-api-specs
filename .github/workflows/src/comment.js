@@ -1,3 +1,5 @@
+import { PER_PAGE_MAX } from "./github.js";
+
 /**
  * @typedef {Object} CommentOrUpdateOptions
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -72,6 +74,7 @@ export async function commentOrUpdate(
       owner,
       repo,
       issue_number,
+      per_page: PER_PAGE_MAX,
     });
 
     // only examine the comments from user in our current GITHUB_TOKEN context

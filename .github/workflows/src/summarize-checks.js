@@ -20,6 +20,7 @@
 import { extractInputs } from "./context.js";
 // eslint-disable-next-line no-unused-vars
 import { commentOrUpdate } from "./comment.js";
+import { PER_PAGE_MAX } from "./github.js";
 import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
 
 import {
@@ -59,9 +60,7 @@ const FYI_CHECK_NAMES = [
   "Swagger BreakingChange",
   "Swagger PrettierCheck",
 ];
-
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
-
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 
 /** @type {CheckMetadata[]} */
@@ -247,34 +246,19 @@ export async function summarizeChecksImpl(
   event_name,
   targetBranch,
 ) {
-  /** @type {string[]} */
-  let labelNames = [];
-  /** @type {CheckRunData[]} */
-  let requiredCheckRuns = [];
-  /** @type {CheckRunData[]} */
-  let fyiCheckRuns = [];
-
   core.info(
     `Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo} with targeted branch ${targetBranch}`,
   );
 
-  // no matter what, we will need the labels for the PR, so let's fetch them first
-  try {
-    const resp = await github.rest.issues.listLabelsOnIssue({
-      owner,
-      repo,
-      issue_number,
-    });
-    /** @type {{ name: string }[]} */
-    const labels = resp.data;
-    /** @type {string[]} */
-    labelNames = labels.map((label) => label.name);
-  } catch (error) {
-    core.error(
-      `Failed to obtain labels from GitHub API. prNumber: ${issue_number}, headOid: ${head_sha}, error: '${error}'. `,
-    );
-    process.exit(1);
-  }
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner: owner,
+    repo: repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+
+  /** @type {string[]} */
+  let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
   // handle our label trigger first, we may bail out early if it's a label action we're reacting to
   // this also implies that if a label action is performed before any workflows complete, we shouldn't
@@ -299,21 +283,15 @@ export async function summarizeChecksImpl(
     }
   }
 
-  try {
-    [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
-      { github, context, core },
-      owner,
-      repo,
-      head_sha,
-      issue_number,
-      EXCLUDED_CHECK_NAMES,
-    );
-  } catch (error) {
-    core.error(
-      `Failed to obtain checkruns from GitHub GraphQL API. prNumber: ${issue_number}, headOid: ${head_sha}, error: '${error}'. `,
-    );
-    process.exit(1);
-  }
+  /** @type {[CheckRunData[], CheckRunData[]]} */
+  const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
+    { github, context, core },
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    EXCLUDED_CHECK_NAMES,
+  );
 
   const commentBody = await createNextStepsComment(
     { github, context, core },
@@ -326,25 +304,18 @@ export async function summarizeChecksImpl(
     fyiCheckRuns,
   );
 
-  try {
-    core.info(
-      `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
-    );
-    // this will remain commented until we're comfortable with the change.
-    // await commentOrUpdate(
-    //   { github, context, core },
-    //   owner,
-    //   repo,
-    //   issue_number,
-    //   commentName,
-    //   commentBody
-    // )
-  } catch (error) {
-    core.error(
-      `Failed to update comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number}. Error: ${error}`,
-    );
-    process.exit(1);
-  }
+  core.info(
+    `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
+  );
+  // this will remain commented until we're comfortable with the change.
+  // await commentOrUpdate(
+  //   { github, context, core },
+  //   owner,
+  //   repo,
+  //   issue_number,
+  //   commentName,
+  //   commentBody
+  // )
 }
 
 /**
