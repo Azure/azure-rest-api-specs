@@ -19,6 +19,7 @@ export default async function generateJobSummary({ core }) {
   core.info(`avocadoLogFile: ${avocadoLogFile}`);
   if (!content && avocadoLogFile) {
     content = await readFileIfExists(avocadoLogFile, core);
+    // TODO: Remove lines starting with "##vso"
   }
 
   if (!content) {
