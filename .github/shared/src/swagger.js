@@ -248,10 +248,10 @@ function json(file) {
 }
 
 // API version lifecycle stages
-export const API_VERSION_LIFECYCLE_STAGES = {
+export const API_VERSION_LIFECYCLE_STAGES = Object.freeze({
   PREVIEW: "preview",
   STABLE: "stable",
-};
+});
 
 /**
  * Extract version string from input file path
