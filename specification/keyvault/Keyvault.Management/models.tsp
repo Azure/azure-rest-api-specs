@@ -1969,6 +1969,31 @@ model ProxyResourceWithoutSystemData {
 }
 
 /**
+ * Display metadata associated with the operation.
+ */
+model OperationDisplay {
+  /**
+   * Service provider: Microsoft Key Vault.
+   */
+  provider?: string;
+
+  /**
+   * Resource on which the operation is performed etc.
+   */
+  resource?: string;
+
+  /**
+   * Type of operation: get, read, delete, etc.
+   */
+  operation?: string;
+
+  /**
+   * Description of operation.
+   */
+  description?: string;
+}
+
+/**
  * Key Vault REST API operation definition.
  */
 model Operation {

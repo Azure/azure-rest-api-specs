@@ -3803,7 +3803,7 @@
           "description": "Operation name: {provider}/{resource}/{operation}"
         },
         "display": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationDisplay",
+          "$ref": "#/definitions/OperationDisplay",
           "description": "Display metadata associated with the operation."
         },
         "origin": {
@@ -3819,6 +3819,28 @@
         "isDataAction": {
           "type": "boolean",
           "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft Key Vault."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of operation."
         }
       }
     },
