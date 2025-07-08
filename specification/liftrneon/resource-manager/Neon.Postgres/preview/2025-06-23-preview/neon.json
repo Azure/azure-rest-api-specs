@@ -1821,6 +1821,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/branches/{branchName}/preflight": {
+      "post": {
+        "operationId": "Branches_Preflight",
+        "tags": [
+          "Branches"
+        ],
+        "description": "Action to validate preflight checks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "organizationName",
+            "in": "path",
+            "description": "Name of the Neon Organizations resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the Project",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "branchName",
+            "in": "path",
+            "description": "The name of the Branch",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\S.{0,62}\\S$|^\\S$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for preflight checks.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreflightCheckParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PreflightCheckResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Branches_Preflight_Database_Gen": {
+            "$ref": "./examples/Branches_Preflight_Database_Gen.json"
+          },
+          "Branches_Preflight_Endpoint_Gen": {
+            "$ref": "./examples/Branches_Preflight_Endpoint_Gen.json"
+          },
+          "Branches_Preflight_MaximumSet": {
+            "$ref": "./examples/Branches_Preflight_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Neon.Postgres/organizations/{organizationName}/projects/{projectName}/getConnectionUri": {
       "post": {
         "operationId": "Projects_GetConnectionUri",
@@ -2448,6 +2528,42 @@
             "name": "ReadWrite",
             "value": "read_write",
             "description": "ReadWrite compute endpoint type"
+          }
+        ]
+      }
+    },
+    "EntityType": {
+      "type": "string",
+      "description": "Entity types allowed for preflight deletion validation.",
+      "enum": [
+        "branch",
+        "neonRole",
+        "neonDatabase",
+        "endpoint"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Branch",
+            "value": "branch",
+            "description": "Branch entity"
+          },
+          {
+            "name": "NeonRole",
+            "value": "neonRole",
+            "description": "NeonRole entity"
+          },
+          {
+            "name": "NeonDatabase",
+            "value": "neonDatabase",
+            "description": "Database entity"
+          },
+          {
+            "name": "Endpoint",
+            "value": "endpoint",
+            "description": "Endpoint entity"
           }
         ]
       }
@@ -3097,6 +3213,62 @@
       },
       "required": [
         "versions"
+      ]
+    },
+    "PreflightCheckParameters": {
+      "type": "object",
+      "description": "Preflight check parameters for branch and child resources.\n\nIMPORTANT: Only one of the property types (branchProperties, roleProperties, databaseProperties,\nor endpointProperties) should be provided at a time, based on the entityType value:\n- When entityType is \"branch\", provide only branchProperties\n- When entityType is \"role\", provide only roleProperties\n- When entityType is \"database\", provide only databaseProperties\n- When entityType is \"endpoint\", provide only endpointProperties",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Project Id associated with this connection"
+        },
+        "branchId": {
+          "type": "string",
+          "description": "Branch Id associated with this connection"
+        },
+        "entityType": {
+          "$ref": "#/definitions/EntityType",
+          "description": "Entity type to be validated for deletion."
+        },
+        "branchProperties": {
+          "$ref": "#/definitions/BranchProperties",
+          "description": "The branch properties - ONLY provided when entityType is 'branch'"
+        },
+        "roleProperties": {
+          "$ref": "#/definitions/NeonRoleProperties",
+          "description": "The role properties - ONLY provided when entityType is 'role'"
+        },
+        "databaseProperties": {
+          "$ref": "#/definitions/NeonDatabaseProperties",
+          "description": "The database properties - ONLY provided when entityType is 'database'"
+        },
+        "endpointProperties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The endpoint properties - ONLY provided when entityType is 'endpoint'"
+        }
+      },
+      "required": [
+        "projectId",
+        "branchId",
+        "entityType"
+      ]
+    },
+    "PreflightCheckResult": {
+      "type": "object",
+      "description": "Result of the pre-deletion validation operation.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether action is allowed."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Optional message in case action is not allowed."
+        }
+      },
+      "required": [
+        "isValid"
       ]
     },
     "Project": {

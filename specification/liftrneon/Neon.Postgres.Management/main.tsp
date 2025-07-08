@@ -6,6 +6,7 @@ import "./Neon.Postgres.Models/databases.tsp";
 import "./Neon.Postgres.Models/connection.tsp";
 import "./Neon.Postgres.Models/roles.tsp";
 import "./Neon.Postgres.Models/endpoints.tsp";
+import "./Neon.Postgres.Models/preflight.tsp";
 import "./LiftrBase.Data/main.tsp";
 
 import "@azure-tools/typespec-autorest";
@@ -116,6 +117,18 @@ interface Branches {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Branch>;
   delete is ArmResourceDeleteSync<Branch>;
   list is ArmResourceListByParent<Branch>;
+
+  @added(Neon.Postgres.Versions.v3_preview)
+  @doc("Action to validate preflight checks.")
+  @autoRoute
+  @armResourceAction(PreflightCheckParameters)
+  @post
+  preflight(
+    ...ResourceInstanceParameters<Branch>,
+    @doc("Parameters for preflight checks.")
+    @body
+    parameters: PreflightCheckParameters,
+  ): ArmResponse<PreflightCheckResult> | ErrorResponse;
 }
 
 @armResourceOperations
