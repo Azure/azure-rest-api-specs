@@ -70,6 +70,23 @@ union WorkloadComplianceState {
 }
 
 /**
+ * Defines the enrollment state of a Virtual Instance / Component as per the workload definition.
+ */
+union WorkloadEnrollmentState {
+  string,
+
+  /**
+   * Indicates the state where the VI / Component isn't fully following the workload definition and thus, enrollment needing attention.
+   */
+  NeedsAttention: "NeedsAttention",
+
+  /**
+   * Indicates the state where the VI / Component is fully following the workload definition and thus, enrollment being complete.
+   */
+  Completed: "Completed",
+}
+
+/**
  * Defines the link type applicable for the linked resources.
  */
 @added(Versions.v2025_06_01_preview)
@@ -194,6 +211,20 @@ model VirtualInstanceProperties {
    */
   @visibility(Lifecycle.Read)
   complianceState?: WorkloadComplianceState;
+
+  /**
+   * Defines the enrollment state of the virtual instance, as per the corresponding workload definition.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentState?: WorkloadEnrollmentState;
+
+  /**
+   * Indicates any enrollment related errors on the Virtual Instance resource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentErrors?: CommonTypes.ErrorDetail;
 
   /**
    * Defines the virtual instance provisioning state.
@@ -353,6 +384,20 @@ model WorkloadComponentProperties {
    */
   @visibility(Lifecycle.Read)
   complianceState?: WorkloadComplianceState;
+
+  /**
+   * Defines the enrollment state of the workload component, as per the corresponding workload definition.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentState?: WorkloadEnrollmentState;
+
+  /**
+   * Indicates any enrollment related errors on the workload component resource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_06_01_preview)
+  enrollmentErrors?: CommonTypes.ErrorDetail;
 
   /**
    * Defines the workload component provisioning state.
