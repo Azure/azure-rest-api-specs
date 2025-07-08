@@ -7769,12 +7769,13 @@
         "Failed",
         "Canceled",
         "Provisioning",
+        "Moving",
         "Updating",
         "Deleting",
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "netappProvisioningState",
+        "name": "netAppProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -7796,6 +7797,11 @@
             "name": "Provisioning",
             "value": "Provisioning",
             "description": "Resource is getting provisioned"
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Resource is getting moved"
           },
           {
             "name": "Updating",
@@ -10432,7 +10438,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/netappProvisioningState"
+          "$ref": "#/definitions/provisioningState"
         },
         "quotaSizeInKiBs": {
           "type": "integer",
@@ -11143,24 +11149,6 @@
           "description": "Azure lifecycle management",
           "example": "Available"
         }
-      }
-    },
-    "netappProvisioningState": {
-      "readOnly": true,
-      "type": "string",
-      "description": "Gets the status of the VolumeQuotaRule at the time the operation was called.",
-      "enum": [
-        "Accepted",
-        "Creating",
-        "Patching",
-        "Deleting",
-        "Moving",
-        "Failed",
-        "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": false
       }
     },
     "encryptionTransitionRequest": {
