@@ -53,57 +53,6 @@
     }
   ],
   "paths": {
-    "/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/changeStates/{changeStateName}/stageProgressions/{stageProgressionName}": {
-      "delete": {
-        "operationId": "StageProgressions_DeleteAtManagementGroupLevel",
-        "tags": [
-          "StageProgressions"
-        ],
-        "description": "Delete a StageProgression",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ManagementGroupNameParameter"
-          },
-          {
-            "name": "changeStateName",
-            "in": "path",
-            "description": "The name of the ChangeState resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9-]{3,100}$"
-          },
-          {
-            "name": "stageProgressionName",
-            "in": "path",
-            "description": "name of the stageProgression",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9-|]{3,100}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/managementGroups/{managementGroupName}/providers/Microsoft.ChangeSafety/stageMaps": {
       "get": {
         "operationId": "StageMaps_ListByManagementGroup",

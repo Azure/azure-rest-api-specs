@@ -106,15 +106,6 @@ interface StageProgressions {
     }
   >;
 
-  @added(Versions.v2025_03_01_preview)
-  deleteAtManagementGroupLevel is ArmResourceDeleteSync<
-    StageProgression,
-    {
-      ...ApiVersionParameter;
-      ...Azure.ResourceManager.CommonTypes.ManagementGroupNameParameter;
-    }
-  >;
-
   update is ArmResourcePatchSync<StageProgression, StageProgressionProperties>;
   updateAtSubscriptionLevel is ArmResourcePatchSync<
     StageProgression,
