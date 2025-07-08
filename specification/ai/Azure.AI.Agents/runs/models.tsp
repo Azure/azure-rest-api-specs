@@ -370,7 +370,7 @@ model SubmitToolApprovalAction extends RequiredAction {
 
   @encodedName("application/json", "submit_tool_approval")
   @doc("The details describing tools that should be approved to continue run.")
-  submitToolApproval: RequiredToolCall[];
+  submitToolApproval: SubmitToolApprovalDetails;
 }
 
 @doc("The details describing tools that should be approved.")
