@@ -31,13 +31,17 @@ export default async function generateJobSummary({ core }) {
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 }
 
+/**
+ * @param {string} file
+ * @param {typeof import("@actions/core")} core
+ */
 async function readFileIfExists(file, core) {
   let content = "";
 
   try {
     content = await readFile(file, { encoding: "utf-8" });
   } catch (error) {
-    if (error.code === "ENOENT") {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
       core.info(`File '${file}' does not exist`);
     } else {
       throw error;

@@ -57,7 +57,7 @@ jobs:
         with:
           script: |
             const { default: generateJobSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/avocado.js');
+              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
             return await generateJobSummary({ core });
         env:
           AVOCADO_LOG_FILE: ${{ steps.run-avocado.outputs.log-file }}
