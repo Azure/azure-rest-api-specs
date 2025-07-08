@@ -147,6 +147,23 @@ union ReplicationMode {
 }
 
 /**
+ * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
+ */
+union StorageAccountStrategy {
+  string,
+
+  /**
+   *  Choose Standard_ZRS storage if the region supports it, else choose Standard_LRS storage, unless overridden by specifying regional storageAccountType. If no storageAccountStrategy is specified, this is the default strategy (from API version 2025-03-03 onwards).
+   */
+  PreferStandard_ZRS: "PreferStandard_ZRS",
+
+  /**
+   *  Choose Standard_LRS storage unless overridden by specifying regional storageAccountType.
+   */
+  DefaultStandard_LRS: "DefaultStandard_LRS",
+}
+
+/**
  * It is type of the extended location.
  */
 union GalleryExtendedLocationType {
@@ -947,11 +964,10 @@ model GalleryArtifactPublishingProfileBase {
   /**
    * The end of life date of the gallery image version. This property can be used for decommissioning purposes. This property is updatable.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endOfLifeDate?: utcDateTime;
 
   /**
-   * Specifies the storage account type to be used to store the image. This property is not updatable.
+   * Specifies the storage account type to be used to store the image. Cannot be specified along with storageAccountStrategy. This property is not updatable.
    */
   storageAccountType?: StorageAccountType;
 
@@ -965,6 +981,11 @@ model GalleryArtifactPublishingProfileBase {
    */
   @identifiers(#["name", "extendedLocation/name"])
   targetExtendedLocations?: GalleryTargetExtendedLocation[];
+
+  /**
+   * Specifies the strategy to be used when selecting the storage account type. Cannot be specified along with storageAccountType, but can be overridden per region by specifying targetRegions[].storageAccountType. This property is not updatable.
+   */
+  storageAccountStrategy?: StorageAccountStrategy;
 }
 
 /**
