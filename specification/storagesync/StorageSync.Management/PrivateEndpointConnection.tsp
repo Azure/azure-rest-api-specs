@@ -35,7 +35,7 @@ interface PrivateEndpointConnections {
   /**
    * Update the state of specified private endpoint connection associated with the storage sync service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | (ArmAcceptedLroResponse & {
@@ -55,7 +55,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the storage sync service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -73,7 +73,7 @@ interface PrivateEndpointConnections {
   /**
    * Get a PrivateEndpointConnection List.
    */
-  #suppress "deprecated" "For backward compatibility"
+  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByStorageSyncService is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult> & {

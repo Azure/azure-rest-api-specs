@@ -48,7 +48,7 @@ interface ServerEndpoints {
   /**
    * Create a new ServerEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   create is ArmCreateOperation<
     ResourceInstanceParameters<
@@ -109,7 +109,7 @@ interface ServerEndpoints {
   /**
    * Delete a given ServerEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerEndpoint,
     Response = (ArmDeletedResponse & {
@@ -152,7 +152,7 @@ interface ServerEndpoints {
   /**
    * Recall a server endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ServerEndpoints_recallAction")
   recallAction is ArmResourceActionSync<
     ServerEndpoint,

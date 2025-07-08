@@ -48,7 +48,7 @@ interface CloudEndpoints {
   /**
    * Create a new CloudEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   create is ArmCreateOperation<
     ResourceInstanceParameters<
@@ -80,7 +80,7 @@ interface CloudEndpoints {
   /**
    * Delete a given CloudEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CloudEndpoint,
     Response = (ArmDeletedResponse & {
@@ -198,7 +198,7 @@ interface CloudEndpoints {
   /**
    * Restore Heartbeat a given CloudEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CloudEndpoints_restoreheartbeat")
   restoreheartbeat is ArmResourceActionSync<
     CloudEndpoint,

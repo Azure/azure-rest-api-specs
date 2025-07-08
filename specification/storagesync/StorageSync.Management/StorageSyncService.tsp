@@ -47,7 +47,7 @@ interface StorageSyncServices {
   /**
    * Create a new StorageSyncService.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   create is ArmCreateOperation<
     ResourceInstanceParameters<
@@ -100,7 +100,7 @@ interface StorageSyncServices {
   /**
    * Delete a given StorageSyncService.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageSyncService,
     Response = (ArmDeletedResponse & {
@@ -160,8 +160,8 @@ interface StorageSyncServices {
   /**
    * Gets the private link resources that need to be created for a storage sync service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "deprecated" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("privateLinkResources")
   @operationId("PrivateLinkResources_ListByStorageSyncService")
