@@ -124,7 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
+              "$ref": "#/definitions/ObjectRecommendationListResult"
             }
           },
           "default": {
@@ -210,7 +210,7 @@
       },
       "description": "Impact on some metric if this recommended action is applied."
     },
-    "IndexRecommendationDetails": {
+    "ObjectRecommendationDetails": {
       "type": "object",
       "properties": {
         "databaseName": {
@@ -251,7 +251,7 @@
       "description": "Recommendation details for the recommended action.",
       "readOnly": true
     },
-    "IndexRecommendationResourceProperties": {
+    "ObjectRecommendationResourceProperties": {
       "type": "object",
       "properties": {
         "initialRecommendedTime": {
@@ -346,20 +346,20 @@
           "description": "Estimated impact of this recommended action."
         },
         "details": {
-          "$ref": "#/definitions/IndexRecommendationDetails",
+          "$ref": "#/definitions/ObjectRecommendationDetails",
           "description": "Recommendation details for the recommended action."
         }
       },
-      "description": "Index recommendation properties.",
+      "description": "Object recommendation properties.",
       "readOnly": true
     },
-    "IndexRecommendationResource": {
+    "ObjectRecommendationResource": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IndexRecommendationResourceProperties",
+          "$ref": "#/definitions/ObjectRecommendationResourceProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of IndexRecommendationResource."
+          "description": "Properties of ObjectRecommendationResource."
         }
       },
       "allOf": [
@@ -367,18 +367,18 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Index recommendation properties."
+      "description": "Object recommendation properties."
     },
-    "IndexRecommendationListResult": {
-      "description": "List of available index recommendations.",
+    "ObjectRecommendationListResult": {
+      "description": "List of available object recommendations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of available index recommendations.",
+          "description": "List of available object recommendations.",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IndexRecommendationResource"
+            "$ref": "#/definitions/ObjectRecommendationResource"
           },
           "x-ms-identifiers": [
             "name"
