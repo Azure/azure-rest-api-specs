@@ -69,7 +69,7 @@ export async function main() {
         break;
       }
 
-      if (Date.now() - start < 1_000 * 60 * 3) {
+      if (Date.now() - start > 1_000 * 60 * 3) {
         throw new Error("Test timeout");
       }
 
