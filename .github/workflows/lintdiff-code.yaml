@@ -51,7 +51,10 @@ jobs:
 
       # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
+        id: run-lintdiff
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> $GITHUB_OUTPUT
+
           npm exec --no -- lint-diff \
             --before before \
             --after after \
@@ -64,10 +67,12 @@ jobs:
           # default.
           NODE_OPTIONS: "--max-old-space-size=8192"
 
-      # Used by set-status.js to set failure targetUrl to job summary
+      # Used by other workflows like set-status
       - name: Set job-summary artifact
-        if: ${{ !cancelled() }}
-        uses: ./.github/actions/add-empty-artifact
+        if: ${{ steps.run-lintdiff.outputs.summary }}
+        uses: actions/upload-artifact@v4
         with:
-          name: "job-summary"
-          value: "true"
+          name: job-summary
+          path: ${{ steps.run-lintdiff.outputs.summary }}
+          # If the file doesn't exist, just don't add the label
+          if-no-files-found: ignore

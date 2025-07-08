@@ -144,7 +144,7 @@ export async function setStatusImpl({
     target_url = run.html_url;
 
     if (run.conclusion === CheckConclusion.FAILURE) {
-      const jobSummaryLabel = "job-summary=true";
+      const jobSummaryLabel = "job-summary";
 
       // Check if run has a custom job summary
       core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryLabel})`);
