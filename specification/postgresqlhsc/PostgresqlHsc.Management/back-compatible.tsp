@@ -10,34 +10,34 @@ using Microsoft.DBforPostgreSQL;
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Configuration.properties, "go");
+@@flattenProperty(Configuration.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServerConfiguration.properties, "go");
+@@flattenProperty(ServerConfiguration.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(FirewallRule.properties, "go");
+@@flattenProperty(FirewallRule.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties, "go");
+@@flattenProperty(PrivateEndpointConnection.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties, "go");
+@@flattenProperty(PrivateLinkResource.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Role.properties, "go");
+@@flattenProperty(Role.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClusterServer.properties, "go");
+@@flattenProperty(ClusterServer.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClusterForUpdate.properties, "go");
+@@flattenProperty(ClusterForUpdate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RoleProperties.externalIdentity, "go");
+@@flattenProperty(RoleProperties.externalIdentity);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SimplePrivateEndpointConnection.properties, "go");
+@@flattenProperty(SimplePrivateEndpointConnection.properties);
 
 @@clientLocation(NodeConfigurations.updateOnNode, Configurations);
 @@clientLocation(NodeConfigurations.getNode, Configurations);
