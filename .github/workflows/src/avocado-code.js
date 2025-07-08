@@ -9,21 +9,23 @@ import { readFile } from "fs/promises";
 export default async function generateJobSummary({ core }) {
   let content = "";
 
-  const avocadoOutputFile = process.env.AVOCADO_OUTPUT_FILE;
-  core.info(`avocadoOutputFile: ${avocadoOutputFile}`);
-  if (avocadoOutputFile) {
-    content = await readFileIfExists(avocadoOutputFile, core);
+  const avocadoOutput = process.env.AVOCADO_OUTPUT;
+  core.info(`avocadoOutput: ${avocadoOutput}`);
+  if (avocadoOutput) {
+    content = await readFileIfExists(avocadoOutput, core);
   }
 
-  const avocadoLogFile = process.env.AVOCADO_LOG_FILE;
-  core.info(`avocadoLogFile: ${avocadoLogFile}`);
-  if (!content && avocadoLogFile) {
-    content = await readFileIfExists(avocadoLogFile, core);
-    // TODO: Remove lines starting with "##vso"
+  const avocadoLog = process.env.AVOCADO_LOG;
+  core.info(`avocadoLog: ${avocadoLog}`);
+  if (!content && avocadoLog) {
+    content = await readFileIfExists(avocadoLog, core);
+
+    // Remove lines starting with "##vso"
+    content = content.replace(/^##vso.*(?:\r?\n)?/gm, "");
   }
 
   if (!content) {
-    content = `Unable to read file '${avocadoOutputFile}' or '${avocadoLogFile}'`;
+    content = `Unable to read file '${avocadoOutput}' or '${avocadoLog}'`;
   }
 
   core.summary.addCodeBlock(content);

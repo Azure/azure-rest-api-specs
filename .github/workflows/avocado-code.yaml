@@ -25,11 +25,11 @@ jobs:
         run: |
           set -o pipefail
 
-          AVOCADO_LOG_FILE=$RUNNER_TEMP/avocado.log
-          AVOCADO_OUTPUT_FILE=$RUNNER_TEMP/avocado.ndjson
+          AVOCADO_LOG=$RUNNER_TEMP/avocado.log
+          AVOCADO_OUTPUT=$RUNNER_TEMP/avocado.ndjson
 
-          echo "output-file=$AVOCADO_OUTPUT_FILE"> $GITHUB_OUTPUT
-          echo "log-file=$AVOCADO_LOG_FILE"> $GITHUB_OUTPUT
+          echo "log=$AVOCADO_LOG"> $GITHUB_OUTPUT
+          echo "output=$AVOCADO_OUTPUT"> $GITHUB_OUTPUT
 
           npm exec --no -- avocado \
             --excludePaths \
@@ -45,8 +45,8 @@ jobs:
               "data-plane" \
               "resource-manager" \
             --file \
-              $AVOCADO_OUTPUT_FILE \
-            | tee $AVOCADO_LOG_FILE
+              $AVOCADO_OUTPUT \
+            | tee $AVOCADO_LOG
         env:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
@@ -62,8 +62,8 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
             return await generateJobSummary({ core });
         env:
-          AVOCADO_LOG_FILE: ${{ steps.run-avocado.outputs.log-file }}
-          AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}
+          AVOCADO_LOG: ${{ steps.run-avocado.outputs.log}}
+          AVOCADO_OUTPUT: ${{ steps.run-avocado.outputs.output }}
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact
