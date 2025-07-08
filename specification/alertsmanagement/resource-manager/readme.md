@@ -156,7 +156,7 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 ```yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
