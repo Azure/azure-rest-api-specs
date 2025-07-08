@@ -1057,13 +1057,85 @@
         }
       }
     },
-    "/models/{name}/versions/{version}": {
-      "patch": {
-        "operationId": "Models_CreateOrUpdateVersion",
-        "description": "Create a new or update an existing ModelVersion with the given version id",
-        "consumes": [
-          "application/merge-patch+json"
+    "/models": {
+      "get": {
+        "operationId": "Models_ListLatest",
+        "description": "List the latest version of each ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/models/{name}/versions": {
+      "get": {
+        "operationId": "Models_ListVersions",
+        "description": "List all versions of the given ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedModelVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/models/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Models_GetVersion",
+        "description": "Get the specific version of the ModelVersion",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1078,18 +1150,9 @@
           {
             "name": "version",
             "in": "path",
-            "description": "The specific version id of the ModelVersion to create or update.",
+            "description": "The specific version id of the ModelVersion to retrieve.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "modelVersion",
-            "in": "body",
-            "description": "The ModelVersion to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelVersion"
-            }
           }
         ],
         "responses": {
@@ -1099,11 +1162,45 @@
               "$ref": "#/definitions/ModelVersion"
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ModelVersion"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Models_DeleteVersion",
+        "description": "Delete the specific version of the ModelVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the ModelVersion to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2099,6 +2196,27 @@
           "description": "The Index items on this page",
           "items": {
             "$ref": "#/definitions/Index"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedModelVersion": {
+      "type": "object",
+      "description": "Paged collection of ModelVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ModelVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ModelVersion"
           }
         },
         "nextLink": {
