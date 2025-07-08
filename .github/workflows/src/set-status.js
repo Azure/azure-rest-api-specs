@@ -144,19 +144,24 @@ export async function setStatusImpl({
     target_url = run.html_url;
 
     if (run.conclusion === CheckConclusion.FAILURE) {
-      const jobSummaryLabel = "job-summary";
+      const jobSummaryArtifactName = "job-summary";
 
       // Check if run has a custom job summary
-      core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryLabel})`);
-      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-        owner: owner,
-        repo: repo,
-        run_id: run.id,
-        name: jobSummaryLabel,
-        per_page: PER_PAGE_MAX,
-      });
+      core.info(
+        `listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryArtifactName})`,
+      );
+      const jobSummaryArtifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner: owner,
+          repo: repo,
+          run_id: run.id,
+          name: jobSummaryArtifactName,
+          per_page: PER_PAGE_MAX,
+        },
+      );
 
-      const hasJobSummary = artifacts.length > 0;
+      const hasJobSummary = jobSummaryArtifacts.length > 0;
       core.info(`hasJobSummary: ${hasJobSummary}`);
 
       if (!hasJobSummary) {
