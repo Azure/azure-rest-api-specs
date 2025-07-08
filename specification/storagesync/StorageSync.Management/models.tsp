@@ -575,6 +575,7 @@ model CheckNameAvailabilityParameters {
   type: Type;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum Type {
   `Microsoft.StorageSync/storageSyncServices`,
 }
@@ -617,7 +618,6 @@ model StorageSyncServiceCreateParameters
    * The parameters used to create the storage sync service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageSyncServiceCreateParametersProperties;
 }
 
@@ -709,7 +709,6 @@ model StorageSyncServiceUpdateParameters {
    * The properties of the server endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: StorageSyncServiceUpdateProperties;
 }
 
@@ -740,6 +739,9 @@ model StorageSyncServiceArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: StorageSyncService[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -756,6 +758,9 @@ model SyncGroupArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: SyncGroup[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -789,7 +794,6 @@ model SyncGroupCreateParameters
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }
 
@@ -803,7 +807,6 @@ model CloudEndpointCreateParameters
    * The parameters used to create the cloud endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CloudEndpointCreateParametersProperties;
 }
 
@@ -1068,6 +1071,9 @@ model CloudEndpointArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: CloudEndpoint[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -1090,7 +1096,6 @@ model PostBackupResponse {
    * Post Backup Response Properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   backupMetadata?: PostBackupResponseProperties;
 }
 
@@ -1265,7 +1270,6 @@ model ServerEndpointCreateParameters
    * The parameters used to create the server endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ServerEndpointCreateParametersProperties;
 }
 
@@ -2111,7 +2115,6 @@ model ServerEndpointUpdateParameters {
    * The properties of the server endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ServerEndpointUpdateProperties;
 }
 
@@ -2166,6 +2169,9 @@ model ServerEndpointArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: ServerEndpoint[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -2197,6 +2203,9 @@ model RegisteredServerArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: RegisteredServer[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -2359,7 +2368,6 @@ model RegisteredServerCreateParameters
    * The parameters used to create the registered server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegisteredServerCreateParametersProperties;
 }
 
@@ -2434,7 +2442,6 @@ model RegisteredServerUpdateParameters
    * The parameters used to update the registered server.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RegisteredServerUpdateProperties;
 }
 
@@ -2475,6 +2482,9 @@ model WorkflowArray {
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: Workflow[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
@@ -2636,7 +2646,6 @@ model SubscriptionState {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: Record<unknown>;
 }
 
@@ -2714,6 +2723,9 @@ model PrivateEndpointConnectionListResult {
    */
   value?: PrivateEndpointConnection[];
 
+  /**
+   * The URL to get the next set of results.
+   */
   @nextLink
   nextLink?: string;
 }
