@@ -287,9 +287,12 @@ function getBaseNameForSwagger(filePath, version = "") {
  */
 export function getVersionFromInputFile(filePath, withPreview = false) {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
-  const segments = filePath.split("/");
+  
+  // Normalize path separators to forward slashes for consistent processing
+  const normalizedPath = filePath.replace(/\\/g, "/");
+  const segments = normalizedPath.split("/");
 
-  if (filePath.indexOf("data-plane") !== -1) {
+  if (normalizedPath.indexOf("data-plane") !== -1) {
     if (segments && segments.length > 1) {
       for (const s of segments.entries()) {
         if (["stable", "preview"].some((v) => v === s[1])) {
