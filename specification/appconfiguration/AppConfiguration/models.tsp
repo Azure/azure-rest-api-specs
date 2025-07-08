@@ -337,6 +337,7 @@ alias SyncTokenHeader = {
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
 alias ContentTypeHeader<T extends string> = {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Avoiding creating a bunch of types for each content type."
   @doc("Content-Type header")
   @header("Content-Type")
   contentType?: T | "application/problem+json";
