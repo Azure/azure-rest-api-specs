@@ -3101,7 +3101,8 @@
         "sharepoint_grounding",
         "azure_ai_search",
         "bing_custom_search",
-        "connected_agent"
+        "connected_agent",
+        "deep_research"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3151,6 +3152,11 @@
             "name": "connectedAgent",
             "value": "connected_agent",
             "description": "Tool type `connected_agent`"
+          },
+          {
+            "name": "deepResearch",
+            "value": "deep_research",
+            "description": "Tool type `deep_research`"
           }
         ]
       }
@@ -3903,6 +3909,63 @@
       "required": [
         "assistant_id"
       ]
+    },
+    "DeepResearchBingGroundingConnection": {
+      "type": "object",
+      "description": "The connection resource ID for the Bing grounding resource .",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "The connection ID for the Bing grounding connection.",
+          "x-ms-client-name": "connectionId"
+        }
+      },
+      "required": [
+        "connection_id"
+      ]
+    },
+    "DeepResearchDetails": {
+      "type": "object",
+      "description": "The details of the Deep Research tool.",
+      "properties": {
+        "deep_research_model": {
+          "type": "string",
+          "description": "The deep research model deployment name.",
+          "x-ms-client-name": "deepResearchModel"
+        },
+        "bing_grounding_connections": {
+          "type": "array",
+          "description": "The array containing Bing grounding connection IDs to enhance deep research capabilities.",
+          "items": {
+            "$ref": "#/definitions/DeepResearchBingGroundingConnection"
+          },
+          "x-ms-client-name": "deepResearchBingGroundingConnections"
+        }
+      },
+      "required": [
+        "deep_research_model",
+        "bing_grounding_connections"
+      ]
+    },
+    "DeepResearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Deep Research tool as used to configure an agent.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/DeepResearchDetails",
+          "description": "The deep_research tool definition configuration.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
     },
     "DoneEvent": {
       "type": "string",
@@ -6058,6 +6121,43 @@
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
+      ]
+    },
+    "RunStepDeepResearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents\nexecuted deep research operations.",
+      "properties": {
+        "deep_research": {
+          "$ref": "#/definitions/RunStepDeepResearchToolCallDetails",
+          "description": "The detailed information about the automated browser tasks performed by the model.",
+          "x-ms-client-name": "deepResearch"
+        }
+      },
+      "required": [
+        "deep_research"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "deep_research"
+    },
+    "RunStepDeepResearchToolCallDetails": {
+      "type": "object",
+      "description": "The detailed information about the deep research tasks performed by the model.",
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The input provided by the model to the deep research tool."
+        },
+        "output": {
+          "type": "string",
+          "description": "The final output for the deep research tool."
+        }
+      },
+      "required": [
+        "input"
       ]
     },
     "RunStepDelta": {
