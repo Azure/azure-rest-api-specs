@@ -25,7 +25,8 @@ model BackupResourceEncryptionConfigExtendedResource
 
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
-model BackupResourceEncryptionConfigResource is Azure.ResourceManager.TrackedResource<BackupResourceEncryptionConfig> {
+model BackupResourceEncryptionConfigResource
+  is Azure.ResourceManager.TrackedResource<BackupResourceEncryptionConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigResource,
     KeyName = "backupEncryptionConfig",
@@ -34,6 +35,7 @@ model BackupResourceEncryptionConfigResource is Azure.ResourceManager.TrackedRes
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface BackupResourceEncryptionConfigExtendedResources {
   /**
@@ -48,6 +50,8 @@ interface BackupResourceEncryptionConfigExtendedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("BackupResourceEncryptionConfigs_Update")
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceEncryptionConfigResource,

@@ -184,10 +184,10 @@ interface JobsOperationGroup {
    * Triggers export of jobs specified by filters and returns an OperationID to track.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("Jobs_Export")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport")
   @post
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   export(
     ...ApiVersionParameter,
 
@@ -310,10 +310,10 @@ interface ValidateOperationResultsOperationGroup {
    * Fetches the result of a triggered validate operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("ValidateOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}")
   @get
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   get(
     ...ApiVersionParameter,
 
@@ -371,10 +371,10 @@ interface ProtectionContainerRefreshOperationResultsOperationGroup {
    * Provides the result of the refresh operation triggered by the BeginRefresh operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("ProtectionContainerRefreshOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}")
   @get
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   get(
     ...ApiVersionParameter,
 
@@ -441,10 +441,10 @@ interface ProtectionContainersOperationGroup {
    * asynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("ProtectionContainers_Refresh")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers")
   @post
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   refresh(
     ...ApiVersionParameter,
 
@@ -480,11 +480,11 @@ interface BackupOperationResultsOperationGroup {
    * part of the Location header of the operation response.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("BackupOperationResults_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}")
   @get
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   get(
     ...ApiVersionParameter,
 
@@ -630,6 +630,7 @@ interface DeletedProtectionContainersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SecurityPINsOperationGroup {
   /**
    * Get the security PIN.
@@ -651,6 +652,7 @@ interface SecurityPINsOperationGroup {
     ...SubscriptionIdParameter,
 
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
     @header
     `x-ms-authorization-auxiliary`?: string,
 

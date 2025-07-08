@@ -53,6 +53,7 @@ interface ProtectionContainerResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("ProtectionContainers_Unregister")
   unregister is ArmResourceDeleteSync<
     ProtectionContainerResource,
@@ -63,8 +64,9 @@ interface ProtectionContainerResources {
    * This is an async operation and the results should be tracked using location header or Azure-async-url.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProtectionContainers_Inquire")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  @operationId("ProtectionContainers_Inquire")
   inquire is ArmResourceActionSync<
     ProtectionContainerResource,
     void,

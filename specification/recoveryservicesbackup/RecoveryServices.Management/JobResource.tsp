@@ -60,9 +60,10 @@ interface JobResources {
    * GetCancelOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("cancel")
   @operationId("JobCancellations_Trigger")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   trigger is ArmResourceActionSync<JobResource, void, AcceptedResponse>;
 }
 
@@ -98,8 +99,9 @@ interface JobOperationResults {
   /**
    * Fetches the result of any operation.
    */
-  @get
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @get
   get is JobOperationResultsOps.Read<
     JobResource,
     Response = OkResponse | AcceptedResponse | ArmNoContentResponse
@@ -135,9 +137,9 @@ interface ExportJobsOperationResults {
    * Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also
    * contains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.
    */
-  @get
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @get
   get is ExportJobsOperationResultsOps.Read<
     JobResource,
     Response = ArmResponse<OperationResultInfoBaseResource> | {

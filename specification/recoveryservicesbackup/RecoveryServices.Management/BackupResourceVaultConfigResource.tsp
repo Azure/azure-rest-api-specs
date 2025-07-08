@@ -25,6 +25,7 @@ model BackupResourceVaultConfigResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface BackupResourceVaultConfigResources {
   /**
@@ -44,6 +45,7 @@ interface BackupResourceVaultConfigResources {
     BackupResourceVaultConfigResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -61,6 +63,7 @@ interface BackupResourceVaultConfigResources {
     PatchModel = BackupResourceVaultConfigResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     }

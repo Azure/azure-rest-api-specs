@@ -14,6 +14,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup items.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
 @parentResource(ProtectionContainerResource)
 model ProtectedItemResource
   is Azure.ResourceManager.TrackedResource<ProtectedItem> {
@@ -50,12 +51,13 @@ interface ProtectedItemResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectedItems_CreateOrUpdate")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @operationId("ProtectedItems_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ProtectedItemResource,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
@@ -68,8 +70,8 @@ interface ProtectedItemResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ProtectedItems_Delete")
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @operationId("ProtectedItems_Delete")
   delete is ArmResourceDeleteSync<
     ProtectedItemResource,
     Response = ArmDeletedResponse | AcceptedResponse | ArmDeletedNoContentResponse
@@ -80,9 +82,10 @@ interface ProtectedItemResources {
    * operation, call GetProtectedItemOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("backup")
   @operationId("Backups_Trigger")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   trigger is ArmResourceActionSync<
     ProtectedItemResource,
     BackupRequestResource,

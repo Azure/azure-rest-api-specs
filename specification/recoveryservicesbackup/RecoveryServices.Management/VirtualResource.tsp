@@ -7,13 +7,24 @@ using Azure.ResourceManager;
 
 namespace Microsoft.RecoveryServices;
 
+/**
+ * Vault virtual resource.
+ */
 @armVirtualResource
 model VaultResource {
   ...ResourceNameParameter<VaultResource, "vaultName", "vaults", "">;
 }
 
+/**
+ * Backup Fabric virtual resource.
+ */
 @parentResource(VaultResource)
 @armVirtualResource
 model BackupFabricResource {
-  ...ResourceNameParameter<BackupFabricResource, "fabricName", "backupFabrics", "">;
+  ...ResourceNameParameter<
+    BackupFabricResource,
+    "fabricName",
+    "backupFabrics",
+    ""
+  >;
 }

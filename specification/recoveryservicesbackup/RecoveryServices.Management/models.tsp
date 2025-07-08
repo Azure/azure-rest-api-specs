@@ -1188,22 +1188,27 @@ enum ProtectableContainerType {
 /**
  * Recovery point tier type.
  */
-union RecoveryPointTierType {
-  "Invalid",
-  "InstantRP",
-  "HardenedRP",
-  "ArchivedRP",
-  string,
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum RecoveryPointTierType {
+  Invalid,
+  InstantRP,
+  HardenedRP,
+  ArchivedRP,
 }
 
 /**
  * Recovery point tier status.
  */
 union RecoveryPointTierStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   "Valid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   "Disabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   "Deleted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   "Rehydrated",
   string,
 }
@@ -1543,12 +1548,14 @@ model FeatureSupportRequest {
   /**
    * backup support feature type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   featureType: string;
 }
 
 /**
  * Response for feature support requests for Azure IaasVm
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVMResourceFeatureSupportResponse {
   /**
    * Support status of feature
@@ -1651,7 +1658,6 @@ model BackupManagementUsage {
   /**
    * Next reset time of usage.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextResetTime?: utcDateTime;
 
   /**
@@ -1839,6 +1845,7 @@ model BackupResourceEncryptionConfigExtended
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model BackupResourceEncryptionConfig {
   /**
    * Encryption At Rest Type
@@ -1868,6 +1875,7 @@ model PrivateEndpointConnection {
   /**
    * Gets or sets provisioning state of the private endpoint connection
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -1986,13 +1994,11 @@ model OperationStatus {
   /**
    * Operation start time. Format: ISO-8601.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Operation end time. Format: ISO-8601.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -2029,6 +2035,7 @@ model OperationStatusExtendedInfo {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2071,6 +2078,7 @@ model VaultStorageConfigOperationResultResponse {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2106,6 +2114,7 @@ model TriggerDataMoveRequest {
   /**
    * Pause GC
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   pauseGC?: boolean;
 }
 
@@ -2118,6 +2127,7 @@ model ProtectedItem {
   /**
    * backup item type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   protectedItemType: string;
 
   /**
@@ -2150,7 +2160,6 @@ model ProtectedItem {
   /**
    * Timestamp when the last (latest) backup copy was created for this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRecoveryPoint?: utcDateTime;
 
   /**
@@ -2166,7 +2175,7 @@ model ProtectedItem {
   /**
    * Time for deferred deletion in UTC
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   deferredDeleteTimeInUTC?: utcDateTime;
 
   /**
@@ -2240,6 +2249,7 @@ model RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2262,6 +2272,7 @@ model RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 
   /**
@@ -2299,6 +2310,7 @@ model ProtectionPolicy {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   backupManagementType: string;
 
   /**
@@ -2351,13 +2363,11 @@ model Job {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -2368,6 +2378,7 @@ model Job {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   jobType: string;
 }
 
@@ -2390,6 +2401,7 @@ model OperationResultInfoBase {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2447,6 +2459,7 @@ model ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2616,7 +2629,6 @@ model BackupEngineExtendedInfo {
   /**
    * Last refresh time in the backup engine.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   refreshedAt?: utcDateTime;
 
   /**
@@ -2671,6 +2683,7 @@ model ProtectableContainer {
    * 1. Compute Azure VM is Microsoft.Compute/virtualMachines
    * 2. Classic Compute Azure VM is Microsoft.ClassicCompute/virtualMachines
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   protectableContainerType: ProtectableContainerType;
 
   /**
@@ -2716,6 +2729,7 @@ model ProtectionContainer {
    * Windows 4. Azure SQL instance is AzureSqlContainer. 5. Storage containers is StorageContainer. 6. Azure workload
    * Backup is VMAppContainer
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   containerType: ProtectableContainerType;
 
   /**
@@ -2768,6 +2782,7 @@ model WorkloadItem {
   /**
    * Type of the backup item.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   workloadItemType: string;
 
   /**
@@ -2800,6 +2815,7 @@ model BackupRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2807,6 +2823,7 @@ model BackupRequest {
  * Parameters to Provision ILR API.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ILRRequestResource extends Resource {
   /**
    * ILRRequestResource properties
@@ -2818,10 +2835,12 @@ model ILRRequestResource extends Resource {
  * Parameters to Provision ILR API.
  */
 @discriminator("objectType")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ILRRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -2869,6 +2888,7 @@ model WorkloadProtectableItem {
   /**
    * Type of the backup item.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   protectableItemType: string;
 
   /**
@@ -2924,10 +2944,12 @@ model TokenInformation {
   /**
    * Security PIN
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   securityPIN?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MoveRPAcrossTiersRequest {
   /**
    * Gets the class type.
@@ -2957,6 +2979,7 @@ model ListRecoveryPointsRecommendedForMoveRequest {
   /**
    * List of Recovery Points excluded from Move
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   excludedRPList?: string[];
 }
 
@@ -3038,6 +3061,7 @@ model FetchTieringCostInfoRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -3049,6 +3073,7 @@ model TieringCostInfo {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   objectType: string;
 }
 
@@ -3079,7 +3104,6 @@ model AzureFileshareProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -3102,6 +3126,7 @@ model AzureFileshareProtectedItem extends ProtectedItem {
 /**
  * KPI Resource Health Details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model KPIResourceHealthDetails {
   /**
    * Resource Health Status
@@ -3151,7 +3176,6 @@ model AzureFileshareProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this item in the service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -3174,7 +3198,6 @@ model AzureFileshareProtectedItemExtendedInfo {
    * The resource state sync time for this backup item.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resourceStateSyncTime?: utcDateTime;
 }
 
@@ -3190,7 +3213,6 @@ model AzureFileShareRecoveryPoint extends RecoveryPoint {
   /**
    * Time at which this backup copy was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -3201,6 +3223,7 @@ model AzureFileShareRecoveryPoint extends RecoveryPoint {
   /**
    * Contains recovery point size
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   recoveryPointSizeInGB?: int32;
 
   /**
@@ -3325,6 +3348,7 @@ model RestoreFileSpecs {
 /**
  * Target Azure File Share Info.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model TargetAFSRestoreInfo {
   /**
    * File share name
@@ -3430,6 +3454,7 @@ model SchedulePolicy {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   schedulePolicyType: string;
 }
 
@@ -3441,6 +3466,7 @@ model RetentionPolicy {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "For backward compatibility"
   retentionPolicyType: string;
 }
 
@@ -3477,6 +3503,7 @@ model SnapshotBackupAdditionalDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instantRpRetentionRangeInDays?: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   instantRPDetails?: string;
 
   /**
@@ -3571,6 +3598,7 @@ model VaultRetentionPolicy {
 /**
  * IaaS VM workload-specific backup item representing the Classic Compute VM.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSClassicComputeVMProtectedItem extends ProtectedItem {
   /**
    * backup item type.
@@ -3630,7 +3658,6 @@ alias AzureIaaSVMProtectedItemProperties = {
    * Timestamp of the last backup operation on this backup item.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -3659,6 +3686,7 @@ alias AzureIaaSVMProtectedItemProperties = {
 /**
  * IaaS VM workload-specific backup item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMProtectedItem extends ProtectedItem {
   /**
    * backup item type.
@@ -3672,34 +3700,33 @@ model AzureIaaSVMProtectedItem extends ProtectedItem {
  * Azure IaaS VM workload-specific Health Details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AzureIaaSVMHealthDetails extends ResourceHealthDetails {}
 
 /**
  * Additional information on Azure IaaS VM specific backup item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this backup item across all tiers.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
    * The oldest backup copy available for this backup item in vault tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPointInVault?: utcDateTime;
 
   /**
    * The oldest backup copy available for this backup item in archive tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPointInArchive?: utcDateTime;
 
   /**
    * The latest backup copy available for this backup item in archive tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   newestRecoveryPointInArchive?: utcDateTime;
 
   /**
@@ -3744,6 +3771,7 @@ model DiskExclusionProperties {
 /**
  * IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSComputeVMProtectedItem extends ProtectedItem {
   /**
    * backup item type.
@@ -3756,6 +3784,7 @@ model AzureIaaSComputeVMProtectedItem extends ProtectedItem {
 /**
  * Azure IaaS VM workload-specific error information.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMErrorInfo {
   /**
    * Error code.
@@ -3831,6 +3860,7 @@ model AzureIaaSVMJob extends Job {
 /**
  * Azure IaaS VM workload-specific additional information for job.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMJobExtendedInfo {
   /**
    * List of tasks associated with this job.
@@ -3869,6 +3899,7 @@ model AzureIaaSVMJobExtendedInfo {
 /**
  * Azure IaaS VM workload-specific job task details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMJobTaskDetails {
   /**
    * The task display name.
@@ -3878,13 +3909,11 @@ model AzureIaaSVMJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -3917,6 +3946,7 @@ model AzureIaaSVMJobTaskDetails {
 /**
  * Azure IaaS VM workload-specific job object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMJobV2 extends Job {
   /**
    * Gets or sets the state/actions applicable on this job like cancel/retry.
@@ -3958,6 +3988,7 @@ model AzureIaaSVMJobV2 extends Job {
 /**
  * IaaS VM workload-specific backup policy.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   instantRPDetails?: InstantRPAdditionalDetails;
@@ -4002,6 +4033,7 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model InstantRPAdditionalDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   azureBackupRGNamePrefix?: string;
@@ -4041,7 +4073,6 @@ model AzureSqlProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this item in the service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -4222,7 +4253,6 @@ model AzureVmWorkloadProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -4265,25 +4295,21 @@ model AzureVmWorkloadProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this backup item across all tiers.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
    * The oldest backup copy available for this backup item in vault tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPointInVault?: utcDateTime;
 
   /**
    * The oldest backup copy available for this backup item in archive tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPointInArchive?: utcDateTime;
 
   /**
    * The latest backup copy available for this backup item in archive tier
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   newestRecoveryPointInArchive?: utcDateTime;
 
   /**
@@ -4331,6 +4357,7 @@ model DistributedNodesInfo {
 /**
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPAseDatabaseProtectedItem extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4343,6 +4370,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectedItem extends RecoveryPoint {
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4355,6 +4383,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectedItem extends RecoveryPoint {
 /**
  * Azure VM workload-specific protected item representing SAP HANA DBInstance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4367,6 +4396,7 @@ model AzureVmWorkloadSAPHanaDBInstanceProtectedItem extends RecoveryPoint {
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLDatabaseProtectedItem extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4507,13 +4537,11 @@ model PointInTimeRange {
   /**
    * Start time of the time range for log recovery.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End time of the time range for log recovery.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
@@ -4521,6 +4549,7 @@ alias AzureWorkloadRecoveryPointProperties = {
   /**
    * UTC time at which recovery point was created
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   recoveryPointTimeInUTC?: utcDateTime;
 
   /**
@@ -4694,12 +4723,14 @@ model SnapshotRestoreParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   skipAttachAndMount?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   logPointInTimeForDBRecovery?: string;
 }
 
 /**
  * Recovery point specific to PointInTime in SAPHana
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4719,6 +4750,7 @@ alias AzureWorkloadSAPHanaPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4732,6 +4764,7 @@ model AzureWorkloadSAPHanaPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4744,6 +4777,7 @@ model AzureWorkloadSAPHanaRestoreRequest extends RestoreRequest {
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4756,6 +4790,7 @@ model AzureWorkloadSAPHanaRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime in SAPAse
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4768,6 +4803,7 @@ model AzureWorkloadSAPAsePointInTimeRecoveryPoint extends RecoveryPoint {
 /**
  * AzureWorkload SAP Ase-specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4785,6 +4821,7 @@ model AzureWorkloadSAPAsePointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Ase-specific restore.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4797,6 +4834,7 @@ model AzureWorkloadSAPAseRestoreRequest extends RestoreRequest {
 /**
  * SAPAse specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4809,6 +4847,7 @@ model AzureWorkloadSAPAseRecoveryPoint extends RecoveryPoint {
 /**
  * Recovery point specific to PointInTime
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4837,6 +4876,7 @@ alias AzureWorkloadSQLRecoveryPointProperties = {
 /**
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4850,11 +4890,11 @@ model AzureWorkloadSQLRecoveryPoint extends RecoveryPoint {
 /**
  * Extended info class details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * UTC time at which data directory info was captured
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   dataDirectoryTimeInUTC?: utcDateTime;
 
   /**
@@ -4867,6 +4907,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
 /**
  * SQLDataDirectory info
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SQLDataDirectory {
   /**
    * Type of data directory mapping
@@ -4894,6 +4935,7 @@ alias AzureWorkloadSQLPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4926,6 +4968,7 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -4939,6 +4982,7 @@ model AzureWorkloadSQLRestoreRequest extends RestoreRequest {
 /**
  * Encapsulates information regarding data directory
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SQLDataDirectoryMapping {
   /**
    * Type of data directory mapping
@@ -4964,6 +5008,7 @@ model SQLDataDirectoryMapping {
 /**
  * BEK is bitlocker encryption key.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BEKDetails {
   /**
    * Secret is BEK.
@@ -4988,13 +5033,11 @@ model BmsrpQueryObject {
   /**
    * Backup copies created after this time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * Backup copies created before this time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
@@ -5010,11 +5053,13 @@ model BmsrpQueryObject {
   /**
    * Whether the RP can be moved to another tier
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   moveReadyRPOnly?: boolean;
 
   /**
    * Flag to indicate whether Soft Deleted RPs should be included/excluded from result.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   includeSoftDeletedRP?: boolean;
 }
 
@@ -5185,13 +5230,11 @@ model DpmJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -5208,6 +5251,7 @@ model DpmJobTaskDetails {
 /**
  * Additional information on Backup engine specific backup item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model DPMProtectedItem extends ProtectedItem {
   /**
    * Friendly name of the managed item
@@ -5238,6 +5282,7 @@ model DPMProtectedItem extends ProtectedItem {
 /**
  * Additional information of DPM Protected item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model DPMProtectedItemExtendedInfo {
   /**
    * Attribute to provide information on various DBs.
@@ -5263,13 +5308,11 @@ model DPMProtectedItemExtendedInfo {
   /**
    * Last refresh time on backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /**
    * Oldest cloud recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -5280,13 +5323,11 @@ model DPMProtectedItemExtendedInfo {
   /**
    * Oldest disk recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   onPremiseOldestRecoveryPoint?: utcDateTime;
 
   /**
    * latest disk recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   onPremiseLatestRecoveryPoint?: utcDateTime;
 
   /**
@@ -5412,7 +5453,6 @@ model HourlySchedule {
   /**
    * To specify start time of the backup window
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   scheduleWindowStartTime?: utcDateTime;
 
   /**
@@ -5529,7 +5569,6 @@ model GenericRecoveryPoint extends RecoveryPoint {
   /**
    * Time at which this backup copy was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -5561,6 +5600,7 @@ model GetProtectedItemQueryObject {
 /**
  * IaaS VM workload specific backup copy.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Type of the backup copy.
@@ -5570,7 +5610,6 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Time at which this backup copy was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -5696,6 +5735,7 @@ model KeyAndSecretDetails {
 /**
  * KEK is encryption key for BEK.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model KEKDetails {
   /**
    * Key is KEK.
@@ -5762,6 +5802,7 @@ model SecuredVMDetails {
   /**
    * Gets or Sets Disk Encryption Set Id for Secured VM OS Disk
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   securedVMOsDiskEncryptionSetId?: string;
 }
 
@@ -5897,6 +5938,7 @@ alias IaasVMRestoreRequestProperties = {
   /**
    * Stores Secured VM Details
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   securedVMDetails?: SecuredVMDetails;
 
   /**
@@ -5908,6 +5950,7 @@ alias IaasVMRestoreRequestProperties = {
 /**
  * IaaS VM workload-specific restore.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IaasVMRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5944,13 +5987,11 @@ model JobQueryObject {
   /**
    * Job has started at this time. Value is in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Job has ended at this time. Value is in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
@@ -6148,7 +6189,6 @@ model MabFileFolderProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -6159,6 +6199,7 @@ model MabFileFolderProtectedItem extends ProtectedItem {
   /**
    * Sync time for deferred deletion in UTC
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   deferredDeleteSyncTimeInUTC?: int64;
 
   /**
@@ -6179,13 +6220,11 @@ model MabFileFolderProtectedItemExtendedInfo {
   /**
    * Last time when the agent data synced to service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /**
    * The oldest backup copy available.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -6274,13 +6313,11 @@ model MabJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -6504,6 +6541,7 @@ model SimpleSchedulePolicyV2 extends SchedulePolicy {
 /**
  * AzureRestoreValidation request.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ValidateIaasVMRestoreOperationRequest extends ValidateOperationRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -6669,11 +6707,11 @@ model DpmContainer extends ProtectionContainer {
 /**
  * Additional information of the DPMContainer.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model DPMContainerExtendedInfo {
   /**
    * Last refresh time of the DPMContainer.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 }
 
@@ -6694,7 +6732,7 @@ model AzureFileShareBackupRequest extends BackupRequest {
   /**
    * Backup copy will expire after the time specified (UTC).
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   recoveryPointExpiryTimeInUTC?: utcDateTime;
 
   /**
@@ -6731,6 +6769,7 @@ model AzureFileShareProtectableItem extends WorkloadProtectableItem {
 /**
  * Update snapshot Uri with the correct friendly Name of the source Azure file share.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureFileShareProvisionILRRequest extends ILRRequest {
   /**
    * Recovery point ID.
@@ -6798,6 +6837,7 @@ model IaaSVMContainer extends ProtectionContainer {
 /**
  * IaaS VM workload-specific backup item representing the Classic Compute VM.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSClassicComputeVMProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -6827,6 +6867,7 @@ alias IaaSVMProtectableItemProperties = {
 /**
  * IaaS VM workload-specific backup item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IaaSVMProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -6854,6 +6895,7 @@ model AzureIaaSComputeVMContainer extends ProtectionContainer {
 /**
  * IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureIaaSComputeVMProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -6866,6 +6908,7 @@ model AzureIaaSComputeVMProtectableItem extends WorkloadProtectableItem {
 /**
  * Container for SQL workloads under SQL Availability Group.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureSQLAGWorkloadContainerProtectionContainer
   extends ProtectionContainer {
   /**
@@ -6888,7 +6931,6 @@ alias AzureWorkloadContainerProperties = {
   /**
    * Time stamp when this container was updated.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedTime?: utcDateTime;
 
   /**
@@ -7009,6 +7051,7 @@ model InquiryValidation {
   /**
    * Dictionary to store the count of ProtectableItems with key POType.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   protectableItemCount?: unknown;
 }
@@ -7085,6 +7128,7 @@ model AzureStorageProtectableContainer extends ProtectableContainer {
 /**
  * Azure workload-specific container
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVMAppContainerProtectableContainer extends ProtectableContainer {
   /**
    * Type of the container. The value of this property for
@@ -7097,6 +7141,7 @@ model AzureVMAppContainerProtectableContainer extends ProtectableContainer {
 /**
  * Container for SQL workloads under Azure Virtual Machines.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVMAppContainerProtectionContainer extends ProtectionContainer {
   /**
    * Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2.
@@ -7231,6 +7276,7 @@ model PreBackupValidation {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPAseDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7244,6 +7290,7 @@ model AzureVmWorkloadSAPAseDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7256,6 +7303,7 @@ model AzureVmWorkloadSAPAseDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP ASE System.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPAseSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7269,6 +7317,7 @@ model AzureVmWorkloadSAPAseSystemProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP ASE System.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7281,6 +7330,7 @@ model AzureVmWorkloadSAPAseSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7294,6 +7344,7 @@ model AzureVmWorkloadSAPHanaDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SAP HANA Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7306,6 +7357,7 @@ model AzureVmWorkloadSAPHanaDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SAP HANA System.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaSystemProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7319,6 +7371,7 @@ model AzureVmWorkloadSAPHanaSystemProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SAP HANA Dbinstance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7331,6 +7384,7 @@ model AzureVmWorkloadSAPHanaDBInstance extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific protectable item representing HANA HSR.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
   /**
    * Type of the backup item.
@@ -7343,6 +7397,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 /**
  * Azure VM workload-specific workload item representing SAP HANA System.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7355,6 +7410,7 @@ model AzureVmWorkloadSAPHanaSystemWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Availability Group.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7374,6 +7430,7 @@ model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
 /**
  * Azure VM workload-specific protectable item representing SQL Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLDatabaseProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7387,6 +7444,7 @@ model AzureVmWorkloadSQLDatabaseProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7399,6 +7457,7 @@ model AzureVmWorkloadSQLDatabaseWorkloadItem extends WorkloadItem {
 /**
  * Azure VM workload-specific protectable item representing SQL Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLInstanceProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -7412,6 +7471,7 @@ model AzureVmWorkloadSQLInstanceProtectableItem
 /**
  * Azure VM workload-specific workload item representing SQL Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVmWorkloadSQLInstanceWorkloadItem extends WorkloadItem {
   /**
    * Type of the backup item.
@@ -7444,7 +7504,7 @@ model AzureWorkloadBackupRequest extends BackupRequest {
   /**
    * Backup copy will expire after the time specified (UTC).
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   recoveryPointExpiryTimeInUTC?: utcDateTime;
 
   /**
@@ -7491,6 +7551,7 @@ model AzureResourceProtectionIntent extends ProtectionIntent {
 /**
  * AzureResource(IaaS VM) Specific feature support request
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureVMResourceFeatureSupportRequest extends FeatureSupportRequest {
   /**
    * Size of the resource: VM size(A/D series etc) in case of IaasVM
@@ -7531,6 +7592,7 @@ model AzureWorkloadAutoProtectionIntent extends ProtectionIntent {
 /**
  * Azure Workload SQL Auto Protection intent item.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLAutoProtectionIntent extends ProtectionIntent {
   /**
    * backup protectionIntent type.
@@ -7546,6 +7608,7 @@ model AzureWorkloadSQLAutoProtectionIntent extends ProtectionIntent {
 /**
  * Query parameters to fetch backup summaries.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSBackupSummariesQueryObject {
   /**
    * Backup management type for this container.
@@ -7581,6 +7644,7 @@ model ProtectionIntentQueryObject {
 /**
  * Query parameters to fetch list of backup engines.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSBackupEngineQueryObject {
   /**
    * attribute to add extended info
@@ -7591,6 +7655,7 @@ model BMSBackupEngineQueryObject {
 /**
  * Query parameters to fetch list of backup engines.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSBackupEnginesQueryObject {
   /**
    * Backup management type for the backup engine.
@@ -7611,6 +7676,7 @@ model BMSBackupEnginesQueryObject {
 /**
  * The query filters that can be used with the list containers API.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSContainerQueryObject {
   /**
    * Backup management type for this container.
@@ -7646,6 +7712,7 @@ model BMSContainerQueryObject {
 /**
  * The query filters that can be used with the inquire container API.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSContainersInquiryQueryObject {
   /**
    * Backup management type for this container.
@@ -7691,6 +7758,7 @@ model BmspoQueryObject {
 /**
  * The query filters that can be used with the refresh container API.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSRefreshContainersQueryObject {
   /**
    * Backup management type for this container.
@@ -7701,6 +7769,7 @@ model BMSRefreshContainersQueryObject {
 /**
  * Filters to list items that can be backed up.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model BMSWorkloadItemQueryObject {
   /**
    * Backup management type.
@@ -7836,11 +7905,12 @@ model GenericContainerExtendedInfo {
 /**
  * IaaS VM workload-specific backup request.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IaasVMBackupRequest extends BackupRequest {
   /**
    * Backup copy will expire after the time specified (UTC).
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   recoveryPointExpiryTimeInUTC?: utcDateTime;
 
   /**
@@ -7946,7 +8016,6 @@ model MabContainerExtendedInfo {
   /**
    * Time stamp when this container was refreshed.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /**
@@ -7973,6 +8042,7 @@ model MabContainerExtendedInfo {
 /**
  * MAB workload-specific Health Details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MABContainerHealthDetails {
   /**
    * Health Code
@@ -8034,6 +8104,7 @@ model OperationStatusJobsExtendedInfo extends OperationStatusExtendedInfo {
 /**
  * Operation status extended info for ILR provision action.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model OperationStatusProvisionILRExtendedInfo
   extends OperationStatusExtendedInfo {
   /**
@@ -8066,6 +8137,7 @@ model OperationStatusValidateOperationExtendedInfo
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8101,6 +8173,7 @@ model RecoveryPointRehydrationInfo {
 /**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8118,6 +8191,7 @@ model AzureWorkloadSAPHanaRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
   extends RestoreRequest {
   /**
@@ -8138,6 +8212,7 @@ model AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest
 /**
  * AzureWorkload SQL-specific restore with integrated rehydration of recovery point
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8156,6 +8231,7 @@ model AzureWorkloadSQLRestoreWithRehydrateRequest extends RestoreRequest {
 /**
  * IaaS VM workload-specific restore with integrated rehydration of recovery point.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IaasVMRestoreWithRehydrationRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -8213,6 +8289,7 @@ model TieringCostRehydrationInfo extends TieringCostInfo {
   /**
    * Source tier to target tier rehydration cost per GB per month
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   retailRehydrationCostPerGBPerMonth: float64;
 
   /**
@@ -8238,11 +8315,13 @@ model TieringCostSavingInfo extends TieringCostInfo {
   /**
    * Source tier retail cost per GB per month
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   retailSourceTierCostPerGBPerMonth: float64;
 
   /**
    * Target tier retail cost per GB per month
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   retailTargetTierCostPerGBPerMonth: float64;
 
   /**

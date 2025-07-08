@@ -14,6 +14,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
 @parentResource(ProtectedItemResource)
 model RecoveryPointResource
   is Azure.ResourceManager.TrackedResource<RecoveryPoint> {
@@ -79,6 +80,7 @@ interface RecoveryPointResources {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPointResource>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
       @header
       `x-ms-authorization-auxiliary`?: string;
     }
@@ -90,9 +92,10 @@ interface RecoveryPointResources {
    * provisioning, call GetProtectedItemOperationResult API.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("provisionInstantItemRecovery")
   @operationId("ItemLevelRecoveryConnections_Provision")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   provision is ArmResourceActionSync<
     RecoveryPointResource,
     ILRRequestResource,
@@ -104,9 +107,10 @@ interface RecoveryPointResources {
    * displaying all recoverable files and folders. This is an asynchronous operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @action("revokeInstantItemRecovery")
   @operationId("ItemLevelRecoveryConnections_Revoke")
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   revoke is ArmResourceActionSync<
     RecoveryPointResource,
     void,

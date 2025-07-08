@@ -61,6 +61,7 @@ interface BackupResourceConfigResources {
    * Prepares source vault for Data Move operation
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @action("prepareDataMove")
   @operationId("BMSPrepareDataMove")
   bMSPrepareDataMove is ArmResourceActionAsync<
@@ -73,6 +74,7 @@ interface BackupResourceConfigResources {
    * Triggers Data Move Operation on target vault
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @action("triggerDataMove")
   @operationId("BMSTriggerDataMove")
   bMSTriggerDataMove is ArmResourceActionAsync<
@@ -94,6 +96,7 @@ interface BackupResourceConfigOperationResultOps
         /** vaults */
         @path @segment("vaults") vaultName: string,
 
+        /** backupStorageConfigName */
         @path
         @segment("backupstorageconfig")
         backupStorageConfigName: "vaultstorageconfig",
@@ -111,8 +114,9 @@ interface BackupResourceConfigOperationResults {
   /**
    * Fetches operation status for data move operation on vault
    */
-  @operationId("BMSPrepareDataMoveOperationResult_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @operationId("BMSPrepareDataMoveOperationResult_Get")
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
     Response = ArmResponse<VaultStorageConfigOperationResultResponse> | AcceptedResponse
@@ -131,6 +135,7 @@ interface BackupResourceConfigOperationStatusOps
         /** vaults */
         @path @segment("vaults") vaultName: string,
 
+        /** backupStorageConfigName */
         @path
         @segment("backupstorageconfig")
         backupStorageConfigName: "vaultstorageconfig",
@@ -143,6 +148,7 @@ interface BackupResourceConfigOperationStatusOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface BackupResourceConfigOperationStatuses {
   /**

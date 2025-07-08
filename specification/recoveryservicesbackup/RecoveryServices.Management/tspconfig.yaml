@@ -1,13 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/recoveryservicesbackup"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    omit-unreachable-types: false
+    use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/bms.json"
-    examples-dir: "{project-root}/examples"
     arm-resource-flattening: false
+  "@azure-tools/typespec-csharp":
+    service-dir: "sdk/recoveryservices-backup"
+    flavor: azure
+    package-dir: "Azure.ResourceManager.RecoveryServicesBackup"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/recoveryservices"
+    package-dir: "azure-mgmt-recoveryservicesbackup"
+    namespace: "azure.mgmt.recoveryservicesbackup"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-recoveryservicesbackup"
+    namespace: "com.azure.resourcemanager.recoveryservicesbackup"
+    service-name: "Azure Resource Manager RecoveryServicesBackup"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-recoveryservicesbackup"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-recoveryservicesbackup"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/recoveryservices"
+    package-dir: "armrecoveryservicesbackup"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
