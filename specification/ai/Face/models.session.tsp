@@ -80,6 +80,10 @@ model LivenessSessionData {
   @added(Versions.v1_3_preview_1)
   @doc("Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body.")
   userCorrelationIdSetInClient?: boolean;
+
+  @added(Versions.v1_3_preview_1)
+  @doc("Specify the expected IP address or CIDR block of the client that runs the liveness check.")
+  expectedClientIpAddress?: string;
 }
 
 @doc("Session data returned for enumeration.")
@@ -611,6 +615,19 @@ model CreateLivenessWithVerifySessionContent {
 model LivenessAbuseMonitoringSetting {
   /** Whether liveness abuse monitoring is enabled */
   enabled: HttpPart<boolean>;
+}
+
+@added(Versions.v1_3_preview_1)
+@doc("Response model for client assets access token.")
+model ClientAssetsAccessTokenResponse {
+  @doc("The expiry time of the access token.")
+  expiry: utcDateTime;
+
+  @doc("The access token for client assets.")
+  accessToken: string;
+
+  @doc("The base64 encoded access token.")
+  base64AccessToken: string;
 }
 
 @added(Versions.v1_3_preview_1)

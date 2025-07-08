@@ -75,6 +75,7 @@ alias GetSessionImageDescription = "Get session image stored during the liveness
 alias GetLivenessSessionSettingDescription = "Get the liveness sessions setting object.";
 alias PatchLivenessSessionSettingDescription = "Update the liveness setting object.";
 alias SuccessfullyDeletedSession = "Successfully deleted session and all correlated data.";
+alias GetClientAssetsAccessTokenDescription = "Get access token to get access to client AI model assets.";
 
 @get
 @action("audit")
@@ -255,6 +256,17 @@ interface LivenessSessionOperations {
       sessionImageId: string;
     },
     SessionImageStream,
+    ServiceTraits,
+    FaceErrorResponse
+  >;
+
+  @added(Versions.v1_3_preview_1)
+  @doc(GetClientAssetsAccessTokenDescription)
+  @get
+  @route("settings/getClientAssetsAccessToken")
+  getClientAssetsAccessToken is Azure.Core.RpcOperation<
+    {},
+    ClientAssetsAccessTokenResponse,
     ServiceTraits,
     FaceErrorResponse
   >;

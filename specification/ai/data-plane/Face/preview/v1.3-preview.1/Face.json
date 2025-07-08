@@ -3689,6 +3689,38 @@
         }
       }
     },
+    "/settings/getClientAssetsAccessToken": {
+      "get": {
+        "operationId": "LivenessSessionOperations_GetClientAssetsAccessToken",
+        "description": "Get access token to get access to client AI model assets.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClientAssetsAccessTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/FaceErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get LivenessSessionOperations Settings ClientAssetsAccessToken": {
+            "$ref": "./examples/LivenessSessionOperations_GetClientAssetsAccessToken.json"
+          }
+        }
+      }
+    },
     "/verify": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFaceToFace",
@@ -5326,6 +5358,30 @@
         "value"
       ]
     },
+    "ClientAssetsAccessTokenResponse": {
+      "type": "object",
+      "description": "Response model for client assets access token.",
+      "properties": {
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiry time of the access token."
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token for client assets."
+        },
+        "base64AccessToken": {
+          "type": "string",
+          "description": "The base64 encoded access token."
+        }
+      },
+      "required": [
+        "expiry",
+        "accessToken",
+        "base64AccessToken"
+      ]
+    },
     "ClientInformation": {
       "type": "object",
       "description": "The client information gathered during the liveness attempt.",
@@ -5439,6 +5495,10 @@
         "userCorrelationIdSetInClient": {
           "type": "boolean",
           "description": "Whether or not to allow client to set their own 'userCorrelationId' via the Vision SDK. Default is false, and 'userCorrelationId' must be set in this request body."
+        },
+        "expectedClientIpAddress": {
+          "type": "string",
+          "description": "Specify the expected IP address or CIDR block of the client that runs the liveness check."
         }
       },
       "required": [
