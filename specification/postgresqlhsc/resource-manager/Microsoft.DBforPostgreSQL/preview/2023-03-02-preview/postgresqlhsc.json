@@ -564,9 +564,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
+              "$ref": "#/definitions/ClusterConfigurationListResult"
             }
           },
           "default": {
@@ -2348,6 +2348,23 @@
         }
       ]
     },
+    "ClusterConfigurationListResult": {
+      "type": "object",
+      "description": "Pagination result of configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of configurations.",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      }
+    },
     "ClusterForUpdate": {
       "type": "object",
       "description": "Represents a cluster for update.",
@@ -2766,27 +2783,6 @@
           }
         ]
       }
-    },
-    "ConfigurationListResult": {
-      "type": "object",
-      "description": "The response of a Configuration list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Configuration items on this page",
-          "items": {
-            "$ref": "#/definitions/Configuration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "ConfigurationProperties": {
       "type": "object",

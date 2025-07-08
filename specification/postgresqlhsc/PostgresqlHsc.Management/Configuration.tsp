@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 /**
@@ -35,7 +36,7 @@ interface Configurations {
   /**
    * List all the configurations of a cluster.
    */
-  listByCluster is ArmResourceListByParent<Configuration>;
+  listByCluster is ArmResourceListByParent<Configuration, Response = ClusterConfigurationListResult>;
 
   /**
    * List all the configurations of a server in cluster.
@@ -47,6 +48,26 @@ interface Configurations {
     void,
     ArmResponse<ResourceListResult<ServerConfiguration>>
   >;
+}
+
+/**
+ * Pagination result of configurations.
+ */
+@pagedResult
+model ClusterConfigurationListResult {
+  /**
+   * The list of configurations.
+   */
+  @doc("The list of configurations.")
+  @items
+  value?: Configuration[];
+
+  /**
+   * The link to the next page of results.
+   */
+  @doc("The link to the next page of results.")
+  @nextLink
+  nextLink?: string;
 }
 
 @@maxLength(Configuration.name, 90);
