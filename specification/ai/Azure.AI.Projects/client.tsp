@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
-// Shorter method names for SDK datasets operations
+// Shorter method names for SDK datasets operations and versions
 @@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
 @@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
 @@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
