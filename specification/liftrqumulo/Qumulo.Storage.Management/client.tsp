@@ -8,9 +8,13 @@ using Azure.ClientGenerator.Core;
   "QumuloFileSystemResource",
   "csharp"
 );
-@@clientName(LiftrBase.Storage.FileSystemResourceProperties,
-  "QumuloFileSystemResourceProperties",
+@@clientName(LiftrBase.UserDetails, "QumuloUserDetails", "csharp");
+@@flattenProperty(LiftrBase.Storage.FileSystemResource.properties, "csharp");
+
+@@clientName(LiftrBase.MarketplaceSubscriptionStatus, 
+  "QumuloMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@clientName(LiftrBase.UserDetails, "QumuloUserDetails", "csharp");
-@@clientName(LiftrBase.ProvisioningState, "QumuloProvisioningState", "csharp");
+
+@@clientName(LiftrBase.MarketplaceDetails, "QumuloMarketplaceDetails", "csharp");
+
