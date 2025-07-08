@@ -236,6 +236,9 @@
           },
           {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourceGroups"
+          },
+          {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
           }
         ],
         "responses": {
@@ -509,6 +512,9 @@
           },
           {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourceGroups"
+          },
+          {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
           }
         ],
         "responses": {
@@ -794,6 +800,9 @@
           },
           {
             "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionResourceGroups"
+          },
+          {
+            "$ref": "#/parameters/ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups"
           }
         ],
         "responses": {
@@ -951,17 +960,17 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "denyDelete",
+            "name": "DenyDelete",
             "value": "denyDelete",
             "description": "Authorized users are able to read and modify the resources, but cannot delete."
           },
           {
-            "name": "denyWriteAndDelete",
+            "name": "DenyWriteAndDelete",
             "value": "denyWriteAndDelete",
             "description": "Authorized users can read from a resource, but cannot modify or delete it."
           },
           {
-            "name": "none",
+            "name": "None",
             "value": "none",
             "description": "No denyAssignments have been applied."
           }
@@ -1270,12 +1279,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "delete",
+            "name": "Delete",
             "value": "delete",
             "description": "Delete the specified resources from Azure"
           },
           {
-            "name": "detach",
+            "name": "Detach",
             "value": "detach",
             "description": "Keep the specified resources in Azure"
           }
@@ -1374,10 +1383,6 @@
       "type": "object",
       "description": "The managed resource model.",
       "properties": {
-        "status": {
-          "$ref": "#/definitions/ResourceStatusMode",
-          "description": "Current management state of the resource in the deployment stack."
-        },
         "denyStatus": {
           "type": "string",
           "description": "denyAssignment settings applied to the resource.",
@@ -1395,34 +1400,71 @@
             "modelAsString": true,
             "values": [
               {
-                "name": "denyDelete",
+                "name": "DenyDelete",
                 "value": "denyDelete",
                 "description": "Authorized users are able to read and modify the resources, but cannot delete."
               },
               {
-                "name": "notSupported",
+                "name": "NotSupported",
                 "value": "notSupported",
                 "description": "Resource type does not support denyAssignments."
               },
               {
-                "name": "inapplicable",
+                "name": "Inapplicable",
                 "value": "inapplicable",
                 "description": "denyAssignments are not supported on resources outside the scope of the deployment stack."
               },
               {
-                "name": "denyWriteAndDelete",
+                "name": "DenyWriteAndDelete",
                 "value": "denyWriteAndDelete",
                 "description": "Authorized users can only read from a resource, but cannot modify or delete it."
               },
               {
-                "name": "removedBySystem",
+                "name": "RemovedBySystem",
                 "value": "removedBySystem",
                 "description": "Deny assignment has been removed by Azure due to a resource management change (management group move, etc.)"
               },
               {
-                "name": "none",
+                "name": "None",
                 "value": "none",
                 "description": "No denyAssignments have been applied."
+              }
+            ]
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Current management state of the resource in the deployment stack.",
+          "default": "none",
+          "enum": [
+            "managed",
+            "removeDenyFailed",
+            "deleteFailed",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceStatusMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Managed",
+                "value": "managed",
+                "description": "This resource is managed by the deployment stack."
+              },
+              {
+                "name": "RemoveDenyFailed",
+                "value": "removeDenyFailed",
+                "description": "Unable to remove the deny assignment on resource."
+              },
+              {
+                "name": "DeleteFailed",
+                "value": "deleteFailed",
+                "description": "Unable to delete the resource from Azure. The delete will be retried on the next stack deployment, or can be deleted manually."
+              },
+              {
+                "name": "None",
+                "value": "none",
+                "description": "No management state."
               }
             ]
           }
@@ -1459,45 +1501,38 @@
           "description": "The error detail."
         }
       }
-    },
-    "ResourceStatusMode": {
-      "type": "string",
-      "description": "Current management state of the resource in the deployment stack.",
-      "enum": [
-        "managed",
-        "removeDenyFailed",
-        "deleteFailed",
-        "none"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceStatusMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "managed",
-            "value": "managed",
-            "description": "This resource is managed by the deployment stack."
-          },
-          {
-            "name": "removeDenyFailed",
-            "value": "removeDenyFailed",
-            "description": "Unable to remove the deny assignment on resource."
-          },
-          {
-            "name": "deleteFailed",
-            "value": "deleteFailed",
-            "description": "Unable to delete the resource from Azure. The delete will be retried on the next stack deployment, or can be deleted manually."
-          },
-          {
-            "name": "none",
-            "value": "none",
-            "description": "No management state."
-          }
-        ]
-      }
     }
   },
   "parameters": {
+    "ActionOnUnmanageDeleteParameters.unmanageActionManagementGroups": {
+      "name": "unmanageAction.ManagementGroups",
+      "in": "query",
+      "description": "Flag to indicate delete rather than detach for unmanaged management groups.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "delete",
+        "detach"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentStacksDeleteDetachEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "Delete the specified resources from Azure"
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Keep the specified resources in Azure"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "unmanageActionManagementGroups"
+    },
     "ActionOnUnmanageDeleteParameters.unmanageActionResourceGroups": {
       "name": "unmanageAction.ResourceGroups",
       "in": "query",
@@ -1513,12 +1548,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "delete",
+            "name": "Delete",
             "value": "delete",
             "description": "Delete the specified resources from Azure"
           },
           {
-            "name": "detach",
+            "name": "Detach",
             "value": "detach",
             "description": "Keep the specified resources in Azure"
           }
@@ -1542,12 +1577,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "delete",
+            "name": "Delete",
             "value": "delete",
             "description": "Delete the specified resources from Azure"
           },
           {
-            "name": "detach",
+            "name": "Detach",
             "value": "detach",
             "description": "Keep the specified resources in Azure"
           }

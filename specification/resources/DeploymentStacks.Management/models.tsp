@@ -14,12 +14,7 @@ namespace Microsoft.Resources.DeploymentStacks;
 /** Deployment stack object. */
 model DeploymentStack
   is Azure.ResourceManager.ProxyResource<DeploymentStackProperties> {
-  ...ResourceNameParameter<
-    Resource = DeploymentStack,
-    KeyName = "deploymentStackName",
-    SegmentName = "deploymentStacks",
-    NamePattern = "^[-\\w\\._\\(\\)]+$"
-  >;
+  ...DeploymentStackNameParameter;
 
   /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. The location is inherited from the resource group for resource group scoped stacks. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
@@ -32,10 +27,18 @@ model DeploymentStack
   tags?: Record<string>;
 }
 
+@@doc(DeploymentStack.properties, "Deployment stack properties.");
+
+alias DeploymentStackNameParameter = ResourceNameParameter<
+  Resource = DeploymentStack,
+  KeyName = "deploymentStackName",
+  SegmentName = "deploymentStacks",
+  NamePattern = "^[-\\w\\._\\(\\)]+$"
+>;
+
 @@maxLength(DeploymentStack.name, 90);
 @@minLength(DeploymentStack.name, 1);
 @@doc(DeploymentStack.name, "Name of the deployment stack.");
-@@doc(DeploymentStack.properties, "Deployment stack properties.");
 
 /**
  * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
@@ -44,10 +47,10 @@ union DeploymentStacksDeleteDetachEnum {
   string,
 
   /** Delete the specified resources from Azure */
-  delete: "delete",
+  Delete: "delete",
 
   /** Keep the specified resources in Azure */
-  detach: "detach",
+  Detach: "detach",
 }
 
 /**
@@ -59,17 +62,17 @@ union DenySettingsMode {
   /**
    * Authorized users are able to read and modify the resources, but cannot delete.
    */
-  denyDelete: "denyDelete",
+  DenyDelete: "denyDelete",
 
   /**
    * Authorized users can read from a resource, but cannot modify or delete it.
    */
-  denyWriteAndDelete: "denyWriteAndDelete",
+  DenyWriteAndDelete: "denyWriteAndDelete",
 
   /**
    * No denyAssignments have been applied.
    */
-  none: "none",
+  None: "none",
 }
 
 /**
@@ -121,23 +124,23 @@ union ResourceStatusMode {
   /**
    * This resource is managed by the deployment stack.
    */
-  managed: "managed",
+  Managed: "managed",
 
   /**
    * Unable to remove the deny assignment on resource.
    */
-  removeDenyFailed: "removeDenyFailed",
+  RemoveDenyFailed: "removeDenyFailed",
 
   /**
    * Unable to delete the resource from Azure. The delete will be retried on the next stack deployment, or can be deleted manually.
    */
-  deleteFailed: "deleteFailed",
+  DeleteFailed: "deleteFailed",
 
   /**
    * No management state.
    */
   @removed(Versions.v2024_03_01)
-  none: "none",
+  None: "none",
 }
 
 /**
@@ -149,32 +152,32 @@ union DenyStatusMode {
   /**
    * Authorized users are able to read and modify the resources, but cannot delete.
    */
-  denyDelete: "denyDelete",
+  DenyDelete: "denyDelete",
 
   /**
    * Resource type does not support denyAssignments.
    */
-  notSupported: "notSupported",
+  NotSupported: "notSupported",
 
   /**
    * denyAssignments are not supported on resources outside the scope of the deployment stack.
    */
-  inapplicable: "inapplicable",
+  Inapplicable: "inapplicable",
 
   /**
    * Authorized users can only read from a resource, but cannot modify or delete it.
    */
-  denyWriteAndDelete: "denyWriteAndDelete",
+  DenyWriteAndDelete: "denyWriteAndDelete",
 
   /**
    * Deny assignment has been removed by Azure due to a resource management change (management group move, etc.)
    */
-  removedBySystem: "removedBySystem",
+  RemovedBySystem: "removedBySystem",
 
   /**
    * No denyAssignments have been applied.
    */
-  none: "none",
+  None: "none",
 }
 
 /**
@@ -196,7 +199,6 @@ model ActionOnUnmanageDeleteParameters {
   /**
    * Flag to indicate delete rather than detach for unmanaged management groups.
    */
-  @added(Versions.v2024_03_01)
   @query("unmanageAction.ManagementGroups")
   unmanageActionManagementGroups?: DeploymentStacksDeleteDetachEnum;
 
@@ -517,12 +519,20 @@ model ManagedResourceReference extends ResourceReference {
   /**
    * Current management state of the resource in the deployment stack.
    */
+  @added(Versions.v2024_03_01)
   status?: ResourceStatusMode;
 
   /**
    * denyAssignment settings applied to the resource.
    */
-  denyStatus?: DenyStatusMode = DenyStatusMode.none;
+  denyStatus?: DenyStatusMode = DenyStatusMode.None;
+
+  /**
+   * Current management state of the resource in the deployment stack.
+   */
+  @renamedFrom(Versions.v2024_03_01, "status")
+  @removed(Versions.v2024_03_01)
+  deprecatedStatus?: ResourceStatusMode = ResourceStatusMode.None; // "None" was removed in 2024-03-01 but it was the default in swagger so this field is needed to represent that.
 }
 
 /**

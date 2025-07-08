@@ -62,13 +62,16 @@ interface DeploymentStackCommonOps<TBaseParams extends TypeSpec.Reflection.Model
 }
 
 @armResourceOperations
+@tag("DeploymentStacksAtResourceGroup")
 interface DeploymentStacksAtResourceGroup
   extends DeploymentStackCommonOps<ResourceGroupBaseParameters> {}
 
 @armResourceOperations
+@tag("DeploymentStacksAtSubscription")
 interface DeploymentStacksAtSubscription
   extends DeploymentStackCommonOps<SubscriptionBaseParameters> {}
 
 @armResourceOperations
+@tag("DeploymentStacksAtManagementGroup")
 interface DeploymentStacksAtManagementGroup
   extends DeploymentStackCommonOps<ManagementGroupIdBaseParameters> {}
