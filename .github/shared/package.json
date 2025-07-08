@@ -29,7 +29,7 @@
     "dependencies2": "All runtime and dev dependencies in this file, must be a subset of ../package.json"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^14.0.1",
+    "@apidevtools/json-schema-ref-parser": "^14.1.0",
     "debug": "^4.4.0",
     "js-yaml": "^4.1.0",
     "marked": "^16.0.0",
@@ -42,6 +42,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^3.0.7",
+    "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
     "prettier": "~3.5.3",
@@ -51,8 +52,8 @@
   },
   "scripts": {
     "lint": "npm run lint:eslint && npm run lint:tsc",
-    "lint:eslint": "eslint",
-    "lint:tsc": "tsc && echo 'Type checking completed successfully'",
+    "lint:eslint": "cross-env DEBUG=eslint:eslint eslint",
+    "lint:tsc": "tsc --build --verbose",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
