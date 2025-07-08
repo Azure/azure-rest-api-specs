@@ -59,7 +59,7 @@ model Stage {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Parameters to apply on the change of that stage. Key value pairs of parameter and values.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  parameterValues?: Record<string>;
+  parameterValues?: Record<string | int32>;
 
   @doc("Stage Map resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
