@@ -3,12 +3,7 @@
   "info": {
     "title": "Microsoft.Support",
     "version": "2024-04-01",
-    "description": "Microsoft Azure Support Resource Provider.",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Microsoft Azure Support Resource Provider."
   },
   "produces": [
     "application/json"
@@ -1952,7 +1947,8 @@
       "type": "object",
       "properties": {
         "contentType": {
-          "$ref": "#/definitions/TranscriptContentType",
+          "type": "string",
+          "x-nullable": false,
           "readOnly": true
         },
         "communicationDirection": {

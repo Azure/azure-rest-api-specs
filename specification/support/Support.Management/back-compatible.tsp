@@ -62,6 +62,13 @@ using Microsoft.Support;
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output
+@@clientLocation(SupportTickets.checkNameAvailability, Communications);
 @@clientLocation(SupportTicketsOperationGroup.checkNameAvailability,
-  "SupportTickets"
+  SupportTickets
+);
+@@clientLocation(SupportTicketsNoSubscriptionOperationGroup.checkNameAvailability,
+  SupportTicketsNoSubscription
+);
+@@clientLocation(SupportTicketsNoSubscription.checkNameAvailability,
+  CommunicationsNoSubscription
 );

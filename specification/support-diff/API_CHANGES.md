@@ -1,11 +1,5 @@
 ## Swagger Changes
 
-### Changes for `x-typespec-generated`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `info['x-typespec-generated__added']` | added | `[{"emitter":"@azure-tools/typespec-autorest"}]` |
-
 ### Changes for `pattern`
 
 | Path | Change Type | Value |
@@ -17,13 +11,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"display":{"properties":{"de...` |
+| `definitions.Operation__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","readOnly":true},"display":{"type":"object","...` |
 
 ### Changes for `OperationsListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationsListResult__deleted` | deleted | `{"properties":{"value":{"type":"array","items":{"$ref":"#/definitions/Operation"},"x-ms-identifiers"...` |
+| `definitions.OperationsListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/Operation"},"x...` |
 
 ### Changes for `TranscriptContentType`
 
@@ -72,7 +66,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.CommunicationDetails.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
-| `definitions.MessageProperties.properties.contentType.type__deleted` | deleted | `string` |
 | `definitions.ProblemClassification.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.Service.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.SupportTicketDetails.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
@@ -83,11 +76,11 @@
 |------|------------|-------|
 | `definitions.MessageProperties.properties.contentType['x-ms-enum__deleted']` | deleted | `{"name":"TranscriptContentType","modelAsString":true}` |
 
-### Changes for `$ref`
+### Changes for `x-nullable`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MessageProperties.properties.contentType.$ref__added` | added | `#/definitions/TranscriptContentType` |
+| `definitions.MessageProperties.properties.contentType['x-nullable__added']` | added | `false` |
 
 ### Changes for `description`
 

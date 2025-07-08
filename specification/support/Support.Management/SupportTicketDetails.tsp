@@ -38,6 +38,7 @@ model SupportTicketsListResult {
    */
   @nextLink
   nextLink?: string;
+
   /**
    * [Placeholder] Discription for value property
    */
@@ -113,7 +114,6 @@ interface SupportTickets {
    * Check the availability of a resource name. This API should be used to check the uniqueness of the name for adding a new communication to the support ticket.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Communications_CheckNameAvailability")
   checkNameAvailability is SupportTicketOps.ActionSync<
     SupportTicketDetails,
     CheckNameAvailabilityInput,
@@ -188,7 +188,6 @@ interface SupportTicketsNoSubscription {
    * Check the availability of a resource name. This API should be used to check the uniqueness of the name for adding a new communication to the support ticket.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("CommunicationsNoSubscription_CheckNameAvailability")
   checkNameAvailability is SupportTicketsNoSubscriptionOps.ActionSync<
     SupportTicketDetails,
     CheckNameAvailabilityInput,

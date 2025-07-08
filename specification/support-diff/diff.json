@@ -1,0 +1,321 @@
+{
+  "paths": {
+    "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}": {
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^[0-9a-zA-Z_\\-. ]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resource",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/FileWorkspaceDetails"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files/{fileName}": {
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "name": "fileWorkspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z_\\-. ]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "fileWorkspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    },
+    "/providers/Microsoft.Support/operations": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationsListResult",
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}": {
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "pattern__deleted": "^[0-9a-zA-Z_\\-. ]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "resource",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/FileWorkspaceDetails"
+              }
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files/{fileName}": {
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "name": "fileWorkspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z_\\-. ]+$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "fileWorkspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Operation__deleted": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "The description of the operation.",
+              "readOnly": true
+            },
+            "operation": {
+              "type": "string",
+              "description": "The action that users can perform, based on their permission level.",
+              "readOnly": true
+            },
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Support.",
+              "readOnly": true
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed.",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationsListResult__deleted": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "TranscriptContentType__added": {
+      "type": "string",
+      "x-nullable": false
+    },
+    "ChatTranscriptsListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "CommunicationDetails": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CommunicationsListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "FilesListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "MessageProperties": {
+      "properties": {
+        "contentType": {
+          "x-ms-enum__deleted": {
+            "name": "TranscriptContentType",
+            "modelAsString": true
+          },
+          "x-nullable__added": false
+        }
+      }
+    },
+    "ProblemClassification": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProblemClassificationsListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "Service": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServicesListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
+        }
+      }
+    },
+    "SupportTicketDetails": {
+      "allOf__added": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportTicketsListResult": {
+      "required__added": [
+        "value"
+      ]
+    }
+  }
+}
