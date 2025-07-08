@@ -220,16 +220,16 @@ Do not skip the step that choose SDK generation method to ensure the user select
 ## Release readiness of SDK and information about the release pipeline
 Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
-## Addressing API Review Comments
-Address API review comments by updating the TypeSpec API specification following the comprehensive process defined in:
-`.github/instructions/api-review-comments.instructions.md`
+## Addressing API Review Comments and Feedback
 
-This process includes:
-- Input validation and format checking
-- Python → TypeSpec mapping understanding  
-- Comment analysis using structured templates
-- Implementation strategy determination
-- File-specific update rules
-- Post-implementation validation and SDK generation
+**Triggered by prompt:**
+- "API review comment", "review feedback", "review suggestion", or similar.
+- feedback on a client, model, or operation name that needs to be changed.
 
-The instructions provide step-by-step guidance, decision trees, and examples for reliably implementing API review feedback.
+**Strict Process Compliance for API Review Comments**
+
+When addressing API review comments or feedback, you MUST follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` exactly, without skipping or reordering steps.
+
+- Always explain each step before taking action.
+- Confirm with the user before making any changes.
+- Do not make changes outside `client.tsp` unless the process explicitly allows it.

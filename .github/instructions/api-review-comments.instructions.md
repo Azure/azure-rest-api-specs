@@ -1,140 +1,226 @@
 # API Review Comments: TypeSpec Implementation Guide
 
+This document provides a quick guide for implementing API review comments in TypeSpec using the `client.tsp` file.
+
 ## IMPORTANT: Process Requirements
 - **Follow these steps in EXACTLY the following order**
 - **Do not skip any part of the process**
 - **Explain each step clearly before taking action**
 - **Confirm with user before making ANY changes**
 
-## Step 0: Prerequisites
-1. **Review these instructions thoroughly**
-2. **CONFIRM understanding** by concisely summarizing these instructions
+## Step 1: Validate Input Format & Triggering Prompts
 
-## Step 1: Validate Input Format
-
-**Required markdown format:**
-```md
-**TSP Folder Location**: specification/<yourservice>/<YourPackage>/
-**TSP Git Branch**: <branch name>
-**Generated Client API Language**: <language>
-**Comments:**
-- <API To Change>: <Review comment>
-- <API To Change>: <Review comment>
-```
+User can provide comments directly in chat with context:
+- **Example**: "I got this feedback for Python '<review comment>' for the model Bar and attribute foo, can you help with that?"
+- **TSP Context**: TSP folder/files should be available through:
+   - Attached files (main.tsp, client.tsp, etc.)
+   - Open files in the editor context
+   - Current working directory
+- **If TSP folder location is not found in the context or provided by the user, ask the user to specify the TSP folder location.**
 
 **Validation checklist:**
-- [ ] TSP folder location provided
-- [ ] Git branch specified (must NOT be `main`)
-- [ ] Language specified (Python, C#, Java, JavaScript, etc.)
-- [ ] All comments listed
+- [ ] TSP folder location in context/provided OR TSP files attached/open
+- [ ] Language specified (Python, C#, Java, JavaScript, etc.) - can be inferred from comment
+- [ ] Review comments provided (either structured or in chat message)
+- [ ] Target API elements identified (model, property, operation, etc.)
 
-## Step 2: Setup Environment
-1. **Verify correct Git branch** (must NOT be `main`)
-2. **Navigate to TSP folder** using `cd <path-to-tsp-folder>`
+## Step 2: Analyze Each Comment
 
-## Step 3: Understand Python → TypeSpec Mapping
+### Quick Reference: Mapping Language Naming to TypeSpec Elements
 
-### Python Client Generation Rules
-| TypeSpec Element | Python Output | Example |
-|------------------|---------------|---------|
-| `namespace Contoso.MyWidget` | `MyWidgetClient` | Last part + "Client" |
-| `interface WidgetModels` | `WidgetModelsOperations` | Interface + "Operations" |
-| Methods in camelCase | Converted to snake_case | `getWidget` → `get_widget` |
+| Language  | Python Example (snake_case)         | TypeSpec Equivalent (camelCase)   | Notes                                      |
+|-----------|-------------------------------------|-----------------------------------|---------------------------------------------|
+| Property  | `parent_entity_name`                | `parentEntityName`                | Python properties: snake_case; TSP: camelCase|
+| Method    | `get_foo_bar()`                     | `getFooBar()`                     | Python methods: snake_case; TSP: camelCase   |
+| Class     | `Relationship`                      | `Relationship`                    | Both: PascalCase                            |
+| Rename    | "rename foo_bar to new_bar"        | Rename `fooBar` to `newBar`       | Map snake_case to camelCase for TSP          |
 
-### Critical Rules
-- **Main client name** = Last namespace segment + "Client"
-- **Operations classes** = Interface name + "Operations" 
-- **NEVER** name interfaces ending with "Operations" (creates "OperationsOperations")
+> **Tip:** Python properties/methods use `snake_case`, but TypeSpec uses `camelCase` for properties/methods and `PascalCase` for classes. Always map accordingly when extracting the TypeSpec element from review comments.
 
-## Step 4: Analyze Each Comment
+**Extract and analyze using the same template:**
 
-**Use this template for EVERY comment:**
 ```
-**Comment**: [exact quote]
-**Python API**: [what Python element is referenced]
-**TypeSpec Source**: [which TypeSpec element generates this]
-**Action**: [update tspconfig.yaml OR client.tsp OR main.tsp]
+**Comment**: [exact quote from review feedback]
+**Target Language**: [Python, C#, Java, JavaScript, etc.]
+**TypeSpec Element**: [specific name of the TypeSpec element being changed]
+**TypeSpec Element Type**: [model/property/operation/interface/enum - what's being referenced]
+**Action**: [client.tsp OR main.tsp]
 **File**: [specific file to modify]
 ```
 
-## Step 5: Determine Implementation Strategy
+**Note**: Some comments may require multiple actions (e.g., both package name changes and client name changes). In such cases, fill out the template multiple times for the same comment, once for each required action.
 
-### Scenario A: Python Package/Namespace Changes
-**Trigger**: Comments about `azure.mynamespace.something` structure
-**Action**: Update `tspconfig.yaml`
-**Example**: 
-```yaml
-"@azure-tools/typespec-python":
-  package-dir: "azure-newname"
-  namespace: "azure.newname"
-```
+**Examples of chat-based comment extraction:**
+- Input: "I got feedback for Python 'rename parent_entity_name to entity_name' for the model Relationship"
+- Analysis: Comment = "rename parent_entity_name to entity_name", Target Language = Python, Target Element = property, Element Name = Relationship.parentEntityName
 
-### Scenario B: Python Client Name Changes  
-**Trigger**: Comments about `SomeClient` class name
-**Action**: Add to `client.tsp`
-**Example**:
-```tsp
-@@clientName(MyNamespace.Data, "WidgetModels", "python");
-```
+## Step 3: Determine Implementation Strategy
 
-### Scenario C: Python Operations Class Changes
-**Trigger**: Comments about `SomeOperations` class name
-**Action**: Add to `client.tsp` 
-**Example**:
-```tsp
-@@clientName(MyNamespace.SomeInterface, "NewName", "python");
-```
+### Implementation Rules
 
-### Scenario D: Universal Changes (All Languages)
-**Trigger**: Comments without language specificity
-**Action**: Update `main.tsp`, `routes.tsp`, or `models.tsp`
+**IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
 
-## Step 6: Implementation Rules
-
-### For `tspconfig.yaml` Updates
-- **NEVER** remove existing options
-- **ONLY** add or modify `@azure-tools/typespec-python` section
-- **PRESERVE** all other language configurations
-
-### For `client.tsp` Updates
 **Required template:**
 ```tsp
 import "@azure-tools/typespec-client-generator-core";
+// import *.tsp for any elements you need to reference in that file
+import "./main.tsp";
 using Azure.ClientGenerator.Core;
+
+namespace ClientCustomizations;
 
 // Your customizations here
 @@clientName(Target, "NewName", "python");
 @@clientNamespace(Namespace, "NewNamespace", "python");
 ```
 
-**Rules:**
-- **ONLY** use `@@clientName` and `@@clientNamespace` in `client.tsp`
-- **NEVER** import client-generator-core in other files
-- **ALWAYS** specify language parameter for language-specific changes
+### Scenario 1: Operations Directly on Client (No Operation Groups)
+**Trigger**: Comments about operations being directly on the client rather than in separate operation groups
+**Action**: Use `@client` decorator in `client.tsp` to define a root client interface with operation aliases
+**Example**:
+```tsp
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
 
-### For Other `.tsp` File Updates
-- **ONLY** for universal (all-language) changes
-- **NEVER** for language-specific customizations
+using Azure.ClientGenerator.Core;
+namespace ClientCustomizations;
+
+@client({
+  name: "RadiologyInsightsClient",
+  service: AzureHealthInsights,
+})
+interface RadiologyInsightsClient {
+  inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
+}
+```
+
+### Scenario 2: Renaming client
+**Trigger**: Comments about changing `SomeClient` class name to `SomeOtherClient`
+**Action**: First check how the client is currently defined, then apply appropriate changes:
+1. **Check client.tsp for `@client` decorator**
+2. **If `@client` exists**: Update the `name` property and attached interface - use the desired name WITH "Client" suffix
+3. **If no `@client`**: Add `@@clientName` - use the desired name WITHOUT "Client" suffix
+
+**Examples**: See complete `client.tsp` examples in Step 6 Implementation Rules section.
+
+**Key points for @@clientName**:
+- Use the augment decorator `@@clientName` (double @), not the regular decorator `@clientName`
+- The client name should NOT include "Client" suffix (it's added automatically)
+
+### Scenario 3: Renaming non-client TypeSpec elements
+**Trigger**: Comments about renaming any TypeSpec elements (models, properties, operations, interfaces, enum members, parameters, etc.)
+**Action**: Use `@@clientName` with appropriate path syntax
+
+**Examples**:
+```tsp
+// In client.tsp
+
+// Renaming model
+@@clientName(Microsoft.Service.DatabaseChangeTierDefinition, "DatabaseChangeTierProperties"); // all languages
+@@clientName(Microsoft.Service.Identity, "IdentityProperties", "csharp"); // csharp
+
+// Renaming model property
+@@clientName(Microsoft.Service.Relationship.parentEntityName, "fromEntity", "python");
+
+// Renaming operation parameter
+@@clientName(Microsoft.Service.SomeInterface.createOrUpdate::parameters.resource, "body");
+
+// Renaming interface/operation group
+@@clientName(Microsoft.Service.EndpointResources, "Endpoints", "python");
+
+// Renaming enum/union member
+@@clientName(Microsoft.Service.AdvertiseMode.BGP, "Bgp", "csharp");
+
+// Renaming API version value
+@@clientName(Microsoft.Service.Versions.`2025-04-01`, "V20250401", "javascript");
+```
+
+### Scenario 4: Access Control Changes
+**Trigger**: Comments about making elements internal/private or changing visibility
+**Actions**: Use `@@access` decorator in `client.tsp`
+
+**Examples**:
+```tsp
+// Make internal (hidden from public SDK)
+@@access(Namespace.Model, Access.internal, "language");
+
+// Make public (explicitly expose)
+@@access(Namespace.Model, Access.public, "language");
+
+// Language-specific access
+@@access(Namespace.Model, Access.internal, "python");
+@@access(Namespace.Model, Access.public, "csharp");
+```
+
+### Complete `client.tsp` File Examples
+
+**Basic client name customization:**
+```tsp
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+
+namespace ClientCustomizations;
+
+// Rename the main client (from namespace-based generation)
+@@clientName(Microsoft.CloudHealth.HealthModels.Data, "HealthModels", "python");
+```
+
+**Using @client decorator for root client interface:**
+```tsp
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+
+namespace ClientCustomizations;
+
+@client({
+  name: "RadiologyInsightsClient",
+  service: AzureHealthInsights,
+})
+interface RadiologyInsightsClient {
+  inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
+}
+
+// rename the operation only for Python
+@@clientName(RadiologyInsightsClient.inferRadiologyInsights, "inferInsights", "python")
+```
+
+### Critical Rules
+- **Client Priority**: `client.tsp` is always checked first for `@client` decorator. If present, it defines the client and overrides namespace-based client generation. If not present, the namespace defined in main.tsp is used for the client name.
+- **@@clientName** = Specify name WITHOUT "Client" suffix (it's added automatically)
+- **@client interface** = Interface name SHOULD end with "Client" (explicit naming)
+- **Namespace naming** = Should NOT end with "Client" (auto-appended for namespace-based generation)
+- **Main client name** = Last namespace segment + "Client" (when using namespace-based generation)
+- **Operations classes** = Interface name + "Operations" 
+- **NEVER** name interfaces ending with "Operations" (creates "OperationsOperations")
 
 ## Step 7: Implementation Process
 
-1. **ALWAYS** show complete analysis using Step 3 template
+1. **ANALYZE** using Step 4 template:
+   ```
+   **Comment**: [exact quote]
+   **Target Language**: [language]
+   **Target Element**: [model/property/operation/etc.]
+   **Element Name**: [TypeSpec element name]
+   **Action**: [tspconfig.yaml OR client.tsp]
+   **File**: [specific file]
+   ```
+
 2. **LIST** all planned changes as bullet points
 3. **CONFIRM** with user before making ANY changes
 4. **IMPLEMENT** changes in this order:
-   - `tspconfig.yaml` first
-   - `client.tsp` second  
-   - Other `.tsp` files last
+   - `tspconfig.yaml` first (package/namespace changes)
+   - `client.tsp` second (naming/access customizations)
+   - Other `.tsp` files only if listed in exceptions section
 
 ## Step 8: Post-Implementation Validation
 
-1. **Validate TypeSpec**: Run `/validate-typespec` and resolve any compilation errors
-2. **Generate SDKs**: 
-   - Run `npx tsp-client generate --languages <languages>`
-   - Prompt user for comma-separated list of target languages (e.g., `python,javascript`)
-3. **Verify results**: Confirm all changes work as expected
-
-## Git Requirements
-- **NEVER** use `main` branch
-- **ALWAYS** work on feature branches
-- **CONFIRM** correct branch before starting
+1. **Validate TypeSpec**: Run `tsp compile .` from project root
+2. **Check specific changes**: 
+   - For client names: Look for generated client class names
+   - For property names: Check model property names in output
+   - For access control: Verify internal elements are excluded
+3. **Fix any compilation errors** before proceeding
