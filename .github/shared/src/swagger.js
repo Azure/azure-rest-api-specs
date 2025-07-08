@@ -61,7 +61,6 @@ export class Swagger {
   constructor(path, options) {
     const rootDir = dirname(options?.tag?.readme?.path ?? "");
     this.#path = resolve(rootDir, path);
-    this.#operations = undefined; // Will be initialized as Map when loaded
     this.#logger = options?.logger;
     this.#tag = options?.tag;
   }
@@ -173,9 +172,9 @@ export class Swagger {
   }
 
   /**
-   * @returns {Promise<string>} swagger version
+   * @returns {string} swagger version
    */
-  async getVersion() {
+  get version() {
     return getVersionFromInputFile(this.#path);
   }
 
@@ -200,14 +199,6 @@ export class Swagger {
     return dirname(this.#path).includes("/preview/")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
-  }
-
-  /**
-   * @returns {Promise<string>} file name of the swagger file
-   */
-  async getFileName() {
-    const version = await this.getVersion();
-    return getBaseNameForSwagger(this.#path, version);
   }
 
   /**
@@ -236,12 +227,6 @@ export class Swagger {
   }
 }
 
-// API version lifecycle stages
-export const API_VERSION_LIFECYCLE_STAGES = {
-  PREVIEW: "preview",
-  STABLE: "stable",
-};
-
 // TODO: Remove duplication with changed-files.js (which currently requires paths relative to repo root)
 
 /**
@@ -262,22 +247,11 @@ function json(file) {
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
 }
 
-/**
- * Get base name for swagger file
- * @param {string} filePath - Path to swagger file
- * @param {string} [version] - Version string to use for base name
- * @returns {string} - Base name for the swagger file
- */
-function getBaseNameForSwagger(filePath, version = "") {
-  if (version) {
-    const segments = filePath.split("/");
-    const index = segments.findIndex((v) => v.startsWith(version));
-    if (index !== -1) {
-      return segments.slice(index + 1).join("/");
-    }
-  }
-  return basename(filePath);
-}
+// API version lifecycle stages
+export const API_VERSION_LIFECYCLE_STAGES = {
+  PREVIEW: "preview",
+  STABLE: "stable",
+};
 
 /**
  * Extract version string from input file path
