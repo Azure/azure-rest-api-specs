@@ -30,25 +30,35 @@ User can provide comments directly in chat with context:
 
 | Language  | Python Example (snake_case)         | TypeSpec Equivalent (camelCase)   | Notes                                      |
 |-----------|-------------------------------------|-----------------------------------|---------------------------------------------|
-| Property  | `parent_entity_name`                | `parentEntityName`                | Python properties: snake_case; TSP: camelCase|
-| Method    | `get_foo_bar()`                     | `getFooBar()`                     | Python methods: snake_case; TSP: camelCase   |
+| Property  | `parent_entity_name`                | `parentEntityName`                | Python: snake_case; TypeSpec: camelCase     |
+| Method    | `get_foo_bar()`                     | `getFooBar()`                     | Python: snake_case; TypeSpec: camelCase     |
 | Class     | `Relationship`                      | `Relationship`                    | Both: PascalCase                            |
-| Rename    | "rename foo_bar to new_bar"        | Rename `fooBar` to `newBar`       | Map snake_case to camelCase for TSP          |
+| Rename    | "rename foo_bar to new_bar"        | Rename `fooBar` to `newBar`       | Map snake_case to camelCase for TypeSpec    |
 
-> **Tip:** Python properties/methods use `snake_case`, but TypeSpec uses `camelCase` for properties/methods and `PascalCase` for classes. Always map accordingly when extracting the TypeSpec element from review comments.
+> **Critical Note:**
+> - **Never change TypeSpec operation or property names to snake_case, even if review feedback uses Python-style names.**
+> - **TypeSpec must always follow conventions and best practices; i.e. use camelCase for operations and properties, and PascalCase for classes.**
+> - **The Python generator will automatically convert camelCase to snake_case in the generated SDK.**
+> - **If review feedback refers to Python API names in snake_case, map them to the correct TypeSpec camelCase name before making changes.**
+
+**Enforcement:**
+- Before making any code changes, always copy and fill out the comment analysis template below for each review comment.
+- If a review comment requests a snake_case name, explicitly document the correct TypeSpec camelCase name in your analysis.
 
 **Extract and analyze using the same template:**
 
 ```
 **Comment**: [exact quote from review feedback]
 **Target Language**: [Python, C#, Java, JavaScript, etc.]
-**TypeSpec Element**: [specific name of the TypeSpec element being changed]
-**TypeSpec Element Type**: [model/property/operation/interface/enum - what's being referenced]
+**TypeSpec Element**: [TypeSpec name to be changed, in camelCase or PascalCase]
+**TypeSpec Element Type**: [model/property/operation/interface/enum]
 **Action**: [client.tsp OR main.tsp]
 **File**: [specific file to modify]
+**Python Name in Feedback**: [snake_case name from review, if present]
+**Mapped TypeSpec Name**: [camelCase or PascalCase name to use in TypeSpec]
 ```
 
-**Note**: Some comments may require multiple actions (e.g., both package name changes and client name changes). In such cases, fill out the template multiple times for the same comment, once for each required action.
+**Note**: If a review comment uses a Python name (snake_case), always show the mapped TypeSpec name (camelCase) in your analysis. For comments requiring multiple actions, fill out the template for each action.
 
 **Examples of chat-based comment extraction:**
 - Input: "I got feedback for Python 'rename parent_entity_name to entity_name' for the model Relationship"
