@@ -836,6 +836,7 @@ model VolumeProperties {
   /**
    * Storage target information
    */
+  @visibility(Lifecycle.Read)
   storageTarget?: IscsiTargetInfo;
 
   /**
