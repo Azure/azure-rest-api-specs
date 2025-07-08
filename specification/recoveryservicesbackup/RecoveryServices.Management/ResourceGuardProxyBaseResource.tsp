@@ -59,6 +59,7 @@ interface ResourceGuardProxies {
   /**
    * List the ResourceGuardProxies under vault
    */
+  @list
   get is ArmResourceListByParent<
     ResourceGuardProxyBaseResource,
     Response = ArmResponse<ResourceGuardProxyBaseResourceList>

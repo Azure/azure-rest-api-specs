@@ -109,6 +109,7 @@ interface BackupProtectionIntent {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -142,6 +143,7 @@ interface BackupUsageSummaries {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -203,6 +205,7 @@ interface BackupProtectedItems {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -384,6 +387,7 @@ interface ProtectableContainers {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -512,6 +516,7 @@ interface BackupProtectableItems {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -545,6 +550,7 @@ interface BackupProtectionContainers {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 
@@ -572,6 +578,7 @@ interface DeletedProtectionContainers {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDeletedProtectionContainers")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,

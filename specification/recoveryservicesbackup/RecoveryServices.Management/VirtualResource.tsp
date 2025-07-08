@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 namespace Microsoft.RecoveryServices;
 
 /**
- * Vault virtual resource.
+ * Vault resource in Recovery Service.
  */
 @armVirtualResource
 model VaultResource {

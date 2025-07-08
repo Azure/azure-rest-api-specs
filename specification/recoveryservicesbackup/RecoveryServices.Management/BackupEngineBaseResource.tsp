@@ -49,6 +49,7 @@ interface BackupEngines {
   /**
    * Backup management servers registered to Recovery Services Vault. Returns a pageable list of servers.
    */
+  @list
   list is ArmResourceListByParent<
     BackupEngineBaseResource,
     Parameters = {

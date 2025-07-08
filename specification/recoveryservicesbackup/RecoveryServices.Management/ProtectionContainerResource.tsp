@@ -81,6 +81,7 @@ interface BackupWorkloadItems {
    */
   @get
   @action("items")
+  @list
   list is ArmResourceActionSync<
     ProtectionContainerResource,
     void,

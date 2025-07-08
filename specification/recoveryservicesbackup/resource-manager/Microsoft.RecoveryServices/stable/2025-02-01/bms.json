@@ -372,7 +372,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -531,7 +532,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -903,7 +905,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -1250,7 +1253,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -1858,7 +1862,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -2376,7 +2381,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -2506,7 +2512,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -2957,7 +2964,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -3352,7 +3360,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -3412,7 +3421,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -3465,7 +3475,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -3525,7 +3536,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -3574,7 +3586,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -4171,7 +4184,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -9063,12 +9077,13 @@
           "items": {
             "$ref": "#/definitions/BackupEngineBaseResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "BackupEngineExtendedInfo": {
       "type": "object",
@@ -9349,12 +9364,13 @@
             "$ref": "#/definitions/BackupManagementUsage"
           },
           "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "BackupRequest": {
       "type": "object",
@@ -12080,12 +12096,13 @@
           "items": {
             "$ref": "#/definitions/JobResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "JobStatus": {
       "type": "string",
@@ -13542,12 +13559,13 @@
           "items": {
             "$ref": "#/definitions/ProtectableContainerResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ProtectableContainerType": {
       "type": "string",
@@ -13776,12 +13794,13 @@
           "items": {
             "$ref": "#/definitions/ProtectedItemResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ProtectedItemState": {
       "type": "string",
@@ -13889,12 +13908,13 @@
           "items": {
             "$ref": "#/definitions/ProtectionContainerResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ProtectionIntent": {
       "type": "object",
@@ -14019,12 +14039,13 @@
           "items": {
             "$ref": "#/definitions/ProtectionIntentResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ProtectionPolicy": {
       "type": "object",
@@ -14095,12 +14116,13 @@
           "items": {
             "$ref": "#/definitions/ProtectionPolicyResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ProtectionState": {
       "type": "string",
@@ -14375,12 +14397,13 @@
           "items": {
             "$ref": "#/definitions/RecoveryPointResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "RecoveryPointTierInformation": {
       "type": "object",
@@ -14606,12 +14629,13 @@
           "items": {
             "$ref": "#/definitions/ResourceGuardProxyBaseResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "ResourceHealthDetails": {
       "type": "object",
@@ -15974,7 +15998,7 @@
     },
     "VaultResource": {
       "type": "object",
-      "description": "Vault virtual resource.",
+      "description": "Vault resource in Recovery Service.",
       "properties": {
         "name": {
           "type": "string",
@@ -16198,12 +16222,13 @@
           "items": {
             "$ref": "#/definitions/WorkloadItemResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "WorkloadItemType": {
       "type": "string",
@@ -16312,12 +16337,13 @@
           "items": {
             "$ref": "#/definitions/WorkloadProtectableItemResource"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of resources, with each API call returning up to 200 resources per page. Use ListNext() to fetch the next page if the total number of resources exceeds 200."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "WorkloadType": {
       "type": "string",

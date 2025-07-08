@@ -67,6 +67,7 @@ interface BackupPolicies {
    * Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch
    * scoped results.
    */
+  @list
   list is ArmResourceListByParent<
     ProtectionPolicyResource,
     Parameters = {

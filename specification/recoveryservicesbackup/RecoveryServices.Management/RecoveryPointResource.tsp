@@ -37,6 +37,7 @@ interface RecoveryPoints {
   /**
    * Lists the backup copies for the backed up item.
    */
+  @list
   list is ArmResourceListByParent<
     RecoveryPointResource,
     Parameters = {

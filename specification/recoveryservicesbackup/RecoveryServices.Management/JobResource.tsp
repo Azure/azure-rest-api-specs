@@ -36,6 +36,7 @@ interface BackupJobs {
   /**
    * Provides a pageable list of jobs.
    */
+  @list
   list is ArmResourceListByParent<
     JobResource,
     Parameters = {

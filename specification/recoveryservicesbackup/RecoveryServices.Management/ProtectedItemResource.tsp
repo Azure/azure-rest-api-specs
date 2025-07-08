@@ -94,6 +94,7 @@ interface RecoveryPointsRecommendedForMove {
    * Lists the recovery points recommended for move to another tier
    */
   @action("recoveryPointsRecommendedForMove")
+  @list
   list is ArmResourceActionSync<
     ProtectedItemResource,
     ListRecoveryPointsRecommendedForMoveRequest,

@@ -1604,15 +1604,12 @@ model ProtectionIntent {
  * List of ProtectionIntent resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ProtectionIntentResourceList {
+model ProtectionIntentResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ProtectionIntentResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -1629,16 +1626,14 @@ model ResourceList {
 /**
  * Backup management usage for vault.
  */
-@pagedResult
-model BackupManagementUsageList {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model BackupManagementUsageList extends ResourceList {
   /**
    * The list of backup management usages for the given vault.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: BackupManagementUsage[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2229,15 +2224,12 @@ model ProtectedItem {
  * List of RecoveryPoint resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model RecoveryPointResourceList {
+model RecoveryPointResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: RecoveryPointResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2285,15 +2277,12 @@ model RestoreRequest {
  * List of ProtectionPolicy resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ProtectionPolicyResourceList {
+model ProtectionPolicyResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ProtectionPolicyResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2323,15 +2312,12 @@ model ProtectionPolicy {
  * List of Job resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model JobResourceList {
+model JobResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: JobResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2425,15 +2411,12 @@ model OperationWorkerResponse {
  * List of ProtectedItem resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ProtectedItemResourceList {
+model ProtectedItemResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ProtectedItemResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2509,15 +2492,12 @@ model ErrorDetail {
  * List of BackupEngineBase resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model BackupEngineBaseResourceList {
+model BackupEngineBaseResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: BackupEngineBaseResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2641,15 +2621,12 @@ model BackupEngineExtendedInfo {
  * List of ProtectableContainer resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ProtectableContainerResourceList {
+model ProtectableContainerResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ProtectableContainerResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2742,15 +2719,12 @@ model ProtectionContainer {
  * List of WorkloadItem resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model WorkloadItemResourceList {
+model WorkloadItemResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: WorkloadItemResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2848,15 +2822,12 @@ model ILRRequest {
  * List of WorkloadProtectableItem resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model WorkloadProtectableItemResourceList {
+model WorkloadProtectableItemResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: WorkloadProtectableItemResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2906,15 +2877,12 @@ model WorkloadProtectableItem {
  * List of ProtectionContainer resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ProtectionContainerResourceList {
+model ProtectionContainerResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ProtectionContainerResource[];
-
-  ...ResourceList;
 }
 
 /**
@@ -2987,15 +2955,12 @@ model ListRecoveryPointsRecommendedForMoveRequest {
  * List of ResourceGuardProxyBase resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
-model ResourceGuardProxyBaseResourceList {
+model ResourceGuardProxyBaseResourceList extends ResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ResourceGuardProxyBaseResource[];
-
-  ...ResourceList;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
