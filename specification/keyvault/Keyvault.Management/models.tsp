@@ -556,7 +556,7 @@ model VaultProperties {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
    */
-  tenantId: string;
+  tenantId: Azure.Core.uuid;
 
   /**
    * SKU details
@@ -669,9 +669,7 @@ model AccessPolicyEntry {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId: string;
+  tenantId: Azure.Core.uuid;
 
   /**
    * The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.
@@ -681,9 +679,7 @@ model AccessPolicyEntry {
   /**
    *  Application ID of the client making request on behalf of a principal
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  applicationId?: string;
+  applicationId?: Azure.Core.uuid;
 
   /**
    * Permissions the identity has for keys, secrets and certificates.
@@ -890,7 +886,7 @@ model VaultPatchProperties {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
    */
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * SKU details
@@ -1183,9 +1179,7 @@ model ManagedHsmProperties {
   /**
    * The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * Array of initial administrators object ids for this managed hsm pool.

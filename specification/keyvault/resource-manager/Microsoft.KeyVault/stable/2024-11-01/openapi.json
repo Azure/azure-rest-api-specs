@@ -2151,8 +2151,7 @@
       "description": "An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.",
       "properties": {
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
         },
         "objectId": {
@@ -2160,8 +2159,7 @@
           "description": "The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
         },
         "applicationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Application ID of the client making request on behalf of a principal"
         },
         "permissions": {
@@ -2244,6 +2242,11 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "CertificatePermissions": {
       "type": "string",
@@ -3449,8 +3452,7 @@
       "description": "Properties of the managed HSM Pool",
       "properties": {
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool."
         },
         "initialAdminObjectIds": {
@@ -4823,7 +4825,7 @@
       "description": "Properties of the vault",
       "properties": {
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
         },
         "sku": {
@@ -4890,7 +4892,7 @@
       "description": "Properties of the vault",
       "properties": {
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
         },
         "sku": {
