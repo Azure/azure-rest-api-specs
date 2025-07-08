@@ -1,27 +1,38 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Private Endpoint Connection Response Properties
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(VaultResource)
-model PrivateEndpointConnectionResource
-  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnection> {
+@Azure.ResourceManager.Private.armResourceInternal(PrivateEndpointConnection)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnectionResource extends Resource {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnectionResource,
     KeyName = "privateEndpointConnectionName",
     SegmentName = "privateEndpointConnections",
     NamePattern = ""
   >;
+
+  /**
+   * PrivateEndpointConnectionResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: PrivateEndpointConnection;
 }
 
 @armResourceOperations
@@ -90,9 +101,6 @@ interface PrivateEndpointOperationStatuses {
 
 @@doc(PrivateEndpointConnectionResource.name,
   "The name of the private endpoint connection."
-);
-@@doc(PrivateEndpointConnectionResource.properties,
-  "PrivateEndpointConnectionResource properties"
 );
 @@doc(PrivateEndpointConnectionResources.put::parameters.resource,
   "Request body for operation"

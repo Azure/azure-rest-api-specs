@@ -13,16 +13,29 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @singleton("vaultstorageconfig")
 @parentResource(VaultResource)
-model BackupResourceConfigResource
-  is Azure.ResourceManager.TrackedResource<BackupResourceConfig> {
+@Azure.ResourceManager.Private.armResourceInternal(BackupResourceConfig)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BackupResourceConfigResource extends Resource {
   ...ResourceNameParameter<
     Resource = BackupResourceConfigResource,
     KeyName = "backupstorageconfig",
     SegmentName = "backupstorageconfig",
     NamePattern = ""
   >;
+
+  /**
+   * BackupResourceConfigResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: BackupResourceConfig;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
@@ -164,9 +177,6 @@ interface BackupResourceConfigOperationStatuses {
 }
 
 @@doc(BackupResourceConfigResource.name, "");
-@@doc(BackupResourceConfigResource.properties,
-  "BackupResourceConfigResource properties"
-);
 @@doc(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "Vault storage config request"
 );

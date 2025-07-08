@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ProtectedItemResource.tsp";
@@ -8,22 +7,34 @@ import "./ProtectedItemResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
 @parentResource(ProtectedItemResource)
-model RecoveryPointResource
-  is Azure.ResourceManager.TrackedResource<RecoveryPoint> {
+@Azure.ResourceManager.Private.armResourceInternal(RecoveryPoint)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RecoveryPointResource extends Resource {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+
+  /**
+   * RecoveryPointResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: RecoveryPoint;
 }
 
 @armResourceOperations
@@ -116,9 +127,10 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPointResource.name,
   "RecoveryPointID represents the backed up data to be fetched."
 );
-@@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
-@@doc(ItemLevelRecoveryConnections.provision::parameters.body, "resource ILR request");
+@@doc(ItemLevelRecoveryConnections.provision::parameters.body,
+  "resource ILR request"
+);

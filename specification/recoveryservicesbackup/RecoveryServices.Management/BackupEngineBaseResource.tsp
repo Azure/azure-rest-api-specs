@@ -1,27 +1,38 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 /**
  * The base backup engine class. All workload specific backup engines derive from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(VaultResource)
-model BackupEngineBaseResource
-  is Azure.ResourceManager.TrackedResource<BackupEngineBase> {
+@Azure.ResourceManager.Private.armResourceInternal(BackupEngineBase)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BackupEngineBaseResource extends Resource {
   ...ResourceNameParameter<
     Resource = BackupEngineBaseResource,
     KeyName = "backupEngineName",
     SegmentName = "backupEngines",
     NamePattern = ""
   >;
+
+  /**
+   * BackupEngineBaseResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: BackupEngineBase;
 }
 
 @armResourceOperations
@@ -70,6 +81,3 @@ interface BackupEngines {
 }
 
 @@doc(BackupEngineBaseResource.name, "Name of the backup management server.");
-@@doc(BackupEngineBaseResource.properties,
-  "BackupEngineBaseResource properties"
-);

@@ -13,15 +13,28 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup policy. Workload-specific backup policies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(VaultResource)
-model ProtectionPolicyResource
-  is Azure.ResourceManager.TrackedResource<ProtectionPolicy> {
+@Azure.ResourceManager.Private.armResourceInternal(ProtectionPolicy)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ProtectionPolicyResource extends Resource {
   ...ResourceNameParameter<
     Resource = ProtectionPolicyResource,
     KeyName = "policyName",
     SegmentName = "backupPolicies",
     NamePattern = ""
   >;
+
+  /**
+   * ProtectionPolicyResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: ProtectionPolicy;
 }
 
 @armResourceOperations
@@ -156,9 +169,6 @@ interface ProtectionPolicyOperationStatuses {
 
 @@doc(ProtectionPolicyResource.name,
   "Backup policy information to be fetched."
-);
-@@doc(ProtectionPolicyResource.properties,
-  "ProtectionPolicyResource properties"
 );
 @@doc(ProtectionPolicies.createOrUpdate::parameters.resource,
   "resource backup policy"

@@ -13,15 +13,28 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for container with backup items. Containers with specific workloads are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(BackupFabricResource)
-model ProtectionContainerResource
-  is Azure.ResourceManager.TrackedResource<ProtectionContainer> {
+@Azure.ResourceManager.Private.armResourceInternal(ProtectionContainer)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ProtectionContainerResource extends Resource {
   ...ResourceNameParameter<
     Resource = ProtectionContainerResource,
     KeyName = "containerName",
     SegmentName = "protectionContainers",
     NamePattern = ""
   >;
+
+  /**
+   * ProtectionContainerResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: ProtectionContainer;
 }
 
 @armResourceOperations
@@ -146,9 +159,6 @@ interface ProtectionContainerOperationResults {
 
 @@doc(ProtectionContainerResource.name,
   "Name of the container whose details need to be fetched."
-);
-@@doc(ProtectionContainerResource.properties,
-  "ProtectionContainerResource properties"
 );
 @@doc(ProtectionContainers.register::parameters.resource,
   "Request body for operation"

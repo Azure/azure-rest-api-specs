@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ProtectionContainerResource.tsp";
@@ -8,22 +7,34 @@ import "./ProtectionContainerResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup items.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(ProtectionContainerResource)
-model ProtectedItemResource
-  is Azure.ResourceManager.TrackedResource<ProtectedItem> {
+@Azure.ResourceManager.Private.armResourceInternal(ProtectedItem)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ProtectedItemResource extends Resource {
   ...ResourceNameParameter<
     Resource = ProtectedItemResource,
     KeyName = "protectedItemName",
     SegmentName = "protectedItems",
     NamePattern = ""
   >;
+
+  /**
+   * ProtectedItemResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: ProtectedItem;
 }
 
 @armResourceOperations
@@ -202,7 +213,6 @@ interface ProtectedItemOperationResults {
 @@doc(ProtectedItemResource.name,
   "Backed up item name whose details are to be fetched."
 );
-@@doc(ProtectedItemResource.properties, "ProtectedItemResource properties");
 @@doc(ProtectedItems.createOrUpdate::parameters.resource,
   "resource backed up item"
 );

@@ -1,38 +1,68 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
-model BackupResourceEncryptionConfigExtendedResource
-  is Azure.ResourceManager.TrackedResource<BackupResourceEncryptionConfigExtended> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BackupResourceEncryptionConfigExtended
+)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BackupResourceEncryptionConfigExtendedResource extends Resource {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigExtendedResource,
     KeyName = "backupEncryptionConfig",
     SegmentName = "backupEncryptionConfigs",
     NamePattern = ""
   >;
+
+  /**
+   * BackupResourceEncryptionConfigExtendedResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: BackupResourceEncryptionConfigExtended;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @singleton("backupResourceEncryptionConfig")
 @parentResource(VaultResource)
-model BackupResourceEncryptionConfigResource
-  is Azure.ResourceManager.TrackedResource<BackupResourceEncryptionConfig> {
+@Azure.ResourceManager.Private.armResourceInternal(
+  BackupResourceEncryptionConfig
+)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BackupResourceEncryptionConfigResource extends Resource {
   ...ResourceNameParameter<
     Resource = BackupResourceEncryptionConfigResource,
     KeyName = "backupEncryptionConfig",
     SegmentName = "backupEncryptionConfigs",
     NamePattern = ""
   >;
+
+  /**
+   * BackupResourceEncryptionConfigResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: BackupResourceEncryptionConfig;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
@@ -56,14 +86,8 @@ interface BackupResourceEncryptionConfigs {
 }
 
 @@doc(BackupResourceEncryptionConfigExtendedResource.name, "");
-@@doc(BackupResourceEncryptionConfigExtendedResource.properties,
-  "BackupResourceEncryptionConfigExtendedResource properties"
-);
 @@doc(BackupResourceEncryptionConfigs.update::parameters.resource,
   "Vault encryption input config request"
 );
 
 @@doc(BackupResourceEncryptionConfigResource.name, "");
-@@doc(BackupResourceEncryptionConfigResource.properties,
-  "BackupResourceEncryptionConfigResource properties"
-);

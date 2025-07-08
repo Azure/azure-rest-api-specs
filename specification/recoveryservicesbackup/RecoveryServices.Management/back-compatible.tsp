@@ -41,7 +41,9 @@ using Microsoft.RecoveryServices;
 
 @@clientName(RecoveryPoints.moveRecoveryPoint::parameters.body, "parameters");
 @@clientName(Restores.trigger::parameters.body, "parameters");
-@@clientName(ItemLevelRecoveryConnections.provision::parameters.body, "parameters");
+@@clientName(ItemLevelRecoveryConnections.provision::parameters.body,
+  "parameters"
+);
 
 @@clientName(ProtectionPolicies.createOrUpdate::parameters.resource,
   "parameters"
@@ -81,10 +83,10 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(RecoveryPoints.moveRecoveryPoint, Microsoft.RecoveryServices);
 
-@@clientLocation(ProtectionContainersOperationGroup.refresh, ProtectionContainers);
+@@clientLocation(ProtectionContainersOperationGroup.refresh,
+  ProtectionContainers
+);
 
 @@clientLocation(ProtectionIntentOperationGroup.validate, "ProtectionIntent");
 
-@@clientLocation(OperationOperationGroup.validate,
-  "Operation"
-);
+@@clientLocation(OperationOperationGroup.validate, "Operation");

@@ -1,27 +1,37 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup ProtectionIntent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(BackupFabricResource)
-model ProtectionIntentResource
-  is Azure.ResourceManager.TrackedResource<ProtectionIntent> {
+@Azure.ResourceManager.Private.armResourceInternal(ProtectionIntent)
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ProtectionIntentResource extends Resource {
   ...ResourceNameParameter<
     Resource = ProtectionIntentResource,
     KeyName = "intentObjectName",
     SegmentName = "backupProtectionIntent",
     NamePattern = ""
   >;
+
+  /**
+   * ProtectionIntentResource properties
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  properties?: ProtectionIntent;
 }
 
 @armResourceOperations
@@ -53,9 +63,6 @@ interface ProtectionIntentResources {
 
 @@doc(ProtectionIntentResource.name,
   "Backed up item name whose details are to be fetched."
-);
-@@doc(ProtectionIntentResource.properties,
-  "ProtectionIntentResource properties"
 );
 @@doc(ProtectionIntentResources.createOrUpdate::parameters.resource,
   "resource backed up item"

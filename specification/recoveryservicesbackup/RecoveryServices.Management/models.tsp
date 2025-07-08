@@ -3,10 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.RecoveryServices;
@@ -1315,6 +1311,7 @@ model Resource {
   /**
    * Resource Id represents the complete path to the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -1327,23 +1324,27 @@ model Resource {
   /**
    * Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Resource location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 
   /**
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   tags?: Record<string>;
 
   /**
    * Optional ETag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   eTag?: string;
 }
 
