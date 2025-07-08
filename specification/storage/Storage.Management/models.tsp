@@ -2372,6 +2372,22 @@ model ListQueueProperties {
 }
 
 /**
+ * The list of available operations.
+ */
+@pagedResult
+model OperationListResult {
+  /**
+   * List of operations supported by the resource provider.
+   */
+  @items
+  value?: Operation[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * Storage REST API operation definition.
  */
 model Operation {
