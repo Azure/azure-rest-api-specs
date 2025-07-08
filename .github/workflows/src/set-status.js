@@ -161,7 +161,7 @@ export async function setStatusImpl({
 
       if (!hasJobSummary) {
         /**
-         * Update target to point directly to the first failed job.
+         * Update target to point directly to the first failed job
          *
          * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
          */
