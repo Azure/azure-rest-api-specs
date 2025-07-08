@@ -1,0 +1,49 @@
+{
+  "title": "ChangeStates_UpdateAtManagementGroupLevel_MaximumSet",
+  "operationId": "ChangeStates_UpdateAtManagementGroupLevel",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "changeStateName": "testChangeState",
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "properties": {
+        "description": "Updated change description",
+        "state": "InProgress",
+        "comments": "Updated state to in progress"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "Normal",
+          "description": "Updated change description",
+          "stageMapResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+          "changeArtifact": {
+            "name": "ArmTemplateDeployment",
+            "artifactType": "InlineArmTemplate",
+            "artifactPayload": {
+              "inlineScript": "{\"$schema\":\"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\"contentVersion\":\"1.0.0.0\",\"resources\":[]}"
+            }
+          },
+          "expirationDate": "2023-12-31T23:59:59Z",
+          "serviceCatalogReference": "https://example.com/servicecatalog/123",
+          "workItemReference": "https://example.com/workitem/456",
+          "state": "InProgress",
+          "comments": "Updated state to in progress",
+          "stageParameters": {
+            "param1": {
+              "type": "string",
+              "defaultValue": "default"
+            }
+          }
+        }
+      }
+    }
+  }
+}

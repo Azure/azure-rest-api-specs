@@ -1,0 +1,59 @@
+{
+  "title": "ChangeStates_ListByManagementGroup_MaximumSet",
+  "operationId": "ChangeStates_ListByManagementGroup",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState1",
+            "name": "testChangeState1",
+            "type": "Microsoft.ChangeSafety/changeStates",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "Normal",
+              "description": "Sample change description 1",
+              "stageMapResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+              "changeArtifact": {
+                "name": "ArmTemplateDeployment",
+                "artifactType": "InlineArmTemplate",
+                "artifactPayload": {
+                  "inlineScript": "{\"$schema\":\"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\"contentVersion\":\"1.0.0.0\",\"resources\":[]}"
+                }
+              },
+              "expirationDate": "2023-12-31T23:59:59Z",
+              "state": "Initialized",
+              "stageParameters": {}
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates/testChangeState2",
+            "name": "testChangeState2",
+            "type": "Microsoft.ChangeSafety/changeStates",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "Emergency",
+              "description": "Sample change description 2",
+              "stageMapResourceId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+              "changeArtifact": {
+                "name": "BicepDeployment",
+                "artifactType": "InlineBicep",
+                "artifactPayload": {
+                  "inlineScript": "resource myResource 'Microsoft.Storage/storageAccounts@2021-02-01' = {}"
+                }
+              },
+              "expirationDate": "2023-12-31T23:59:59Z",
+              "state": "InProgress",
+              "stageParameters": {}
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/changeStates?api-version=2025-03-01-preview&$skiptoken=nextPage"
+      }
+    }
+  }
+}

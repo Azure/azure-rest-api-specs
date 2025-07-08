@@ -1,0 +1,77 @@
+{
+  "title": "StageMaps_UpdateAtManagementGroupLevel_MaximumSet",
+  "operationId": "StageMaps_UpdateAtManagementGroupLevel",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "stageMapName": "sampleStageMap",
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "properties": {
+        "stages": [
+          {
+            "name": "stage1",
+            "sequence": 1,
+            "parameterValues": {
+              "param1": "updatedValue1"
+            }
+          },
+          {
+            "name": "stage2",
+            "sequence": 2,
+            "parameterValues": {
+              "param1": "updatedValue2"
+            }
+          },
+          {
+            "name": "stage3",
+            "sequence": 3,
+            "parameterValues": {
+              "param1": "value3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+        "name": "sampleStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "stage1",
+              "sequence": 1,
+              "parameterValues": {
+                "param1": "updatedValue1"
+              }
+            },
+            {
+              "name": "stage2",
+              "sequence": 2,
+              "parameterValues": {
+                "param1": "updatedValue2"
+              }
+            },
+            {
+              "name": "stage3",
+              "sequence": 3,
+              "parameterValues": {
+                "param1": "value3"
+              }
+            }
+          ],
+          "parameters": {
+            "param1": {
+              "type": "string",
+              "defaultValue": "default"
+            }
+          }
+        }
+      }
+    }
+  }
+}
