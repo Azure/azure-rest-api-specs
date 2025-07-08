@@ -193,7 +193,7 @@ model StorageDiscoveryScopeV2 {
 @added(ApiVersion.v2025_06_01_preview)
 model StorageDiscoveryScope {
   @doc("Display name of the collection")
-  @pattern("^(?! )[a-zA-Z0-9]+(?:[ -][a-zA-Z0-9]+)*(?<! )$")
+  @pattern("^[a-zA-Z0-9]+([ -][a-zA-Z0-9]+)*$")
   @minLength(4)
   @maxLength(64)
   displayName: string;
