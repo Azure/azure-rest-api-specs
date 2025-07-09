@@ -51,49 +51,6 @@ input-file:
 - preview/2024-12-01-preview/Maintenances.json
 - preview/2024-12-01-preview/PrivateEndpointConnections.json
 - preview/2024-12-01-preview/PrivateLinkResources.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
-  - code: PatchBodyParametersSchema
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: DeleteResponseCodes
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: LroLocationHeader
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: ProvisioningStateSpecifiedForLROPut
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: ProvisioningStateSpecifiedForLROPatch
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: ResourceNameRestriction
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: PostResponseCodes
-    from: FlexibleServers.json
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: GetCollectionOnlyHasValueAndNextLink
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: XmsPageableForListCalls
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: AvoidAdditionalProperties
-    from: ServiceOperations.json
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: OperationsApiResponseSchema
-    from: ServiceOperations.json
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: ServiceOperations.json
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: RequiredPropertiesMissingInResourceModel
-    from: ServiceOperations.json
-    reason: "The new version file for 2024-12-01 was fully copied from the last existing file. Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
 ```
 ### Tag: package-flexibleserver-2021-12-01-preview
 
@@ -143,10 +100,6 @@ input-file:
 - preview/2023-06-01-preview/FlexibleServers.json
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2023-06-01-preview/ServiceOperations.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
 ```
 
 ### Tag: package-flexibleserver-2023-06-01-preview-new
@@ -164,10 +117,6 @@ input-file:
 - preview/2023-06-01-preview/FlexibleServers.json
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2021-12-01-preview/ServiceOperations.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
 ```
 
 ### Tag: package-flexibleserver-2023-06-30
@@ -186,10 +135,6 @@ input-file:
 - stable/2023-06-30/LogFiles.json
 - stable/2023-06-30/ServiceOperations.json
 - preview/2023-10-01-preview/Maintenances.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
 ```
 
 ### Tag: package-flexibleserver-2023-10-01-preview
@@ -208,10 +153,6 @@ input-file:
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2023-06-01-preview/ServiceOperations.json
 - preview/2023-10-01-preview/AdvancedThreatProtectionSettings.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
 ```
 
 ### Tag: package-flexibleserver-2023-12-01-preview
@@ -232,22 +173,6 @@ input-file:
 - preview/2023-06-01-preview/LogFiles.json
 - preview/2023-12-01-preview/ServiceOperations.json
 - preview/2023-10-01-preview/Maintenances.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2023-12-30
@@ -268,22 +193,6 @@ input-file:
 - preview/2023-06-01-preview/LogFiles.json
 - stable/2023-12-30/ServiceOperations.json
 - preview/2023-10-01-preview/Maintenances.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2024-01-01
@@ -304,22 +213,6 @@ input-file:
 - stable/2023-12-30/LogFiles.json
 - stable/2023-12-30/ServiceOperations.json
 - stable/2023-12-30/Maintenances.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2024-02-01-preview
@@ -340,22 +233,6 @@ input-file:
 - stable/2023-12-30/Maintenances.json
 - preview/2024-02-01-preview/FlexibleServers.json
 - preview/2024-02-01-preview/AdvancedThreatProtectionSettings.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2024-06-01-preview
@@ -376,22 +253,6 @@ input-file:
 - stable/2023-12-30/Maintenances.json
 - preview/2024-06-01-preview/FlexibleServers.json
 - preview/2024-06-01-preview/AdvancedThreatProtectionSettings.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2024-10-01-preview
@@ -412,22 +273,6 @@ input-file:
 - stable/2023-12-30/LogFiles.json
 - preview/2024-10-01-preview/ServiceOperations.json
 - stable/2023-12-30/Maintenances.json
-suppressions:
-  - code: PostOperationAsyncResponseValidation
-    from: FlexibleServers.json
-    reason: This check is optional.
-  - code: PutResponseCodes
-    from: LongRunningBackups.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutResponseCodes
-    from: AdvancedThreatProtectionSettings.json
-    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
-  - code: PutInOperationName
-    from: AdvancedThreatProtectionSettings.json
-    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
-  - code: AllProxyResourcesShouldHaveDelete
-    from: AdvancedThreatProtectionSettings.json
-    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ### Tag: package-flexibleserver-2023-06-30-privatelink
@@ -483,6 +328,42 @@ directive:
   - suppress: OperationsApiResponseSchema
     from: mysql.json
     reason: Property isDataAction is not included in get operation reponse body
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    reason: This check is optional.
+  - code: PutResponseCodes
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutInOperationName
+    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
+  - code: AllProxyResourcesShouldHaveDelete
+    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
+  - code: PatchBodyParametersSchema
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: DeleteResponseCodes
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: LroLocationHeader
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ProvisioningStateSpecifiedForLROPatch
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ResourceNameRestriction
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: PostResponseCodes
+    from: FlexibleServers.json
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: XmsPageableForListCalls
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: AvoidAdditionalProperties
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: OperationsApiResponseSchema
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: OperationsApiSchemaUsesCommonTypes
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
 ```
 
 ---
