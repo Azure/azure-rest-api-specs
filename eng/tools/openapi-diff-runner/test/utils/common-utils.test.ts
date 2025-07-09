@@ -1,5 +1,4 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { readFileSync, existsSync } from "node:fs";
 import {
   blobHref,
   targetHref,
@@ -15,13 +14,8 @@ import {
   cutoffMsg,
   processOadRuntimeErrorMessage,
   specIsPreview,
+  convertRawErrorToUnifiedMsg,
 } from "../../src/utils/common-utils.js";
-
-// Mock node:fs
-vi.mock("node:fs", () => ({
-  existsSync: vi.fn(),
-  readFileSync: vi.fn(),
-}));
 
 describe("common-utils", () => {
   let originalEnv: NodeJS.ProcessEnv;
@@ -168,10 +162,6 @@ describe("common-utils", () => {
   });
 
   describe("getVersionFromInputFile", () => {
-    beforeEach(() => {
-      vi.mocked(existsSync).mockReturnValue(false);
-    });
-
     it("should extract version from data-plane path", () => {
       const filePath =
         "specification/storage/data-plane/Microsoft.Storage/stable/2021-01-01/storage.json";
@@ -193,19 +183,16 @@ describe("common-utils", () => {
       expect(result).toBe("2021-01-01");
     });
 
-    it("should read version from file when exists", () => {
+    it("should return empty string when no version found in path", () => {
       const filePath = "test.json";
-      vi.mocked(existsSync).mockReturnValue(true);
-      vi.mocked(readFileSync).mockReturnValue(JSON.stringify({ info: { version: "1.0.0" } }));
-
       const result = getVersionFromInputFile(filePath);
-      expect(result).toBe("1.0.0");
+      expect(result).toBe("");
     });
 
-    it("should return undefined when no version found", () => {
+    it("should return folder name when no valid API version found", () => {
       const filePath = "invalid/path.json";
       const result = getVersionFromInputFile(filePath);
-      expect(result).toBeUndefined();
+      expect(result).toBe("invalid");
     });
   });
 
@@ -387,6 +374,69 @@ describe("common-utils", () => {
       expect(result).toBe(
         "https://github.com/owner/repo/blob/feature-branch/specification/test.json",
       );
+    });
+  });
+
+  describe("convertRawErrorToUnifiedMsg", () => {
+    beforeEach(() => {
+      process.env.GITHUB_ACTIONS = "true";
+      process.env.GITHUB_REPOSITORY = "owner/repo";
+      process.env.GITHUB_BASE_REF = "main";
+    });
+
+    it("should create unified error message with default level", () => {
+      const result = convertRawErrorToUnifiedMsg("TestError", "This is a test error message");
+      const parsed = JSON.parse(result);
+
+      expect(parsed.type).toBe("Raw");
+      expect(parsed.level).toBe("Error");
+      expect(parsed.message).toBe("TestError");
+      expect(parsed.extra.details).toBe("This is a test error message");
+      expect(parsed.time).toBeDefined();
+      expect(parsed.extra.location).toBeUndefined();
+    });
+
+    it("should create unified error message with custom level", () => {
+      const result = convertRawErrorToUnifiedMsg("TestWarning", "This is a warning", "Warning");
+      const parsed = JSON.parse(result);
+
+      expect(parsed.type).toBe("Raw");
+      expect(parsed.level).toBe("Warning");
+      expect(parsed.message).toBe("TestWarning");
+      expect(parsed.extra.details).toBe("This is a warning");
+    });
+
+    it("should create unified error message with location", () => {
+      const result = convertRawErrorToUnifiedMsg(
+        "TestError",
+        "Error with location",
+        "Error",
+        "specification/test/test.json",
+      );
+      const parsed = JSON.parse(result);
+
+      expect(parsed.type).toBe("Raw");
+      expect(parsed.level).toBe("Error");
+      expect(parsed.message).toBe("TestError");
+      expect(parsed.extra.details).toBe("Error with location");
+      expect(parsed.extra.location).toBe(
+        "https://github.com/owner/repo/blob/main/specification/test/test.json",
+      );
+    });
+
+    it("should handle empty error message", () => {
+      const result = convertRawErrorToUnifiedMsg("EmptyError", "");
+      const parsed = JSON.parse(result);
+
+      expect(parsed.extra.details).toBe("");
+    });
+
+    it("should handle special characters in error message", () => {
+      const errorMsg = 'Error with "quotes" and \n newlines \t tabs';
+      const result = convertRawErrorToUnifiedMsg("SpecialCharsError", errorMsg);
+      const parsed = JSON.parse(result);
+
+      expect(parsed.extra.details).toBe(errorMsg);
     });
   });
 });

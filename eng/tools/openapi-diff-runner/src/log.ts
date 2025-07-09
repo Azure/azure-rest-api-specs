@@ -1,4 +1,4 @@
-import { appendFileSync } from "fs";
+import { appendFileSync } from "node:fs";
 
 /**
  * Log prefix for all messages from openapi-diff-runner

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import {
   convertOadMessagesToResultMessageRecords,
   createOadMessageProcessor,
@@ -15,9 +15,10 @@ import {
 import { OadMessage } from "../../src/types/oad-types.js";
 import { MessageLevel } from "../../src/types/message.js";
 import { logMessage } from "../../src/log.js";
+import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
 
 // Mock dependencies
-vi.mock("fs");
+vi.mock("node:fs");
 vi.mock("../../src/log.js");
 vi.mock("../../src/utils/common-utils.js", () => ({
   sourceBranchHref: vi.fn(
@@ -28,12 +29,13 @@ vi.mock("../../src/utils/common-utils.js", () => ({
       `https://github.com/owner/repo/blob/${branch}/${location}`,
   ),
 }));
-vi.mock("../../src/types/breaking-change.js", () => ({
-  logFileName: "breaking-change.log",
-}));
-vi.mock("../../src/command-helpers.js", () => ({
-  defaultBreakingChangeBaseBranch: "main",
-}));
+vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
+  const actual = (await importOriginal()) as any;
+  return {
+    ...actual,
+    logFileName: "breaking-change.log",
+  };
+});
 
 describe("oad-message-processor", () => {
   const mockAppendFileSync = vi.mocked(fs.appendFileSync);
@@ -55,7 +57,7 @@ describe("oad-message-processor", () => {
       id: "test-id",
       docUrl: "https://docs.example.com/rules/RemovedProperty",
       mode: "test",
-      groupName: "stable",
+      groupName: ApiVersionLifecycleStage.STABLE,
       new: {
         location: "specification/test/new.json",
         path: "$.definitions.TestModel",
@@ -70,7 +72,7 @@ describe("oad-message-processor", () => {
     it("should convert OAD messages to result message records", () => {
       const oadMessages: OadMessage[] = [createMockOadMessage()];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages);
+      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
 
       expect(result).toHaveLength(1);
       expect(result[0]).toEqual({
@@ -81,7 +83,7 @@ describe("oad-message-processor", () => {
         id: "test-id",
         docUrl: "https://docs.example.com/rules/RemovedProperty",
         time: expect.any(Date),
-        groupName: "stable",
+        groupName: ApiVersionLifecycleStage.STABLE,
         extra: {
           mode: "test",
         },
@@ -118,7 +120,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages);
+      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(1);
       expect(result[0].paths[0].tag).toBe("Old");
@@ -131,7 +133,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages);
+      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(1);
       expect(result[0].paths[0].tag).toBe("New");
@@ -145,7 +147,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages);
+      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(0);
     });
@@ -156,7 +158,7 @@ describe("oad-message-processor", () => {
         createMockOadMessage({ type: level }),
       );
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages);
+      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
 
       expect(result).toHaveLength(3);
       result.forEach((msg, index) => {
@@ -192,7 +194,7 @@ describe("oad-message-processor", () => {
       code: "RemovedProperty",
       message: "Test error message",
       mode: "test",
-      groupName: "stable",
+      groupName: ApiVersionLifecycleStage.STABLE,
       id: "test-id",
       docUrl: "https://docs.example.com/rules/RemovedProperty",
       new: {
@@ -315,7 +317,7 @@ describe("oad-message-processor", () => {
       id: "test-id",
       docUrl: "https://docs.example.com/rules/RemovedProperty",
       mode: "test",
-      groupName: "stable",
+      groupName: ApiVersionLifecycleStage.STABLE,
       new: {
         location: "specification/test/new.json",
         path: "$.definitions.TestModel",
@@ -444,7 +446,7 @@ describe("oad-message-processor", () => {
             id: "test-id",
             docUrl: "https://docs.example.com/rules/RemovedProperty",
             mode: "test",
-            groupName: "stable",
+            groupName: ApiVersionLifecycleStage.STABLE,
             new: { location: "new.json", path: "$.path" },
             old: { location: "old.json", path: "$.path" },
           },
@@ -470,7 +472,7 @@ describe("oad-message-processor", () => {
             id: "test-id-1",
             docUrl: "https://docs.example.com/rules/RemovedProperty",
             mode: "test",
-            groupName: "stable",
+            groupName: ApiVersionLifecycleStage.STABLE,
             new: { location: "new.json", path: "$.path" },
             old: { location: "old.json", path: "$.path" },
           },
@@ -481,7 +483,7 @@ describe("oad-message-processor", () => {
             id: "test-id-2",
             docUrl: "https://docs.example.com/rules/AddedPropertyInResponse",
             mode: "test",
-            groupName: "preview",
+            groupName: ApiVersionLifecycleStage.PREVIEW,
             new: { location: "new2.json", path: "$.path2" },
             old: { location: "old2.json", path: "$.path2" },
           },

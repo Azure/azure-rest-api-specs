@@ -101,7 +101,7 @@ describe("pull-request", () => {
       expect(result!.baseBranch).toBe("main");
       expect(result!.targetBranch).toBe("main");
       expect(result!.sourceBranch).toBe("source-b6791c5f-e0a5-49b1-9175-d7fd3e341cb8");
-      expect(result!.workingDir).toBe("/resolved/working/dir");
+      expect(result!.tempRepoFolder).toBe("/resolved/working/dir");
       expect(result!.currentBranch).toBe("main");
       expect(typeof result!.checkout).toBe("function");
     });
@@ -373,7 +373,7 @@ describe("pull-request", () => {
       expect(mockPath.resolve).toHaveBeenCalledWith(
         "../custom-prefix-c93b354fd9c14905bb574a8834c4d69b",
       );
-      expect(result!.workingDir).toBe("/resolved/working/dir");
+      expect(result!.tempRepoFolder).toBe("/resolved/working/dir");
     });
 
     it("should use correct git options", async () => {

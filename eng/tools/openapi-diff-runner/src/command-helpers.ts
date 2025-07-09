@@ -12,6 +12,7 @@ import { getArgumentValue } from "./utils/common-utils.js";
 import { createOadMessageProcessor } from "./utils/oad-message-processor.js";
 import { createPullRequestProperties } from "./utils/pull-request.js";
 import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { logMessage, setOutput } from "./log.js";
 
 /**
@@ -30,7 +31,11 @@ export function initContext(): Context {
   const swaggerDirs: string[] = ["specification", "dev"];
   const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
   const prNumber: string = getArgumentValue(args, "--number", "");
-  const runType = getArgumentValue(args, "--rt", "SameVersion") as BreakingChangesCheckType;
+  const runType = getArgumentValue(
+    args,
+    "--rt",
+    BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+  ) as BreakingChangesCheckType;
   const workingFolder: string = path.join(localSpecRepoPath, "..");
   const logFileFolder: string = path.join(workingFolder, "out/logs");
 
@@ -65,9 +70,10 @@ export function initContext(): Context {
  * Appropriate labels are added to this set by applyRules() function.
  */
 export const BreakingChangeLabelsToBeAdded = new Set<string>();
-export let defaultBreakingChangeBaseBranch = "main";
 function getBreakingChangeCheckName(runType: BreakingChangesCheckType): string {
-  return runType === "SameVersion" ? "Swagger BreakingChange" : "BreakingChange(Cross-Version)";
+  return runType === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION
+    ? "Swagger BreakingChange"
+    : "BreakingChange(Cross-Version)";
 }
 
 /**
@@ -172,11 +178,6 @@ export async function getSwaggerDiffs(
  * TargetBranches is a set of branches and treat each of them like a service team master branch.
  */
 export async function buildPrInfo(context: Context): Promise<void> {
-  /**
-   * For PR target branch not in `targetBranches`. prepare for switch to master branch,
-   * if not the switching to master below would failed
-   */
-  defaultBreakingChangeBaseBranch = context.baseBranch;
   const prInfo = await createPullRequestProperties(
     context,
     context.runType === "CrossVersion" ? "cross-version" : "same-version",
@@ -265,7 +266,7 @@ export function cleanDummySwagger(): void {
  * Return true if the type indicates the same version breaking change
  */
 export function isSameVersionBreakingType(type: BreakingChangesCheckType): boolean {
-  return type === "SameVersion";
+  return type === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
 }
 
 /**

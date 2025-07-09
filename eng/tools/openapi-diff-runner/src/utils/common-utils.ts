@@ -1,12 +1,14 @@
-import { existsSync, readFileSync } from "node:fs";
 import { FilePosition } from "../types/message.js";
 import { logMessage } from "../log.js";
 
 export function blobHref(file: unknown): string {
   // GitHub Actions scenario
   if (process.env.GITHUB_ACTIONS) {
+    // GITHUB_HEAD_REPOSITORY is only available for pull requests from forked repositories.
+    // GITHUB_REPOSITORY is the repository where the workflow is running.
     const repoName = process.env.GITHUB_HEAD_REPOSITORY || process.env.GITHUB_REPOSITORY;
-    const sha = process.env.GITHUB_SHA || process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA;
+    // GITHUB_EVENT_PULL_REQUEST_HEAD_SHA is the pull request head commit SHA and GITHUB_SHA is the merge commit SHA
+    const sha = process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA || process.env.GITHUB_SHA;
     return `https://github.com/${repoName}/blob/${sha}/${file}`;
   }
 
@@ -95,10 +97,14 @@ export function specificBranchHref(
   );
 }
 
-export function getVersionFromInputFile(filePath: string, withPreview = false): string | undefined {
+export function getVersionFromInputFile(filePath: string, withPreview = false): string {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
-  const segments = filePath.split("/");
-  if (filePath.indexOf("data-plane") !== -1) {
+
+  // Normalize path separators to forward slashes for consistent processing
+  const normalizedPath = filePath.replace(/\\/g, "/");
+  const segments = normalizedPath.split("/");
+
+  if (normalizedPath.indexOf("data-plane") !== -1) {
     if (segments && segments.length > 1) {
       for (const s of segments.entries()) {
         if (["stable", "preview"].some((v) => v === s[1])) {
@@ -120,10 +126,17 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
       }
     }
   }
-  if (existsSync(filePath)) {
-    return JSON.parse(readFileSync(filePath).toString())?.info?.version;
+
+  // If no regex match found, return the immediate folder name (parent directory of the file)
+  if (segments && segments.length > 1) {
+    // Get the folder name that contains the file (last segment before filename)
+    const folderName = segments[segments.length - 2];
+    if (folderName) {
+      return folderName;
+    }
   }
-  return undefined;
+
+  return "";
 }
 
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
@@ -204,4 +217,27 @@ export function processOadRuntimeErrorMessage(
 export function specIsPreview(specPath: string): boolean {
   // Example input value: specification/maps/data-plane/Creator/preview/2022-09-01-preview/wayfind.json
   return specPath.includes("/preview/") && !specPath.includes("/stable/");
+}
+
+export function convertRawErrorToUnifiedMsg(
+  errType: string,
+  errorMsg: string,
+  levelType = "Error",
+  location: string | undefined = undefined,
+): string {
+  const extra: { [index: string]: string } = {};
+  extra.details = errorMsg;
+  if (location) {
+    extra.location = targetBranchHref(location);
+  }
+  const result = {
+    type: "Raw",
+    level: levelType,
+    message: errType,
+    time: new Date(),
+    extra: {
+      ...extra,
+    },
+  };
+  return JSON.stringify(result);
 }

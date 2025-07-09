@@ -2,13 +2,14 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { generateBreakingChangeResultSummary } from "../src/generate-report.js";
 import { Context } from "../src/types/breaking-change.js";
 import { RawMessageRecord, ResultMessageRecord } from "../src/types/message.js";
-import { addToSummary, logMessage, logWarning } from "../src/log.js";
+import { addToSummary, logMessage } from "../src/log.js";
 import {
   BreakingChangeMdReport,
   createBreakingChangeMdReport,
   reportToString,
   sortBreakingChangeMdReports,
 } from "../src/utils/markdown-report.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 // Mock dependencies
 vi.mock("../src/log.js");
@@ -17,7 +18,6 @@ vi.mock("../src/utils/markdown-report.js");
 describe("generate-report", () => {
   const mockAddToSummary = vi.mocked(addToSummary);
   const mockLogMessage = vi.mocked(logMessage);
-  const mockLogWarning = vi.mocked(logWarning);
   const mockCreateBreakingChangeMdReport = vi.mocked(createBreakingChangeMdReport);
   const mockReportToString = vi.mocked(reportToString);
   const mockSortBreakingChangeMdReports = vi.mocked(sortBreakingChangeMdReports);
@@ -53,7 +53,7 @@ describe("generate-report", () => {
     swaggerDirs: ["specification"],
     baseBranch: "main",
     headCommit: "HEAD",
-    runType: "SameVersion",
+    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
     checkName: "Swagger BreakingChange",
     repo: "test/repo",
     prNumber: "123",
@@ -298,60 +298,6 @@ describe("generate-report", () => {
         expect.stringContaining(
           "The following breaking changes have been detected in comparison to the latest preview version",
         ),
-      );
-    });
-
-    it.skip("should handle comment data length exceeding limit", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [createMockResultMessage()];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "x".repeat(60000); // Very long table content
-      const summaryDataSuppressionAndDetailsText = "";
-
-      // Mock a very long report string
-      mockReportToString.mockReturnValue("x".repeat(10000));
-
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockLogWarning).toHaveBeenCalledWith(
-        expect.stringContaining("ASSERTION VIOLATION! commentData.length"),
-      );
-      expect(mockAddToSummary).toHaveBeenCalledWith(expect.stringContaining("⚠️ TRUNCATED ⚠️"));
-    });
-
-    it.skip("should iteratively reduce max row count to fit within limits", async () => {
-      const context = createMockContext();
-      const messages: ResultMessageRecord[] = [
-        createMockResultMessage(),
-        createMockResultMessage(),
-        createMockResultMessage(),
-      ];
-      const runtimeErrors: RawMessageRecord[] = [];
-      const comparedSpecsTableContent = "";
-      const summaryDataSuppressionAndDetailsText = "";
-
-      // First call returns long string, subsequent calls return shorter strings
-      mockReportToString
-        .mockReturnValueOnce("x".repeat(70000)) // Too long
-        .mockReturnValueOnce("x".repeat(60000)) // Still too long
-        .mockReturnValueOnce("x".repeat(50000)); // Finally fits
-
-      await generateBreakingChangeResultSummary(
-        context,
-        messages,
-        runtimeErrors,
-        comparedSpecsTableContent,
-        summaryDataSuppressionAndDetailsText,
-      );
-
-      expect(mockLogMessage).toHaveBeenCalledWith(
-        expect.stringContaining("maxRowCount reduced/current/max"),
       );
     });
 

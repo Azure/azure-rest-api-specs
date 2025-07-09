@@ -1,10 +1,9 @@
-import path from "path";
-import fs from "fs";
+import path from "node:path";
+import fs from "node:fs";
 import { OadMessage } from "../types/oad-types.js";
 import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
 import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
 import { logFileName } from "../types/breaking-change.js";
-import { defaultBreakingChangeBaseBranch as defaultBaseBranch } from "../command-helpers.js";
 import { logMessage } from "../log.js";
 
 /**
@@ -21,7 +20,7 @@ export interface OadMessageProcessorContext {
  */
 export function convertOadMessagesToResultMessageRecords(
   messages: OadMessage[],
-  baseBranchName: string | null = null,
+  baseBranchName: string,
 ): ResultMessageRecord[] {
   return messages.map((oadMessage) => {
     // These paths will be printed out to GitHub check pane table row by invocations to
@@ -37,10 +36,7 @@ export function convertOadMessagesToResultMessageRecords(
     if (oadMessage.old.location) {
       paths.push({
         tag: "Old",
-        path: specificBranchHref(
-          oadMessage.old.location || "",
-          baseBranchName || defaultBaseBranch,
-        ),
+        path: specificBranchHref(oadMessage.old.location || "", baseBranchName),
         jsonPath: oadMessage.old?.path,
       });
     }

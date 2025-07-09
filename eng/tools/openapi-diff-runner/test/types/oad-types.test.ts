@@ -6,9 +6,10 @@ import {
   setOadBaseBranch,
 } from "../../src/types/oad-types.js";
 import { Context } from "../../src/types/breaking-change.js";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 const mockContext: Context = {
-  runType: "SameVersion",
+  runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
   prUrl: "https://github.com/Azure/azure-rest-api-specs/pull/12345",
   prTargetBranch: "main",
   prSourceBranch: "feature-branch",
@@ -43,7 +44,6 @@ describe("OAD Trace Functions", () => {
     expect(updatedTrace.traces[0]).toEqual({
       old: "path/to/old.json",
       new: "path/to/new.json",
-      baseBranch: "main",
     });
   });
 

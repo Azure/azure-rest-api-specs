@@ -22,6 +22,7 @@ import {
 } from "../src/types/breaking-change.js";
 import { ResultMessageRecord } from "../src/types/message.js";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 // Mock dependencies
 vi.mock("node:fs");
@@ -94,7 +95,7 @@ describe("command-helpers", () => {
         const argMap: Record<string, string> = {
           "--repo": "test/repo",
           "--number": "123",
-          "--rt": "SameVersion",
+          "--rt": BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
           "--bb": "main",
           "--hc": "HEAD",
           "--sb": "",
@@ -331,7 +332,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -349,7 +350,7 @@ describe("command-helpers", () => {
         baseBranch: "main",
         targetBranch: "main",
         sourceBranch: "feature",
-        workingDir: "/working/dir",
+        tempRepoFolder: "/working/dir",
         currentBranch: "main",
         checkout: vi.fn(),
       };
@@ -390,7 +391,7 @@ describe("command-helpers", () => {
         baseBranch: "main",
         targetBranch: "main",
         sourceBranch: "feature",
-        workingDir: "/working/dir",
+        tempRepoFolder: "/working/dir",
         currentBranch: "main",
         checkout: vi.fn(),
       };
@@ -412,7 +413,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -441,7 +442,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -459,7 +460,7 @@ describe("command-helpers", () => {
         baseBranch: "main",
         targetBranch: "", // Empty target branch
         sourceBranch: "feature",
-        workingDir: "/working/dir",
+        tempRepoFolder: "/working/dir",
         currentBranch: "main",
         checkout: vi.fn(),
       };
@@ -481,7 +482,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -497,7 +498,7 @@ describe("command-helpers", () => {
           baseBranch: "develop",
           targetBranch: "develop",
           sourceBranch: "feature",
-          workingDir: "/working/dir",
+          tempRepoFolder: "/working/dir",
           currentBranch: "develop",
           checkout: vi.fn(),
         },
@@ -517,7 +518,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -533,7 +534,7 @@ describe("command-helpers", () => {
           baseBranch: "main",
           targetBranch: "main",
           sourceBranch: "feature",
-          workingDir: "/working/dir",
+          tempRepoFolder: "/working/dir",
           currentBranch: "main",
           checkout: vi.fn(),
         },
@@ -553,7 +554,7 @@ describe("command-helpers", () => {
         swaggerDirs: ["specification"],
         baseBranch: "main",
         headCommit: "HEAD",
-        runType: "SameVersion",
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
         prNumber: "123",
@@ -569,7 +570,7 @@ describe("command-helpers", () => {
           baseBranch: "ARMCoreRPDev",
           targetBranch: "ARMCoreRPDev",
           sourceBranch: "feature",
-          workingDir: "/working/dir",
+          tempRepoFolder: "/working/dir",
           currentBranch: "ARMCoreRPDev",
           checkout: vi.fn(),
         },
@@ -607,7 +608,7 @@ describe("command-helpers", () => {
           baseBranch: "develop",
           targetBranch: "develop",
           sourceBranch: "feature",
-          workingDir: "/working/dir",
+          tempRepoFolder: "/working/dir",
           currentBranch: "develop",
           checkout: vi.fn(),
         },
