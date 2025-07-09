@@ -3595,7 +3595,7 @@
           ],
           "x-ms-enum": {
             "name": "GalleryScriptParameterType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "minValue": {
@@ -5314,6 +5314,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+      "x-ms-parameter-location": "method",
       "description": "The name of the Shared Image Gallery where Image Definitions or other artifacts reside."
     },
     "GalleryODataExpandQueryParameter": {
@@ -5337,6 +5338,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+      "x-ms-parameter-location": "method",
       "description": "The name of the gallery Script Definition in which the Script Version is to be created."
     },
     "GalleryScriptVersionNameParameter": {
@@ -5345,6 +5347,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "x-ms-parameter-location": "method",
       "description": "The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
     }
   }
