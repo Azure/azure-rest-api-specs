@@ -301,13 +301,9 @@ export async function summarizeChecksImpl(
   );
 
   const commentBody = await createNextStepsComment(
-    github,
-    context,
     core,
-    owner,
     repo,
     labelNames,
-    issue_number,
     targetBranch,
     requiredCheckRuns,
     fyiCheckRuns,
@@ -617,26 +613,19 @@ function extractRunsFromGraphQLResponse(response) {
 // #region next steps
 /**
  *
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
- * @param {import('@actions/github').context } context
  * @param {typeof import("@actions/core")} core
- * @param {string} owner
  * @param {string} repo
  * @param {string[]} labels
- * @param {number} issue_number
  * @param {string} targetBranch
  * @param {CheckRunData[]} requiredRuns
  * @param {CheckRunData[]} fyiRuns
  * @returns {Promise<string>}
  */
 export async function createNextStepsComment(
-  github,
-  context,
+
   core,
-  owner,
   repo,
   labels,
-  issue_number,
   targetBranch,
   requiredRuns,
   fyiRuns,
@@ -654,8 +643,6 @@ export async function createNextStepsComment(
     .map((run) => run.checkInfo);
 
   const commentBody = await buildNextStepsToMergeCommentBody(
-    github,
-    context,
     core,
     labels,
     `${repo}/${targetBranch}`,
@@ -668,9 +655,7 @@ export async function createNextStepsComment(
 }
 
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
- * @param {import('@actions/github').context } context
- * @param {typeof import("@actions/core")} core
+ * @param {import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {boolean} requiredCheckInfosPresent
@@ -679,8 +664,6 @@ export async function createNextStepsComment(
  * @returns {Promise<string>}
  */
 async function buildNextStepsToMergeCommentBody(
-  github,
-  context,
   core,
   labels,
   targetBranch,
@@ -692,11 +675,7 @@ async function buildNextStepsToMergeCommentBody(
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
-    {
-      github,
-      context,
-      core,
-    },
+    core,
     labels,
     targetBranch,
   );
