@@ -3,7 +3,7 @@
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
-import { execFile } from "../../.github/shared/src/exec";
+import { execFile } from "../../.github/shared/src/exec.js";
 import { /* @type {string} */ readFile } from "fs/promises";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
