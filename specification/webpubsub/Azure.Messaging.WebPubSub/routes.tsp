@@ -13,6 +13,7 @@ interface HealthApiOperationGroup {
   /**
    * Get service health status.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Get service health status.")
   @route("/api/health")
   @head
@@ -23,6 +24,7 @@ interface WebPubSubOperationGroup {
   /**
    * Add filtered connections to multiple groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
@@ -48,6 +50,7 @@ interface WebPubSubOperationGroup {
   /**
    * Close the connections in the hub.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
@@ -79,6 +82,7 @@ interface WebPubSubOperationGroup {
   /**
    * Generate token for the client to connect Azure Web PubSub service.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
@@ -134,6 +138,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove filtered connections from multiple groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
@@ -159,6 +164,7 @@ interface WebPubSubOperationGroup {
   /**
    * Broadcast content inside request body to all the connected client connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
@@ -215,6 +221,7 @@ interface WebPubSubOperationGroup {
   /**
    * Close the client connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
@@ -248,6 +255,7 @@ interface WebPubSubOperationGroup {
   /**
    * Check if the connection with the given connectionId exists.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
@@ -274,6 +282,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to the specific connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
@@ -324,6 +333,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a connection from all groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
@@ -351,6 +361,7 @@ interface WebPubSubOperationGroup {
   /**
    * Check if there are any client connections inside the given group
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
@@ -379,6 +390,7 @@ interface WebPubSubOperationGroup {
   /**
    * Close connections in the specific group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
@@ -419,6 +431,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to a group of connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
@@ -484,6 +497,7 @@ interface WebPubSubOperationGroup {
   /**
    * List connections in a group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
@@ -541,6 +555,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a connection from the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
@@ -577,6 +592,7 @@ interface WebPubSubOperationGroup {
   /**
    * Add a connection to the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
@@ -612,6 +628,7 @@ interface WebPubSubOperationGroup {
   /**
    * Revoke permission for the connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
@@ -653,6 +670,7 @@ interface WebPubSubOperationGroup {
   /**
    * Check if a connection has permission to the specified action.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
@@ -693,6 +711,7 @@ interface WebPubSubOperationGroup {
   /**
    * Grant permission to the connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
@@ -733,6 +752,7 @@ interface WebPubSubOperationGroup {
   /**
    * Check if there are any client connections connected for the given user.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
@@ -759,6 +779,7 @@ interface WebPubSubOperationGroup {
   /**
    * Close connections for the specific user.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
@@ -797,6 +818,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to the specific user.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
@@ -854,6 +876,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a user from all groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
@@ -881,6 +904,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a user from the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
@@ -917,6 +941,7 @@ interface WebPubSubOperationGroup {
   /**
    * Add a user to the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @summary("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
