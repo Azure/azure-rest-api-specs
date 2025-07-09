@@ -1,0 +1,52 @@
+parameters:
+  - name: Sha
+    type: string
+    default: $(System.PullRequest.SourceCommitId)
+
+  - name: RepositoryName
+    type: string
+    default: $(Build.Repository.Name)
+    description: The name of the repository where the PR is located (generally of the form 'owner/repo')
+
+  - name: State
+    type: string
+    default: 'pending'
+    values:
+      - error
+      - failure
+      - pending
+      - success
+
+  - name: TargetUrl
+    type: string
+    default: ''
+
+  - name: Description
+    type: string
+    default: ''
+
+  - name: Context
+    type: string
+    default: default context
+
+  - name: GitHubToken
+    type: string
+    default: $(azuresdk-github-pat)
+
+steps:
+  - bash: |
+      echo "Repository Name: ${{ parameters.RepositoryName }}"
+      echo "Commit ID: ${{ parameters.Sha }}"
+      echo "State: ${{ parameters.State }}"
+      echo "Target URL: ${{ parameters.TargetUrl }}"
+      echo "Description: ${{ parameters.Description }}"
+      echo "Context: ${{ parameters.Context }}"
+
+      gh api repos/${{ parameters.RepositoryName }}/statuses/${{ parameters.Sha }} \
+        -f state='${{ parameters.State }}' \
+        -f target_url='${{ parameters.TargetUrl }}' \
+        -f description='${{ parameters.Description }}' \
+        -f context='${{ parameters.Context }}'
+    displayName: 'Set PR status to ${{ parameters.State }} for ${{ parameters.Sha }}'
+    env:
+      GH_TOKEN: ${{ parameters.GitHubToken }}
