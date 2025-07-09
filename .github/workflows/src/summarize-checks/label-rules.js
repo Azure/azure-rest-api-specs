@@ -624,7 +624,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri3Blockers);
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {typeof import("@actions/core")} core
  * @param {string} repo
  * @param {string} owner
  * @param {string[]} existingLabels
@@ -633,7 +633,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
  * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
  */
 export async function getPresentBlockingLabelsAndMissingRequiredLabels(
-  { github, context, core },
+  core,
   repo,
   owner,
   existingLabels,
@@ -643,7 +643,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   const repoTargetBranch = `${repo}/${targetBranch}`;
 
   const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
-    { github, context, core },
+    core,
     existingLabels,
     repoTargetBranch,
   );
@@ -651,7 +651,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
 
   const requiredLabelsFromRules = (
     await getViolatedRequiredLabelsRules(
-      { github, context, core },
+      core,
       existingLabels,
       repoTargetBranch,
     )
@@ -668,19 +668,19 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
 }
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
  * @returns {Promise<RequiredLabelRule[]>}
  */
 export async function getViolatedRequiredLabelsRules(
-  { github, context, core },
+  core,
   labels,
   targetBranch,
 ) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated({ github, context, core }, labels, targetBranch, rule)) {
+    if (await requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
@@ -688,14 +688,14 @@ export async function getViolatedRequiredLabelsRules(
 }
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {typeof import("@actions/core")} core
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule
  * @returns {Promise<boolean>}
  */
 export async function requiredLabelRuleViolated(
-  { core },
+  core,
   presentLabels,
   targetBranch,
   rule,

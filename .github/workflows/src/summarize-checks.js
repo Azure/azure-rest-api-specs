@@ -209,28 +209,28 @@ const EXCLUDED_CHECK_NAMES = [];
  * @returns {Promise<void>}
  */
 export default async function summarizeChecks({ github, context, core }) {
-  logGitHubRateLimitInfo({ github, context, core });
+  logGitHubRateLimitInfo(github, core);
   let { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
   const targetBranch = context.payload.pull_request?.base?.ref;
   core.info(`PR target branch: ${targetBranch}`);
 
   await summarizeChecksImpl(
-    {
-      github,
-      context,
-      core,
-    },
+    github,
+    context,
+    core,
     owner,
     repo,
     issue_number,
     head_sha,
-    context.event_name,
+    context.eventName,
     targetBranch,
   );
 }
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github').context } context
+ * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} issue_number
@@ -240,7 +240,9 @@ export default async function summarizeChecks({ github, context, core }) {
  * @returns {Promise<void>}
  */
 export async function summarizeChecksImpl(
-  { github, context, core },
+  github,
+  context,
+  core,
   owner,
   repo,
   issue_number,
@@ -268,7 +270,9 @@ export async function summarizeChecksImpl(
   if (event_name in ["labeled", "unlabeled"]) {
     // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
     const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-      { github, context, core },
+      github,
+      context,
+      core,
       owner,
       repo,
       issue_number,
@@ -287,7 +291,8 @@ export async function summarizeChecksImpl(
 
   /** @type {[CheckRunData[], CheckRunData[]]} */
   const [requiredCheckRuns, fyiCheckRuns] = await getCheckRunTuple(
-    { github, context, core },
+    github,
+    core,
     owner,
     repo,
     head_sha,
@@ -296,7 +301,9 @@ export async function summarizeChecksImpl(
   );
 
   const commentBody = await createNextStepsComment(
-    { github, context, core },
+    github,
+    context,
+    core,
     owner,
     repo,
     labelNames,
@@ -321,12 +328,13 @@ export async function summarizeChecksImpl(
 }
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {typeof import("@actions/core")} core
  * @returns {Promise<void>}
  */
-export async function logGitHubRateLimitInfo({ github, core }) {
+export async function logGitHubRateLimitInfo(github, core) {
   try {
-    const rateLimit = await github.rateLimit.get();
+    const { data: rateLimit } = await github.rest.rateLimit.get();
     const { data: user } = await github.rest.users.getAuthenticated();
     core.info(`GitHub RateLimit Info for user ${user.login}: ${JSON.stringify(rateLimit)}`);
   } catch (e) {
@@ -399,7 +407,9 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 // #endregion
 // #region label update
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github').context } context
+ * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
  * @param {number} issue_number
@@ -407,8 +417,11 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
  * @param {string[]} known_labels
  * @returns {Promise<[string[], string[]]>}
  */
+// @ts-ignore: 'github' is currently unused but will be used after necessary changes
 export async function handleLabeledEvent(
-  { context, core },
+  github,
+  context,
+  core,
   owner,
   repo,
   issue_number,
@@ -472,7 +485,8 @@ export async function handleLabeledEvent(
 // #endregion
 // #region checks
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {typeof import("@actions/core")} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
  * @param {string} head_sha - The commit SHA to check.
@@ -481,7 +495,9 @@ export async function handleLabeledEvent(
  * @returns {Promise<[CheckRunData[], CheckRunData[]]>}
  */
 export async function getCheckRunTuple(
-  { github, core },
+
+  github,
+  core,
   owner,
   repo,
   head_sha,
@@ -601,7 +617,9 @@ function extractRunsFromGraphQLResponse(response) {
 // #region next steps
 /**
  *
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github').context } context
+ * @param {typeof import("@actions/core")} core
  * @param {string} owner
  * @param {string} repo
  * @param {string[]} labels
@@ -612,7 +630,9 @@ function extractRunsFromGraphQLResponse(response) {
  * @returns {Promise<string>}
  */
 export async function createNextStepsComment(
-  { github, context, core },
+  github,
+  context,
+  core,
   owner,
   repo,
   labels,
@@ -634,7 +654,9 @@ export async function createNextStepsComment(
     .map((run) => run.checkInfo);
 
   const commentBody = await buildNextStepsToMergeCommentBody(
-    { github, context, core },
+    github,
+    context,
+    core,
     labels,
     `${repo}/${targetBranch}`,
     requiredCheckInfosPresent,
@@ -646,7 +668,9 @@ export async function createNextStepsComment(
 }
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github').context } context
+ * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch // this is in the format of "repo/branch"
  * @param {boolean} requiredCheckInfosPresent
@@ -655,7 +679,9 @@ export async function createNextStepsComment(
  * @returns {Promise<string>}
  */
 async function buildNextStepsToMergeCommentBody(
-  { github, context, core },
+  github,
+  context,
+  core,
   labels,
   targetBranch,
   requiredCheckInfosPresent,
