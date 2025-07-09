@@ -24,4 +24,19 @@ interface RadiologyInsights {
   @doc("Creates a Radiology Insights job with the given request body.")
   @pollingOperation(RadiologyInsights.getJob)
   createJob is HealthInsightsOperations.LongRunningResourceCreateOrReplace<RadiologyInsightsJob>;
+
+  @summary("Get Radiology Insights job details")
+  @tag("RadiologyInsights")
+  @doc("Gets the status and details of the Radiology Insights job.")
+  @get
+  getCustomInference is HealthInsightsOperations.ResourceRead<RadiologyInsightsCustomJob>;
+
+  @doc("Infer radiology insights using a custom model.")
+  @route("/radiology-insights/custom")
+  @pollingOperation(RadiologyInsights.getJob)
+  inferFromCustomModelId is LongRunningRpcOperation<
+    RadiologyInsightsCustomInferenceRequest,
+    RadiologyInsightsInferenceResult,
+    RadiologyInsightsCustomJob
+  >;
 }

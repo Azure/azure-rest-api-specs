@@ -3,12 +3,48 @@ import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
 import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 import "./model.radiologyinsights.valuesets.tsp";
+import "../HealthInsights.OpenAPI/service.tsp";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
-
 using TypeSpec.Versioning;
 
 namespace AzureHealthInsights;
+
+@doc("The request for Radiology Insights custom model inference.")
+model RadiologyInsightsCustomInferenceRequest {
+  @doc("Contains the list of patients, and configuration data.")
+  inferenceData: RadiologyInsightsData;
+
+  @doc("Models to be used for inference. If this is not specified, the model will use the default model for inference.")
+  @minItems(1)
+  id?: Array<string>;
+}
+
+@doc("The inference results for the Radiology Insights request. If field 'status' has value 'succeeded', then field 'result' will contain an instance of RadiologyInsightsInferenceResult.")
+model RadiologyInsightsCustomInferenceResponse {
+  @doc("Results for the patients given in the request.")
+  @minItems(1)
+  patientResults: RadiologyInsightsPatientResult[];
+
+  @doc("Models to be used for inference. If this is not specified, the model will use the default model for inference.")
+  id: Array<string>;
+}
+
+@doc("Response for the Radiology Insights request.")
+@resource("radiology-insights/jobs/custom")
+model RadiologyInsightsCustomJob {
+  @doc("The request data for the operation.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  jobData?: RadiologyInsightsData;
+
+  @doc("The result of the operation.")
+  @visibility(Lifecycle.Read)
+  result?: RadiologyInsightsCustomInferenceResponse;
+
+  ...HealthInsightsJobBase;
+}
 
 @doc("Contains the list of patients, and configuration data.")
 model RadiologyInsightsData {

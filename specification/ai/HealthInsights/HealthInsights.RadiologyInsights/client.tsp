@@ -19,6 +19,9 @@ interface RadiologyInsightsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+  inferFromCustomModelId is AzureHealthInsights.RadiologyInsights.inferFromCustomModelId;
 }
 
 @@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "java");
