@@ -162,6 +162,7 @@ model NginxConfigurationRequestProperties {
 /**
  * The request body for creating an analysis for an NGINX configuration.
  */
+@doc("The request body for creating an analysis for an NGINX configuration.")
 model AnalysisCreate {
   /**
    * Configuration details for analysis.
@@ -333,7 +334,6 @@ union DiagnosticLevel {
 /**
  * Operations on Nginx configurations under a given deployment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We already have a delete operation defined in the interface"
 @armResourceOperations
 interface Configurations {
   /**
@@ -345,9 +345,8 @@ interface Configurations {
    * Creates or updates a configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The request and response models are different by design"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "We have all the response codes defined in the model"
   @put
-  @armResourceCreateOrUpdate(NginxConfigurationRequest)
+  @armResourceCreateOrUpdate(Configuration)
   createOrUpdate(
     ...ResourceInstanceParameters<Configuration>,
 
@@ -381,16 +380,12 @@ interface Configurations {
   /**
    * Analyzes a configuration for potential issues or optimizations.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This is not a long-running operation"
   @armResourceAction(Configuration)
   @post
   @action("analyze")
-  analyze(
-    ...ResourceInstanceParameters<Configuration>,
-
-    /**
-     * Request body for the analysis.
-     */
-    @body body: AnalysisCreate,
-  ): ArmResponse<AnalysisResult> | ErrorResponse;
+  analyze is ArmResourceActionSync<
+    Configuration,
+    AnalysisCreate,
+    AnalysisResult | ErrorResponse
+  >;
 }

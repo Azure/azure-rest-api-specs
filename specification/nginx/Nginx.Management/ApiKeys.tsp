@@ -81,11 +81,16 @@ interface ApiKeys {
    * @returns The created or updated API key.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "We have different data models by design"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "We have all the response codes defined in the model"
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Resource = ApiKeyRequest,
-    Response = ApiKey
-  >;
+  @armResourceCreateOrUpdate(ApiKeyRequest)
+  @put
+  createOrUpdate(
+    ...ResourceInstanceParameters<ApiKey>,
+
+    /**
+     * The API key resource to create or update.
+     */
+    @bodyRoot resource: ApiKeyRequest,
+  ): ArmResponse<ApiKey> | ArmCreatedResponse<ApiKey> | ErrorResponse;
 
   /**
    * Deletes the specified API key.

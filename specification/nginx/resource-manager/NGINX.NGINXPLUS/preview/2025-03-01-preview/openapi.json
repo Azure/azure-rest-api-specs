@@ -546,15 +546,15 @@
           {
             "name": "apiKeyName",
             "in": "path",
-            "description": "The name of the ApiKey",
+            "description": "The name of the API Key resource.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
           },
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The API key resource to create or update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApiKeyRequest"
@@ -563,9 +563,22 @@
         ],
         "responses": {
           "200": {
-            "description": "The created or updated API key.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApiKey"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApiKey"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1314,7 +1327,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Request body for the analysis.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalysisCreate"
