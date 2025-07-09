@@ -1,11 +1,18 @@
 import { PER_PAGE_MAX } from "./github.js";
 
 /**
+ * @typedef {Object} IssueComment
+ * @property {number} id
+ * @property {string} [body]
+ * @property {{ login: string } | null} [user]
+ */
+
+/**
  * Given a set of comments from an issue (or PR) for a specific user, grab the one that contains the specified comment group name.
  *
  * If the comment group name is not found, this function should return undefined.
  *
- * @param {import("@octokit/openapi-types").components["schemas"]["issue-comment"][]} comments - The list of comments to search through.
+ * @param {IssueComment[]} comments - The list of comments to search through.
  * @param {string} commentGroupName - The name of the comment group to search for in the comments. This is merely a "category" that
  *  will allow the comment to be identified and updated later in a context where there are MULTIPLE github comments being left by token.
  *  This is a bit more future proofed than merely assuming the first comment by the GITHUB_TOKEN user is the one we want to update.
@@ -62,7 +69,7 @@ export async function commentOrUpdate(
     const authenticatedUsername = user.login;
     const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-    /** @type {import("@octokit/openapi-types").components["schemas"]["issue-comment"][]} */
+    /** @type {IssueComment[]} */
     const comments = await github.paginate(github.rest.issues.listComments, {
       owner,
       repo,
@@ -100,6 +107,6 @@ export async function commentOrUpdate(
       core.info(`Created new comment #${newComment.id}`);
     }
   } catch (/** @type {any} */ error) {
-    core.setFailed(`Failed to comment or update: ${error.message}`);
+    core.error(`Failed to comment or update: ${error.message}`);
   }
 }
