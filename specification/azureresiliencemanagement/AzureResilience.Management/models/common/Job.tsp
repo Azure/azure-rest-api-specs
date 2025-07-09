@@ -27,8 +27,14 @@ union JobStatus {
   @doc("The job has been completed successfully.")
   Completed: "Completed",
 
+  @doc("The job has been completed with warnings.")
+  CompletedWithWarnings: "CompletedWithWarnings",
+
   @doc("The job has failed.")
   Failed: "Failed",
+
+  @doc("The job skipped for the resource (resource not qualified or not applicable).")
+  Skipped: "Skipped",
 
   @doc("The job is in the process of being cancelled.")
   Cancelling: "Cancelling",
@@ -82,7 +88,7 @@ model JobTaskDetail {
   linkedJobIds?: armResourceIdentifier[];
 
   @OpenAPI.extension("x-ms-identifiers", #[])
-  @doc("List of sub-tasks associated with this job.")
+  @doc("User Comments.")
   @visibility(Lifecycle.Read)
   userComments?: JobUserComment[];
 
@@ -169,6 +175,11 @@ model BaseJobProperties {
 
   @doc("Additional information about the job.")
   jobExtendedInfo?: JobExtendedInfo;
+
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @doc("User Comments.")
+  @visibility(Lifecycle.Read)
+  userComments?: JobUserComment[];
 }
 
 // Define the main model

@@ -4,27 +4,19 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
-
-@versioned(Versions)
-namespace Microsoft.MessagingConnectors;
+namespace Microsoft.MessagingConnectors.Models.FetchSchema;
 
 @doc("Connector Schema Config")
 @discriminator("connectorType")
 model ConnectorSchemaConfig {
   @doc("connector Type.")
-  connectorType: ConnectorType;
+  connectorType: Models.Connector.ConnectorType;
 }
 
 @doc("SqlServerSource Schema Config")
 model SqlServerSourceConnectorSchemaConfig extends ConnectorSchemaConfig {
   @doc("SqlServerSource Connector")
-  connectorType: ConnectorType.SqlServerSource;
+  connectorType: Models.Connector.ConnectorType.SqlServerSource;
 
   @doc("Servername string")
   serverName: string;

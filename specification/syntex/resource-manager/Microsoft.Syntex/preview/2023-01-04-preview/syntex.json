@@ -781,6 +781,17 @@
             "update"
           ]
         },
+        "featuresToMigrate": {
+          "type": "array",
+          "description": "The list of features to be migrated to the accounts resource on update operations.",
+          "items": {
+            "type": "string",
+            "description": "The migrated feature associated with the accounts resource."
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
         "scope": {
           "type": "string",
           "description": "This signifies if the scope is tenant only or global."
@@ -838,6 +849,14 @@
               "items": {
                 "type": "string",
                 "description": "The feature associated with the accounts resource."
+              }
+            },
+            "featuresToMigrate": {
+              "type": "array",
+              "description": "The list of features to be migrated to the accounts resource.",
+              "items": {
+                "type": "string",
+                "description": "The migrated features associated with the accounts resource."
               }
             },
             "scopeMetaData": {
