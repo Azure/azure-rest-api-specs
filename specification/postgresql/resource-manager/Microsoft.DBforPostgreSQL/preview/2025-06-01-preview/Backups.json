@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
       "put": {
         "tags": [
-          "Backups"
+          "Backups Automatic And On Demand"
         ],
-        "operationId": "Backups_Create",
+        "operationId": "BackupsAutomaticAndOnDemand_Create",
         "x-ms-examples": {
           "Create an on demand backup of a flexible server.": {
             "$ref": "./examples/BackupCreate.json"
@@ -64,18 +64,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerBackup"
-            }
-          },
-          "201": {
-            "description": "Successfully created backup",
-            "schema": {
-              "$ref": "#/definitions/ServerBackup"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -98,9 +86,9 @@
       },
       "delete": {
         "tags": [
-          "Backups"
+          "Backups Automatic And On Demand"
         ],
-        "operationId": "Backups_Delete",
+        "operationId": "BackupsAutomaticAndOnDemand_Delete",
         "x-ms-examples": {
           "Delete an on demand backup, given its name.": {
             "$ref": "./examples/BackupDelete.json"
@@ -133,9 +121,6 @@
               }
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -150,9 +135,9 @@
       },
       "get": {
         "tags": [
-          "Backups"
+          "Backups Automatic And On Demand"
         ],
-        "operationId": "Backups_Get",
+        "operationId": "BackupsAutomaticAndOnDemand_Get",
         "x-ms-examples": {
           "Get an on demand backup, given its name.": {
             "$ref": "./examples/BackupGet.json"
@@ -195,9 +180,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups": {
       "get": {
         "tags": [
-          "Backups"
+          "Backups Automatic And On Demand"
         ],
-        "operationId": "Backups_ListByServer",
+        "operationId": "BackupsAutomaticAndOnDemand_ListByServer",
         "x-ms-examples": {
           "List all available backups of a flexible server.": {
             "$ref": "./examples/BackupListByServer.json"
@@ -294,7 +279,8 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"  
         }
       },
       "description": "List of backups."
@@ -309,6 +295,7 @@
       "description": "Name of the backup.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
+      "maxLength": 128,
       "x-ms-parameter-location": "method"
     }
   }

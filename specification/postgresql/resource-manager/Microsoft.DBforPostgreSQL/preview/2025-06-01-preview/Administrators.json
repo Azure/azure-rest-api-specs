@@ -39,7 +39,7 @@
         "tags": [
           "Administrators"
         ],
-        "operationId": "Administrators_Create",
+        "operationId": "Administrators_CreateOrUpdate",
         "x-ms-examples": {
           "Add a server administrator associated to a Microsoft Entra principal.": {
             "$ref": "./examples/AdministratorAdd.json"
@@ -67,24 +67,12 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActiveDirectoryAdministratorAdd"
+              "$ref": "#/definitions/AdministratorAdd"
             },
             "description": "Required parameters for adding a server administrator associated to a Microsoft Entra principal."
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ActiveDirectoryAdministrator"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ActiveDirectoryAdministrator"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -134,9 +122,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -144,9 +129,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -192,7 +174,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ActiveDirectoryAdministrator"
+              "$ref": "#/definitions/Administrator"
             }
           },
           "default": {
@@ -251,7 +233,7 @@
     }
   },
   "definitions": {
-    "ActiveDirectoryAdministratorAdd": {
+    "AdministratorAdd": {
       "type": "object",
       "properties": {
         "properties": {
@@ -356,7 +338,7 @@
       },
       "description": "Properties of a server administrator associated to a Microsoft Entra principal."
     },
-    "ActiveDirectoryAdministrator": {
+    "Administrator": {
       "type": "object",
       "properties": {
         "properties": {
@@ -381,13 +363,14 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActiveDirectoryAdministrator"
+            "$ref": "#/definitions/Administrator"
           },
           "description": "List of server administrators associated to Microsoft Entra principals."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "List of server administrators associated to Microsoft Entra principals."

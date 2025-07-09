@@ -37,15 +37,15 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
       "post": {
         "tags": [
-          "CheckNameAvailability"
+          "NameAvailability"
         ],
-        "operationId": "CheckNameAvailability_Execute",
+        "operationId": "NameAvailability_CheckGlobally",
         "x-ms-examples": {
-          "Check the validity and availability of the given name, to assign it to a new flexible server.": {
+          "Check the validity and availability of the given name, to assign it to a new flexible server or to use it as the base name of a new pair of virtual endpoints.": {
             "$ref": "./examples/CheckNameAvailability.json"
           }
         },
-        "description": "Checks the validity and availability of the given name, to assign it to a new flexible server.",
+        "description": "Checks the validity and availability of the given name, to assign it to a new flexible server or to use it as the base name of a new pair of virtual endpoints.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -60,7 +60,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
             },
-            "description": "Parameters required to check if a server name is valid and available to assign it to a new flexible server."
+            "description": "Parameters required to check if a given name is valid and available to assign it to a new flexible server or to use it as the base name of a new pair of virtual endpoints."
           }
         ],
         "responses": {
@@ -82,11 +82,11 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability": {
       "post": {
         "tags": [
-          "CheckNameAvailability"
+          "NameAvailability"
         ],
-        "operationId": "CheckNameAvailabilityWithLocation_Execute",
+        "operationId": "NameAvailability_CheckWithLocation",
         "x-ms-examples": {
-          "Check the validity and availability of the given server name in the given location, to assign it to a new flexible server": {
+          "Check the validity and availability of the given name, in the given location, to assign it to a new flexible server or to use it as the base name of a new pair of virtual endpoints": {
             "$ref": "./examples/CheckNameAvailabilityLocationBased.json"
           }
         },
@@ -108,7 +108,7 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
             },
-            "description": "Parameters required to check if server name is available."
+            "description": "Parameters required to check if a given name is valid and available to assign it to a new flexible server or to use it as the base name of a new pair of virtual endpoints."
           }
         ],
         "responses": {
@@ -134,16 +134,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the PostgreSQL flexible server.",
+          "description": "Name for which validity and availability was checked.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Type of the server.",
+          "description": "Type of resource. It can be \"Microsoft.DBforPostgreSQL/flexibleServers\" or \"Microsoft.DBforPostgreSQL/flexibleServers/virtualendpoints\".",
           "readOnly": true
         }
       },
-      "description": "Availability of a server name.",
+      "description": "Availability of a name.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"

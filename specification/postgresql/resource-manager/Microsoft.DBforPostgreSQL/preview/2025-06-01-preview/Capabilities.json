@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
       "get": {
         "tags": [
-          "LocationBasedCapabilities"
+          "CapabilitiesByLocation"
         ],
-        "operationId": "LocationBasedCapabilities_Execute",
+        "operationId": "CapabilitiesByLocation_Get",
         "x-ms-examples": {
           "List the capabilities available in a given location for a specific subscription.": {
             "$ref": "./examples/CapabilitiesByLocation.json"
@@ -79,9 +79,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/capabilities": {
       "get": {
         "tags": [
-          "FlexibleServerCapabilities"
+          "CapabilitiesByServer"
         ],
-        "operationId": "ServerCapabilities_List",
+        "operationId": "CapabilitiesByServer_Get",
         "x-ms-examples": {
           "List the capabilities available for a given flexible server.": {
             "$ref": "./examples/ServerCapabilities.json"
@@ -430,7 +430,7 @@
         }
       ]
     },
-    "FlexibleServerEditionCapability": {
+    "ServerEditionCapability": {
       "type": "object",
       "allOf": [
         {
@@ -473,7 +473,7 @@
       },
       "description": "Capabilities in terms of compute tier."
     },
-    "FlexibleServerCapability": {
+    "Capability": {
       "type": "object",
       "allOf": [
         {
@@ -488,7 +488,7 @@
         "supportedServerEditions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlexibleServerEditionCapability"
+            "$ref": "#/definitions/ServerEditionCapability"
           },
           "x-ms-identifiers": [
             "name"
@@ -630,7 +630,7 @@
           "description": "List of supported capabilities.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FlexibleServerCapability"
+            "$ref": "#/definitions/Capability"
           },
           "x-ms-identifiers": [
             "name"
@@ -640,7 +640,7 @@
         "nextLink": {
           "description": "Link to retrieve next page of results.",
           "type": "string",
-          "readOnly": true
+          "format": "uri"
         }
       },
       "description": "Capability for the Azure Database for PostgreSQL flexible server."
