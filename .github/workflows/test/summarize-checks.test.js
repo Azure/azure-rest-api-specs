@@ -2,13 +2,15 @@ import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
+  handleLabeledEvent
 } from "../src/summarize-checks/summarize-checks.js";
-import { createMockCore } from "./mocks.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
+const mockGithub = createMockGithub();
 
-describe("summarizeChecksImpl", () => {
+describe("Summarize Checks Tests", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
       const repo = "azure-rest-api-specs";
@@ -509,6 +511,132 @@ describe("summarizeChecksImpl", () => {
         ).resolves.not.toThrow();
       },
       600000,
+    );
+  });
+
+  describe("label add and remove", () => {
+    const testCases = [
+      {
+        description: "labeled: ARMChangesRequested with WaitForARMFeedback present",
+        eventName: "labeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["WaitForARMFeedback", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      },
+      {
+        description: "labeled: ARMChangesRequested without WaitForARMFeedback",
+        eventName: "labeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "labeled: ARMSignedOff with both labels present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"]
+      },
+      {
+        description: "labeled: ARMSignedOff with only WaitForARMFeedback present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["WaitForARMFeedback", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
+      },
+      {
+        description: "labeled: ARMSignedOff with only ARMChangesRequested present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["ARMChangesRequested", "other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: ["ARMChangesRequested"]
+      },
+      {
+        description: "labeled: ARMSignedOff with neither label present",
+        eventName: "labeled",
+        changedLabel: "ARMSignedOff",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "unlabeled: ARMChangesRequested with WaitForARMFeedback present (buggy case)",
+        eventName: "unlabeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["WaitForARMFeedback", "other-label"],
+        expectedLabelsToAdd: ["WaitForARMFeedback"],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "unlabeled: ARMChangesRequested without WaitForARMFeedback",
+        eventName: "unlabeled",
+        changedLabel: "ARMChangesRequested",
+        existingLabels: ["other-label"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "labeled: other label should have no effect",
+        eventName: "labeled",
+        changedLabel: "SomeOtherLabel",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      },
+      {
+        description: "unlabeled: other label should have no effect",
+        eventName: "unlabeled",
+        changedLabel: "SomeOtherLabel",
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
+        expectedLabelsToAdd: [],
+        expectedLabelsToRemove: []
+      }
+    ];
+
+    it.each(testCases)(
+      "$description",
+      async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+        const repo = "azure-rest-api-specs";
+        const owner = "Azure";
+        const mockContext = {
+          repo: {
+            owner: owner,
+            repo: repo,
+          },
+          payload: {
+            action: eventName,
+            pull_request: {
+              number: 1,
+              head: {
+                sha: "abc123",
+              },
+            },
+            label: {
+              name: changedLabel
+            }
+          },
+          eventName: eventName,
+        };
+
+        const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
+          mockGithub,
+          mockContext,
+          mockCore,
+          owner,
+          repo,
+          1,
+          eventName,
+          existingLabels,
+        );
+
+        expect(labelsToAdd).toEqual(expectedLabelsToAdd);
+        expect(labelsToRemove).toEqual(expectedLabelsToRemove);
+      }
     );
   });
 });
