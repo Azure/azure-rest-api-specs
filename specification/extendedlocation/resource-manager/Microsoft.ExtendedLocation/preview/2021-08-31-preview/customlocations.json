@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-08-31-preview",
     "title": "customLocations",
-    "description": "The customLocations Rest API spec."
+    "version": "2021-08-31-preview",
+    "description": "The customLocations Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,7 +30,7 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -33,160 +38,177 @@
       }
     }
   },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CustomLocations"
+    },
+    {
+      "name": "ResourceSyncRules"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.ExtendedLocation/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
-          "customLocations"
+          "Operations"
         ],
-        "operationId": "CustomLocations_ListOperations",
         "description": "Lists all available Custom Locations operations.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Operation details.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocationOperationsList"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Custom Locations operations": {
             "$ref": "./examples/CustomLocationsListOperations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ExtendedLocation/customLocations": {
       "get": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_ListBySubscription",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Gets a list of Custom Locations in a subscription.",
         "description": "Gets a list of Custom Locations in the specified subscription. The operation returns properties of each Custom Location",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocationListResult"
+              "$ref": "#/definitions/CustomLocationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Custom Locations by subscription": {
             "$ref": "./examples/CustomLocationsListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations": {
       "get": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_ListByResourceGroup",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Gets a list of Custom Locations in the specified subscription and resource group.",
         "description": "Gets a list of Custom Locations in the specified subscription and resource group. The operation returns properties of each Custom Location.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocationListResult"
+              "$ref": "#/definitions/CustomLocationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Custom Locations by resource group": {
             "$ref": "./examples/CustomLocationsListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}": {
       "get": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_Get",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Gets a Custom Location.",
         "description": "Gets the details of the customLocation with a specified resource group and name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocation"
+              "$ref": "#/definitions/CustomLocation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -197,152 +219,132 @@
         }
       },
       "put": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_CreateOrUpdate",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Creates or updates a Custom Location.",
         "description": "Creates or updates a Custom Location in the specified Subscription and Resource Group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters supplied to create or update a Custom Location.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/customLocation"
-            },
-            "description": "Parameters supplied to create or update a Custom Location."
+              "$ref": "#/definitions/CustomLocation"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Resource 'CustomLocation' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/customLocation"
+              "$ref": "#/definitions/CustomLocation"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Resource 'CustomLocation' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/customLocation"
+              "$ref": "#/definitions/CustomLocation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create/Update Custom Location": {
             "$ref": "./examples/CustomLocationsCreate_Update.json"
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "customLocations"
-        ],
-        "operationId": "CustomLocations_Delete",
-        "summary": "Deletes a Custom Location.",
-        "description": "Deletes the Custom Location with the specified Resource Name, Resource Group, and Subscription Id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background."
-          },
-          "204": {
-            "description": "NoContent. The response indicates the customLocation resource is already deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-examples": {
-          "Delete Custom Location": {
-            "$ref": "./examples/CustomLocationsDelete.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_Update",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Updates a Custom Location.",
         "description": "Updates a Custom Location with the specified Resource Name in the specified Resource Group and Subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "The updatable fields of an existing Custom Location.",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/patchableCustomLocations"
+              "$ref": "#/definitions/PatchableCustomLocations"
             },
-            "description": "The updatable fields of an existing Custom Location."
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocation"
+              "$ref": "#/definitions/CustomLocation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -351,99 +353,176 @@
             "$ref": "./examples/CustomLocationsPatch.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "CustomLocations_Delete",
+        "tags": [
+          "CustomLocations"
+        ],
+        "summary": "Deletes a Custom Location.",
+        "description": "Deletes the Custom Location with the specified Resource Name, Resource Group, and Subscription Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Custom Location": {
+            "$ref": "./examples/CustomLocationsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/enabledResourceTypes": {
       "get": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_ListEnabledResourceTypes",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Gets the list of Enabled Resource Types.",
         "description": "Gets the list of the Enabled Resource Types.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/EnabledResourceTypesListResult"
+              "$ref": "#/definitions/EnabledResourceTypeListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get Custom Location": {
             "$ref": "./examples/CustomLocationsListEnabledResourceTypes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/findTargetResourceGroup": {
       "post": {
-        "tags": [
-          "customLocations"
-        ],
         "operationId": "CustomLocations_FindTargetResourceGroup",
+        "tags": [
+          "CustomLocations"
+        ],
         "summary": "Gets matching target resource group for resource sync.",
         "description": "Returns the target resource group associated with the resource sync rules of the Custom Location that match the rules passed in with the Find Target Resource Group Request.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters of the find target resource group request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/customLocationFindTargetResourceGroupProperties"
-            },
-            "description": "Parameters of the find target resource group request."
+              "$ref": "#/definitions/CustomLocationFindTargetResourceGroupProperties"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/customLocationFindTargetResourceGroupResult"
+              "$ref": "#/definitions/CustomLocationFindTargetResourceGroupResult"
             }
           },
           "204": {
-            "description": "NoContent. The response indicates there was no matching target resource group for resource sync."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -456,86 +535,107 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/resourceSyncRules": {
       "get": {
-        "tags": [
-          "resourceSyncRules"
-        ],
         "operationId": "ResourceSyncRules_ListByCustomLocationID",
+        "tags": [
+          "ResourceSyncRules"
+        ],
         "summary": "Lists all Resource Sync Rules in a Custom Location.",
         "description": "Gets a list of Resource Sync Rules in the specified subscription. The operation returns properties of each Resource Sync Rule",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/resourceSyncRuleListResult"
+              "$ref": "#/definitions/ResourceSyncRuleListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Resource Sync Rules by subscription": {
             "$ref": "./examples/ResourceSyncRulesListByCustomLocationID.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExtendedLocation/customLocations/{resourceName}/resourceSyncRules/{childResourceName}": {
       "get": {
-        "tags": [
-          "resourceSyncRules"
-        ],
         "operationId": "ResourceSyncRules_Get",
+        "tags": [
+          "ResourceSyncRules"
+        ],
         "summary": "Gets a Resource Sync Rule.",
         "description": "Gets the details of the resourceSyncRule with a specified resource group, subscription id Custom Location resource name and Resource Sync Rule name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/ChildResourceNameParameter"
+            "name": "childResourceName",
+            "in": "path",
+            "description": "Resource Sync Rule name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/resourceSyncRule"
+              "$ref": "#/definitions/ResourceSyncRule"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -546,103 +646,210 @@
         }
       },
       "put": {
-        "tags": [
-          "resourceSyncRules"
-        ],
         "operationId": "ResourceSyncRules_CreateOrUpdate",
+        "tags": [
+          "ResourceSyncRules"
+        ],
         "summary": "Creates or updates a Resource Sync Rule.",
         "description": "Creates or updates a Resource Sync Rule in the parent Custom Location, Subscription Id and Resource Group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/ChildResourceNameParameter"
+            "name": "childResourceName",
+            "in": "path",
+            "description": "Resource Sync Rule name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters supplied to create or update a Resource Sync Rule.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/resourceSyncRule"
-            },
-            "description": "Parameters supplied to create or update a Resource Sync Rule."
+              "$ref": "#/definitions/ResourceSyncRule"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Resource 'ResourceSyncRule' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/resourceSyncRule"
+              "$ref": "#/definitions/ResourceSyncRule"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Resource 'ResourceSyncRule' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/resourceSyncRule"
+              "$ref": "#/definitions/ResourceSyncRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create/Update Resource Sync Rule": {
             "$ref": "./examples/ResourceSyncRulesCreate_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
-      "delete": {
+      "patch": {
+        "operationId": "ResourceSyncRules_Update",
         "tags": [
-          "resourceSyncRules"
+          "ResourceSyncRules"
         ],
-        "operationId": "ResourceSyncRules_Delete",
-        "summary": "Deletes a Resource Sync Rule.",
-        "description": "Deletes the Resource Sync Rule with the specified Resource Sync Rule Name, Custom Location Resource Name, Resource Group, and Subscription Id.",
+        "summary": "Updates a Resource Sync Rule.",
+        "description": "Updates a Resource Sync Rule with the specified Resource Sync Rule name in the specified Resource Group, Subscription and Custom Location name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
-            "$ref": "#/parameters/ChildResourceNameParameter"
+            "name": "childResourceName",
+            "in": "path",
+            "description": "Resource Sync Rule name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The updatable fields of an existing Resource Sync Rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableResourceSyncRule"
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. The response indicates the delete operation is successful."
-          },
-          "204": {
-            "description": "NoContent. The response indicates the resourceSyncRule resource is already deleted."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSyncRule"
+            }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Resource Sync Rule": {
+            "$ref": "./examples/ResourceSyncRulesPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ResourceSyncRules_Delete",
+        "tags": [
+          "ResourceSyncRules"
+        ],
+        "summary": "Deletes a Resource Sync Rule.",
+        "description": "Deletes the Resource Sync Rule with the specified Resource Sync Rule Name, Custom Location Resource Name, Resource Group, and Subscription Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Custom Locations name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "childResourceName",
+            "in": "path",
+            "description": "Resource Sync Rule name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -651,106 +858,141 @@
             "$ref": "./examples/ResourceSyncRulesDelete.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "resourceSyncRules"
-        ],
-        "operationId": "ResourceSyncRules_Update",
-        "summary": "Updates a Resource Sync Rule.",
-        "description": "Updates a Resource Sync Rule with the specified Resource Sync Rule name in the specified Resource Group, Subscription and Custom Location name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ChildResourceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/patchableResourceSyncRule"
-            },
-            "description": "The updatable fields of an existing Resource Sync Rule."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/resourceSyncRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-examples": {
-          "Update Resource Sync Rule": {
-            "$ref": "./examples/ResourceSyncRulesPatch.json"
-          }
-        }
       }
     }
   },
-  "parameters": {
-    "ChildResourceNameParameter": {
-      "name": "childResourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "Resource Sync Rule name."
-    },
-    "EnabledResourceTypeNameParameter": {
-      "name": "enabledResourceTypeName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "Custom Locations Enabled Resource Type name."
-    },
-    "ResourceNameParameter": {
-      "name": "resourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 63,
-      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
-      "description": "Custom Locations name."
-    }
-  },
   "definitions": {
-    "EnabledResourceType": {
-      "description": "EnabledResourceType definition.",
+    "CustomLocation": {
       "type": "object",
+      "description": "Custom Locations definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomLocationProperties",
+          "description": "The set of properties specific to a Custom Location",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CustomLocationFindTargetResourceGroupProperties": {
+      "type": "object",
+      "description": "The Find Target Resource Group operation request.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "description": "Labels of the custom resource, this is a map of {key,value} pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomLocationFindTargetResourceGroupResult": {
+      "type": "object",
+      "description": "The Find Target Resource Group operation response.",
+      "properties": {
+        "matchedResourceSyncRule": {
+          "type": "string",
+          "description": "The matching resource sync rule is the particular resource sync rule that matched the match expressions and labels and had lowest priority. This is the rule responsible for mapping the target resource to the target resource group.",
+          "readOnly": true
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The target resource group of matching resource sync rule. The labels from the request will be used to find out matching resource sync rule against the selector property of the resource sync rule. The one with highest priority will be returned if there are multiple matching rules.",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomLocationListResult": {
+      "type": "object",
+      "description": "The response of a CustomLocation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CustomLocation items on this page",
+          "items": {
+            "$ref": "#/definitions/CustomLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomLocationProperties": {
+      "type": "object",
+      "description": "Properties for a custom location.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/CustomLocationPropertiesAuthentication",
+          "description": "This is optional input that contains the authentication that should be used to generate the namespace."
+        },
+        "clusterExtensionIds": {
+          "type": "array",
+          "description": "Contains the reference to the add-on that contains charts to deploy CRDs and operators.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the Custom Locations location."
+        },
+        "hostResourceId": {
+          "type": "string",
+          "description": "Connected Cluster or AKS Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions."
+        },
+        "hostType": {
+          "$ref": "#/definitions/HostType",
+          "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...)."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace that will be created on the specified cluster."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning State for the Custom Location."
+        }
+      }
+    },
+    "CustomLocationPropertiesAuthentication": {
+      "type": "object",
+      "description": "This is optional input that contains the authentication that should be used to generate the namespace.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the Custom Locations authentication"
+        },
+        "value": {
+          "type": "string",
+          "description": "The kubeconfig value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "EnabledResourceType": {
+      "type": "object",
+      "description": "EnabledResourceType definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnabledResourceTypeProperties",
@@ -758,49 +1000,55 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "Metadata pertaining to creation and last modification of the resource",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "EnabledResourceTypeProperties": {
-      "description": "Properties for EnabledResourceType of a custom location.",
+    "EnabledResourceTypeListResult": {
       "type": "object",
+      "description": "The response of a EnabledResourceType list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EnabledResourceType items on this page",
+          "items": {
+            "$ref": "#/definitions/EnabledResourceType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnabledResourceTypeProperties": {
+      "type": "object",
+      "description": "Properties for EnabledResourceType of a custom location.",
       "properties": {
         "clusterExtensionId": {
-          "description": "Cluster Extension ID",
-          "type": "string"
+          "type": "string",
+          "description": "Cluster Extension ID"
         },
         "extensionType": {
-          "description": "Cluster Extension Type",
-          "type": "string"
+          "type": "string",
+          "description": "Cluster Extension Type"
         },
         "typesMetadata": {
-          "description": "Metadata of the Resource Type",
           "type": "array",
+          "description": "Metadata of the Resource Type",
           "items": {
-            "description": "Metadata of the Resource Type.",
-            "type": "object",
-            "properties": {
-              "apiVersion": {
-                "description": "Api Version of Resource Type",
-                "type": "string"
-              },
-              "resourceProviderNamespace": {
-                "description": "Resource Provider Namespace of Resource Type",
-                "type": "string"
-              },
-              "resourceType": {
-                "description": "Resource Type",
-                "type": "string"
-              }
-            }
+            "$ref": "#/definitions/EnabledResourceTypePropertiesTypesMetadataItem"
           },
           "x-ms-identifiers": [
             "apiVersion",
@@ -810,293 +1058,76 @@
         }
       }
     },
-    "EnabledResourceTypesListResult": {
-      "description": "List of EnabledResourceTypes definition.",
+    "EnabledResourceTypePropertiesTypesMetadataItem": {
       "type": "object",
+      "description": "Metadata of the Resource Type.",
       "properties": {
-        "nextLink": {
-          "description": "The URL to use for getting the next set of results.",
+        "apiVersion": {
           "type": "string",
-          "readOnly": true
+          "description": "Api Version of Resource Type"
         },
-        "value": {
-          "description": "The list of EnabledResourceTypes available for a customLocation.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/EnabledResourceType"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+        "resourceProviderNamespace": {
+          "type": "string",
+          "description": "Resource Provider Namespace of Resource Type"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type"
         }
+      }
+    },
+    "HostType": {
+      "type": "string",
+      "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
+      "enum": [
+        "Kubernetes"
+      ],
+      "x-ms-enum": {
+        "name": "HostType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Kubernetes",
+            "value": "Kubernetes"
+          }
+        ]
       }
     },
     "Identity": {
-      "description": "Identity for the resource.",
       "type": "object",
+      "description": "Identity for the resource.",
       "properties": {
         "principalId": {
-          "description": "The principal ID of resource identity.",
           "type": "string",
+          "description": "The principal ID of resource identity.",
           "readOnly": true
         },
         "tenantId": {
-          "description": "The tenant ID of resource.",
           "type": "string",
+          "description": "The tenant ID of resource.",
           "readOnly": true
         },
         "type": {
-          "description": "The identity type.",
-          "type": "string",
-          "enum": [
-            "SystemAssigned",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity type."
         }
       }
     },
-    "customLocation": {
-      "description": "Custom Locations definition.",
+    "MatchExpressionsProperties": {
       "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Identity for the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/customLocationProperties",
-          "description": "The set of properties specific to a Custom Location",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "customLocationFindTargetResourceGroupProperties": {
-      "description": "The Find Target Resource Group operation request.",
-      "type": "object",
-      "properties": {
-        "labels": {
-          "description": "Labels of the custom resource, this is a map of {key,value} pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "customLocationFindTargetResourceGroupResult": {
-      "description": "The Find Target Resource Group operation response.",
-      "type": "object",
-      "properties": {
-        "matchedResourceSyncRule": {
-          "description": "The matching resource sync rule is the particular resource sync rule that matched the match expressions and labels and had lowest priority. This is the rule responsible for mapping the target resource to the target resource group.",
-          "type": "string",
-          "readOnly": true
-        },
-        "targetResourceGroup": {
-          "description": "The target resource group of matching resource sync rule. The labels from the request will be used to find out matching resource sync rule against the selector property of the resource sync rule. The one with highest priority will be returned if there are multiple matching rules.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "customLocationListResult": {
-      "description": "The List Custom Locations operation response.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The URL to use for getting the next set of results.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "The list of Custom Locations.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/customLocation"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        }
-      }
-    },
-    "customLocationOperation": {
-      "description": "Custom Locations operation.",
-      "type": "object",
-      "properties": {
-        "display": {
-          "$ref": "#/definitions/customLocationOperationValueDisplay",
-          "description": "Describes the properties of a Custom Locations Operation Value Display.",
-          "x-ms-client-flatten": true
-        },
-        "isDataAction": {
-          "description": "Is this Operation a data plane operation",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the compute operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "origin": {
-          "description": "The origin of the compute operation.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "customLocationOperationValueDisplay": {
-      "description": "Describes the properties of a Custom Locations Operation Value Display.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The description of the operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "operation": {
-          "description": "The display name of the compute operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "provider": {
-          "description": "The resource provider for the operation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resource": {
-          "description": "The display name of the resource the operation applies to.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "customLocationOperationsList": {
-      "description": "Lists of Custom Locations operations.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "Next page of operations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of customLocationOperation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/customLocationOperation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "customLocationProperties": {
-      "description": "Properties for a custom location.",
-      "type": "object",
-      "properties": {
-        "authentication": {
-          "description": "This is optional input that contains the authentication that should be used to generate the namespace.",
-          "type": "object",
-          "properties": {
-            "type": {
-              "description": "The type of the Custom Locations authentication",
-              "type": "string"
-            },
-            "value": {
-              "description": "The kubeconfig value.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "update"
-              ],
-              "x-ms-secret": true
-            }
-          }
-        },
-        "clusterExtensionIds": {
-          "description": "Contains the reference to the add-on that contains charts to deploy CRDs and operators.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        },
-        "displayName": {
-          "description": "Display name for the Custom Locations location.",
-          "type": "string"
-        },
-        "hostResourceId": {
-          "description": "Connected Cluster or AKS Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions.",
-          "type": "string"
-        },
-        "hostType": {
-          "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
-          "type": "string",
-          "enum": [
-            "Kubernetes"
-          ],
-          "x-ms-enum": {
-            "name": "HostType",
-            "modelAsString": true
-          }
-        },
-        "namespace": {
-          "description": "Kubernetes namespace that will be created on the specified cluster.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "Provisioning State for the Custom Location.",
-          "type": "string"
-        }
-      }
-    },
-    "matchExpressionsList": {
       "description": "Resource Sync Rules matchExpression property definition.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/matchExpressionsProperties",
-        "description": "The list of matchExpressions."
-      },
-      "x-ms-identifiers": []
-    },
-    "matchExpressionsProperties": {
-      "description": "Resource Sync Rules matchExpression property definition.",
-      "type": "object",
       "properties": {
         "key": {
-          "description": "Key is the label key that the selector applies to.",
-          "type": "string"
+          "type": "string",
+          "description": "Key is the label key that the selector applies to."
         },
         "operator": {
-          "description": "The Operator field represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.",
-          "type": "string"
+          "type": "string",
+          "description": "The Operator field represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
         },
         "values": {
-          "description": "The label value",
           "type": "array",
+          "description": "The label value",
           "items": {
             "type": "string"
           },
@@ -1104,130 +1135,151 @@
         }
       }
     },
-    "patchableCustomLocations": {
-      "description": "The Custom Locations patchable resource definition.",
+    "PatchableCustomLocations": {
       "type": "object",
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
+      "description": "The Custom Locations patchable resource definition.",
       "properties": {
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Identity for the resource."
         },
         "properties": {
-          "$ref": "#/definitions/customLocationProperties",
+          "$ref": "#/definitions/CustomLocationProperties",
           "description": "The Custom Locations patchable properties.",
           "x-ms-client-flatten": true
         },
         "tags": {
-          "description": "Resource tags",
           "type": "object",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }
         }
       }
     },
-    "patchableResourceSyncRule": {
-      "description": "The Resource Sync Rules patchable resource definition.",
+    "PatchableResourceSyncRule": {
       "type": "object",
-      "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
+      "description": "The Resource Sync Rules patchable resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/resourceSyncRuleProperties",
+          "$ref": "#/definitions/ResourceSyncRuleProperties",
           "description": "The Resource Sync Rules patchable properties.",
           "x-ms-client-flatten": true
         },
         "tags": {
-          "description": "Resource tags",
           "type": "object",
+          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }
         }
       }
     },
-    "resourceSyncRule": {
-      "description": "Resource Sync Rules definition.",
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "SystemAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "None",
+            "value": "None"
+          }
+        ]
+      }
+    },
+    "ResourceSyncRule": {
       "type": "object",
+      "description": "Resource Sync Rules definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/resourceSyncRuleProperties",
+          "$ref": "#/definitions/ResourceSyncRuleProperties",
           "description": "The set of properties specific to a Resource Sync Rule",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource",
-          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "resourceSyncRuleListResult": {
-      "description": "The List Resource Sync Rules operation response.",
+    "ResourceSyncRuleListResult": {
       "type": "object",
+      "description": "The response of a ResourceSyncRule list operation.",
       "properties": {
-        "nextLink": {
-          "description": "The URL to use for getting the next set of results.",
-          "type": "string",
-          "readOnly": true
-        },
         "value": {
-          "description": "The list of Resource Sync Rules.",
           "type": "array",
-          "readOnly": true,
+          "description": "The ResourceSyncRule items on this page",
           "items": {
-            "$ref": "#/definitions/resourceSyncRule"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+            "$ref": "#/definitions/ResourceSyncRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
-    "resourceSyncRuleProperties": {
-      "description": "Properties for a resource sync rule. For an unmapped custom resource, its labels will be used to find out matching resource sync rules using the selector property of the resource sync rule. If this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule.",
+    "ResourceSyncRuleProperties": {
       "type": "object",
+      "description": "Properties for a resource sync rule. For an unmapped custom resource, its labels will be used to find out matching resource sync rules using the selector property of the resource sync rule. If this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule.",
       "properties": {
         "priority": {
-          "description": "Priority represents a priority of the Resource Sync Rule",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Priority represents a priority of the Resource Sync Rule"
         },
         "provisioningState": {
-          "description": "Provisioning State for the Resource Sync Rule.",
           "type": "string",
+          "description": "Provisioning State for the Resource Sync Rule.",
           "readOnly": true
         },
         "selector": {
-          "description": "A label selector is composed of two parts, matchLabels and matchExpressions. The first part, matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'. The second part, matchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist. All of the requirements, from both matchLabels and matchExpressions must all be satisfied in order to match.",
-          "type": "object",
-          "properties": {
-            "matchExpressions": {
-              "$ref": "#/definitions/matchExpressionsList",
-              "description": "MatchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist.",
-              "x-ms-client-flatten": true
-            },
-            "matchLabels": {
-              "description": "MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          }
+          "$ref": "#/definitions/ResourceSyncRulePropertiesSelector",
+          "description": "A label selector is composed of two parts, matchLabels and matchExpressions. The first part, matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'. The second part, matchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist. All of the requirements, from both matchLabels and matchExpressions must all be satisfied in order to match."
         },
         "targetResourceGroup": {
-          "description": "For an unmapped custom resource, its labels will be used to find matching resource sync rules. If this resource sync rule is one of the matching rules with highest priority, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this write permission will be validated when creating the resource sync rule.",
-          "type": "string"
+          "type": "string",
+          "description": "For an unmapped custom resource, its labels will be used to find matching resource sync rules. If this resource sync rule is one of the matching rules with highest priority, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this write permission will be validated when creating the resource sync rule."
+        }
+      }
+    },
+    "ResourceSyncRulePropertiesSelector": {
+      "type": "object",
+      "description": "A label selector is composed of two parts, matchLabels and matchExpressions. The first part, matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'. The second part, matchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist. All of the requirements, from both matchLabels and matchExpressions must all be satisfied in order to match.",
+      "properties": {
+        "matchExpressions": {
+          "type": "array",
+          "description": "MatchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist.",
+          "items": {
+            "$ref": "#/definitions/MatchExpressionsProperties"
+          },
+          "x-ms-client-flatten": true,
+          "x-ms-identifiers": []
+        },
+        "matchLabels": {
+          "type": "object",
+          "description": "MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
-  }
+  },
+  "parameters": {}
 }
