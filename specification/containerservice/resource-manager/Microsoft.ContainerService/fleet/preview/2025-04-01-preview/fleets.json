@@ -3464,8 +3464,17 @@
       ]
     },
     "GateTargetId": {
-      "$ref": "#/definitions/UpdateRunResourceId",
-      "x-nullable": false
+      "type": "object",
+      "description": "The resource id of staged rollout that the Gate is targeting.",
+      "properties": {
+        "updateRun": {
+          "$ref": "#/definitions/UpdateRunResourceId",
+          "description": "The Gate is controlling the staged rollout of an Update Run."
+        }
+      },
+      "required": [
+        "updateRun"
+      ]
     },
     "GateType": {
       "type": "string",
