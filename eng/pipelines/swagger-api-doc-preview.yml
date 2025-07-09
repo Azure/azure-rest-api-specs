@@ -15,12 +15,21 @@ jobs:
     variables:
       - template: /eng/pipelines/templates/variables/globals.yml
       - template: /eng/pipelines/templates/variables/image.yml
+      
       - name: BranchName
         value: preview/$(Build.Repository.Name)/pr/$(System.PullRequest.PullRequestNumber)/build/$(Build.BuildId)/attempt/$(System.JobAttempt)
+      
+      - name: CurrentBuildUrl
+        value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
     steps:
-      - pwsh: gh auth status --show-token
-        displayName: Show token scope
+      - bash: |
+          gh api repos/Azure/$(Build.Repository.Name)/statuses/$(Build.SourceVersion) \
+            -f state='pending' \
+            -f target_url='$(CurrentBuildUrl)' \
+            -f description='Starting build' \
+            -f context='Swagger ApiDocPreview'
+        displayName: 'Set PR status to pending'
         env:
           GH_TOKEN: $(azuresdk-github-pat)
 
