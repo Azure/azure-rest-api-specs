@@ -25,7 +25,7 @@ jobs:
     steps:
       - bash: |
           echo "PR: $(System.PullRequest.SourceCommitId)"
-          gh api repos/Azure/$(Build.Repository.Name)/statuses/$(System.PullRequest.SourceCommitId) \
+          gh api repos/$(Build.Repository.Name)/statuses/$(System.PullRequest.SourceCommitId) \
             -f state='pending' \
             -f target_url='$(CurrentBuildUrl)' \
             -f description='Starting build' \
