@@ -39,7 +39,9 @@ interface CustomDomains {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "For backward compatibility"
   @operationId("SignalRCustomDomains_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomDomain,
     Response = ArmResourceCreatedResponse<CustomDomain>
