@@ -2637,6 +2637,14 @@
         "autoUpgradeProfileStatus": {
           "$ref": "#/definitions/AutoUpgradeProfileStatus",
           "description": "The status of the auto upgrade profile."
+        },
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "  This is the target Kubernetes version for auto-upgrade. The format must be `{major version}.{minor version}`. For example, \"1.30\".\n  By default, this is empty.\n  If upgrade channel is set to TargetKubernetesVersion, this field must not be empty.\n  If upgrade channel is Rapid, Stable or NodeImage, this field must be empty."
+        },
+        "longTermSupport": {
+          "type": "boolean",
+          "description": "  If upgrade channel is not TargetKubernetesVersion, this field must be False.\n  If set to True: Fleet auto upgrade will continue generate update runs for patches of minor versions earlier than N-2 \n  (where N is the latest supported minor version) if those minor versions support Long-Term Support (LTS).\n  By default, this is set to False.\n  For more information on AKS LTS, please see https://learn.microsoft.com/en-us/azure/aks/long-term-support"
         }
       },
       "required": [
@@ -4296,7 +4304,8 @@
       "enum": [
         "Stable",
         "Rapid",
-        "NodeImage"
+        "NodeImage",
+        "TargetKubernetesVersion"
       ],
       "x-ms-enum": {
         "name": "UpgradeChannel",
@@ -4316,6 +4325,11 @@
             "name": "NodeImage",
             "value": "NodeImage",
             "description": "Upgrade node image version of the clusters."
+          },
+          {
+            "name": "TargetKubernetesVersion",
+            "value": "TargetKubernetesVersion",
+            "description": "  Upgrades the clusters Kubernetes version to the latest supported patch version of the specified target Kubernetes version.\n  For information on the behavior of update run for Kubernetes version upgrade, \n  see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal"
           }
         ]
       }
