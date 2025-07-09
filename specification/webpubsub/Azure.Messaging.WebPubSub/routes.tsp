@@ -14,7 +14,6 @@ interface HealthApiOperationGroup {
    * Get service health status.
    */
   @summary("Get service health status.")
-  @operationId("HealthApi_GetServiceStatus")
   @route("/api/health")
   @head
   getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
@@ -25,7 +24,6 @@ interface WebPubSubOperationGroup {
    * Add filtered connections to multiple groups.
    */
   @summary("Add filtered connections to multiple groups.")
-  @operationId("WebPubSub_AddConnectionsToGroups")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
   addConnectionsToGroups is Azure.Core.Foundations.Operation<
@@ -51,7 +49,6 @@ interface WebPubSubOperationGroup {
    * Close the connections in the hub.
    */
   @summary("Close the connections in the hub.")
-  @operationId("WebPubSub_CloseAllConnections")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
   closeAllConnections is Azure.Core.Foundations.Operation<
@@ -67,7 +64,7 @@ interface WebPubSubOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections in the hub.
        */
-      @query(#{ name: "excluded", explode: true })
+      @query("excluded")
       excluded?: string[];
 
       /**
@@ -83,7 +80,6 @@ interface WebPubSubOperationGroup {
    * Generate token for the client to connect Azure Web PubSub service.
    */
   @summary("Generate token for the client to connect Azure Web PubSub service.")
-  @operationId("WebPubSub_GenerateClientToken")
   @route("/api/hubs/{hub}/:generateToken")
   @post
   generateClientToken is Azure.Core.Foundations.Operation<
@@ -105,7 +101,7 @@ interface WebPubSubOperationGroup {
       /**
        * Roles that the connection with the generated token will have.
        */
-      @query(#{ name: "role", explode: true })
+      @query("role")
       role?: string[];
 
       /**
@@ -118,7 +114,7 @@ interface WebPubSubOperationGroup {
       /**
        * Groups that the connection will join when it connects.
        */
-      @query(#{ name: "group", explode: true })
+      @query("group")
       group?: string[];
 
       /**
@@ -139,7 +135,6 @@ interface WebPubSubOperationGroup {
    * Remove filtered connections from multiple groups.
    */
   @summary("Remove filtered connections from multiple groups.")
-  @operationId("WebPubSub_RemoveConnectionsFromGroups")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
   removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
@@ -165,7 +160,6 @@ interface WebPubSubOperationGroup {
    * Broadcast content inside request body to all the connected client connections.
    */
   @summary("Broadcast content inside request body to all the connected client connections.")
-  @operationId("WebPubSub_SendToAll")
   @route("/api/hubs/{hub}/:send")
   @post
   sendToAll is Azure.Core.Foundations.Operation<
@@ -181,7 +175,7 @@ interface WebPubSubOperationGroup {
       /**
        * Excluded connection Ids.
        */
-      @query(#{ name: "excluded", explode: true })
+      @query("excluded")
       excluded?: string[];
 
       /**
@@ -221,7 +215,6 @@ interface WebPubSubOperationGroup {
    * Close the client connection.
    */
   @summary("Close the client connection.")
-  @operationId("WebPubSub_CloseConnection")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
   closeConnection is Azure.Core.Foundations.Operation<
@@ -254,7 +247,6 @@ interface WebPubSubOperationGroup {
    * Check if the connection with the given connectionId exists.
    */
   @summary("Check if the connection with the given connectionId exists.")
-  @operationId("WebPubSub_ConnectionExists")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
   connectionExists is Azure.Core.Foundations.Operation<
@@ -281,7 +273,6 @@ interface WebPubSubOperationGroup {
    * Send content inside request body to the specific connection.
    */
   @summary("Send content inside request body to the specific connection.")
-  @operationId("WebPubSub_SendToConnection")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
   sendToConnection is Azure.Core.Foundations.Operation<
@@ -331,7 +322,6 @@ interface WebPubSubOperationGroup {
    * Remove a connection from all groups.
    */
   @summary("Remove a connection from all groups.")
-  @operationId("WebPubSub_RemoveConnectionFromAllGroups")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
   removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
@@ -358,7 +348,6 @@ interface WebPubSubOperationGroup {
    * Check if there are any client connections inside the given group
    */
   @summary("Check if there are any client connections inside the given group")
-  @operationId("WebPubSub_GroupExists")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
   groupExists is Azure.Core.Foundations.Operation<
@@ -387,7 +376,6 @@ interface WebPubSubOperationGroup {
    * Close connections in the specific group.
    */
   @summary("Close connections in the specific group.")
-  @operationId("WebPubSub_CloseGroupConnections")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
   closeGroupConnections is Azure.Core.Foundations.Operation<
@@ -412,7 +400,7 @@ interface WebPubSubOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections in the group.
        */
-      @query(#{ name: "excluded", explode: true })
+      @query("excluded")
       excluded?: string[];
 
       /**
@@ -428,7 +416,6 @@ interface WebPubSubOperationGroup {
    * Send content inside request body to a group of connections.
    */
   @summary("Send content inside request body to a group of connections.")
-  @operationId("WebPubSub_SendToGroup")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
   sendToGroup is Azure.Core.Foundations.Operation<
@@ -453,7 +440,7 @@ interface WebPubSubOperationGroup {
       /**
        * Excluded connection Ids
        */
-      @query(#{ name: "excluded", explode: true })
+      @query("excluded")
       excluded?: string[];
 
       /**
@@ -493,7 +480,6 @@ interface WebPubSubOperationGroup {
    * List connections in a group.
    */
   @summary("List connections in a group.")
-  @operationId("WebPubSub_ListConnectionsInGroup")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
   listConnectionsInGroup is Azure.Core.Foundations.Operation<
@@ -550,7 +536,6 @@ interface WebPubSubOperationGroup {
    * Remove a connection from the target group.
    */
   @summary("Remove a connection from the target group.")
-  @operationId("WebPubSub_RemoveConnectionFromGroup")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
   removeConnectionFromGroup is Azure.Core.Foundations.Operation<
@@ -586,7 +571,6 @@ interface WebPubSubOperationGroup {
    * Add a connection to the target group.
    */
   @summary("Add a connection to the target group.")
-  @operationId("WebPubSub_AddConnectionToGroup")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
   addConnectionToGroup is Azure.Core.Foundations.Operation<
@@ -622,7 +606,6 @@ interface WebPubSubOperationGroup {
    * Revoke permission for the connection.
    */
   @summary("Revoke permission for the connection.")
-  @operationId("WebPubSub_RevokePermission")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
   revokePermission is Azure.Core.Foundations.Operation<
@@ -663,7 +646,6 @@ interface WebPubSubOperationGroup {
    * Check if a connection has permission to the specified action.
    */
   @summary("Check if a connection has permission to the specified action.")
-  @operationId("WebPubSub_CheckPermission")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
   checkPermission is Azure.Core.Foundations.Operation<
@@ -704,7 +686,6 @@ interface WebPubSubOperationGroup {
    * Grant permission to the connection.
    */
   @summary("Grant permission to the connection.")
-  @operationId("WebPubSub_GrantPermission")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
   grantPermission is Azure.Core.Foundations.Operation<
@@ -745,7 +726,6 @@ interface WebPubSubOperationGroup {
    * Check if there are any client connections connected for the given user.
    */
   @summary("Check if there are any client connections connected for the given user.")
-  @operationId("WebPubSub_UserExists")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
   userExists is Azure.Core.Foundations.Operation<
@@ -772,7 +752,6 @@ interface WebPubSubOperationGroup {
    * Close connections for the specific user.
    */
   @summary("Close connections for the specific user.")
-  @operationId("WebPubSub_CloseUserConnections")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
   closeUserConnections is Azure.Core.Foundations.Operation<
@@ -795,7 +774,7 @@ interface WebPubSubOperationGroup {
       /**
        * Exclude these connectionIds when closing the connections for the user.
        */
-      @query(#{ name: "excluded", explode: true })
+      @query("excluded")
       excluded?: string[];
 
       /**
@@ -811,7 +790,6 @@ interface WebPubSubOperationGroup {
    * Send content inside request body to the specific user.
    */
   @summary("Send content inside request body to the specific user.")
-  @operationId("WebPubSub_SendToUser")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
   sendToUser is Azure.Core.Foundations.Operation<
@@ -868,7 +846,6 @@ interface WebPubSubOperationGroup {
    * Remove a user from all groups.
    */
   @summary("Remove a user from all groups.")
-  @operationId("WebPubSub_RemoveUserFromAllGroups")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
   removeUserFromAllGroups is Azure.Core.Foundations.Operation<
@@ -895,7 +872,6 @@ interface WebPubSubOperationGroup {
    * Remove a user from the target group.
    */
   @summary("Remove a user from the target group.")
-  @operationId("WebPubSub_RemoveUserFromGroup")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
   removeUserFromGroup is Azure.Core.Foundations.Operation<
@@ -931,7 +907,6 @@ interface WebPubSubOperationGroup {
    * Add a user to the target group.
    */
   @summary("Add a user to the target group.")
-  @operationId("WebPubSub_AddUserToGroup")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
   addUserToGroup is Azure.Core.Foundations.Operation<
