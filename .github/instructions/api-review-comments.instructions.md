@@ -11,7 +11,7 @@ This document provides a quick guide for implementing API review comments in Typ
 ## Step 1: Validate Input Format & Triggering Prompts
 
 User can provide comments directly in chat with context:
-- **Example**: "I got this feedback for Python '<review comment>' for the model Bar and attribute foo, can you help with that?"
+- **Example**: "I got this review feedback for Java '<review comment>' for the model Bar and attribute foo, can you help with that?"
 - **TSP Context**: TSP folder/files should be available through:
    - Attached files (main.tsp, client.tsp, etc.)
    - Open files in the editor context
@@ -26,6 +26,22 @@ User can provide comments directly in chat with context:
 
 ## Step 2: Analyze Each Comment
 
+> **🚨 CRITICAL RULE - READ THIS FIRST:**
+> 
+> **THE TARGET NAME IN `@@clientName` MUST ALWAYS USE TYPESCRIPT CONVENTIONS, NEVER TARGET LANGUAGE CONVENTIONS**
+> 
+> - **Operations/Methods**: ALWAYS camelCase (e.g., "getSomething", "createEntity")
+> - **Properties**: ALWAYS camelCase (e.g., "entityName", "parentId")
+> - **Interfaces/Classes**: ALWAYS PascalCase (e.g., "EntityClient", "Relationships")
+>
+> **Even if the review feedback says "rename to snake_case_name", you MUST convert it to camelCase for TypeSpec:**
+> - ❌ WRONG: `@@clientName(operation, "snake_case_name", "python")`
+> - ✅ CORRECT: `@@clientName(operation, "snakeCaseName", "python")`
+
+**Examples of chat-based comment extraction:**
+- Input: "I got feedback for Python 'rename parent_entity_name to entity_name' for the model Relationship"
+- Analysis: Comment = "rename parent_entity_name to entity_name", Target Language = Python, Target Element = property, Element Name = Relationship.parentEntityName, TypeSpec Element: `entityName`
+
 ### Quick Reference: Mapping Language Naming to TypeSpec Elements
 
 | Language  | Target Language (snake_case)         | TypeSpec Equivalent (camelCase)   | Notes                                      |
@@ -35,16 +51,11 @@ User can provide comments directly in chat with context:
 | Class     | `Relationship`                      | `Relationship`                    | Both: PascalCase                            |
 | Rename    | "rename foo_bar to new_bar"        | Rename `fooBar` to `newBar`       | Map snake_case to camelCase for TypeSpec    |
 
-> **Critical Note:**
-> - **Never change TypeSpec operation or property names to snake_case, even if review feedback uses snake_case.**
-> - **TypeSpec must always follow conventions and best practices; i.e. use camelCase for operations and properties, and PascalCase for classes.**
-> - **The Python generator will automatically convert camelCase to snake_case in the generated SDK.**
-> - **If review feedback refers to API names in snake_case, map them to the correct TypeSpec camelCase name before making changes.**
-
 **Enforcement:**
 - Before making any code changes, always copy and fill out the comment analysis template below for each review comment.
 - If a review comment requests a snake_case name, explicitly document the correct TypeSpec camelCase/PascalCase name in your analysis.
-  - **client decorator target values must ALWAYS follow TypeSpec conventions: PascalCase for interfaces/classes, camelCase for operations/properties.**
+- **🚨 REMINDER: client decorator target values must ALWAYS follow TypeSpec conventions: PascalCase for interfaces/classes, camelCase for operations/properties.**
+- **🚨 NEVER use snake_case, kebab-case, or any other naming convention in the target name - ONLY TypeSpec conventions.**
 
 **Extract and analyze using the same template:**
 
@@ -55,15 +66,10 @@ User can provide comments directly in chat with context:
 **TypeSpec Element Type**: [model/property/operation/interface/enum]
 **Action**: [client.tsp OR main.tsp]
 **File**: [specific file to modify]
-**Python Name in Feedback**: [snake_case name from review, if present]
-**Mapped TypeSpec Name**: [camelCase or PascalCase name to use in TypeSpec]
+**Mapped TypeSpec Name**: [camelCase or PascalCase name to use in TypeSpec - MUST follow TypeSpec conventions]
 ```
 
-**Note**: If a review comment uses a Python name (snake_case), always show the mapped TypeSpec name (camelCase) in your analysis. For comments requiring multiple actions, fill out the template for each action.
-
-**Examples of chat-based comment extraction:**
-- Input: "I got feedback for Python 'rename parent_entity_name to entity_name' for the model Relationship"
-- Analysis: Comment = "rename parent_entity_name to entity_name", Target Language = Python, Target Element = property, Element Name = Relationship.parentEntityName
+**Note**: For comments requiring multiple actions, fill out the template for each action.
 
 ## Step 3: Determine Implementation Strategy
 
@@ -78,7 +84,6 @@ When using `@@clientName`, the target name (second parameter) must follow TypeSp
 - **Interfaces/Classes**: PascalCase (e.g., "Entities", "Relationships", "HealthModels")
 - **Operations/Methods**: camelCase (e.g., "getEntity", "listSignals")
 - **Properties**: camelCase (e.g., "entityName", "signalData")
-- The Python generator will automatically convert these to snake_case in the generated SDK
 
 **Examples of CORRECT target naming:**
 ```tsp
@@ -279,6 +284,7 @@ interface RadiologyInsightsClient {
 1. **Validate TypeSpec**: Run `tsp compile .` from project root
 2. **Fix any compilation errors** before proceeding
 3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
+   - If the emitter is not installed, run `npm install @azure-tools/typespec-<target language>` first
 4. **Fix any generation errors**
 
 <!-- References -->
