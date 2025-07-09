@@ -1430,7 +1430,10 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SignalRKeys"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -2571,19 +2574,6 @@
           "maximum": 604800
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<SignalRKeys>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SignalRKeys",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "ClientConnectionCountRule": {
       "type": "object",

@@ -119,11 +119,13 @@ interface SignalRResources {
    * Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @operationId("SignalR_RegenerateKey")
-  regenerateKey is ArmResourceActionAsync<
+  regenerateKey is ArmResourceActionAsyncBase<
     SignalRResource,
     RegenerateKeyParameters,
-    ArmResponse<SignalRKeys>
+    ArmResponse<SignalRKeys> | (ArmAcceptedLroResponse & {@bodyRoot body: SignalRKeys}),
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SignalRResource>,
   >;
 
   /**
