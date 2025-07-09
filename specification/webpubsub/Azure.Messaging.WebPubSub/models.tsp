@@ -89,15 +89,24 @@ model ErrorDetail {
    */
   details?: ErrorDetail[];
 
+  /**
+   * Detailed error
+   */
   inner?: InnerError;
 }
 
+/**
+ * Detailed error
+ */
 model InnerError {
   /**
    * A more specific error code than was provided by the containing error.
    */
   code?: string;
 
+  /**
+   * Detailed error
+   */
   inner?: InnerError;
 }
 
@@ -131,6 +140,9 @@ model RemoveFromGroupsRequest {
  */
 model GroupMemberPagedValues is Azure.Core.Page<GroupMember>;
 
+/**
+ * Represents a member in a group.
+ */
 model GroupMember {
   /**
    * A unique identifier of a connection.
