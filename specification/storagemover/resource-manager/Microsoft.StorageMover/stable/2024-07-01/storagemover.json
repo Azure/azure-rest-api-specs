@@ -837,7 +837,7 @@
             "type": "string"
           },
           {
-            "name": "endpoint",
+            "name": "resource",
             "in": "body",
             "description": "",
             "required": true,
@@ -906,7 +906,7 @@
             "type": "string"
           },
           {
-            "name": "endpoint",
+            "name": "properties",
             "in": "body",
             "description": "",
             "required": true,
@@ -1768,10 +1768,6 @@
           "JobDefinitions"
         ],
         "description": "Creates a new Job Run resource for the specified Job Definition and passes it to the Agent for execution.",
-        "consumes": [
-          "application/json",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1832,10 +1828,6 @@
           "JobDefinitions"
         ],
         "description": "Requests the Agent of any active instance of this Job Definition to stop.",
-        "consumes": [
-          "application/json",
-          "application/x-www-form-urlencoded"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3070,6 +3062,24 @@
         ]
       }
     },
+    "Recurrence": {
+      "type": "object",
+      "description": "The schedule recurrence.",
+      "properties": {
+        "startTime": {
+          "$ref": "#/definitions/Time",
+          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported."
+        },
+        "endTime": {
+          "$ref": "#/definitions/Time",
+          "description": "The end time of the schedule recurrence. Full hour and 30-minute intervals are supported."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
     "SmbMountEndpointProperties": {
       "type": "object",
       "description": "The properties of SMB share endpoint.",
@@ -3260,21 +3270,6 @@
       "type": "object",
       "description": "The weekly recurrence of the WAN-link upload limit schedule. The start time must be earlier in the day than the end time. The recurrence must not span across multiple days.",
       "properties": {
-        "days": {
-          "type": "array",
-          "description": "The set of days of week for the schedule recurrence. A day must not be specified more than once in a recurrence.",
-          "items": {
-            "$ref": "#/definitions/DayOfWeek"
-          }
-        },
-        "startTime": {
-          "$ref": "#/definitions/Time",
-          "description": "The start time of the schedule recurrence. Full hour and 30-minute intervals are supported."
-        },
-        "endTime": {
-          "$ref": "#/definitions/Time",
-          "description": "The end time of the schedule recurrence. Full hour and 30-minute intervals are supported."
-        },
         "limitInMbps": {
           "type": "integer",
           "format": "int32",
@@ -3283,7 +3278,33 @@
         }
       },
       "required": [
+        "limitInMbps"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WeeklyRecurrence"
+        }
+      ]
+    },
+    "WeeklyRecurrence": {
+      "type": "object",
+      "description": "The weekly recurrence of the schedule.",
+      "properties": {
+        "days": {
+          "type": "array",
+          "description": "The set of days of week for the schedule recurrence. A day must not be specified more than once in a recurrence.",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
         "days"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrence"
+        }
       ]
     }
   },
