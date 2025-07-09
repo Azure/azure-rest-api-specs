@@ -1308,7 +1308,7 @@
           "minimum": 30,
           "exclusiveMinimum": false,
           "default": 60,
-          "description": "Duration of packet capture in seconds. Default duration if field is not provided is 60 seconds."
+          "description": "Duration of packet capture in seconds. If the field is not provided, the default value is 60."
         },
         "numberOfPacketsToCapture": {
           "type": "integer",
@@ -1318,7 +1318,7 @@
           "minimum": 100,
           "exclusiveMinimum": false,
           "default": 1000,
-          "description": "Number of packets to be captured. Default number of packets if field is not provided is 1000 packets."
+          "description": "Number of packets to be captured. If the field is not provided, the default value is 1000."
         },
         "sasUrl": {
           "type": "string",
@@ -1444,7 +1444,7 @@
     },
     "AzureFirewallPacketCaptureOperationType": {
       "type": "string",
-      "description": "The packet capture operation to perform. For operation Start, please provide all firewallpacketcaptureparameters for the operation to successfully run. For operation Status or Stop, please provide the operation and all other parameters can be omitted.",
+      "description": "The packet capture operation to perform. If the Start operation is selected, please provide all the fields in the firewallPacketCaptureParameters to successfully initiate the packet capture. If the Status or Stop operation is selected, only the operation field is required; all other fields in the firewallPacketCaptureParameters can be omitted to successfully retrieve the capture status or stop the capture.",
       "enum": [
         "Start",
         "Status",
