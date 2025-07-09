@@ -69,14 +69,17 @@ User can provide comments directly in chat with context:
 ### Implementation Rules
 
 **IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
+**IMPORTANT**: Follow TypeSpec conventions and best practices for naming and structure.
 
 **Required template:**
 ```tsp
 import "@azure-tools/typespec-client-generator-core";
-// import *.tsp for any elements you need to reference in that file
+import "@typespec/versioning";  // Required for versioned services
 import "./main.tsp";
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;      // Required for @useDependency
 
+@useDependency(YourService.Versions.vYOUR_VERSION)  // Required for versioned namespaces
 namespace ClientCustomizations;
 
 // Your customizations here
@@ -84,15 +87,19 @@ namespace ClientCustomizations;
 @@clientNamespace(Namespace, "NewNamespace", "python");
 ```
 
-### Scenario 1: Operations Directly on Client (No Operation Groups)
-**Trigger**: Comments about operations being directly on the client rather than in separate operation groups
+### Scenario 1: Operations Directly on Client
+**Trigger**: Comments about operations being directly on the client rather than in separate `*Operation` classes.
 **Action**: Use `@client` decorator in `client.tsp` to define a root client interface with operation aliases
 **Example**:
 ```tsp
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
+
+@useDependency(AzureHealthInsights.Versions.v2024_08_01_preview)
 namespace ClientCustomizations;
 
 @client({
@@ -100,9 +107,12 @@ namespace ClientCustomizations;
   service: AzureHealthInsights,
 })
 interface RadiologyInsightsClient {
+  // Only operations used here and models/enum/union used by those operations will be public - all others become internal
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
 }
 ```
+**Important Notes for @@client**:
+- Only operations referenced in the `@client` interface -- and models/enum/union used by those operations -- will be public. All other operations/interfaces will be internal by default.
 
 ### Scenario 2: Renaming client
 **Trigger**: Comments about changing `SomeClient` class name to `SomeOtherClient`
@@ -111,7 +121,7 @@ interface RadiologyInsightsClient {
 2. **If `@client` exists**: Update the `name` property and attached interface - use the desired name WITH "Client" suffix
 3. **If no `@client`**: Add `@@clientName` - use the desired name WITHOUT "Client" suffix
 
-**Examples**: See complete `client.tsp` examples in Step 6 Implementation Rules section.
+**Examples**: See complete `client.tsp` examples in "Complete `client.tsp` File Examples" section.
 
 **Key points for @@clientName**:
 - Use the augment decorator `@@clientName` (double @), not the regular decorator `@clientName`
@@ -135,7 +145,7 @@ interface RadiologyInsightsClient {
 // Renaming operation parameter
 @@clientName(Microsoft.Service.SomeInterface.createOrUpdate::parameters.resource, "body");
 
-// Renaming interface/operation group
+// Renaming interface
 @@clientName(Microsoft.Service.EndpointResources, "Endpoints", "python");
 
 // Renaming enum/union member
@@ -149,17 +159,34 @@ interface RadiologyInsightsClient {
 **Trigger**: Comments about making elements internal/private or changing visibility
 **Actions**: Use `@@access` decorator in `client.tsp`
 
+**Important Notes:**
+- `@@access` can only be applied to: ModelProperty, Model, Operation, Enum, Union, or Namespace
+- `@@access` **CANNOT** be applied to interfaces
+- If the `@client` decorator is being used to define a custom client, all operations/interfaces that are not referenced will be private by default.
+
 **Examples**:
 ```tsp
-// Make internal (hidden from public SDK)
-@@access(Namespace.Model, Access.internal, "language");
+// Make model internal for python
+@@access(Namespace.Model, Access.internal, "python");
 
-// Make public (explicitly expose)
-@@access(Namespace.Model, Access.public, "language");
+// Make enum internal
+@@access(Namespace.SomeEnum, Access.internal, "python");
 
 // Language-specific access
 @@access(Namespace.Model, Access.internal, "python");
-@@access(Namespace.Model, Access.public, "csharp");
+
+// ❌ WRONG - Cannot apply to interfaces
+// @@access(Namespace.SomeOperations, Access.internal, "python");
+
+// ✅ CORRECT - Use @client decorator instead for interfaces
+@client({
+  name: "ServiceClient",
+  service: Namespace,
+})
+interface ServiceClient {
+  // Only operations referenced here will be public and directly on the client. All other operations will be private.
+  getSomething is Namespace.SomeOperations.getSomething;
+}
 ```
 
 ### Complete `client.tsp` File Examples
@@ -167,10 +194,13 @@ interface RadiologyInsightsClient {
 **Basic client name customization:**
 ```tsp
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
+@useDependency(Microsoft.CloudHealth.HealthModels.Data.Versions.v2025_06_18_preview)
 namespace ClientCustomizations;
 
 // Rename the main client (from namespace-based generation)
@@ -180,10 +210,13 @@ namespace ClientCustomizations;
 **Using @client decorator for root client interface:**
 ```tsp
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
+@useDependency(AzureHealthInsights.Versions.v2024_08_01_preview)
 namespace ClientCustomizations;
 
 @client({
@@ -207,9 +240,11 @@ interface RadiologyInsightsClient {
 - **Operations classes** = Interface name + "Operations" 
 - **NEVER** name interfaces ending with "Operations" (creates "OperationsOperations")
 
-## Step 7: Implementation Process
+## Step 4: Implementation Process
 
-1. **ANALYZE** using Step 4 template:
+**IMPORTANT**: Check that planned changes are ACTUALLY implemented.
+
+1. **ANALYZE** using Step 2 Comment Analysis template:
    ```
    **Comment**: [exact quote]
    **Target Language**: [language]
@@ -222,15 +257,15 @@ interface RadiologyInsightsClient {
 2. **LIST** all planned changes as bullet points
 3. **CONFIRM** with user before making ANY changes
 4. **IMPLEMENT** changes in this order:
-   - `tspconfig.yaml` first (package/namespace changes)
    - `client.tsp` second (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
 
-## Step 8: Post-Implementation Validation
+## Step 5: Post-Implementation Validation
 
 1. **Validate TypeSpec**: Run `tsp compile .` from project root
-2. **Check specific changes**: 
-   - For client names: Look for generated client class names
-   - For property names: Check model property names in output
-   - For access control: Verify internal elements are excluded
-3. **Fix any compilation errors** before proceeding
+2. **Fix any compilation errors** before proceeding
+3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
+4. **Fix any generation errors**
+
+<!-- References -->
+[TypeSpec Language Basics Docs]: https://typespec.io/docs/language-basics/overview/
