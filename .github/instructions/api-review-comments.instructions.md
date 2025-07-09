@@ -28,18 +28,18 @@ User can provide comments directly in chat with context:
 
 ### Quick Reference: Mapping Language Naming to TypeSpec Elements
 
-| Language  | Python Example (snake_case)         | TypeSpec Equivalent (camelCase)   | Notes                                      |
+| Language  | Target Language (snake_case)         | TypeSpec Equivalent (camelCase)   | Notes                                      |
 |-----------|-------------------------------------|-----------------------------------|---------------------------------------------|
-| Property  | `parent_entity_name`                | `parentEntityName`                | Python: snake_case; TypeSpec: camelCase     |
-| Method    | `get_foo_bar()`                     | `getFooBar()`                     | Python: snake_case; TypeSpec: camelCase     |
+| Property  | `parent_entity_name`                | `parentEntityName`                | Target: snake_case; TypeSpec: camelCase     |
+| Method    | `get_foo_bar()`                     | `getFooBar()`                     | Target: snake_case; TypeSpec: camelCase     |
 | Class     | `Relationship`                      | `Relationship`                    | Both: PascalCase                            |
 | Rename    | "rename foo_bar to new_bar"        | Rename `fooBar` to `newBar`       | Map snake_case to camelCase for TypeSpec    |
 
 > **Critical Note:**
-> - **Never change TypeSpec operation or property names to snake_case, even if review feedback uses Python-style names.**
+> - **Never change TypeSpec operation or property names to snake_case, even if review feedback uses snake_case.**
 > - **TypeSpec must always follow conventions and best practices; i.e. use camelCase for operations and properties, and PascalCase for classes.**
 > - **The Python generator will automatically convert camelCase to snake_case in the generated SDK.**
-> - **If review feedback refers to Python API names in snake_case, map them to the correct TypeSpec camelCase name before making changes.**
+> - **If review feedback refers to API names in snake_case, map them to the correct TypeSpec camelCase name before making changes.**
 
 **Enforcement:**
 - Before making any code changes, always copy and fill out the comment analysis template below for each review comment.
@@ -71,6 +71,7 @@ User can provide comments directly in chat with context:
 
 **IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
 **IMPORTANT**: Follow TypeSpec conventions and best practices for naming and structure.
+**IMPORTANT**: Avoid adding unnecessary comments to TypeSpec files for simple changes. Only add comments when they provide meaningful context or clarification.
 
 **Critical Naming Convention Rule:**
 When using `@@clientName`, the target name (second parameter) must follow TypeSpec conventions:

@@ -223,7 +223,7 @@ Run `/check-package-readiness` prompt to check the release readiness of an SDK p
 ## Addressing API Review Comments and Feedback
 
 **Triggered by prompt:**
-- "API review comment", "review feedback", "review suggestion", or similar.
+- "API review comment", "review feedback", "review suggestion", "notes from architect", or similar.
 - feedback on a client, model, or operation name that needs to be changed.
 
 **Strict Process Compliance for API Review Comments**
