@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { createNextStepsComment, summarizeChecksImpl } from "../src/summarize-checks/summarize-checks.js";
+import {
+  createNextStepsComment,
+  summarizeChecksImpl,
+} from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
@@ -209,7 +212,8 @@ describe("summarizeChecksImpl", () => {
       const labelNames = [];
       const fyiCheckRuns = [];
       const requiredCheckRuns = [];
-      const expectedOutput = "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput =
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
 
       const output = await createNextStepsComment(
         mockCore,
@@ -228,7 +232,8 @@ describe("summarizeChecksImpl", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput = '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.';
+      const expectedOutput =
+        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.';
 
       const requiredCheckRuns = [
         {
@@ -406,7 +411,8 @@ describe("summarizeChecksImpl", () => {
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
-      const expectedOutput = "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
+      const expectedOutput =
+        "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
 
       const requiredCheckRuns = [
         {

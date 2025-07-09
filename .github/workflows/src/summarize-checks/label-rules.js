@@ -650,11 +650,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
   const requiredLabelsFromRules = (
-    await getViolatedRequiredLabelsRules(
-      core,
-      existingLabels,
-      repoTargetBranch,
-    )
+    await getViolatedRequiredLabelsRules(core, existingLabels, repoTargetBranch)
   )
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
@@ -673,11 +669,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
  * @returns {Promise<RequiredLabelRule[]>}
  */
-export async function getViolatedRequiredLabelsRules(
-  core,
-  labels,
-  targetBranch,
-) {
+export async function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
     if (await requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
@@ -694,12 +686,7 @@ export async function getViolatedRequiredLabelsRules(
  * @param {RequiredLabelRule} rule
  * @returns {Promise<boolean>}
  */
-export async function requiredLabelRuleViolated(
-  core,
-  presentLabels,
-  targetBranch,
-  rule,
-) {
+export async function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =

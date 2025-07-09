@@ -672,11 +672,7 @@ async function buildNextStepsToMergeCommentBody(
   // Build the comment header
   const commentTitle = `<h2>Next Steps to Merge</h2>`;
 
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
-    core,
-    labels,
-    targetBranch,
-  );
+  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
   // this is the first place of adjusted logic. I am treating `requirementsMet` as `no failed required checks`.
   // I do this because the `automatedMergingRequirementsMetCheckRun` WILL NOT BE PRESENT in the new world.
@@ -722,7 +718,6 @@ function getCommentBody(
   let bodyProper = "";
 
   if (anyBlockerPresent || anyFyiPresent) {
-
     if (anyBlockerPresent) {
       bodyProper += getBlockerPresentBody(failingReqChecksInfo, violatedRequiredLabelsRules);
     }
