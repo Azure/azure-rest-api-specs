@@ -223,7 +223,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceCreate"
+              "$ref": "#/definitions/PrivateLinkResource"
             },
             "description": "Private link request payload containing the resource information for create operations."
           }
@@ -697,30 +697,6 @@
       "required": [
         "properties"
       ]
-    },
-    "PrivateLinkResourceCreate": {
-      "type": "object",
-      "description": "Request payload for creating a private link resource. This schema includes location (required for creation) and excludes read-only properties to comply with ARM guidelines.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateLinkPropertiesCreate",
-          "description": "Properties specific to the private link resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ]
-    },
-    "PrivateLinkPropertiesCreate": {
-      "type": "object",
-      "description": "Properties for creating a private link resource. This excludes read-only fields.",
-      "properties": {}
     },
     "PrivateLinkUpdate": {
       "type": "object",
