@@ -82,4 +82,15 @@ using Microsoft.SignalRService;
 @@clientLocation(SharedPrivateLinkResources.list,
   "SignalRReplicaSharedPrivateLinkResources"
 );
+@@clientLocation(SignalRResources.get, "SignalR");
+@@clientLocation(SignalRResources.createOrUpdate, "SignalR");
+@@clientLocation(SignalRResources.update, "SignalR");
+@@clientLocation(SignalRResources.delete, "SignalR");
+@@clientLocation(SignalRResources.listByResourceGroup, "SignalR");
+@@clientLocation(SignalRResources.listBySubscription, "SignalR");
+@@clientLocation(SignalRResources.listKeys, "SignalR");
+@@clientLocation(SignalRResources.regenerateKey, "SignalR");
+@@clientLocation(SignalRResources.restart, "SignalR");
+@@clientLocation(SignalRResources.listSkus, "SignalR");
 @@clientLocation(SignalRResources.list, "SignalRPrivateLinkResources");
+@@clientLocation(UsagesOperationGroup.list, "Usage");
