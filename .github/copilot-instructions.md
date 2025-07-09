@@ -228,7 +228,7 @@ Run `/check-package-readiness` prompt to check the release readiness of an SDK p
 
 **Strict Process Compliance for API Review Comments**
 
-When addressing API review comments or feedback, you MUST follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` exactly, without skipping or reordering steps.
+- ALWAYS follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` EXACTLY and THOROUGHLY, without skipping or reordering steps.
 
 - Always explain each step before taking action.
 - Confirm with the user before making any changes.
