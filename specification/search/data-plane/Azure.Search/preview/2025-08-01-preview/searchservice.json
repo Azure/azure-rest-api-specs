@@ -2660,8 +2660,7 @@
       },
       "required": [
         "name",
-        "models",
-        "targetIndexes"
+        "models"
       ]
     },
     "KnowledgeSourceReference": {
@@ -2915,19 +2914,90 @@
       "required": [ "searchIndexName" ],
       "description": "Parameters for search index knowledge source."
     },
+    "AzureBlobKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureBlob",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "azureBlobParameters": {
+          "$ref": "#/definitions/AzureBlobKnowledgeSourceParameters",
+          "description": "The type of the knowledge source."
+        }
+      },
+      "required": [ "azureBlobParameters" ],
+      "description": "Configuration for Azure Blob Storage knowledge source."
+    },
+    "AzureBlobKnowledgeSourceParameters": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Key-based connection string or the ResourceId format if using a managed identity."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the blob storage container."
+        },
+        "folderPath": {
+          "type": "string",
+          "description": "Optional folder path within the container."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/VectorSearchVectorizer",
+          "description": "Optional vectorizer configuration for vectorizing content.",
+          "x-nullable": true
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeAgentModel",
+          "description": "Optional chat completion model for image verbalization or context extraction.",
+          "x-nullable": true
+        },
+        "ingestionSchedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Optional schedule for data ingestion.",
+          "x-nullable": true
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        },        
+        "_links": {
+          "$ref": "#/definitions/KnowledgeSourceLinks",
+          "description": "Links related to the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [ "connectionString", "containerName" ], 
+      "description": "Parameters for Azure Blob Storage knowledge source."
+    },   
     "KnowledgeSourceKind": {
       "type": "string",
       "enum": [
-        "searchIndex"
+        "searchIndex",
+        "azureBlob"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "value": "searchIndex",
             "name": "SearchIndex",
             "description": "A knowledge source that reads data from a Search Index."
+          },
+          {
+            "value": "azureBlob",
+            "name": "AzureBlob",
+            "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
           }
         ]
       },
@@ -2947,6 +3017,33 @@
       "required": [
         "value"
       ]
+    },    
+    "CreatedResources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "description": "The name of the created resource."
+      },
+      "description": "Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names."
+    },
+    "KnowledgeSourceLinks": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LinkInfo",
+        "description": "A link related to the knowledge source."
+      },
+      "description": "Links related to the knowledge source. Keys represent link types (e.g., 'indexerStatus', 'datasourceStatus', 'skillsetStatus') and values represent link information."
+    },
+    "LinkInfo": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "description": "The URL of the link."
+        }
+      },
+      "required": [ "href" ],
+      "description": "Information about a link."
     },
     "AnalyzeRequest": {
       "type": "object",
