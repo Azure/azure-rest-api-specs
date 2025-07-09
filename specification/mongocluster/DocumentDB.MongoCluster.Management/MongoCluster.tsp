@@ -20,6 +20,8 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   @visibility(Lifecycle.Read)
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -557,39 +559,6 @@ union AuthenticationMode {
 
   /** Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
   "MicrosoftEntraID",
-}
-
-/** Managed service identity (user assigned identities only for this version) */
-@added(Versions.v2025_05_01_preview)
-model ManagedServiceIdentity {
-  /** Type of managed service identity. 'UserAssigned' or 'None' are supported. */
-  type: ManagedServiceIdentityType;
-  /**
-   * The set of user assigned identities associated with the resource.
-   * If type is 'None', this property must not be present.
-   * This is a dictionary where each key is a resourceId and value is a UserAssignedIdentity.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM identity dictionaries require dynamic keys."
-  userAssignedIdentities?: Record<UserAssignedIdentity>;
-}
-
-/** User assigned identity request/response (with principalId and clientId). */
-@added(Versions.v2025_05_01_preview)
-model UserAssignedIdentity {
-  /** The principal ID of the user assigned identity. */
-  principalId?: string;
-  /** The client ID of the user assigned identity. */
-  clientId?: string;
-}
-
-/** Type of managed service identity. 'UserAssigned' or 'None' are supported. */
-@added(Versions.v2025_05_01_preview)
-union ManagedServiceIdentityType {
-  string,
-  /** No managed identity. */
-  None: "None",
-  /** User assigned managed identity. */
-  UserAssigned: "UserAssigned",
 }
 
 /** The type of identity for key encryption key. */
