@@ -26,7 +26,7 @@ These are the global settings for the marketplacecatalog.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2021-10-01
+tag: package-2025-05-01
 ```
 
 ### Tag: package-2021-10-01
