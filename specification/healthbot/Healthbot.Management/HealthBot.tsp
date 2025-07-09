@@ -52,15 +52,11 @@ interface HealthBots {
   /**
    * Get a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_Get")
   get is ArmResourceRead<HealthBot, Error = Error>;
 
   /**
    * Create a new Azure Health Bot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_Create")
   create is ArmResourceCreateOrReplaceAsync<
     HealthBot,
     Error = Error,
@@ -73,10 +69,8 @@ interface HealthBots {
   /**
    * Patch a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  @operationId("Bots_Update")
   update is ArmCustomPatchAsync<
     HealthBot,
     PatchModel = HealthBotUpdateParameters,
@@ -90,9 +84,7 @@ interface HealthBots {
   /**
    * Delete a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -102,8 +94,6 @@ interface HealthBots {
   /**
    * Returns all the resources of a particular type belonging to a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     HealthBot,
     Response = ArmResponse<BotResponseList>,
@@ -113,8 +103,6 @@ interface HealthBots {
   /**
    * Returns all the resources of a particular type belonging to a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_List")
   list is ArmListBySubscription<
     HealthBot,
     Response = ArmResponse<BotResponseList>,
@@ -124,8 +112,6 @@ interface HealthBots {
   /**
    * List all secrets of a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_ListSecrets")
   listSecrets is ArmResourceActionSync<
     HealthBot,
     void,
@@ -136,8 +122,6 @@ interface HealthBots {
   /**
    * Regenerate the API JWT Secret of a HealthBot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Bots_RegenerateApiJwtSecret")
   regenerateApiJwtSecret is ArmResourceActionSync<
     HealthBot,
     void,
