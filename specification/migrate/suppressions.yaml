@@ -1,0 +1,16 @@
+- tool: TypeSpecValidation
+  if: checkingAllSpecs
+  reason: Suppress until next PR changing spec
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - AssessmentProjects.Management/AKSAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/AvsAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/BusinessCases.Management/tspconfig.yaml
+    - AssessmentProjects.Management/Collectors.Management/tspconfig.yaml
+    - AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/HeterogeneousAssessments.Management/tspconfig.yaml
+    - AssessmentProjects.Management/MachineAssessments.Management/tspconfig.yaml
