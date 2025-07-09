@@ -8,5 +8,4 @@ namespace ClientCustomizations;
 
 @@access(upload, Access.internal, "python");
 
-
-@@clientDoc(LogsIngestion, "", DocumentationMode.append, "java");
+@@clientNamespace(LogsIngestion, "com.azure.monitor.ingestion.implementation", "java");
