@@ -90,7 +90,7 @@ interface Replicas {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SignalRReplicas_Restart")
-  restart is ArmResourceActionAsync<Replica, void, NoContentResponse>;
+  restart is ArmResourceActionAsync<Replica, void, void>;
 }
 
 @@maxLength(Replica.name, 63);

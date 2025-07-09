@@ -128,7 +128,7 @@ interface SignalRResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SignalR_Restart")
-  restart is ArmResourceActionAsync<SignalRResource, void, NoContentResponse>;
+  restart is ArmResourceActionAsync<SignalRResource, void, void>;
 
   /**
    * List all available skus of the resource.
