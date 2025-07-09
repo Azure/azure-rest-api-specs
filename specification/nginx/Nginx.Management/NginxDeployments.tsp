@@ -13,7 +13,13 @@ namespace NGINX.NGINXPLUS;
  * Represents an Nginx deployment resource.
  */
 model NginxDeployment is TrackedResource<NginxDeploymentProperties> {
-  ...ResourceNameParameter<NginxDeployment>;
+  /** The name of the Nginx deployment resource. */
+  @pattern("^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$")
+  @key("nginxDeploymentName")
+  @segment("nginxDeployments")
+  @path
+  name: string;
+
   ...ManagedServiceIdentityProperty;
   ...ResourceSkuProperty;
 }

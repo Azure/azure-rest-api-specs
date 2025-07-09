@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
+using Http;
 using Azure.ResourceManager;
 
 namespace NGINX.NGINXPLUS;
@@ -13,7 +14,12 @@ namespace NGINX.NGINXPLUS;
  */
 @parentResource(NginxDeployment)
 model ApiKey is ProxyResource<ApiKeyResponseProperties> {
-  ...ResourceNameParameter<ApiKey>;
+  /** The name of the API Key resource. */
+  @pattern("^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$")
+  @key("apiKeyName")
+  @segment("apiKeys")
+  @path
+  name: string;
 }
 
 /**
