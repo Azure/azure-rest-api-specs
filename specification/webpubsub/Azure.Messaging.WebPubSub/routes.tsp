@@ -159,6 +159,7 @@ interface WebPubSubOperationGroup {
   /**
    * Broadcast content inside request body to all the connected client connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
@@ -214,6 +215,7 @@ interface WebPubSubOperationGroup {
   /**
    * Close the client connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
@@ -272,6 +274,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to the specific connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
@@ -321,6 +324,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a connection from all groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
@@ -415,6 +419,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to a group of connections.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
@@ -479,6 +484,7 @@ interface WebPubSubOperationGroup {
   /**
    * List connections in a group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
@@ -535,6 +541,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a connection from the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
@@ -605,6 +612,7 @@ interface WebPubSubOperationGroup {
   /**
    * Revoke permission for the connection.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
@@ -789,6 +797,7 @@ interface WebPubSubOperationGroup {
   /**
    * Send content inside request body to the specific user.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
@@ -845,6 +854,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a user from all groups.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
@@ -871,6 +881,7 @@ interface WebPubSubOperationGroup {
   /**
    * Remove a user from the target group.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
