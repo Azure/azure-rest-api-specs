@@ -1,0 +1,1984 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Web PubSub Service REST API",
+    "version": "2024-12-01",
+    "description": "Azure Web PubSub Service is a managed service that helps developers easily build real-time\nfeatures in web applications with publish-subscribe patterns.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The Web PubSub service endpoint (protocol and hostname, for example:\nhttps://myservice.webpubsub.azure.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/api/health": {
+      "head": {
+        "operationId": "HealthApi_GetServiceStatus",
+        "summary": "Get service health status.",
+        "description": "Get service health status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthApi_GetServiceStatus": {
+            "$ref": "./examples/HealthApi_GetServiceStatus.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:addToGroups": {
+      "post": {
+        "operationId": "WebPubSub_AddConnectionsToGroups",
+        "summary": "Add filtered connections to multiple groups.",
+        "description": "Add filtered connections to multiple groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "groupsToAdd",
+            "in": "body",
+            "description": "Target groups and connection filter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddToGroupsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddConnectionsToGroups": {
+            "$ref": "./examples/WebPubSub_AddConnectionsToGroups.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:closeConnections": {
+      "post": {
+        "operationId": "WebPubSub_CloseAllConnections",
+        "summary": "Close the connections in the hub.",
+        "description": "Close the connections in the hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Exclude these connectionIds when closing the connections in the hub.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "description": "The reason closing the client connection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseAllConnections": {
+            "$ref": "./examples/WebPubSub_CloseAllConnections.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:generateToken": {
+      "post": {
+        "operationId": "WebPubSub_GenerateClientToken",
+        "summary": "Generate token for the client to connect Azure Web PubSub service.",
+        "description": "Generate token for the client to connect Azure Web PubSub service.",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "User Id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "Roles that the connection with the generated token will have.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "minutesToExpire",
+            "in": "query",
+            "description": "The expire time of the generated token.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 60,
+            "minimum": 1
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "description": "Groups that the connection will join when it connects.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "clientType",
+            "in": "query",
+            "description": "The type of client. Case-insensitive. If not set, it's \"Default\". For Web\nPubSub for Socket.IO, only the default value is supported. For Web PubSub, the\nvalid values are 'Default' and 'MQTT'.",
+            "required": false,
+            "type": "string",
+            "default": "Default",
+            "enum": [
+              "Default",
+              "MQTT"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubClientType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default Web PubSub client type"
+                },
+                {
+                  "name": "MQTT",
+                  "value": "MQTT",
+                  "description": "MQTT Web PubSub client type"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClientTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GenerateClientToken": {
+            "$ref": "./examples/WebPubSub_GenerateClientToken.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:removeFromGroups": {
+      "post": {
+        "operationId": "WebPubSub_RemoveConnectionsFromGroups",
+        "summary": "Remove filtered connections from multiple groups.",
+        "description": "Remove filtered connections from multiple groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "groupsToRemove",
+            "in": "body",
+            "description": "Target groups and connection filter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveFromGroupsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveConnectionsFromGroups": {
+            "$ref": "./examples/WebPubSub_RemoveConnectionsFromGroups.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/:send": {
+      "post": {
+        "operationId": "WebPubSub_SendToAll",
+        "summary": "Broadcast content inside request body to all the connected client connections.",
+        "description": "Broadcast content inside request body to all the connected client connections.",
+        "consumes": [
+          "application/json",
+          "application/octet-stream",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Excluded connection Ids.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "messageTtlSeconds",
+            "in": "query",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300
+          },
+          {
+            "name": "message",
+            "in": "body",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToAll": {
+            "$ref": "./examples/WebPubSub_SendToAll.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/connections/{connectionId}": {
+      "delete": {
+        "operationId": "WebPubSub_CloseConnection",
+        "summary": "Close the client connection.",
+        "description": "Close the client connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "description": "The reason closing the client connection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseConnection": {
+            "$ref": "./examples/WebPubSub_CloseConnection.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "WebPubSub_ConnectionExists",
+        "summary": "Check if the connection with the given connectionId exists.",
+        "description": "Check if the connection with the given connectionId exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "The connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ConnectionExists": {
+            "$ref": "./examples/WebPubSub_ConnectionExists.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/connections/{connectionId}/:send": {
+      "post": {
+        "operationId": "WebPubSub_SendToConnection",
+        "summary": "Send content inside request body to the specific connection.",
+        "description": "Send content inside request body to the specific connection.",
+        "consumes": [
+          "application/json",
+          "application/octet-stream",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "The connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "messageTtlSeconds",
+            "in": "query",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300
+          },
+          {
+            "name": "message",
+            "in": "body",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToConnection": {
+            "$ref": "./examples/WebPubSub_SendToConnection.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/connections/{connectionId}/groups": {
+      "delete": {
+        "operationId": "WebPubSub_RemoveConnectionFromAllGroups",
+        "summary": "Remove a connection from all groups.",
+        "description": "Remove a connection from all groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveConnectionFromAllGroups": {
+            "$ref": "./examples/WebPubSub_RemoveConnectionFromAllGroups.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}": {
+      "head": {
+        "operationId": "WebPubSub_GroupExists",
+        "summary": "Check if there are any client connections inside the given group",
+        "description": "Check if there are any client connections inside the given group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GroupExists": {
+            "$ref": "./examples/WebPubSub_GroupExists.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/:closeConnections": {
+      "post": {
+        "operationId": "WebPubSub_CloseGroupConnections",
+        "summary": "Close connections in the specific group.",
+        "description": "Close connections in the specific group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Exclude these connectionIds when closing the connections in the group.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "description": "The reason closing the client connection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseGroupConnections": {
+            "$ref": "./examples/WebPubSub_CloseGroupConnections.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/:send": {
+      "post": {
+        "operationId": "WebPubSub_SendToGroup",
+        "summary": "Send content inside request body to a group of connections.",
+        "description": "Send content inside request body to a group of connections.",
+        "consumes": [
+          "application/json",
+          "application/octet-stream",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Excluded connection Ids",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "messageTtlSeconds",
+            "in": "query",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300
+          },
+          {
+            "name": "message",
+            "in": "body",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToGroup": {
+            "$ref": "./examples/WebPubSub_SendToGroup.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/connections": {
+      "get": {
+        "operationId": "WebPubSub_ListConnectionsInGroup",
+        "summary": "List connections in a group.",
+        "description": "List connections in a group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, whose length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "description": "The maximum number of connections to include in a single response. It should be\nbetween 1 and 200.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 200
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of connections to return. If the value is not set, then all\nthe connections in a group are returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "A token that allows the client to retrieve the next page of results. This\nparameter is provided by the service in the response of a previous request when\nthere are additional results to be fetched. Clients should include the\ncontinuationToken in the next request to receive the subsequent page of data.\nIf this parameter is omitted, the server will return the first page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GroupMemberPagedValues"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_ListConnectionsInGroup": {
+            "$ref": "./examples/WebPubSub_ListConnectionsInGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/connections/{connectionId}": {
+      "put": {
+        "operationId": "WebPubSub_AddConnectionToGroup",
+        "summary": "Add a connection to the target group.",
+        "description": "Add a connection to the target group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddConnectionToGroup": {
+            "$ref": "./examples/WebPubSub_AddConnectionToGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebPubSub_RemoveConnectionFromGroup",
+        "summary": "Remove a connection from the target group.",
+        "description": "Remove a connection from the target group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveConnectionFromGroup": {
+            "$ref": "./examples/WebPubSub_RemoveConnectionFromGroup.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}": {
+      "put": {
+        "operationId": "WebPubSub_GrantPermission",
+        "summary": "Grant permission to the connection.",
+        "description": "Grant permission to the connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "permission",
+            "in": "path",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "sendToGroup",
+                  "value": "sendToGroup",
+                  "description": "Permission to send messages to a group"
+                },
+                {
+                  "name": "joinLeaveGroup",
+                  "value": "joinLeaveGroup",
+                  "description": "Permission to join or leave a group"
+                }
+              ]
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "targetName",
+            "in": "query",
+            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_GrantPermission": {
+            "$ref": "./examples/WebPubSub_GrantPermission.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebPubSub_RevokePermission",
+        "summary": "Revoke permission for the connection.",
+        "description": "Revoke permission for the connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "permission",
+            "in": "path",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "sendToGroup",
+                  "value": "sendToGroup",
+                  "description": "Permission to send messages to a group"
+                },
+                {
+                  "name": "joinLeaveGroup",
+                  "value": "joinLeaveGroup",
+                  "description": "Permission to join or leave a group"
+                }
+              ]
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "targetName",
+            "in": "query",
+            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RevokePermission": {
+            "$ref": "./examples/WebPubSub_RevokePermission.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "WebPubSub_CheckPermission",
+        "summary": "Check if a connection has permission to the specified action.",
+        "description": "Check if a connection has permission to the specified action.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "permission",
+            "in": "path",
+            "description": "The permission: current supported actions are joinLeaveGroup and sendToGroup.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "sendToGroup",
+              "joinLeaveGroup"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubPermission",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "sendToGroup",
+                  "value": "sendToGroup",
+                  "description": "Permission to send messages to a group"
+                },
+                {
+                  "name": "joinLeaveGroup",
+                  "value": "joinLeaveGroup",
+                  "description": "Permission to join or leave a group"
+                }
+              ]
+            }
+          },
+          {
+            "name": "connectionId",
+            "in": "path",
+            "description": "Target connection Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "targetName",
+            "in": "query",
+            "description": "The meaning of the target depends on the specific permission. For\njoinLeaveGroup and sendToGroup, targetName is a required parameter standing for\nthe group name.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CheckPermission": {
+            "$ref": "./examples/WebPubSub_CheckPermission.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}": {
+      "head": {
+        "operationId": "WebPubSub_UserExists",
+        "summary": "Check if there are any client connections connected for the given user.",
+        "description": "Check if there are any client connections connected for the given user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Target user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_UserExists": {
+            "$ref": "./examples/WebPubSub_UserExists.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}/:closeConnections": {
+      "post": {
+        "operationId": "WebPubSub_CloseUserConnections",
+        "summary": "Close connections for the specific user.",
+        "description": "Close connections for the specific user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "excluded",
+            "in": "query",
+            "description": "Exclude these connectionIds when closing the connections for the user.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "reason",
+            "in": "query",
+            "description": "The reason closing the client connection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_CloseUserConnections": {
+            "$ref": "./examples/WebPubSub_CloseUserConnections.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}/:send": {
+      "post": {
+        "operationId": "WebPubSub_SendToUser",
+        "summary": "Send content inside request body to the specific user.",
+        "description": "Send content inside request body to the specific user.",
+        "consumes": [
+          "application/json",
+          "application/octet-stream",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Following OData filter syntax to filter out the subscribers receiving the\nmessages.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "messageTtlSeconds",
+            "in": "query",
+            "description": "The time-to-live (TTL) value in seconds for messages sent to the service. 0 is\nthe default value, which means the message never expires. 300 is the maximum\nvalue. If this parameter is non-zero, messages that are not consumed by the\nclient within the specified TTL will be dropped by the service. This parameter\ncan help when the client's bandwidth is limited.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "maximum": 300
+          },
+          {
+            "name": "message",
+            "in": "body",
+            "description": "The payload body.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_SendToUser": {
+            "$ref": "./examples/WebPubSub_SendToUser.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}/groups": {
+      "delete": {
+        "operationId": "WebPubSub_RemoveUserFromAllGroups",
+        "summary": "Remove a user from all groups.",
+        "description": "Remove a user from all groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Target user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveUserFromAllGroups": {
+            "$ref": "./examples/WebPubSub_RemoveUserFromAllGroups.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/users/{userId}/groups/{group}": {
+      "put": {
+        "operationId": "WebPubSub_AddUserToGroup",
+        "summary": "Add a user to the target group.",
+        "description": "Add a user to the target group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Target user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_AddUserToGroup": {
+            "$ref": "./examples/WebPubSub_AddUserToGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebPubSub_RemoveUserFromGroup",
+        "summary": "Remove a user from the target group.",
+        "description": "Remove a user from the target group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "group",
+            "in": "path",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^(?!\\s+$).+$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Target user Id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSub_RemoveUserFromGroup": {
+            "$ref": "./examples/WebPubSub_RemoveUserFromGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddToGroupsRequest": {
+      "type": "object",
+      "description": "The request object containing targets groups and a connection filter",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "A list of groups which target connections will be added into",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "type": "string",
+          "description": "An OData filter which target connections satisfy"
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ClientTokenResponse": {
+      "type": "object",
+      "description": "The response object containing the token for the client",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The token value for the WebSocket client to connect to the service"
+        }
+      }
+    },
+    "ContentType": {
+      "type": "string",
+      "description": "Content type for upload",
+      "enum": [
+        "application/json",
+        "application/octet-stream",
+        "text/plain"
+      ],
+      "x-ms-enum": {
+        "name": "ContentType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "application/json",
+            "value": "application/json",
+            "description": "Content Type 'application/json'"
+          },
+          {
+            "name": "application/octet-stream",
+            "value": "application/octet-stream",
+            "description": "Content Type 'application/octet-stream'"
+          },
+          {
+            "name": "text/plain",
+            "value": "text/plain",
+            "description": "Content Type 'text/plain'"
+          }
+        ]
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "GroupMember": {
+      "type": "object",
+      "properties": {
+        "connectionId": {
+          "type": "string",
+          "description": "A unique identifier of a connection."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The user ID of the connection. A user can have multiple connections."
+        }
+      },
+      "required": [
+        "connectionId"
+      ]
+    },
+    "GroupMemberPagedValues": {
+      "type": "object",
+      "description": "Represents a page of elements as a LIST REST API result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GroupMember items on this page",
+          "items": {
+            "$ref": "#/definitions/GroupMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A more specific error code than was provided by the containing error."
+        },
+        "inner": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "RemoveFromGroupsRequest": {
+      "type": "object",
+      "description": "The request object containing targets groups and a connection filter",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "A list of groups which target connections will be removed from",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "type": "string",
+          "description": "An OData filter which target connections satisfy"
+        }
+      }
+    },
+    "WebPubSubClientType": {
+      "type": "string",
+      "description": "The type of Web PubSub client.",
+      "enum": [
+        "Default",
+        "MQTT"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubClientType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default Web PubSub client type"
+          },
+          {
+            "name": "MQTT",
+            "value": "MQTT",
+            "description": "MQTT Web PubSub client type"
+          }
+        ]
+      }
+    },
+    "WebPubSubPermission": {
+      "type": "string",
+      "description": "Web PubSub permission types.",
+      "enum": [
+        "sendToGroup",
+        "joinLeaveGroup"
+      ],
+      "x-ms-enum": {
+        "name": "WebPubSubPermission",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "sendToGroup",
+            "value": "sendToGroup",
+            "description": "Permission to send messages to a group"
+          },
+          {
+            "name": "joinLeaveGroup",
+            "value": "joinLeaveGroup",
+            "description": "Permission to join or leave a group"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
