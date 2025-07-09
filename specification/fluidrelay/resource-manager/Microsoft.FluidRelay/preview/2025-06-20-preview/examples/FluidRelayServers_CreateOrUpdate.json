@@ -45,7 +45,23 @@
           "provisioningState": "Succeeded",
           "sharedKeyAccess": "Enabled",
           "privateKeyAccess": "Disabled",
-          "publicNetworkAccess": "Enabled"
+          "publicNetworkAccess": "Enabled",
+          "privateEndpointConnections ": [
+            {
+              "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer/privateEndpointConnections/myPrivateEndpointConnection",
+              "properties": {
+                "privateEndpoint": {
+                  "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                },
+                "groupIds": ["FluidRelayServers"],
+                "privateLinkServiceConnectionState": {
+                  "status": "Pending",
+                  "description": "Please approve my request, thanks.",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
         }
       }
     }
