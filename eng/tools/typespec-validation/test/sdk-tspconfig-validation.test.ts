@@ -32,6 +32,7 @@ import {
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
+  TspConfigTsDpIsModularLibraryRequiredSubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
@@ -258,6 +259,15 @@ const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
   [new TspConfigTsMlcDpPackageNameMatchPatternSubRule()],
   false,
   { "is-modular-library": true }, // Additional option added
+);
+
+const tsDpIsModularLibraryRequiredTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "is-modular-library",
+  true,
+  "true",
+  [new TspConfigTsDpIsModularLibraryRequiredSubRule()],
 );
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -657,6 +667,7 @@ describe("tspconfig", function () {
     ...tsDpPackageDirTestCases,
     ...tsDpPackageNameTestCases,
     ...tsDpModularPackageNameTestCases,
+    ...tsDpIsModularLibraryRequiredTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
