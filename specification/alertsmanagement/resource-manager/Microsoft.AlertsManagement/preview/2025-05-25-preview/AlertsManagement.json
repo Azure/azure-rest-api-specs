@@ -1842,6 +1842,26 @@
         }
       }
     },
+    "alertEnrichmentProperties": {
+      "type": "object",
+      "description": "Properties of the alert enrichment item.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id (GUID) of the alert for which the enrichments are being retrieved.",
+          "readOnly": true
+        },
+        "enrichments": {
+          "type": "array",
+          "description": "Enrichment details",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentItem"
+          },
+          "x-ms-identifiers": [
+          ]
+        }
+      }
+    },
     "customProperties": {
       "type": "object",
       "description": "Custom properties that can hold any user defined key-value pairs",
