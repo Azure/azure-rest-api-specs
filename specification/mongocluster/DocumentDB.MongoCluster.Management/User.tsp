@@ -120,6 +120,11 @@ union EntraPrincipalType {
 union UserRole {
   string,
 
+  /** Datbase owner role permissions on the target scope. */
+  @removed(Versions.v2025_07_01_preview)
+  DatabaseOwner: "dbOwner",
+
   /** Root role permissions on the target scope. */
+  @added(Versions.v2025_07_01_preview)
   Root: "root",
 }
