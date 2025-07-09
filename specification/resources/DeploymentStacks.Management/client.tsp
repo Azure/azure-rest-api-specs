@@ -4,11 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Resources.DeploymentStacks;
 
-@@clientName(Microsoft.Resources.DeploymentStacks,
-  "DeploymentStacksMgmtClient",
-  "python"
-);
-
 @@clientName(DeploymentParameter, "DeploymentParameterItem", "csharp"); // .NET SDK validation: cannot end in "Parameter"
 @@clientName(DeploymentStackTemplateDefinition,
   "DeploymentStackTemplateExportResult",
