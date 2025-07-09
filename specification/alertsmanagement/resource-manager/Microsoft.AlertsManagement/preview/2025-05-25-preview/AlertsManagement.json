@@ -1792,6 +1792,56 @@
         }
       }
     },
+    "PrometheusInstantQuery": {
+      "x-ms-discriminator-value": "PrometheusInstantQuery",
+      "type": "object",
+      "description": "Prometheus instant query enrichment object.",
+      "required": [
+        "time"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "The date and the time of the evaluation."
+        }
+      }
+    },
+    "PrometheusRangeQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "PrometheusRangeQuery",
+      "description": "Prometheus instant query enrichment object.",
+      "required": [
+        "start",
+        "end",
+        "step"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "The start evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "description": "The end evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "step": {
+          "type": "string",
+          "description": "Query resolution step width in ISO8601 format."
+        }
+      }
+    },
     "customProperties": {
       "type": "object",
       "description": "Custom properties that can hold any user defined key-value pairs",
