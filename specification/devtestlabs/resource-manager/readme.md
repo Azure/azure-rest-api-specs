@@ -51,7 +51,7 @@ suppressions:
     from: DTL.json
     reason: This is already released to customers, hence suppressing the rule for compatibility
   - code: AvoidAdditionalProperties
-   where:
+    where:
       - $.definitions.ParametersValueFileInfo.properties.parametersValueInfo
       - $.definitions.ArmTemplateInfo.properties.template
       - $.definitions.ArmTemplateInfo.properties.parameters
