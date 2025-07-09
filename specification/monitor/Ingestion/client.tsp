@@ -9,4 +9,4 @@ namespace ClientCustomizations;
 @@access(upload, Access.internal, "python");
 
 
-@@client(LogsIngestion, {}, "java");
+@@client(LogsIngestion, {}, "!java");
