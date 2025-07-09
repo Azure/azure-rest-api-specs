@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  reason: Only Python emits from this directory.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - tspconfig.yaml
