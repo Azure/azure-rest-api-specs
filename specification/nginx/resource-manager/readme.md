@@ -42,14 +42,14 @@ input-file:
 suppressions:
   - code: GetCollectionResponseSchema
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{deploymentName}/wafPolicies"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"].get
     reason: This is by design to avoid high bandwidth consumption as agreed with the partner
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/apiKeys/{apiKeyName}"].put
   - code: PutRequestResponseSchemeArm
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/configurations/{configurationName}"].put
     reason: This is by design. We do not return provided file contents in the response. 
   - code: PutResponseCodes
     from: openapi.json
