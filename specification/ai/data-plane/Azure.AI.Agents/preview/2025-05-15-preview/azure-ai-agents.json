@@ -7033,11 +7033,8 @@
       "description": "The details for required tool call approval that must be submitted for an agent thread run to continue.",
       "properties": {
         "submit_tool_approval": {
-          "type": "array",
+          "$ref": "#/definitions/SubmitToolApprovalDetails",
           "description": "The details describing tools that should be approved to continue run.",
-          "items": {
-            "$ref": "#/definitions/RequiredToolCall"
-          },
           "x-ms-client-name": "submitToolApproval"
         }
       },
