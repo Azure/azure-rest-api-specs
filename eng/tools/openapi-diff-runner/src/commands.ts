@@ -29,10 +29,7 @@ import { appendMarkdownToLog } from "./utils/oad-message-processor.js";
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 
 /**
- * The function validateBreakingChange() is executed with type SameVersion or CrossVersion, by
- * corresponding runScript functions in:
- * - breakingChangeValidationPipeline.ts
- * - crossVersionBreakingChangeValidationPipeline.ts
+ * The function validateBreakingChange() is executed with type SameVersion or CrossVersion
  *
  * Most importantly, this function does the following:
  *
@@ -42,17 +39,12 @@ import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking
  *     detect-breaking-change.checkCrossVersionBreakingChange(),
  *   depending on the input type.
  *
- * 2. Saves the PR context to the unified pipeline store ("pipe.log" file) in call to:
- *     oadTracer.save(context.contextConfig() as PRContext);
- *   Note that this does not save the OAD messages to the unified pipeline store.
- *   Instead, they are saved to unified pipeline store within step 1.
+ * 2. Gernerate markdown report
  *
- * 3. Adds "review required" labels to ADO pipeline variable, in call to:
+ * 3. Compute "review required" labels to be added in the PR in call to:
  *     ruleManager.addBreakingChangeLabelsToBeAdded(comparisonType);
  *
- * 4. Outputs full list of the OAD messages to build log for human review, in call to:
- *     logFullOadMessagesList()
- * TODO: add breaking change labels
+ * 4. Outputs full list of the OAD messages to build log for human review,
  */
 export async function validateBreakingChange(context: Context): Promise<number> {
   let statusCode: number = 0;

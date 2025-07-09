@@ -9,6 +9,10 @@ export function blobHref(file: unknown): string {
     const repoName = process.env.GITHUB_HEAD_REPOSITORY || process.env.GITHUB_REPOSITORY;
     // GITHUB_EVENT_PULL_REQUEST_HEAD_SHA is the pull request head commit SHA and GITHUB_SHA is the merge commit SHA
     const sha = process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA || process.env.GITHUB_SHA;
+    logMessage(
+      `env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: ${process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}`,
+    );
+    logMessage(`env.GITHUB_SHA: ${process.env.GITHUB_SHA}`);
     return `https://github.com/${repoName}/blob/${sha}/${file}`;
   }
 
