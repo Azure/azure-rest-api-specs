@@ -3,7 +3,7 @@
 import { readFile } from "fs/promises";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
 export default async function generateJobSummary({ core }) {
@@ -18,14 +18,20 @@ export default async function generateJobSummary({ core }) {
   let content;
 
   try {
+    core.info(`readfile(${avocadoOutputFile})`);
     content = await readFile(avocadoOutputFile, { encoding: "utf-8" });
-  } catch {
-    // If we can't read the file, the previous step must have failed catastrophically, so don't
-    // even try to generate a summary.
+    core.info(`content:\n${content}`);
+  } catch (error) {
+    // If we can't read the file, the previous step must have failed catastrophically.
+    // generateJobSummary() should never fail, so just log the error and return
+    core.info(`Error reading '${avocadoOutputFile}': ${error}`);
     return;
   }
 
-  // TODO: Replace with table similar to old check
+  // TODO
+  // 1. Parse content to an array of MessageRecord (copied from alps)
+  // 2. Generate markdown table from objects
+
   core.summary.addCodeBlock(content);
 
   core.summary.write();
