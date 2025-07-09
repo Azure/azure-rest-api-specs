@@ -43,7 +43,8 @@ User can provide comments directly in chat with context:
 
 **Enforcement:**
 - Before making any code changes, always copy and fill out the comment analysis template below for each review comment.
-- If a review comment requests a snake_case name, explicitly document the correct TypeSpec camelCase name in your analysis.
+- If a review comment requests a snake_case name, explicitly document the correct TypeSpec camelCase/PascalCase name in your analysis.
+  - **client decorator target values must ALWAYS follow TypeSpec conventions: PascalCase for interfaces/classes, camelCase for operations/properties.**
 
 **Extract and analyze using the same template:**
 
@@ -71,20 +72,23 @@ User can provide comments directly in chat with context:
 **IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
 **IMPORTANT**: Follow TypeSpec conventions and best practices for naming and structure.
 
-**Required template:**
+**Critical Naming Convention Rule:**
+When using `@@clientName`, the target name (second parameter) must follow TypeSpec conventions:
+- **Interfaces/Classes**: PascalCase (e.g., "Entities", "Relationships", "HealthModels")
+- **Operations/Methods**: camelCase (e.g., "getEntity", "listSignals")
+- **Properties**: camelCase (e.g., "entityName", "signalData")
+- The Python generator will automatically convert these to snake_case in the generated SDK
+
+**Examples of CORRECT target naming:**
 ```tsp
-import "@azure-tools/typespec-client-generator-core";
-import "@typespec/versioning";  // Required for versioned services
-import "./main.tsp";
-using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;      // Required for @useDependency
+// ✅ CORRECT - Interface renamed to PascalCase
+@@clientName(Namespace.EntityOperations, "Entities", "python");
 
-@useDependency(YourService.Versions.vYOUR_VERSION)  // Required for versioned namespaces
-namespace ClientCustomizations;
+// ✅ CORRECT - Operation renamed to camelCase  
+@@clientName(Namespace.SomeInterface.get_something, "getSomething", "python");
 
-// Your customizations here
-@@clientName(Target, "NewName", "python");
-@@clientNamespace(Namespace, "NewNamespace", "python");
+// ❌ WRONG - Using snake_case (target language convention) for TypeSpec target
+@@clientName(Namespace.EntityOperations, "entities", "python");
 ```
 
 ### Scenario 1: Operations Directly on Client
@@ -242,8 +246,6 @@ interface RadiologyInsightsClient {
 
 ## Step 4: Implementation Process
 
-**IMPORTANT**: Check that planned changes are ACTUALLY implemented.
-
 1. **ANALYZE** using Step 2 Comment Analysis template:
    ```
    **Comment**: [exact quote]
@@ -257,6 +259,17 @@ interface RadiologyInsightsClient {
 2. **LIST** all planned changes as bullet points
 3. **CONFIRM** with user before making ANY changes
 4. **IMPLEMENT** changes in this order:
+   - `client.tsp` (naming/access customizations)
+   - Other `.tsp` files only if listed in exceptions section
+
+## CRITICAL ENFORCEMENT CHECKPOINT
+**BEFORE moving to validation, STOP and verify:**
+- [ ] Did I actually call `create_file` or `replace_string_in_file` or `insert_edit_into_file`?
+- [ ] Can I see my changes reflected in the file content?
+- [ ] Are the exact planned changes present in the code?
+- [ ] Do target names follow TypeSpec conventions (PascalCase for interfaces, camelCase for operations/properties)?
+
+**If ANY answer is NO, implement immediately before continuing.**
    - `client.tsp` second (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
 
