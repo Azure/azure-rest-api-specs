@@ -1,38 +1,60 @@
-import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
 
 namespace Azure.Messaging.WebPubSub;
 
-/** The type of Web PubSub client. */
-union WebPubSubClientType {
-  string,
+/**
+ * Details about the client.
+ */
+model ClientDetail {
+  /** User Id */
+  userId?: string;
 
-  /** Default Web PubSub client type */
-  Default: "Default",
-
-  /** MQTT Web PubSub client type */
-  MQTT: "MQTT",
+  /** Roles that the connection with the user id has */
+  roles?: string[];
 }
 
-/** Web PubSub permission types. */
-union WebPubSubPermission {
-  string,
+/**
+ * The response object containing the client access token
+ */
+model ClientTokenResponse {
+  /** Access token for the client to connect Azure Web PubSub service */
+  token?: string;
+}
 
-  /** Permission to send messages to a group */
-  sendToGroup: "sendToGroup",
+/**
+ * Request object to add connections to groups
+ */
+model AddToGroupsRequest {
+  /** Target groups */
+  groups?: string[];
 
-  /** Permission to join or leave a group */
-  joinLeaveGroup: "joinLeaveGroup",
+  /** Following OData filter syntax to filter out the subscribers receiving the messages */
+  filter?: string;
+}
+
+/**
+ * Request object to remove connections from groups
+ */
+model RemoveFromGroupsRequest {
+  /** Target groups */
+  groups?: string[];
+
+  /** Following OData filter syntax to filter out the subscribers receiving the messages */
+  filter?: string;
 }
 
 /**
  * Content type for upload
  */
 union ContentType {
+  string,
+
   /**
    * Content Type 'application/json'
    */
@@ -50,107 +72,94 @@ union ContentType {
 }
 
 /**
- * The request object containing targets groups and a connection filter
+ * Content type for HTTP headers in message operations (closed union for HTTP compliance)
  */
-model AddToGroupsRequest {
+// @azure-tools/typespec-azure-core/no-closed-literal-union - Intentionally closed for HTTP Content-Type header compliance
+union MessageContentType {
   /**
-   * A list of groups which target connections will be added into
+   * Content Type 'application/json'
    */
-  groups?: string[];
+  "application/json",
 
   /**
-   * An OData filter which target connections satisfy
+   * Content Type 'application/octet-stream'
    */
-  filter?: string;
+  "application/octet-stream",
+
+  /**
+   * Content Type 'text/plain'
+   */
+  "text/plain",
 }
 
 /**
- * The error object.
+ * Content type for response headers (closed union for HTTP compliance)
  */
-@error
-model ErrorDetail {
+// @azure-tools/typespec-azure-core/no-closed-literal-union - Intentionally closed for HTTP Content-Type header compliance
+union ResponseContentType {
   /**
-   * One of a server-defined set of error codes.
+   * Content Type 'application/json'
    */
-  code?: string;
+  "application/json",
 
   /**
-   * A human-readable representation of the error.
+   * Content Type 'text/json'
    */
-  message?: string;
-
-  /**
-   * The target of the error.
-   */
-  target?: string;
-
-  /**
-   * An array of details about specific errors that led to this reported error.
-   */
-  details?: ErrorDetail[];
-
-  /**
-   * Detailed error
-   */
-  inner?: InnerError;
+  "text/json",
 }
 
 /**
- * Detailed error
- */
-model InnerError {
-  /**
-   * A more specific error code than was provided by the containing error.
-   */
-  code?: string;
-
-  /**
-   * Detailed error
-   */
-  inner?: InnerError;
-}
-
-/**
- * The response object containing the token for the client
- */
-model ClientTokenResponse {
-  /**
-   * The token value for the WebSocket client to connect to the service
-   */
-  token?: string;
-}
-
-/**
- * The request object containing targets groups and a connection filter
- */
-model RemoveFromGroupsRequest {
-  /**
-   * A list of groups which target connections will be removed from
-   */
-  groups?: string[];
-
-  /**
-   * An OData filter which target connections satisfy
-   */
-  filter?: string;
-}
-
-/**
- * Represents a page of elements as a LIST REST API result.
- */
-model GroupMemberPagedValues is Azure.Core.Page<GroupMember>;
-
-/**
- * Represents a member in a group.
+ * Group member
  */
 model GroupMember {
-  /**
-   * A unique identifier of a connection.
-   */
-  connectionId: string;
-
-  /**
-   * The user ID of the connection. A user can have multiple connections.
-   */
+  /** User Id */
   userId?: string;
+}
+
+/**
+ * Paged response for group members
+ */
+model GroupMemberPagedValues {
+  /** The group members */
+  value?: GroupMember[];
+
+  /** The link to the next page of results */
+  nextLink?: string;
+}
+
+/**
+ * Error detail information.
+ */
+model InnerError {
+  /** Error code. */
+  code?: string;
+
+  /** Error message. */
+  message?: string;
+}
+
+/**
+ * Web PubSub permission
+ */
+union WebPubSubPermission {
+  string,
+
+  /** The permission to send messages to groups. */
+  SendToGroup: "sendToGroup",
+
+  /** The permission to join/leave groups. */
+  JoinLeaveGroup: "joinLeaveGroup",
+}
+
+/**
+ * Web PubSub client type
+ */
+union WebPubSubClientType {
+  string,
+
+  /** Default value. */
+  Default: "Default",
+
+  /** MQTT client. */
+  MQTT: "mqtt",
 }

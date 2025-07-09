@@ -126,8 +126,8 @@ interface WebPubSubOperationGroup {
       clientType?: WebPubSubClientType = WebPubSubClientType.Default;
     },
     ClientTokenResponse & {
-      @header
-      contentType: "application/json" | "text/json";
+      @header("content-type")
+      contentType: ResponseContentType;
     }
   >;
 
@@ -199,8 +199,8 @@ interface WebPubSubOperationGroup {
       /**
        * Upload file type
        */
-      @header
-      `content-type`: ContentType;
+      @header("content-type")
+      contentType: MessageContentType;
 
       /**
        * The payload body.
@@ -306,8 +306,8 @@ interface WebPubSubOperationGroup {
       /**
        * Upload file type
        */
-      @header
-      `content-type`: ContentType;
+      @header("content-type")
+      contentType: MessageContentType;
 
       /**
        * The payload body.
@@ -464,8 +464,8 @@ interface WebPubSubOperationGroup {
       /**
        * Upload file type
        */
-      @header
-      `content-type`: ContentType;
+      @header("content-type")
+      contentType: MessageContentType;
 
       /**
        * The payload body.
@@ -830,8 +830,8 @@ interface WebPubSubOperationGroup {
       /**
        * Upload file type
        */
-      @header
-      `content-type`: ContentType;
+      @header("content-type")
+      contentType: MessageContentType;
 
       /**
        * The payload body.
