@@ -1,15 +1,6 @@
 import { PER_PAGE_MAX } from "./github.js";
 
 /**
- * @typedef {Object} CommentOrUpdateOptions
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @property {string} owner - The repository owner.
- * @property {string} repo - The repository name.
- * @property {number} issue_number - The issue or pull request number.
- * @property {string} body - The markdown content of the comment.
- */
-
-/**
  * Given a set of comments from an issue (or PR) for a specific user, grab the one that contains the specified comment group name.
  *
  * If the comment group name is not found, this function should return undefined.
@@ -47,7 +38,8 @@ export function parseExistingComments(comments, commentGroupName) {
  * Creates a new issue comment or updates an existing one.
  *
  *
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {typeof import("@actions/core")} core
  * @param {string} owner - The repository owner.
  * @param {string} repo - The repository name.
  * @param {number} issue_number - The issue or pull request number.
@@ -56,7 +48,8 @@ export function parseExistingComments(comments, commentGroupName) {
  * @returns {Promise<void>} Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
-  { github, core },
+  github,
+  core,
   owner,
   repo,
   issue_number,
@@ -106,7 +99,7 @@ export async function commentOrUpdate(
       });
       core.info(`Created new comment #${newComment.id}`);
     }
-  } catch (error) {
+  } catch (/** @type {any} */ error) {
     core.setFailed(`Failed to comment or update: ${error.message}`);
   }
 }

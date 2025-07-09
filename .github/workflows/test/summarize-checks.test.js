@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createNextStepsComment, summarizeChecksImpl } from "../src/summarize-checks/summarize-checks.js";
-import { createMockCore, createMockGithub } from "./mocks.js";
+import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
@@ -8,28 +8,7 @@ const mockCore = createMockCore();
 describe("summarizeChecksImpl", () => {
   describe("next steps comment rendering", () => {
     it("Should generate summary for a mockdata PR scenario", async () => {
-      const mockGithub = createMockGithub();
-      const owner = "Azure";
       const repo = "azure-rest-api-specs";
-      const issue_number = 35629;
-      const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
-      const event_name = "pull_request";
-      const mockContext = {
-        repo: {
-          owner: owner,
-          repo: repo,
-        },
-        payload: {
-          action: "opened",
-          pull_request: {
-            number: issue_number,
-            head: {
-              sha: head_sha,
-            },
-          },
-        },
-        eventName: event_name,
-      };
       const targetBranch = "main";
       const labelNames = [
         "Cognitive Services",
@@ -213,11 +192,9 @@ describe("summarizeChecksImpl", () => {
       ];
 
       const output = await createNextStepsComment(
-        { github: mockGithub, context: mockContext, core: mockCore },
-        owner,
+        mockCore,
         repo,
         labelNames,
-        issue_number,
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
@@ -227,28 +204,7 @@ describe("summarizeChecksImpl", () => {
     });
 
     it("should generate pending summary for no matched check suites", async () => {
-      const mockGithub = createMockGithub();
-      const owner = "Azure";
       const repo = "azure-rest-api-specs";
-      const issue_number = 35629;
-      const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
-      const event_name = "pull_request";
-      const mockContext = {
-        repo: {
-          owner: owner,
-          repo: repo,
-        },
-        payload: {
-          action: "opened",
-          pull_request: {
-            number: issue_number,
-            head: {
-              sha: head_sha,
-            },
-          },
-        },
-        eventName: event_name,
-      };
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
@@ -256,11 +212,9 @@ describe("summarizeChecksImpl", () => {
       const expectedOutput = "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
 
       const output = await createNextStepsComment(
-        { github: mockGithub, context: mockContext, core: mockCore },
-        owner,
+        mockCore,
         repo,
         labelNames,
-        issue_number,
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
@@ -270,28 +224,7 @@ describe("summarizeChecksImpl", () => {
     });
 
     it("should generate success summary for all completed check suites", async () => {
-      const mockGithub = createMockGithub();
-      const owner = "Azure";
       const repo = "azure-rest-api-specs";
-      const issue_number = 35629;
-      const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
-      const event_name = "pull_request";
-      const mockContext = {
-        repo: {
-          owner: owner,
-          repo: repo,
-        },
-        payload: {
-          action: "opened",
-          pull_request: {
-            number: issue_number,
-            head: {
-              sha: head_sha,
-            },
-          },
-        },
-        eventName: event_name,
-      };
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
@@ -457,11 +390,9 @@ describe("summarizeChecksImpl", () => {
       ];
 
       const output = await createNextStepsComment(
-        { github: mockGithub, context: mockContext, core: mockCore },
-        owner,
+        mockCore,
         repo,
         labelNames,
-        issue_number,
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
@@ -471,28 +402,7 @@ describe("summarizeChecksImpl", () => {
     });
 
     it("should generate pending summary when checks are in progress", async () => {
-      const mockGithub = createMockGithub();
-      const owner = "Azure";
       const repo = "azure-rest-api-specs";
-      const issue_number = 35629;
-      const head_sha = "c12f0191c34212c4e6be88121d132ccb0a7f560c";
-      const event_name = "pull_request";
-      const mockContext = {
-        repo: {
-          owner: owner,
-          repo: repo,
-        },
-        payload: {
-          action: "opened",
-          pull_request: {
-            number: issue_number,
-            head: {
-              sha: head_sha,
-            },
-          },
-        },
-        eventName: event_name,
-      };
       const targetBranch = "main";
       const labelNames = [];
       const fyiCheckRuns = [];
@@ -538,11 +448,9 @@ describe("summarizeChecksImpl", () => {
       ];
 
       const output = await createNextStepsComment(
-        { github: mockGithub, context: mockContext, core: mockCore },
-        owner,
+        mockCore,
         repo,
         labelNames,
-        issue_number,
         targetBranch,
         requiredCheckRuns,
         fyiCheckRuns,
@@ -582,7 +490,9 @@ describe("summarizeChecksImpl", () => {
 
         await expect(
           summarizeChecksImpl(
-            { github, context: mockContext, core: mockCore },
+            github,
+            mockContext,
+            mockCore,
             owner,
             repo,
             issue_number,
