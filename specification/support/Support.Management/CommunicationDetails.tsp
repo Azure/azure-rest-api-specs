@@ -44,7 +44,7 @@ model CommunicationsListResult {
    * [Placeholder] Description for value property
    */
   @items
-  value: CommunicationDetails[];
+  value?: CommunicationDetails[];
 }
 
 @armResourceOperations

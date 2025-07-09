@@ -43,7 +43,7 @@ model SupportTicketsListResult {
    * [Placeholder] Description for value property
    */
   @items
-  value: SupportTicketDetails[];
+  value?: SupportTicketDetails[];
 }
 
 @armResourceOperations

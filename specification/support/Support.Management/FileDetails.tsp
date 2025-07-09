@@ -40,7 +40,7 @@ model FilesListResult {
    * [Placeholder] Description for value property
    */
   @items
-  value: FileDetails[];
+  value?: FileDetails[];
 }
 
 @armResourceOperations

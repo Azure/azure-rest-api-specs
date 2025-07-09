@@ -41,7 +41,7 @@ model ChatTranscriptsListResult {
    * [Placeholder] Description for value property
    */
   @items
-  value: ChatTranscriptDetails[];
+  value?: ChatTranscriptDetails[];
 }
 
 @armResourceOperations
