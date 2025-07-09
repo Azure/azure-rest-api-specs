@@ -23,16 +23,6 @@ jobs:
         value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
     steps:
-      - bash: |
-          gh api repos/Azure/$(Build.Repository.Name)/statuses/$(Build.SourceVersion) \
-            -f state='pending' \
-            -f target_url='$(CurrentBuildUrl)' \
-            -f description='Starting build' \
-            -f context='Swagger ApiDocPreview'
-        displayName: 'Set PR status to pending'
-        env:
-          GH_TOKEN: $(azuresdk-github-pat)
-
       # TODO: Use sparse checkout instead
       - checkout: self
         # Fetch depth required to get list of changed files
@@ -49,6 +39,16 @@ jobs:
               # TODO: use main
               Commitish: refs/heads/doc-preview-migration-test
               WorkingDirectory: AzureRestPreview
+
+      - bash: |
+          gh api repos/Azure/$(Build.Repository.Name)/statuses/$(git rev-parse HEAD) \
+            -f state='pending' \
+            -f target_url='$(CurrentBuildUrl)' \
+            -f description='Starting build' \
+            -f context='Swagger ApiDocPreview'
+        displayName: 'Set PR status to pending'
+        env:
+          GH_TOKEN: $(azuresdk-github-pat)
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
 
