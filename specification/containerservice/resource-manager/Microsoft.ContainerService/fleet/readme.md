@@ -47,14 +47,6 @@ suppressions:
     from: fleets.json
     where: $.definitions.FleetMemberUpdateProperties.properties.labels
     reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
-  - code: AllTrackedResourcesMustHaveDelete
-    from: fleets.json
-    where: $.definitions.Gate
-    reason: Put and Delete Gate APIs are only called by the service internally, not by customers.
-  - code: TrackedResourcesMustHavePut
-    from: fleets.json
-    where: $.definitions.Gate
-    reason: Put and Delete Gate APIs are only called by the service internally, not by customers.
 ```
 
 ### Tag: package-2025-03-01
@@ -169,7 +161,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
