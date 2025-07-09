@@ -62,9 +62,9 @@ export async function main() {
   if (resultArtifactData.status != "Succeeded") {
     console.log(`Build failed: ${resultArtifactData.status}`);
 
-    console.log(`##[task.setvariable variable=CheckUrl]${buildLink}`);
-    console.log("##[task.setvariable variable=CheckDescription]Docs build failed");
-    console.log(`##[task.setvariable variable=CheckState]failure`);
+    console.log(`##vso[task.setvariable variable=CheckUrl]${buildLink}`);
+    console.log("##vso[task.setvariable variable=CheckDescription]Docs build failed");
+    console.log(`##vso[task.setvariable variable=CheckState]failure`);
     console.log(`Raw output:\n${resultArtifactRaw}`);
     console.log(`Build details: ${buildLink}`);
     return;
@@ -73,9 +73,9 @@ export async function main() {
   console.log(`Build completed successfully.`);
 
   const docsPreviewUrl = `https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=${encodeURIComponent(resultArtifactData.branch)}&view=azure-rest-preview`
-  console.log(`##[task.setvariable variable=CheckUrl]${docsPreviewUrl}`);
-  console.log("##[task.setvariable variable=CheckDescription]Docs build succeeded");
-  console.log(`##[task.setvariable variable=CheckState]success`);
+  console.log(`##vso[task.setvariable variable=CheckUrl]${docsPreviewUrl}`);
+  console.log("##vso[task.setvariable variable=CheckDescription]Docs build succeeded");
+  console.log(`##vso[task.setvariable variable=CheckState]success`);
   console.log(`Docs preview URL: ${docsPreviewUrl}`);
 }
 
