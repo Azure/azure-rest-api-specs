@@ -7,3 +7,5 @@ using LogsIngestion;
 namespace ClientCustomizations;
 
 @@access(upload, Access.internal, "python");
+
+@@clientName(LogsIngestion, "Client", "go");

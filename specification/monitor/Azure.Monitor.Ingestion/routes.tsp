@@ -15,20 +15,20 @@ namespace LogsIngestion;
 @post
 op upload is Azure.Core.Foundations.Operation<
   {
-    @doc("The immutable ID of the Data Collection Rule resource.")
+    /** The immutable ID of the Data Collection Rule resource. */
     @path
     ruleId: string;
 
-    @doc("The streamDeclaration name as defined in the Data Collection Rule.")
+    /** The streamDeclaration name as defined in the Data Collection Rule. */
     @path("stream")
     streamName: string;
 
-    @doc("The content encoding of the request body which is always 'gzip'.")
+    /** The content encoding of the request body which is always 'gzip'. */
     @header("Content-Encoding")
     contentEncoding?: string;
 
+    /** The array of objects matching the schema defined by the provided stream. */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
-    @doc("The array of objects matching the schema defined by the provided stream.")
     @body
     body: Record<unknown>[];
 

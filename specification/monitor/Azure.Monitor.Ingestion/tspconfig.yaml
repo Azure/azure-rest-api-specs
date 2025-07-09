@@ -26,3 +26,20 @@ options:
     package-dir: "azure-monitor-ingestion"
     namespace: com.azure.monitor.ingestion
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/ingestion"
+    package-dir: "azlogs"
+    emitter-output-dir: "{project-root}"
+    inject-spans: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Monitor.Ingestion"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "monitor-ingestion"
+    package-details:
+      name: "@azure/monitor-ingestion"
+      description: "Azure Monitor Ingestion library"
+    flavor: azure
