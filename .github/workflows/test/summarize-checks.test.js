@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createNextStepsComment, summarizeChecksImpl } from "../src/summarize-checks.js";
+import { createNextStepsComment, summarizeChecksImpl } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 

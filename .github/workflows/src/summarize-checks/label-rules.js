@@ -624,7 +624,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri3Blockers);
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} repo
  * @param {string} owner
  * @param {string[]} existingLabels
@@ -668,7 +668,7 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
 }
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} labels
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
  * @returns {Promise<RequiredLabelRule[]>}
@@ -688,7 +688,7 @@ export async function getViolatedRequiredLabelsRules(
 }
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule

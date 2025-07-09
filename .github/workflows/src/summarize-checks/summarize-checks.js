@@ -19,11 +19,11 @@
 */
 
 // #region imports/constants
-import { extractInputs } from "./context.js";
+import { extractInputs } from "../context.js";
 // eslint-disable-next-line no-unused-vars
-import { commentOrUpdate } from "./comment.js";
-import { PER_PAGE_MAX } from "./github.js";
-import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./summarize-checks/label-rules.js";
+import { commentOrUpdate } from "../comment.js";
+import { PER_PAGE_MAX } from "../github.js";
+import { verRevApproval, brChRevApproval, getViolatedRequiredLabelsRules } from "./label-rules.js";
 
 import {
   brchTsg,
@@ -33,7 +33,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
-} from "./summarize-checks/tsgs.js";
+} from "./tsgs.js";
 
 /**
  * @typedef {Object} CheckMetadata
@@ -52,7 +52,7 @@ import {
  */
 
 /**
- * @typedef {import("./summarize-checks/label-rules.js").RequiredLabelRule} RequiredLabelRule
+ * @typedef {import("./label-rules.js").RequiredLabelRule} RequiredLabelRule
  */
 
 // Placing these configuration items here until we decide another way to pull them in.
