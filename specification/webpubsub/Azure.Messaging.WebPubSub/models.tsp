@@ -32,21 +32,21 @@ union WebPubSubPermission {
 /**
  * Content type for upload
  */
-enum ContentType {
+union ContentType {
   /**
    * Content Type 'application/json'
    */
-  `application/json`,
+  "application/json",
 
   /**
    * Content Type 'application/octet-stream'
    */
-  `application/octet-stream`,
+  "application/octet-stream",
 
   /**
    * Content Type 'text/plain'
    */
-  `text/plain`,
+  "text/plain",
 }
 
 /**
