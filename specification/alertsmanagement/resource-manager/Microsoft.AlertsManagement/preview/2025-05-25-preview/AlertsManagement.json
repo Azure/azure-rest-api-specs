@@ -6,15 +6,9 @@
     "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -87,9 +81,7 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK. Successfully listed alert objects.",
@@ -119,9 +111,7 @@
         "operationId": "Alerts_GetByIdTenant",
         "summary": "Get a specific alert.",
         "description": "Get information related to a specific alert.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/alertId"
@@ -232,9 +222,7 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK. Successfully retrieved operations list.",
@@ -265,9 +253,7 @@
             "$ref": "#/parameters/identifier"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK. Successfully listed alert meta data.",
@@ -352,9 +338,7 @@
             "$ref": "#/parameters/api-version"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK. Successfully listed alert objects.",
@@ -384,9 +368,7 @@
         "operationId": "Alerts_GetById",
         "summary": "Get a specific alert.",
         "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/scope"
@@ -665,10 +647,7 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "enum": [
-        "2019-03-01",
-        "2025-05-25-preview"
-      ],
+      "enum": ["2019-03-01", "2025-05-25-preview"],
       "x-ms-enum": {
         "name": "api-version",
         "modelAsString": true
@@ -742,13 +721,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "Sev0",
-        "Sev1",
-        "Sev2",
-        "Sev3",
-        "Sev4"
-      ],
+      "enum": ["Sev0", "Sev1", "Sev2", "Sev3", "Sev4"],
       "x-ms-enum": {
         "name": "Severity",
         "modelAsString": true
@@ -777,11 +750,7 @@
       "in": "query",
       "required": true,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "New",
-        "Acknowledged",
-        "Closed"
-      ],
+      "enum": ["New", "Acknowledged", "Closed"],
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
@@ -804,11 +773,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "New",
-        "Acknowledged",
-        "Closed"
-      ],
+      "enum": ["New", "Acknowledged", "Closed"],
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
@@ -821,11 +786,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "New",
-        "Acknowledged",
-        "Closed"
-      ],
+      "enum": ["New", "Acknowledged", "Closed"],
       "x-ms-enum": {
         "name": "AlertState",
         "modelAsString": true
@@ -838,10 +799,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "Fired",
-        "Resolved"
-      ],
+      "enum": ["Fired", "Resolved"],
       "x-ms-enum": {
         "name": "MonitorCondition",
         "modelAsString": true
@@ -862,12 +820,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "1h",
-        "1d",
-        "7d",
-        "30d"
-      ],
+      "enum": ["1h", "1d", "7d", "30d"],
       "x-ms-enum": {
         "name": "TimeRange",
         "modelAsString": true
@@ -983,10 +936,7 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method",
-      "enum": [
-        "asc",
-        "desc"
-      ]
+      "enum": ["asc", "desc"]
     },
     "select": {
       "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
@@ -1002,9 +952,7 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "enum": [
-        "MonitorServiceList"
-      ],
+      "enum": ["MonitorServiceList"],
       "x-ms-enum": {
         "name": "identifier",
         "modelAsString": true
@@ -1059,9 +1007,7 @@
           }
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "AlertsManagementErrorResponse": {
       "description": "An error response from the service.",
@@ -1202,13 +1148,7 @@
           "type": "string",
           "description": "Severity of alert Sev0 being highest and Sev4 being lowest.",
           "readOnly": true,
-          "enum": [
-            "Sev0",
-            "Sev1",
-            "Sev2",
-            "Sev3",
-            "Sev4"
-          ],
+          "enum": ["Sev0", "Sev1", "Sev2", "Sev3", "Sev4"],
           "x-ms-enum": {
             "name": "Severity",
             "modelAsString": true
@@ -1218,11 +1158,7 @@
           "type": "string",
           "description": "The type of signal the alert is based on, which could be metrics, logs or activity logs.",
           "readOnly": true,
-          "enum": [
-            "Metric",
-            "Log",
-            "Unknown"
-          ],
+          "enum": ["Metric", "Log", "Unknown"],
           "x-ms-enum": {
             "name": "SignalType",
             "modelAsString": true
@@ -1232,11 +1168,7 @@
           "type": "string",
           "description": "Alert object state, which can be modified by the user.",
           "readOnly": true,
-          "enum": [
-            "New",
-            "Acknowledged",
-            "Closed"
-          ],
+          "enum": ["New", "Acknowledged", "Closed"],
           "x-ms-enum": {
             "name": "AlertState",
             "modelAsString": true
@@ -1246,10 +1178,7 @@
           "type": "string",
           "description": "Can be 'Fired' or 'Resolved', which represents whether the underlying conditions have crossed the defined alert rule thresholds.",
           "readOnly": true,
-          "enum": [
-            "Fired",
-            "Resolved"
-          ],
+          "enum": ["Fired", "Resolved"],
           "x-ms-enum": {
             "name": "MonitorCondition",
             "modelAsString": true
@@ -1386,11 +1315,7 @@
         "modificationEvent": {
           "type": "string",
           "description": "Reason for the modification",
-          "enum": [
-            "AlertCreated",
-            "StateChange",
-            "MonitorConditionChange"
-          ],
+          "enum": ["AlertCreated", "StateChange", "MonitorConditionChange"],
           "x-ms-enum": {
             "name": "AlertModificationEvent"
           }
@@ -1571,16 +1496,12 @@
     "alertsMetaDataProperties": {
       "description": "alert meta data property bag",
       "discriminator": "metadataIdentifier",
-      "required": [
-        "metadataIdentifier"
-      ],
+      "required": ["metadataIdentifier"],
       "properties": {
         "metadataIdentifier": {
           "type": "string",
           "description": "Identification of the information to be retrieved by API call",
-          "enum": [
-            "MonitorServiceList"
-          ],
+          "enum": ["MonitorServiceList"],
           "x-ms-enum": {
             "name": "metadataIdentifier",
             "modelAsString": true
@@ -1630,11 +1551,7 @@
           "type": "string",
           "description": "Smart group state",
           "readOnly": true,
-          "enum": [
-            "New",
-            "Acknowledged",
-            "Closed"
-          ],
+          "enum": ["New", "Acknowledged", "Closed"],
           "x-ms-enum": {
             "name": "State",
             "modelAsString": true
@@ -1644,13 +1561,7 @@
           "type": "string",
           "description": "Severity of smart group is the highest(Sev0 >... > Sev4) severity of all the alerts in the group.",
           "readOnly": true,
-          "enum": [
-            "Sev0",
-            "Sev1",
-            "Sev2",
-            "Sev3",
-            "Sev4"
-          ],
+          "enum": ["Sev0", "Sev1", "Sev2", "Sev3", "Sev4"],
           "x-ms-enum": {
             "name": "Severity",
             "modelAsString": true
@@ -1745,9 +1656,7 @@
     "MonitorServiceList": {
       "title": "Monitor service details",
       "description": "Monitor service details",
-      "required": [
-        "data"
-      ],
+      "required": ["data"],
       "allOf": [
         {
           "$ref": "#/definitions/alertsMetaDataProperties"
@@ -1787,191 +1696,169 @@
       }
     },
     "alertEnrichmentResponse": {
-    "description": "The alert's enrichments.",
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-      }
-    ],
-    "properties": {
+      "description": "The alert's enrichments.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "$ref": "#/definitions/alertEnrichmentProperties"
-      }
-    }
-  },
-  "alertEnrichmentsList": {
-    "description": "List the alert's enrichments.",
-    "type": "object",
-    "properties": {
-      "value": {
-        "description": "List the alert's enrichments",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/alertEnrichmentResponse"
+        "properties": {
+          "$ref": "#/definitions/alertEnrichmentProperties"
         }
-      },
-      "nextLink": {
-        "type": "string",
-        "description": "Request URL that can be used to query next page."
       }
-    }
-  },
-  "alertEnrichmentProperties": {
-    "type": "object",
-    "description": "Properties of the alert enrichment item.",
-    "properties": {
-      "alertId": {
-        "type": "string",
-        "description": "Unique Id (GUID) of the alert for which the enrichments are being retrieved.",
-        "readOnly": true
-      },
-      "enrichments": {
-        "type": "array",
-        "description": "Enrichment details",
-        "items": {
-          "$ref": "#/definitions/alertEnrichmentItem"
+    },
+    "alertEnrichmentsList": {
+      "description": "List the alert's enrichments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List the alert's enrichments",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentResponse"
+          }
         },
-        "x-ms-identifiers": []
-      }
-    }
-  },
-  "alertEnrichmentItem": {
-    "type": "object",
-    "description": "Alert enrichment item.",
-    "discriminator": "type",
-    "required": [
-      "title",
-      "description",
-      "status",
-      "type"
-    ],
-    "properties": {
-      "title": {
-        "type": "string",
-        "description": "The enrichment title."
-      },
-      "description": {
-        "type": "string",
-        "description": "The enrichment description."
-      },
-      "status": {
-        "type": "string",
-        "description": "The status of the evaluation of the enrichment.",
-        "enum": [
-          "Succeeded",
-          "Failed"
-        ],
-        "x-ms-enum": {
-          "name": "status",
-          "modelAsString": true
-        }
-      },
-      "errorMessage": {
-        "type": "string",
-        "description": "The error message. Will be present only if the status is 'Failed'."
-      },
-      "type": {
-        "type": "string",
-        "description": "The enrichment type.",
-        "enum": [
-          "PrometheusInstantQuery",
-          "PrometheusRangeQuery"
-        ],
-        "x-ms-enum": {
-          "name": "type",
-          "modelAsString": true
-        }
-      }
-    }
-  },
-  "PrometheusEnrichmentItem": {
-    "type": "object",
-    "description": "Prometheus enrichment object.",
-    "required": [
-      "linkToApi",
-      "datasources",
-      "grafanaExplorePath",
-      "query"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/alertEnrichmentItem"
-      }
-    ],
-    "properties": {
-      "linkToApi": {
-        "type": "string",
-        "description": "Link to Prometheus query API (Url format)."
-      },
-      "datasources": {
-        "type": "array",
-        "description": "An array of the azure monitor workspace resource ids.",
-        "items": {
+        "nextLink": {
           "type": "string",
-          "description": "The azure monitor workspace resource id."
+          "description": "Request URL that can be used to query next page."
+        }
+      }
+    },
+    "alertEnrichmentProperties": {
+      "type": "object",
+      "description": "Properties of the alert enrichment item.",
+      "properties": {
+        "alertId": {
+          "type": "string",
+          "description": "Unique Id (GUID) of the alert for which the enrichments are being retrieved.",
+          "readOnly": true
         },
-        "x-ms-identifiers": []
-      },
-      "grafanaExplorePath": {
-        "type": "string",
-        "description": "Partial link to the Grafana explore API."
-      },
-      "query": {
-        "type": "string",
-        "description": "The Prometheus expression query."
+        "enrichments": {
+          "type": "array",
+          "description": "Enrichment details",
+          "items": {
+            "$ref": "#/definitions/alertEnrichmentItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "alertEnrichmentItem": {
+      "type": "object",
+      "description": "Alert enrichment item.",
+      "discriminator": "type",
+      "required": ["title", "description", "status", "type"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The enrichment title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The enrichment description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation of the enrichment.",
+          "enum": ["Succeeded", "Failed"],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message. Will be present only if the status is 'Failed'."
+        },
+        "type": {
+          "type": "string",
+          "description": "The enrichment type.",
+          "enum": ["PrometheusInstantQuery", "PrometheusRangeQuery"],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrometheusEnrichmentItem": {
+      "type": "object",
+      "description": "Prometheus enrichment object.",
+      "required": ["linkToApi", "datasources", "grafanaExplorePath", "query"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "linkToApi": {
+          "type": "string",
+          "description": "Link to Prometheus query API (Url format)."
+        },
+        "datasources": {
+          "type": "array",
+          "description": "An array of the azure monitor workspace resource ids.",
+          "items": {
+            "type": "string",
+            "description": "The azure monitor workspace resource id."
+          },
+          "x-ms-identifiers": []
+        },
+        "grafanaExplorePath": {
+          "type": "string",
+          "description": "Partial link to the Grafana explore API."
+        },
+        "query": {
+          "type": "string",
+          "description": "The Prometheus expression query."
+        }
+      }
+    },
+    "PrometheusInstantQuery": {
+      "x-ms-discriminator-value": "PrometheusInstantQuery",
+      "type": "object",
+      "description": "Prometheus instant query enrichment object.",
+      "required": ["time"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "description": "The date and the time of the evaluation."
+        }
+      }
+    },
+    "PrometheusRangeQuery": {
+      "type": "object",
+      "x-ms-discriminator-value": "PrometheusRangeQuery",
+      "description": "Prometheus instant query enrichment object.",
+      "required": ["start", "end", "step"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrometheusEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "The start evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "description": "The end evaluation date and time in ISO8601 format.",
+          "format": "date-time"
+        },
+        "step": {
+          "type": "string",
+          "description": "Query resolution step width in ISO8601 format."
+        }
       }
     }
-  },
-  "PrometheusInstantQuery": {
-    "x-ms-discriminator-value": "PrometheusInstantQuery",
-    "type": "object",
-    "description": "Prometheus instant query enrichment object.",
-    "required": [
-      "time"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/PrometheusEnrichmentItem"
-      }
-    ],
-    "properties": {
-      "time": {
-        "type": "string",
-        "description": "The date and the time of the evaluation."
-      }
-    }
-  },
-  "PrometheusRangeQuery": {
-    "type": "object",
-    "x-ms-discriminator-value": "PrometheusRangeQuery",
-    "description": "Prometheus instant query enrichment object.",
-    "required": [
-      "start",
-      "end",
-      "step"
-    ],
-    "allOf": [
-      {
-        "$ref": "#/definitions/PrometheusEnrichmentItem"
-      }
-    ],
-    "properties": {
-      "start": {
-        "type": "string",
-        "description": "The start evaluation date and time in ISO8601 format.",
-        "format": "date-time"
-      },
-      "end": {
-        "type": "string",
-        "description": "The end evaluation date and time in ISO8601 format.",
-        "format": "date-time"
-      },
-      "step": {
-        "type": "string",
-        "description": "Query resolution step width in ISO8601 format."
-      }
-    }
-  }
   }
 }
