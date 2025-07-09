@@ -1704,6 +1704,55 @@
         }
       }
     },
+    "alertEnrichmentItem": {
+      "type": "object",
+      "description": "Alert enrichment item.",
+      "discriminator": "type",
+      "required": [
+        "title",
+        "description",
+        "status",
+        "type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The enrichment title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The enrichment description."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation of the enrichment.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message. Will be present only if the status is 'Failed'."
+        },
+        "type": {
+          "type": "string",
+          "description": "The enrichment type.",
+          "enum": [
+            "PrometheusInstantQuery",
+            "PrometheusRangeQuery"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "customProperties": {
       "type": "object",
       "description": "Custom properties that can hold any user defined key-value pairs",
