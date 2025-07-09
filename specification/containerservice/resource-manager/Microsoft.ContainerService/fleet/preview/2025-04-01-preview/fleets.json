@@ -3443,7 +3443,7 @@
       "description": "The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.",
       "properties": {
         "id": {
-          "$ref": "#/definitions/GateTargetId",
+          "$ref": "#/definitions/UpdateRunResourceId",
           "description": "The resource id that the Gate is controlling the rollout of.",
           "x-ms-mutability": [
             "read",
@@ -3461,19 +3461,6 @@
       },
       "required": [
         "id"
-      ]
-    },
-    "GateTargetId": {
-      "type": "object",
-      "description": "The resource id of staged rollout that the Gate is targeting.",
-      "properties": {
-        "updateRun": {
-          "$ref": "#/definitions/UpdateRunResourceId",
-          "description": "The Gate is controlling the staged rollout of an Update Run."
-        }
-      },
-      "required": [
-        "updateRun"
       ]
     },
     "GateType": {
