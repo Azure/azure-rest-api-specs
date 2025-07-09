@@ -22,10 +22,7 @@ using Azure.Core;
  * Azure Web PubSub Service is a managed service that helps developers easily build real-time
  * features in web applications with publish-subscribe patterns.
  */
-@service({
-  title: "Azure Web PubSub Service REST API",
-  version: "2024-12-01",
-})
+@service(#{ title: "Azure Web PubSub Service REST API" })
 @versioned(Versions)
 @server(
   "{endpoint}",
