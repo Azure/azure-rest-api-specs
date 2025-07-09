@@ -10,10 +10,7 @@ using LiftrBase.Storage;
 namespace LiftrBase;
 
 @@clientName(Qumulo.Storage, "QumuloMgmt", "python");
-@@clientName(FileSystemResource,
-  "QumuloFileSystemResource",
-  "csharp"
-);
+@@clientName(FileSystemResource, "QumuloFileSystemResource", "csharp");
 @@clientName(FileSystemResourceProperties.storageSku,
   "StorageSkuName",
   "csharp"
@@ -23,44 +20,53 @@ namespace LiftrBase;
   "csharp"
 );
 @@alternateType(FileSystemResourceProperties.clusterLoginUrl, url, "csharp");
-@@alternateType(FileSystemResourceProperties.privateIPs, ipV4Address[], "csharp");
+@@alternateType(FileSystemResourceProperties.privateIPs,
+  ipV4Address[],
+  "csharp"
+);
 @@clientName(ProvisioningState, "QumuloArmProvisioningState", "csharp");
 @@clientName(FileSystemResourceProperties.provisioningState,
   "ArmProvisioningState",
   "csharp"
 );
 @@clientName(UserDetails, "QumuloUserDetails", "csharp");
-@@clientName(MarketplaceSubscriptionStatus, 
+@@clientName(MarketplaceSubscriptionStatus,
   "QumuloMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@clientName(MarketplaceDetails.marketplaceSubscriptionStatus, "QumuloMarketplaceSubscriptionStatus", "csharp");
-@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId, armResourceIdentifier, "csharp");
+@@clientName(MarketplaceDetails.marketplaceSubscriptionStatus,
+  "QumuloMarketplaceSubscriptionStatus",
+  "csharp"
+);
+@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 #suppress "deprecated" "for backward compatibility purpose"
 @@flattenProperty(LiftrBase.Storage.FileSystemResource.properties, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "This is added back for backward compatibility purpose because the previous api-version has this"
-@usage(Usage.input | Usage.output, "csharp")
-@access(Access.public, "csharp")
 /**
  * For backward compatibility purpose, this enum is added back.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is added back for backward compatibility purpose because the previous api-version has this"
+@usage(Usage.input | Usage.output, "csharp")
+@access(Access.public, "csharp")
 enum StorageSku {
   /** Standard Storage Sku. */
   Standard,
+
   /** Performance Storage Sku. */
-  Performance
+  Performance,
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "This is added back for backward compatibility purpose because the previous api-version has this"
-@usage(Usage.input | Usage.output, "csharp")
-@access(Access.public, "csharp")
 /**
  * For backward compatibility purpose, this enum is added back.
  */
-enum QumuloProvisioningState
-{
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is added back for backward compatibility purpose because the previous api-version has this"
+@usage(Usage.input | Usage.output, "csharp")
+@access(Access.public, "csharp")
+enum QumuloProvisioningState {
   NotSpecified,
   Accepted,
   Creating,
@@ -72,15 +78,14 @@ enum QumuloProvisioningState
   Deleted,
 }
 
+/**
+ * For backward compatibility purpose, this enum is added back.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "This is added back for backward compatibility purpose because the previous api-version has this"
 @usage(Usage.input | Usage.output, "csharp")
 @access(Access.public, "csharp")
 @clientName("MarketplaceSubscriptionStatus", "csharp")
-/**
- * For backward compatibility purpose, this enum is added back.
- */
-enum OldMarketplaceSubscriptionStatus
-{
+enum OldMarketplaceSubscriptionStatus {
   PendingFulfillmentStart,
   Subscribed,
   Suspended,
