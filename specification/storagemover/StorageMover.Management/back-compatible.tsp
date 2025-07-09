@@ -25,8 +25,9 @@ using Microsoft.StorageMover;
 #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Agent.properties);
 
-@@clientName(Endpoints.createOrUpdate::parameters.resource, "endpoint");
-@@clientName(Endpoints.update::parameters.properties, "endpoint");
+// would cause: 'endpoint' in URI is missing a matching definition in the path parameters collection  when generating client
+// @@clientName(Endpoints.createOrUpdate::parameters.resource, "endpoint");
+// @@clientName(Endpoints.update::parameters.properties, "endpoint");
 
 @@clientName(Projects.createOrUpdate::parameters.resource, "project");
 @@clientName(Projects.update::parameters.properties, "project");

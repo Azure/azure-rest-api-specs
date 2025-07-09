@@ -73,13 +73,7 @@ interface JobDefinitions {
   startJob is ArmResourceActionSync<
     JobDefinition,
     void,
-    ArmResponse<JobRunResourceId>,
-    Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      contentType: "application/json" | "application/x-www-form-urlencoded";
-    }
+    ArmResponse<JobRunResourceId>
   >;
 
   /**
@@ -88,13 +82,7 @@ interface JobDefinitions {
   stopJob is ArmResourceActionSync<
     JobDefinition,
     void,
-    ArmResponse<JobRunResourceId>,
-    Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      contentType: "application/json" | "application/x-www-form-urlencoded";
-    }
+    ArmResponse<JobRunResourceId>
   >;
 }
 
