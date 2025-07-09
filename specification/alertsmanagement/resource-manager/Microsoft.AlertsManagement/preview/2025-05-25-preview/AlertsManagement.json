@@ -1753,6 +1753,45 @@
         }
       }
     },
+    "PrometheusEnrichmentItem": {
+      "type": "object",
+      "description": "Prometheus enrichment object.",
+      "required": [
+        "linkToApi",
+        "datasources",
+        "grafanaExplorePath",
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertEnrichmentItem"
+        }
+      ],
+      "properties": {
+        "linkToApi": {
+          "type": "string",
+          "description": "Link to Prometheus query API (Url format)."
+        },
+        "datasources": {
+          "type": "array",
+          "description": "An array of the azure monitor workspace resource ids.",
+          "items": {
+            "type": "string",
+            "description": "The azure monitor workspace resource id."
+          },
+          "x-ms-identifiers": [
+          ]
+        },
+        "grafanaExplorePath": {
+          "type": "string",
+          "description": "Partial link to the Grafana explore API."
+        },
+        "query": {
+          "type": "string",
+          "description": "The Prometheus expression query."
+        }
+      }
+    },
     "customProperties": {
       "type": "object",
       "description": "Custom properties that can hold any user defined key-value pairs",
