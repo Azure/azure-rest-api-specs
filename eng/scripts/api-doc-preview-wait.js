@@ -1,9 +1,10 @@
-#!/usr/bin/env node 
+#!/usr/bin/env node
+// @ts-check
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
-import { execFile } from "../../.github/shared/src/exec.js";
-import { readFile } from "fs/promises";
+import { execFile } from "../../.github/shared/src/exec";
+import { /* @type {string} */ readFile } from "fs/promises";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -32,7 +33,7 @@ export async function main() {
   });
 
   let buildStartData, buildId;
-  try { 
+  try {
     buildStartData = JSON.parse(await readFile(buildStartPath, { encoding: "utf8" }));
     buildId = buildStartData.id;
   } catch (error) { 
