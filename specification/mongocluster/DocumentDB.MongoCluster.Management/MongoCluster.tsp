@@ -20,6 +20,8 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   @visibility(Lifecycle.Read)
   @path
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -198,6 +200,11 @@ model MongoClusterProperties {
   /** The authentication configuration for the cluster. */
   @added(Versions.v2025_04_01_preview)
   authConfig?: AuthConfigProperties;
+
+  /** The encryption configuration for the cluster. Depends on identity being configured. */
+  @added(Versions.v2025_05_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  encryption?: EncryptionProperties;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -552,4 +559,37 @@ union AuthenticationMode {
 
   /** Microsoft Entra ID authentication mode using Entra users assigned to the cluster and auth mechanism 'MONGODB-OIDC'. */
   "MicrosoftEntraID",
+}
+
+/** The type of identity for key encryption key. */
+@added(Versions.v2025_05_01_preview)
+union KeyEncryptionKeyIdentityType {
+  string,
+  /** User assigned identity. */
+  UserAssignedIdentity: "UserAssignedIdentity",
+}
+
+/** The encryption configuration for the mongo cluster. */
+@added(Versions.v2025_05_01_preview)
+model EncryptionProperties {
+  /** Customer managed key encryption settings. */
+  customerManagedKeyEncryption?: CustomerManagedKeyEncryptionProperties;
+}
+
+/** Customer managed key encryption settings. */
+@added(Versions.v2025_05_01_preview)
+model CustomerManagedKeyEncryptionProperties {
+  /** The identity used to access the key encryption key. */
+  keyEncryptionKeyIdentity: KeyEncryptionKeyIdentity;
+  /** The URI of the key vault key used for encryption. */
+  keyEncryptionKeyUrl: string;
+}
+
+/** The identity used for key encryption key. */
+@added(Versions.v2025_05_01_preview)
+model KeyEncryptionKeyIdentity {
+  /** The type of identity. Only 'UserAssignedIdentity' is supported. */
+  identityType: KeyEncryptionKeyIdentityType;
+  /** The user assigned identity resource id. */
+  userAssignedIdentityResourceId: string;
 }
