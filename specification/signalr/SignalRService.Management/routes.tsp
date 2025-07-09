@@ -14,6 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.SignalRService;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 interface SignalROperationGroup {
   /**
    * Checks that the resource name is valid and is not already in use.

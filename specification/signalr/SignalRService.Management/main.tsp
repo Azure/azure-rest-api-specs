@@ -30,6 +30,7 @@ using TypeSpec.Versioning;
 /**
  * REST API for Azure SignalR Service
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "SignalRManagementClient" })
 @versioned(Versions)

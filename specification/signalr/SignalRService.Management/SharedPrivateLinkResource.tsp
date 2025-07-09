@@ -80,6 +80,7 @@ interface SharedPrivateLinkResources {
     Response = ArmResponse<SharedPrivateLinkResourceList>
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SignalRSharedPrivateLinkResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -103,6 +104,7 @@ interface SignalRSharedPrivateLinkResourceOps
       >>
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SignalRSharedPrivateLinkResources {
   /**

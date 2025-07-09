@@ -10,9 +10,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.SignalRService;
+
 /**
- * A class represent a resource.
+ * A class representing a resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRResource
   is Azure.ResourceManager.TrackedResource<SignalRProperties> {
   ...ResourceNameParameter<
@@ -42,6 +44,7 @@ model SignalRResource
   identity?: ManagedIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SignalRResources {
   /**
@@ -127,6 +130,7 @@ interface SignalRResources {
    * Operation to restart a resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @operationId("SignalR_Restart")
   restart is ArmResourceActionAsync<SignalRResource, void, void>;
 

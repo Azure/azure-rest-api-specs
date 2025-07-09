@@ -435,11 +435,13 @@ model NameAvailability {
 /**
  * Object that includes an array of the resource usages and a possible link for next set.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRUsageList is Azure.Core.Page<SignalRUsage>;
 
 /**
  * Object that describes a specific usage of the resources.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRUsage {
   /**
    * Fully qualified ARM resource id
@@ -470,6 +472,7 @@ model SignalRUsage {
 /**
  * Localizable String object containing the name and a localized value.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRUsageName {
   /**
    * The identifier of the usage.
@@ -485,6 +488,7 @@ model SignalRUsageName {
 /**
  * Object that includes an array of resources and a possible link for next set.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRResourceList is Azure.Core.Page<SignalRResource>;
 
 /**
@@ -533,6 +537,7 @@ model ResourceSku {
 /**
  * A class that describes the properties of the resource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRProperties {
   /**
    * Provisioning state of the resource.
@@ -543,6 +548,7 @@ model SignalRProperties {
   /**
    * The publicly accessible IP of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   externalIP?: string;
 
@@ -634,6 +640,7 @@ model SignalRProperties {
   /**
    * Network ACLs for the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   networkACLs?: SignalRNetworkACLs;
 
   /**
@@ -781,6 +788,7 @@ model SharedPrivateLinkResourceProperties {
 /**
  * TLS settings for the resource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRTlsSettings {
   /**
    * Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.
@@ -791,6 +799,7 @@ model SignalRTlsSettings {
 /**
  * Feature of a resource, which controls the runtime behavior.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRFeature {
   /**
    * FeatureFlags is the supported features of Azure SignalR service.
@@ -887,6 +896,7 @@ model ResourceLogCategory {
 /**
  * Cross-Origin Resource Sharing (CORS) settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRCorsSettings {
   /**
    * Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use "*" to allow all. If omitted, allow all by default.
@@ -1012,6 +1022,7 @@ model ManagedIdentitySettings {
 /**
  * Network ACLs for the resource
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRNetworkACLs {
   /**
    * Azure Networking ACL Action.
@@ -1039,6 +1050,7 @@ model SignalRNetworkACLs {
 /**
  * Network ACL
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
@@ -1057,6 +1069,7 @@ model NetworkACL {
  * ACL for a private endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model PrivateEndpointACL extends NetworkACL {
   /**
    * Name of the private endpoint connection
@@ -1275,6 +1288,7 @@ model ResourceReference {
 /**
  * A class represents the access keys of the resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SignalRKeys {
   /**
    * The primary access key.
@@ -1461,6 +1475,7 @@ model Sku {
   /**
    * The billing information of the resource.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @visibility(Lifecycle.Read)
   sku?: ResourceSku;
 
