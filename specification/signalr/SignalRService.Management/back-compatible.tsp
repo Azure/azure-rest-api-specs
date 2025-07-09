@@ -43,3 +43,27 @@ using Microsoft.SignalRService;
 @@clientName(Replicas.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Replica.properties);
+
+@@clientLocation(CustomCertificates.get, "SignalRCustomCertificates");
+@@clientLocation(CustomCertificates.createOrUpdate, "SignalRCustomCertificates");
+@@clientLocation(CustomCertificates.delete, "SignalRCustomCertificates");
+@@clientLocation(CustomCertificates.list, "SignalRCustomCertificates");
+@@clientLocation(CustomDomains.get, "SignalRCustomDomains");
+@@clientLocation(CustomDomains.createOrUpdate, "SignalRCustomDomains");
+@@clientLocation(CustomDomains.delete, "SignalRCustomDomains");
+@@clientLocation(CustomDomains.list, "SignalRCustomDomains");
+@@clientLocation(PrivateEndpointConnections.get, "SignalRPrivateEndpointConnections");
+@@clientLocation(PrivateEndpointConnections.update, "SignalRPrivateEndpointConnections");
+@@clientLocation(PrivateEndpointConnections.delete, "SignalRPrivateEndpointConnections");
+@@clientLocation(PrivateEndpointConnections.list, "SignalRPrivateEndpointConnections");
+@@clientLocation(Replicas.get, "SignalRReplicas");
+@@clientLocation(Replicas.createOrUpdate, "SignalRReplicas");
+@@clientLocation(Replicas.update, "SignalRReplicas");
+@@clientLocation(Replicas.delete, "SignalRReplicas");
+@@clientLocation(Replicas.list, "SignalRReplicas");
+@@clientLocation(Replicas.restart, "SignalRReplicas");
+@@clientLocation(Replicas.listReplicaSkus, "SignalR");
+@@clientLocation(SharedPrivateLinkResources.get, "SignalRReplicaSharedPrivateLinkResources");
+@@clientLocation(SharedPrivateLinkResources.createOrUpdate, "SignalRReplicaSharedPrivateLinkResources");
+@@clientLocation(SharedPrivateLinkResources.list, "SignalRReplicaSharedPrivateLinkResources");
+@@clientLocation(SignalRResources.list, "SignalRPrivateLinkResources");
