@@ -157,15 +157,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create or update private link": {
-            "$ref": "./examples/PrivateLinks/PrivateLinks_CreateOrUpdate.json"
+          "Create private link": {
+            "$ref": "./examples/PrivateLinks/PrivateLinks_Create.json"
           }
         },
         "tags": [
           "PrivateLinks"
         ],
-        "description": "Create or update a private link resource. This operation creates the necessary infrastructure to enable private endpoint connections to Microsoft Defender for Cloud services. The operation is asynchronous and may take several minutes to complete.",
-        "operationId": "PrivateLinks_CreateOrUpdate",
+        "description": "Create a private link resource. This operation creates the necessary infrastructure to enable private endpoint connections to Microsoft Defender for Cloud services. For updates to existing resources, use the PATCH operation. The operation is asynchronous and may take several minutes to complete.",
+        "operationId": "PrivateLinks_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -184,14 +184,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkRequest"
+              "$ref": "#/definitions/PrivateLinkResourceCreate"
             },
-            "description": "private link request payload containing the location and optional tags for the resource."
+            "description": "Private link request payload containing the resource information for create operations."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Updated",
+            "description": "OK - Resource already exists",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
@@ -200,15 +200,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "202": {
-            "description": "Accepted - Operation started",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -221,6 +212,55 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update private link": {
+            "$ref": "./examples/PrivateLinks/PrivateLinks_Update.json"
+          }
+        },
+        "tags": [
+          "PrivateLinks"
+        ],
+        "description": "Update specific properties of a private link resource. Use this operation to update mutable properties like tags without affecting the entire resource configuration.",
+        "operationId": "PrivateLinks_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkName"
+          },
+          {
+            "name": "privateLink",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkUpdate"
+            },
+            "description": "private link update payload containing only the properties to be updated."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Updated successfully",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       },
       "delete": {
@@ -249,11 +289,7 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - Deleted"
-          },
           "202": {
-            "description": "Accepted - Delete operation started",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -262,7 +298,6 @@
             }
           },
           "204": {
-            "description": "No Content - Resource does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -316,6 +351,9 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -403,6 +441,9 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -550,14 +591,7 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK - Deleted",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
           "202": {
-            "description": "Accepted - Delete operation started",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URL to query for status of the operation.",
@@ -566,7 +600,6 @@
             }
           },
           "204": {
-            "description": "No Content - Resource does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -625,34 +658,42 @@
         "properties"
       ]
     },
-    "PrivateLinkRequest": {
+    "PrivateLinkResourceCreate": {
       "type": "object",
-      "description": "Request payload for creating or updating a private link resource. The location property determines the Azure region where the private link infrastructure will be deployed.",
+      "description": "Request payload for creating a private link resource. This schema includes location (required for creation) and excludes read-only properties to comply with ARM guidelines.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The Azure region where the private link should be created. This should match the region where you want to establish private connectivity to Defender services.",
-          "pattern": "^[a-z0-9]+$",
-          "minLength": 1,
-          "maxLength": 50,
-          "example": "eastus"
-        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkPropertiesCreate",
+          "description": "Properties specific to the private link resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateLinkPropertiesCreate": {
+      "type": "object",
+      "description": "Properties for creating a private link resource. This excludes read-only fields.",
+      "properties": {}
+    },
+    "PrivateLinkUpdate": {
+      "type": "object",
+      "description": "Request payload for updating a private link resource. Used in PATCH operations to update specific mutable properties without affecting the entire resource configuration.",
+      "properties": {
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
           "description": "Resource tags"
         }
-      },
-      "required": [
-        "location"
-      ]
+      }
     },
     "PrivateLinkProperties": {
       "type": "object",
