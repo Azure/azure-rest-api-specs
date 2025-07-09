@@ -1,18 +1,23 @@
 #!/usr/bin/env node
+// @ts-check
 import { join, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { mkdir, writeFile } from "fs/promises";
 
-import { swagger, getChangedFiles, pathExists } from "../src/changed-files.js";
-import { filterAsync } from "../src/array.js";
+import {
+  swagger,
+  getChangedFiles,
+  pathExists,
+} from "../../.github/shared/src/changed-files.js";
+import { filterAsync } from "../../.github/shared/src/array.js";
 
 import {
   mappingJSONTemplate,
   repoJSONTemplate,
   indexMd,
   getSwaggersToProcess,
-} from "../src/doc-preview.js";
+} from "./doc-preview.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -54,7 +59,7 @@ export async function main() {
       },
       "spec-repo-root": {
         type: "string",
-        default: resolve(__dirname, "../../../"),
+        default: resolve(__dirname, "../../"),
       },
     },
     allowPositionals: false,

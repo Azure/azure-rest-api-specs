@@ -1,3 +1,4 @@
+// @ts-check
 const DOCS_NAMESPACE = "_swagger_specs";
 const SPEC_FILE_REGEX =
   "(specification/)+(.*)/(resourcemanager|resource-manager|dataplane|data-plane|control-plane)/(.*)/(preview|stable|privatepreview)/(.*?)/(example)?(.*)";

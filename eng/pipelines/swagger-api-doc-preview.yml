@@ -52,11 +52,8 @@ jobs:
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
 
-      # TODO: Use variables for triggering repository instead of hardcoding
-      - script: |
-          npm exec --no -- api-doc-preview --output $(System.DefaultWorkingDirectory)/AzureRestPreview
-        displayName: 'Generate Swagger API documentation preview'
-        workingDirectory: .github/shared
+      - script: eng/scripts/api-doc-preview.js
+        displayName: Generate Swagger API documentation preview
 
       - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
         parameters:
@@ -64,7 +61,6 @@ jobs:
           BaseRepoOwner: MicrosoftDocs
           TargetRepoOwner: MicrosoftDocs
           TargetRepoName: AzureRestPreview
-          # TODO: Determine this value at runtime
           BaseRepoBranch: $(BranchName)
           CommitMsg: |
             Update API Doc Preview
@@ -108,16 +104,12 @@ jobs:
           Description: $(CheckDescription)
           Context: $(StatusName)
 
-      # In the event of a failure in this job, set the PR status to failed and
-      # link to the current build.
-      - bash: |
-          echo "PR: $(System.PullRequest.SourceCommitId)"
-          gh api repos/$(Build.Repository.Name)/statuses/$(System.PullRequest.SourceCommitId) \
-            -f state='failure' \
-            -f target_url='$(CurrentBuildUrl)' \
-            -f description='Orchestration build failed' \
-            -f context='$(StatusName)'
-        displayName: 'Set PR status to failed'
-        condition: failed()
-        env:
-          GH_TOKEN: $(azuresdk-github-pat)
+      # In the event of a failure in this job (not the docs build job), set the 
+      # PR status to failed and link to the current build.
+      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+        parameters:
+          State: failure
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Orchestration build failed click to see logs'
+          Context: $(StatusName)
+          Condition: failed()

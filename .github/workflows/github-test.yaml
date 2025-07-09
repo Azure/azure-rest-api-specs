@@ -1,4 +1,4 @@
-name: GitHub Actions - Test
+name: Specs EngSys - Test
 
 on:
   push:
@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - .github/**
+      - eng/scripts/**
   pull_request:
     paths:
       - .github/**
+      - eng/scripts/**
   workflow_dispatch:
 
 permissions:
@@ -18,7 +20,7 @@ jobs:
   test:
     strategy:
       matrix:
-        folder: [.github, .github/shared]
+        folder: [.github, .github/shared, eng/scripts]
         os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}

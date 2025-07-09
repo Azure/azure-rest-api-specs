@@ -19,12 +19,10 @@ parameters:
 
 export async function main() {
   const {
-    values: {
-      "input": buildStartPath,
-    },
+    values: { input: buildStartPath },
   } = parseArgs({
     options: {
-      "input": { 
+      input: {
         type: "string",
         default: resolve(__dirname, "../../buildstart.json"),
       },
@@ -34,43 +32,47 @@ export async function main() {
 
   let buildStartData, buildId;
   try {
-    buildStartData = JSON.parse(await readFile(buildStartPath, { encoding: "utf8" }));
+    buildStartData = JSON.parse(
+      await readFile(buildStartPath, { encoding: "utf8" }),
+    );
     buildId = buildStartData.id;
-  } catch (error) { 
-    console.error(`Failed to read or parse input file "${buildStartPath}": ${error.message}`);
+  } catch (error) {
+    console.error(
+      `Failed to read or parse input file "${buildStartPath}": ${error.message}`,
+    );
     usage();
     process.exitCode = 1;
     return;
   }
 
-  const devOpsIdentifiers = [ 
-    "--organization", "https://dev.azure.com/apidrop/",
-    "--project", "Content CI",
+  const devOpsIdentifiers = [
+    "--organization",
+    "https://dev.azure.com/apidrop/",
+    "--project",
+    "Content CI",
   ];
 
   while (true) {
     try {
-      // TODO: Query?
-      const { stdout, } = await execFile(
-        "az", 
-        [
-          "pipelines", "runs", "show",
-          ...devOpsIdentifiers,
-          "--id", buildId,
-        ],
-      );
+      const { stdout } = await execFile("az", [
+        "pipelines",
+        "runs",
+        "show",
+        ...devOpsIdentifiers,
+        "--id",
+        buildId,
+      ]);
 
       const run = JSON.parse(stdout);
       const status = run.status;
 
       console.log(`Build ${buildId} status: ${status}`);
-      if (status === "completed") { 
+      if (status === "completed") {
         break;
       }
 
       // Sleep 10 seconds to avoid calling the API too frequently
-      await new Promise(resolve => setTimeout(resolve, 10_000));
-
+      await new Promise((resolve) => setTimeout(resolve, 10_000));
     } catch (error) {
       console.error(`Failed to check build status: ${error.message}`);
       if (error.stdout) {
@@ -87,16 +89,19 @@ export async function main() {
 
   console.log("Downloading artifact...");
   try {
-    await execFile(
-      "az",
-      [
-        "pipelines", "runs", "artifact", "download",
-        ...devOpsIdentifiers,
-        "--run-id", buildId,
-        "--artifact-name", "report",
-        "--path", resolve(__dirname, "../../"),
-      ],
-    );
+    await execFile("az", [
+      "pipelines",
+      "runs",
+      "artifact",
+      "download",
+      ...devOpsIdentifiers,
+      "--run-id",
+      buildId,
+      "--artifact-name",
+      "report",
+      "--path",
+      resolve(__dirname, "../../"),
+    ]);
   } catch (error) {
     console.error(`Failed to download artifact: ${error.message}`);
     if (error.stdout) {

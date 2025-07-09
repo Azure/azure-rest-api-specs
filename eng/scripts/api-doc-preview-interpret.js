@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 import { parseArgs } from "util";
 import { readFile } from "fs/promises";
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function usage() {
@@ -20,13 +19,10 @@ parameters:
 
 export async function main() {
   const {
-    values: {
-      "report": resultArtifactPath,
-      "build-start": buildStartPath,
-    },
+    values: { report: resultArtifactPath, "build-start": buildStartPath },
   } = parseArgs({
     options: {
-      "report": { 
+      report: {
         type: "string",
         default: resolve(__dirname, "../../report.json"),
       },
@@ -41,12 +37,15 @@ export async function main() {
   let resultArtifactData, resultArtifactRaw;
   try {
     // TODO: CLEANUP
-    resultArtifactRaw = await readFile(resultArtifactPath, { encoding: "utf8" });
+    resultArtifactRaw = await readFile(resultArtifactPath, {
+      encoding: "utf8",
+    });
     // Use .trim() to remove BOM which can be present in the JSON file
     resultArtifactData = JSON.parse(resultArtifactRaw.trim());
-
   } catch (error) {
-    console.error(`Failed to read input file "${resultArtifactPath}": ${error.message}`);
+    console.error(
+      `Failed to read input file "${resultArtifactPath}": ${error.message}`,
+    );
     usage();
     process.exitCode = 1;
     return;
@@ -63,7 +62,9 @@ export async function main() {
     console.log(`Build failed: ${resultArtifactData.status}`);
 
     console.log(`##vso[task.setvariable variable=CheckUrl]${buildLink}`);
-    console.log("##vso[task.setvariable variable=CheckDescription]Docs build failed");
+    console.log(
+      "##vso[task.setvariable variable=CheckDescription]Docs build failed (click to see pipeline)",
+    );
     console.log(`##vso[task.setvariable variable=CheckState]failure`);
     console.log(`Raw output:\n${resultArtifactRaw}`);
     console.log(`Build details: ${buildLink}`);
@@ -72,9 +73,11 @@ export async function main() {
 
   console.log(`Build completed successfully.`);
 
-  const docsPreviewUrl = `https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=${encodeURIComponent(resultArtifactData.branch)}&view=azure-rest-preview`
+  const docsPreviewUrl = `https://review.learn.microsoft.com/en-us/rest/api/azure-rest-preview/?branch=${encodeURIComponent(resultArtifactData.branch)}&view=azure-rest-preview`;
   console.log(`##vso[task.setvariable variable=CheckUrl]${docsPreviewUrl}`);
-  console.log("##vso[task.setvariable variable=CheckDescription]Docs build succeeded");
+  console.log(
+    "##vso[task.setvariable variable=CheckDescription]Docs build succeeded (click to see preview)",
+  );
   console.log(`##vso[task.setvariable variable=CheckState]success`);
   console.log(`Docs preview URL: ${docsPreviewUrl}`);
 }
