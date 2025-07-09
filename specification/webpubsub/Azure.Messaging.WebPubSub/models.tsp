@@ -74,7 +74,7 @@ union ContentType {
 /**
  * Content type for HTTP headers in message operations (closed union for HTTP compliance)
  */
-// @azure-tools/typespec-azure-core/no-closed-literal-union - Intentionally closed for HTTP Content-Type header compliance
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union MessageContentType {
   /**
    * Content Type 'application/json'
@@ -95,7 +95,7 @@ union MessageContentType {
 /**
  * Content type for response headers (closed union for HTTP compliance)
  */
-// @azure-tools/typespec-azure-core/no-closed-literal-union - Intentionally closed for HTTP Content-Type header compliance
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union ResponseContentType {
   /**
    * Content Type 'application/json'
