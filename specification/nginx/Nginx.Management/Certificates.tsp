@@ -37,7 +37,7 @@ model NginxCertificateProperties {
   /**
    * The Key Vault secret ID. Example: `https://myvault.vault.azure.net/secrets/mysecret/1234567890abcdef1234567890abcdef`.
    */
-  keyVaultSecretId?: string;
+  keyVaultSecretId?: url;
 
   /**
    * The SHA1 thumbprint of the certificate.
