@@ -5,17 +5,27 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AzureWebPubSubServiceRESTAPI;
+namespace Azure.Messaging.WebPubSub;
 
+/** The type of Web PubSub client. */
 union WebPubSubClientType {
   string,
+
+  /** Default Web PubSub client type */
   Default: "Default",
+
+  /** MQTT Web PubSub client type */
   MQTT: "MQTT",
 }
 
+/** Web PubSub permission types. */
 union WebPubSubPermission {
   string,
+
+  /** Permission to send messages to a group */
   sendToGroup: "sendToGroup",
+
+  /** Permission to join or leave a group */
   joinLeaveGroup: "joinLeaveGroup",
 }
 

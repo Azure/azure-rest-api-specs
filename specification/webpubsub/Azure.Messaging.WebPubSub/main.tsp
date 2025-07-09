@@ -9,25 +9,37 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 /**
- * // FIXME: (missing-service-description) Add service description
+ * Azure Web PubSub Service is a managed service that helps developers easily build real-time
+ * features in web applications with publish-subscribe patterns.
  */
-@service(#{ title: "Azure Web PubSub Service REST API" })
+@service({
+  title: "Azure Web PubSub Service REST API",
+  version: "2024-12-01",
+})
 @versioned(Versions)
 @server(
   "{endpoint}",
-  "// FIXME: (missing-service-description) Add service description",
+  "Azure Web PubSub Service",
   {
-    endpoint: string,
+    /**
+     * The Web PubSub service endpoint (protocol and hostname, for example:
+     * https://myservice.webpubsub.azure.com).
+     */
+    endpoint: url,
   }
 )
-namespace AzureWebPubSubServiceRESTAPI;
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
+namespace Azure.Messaging.WebPubSub;
 
 /**
  * The available API versions.
@@ -36,6 +48,6 @@ enum Versions {
   /**
    * The 2024-12-01 API version.
    */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_12_01: "2024-12-01",
 }
