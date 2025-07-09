@@ -41,7 +41,6 @@ using TypeSpec.Versioning;
  * The DevTest Labs Client.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
-// FIXME: Common type version not set. Set to v3.
 @armProviderNamespace
 @service(#{ title: "DevTestLabsClient" })
 @versioned(Versions)

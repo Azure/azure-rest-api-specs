@@ -179,26 +179,6 @@ interface Labs {
    * List disk images available for custom image creation.
    */
   listVhds is ArmResourceActionSync<Lab, void, ArmResponse<LabVhdList>>;
-
-  // /**
-  //  * Evaluates lab policy.
-  //  */
-  // #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  // @post
-  // @operationId("PolicySets_EvaluatePolicies")
-  // evaluatePolicies is ArmResourceActionSync<
-  //   Lab,
-  //   EvaluatePoliciesRequest,
-  //   ArmResponse<EvaluatePoliciesResponse>,
-  //   Parameters = {
-  //     /**
-  //      * The name of the policy set.
-  //      */
-  //     @path
-  //     @segment("policysets")
-  //     policySetName: string;
-  //   }
-  // >;
 }
 
 @@doc(Lab.name, "The name of the lab.");

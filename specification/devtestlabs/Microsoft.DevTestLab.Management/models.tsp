@@ -5,9 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.DevTestLab;
 
-using TypeSpec.Rest;
-using Azure.ResourceManager;
-using TypeSpec.Http;
 using OpenAPI;
 
 /**
