@@ -22,17 +22,16 @@ jobs:
       - name: CurrentBuildUrl
         value: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
 
+      - name: StatusName
+        value: '[TEST-IGNORE] Swagger ApiDocPreview'
+
     steps:
-      - bash: |
-          echo "PR: $(System.PullRequest.SourceCommitId)"
-          gh api repos/$(Build.Repository.Name)/statuses/$(System.PullRequest.SourceCommitId) \
-            -f state='pending' \
-            -f target_url='$(CurrentBuildUrl)' \
-            -f description='Starting build' \
-            -f context='Swagger ApiDocPreview'
-        displayName: 'Set PR status to pending'
-        env:
-          GH_TOKEN: $(azuresdk-github-pat)
+      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+        parameters:
+          State: pending
+          TargetUrl: $(CurrentBuildUrl)
+          Description: 'Starting docs build'
+          Context: $(StatusName)
 
       # TODO: Use sparse checkout instead
       - checkout: self
@@ -95,7 +94,30 @@ jobs:
           azureSubscription: msdocs-apidrop-connection
           scriptType: bash
           scriptLocation: inlineScript
-          inlineScript: eng/scripts/api-doc-preview-wait.mjs
+          inlineScript: eng/scripts/api-doc-preview-wait.js
 
-      - script: eng/scripts/api-doc-preview-interpret.mjs
-        displayName: Output results
+      - script: eng/scripts/api-doc-preview-interpret.js
+        displayName: Interpret build results and update PR status
+
+      # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
+      # $(CheckDescription) variables set by api-doc-preview-interpret.js.
+      - template: /eng/pipelines/templates/steps/set-pr-check.yml
+        parameters:
+          State: $(CheckState)
+          TargetUrl: $(CheckUrl)
+          Description: $(CheckDescription)
+          Context: $(StatusName)
+
+      # In the event of a failure in this job, set the PR status to failed and
+      # link to the current build.
+      - bash: |
+          echo "PR: $(System.PullRequest.SourceCommitId)"
+          gh api repos/$(Build.Repository.Name)/statuses/$(System.PullRequest.SourceCommitId) \
+            -f state='failure' \
+            -f target_url='$(CurrentBuildUrl)' \
+            -f description='Orchestration build failed' \
+            -f context='$(StatusName)'
+        displayName: 'Set PR status to failed'
+        condition: failed()
+        env:
+          GH_TOKEN: $(azuresdk-github-pat)
