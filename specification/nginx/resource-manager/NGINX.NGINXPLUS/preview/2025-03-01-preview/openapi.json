@@ -2042,15 +2042,15 @@
       "properties": {
         "keyVirtualPath": {
           "type": "string",
-          "description": "The virtual path to the key file."
+          "description": "The virtual path to the key file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/key.key."
         },
         "certificateVirtualPath": {
           "type": "string",
-          "description": "The virtual path to the certificate file."
+          "description": "The virtual path to the certificate file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/cert.pem."
         },
         "keyVaultSecretId": {
           "type": "string",
-          "description": "The Key Vault secret ID."
+          "description": "The Key Vault secret ID. Example: `https://myvault.vault.azure.net/secrets/mysecret/1234567890abcdef1234567890abcdef`."
         },
         "sha1Thumbprint": {
           "type": "string",
@@ -2062,7 +2062,7 @@
         },
         "keyVaultSecretCreated": {
           "type": "string",
-          "description": "The creation time of the Key Vault secret."
+          "description": "The creation time of the Key Vault secret in UTC RFC 3339 format.\nExample: `2025-07-08T10:11:08.856Z`."
         },
         "certificateError": {
           "$ref": "#/definitions/NginxCertificateErrorResponseBody",
@@ -2187,7 +2187,7 @@
         },
         "time": {
           "type": "string",
-          "description": "The timestamp when compilation status was recorded in UTC."
+          "description": "The timestamp when compilation status was recorded in UTC timezone and RFC 3339 format.\nExample: `2025-07-08T10:11:08.856Z`."
         }
       },
       "required": [
@@ -2399,15 +2399,15 @@
         },
         "keyVirtualPath": {
           "type": "string",
-          "description": "The virtual path to the key file."
+          "description": "The virtual path to the key file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/key.key."
         },
         "certificateVirtualPath": {
           "type": "string",
-          "description": "The virtual path to the certificate file."
+          "description": "The virtual path to the certificate file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/cert.pem."
         },
         "keyVaultSecretId": {
           "type": "string",
-          "description": "The Key Vault secret ID."
+          "description": "The Key Vault secret ID. Example: `https://myvault.vault.azure.net/secrets/mysecret/1234567890abcdef1234567890abcdef`."
         },
         "sha1Thumbprint": {
           "type": "string",
@@ -2419,7 +2419,7 @@
         },
         "keyVaultSecretCreated": {
           "type": "string",
-          "description": "The creation time of the Key Vault secret."
+          "description": "The creation time of the Key Vault secret in UTC RFC 3339 format.\nExample: `2025-07-08T10:11:08.856Z`."
         },
         "certificateError": {
           "$ref": "#/definitions/NginxCertificateErrorResponseBody",
@@ -2440,26 +2440,6 @@
           "description": "Virtual path of the file."
         }
       }
-    },
-    "NginxConfigurationListResponse": {
-      "type": "object",
-      "description": "Response model for listing Nginx configurations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of configurations.",
-          "items": {
-            "$ref": "#/definitions/Configuration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to fetch the next page of configurations."
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "NginxConfigurationPackage": {
       "type": "object",

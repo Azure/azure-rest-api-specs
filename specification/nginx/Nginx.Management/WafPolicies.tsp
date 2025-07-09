@@ -47,7 +47,9 @@ model DeploymentWafPolicyCompilingStatus {
   /** The human-readable compilation status. */
   displayStatus: string;
 
-  /** The timestamp when compilation status was recorded in UTC. */
+  /** The timestamp when compilation status was recorded in UTC timezone and RFC 3339 format.
+   * Example: `2025-07-08T10:11:08.856Z`.
+   */
   time: string;
 }
 

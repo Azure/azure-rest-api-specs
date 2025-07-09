@@ -25,17 +25,17 @@ model NginxCertificateProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * The virtual path to the key file.
+   * The virtual path to the key file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/key.key.
    */
   keyVirtualPath?: string;
 
   /**
-   * The virtual path to the certificate file.
+   * The virtual path to the certificate file. This is a path that would be used in an Nginx configuration file, for example, /etc/nginx/ssl/cert.pem.
    */
   certificateVirtualPath?: string;
 
   /**
-   * The Key Vault secret ID.
+   * The Key Vault secret ID. Example: `https://myvault.vault.azure.net/secrets/mysecret/1234567890abcdef1234567890abcdef`.
    */
   keyVaultSecretId?: string;
 
@@ -50,7 +50,8 @@ model NginxCertificateProperties {
   keyVaultSecretVersion?: string;
 
   /**
-   * The creation time of the Key Vault secret.
+   * The creation time of the Key Vault secret in UTC RFC 3339 format.
+   * Example: `2025-07-08T10:11:08.856Z`.
    */
   keyVaultSecretCreated?: string;
 
