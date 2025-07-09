@@ -7,54 +7,8 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.GuestConfiguration;
-
-alias VirtualMachine = Extension.ExternalResource<
-  "Microsoft.Compute",
-  "virtualMachines",
-  "vmName",
-  NamePattern = "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$",
-  Description = "The name of the virtual machine"
->;
-
-alias VirtualMachineParameters = {
-  ...Extension.ExtensionProviderNamespace<VirtualMachine>;
-  ...ParentKeysOf<VirtualMachine>;
-};
-
-alias VirtualMachineScaleSets = Extension.ExternalResource<
-  "Microsoft.Compute",
-  "virtualMachineScaleSets",
-  "vmssName",
-  Description = "The name of the virtual machine scale set."
->;
-
-alias Machines = Extension.ExternalResource<
-  "Microsoft.HybridCompute",
-  "machines",
-  "machineName",
-  Description = "The name of the ARC machine."
->;
-
-alias MachinesParameters = {
-  ...Extension.ExtensionProviderNamespace<Machines>;
-  ...ParentKeysOf<Machines>;
-};
-
-alias ConnectedVMwarevSphere = Extension.ExternalResource<
-  "Microsoft.ConnectedVMwarevSphere",
-  "virtualmachines",
-  "vmName",
-  NamePattern = "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$",
-  Description = "The name of the virtual machine."
->;
-
-alias ConnectedVMwarevSphereParameters = {
-  ...Extension.ExtensionProviderNamespace<VirtualMachine>;
-  ...ParentKeysOf<VirtualMachine>;
-};
 
 /**
  * Error response of an operation failure.

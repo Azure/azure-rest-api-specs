@@ -28,67 +28,43 @@ model GuestConfigurationAssignment extends ProxyResource {
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface GuestConfigurationAssignmentOpsList
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {},
-      ErrorType = Microsoft.GuestConfiguration.ErrorResponse
-    > {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface GuestConfigurationAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-      },
-      VirtualMachineParameters,
-      {
-        ...Extension.ExtensionProviderNamespace<VirtualMachine>,
-        ...KeysOf<VirtualMachine>,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * The guest configuration assignment name.
-         */
-        @segment("guestConfigurationAssignments")
-        @path
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+alias VirtualMachine = Extension.ExternalResource<
+  "Microsoft.Compute",
+  "virtualMachines",
+  "vmName",
+  NamePattern = "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$",
+  Description = "The name of the virtual machine"
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface GuestConfigurationAssignments {
   /**
    * Get information about a guest configuration assignment
    */
-  get is GuestConfigurationAssignmentOps.Read<
+  get is Extension.Read<
+    VirtualMachine,
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignment>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Creates an association between a VM and guest configuration
    */
-  createOrUpdate is GuestConfigurationAssignmentOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    VirtualMachine,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Delete a guest configuration assignment
    */
-  delete is GuestConfigurationAssignmentOps.DeleteSync<
+  delete is Extension.DeleteSync<
+    VirtualMachine,
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
@@ -105,29 +81,32 @@ interface GuestConfigurationAssignments {
    * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  SubscriptionList is GuestConfigurationAssignmentOpsList.List<
+  SubscriptionList is Extension.ListByTarget<
+    Extension.Subscription,
     GuestConfigurationAssignment,
-    Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse
+    Response = ArmResponse<GuestConfigurationAssignmentList> | NoContentResponse,
+    Error = ErrorResponse
   >;
 
   /**
    * List all reports for the guest configuration assignment, latest report first.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  guestConfigurationAssignmentReportsList is GuestConfigurationAssignmentOps.Read<
+  guestConfigurationAssignmentReportsList is Extension.ActionSync<
+    VirtualMachine,
     GuestConfigurationAssignment,
+    void,
     Response = ArmResponse<GuestConfigurationAssignmentReportList>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  guestConfigurationAssignmentReportsGet is GuestConfigurationAssignmentOps.Read<
+  guestConfigurationAssignmentReportsGet is Extension.Read<
+    VirtualMachine,
     GuestConfigurationAssignment,
     Parameters = {
       /**
@@ -138,32 +117,16 @@ interface GuestConfigurationAssignments {
       reportId: string;
     },
     Response = ArmResponse<GuestConfigurationAssignmentReport>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface GuestConfigurationHCRPAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-      },
-      MachinesParameters,
-      {
-        ...Extension.ExtensionProviderNamespace<Machines>,
-        ...KeysOf<Machines>,
-        ...Azure.ResourceManager.Legacy.Provider,
 
-        /**
-         * The guest configuration assignment name.
-         */
-        @segment("guestConfigurationAssignments")
-        @path
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+alias HybridCompute = Extension.ExternalResource<
+  "Microsoft.HybridCompute",
+  "machines",
+  "machineName",
+  Description = "The name of the ARC machine."
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -171,38 +134,37 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  get is GuestConfigurationHCRPAssignmentOps.Read<
+  get is Extension.Read<
+    HybridCompute,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Creates an association between a ARC machine and guest configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is GuestConfigurationHCRPAssignmentOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    HybridCompute,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Delete a guest configuration assignment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is GuestConfigurationHCRPAssignmentOps.DeleteSync<
+  delete is Extension.DeleteSync<
+    HybridCompute,
     GuestConfigurationAssignment,
     Response = ArmDeletedResponse,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * List all guest configuration assignments for an ARC machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is Extension.ListByTarget<
-    Machines,
+    HybridCompute,
     GuestConfigurationAssignment,
     Response = ArmResponse<GuestConfigurationAssignmentList>,
     Error = ErrorResponse
@@ -212,22 +174,23 @@ interface GuestConfigurationHCRPAssignments {
    * List all reports for the guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  guestConfigurationHCRPAssignmentReportsList is GuestConfigurationHCRPAssignmentOps.Read<
+  guestConfigurationHCRPAssignmentReportsList is Extension.ActionSync<
+    HybridCompute,
     GuestConfigurationAssignment,
+    void,
     Response = ArmResponse<GuestConfigurationAssignmentReportList>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  guestConfigurationHCRPAssignmentReportsGet is GuestConfigurationHCRPAssignmentOps.Read<
+  guestConfigurationHCRPAssignmentReportsGet is Extension.Read<
+    HybridCompute,
     GuestConfigurationAssignment,
     Parameters = {
       /**
@@ -238,9 +201,16 @@ interface GuestConfigurationHCRPAssignments {
       reportId: string;
     },
     Response = ArmResponse<GuestConfigurationAssignmentReport>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
+
+alias VirtualMachineScaleSets = Extension.ExternalResource<
+  "Microsoft.Compute",
+  "virtualMachineScaleSets",
+  "vmssName",
+  Description = "The name of the virtual machine scale set."
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -248,7 +218,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -258,7 +227,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Creates an association between a VMSS and guest configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Extension.CreateOrReplaceSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -269,7 +237,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Delete a guest configuration assignment for VMSS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is Extension.DeleteSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -281,7 +248,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all guest configuration assignments for VMSS.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is Extension.ListByTarget<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -293,7 +259,6 @@ interface GuestConfigurationAssignmentsVMSS {
    * List all reports for the VMSS guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
   guestConfigurationAssignmentReportsVMSSList is Extension.Read<
@@ -307,7 +272,6 @@ interface GuestConfigurationAssignmentsVMSS {
    * Get a report for the VMSS guest configuration assignment, by reportId.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   guestConfigurationAssignmentReportsVMSSGet is Extension.Read<
     VirtualMachineScaleSets,
@@ -324,30 +288,14 @@ interface GuestConfigurationAssignmentsVMSS {
     Error = ErrorResponse
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface GuestConfigurationConnectedVMwarevSphereAssignmentOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-      },
-      ConnectedVMwarevSphereParameters,
-      {
-        ...Extension.ExtensionProviderNamespace<ConnectedVMwarevSphere>,
-        ...KeysOf<ConnectedVMwarevSphere>,
-        ...Azure.ResourceManager.Legacy.Provider,
 
-        /**
-         * The guest configuration assignment name.
-         */
-        @segment("guestConfigurationAssignments")
-        @path
-        @pattern("^[^<>%&:\\\\?/#]*$")
-        guestConfigurationAssignmentName: string,
-      }
-    > {}
+alias ConnectedVMwarevSphere = Extension.ExternalResource<
+  "Microsoft.ConnectedVMwarevSphere",
+  "virtualmachines",
+  "vmName",
+  NamePattern = "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$",
+  Description = "The name of the virtual machine."
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -355,25 +303,28 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
   /**
    * Get information about a guest configuration assignment
    */
-  get is GuestConfigurationConnectedVMwarevSphereAssignmentOps.Read<
+  get is Extension.Read<
+    ConnectedVMwarevSphere,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Creates an association between a Connected VM Sphere machine and guest configuration
    */
-  createOrUpdate is GuestConfigurationConnectedVMwarevSphereAssignmentOps.CreateOrUpdateSync<
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    ConnectedVMwarevSphere,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Delete a guest configuration assignment
    */
-  delete is GuestConfigurationConnectedVMwarevSphereAssignmentOps.DeleteSync<
+  delete is Extension.DeleteSync<
+    ConnectedVMwarevSphere,
     GuestConfigurationAssignment,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
@@ -390,23 +341,25 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
    * List all reports for the guest configuration assignment, latest report first.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is GuestConfigurationConnectedVMwarevSphereAssignmentOps.Read<
+  guestConfigurationConnectedVMwarevSphereAssignmentsReportsList is Extension.ActionSync<
+    ConnectedVMwarevSphere,
     GuestConfigurationAssignment,
+    void,
     Response = ArmResponse<GuestConfigurationAssignmentReportList>,
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
    * Get a report for the guest configuration assignment, by reportId.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
-  guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet is GuestConfigurationConnectedVMwarevSphereAssignmentOps.Read<
+  guestConfigurationConnectedVMwarevSphereAssignmentsReportsGet is Extension.ActionSync<
+    ConnectedVMwarevSphere,
     GuestConfigurationAssignment,
+    void,
     Response = ArmResponse<GuestConfigurationAssignmentReport>,
     Parameters = {
       /**
@@ -416,7 +369,7 @@ interface GuestConfigurationConnectedVMwarevSphereAssignments {
       @segment("reports")
       reportId: string;
     },
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
 
