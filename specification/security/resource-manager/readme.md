@@ -115,7 +115,7 @@ input-file:
   - Microsoft.Security/preview/2025-05-04-preview/operations.json
   - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
   - Microsoft.Security/preview/2025-05-04-preview/assessments.json
-  ```
+```
 
 ### Tag: package-2025-03
 
@@ -1028,6 +1028,9 @@ These settings apply only when `--tag=package-2021-07-preview-only` is specified
 input-file:
   - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
   - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
+  - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
+override-info:
+  title: SecurityCenter
 ```
 
 ### Tag: package-preview-2021-10
@@ -1039,10 +1042,8 @@ input-file:
   - Microsoft.Security/preview/2021-10-01-preview/mdeOnboardings.json
 
 # Needed when there is more than one input file
-
 override-info:
   title: SecurityCenter
-
 ```
 
 ### Tag: package-2021-06-only
@@ -1067,18 +1068,6 @@ These settings apply only when `--tag=package-2021-07-only` is specified on the 
 ``` yaml $(tag) == 'package-2021-07-only'
 input-file:
 - Microsoft.Security/stable/2021-07-01/settings.json
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-preview-2021-07-preview-only
-
-These settings apply only when `--tag=package-preview-2021-07-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-07-preview-only'
-input-file:
-  - Microsoft.Security/preview/2021-07-01-preview/securityConnectors.json
 # Needed when there is more than one input file
 override-info:
   title: SecurityCenter
