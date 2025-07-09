@@ -1,0 +1,11 @@
+- tool: TypeSpecValidation
+  reason: Go does not emit from this directory.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+  paths:
+    - tspconfig.yaml
