@@ -5704,7 +5704,8 @@
           "readOnly": true,
           "description": "The name of the service.",
           "enum": [
-            "AutomaticRepairs"
+            "AutomaticRepairs",
+            "AutomaticZoneRebalancing"
           ],
           "x-ms-enum": {
             "name": "OrchestrationServiceNames",
@@ -5724,6 +5725,25 @@
             "name": "OrchestrationServiceState",
             "modelAsString": true
           }
+        },
+        "latestOperationStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The latest operation status of the service. Minimum API version for this property is 2025-04-01.",
+          "enum": [
+            "InProgress",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestrationServiceOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChangeTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the operation status changed. Minimum API version for this property is 2025-04-01."
         }
       },
       "description": "Summary for an orchestration service of a virtual machine scale set."
