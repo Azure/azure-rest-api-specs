@@ -247,7 +247,7 @@ interface QuestionAnsweringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
-  @patch
+  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
   updateSources is Foundations.LongRunningOperation<
     {
@@ -290,7 +290,7 @@ interface QuestionAnsweringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/qnas")
-  @patch
+  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateQnasStatus)
   updateQnas is Foundations.LongRunningOperation<
     {

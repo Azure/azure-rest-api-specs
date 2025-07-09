@@ -1,0 +1,77 @@
+{
+  "title": "CreateOrReplace_Schema",
+  "operationId": "Schemas_CreateOrReplace",
+  "description": "Create a Schema",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "schemaRegistryName": "my-schema-registry",
+    "schemaName": "my-schema",
+    "resource": {
+      "properties": {
+        "displayName": "My Schema",
+        "description": "This is a sample Schema",
+        "format": "JsonSchema/draft-07",
+        "schemaType": "MessageSchema",
+        "tags": {
+          "sampleKey": "sampleValue"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/schemaRegistries/my-schema-registry/schemas/my-schema",
+        "name": "my-schema",
+        "type": "Microsoft.DeviceRegistry/schemaRegistries/schemas",
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "displayName": "My Schema",
+          "description": "This is a sample Schema",
+          "format": "JsonSchema/draft-07",
+          "schemaType": "MessageSchema",
+          "provisioningState": "Succeeded",
+          "tags": {
+            "sampleKey": "sampleValue"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/schemaRegistries/my-schema-registry/schemas/my-schema",
+        "name": "my-schema",
+        "type": "Microsoft.DeviceRegistry/schemaRegistries/schemas",
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "displayName": "My Schema",
+          "description": "This is a sample Schema",
+          "format": "JsonSchema/draft-07",
+          "schemaType": "MessageSchema",
+          "provisioningState": "Succeeded",
+          "tags": {
+            "sampleKey": "sampleValue"
+          }
+        }
+      }
+    }
+  }
+}

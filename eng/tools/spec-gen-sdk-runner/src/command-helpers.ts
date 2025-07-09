@@ -1,15 +1,23 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { findReadmeFiles, getArgumentValue, getAllTypeSpecPaths, objectToMap } from "./utils.js";
+import {
+  findReadmeFiles,
+  getArgumentValue,
+  getAllTypeSpecPaths,
+  objectToMap,
+  SpecConfigs,
+} from "./utils.js";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import {
+  APIViewRequestData,
   SdkName,
   SpecGenSdkArtifactInfo,
   SpecGenSdkCmdInput,
   SpecGenSdkRequiredSettings,
   VsoLogs,
 } from "./types.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 
 /**
  * Load execution-report.json.
@@ -27,20 +35,28 @@ export function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
 
 /**
  * Set the pipeline variables for the SDK pull request.
+ * @param stagedArtifactsFolder - The staged artifacts folder.
+ * @param skipPrVariables - A flag indicating whether to skip setting PR variables.
  * @param packageName - The package name.
  * @param installationInstructions - The installation instructions.
  */
 export function setPipelineVariables(
-  packageName: string,
+  stagedArtifactsFolder: string,
+  skipPrVariables: boolean = true,
+  packageName: string = "",
   installationInstructions: string = "",
 ): void {
-  const branchName = `sdkauto/${packageName?.replace("/", "-")}`;
-  const prTitle = `[AutoPR ${packageName}]`;
-  const prBody = installationInstructions;
-  setVsoVariable("PrBranch", branchName);
-  setVsoVariable("PrTitle", prTitle);
-  setVsoVariable("PrBody", prBody);
+  if (!skipPrVariables) {
+    const branchName = `sdkauto/${packageName?.replace("/", "-")}`;
+    const prTitle = `[AutoPR ${packageName}]`;
+    const prBody = installationInstructions;
+    setVsoVariable("PrBranch", branchName);
+    setVsoVariable("PrTitle", prTitle);
+    setVsoVariable("PrBody", prBody);
+  }
+  setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
 }
+
 /**
  * Parse the arguments.
  * @returns The spec-gen-sdk command input.
@@ -144,34 +160,65 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
  * Get the spec paths based on the batch run type.
  * @param batchType The batch run type.
  * @param specRepoPath The specification repository path.
- * @returns The spec paths.
+ * @returns The specConfigs array.
  */
-export function getSpecPaths(batchType: string, specRepoPath: string): string[] {
-  const specConfigPaths: string[] = [];
+export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
+  let tspconfigs: string[] = [];
+  let readmes: string[] = [];
+  let skipUnmatchedReadmes = false;
   switch (batchType) {
     case "all-specs": {
-      specConfigPaths.push(
-        ...getAllTypeSpecPaths(specRepoPath),
-        ...findReadmeFiles(path.join(specRepoPath, "specification")),
-      );
+      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
     case "all-typespecs": {
-      specConfigPaths.push(...getAllTypeSpecPaths(specRepoPath));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
+      skipUnmatchedReadmes = true;
+      break;
+    }
+    case "all-mgmtplane-typespecs": {
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("resource-manager"),
+      );
+      skipUnmatchedReadmes = true;
+      break;
+    }
+    case "all-dataplane-typespecs": {
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("data-plane"),
+      );
+      skipUnmatchedReadmes = true;
       break;
     }
     case "all-openapis": {
-      specConfigPaths.push(...findReadmeFiles(path.join(specRepoPath, "specification")));
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
+      break;
+    }
+    case "all-mgmtplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("resource-manager"),
+      );
+      break;
+    }
+    case "all-dataplane-openapis": {
+      readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
+        p.includes("data-plane"),
+      );
       break;
     }
     case "sample-typespecs": {
-      specConfigPaths.push(
+      tspconfigs = [
         "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
         "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
-      );
+      ];
     }
   }
-  return specConfigPaths;
+
+  return groupSpecConfigPaths(tspconfigs, readmes, skipUnmatchedReadmes);
 }
 
 /**
@@ -192,14 +239,18 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
     const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
     const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
     if (errors.length > 0) {
-      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      const errorTitle =
+        `Errors occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed errors.`;
       logMessage(errorTitle, LogLevel.Group);
       const errorsWithTitle = [errorTitle, ...errors];
       vsoLogIssue(errorsWithTitle.join("%0D%0A"));
       logMessage("ending group logging", LogLevel.EndGroup);
     }
     if (warnings.length > 0) {
-      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      const warningTitle =
+        `Warnings occurred while generating SDK from ${specConfigDisplayText}. ` +
+        `Follow the steps at https://aka.ms/azsdk/sdk-automation-faq#how-to-view-the-detailed-sdk-generation-errors to view detailed warnings.`;
       logMessage(warningTitle, LogLevel.Group);
       const warningsWithTitle = [warningTitle, ...warnings];
       vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
@@ -212,34 +263,36 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
  * Process the breaking change label artifacts.
  *
  * @param executionReport - The spec-gen-sdk execution report.
- * @returns [flag of lable breaking change, breaking change label].
+ * @returns flag of lable breaking change.
  */
-export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
-  let breakingChangeLabel = "";
+export function getBreakingChangeInfo(executionReport: any): boolean {
   for (const packageInfo of executionReport.packages) {
-    breakingChangeLabel = packageInfo.breakingChangeLabel;
     if (packageInfo.shouldLabelBreakingChange) {
-      return [true, breakingChangeLabel];
+      return true;
     }
   }
-  return [false, breakingChangeLabel];
+  return false;
 }
 
 /**
  * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
  * @param result - The spec-gen-sdk execution result.
- * @param breakingChangeLabel - The breaking change label.
  * @param hasBreakingChange - A flag indicating whether there are breaking changes.
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param stagedArtifactsFolder - The staged artifacts folder.
+ * @param apiViewRequestData - The API view request data.
+ * @param sdkGenerationExecuted - A flag indicating whether the SDK generation was executed.
  * @returns the run status code.
  */
 export function generateArtifact(
   commandInput: SpecGenSdkCmdInput,
   result: string,
-  breakingChangeLabel: string,
   hasBreakingChange: boolean,
   hasManagementPlaneSpecs: boolean,
+  stagedArtifactsFolder: string,
+  apiViewRequestData: APIViewRequestData[],
+  sdkGenerationExecuted: boolean = true,
 ): number {
   const specGenSdkArtifactName = "spec-gen-sdk-artifact";
   const specGenSdkArtifactFileName = specGenSdkArtifactName + ".json";
@@ -252,13 +305,22 @@ export function generateArtifact(
     if (!fs.existsSync(specGenSdkArtifactAbsoluteFolder)) {
       fs.mkdirSync(specGenSdkArtifactAbsoluteFolder, { recursive: true });
     }
+    let isSpecGenSdkCheckRequired = false;
+    if (sdkGenerationExecuted) {
+      isSpecGenSdkCheckRequired = getRequiredSettingValue(
+        hasManagementPlaneSpecs,
+        commandInput.sdkLanguage as SdkName,
+      );
+    }
+
     // Write artifact
     const artifactInfo: SpecGenSdkArtifactInfo = {
       language: commandInput.sdkLanguage,
       result,
+      prNumber: commandInput.prNumber,
       labelAction: hasBreakingChange,
-      isSpecGenSdkCheckRequired:
-        hasManagementPlaneSpecs && SpecGenSdkRequiredSettings[commandInput.sdkLanguage as SdkName],
+      isSpecGenSdkCheckRequired,
+      apiViewRequestData: apiViewRequestData,
     };
     fs.writeFileSync(
       path.join(commandInput.workingFolder, specGenSdkArtifactPath, specGenSdkArtifactFileName),
@@ -266,8 +328,8 @@ export function generateArtifact(
     );
     setVsoVariable("SpecGenSdkArtifactName", specGenSdkArtifactName);
     setVsoVariable("SpecGenSdkArtifactPath", specGenSdkArtifactPath);
-    setVsoVariable("BreakingChangeLabelAction", hasBreakingChange ? "add" : "remove");
-    setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+    setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
+    setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
     vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
@@ -275,4 +337,37 @@ export function generateArtifact(
     return 1;
   }
   return 0;
+}
+
+/**
+ * Get the service folder path from the spec config path.
+ * @param specConfigPath
+ * @returns The service folder path.
+ */
+export function getServiceFolderPath(specConfigPath: string): string {
+  if (!specConfigPath || specConfigPath.length === 0) {
+    return "";
+  }
+  const segments = specConfigPath.split("/");
+  if (segments.length > 2) {
+    return `${segments[0]}/${segments[1]}`;
+  }
+  return specConfigPath;
+}
+
+/**
+ * Get the required setting value for the SDK check based on the spec PR types.
+ * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
+ * @param sdkName - The SDK name.
+ * @returns boolean indicating whether the SDK check is required.
+ */
+export function getRequiredSettingValue(
+  hasManagementPlaneSpecs: boolean,
+  sdkName: SdkName,
+): boolean {
+  if (hasManagementPlaneSpecs) {
+    return SpecGenSdkRequiredSettings[sdkName].managementPlane;
+  } else {
+    return SpecGenSdkRequiredSettings[sdkName].dataPlane;
+  }
 }

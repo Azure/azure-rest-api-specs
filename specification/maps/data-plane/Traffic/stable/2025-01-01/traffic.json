@@ -96,13 +96,9 @@
               "Accident",
               "Congestion",
               "DisabledVehicle",
-              "MassTransit",
               "Miscellaneous",
-              "OtherNews",
-              "PlannedEvent",
               "RoadHazard",
               "Construction",
-              "Alert",
               "Weather"
             ],
             "x-ms-enum": {
@@ -122,20 +118,8 @@
                   "description": "DisabledVehicle"
                 },
                 {
-                  "value": "MassTransit",
-                  "description": "MassTransit"
-                },
-                {
                   "value": "Miscellaneous",
                   "description": "Miscellaneous"
-                },
-                {
-                  "value": "OtherNews",
-                  "description": "OtherNews"
-                },
-                {
-                  "value": "PlannedEvent",
-                  "description": "PlannedEvent"
                 },
                 {
                   "value": "RoadHazard",
@@ -144,10 +128,6 @@
                 {
                   "value": "Construction",
                   "description": "Construction"
-                },
-                {
-                  "value": "Alert",
-                  "description": "Alert"
                 },
                 {
                   "value": "Weather",
@@ -214,13 +194,9 @@
         "Accident",
         "Congestion",
         "DisabledVehicle",
-        "MassTransit",
         "Miscellaneous",
-        "OtherNews",
-        "PlannedEvent",
         "RoadHazard",
         "Construction",
-        "Alert",
         "Weather"
       ],
       "x-ms-enum": {
@@ -240,20 +216,8 @@
             "description": "DisabledVehicle"
           },
           {
-            "value": "MassTransit",
-            "description": "MassTransit"
-          },
-          {
             "value": "Miscellaneous",
             "description": "Miscellaneous"
-          },
-          {
-            "value": "OtherNews",
-            "description": "OtherNews"
-          },
-          {
-            "value": "PlannedEvent",
-            "description": "PlannedEvent"
           },
           {
             "value": "RoadHazard",
@@ -262,10 +226,6 @@
           {
             "value": "Construction",
             "description": "Construction"
-          },
-          {
-            "value": "Alert",
-            "description": "Alert"
           },
           {
             "value": "Weather",
@@ -333,7 +293,7 @@
           "type": "boolean"
         },
         "severity": {
-          "description": "Specifies the level of importance of the incident.\n\n - 1: LowImpact \n\n - 2: Minor \n\n - 3: Moderate \n\n- 4: Serious",
+          "description": "Specifies the level of importance of the incident.\n\n - 0: Unknown \n\n - 1: Minor \n\n - 2: Moderate \n\n - 3: Major \n\n- 4: Undefined (used for road closures and other indefinite delays)",
           "type": "integer",
           "format": "int32"
         },

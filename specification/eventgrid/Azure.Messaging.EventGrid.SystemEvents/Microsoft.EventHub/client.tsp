@@ -9,3 +9,8 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
+
+//useSystemTextJsonConverter decorators
+@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData,
+  "csharp"
+);

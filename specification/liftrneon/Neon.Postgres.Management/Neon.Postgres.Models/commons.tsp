@@ -31,7 +31,7 @@ model BaseEntity {
   provisioningState?: ResourceProvisioningState;
 
   @doc("Additional attributes for the entity")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   attributes?: Attributes[];
 }
 
@@ -56,6 +56,6 @@ model PgVersion {
 @added(Neon.Postgres.Versions.v2_preview)
 model PgVersionsResult {
   @doc("List of PostgreSQL versions")
-  @Azure.ResourceManager.identifiers(#[])
+  @identifiers(#[])
   versions: PgVersion[];
 }

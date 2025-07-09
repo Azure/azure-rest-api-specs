@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/mongodbatlas"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,6 +15,11 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-mongodbatlas"
+    namespace: "com.azure.resourcemanager.mongodbatlas"
+    flavor: "azure"
+    service-name: "Mongo DB Atlas"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mongodbatlas"
     package-dir: "armmongodbatlas"
@@ -22,6 +30,18 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-mongodbatlas"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-mongodbatlas"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-mongodbatlas"
+    namespace: "azure.mgmt.mongodbatlas"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

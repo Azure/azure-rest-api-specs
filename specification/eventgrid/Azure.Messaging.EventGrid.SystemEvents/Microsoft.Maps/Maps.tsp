@@ -1,10 +1,12 @@
 import "@typespec/versioning";
+import "./MapsExample.tsp";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftMapsGeofenceEnteredExample)
 model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event. */
@@ -13,6 +15,7 @@ model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftMapsGeofenceResultExample)
 model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult). */

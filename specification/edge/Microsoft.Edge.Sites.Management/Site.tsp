@@ -116,7 +116,7 @@ interface SitesByServiceGroup {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
-  @patch
+  @patch(#{ implicitOptionality: true })
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   update(
