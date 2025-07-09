@@ -222,14 +222,8 @@ Run `/check-package-readiness` prompt to check the release readiness of an SDK p
 
 ## Addressing API Review Comments and Feedback
 
+- ALWAYS follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` EXACTLY and THOROUGHLY, without skipping or reordering steps.
+
 **Triggered by prompt:**
 - "API review comment", "review feedback", "review suggestion", "notes from architect", or similar.
 - feedback on a client, model, or operation name that needs to be changed.
-
-**Strict Process Compliance for API Review Comments**
-
-- ALWAYS follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` EXACTLY and THOROUGHLY, without skipping or reordering steps.
-
-- Always explain each step before taking action.
-- Confirm with the user before making any changes.
-- Do not make changes outside `client.tsp` unless the process explicitly allows it.
