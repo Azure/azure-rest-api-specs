@@ -189,6 +189,7 @@ model ServicesListResult {
    */
   @nextLink
   nextLink?: string;
+
   /**
    * List of Service resources.
    */
@@ -222,6 +223,7 @@ model ProblemClassificationsListResult {
    */
   @nextLink
   nextLink?: string;
+
   /**
    * List of ProblemClassification resources.
    */
