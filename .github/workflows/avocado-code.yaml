@@ -52,6 +52,9 @@ jobs:
           # Tells Avocado to analyze the files changed between the PR head (default checkout)
           # and the PR base branch.
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
+          # Avocado hardcodes these env vars to get repo and SHA
+          TRAVIS_REPO_SLUG: ${{ github.repository }}
+          TRAVIS_PULL_REQUEST_SHA: ${{ github.sha }}
 
       - name: Setup Node 20 and install deps (under .github)
         if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
