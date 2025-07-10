@@ -6,7 +6,7 @@ import { pathToFileURL } from "url";
 import { inspect } from "util";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function importAllModules({ core }) {
   const workspace = process.env.GITHUB_WORKSPACE;
