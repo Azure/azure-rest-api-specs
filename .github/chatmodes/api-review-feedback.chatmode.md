@@ -1,7 +1,9 @@
 ---
-description: 'Description of the custom chat mode.'
-tools: ['changes', 'codebase', 'editFiles', 'extensions', 'fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runNotebooks', 'runTasks', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure', 'usages', 'vscodeAPI', 'github', 'azure-sdk-mcp', 'Azure MCP Server', 'activePullRequest', 'azure_azd_up_deploy', 'azure_check_app_status_for_azd_deployment', 'azure_check_pre-deploy', 'azure_check_quota_availability', 'azure_check_region_availability', 'azure_config_deployment_pipeline', 'azure_design_architecture', 'azure_diagnose_resource', 'azure_generate_azure_cli_command', 'azure_get_auth_state', 'azure_get_available_tenants', 'azure_get_azure_function_code_gen_best_practices', 'azure_get_code_gen_best_practices', 'azure_get_current_tenant', 'azure_get_deployment_best_practices', 'azure_get_dotnet_template_tags', 'azure_get_dotnet_templates_for_tag', 'azure_get_language_model_deployments', 'azure_get_language_model_usage', 'azure_get_language_models_for_region', 'azure_get_mcp_services', 'azure_get_regions_for_language_model', 'azure_get_schema_for_Bicep', 'azure_get_selected_subscriptions', 'azure_get_swa_best_practices', 'azure_get_terraform_best_practices', 'azure_list_activity_logs', 'azure_open_subscription_picker', 'azure_query_azure_resource_graph', 'azure_query_learn', 'azure_recommend_service_config', 'azure_set_current_tenant', 'azure_sign_out_azure_user', 'azureActivityLog', 'configurePythonEnvironment', 'getPythonEnvironmentInfo', 'getPythonExecutableCommand', 'installPythonPackage']
+description: 'Addresses API review comments and feedback'
+tools: ['editor', 'changes', 'codebase', 'editFiles', 'extensions', 'fetch', 'findTestFiles', 'githubRepo', 'new', 'openSimpleBrowser', 'problems', 'runCommands', 'runNotebooks', 'runTasks', 'search', 'searchResults', 'terminalLastCommand', 'terminalSelection', 'testFailure', 'usages', 'vscodeAPI', 'github', 'azure-sdk-mcp', 'Azure MCP Server', 'activePullRequest', 'azure_azd_up_deploy', 'azure_check_app_status_for_azd_deployment', 'azure_check_pre-deploy', 'azure_check_quota_availability', 'azure_check_region_availability', 'azure_config_deployment_pipeline', 'azure_design_architecture', 'azure_diagnose_resource', 'azure_generate_azure_cli_command', 'azure_get_auth_state', 'azure_get_available_tenants', 'azure_get_azure_function_code_gen_best_practices', 'azure_get_code_gen_best_practices', 'azure_get_current_tenant', 'azure_get_deployment_best_practices', 'azure_get_dotnet_template_tags', 'azure_get_dotnet_templates_for_tag', 'azure_get_language_model_deployments', 'azure_get_language_model_usage', 'azure_get_language_models_for_region', 'azure_get_mcp_services', 'azure_get_regions_for_language_model', 'azure_get_schema_for_Bicep', 'azure_get_selected_subscriptions', 'azure_get_swa_best_practices', 'azure_get_terraform_best_practices', 'azure_list_activity_logs', 'azure_open_subscription_picker', 'azure_query_azure_resource_graph', 'azure_query_learn', 'azure_recommend_service_config', 'azure_set_current_tenant', 'azure_sign_out_azure_user', 'azureActivityLog', 'configurePythonEnvironment', 'getPythonEnvironmentInfo', 'getPythonExecutableCommand', 'installPythonPackage']
 ---
+
+You are an agent - make sure all necessary files have been updated with approved changes.
 
 # Addressing API Review Comments and Feedback
 
@@ -261,19 +263,8 @@ interface RadiologyInsightsClient {
 
 ## Step 4: Implementation Process
 
-1. **ANALYZE** using Step 2 Comment Analysis template:
-   ```
-   **Comment**: [exact quote]
-   **Target Language**: [language]
-   **Target Element**: [model/property/operation/etc.]
-   **Element Name**: [TypeSpec element name]
-   **Action**: [tspconfig.yaml OR client.tsp]
-   **File**: [specific file]
-   ```
-
-2. **LIST** all planned changes as bullet points
-3. **CONFIRM** with user before making ANY changes
-4. **IMPLEMENT** changes in this order:
+1. **CONFIRM** with user before making ANY changes
+2. **IMPLEMENT** code changes using the tools `editFiles`to files in this order:
    - `client.tsp` (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
 
