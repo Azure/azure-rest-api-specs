@@ -9,6 +9,3 @@ namespace ClientCustomizations;
 @@access(upload, Access.internal, "python");
 
 @@clientName(LogsIngestion, "Client", "go");
-
-@@clientName(LogsIngestion, "LogsIngestionClientOptions", "javascript");
-@@clientName(LogsIngestion.upload, "LogsUploadOptions", "javascript");
