@@ -37,12 +37,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators/{objectId}": {
       "put": {
         "tags": [
-          "Administrators"
+          "AdministratorsMicrosoftEntra"
         ],
-        "operationId": "Administrators_CreateOrUpdate",
+        "operationId": "AdministratorsMicrosoftEntra_CreateOrUpdate",
         "x-ms-examples": {
           "Add a server administrator associated to a Microsoft Entra principal.": {
-            "$ref": "./examples/AdministratorsAdd.json"
+            "$ref": "./examples/AdministratorsMicrosoftEntraAdd.json"
           }
         },
         "description": "Creates a new server administrator associated to a Microsoft Entra principal.",
@@ -67,7 +67,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdministratorAdd"
+              "$ref": "#/definitions/AdministratorMicrosoftEntraAdd"
             },
             "description": "Required parameters for adding a server administrator associated to a Microsoft Entra principal."
           }
@@ -95,12 +95,12 @@
       },
       "delete": {
         "tags": [
-          "Administrators"
+          "AdministratorsMicrosoftEntra"
         ],
-        "operationId": "Administrators_Delete",
+        "operationId": "AdministratorsMicrosoftEntra_Delete",
         "x-ms-examples": {
           "Delete a server administrator associated to a Microsoft Entra principal.": {
-            "$ref": "./examples/AdministratorsDelete.json"
+            "$ref": "./examples/AdministratorsMicrosoftEntraDelete.json"
           }
         },
         "description": "Deletes an existing server administrator associated to a Microsoft Entra principal.",
@@ -144,12 +144,12 @@
       },
       "get": {
         "tags": [
-          "Administrators"
+          "AdministratorsMicrosoftEntra"
         ],
-        "operationId": "Administrators_Get",
+        "operationId": "AdministratorsMicrosoftEntra_Get",
         "x-ms-examples": {
           "Get information about a server administrator associated to a Microsoft Entra principal.": {
-            "$ref": "./examples/AdministratorsGet.json"
+            "$ref": "./examples/AdministratorsMicrosoftEntraGet.json"
           }
         },
         "description": "Gets information about a server administrator associated to a Microsoft Entra principal.",
@@ -174,7 +174,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/Administrator"
+              "$ref": "#/definitions/AdministratorMicrosoftEntra"
             }
           },
           "default": {
@@ -189,12 +189,12 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/administrators": {
       "get": {
         "tags": [
-          "Administrators"
+          "AdministratorsMicrosoftEntra"
         ],
-        "operationId": "Administrators_ListByServer",
+        "operationId": "AdministratorsMicrosoftEntra_ListByServer",
         "x-ms-examples": {
           "List information about all server administrators associated to Microsoft Entra principals.": {
-            "$ref": "./examples/AdministratorsListByServer.json"
+            "$ref": "./examples/AdministratorsMicrosoftEntraListByServer.json"
           }
         },
         "description": "List all server administrators associated to a Microsoft Entra principal.",
@@ -216,7 +216,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/AdministratorList"
+              "$ref": "#/definitions/AdministratorMicrosoftEntraList"
             }
           },
           "default": {
@@ -233,18 +233,18 @@
     }
   },
   "definitions": {
-    "AdministratorAdd": {
+    "AdministratorMicrosoftEntraAdd": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdministratorPropertiesForAdd",
+          "$ref": "#/definitions/AdministratorMicrosoftEntraPropertiesForAdd",
           "x-ms-client-flatten": true,
           "description": "Properties of the server administrator associated to a Microsoft Entra principal."
         }
       },
       "description": "Server administrator associated to a Microsoft Entra principal."
     },
-    "AdministratorPropertiesForAdd": {
+    "AdministratorMicrosoftEntraPropertiesForAdd": {
       "type": "object",
       "properties": {
         "principalType": {
@@ -286,7 +286,7 @@
       },
       "description": "Properties of a server administrator associated to a Microsoft Entra principal."
     },
-    "AdministratorProperties": {
+    "AdministratorMicrosoftEntraProperties": {
       "type": "object",
       "properties": {
         "principalType": {
@@ -338,11 +338,11 @@
       },
       "description": "Properties of a server administrator associated to a Microsoft Entra principal."
     },
-    "Administrator": {
+    "AdministratorMicrosoftEntra": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdministratorProperties",
+          "$ref": "#/definitions/AdministratorMicrosoftEntraProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of a server administrator associated to a Microsoft Entra principal."
         }
@@ -357,13 +357,13 @@
       ],
       "description": "Server administrator associated to a Microsoft Entra principal."
     },
-    "AdministratorList": {
+    "AdministratorMicrosoftEntraList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Administrator"
+            "$ref": "#/definitions/AdministratorMicrosoftEntra"
           },
           "description": "List of server administrators associated to Microsoft Entra principals."
         },
