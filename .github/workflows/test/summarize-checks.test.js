@@ -597,7 +597,7 @@ describe("Summarize Checks Tests", () => {
       }
     ];
 
-    it.only.each(testCases)(
+    it.each(testCases)(
       "$description",
       async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
         const [labelsToAdd, labelsToRemove] = await updateLabels(

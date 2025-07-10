@@ -467,6 +467,12 @@ export async function updateLabels(
   //  - public/rest-api-specs-scripts/src/prSummary.ts
   // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
 
+  // the important part about how this will work depends how the users use it
+  // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
+  // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
+  // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
+  // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
+
   const labelsToAdd = new Set();
   const labelsToRemove = new Set();
 
