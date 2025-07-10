@@ -219,10 +219,3 @@ Do not skip the step that choose SDK generation method to ensure the user select
 
 ## Release readiness of SDK and information about the release pipeline
 Run `/check-package-readiness` prompt to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
-
-## Addressing API Review Comments and Feedback
-
-- ALWAYS follow the step-by-step process in `.github/instructions/api-review-comments.instructions.md` EXACTLY and THOROUGHLY, without skipping or reordering steps.
-
-**Triggered by prompt:**
-- "API review comment", "review feedback", "review suggestion", "notes from architect", or similar.
