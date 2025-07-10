@@ -8,18 +8,18 @@ You are an agent. Think carefully about how to avoid any TypeSpec compilation er
 # Addressing API Review Comments and Feedback
 
 - ALWAYS follow the step-by-step process in below EXACTLY, without skipping or reordering steps. Explain each step concisely before taking action.
-- Review the files in the TSP file directory carefully and thoroughly before suggesting and implementing any changes.
+- Review the files in the TSP file directory carefully before suggesting and implementing any changes.
 
 ## TypeSpec Implementation Guide
 
 This document provides a quick guide for implementing API review comments in TypeSpec using the `client.tsp` file.
 
-## Step 1: Validate Input Format & Triggering Prompts
+## Step 1: Validate Input Format
 
 User can provide comments directly in chat with context:
 - **Example**: "I got this review feedback for Java '<review comment>' for the model Bar and attribute foo, can you help with that?"
 - **TSP Context**: TSP folder/files should be available through:
-   - Attached files (main.tsp, client.tsp, etc.)
+   - Attached files (main.tsp, client.tsp, tspconfig.yaml, etc.)
    - Open files in the editor context
    - Current working directory
 - **If TSP folder location is not found in the context or provided by the user, ask the user to specify the TSP folder location.**
@@ -70,17 +70,12 @@ User can provide comments directly in chat with context:
 **Target Language**: [Python, C#, Java, JavaScript, etc.]
 **TypeSpec Element**: [TypeSpec name to be changed, in camelCase or PascalCase]
 **TypeSpec Element Type**: [model/property/operation/interface/enum]
-**Action**: [client.tsp OR main.tsp]
+**Action**: [client.tsp]
 **File**: [specific file to modify]
 **Mapped TypeSpec Name**: [camelCase or PascalCase name to use in TypeSpec - MUST follow TypeSpec conventions]
 ```
 
 **Note**: For comments requiring multiple actions, fill out the template for each action.
-
-### Implementation Rules
-
-**AVOID** adding unnecessary comments to TypeSpec files.
-**IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
 
 **Critical Naming Convention Rule:**
 When using `@@clientName`, the target name (second parameter) must follow TypeSpec conventions:
@@ -256,6 +251,11 @@ interface RadiologyInsightsClient {
 
 ## Step 3: Implementation Process
 
+### Implementation Rules
+
+- **IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
+- **AVOID** adding comments to TypeSpec files.
+
 1. **IMPLEMENT** your Implementation Strategy Plan from Step 3 to files in this order:
    - `client.tsp` (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
@@ -271,14 +271,13 @@ interface RadiologyInsightsClient {
    - `client.tsp` (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
 
-## Step 5: Post-Implementation Validation and Generation
+## Step 5: Post-Implementation Validation
 
-For all steps below, keep going until the validation and generation have completed successfully and all compilation/generation errors are completely resolved, before ending your turn and yielding back to the user. You MUST fully solve this autonomously before returning to user.
-1. **Validate TypeSpec**: Run `tsp compile .` from project root
+For all steps below, keep going until the validation has completed successfully and all compilation errors are completely resolved, before ending your turn and yielding back to the user.
+1. **Validate TypeSpec**: Run `tsp compile client.tsp` from project root.
 2. **Fix any compilation errors** before proceeding
-3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
-   - If the emitter is not installed, run `npm install @azure-tools/typespec-<target language>` first
-4. **Fix any generation errors**
+
+Let the user know that they can now generate the SDK with these changes.
 
 <!-- References -->
 [TypeSpec Language Basics Docs]: https://typespec.io/docs/language-basics/overview/
