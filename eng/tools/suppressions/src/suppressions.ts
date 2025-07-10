@@ -7,7 +7,6 @@ import { sep as posixSep } from "path/posix";
 import vm from "vm";
 import { parse as yamlParse } from "yaml";
 import * as z from "zod";
-import { fromError } from "zod-validation-error";
 
 export interface Suppression {
   tool: string;
@@ -149,7 +148,11 @@ export function getSuppressionsFromYaml(
     // Throws if parsedYaml doesn't match schema
     suppressions = suppressionSchema.parse(parsedYaml);
   } catch (err) {
-    throw fromError(err);
+    if (err instanceof z.ZodError) {
+      throw new Error(z.prettifyError(err));
+    } else {
+      throw err;
+    }
   }
 
   // Make "require" available inside sandbox for CJS imports
