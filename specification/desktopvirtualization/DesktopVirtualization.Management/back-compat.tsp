@@ -58,3 +58,5 @@ using Microsoft.DesktopVirtualization;
 @@pattern(Azure.ResourceManager.ResourceKindProperty.kind,
   "^[-\\w\\._,\\(\\)]+$"
 );
+
+@@clientName(MSIXImages, "MsixImages", "autorest");

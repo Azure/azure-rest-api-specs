@@ -76,10 +76,11 @@ interface StorageTasks {
   /**
    * Delete the storage task resource.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageTask,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = StorageTask> &
-      ArmLroLocationHeader<FinalResult = StorageTask> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
@@ -105,7 +106,6 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  @operationId("StorageTasksReport_List")
   list is ArmResourceActionSync<
     StorageTask,
     void,
@@ -131,7 +131,6 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("storageTaskAssignments")
-  @operationId("StorageTaskAssignment_List")
   storageTaskAssignmentList is ArmResourceActionSync<
     StorageTask,
     void,
