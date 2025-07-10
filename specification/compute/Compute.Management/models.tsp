@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Versioning;
 
 namespace Microsoft.Compute;
 
