@@ -116,7 +116,7 @@ model DataflowGraphNodeGraphSettings {
   /** Reference to the registry endpoint for pulling the artifact. */
   registryEndpointRef: string;
 
-  /** The artifact name and version to pull. */
+  /** The artifact name and version to pull. This should be in the format `<artifact-name>:<version>`. */
   artifact: string;
 
   /** Configuration key-value pairs. */

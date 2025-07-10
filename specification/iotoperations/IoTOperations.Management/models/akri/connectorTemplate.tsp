@@ -332,7 +332,7 @@ model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   /** The managed configuration type for the Connector template. */
   managedConfigurationType: StatefulSetConfiguration;
 
-  /** 
+  /**
    * The stateful set configuration settings. This corresponds to the Kubernetes StatefulSet resource.
    * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json#/components/schemas/io.k8s.api.apps.v1.StatefulSetSpec
    */
