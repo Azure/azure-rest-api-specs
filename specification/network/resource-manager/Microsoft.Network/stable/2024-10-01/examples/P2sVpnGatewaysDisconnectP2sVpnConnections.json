@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "p2s-vpn-gateway-test",
+    "p2sVpnGatewayName": "p2svpngateway",
+    "api-version": "2024-10-01",
+    "request": {
+      "vpnConnectionIds": [
+        "vpnconnId1",
+        "vpnconnId2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    }
+  }
+}
