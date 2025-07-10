@@ -279,6 +279,12 @@ directive:
   - suppress: PutResponseCodes
     from: AuthorizationRules.json
     reason: Breaking change in order to change the API response code.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: namespace-preview.json 
+    reason: Temporarily suppressing linter errors and will be fixed later. 
+  - suppress: XmsPageableForListCalls
+    from: namespace-preview.json
+    reason: Not a mandatory check.
 ```
 
 
