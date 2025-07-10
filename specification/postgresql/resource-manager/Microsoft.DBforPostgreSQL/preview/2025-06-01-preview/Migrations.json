@@ -42,25 +42,25 @@
         "operationId": "Migrations_Create",
         "x-ms-examples": {
           "Create a migration.": {
-            "$ref": "./examples/Migrations_Create.json"
+            "$ref": "./examples/MigrationsCreate.json"
           },
           "Create a migration specifying user names.": {
-            "$ref": "./examples/Migrations_Create_With_Other_Users.json"
+            "$ref": "./examples/MigrationsCreateWithOtherUsers.json"
           },
           "Create a migration with roles.": {
-            "$ref": "./examples/Migrations_Create_With_Roles.json"
+            "$ref": "./examples/MigrationsCreateWithRoles.json"
           },
           "Create a migration with private endpoint.": {
-            "$ref": "./examples/Migrations_Create_With_PrivateEndpoint_Servers.json"
+            "$ref": "./examples/MigrationsCreateWithPrivateEndpointServers.json"
           },
           "Create a migration with other source type for validating and migrating.": {
-            "$ref": "./examples/Migrations_Create_Other_SourceTypes_Validate_Migrate.json"
+            "$ref": "./examples/MigrationsCreateOtherSourceTypesValidateMigrate.json"
           },
           "Create a migration for validating only.": {
-            "$ref": "./examples/Migrations_Create_Validate_Only.json"
+            "$ref": "./examples/MigrationsCreateValidateOnly.json"
           },
           "Create a migration with fully qualified domain names for source and target servers.": {
-            "$ref": "./examples/Migrations_Create_With_FullyQualifiedDomainName.json"
+            "$ref": "./examples/MigrationsCreateWithFullyQualifiedDomainName.json"
           }
         },
         "description": "Creates a new migration.",
@@ -85,7 +85,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/Migration"
             },
             "description": "Parameters required for creating a migration."
           }
@@ -94,13 +94,13 @@
           "200": {
             "description": "Successfully set or update the Migration for a server.",
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/Migration"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/Migration"
             }
           },
           "default": {
@@ -118,19 +118,19 @@
         "operationId": "Migrations_Get",
         "x-ms-examples": {
           "Get information about a migration.": {
-            "$ref": "./examples/Migrations_Get.json"
+            "$ref": "./examples/MigrationsGet.json"
           },
           "Get information about a migration with validation failures.": {
-            "$ref": "./examples/Migrations_GetMigrationWithValidationFailures.json"
+            "$ref": "./examples/MigrationsGetMigrationWithValidationFailures.json"
           },
           "Get information about a migration with successful validation only.": {
-            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationOnly.json"
+            "$ref": "./examples/MigrationsGetMigrationWithSuccessfulValidationOnly.json"
           },
           "Get information about a migration with successful validation but failed migration.": {
-            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationButMigrationFailure.json"
+            "$ref": "./examples/MigrationsGetMigrationWithSuccessfulValidationButMigrationFailure.json"
           },
           "Get information about a migration with successful validation and successful migration.": {
-            "$ref": "./examples/Migrations_GetMigrationWithSuccessfulValidationAndMigration.json"
+            "$ref": "./examples/MigrationsGetMigrationWithSuccessfulValidationAndMigration.json"
           }
         },
         "description": "Gets information about a migration.",
@@ -155,7 +155,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/Migration"
             }
           },
           "default": {
@@ -173,10 +173,10 @@
         "operationId": "Migrations_Update",
         "x-ms-examples": {
           "Update an existing migration.": {
-            "$ref": "./examples/Migrations_Update.json"
+            "$ref": "./examples/MigrationsUpdate.json"
           },
           "Cancel an existing migration.": {
-            "$ref": "./examples/Migrations_Cancel.json"
+            "$ref": "./examples/MigrationsCancel.json"
           }
         },
         "description": "Updates an existing migration. The request body can contain one to many of the mutable properties present in the migration definition. Certain property updates initiate migration state transitions.",
@@ -210,7 +210,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/MigrationResource"
+              "$ref": "#/definitions/Migration"
             }
           },
           "default": {
@@ -228,7 +228,7 @@
         "operationId": "Migrations_Delete",
         "x-ms-examples": {
           "Delete an existing migration.": {
-            "$ref": "./examples/Migrations_Delete.json"
+            "$ref": "./examples/MigrationsDelete.json"
           }
         },
         "description": "Deletes an existing migration.",
@@ -273,7 +273,7 @@
         "operationId": "Migrations_ListByTargetServer",
         "x-ms-examples": {
           "List all migrations of a target flexible server.": {
-            "$ref": "./examples/Migrations_ListByTargetServer.json"
+            "$ref": "./examples/MigrationsListByTargetServer.json"
           }
         },
         "description": "Lists all migrations of a target flexible server.",
@@ -298,7 +298,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MigrationResourceListResult"
+              "$ref": "#/definitions/MigrationResourceList"
             }
           },
           "default": {
@@ -321,10 +321,10 @@
           "Custom operation",
           "POST"
         ],
-        "operationId": "CheckMigrationNameAvailability",
+        "operationId": "Migrations_CheckNameAvailability",
         "x-ms-examples": {
           "Check the validity and availability of the given name, to assign it to a new migration.": {
-            "$ref": "./examples/CheckMigrationNameAvailability.json"
+            "$ref": "./examples/MigrationsCheckNameAvailability.json"
           }
         },
         "parameters": [
@@ -345,7 +345,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+              "$ref": "#/definitions/MigrationNameAvailability"
             },
             "description": "Parameters required to check if a migration name is valid and available."
           }
@@ -354,7 +354,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/MigrationNameAvailabilityResource"
+              "$ref": "#/definitions/MigrationNameAvailability"
             }
           },
           "default": {
@@ -368,11 +368,11 @@
     }
   },
   "definitions": {
-    "MigrationResource": {
+    "Migration": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrationResourceProperties",
+          "$ref": "#/definitions/MigrationProperties",
           "description": "Migration properties.",
           "x-ms-client-flatten": true
         }
@@ -384,7 +384,7 @@
       ],
       "description": "Migration."
     },
-    "MigrationResourceProperties": {
+    "MigrationProperties": {
       "type": "object",
       "properties": {
         "migrationId": {
@@ -559,13 +559,13 @@
       },
       "description": "Migration."
     },
-    "MigrationResourceListResult": {
+    "MigrationResourceList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MigrationResource"
+            "$ref": "#/definitions/Migration"
           },
           "readOnly": true,
           "description": "List of migrations.",
@@ -583,7 +583,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrationResourcePropertiesForPatch",
+          "$ref": "#/definitions/MigrationPropertiesForPatch",
           "description": "Migration properties.",
           "x-ms-client-flatten": true
         },
@@ -597,7 +597,7 @@
       },
       "description": "Migration."
     },
-    "MigrationResourcePropertiesForPatch": {
+    "MigrationPropertiesForPatch": {
       "type": "object",
       "properties": {
         "sourceDbServerResourceId": {
@@ -1220,7 +1220,7 @@
         "modelAsString": true
       }
     },
-    "MigrationNameAvailabilityResource": {
+    "MigrationNameAvailability": {
       "required": [
         "name",
         "type"
