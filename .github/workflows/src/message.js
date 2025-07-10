@@ -91,7 +91,7 @@ export const MessageRecordSchema = z.discriminatedUnion("type", [
 /**
  * Adds table of messages to core.summary
  *
- * @param {import("./message.js").MessageRecord[]} messages
+ * @param {MessageRecord[]} messages
  */
 export function generateMarkdownTable(messages) {
   const header = ["Rule", "Message"];
@@ -100,7 +100,7 @@ export function generateMarkdownTable(messages) {
 }
 
 /**
- * @param {import("./message.js").MessageRecord} record
+ * @param {MessageRecord} record
  * @returns {string[]}
  */
 function getMarkdownRow(record) {
@@ -117,7 +117,7 @@ function getMarkdownRow(record) {
 // Following ported from openapi-alps/reportGenerator.ts
 
 /**
- * @param {import("./message.js").MessageRecord} record
+ * @param {MessageRecord} record
  * @returns {string}
  */
 function getLevelMarkdown(record) {
@@ -132,7 +132,7 @@ function getLevelMarkdown(record) {
 }
 
 /**
- * @param {import("./message.js").ResultMessageRecord} result
+ * @param {ResultMessageRecord} result
  * @returns {string}
  */
 function getRuleMarkdown(result) {
@@ -141,7 +141,7 @@ function getRuleMarkdown(result) {
 }
 
 /**
- * @param {import("./message.js").ResultMessageRecord} result
+ * @param {ResultMessageRecord} result
  * @returns {string}
  */
 function getLocationMarkdown(result) {
@@ -169,7 +169,7 @@ function getPathSegment(path) {
 }
 
 /**
- * @param {import("./message.js").MessageRecord} record
+ * @param {MessageRecord} record
  * @returns {string}
  */
 function getMessageMarkdown(record) {
@@ -182,7 +182,7 @@ function getMessageMarkdown(record) {
   }
 }
 /**
- * @param {import("./message.js").MessageRecord} record
+ * @param {MessageRecord} record
  * @returns {string}
  */
 function getExtraMarkdown(record) {
