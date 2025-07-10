@@ -594,6 +594,139 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfiguration_List",
+        "x-ms-examples": {
+          "NamspaceNetworkSecurityPerimeterConfigurationList": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        },
+        "description": "Gets list of current NetworkSecurityPerimeterConfiguration for Namespace",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration List",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}/reconcile": {
+      "post": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_CreateOrUpdate",
+        "description": "Refreshes any information about the association.",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationList": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationReconcile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Association reconciled"
+          },
+          "202": {
+            "description": "Request to reconcile the association accepted."
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkSecurityPerimeterConfigurations/{resourceAssociationName}": {
+      "get": {
+        "tags": [
+          "Namespaces NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_resourceAssociationName",
+        "description": "Return a NetworkSecurityPerimeterConfigurations resourceAssociationName",
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurationassociationProxyName": {
+            "$ref": "./examples/NameSpaces/NetworkSecurityPerimeterConfigurationAssociationproxy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceAssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Network Security Perimeter Configuration associationProxyName",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -739,7 +872,7 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "This property reflects if zone redundancy has been enabled for namespaces in regions that support availability zones.",
+          "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones.",
           "x-ms-mutability": [
             "create",
             "read"
