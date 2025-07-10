@@ -1,9 +1,10 @@
-import { join } from "path";
+import { join, dirname } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { Suppression } from "suppressions";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
+import * as fs from "fs";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -42,7 +43,7 @@ export abstract class TspconfigSubRuleBase {
         success: true,
         stdOutput: `Validation skipped. ${reason}`,
       };
-    return this.validate(config);
+    return this.validate(config, folder);
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -65,15 +66,107 @@ export abstract class TspconfigSubRuleBase {
     }
   }
 
-  protected createFailedResult(error: string, action: string): RuleResult {
+  /**
+   * Find repository root directory by searching for a suppressions.yaml file
+   * @param folderPath The starting folder path
+   * @returns The repository root path or the original folder if not found
+   */
+  protected findRepoRoot(folderPath?: string): string {
+    if (!folderPath) return "";
+
+    // Start from the given folder and move up until finding suppressions.yaml
+    let currentDir = folderPath;
+    let previousDir = "";
+
+    while (currentDir !== previousDir) {
+      const suppressionsPath = join(currentDir, "suppressions.yaml");
+
+      if (fs.existsSync(suppressionsPath)) {
+        return currentDir; // Found a directory with suppressions.yaml
+      }
+
+      previousDir = currentDir;
+      currentDir = dirname(currentDir);
+    }
+
+    // If we couldn't find a suppressions.yaml, return the original folder
+    return folderPath;
+  }
+
+  /**
+   * Generate a line anchor for the emitter in the sample file
+   * @param emitterName The name of the emitter
+   * @param samplePath The path to the sample tspconfig.yaml file
+   * @param folder The folder path of the TypeSpec project being validated
+   * @returns A string with the line anchor (e.g., "#L12") or empty string if not found
+   */
+  protected getLineAnchor(emitterName?: string, samplePath?: string, folder?: string): string {
+    if (!emitterName || !samplePath) return "";
+
+    // Find the repository root directory
+    const repoRoot = this.findRepoRoot(folder);
+    // Construct the full path to the sample file
+    const fullSamplePath = join(repoRoot, samplePath);
+
+    // Try to read the file and find the emitter line dynamically
+    try {
+      if (!fs.existsSync(fullSamplePath)) {
+        console.warn(`Sample file not found: ${fullSamplePath}`);
+        return "";
+      }
+
+      const fileContent = fs.readFileSync(fullSamplePath, "utf8");
+      const lines = fileContent.split("\n");
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        // Look for the emitter name in a line (handling various formats with proper indentation)
+        const cleanLine = line.trim();
+        if (cleanLine.includes(`${emitterName}`)) {
+          return `#L${i + 1}`;
+        }
+      }
+
+      console.warn(`Emitter ${emitterName} not found in options section of ${fullSamplePath}`);
+    } catch (err) {
+      // If file reading fails, log and return empty string
+      console.warn(`Error reading file ${fullSamplePath}: ${err}`);
+    }
+    return "";
+  }
+
+  protected createFailedResult(
+    error: string,
+    action: string,
+    folder?: string,
+    emitterName?: string,
+  ): RuleResult {
+    let errorOutput = `- ${error}. ${action}.`;
+
+    // Add Contoso sample information if folder is provided
+    if (folder) {
+      const isManagement = isManagementSdk(folder);
+      const samplePath = isManagement
+        ? "contosowidgetmanager/Contoso.Management/tspconfig.yaml"
+        : "contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml";
+
+      // Get line anchor based on emitter name if provided, pass folder to find repo root correctly
+      const lineAnchor = this.getLineAnchor(emitterName, samplePath, folder);
+
+      const sampleUrl = `https://github.com/Azure/azure-rest-api-specs/blob/main/specification/${samplePath}${lineAnchor}`;
+      const title = isManagement ? "Contoso Management Plane Sample" : "Contoso Data Plane Sample";
+
+      errorOutput += `\n${title} Link: ${sampleUrl}`;
+    }
+
     return {
       success: false,
-      errorOutput: `- ${error}. ${action}.`,
+      errorOutput,
     };
   }
 
   public abstract getPathOfKeyToValidate(): string;
-  protected abstract validate(config: any): RuleResult;
+  protected abstract validate(config: any, folder: string): RuleResult;
 }
 
 class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
@@ -81,18 +174,20 @@ class TspconfigParameterSubRuleBase extends TspconfigSubRuleBase {
     super(keyToValidate, expectedValue);
   }
 
-  protected validate(config: any): RuleResult {
+  protected validate(config: any, folder: string): RuleResult {
     const parameter = config?.parameters?.[this.keyToValidate]?.default;
     if (parameter === undefined)
       return this.createFailedResult(
         `Failed to find "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}"`,
         `Please add "parameters.${this.keyToValidate}.default" with expected value "${this.expectedValue}".`,
+        folder,
       );
 
     if (!this.validateValue(parameter, this.expectedValue))
       return this.createFailedResult(
         `The value of parameters.${this.keyToValidate}.default "${parameter}" does not match "${this.expectedValue}"`,
         `Please update the value of "parameters.${this.keyToValidate}.default" to match "${this.expectedValue}".`,
+        folder,
       );
 
     return { success: true };
@@ -125,20 +220,26 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return option;
   }
 
-  protected validate(config: any): RuleResult {
+  protected validate(config: any, folder: string): RuleResult {
     const option = this.tryFindOption(config);
-    if (option === undefined)
+    if (option === undefined) {
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
+        folder,
+        this.emitterName,
       );
+    }
 
     const actualValue = option as unknown as undefined | string | boolean;
-    if (!this.validateValue(actualValue, this.expectedValue))
+    if (!this.validateValue(actualValue, this.expectedValue)) {
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
+        folder,
+        this.emitterName,
       );
+    }
 
     return { success: true };
   }
@@ -345,10 +446,10 @@ export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOpti
       new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
     );
   }
-  protected validate(config: any): RuleResult {
+  protected validate(config: any, folder: string): RuleResult {
     let module = config?.options?.[this.emitterName]?.module;
     if (module === undefined) return { success: true };
-    return super.validate(config);
+    return super.validate(config, folder);
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -485,14 +586,17 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
   constructor() {
     super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
   }
-  override validate(config: any): RuleResult {
+  override validate(config: any, folder: string): RuleResult {
     const option = this.tryFindOption(config);
 
-    if (option === undefined)
+    if (option === undefined) {
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}".`,
+        folder,
+        this.emitterName,
       );
+    }
 
     const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
     const actualValue = option as unknown as undefined | string | boolean;
@@ -506,6 +610,8 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
     return this.createFailedResult(
       `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
       `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
+      folder,
+      this.emitterName,
     );
   }
 }
