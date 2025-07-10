@@ -1,8 +1,8 @@
 // @ts-check
 
 import { readFile } from "fs/promises";
-import { inspect } from "util";
 import { MessageLevel, MessageRecordSchema, MessageType } from "./message.js";
+import { addTable } from "./summary.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -36,7 +36,11 @@ export default async function generateJobSummary({ core }) {
     .map((line) => JSON.parse(line))
     .map((obj) => MessageRecordSchema.parse(obj));
 
-  if (
+  if (messages.length === 0) {
+    // Should never happen, but if it does, just log the error and return.
+    core.notice(`No messages in '${avocadoOutputFile}'`);
+    return;
+  } else if (
     messages.length === 1 &&
     messages[0].type === MessageType.Raw &&
     messages[0].level === MessageLevel.Info &&
@@ -45,8 +49,7 @@ export default async function generateJobSummary({ core }) {
     // Special-case marker message for success
     core.summary.addRaw("Success");
   } else {
-    // Render all "Raw" and "Result" messages in a table
-    core.summary.addCodeBlock(inspect(messages));
+    addTable(core, messages);
   }
 
   core.summary.write();

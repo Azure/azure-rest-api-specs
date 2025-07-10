@@ -8,7 +8,7 @@ import { LabelAction } from "./label.js";
 // TODO: Add tests
 /* v8 ignore start */
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {typeof import('@actions/github-script').AsyncFunctionArguments["core"]} AsyncFunctionArguments
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
  */
 export default async function getLabelAction({ github, context, core }) {
