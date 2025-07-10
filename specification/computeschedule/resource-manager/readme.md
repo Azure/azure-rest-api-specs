@@ -59,6 +59,16 @@ input-file:
   - Microsoft.ComputeSchedule/stable/2024-10-01/computeschedule.json
 ```
 
+
+### Tag: package-2024-08-15-preview
+
+These settings apply only when `--tag=package-2024-08-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-15-preview'
+input-file:
+  - Microsoft.ComputeSchedule/stable/2024-08-15-preview/computeschedule.json
+```
+
 ---
 
 # Code Generation
