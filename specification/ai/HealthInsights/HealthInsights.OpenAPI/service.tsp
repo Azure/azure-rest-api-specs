@@ -35,4 +35,7 @@ enum ApiVersion {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_10_01: "2024-10-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_07_01_preview: "2025-07-01-preview",
 }
