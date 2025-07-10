@@ -8,9 +8,9 @@
   },
   "scripts": {
     "lint": "eslint",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "format:check:ci": "prettier . --check --log-level debug",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
