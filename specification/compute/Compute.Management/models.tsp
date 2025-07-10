@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using Versioning;
 
 namespace Microsoft.Compute;
 
@@ -465,6 +467,12 @@ union OrchestrationServiceNames {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticRepairs: "AutomaticRepairs",
+
+  /**
+   * AutomaticZoneRebalancing
+   */
+  @added(Versions.v2025_04_01)
+  AutomaticZoneRebalancing: "AutomaticZoneRebalancing",
 }
 
 /**
@@ -489,6 +497,24 @@ union OrchestrationServiceStateAction {
   Resume: "Resume",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspend: "Suspend",
+}
+
+/**
+ * The latest operation status of the service.
+ */
+@added(Versions.v2025_04_01)
+union OrchestrationServiceOperationStatus {
+  string,
+
+  /**
+   * InProgress
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Completed
+   */
+  Completed: "Completed",
 }
 
 /**
@@ -4116,6 +4142,20 @@ model OrchestrationServiceSummary {
    */
   @visibility(Lifecycle.Read)
   serviceState?: OrchestrationServiceState;
+
+  /**
+   * The latest operation status of the service. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  latestOperationStatus?: OrchestrationServiceOperationStatus;
+
+  /**
+   * The last time when the operation status changed. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  lastStatusChangeTime?: utcDateTime;
 }
 
 @@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
