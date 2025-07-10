@@ -43,7 +43,7 @@ export default async function generateJobSummary({ core }) {
     messages[0].message.toLowerCase() === "success"
   ) {
     // Special-case marker message for success
-    core.summary.addRaw("success");
+    core.summary.addRaw("Success");
   } else {
     // Render all "Raw" and "Result" messages in a table
     core.summary.addCodeBlock(inspect(messages));
