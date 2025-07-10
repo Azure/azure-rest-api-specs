@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved a specified private endpoint connection.",
+            "description": "OK.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
@@ -74,7 +74,7 @@
         },
         "x-ms-examples": {
           "Get a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
           }
         }
       },
@@ -83,7 +83,7 @@
           "PrivateEndpointConnections"
         ],
         "description": "Approves or rejects a private endpoint connection.",
-        "operationId": "PrivateEndpointConnection_Update",
+        "operationId": "PrivateEndpointConnections_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -111,20 +111,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully approved or rejected private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Successfully approved or rejected private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -141,7 +129,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Approve or reject a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+            "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
           }
         }
       },
@@ -150,7 +138,7 @@
           "PrivateEndpointConnections"
         ],
         "description": "Deletes a private endpoint connection.",
-        "operationId": "PrivateEndpointConnection_Delete",
+        "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -170,15 +158,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
+            "description": "Accepted.",
             "headers": {
               "Location": {
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "Private endpoint connection does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -221,9 +206,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private endpoint connections.",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
             }
           },
           "default": {
@@ -238,14 +223,14 @@
         },
         "x-ms-examples": {
           "List all private endpoint connections on a flexible server.": {
-            "$ref": "./examples/PrivateEndpointConnectionList.json"
+            "$ref": "./examples/PrivateEndpointConnectionsList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionListResult": {
+    "PrivateEndpointConnectionList": {
       "description": "List of private endpoint connections.",
       "type": "object",
       "properties": {
@@ -260,8 +245,7 @@
         "nextLink": {
           "description": "Link used to get the next page of results.",
           "type": "string",
-          "format": "uri",
-          "readOnly": true
+          "format": "uri"
         }
       }
     }

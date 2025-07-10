@@ -42,7 +42,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List all available REST API operations.": {
-            "$ref": "./examples/OperationList.json"
+            "$ref": "./examples/OperationsList.json"
           }
         },
         "description": "Lists all available REST API operations.",
@@ -55,7 +55,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -141,7 +141,7 @@
       },
       "description": "REST API operation definition."
     },
-    "OperationListResult": {
+    "OperationList": {
       "description": "List of resource provider operations.",
       "type": "object",
       "properties": {
@@ -158,7 +158,8 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
     }
