@@ -15,18 +15,18 @@ import {
 import { OadMessage } from "../../src/types/oad-types.js";
 import { MessageLevel } from "../../src/types/message.js";
 import { logMessage } from "../../src/log.js";
-import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
+import { ApiVersionLifecycleStage, Context } from "../../src/types/breaking-change.js";
 
 // Mock dependencies
 vi.mock("node:fs");
 vi.mock("../../src/log.js");
 vi.mock("../../src/utils/common-utils.js", () => ({
   sourceBranchHref: vi.fn(
-    (location: string) => `https://github.com/owner/repo/blob/main/${location}`,
+    (repo: string, sha: string, file: string) => `https://github.com/${repo}/blob/${sha}/${file}`,
   ),
   specificBranchHref: vi.fn(
-    (location: string, branch: string) =>
-      `https://github.com/owner/repo/blob/${branch}/${location}`,
+    (repo: string, file: string, branchName: string) =>
+      `https://github.com/${repo}/blob/${branchName}/${file}`,
   ),
 }));
 vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
@@ -40,6 +40,28 @@ vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
 describe("oad-message-processor", () => {
   const mockAppendFileSync = vi.mocked(fs.appendFileSync);
   const mockLogMessage = vi.mocked(logMessage);
+
+  const mockContext: Context = {
+    sourceRepo: "owner/repo",
+    headCommit: "abc123",
+    repo: "owner/repo",
+    localSpecRepoPath: "/path/to/repo",
+    workingFolder: "/working",
+    logFileFolder: "/logs",
+    swaggerDirs: ["specification"],
+    baseBranch: "main",
+    runType: "SameVersion",
+    checkName: "test",
+    prNumber: "123",
+    prSourceBranch: "feature",
+    prTargetBranch: "main",
+    oadMessageProcessorContext: {
+      logFilePath: "/path/to/log.txt",
+      prUrl: "https://github.com/owner/repo/pull/123",
+      messageCache: [],
+    },
+    prUrl: "https://github.com/owner/repo/pull/123",
+  } as Context;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -72,7 +94,7 @@ describe("oad-message-processor", () => {
     it("should convert OAD messages to result message records", () => {
       const oadMessages: OadMessage[] = [createMockOadMessage()];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
+      const result = convertOadMessagesToResultMessageRecords(mockContext, oadMessages, "main");
 
       expect(result).toHaveLength(1);
       expect(result[0]).toEqual({
@@ -90,7 +112,7 @@ describe("oad-message-processor", () => {
         paths: [
           {
             tag: "New",
-            path: "https://github.com/owner/repo/blob/main/specification/test/new.json",
+            path: "https://github.com/owner/repo/blob/abc123/specification/test/new.json",
             jsonPath: "$.definitions.TestModel",
           },
           {
@@ -106,7 +128,11 @@ describe("oad-message-processor", () => {
       const oadMessages: OadMessage[] = [createMockOadMessage()];
       const customBaseBranch = "feature-branch";
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, customBaseBranch);
+      const result = convertOadMessagesToResultMessageRecords(
+        mockContext,
+        oadMessages,
+        customBaseBranch,
+      );
 
       expect(result[0].paths[1].path).toBe(
         "https://github.com/owner/repo/blob/feature-branch/specification/test/old.json",
@@ -120,7 +146,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
+      const result = convertOadMessagesToResultMessageRecords(mockContext, oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(1);
       expect(result[0].paths[0].tag).toBe("Old");
@@ -133,7 +159,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
+      const result = convertOadMessagesToResultMessageRecords(mockContext, oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(1);
       expect(result[0].paths[0].tag).toBe("New");
@@ -147,7 +173,7 @@ describe("oad-message-processor", () => {
         }),
       ];
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
+      const result = convertOadMessagesToResultMessageRecords(mockContext, oadMessages, "main");
 
       expect(result[0].paths).toHaveLength(0);
     });
@@ -158,7 +184,7 @@ describe("oad-message-processor", () => {
         createMockOadMessage({ type: level }),
       );
 
-      const result = convertOadMessagesToResultMessageRecords(oadMessages, "main");
+      const result = convertOadMessagesToResultMessageRecords(mockContext, oadMessages, "main");
 
       expect(result).toHaveLength(3);
       result.forEach((msg, index) => {
@@ -330,18 +356,16 @@ describe("oad-message-processor", () => {
     });
 
     it("should process and append new messages", () => {
-      const context: OadMessageProcessorContext = {
-        logFilePath: "/path/to/log.txt",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [],
-      };
+      // Reset message cache for this test
+      mockContext.oadMessageProcessorContext.messageCache = [];
+
       const oadMessages = [createMockOadMessage()];
       const baseBranch = "main";
 
-      const result = processAndAppendOadMessages(context, oadMessages, baseBranch);
+      const result = processAndAppendOadMessages(mockContext, oadMessages, baseBranch);
 
       expect(result).toHaveLength(1);
-      expect(context.messageCache).toHaveLength(1);
+      expect(mockContext.oadMessageProcessorContext.messageCache).toHaveLength(1);
       expect(mockAppendFileSync).toHaveBeenCalledTimes(2);
       expect(mockLogMessage).toHaveBeenCalledWith(
         expect.stringContaining("oad-message-processor.processAndAppendOadMessages"),
@@ -349,21 +373,18 @@ describe("oad-message-processor", () => {
     });
 
     it("should deduplicate messages", () => {
-      const context: OadMessageProcessorContext = {
-        logFilePath: "/path/to/log.txt",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [],
-      };
+      // Reset message cache for this test
+      mockContext.oadMessageProcessorContext.messageCache = [];
 
       const baseMessage = createMockOadMessage();
       const differentMessage = createMockOadMessage({ code: "AddedPropertyInResponse" });
       const oadMessages = [baseMessage, differentMessage];
       const baseBranch = "main";
 
-      const result = processAndAppendOadMessages(context, oadMessages, baseBranch);
+      const result = processAndAppendOadMessages(mockContext, oadMessages, baseBranch);
 
       expect(result).toHaveLength(2); // Both unique messages
-      expect(context.messageCache).toHaveLength(2);
+      expect(mockContext.oadMessageProcessorContext.messageCache).toHaveLength(2);
       expect(mockLogMessage).toHaveBeenCalledWith(
         expect.stringContaining("duplicateOadMessages.length: 0"),
       );
@@ -372,11 +393,7 @@ describe("oad-message-processor", () => {
     it("should test actual deduplication with cache", () => {
       // First, add a message to the cache
       const existingMessage = createMockOadMessage();
-      const context: OadMessageProcessorContext = {
-        logFilePath: "/path/to/log.txt",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [existingMessage],
-      };
+      mockContext.oadMessageProcessorContext.messageCache = [existingMessage];
 
       // Create new messages including one that matches the cached message
       const sameMessage = { ...existingMessage };
@@ -384,10 +401,10 @@ describe("oad-message-processor", () => {
       const oadMessages = [sameMessage, differentMessage];
       const baseBranch = "main";
 
-      const result = processAndAppendOadMessages(context, oadMessages, baseBranch);
+      const result = processAndAppendOadMessages(mockContext, oadMessages, baseBranch);
 
       expect(result).toHaveLength(1); // Only the different message should be processed
-      expect(context.messageCache).toHaveLength(2); // Original + new different message
+      expect(mockContext.oadMessageProcessorContext.messageCache).toHaveLength(2); // Original + new different message
       expect(mockLogMessage).toHaveBeenCalledWith(
         expect.stringContaining("duplicateOadMessages.length: 1"),
       );
@@ -395,36 +412,29 @@ describe("oad-message-processor", () => {
 
     it("should not process messages already in cache", () => {
       const existingMessage = createMockOadMessage();
-      const context: OadMessageProcessorContext = {
-        logFilePath: "/path/to/log.txt",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [existingMessage],
-      };
+      mockContext.oadMessageProcessorContext.messageCache = [existingMessage];
+
       const oadMessages = [createMockOadMessage()]; // Same as existing
       const baseBranch = "main";
 
-      const result = processAndAppendOadMessages(context, oadMessages, baseBranch);
+      const result = processAndAppendOadMessages(mockContext, oadMessages, baseBranch);
 
       expect(result).toHaveLength(0); // No new messages
-      expect(context.messageCache).toHaveLength(1); // Cache unchanged
+      expect(mockContext.oadMessageProcessorContext.messageCache).toHaveLength(1); // Cache unchanged
       expect(mockLogMessage).toHaveBeenCalledWith(
         expect.stringContaining("duplicateOadMessages.length: 1"),
       );
     });
 
     it("should log processing statistics", () => {
-      const context: OadMessageProcessorContext = {
-        logFilePath: "/path/to/log.txt",
-        prUrl: "https://github.com/owner/repo/pull/123",
-        messageCache: [],
-      };
+      mockContext.oadMessageProcessorContext.messageCache = [];
 
       const message1 = createMockOadMessage();
       const message2 = createMockOadMessage({ code: "AddedPropertyInResponse" });
       const oadMessages = [message1, message2];
       const baseBranch = "develop";
 
-      processAndAppendOadMessages(context, oadMessages, baseBranch);
+      processAndAppendOadMessages(mockContext, oadMessages, baseBranch);
 
       expect(mockLogMessage).toHaveBeenCalledWith(
         "oad-message-processor.processAndAppendOadMessages: PR:https://github.com/owner/repo/pull/123, " +

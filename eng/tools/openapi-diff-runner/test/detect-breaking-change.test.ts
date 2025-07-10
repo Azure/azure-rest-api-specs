@@ -215,7 +215,10 @@ describe("detect-breaking-change", () => {
 
       vi.mocked(getExistedVersionOperations).mockResolvedValue(mockOperations);
 
+      const mockContext = {} as Context;
+
       await checkAPIsBeingMovedToANewSpec(
+        mockContext,
         "specification/network/resource-manager/Microsoft.Network/stable/2021-05-01/network.json",
         [],
       );
@@ -230,7 +233,10 @@ describe("detect-breaking-change", () => {
       vi.clearAllMocks();
       vi.mocked(getExistedVersionOperations).mockResolvedValue(new Map());
 
+      const mockContext = {} as Context;
+
       await checkAPIsBeingMovedToANewSpec(
+        mockContext,
         "specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/storage.json",
         [],
       );

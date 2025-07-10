@@ -78,7 +78,8 @@ function applyRule(
   previousApiVersionLifecycleStage: ApiVersionLifecycleStage,
 ): OadMessage {
   const isSameVersionOnPreview =
-    previousApiVersionLifecycleStage === "preview" && rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
+    previousApiVersionLifecycleStage === "preview" &&
+    rule.scenario === BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION;
 
   // Comparing against previous previews always decreases failure severity from error to warning.
   // The fact we set this to true corresponds to the green "Ignore" rectangle for
@@ -87,7 +88,8 @@ function applyRule(
   // See also:
   // https://github.com/Azure/azure-sdk-tools/issues/6396
   const isCrossVersionAgainstPreviousPreview =
-    previousApiVersionLifecycleStage === "preview" && rule.scenario === BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION;
+    previousApiVersionLifecycleStage === "preview" &&
+    rule.scenario === BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION;
 
   const appliedSeverity =
     rule.severity === "Error" && isCrossVersionAgainstPreviousPreview ? "Warning" : rule.severity;

@@ -21,6 +21,7 @@ const mockContext: Context = {
   swaggerDirs: ["/path/to/swagger"],
   checkName: "test-check",
   repo: "Azure/azure-rest-api-specs",
+  sourceRepo: "Azure/azure-rest-api-specs",
   prNumber: "12345",
   oadMessageProcessorContext: {
     logFilePath: "/path/to/log",

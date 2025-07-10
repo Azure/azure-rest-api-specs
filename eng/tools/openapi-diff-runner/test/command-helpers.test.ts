@@ -335,6 +335,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
@@ -376,6 +377,7 @@ describe("command-helpers", () => {
         runType: "CrossVersion",
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
@@ -416,6 +418,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
@@ -445,6 +448,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main",
@@ -485,6 +489,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "develop", // Different from baseBranch
@@ -521,6 +526,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "main", // Same as baseBranch
@@ -557,6 +563,7 @@ describe("command-helpers", () => {
         runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "ARMCoreRPDev", // Whitelisted branch
@@ -595,6 +602,7 @@ describe("command-helpers", () => {
         runType: "CrossVersion", // CrossVersion type
         checkName: "test",
         repo: "test/repo",
+        sourceRepo: "test/repo",
         prNumber: "123",
         prSourceBranch: "feature",
         prTargetBranch: "develop", // Different from baseBranch

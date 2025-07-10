@@ -68,6 +68,7 @@ export interface Context {
   runType: BreakingChangesCheckType;
   checkName: string;
   repo: string; // The format is: "owner/repoName"
+  sourceRepo: string; // The format is: "owner/repoName"
   prNumber: string;
   prSourceBranch: string;
   prTargetBranch: string;

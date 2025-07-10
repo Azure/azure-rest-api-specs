@@ -30,6 +30,7 @@ export function initContext(): Context {
   );
   const swaggerDirs: string[] = ["specification", "dev"];
   const repo: string = getArgumentValue(args, "--repo", "azure/azure-rest-api-specs");
+  const sourceRepo: string = getArgumentValue(args, "--sr", "azure/azure-rest-api-specs");
   const prNumber: string = getArgumentValue(args, "--number", "");
   const runType = getArgumentValue(
     args,
@@ -56,6 +57,7 @@ export function initContext(): Context {
     checkName: getBreakingChangeCheckName(runType),
     headCommit: getArgumentValue(args, "--hc", "HEAD"),
     repo,
+    sourceRepo,
     prNumber,
     prSourceBranch: getArgumentValue(args, "--sb", ""),
     prTargetBranch: getArgumentValue(args, "--tb", ""),

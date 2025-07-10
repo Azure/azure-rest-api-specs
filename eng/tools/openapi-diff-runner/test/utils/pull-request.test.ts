@@ -54,6 +54,7 @@ describe("pull-request", () => {
       runType: "SameVersion",
       checkName: "BreakingChange",
       repo: "owner/repo",
+      sourceRepo: "owner/repo",
       prNumber: "123",
       prSourceBranch: "feature-branch",
       prTargetBranch: "main",

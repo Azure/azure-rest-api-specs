@@ -219,7 +219,11 @@ export async function checkCrossVersionBreakingChange(
       aggregateOadViolationsCnt += oadViolationsCnt;
     }
     if (!previousStableSwaggerPath && !previousPreviewSwaggerPath) {
-      await checkAPIsBeingMovedToANewSpec(absoluteSwaggerPath, availableSwaggers);
+      await checkAPIsBeingMovedToANewSpec(
+        detectionContext.context,
+        absoluteSwaggerPath,
+        availableSwaggers,
+      );
     }
   }
   logMessage(
@@ -295,7 +299,7 @@ export async function doBreakingChangeDetection(
     ).length;
 
     const msgs: ResultMessageRecord[] = processAndAppendOadMessages(
-      detectionContext.context.oadMessageProcessorContext,
+      detectionContext.context,
       modifiedOadMessages,
       detectionContext.context.baseBranch,
     );
@@ -309,8 +313,16 @@ export async function doBreakingChangeDetection(
       time: new Date(),
       groupName: previousApiVersionLifecycleStage,
       extra: {
-        new: blobHref(getRelativeSwaggerPathToRepo(newSpec)),
-        old: branchHref(getRelativeSwaggerPathToRepo(oldSpec), detectionContext.context.baseBranch),
+        new: blobHref(
+          detectionContext.context.sourceRepo,
+          detectionContext.context.headCommit,
+          getRelativeSwaggerPathToRepo(newSpec),
+        ),
+        old: branchHref(
+          detectionContext.context.repo,
+          getRelativeSwaggerPathToRepo(oldSpec),
+          detectionContext.context.baseBranch,
+        ),
         details: processOadRuntimeErrorMessage(error.message, stackTraceMaxLength),
       },
     };
@@ -394,7 +406,11 @@ export function getSpecModel(swaggerPath: string): SpecModel {
   return specModel;
 }
 
-export async function checkAPIsBeingMovedToANewSpec(swaggerPath: string, availableSwaggers: any[]) {
+export async function checkAPIsBeingMovedToANewSpec(
+  context: Context,
+  swaggerPath: string,
+  availableSwaggers: any[],
+) {
   const movedApis = await getExistedVersionOperations(swaggerPath, availableSwaggers);
   logMessage(
     `checkAPIsBeingMovedToANewSpec: swaggerPath: ${swaggerPath}, movedApis.size: ${movedApis.size}`,
@@ -408,6 +424,7 @@ export async function checkAPIsBeingMovedToANewSpec(swaggerPath: string, availab
       appendFileSync(
         logFileName,
         convertRawErrorToUnifiedMsg(
+          context,
           "APIsBeingMovedToANewSpec",
           "Attention: There are some existing APIs currently documented in a new spec file. The validation may not be able to report breaking changes with these APIs. It is recommended not to rename swagger file or move public APIs to a new file when creating a new API version." +
             ` The existing APIs being moved are: ${operationIds};`,

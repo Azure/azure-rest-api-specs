@@ -34,6 +34,7 @@ jobs:
             --sb "${{ github.event.pull_request.head.ref }}" \
             --tb "${{ github.event.pull_request.base.ref }}" \
             --hc "${{ github.event.pull_request.head.sha }}" \
+            --sr "${{ github.event.pull_request.head.repo.full_name}}" \
             --repo "${{ github.repository }}"
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
@@ -53,7 +54,7 @@ jobs:
         name: Upload artifact with VersioningReviewRequiredLabel label
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"          
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
 
       # Upload artifact with issue number if labels are present and PR number is valid

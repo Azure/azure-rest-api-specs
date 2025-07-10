@@ -56,6 +56,7 @@ describe("generate-report", () => {
     runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
     checkName: "Swagger BreakingChange",
     repo: "test/repo",
+    sourceRepo: "test/repo",
     prNumber: "123",
     prSourceBranch: "feature",
     prTargetBranch: "main",

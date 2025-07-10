@@ -1,58 +1,22 @@
 import { FilePosition } from "../types/message.js";
-import { logMessage } from "../log.js";
+import { Context } from "../types/breaking-change.js";
 
-export function blobHref(file: unknown): string {
-  // GitHub Actions scenario
-  if (process.env.GITHUB_ACTIONS) {
-    // GITHUB_HEAD_REPOSITORY is only available for pull requests from forked repositories.
-    // GITHUB_REPOSITORY is the repository where the workflow is running.
-    const repoName = process.env.GITHUB_HEAD_REPOSITORY || process.env.GITHUB_REPOSITORY;
-    // GITHUB_EVENT_PULL_REQUEST_HEAD_SHA is the pull request head commit SHA and GITHUB_SHA is the merge commit SHA
-    const sha = process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA || process.env.GITHUB_SHA;
-    logMessage(
-      `env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA: ${process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA}`,
-    );
-    logMessage(`env.GITHUB_SHA: ${process.env.GITHUB_SHA}`);
-    return `https://github.com/${repoName}/blob/${sha}/${file}`;
-  }
-
-  // Local development scenario
-  return `${file}`;
+export function blobHref(repo: string, sha: string, file: string): string {
+  return `https://github.com/${repo}/blob/${sha}/${file}`;
 }
 
 /**
  * Get the Github url of targeted swagger file.
+ * @param repo The repository name in the format "owner/repoName"
+ * @param branch The branch name, e.g. "main"
  * @param file Swagger file starts with "specification"
  */
-export function targetHref(file: string) {
-  return file
-    ? `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${getTargetBranch()}/${file}`
-    : "";
+export function targetHref(repo: string, branch: string, file: string) {
+  return file ? `https://github.com/${repo}/blob/${branch}/${file}` : "";
 }
 
-export function branchHref(file: string, branch: string = "main") {
-  return file ? `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${branch}/${file}` : "";
-}
-
-/**
- * Gets the name of the target branch to which the PR is sent.
- * If the environment variable is undefined then the method returns 'main' as the default value.
- * @returns {string} branchName The target branch name.
- */
-export function getTargetBranch(): string {
-  // For GitHub Actions, use GITHUB_BASE_REF for pull requests, fallback to GITHUB_REF_NAME for direct pushes
-  const githubBaseRef = process.env["GITHUB_BASE_REF"]; // Target branch for PR
-  const githubRefName = process.env["GITHUB_REF_NAME"]; // Current branch name
-  logMessage(
-    `@@@@@ process.env['GITHUB_BASE_REF'] - ${githubBaseRef}, process.env['GITHUB_REF_NAME'] - ${githubRefName}`,
-  );
-
-  // For pull requests, use GITHUB_BASE_REF (target branch)
-  // For direct pushes, use GITHUB_REF_NAME (current branch) or fallback to "main"
-  let result = githubBaseRef || githubRefName || "main";
-  result = result.trim();
-  logMessage(`>>>>> The target branch is: "${result}".`);
-  return result;
+export function branchHref(repo: string, file: string, branch: string = "main") {
+  return file ? `https://github.com/${repo}/blob/${branch}/${file}` : "";
 }
 
 /**
@@ -82,20 +46,36 @@ export function getRelativeSwaggerPathToRepo(
   return filePath.substring(position, filePath.length);
 }
 
-export function sourceBranchHref(file: string, filePos?: FilePosition): string {
-  return blobHref(getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
+export function sourceBranchHref(
+  repo: string,
+  sha: string,
+  file: string,
+  filePos?: FilePosition,
+): string {
+  return blobHref(repo, sha, getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
 }
 
-export function targetBranchHref(file: string, filePos?: FilePosition): string {
-  return targetHref(getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
+export function targetBranchHref(
+  repo: string,
+  branch: string,
+  file: string,
+  filePos?: FilePosition,
+): string {
+  return targetHref(
+    repo,
+    branch,
+    getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos),
+  );
 }
 
 export function specificBranchHref(
+  repo: string,
   file: string,
   branchName: string,
   filePos?: FilePosition,
 ): string {
   return branchHref(
+    repo,
     getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos),
     branchName,
   );
@@ -224,6 +204,7 @@ export function specIsPreview(specPath: string): boolean {
 }
 
 export function convertRawErrorToUnifiedMsg(
+  context: Context,
   errType: string,
   errorMsg: string,
   levelType = "Error",
@@ -232,7 +213,7 @@ export function convertRawErrorToUnifiedMsg(
   const extra: { [index: string]: string } = {};
   extra.details = errorMsg;
   if (location) {
-    extra.location = targetBranchHref(location);
+    extra.location = targetBranchHref(context.repo, context.prTargetBranch, location);
   }
   const result = {
     type: "Raw",
