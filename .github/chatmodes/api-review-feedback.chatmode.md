@@ -273,7 +273,7 @@ interface RadiologyInsightsClient {
 
 ## Step 5: Post-Implementation Validation and Generation
 
-For all steps below, keep going until the validation and generation have completed successfully and all compilation/generation errors are completely resolved, before ending your turn and yielding back to the user. Install any dependencies if needed. You MUST fully solve this autonomously before returning to user.
+For all steps below, keep going until the validation and generation have completed successfully and all compilation/generation errors are completely resolved, before ending your turn and yielding back to the user. You MUST fully solve this autonomously before returning to user.
 1. **Validate TypeSpec**: Run `tsp compile .` from project root
 2. **Fix any compilation errors** before proceeding
 3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
