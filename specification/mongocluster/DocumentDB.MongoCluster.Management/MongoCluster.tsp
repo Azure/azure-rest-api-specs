@@ -202,7 +202,7 @@ model MongoClusterProperties {
   authConfig?: AuthConfigProperties;
 
   /** The encryption configuration for the cluster. Depends on identity being configured. */
-  @added(Versions.v2025_05_01_preview)
+  @added(Versions.v2025_07_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   encryption?: EncryptionProperties;
 }
@@ -562,34 +562,37 @@ union AuthenticationMode {
 }
 
 /** The type of identity for key encryption key. */
-@added(Versions.v2025_05_01_preview)
+@added(Versions.v2025_07_01_preview)
 union KeyEncryptionKeyIdentityType {
   string,
+
   /** User assigned identity. */
   UserAssignedIdentity: "UserAssignedIdentity",
 }
 
 /** The encryption configuration for the mongo cluster. */
-@added(Versions.v2025_05_01_preview)
+@added(Versions.v2025_07_01_preview)
 model EncryptionProperties {
   /** Customer managed key encryption settings. */
   customerManagedKeyEncryption?: CustomerManagedKeyEncryptionProperties;
 }
 
 /** Customer managed key encryption settings. */
-@added(Versions.v2025_05_01_preview)
+@added(Versions.v2025_07_01_preview)
 model CustomerManagedKeyEncryptionProperties {
   /** The identity used to access the key encryption key. */
   keyEncryptionKeyIdentity: KeyEncryptionKeyIdentity;
+
   /** The URI of the key vault key used for encryption. */
   keyEncryptionKeyUrl: string;
 }
 
 /** The identity used for key encryption key. */
-@added(Versions.v2025_05_01_preview)
+@added(Versions.v2025_07_01_preview)
 model KeyEncryptionKeyIdentity {
   /** The type of identity. Only 'UserAssignedIdentity' is supported. */
   identityType: KeyEncryptionKeyIdentityType;
+
   /** The user assigned identity resource id. */
   userAssignedIdentityResourceId: string;
 }

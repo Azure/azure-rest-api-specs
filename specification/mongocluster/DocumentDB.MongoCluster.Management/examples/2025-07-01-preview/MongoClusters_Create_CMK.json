@@ -1,11 +1,11 @@
 {
   "operationId": "MongoClusters_CreateOrUpdate",
-  "title": "Creates a Mongo Cluster resource with Customer Managed Key encryption from a point in time restore",
+  "title": "Creates a new Mongo Cluster resource with Customer Managed Key encryption.",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "TestResourceGroup",
     "mongoClusterName": "myMongoCluster",
-    "api-version": "2025-05-01-preview",
+    "api-version": "2025-07-01-preview",
     "resource": {
       "identity": {
         "type": "UserAssigned",
@@ -15,10 +15,21 @@
       },
       "location": "westus2",
       "properties": {
-        "createMode": "PointInTimeRestore",
-        "restoreParameters": {
-          "pointInTimeUTC": "2023-01-13T20:07:35Z",
-          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myOtherMongoCluster"
+        "administrator": {
+          "userName": "mongoAdmin",
+          "password": "password"
+        },
+        "storage": {
+          "sizeGb": 32
+        },
+        "compute": {
+          "tier": "M30"
+        },
+        "sharding": {
+          "shardCount": 1
+        },
+        "highAvailability": {
+          "targetMode": "Disabled"
         },
         "encryption": {
           "customerManagedKeyEncryption": {
@@ -43,93 +54,16 @@
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2025-06-01T17:18:19.1234567Z",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
           "lastModifiedBy": "user2",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-06-02T17:18:19.1234567Z"
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
         },
         "properties": {
           "provisioningState": "Succeeded",
           "clusterStatus": "Ready",
           "administrator": {
             "userName": "mongoAdmin"
-          },
-          "authConfig": {
-            "allowedModes": [
-              "NativeAuth"
-            ]
-          },
-          "serverVersion": "7.0",
-          "storage": {
-            "sizeGb": 32,
-            "type": "PremiumSSD"
-          },
-          "compute": {
-            "tier": "M30"
-          },
-          "sharding": {
-            "shardCount": 1
-          },
-          "highAvailability": {
-            "targetMode": "SameZone"
-          },
-          "backup": {
-            "earliestRestoreTime": "2025-06-01T20:07:35Z"
-          },
-          "publicNetworkAccess": "Enabled",
-          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
-          "replica": {
-            "role": "Primary",
-            "replicationState": "Active"
-          },
-          "infrastructureVersion": "2.0",
-          "dataApi": {
-            "mode": "Disabled"
-          },
-          "createMode": "Default",
-          "encryption": {
-            "customerManagedKeyEncryption": {
-              "keyEncryptionKeyIdentity": {
-                "identityType": "UserAssignedIdentity",
-                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster"
-              },
-              "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
-            }
-          }
-        },
-        "identity": {
-          "type": "UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster": {}
-          }
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
-        "name": "myMongoCluster",
-        "type": "Microsoft.DocumentDB/mongoClusters",
-        "tags": {},
-        "location": "westus2",
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2025-06-01T17:18:19.1234567Z",
-          "lastModifiedBy": "user1",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-06-01T17:18:19.1234567Z"
-        },
-        "properties": {
-          "provisioningState": "InProgress",
-          "clusterStatus": "Provisioning",
-          "administrator": {
-            "userName": "mongoAdmin"
-          },
-          "authConfig": {
-            "allowedModes": [
-              "NativeAuth"
-            ]
           },
           "serverVersion": "7.0",
           "storage": {
@@ -145,17 +79,98 @@
           "highAvailability": {
             "targetMode": "Disabled"
           },
-          "backup": {},
+          "backup": {
+            "earliestRestoreTime": "2025-06-13T01:23:33Z"
+          },
           "infrastructureVersion": "2.0",
+          "privateEndpointConnections": [],
           "publicNetworkAccess": "Enabled",
           "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
           "replica": {
-            "role": "Primary"
+            "role": "Primary",
+            "replicationState": "Active"
           },
           "dataApi": {
             "mode": "Disabled"
           },
-          "createMode": "PointInTimeRestore",
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "createMode": "Default",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "UserAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster"
+              },
+              "keyEncryptionKeyUrl": "https://myVault.vault.azure.net/keys/myKey"
+            }
+          }
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "1111111-1111-1111-1111-111111111111"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "Microsoft.DocumentDB/mongoClusters",
+        "tags": {},
+        "location": "westus2",
+        "systemData": {
+          "createdAt": "2025-06-13T01:12:16.7522689Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-06-13T01:12:16.7522689Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User"
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "clusterStatus": "Provisioning",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "serverVersion": "7.0",
+          "compute": {
+            "tier": "M30"
+          },
+          "storage": {
+            "sizeGb": 32,
+            "type": "PremiumSSD"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "Disabled"
+          },
+          "backup": {},
+          "privateEndpointConnections": [],
+          "publicNetworkAccess": "Enabled",
+          "replica": {
+            "role": "Primary"
+          },
+          "infrastructureVersion": "2.0",
+          "dataApi": {
+            "mode": "Disabled"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "createMode": "Default",
           "encryption": {
             "customerManagedKeyEncryption": {
               "keyEncryptionKeyIdentity": {
