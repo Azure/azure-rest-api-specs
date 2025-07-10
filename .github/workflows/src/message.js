@@ -2,7 +2,7 @@
 
 // Ported from @azure/swagger-validation-common:src/types/message.ts
 
-import * as z from "zod/v4";
+import * as z from "zod";
 
 /**
  * @readonly
@@ -13,19 +13,19 @@ export const MessageLevel = Object.freeze({
   Warning: "Warning",
   Error: "Error",
 });
-/** @type {import("zod/v4").ZodType<MessageLevel>} */
+/** @type {import("zod").ZodType<MessageLevel>} */
 export const MessageLevelSchema = z.enum(Object.values(MessageLevel));
 
 export const MessageContextSchema = z.object({
   toolVersion: z.string(),
 });
 /**
- * @typedef {import("zod/v4").infer<typeof MessageContextSchema>} MessageContext
+ * @typedef {import("zod").infer<typeof MessageContextSchema>} MessageContext
  */
 
 export const ExtraSchema = z.record(z.string(), z.any());
 /**
- * @typedef {import("zod/v4").infer<typeof ExtraSchema>} Extra
+ * @typedef {import("zod").infer<typeof ExtraSchema>} Extra
  */
 
 export const BaseMessageRecordSchema = z.object({
@@ -38,7 +38,7 @@ export const BaseMessageRecordSchema = z.object({
   groupName: z.optional(z.string()),
 });
 /**
- * @typedef {import("zod/v4").infer<typeof BaseMessageRecordSchema>} BaseMessageRecord
+ * @typedef {import("zod").infer<typeof BaseMessageRecordSchema>} BaseMessageRecord
  */
 
 /**
@@ -49,14 +49,14 @@ export const MessageType = Object.freeze({
   Raw: "Raw",
   Result: "Result",
 });
-/** @type {import("zod/v4").ZodType<MessageType>} */
+/** @type {import("zod").ZodType<MessageType>} */
 export const MessageTypeSchema = z.enum(Object.values(MessageType));
 
 export const RawMessageRecordSchema = BaseMessageRecordSchema.extend({
   type: z.literal(MessageType.Raw),
 });
 /**
- * @typedef {import("zod/v4").infer<typeof RawMessageRecordSchema>} RawMessageRecord
+ * @typedef {import("zod").infer<typeof RawMessageRecordSchema>} RawMessageRecord
  */
 
 export const JsonPathSchema = z.object({
@@ -65,7 +65,7 @@ export const JsonPathSchema = z.object({
   jsonPath: z.optional(z.string()),
 });
 /**
- * @typedef {import("zod/v4").infer<typeof JsonPathSchema>} JsonPathSchema
+ * @typedef {import("zod").infer<typeof JsonPathSchema>} JsonPathSchema
  */
 
 export const ResultMessageRecordSchema = BaseMessageRecordSchema.extend({
@@ -76,7 +76,7 @@ export const ResultMessageRecordSchema = BaseMessageRecordSchema.extend({
   paths: z.array(JsonPathSchema),
 });
 /**
- * @typedef {import("zod/v4").infer<typeof ResultMessageRecordSchema>} ResultMessageRecord
+ * @typedef {import("zod").infer<typeof ResultMessageRecordSchema>} ResultMessageRecord
  */
 
 export const MessageRecordSchema = z.discriminatedUnion("type", [
@@ -84,5 +84,5 @@ export const MessageRecordSchema = z.discriminatedUnion("type", [
   ResultMessageRecordSchema,
 ]);
 /**
- * @typedef {import("zod/v4").infer<typeof MessageRecordSchema>} MessageRecord
+ * @typedef {import("zod").infer<typeof MessageRecordSchema>} MessageRecord
  */
