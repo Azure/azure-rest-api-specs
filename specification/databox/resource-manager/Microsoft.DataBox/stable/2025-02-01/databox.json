@@ -1824,8 +1824,29 @@
       "description": "Account details of the data to be transferred",
       "properties": {
         "dataAccountType": {
-          "$ref": "#/definitions/DataAccountType",
-          "description": "Account Type of the data to be transferred."
+          "type": "string",
+          "description": "Account Type of the data to be transferred.",
+          "default": "StorageAccount",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "StorageAccount",
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "name": "ManagedDisk",
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
         },
         "sharePassword": {
           "type": "string",
@@ -1979,7 +2000,8 @@
         },
         "enableManifestBackup": {
           "type": "boolean",
-          "description": "Flag to indicate if disk manifest should be backed-up in the Storage Account."
+          "description": "Flag to indicate if disk manifest should be backed-up in the Storage Account.",
+          "default": false
         }
       },
       "required": [
@@ -2748,8 +2770,29 @@
           "description": "Configuration for the data transfer."
         },
         "logCollectionLevel": {
-          "$ref": "#/definitions/LogCollectionLevel",
-          "description": "Level of the logs to be collected."
+          "type": "string",
+          "description": "Level of the logs to be collected.",
+          "default": "Error",
+          "enum": [
+            "Error",
+            "Verbose"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionLevel",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "Only Errors will be collected in the logs."
+              },
+              {
+                "name": "Verbose",
+                "value": "Verbose",
+                "description": "Verbose logging (includes Errors, CRC, size information and others)."
+              }
+            ]
+          }
         },
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
@@ -2770,8 +2813,29 @@
           "description": "Account details of the data to be transferred"
         },
         "logCollectionLevel": {
-          "$ref": "#/definitions/LogCollectionLevel",
-          "description": "Level of the logs to be collected."
+          "type": "string",
+          "description": "Level of the logs to be collected.",
+          "default": "Error",
+          "enum": [
+            "Error",
+            "Verbose"
+          ],
+          "x-ms-enum": {
+            "name": "LogCollectionLevel",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "Only Errors will be collected in the logs."
+              },
+              {
+                "name": "Verbose",
+                "value": "Verbose",
+                "description": "Verbose logging (includes Errors, CRC, size information and others)."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -3928,30 +3992,6 @@
           "$ref": "#/definitions/CustomerResolutionCode",
           "description": "Resolution code provided by customer"
         }
-      }
-    },
-    "LogCollectionLevel": {
-      "type": "string",
-      "description": "Level of the logs to be collected.",
-      "enum": [
-        "Error",
-        "Verbose"
-      ],
-      "x-ms-enum": {
-        "name": "LogCollectionLevel",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "Only Errors will be collected in the logs."
-          },
-          {
-            "name": "Verbose",
-            "value": "Verbose",
-            "description": "Verbose logging (includes Errors, CRC, size information and others)."
-          }
-        ]
       }
     },
     "ManagedDiskDetails": {
@@ -5340,8 +5380,29 @@
       "description": "Details to transfer all data.",
       "properties": {
         "dataAccountType": {
-          "$ref": "#/definitions/DataAccountType",
-          "description": "Type of the account of data"
+          "type": "string",
+          "description": "Type of the account of data",
+          "default": "StorageAccount",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "StorageAccount",
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "name": "ManagedDisk",
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
         },
         "transferAllBlobs": {
           "type": "boolean",
@@ -5426,8 +5487,29 @@
       "description": "Details of the filtering the transfer of data.",
       "properties": {
         "dataAccountType": {
-          "$ref": "#/definitions/DataAccountType",
-          "description": "Type of the account of data."
+          "type": "string",
+          "description": "Type of the account of data.",
+          "default": "StorageAccount",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "StorageAccount",
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "name": "ManagedDisk",
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
         },
         "blobFilterDetails": {
           "$ref": "#/definitions/BlobFilterDetails",

@@ -1577,7 +1577,7 @@ model DataImportDetails {
   /**
    * Level of the logs to be collected.
    */
-  logCollectionLevel?: LogCollectionLevel;
+  logCollectionLevel?: LogCollectionLevel = LogCollectionLevel.Error;
 }
 
 /**
@@ -1589,7 +1589,7 @@ model DataAccountDetails {
    * Account Type of the data to be transferred.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  dataAccountType: DataAccountType;
+  dataAccountType: DataAccountType = DataAccountType.StorageAccount;
 
   @doc("Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+")
   @visibility(Lifecycle.Create)
@@ -1609,7 +1609,7 @@ model DataExportDetails {
   /**
    * Level of the logs to be collected.
    */
-  logCollectionLevel?: LogCollectionLevel;
+  logCollectionLevel?: LogCollectionLevel = LogCollectionLevel.Error;
 
   /**
    * Account details of the data to be transferred
@@ -1654,7 +1654,7 @@ model TransferFilterDetails {
   /**
    * Type of the account of data.
    */
-  dataAccountType: DataAccountType;
+  dataAccountType: DataAccountType = DataAccountType.StorageAccount;
 
   /**
    * Filter details to transfer blobs.
@@ -1745,7 +1745,7 @@ model TransferAllDetails {
   /**
    * Type of the account of data
    */
-  dataAccountType: DataAccountType;
+  dataAccountType: DataAccountType = DataAccountType.StorageAccount;
 
   /**
    * To indicate if all Azure blobs have to be transferred
@@ -3269,7 +3269,7 @@ model DataBoxCustomerDiskJobDetails extends JobDetails {
   /**
    * Flag to indicate if disk manifest should be backed-up in the Storage Account.
    */
-  enableManifestBackup?: boolean;
+  enableManifestBackup?: boolean = false;
 
   /**
    * Indicates the type of job details.
