@@ -94,17 +94,99 @@ export const MessageRecordSchema = z.discriminatedUnion("type", [
  * @param {import("./message.js").MessageRecord[]} messages
  */
 export function generateMarkdownTable(messages) {
-  const rows = [["Rule", "Message"]];
+  const header = ["Rule", "Message"];
+  const rows = messages.map((m) => getMarkdownRow(m));
+  return markdownTable([header, ...rows]);
+}
 
-  rows.push(
-    ...messages.map((m) => {
-      if (m.type === MessageType.Result) {
-        return [m.code || "UNKNOWN", m.message];
-      } else {
-        return [m.message, JSON.stringify(m.extra)];
-      }
-    }),
-  );
+/**
+ * @param {import("./message.js").MessageRecord} record
+ * @returns {string[]}
+ */
+function getMarkdownRow(record) {
+  if (record.type === MessageType.Result) {
+    return [
+      getLevelMarkdown(record) + " " + getRuleMarkdown(record),
+      getMessageMarkdown(record) + "<br>" + getLocationMarkdown(record),
+    ];
+  } else {
+    return [getLevelMarkdown(record) + " " + getMessageMarkdown(record), getExtraMarkdown(record)];
+  }
+}
 
-  return markdownTable(rows);
+// Following ported from openapi-alps/reportGenerator.ts
+
+/**
+ * @param {import("./message.js").MessageRecord} record
+ * @returns {string}
+ */
+function getLevelMarkdown(record) {
+  switch (record.level) {
+    case "Error":
+      return "❌";
+    case "Info":
+      return "ℹ️";
+    case "Warning":
+      return "⚠️";
+  }
+}
+
+/**
+ * @param {import("./message.js").ResultMessageRecord} result
+ * @returns {string}
+ */
+function getRuleMarkdown(result) {
+  let ruleName = [result.id, result.code].filter((s) => s).join(" - ");
+  return `[${ruleName}](${result.docUrl})`;
+}
+
+/**
+ * @param {import("./message.js").ResultMessageRecord} result
+ * @returns {string}
+ */
+function getLocationMarkdown(result) {
+  if (result.paths === undefined) return "";
+  return result.paths
+    .filter((p) => p.path)
+    .map((p) => `${p.tag}: [${getPathSegment(p.path)}](${p.path})`)
+    .join("<br>");
+}
+
+/**
+ * @param {string} path
+ * @returns {string}
+ */
+function getPathSegment(path) {
+  if (!path) {
+    return "";
+  }
+  const idx = path.indexOf("path=");
+  if (idx !== -1) {
+    path = decodeURIComponent(path.substr(idx + 5).split("&")[0]);
+  }
+  // for github url
+  return path.split("/").slice(-4).join("/").split("#")[0];
+}
+
+/**
+ * @param {import("./message.js").MessageRecord} record
+ * @returns {string}
+ */
+function getMessageMarkdown(record) {
+  if (record.type === MessageType.Raw) {
+    return record.message.replace(/\\n\\n/g, "\n").split("\n")[0];
+  } else {
+    // record.type === MessageType.Raw
+    const re = /(\n|\t|\r)/gi;
+    return record.message.replace(re, " ");
+  }
+}
+/**
+ * @param {import("./message.js").MessageRecord} record
+ * @returns {string}
+ */
+function getExtraMarkdown(record) {
+  return JSON.stringify(record.extra || {})
+    .replace(/[{}]/g, "")
+    .replace(/,/g, ",<br>");
 }
