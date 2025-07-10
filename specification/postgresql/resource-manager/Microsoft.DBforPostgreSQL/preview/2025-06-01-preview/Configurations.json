@@ -42,7 +42,7 @@
         "operationId": "Configurations_ListByServer",
         "x-ms-examples": {
           "List all configurations (also known as server parameters) of a flexible server.": {
-            "$ref": "./examples/ConfigurationListByServer.json"
+            "$ref": "./examples/ConfigurationsListByServer.json"
           }
         },
         "description": "Lists all configurations (also known as server parameters) of a flexible server.",
@@ -64,7 +64,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConfigurationListResult"
+              "$ref": "#/definitions/ConfigurationList"
             }
           },
           "default": {
@@ -87,7 +87,7 @@
         "operationId": "Configurations_Get",
         "x-ms-examples": {
           "Get information about a specific configuration (also known as server parameter) of a flexible server.": {
-            "$ref": "./examples/ConfigurationGet.json"
+            "$ref": "./examples/ConfigurationsGet.json"
           }
         },
         "description": "Gets information about a specific configuration (also known as server parameter) of a flexible server.",
@@ -130,7 +130,7 @@
         "operationId": "Configurations_Update",
         "x-ms-examples": {
           "Update the value assigned to a specific modifiable configuration (also known as server parameter) of a flexible server.": {
-            "$ref": "./examples/ConfigurationUpdateUsingPatch.json"
+            "$ref": "./examples/ConfigurationsUpdate.json"
           }
         },
         "description": "Updates the value assigned to a specific modifiable configuration (also known as server parameter) of a flexible server.",
@@ -294,7 +294,7 @@
       },
       "description": "Configuration (also known as server parameter)."
     },
-    "ConfigurationListResult": {
+    "ConfigurationList": {
       "type": "object",
       "properties": {
         "value": {
