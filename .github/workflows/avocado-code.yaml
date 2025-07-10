@@ -53,6 +53,16 @@ jobs:
           # and the PR base branch.
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
 
+      - name: Setup Node 20 and install deps (under .github)
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          # actions/github-script@v7 uses Node 20
+          node-version: 20.x
+          # "--no-audit": improves performance
+          # "--omit dev": not needed at dev time, improves performance
+          install-command: "npm ci --no-audit --omit dev"
+          working-directory: ./.github
+
       - name: Generate Job Summary
         if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         id: generate-job-summary
