@@ -75,7 +75,7 @@
             "$ref": "#/parameters/SkuIdParameter"
           },
           {
-            "$ref": "#/parameters/PricingAudienceHeaderParameter"
+            "$ref": "#/parameters/PricingAudienceParameter"
           }
         ],
         "responses": {
@@ -1853,14 +1853,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PricingAudienceHeaderParameter": {
-      "name": "x-ms-pricing-audience",
-      "in": "header",
-      "description": "DirectCommercial or PartnerCommercial, DirectCommercial is the default",
+    "PricingAudienceParameter": {
+      "name": "pricingAudience",
+      "in": "query",
+      "description": "Can be 'DirectCommercial' or 'PartnerCommercial', 'DirectCommercial' is the default",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "pricingAudience"
+      "x-ms-parameter-location": "method"
     },
     "SearchParameter": {
       "name": "$search",

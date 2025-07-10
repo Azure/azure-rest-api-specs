@@ -911,9 +911,9 @@ model SkuIdParameter {
 }
 
 @doc("Pricing audience header parameter")
-model PricingAudienceHeaderParameter {
-  @header("x-ms-pricing-audience")
-  @doc("DirectCommercial or PartnerCommercial, DirectCommercial is the default")
+model PricingAudienceParameter {
+  @query
+  @doc("Can be 'DirectCommercial' or 'PartnerCommercial', 'DirectCommercial' is the default")
   pricingAudience?: string;
 }
 

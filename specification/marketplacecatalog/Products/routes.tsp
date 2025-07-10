@@ -32,8 +32,8 @@ alias ProductsGetTraits = NoClientRequestId &
     HideKeysParameter &
     ExcludeSkuDetailsParameter &
     IncludeFutureAvailabilitiesParameter &
-    SkuIdParameter> &
-  RequestHeadersTrait<PricingAudienceHeaderParameter>;
+    SkuIdParameter &
+    PricingAudienceParameter>;
 
 // Operation definitions
 alias ProductsListingOperation = ResourceOperations<ProductsListingTraits>;
