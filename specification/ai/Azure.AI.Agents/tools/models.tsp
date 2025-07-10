@@ -908,11 +908,11 @@ model ConnectedAgentDetails {
 model DeepResearchDetails {
   @doc("The deep research model deployment name.")
   @encodedName("application/json", "deep_research_model")
-  deepResearchModel: string;
+  `model`: string;
 
   @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
   @encodedName("application/json", "bing_grounding_connections")
-  deepResearchBingGroundingConnections: DeepResearchBingGroundingConnection[];
+  bingGroundingConnections: DeepResearchBingGroundingConnection[];
 }
 
 /**
