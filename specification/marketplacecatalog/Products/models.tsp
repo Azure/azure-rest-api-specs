@@ -853,12 +853,21 @@ model Image {
   type?: string;
 }
 
-// The following section contains query param models
+// ----------------------------------- The following section contains query param models --------------------------- //
+
+// Market is required in some operations and not in others, so there are 2 models used
 @doc("Marketplace Catalog API")
 model MarketParameter {
   @query
   @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
   market: string;
+}
+
+@doc("Marketplace Catalog API")
+model OptionalMarketParameter {
+  @query
+  @doc("Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'")
+  market?: string;
 }
 
 @doc("Parameters for language selection")

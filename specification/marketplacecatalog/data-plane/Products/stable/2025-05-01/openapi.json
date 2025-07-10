@@ -123,7 +123,7 @@
             "$ref": "#/parameters/LocationsParameter"
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "$ref": "#/parameters/OptionalMarketParameter"
           },
           {
             "$ref": "#/parameters/HideKeysParameter"
@@ -195,7 +195,7 @@
             "$ref": "#/parameters/LocationsParameter"
           },
           {
-            "$ref": "#/parameters/MarketParameter"
+            "$ref": "#/parameters/OptionalMarketParameter"
           },
           {
             "$ref": "#/parameters/OdataSelectParameter"
@@ -1849,6 +1849,14 @@
       "name": "$select",
       "in": "query",
       "description": "Selects which properties to include in the results. Example: $select=displayName",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OptionalMarketParameter": {
+      "name": "market",
+      "in": "query",
+      "description": "Product market value  (the response will include only products that can be sold in the specified market)\nPossible values can be found at https://docs.microsoft.com/en-us/azure/marketplace/marketplace-geo-availability-currencies. Example: 'US'",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -10,8 +10,6 @@
       "eastus2",
       "westus2"
     ],
-    "$select": "productId,skuId,skuName,skuProperties,publisherDisplayName",
-    "$orderBy": "publisherDisplayName desc",
     "$filter": "productType eq 'VirtualMachine'"
   },
   "responses": {
@@ -207,7 +205,7 @@
             ]
           }
         ],
-        "nextLink": "https://catalogapi.azure.com/skus?serviceFamily=Compute&service=Virtual+Machines&api-version=2025-05-01&language=en&$skiptoken=W3s..."
+        "nextLink": "https://catalogapi.azure.com/skus?serviceFamily=Compute&service=Virtual%20Machines&language=en&api-version=2025-05-01&locations=eastus2,westus2&$filter=productType%20eq%20%27VirtualMachine%27&$skiptoken=W3s..."
       }
     }
   }
