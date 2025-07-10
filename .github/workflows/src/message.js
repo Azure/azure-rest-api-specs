@@ -41,8 +41,19 @@ export const BaseMessageRecordSchema = z.object({
  * @typedef {import("zod/v4").infer<typeof BaseMessageRecordSchema>} BaseMessageRecord
  */
 
+/**
+ * @readonly
+ * @enum {"Raw" | "Result"}
+ */
+export const MessageType = Object.freeze({
+  Raw: "Raw",
+  Result: "Result",
+});
+/** @type {import("zod/v4").ZodType<MessageType>} */
+export const MessageTypeSchema = z.enum(Object.values(MessageType));
+
 export const RawMessageRecordSchema = BaseMessageRecordSchema.extend({
-  type: z.literal("Raw"),
+  type: z.literal(MessageType.Raw),
 });
 /**
  * @typedef {import("zod/v4").infer<typeof RawMessageRecordSchema>} RawMessageRecord
@@ -58,7 +69,7 @@ export const JsonPathSchema = z.object({
  */
 
 export const ResultMessageRecordSchema = BaseMessageRecordSchema.extend({
-  type: z.literal("Result"),
+  type: z.literal(MessageType.Result),
   id: z.optional(z.string()),
   code: z.optional(z.string()),
   docUrl: z.optional(z.string()),
