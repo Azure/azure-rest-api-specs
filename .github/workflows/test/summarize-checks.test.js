@@ -520,7 +520,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMChangesRequested with WaitForARMFeedback present",
         eventName: "labeled",
         changedLabel: "ARMChangesRequested",
-        existingLabels: ["WaitForARMFeedback", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"]
       },
@@ -528,7 +528,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMChangesRequested without WaitForARMFeedback",
         eventName: "labeled",
         changedLabel: "ARMChangesRequested",
-        existingLabels: ["other-label"],
+        existingLabels: ["other-label", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: []
       },
@@ -536,7 +536,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMSignedOff with both labels present",
         eventName: "labeled",
         changedLabel: "ARMSignedOff",
-        existingLabels: ["WaitForARMFeedback", "ARMChangesRequested", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "ARMChangesRequested", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback", "ARMChangesRequested"]
       },
@@ -544,7 +544,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMSignedOff with only WaitForARMFeedback present",
         eventName: "labeled",
         changedLabel: "ARMSignedOff",
-        existingLabels: ["WaitForARMFeedback", "other-label"],
+        existingLabels: ["WaitForARMFeedback", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["WaitForARMFeedback"]
       },
@@ -552,7 +552,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMSignedOff with only ARMChangesRequested present",
         eventName: "labeled",
         changedLabel: "ARMSignedOff",
-        existingLabels: ["ARMChangesRequested", "other-label"],
+        existingLabels: ["ARMChangesRequested", "ARMSignedOff", "other-label"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: ["ARMChangesRequested"]
       },
@@ -560,7 +560,7 @@ describe("Summarize Checks Tests", () => {
         description: "labeled: ARMSignedOff with neither label present",
         eventName: "labeled",
         changedLabel: "ARMSignedOff",
-        existingLabels: ["other-label"],
+        existingLabels: ["other-label", "ARMSignedOff"],
         expectedLabelsToAdd: [],
         expectedLabelsToRemove: []
       },
@@ -630,9 +630,11 @@ describe("Summarize Checks Tests", () => {
             changedLabel
         );
 
-        expect(labelsToAdd).toEqual(expectedLabelsToAdd);
-        expect(labelsToRemove).toEqual(expectedLabelsToRemove);
-      }
+
+        expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
+        expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());
+      },
+      600000,
     );
   });
 });

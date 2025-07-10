@@ -468,21 +468,50 @@ export async function updateLabels(
 
   const labelsToAdd = new Set();
   const labelsToRemove = new Set();
-  const sortedLabels = existingLabels.sort((a, b) => a.localeCompare(b));
 
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
-  if (containsAll(sortedLabels, ["ARMSignedOff"])) {
-    labelsToRemove.add("ARMChangesRequested");
-    labelsToRemove.add("WaitForARMFeedback");
+  if (containsAll(existingLabels, ["ARMSignedOff"])) {
+    if (existingLabels.includes("ARMChangesRequested")) {
+      labelsToRemove.add("ARMChangesRequested");
+    }
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      labelsToRemove.add("WaitForARMFeedback");
+    }
   }
   // if we are waiting for ARM feedback, we should add the "WaitForARMFeedback" label
-  else if (containsAll(sortedLabels, ["ARMChangesRequested"]) && containsNone(sortedLabels, ["ARMSignedOff"])) {
-    labelsToRemove.add("WaitForARMFeedback");
+  else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
+    if (existingLabels.includes("WaitForARMFeedback")) {
+      labelsToRemove.add("WaitForARMFeedback");
+    }
   }
   // finally, if ARMChangesRequested are not present, and we've gotten here by lack of signoff, we should add the "WaitForARMFeedback" label
-  else if (containsNone(sortedLabels, ["ARMChangesRequested"])) {
-    labelsToAdd.add("WaitForARMFeedback");
+  else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
+    if (!existingLabels.includes("WaitForARMFeedback")) {
+      labelsToAdd.add("WaitForARMFeedback");
+    }
   }
+
+  // if (event_name === "labeled") {
+  //   if (changedLabel == "ARMChangesRequested") {
+  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+  //       labelsToRemove.add("WaitForARMFeedback");
+  //     }
+  //   }
+  //   if (changedLabel == "ARMSignedOff") {
+  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+  //       labelsToRemove.add("WaitForARMFeedback");
+  //     }
+  //     if (known_labels.indexOf("ARMChangesRequested") !== -1) {
+  //       labelsToRemove.add("ARMChangesRequested");
+  //     }
+  //   }
+  // } else if (event_name === "unlabeled") {
+  //   if (changedLabel == "ARMChangesRequested") {
+  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
+  //       labelsToAdd.add("WaitForARMFeedback");
+  //     }
+  //   }
+  // }
 
   return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
 }
