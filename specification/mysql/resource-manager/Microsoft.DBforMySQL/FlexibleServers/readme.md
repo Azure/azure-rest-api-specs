@@ -319,6 +319,42 @@ input-file:
 - preview/2022-09-30-preview/PrivateLinkResources.json
 ```
 
+### Tag: package-2020-07-01-privatepreview
+
+These settings apply only when `--tag=package-2020-07-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-privatepreview'
+input-file:
+- preview/2020-07-01-privatepreview/mysql.json
+```
+
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+- preview/2020-07-01-preview/mysql.json
+```
+
+### Tag: package-flexibleserver-2021-05-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2021-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-05-01-preview'
+input-file:
+- preview/2021-05-01-preview/mysql.json
+```
+
+### Tag: package-flexibleserver-2021-05-01
+
+These settings apply only when `--tag=package-flexibleserver-2021-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-05-01'
+input-file:
+- stable/2021-05-01/mysql.json
+```
+
 ## Suppression
 
 ``` yaml
