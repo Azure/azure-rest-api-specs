@@ -271,13 +271,13 @@ interface RadiologyInsightsClient {
    - `client.tsp` (naming/access customizations)
    - Other `.tsp` files only if listed in exceptions section
 
-## Step 5: Post-Implementation Validation and Generation
+## Step 5: Post-Implementation Validation
 
 For all steps below, keep going until the validation has completed successfully and all compilation errors are completely resolved, before ending your turn and yielding back to the user.
-1. **Validate TypeSpec**: Run `tsp compile .` from project root where `main.tsp` exists.
+1. **Validate TypeSpec**: Run `tsp compile client.tsp` from project root.
 2. **Fix any compilation errors** before proceeding
-3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
-4. **Fix any generation issues**
+
+Let the user know that they can now generate the SDK with these changes.
 
 <!-- References -->
 [TypeSpec Language Basics Docs]: https://typespec.io/docs/language-basics/overview/
