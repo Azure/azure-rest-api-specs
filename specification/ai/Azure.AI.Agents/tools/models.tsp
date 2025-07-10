@@ -143,7 +143,6 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   @encodedName("application/json", "connected_agent")
   connectedAgent: ConnectedAgentDetails;
 }
-
 @doc("The input definition information for a Deep Research tool as used to configure an agent.")
 @added(Versions.v2025_05_15_preview)
 model DeepResearchToolDefinition extends ToolDefinition {
@@ -824,7 +823,7 @@ union AgentsNamedToolChoiceType {
   /** Tool type `deep_research` */
   @added(Versions.v2025_05_15_preview)
   deepResearch: "deep_research",
-
+  
   /** Tool type `mcp` */
   @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
