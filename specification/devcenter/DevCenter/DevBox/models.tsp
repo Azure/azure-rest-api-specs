@@ -207,8 +207,8 @@ union PoolAlignTarget {
   NetworkProperties: "NetworkProperties",
 
   @added(APIVersions.v2025_07_01_preview)
-  @doc("Hibernation support.")
-  HibernationSupport: "HibernationSupport",
+  @doc("Hibernate support.")
+  HibernateSupport: "HibernateSupport",
 
   @added(APIVersions.v2025_07_01_preview)
   @doc("Single sign on status.")
