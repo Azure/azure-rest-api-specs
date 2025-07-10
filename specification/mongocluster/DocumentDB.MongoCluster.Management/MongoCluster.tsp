@@ -24,6 +24,8 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@@added(MongoCluster.identity, Microsoft.DocumentDB.Versions.v2025_07_01_preview);
+
 @armResourceOperations
 interface MongoClusters {
   /** Gets information about a mongo cluster. */

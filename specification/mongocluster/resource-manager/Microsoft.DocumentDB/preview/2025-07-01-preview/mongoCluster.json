@@ -345,6 +345,12 @@
           "Creates a Mongo Cluster resource from a point in time restore": {
             "$ref": "./examples/MongoClusters_CreatePITR.json"
           },
+          "Creates a Mongo Cluster resource with Customer Managed Key encryption from a point in time restore": {
+            "$ref": "./examples/MongoClusters_CreatePITR_CMK.json"
+          },
+          "Creates a new Mongo Cluster resource with Customer Managed Key encryption.": {
+            "$ref": "./examples/MongoClusters_Create_CMK.json"
+          },
           "Creates a new Mongo Cluster resource with Premium SSDv2 storage.": {
             "$ref": "./examples/MongoClusters_Create_SSDv2.json"
           },
@@ -353,6 +359,9 @@
           },
           "Creates a replica Mongo Cluster resource from a source resource.": {
             "$ref": "./examples/MongoClusters_CreateGeoReplica.json"
+          },
+          "Creates a replica Mongo Cluster resource with Customer Managed Key encryption from a source resource.": {
+            "$ref": "./examples/MongoClusters_CreateGeoReplica_CMK.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1675,6 +1684,24 @@
         ]
       }
     },
+    "CustomerManagedKeyEncryptionProperties": {
+      "type": "object",
+      "description": "Customer managed key encryption settings.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "The identity used to access the key encryption key."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "The URI of the key vault key used for encryption."
+        }
+      },
+      "required": [
+        "keyEncryptionKeyIdentity",
+        "keyEncryptionKeyUrl"
+      ]
+    },
     "DataApiMode": {
       "type": "string",
       "description": "The mode to apply to the Mongo Data API.",
@@ -1726,6 +1753,16 @@
         "db",
         "role"
       ]
+    },
+    "EncryptionProperties": {
+      "type": "object",
+      "description": "The encryption configuration for the mongo cluster.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/CustomerManagedKeyEncryptionProperties",
+          "description": "Customer managed key encryption settings."
+        }
+      }
     },
     "EntraIdentityProvider": {
       "type": "object",
@@ -1934,6 +1971,42 @@
         }
       }
     },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "The identity used for key encryption key.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityType",
+          "description": "The type of identity. Only 'UserAssignedIdentity' is supported."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "The user assigned identity resource id."
+        }
+      },
+      "required": [
+        "identityType",
+        "userAssignedIdentityResourceId"
+      ]
+    },
+    "KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity for key encryption key.",
+      "enum": [
+        "UserAssignedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssignedIdentity",
+            "value": "UserAssignedIdentity",
+            "description": "User assigned identity."
+          }
+        ]
+      }
+    },
     "ListConnectionStringsResult": {
       "type": "object",
       "description": "The connection strings for the given mongo cluster.",
@@ -1956,6 +2029,10 @@
         "properties": {
           "$ref": "#/definitions/MongoClusterProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2092,6 +2169,14 @@
         "authConfig": {
           "$ref": "#/definitions/AuthConfigProperties",
           "description": "The authentication configuration for the cluster."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "The encryption configuration for the cluster. Depends on identity being configured.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -2198,6 +2283,10 @@
       "type": "object",
       "description": "The type used for update operations of the MongoCluster.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
