@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Versioning;
