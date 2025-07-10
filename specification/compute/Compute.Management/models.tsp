@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -2560,6 +2562,13 @@ model VirtualMachineScaleSetNetworkConfiguration {
    * The network configuration name.
    */
   name: string;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
