@@ -9,15 +9,15 @@ import {
   swagger,
   getChangedFiles,
   pathExists,
-} from "../../.github/shared/src/changed-files.js";
-import { filterAsync } from "../../.github/shared/src/array.js";
+} from "../src/changed-files.js";
+import { filterAsync } from "../src/array.js";
 
 import {
   mappingJSONTemplate,
   repoJSONTemplate,
   indexMd,
   getSwaggersToProcess,
-} from "./doc-preview.js";
+} from "../src/doc-preview.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
