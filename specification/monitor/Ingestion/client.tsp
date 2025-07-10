@@ -7,3 +7,6 @@ using LogsIngestion;
 namespace ClientCustomizations;
 
 @@access(upload, Access.internal, "python");
+
+@@clientName(LogsIngestion.upload, "LogsUploadOptions", "typescript");
+@@clientName(LogsIngestion, "LogsIngestionClientOptions", "typescript");
