@@ -823,7 +823,7 @@ union AgentsNamedToolChoiceType {
   /** Tool type `deep_research` */
   @added(Versions.v2025_05_15_preview)
   deepResearch: "deep_research",
-  
+
   /** Tool type `mcp` */
   @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
