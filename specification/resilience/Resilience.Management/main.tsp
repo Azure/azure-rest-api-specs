@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 /** Microsoft.Resilience Resource Provider management API. */
 @armProviderNamespace(ProviderName)
 @service(#{ title: ProviderName })
-@armCommonTypesVersion(CommonTypes.Versions.v5)
+@armCommonTypesVersion(CommonTypes.Versions.v6)
 @versioned(Versions)
 namespace Microsoft.Resilience;
 
@@ -129,6 +129,12 @@ model ResourceResilienceProfile {
   @added(Versions.v2025_01_01_preview)
   @doc("Reasons for the resilience state of the resource.")
   resilienceStateReasons: ResilienceStateReason[];
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dynamic properties for extensibility"
+  @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read)
+  @doc("Optional property for extended metadata.")
+  extendedMetadata?: Record<string>;
 }
 
 @doc("Azores Classification tags applied for resource exclusion/assertion.")
