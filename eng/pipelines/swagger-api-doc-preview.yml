@@ -53,8 +53,9 @@ jobs:
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
 
-      - script: eng/scripts/api-doc-preview.js --output ./AzureRestPreview
+      - script: npm exec --no -- api-doc-preview --output ../../AzureRestPreview
         displayName: Generate Swagger API documentation preview
+        workingDirectory: .github/shared
 
       - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
         parameters:

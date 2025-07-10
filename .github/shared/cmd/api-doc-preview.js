@@ -59,7 +59,7 @@ export async function main() {
       },
       "spec-repo-root": {
         type: "string",
-        default: resolve(__dirname, "../../"),
+        default: resolve(__dirname, "../../../"),
       },
     },
     allowPositionals: false,
