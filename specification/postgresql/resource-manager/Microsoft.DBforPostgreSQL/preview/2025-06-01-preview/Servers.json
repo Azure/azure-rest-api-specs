@@ -42,34 +42,34 @@
         "operationId": "Servers_CreateOrUpdate",
         "x-ms-examples": {
           "Create a new flexible server.": {
-            "$ref": "./examples/ServerCreate.json"
+            "$ref": "./examples/ServersCreate.json"
           },
           "Create a new flexible server with Microsoft Entra authentication enabled.": {
-            "$ref": "./examples/ServerCreateWithMicrosoftEntraEnabled.json"
+            "$ref": "./examples/ServersCreateWithMicrosoftEntraEnabled.json"
           },
           "Create a new flexible server with data encryption based on customer managed key.": {
-            "$ref": "./examples/ServerCreateWithDataEncryptionEnabled.json"
+            "$ref": "./examples/ServersCreateWithDataEncryptionEnabled.json"
           },
           "Create a new flexible server with data encryption based on customer managed key with automatic key version update.": {
-            "$ref": "./examples/ServerCreateWithDataEncryptionEnabledAutoUpdate.json"
+            "$ref": "./examples/ServersCreateWithDataEncryptionEnabledAutoUpdate.json"
           },
           "Create a new flexible server using a point in time restore of a backup of an existing flexible server.": {
-            "$ref": "./examples/ServerCreatePointInTimeRestore.json"
+            "$ref": "./examples/ServersCreatePointInTimeRestore.json"
           },
           "Create a new flexible server using a restore of a geographically redundant backup of an existing flexible server, with data encryption based on customer managed key.": {
-            "$ref": "./examples/ServerCreateGeoRestoreWithDataEncryptionEnabled.json"
+            "$ref": "./examples/ServersCreateGeoRestoreWithDataEncryptionEnabled.json"
           },
           "Create a new flexible server using a restore of a geographically redundant backup of an existing flexible server, with data encryption based on customer managed key with automatic key version update.": {
-            "$ref": "./examples/ServerCreateGeoRestoreWithDataEncryptionEnabledAutoUpdate.json"
+            "$ref": "./examples/ServersCreateGeoRestoreWithDataEncryptionEnabledAutoUpdate.json"
           },
           "Create a read replica of an existing flexible server.": {
-            "$ref": "./examples/ServerCreateReplica.json"
+            "$ref": "./examples/ServersCreateReplica.json"
           },
           "Create a new flexible server using a backup of a flexible server that was deleted or dropped recently.": {
-            "$ref": "./examples/ServerCreateReviveDropped.json"
+            "$ref": "./examples/ServersCreateReviveDropped.json"
           },
           "Create a new elastic cluster.": {
-            "$ref": "./examples/ClusterCreate.json"
+            "$ref": "./examples/ServersClusterCreate.json"
           }
         },
         "description": "Creates a new server.",
@@ -97,18 +97,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -136,34 +124,34 @@
         "operationId": "Servers_Update",
         "x-ms-examples": {
           "Update an existing flexible server.": {
-            "$ref": "./examples/ServerUpdate.json"
+            "$ref": "./examples/ServersUpdate.json"
           },
           "Update an existing flexible server with Microsoft Entra authentication enabled.": {
-            "$ref": "./examples/ServerUpdateWithMicrosoftEntraEnabled.json"
+            "$ref": "./examples/ServersUpdateWithMicrosoftEntraEnabled.json"
           },
           "Update an existing flexible server with data encryption based on customer managed key.": {
-            "$ref": "./examples/ServerUpdateWithDataEncryptionEnabled.json"
+            "$ref": "./examples/ServersUpdateWithDataEncryptionEnabled.json"
           },
           "Update an existing flexible server with data encryption based on customer managed key with automatic key version update.": {
-            "$ref": "./examples/ServerUpdateWithDataEncryptionEnabledAutoUpdate.json"
+            "$ref": "./examples/ServersUpdateWithDataEncryptionEnabledAutoUpdate.json"
           },
           "Update an existing flexible server with custom maintenance window.": {
-            "$ref": "./examples/ServerUpdateWithCustomMaintenanceWindow.json"
+            "$ref": "./examples/ServersUpdateWithCustomMaintenanceWindow.json"
           },
           "Update an existing flexible server to upgrade the major version of PostgreSQL database engine.": {
-            "$ref": "./examples/ServerUpdateWithMajorVersionUpgrade.json"
+            "$ref": "./examples/ServersUpdateWithMajorVersionUpgrade.json"
           },
           "Promote a read replica to a standalone server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the promotion to a standalone server.": {
-            "$ref": "./examples/PromoteReplicaAsPlannedStandaloneServer.json"
+            "$ref": "./examples/ServersPromoteReplicaAsPlannedStandaloneServer.json"
           },
           "Promote a read replica to a standalone server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the promotion to a standalone server.": {
-            "$ref": "./examples/PromoteReplicaAsForcedStandaloneServer.json"
+            "$ref": "./examples/ServersPromoteReplicaAsForcedStandaloneServer.json"
           },
           "Switch over a read replica to primary server with planned data synchronization. Meaning that it waits for data in the read replica to be fully synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
-            "$ref": "./examples/PromoteReplicaAsPlannedSwitchover.json"
+            "$ref": "./examples/ServersPromoteReplicaAsPlannedSwitchover.json"
           },
           "Switch over a read replica to primary server with forced data synchronization. Meaning that it doesn't wait for data in the read replica to be synchronized with its source server before it initiates the switching of roles between the read replica and the primary server.": {
-            "$ref": "./examples/PromoteReplicaAsForcedSwitchover.json"
+            "$ref": "./examples/ServersPromoteReplicaAsForcedSwitchover.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.",
@@ -191,12 +179,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -224,7 +206,7 @@
         "operationId": "Servers_Delete",
         "x-ms-examples": {
           "Delete or drop an existing flexible server.": {
-            "$ref": "./examples/ServerDelete.json"
+            "$ref": "./examples/ServersDelete.json"
           }
         },
         "description": "Deletes or drops an existing flexible server.",
@@ -243,9 +225,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -253,9 +232,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -276,13 +252,13 @@
         "operationId": "Servers_Get",
         "x-ms-examples": {
           "Get information about an existing flexible server.": {
-            "$ref": "./examples/ServerGet.json"
+            "$ref": "./examples/ServersGet.json"
           },
           "Get information about an existing flexible server that is integrated into a virtual network provided by customer.": {
-            "$ref": "./examples/ServerGetWithVnet.json"
+            "$ref": "./examples/ServersGetWithVnet.json"
           },
           "Get information about an existing flexible server that isn't integrated into a virtual network provided by customer and has private endpoint connections.": {
-            "$ref": "./examples/ServerGetWithPrivateEndpoints.json"
+            "$ref": "./examples/ServersGetWithPrivateEndpoints.json"
           }
         },
         "description": "Gets information about an existing flexible server.",
@@ -324,7 +300,7 @@
         "operationId": "Servers_ListByResourceGroup",
         "x-ms-examples": {
           "List all flexible servers in a resource group.": {
-            "$ref": "./examples/ServerListByResourceGroup.json"
+            "$ref": "./examples/ServersListByResourceGroup.json"
           }
         },
         "description": "Lists all flexible servers in a resource group.",
@@ -343,7 +319,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerListResult"
+              "$ref": "#/definitions/ServerList"
             }
           },
           "default": {
@@ -366,7 +342,7 @@
         "operationId": "Servers_ListBySubscription",
         "x-ms-examples": {
           "List all flexible servers in a subscription.": {
-            "$ref": "./examples/ServerList.json"
+            "$ref": "./examples/ServeServersListBySubscriptionrsList.json"
           }
         },
         "description": "Lists all flexible servers in a subscription.",
@@ -382,7 +358,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ServerListResult"
+              "$ref": "#/definitions/ServerList"
             }
           },
           "default": {
@@ -394,6 +370,161 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "Restart PostgreSQL database engine in a flexible server.": {
+            "$ref": "./examples/ServerRestart.json"
+          },
+          "Restart PostgreSQL database engine in a flexible server with a forced failover to standby server.": {
+            "$ref": "./examples/ServerRestartWithFailover.json"
+          }
+        },
+        "description": "Restarts PostgreSQL database engine in a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestartParameter"
+            },
+            "description": "Parameters to restart a flexible server."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/start": {
+      "post": {
+        "tags": [
+          "ServerStart"
+        ],
+        "operationId": "Servers_Start",
+        "x-ms-examples": {
+          "Start a stopped flexible server.": {
+            "$ref": "./examples/ServerStart.json"
+          }
+        },
+        "description": "Starts a stopped flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/stop": {
+      "post": {
+        "tags": [
+          "ServerStop"
+        ],
+        "operationId": "Servers_Stop",
+        "x-ms-examples": {
+          "Stop a flexible server.": {
+            "$ref": "./examples/ServerStop.json"
+          }
+        },
+        "description": "Stops a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
@@ -818,7 +949,7 @@
       },
       "description": "Represents a server to be updated."
     },
-    "ServerListResult": {
+    "ServerList": {
       "type": "object",
       "properties": {
         "value": {
@@ -1264,6 +1395,30 @@
           "description": "Default database name for the elastic cluster."
         }
       }
+    },
+    "RestartParameter": {
+      "type": "object",
+      "properties": {
+        "restartWithFailover": {
+          "type": "boolean",
+          "description": "Indicates if restart the PostgreSQL database engine should failover or switch over from primary to standby. This only works if flexible server has high availability enabled."
+        },
+        "failoverMode": {
+          "type": "string",
+          "description": "Failover mode.",
+          "enum": [
+            "PlannedFailover",
+            "ForcedFailover",
+            "PlannedSwitchover",
+            "ForcedSwitchover"
+          ],
+          "x-ms-enum": {
+            "name": "FailoverMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "PostgreSQL database engine restart parameters."
     }
   },
   "parameters": {}
