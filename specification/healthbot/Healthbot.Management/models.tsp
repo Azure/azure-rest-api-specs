@@ -257,41 +257,44 @@ model Error {
    * The error object.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  error?: {
-    /**
-     * The error code.
-     */
-    @visibility(Lifecycle.Read)
-    code?: string;
-
-    /**
-     * The error message.
-     */
-    @visibility(Lifecycle.Read)
-    message?: string;
-
-    /**
-     * The error target.
-     */
-    @visibility(Lifecycle.Read)
-    target?: string;
-
-    /**
-     * The error details.
-     */
-    @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    details?: Error[];
-
-    /**
-     * The error additional info.
-     */
-    @visibility(Lifecycle.Read)
-    @OpenAPI.extension("x-ms-identifiers", #[])
-    additionalInfo?: ErrorAdditionalInfo[];
-  };
+  error?: ErrorError;
 }
+/**
+ * The error object.
+ */
+model ErrorError {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
 
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  details?: Error[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  additionalInfo?: ErrorAdditionalInfo[];
+}
 /**
  * The resource management error additional info.
  */

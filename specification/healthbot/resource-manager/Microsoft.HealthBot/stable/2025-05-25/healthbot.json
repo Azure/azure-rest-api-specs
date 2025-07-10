@@ -580,43 +580,8 @@
       "description": "The resource management error response.",
       "properties": {
         "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "The error code.",
-              "readOnly": true
-            },
-            "message": {
-              "type": "string",
-              "description": "The error message.",
-              "readOnly": true
-            },
-            "target": {
-              "type": "string",
-              "description": "The error target.",
-              "readOnly": true
-            },
-            "details": {
-              "type": "array",
-              "description": "The error details.",
-              "items": {
-                "$ref": "#/definitions/Error"
-              },
-              "readOnly": true,
-              "x-ms-identifiers": []
-            },
-            "additionalInfo": {
-              "type": "array",
-              "description": "The error additional info.",
-              "items": {
-                "$ref": "#/definitions/ErrorAdditionalInfo"
-              },
-              "readOnly": true,
-              "x-ms-identifiers": []
-            }
-          }
+          "$ref": "#/definitions/ErrorError",
+          "description": "The error object."
         }
       }
     },
@@ -633,6 +598,45 @@
           "type": "object",
           "description": "The additional info.",
           "readOnly": true
+        }
+      }
+    },
+    "ErrorError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
