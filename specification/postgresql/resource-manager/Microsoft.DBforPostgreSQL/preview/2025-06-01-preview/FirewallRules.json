@@ -42,7 +42,7 @@
         "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "Create a new firewall rule or update an existing firewall rule.": {
-            "$ref": "./examples/FirewallRuleCreate.json"
+            "$ref": "./examples/FirewallRulesCreateOrUpdate.json"
           }
         },
         "description": "Creates a new firewall rule or updates an existing firewall rule.",
@@ -73,18 +73,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/FirewallRule"
-            }
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -112,7 +100,7 @@
         "operationId": "FirewallRules_Delete",
         "x-ms-examples": {
           "Delete an existing firewall rule.": {
-            "$ref": "./examples/FirewallRuleDelete.json"
+            "$ref": "./examples/FirewallRulesDelete.json"
           }
         },
         "description": "Deletes an existing firewall rule.",
@@ -134,9 +122,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -144,9 +129,6 @@
                 "type": "string"
               }
             }
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -167,7 +149,7 @@
         "operationId": "FirewallRules_Get",
         "x-ms-examples": {
           "Get information about a firewall rule in a flexible server.": {
-            "$ref": "./examples/FirewallRuleGet.json"
+            "$ref": "./examples/FirewallRulesGet.json"
           }
         },
         "description": "Gets information about a firewall rule in a flexible server.",
@@ -212,7 +194,7 @@
         "operationId": "FirewallRules_ListByServer",
         "x-ms-examples": {
           "List information about all firewall rules in a flexible server.": {
-            "$ref": "./examples/FirewallRuleListByServer.json"
+            "$ref": "./examples/FirewallRulesListByServer.json"
           }
         },
         "description": "Lists information about all firewall rules in a flexible server.",
@@ -234,7 +216,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/FirewallRuleListResult"
+              "$ref": "#/definitions/FirewallRuleList"
             }
           },
           "default": {
@@ -290,7 +272,7 @@
       ],
       "description": "Firewall rule."
     },
-    "FirewallRuleListResult": {
+    "FirewallRuleList": {
       "type": "object",
       "properties": {
         "value": {
@@ -302,7 +284,8 @@
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "description": "List of firewall rules."
@@ -317,6 +300,7 @@
       "description": "Name of the firewall rule.",
       "minLength": 1,
       "pattern": "^[-\\w\\._]+$",
+      "maxLength": 80,
       "x-ms-parameter-location": "method"
     }
   }
