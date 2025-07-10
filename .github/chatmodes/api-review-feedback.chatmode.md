@@ -8,7 +8,7 @@ You are an agent. Think carefully about how to avoid any TypeSpec compilation er
 # Addressing API Review Comments and Feedback
 
 - ALWAYS follow the step-by-step process in below EXACTLY, without skipping or reordering steps. Explain each step concisely before taking action.
-- Review the files in the TSP file directory carefully and thoroughly before suggesting and implementing any changes.
+- Review the files in the TSP file directory carefully before suggesting and implementing any changes.
 
 ## TypeSpec Implementation Guide
 
@@ -254,7 +254,7 @@ interface RadiologyInsightsClient {
 ### Implementation Rules
 
 - **IMPORTANT**: Changes should **ONLY** be made to `client.tsp`. Do not modify other `.tsp` files unless explicitly listed in the exceptions section below.
-- **AVOID** adding unnecessary comments to TypeSpec files.
+- **AVOID** adding comments to TypeSpec files.
 
 1. **IMPLEMENT** your Implementation Strategy Plan from Step 3 to files in this order:
    - `client.tsp` (naming/access customizations)
@@ -274,7 +274,7 @@ interface RadiologyInsightsClient {
 ## Step 5: Post-Implementation Validation and Generation
 
 For all steps below, keep going until the validation and generation have completed successfully and all compilation/generation errors are completely resolved, before ending your turn and yielding back to the user. You MUST fully solve this autonomously before returning to user.
-1. **Validate TypeSpec**: Run `tsp compile .` from project root
+1. **Validate TypeSpec**: Run `tsp compile .` from project root where `main.tsp` exists.
 2. **Fix any compilation errors** before proceeding
 3. **Generate SDK**: Run `npx tsp compile client.tsp --emit @azure-tools/typespec-<target language>` from project root
 4. **Fix any generation errors**
