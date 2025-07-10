@@ -17,7 +17,7 @@ import { MessageType } from "./message.js";
 /**
  * Adds table of messages to core.summary
  *
- * @param {import("@actions/core")} core
+ * @param {typeof import("@actions/core")} core
  * @param {import("./message.js").MessageRecord[]} messages
  */
 export function addTable(core, messages) {
@@ -30,11 +30,11 @@ export function addTable(core, messages) {
   ]);
 
   tableRows.push(
-    messages.map((m) => {
+    ...messages.map((m) => {
       if (m.type === MessageType.Result) {
-        return { data: m.code || "UNKNOWN" };
+        return [{ data: m.code || "UNKNOWN" }, { data: m.message }];
       } else {
-        return { data: m.message };
+        return [{ data: m.message }, { data: JSON.stringify(m.extra) }];
       }
     }),
   );
