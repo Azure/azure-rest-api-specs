@@ -33,7 +33,7 @@ interface RadiologyInsights {
 
   @doc("Infer radiology insights using a custom model.")
   @route("/radiology-insights/custom")
-  @pollingOperation(RadiologyInsights.getJob)
+  @pollingOperation(RadiologyInsights.getCustomInference)
   inferFromCustomModelId is LongRunningRpcOperation<
     RadiologyInsightsCustomInferenceRequest,
     RadiologyInsightsInferenceResult,
