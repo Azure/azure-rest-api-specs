@@ -6,7 +6,6 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 
-
 namespace LogsIngestion;
 
 /**
