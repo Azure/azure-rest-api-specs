@@ -174,6 +174,9 @@
           },
           "Get a web test alert rule": {
             "$ref": "./examples/getWebTestMetricAlert.json"
+          },
+          "Get a query based alert rule": {
+            "$ref": "./examples/getMetricAlertQuery.json"
           }
         }
       },
@@ -244,6 +247,9 @@
           },
           "Create or update an alert rules with dimensions": {
             "$ref": "./examples/createOrUpdateMetricAlertWithDimensions.json"
+          },
+          "Create or update a query based alert rule": {
+            "$ref": "./examples/createOrUpdateMetricAlertQuery.json"
           }
         }
       },
@@ -336,93 +342,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status": {
-      "get": {
-        "tags": [
-          "MetricAlertsStatus"
-        ],
-        "description": "Retrieve an alert rule status.",
-        "operationId": "MetricAlertsStatus_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request for a list of metric alerts",
-            "schema": {
-              "$ref": "#/definitions/MetricAlertStatusCollection"
-            }
-          },
-          "default": {
-            "description": "BadRequest",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an alert rule status": {
-            "$ref": "./examples/getMetricAlertStatus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}": {
-      "get": {
-        "tags": [
-          "MetricAlertsStatus"
-        ],
-        "description": "Retrieve an alert rule status.",
-        "operationId": "MetricAlertsStatus_ListByName",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleNameParameter"
-          },
-          {
-            "$ref": "#/parameters/StatusNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request for a list of metric alerts",
-            "schema": {
-              "$ref": "#/definitions/MetricAlertStatusCollection"
-            }
-          },
-          "default": {
-            "description": "BadRequest",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an alert rule status": {
-            "$ref": "./examples/getMetricAlertStatusByName.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -458,6 +377,10 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       },
       "required": [
@@ -489,7 +412,6 @@
         "enabled",
         "severity",
         "evaluationFrequency",
-        "windowSize",
         "criteria",
         "scopes"
       ],
@@ -540,6 +462,12 @@
         "autoMitigate": {
           "type": "boolean",
           "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
+        },
+        "resolveConfiguration": {
+          "$ref": "#/definitions/QueryResolveConfiguration"
+        },
+        "failingPeriods": {
+          "$ref": "#/definitions/QueryFailingPeriods"
         },
         "actions": {
           "type": "array",
@@ -614,6 +542,9 @@
           "type": "boolean",
           "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
+        "resolveConfiguration": {
+          "$ref": "#/definitions/QueryResolveConfiguration"
+        },
         "actions": {
           "type": "array",
           "items": {
@@ -666,6 +597,10 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -764,7 +699,8 @@
           "enum": [
             "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
             "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
-            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
+            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+            "Microsoft.Azure.Monitor.QueryMetricCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -837,9 +773,37 @@
           "$ref": "#/definitions/MultiMetricCriteria"
         }
       ],
-      "required": [
-        "operator",
-        "threshold"
+      "properties": {
+        "operator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": true
+          },
+          "description": "the criteria operator."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "the criteria threshold value that activates the alert."
+        }
+      },
+      "description": "Criterion to filter metrics."
+    },
+    "QueryMetricCriteria": {
+      "x-ms-discriminator-value": "StaticThresholdCriterion",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiQueryMetricCriteria"
+        }
       ],
       "properties": {
         "operator": {
@@ -904,6 +868,28 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MultiMetricCriteria"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "the list of multiple metric criteria for this 'all of' operation. "
+        }
+      },
+      "description": "Specifies the metric alert criteria for multiple resource that has multiple metric criteria."
+    },
+    "MetricAlertMultipleResourceMultipleMetricQueryCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.QueryMetricCriteria",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiQueryMetricCriteria"
           },
           "x-ms-identifiers": [
             "name"
@@ -982,12 +968,100 @@
       ],
       "description": "The types of conditions for a multi resource alert."
     },
+    "MultiQueryMetricCriteria": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      },
+      "discriminator": "criterionType",
+      "properties": {
+        "criterionType": {
+          "type": "string",
+          "enum": [
+            "StaticThresholdCriterion",
+            "DynamicThresholdCriterion"
+          ],
+          "x-ms-enum": {
+            "name": "criterionType",
+            "modelAsString": true
+          },
+          "description": "Specifies the type of threshold criteria"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the criteria."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query used to evaluate the alert rule"
+        }
+      },
+      "required": [
+        "criterionType",
+        "name",
+        "query"
+      ],
+      "description": "The types of conditions for a multi query metric alert."
+    },
     "DynamicMetricCriteria": {
       "x-ms-discriminator-value": "DynamicThresholdCriterion",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiMetricCriteria"
+        }
+      ],
+      "required": [
+        "operator",
+        "alertSensitivity",
+        "failingPeriods"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "enum": [
+            "GreaterThan",
+            "LessThan",
+            "GreaterOrLessThan"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicThresholdOperator",
+            "modelAsString": true
+          },
+          "description": "The operator used to compare the metric value against the threshold."
+        },
+        "alertSensitivity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicThresholdSensitivity",
+            "modelAsString": true
+          },
+          "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern."
+        },
+        "failingPeriods": {
+          "type": "object",
+          "$ref": "#/definitions/DynamicThresholdFailingPeriods",
+          "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+        },
+        "ignoreDataBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
+        }
+      },
+      "description": "Criterion for dynamic threshold."
+    },
+    "DynamicQueryMetricCriteria": {
+      "x-ms-discriminator-value": "DynamicThresholdCriterion",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiQueryMetricCriteria"
         }
       ],
       "required": [
@@ -1052,6 +1126,87 @@
         }
       },
       "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    },
+    "QueryResolveConfiguration": {
+      "type": "object",
+      "properties": {
+        "autoResolved": {
+          "type": "boolean",
+          "description": "Indicates whether the alert should be auto resolved"
+        },
+        "timeToResolve": {
+          "type": "string",
+          "description": "The time after which the alert should be auto resolved"
+        }
+      }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of managed service identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "description": "Identity for the resource."
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of resource identity."
+        }
+      },
+      "description": "Properties of the user assigned identity."
+    },
+    "QueryFailingPeriods": {
+      "type": "object",
+      "description": "Configuration for failing periods in query-based alerts.",
+      "properties": {
+        "for": {
+          "type": "string",
+          "description": "The minimum number of failing periods required to trigger an alert."
+        }
+      },
+      "required": [
+        "for"
+      ]
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
