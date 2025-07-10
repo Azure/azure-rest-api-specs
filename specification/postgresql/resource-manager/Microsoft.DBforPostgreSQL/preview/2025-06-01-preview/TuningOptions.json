@@ -41,11 +41,11 @@
         ],
         "operationId": "TuningOptions_Get",
         "x-ms-examples": {
-          "Get the tuning options of a flexible server.": {
-            "$ref": "./examples/Tuning_GetTuningOption.json"
+          "Get the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsGet.json"
           }
         },
-        "description": "Gets the tuning options of a flexible server.",
+        "description": "Gets the tuning options of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -67,7 +67,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TuningOptionsResource"
+              "$ref": "#/definitions/TuningOptions"
             }
           },
           "default": {
@@ -86,20 +86,20 @@
         ],
         "operationId": "TuningOptions_ListRecommendations",
         "x-ms-examples": {
-          "List available recommendations produced by index tuning.": {
-            "$ref": "./examples/TuningOptions_GetRecommendations.json"
+          "List available index recommendations.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendations.json"
           },
-          "TuningOptions_ListTableRecommendations": {
-            "$ref": "./examples/TuningOptions_GetTableRecommendations.json"
+          "List available table recommendations.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendations.json"
           },
-          "List available recommendations produced by index tuning, exclusively those of create index type.": {
-            "$ref": "./examples/TuningOptions_GetFilteredRecommendations.json"
+          "List available index recommendations, filtered to exclusively get those of CREATE INDEX type.": {
+            "$ref": "./examples/TuningOptionsListIndexRecommendationsFilteredForCreateIndex.json"
           },
-          "TuningOptions_ListFilteredTableRecommendations": {
-            "$ref": "./examples/TuningOptions_GetFilteredTableRecommendations.json"
+          "List available table recommendations, filtered to exclusively get those of ANALYZE TABLE type.": {
+            "$ref": "./examples/TuningOptionsListTableRecommendationsFilteredForAnalyzeTable.json"
           }
         },
-        "description": "Lists available recommendations produced by index tuning.",
+        "description": "Lists available object recommendations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -124,7 +124,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ObjectRecommendationListResult"
+              "$ref": "#/definitions/ObjectRecommendationList"
             }
           },
           "default": {
@@ -146,11 +146,11 @@
         ],
         "operationId": "TuningOptions_ListByServer",
         "x-ms-examples": {
-          "List the tuning options of a flexible server.": {
-            "$ref": "./examples/Tuning_ListTuningOptions.json"
+          "List the tuning options of a server.": {
+            "$ref": "./examples/TuningOptionsListByServer.json"
           }
         },
-        "description": "Lists the tuning options of a flexible server.",
+        "description": "Lists the tuning options of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -169,7 +169,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TuningOptionsListResult"
+              "$ref": "#/definitions/TuningOptionsList"
             }
           },
           "default": {
@@ -251,7 +251,7 @@
       "description": "Recommendation details for the recommended action.",
       "readOnly": true
     },
-    "ObjectRecommendationResourceProperties": {
+    "ObjectRecommendationProperties": {
       "type": "object",
       "properties": {
         "initialRecommendedTime": {
@@ -353,13 +353,13 @@
       "description": "Object recommendation properties.",
       "readOnly": true
     },
-    "ObjectRecommendationResource": {
+    "ObjectRecommendation": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ObjectRecommendationResourceProperties",
+          "$ref": "#/definitions/ObjectRecommendationProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of ObjectRecommendationResource."
+          "description": "Properties of an object recommendation."
         }
       },
       "allOf": [
@@ -369,7 +369,7 @@
       ],
       "description": "Object recommendation properties."
     },
-    "ObjectRecommendationListResult": {
+    "ObjectRecommendationList": {
       "description": "List of available object recommendations.",
       "type": "object",
       "properties": {
@@ -378,7 +378,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ObjectRecommendationResource"
+            "$ref": "#/definitions/ObjectRecommendation"
           },
           "x-ms-identifiers": [
             "name"
@@ -386,11 +386,12 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
     },
-    "TuningOptionsResource": {
+    "TuningOptions": {
       "type": "object",
       "allOf": [
         {
@@ -399,7 +400,7 @@
       ],
       "description": "Impact on some metric if this recommended action is applied."
     },
-    "TuningOptionsListResult": {
+    "TuningOptionsList": {
       "description": "List of server tuning options.",
       "type": "object",
       "properties": {
@@ -408,7 +409,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TuningOptionsResource"
+            "$ref": "#/definitions/TuningOptions"
           },
           "x-ms-identifiers": [
             "name"
@@ -416,31 +417,10 @@
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       }
-    },
-    "ConfigTuningRequestParameter": {
-      "type": "object",
-      "properties": {
-        "serverName": {
-          "type": "string",
-          "description": "The name of server."
-        },
-        "allowServerRestarts": {
-          "type": "boolean",
-          "description": "Indicates whether PG should be restarted during a tuning session."
-        },
-        "targetImprovementMetric": {
-          "type": "string",
-          "description": "The target metric the tuning session is trying to improve."
-        },
-        "configTuningUsageMode": {
-          "type": "boolean",
-          "description": "The mode with which the feature will be enabled."
-        }
-      },
-      "description": "Config tuning request parameters."
     }
   },
   "parameters": {
@@ -451,7 +431,6 @@
       "type": "string",
       "enum": [
         "index",
-        "configuration",
         "table"
       ],
       "description": "The name of the tuning option.",
@@ -476,14 +455,6 @@
         "name": "RecommendationType",
         "modelAsString": true
       },
-      "x-ms-parameter-location": "method"
-    },
-    "SessionIdParameter": {
-      "name": "sessionId",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Guid of the objectId for the session.",
       "x-ms-parameter-location": "method"
     }
   }

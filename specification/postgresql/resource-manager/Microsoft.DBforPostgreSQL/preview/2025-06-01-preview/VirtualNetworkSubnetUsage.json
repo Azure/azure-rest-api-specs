@@ -39,13 +39,13 @@
         "tags": [
           "VirtualNetworkSubnetUsage"
         ],
-        "operationId": "VirtualNetworkSubnetUsage_Execute",
+        "operationId": "VirtualNetworkSubnetUsage_List",
         "x-ms-examples": {
-          "VirtualNetworkSubnetUsageList": {
-            "$ref": "./examples/VirtualNetworkSubnetUsage.json"
+          "List the virtual network subnet usage for a given virtual network.": {
+            "$ref": "./examples/VirtualNetworkSubnetUsageList.json"
           }
         },
-        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "description": "Lists the virtual network subnet usage for a given virtual network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -70,7 +70,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
+              "$ref": "#/definitions/VirtualNetworkSubnetUsage"
             }
           },
           "default": {
@@ -94,7 +94,7 @@
       },
       "description": "Virtual network subnet usage parameter"
     },
-    "VirtualNetworkSubnetUsageResult": {
+    "VirtualNetworkSubnetUsage": {
       "type": "object",
       "properties": {
         "delegatedSubnetsUsage": {
