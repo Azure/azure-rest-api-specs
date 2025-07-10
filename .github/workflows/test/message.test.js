@@ -12,12 +12,24 @@ describe("message", () => {
     },
   );
 
-  it.each([[{}, ZodError], [{ level: "foo" }, ZodError], [{ level: MessageLevel.Error }]])(
-    "BaseMessageRecordSchema.parse(%o)",
-    (input, expectedError) => {
-      testSchemaParse(BaseMessageRecordSchema, input, expectedError);
-    },
-  );
+  it.each([
+    [{}, ZodError],
+    [{ level: "foo", message: 1, time: "bar" }, ZodError],
+    [{ level: MessageLevel.Error, message: "test-message", time: new Date().toISOString() }],
+    [
+      {
+        level: MessageLevel.Warning,
+        message: "test-message",
+        time: new Date().toISOString(),
+        context: { toolVersion: "1.0" },
+        group: "test-group",
+        extra: { extraKey: "extraVal" },
+        groupName: "test-group-name",
+      },
+    ],
+  ])("BaseMessageRecordSchema.parse(%o)", (input, expectedError) => {
+    testSchemaParse(BaseMessageRecordSchema, input, expectedError);
+  });
 });
 
 function testSchemaParse(schema, input, expectedError) {
