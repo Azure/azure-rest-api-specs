@@ -469,7 +469,7 @@ union OrchestrationServiceNames {
   AutomaticRepairs: "AutomaticRepairs",
 
   /**
-   * AutomaticZoneRebalancing
+   * AutomaticZoneRebalancing orchestration service.
    */
   @added(Versions.v2025_04_01)
   AutomaticZoneRebalancing: "AutomaticZoneRebalancing",
@@ -507,12 +507,12 @@ union OrchestrationServiceOperationStatus {
   string,
 
   /**
-   * InProgress
+   * InProgress orchestration service operation status.
    */
   InProgress: "InProgress",
 
   /**
-   * Completed
+   * Completed orchestration service operation status.
    */
   Completed: "Completed",
 }
