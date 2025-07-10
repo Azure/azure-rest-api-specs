@@ -2,7 +2,7 @@
 
 import { readFile } from "fs/promises";
 import { inspect } from "util";
-import { MessageRecordSchema } from "./message.js";
+import { MessageLevel, MessageRecordSchema, MessageType } from "./message.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -31,8 +31,6 @@ export default async function generateJobSummary({ core }) {
   }
 
   // TODO
-  // 1. Parse content to an array of MessageRecord (copied from alps)
-  // 2. Generate markdown table from objects
 
   const messages = content
     .split("\n")
@@ -40,7 +38,18 @@ export default async function generateJobSummary({ core }) {
     .map((line) => JSON.parse(line))
     .map((obj) => MessageRecordSchema.parse(obj));
 
-  core.summary.addCodeBlock(inspect(messages));
+  if (
+    messages.length === 1 &&
+    messages[0].type === MessageType.Raw &&
+    messages[0].level === MessageLevel.Info &&
+    messages[0].message.toLowerCase() === "success"
+  ) {
+    // Special-case marker message for success
+    core.summary.addRaw("success");
+  } else {
+    // Render all "Raw" and "Result" messages in a table
+    core.summary.addCodeBlock(inspect(messages));
+  }
 
   core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
