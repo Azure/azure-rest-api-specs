@@ -2969,11 +2969,6 @@
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },        
-        "_links": {
-          "$ref": "#/definitions/KnowledgeSourceLinks",
-          "description": "Links related to the knowledge source.",
-          "readOnly": true
         }
       },
       "required": [ "connectionString", "containerName" ], 
@@ -3025,25 +3020,6 @@
         "description": "The name of the created resource."
       },
       "description": "Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names."
-    },
-    "KnowledgeSourceLinks": {
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/LinkInfo",
-        "description": "A link related to the knowledge source."
-      },
-      "description": "Links related to the knowledge source. Keys represent link types (e.g., 'indexerStatus', 'datasourceStatus', 'skillsetStatus') and values represent link information."
-    },
-    "LinkInfo": {
-      "type": "object",
-      "properties": {
-        "href": {
-          "type": "string",
-          "description": "The URL of the link."
-        }
-      },
-      "required": [ "href" ],
-      "description": "Information about a link."
     },
     "AnalyzeRequest": {
       "type": "object",
