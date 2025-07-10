@@ -484,6 +484,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -505,6 +506,7 @@ namespace Storage.Blob {
       {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -527,6 +529,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -549,6 +552,7 @@ namespace Storage.Blob {
         ...LeaseTimeResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -572,6 +576,7 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
+        ...DateResponseHeaderPrivate;
       }
     >;
 
@@ -1103,6 +1108,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...LeaseIdResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
@@ -1128,6 +1134,7 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
@@ -1154,6 +1161,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...LeaseIdResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
@@ -1181,6 +1189,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...LeaseIdResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
@@ -1208,6 +1217,7 @@ namespace Storage.Blob {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
           ...LeaseTimeResponseHeader;
+          ...DateResponseHeaderPrivate;
         }
       >;
 
@@ -1966,6 +1976,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2019,6 +2030,7 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2049,6 +2061,7 @@ namespace Storage.Blob {
           {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
+            ...DateResponseHeaderPrivate;
             ...IsSealedResponseHeader;
           }
         >;
