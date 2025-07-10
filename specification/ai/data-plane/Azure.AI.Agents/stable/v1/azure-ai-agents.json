@@ -389,14 +389,13 @@
           {
             "name": "file",
             "in": "formData",
-            "description": "The file data, in bytes.",
             "required": true,
             "type": "file"
           },
           {
             "name": "purpose",
             "in": "formData",
-            "description": "The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.",
+            "description": "The possible values denoting the intended usage of a file.",
             "required": true,
             "type": "string",
             "enum": [
@@ -429,7 +428,6 @@
           {
             "name": "filename",
             "in": "formData",
-            "description": "The name of the file.",
             "required": false,
             "type": "string"
           }
@@ -1663,7 +1661,8 @@
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
-                  "x-ms-client-name": "toolOutputs"
+                  "x-ms-client-name": "toolOutputs",
+                  "x-ms-identifiers": []
                 },
                 "stream": {
                   "type": "boolean",
@@ -2037,7 +2036,8 @@
                   "items": {
                     "$ref": "#/definitions/VectorStoreDataSource"
                   },
-                  "x-ms-client-name": "dataSources"
+                  "x-ms-client-name": "dataSources",
+                  "x-ms-identifiers": []
                 },
                 "chunking_strategy": {
                   "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
@@ -2715,12 +2715,18 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
@@ -3010,9 +3016,14 @@
           "x-ms-client-name": "createdAt"
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -3041,12 +3052,18 @@
           "description": "The initial messages to associate with the new thread.",
           "items": {
             "$ref": "#/definitions/ThreadMessageOptions"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -3281,7 +3298,8 @@
           "items": {
             "$ref": "#/definitions/AISearchIndexResource"
           },
-          "x-ms-client-name": "indexList"
+          "x-ms-client-name": "indexList",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3456,7 +3474,8 @@
           "items": {
             "$ref": "#/definitions/BingGroundingSearchConfiguration"
           },
-          "x-ms-client-name": "searchConfigurations"
+          "x-ms-client-name": "searchConfigurations",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3513,7 +3532,8 @@
           "items": {
             "$ref": "#/definitions/VectorStoreDataSource"
           },
-          "x-ms-client-name": "dataSources"
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3589,12 +3609,18 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
@@ -3660,12 +3686,18 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "stream": {
@@ -3702,9 +3734,14 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "$ref": "#/definitions/TruncationObject",
+          "type": "object",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/TruncationObject"
+            }
+          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -3769,7 +3806,8 @@
           "items": {
             "$ref": "#/definitions/ThreadMessageOptions"
           },
-          "x-ms-client-name": "additionalMessages"
+          "x-ms-client-name": "additionalMessages",
+          "x-ms-identifiers": []
         },
         "tools": {
           "type": "array",
@@ -3777,7 +3815,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "stream": {
           "type": "boolean",
@@ -3813,9 +3852,14 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "$ref": "#/definitions/TruncationObject",
+          "type": "object",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/TruncationObject"
+            }
+          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -4126,7 +4170,8 @@
           "items": {
             "$ref": "#/definitions/VectorStoreConfigurations"
           },
-          "x-ms-client-name": "vectorStores"
+          "x-ms-client-name": "vectorStores",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4428,7 +4473,8 @@
           "description": "The content of the message as an array of text and/or images.",
           "items": {
             "$ref": "#/definitions/MessageDeltaContent"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4562,7 +4608,8 @@
           "description": "Annotations for the text.",
           "items": {
             "$ref": "#/definitions/MessageDeltaTextAnnotation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5052,7 +5099,8 @@
           "description": "A list of annotations associated with this text.",
           "items": {
             "$ref": "#/definitions/MessageTextAnnotation"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5322,7 +5370,8 @@
           "items": {
             "$ref": "#/definitions/FunctionDefinition"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -5694,9 +5743,14 @@
           "x-ms-client-name": "stepDetails"
         },
         "last_error": {
-          "$ref": "#/definitions/RunStepError",
+          "type": "object",
           "description": "If applicable, information about the last error encountered by this run step.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunStepError"
+            }
+          ],
           "x-ms-client-name": "lastError"
         },
         "created_at": {
@@ -5734,9 +5788,14 @@
           "x-ms-client-name": "failedAt"
         },
         "usage": {
-          "$ref": "#/definitions/RunStepCompletionUsage",
+          "type": "object",
           "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunStepCompletionUsage"
+            }
+          ]
         },
         "metadata": {
           "type": "object",
@@ -5896,7 +5955,8 @@
           "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
             "$ref": "#/definitions/RunStepCodeInterpreterToolCallOutput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6000,7 +6060,8 @@
           "description": "The outputs from the Code Interpreter tool call. Code Interpreter can output one or more\nitems, including text (`logs`) or images (`image`). Each of these are represented by a\ndifferent object type.",
           "items": {
             "$ref": "#/definitions/RunStepDeltaCodeInterpreterOutput"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6330,7 +6391,8 @@
           "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
           "items": {
             "$ref": "#/definitions/FileSearchToolCallContent"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6353,7 +6415,8 @@
           "description": "The array of a file search results",
           "items": {
             "$ref": "#/definitions/RunStepFileSearchToolCallResult"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -6788,9 +6851,14 @@
           "description": "The status of the message."
         },
         "incomplete_details": {
-          "$ref": "#/definitions/MessageIncompleteDetails",
+          "type": "object",
           "description": "On an incomplete message, details about why the message is incomplete.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/MessageIncompleteDetails"
+            }
+          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
@@ -6816,7 +6884,8 @@
           "description": "The list of content items associated with the agent thread message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "assistant_id": {
           "type": "string",
@@ -6836,7 +6905,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MessageAttachment"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "object",
@@ -6882,7 +6952,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/MessageAttachment"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "type": "object",
@@ -6931,15 +7002,25 @@
           "description": "The status of the agent thread run."
         },
         "required_action": {
-          "$ref": "#/definitions/RequiredAction",
+          "type": "object",
           "description": "The details of the action required for the agent thread run to continue.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RequiredAction"
+            }
+          ],
           "x-ms-client-name": "requiredAction"
         },
         "last_error": {
-          "$ref": "#/definitions/RunError",
+          "type": "object",
           "description": "The last error, if any, encountered by this agent thread run.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunError"
+            }
+          ],
           "x-ms-client-name": "lastError"
         },
         "model": {
@@ -6956,7 +7037,8 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "created_at": {
           "type": "integer",
@@ -7000,15 +7082,25 @@
           "x-ms-client-name": "failedAt"
         },
         "incomplete_details": {
-          "$ref": "#/definitions/IncompleteRunDetails",
+          "type": "object",
           "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/IncompleteRunDetails"
+            }
+          ],
           "x-ms-client-name": "incompleteDetails"
         },
         "usage": {
-          "$ref": "#/definitions/RunCompletionUsage",
+          "type": "object",
           "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunCompletionUsage"
+            }
+          ]
         },
         "temperature": {
           "type": "number",
@@ -7038,9 +7130,14 @@
           "x-ms-client-name": "maxCompletionTokens"
         },
         "truncation_strategy": {
-          "$ref": "#/definitions/TruncationObject",
+          "type": "object",
           "description": "The strategy to use for dropping messages as the context windows moves forward.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/TruncationObject"
+            }
+          ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
@@ -7064,9 +7161,14 @@
           }
         },
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "parallel_tool_calls": {
@@ -7145,7 +7247,8 @@
           "items": {
             "$ref": "#/definitions/ToolConnection"
           },
-          "x-ms-client-name": "connectionList"
+          "x-ms-client-name": "connectionList",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -7293,7 +7396,8 @@
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
@@ -7336,9 +7440,14 @@
       "description": "The details used to update an existing agent thread",
       "properties": {
         "tool_resources": {
-          "$ref": "#/definitions/ToolResources",
+          "type": "object",
           "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
           "x-ms-client-name": "toolResources"
         },
         "metadata": {
@@ -7536,7 +7645,8 @@
           "items": {
             "$ref": "#/definitions/VectorStoreDataSource"
           },
-          "x-ms-client-name": "dataSources"
+          "x-ms-client-name": "dataSources",
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7715,9 +7825,14 @@
           "description": "The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use."
         },
         "last_error": {
-          "$ref": "#/definitions/VectorStoreFileError",
+          "type": "object",
           "description": "The last error associated with this vector store file. Will be `null` if there are no errors.",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/VectorStoreFileError"
+            }
+          ],
           "x-ms-client-name": "lastError"
         },
         "chunking_strategy": {
@@ -8153,9 +8268,14 @@
           "x-nullable": true
         },
         "expires_after": {
-          "$ref": "#/definitions/VectorStoreExpirationPolicy",
+          "type": "object",
           "description": "Details on when this vector store expires",
           "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/VectorStoreExpirationPolicy"
+            }
+          ],
           "x-ms-client-name": "expiresAfter"
         },
         "metadata": {
