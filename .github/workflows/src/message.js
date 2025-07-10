@@ -2,6 +2,7 @@
 
 // Ported from @azure/swagger-validation-common:src/types/message.ts
 
+import { markdownTable } from "markdown-table";
 import * as z from "zod";
 
 /**
@@ -86,3 +87,24 @@ export const MessageRecordSchema = z.discriminatedUnion("type", [
 /**
  * @typedef {import("zod").infer<typeof MessageRecordSchema>} MessageRecord
  */
+
+/**
+ * Adds table of messages to core.summary
+ *
+ * @param {import("./message.js").MessageRecord[]} messages
+ */
+export function generateMarkdownTable(messages) {
+  const rows = [["Rule", "Message"]];
+
+  rows.push(
+    ...messages.map((m) => {
+      if (m.type === MessageType.Result) {
+        return [m.code || "UNKNOWN", m.message];
+      } else {
+        return [m.message, JSON.stringify(m.extra)];
+      }
+    }),
+  );
+
+  return markdownTable(rows);
+}

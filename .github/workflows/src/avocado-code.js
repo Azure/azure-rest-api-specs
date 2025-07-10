@@ -1,8 +1,12 @@
 // @ts-check
 
 import { readFile } from "fs/promises";
-import { MessageLevel, MessageRecordSchema, MessageType } from "./message.js";
-import { addTable } from "./summary.js";
+import {
+  generateMarkdownTable,
+  MessageLevel,
+  MessageRecordSchema,
+  MessageType,
+} from "./message.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -49,7 +53,7 @@ export default async function generateJobSummary({ core }) {
     // Special-case marker message for success
     core.summary.addRaw("Success");
   } else {
-    addTable(core, messages);
+    core.summary.addRaw(generateMarkdownTable(messages));
   }
 
   core.summary.write();
