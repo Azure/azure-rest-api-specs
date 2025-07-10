@@ -42,7 +42,7 @@
         "operationId": "Databases_Create",
         "x-ms-examples": {
           "Create a database.": {
-            "$ref": "./examples/DatabaseCreate.json"
+            "$ref": "./examples/DatabasesCreate.json"
           }
         },
         "description": "Creates a new database.",
@@ -74,7 +74,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -112,7 +112,7 @@
         "operationId": "Databases_Delete",
         "x-ms-examples": {
           "Delete an existing database": {
-            "$ref": "./examples/DatabaseDelete.json"
+            "$ref": "./examples/DatabasesDelete.json"
           }
         },
         "description": "Deletes an existing database.",
@@ -135,7 +135,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK."
           },
           "202": {
             "description": "Accepted",
@@ -167,7 +167,7 @@
         "operationId": "Databases_Get",
         "x-ms-examples": {
           "Get information about an existing database.": {
-            "$ref": "./examples/DatabaseGet.json"
+            "$ref": "./examples/DatabasesGet.json"
           }
         },
         "description": "Gets information about an existing database.",
@@ -190,7 +190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Database"
             }
@@ -232,9 +232,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/DatabaseListResult"
+              "$ref": "#/definitions/DatabaseList"
             }
           },
           "default": {
@@ -283,7 +283,7 @@
       ],
       "description": "Represents a Database."
     },
-    "DatabaseListResult": {
+    "DatabaseList": {
       "type": "object",
       "properties": {
         "value": {
@@ -311,6 +311,7 @@
       "description": "Name of the database.",
       "minLength": 1,
       "pattern": "^[a-zA-Z_][\\w\\-]{0,62}$",
+      "maxLength": 63,
       "x-ms-parameter-location": "method"
     }
   }
