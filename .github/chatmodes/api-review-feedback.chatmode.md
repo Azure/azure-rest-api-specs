@@ -14,7 +14,7 @@ You are an agent. Think carefully about how to avoid any TypeSpec compilation er
 
 This document provides a quick guide for implementing API review comments in TypeSpec using the `client.tsp` file.
 
-## Step 1: Validate Input Format & Triggering Prompts
+## Step 1: Validate Input Format
 
 User can provide comments directly in chat with context:
 - **Example**: "I got this review feedback for Java '<review comment>' for the model Bar and attribute foo, can you help with that?"
