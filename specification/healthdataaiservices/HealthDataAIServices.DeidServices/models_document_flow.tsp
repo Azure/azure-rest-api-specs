@@ -18,6 +18,7 @@ model DeidentificationJob {
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
   @clientName("jobName", "csharp,java,python")
+  @pollingOperationParameter
   name: string;
 
   @doc("Operation to perform on the input documents.")
@@ -37,7 +38,6 @@ model DeidentificationJob {
 
   @doc("Current status of a job.")
   @visibility(Lifecycle.Read)
-  @pollingOperationParameter
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
