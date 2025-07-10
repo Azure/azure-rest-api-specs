@@ -813,17 +813,23 @@ model ClusterMonitoringPolicy {
   /**
    * The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  healthCheckRetryTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  healthCheckRetryTimeout: duration;
 
   /**
    * The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  upgradeTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  upgradeTimeout: duration;
 
   /**
    * The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
-  upgradeDomainTimeout: string;
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  @encode("duration-constant")
+  upgradeDomainTimeout: duration;
 }
 
 /**
