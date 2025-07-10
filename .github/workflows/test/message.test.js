@@ -9,14 +9,16 @@ import {
   MessageRecordSchema,
 } from "../src/message.js";
 
-describe("message", () => {
+describe("MessageLevelSchema", () => {
   it.each([["foo", ZodError], [MessageLevel.Error], [MessageLevel.Info], [MessageLevel.Warning]])(
-    "MessageLevelSchema.parse(%o)",
+    "parse(%o)",
     (input, expectedError) => {
       testSchemaParse(MessageLevelSchema, input, expectedError);
     },
   );
+});
 
+describe("BaseMessageRecordSchema", () => {
   it.each([
     [{}, ZodError],
     [{ level: "foo", message: 1, time: "bar" }, ZodError],
@@ -32,10 +34,12 @@ describe("message", () => {
         groupName: "test-group-name",
       },
     ],
-  ])("BaseMessageRecordSchema.parse(%o)", (input, expectedError) => {
+  ])("parse(%o)", (input, expectedError) => {
     testSchemaParse(BaseMessageRecordSchema, input, expectedError);
   });
+});
 
+describe("MessageRecordSchema", () => {
   it.each([
     [{}, ZodError],
     [
@@ -87,7 +91,7 @@ describe("message", () => {
         ],
       },
     ],
-  ])("MessageRecordSchema.parse(%o)", (input, expectedError) => {
+  ])("parse(%o)", (input, expectedError) => {
     testSchemaParse(MessageRecordSchema, input, expectedError);
   });
 });
