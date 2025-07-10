@@ -42,7 +42,7 @@
         "operationId": "CapabilitiesByLocation_Get",
         "x-ms-examples": {
           "List the capabilities available in a given location for a specific subscription.": {
-            "$ref": "./examples/CapabilitiesByLocation.json"
+            "$ref": "./examples/CapabilitiesByLocationGet.json"
           }
         },
         "description": "Lists the capabilities available in a given location for a specific subscription.",
@@ -61,7 +61,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CapabilitiesListResult"
+              "$ref": "#/definitions/CapabilityList"
             }
           },
           "default": {
@@ -84,7 +84,7 @@
         "operationId": "CapabilitiesByServer_Get",
         "x-ms-examples": {
           "List the capabilities available for a given flexible server.": {
-            "$ref": "./examples/ServerCapabilities.json"
+            "$ref": "./examples/CapabilitiesByServerGet.json"
           }
         },
         "description": "Lists the capabilities available for a given flexible server.",
@@ -106,7 +106,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CapabilitiesListResult"
+              "$ref": "#/definitions/CapabilityList"
             }
           },
           "default": {
@@ -623,7 +623,7 @@
       },
       "description": "Capability for the Azure Database for PostgreSQL flexible server."
     },
-    "CapabilitiesListResult": {
+    "CapabilityList": {
       "type": "object",
       "properties": {
         "value": {
@@ -643,7 +643,7 @@
           "format": "uri"
         }
       },
-      "description": "Capability for the Azure Database for PostgreSQL flexible server."
+      "description": "List of capabilities for the Azure Database for PostgreSQL flexible server."
     }
   },
   "parameters": {}
