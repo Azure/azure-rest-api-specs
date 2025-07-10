@@ -8,6 +8,22 @@ using OpenAPI;
 
 namespace Oracle.Database;
 
+@added(Versions.v20250701_preview)
+scalar ResourceAnchorResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Oracle.Database/resourceAnchors",
+    }
+  ]>;
+
+@added(Versions.v20250701_preview)
+scalar NetworkAnchorResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Oracle.Database/networkAnchors",
+    }
+  ]>;
+
 //OCI Reference: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/DbSystem/
 @added(Versions.v20250701_preview)
 @doc("DbSystem resource definition")
@@ -35,6 +51,10 @@ model DbSystemProperties extends DbSystemBaseProperties {
   @doc("A valid Oracle Database version. For a list of supported versions, use the ListDbVersions operation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dbVersion: string;
+
+  @doc("The name of the pluggable database. The name must begin with an alphabetic character and can contain a maximum of thirty alphanumeric characters. Special characters are not permitted. Pluggable database should not be same as database name.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  pdbName?: string;
 }
 
 //OCI Reference: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/datatypes/LaunchDbSystemBase
@@ -56,11 +76,11 @@ model DbSystemBaseProperties {
 
   @doc("Azure Resource Anchor ID")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  resourceAnchorId: string;
+  resourceAnchorId: ResourceAnchorResourceId;
 
   @doc("Azure Network Anchor ID")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  networkAnchorId: string;
+  networkAnchorId: NetworkAnchorResourceId;
 
   @doc("The cluster name for Exadata and 2-node RAC virtual machine DB systems. The cluster name must begin with an alphabetic character, and may contain hyphens (-). Underscores (_) are not permitted. The cluster name can be no longer than 11 characters and is not case sensitive.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -164,7 +184,7 @@ model DbSystemBaseProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   storageVolumePerformanceMode?: StorageVolumePerformanceMode;
 
-  @doc("The time zone of the DB system. For details, see [DB System Time Zones](/Content/Database/References/timezones.htm).")
+  @doc("The time zone of the DB system.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(255)

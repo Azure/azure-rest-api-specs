@@ -10804,7 +10804,7 @@
           "readOnly": true
         },
         "resourceAnchorId": {
-          "type": "string",
+          "$ref": "#/definitions/ResourceAnchorResourceId",
           "description": "Azure Resource Anchor ID",
           "x-ms-mutability": [
             "read",
@@ -10812,7 +10812,7 @@
           ]
         },
         "networkAnchorId": {
-          "type": "string",
+          "$ref": "#/definitions/NetworkAnchorResourceId",
           "description": "Azure Network Anchor ID",
           "x-ms-mutability": [
             "read",
@@ -11012,7 +11012,7 @@
         },
         "timeZone": {
           "type": "string",
-          "description": "The time zone of the DB system. For details, see [DB System Time Zones](/Content/Database/References/timezones.htm).",
+          "description": "The time zone of the DB system.",
           "minLength": 1,
           "maxLength": 255,
           "x-ms-mutability": [
@@ -11223,6 +11223,14 @@
         "dbVersion": {
           "type": "string",
           "description": "A valid Oracle Database version. For a list of supported versions, use the ListDbVersions operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "pdbName": {
+          "type": "string",
+          "description": "The name of the pluggable database. The name must begin with an alphabetic character and can contain a maximum of thirty alphanumeric characters. Special characters are not permitted. Pluggable database should not be same as database name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -11654,12 +11662,10 @@
       "type": "object",
       "description": "DNS forwarding rule properties",
       "properties": {
-        "domainName": {
+        "domainNames": {
           "type": "string",
-          "description": "Domain name",
+          "description": "Comma-separated domain names",
           "x-ms-mutability": [
-            "read",
-            "update",
             "create"
           ]
         },
@@ -11667,14 +11673,12 @@
           "type": "string",
           "description": "Forwarding ip address",
           "x-ms-mutability": [
-            "read",
-            "update",
             "create"
           ]
         }
       },
       "required": [
-        "domainName",
+        "domainNames",
         "forwardingIpAddress"
       ]
     },
@@ -13626,8 +13630,13 @@
           },
           "x-ms-identifiers": [],
           "x-ms-mutability": [
-            "read",
-            "update",
+            "create"
+          ]
+        },
+        "dnsListeningEndpointAllowedCidrs": {
+          "type": "string",
+          "description": "Comma-separated list of CIDRs that are allowed to send requests to the DNS listening endpoint",
+          "x-ms-mutability": [
             "create"
           ]
         },
@@ -13640,12 +13649,39 @@
           "type": "string",
           "description": "DNS forwarding endpoint IP address",
           "readOnly": true
+        },
+        "dnsForwardingRulesUrl": {
+          "type": "string",
+          "description": "Deep link to OCI console DNS Forwarding rules page",
+          "readOnly": true
+        },
+        "dnsListeningEndpointNsgRulesUrl": {
+          "type": "string",
+          "description": "Deep link to OCI console DNS Listening endpoint NSG rules",
+          "readOnly": true
+        },
+        "dnsForwardingEndpointNsgRulesUrl": {
+          "type": "string",
+          "description": "Deep link to OCI console DNS Forwarding endpoint NSG rules",
+          "readOnly": true
         }
       },
       "required": [
         "resourceAnchorId",
         "subnetId"
       ]
+    },
+    "NetworkAnchorResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Oracle.Database/networkAnchors"
+          }
+        ]
+      }
     },
     "NetworkAnchorUpdate": {
       "type": "object",
@@ -13708,19 +13744,6 @@
           "type": "boolean",
           "description": "Indicates whether the Oracle DNS forwarding endpoint is enabled",
           "default": false,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "dnsForwardingRules": {
-          "type": "array",
-          "description": "DNS forwarding rules",
-          "items": {
-            "$ref": "#/definitions/DnsForwardingRule"
-          },
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "update",
@@ -14465,6 +14488,18 @@
           "description": "Oracle Cloud Infrastructure compartment Id (ocid) which was created or linked by customer with resource anchor. This compartmentId is different from where resource Anchor lives",
           "readOnly": true
         }
+      }
+    },
+    "ResourceAnchorResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Oracle.Database/resourceAnchors"
+          }
+        ]
       }
     },
     "ResourceAnchorUpdate": {
