@@ -1072,6 +1072,20 @@ union HyperVGenerationTypes {
 }
 
 /**
+ * Specifies the high speed interconnect placement for the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+union HighSpeedInterconnectPlacement {
+  string,
+
+  /** No high speed interconnect placement */
+  None: "None",
+
+  /** Trunk high speed interconnect placement */
+  Trunk: "Trunk",
+}
+
+/**
  * VM disk types which are disallowed.
  */
 union VmDiskTypes {
@@ -1680,6 +1694,12 @@ model VirtualMachineScaleSetProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the high speed interconnect placement for the virtual machine scale set.
+   */
+  @added(Versions.v2025_04_01)
+  highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
 }
 
 /**
