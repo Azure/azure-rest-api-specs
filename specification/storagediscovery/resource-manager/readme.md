@@ -46,7 +46,7 @@ suppressions:
     reason: The sku property requires a default value for proper API functionality, but this conflicts with PATCH operation requirements. This is an acceptable design choice for this service.
   - code: ArmResourcePropertiesBag
     from: storageDiscoveryWorkspace.json
-    where: - $.definitions["StorageDiscoveryWorkspace"]
+    where: $.definitions["StorageDiscoveryWorkspace"]
     reason: The sku property name is critical. Present in already approved version. 
 ```
 
