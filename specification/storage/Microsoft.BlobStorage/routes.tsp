@@ -484,7 +484,6 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -506,7 +505,6 @@ namespace Storage.Blob {
       {
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -529,7 +527,6 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -552,8 +549,6 @@ namespace Storage.Blob {
         ...LeaseTimeResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...LeaseIdResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -577,7 +572,6 @@ namespace Storage.Blob {
         ...LeaseIdResponseHeader;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -1108,7 +1102,6 @@ namespace Storage.Blob {
           @statusCode statusCode: 201;
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1135,7 +1128,6 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
         }
       >;
 
@@ -1161,7 +1153,6 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1189,7 +1180,6 @@ namespace Storage.Blob {
         {
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
           ...LeaseIdResponseHeader;
         }
       >;
@@ -1217,7 +1207,6 @@ namespace Storage.Blob {
           @statusCode statusCode: 202;
           ...EtagResponseHeader;
           ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
           ...LeaseTimeResponseHeader;
         }
       >;
@@ -1977,7 +1966,6 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            ...DateResponseHeader;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2031,7 +2019,6 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
-            ...DateResponseHeader;
             ...BlobAppendOffsetResponseHeader;
             ...BlobCommittedBlockCountResponseHeader;
             ...RequestServerEncryptedResponseHeader;
@@ -2062,7 +2049,6 @@ namespace Storage.Blob {
           {
             ...EtagResponseHeader;
             ...LastModifiedResponseHeader;
-            ...DateResponseHeader;
             ...IsSealedResponseHeader;
           }
         >;
