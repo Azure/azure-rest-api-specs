@@ -30,8 +30,6 @@ export default async function generateJobSummary({ core }) {
     return;
   }
 
-  // TODO
-
   const messages = content
     .split("\n")
     .filter((line) => line.trim() !== "")
