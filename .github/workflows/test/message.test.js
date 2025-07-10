@@ -2,7 +2,12 @@
 
 import { describe, expect, it } from "vitest";
 import { ZodError } from "zod/v4";
-import { BaseMessageRecordSchema, MessageLevel, MessageLevelSchema } from "../src/message.js";
+import {
+  BaseMessageRecordSchema,
+  MessageLevel,
+  MessageLevelSchema,
+  MessageRecordSchema,
+} from "../src/message.js";
 
 describe("message", () => {
   it.each([["foo", ZodError], [MessageLevel.Error], [MessageLevel.Info], [MessageLevel.Warning]])(
@@ -29,6 +34,61 @@ describe("message", () => {
     ],
   ])("BaseMessageRecordSchema.parse(%o)", (input, expectedError) => {
     testSchemaParse(BaseMessageRecordSchema, input, expectedError);
+  });
+
+  it.each([
+    [{}, ZodError],
+    [
+      {
+        type: "Result",
+        level: MessageLevel.Error,
+        message: "test-message",
+        time: new Date().toISOString(),
+        // Missing required field "paths"
+      },
+      ZodError,
+    ],
+    [
+      {
+        type: "Raw",
+        level: MessageLevel.Error,
+        message: "test-message",
+        time: new Date().toISOString(),
+      },
+    ],
+    [
+      {
+        type: "Raw",
+        level: MessageLevel.Warning,
+        message: "test-message",
+        time: new Date().toISOString(),
+        context: { toolVersion: "1.0" },
+        group: "test-group",
+        extra: { extraKey: "extraVal" },
+        groupName: "test-group-name",
+      },
+    ],
+    [
+      {
+        type: "Result",
+        level: MessageLevel.Warning,
+        message: "test-message",
+        time: new Date().toISOString(),
+        context: { toolVersion: "1.0" },
+        group: "test-group",
+        extra: { extraKey: "extraVal" },
+        groupName: "test-group-name",
+        id: "test-id",
+        code: "test-code",
+        docUrl: "test-url",
+        paths: [
+          { tag: "tag1", path: "path1", jsonPath: "jsonPath1" },
+          { tag: "tag2", path: "path2" },
+        ],
+      },
+    ],
+  ])("MessageRecordSchema.parse(%o)", (input, expectedError) => {
+    testSchemaParse(MessageRecordSchema, input, expectedError);
   });
 });
 

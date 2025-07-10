@@ -40,3 +40,38 @@ export const BaseMessageRecordSchema = z.object({
 /**
  * @typedef {import("zod/v4").infer<typeof BaseMessageRecordSchema>} BaseMessageRecord
  */
+
+export const RawMessageRecordSchema = BaseMessageRecordSchema.extend({
+  type: z.literal("Raw"),
+});
+/**
+ * @typedef {import("zod/v4").infer<typeof RawMessageRecordSchema>} RawMessageRecord
+ */
+
+export const JsonPathSchema = z.object({
+  tag: z.string(),
+  path: z.string(),
+  jsonPath: z.optional(z.string()),
+});
+/**
+ * @typedef {import("zod/v4").infer<typeof JsonPathSchema>} JsonPathSchema
+ */
+
+export const ResultMessageRecordSchema = BaseMessageRecordSchema.extend({
+  type: z.literal("Result"),
+  id: z.optional(z.string()),
+  code: z.optional(z.string()),
+  docUrl: z.optional(z.string()),
+  paths: z.array(JsonPathSchema),
+});
+/**
+ * @typedef {import("zod/v4").infer<typeof ResultMessageRecordSchema>} ResultMessageRecord
+ */
+
+export const MessageRecordSchema = z.discriminatedUnion("type", [
+  RawMessageRecordSchema,
+  ResultMessageRecordSchema,
+]);
+/**
+ * @typedef {import("zod/v4").infer<typeof MessageRecordSchema>} MessageRecord
+ */
