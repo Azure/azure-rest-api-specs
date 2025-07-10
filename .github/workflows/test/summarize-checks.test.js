@@ -569,7 +569,7 @@ describe("Summarize Checks Tests", () => {
         eventName: "unlabeled",
         changedLabel: "ARMChangesRequested",
         existingLabels: ["WaitForARMFeedback", "other-label"],
-        expectedLabelsToAdd: ["WaitForARMFeedback"],
+        expectedLabelsToAdd: [],
         expectedLabelsToRemove: []
       },
       {
@@ -577,7 +577,7 @@ describe("Summarize Checks Tests", () => {
         eventName: "unlabeled",
         changedLabel: "ARMChangesRequested",
         existingLabels: ["other-label"],
-        expectedLabelsToAdd: [],
+        expectedLabelsToAdd: ["WaitForARMFeedback"],
         expectedLabelsToRemove: []
       },
       {
@@ -586,7 +586,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
       },
       {
         description: "unlabeled: other label should have no effect",
@@ -594,7 +594,7 @@ describe("Summarize Checks Tests", () => {
         changedLabel: "SomeOtherLabel",
         existingLabels: ["WaitForARMFeedback", "ARMChangesRequested"],
         expectedLabelsToAdd: [],
-        expectedLabelsToRemove: []
+        expectedLabelsToRemove: ["WaitForARMFeedback"]
       }
     ];
 
@@ -629,7 +629,6 @@ describe("Summarize Checks Tests", () => {
             existingLabels,
             changedLabel
         );
-
 
         expect(labelsToAdd.sort()).toEqual(expectedLabelsToAdd.sort());
         expect(labelsToRemove.sort()).toEqual(expectedLabelsToRemove.sort());

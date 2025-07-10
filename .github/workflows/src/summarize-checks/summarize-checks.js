@@ -492,25 +492,25 @@ export async function updateLabels(
   }
 
   // if (event_name === "labeled") {
-  //   if (changedLabel == "ARMChangesRequested") {
-  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-  //       labelsToRemove.add("WaitForARMFeedback");
-  //     }
-  //   }
-  //   if (changedLabel == "ARMSignedOff") {
-  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-  //       labelsToRemove.add("WaitForARMFeedback");
-  //     }
-  //     if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-  //       labelsToRemove.add("ARMChangesRequested");
-  //     }
-  //   }
+    // if (targetLabel == "ARMChangesRequested") {
+    //   if (presentLabels.has("WaitForARMFeedback")) {
+    //     labelsToRemove.add("WaitForARMFeedback");
+    //   }
+    // }
+
+    // if (targetLabel == "ARMSignedOff") {
+    //   if (presentLabels.has("WaitForARMFeedback")) {
+    //     labelsToRemove.add("WaitForARMFeedback");
+    //   }
+    //   if (presentLabels.has("ARMChangesRequested")) {
+    //     labelsToRemove.add("ARMChangesRequested");
+    //   }
   // } else if (event_name === "unlabeled") {
-  //   if (changedLabel == "ARMChangesRequested") {
-  //     if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-  //       labelsToAdd.add("WaitForARMFeedback");
-  //     }
-  //   }
+    // if (targetLabel == "ARMChangesRequested") {
+    //   if (!presentLabels.has("WaitForARMFeedback")) {
+    //     labelsToAdd.add("WaitForARMFeedback");
+    //   }
+    // }
   // }
 
   return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
