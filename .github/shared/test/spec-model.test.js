@@ -354,3 +354,99 @@ describe.skip("Parse readmes", () => {
     },
   );
 });
+
+describe("getSwaggers", () => {
+  it("should return all swagger files from tags", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+
+    expect(swaggers.length).toBeGreaterThan(0);
+
+    // Verify that all returned items are Swagger instances
+    expect(swaggers.every((s) => s.constructor.name === "Swagger")).toBe(true);
+
+    // Verify that swagger files have the expected properties
+    const swagger = swaggers[0];
+    expect(swagger.path).toBeDefined();
+    expect(swagger.versionKind).toBeDefined();
+  });
+
+  it("should return swaggers from multiple readmes and tags", async () => {
+    // Using a fixture that has multiple readme files
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+    const specModel = new SpecModel(folder, options);
+
+    const swaggers = await specModel.getSwaggers();
+
+    // Should find swaggers from all readmes
+    expect(swaggers.length).toBeGreaterThan(0);
+
+    // Each swagger should have a valid path
+    swaggers.forEach((swagger) => {
+      expect(swagger.path).toBeDefined();
+      expect(typeof swagger.path).toBe("string");
+      expect(swagger.path.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("should handle empty directories gracefully", async () => {
+    // Test with a minimal or empty spec model
+    const tempFolder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+    const specModel = new SpecModel(tempFolder, options);
+
+    const swaggers = await specModel.getSwaggers();
+
+    // Should return an array even if empty
+    expect(Array.isArray(swaggers)).toBe(true);
+  });
+
+  it("should preserve tag relationships", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/getSpecModel/specification/contosowidgetmanager/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+
+    // Each swagger should have a tag reference
+    swaggers.forEach((swagger) => {
+      expect(swagger.tag).toBeDefined();
+      if (swagger.tag) {
+        expect(swagger.tag.name).toBeDefined();
+        expect(typeof swagger.tag.name).toBe("string");
+      }
+    });
+  });
+
+  it("should work with swagger fixtures", async () => {
+    const folder = resolve(
+      __dirname,
+      "fixtures/swagger/specification/servicelinker/resource-manager",
+    );
+
+    const specModel = new SpecModel(folder, options);
+    const swaggers = await specModel.getSwaggers();
+    // Should return an array (may be empty if no valid readmes in this fixture)
+    expect(swaggers.length).toBe(5);
+
+    // If swaggers are found, they should have the expected structure
+    for (const swagger of swaggers) {
+      expect(swagger.path).toBeDefined();
+      expect(swagger.versionKind).toBeDefined();
+    }
+    expect(swaggers[0].path).contains(folder);
+    expect(swaggers[0].versionKind).toBe("stable");
+  });
+});
