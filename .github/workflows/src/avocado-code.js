@@ -1,6 +1,8 @@
 // @ts-check
 
 import { readFile } from "fs/promises";
+import { inspect } from "util";
+import { MessageRecordSchema } from "./message.js";
 
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -32,7 +34,14 @@ export default async function generateJobSummary({ core }) {
   // 1. Parse content to an array of MessageRecord (copied from alps)
   // 2. Generate markdown table from objects
 
-  core.summary.addCodeBlock(content);
+  const messages = content
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.trim() !== "")
+    .map((line) => JSON.parse(line))
+    .map((obj) => MessageRecordSchema.parse(obj));
+
+  core.summary.addCodeBlock(inspect(messages));
 
   core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
