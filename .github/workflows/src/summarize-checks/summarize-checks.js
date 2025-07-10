@@ -466,16 +466,27 @@ export async function updateLabels(
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
   //  - public/rest-api-specs-scripts/src/prSummary.ts
   // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
+  const [labelsToAdd, labelsToRemove] = processArmReviewLabels(existingLabels);
+  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+}
+
+/**
+ * @param {string[]} existingLabels
+ * @returns {[Set<string>, Set<string>]}
+ */
+export function processArmReviewLabels(
+  existingLabels
+) {
+  /** @type {Set<string>} */
+  const labelsToAdd = new Set();
+  /** @type {Set<string>} */
+  const labelsToRemove = new Set();
 
   // the important part about how this will work depends how the users use it
   // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
   // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
   // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
   // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
-
-  const labelsToAdd = new Set();
-  const labelsToRemove = new Set();
-
   // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
   if (containsAll(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("ARMChangesRequested")) {
@@ -485,20 +496,20 @@ export async function updateLabels(
       labelsToRemove.add("WaitForARMFeedback");
     }
   }
-  // if we are waiting for ARM feedback, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
+  // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
   else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("WaitForARMFeedback")) {
       labelsToRemove.add("WaitForARMFeedback");
     }
   }
-  // finally, if ARMChangesRequested are not present, and we've gotten here by lack of signoff, we should add the "WaitForARMFeedback" label
+  // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
   else if (containsNone(existingLabels, ["ARMChangesRequested"])) {
     if (!existingLabels.includes("WaitForARMFeedback")) {
       labelsToAdd.add("WaitForARMFeedback");
     }
   }
 
-  return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
+  return [labelsToAdd, labelsToRemove]
 }
 
 
