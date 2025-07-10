@@ -1298,6 +1298,272 @@
           "description": "ARM ID of user Identity selected for encryption"
         }
       }
+    },
+    "NetworkSecurityPerimeterConfigurationList": {
+      "description": "Result of the List NetworkSecurityPerimeterConfiguration operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of NetworkSecurityPerimeterConfigurations",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "Network Security Perimeter related configurations of a given namespace",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Properties of the Network Security Perimeter Configuration",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "Properties of NetworkSecurityPerimeterConfiguration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of NetworkSecurityPerimeter configuration propagation",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Updating",
+            "Accepted",
+            "InvalidResponse",
+            "Succeeded",
+            "SucceededWithIssues",
+            "Failed",
+            "Deleting",
+            "Deleted",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues if any",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "description": "Information about resource association",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource association",
+              "type": "string"
+            },
+            "accessMode": {
+              "description": "Access Mode of the resource association",
+              "enum": [
+                "NoAssociationMode",
+                "EnforcedMode",
+                "LearningMode",
+                "AuditMode",
+                "UnspecifiedMode"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ResourceAssociationAccessMode",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "profile": {
+          "description": "Information about current network profile",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "Name of the resource",
+              "type": "string"
+            },
+            "accessRulesVersion": {
+              "description": "Current access rules version",
+              "type": "string"
+            },
+            "accessRules": {
+              "description": "List of Access Rules",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NspAccessRule"
+              }
+            }
+          }
+        },
+        "isBackingResource": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "True if the ServiceBus namespace is backed by another Azure resource and not visible to end users."
+        },
+        "applicableFeatures": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Indicates that the NSP controls related to backing association are only applicable to a specific feature in backing resource's data plane.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentAssociationName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Source Resource Association name"
+        },
+        "sourceResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ARM Id of source resource"
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Name of the issue",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Provisioning Issue",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "issueType": {
+              "description": "Type of Issue",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the issue",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "NspAccessRule": {
+      "description": "Information of Access Rule in Network Profile",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the resource",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Access Rule",
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "direction": {
+              "description": "Direction of Access Rule",
+              "enum": [
+                "Inbound",
+                "Outbound"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "NspAccessRuleDirection",
+                "modelAsString": true
+              }
+            },
+            "addressPrefixes": {
+              "description": "Address prefixes in the CIDR format for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "IP Address",
+                "type": "string"
+              }
+            },
+            "subscriptions": {
+              "description": "Subscriptions for inbound rules",
+              "type": "array",
+              "items": {
+                "description": "Subscription for inbound rule",
+                "type": "object",
+                "readOnly": true,
+                "properties": {
+                  "id": {
+                    "description": "Fully qualified identifier of subscription",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "networkSecurityPerimeters": {
+              "description": "NetworkSecurityPerimeters for inbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "$ref": "#/definitions/NetworkSecurityPerimeter"
+              }
+            },
+            "fullyQualifiedDomainNames": {
+              "description": "FQDN for outbound rules",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "description": "Fully qualified domain name",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "description": "NetworkSecurityPerimeter related information",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Guid of the resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {}
