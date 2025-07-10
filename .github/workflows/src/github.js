@@ -146,8 +146,8 @@ export async function writeToActionsSummary(content, core) {
 
 /**
  * Returns the check with the given checkRunName for the given ref.
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} context
  * @param {string} checkRunName
  * @param {string} ref
  * @returns {Promise<CheckRuns>}
@@ -178,8 +178,8 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
 
 /**
  * Returns the check with the given checkRunName for the given ref.
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} context
  * @param {string} commitStatusName
  * @param {string} ref
  * @returns {Promise<CommitStatuses>}
@@ -202,8 +202,8 @@ export async function getCommitStatuses(github, context, commitStatusName, ref) 
 
 /**
  * Returns the workflow run with the given workflowName for the given ref.
- * @param {import('github-script').AsyncFunctionArguments['github']} github
- * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} context
  * @param {string} workflowName
  * @param {string} ref
  * @returns {Promise<WorkflowRuns>}

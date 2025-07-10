@@ -4,7 +4,7 @@ import { extractInputs } from "../src/context.js";
 import { PER_PAGE_MAX } from "./github.js";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function updateLabels({ github, context, core }) {
   let owner = process.env.OWNER;
