@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/liftrqumulo"
+    default: "sdk/qumulo"
 output-dir: "{project-root}/"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -15,6 +15,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Qumulo.Storage.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
+    service-dir: "sdk/liftrqumulo"
     package-dir: "arm-qumulo"
     flavor: azure
     package-details:
@@ -27,10 +28,27 @@ options:
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-qumulo"
+    package-name: "azure-mgmt-qumulo"
     namespace: "azure.mgmt.qumulo"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/liftrqumulo"
+    package-dir: "armqumulo"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-qumulo"
+    namespace: "com.azure.resourcemanager.qumulo"
+    service-name: "Qumulo"
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
