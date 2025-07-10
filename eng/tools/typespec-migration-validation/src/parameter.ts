@@ -1,3 +1,4 @@
+import { OpenAPI2Parameter } from "@azure-tools/typespec-autorest";
 import { getOriginalDocument } from "./document.js";
 
 const apiVersionAlias: string[] = ["api-version", "apiVersion", "apiVersionParameter"];
