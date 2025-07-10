@@ -13,6 +13,13 @@ import { SpecModelError } from "./spec-model-error.js";
  */
 
 /**
+ * @typedef {Object} Operation
+ * @property {string} id - The operation ID
+ * @property {string} path - API path
+ * @property {string} httpMethod - HTTP method (GET, POST, etc.)
+ */
+
+/**
  * @type {import('@apidevtools/json-schema-ref-parser').ResolverOptions}
  */
 const excludeExamples = {
@@ -41,6 +48,9 @@ export class Swagger {
 
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
+
+  /** @type {Map<string, Operation> | undefined} map of the operations in this swagger with key as 'operation_id*/
+  #operations;
 
   /**
    * @param {string} path
@@ -119,6 +129,49 @@ export class Swagger {
   }
 
   /**
+   * @returns {Promise<Map<string, Operation>>}
+   */
+  async getOperations() {
+    if (!this.#operations) {
+      this.#operations = new Map();
+      const content = await readFile(this.#path, "utf8");
+      const swagger = JSON.parse(content);
+      // Process regular paths
+      if (swagger.paths) {
+        for (const [path, pathItem] of Object.entries(swagger.paths)) {
+          for (const [method, operation] of Object.entries(pathItem)) {
+            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+              const operationObj = {
+                id: operation.operationId,
+                httpMethod: method.toUpperCase(),
+                path: path,
+              };
+              this.#operations.set(operation.operationId, operationObj);
+            }
+          }
+        }
+      }
+
+      // Process x-ms-paths (Azure extension)
+      if (swagger["x-ms-paths"]) {
+        for (const [path, pathItem] of Object.entries(swagger["x-ms-paths"])) {
+          for (const [method, operation] of Object.entries(pathItem)) {
+            if (typeof operation === "object" && operation.operationId && method !== "parameters") {
+              const operationObj = {
+                id: operation.operationId,
+                httpMethod: method.toUpperCase(),
+                path: path,
+              };
+              this.#operations.set(operation.operationId, operationObj);
+            }
+          }
+        }
+      }
+    }
+    return this.#operations;
+  }
+
+  /**
    * @returns {string} absolute path
    */
   get path() {
@@ -130,6 +183,15 @@ export class Swagger {
    */
   get tag() {
     return this.#tag;
+  }
+
+  /**
+   * @returns {string} version kind (stable or preview)
+   */
+  get versionKind() {
+    return dirname(this.#path).includes("/preview/")
+      ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
+      : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }
 
   /**
@@ -177,3 +239,9 @@ function json(file) {
   // Extension "json" with any case is a valid JSON file
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
 }
+
+// API version lifecycle stages
+export const API_VERSION_LIFECYCLE_STAGES = Object.freeze({
+  PREVIEW: "preview",
+  STABLE: "stable",
+});
