@@ -1,0 +1,13 @@
+- tool: TypeSpecValidation
+  reason: Suppress until Communication has Go data-plane SDK support
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.flavor
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-java.namespace
+  paths:
+    - ./Communication.JobRouter/tspconfig.yaml
+    - ./Communication.Messages/tspconfig.yaml

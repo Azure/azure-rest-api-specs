@@ -385,7 +385,8 @@
     - cognitiveservices/OpenAI.Inference/tspconfig.yaml
 
 - tool: TypeSpecValidation
-  reason: Suppress until Communication has Go data-plane SDK support
+  if: checkingAllSpecs
+  reason: Suppress until next PR changing spec
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-go.flavor
