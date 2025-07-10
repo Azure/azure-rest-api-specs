@@ -36,7 +36,6 @@ export default async function generateJobSummary({ core }) {
 
   const messages = content
     .split("\n")
-    .map((line) => line.trim())
     .filter((line) => line.trim() !== "")
     .map((line) => JSON.parse(line))
     .map((obj) => MessageRecordSchema.parse(obj));
