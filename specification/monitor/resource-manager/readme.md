@@ -44,7 +44,6 @@ These settings apply only when `--tag=package-preview-2024-03-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2024-03-01-preview'
 input-file:
-  - Microsoft.Insights/preview/2024-03-01-preview/actionGroups_API.json
   - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
 ```
 
