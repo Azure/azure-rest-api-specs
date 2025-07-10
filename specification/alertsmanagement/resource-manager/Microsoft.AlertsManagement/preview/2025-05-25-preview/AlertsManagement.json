@@ -1395,14 +1395,6 @@
             "name": "AlertModificationEvent"
           }
         },
-        "oldValue": {
-          "type": "string",
-          "description": "Old value"
-        },
-        "newValue": {
-          "type": "string",
-          "description": "New value"
-        },
         "modifiedAt": {
           "type": "string",
           "description": "Modified date and time"
@@ -1411,13 +1403,147 @@
           "type": "string",
           "description": "Modified user details (Principal client name)"
         },
-        "comments": {
-          "type": "string",
-          "description": "Modification comments"
-        },
         "description": {
           "type": "string",
           "description": "Description of the modification"
+        },
+        "details": {
+          "$ref": "#/definitions/BaseDetails"
+        }
+      }
+    },
+    "BaseDetails": {
+      "description": "Base details class.",
+	    "type": "object",
+      "discriminator": "Type",
+      "required": [
+        "type"
+      ],
+      "properties" :{
+        "type": {
+          "type": "string",
+          "description": "Type of modification details",
+          "enum": [
+            "PropertyChange",
+            "ActionSuppressed",
+            "ActionTriggered"
+          ],
+          "x-ms-enum": {
+            "name": "DetailsType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PropertyChangeDetails": {
+      "x-ms-discriminator-value": "PropertyChange",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["PropertyChange"],
+          "description": "Discriminator for PropertyChangeDetails"
+        },
+        "oldValue": {
+          "type": "string",
+          "description": "The value before the change"
+        },
+        "newValue": {
+          "type": "string",
+          "description": "The value after the change"
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments for the change"
+        }
+      },
+      "required": ["type"]
+
+    },
+    "ActionSuppressedDetails": {
+      "x-ms-discriminator-value": "ActionSuppressed",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ActionSuppressed"],
+          "description": "Discriminator for PropertyChangeDetails"
+        },
+        "suppressionActionRules": {
+          "type": "array",
+          "description": "List of suppression action rules",
+          "items": {
+            "type": "string",
+            "description": "Action rule Id"
+          }
+        },
+        "suppressedActionGroups": {
+          "description": "List of list of suppression action rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggeredRule"
+          }
+        }
+      }
+    },
+    "ActionTriggeredDetails": {
+      "x-ms-discriminator-value": "ActionTriggered",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ActionTriggered"],
+          "description": "Discriminator for PropertyChangeDetails"
+        },
+        "actionGroup": {
+          "$ref": "#/definitions/TriggeredRule"
+        },
+        "notificationResult": {
+          "$ref": "#/definitions/NotificationResult"
+        }
+      }
+    },
+    "TriggeredRule": {
+      "type": "object",
+      "properties": {
+        "actionGroupId": {
+          "type": "string",
+          "description": "The action group ID"
+        },
+        "RuleId": {
+          "type": "string",
+          "description": "The rule ID"
+        },
+        "RuleType": {
+          "type": "string",
+          "description": "The rule type",
+          "enum": [
+            "AlertRule",
+            "ActionRule"
+          ]
+        }
+      }
+    },
+    "NotificationResult": {
+      "type": "object",
+      "properties": {
+        "statusURL": {
+          "type": "string",
+          "description": "URL adrress to get the status of the notification"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the notification",
+          "enum":[
+            "None",
+            "Accepted",
+            "Throttled",
+            "Failed",
+            "ThrottledByAlertRule",
+            "ThrottledBySubscription"
+          ]
         }
       }
     },
