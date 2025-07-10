@@ -148,10 +148,11 @@ export function getSuppressionsFromYaml(
     // Throws if parsedYaml doesn't match schema
     suppressions = suppressionSchema.parse(parsedYaml);
   } catch (err) {
+    let finalErr = err;
     if (err instanceof z.ZodError) {
-      err = new Error(z.prettifyError(err));
+      finalErr = new Error(z.prettifyError(err), { cause: err });
     }
-    throw err;
+    throw finalErr;
   }
 
   // Make "require" available inside sandbox for CJS imports
