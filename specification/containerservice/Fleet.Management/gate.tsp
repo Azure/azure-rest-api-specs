@@ -139,12 +139,7 @@ scalar UpdateRunResourceId
     }
   ]>;
 
-@doc("The resource id of staged rollout that the Gate is targeting.")
-@added(Versions.v2025_04_01_preview)
-union GateTargetId {
-  @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRun: UpdateRunResourceId,
-}
+alias GateTargetId = UpdateRunResourceId;
 
 @doc("The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.")
 @added(Versions.v2025_04_01_preview)
