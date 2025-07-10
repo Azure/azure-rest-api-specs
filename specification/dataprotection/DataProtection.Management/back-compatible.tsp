@@ -47,3 +47,6 @@ using Microsoft.DataProtection;
 @@clientName(ResourceGuardProxyBaseResources.unlockDelete::parameters.body,
   "parameters"
 );
+@@clientName(DataProtectionOperationGroup.checkFeatureSupport::parameters.body,
+  "parameters"
+);

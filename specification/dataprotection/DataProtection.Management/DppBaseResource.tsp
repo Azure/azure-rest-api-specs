@@ -26,7 +26,7 @@ model DppBaseResource is Azure.ResourceManager.ProxyResource<{}> {
 
 @armResourceOperations
 interface DppBaseResourceOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -49,7 +49,7 @@ interface DppBaseResourceOps
 
 @armResourceOperations
 interface ResourceGuardOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -88,7 +88,7 @@ interface ResourceGuards {
 }
 @armResourceOperations
 interface DppBaseResourceGetBackupSecurityPINOperationGroupOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -111,7 +111,7 @@ interface DppBaseResourceGetBackupSecurityPINOperationGroupOps
 
 @armResourceOperations
 interface DppBaseResourceDeleteProtectedItemOperationGroupOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -134,7 +134,7 @@ interface DppBaseResourceDeleteProtectedItemOperationGroupOps
 
 @armResourceOperations
 interface DppBaseResourceUpdateProtectionPolicyOperationGroupOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -157,7 +157,7 @@ interface DppBaseResourceUpdateProtectionPolicyOperationGroupOps
 
 @armResourceOperations
 interface DppBaseResourceUpdateProtectedItemOperationGroupOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,

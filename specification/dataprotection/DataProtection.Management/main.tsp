@@ -23,7 +23,6 @@ import "./ResourceGuardResource.tsp";
 import "./DppBaseResource.tsp";
 import "./ResourceGuardProxyBaseResource.tsp";
 import "./routes.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -60,6 +60,7 @@ interface ResourceGuardResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetResourcesInResourceGroup")
+  @list
   getResourcesInResourceGroup is ArmResourceListByParent<
     ResourceGuardResource,
     Response = ArmResponse<ResourceGuardResourceList>
@@ -70,6 +71,7 @@ interface ResourceGuardResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ResourceGuards_GetResourcesInSubscription")
+  @list
   getResourcesInSubscription is ArmListBySubscription<
     ResourceGuardResource,
     Response = ArmResponse<ResourceGuardResourceList>

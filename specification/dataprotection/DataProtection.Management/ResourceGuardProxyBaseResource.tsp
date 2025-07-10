@@ -57,6 +57,7 @@ interface ResourceGuardProxyBaseResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DppResourceGuardProxy_List")
+  @list
   list is ArmResourceListByParent<
     ResourceGuardProxyBaseResource,
     Response = ArmResponse<ResourceGuardProxyBaseResourceList>

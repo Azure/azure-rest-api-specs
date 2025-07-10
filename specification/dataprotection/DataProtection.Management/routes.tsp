@@ -170,6 +170,7 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
   @operationId("FetchSecondaryRecoveryPoints_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints")
   @post
+  @list
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -228,6 +229,7 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
   @operationId("FetchCrossRegionRestoreJobs_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchCrossRegionRestoreJobs")
   @post
+  @list
   list(
     ...ApiVersionParameter,
     ...ResourceGroupParameter,
@@ -255,8 +257,9 @@ interface BackupInstancesExtensionRoutingOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupInstancesExtensionRouting_List")
-  @route("/{resourceId}/providers/Microsoft.DataProtection/backupInstances")
+  @route("/{+resourceId}/providers/Microsoft.DataProtection/backupInstances")
   @get
+  @list
   list(
     ...ApiVersionParameter,
 

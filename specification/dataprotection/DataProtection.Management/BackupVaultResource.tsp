@@ -25,7 +25,7 @@ model BackupVaultResource
 
 @armResourceOperations
 interface BackupVaultResourceOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -98,6 +98,7 @@ interface BackupVaultResources {
   // /subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupVaults_GetInSubscription")
+  @list
   getInSubscription is ArmListBySubscription<
     BackupVaultResource,
     Response = ArmResponse<BackupVaultResourceList>
@@ -164,7 +165,7 @@ interface BackupVaultResources {
 }
 @armResourceOperations
 interface BackupVaultOperationResultOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -197,6 +198,7 @@ interface BackupVaultOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupVaults_GetInResourceGroup")
+  @list
   getInResourceGroup is ArmResourceListByParent<
     BackupVaultResource,
     Response = ArmResponse<BackupVaultResourceList>

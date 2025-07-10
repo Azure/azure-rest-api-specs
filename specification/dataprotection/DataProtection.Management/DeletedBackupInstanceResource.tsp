@@ -40,6 +40,7 @@ interface DeletedBackupInstanceResources {
   // /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/deletedBackupInstances
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedBackupInstances_List")
+  @list
   list is ArmResourceListByParent<
     DeletedBackupInstanceResource,
     Response = ArmResponse<DeletedBackupInstanceResourceList>

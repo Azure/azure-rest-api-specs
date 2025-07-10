@@ -566,12 +566,11 @@ union SecretStoreType {
  * List of BackupVault resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model BackupVaultResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: BackupVaultResource[];
 }
 
@@ -923,6 +922,7 @@ model DppResourceList {
   /**
    * The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.
    */
+  @nextLink
   nextLink?: string;
 }
 
@@ -1244,12 +1244,11 @@ model ClientDiscoveryForLogSpecification {
  * List of BaseBackupPolicy resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model BaseBackupPolicyResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: BaseBackupPolicyResource[];
 }
 
@@ -1301,12 +1300,11 @@ model DppResource {
  * BackupInstance Resource list response
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model BackupInstanceResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: BackupInstanceResource[];
 }
 
@@ -1744,12 +1742,11 @@ model ValidateForModifyBackupRequest {
  * Azure backup recoveryPoint resource list
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model AzureBackupRecoveryPointResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: AzureBackupRecoveryPointResource[];
 }
 
@@ -2179,12 +2176,11 @@ model CrossRegionRestoreJobsRequest {
  * List of AzureBackup Job resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model AzureBackupJobResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: AzureBackupJobResource[];
 }
 
@@ -2342,12 +2338,11 @@ model ExportJobsResult {
  * List of DeletedBackupInstance resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model DeletedBackupInstanceResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: DeletedBackupInstanceResource[];
 }
 
@@ -2397,12 +2392,11 @@ model DeletionInfo {
  * List of ResourceGuard resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model ResourceGuardResourceList extends DppTrackedResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ResourceGuardResource[];
 }
 
@@ -2461,6 +2455,7 @@ model DppTrackedResourceList {
   /**
    * The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.
    */
+  @nextLink
   nextLink?: string;
 }
 
@@ -2484,12 +2479,11 @@ model DppBaseResourceList is Azure.Core.Page<DppBaseResource>;
  * List of ResourceGuardProxyBase resources
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@pagedResult
 model ResourceGuardProxyBaseResourceList extends DppResourceList {
   /**
    * List of resources.
    */
-  @items
+  @pageItems
   value?: ResourceGuardProxyBaseResource[];
 }
 

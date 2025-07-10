@@ -39,6 +39,7 @@ interface AzureBackupRecoveryPointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RecoveryPoints_List")
+  @list
   list is ArmResourceListByParent<
     AzureBackupRecoveryPointResource,
     Parameters = {

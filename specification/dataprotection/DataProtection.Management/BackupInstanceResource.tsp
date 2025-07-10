@@ -27,7 +27,7 @@ model BackupInstanceResource
 
 @armResourceOperations
 interface BackupInstanceResourceOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -112,7 +112,7 @@ interface BackupInstanceResources {
   validateForModifyBackup is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
-    ArmResponse<OperationJobExtendedInfo>
+    void
   >;
 
   /**
@@ -246,7 +246,7 @@ interface BackupInstanceResources {
 }
 @armResourceOperations
 interface BackupInstanceOps
-  extends Azure.ResourceManager.Legacy.DataProtectionOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
@@ -286,6 +286,7 @@ interface BackupInstances {
   /**
    * Gets a backup instances belonging to a backup vault
    */
+  @list
   list is ArmResourceListByParent<
     BackupInstanceResource,
     Response = ArmResponse<BackupInstanceResourceList>

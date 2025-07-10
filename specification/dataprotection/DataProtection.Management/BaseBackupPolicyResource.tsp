@@ -57,6 +57,7 @@ interface BaseBackupPolicyResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupPolicies_List")
+  @list
   list is ArmResourceListByParent<
     BaseBackupPolicyResource,
     Response = ArmResponse<BaseBackupPolicyResourceList>
