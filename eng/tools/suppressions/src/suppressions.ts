@@ -6,7 +6,7 @@ import { dirname, join, resolve, sep } from "path";
 import { sep as posixSep } from "path/posix";
 import vm from "vm";
 import { parse as yamlParse } from "yaml";
-import { z } from "zod";
+import * as z from "zod";
 import { fromError } from "zod-validation-error";
 
 export interface Suppression {
