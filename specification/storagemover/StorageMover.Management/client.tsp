@@ -75,4 +75,3 @@ using Azure.Core;
 @@clientName(Minute.`30`, "Thirty", "csharp");
 @@usage(JobRun, Usage.input, "csharp");
 @@usage(JobRunError, Usage.output, "csharp");
-@@alternateType(StorageMoverList.nextLink, string, "csharp");
