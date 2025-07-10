@@ -332,7 +332,10 @@ model AkriConnectorTemplateRuntimeStatefulSetConfiguration
   /** The managed configuration type for the Connector template. */
   managedConfigurationType: StatefulSetConfiguration;
 
-  /** The stateful set configuration settings. */
+  /** 
+   * The stateful set configuration settings. This corresponds to the Kubernetes StatefulSet resource.
+   * See https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json#/components/schemas/io.k8s.api.apps.v1.StatefulSetSpec
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a Kubernetes resource type"
   statefulSetConfigurationSettings: Record<unknown>;
 }
@@ -380,19 +383,19 @@ model AkriConnectorTemplateHelmAdvancedConfiguration {
 }
 
 alias HelmOperationConfiguration = {
-  /** The timeout for the operation in seconds. */
+  /** Time to wait for any individual Kubernetes operation (like `Jobs` for hooks). */
   timeout?: int32;
 
-  /** The wait for jobs flag. */
+  /** If set, the operation will wait for jobs to complete before marking the release as successful. */
   waitForJobs?: boolean;
 
-  /** Atomic flag for the operation. */
+  /** If set, the operation will be atomic. If the operation fails, all changes will be rolled back. */
   atomic?: boolean;
 
-  /** Disable hooks flag for the operation. */
+  /** Disable pre/post upgrade hooks for the operation. */
   disableHooks?: boolean;
 
-  /** The wait flag for the operation. */
+  /** If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful. */
   wait?: boolean;
 };
 

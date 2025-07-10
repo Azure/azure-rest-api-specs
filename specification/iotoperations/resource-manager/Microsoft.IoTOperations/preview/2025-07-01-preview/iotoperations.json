@@ -4386,23 +4386,23 @@
         "timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "The timeout for the operation in seconds."
+          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
         },
         "waitForJobs": {
           "type": "boolean",
-          "description": "The wait for jobs flag."
+          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
         },
         "atomic": {
           "type": "boolean",
-          "description": "Atomic flag for the operation."
+          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
         },
         "disableHooks": {
           "type": "boolean",
-          "description": "Disable hooks flag for the operation."
+          "description": "Disable pre/post upgrade hooks for the operation."
         },
         "wait": {
           "type": "boolean",
-          "description": "The wait flag for the operation."
+          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
         }
       }
     },
@@ -4413,23 +4413,23 @@
         "timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "The timeout for the operation in seconds."
+          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
         },
         "waitForJobs": {
           "type": "boolean",
-          "description": "The wait for jobs flag."
+          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
         },
         "atomic": {
           "type": "boolean",
-          "description": "Atomic flag for the operation."
+          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
         },
         "disableHooks": {
           "type": "boolean",
-          "description": "Disable hooks flag for the operation."
+          "description": "Disable pre/post upgrade hooks for the operation."
         },
         "wait": {
           "type": "boolean",
-          "description": "The wait flag for the operation."
+          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
         }
       }
     },
@@ -4496,23 +4496,23 @@
         "timeout": {
           "type": "integer",
           "format": "int32",
-          "description": "The timeout for the operation in seconds."
+          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
         },
         "waitForJobs": {
           "type": "boolean",
-          "description": "The wait for jobs flag."
+          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
         },
         "atomic": {
           "type": "boolean",
-          "description": "Atomic flag for the operation."
+          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
         },
         "disableHooks": {
           "type": "boolean",
-          "description": "Disable hooks flag for the operation."
+          "description": "Disable pre/post upgrade hooks for the operation."
         },
         "wait": {
           "type": "boolean",
-          "description": "The wait flag for the operation."
+          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
         }
       }
     },
@@ -4815,7 +4815,7 @@
       "properties": {
         "statefulSetConfigurationSettings": {
           "type": "object",
-          "description": "The stateful set configuration settings.",
+          "description": "The stateful set configuration settings. This corresponds to the Kubernetes StatefulSet resource.\nSee https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/v3/apis__apps__v1_openapi.json#/components/schemas/io.k8s.api.apps.v1.StatefulSetSpec",
           "additionalProperties": {}
         }
       },
