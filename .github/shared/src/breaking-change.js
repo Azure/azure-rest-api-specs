@@ -77,9 +77,3 @@ export const BREAKING_CHANGES_CHECK_TYPES = {
   SAME_VERSION: "SameVersion",
   CROSS_VERSION: "CrossVersion",
 };
-
-// API version lifecycle stages
-export const API_VERSION_LIFECYCLE_STAGES = {
-  PREVIEW: "preview",
-  STABLE: "stable",
-};
