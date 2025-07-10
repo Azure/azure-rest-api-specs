@@ -636,6 +636,10 @@
         "scheduledEventsAdditionalPublishingTargets": {
           "$ref": "#/definitions/ScheduledEventsAdditionalPublishingTargets",
           "description": "The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets."
+        },
+        "allInstancesDown": {
+          "$ref": "#/definitions/AllInstancesDown",
+          "description": "The configuration parameters used while creating AllInstancesDown scheduled event setting creation."
         }
       }
     },
@@ -675,6 +679,20 @@
         "enable": {
           "type": "boolean",
           "description": "Specifies if event grid and resource graph is enabled for Scheduled event related configurations."
+        },
+        "scheduledEventsApiVersion": {
+          "type": "string",
+          "description": "Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered."
+        }
+      }
+    },
+    "AllInstancesDown": {
+      "type": "object",
+      "description": "Specifies if Scheduled Events should be auto-approved when all instances are down.",
+      "properties": {
+        "automaticallyApprove": {
+          "type": "boolean",
+          "description": "Specifies if Scheduled Events should be auto-approved when all instances are down, its default value is true"
         }
       }
     },
