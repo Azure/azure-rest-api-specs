@@ -17,11 +17,11 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "operationalinsights/{azure-resource-provider-folder}/Microsoft.OperationInsights/{version-status}/{version}/OperationInsights.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-monitor-querylogs"
+    package-dir: "azure-monitor-query"
     package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
-    namespace: azure.monitor.querylogs._generated
+    namespace: azure.monitor.query._generated
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Monitor.Query.Logs"
     namespace: "{package-dir}"
@@ -40,4 +40,9 @@ options:
     package-dir: "azure-monitor-query-logs"
     namespace: com.azure.monitor.query-logs
     flavor: azure
-
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/monitor/query"
+    package-dir: "azlogs"
+    emitter-output-dir: "{project-root}"
+    generate-fakes: true
+    inject-spans: true

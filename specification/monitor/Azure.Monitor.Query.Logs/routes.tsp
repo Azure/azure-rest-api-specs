@@ -35,7 +35,9 @@ interface QueryOperationGroup {
       @query("timespan")
       timespan?: duration;
     },
-    QueryResults
+    QueryResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 
   /**
@@ -71,7 +73,9 @@ interface QueryOperationGroup {
       @bodyRoot
       body: QueryBody;
     },
-    QueryResults
+    QueryResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 
   /**
@@ -104,7 +108,9 @@ interface QueryOperationGroup {
       @query("timespan")
       timespan?: duration;
     },
-    QueryResults
+    QueryResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 
   /**
@@ -140,7 +146,9 @@ interface QueryOperationGroup {
       @bodyRoot
       body: QueryBody;
     },
-    QueryResults
+    QueryResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 
   /**
@@ -162,7 +170,9 @@ interface QueryOperationGroup {
       @bodyRoot
       body: BatchRequest;
     },
-    BatchResponse
+    BatchResponse,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 }
 
@@ -184,7 +194,9 @@ interface MetadataOperationGroup {
       @path
       workspaceId: string;
     },
-    MetadataResults
+    MetadataResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 
   /**
@@ -204,6 +216,8 @@ interface MetadataOperationGroup {
       @path
       workspaceId: string;
     },
-    MetadataResults
+    MetadataResults,
+    {},
+    MonitorQueryLogs.ErrorResponse
   >;
 }
