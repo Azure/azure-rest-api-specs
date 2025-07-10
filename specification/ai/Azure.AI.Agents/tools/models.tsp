@@ -143,6 +143,16 @@ model ConnectedAgentToolDefinition extends ToolDefinition {
   @encodedName("application/json", "connected_agent")
   connectedAgent: ConnectedAgentDetails;
 }
+@doc("The input definition information for a Deep Research tool as used to configure an agent.")
+@added(Versions.v2025_05_15_preview)
+model DeepResearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The deep_research tool definition configuration.")
+  @encodedName("application/json", "deep_research")
+  deepResearch: DeepResearchDetails;
+}
 
 @doc("The input definition information for a MCP tool which defines a MCP server endpoint")
 @added(Versions.v2025_05_15_preview)
@@ -595,6 +605,20 @@ model RunStepOpenAPIToolCall extends RunStepToolCall {
   openAPI: Record<string>;
 }
 
+@doc("""
+  A record of a call to a Deep Research tool, issued by the model in evaluation of a defined tool, that represents
+  executed deep research operations.
+  """)
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'deep_research'.")
+  type: "deep_research";
+
+  @doc("The detailed information about the automated browser tasks performed by the model.")
+  @encodedName("application/json", "deep_research")
+  deepResearch: RunStepDeepResearchToolCallDetails;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -677,6 +701,17 @@ model BingGroundingSearchConfiguration {
 
   @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
   freshness?: string;
+}
+
+// Call details: Deep Research
+@doc("The detailed information about the deep research tasks performed by the model.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeepResearchToolCallDetails {
+  @doc("The input provided by the model to the deep research tool.")
+  input: string;
+
+  @doc("The final output for the deep research tool.")
+  output?: string;
 }
 
 //
@@ -785,6 +820,10 @@ union AgentsNamedToolChoiceType {
   /** Tool type `connected_agent` */
   connectedAgent: "connected_agent",
 
+  /** Tool type `deep_research` */
+  @added(Versions.v2025_05_15_preview)
+  deepResearch: "deep_research",
+  
   /** Tool type `mcp` */
   @added(Versions.v2025_05_15_preview)
   mcp: "mcp",
@@ -860,6 +899,30 @@ model ConnectedAgentDetails {
 
   @doc("A description of what the agent does, used by the model to choose when and how to call the agent.")
   description: string;
+}
+
+/**
+ * The details of the Deep Research tool.
+ */
+@added(Versions.v2025_05_15_preview)
+model DeepResearchDetails {
+  @doc("The deep research model deployment name.")
+  @encodedName("application/json", "deep_research_model")
+  deepResearchModel: string;
+
+  @doc("The array containing Bing grounding connection IDs to enhance deep research capabilities.")
+  @encodedName("application/json", "bing_grounding_connections")
+  deepResearchBingGroundingConnections: DeepResearchBingGroundingConnection[];
+}
+
+/**
+ * The connection resource ID for the Bing grounding resource .
+ */
+@added(Versions.v2025_05_15_preview)
+model DeepResearchBingGroundingConnection {
+  @doc("The connection ID for the Bing grounding connection.")
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
 }
 
 /**
