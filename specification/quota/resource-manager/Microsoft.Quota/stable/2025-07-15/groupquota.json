@@ -2169,6 +2169,66 @@
           "readOnly": true
         }
       }
+    },
+    "GroupQuotasEnforcementListResponse": {
+      "type": "object",
+      "description": "List of Azure regions, where the group quotas is enabled for enforcement.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Azure Regions.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnforcementState": {
+      "description": "Enforcement status.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnforcementState",
+        "modelAsString": true
+      }
+    },
+    "GroupQuotasEnforcementResponse": {
+      "type": "object",
+      "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "enforcementEnabled": {
+              "$ref": "#/definitions/EnforcementState",
+              "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "faultCode": {
+              "type": "string",
+              "description": "Details of the failure.",
+              "readOnly": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
