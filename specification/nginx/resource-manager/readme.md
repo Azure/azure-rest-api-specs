@@ -42,7 +42,7 @@ input-file:
 suppressions:
   - code: GetCollectionResponseSchema
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"].get
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NGINX.NGINXPLUS/nginxDeployments/{nginxDeploymentName}/wafPolicies"]
     reason: This is by design to avoid high bandwidth consumption as agreed with the partner
   - code: PutRequestResponseSchemeArm
     from: openapi.json
