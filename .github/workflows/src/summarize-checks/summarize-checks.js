@@ -264,14 +264,14 @@ export async function summarizeChecksImpl(
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
-  /** @type { string | undefined } */
-  const changedLabel = context.payload.label?.name;
+  // /** @type { string | undefined } */
+  // const changedLabel = context.payload.label?.name;
 
   const [labelsToAdd, labelsToRemove] = await updateLabels(
-    event_name,
-    targetBranch,
+    // event_name,
+    // targetBranch,
     labelNames,
-    changedLabel
+    // changedLabel
   );
 
   for (const label of labelsToRemove) {
@@ -438,28 +438,29 @@ function containsNone(arr, values) {
   return values.every((value) => !arr.includes(value));
 }
 
-/**
- *
- * @param {any[]} arr
- * @param {any[]} values
- * @returns
- */
-function containsAny(arr, values) {
-  return values.some((value) => arr.includes(value));
-}
+// /**
+//  *
+//  * @param {any[]} arr
+//  * @param {any[]} values
+//  * @returns
+//  */
+// function containsAny(arr, values) {
+//   return values.some((value) => arr.includes(value));
+// }
+
+// * @param {string} eventName
+// * @param {string} targetBranch
+// * @param {string | undefined } changedLabel
 
 /**
- * @param {string} eventName
- * @param {string} targetBranch
  * @param {string[]} existingLabels
- * @param {string | undefined } changedLabel
  * @returns {Promise<[string[], string[]]>}
  */
 export async function updateLabels(
-  eventName,
-  targetBranch,
+  // eventName,
+  // targetBranch,
   existingLabels,
-  changedLabel
+  // changedLabel
 ) {
   // logic for this function originally present in:
   //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
@@ -478,7 +479,7 @@ export async function updateLabels(
       labelsToRemove.add("WaitForARMFeedback");
     }
   }
-  // if we are waiting for ARM feedback, we should add the "WaitForARMFeedback" label
+  // if we are waiting for ARM feedback, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
   else if (containsAll(existingLabels, ["ARMChangesRequested"]) && containsNone(existingLabels, ["ARMSignedOff"])) {
     if (existingLabels.includes("WaitForARMFeedback")) {
       labelsToRemove.add("WaitForARMFeedback");
@@ -490,28 +491,6 @@ export async function updateLabels(
       labelsToAdd.add("WaitForARMFeedback");
     }
   }
-
-  // if (event_name === "labeled") {
-    // if (targetLabel == "ARMChangesRequested") {
-    //   if (presentLabels.has("WaitForARMFeedback")) {
-    //     labelsToRemove.add("WaitForARMFeedback");
-    //   }
-    // }
-
-    // if (targetLabel == "ARMSignedOff") {
-    //   if (presentLabels.has("WaitForARMFeedback")) {
-    //     labelsToRemove.add("WaitForARMFeedback");
-    //   }
-    //   if (presentLabels.has("ARMChangesRequested")) {
-    //     labelsToRemove.add("ARMChangesRequested");
-    //   }
-  // } else if (event_name === "unlabeled") {
-    // if (targetLabel == "ARMChangesRequested") {
-    //   if (!presentLabels.has("WaitForARMFeedback")) {
-    //     labelsToAdd.add("WaitForARMFeedback");
-    //   }
-    // }
-  // }
 
   return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
 }

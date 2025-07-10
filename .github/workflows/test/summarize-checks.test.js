@@ -4,11 +4,10 @@ import {
   summarizeChecksImpl,
   updateLabels
 } from "../src/summarize-checks/summarize-checks.js";
-import { createMockCore, createMockGithub } from "./mocks.js";
+import { createMockCore } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
 
 const mockCore = createMockCore();
-const mockGithub = createMockGithub();
 
 describe("Summarize Checks Tests", () => {
   describe("next steps comment rendering", () => {
@@ -601,28 +600,6 @@ describe("Summarize Checks Tests", () => {
     it.only.each(testCases)(
       "$description",
       async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
-        const repo = "azure-rest-api-specs";
-        const owner = "Azure";
-        const mockContext = {
-          repo: {
-            owner: owner,
-            repo: repo,
-          },
-          payload: {
-            action: eventName,
-            pull_request: {
-              number: 1,
-              head: {
-                sha: "abc123",
-              },
-            },
-            label: {
-              name: changedLabel
-            }
-          },
-          eventName: eventName,
-        };
-
         const [labelsToAdd, labelsToRemove] = await updateLabels(
             eventName,
             "main",
