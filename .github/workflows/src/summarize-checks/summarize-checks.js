@@ -264,28 +264,43 @@ export async function summarizeChecksImpl(
   /** @type {string[]} */
   let labelNames = labels.map((/** @type {{ name: string; }} */ label) => label.name);
 
-  // handle our label trigger first, we may bail out early if it's a label action we're reacting to
-  // this also implies that if a label action is performed before any workflows complete, we shouldn't
-  // accidentally update the next steps to merge with the results of the workflows that haven't completed yet.
-  if (event_name in ["labeled", "unlabeled"]) {
-    // if anything goes wrong with label actions, the invocation will end within handleLabeledEvent due to localized error handling
-    const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-      github,
-      context,
-      core,
-      owner,
-      repo,
-      issue_number,
-      event_name,
-      labelNames,
-    );
+  /** @type { string | undefined } */
+  const changedLabel = context.payload.label?.name;
 
-    // adjust labelNames based on labelsToAdd/labelsToRemove
-    labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
-    for (const label of labelsToAdd) {
-      if (!labelNames.includes(label)) {
-        labelNames.push(label);
-      }
+  const [labelsToAdd, labelsToRemove] = await updateLabels(
+    event_name,
+    targetBranch,
+    labelNames,
+    changedLabel
+  );
+
+  for (const label of labelsToRemove) {
+    core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
+    // await github.rest.issues.removeLabel({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   name: label,
+    // });
+  }
+
+  if (labelsToAdd.length > 0) {
+    core.info(
+      `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
+    );
+    // await github.rest.issues.addLabels({
+    //   owner: owner,
+    //   repo: repo,
+    //   issue_number: issue_number,
+    //   labels: Array.from(labelsToAdd),
+    // });
+  }
+
+  // adjust labelNames based on labelsToAdd/labelsToRemove
+  labelNames = labelNames.filter((name) => !labelsToRemove.includes(name));
+  for (const label of labelsToAdd) {
+    if (!labelNames.includes(label)) {
+      labelNames.push(label);
     }
   }
 
@@ -402,81 +417,76 @@ function getGraphQLQuery(owner, repo, sha, prNumber) {
 
 // #endregion
 // #region label update
+
 /**
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
- * @param {import('@actions/github').context } context
- * @param {typeof import("@actions/core")} core
- * @param {string} owner
- * @param {string} repo
- * @param {number} issue_number
- * @param {string} event_name
- * @param {string[]} known_labels
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsAll(arr, values) {
+  return values.every((value) => arr.includes(value));
+}
+
+/**
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsNone(arr, values) {
+  return values.every((value) => !arr.includes(value));
+}
+
+/**
+ *
+ * @param {any[]} arr
+ * @param {any[]} values
+ * @returns
+ */
+function containsAny(arr, values) {
+  return values.some((value) => arr.includes(value));
+}
+
+/**
+ * @param {string} eventName
+ * @param {string} targetBranch
+ * @param {string[]} existingLabels
+ * @param {string | undefined } changedLabel
  * @returns {Promise<[string[], string[]]>}
  */
-// @ts-ignore: 'github' is currently unused but will be used after necessary changes
-export async function handleLabeledEvent(
-  github,
-  context,
-  core,
-  owner,
-  repo,
-  issue_number,
-  event_name,
-  known_labels,
+export async function updateLabels(
+  eventName,
+  targetBranch,
+  existingLabels,
+  changedLabel
 ) {
-  // logic for this event is based on code directly ripped from pipelinebot:
-  // private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
-  // todo: further enhance with labelling actions from `PR Summary` check.
-  const changedLabel = context.payload.label?.name;
+  // logic for this function originally present in:
+  //  - private/openapi-kebab/src/bots/pipeline/pipelineBotOnPRLabelEvent.ts
+  //  - public/rest-api-specs-scripts/src/prSummary.ts
+  // it has since been simplified and moved here to handle all label addition and subtraction given a PR context
+
   const labelsToAdd = new Set();
   const labelsToRemove = new Set();
+  const sortedLabels = existingLabels.sort((a, b) => a.localeCompare(b));
 
-  if (event_name === "labeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-    }
-    if (changedLabel == "ARMSignedOff") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToRemove.add("WaitForARMFeedback");
-      }
-      if (known_labels.indexOf("ARMChangesRequested") !== -1) {
-        labelsToRemove.add("ARMChangesRequested");
-      }
-    }
-
-    for (const label of labelsToRemove) {
-      core.info(`Removing label: ${label} from ${owner}/${repo}#${issue_number}.`);
-      // await github.rest.issues.removeLabel({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   name: label,
-      // });
-    }
-  } else if (event_name === "unlabeled") {
-    if (changedLabel == "ARMChangesRequested") {
-      if (known_labels.indexOf("WaitForARMFeedback") !== -1) {
-        labelsToAdd.add("WaitForARMFeedback");
-      }
-    }
-
-    if (labelsToAdd.size > 0) {
-      core.info(
-        `Adding labels: ${Array.from(labelsToAdd).join(", ")} to ${owner}/${repo}#${issue_number}.`,
-      );
-      // await github.rest.issues.addLabels({
-      //   owner: owner,
-      //   repo: repo,
-      //   issue_number: issue_number,
-      //   labels: Array.from(labelsToAdd),
-      // });
-    }
+  // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
+  if (containsAll(sortedLabels, ["ARMSignedOff"])) {
+    labelsToRemove.add("ARMChangesRequested");
+    labelsToRemove.add("WaitForARMFeedback");
+  }
+  // if we are waiting for ARM feedback, we should add the "WaitForARMFeedback" label
+  else if (containsAll(sortedLabels, ["ARMChangesRequested"]) && containsNone(sortedLabels, ["ARMSignedOff"])) {
+    labelsToRemove.add("WaitForARMFeedback");
+  }
+  // finally, if ARMChangesRequested are not present, and we've gotten here by lack of signoff, we should add the "WaitForARMFeedback" label
+  else if (containsNone(sortedLabels, ["ARMChangesRequested"])) {
+    labelsToAdd.add("WaitForARMFeedback");
   }
 
   return [Array.from(labelsToAdd), Array.from(labelsToRemove)];
 }
+
 
 // #endregion
 // #region checks

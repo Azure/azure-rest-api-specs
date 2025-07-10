@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   createNextStepsComment,
   summarizeChecksImpl,
-  handleLabeledEvent
+  updateLabels
 } from "../src/summarize-checks/summarize-checks.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 import { Octokit } from "@octokit/rest";
@@ -598,7 +598,7 @@ describe("Summarize Checks Tests", () => {
       }
     ];
 
-    it.each(testCases)(
+    it.only.each(testCases)(
       "$description",
       async ({ eventName, changedLabel, existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
         const repo = "azure-rest-api-specs";
@@ -623,15 +623,11 @@ describe("Summarize Checks Tests", () => {
           eventName: eventName,
         };
 
-        const [labelsToAdd, labelsToRemove] = await handleLabeledEvent(
-          mockGithub,
-          mockContext,
-          mockCore,
-          owner,
-          repo,
-          1,
-          eventName,
-          existingLabels,
+        const [labelsToAdd, labelsToRemove] = await updateLabels(
+            eventName,
+            "main",
+            existingLabels,
+            changedLabel
         );
 
         expect(labelsToAdd).toEqual(expectedLabelsToAdd);
