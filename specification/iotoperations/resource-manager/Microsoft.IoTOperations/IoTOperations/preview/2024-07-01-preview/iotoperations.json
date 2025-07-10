@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.IoTOperations management service.",
-    "version": "2025-04-01",
+    "version": "2024-07-01-preview",
     "description": "Microsoft.IoTOperations Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -58,13 +58,13 @@
       "name": "BrokerAuthorization"
     },
     {
-      "name": "DataflowProfile"
+      "name": "DataFlowProfile"
     },
     {
-      "name": "Dataflow"
+      "name": "DataFlow"
     },
     {
-      "name": "DataflowEndpoint"
+      "name": "DataFlowEndpoint"
     }
   ],
   "paths": {
@@ -77,20 +77,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -113,10 +113,10 @@
         "description": "List InstanceResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -129,7 +129,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -152,13 +152,13 @@
         "description": "List InstanceResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -171,7 +171,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -194,13 +194,13 @@
         "description": "Get a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -223,7 +223,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -241,13 +241,13 @@
         "description": "Create a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -296,7 +296,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -318,13 +318,13 @@
         "description": "Update a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -342,7 +342,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InstancePatchModel"
+              "$ref": "#/definitions/InstanceResourceTagsUpdate"
             }
           }
         ],
@@ -356,7 +356,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -374,13 +374,13 @@
         "description": "Delete a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -414,7 +414,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -438,13 +438,13 @@
         "description": "List BrokerResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -467,7 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -490,13 +490,13 @@
         "description": "Get a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -529,7 +529,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -547,13 +547,13 @@
         "description": "Create a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -612,22 +612,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Broker_CreateOrUpdate": {
             "$ref": "./examples/Broker_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Broker_CreateOrUpdate_Complex": {
-            "$ref": "./examples/Broker_CreateOrUpdate_Complex.json"
-          },
-          "Broker_CreateOrUpdate_Minimal": {
-            "$ref": "./examples/Broker_CreateOrUpdate_Minimal.json"
-          },
-          "Broker_CreateOrUpdate_Simple": {
-            "$ref": "./examples/Broker_CreateOrUpdate_Simple.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -643,13 +634,13 @@
         "description": "Delete a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -693,7 +684,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -717,13 +708,13 @@
         "description": "List BrokerAuthenticationResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -756,7 +747,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -779,13 +770,13 @@
         "description": "Get a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -828,7 +819,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -846,13 +837,13 @@
         "description": "Create a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -921,16 +912,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "BrokerAuthentication_CreateOrUpdate": {
             "$ref": "./examples/BrokerAuthentication_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "BrokerAuthentication_CreateOrUpdate_Complex": {
-            "$ref": "./examples/BrokerAuthentication_CreateOrUpdate_Complex.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -946,13 +934,13 @@
         "description": "Delete a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1006,7 +994,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1030,13 +1018,13 @@
         "description": "List BrokerAuthorizationResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1069,7 +1057,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1092,13 +1080,13 @@
         "description": "Get a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1141,7 +1129,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1159,13 +1147,13 @@
         "description": "Create a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1234,19 +1222,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "BrokerAuthorization_CreateOrUpdate": {
             "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "BrokerAuthorization_CreateOrUpdate_Complex": {
-            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_Complex.json"
-          },
-          "BrokerAuthorization_CreateOrUpdate_Simple": {
-            "$ref": "./examples/BrokerAuthorization_CreateOrUpdate_Simple.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1262,13 +1244,13 @@
         "description": "Delete a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1322,7 +1304,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1346,13 +1328,13 @@
         "description": "List BrokerListenerResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1385,7 +1367,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1408,13 +1390,13 @@
         "description": "Get a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1457,7 +1439,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1475,13 +1457,13 @@
         "description": "Create a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1550,19 +1532,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "BrokerListener_CreateOrUpdate": {
             "$ref": "./examples/BrokerListener_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "BrokerListener_CreateOrUpdate_Complex": {
-            "$ref": "./examples/BrokerListener_CreateOrUpdate_Complex.json"
-          },
-          "BrokerListener_CreateOrUpdate_Simple": {
-            "$ref": "./examples/BrokerListener_CreateOrUpdate_Simple.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1578,13 +1554,13 @@
         "description": "Delete a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1638,7 +1614,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1655,20 +1631,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowEndpoints": {
       "get": {
-        "operationId": "DataflowEndpoint_ListByResourceGroup",
+        "operationId": "DataFlowEndpoint_ListByResourceGroup",
         "tags": [
-          "DataflowEndpoint"
+          "DataFlowEndpoint"
         ],
-        "description": "List DataflowEndpointResource resources by InstanceResource",
+        "description": "List DataFlowEndpointResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1685,19 +1661,19 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowEndpointResourceListResult"
+              "$ref": "#/definitions/DataFlowEndpointResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowEndpoint_ListByResourceGroup": {
-            "$ref": "./examples/DataflowEndpoint_ListByResourceGroup_MaximumSet_Gen.json"
+          "DataFlowEndpoint_ListByResourceGroup": {
+            "$ref": "./examples/DataFlowEndpoint_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1707,20 +1683,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowEndpoints/{dataflowEndpointName}": {
       "get": {
-        "operationId": "DataflowEndpoint_Get",
+        "operationId": "DataFlowEndpoint_Get",
         "tags": [
-          "DataflowEndpoint"
+          "DataFlowEndpoint"
         ],
-        "description": "Get a DataflowEndpointResource",
+        "description": "Get a DataFlowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1747,37 +1723,37 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowEndpointResource"
+              "$ref": "#/definitions/DataFlowEndpointResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowEndpoint_Get": {
-            "$ref": "./examples/DataflowEndpoint_Get_MaximumSet_Gen.json"
+          "DataFlowEndpoint_Get": {
+            "$ref": "./examples/DataFlowEndpoint_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "DataflowEndpoint_CreateOrUpdate",
+        "operationId": "DataFlowEndpoint_CreateOrUpdate",
         "tags": [
-          "DataflowEndpoint"
+          "DataFlowEndpoint"
         ],
-        "description": "Create a DataflowEndpointResource",
+        "description": "Create a DataFlowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1805,21 +1781,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataflowEndpointResource"
+              "$ref": "#/definitions/DataFlowEndpointResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DataflowEndpointResource' update operation succeeded",
+            "description": "Resource 'DataFlowEndpointResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowEndpointResource"
+              "$ref": "#/definitions/DataFlowEndpointResource"
             }
           },
           "201": {
-            "description": "Resource 'DataflowEndpointResource' create operation succeeded",
+            "description": "Resource 'DataFlowEndpointResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowEndpointResource"
+              "$ref": "#/definitions/DataFlowEndpointResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1836,40 +1812,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowEndpoint_CreateOrUpdate": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_ADLSv2": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_ADLSv2.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_ADX": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_ADX.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_AIO": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_AIO.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_EventGrid": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_EventGrid.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_EventHub": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_EventHub.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_Fabric": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_Fabric.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_Kafka": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_Kafka.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_LocalStorage": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_LocalStorage.json"
-          },
-          "DataflowEndpoint_CreateOrUpdate_MQTT": {
-            "$ref": "./examples/DataflowEndpoint_CreateOrUpdate_MQTT.json"
+          "DataFlowEndpoint_CreateOrUpdate": {
+            "$ref": "./examples/DataFlowEndpoint_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1878,20 +1827,20 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DataflowEndpoint_Delete",
+        "operationId": "DataFlowEndpoint_Delete",
         "tags": [
-          "DataflowEndpoint"
+          "DataFlowEndpoint"
         ],
-        "description": "Delete a DataflowEndpointResource",
+        "description": "Delete a DataFlowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1935,13 +1884,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowEndpoint_Delete": {
-            "$ref": "./examples/DataflowEndpoint_Delete_MaximumSet_Gen.json"
+          "DataFlowEndpoint_Delete": {
+            "$ref": "./examples/DataFlowEndpoint_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1952,20 +1901,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles": {
       "get": {
-        "operationId": "DataflowProfile_ListByResourceGroup",
+        "operationId": "DataFlowProfile_ListByResourceGroup",
         "tags": [
-          "DataflowProfile"
+          "DataFlowProfile"
         ],
-        "description": "List DataflowProfileResource resources by InstanceResource",
+        "description": "List DataFlowProfileResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1982,19 +1931,19 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowProfileResourceListResult"
+              "$ref": "#/definitions/DataFlowProfileResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowProfile_ListByResourceGroup": {
-            "$ref": "./examples/DataflowProfile_ListByResourceGroup_MaximumSet_Gen.json"
+          "DataFlowProfile_ListByResourceGroup": {
+            "$ref": "./examples/DataFlowProfile_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2004,20 +1953,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}": {
       "get": {
-        "operationId": "DataflowProfile_Get",
+        "operationId": "DataFlowProfile_Get",
         "tags": [
-          "DataflowProfile"
+          "DataFlowProfile"
         ],
-        "description": "Get a DataflowProfileResource",
+        "description": "Get a DataFlowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2044,37 +1993,37 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowProfileResource"
+              "$ref": "#/definitions/DataFlowProfileResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowProfile_Get": {
-            "$ref": "./examples/DataflowProfile_Get_MaximumSet_Gen.json"
+          "DataFlowProfile_Get": {
+            "$ref": "./examples/DataFlowProfile_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "DataflowProfile_CreateOrUpdate",
+        "operationId": "DataFlowProfile_CreateOrUpdate",
         "tags": [
-          "DataflowProfile"
+          "DataFlowProfile"
         ],
-        "description": "Create a DataflowProfileResource",
+        "description": "Create a DataFlowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2102,21 +2051,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataflowProfileResource"
+              "$ref": "#/definitions/DataFlowProfileResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DataflowProfileResource' update operation succeeded",
+            "description": "Resource 'DataFlowProfileResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowProfileResource"
+              "$ref": "#/definitions/DataFlowProfileResource"
             }
           },
           "201": {
-            "description": "Resource 'DataflowProfileResource' create operation succeeded",
+            "description": "Resource 'DataFlowProfileResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowProfileResource"
+              "$ref": "#/definitions/DataFlowProfileResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2133,19 +2082,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowProfile_CreateOrUpdate": {
-            "$ref": "./examples/DataflowProfile_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "DataflowProfile_CreateOrUpdate_Minimal": {
-            "$ref": "./examples/DataflowProfile_CreateOrUpdate_Minimal.json"
-          },
-          "DataflowProfile_CreateOrUpdate_Multi": {
-            "$ref": "./examples/DataflowProfile_CreateOrUpdate_Multi.json"
+          "DataFlowProfile_CreateOrUpdate": {
+            "$ref": "./examples/DataFlowProfile_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2154,20 +2097,20 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "DataflowProfile_Delete",
+        "operationId": "DataFlowProfile_Delete",
         "tags": [
-          "DataflowProfile"
+          "DataFlowProfile"
         ],
-        "description": "Delete a DataflowProfileResource",
+        "description": "Delete a DataFlowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2211,13 +2154,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "DataflowProfile_Delete": {
-            "$ref": "./examples/DataflowProfile_Delete_MaximumSet_Gen.json"
+          "DataFlowProfile_Delete": {
+            "$ref": "./examples/DataFlowProfile_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2228,20 +2171,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflows": {
       "get": {
-        "operationId": "Dataflow_ListByProfileResource",
+        "operationId": "DataFlow_ListByProfileResource",
         "tags": [
-          "Dataflow"
+          "DataFlow"
         ],
-        "description": "List DataflowResource resources by DataflowProfileResource",
+        "description": "List DataFlowResource resources by DataFlowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2268,19 +2211,19 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowResourceListResult"
+              "$ref": "#/definitions/DataFlowResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Dataflow_ListByProfileResource": {
-            "$ref": "./examples/Dataflow_ListByProfileResource_MaximumSet_Gen.json"
+          "DataFlow_ListByProfileResource": {
+            "$ref": "./examples/DataFlow_ListByProfileResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2290,20 +2233,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflows/{dataflowName}": {
       "get": {
-        "operationId": "Dataflow_Get",
+        "operationId": "DataFlow_Get",
         "tags": [
-          "Dataflow"
+          "DataFlow"
         ],
-        "description": "Get a DataflowResource",
+        "description": "Get a DataFlowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2340,37 +2283,37 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DataflowResource"
+              "$ref": "#/definitions/DataFlowResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Dataflow_Get": {
-            "$ref": "./examples/Dataflow_Get_MaximumSet_Gen.json"
+          "DataFlow_Get": {
+            "$ref": "./examples/DataFlow_Get_MaximumSet_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Dataflow_CreateOrUpdate",
+        "operationId": "DataFlow_CreateOrUpdate",
         "tags": [
-          "Dataflow"
+          "DataFlow"
         ],
-        "description": "Create a DataflowResource",
+        "description": "Create a DataFlowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2408,21 +2351,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataflowResource"
+              "$ref": "#/definitions/DataFlowResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DataflowResource' update operation succeeded",
+            "description": "Resource 'DataFlowResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowResource"
+              "$ref": "#/definitions/DataFlowResource"
             }
           },
           "201": {
-            "description": "Resource 'DataflowResource' create operation succeeded",
+            "description": "Resource 'DataFlowResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DataflowResource"
+              "$ref": "#/definitions/DataFlowResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2439,28 +2382,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Dataflow_CreateOrUpdate": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Dataflow_CreateOrUpdate_ComplexContextualization": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_ComplexContextualization.json"
-          },
-          "Dataflow_CreateOrUpdate_ComplexEventHub": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_ComplexEventHub.json"
-          },
-          "Dataflow_CreateOrUpdate_FilterToTopic": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_FilterToTopic.json"
-          },
-          "Dataflow_CreateOrUpdate_SimpleEventGrid": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_SimpleEventGrid.json"
-          },
-          "Dataflow_CreateOrUpdate_SimpleFabric": {
-            "$ref": "./examples/Dataflow_CreateOrUpdate_SimpleFabric.json"
+          "DataFlow_CreateOrUpdate": {
+            "$ref": "./examples/DataFlow_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2469,20 +2397,20 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Dataflow_Delete",
+        "operationId": "DataFlow_Delete",
         "tags": [
-          "Dataflow"
+          "DataFlow"
         ],
-        "description": "Delete a DataflowResource",
+        "description": "Delete a DataFlowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2536,13 +2464,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Dataflow_Delete": {
-            "$ref": "./examples/Dataflow_Delete_MaximumSet_Gen.json"
+          "DataFlow_Delete": {
+            "$ref": "./examples/DataFlow_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2553,24 +2481,6 @@
     }
   },
   "definitions": {
-    "AccessTokenMethod": {
-      "type": "string",
-      "description": "Access Token Method",
-      "enum": [
-        "AccessToken"
-      ],
-      "x-ms-enum": {
-        "name": "AccessTokenMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AccessToken",
-            "value": "AccessToken",
-            "description": "AccessToken Option"
-          }
-        ]
-      }
-    },
     "AdvancedSettings": {
       "type": "object",
       "description": "Broker Advanced Settings",
@@ -2610,20 +2520,44 @@
         }
       }
     },
-    "AnonymousMethod": {
+    "AuthenticationMethod": {
       "type": "string",
-      "description": "x509 Certificate Method",
+      "description": "Authentication Mode properties",
       "enum": [
-        "Anonymous"
+        "SystemAssignedManagedIdentity",
+        "UserAssignedManagedIdentity",
+        "AccessToken",
+        "Sasl",
+        "X509Credentials"
       ],
       "x-ms-enum": {
-        "name": "AnonymousMethod",
+        "name": "AuthenticationMethod",
         "modelAsString": true,
         "values": [
           {
-            "name": "Anonymous",
-            "value": "Anonymous",
-            "description": "Anonymous Option"
+            "name": "SystemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "SystemAssignedManagedIdentity Option"
+          },
+          {
+            "name": "UserAssignedManagedIdentity",
+            "value": "UserAssignedManagedIdentity",
+            "description": "UserAssignedManagedIdentity Option"
+          },
+          {
+            "name": "AccessToken",
+            "value": "AccessToken",
+            "description": "AccessToken Option"
+          },
+          {
+            "name": "Sasl",
+            "value": "Sasl",
+            "description": "Sasl Option"
+          },
+          {
+            "name": "X509Credentials",
+            "value": "X509Credentials",
+            "description": "X509Credentials Option"
           }
         ]
       }
@@ -2697,6 +2631,39 @@
         "principals"
       ]
     },
+    "AutomaticCertMethod": {
+      "type": "object",
+      "description": "Automatic TLS server certificate management with cert-manager",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself."
+        },
+        "renewBefore": {
+          "type": "string",
+          "description": "When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
+        },
+        "issuerRef": {
+          "$ref": "#/definitions/CertManagerIssuerRef",
+          "description": "cert-manager issuerRef."
+        },
+        "privateKey": {
+          "$ref": "#/definitions/CertManagerPrivateKey",
+          "description": "Type of certificate private key."
+        },
+        "san": {
+          "$ref": "#/definitions/SanForCert",
+          "description": "Additional Subject Alternative Names (SANs) to include in the certificate."
+        }
+      },
+      "required": [
+        "issuerRef"
+      ]
+    },
     "BackendChain": {
       "type": "object",
       "description": "Desired properties of the backend instances of the broker",
@@ -2757,7 +2724,7 @@
       "enum": [
         "Custom",
         "ServiceAccountToken",
-        "X509"
+        "X509Credentials"
       ],
       "x-ms-enum": {
         "name": "BrokerAuthenticationMethod",
@@ -2774,8 +2741,8 @@
             "description": "ServiceAccountToken authentication configuration."
           },
           {
-            "name": "X509",
-            "value": "X509",
+            "name": "X509Credentials",
+            "value": "X509Credentials",
             "description": "X.509 authentication configuration."
           }
         ]
@@ -2825,7 +2792,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2956,15 +2923,15 @@
           "$ref": "#/definitions/BrokerAuthenticationMethod",
           "description": "Custom authentication configuration."
         },
-        "customSettings": {
+        "custom": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodCustom",
           "description": "Custom authentication configuration."
         },
-        "serviceAccountTokenSettings": {
+        "serviceAccountToken": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodSat",
           "description": "ServiceAccountToken authentication configuration."
         },
-        "x509Settings": {
+        "x509Credentials": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodX509",
           "description": "X.509 authentication configuration."
         }
@@ -3013,7 +2980,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3064,9 +3031,14 @@
       "type": "object",
       "description": "Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.",
       "properties": {
+        "brokerRef": {
+          "type": "string",
+          "description": "Broker associated with this listener."
+        },
         "serviceName": {
           "type": "string",
-          "description": "Kubernetes Service name of this listener."
+          "description": "Kubernetes Service name of this listener.",
+          "default": "aio-mq-dmqtt-frontend"
         },
         "ports": {
           "type": "array",
@@ -3116,6 +3088,7 @@
         }
       },
       "required": [
+        "brokerRef",
         "ports"
       ]
     },
@@ -3141,7 +3114,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3336,7 +3309,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3399,14 +3372,6 @@
           "$ref": "#/definitions/BrokerResourceDefinitionMethods",
           "description": "Give access for a Broker method (i.e., Connect, Subscribe, or Publish)."
         },
-        "clientIds": {
-          "type": "array",
-          "description": "A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection. This subfield may be set if the method is Connect.",
-          "default": [],
-          "items": {
-            "type": "string"
-          }
-        },
         "topics": {
           "type": "array",
           "description": "A list of topics or topic patterns that match the topics that the clients can publish or subscribe to. This subfield is required if the method is Publish or Subscribe.",
@@ -3461,39 +3426,6 @@
         "privateKey"
       ]
     },
-    "CertManagerCertificateSpec": {
-      "type": "object",
-      "description": "Automatic TLS server certificate management with cert-manager",
-      "properties": {
-        "duration": {
-          "type": "string",
-          "description": "Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself."
-        },
-        "renewBefore": {
-          "type": "string",
-          "description": "When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
-        },
-        "issuerRef": {
-          "$ref": "#/definitions/CertManagerIssuerRef",
-          "description": "cert-manager issuerRef."
-        },
-        "privateKey": {
-          "$ref": "#/definitions/CertManagerPrivateKey",
-          "description": "Type of certificate private key."
-        },
-        "san": {
-          "$ref": "#/definitions/SanForCert",
-          "description": "Additional Subject Alternative Names (SANs) to include in the certificate."
-        }
-      },
-      "required": [
-        "issuerRef"
-      ]
-    },
     "CertManagerIssuerKind": {
       "type": "string",
       "description": "CertManagerIssuerKind properties",
@@ -3522,7 +3454,7 @@
       "type": "object",
       "description": "Cert-Manager issuerRef properties",
       "properties": {
-        "group": {
+        "apiGroup": {
           "type": "string",
           "description": "group of issuer.",
           "default": "cert-manager.io"
@@ -3537,7 +3469,7 @@
         }
       },
       "required": [
-        "group",
+        "apiGroup",
         "kind",
         "name"
       ]
@@ -3605,181 +3537,9 @@
         }
       }
     },
-    "CloudEventAttributeType": {
-      "type": "string",
-      "description": "How to map events to the cloud.",
-      "enum": [
-        "Propagate",
-        "CreateOrRemap"
-      ],
-      "x-ms-enum": {
-        "name": "CloudEventAttributeType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Propagate",
-            "value": "Propagate",
-            "description": "Propagate type"
-          },
-          {
-            "name": "CreateOrRemap",
-            "value": "CreateOrRemap",
-            "description": "CreateOrRemap type"
-          }
-        ]
-      }
-    },
-    "DataExplorerAuthMethod": {
-      "$ref": "#/definitions/ManagedIdentityMethod",
-      "x-nullable": false
-    },
-    "DataLakeStorageAuthMethod": {
-      "type": "string",
-      "description": "DataflowEndpoint Data Lake Storage Authentication Method properties",
-      "enum": [
-        "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity",
-        "AccessToken"
-      ],
-      "x-ms-enum": {
-        "name": "DataLakeStorageAuthMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
-            "description": "SystemAssignedManagedIdentity type"
-          },
-          {
-            "name": "UserAssignedManagedIdentity",
-            "value": "UserAssignedManagedIdentity",
-            "description": "UserAssignedManagedIdentity type"
-          },
-          {
-            "name": "AccessToken",
-            "value": "AccessToken",
-            "description": "AccessToken Option"
-          }
-        ]
-      }
-    },
-    "DataflowBuiltInTransformationDataset": {
+    "DataFlowBuiltInTransformation": {
       "type": "object",
-      "description": "Dataflow BuiltIn Transformation dataset properties",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The key of the dataset.",
-          "maxLength": 64
-        },
-        "description": {
-          "type": "string",
-          "description": "A user provided optional description of the dataset.",
-          "maxLength": 256
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "The reference to the schema that describes the dataset. Allowed: JSON Schema/draft-7."
-        },
-        "inputs": {
-          "type": "array",
-          "description": "List of fields for enriching from the Broker State Store.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expression": {
-          "type": "string",
-          "description": "Condition to enrich data from Broker State Store. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
-        }
-      },
-      "required": [
-        "key",
-        "inputs"
-      ]
-    },
-    "DataflowBuiltInTransformationFilter": {
-      "type": "object",
-      "description": "Dataflow BuiltIn Transformation filter properties",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of dataflow operation.",
-          "default": "Filter",
-          "enum": [
-            "Filter"
-          ],
-          "x-ms-enum": {
-            "name": "FilterType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Filter",
-                "value": "Filter",
-                "description": "Filter type"
-              }
-            ]
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "A user provided optional description of the filter.",
-          "maxLength": 256
-        },
-        "inputs": {
-          "type": "array",
-          "description": "List of fields for filtering in JSON path expression.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expression": {
-          "type": "string",
-          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
-        }
-      },
-      "required": [
-        "inputs",
-        "expression"
-      ]
-    },
-    "DataflowBuiltInTransformationMap": {
-      "type": "object",
-      "description": "Dataflow BuiltIn Transformation map properties",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DataflowMappingType",
-          "description": "Type of transformation."
-        },
-        "description": {
-          "type": "string",
-          "description": "A user provided optional description of the mapping function.",
-          "maxLength": 256
-        },
-        "inputs": {
-          "type": "array",
-          "description": "List of fields for mapping in JSON path expression.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "expression": {
-          "type": "string",
-          "description": "Modify the inputs field(s) to the final output field. Example: $1 * 2.2 (Assuming inputs section $1 is provided)"
-        },
-        "output": {
-          "type": "string",
-          "description": "Where and how the input fields to be organized in the output record."
-        }
-      },
-      "required": [
-        "inputs",
-        "output"
-      ]
-    },
-    "DataflowBuiltInTransformationSettings": {
-      "type": "object",
-      "description": "Dataflow BuiltIn Transformation properties",
+      "description": "DataFlow BuiltIn Transformation properties",
       "properties": {
         "serializationFormat": {
           "type": "string",
@@ -3822,7 +3582,7 @@
           "default": [],
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/DataflowBuiltInTransformationDataset"
+            "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
           },
           "x-ms-identifiers": []
         },
@@ -3831,7 +3591,7 @@
           "description": "Filters input record or datapoints based on condition.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/DataflowBuiltInTransformationFilter"
+            "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
           },
           "x-ms-identifiers": []
         },
@@ -3840,22 +3600,136 @@
           "description": "Maps input to output message.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/DataflowBuiltInTransformationMap"
+            "$ref": "#/definitions/DataFlowBuiltInTransformationMap"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "DataflowDestinationOperationSettings": {
+    "DataFlowBuiltInTransformationDataset": {
       "type": "object",
-      "description": "Dataflow Destination Operation properties",
+      "description": "DataFlow BuiltIn Transformation dataset properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the dataset.",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "A user provided optional description of the dataset.",
+          "maxLength": 256
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "The reference to the schema that describes the dataset. Allowed: JSON Schema/draft-7."
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of fields for enriching from the Broker State Store.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "type": "string",
+          "description": "Condition to enrich data from Broker State Store. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
+        }
+      },
+      "required": [
+        "key",
+        "inputs"
+      ]
+    },
+    "DataFlowBuiltInTransformationFilter": {
+      "type": "object",
+      "description": "DataFlow BuiltIn Transformation filter properties",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of dataflow operation.",
+          "default": "Filter",
+          "enum": [
+            "Filter"
+          ],
+          "x-ms-enum": {
+            "name": "FilterType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Filter",
+                "value": "Filter",
+                "description": "Filter type"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "A user provided optional description of the filter.",
+          "maxLength": 256
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of fields for filtering in JSON path expression.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "type": "string",
+          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
+        }
+      },
+      "required": [
+        "inputs",
+        "expression"
+      ]
+    },
+    "DataFlowBuiltInTransformationMap": {
+      "type": "object",
+      "description": "DataFlow BuiltIn Transformation map properties",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DataFlowMappingType",
+          "description": "Type of transformation."
+        },
+        "description": {
+          "type": "string",
+          "description": "A user provided optional description of the mapping function.",
+          "maxLength": 256
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of fields for mapping in JSON path expression.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "type": "string",
+          "description": "Modify the inputs field(s) to the final output field. Example: $1 * 2.2 (Assuming inputs section $1 is provided)"
+        },
+        "output": {
+          "type": "string",
+          "description": "Where and how the input fields to be organized in the output record."
+        }
+      },
+      "required": [
+        "inputs",
+        "output"
+      ]
+    },
+    "DataFlowDestinationOperation": {
+      "type": "object",
+      "description": "DataFlow Destination Operation properties",
       "properties": {
         "endpointRef": {
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
         },
         "dataDestination": {
-          "$ref": "#/definitions/NonEmptyString",
+          "type": "string",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
         }
       },
@@ -3864,47 +3738,71 @@
         "dataDestination"
       ]
     },
-    "DataflowEndpointAuthenticationAccessToken": {
+    "DataFlowEndpointAuthentication": {
       "type": "object",
-      "description": "DataflowEndpoint Authentication Access Token properties",
+      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
       "properties": {
-        "secretRef": {
+        "method": {
+          "$ref": "#/definitions/AuthenticationMethod",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        },
+        "accessTokenSecretRef": {
           "type": "string",
-          "description": "Token secret name."
+          "description": "SAS token authentication."
+        },
+        "saslSettings": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
+          "description": "SASL authentication."
+        },
+        "serviceAccountTokenSettings": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationServiceAccountToken",
+          "description": "Service Account Token authentication."
+        },
+        "x509CredentialsSettings": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
         }
       },
       "required": [
-        "secretRef"
+        "method"
       ]
     },
-    "DataflowEndpointAuthenticationSasl": {
+    "DataFlowEndpointAuthenticationSasl": {
       "type": "object",
-      "description": "DataflowEndpoint Authentication Sasl properties",
+      "description": "DataFlowEndpoint Authentication Sasl properties",
       "properties": {
         "saslType": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSaslType",
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSaslType",
           "description": "Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512."
         },
-        "secretRef": {
+        "tokenSecretRef": {
           "type": "string",
           "description": "Token secret name."
         }
       },
       "required": [
         "saslType",
-        "secretRef"
+        "tokenSecretRef"
       ]
     },
-    "DataflowEndpointAuthenticationSaslType": {
+    "DataFlowEndpointAuthenticationSaslType": {
       "type": "string",
-      "description": "DataflowEndpoint Authentication Sasl Type properties",
+      "description": "DataFlowEndpoint Authentication Sasl Type properties",
       "enum": [
         "Plain",
         "ScramSha256",
         "ScramSha512"
       ],
       "x-ms-enum": {
-        "name": "DataflowEndpointAuthenticationSaslType",
+        "name": "DataFlowEndpointAuthenticationSaslType",
         "modelAsString": true,
         "values": [
           {
@@ -3925,7 +3823,7 @@
         ]
       }
     },
-    "DataflowEndpointAuthenticationServiceAccountToken": {
+    "DataFlowEndpointAuthenticationServiceAccountToken": {
       "type": "object",
       "description": "Service Account Token for BrokerAuthentication",
       "properties": {
@@ -3938,25 +3836,28 @@
         "audience"
       ]
     },
-    "DataflowEndpointAuthenticationSystemAssignedManagedIdentity": {
+    "DataFlowEndpointAuthenticationSystemAssignedManagedIdentity": {
       "type": "object",
-      "description": "DataflowEndpoint Authentication SystemAssignedManagedIdentity properties",
+      "description": "DataFlowEndpoint Authentication SystemAssignedManagedIdentity properties",
       "properties": {
         "audience": {
           "type": "string",
           "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
         }
-      }
+      },
+      "required": [
+        "audience"
+      ]
     },
-    "DataflowEndpointAuthenticationUserAssignedManagedIdentity": {
+    "DataFlowEndpointAuthenticationUserAssignedManagedIdentity": {
       "type": "object",
-      "description": "DataflowEndpoint Authentication UserAssignedManagedIdentity properties",
+      "description": "DataFlowEndpoint Authentication UserAssignedManagedIdentity properties",
       "properties": {
         "clientId": {
           "type": "string",
           "description": "Client ID for the user-assigned managed identity."
         },
-        "scope": {
+        "audience": {
           "type": "string",
           "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
         },
@@ -3967,12 +3868,13 @@
       },
       "required": [
         "clientId",
+        "audience",
         "tenantId"
       ]
     },
-    "DataflowEndpointAuthenticationX509": {
+    "DataFlowEndpointAuthenticationX509": {
       "type": "object",
-      "description": "DataflowEndpoint Authentication X509 properties",
+      "description": "DataFlowEndpoint Authentication X509 properties",
       "properties": {
         "secretRef": {
           "type": "string",
@@ -3983,14 +3885,10 @@
         "secretRef"
       ]
     },
-    "DataflowEndpointDataExplorer": {
+    "DataFlowEndpointDataExplorer": {
       "type": "object",
       "description": "Azure Data Explorer endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointDataExplorerAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "database": {
           "type": "string",
           "description": "Database name."
@@ -4006,40 +3904,14 @@
         }
       },
       "required": [
-        "authentication",
         "database",
         "host"
       ]
     },
-    "DataflowEndpointDataExplorerAuthentication": {
-      "type": "object",
-      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/DataExplorerAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointDataLakeStorage": {
+    "DataFlowEndpointDataLakeStorage": {
       "type": "object",
       "description": "Azure Data Lake endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointDataLakeStorageAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "host": {
           "type": "string",
           "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
@@ -4051,49 +3923,19 @@
         }
       },
       "required": [
-        "authentication",
         "host"
       ]
     },
-    "DataflowEndpointDataLakeStorageAuthentication": {
-      "type": "object",
-      "description": "Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/DataLakeStorageAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "accessTokenSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationAccessToken",
-          "description": "SAS token authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointFabricOneLake": {
+    "DataFlowEndpointFabricOneLake": {
       "type": "object",
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLakeAuthentication",
-          "description": "Authentication configuration. NOTE - only one authentication property is allowed per entry."
-        },
         "names": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLakeNames",
+          "$ref": "#/definitions/DataFlowEndpointFabricOneLakeNames",
           "description": "Names of the workspace and lakehouse."
         },
         "oneLakePathType": {
-          "$ref": "#/definitions/DataflowEndpointFabricPathType",
+          "$ref": "#/definitions/DataFlowEndpointFabricPathType",
           "description": "Type of location of the data in the workspace. Can be either tables or files."
         },
         "host": {
@@ -4107,34 +3949,12 @@
         }
       },
       "required": [
-        "authentication",
         "names",
         "oneLakePathType",
         "host"
       ]
     },
-    "DataflowEndpointFabricOneLakeAuthentication": {
-      "type": "object",
-      "description": "Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/FabricOneLakeAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointFabricOneLakeNames": {
+    "DataFlowEndpointFabricOneLakeNames": {
       "type": "object",
       "description": "Microsoft Fabric endpoint Names properties",
       "properties": {
@@ -4152,15 +3972,15 @@
         "workspaceName"
       ]
     },
-    "DataflowEndpointFabricPathType": {
+    "DataFlowEndpointFabricPathType": {
       "type": "string",
-      "description": "DataflowEndpoint Fabric Path Type properties",
+      "description": "DataFlowEndpoint Fabric Path Type properties",
       "enum": [
         "Files",
         "Tables"
       ],
       "x-ms-enum": {
-        "name": "DataflowEndpointFabricPathType",
+        "name": "DataFlowEndpointFabricPathType",
         "modelAsString": true,
         "values": [
           {
@@ -4176,14 +3996,10 @@
         ]
       }
     },
-    "DataflowEndpointKafka": {
+    "DataFlowEndpointKafka": {
       "type": "object",
       "description": "Kafka endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointKafkaAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "consumerGroupId": {
           "type": "string",
           "description": "Consumer group ID."
@@ -4193,13 +4009,13 @@
           "description": "Kafka endpoint host."
         },
         "batching": {
-          "$ref": "#/definitions/DataflowEndpointKafkaBatching",
+          "$ref": "#/definitions/DataFlowEndpointKafkaBatching",
           "description": "Batching configuration."
         },
         "copyMqttProperties": {
           "type": "string",
           "description": "Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.",
-          "default": "Enabled",
+          "default": "Disabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -4232,7 +4048,7 @@
             "Lz4"
           ],
           "x-ms-enum": {
-            "name": "DataflowEndpointKafkaCompression",
+            "name": "DataFlowEndpointKafkaCompression",
             "modelAsString": true,
             "values": [
               {
@@ -4268,7 +4084,7 @@
             "All"
           ],
           "x-ms-enum": {
-            "name": "DataflowEndpointKafkaAcks",
+            "name": "DataFlowEndpointKafkaAcks",
             "modelAsString": true,
             "values": [
               {
@@ -4300,7 +4116,7 @@
             "Property"
           ],
           "x-ms-enum": {
-            "name": "DataflowEndpointKafkaPartitionStrategy",
+            "name": "DataFlowEndpointKafkaPartitionStrategy",
             "modelAsString": true,
             "values": [
               {
@@ -4329,27 +4145,22 @@
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
-        },
-        "cloudEventAttributes": {
-          "$ref": "#/definitions/CloudEventAttributeType",
-          "description": "Cloud event mapping config."
         }
       },
       "required": [
-        "authentication",
-        "host"
+        "tls"
       ]
     },
-    "DataflowEndpointKafkaAcks": {
+    "DataFlowEndpointKafkaAcks": {
       "type": "string",
-      "description": "DataflowEndpoint Kafka Acks properties",
+      "description": "DataFlowEndpoint Kafka Acks properties",
       "enum": [
         "Zero",
         "One",
         "All"
       ],
       "x-ms-enum": {
-        "name": "DataflowEndpointKafkaAcks",
+        "name": "DataFlowEndpointKafkaAcks",
         "modelAsString": true,
         "values": [
           {
@@ -4370,36 +4181,7 @@
         ]
       }
     },
-    "DataflowEndpointKafkaAuthentication": {
-      "type": "object",
-      "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/KafkaAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
-        "saslSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
-          "description": "SASL authentication."
-        },
-        "x509CertificateSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointKafkaBatching": {
+    "DataFlowEndpointKafkaBatching": {
       "type": "object",
       "description": "Kafka endpoint Batching properties",
       "properties": {
@@ -4454,7 +4236,7 @@
         }
       }
     },
-    "DataflowEndpointKafkaCompression": {
+    "DataFlowEndpointKafkaCompression": {
       "type": "string",
       "description": "Kafka endpoint Compression properties",
       "enum": [
@@ -4464,7 +4246,7 @@
         "Lz4"
       ],
       "x-ms-enum": {
-        "name": "DataflowEndpointKafkaCompression",
+        "name": "DataFlowEndpointKafkaCompression",
         "modelAsString": true,
         "values": [
           {
@@ -4490,9 +4272,9 @@
         ]
       }
     },
-    "DataflowEndpointKafkaPartitionStrategy": {
+    "DataFlowEndpointKafkaPartitionStrategy": {
       "type": "string",
-      "description": "DataflowEndpoint Kafka Partition Strategy properties",
+      "description": "DataFlowEndpoint Kafka Partition Strategy properties",
       "enum": [
         "Default",
         "Static",
@@ -4500,7 +4282,7 @@
         "Property"
       ],
       "x-ms-enum": {
-        "name": "DataflowEndpointKafkaPartitionStrategy",
+        "name": "DataFlowEndpointKafkaPartitionStrategy",
         "modelAsString": true,
         "values": [
           {
@@ -4526,7 +4308,7 @@
         ]
       }
     },
-    "DataflowEndpointLocalStorage": {
+    "DataFlowEndpointLocalStorage": {
       "type": "object",
       "description": "Local persistent volume endpoint properties",
       "properties": {
@@ -4539,21 +4321,18 @@
         "persistentVolumeClaimRef"
       ]
     },
-    "DataflowEndpointMqtt": {
+    "DataFlowEndpointMqtt": {
       "type": "object",
       "description": "Broker endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointMqttAuthentication",
-          "description": "authentication properties. DEFAULT: kubernetes.audience=aio-internal. NOTE - Enum field only property is allowed"
-        },
         "clientIdPrefix": {
           "type": "string",
           "description": "Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted."
         },
         "host": {
           "type": "string",
-          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted."
+          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.",
+          "default": "aio-mq-dmqtt-frontend:1883"
         },
         "protocol": {
           "type": "string",
@@ -4625,86 +4404,55 @@
           "description": "Qos for Broker connection.",
           "default": 1,
           "minimum": 0,
-          "maximum": 1
+          "maximum": 2
         },
         "sessionExpirySeconds": {
           "type": "integer",
           "format": "int32",
           "description": "Session expiry in seconds.",
+          "default": 3600,
           "minimum": 0
         },
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
-        },
-        "cloudEventAttributes": {
-          "$ref": "#/definitions/CloudEventAttributeType",
-          "description": "Cloud event mapping config."
         }
-      },
-      "required": [
-        "authentication"
-      ]
+      }
     },
-    "DataflowEndpointMqttAuthentication": {
+    "DataFlowEndpointProperties": {
       "type": "object",
-      "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/MqttAuthMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
-        "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
-          "description": "Kubernetes service account token authentication. Default audience if not set is aio-internal"
-        },
-        "x509CertificateSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "DataflowEndpointProperties": {
-      "type": "object",
-      "description": "DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
+      "description": "DataFlowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
       "properties": {
         "endpointType": {
           "$ref": "#/definitions/EndpointType",
           "description": "Endpoint Type."
         },
+        "authentication": {
+          "$ref": "#/definitions/DataFlowEndpointAuthentication",
+          "description": "Authentication configuration."
+        },
         "dataExplorerSettings": {
-          "$ref": "#/definitions/DataflowEndpointDataExplorer",
+          "$ref": "#/definitions/DataFlowEndpointDataExplorer",
           "description": "Azure Data Explorer endpoint."
         },
         "dataLakeStorageSettings": {
-          "$ref": "#/definitions/DataflowEndpointDataLakeStorage",
+          "$ref": "#/definitions/DataFlowEndpointDataLakeStorage",
           "description": "Azure Data Lake endpoint."
         },
         "fabricOneLakeSettings": {
-          "$ref": "#/definitions/DataflowEndpointFabricOneLake",
+          "$ref": "#/definitions/DataFlowEndpointFabricOneLake",
           "description": "Microsoft Fabric endpoint."
         },
         "kafkaSettings": {
-          "$ref": "#/definitions/DataflowEndpointKafka",
+          "$ref": "#/definitions/DataFlowEndpointKafka",
           "description": "Kafka endpoint."
         },
         "localStorageSettings": {
-          "$ref": "#/definitions/DataflowEndpointLocalStorage",
+          "$ref": "#/definitions/DataFlowEndpointLocalStorage",
           "description": "Local persistent volume endpoint."
         },
         "mqttSettings": {
-          "$ref": "#/definitions/DataflowEndpointMqtt",
+          "$ref": "#/definitions/DataFlowEndpointMqtt",
           "description": "Broker endpoint."
         },
         "provisioningState": {
@@ -4714,15 +4462,16 @@
         }
       },
       "required": [
-        "endpointType"
+        "endpointType",
+        "authentication"
       ]
     },
-    "DataflowEndpointResource": {
+    "DataFlowEndpointResource": {
       "type": "object",
       "description": "Instance dataflowEndpoint resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataflowEndpointProperties",
+          "$ref": "#/definitions/DataFlowEndpointProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -4739,19 +4488,19 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "DataflowEndpointResourceListResult": {
+    "DataFlowEndpointResourceListResult": {
       "type": "object",
-      "description": "The response of a DataflowEndpointResource list operation.",
+      "description": "The response of a DataFlowEndpointResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataflowEndpointResource items on this page",
+          "description": "The DataFlowEndpointResource items on this page",
           "items": {
-            "$ref": "#/definitions/DataflowEndpointResource"
+            "$ref": "#/definitions/DataFlowEndpointResource"
           }
         },
         "nextLink": {
@@ -4764,9 +4513,9 @@
         "value"
       ]
     },
-    "DataflowMappingType": {
+    "DataFlowMappingType": {
       "type": "string",
-      "description": "Dataflow type mapping properties",
+      "description": "DataFlow type mapping properties",
       "enum": [
         "NewProperties",
         "Rename",
@@ -4775,7 +4524,7 @@
         "BuiltInFunction"
       ],
       "x-ms-enum": {
-        "name": "DataflowMappingType",
+        "name": "DataFlowMappingType",
         "modelAsString": true,
         "values": [
           {
@@ -4806,9 +4555,9 @@
         ]
       }
     },
-    "DataflowOperation": {
+    "DataFlowOperation": {
       "type": "object",
-      "description": "Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.",
+      "description": "DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.",
       "properties": {
         "operationType": {
           "$ref": "#/definitions/OperationType",
@@ -4819,26 +4568,28 @@
           "description": "Optional user provided name of the transformation.",
           "maxLength": 64
         },
-        "sourceSettings": {
-          "$ref": "#/definitions/DataflowSourceOperationSettings",
-          "description": "Source configuration."
-        },
         "builtInTransformationSettings": {
-          "$ref": "#/definitions/DataflowBuiltInTransformationSettings",
-          "description": "Built In Transformation configuration."
+          "$ref": "#/definitions/DataFlowBuiltInTransformation",
+          "description": "Transformation configuration."
         },
         "destinationSettings": {
-          "$ref": "#/definitions/DataflowDestinationOperationSettings",
+          "$ref": "#/definitions/DataFlowDestinationOperation",
           "description": "Destination configuration."
+        },
+        "sourceSettings": {
+          "$ref": "#/definitions/DataFlowSourceOperation",
+          "description": "Source configuration."
         }
       },
       "required": [
-        "operationType"
+        "operationType",
+        "destinationSettings",
+        "sourceSettings"
       ]
     },
-    "DataflowProfileProperties": {
+    "DataFlowProfileProperties": {
       "type": "object",
-      "description": "DataflowProfile Resource properties",
+      "description": "DataFlowProfile Resource properties",
       "properties": {
         "diagnostics": {
           "$ref": "#/definitions/ProfileDiagnostics",
@@ -4848,7 +4599,6 @@
           "type": "integer",
           "format": "int32",
           "description": "To manually scale the dataflow profile, specify the maximum number of instances you want to run.",
-          "default": 1,
           "minimum": 1,
           "maximum": 20
         },
@@ -4859,12 +4609,12 @@
         }
       }
     },
-    "DataflowProfileResource": {
+    "DataFlowProfileResource": {
       "type": "object",
       "description": "Instance dataflowProfile resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataflowProfileProperties",
+          "$ref": "#/definitions/DataFlowProfileProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -4881,19 +4631,19 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "DataflowProfileResourceListResult": {
+    "DataFlowProfileResourceListResult": {
       "type": "object",
-      "description": "The response of a DataflowProfileResource list operation.",
+      "description": "The response of a DataFlowProfileResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataflowProfileResource items on this page",
+          "description": "The DataFlowProfileResource items on this page",
           "items": {
-            "$ref": "#/definitions/DataflowProfileResource"
+            "$ref": "#/definitions/DataFlowProfileResource"
           }
         },
         "nextLink": {
@@ -4906,13 +4656,17 @@
         "value"
       ]
     },
-    "DataflowProperties": {
+    "DataFlowProperties": {
       "type": "object",
-      "description": "Dataflow Resource properties",
+      "description": "DataFlow Resource properties",
       "properties": {
+        "profileRef": {
+          "type": "string",
+          "description": "Reference to the DataflowProfile CR."
+        },
         "mode": {
           "type": "string",
-          "description": "Mode for Dataflow. Optional; defaults to Enabled.",
+          "description": "Mode for DataFlow. Optional; defaults to Enabled.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -4939,7 +4693,7 @@
           "type": "array",
           "description": "List of operations including source and destination references as well as transformation.",
           "items": {
-            "$ref": "#/definitions/DataflowOperation"
+            "$ref": "#/definitions/DataFlowOperation"
           },
           "x-ms-identifiers": []
         },
@@ -4950,15 +4704,16 @@
         }
       },
       "required": [
+        "profileRef",
         "operations"
       ]
     },
-    "DataflowResource": {
+    "DataFlowResource": {
       "type": "object",
       "description": "Instance dataflowProfile dataflow resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DataflowProperties",
+          "$ref": "#/definitions/DataFlowProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -4975,19 +4730,19 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "DataflowResourceListResult": {
+    "DataFlowResourceListResult": {
       "type": "object",
-      "description": "The response of a DataflowResource list operation.",
+      "description": "The response of a DataFlowResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataflowResource items on this page",
+          "description": "The DataFlowResource items on this page",
           "items": {
-            "$ref": "#/definitions/DataflowResource"
+            "$ref": "#/definitions/DataFlowResource"
           }
         },
         "nextLink": {
@@ -5000,9 +4755,9 @@
         "value"
       ]
     },
-    "DataflowSourceOperationSettings": {
+    "DataFlowSourceOperation": {
       "type": "object",
-      "description": "Dataflow Source Operation properties",
+      "description": "DataFlow Source Operation properties",
       "properties": {
         "endpointRef": {
           "type": "string",
@@ -5039,7 +4794,7 @@
           "type": "array",
           "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
-            "$ref": "#/definitions/NonEmptyString"
+            "type": "string"
           }
         }
       },
@@ -5052,6 +4807,10 @@
       "type": "object",
       "description": "Diagnostic Log properties",
       "properties": {
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryLogExportConfig",
+          "description": "The open telemetry export configuration."
+        },
         "level": {
           "type": "string",
           "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
@@ -5083,7 +4842,7 @@
     },
     "EndpointType": {
       "type": "string",
-      "description": "DataflowEndpoint Type properties",
+      "description": "DataFlowEndpoint Type properties",
       "enum": [
         "DataExplorer",
         "DataLakeStorage",
@@ -5165,10 +4924,6 @@
         ]
       }
     },
-    "FabricOneLakeAuthMethod": {
-      "$ref": "#/definitions/ManagedIdentityMethod",
-      "x-nullable": false
-    },
     "FilterType": {
       "type": "string",
       "description": "Filter Type properties",
@@ -5242,73 +4997,9 @@
         }
       }
     },
-    "InstanceFeature": {
-      "type": "object",
-      "description": "The features of the AIO Instance.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/InstanceFeatureMode",
-          "description": "The state of the feature."
-        },
-        "settings": {
-          "type": "object",
-          "description": "The settings of the feature.",
-          "additionalProperties": {
-            "$ref": "#/definitions/OperationalMode"
-          }
-        }
-      }
-    },
-    "InstanceFeatureMode": {
-      "type": "string",
-      "description": "The enum defining mode of a feature.",
-      "enum": [
-        "Stable",
-        "Preview",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "InstanceFeatureMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Stable",
-            "value": "Stable",
-            "description": "Opt in to enable a stable feature"
-          },
-          {
-            "name": "Preview",
-            "value": "Preview",
-            "description": "Opt in to enable a preview feature"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Opt out of a feature"
-          }
-        ]
-      }
-    },
-    "InstancePatchModel": {
-      "type": "object",
-      "description": "The Instance update model.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
     "InstanceProperties": {
       "type": "object",
-      "description": "The properties of the Instance resource.",
+      "description": "The properties of a Instance resource.",
       "properties": {
         "description": {
           "type": "string",
@@ -5323,22 +5014,8 @@
           "type": "string",
           "description": "The Azure IoT Operations version.",
           "readOnly": true
-        },
-        "schemaRegistryRef": {
-          "$ref": "#/definitions/SchemaRegistryRef",
-          "description": "The reference to the Schema Registry for this AIO Instance."
-        },
-        "features": {
-          "type": "object",
-          "description": "The features of the AIO Instance.",
-          "additionalProperties": {
-            "$ref": "#/definitions/InstanceFeature"
-          }
         }
-      },
-      "required": [
-        "schemaRegistryRef"
-      ]
+      }
     },
     "InstanceResource": {
       "type": "object",
@@ -5355,10 +5032,6 @@
             "read",
             "create"
           ]
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "required": [
@@ -5366,7 +5039,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -5391,46 +5064,17 @@
         "value"
       ]
     },
-    "KafkaAuthMethod": {
-      "type": "string",
-      "description": "DataflowEndpoint Kafka Authentication Method properties",
-      "enum": [
-        "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity",
-        "Sasl",
-        "X509Certificate",
-        "Anonymous"
-      ],
-      "x-ms-enum": {
-        "name": "KafkaAuthMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
-            "description": "SystemAssignedManagedIdentity type"
-          },
-          {
-            "name": "UserAssignedManagedIdentity",
-            "value": "UserAssignedManagedIdentity",
-            "description": "UserAssignedManagedIdentity type"
-          },
-          {
-            "name": "Sasl",
-            "value": "Sasl",
-            "description": "Sasl Option"
-          },
-          {
-            "name": "X509Certificate",
-            "value": "X509Certificate",
-            "description": "x509Certificate Option"
-          },
-          {
-            "name": "Anonymous",
-            "value": "Anonymous",
-            "description": "Anonymous Option"
+    "InstanceResourceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in InstanceResource resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
           }
-        ]
+        }
       }
     },
     "KubernetesReference": {
@@ -5541,44 +5185,6 @@
         "name"
       ]
     },
-    "ManagedIdentity": {
-      "type": "object",
-      "description": "System and Use Assigned Managed Identity properties",
-      "properties": {
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      }
-    },
-    "ManagedIdentityMethod": {
-      "type": "string",
-      "description": "Managed Identity Method",
-      "enum": [
-        "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
-            "description": "SystemAssignedManagedIdentity type"
-          },
-          {
-            "name": "UserAssignedManagedIdentity",
-            "value": "UserAssignedManagedIdentity",
-            "description": "UserAssignedManagedIdentity type"
-          }
-        ]
-      }
-    },
     "MetricProperties": {
       "type": "object",
       "description": "Metric properties",
@@ -5597,6 +5203,10 @@
       "type": "object",
       "description": "Diagnostic Metrics properties",
       "properties": {
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "description": "The open telemetry export configuration."
+        },
         "prometheusPort": {
           "type": "integer",
           "format": "int32",
@@ -5605,48 +5215,6 @@
           "minimum": 0,
           "maximum": 65535
         }
-      }
-    },
-    "MqttAuthMethod": {
-      "type": "string",
-      "description": "DataflowEndpoint Mqtt Authentication Method properties",
-      "enum": [
-        "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity",
-        "ServiceAccountToken",
-        "X509Certificate",
-        "Anonymous"
-      ],
-      "x-ms-enum": {
-        "name": "MqttAuthMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssignedManagedIdentity",
-            "value": "SystemAssignedManagedIdentity",
-            "description": "SystemAssignedManagedIdentity type"
-          },
-          {
-            "name": "UserAssignedManagedIdentity",
-            "value": "UserAssignedManagedIdentity",
-            "description": "UserAssignedManagedIdentity type"
-          },
-          {
-            "name": "ServiceAccountToken",
-            "value": "ServiceAccountToken",
-            "description": "ServiceAccountToken Option"
-          },
-          {
-            "name": "X509Certificate",
-            "value": "X509Certificate",
-            "description": "x509Certificate Option"
-          },
-          {
-            "name": "Anonymous",
-            "value": "Anonymous",
-            "description": "Anonymous Option"
-          }
-        ]
       }
     },
     "MqttRetainType": {
@@ -5673,14 +5241,56 @@
         ]
       }
     },
-    "NonEmptyString": {
-      "type": "string",
-      "description": "A string with a minimum length of 1.",
-      "minLength": 1
+    "OpenTelemetryExportConfig": {
+      "type": "object",
+      "description": "OpenTelemetry Export Configuration properties",
+      "properties": {
+        "otlpGrpcEndpoint": {
+          "type": "string",
+          "description": "The open telemetry collector endpoint to export to."
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often to export the metrics to the open telemetry collector.",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 300
+        }
+      },
+      "required": [
+        "otlpGrpcEndpoint"
+      ]
+    },
+    "OpenTelemetryLogExportConfig": {
+      "type": "object",
+      "description": "OpenTelemetry Log Export Configuration properties",
+      "properties": {
+        "otlpGrpcEndpoint": {
+          "type": "string",
+          "description": "The open telemetry collector endpoint to export to."
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often to export the metrics to the open telemetry collector.",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 300
+        },
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "error"
+        }
+      },
+      "required": [
+        "otlpGrpcEndpoint"
+      ]
     },
     "OperationType": {
       "type": "string",
-      "description": "Dataflow Operation Type properties",
+      "description": "DataFlow Operation Type properties",
       "enum": [
         "Source",
         "Destination",
@@ -5693,17 +5303,17 @@
           {
             "name": "Source",
             "value": "Source",
-            "description": "Dataflow Source Operation"
+            "description": "DataFlow Source Operation"
           },
           {
             "name": "Destination",
             "value": "Destination",
-            "description": "Dataflow Destination Operation"
+            "description": "DataFlow Destination Operation"
           },
           {
             "name": "BuiltInTransformation",
             "value": "BuiltInTransformation",
-            "description": "Dataflow BuiltIn Transformation Operation"
+            "description": "DataFlow BuiltIn Transformation Operation"
           }
         ]
       }
@@ -5882,7 +5492,7 @@
     },
     "ProfileDiagnostics": {
       "type": "object",
-      "description": "DataflowProfile Diagnostics properties",
+      "description": "DataFlowProfile Diagnostics properties",
       "properties": {
         "logs": {
           "$ref": "#/definitions/DiagnosticsLogs",
@@ -5975,49 +5585,6 @@
         "ip"
       ]
     },
-    "SaslMethod": {
-      "type": "string",
-      "description": "Sasl Method",
-      "enum": [
-        "Sasl"
-      ],
-      "x-ms-enum": {
-        "name": "SaslMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sasl",
-            "value": "Sasl",
-            "description": "Sasl Option"
-          }
-        ]
-      }
-    },
-    "SchemaRegistryID": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.DeviceRegistry/schemaRegistries"
-          }
-        ]
-      }
-    },
-    "SchemaRegistryRef": {
-      "type": "object",
-      "description": "The reference to the Schema Registry for this AIO Instance.",
-      "properties": {
-        "resourceId": {
-          "$ref": "#/definitions/SchemaRegistryID",
-          "description": "The resource ID of the Schema Registry."
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
     "SelfCheck": {
       "type": "object",
       "description": "Broker Diagnostic Self check properties",
@@ -6102,24 +5669,6 @@
           "minimum": 1,
           "maximum": 300
         }
-      }
-    },
-    "ServiceAccountTokenMethod": {
-      "type": "string",
-      "description": "Service Account Token Method",
-      "enum": [
-        "ServiceAccountToken"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceAccountTokenMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceAccountToken",
-            "value": "ServiceAccountToken",
-            "description": "ServiceAccountToken Option"
-          }
-        ]
       }
     },
     "ServiceType": {
@@ -6325,8 +5874,8 @@
           "$ref": "#/definitions/TlsCertMethodMode",
           "description": "Mode of TLS server certificate management."
         },
-        "certManagerCertificateSpec": {
-          "$ref": "#/definitions/CertManagerCertificateSpec",
+        "automatic": {
+          "$ref": "#/definitions/AutomaticCertMethod",
           "description": "Option 1 - Automatic TLS server certificate management with cert-manager."
         },
         "manual": {
@@ -6426,6 +5975,10 @@
             ]
           }
         },
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "description": "The open telemetry export configuration."
+        },
         "cacheSizeMegabytes": {
           "type": "integer",
           "format": "int32",
@@ -6519,7 +6072,8 @@
           "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dataSource": {
           "$ref": "#/definitions/LocalKubernetesReference",
@@ -6597,24 +6151,6 @@
       "required": [
         "secretRef"
       ]
-    },
-    "x509CertificateMethod": {
-      "type": "string",
-      "description": "x509 Certificate Method",
-      "enum": [
-        "X509Certificate"
-      ],
-      "x-ms-enum": {
-        "name": "x509CertificateMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "X509Certificate",
-            "value": "X509Certificate",
-            "description": "x509Certificate Option"
-          }
-        ]
-      }
     }
   },
   "parameters": {}
