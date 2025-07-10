@@ -121,7 +121,7 @@ op getSecret is KeyVaultOperation<
      */
     @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
     @query("outContentType")
-    outContentType?: string;
+    outContentType?: ContentType;
   },
   SecretBundle
 >;

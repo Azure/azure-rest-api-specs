@@ -360,3 +360,17 @@ model SecretProperties {
    */
   contentType?: string;
 }
+
+/**
+ * The media type (MIME type).
+ */
+@Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+union ContentType {
+  string,
+
+  /** The PKCS#12 file format. */
+  PFX: "application/x-pkcs12",
+
+  /** The PEM file format. */
+  PEM: "application/x-pem-file",
+}

@@ -315,7 +315,7 @@ model CertificateBundle {
   cer?: bytes;
 
   /**
-   * The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12',
+   * The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12'.
    */
   contentType?: string;
 
@@ -325,7 +325,7 @@ model CertificateBundle {
   attributes?: CertificateAttributes;
 
   /**
-   * Application specific metadata in the form of key-value pairs
+   * Application specific metadata in the form of key-value pairs.
    */
   tags?: Record<string>;
 
