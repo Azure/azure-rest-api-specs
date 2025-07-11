@@ -52,6 +52,295 @@
   },
   "tags": [],
   "paths": {
+    "/agentblueprints": {
+      "get": {
+        "operationId": "AgentBlueprints_ListLatest",
+        "description": "List the latest version of each AgentBlueprint",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAgentBlueprint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/agentblueprints/{name}/versions": {
+      "get": {
+        "operationId": "AgentBlueprints_ListVersions",
+        "description": "List all versions of the given AgentBlueprint",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAgentBlueprint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/agentblueprints/{name}/versions/{version}": {
+      "get": {
+        "operationId": "AgentBlueprints_GetVersion",
+        "description": "Get the specific version of the AgentBlueprint",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the AgentBlueprint to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentBlueprint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AgentBlueprints_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing AgentBlueprint with the given version id",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the AgentBlueprint to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agentblueprint",
+            "in": "body",
+            "description": "The AgentBlueprint to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentBlueprint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentBlueprint"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AgentBlueprint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AgentBlueprints_DeleteVersion",
+        "description": "Delete the specific version of the AgentBlueprint",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the AgentBlueprint to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agentblueprints/{name}/versions/{version}/scaffold": {
+      "post": {
+        "operationId": "AgentBlueprints_ScaffoldBlueprint",
+        "description": "Generate a fillable config file for the blueprint that can be used to create an agent instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the AgentBlueprint to operate on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scaffoldRequest",
+            "in": "body",
+            "description": "The scaffold request parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScaffoldRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScaffoldResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/connections": {
       "get": {
         "operationId": "Connections_List",
@@ -1059,6 +1348,120 @@
     }
   },
   "definitions": {
+    "AgentBlueprint": {
+      "type": "object",
+      "description": "AgentBlueprint resource Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Asset ID, a unique identifier for the asset",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the resource",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the blueprint"
+        },
+        "SystemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System related metadata",
+          "readOnly": true
+        },
+        "catalogInfo": {
+          "$ref": "#/definitions/AgentBlueprintCatalogInformation",
+          "description": "Catalog information for the blueprint"
+        },
+        "implementation": {
+          "$ref": "#/definitions/AgentImplementationDetails",
+          "description": "Instructions for deploying an agent using this blueprint"
+        },
+        "dependencies": {
+          "type": "object",
+          "description": "Dependencies that need to be specified to create an agent instance from this blueprint",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseAgentDependency"
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Definitions of parameters to be specified when creating an agent instance from this blueprint",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseParameterDefinition"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "displayName",
+        "catalogInfo",
+        "implementation"
+      ]
+    },
+    "AgentBlueprintCatalogInformation": {
+      "type": "object",
+      "description": "Catalog information for the agent blueprint",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The id of the publisher of the asset"
+        },
+        "license": {
+          "type": "string",
+          "description": "The license the asset is under"
+        }
+      },
+      "required": [
+        "publisherId",
+        "license"
+      ]
+    },
+    "AgentImplementationDetails": {
+      "type": "object",
+      "description": "An abstract representation of instructions on how to deploy and run the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of agent"
+        },
+        "instructions": {
+          "type": "string",
+          "description": "instructions/prompt for the agent"
+        }
+      },
+      "required": [
+        "type",
+        "instructions"
+      ]
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1187,6 +1590,20 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "BaseAgentDependency": {
+      "type": "object",
+      "description": "An abstract representation of a dependency for the agent",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of dependency"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -1195,6 +1612,49 @@
           "$ref": "#/definitions/CredentialType",
           "description": "The type of credential used by the connection",
           "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "BaseParameterDefinition": {
+      "type": "object",
+      "description": "Base parameter definition for an asset",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of the parameter"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "display name of the parameter"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the parameter"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "indicates if the parameter is required"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "displayName",
+        "description",
+        "required"
+      ]
+    },
+    "BaseParameterValue": {
+      "type": "object",
+      "description": "base parameter value for an asset's parameter",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for BaseParameterValue."
         }
       },
       "discriminator": "type",
@@ -1277,6 +1737,44 @@
         "credentials",
         "metadata"
       ]
+    },
+    "ConnectionParameterDefinition": {
+      "type": "object",
+      "description": "connection parameter definition for an asset",
+      "properties": {
+        "connectionType": {
+          "type": "string",
+          "description": "type of the connection"
+        }
+      },
+      "required": [
+        "connectionType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
+    },
+    "ConnectionParameterValue": {
+      "type": "object",
+      "description": "connection parameter value",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "connectionName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "connection"
     },
     "ConnectionType": {
       "type": "string",
@@ -1813,6 +2311,32 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
+    "ModelDependency": {
+      "type": "object",
+      "description": "Representation of a model dependency for the agent",
+      "properties": {
+        "recommendedModel": {
+          "type": "string",
+          "description": "identifier of the recommended model"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "parameters for the model",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "recommendedModel"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "model"
+    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -1874,6 +2398,27 @@
         }
       ],
       "x-ms-discriminator-value": "None"
+    },
+    "PagedAgentBlueprint": {
+      "type": "object",
+      "description": "Paged collection of AgentBlueprint items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentBlueprint items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentBlueprint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedConnection": {
       "type": "object",
@@ -2105,6 +2650,34 @@
         "type"
       ]
     },
+    "ScaffoldRequest": {
+      "type": "object",
+      "description": "Represents the request for a blueprint scaffold operation"
+    },
+    "ScaffoldResponse": {
+      "type": "object",
+      "description": "Represents the response for a blueprint scaffold request",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the blueprint",
+          "additionalProperties": {
+            "$ref": "#/definitions/BaseParameterValue"
+          }
+        },
+        "_meta": {
+          "type": "object",
+          "description": "comment metadata for each parameter",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "parameters",
+        "_meta"
+      ]
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -2138,6 +2711,90 @@
         "size",
         "tier"
       ]
+    },
+    "StringParameterDefinition": {
+      "type": "object",
+      "description": "String parameter definition for an asset",
+      "properties": {
+        "defaultValue": {
+          "type": "string",
+          "description": "default value of the parameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "StringParameterValue": {
+      "type": "object",
+      "description": "string parameter value",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "value of the parameter"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseParameterValue"
+        }
+      ],
+      "x-ms-discriminator-value": "string"
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for an asset",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The creator of the asset",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was created",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of when the asset was last modified",
+          "readOnly": true
+        }
+      }
+    },
+    "ToolDependency": {
+      "type": "object",
+      "description": "Representation of a tool dependency for the agent",
+      "properties": {
+        "assetId": {
+          "type": "object",
+          "description": "identifier for the tool",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "optional description of how the blueprint will use the tool"
+        }
+      },
+      "required": [
+        "assetId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAgentDependency"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
     }
   },
   "parameters": {
