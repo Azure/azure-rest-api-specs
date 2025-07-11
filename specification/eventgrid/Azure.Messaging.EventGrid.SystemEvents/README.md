@@ -23,6 +23,10 @@ model AcsChatMessageReceivedEventData {
 
   /** Optional. Field may not be present in some events. */
   optionalProperty ?: string;
+
+  /** Array properties must be decorated as read-only */
+  @visibility(Lifecycle.Read)
+  arrayProperty: string[]
 }
 ~~~
 
