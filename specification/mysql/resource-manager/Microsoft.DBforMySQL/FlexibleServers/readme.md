@@ -400,6 +400,24 @@ suppressions:
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: RequiredPropertiesMissingInResourceModel
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: PathResourceProviderMatchNamespace
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: LroErrorContent
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: PatchIdentityProperty
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: PostResponseCodes
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: MissingTypeObject
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ArmResourcePropertiesBag
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: LRO_RESPONSE_HEADER
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: INVALID_REQUEST_PARAMETER
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: OBJECT_MISSING_REQUIRED_PROPERTY
+    reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
 ```
 
 ---
