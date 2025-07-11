@@ -26,8 +26,8 @@ model StorageAccountDsmsResourceProperties {
   @doc("Subscription Tenant Id. If not set, will use default tenant id in global setting.")
   subscriptionTenantId?: string;
 
-  @doc("Account Replication Type.")
-  accountReplicationType?: string;
+  @doc("Account replication type (SKU).")
+  accountReplicationType?: AccountReplicationType;
 
   @doc("Description of the XStore account.")
   description?: string;
@@ -143,6 +143,26 @@ model StorageAccountDsmsResourceProperties {
   @doc("StorageAccountSyncTemplate provision start time; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   provisionStartTime_storageAccountSyncTemplate?: string;
+}
+
+@doc("Account replication type (SKU).")
+union AccountReplicationType {
+  @doc("Standard Locally Redundant Storage.")
+  Standard_LRS: "Standard_LRS",
+
+  @doc("Standard Geo Replicated Storage.")
+  Standard_GRS: "Standard_GRS",
+
+  @doc("Standard Zone Redundant Storage.")
+  Standard_ZRS: "Standard_ZRS",
+
+  @doc("Standard Read-Access Geo Replicated Storage.")
+  Standard_RAGRS: "Standard_RAGRS",
+
+  @doc("Provisioned IO Locally Redundant Storage.")
+  Premium_LRS: "Premium_LRS",
+
+  string
 }
 
 @doc("Whitelist element defines the whitelist for a secret.")

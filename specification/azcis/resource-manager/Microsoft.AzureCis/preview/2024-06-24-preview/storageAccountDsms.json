@@ -284,6 +284,48 @@
     }
   },
   "definitions": {
+    "AccountReplicationType": {
+      "type": "string",
+      "description": "Account replication type (SKU).",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "AccountReplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard Locally Redundant Storage."
+          },
+          {
+            "name": "Standard_GRS",
+            "value": "Standard_GRS",
+            "description": "Standard Geo Replicated Storage."
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "Standard Zone Redundant Storage."
+          },
+          {
+            "name": "Standard_RAGRS",
+            "value": "Standard_RAGRS",
+            "description": "Standard Read-Access Geo Replicated Storage."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Provisioned IO Locally Redundant Storage."
+          }
+        ]
+      }
+    },
     "AccountSasInfo": {
       "type": "object",
       "description": "AccountSasInfo element contains Sas Key Information.",
@@ -614,8 +656,8 @@
           "description": "Subscription Tenant Id. If not set, will use default tenant id in global setting."
         },
         "accountReplicationType": {
-          "type": "string",
-          "description": "Account Replication Type."
+          "$ref": "#/definitions/AccountReplicationType",
+          "description": "Account replication type (SKU)."
         },
         "description": {
           "type": "string",
