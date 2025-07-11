@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace LogsIngestion;
 
@@ -29,6 +31,8 @@ op upload is Azure.Core.Foundations.Operation<
 
     /** The array of objects matching the schema defined by the provided stream. */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
+    @alternateType(unknown, "go")
+    @clientName("logs", "go")
     @body
     body: Record<unknown>[];
 
